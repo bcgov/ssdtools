@@ -6,8 +6,10 @@ Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Depends: R (>= 3.4.2)
 Imports: checkr,
+    fitdistrplus,
     magrittr,
-    stats
+    stats,
+    tibble
 Suggests:
     testthat
 Remotes: poissonconsulting/checkr
