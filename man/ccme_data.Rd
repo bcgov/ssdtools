@@ -9,7 +9,7 @@
   \item{Chemical}{The chemical <chr>.}
   \item{Species}{The species binomial name <chr>.}
   \item{Conc}{The chemical concentration <dbl>.}
-  \item{Group}{The taxonomic group <chr>.}
+  \item{Group}{The taxonomic group <fctr>.}
 }}
 \usage{
 ccme_data
