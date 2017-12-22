@@ -13,7 +13,7 @@ Imports: checkr,
     tibble
 Suggests:
     testthat
-Remotes: poissonconsulting/checkr
+Additional_Repositories: http://poissonconsulting.github.io/drat
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
