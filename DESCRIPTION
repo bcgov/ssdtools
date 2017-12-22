@@ -1,9 +1,10 @@
 Package: ssdca
 Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
+Date: 2017-12-22
 Authors@R: 'Joe Thorley <joe@poissonconsulting.ca> [aut,cre]'
 Description: What the package does (one paragraph).
-License: MIT + file LICENSE
+License: Apache License (== 2.0) | file LICENSE
 Depends: R (>= 3.4.2)
 Imports: checkr,
     fitdistrplus,
