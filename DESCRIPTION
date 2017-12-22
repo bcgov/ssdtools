@@ -1,9 +1,9 @@
 Package: ssdca
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
+Title: Species Sensitivity Distributions Canada
+Version: 0.0.0.9001
 Date: 2017-12-22
 Authors@R: 'Joe Thorley <joe@poissonconsulting.ca> [aut,cre]'
-Description: What the package does (one paragraph).
+Description: Fits Species Sensitivity Distributions using Maximum Likelihood and plots data and results.
 License: Apache License (== 2.0) | file LICENSE
 Depends: R (>= 3.4.2)
 Imports: checkr,
@@ -12,7 +12,8 @@ Imports: checkr,
     stats,
     tibble
 Suggests:
-    testthat
+    testthat,
+    covr
 Additional_Repositories: http://poissonconsulting.github.io/drat
 Encoding: UTF-8
 LazyData: true
