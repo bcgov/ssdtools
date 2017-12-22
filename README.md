@@ -41,9 +41,13 @@ Please note that this project is released with a [Contributor Code of
 Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
 to abide by its terms.
 
+## Source Data
+
 ## License
 
-    Copyright 2017 Province of British Columbia
+The code is released under the Apache License 2.0
+
+    Copyright 2015 Province of British Columbia
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -56,6 +60,10 @@ to abide by its terms.
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+The data are licensed under the ([Open Government Licence -
+Canada](http://open.canada.ca/en/open-government-licence-canada)). See
+the `data-raw` folder for more information.
 
 This repository is maintained by [Environmental Reporting
 BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B).
