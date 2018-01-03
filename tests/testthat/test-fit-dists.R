@@ -12,18 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Plot Skewness-Kurtosis Graph
-#'
-#' Plots a skewness-kurtosis graph similar to the one proposed by Cullen and Frey with 100 bootstrapped values.
-#' @param x A numeric vector.
-#' @return An invisible TRUE.
-#' @seealso \code{\link[fitdistrplus]{descdist}}
-#' @export
-#'
-#' @examples
-#' ssd_plot_skewness_kurtosis(ccme_data$Conc[ccme_data$Chemical == "Cadmium"])
-ssd_plot_skewness_kurtosis <- function(x) {
-  check_vector(x, 1, length = c(2,Inf))
-  x %<>% fitdistrplus::descdist(boot=100L)
-  invisible(TRUE)
-}
+context("fit-dists")
+
+test_that("fit_dists", {
+  dist_names <- c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull")
+  dists <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"], dist_names)
+
+  expect_identical(names(dists), dist_names)
+})
