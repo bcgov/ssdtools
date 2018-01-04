@@ -14,6 +14,7 @@
 
 #' @import checkr FAdist purrr stats
 #' @importFrom actuar dburr
+#' @importFrom fitdistrplus bootdist
 #' @importFrom magrittr %<>% %>%
 #' @importFrom purrr imap map safely
 #' @importFrom VGAM dgompertz gompertz paretoff vglm

@@ -34,4 +34,11 @@ test_that("fit_dists", {
   aicc <- AICc(dist1, dist2)
   expect_identical(rownames(aicc), dist_names)
   expect_identical(colnames(aicc), c("df", "AICc"))
+
+  dist3 <- dists[c("gamma", "gompertz")]
+  class(dist3) <- "fitdists"
+  pred <- predict(dist3, nboot = 10L)
+  expect_is(pred, "tbl")
+  expect_identical(colnames(pred), c("prob", "est", "se", "lcl", "ucl"))
+  expect_identical(pred$prob, seq(0.01, 0.99, by = 0.02))
 })

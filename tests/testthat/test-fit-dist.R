@@ -36,7 +36,7 @@ test_that("fit_dist", {
   aic <-  AIC(object = dist, dist3)
   expect_identical(rownames(aic), c("dist", "dist3"))
 
-  pred <- predict(dist)
+  pred <- predict(dist, nboot = 10)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("prob", "est", "se", "lcl", "ucl"))
   expect_identical(pred$prob, seq(0.01, 0.99, by = 0.02))

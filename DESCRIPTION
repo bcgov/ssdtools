@@ -9,12 +9,14 @@ Depends:
     R (>= 3.4.2),
     actuar,
     FAdist,
+    fitdistrplus,
     VGAM,
     stats
 Imports: 
+    dplyr,
     checkr,
-    fitdistrplus,
     magrittr,
+    plyr,
     purrr,
     pryr,
     tibble
