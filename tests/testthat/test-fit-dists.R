@@ -15,24 +15,25 @@
 context("fit-dists")
 
 test_that("fit_dists", {
-  dist_names <- c("burr", "lnorm", "llog", "gompertz", "lgumbel", "pareto", "gamma", "weibull")
+  dist_names <- ssd_dists(all = TRUE)
   dists <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"], dist_names)
 
   expect_identical(names(dists), dist_names)
   aic <- AIC(dists)
   expect_identical(rownames(aic), dist_names)
-  expect_identical(aic$df, c(3L,2L,2L,2L,2L,1L,2L,2L))
-  expect_equal(aic$AIC[2], 239.0284, tolerance = 0.000001)
-  dist1 <- dists[c("burr", "lnorm", "llog", "gompertz")]
-  dist2 <- dists[c("lgumbel", "pareto", "gamma", "weibull")]
+  expect_identical(aic$df, c(3L,2L,2L,2L,2L,2L,1L,2L))
+  expect_equal(aic["lnorm", "AIC"], 239.0284, tolerance = 0.000001)
+  dist1 <- dists[ssd_dists()]
+  dist2 <- dists[setdiff(ssd_dists(all = TRUE), ssd_dists())]
   class(dist1) <- "fitdists"
   class(dist2) <- "fitdists"
-  expect_identical(AIC(dist1, dist2), aic)
+  aic2 <- AIC(dist1, dist2)
+  expect_identical(aic2[order(rownames(aic2)),], aic)
   bic <- BIC(dist1, dist2)
-  expect_identical(rownames(bic), dist_names)
+  expect_identical(rownames(bic), rownames(aic2))
   expect_identical(colnames(bic), c("df", "BIC"))
   aicc <- AICc(dist1, dist2)
-  expect_identical(rownames(aicc), dist_names)
+  expect_identical(rownames(aicc), rownames(aic2))
   expect_identical(colnames(aicc), c("df", "AICc"))
 
   dist3 <- dists[c("gamma", "gompertz")]

@@ -20,7 +20,7 @@ remove_errors <- function(dist_fit, name, silent) {
 #' ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"])
 ssd_fit_dists <- function(x, dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"), silent = FALSE) {
   check_vector(x, 1)
-  check_vector(dists, "", unique = TRUE, named = FALSE, length = c(1L, .Machine$integer.max))
+  check_dists(dists)
 
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
