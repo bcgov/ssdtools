@@ -15,16 +15,16 @@
 context("fit-dists")
 
 test_that("fit_dists", {
-  dist_names <- c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull")
+  dist_names <- c("burr", "lnorm", "llog", "gompertz", "lgumbel", "pareto", "gamma", "weibull")
   dists <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"], dist_names)
 
   expect_identical(names(dists), dist_names)
   aic <- AIC(dists)
   expect_identical(rownames(aic), dist_names)
-  expect_identical(aic$df, rep(2L, length(dist_names)))
-  expect_equal(aic$AIC[1], 239.0284, tolerance = 0.000001)
-  dist1 <- dists[c("lnorm", "llog", "gompertz")]
-  dist2 <- dists[c("lgumbel", "gamma", "weibull")]
+  expect_identical(aic$df, c(3L,2L,2L,2L,2L,1L,2L,2L))
+  expect_equal(aic$AIC[2], 239.0284, tolerance = 0.000001)
+  dist1 <- dists[c("burr", "lnorm", "llog", "gompertz")]
+  dist2 <- dists[c("lgumbel", "pareto", "gamma", "weibull")]
   class(dist1) <- "fitdists"
   class(dist2) <- "fitdists"
   expect_identical(AIC(dist1, dist2), aic)
