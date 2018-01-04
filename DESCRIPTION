@@ -1,7 +1,7 @@
 Package: ssdca
 Title: Species Sensitivity Distributions Canada
-Version: 0.0.0.9003
-Date: 2018-01-03
+Version: 0.0.0.9004
+Date: 2018-01-04
 Authors@R: 'Joe Thorley <joe@poissonconsulting.ca> [aut,cre]'
 Description: Fits Species Sensitivity Distributions using Maximum Likelihood and plots data and results.
 License: Apache License (== 2.0) | file LICENSE

@@ -40,4 +40,6 @@ test_that("fit_dist", {
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("prob", "est", "se", "lcl", "ucl"))
   expect_identical(pred$prob, seq(0.01, 0.99, by = 0.02))
+  pred2 <- predict(dist, nboot = 10)
+  expect_identical(pred$est[1], pred2$est[1])
 })

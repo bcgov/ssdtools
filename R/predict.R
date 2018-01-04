@@ -41,10 +41,7 @@ predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.02),
 
   predictions <- lapply(object, predict, probs = probs, nboot = nboot, level = level) %>%
     map2(ic, function(x, y) {x$weight <- y$weight; x}) %>%
-    dplyr::bind_cols()
-
-
-  predictions %<>%
+    dplyr::bind_cols() %>%
     plyr::ddply("prob", model_average) %>%
     tibble::as_tibble()
 
