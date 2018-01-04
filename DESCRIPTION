@@ -5,14 +5,14 @@ Date: 2018-01-04
 Authors@R: 'Joe Thorley <joe@poissonconsulting.ca> [aut,cre]'
 Description: Fits Species Sensitivity Distributions using Maximum Likelihood and plots data and results.
 License: Apache License (== 2.0) | file LICENSE
-Depends: 
+Depends:
     R (>= 3.4.2),
     actuar,
     FAdist,
     fitdistrplus,
     VGAM,
     stats
-Imports: 
+Imports:
     dplyr,
     checkr,
     magrittr,
@@ -22,8 +22,11 @@ Imports:
     tibble
 Suggests:
     testthat,
-    covr
+    covr,
+    knitr,
+    rmarkdown
 Additional_Repositories: http://poissonconsulting.github.io/drat
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
