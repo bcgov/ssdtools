@@ -13,6 +13,7 @@ remove_errors <- function(dist_fit, name, silent) {
 #' @param x A numeric vector of the data.
 #' @param dists A character vector of the distributions to fit.
 #' @param silent A flag indicating whether fits should fail without issuing errors.
+#' @return An object of class fitdists.
 #'
 #' @export
 #' @examples
@@ -26,5 +27,6 @@ ssd_fit_dists <- function(x, dists = c("lnorm", "llog", "gompertz", "lgumbel", "
   dists %<>% map(safe_fit_dist, x = x)
   dists %<>% imap(remove_errors, silent = silent)
   dists <- dists[!vapply(dists, is.null, TRUE)]
+  class(dists) <- "fitdists"
   dists
 }

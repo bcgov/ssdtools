@@ -14,6 +14,9 @@ ssd_fit_dists(x, dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma",
 
 \item{silent}{A flag indicating whether fits should fail without issuing errors.}
 }
+\value{
+An object of class fitdists.
+}
 \description{
 By default fits xx distributions.
 }

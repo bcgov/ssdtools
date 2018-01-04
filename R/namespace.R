@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import checkr FAdist stats
+#' @import checkr FAdist purrr stats
 #' @importFrom magrittr %<>% %>%
 #' @importFrom purrr imap map safely
 #' @importFrom VGAM dgompertz gompertz paretoff vglm
