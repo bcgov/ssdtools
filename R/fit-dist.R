@@ -15,7 +15,7 @@ ssd_fit_dist <- function(x, dist = "lnorm") {
   dist %<>% list(data = x, distr = ., method = "mle")
 
   if(dist$distr == "burr"){
-    attachNamespace("actuar")
+    attach_pkg("actuar")
     dist$start <- list(shape1 = 4, shape2 = 1, rate = 1)
     dist$method <- "mme"
     dist$order <- 1:3
