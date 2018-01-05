@@ -16,6 +16,7 @@ library(magrittr)
 library(stringr)
 library(devtools)
 library(dplyr)
+library(ssdca)
 
 ccme_data <- read.csv("data-raw/CCME data.csv", stringsAsFactors = FALSE)
 ccme_data <- ccme_data[!is.na(ccme_data$Conc),]
@@ -58,3 +59,6 @@ ccme_data$Reference <- NULL
 ccme_data %<>% as_tibble()
 
 use_data(ccme_data, overwrite = TRUE)
+
+boron_lnorm <- ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"], "lnorm")
+use_data(boron_lnorm, overwrite = TRUE)

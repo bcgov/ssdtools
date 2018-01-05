@@ -39,3 +39,12 @@
 #' @examples
 #' head(ccme_data)
 "ccme_data"
+
+#' fitdist for CCME Boron Data
+#'
+#' A fitdist object for Species Sensitivity Data for
+#' Boron with the lnorm distribution.
+#'
+#' @examples
+#' boron_lnorm
+"boron_lnorm"
