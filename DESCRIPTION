@@ -8,28 +8,28 @@ Description: Fits and plots Species Sensitivity Data and Distributions.
 License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.2),
-    FAdist,
     fitdistrplus,
     graphics,
     VGAM,
     stats
 Imports:
     actuar,
-    dplyr,
     checkr,
+    dplyr,
+    FAdist,
     ggplot2,
     grid,
     magrittr,
     plyr,
-    purrr,
     pryr,
+    purrr,
     tibble,
     scales
 Suggests:
-    testthat,
     covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 Additional_Repositories: http://poissonconsulting.github.io/drat
 Encoding: UTF-8
 LazyData: true

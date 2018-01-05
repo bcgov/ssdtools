@@ -18,6 +18,8 @@ test_that("fit_dists", {
   dist_names <- ssd_dists(all = TRUE)
   dists <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"], dist_names)
 
+  expect_true(is_fitdists(dists))
+
   expect_identical(names(dists), dist_names)
   aic <- AIC(dists)
   expect_identical(rownames(aic), dist_names)

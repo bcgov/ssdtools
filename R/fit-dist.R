@@ -31,6 +31,7 @@ ssd_fit_dist <- function(x, dist = "lnorm") {
     dist$start <- list(location = mean(log(x)),
                        scale = pi*sd(log(x))/sqrt(6))
   } else if(dist$distr == "llog" ){
+    attach_pkg("FAdist")
     dist$start <- list(shape = mean(log(x)), scale = pi*sd(log(x))/sqrt(3))
   } else if(dist$distr == "pareto"){
     fit <- vglm(x~1, paretoff)
