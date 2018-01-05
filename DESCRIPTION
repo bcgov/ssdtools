@@ -7,16 +7,16 @@ Description: Fits and plots Species Sensitivity Data and Distributions.
   The package was developed by the Canadian Government.
 License: Apache License (== 2.0) | file LICENSE
 Depends:
-    R (>= 3.4.2),
+    R (>= 3.4.0),
+    actuar,
+    FAdist,
     fitdistrplus,
     graphics,
     VGAM,
     stats
 Imports:
-    actuar,
     checkr,
     dplyr,
-    FAdist,
     ggplot2,
     grid,
     magrittr,

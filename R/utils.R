@@ -39,10 +39,3 @@ comma_round <- function(x, digits = 0, ...) {
   x %<>% round(digits = digits)
   scales::comma(x, ...)
 }
-
-attach_pkg <- function(pkg) {
-  if(!isNamespaceLoaded(pkg)) {
-    message("attaching ", pkg, " package")
-    attachNamespace(pkg)
-  }
-}

@@ -15,7 +15,6 @@ ssd_fit_dist <- function(x, dist = "lnorm") {
   dist %<>% list(data = x, distr = ., method = "mle")
 
   if(dist$distr == "burr"){
-    attach_pkg("actuar")
     dist$start <- list(shape1 = 4, shape2 = 1, rate = 1)
     dist$method <- "mme"
     dist$order <- 1:3
@@ -31,7 +30,6 @@ ssd_fit_dist <- function(x, dist = "lnorm") {
     dist$start <- list(location = mean(log(x)),
                        scale = pi*sd(log(x))/sqrt(6))
   } else if(dist$distr == "llog" ){
-    attach_pkg("FAdist")
     dist$start <- list(shape = mean(log(x)), scale = pi*sd(log(x))/sqrt(3))
   } else if(dist$distr == "pareto"){
     fit <- vglm(x~1, paretoff)

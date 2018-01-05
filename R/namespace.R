@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 #' @import checkr ggplot2 purrr stats
+#' @importFrom actuar dburr
+#' @importFrom FAdist dllog
 #' @importFrom fitdistrplus bootdist
 #' @importFrom graphics par plot title
 #' @importFrom grid grobName polygonGrob gpar
