@@ -46,8 +46,8 @@ library(scales)
 ggplot(filter(ccme_data, Chemical %in% c("Boron", "Chloride")), aes(Conc)) +
   facet_wrap(~Chemical) +
   geom_ssd() +
-  stat_cdf(color = "red") +
-  stat_cdf(color = "blue", dist = "gamma") +
+  stat_fitdist(color = "red") +
+  stat_fitdist(color = "blue", dist = "gamma") +
   coord_trans(x = "log10") +
   scale_x_continuous("Concentration", labels = comma, breaks = c(1,10,10^2,10^3,10^4,10^5)) +
   scale_y_continuous("Distribution (%)", labels = percent, limits = c(0 , 1), expand = c(0,0))

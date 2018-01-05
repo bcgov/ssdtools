@@ -3,7 +3,7 @@
 \docType{data}
 \name{StatSsd}
 \alias{StatSsd}
-\alias{StatCdf}
+\alias{StatFitdist}
 \alias{GeomSsd}
 \alias{ggplot2-ggproto}
 \title{Base ggproto classes for ggplot2}
