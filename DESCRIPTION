@@ -17,6 +17,7 @@ Imports:
     dplyr,
     checkr,
     ggplot2,
+    grid,
     magrittr,
     plyr,
     purrr,

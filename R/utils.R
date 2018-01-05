@@ -34,3 +34,8 @@ nobs.fitdists <- function(object, ...) {
     stop("the fitdists must have the same number of observations", call. = FALSE)
   ns[1]
 }
+
+comma_round <- function(x, digits = 0, ...) {
+  x %<>% round(digits = digits)
+  scales::comma(x, ...)
+}

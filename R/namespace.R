@@ -12,10 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import checkr FAdist purrr stats
+#' @import checkr FAdist ggplot2 purrr stats
 #' @importFrom actuar dburr
 #' @importFrom fitdistrplus bootdist
 #' @importFrom graphics par plot title
+#' @importFrom grid grobName polygonGrob gpar
 #' @importFrom magrittr %<>% %>%
 #' @importFrom purrr imap map safely
 #' @importFrom scales percent

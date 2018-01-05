@@ -37,20 +37,13 @@ The base `plot()` generic function plots model diagnostics for `fitdist` objects
 plot(dist)
 ```
 
-The more familiar xx plots can be produced using ggplot2
-```{r, fig.width=6, fig.height=3}
+The more familiar xx plots can be produced using the ggplot2 generic `autoplot()`
+```{r, fig.width=3, fig.height=3}
 library(ggplot2)
 library(dplyr)
 library(scales)
 
-ggplot(filter(ccme_data, Chemical %in% c("Boron", "Chloride")), aes(Conc)) +
-  facet_wrap(~Chemical) +
-  geom_ssd() +
-  geom_fitdist(color = "red") +
-  geom_fitdist(color = "blue", dist = "gamma") +
-  coord_trans(x = "log10") +
-  scale_x_continuous("Concentration", labels = comma, breaks = c(1,10,10^2,10^3,10^4,10^5)) +
-  scale_y_continuous("Distribution (%)", labels = percent, limits = c(0 , 1), expand = c(0,0))
+autoplot(dist)
 ```
 
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
