@@ -5,6 +5,7 @@
 \alias{StatSsd}
 \alias{StatFitdist}
 \alias{GeomSsd}
+\alias{GeomFitdist}
 \alias{ggplot2-ggproto}
 \title{Base ggproto classes for ggplot2}
 \description{

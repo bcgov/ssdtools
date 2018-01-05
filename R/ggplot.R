@@ -35,6 +35,14 @@ GeomSsd <- ggplot2::ggproto(
   "GeomSsd", ggplot2::GeomPoint
 )
 
+#' @rdname ggplot2-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+GeomFitdist <- ggplot2::ggproto(
+  "GeomFitdist", ggplot2::GeomLine
+)
+
 #' Plot Species Sensitivy Data
 #'
 #' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
@@ -96,5 +104,28 @@ stat_fitdist <- function(mapping = NULL, data = NULL, geom = "line",
     stat = StatFitdist, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, dist = dist, ...)
+  )
+}
+
+#' Plot fitdist
+#'
+#' Plots the fit of a univariate distribution as a cumulative density/distribution function.
+#'
+#' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::geom_point
+#' @inheritParams ssd_fit_dist
+#' @seealso \code{\link{ssd_fit_dist}}
+#' @export
+#' @examples
+#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
+#'   geom_ssd() +
+#'   geom_fitdist()
+geom_fitdist <- function(mapping = NULL, data = NULL, stat = "fitdist",
+                     position = "identity", na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE, ...) {
+  ggplot2::layer(
+    geom = GeomFitdist, data = data, mapping = mapping, stat = stat,
+    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
+    params = list(na.rm = na.rm, ...)
   )
 }
