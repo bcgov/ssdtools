@@ -8,12 +8,12 @@ Description: Fits and plots Species Sensitivity Data and Distributions.
 License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.0),
-    actuar,
-    FAdist,
-    fitdistrplus,
     graphics,
+    stats,
+    actuar,
     VGAM,
-    stats
+    FAdist,
+    fitdistrplus
 Imports:
     checkr,
     dplyr,
