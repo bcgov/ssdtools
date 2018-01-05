@@ -36,6 +36,7 @@ model_average <- function(x) {
 #' @param probs A numeric vector of the densities to calculate the estimated concentrations for.
 #' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
 #' @param IC A function returning the information criterion to use for model averaging.
+#' @param average A flag indicating whether to model average the predictions.
 #' @param level A real of the confidence limit.
 #' @param ... Unused
 #' @seealso \code{\link{AICc}}
@@ -45,7 +46,10 @@ model_average <- function(x) {
 #' predict(boron_all, probs = c(0.01, 0.05, 0.5), IC = AICc)
 #' }
 predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.02),
-                             nboot = 1001, IC = AICc, level = 0.95, ...) {
+                             nboot = 1001, IC = AICc, average = TRUE, level = 0.95, ...) {
+  check_function(IC)
+  check_flag(average)
+
   ic <- IC(object)
 
   if(!(is.data.frame(ic) && ncol(ic) == 2 && row.names(ic) == names(object)))
@@ -58,7 +62,11 @@ predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.02),
 
   predictions <- lapply(object, predict, probs = probs, nboot = nboot, level = level) %>%
     map2(ic, function(x, y) {x$weight <- y$weight; x}) %>%
-    dplyr::bind_cols() %>%
+    dplyr::bind_rows(.id = "dist")
+
+  if(!average) return(predictions)
+
+  predictions %<>%
     plyr::ddply("prob", model_average) %>%
     tibble::as_tibble()
 

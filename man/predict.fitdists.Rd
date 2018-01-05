@@ -5,7 +5,7 @@
 \title{Predict fitdist}
 \usage{
 \method{predict}{fitdists}(object, probs = seq(0.01, 0.99, by = 0.02),
-  nboot = 1001, IC = AICc, level = 0.95, ...)
+  nboot = 1001, IC = AICc, average = TRUE, level = 0.95, ...)
 }
 \arguments{
 \item{object}{The object.}
@@ -15,6 +15,8 @@
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
 \item{IC}{A function returning the information criterion to use for model averaging.}
+
+\item{average}{A flag indicating whether to model average the predictions.}
 
 \item{level}{A real of the confidence limit.}
 

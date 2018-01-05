@@ -35,7 +35,7 @@ nobs.fitdists <- function(object, ...) {
   ns[1]
 }
 
-comma_round <- function(x, digits = 0, ...) {
-  x %<>% round(digits = digits)
+comma_signif <- function(x, digits = 1, ...) {
+  x %<>% signif(digits = digits)
   scales::comma(x, ...)
 }

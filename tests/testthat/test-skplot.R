@@ -12,8 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("plot_skewness_kurtosis")
+context("skplot")
 
-test_that("plot_skewness_kurtosis", {
-  expect_true(ssd_plot_skewness_kurtosis(ccme_data$Conc))
+test_that("ssd_skplot", {
+  expect_true(ssd_skplot(ccme_data$Conc))
 })

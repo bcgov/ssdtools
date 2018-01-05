@@ -19,77 +19,27 @@ library(ssdca)
 
 The `ssdca` package fits Species Sensitivity Distributions and plots and tabulates the results.
 
-The core function `ssd_fit_dist()` takes a numeric vector of sensitivity values
-and fits a single distribution (by default the log-normal).
-For a vector of all the recognized distributions type `sdd_dists()`.
+The core function `ssd_fit_dists()` takes a numeric vector of sensitivity values
+and fits one or more recognized distributions.
 
 ```{r}
-boron <- dplyr::filter(ccme_data, Chemical == "Boron")
-dist <- ssd_fit_dist(boron$Conc)
-print(dist)
+boron <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"], c("lnorm", "weibull"))
+print(boron)
 ```
 
-The `ssd_fit_dist()` function returns a object of class `fitdist` as recognized by 
-the `fitdistrplus` package. The `fitdistrplus` package is automatically installed 
-(and loaded) when you install (and load) `ssdca`.
-The base `plot()` generic function plots model diagnostics for `fitdist` objects.
-```{r, fig.width=6, fig.height=6}
-plot(dist)
+There are currently `r length(ssd_dists(all = TRUE))` recognized distributions.
+```{r}
+ssd_dists(all = TRUE)
+```
+
+The base `plot()` generic function plots model diagnostics for `fitdists` objects.
+```{r, fig.width=6, fig.height=6, fig.show='hold'}
+plot(boron)
 ```
 
 The more familiar xx plots can be produced using the ggplot2 generic `autoplot()`
-```{r, fig.width=3, fig.height=3}
+```{r, fig.width=4, fig.height=3}
 library(ggplot2)
-library(dplyr)
-library(scales)
-
-autoplot(dist)
+autoplot(boron)
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-output: 
-rmarkdown::html_vignette:
-css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-output:
-rmarkdown::html_vignette:
-fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
