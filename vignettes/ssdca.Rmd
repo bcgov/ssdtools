@@ -45,7 +45,7 @@ library(scales)
 
 ggplot(filter(ccme_data, Chemical %in% c("Boron", "Chloride")), aes(Conc)) +
   facet_wrap(~Chemical) +
-  geom_ecd() +
+  geom_ssd() +
   stat_cdf(color = "red") +
   stat_cdf(color = "blue", dist = "gamma") +
   coord_trans(x = "log10") +

@@ -60,7 +60,7 @@ based on a univariate distribution.
 }
 \examples{
 ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
-  stat_ecd() +
+  stat_ssd() +
   stat_cdf()
 }
 \seealso{

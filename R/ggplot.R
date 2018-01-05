@@ -1,9 +1,9 @@
-#' Empirical Cumulative Density Stat
+#' @rdname ggplot2-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
-StatEcd <- ggplot2::ggproto(
-  "StatEcd", ggplot2::Stat,
+StatSsd <- ggplot2::ggproto(
+  "StatSsd", ggplot2::Stat,
   compute_group = function(data, scales) {
     data$density <- (rank(data$x) - 0.5) / length(data$x)
     data
@@ -12,7 +12,7 @@ StatEcd <- ggplot2::ggproto(
   required_aes = "x"
 )
 
-#' Cumulative Density Function Stat
+#' @rdname ggplot2-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -27,49 +27,50 @@ StatCdf <- ggplot2::ggproto(
   required_aes = "x"
 )
 
-#' ECD Geom
+#' @rdname ggplot2-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomEcd <- ggplot2::ggproto(
-  "GeomEcd", ggplot2::GeomPoint
+GeomSsd <- ggplot2::ggproto(
+  "GeomSsd", ggplot2::GeomPoint
 )
 
-#' Calculate Empirical Cumulative Density
+#' Plot Species Sensitivy Data
 #'
-#' The empirical cumulative density/distribution provides a way to visualize species sensitivity data.
+#' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
+#' @seealso \code{\link{geom_ssd}}
 #' @export
 #' @examples
 #' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
-#'   stat_ecd()
-stat_ecd <- function(mapping = NULL, data = NULL, geom = "point",
+#'   stat_ssd()
+stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, ...) {
   ggplot2::layer(
-    stat = StatEcd, data = data, mapping = mapping, geom = geom,
+    stat = StatSsd, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
 }
 
-#' Calculate Empirical Cumulative Density
+#' Plot Species Sensitivity Data
 #'
-#' The empirical cumulative density/distribution provides a way to visualize species sensitivity data.
+#' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @export
 #' @examples
 #' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
-#'   geom_ecd()
-geom_ecd <- function(mapping = NULL, data = NULL, stat = "ecd",
+#'   geom_ssd()
+geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, ...) {
   ggplot2::layer(
-    geom = GeomEcd, data = data, mapping = mapping, stat = stat,
+    geom = GeomSsd, data = data, mapping = mapping, stat = stat,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
@@ -87,7 +88,7 @@ geom_ecd <- function(mapping = NULL, data = NULL, stat = "ecd",
 #' @export
 #' @examples
 #' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
-#'   stat_ecd() +
+#'   stat_ssd() +
 #'   stat_cdf()
 stat_cdf <- function(mapping = NULL, data = NULL, geom = "line",
                      position = "identity", na.rm = FALSE, show.legend = NA,
