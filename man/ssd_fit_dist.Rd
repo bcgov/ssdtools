@@ -4,7 +4,7 @@
 \alias{ssd_fit_dist}
 \title{Fit Distribution}
 \usage{
-ssd_fit_dist(x, dist)
+ssd_fit_dist(x, dist = "lnorm")
 }
 \arguments{
 \item{x}{A numeric vector of the data.}
@@ -18,5 +18,5 @@ An object of class fitdist.
 Fit Distribution
 }
 \examples{
-ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"], "lnorm")
+ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"])
 }

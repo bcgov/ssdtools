@@ -16,11 +16,13 @@ Depends:
 Imports:
     dplyr,
     checkr,
+    ggplot2,
     magrittr,
     plyr,
     purrr,
     pryr,
-    tibble
+    tibble,
+    scales
 Suggests:
     testthat,
     covr,

@@ -18,5 +18,6 @@
 #' @importFrom graphics par plot title
 #' @importFrom magrittr %<>% %>%
 #' @importFrom purrr imap map safely
+#' @importFrom scales percent
 #' @importFrom VGAM dgompertz gompertz paretoff vglm
 NULL

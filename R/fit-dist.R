@@ -7,8 +7,8 @@
 #' @export
 #'
 #' @examples
-#' ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"], "lnorm")
-ssd_fit_dist <- function(x, dist) {
+#' ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"])
+ssd_fit_dist <- function(x, dist = "lnorm") {
   check_vector(x, 1)
   check_string(dist)
 
