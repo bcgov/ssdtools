@@ -48,3 +48,12 @@
 #' @examples
 #' boron_lnorm
 "boron_lnorm"
+
+#' fitdists for CCME Boron Data
+#'
+#' A fitdists object for Species Sensitivity Data for
+#' Boron.
+#'
+#' @examples
+#' boron_lnorm
+"boron_dists"

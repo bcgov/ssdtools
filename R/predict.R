@@ -7,7 +7,12 @@ predict_fitdist_prob <- function(prob, boot, level) {
   tibble::data_frame(prob = prob, est = est, se = se, lcl = lcl, ucl = ucl)
 }
 
+#' Predict fitdist
+#'
+#' @inheritParams predict.fitdists
 #' @export
+#' @examples
+#' predict(boron_lnorm)
 predict.fitdist <- function(object, probs = seq(0.01, 0.99, by = 0.02),
                             nboot = 1001, level = 0.95, ...) {
   check_vector(probs, c(0.001, 0.999), length = c(1, Inf), unique = TRUE)
@@ -26,9 +31,21 @@ model_average <- function(x) {
   tibble::data_frame(est = est, se = se, lcl = lcl, ucl = ucl)
 }
 
+#' Predict fitdist
+#' @param object The object.
+#' @param probs A numeric vector of the densities to calculate the estimated concentrations for.
+#' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
+#' @param IC A function returning the information criterion to use for model averaging.
+#' @param level A real of the confidence limit.
+#' @param ... Unused
+#' @seealso \code{\link{AICc}}
 #' @export
+#' @examples
+#' \dontrun{
+#' predict(boron_dists, probs = c(0.01, 0.05, 0.5), IC = AICc)
+#' }
 predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.02),
-                             nboot = 1001, IC = AIC, level = 0.95, ...) {
+                             nboot = 1001, IC = AICc, level = 0.95, ...) {
   ic <- IC(object)
 
   if(!(is.data.frame(ic) && ncol(ic) == 2 && row.names(ic) == names(object)))

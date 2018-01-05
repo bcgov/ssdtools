@@ -14,3 +14,7 @@ AICc(object, ...)
 \description{
 Get the AICc value or table.
 }
+\examples{
+AICc(boron_lnorm)
+AICc(boron_dists)
+}

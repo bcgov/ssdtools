@@ -4,6 +4,9 @@
 #' @param ... Optional.
 #'
 #' @export
+#' @examples
+#' AICc(boron_lnorm)
+#' AICc(boron_dists)
 AICc <- function(object, ...) {
   UseMethod("AICc")
 }

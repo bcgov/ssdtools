@@ -5,6 +5,8 @@
 #'
 #' @return A count indicating the number of parameters.
 #' @export
+#' @examples
+#' npars(boron_lnorm)
 npars <- function(object, ...) {
   UseMethod("npars")
 }
@@ -16,7 +18,13 @@ is_fitdist <- function(x) inherits(x, "fitdist")
 
 is_fitdists <- function(x) inherits(x, "fitdists")
 
+#' Number of Observations
+#'
+#' @param object The object.
+#' @param ... Unused.
 #' @export
+#' @examples
+#' nobs(boron_lnorm)
 nobs.fitdist <- function(object, ...) object$n
 
 #' @export
