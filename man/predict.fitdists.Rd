@@ -25,7 +25,7 @@ Predict fitdist
 }
 \examples{
 \dontrun{
-predict(boron_dists, probs = c(0.01, 0.05, 0.5), IC = AICc)
+predict(boron_all, probs = c(0.01, 0.05, 0.5), IC = AICc)
 }
 }
 \seealso{

@@ -55,5 +55,5 @@
 #' Boron.
 #'
 #' @examples
-#' boron_lnorm
-"boron_dists"
+#' boron_all
+"boron_all"

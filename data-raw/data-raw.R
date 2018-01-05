@@ -63,5 +63,5 @@ use_data(ccme_data, overwrite = TRUE)
 boron_lnorm <- ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"], "lnorm")
 use_data(boron_lnorm, overwrite = TRUE)
 
-boron_dists <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"])
-use_data(boron_dists, overwrite = TRUE)
+boron_all <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"], ssd_dists(all = TRUE))
+use_data(boron_all, overwrite = TRUE)

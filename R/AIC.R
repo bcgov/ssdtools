@@ -6,7 +6,7 @@
 #' @export
 #' @examples
 #' AICc(boron_lnorm)
-#' AICc(boron_dists)
+#' AICc(boron_all)
 AICc <- function(object, ...) {
   UseMethod("AICc")
 }

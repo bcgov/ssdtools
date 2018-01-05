@@ -1,6 +1,6 @@
 Package: ssdca
 Title: Species Sensitivity Distributions
-Version: 0.0.0.9005
+Version: 0.0.0.9006
 Date: 2018-01-05
 Authors@R: 'Joe Thorley <joe@poissonconsulting.ca> [aut,cre]'
 Description: Fits and plots Species Sensitivity Data and Distributions.
