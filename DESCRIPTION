@@ -1,19 +1,20 @@
 Package: ssdca
-Title: Species Sensitivity Distributions Canada
-Version: 0.0.0.9004
-Date: 2018-01-04
+Title: Species Sensitivity Distributions
+Version: 0.0.0.9005
+Date: 2018-01-05
 Authors@R: 'Joe Thorley <joe@poissonconsulting.ca> [aut,cre]'
-Description: Fits Species Sensitivity Distributions using Maximum Likelihood and plots data and results.
+Description: Fits and plots Species Sensitivity Data and Distributions.
+  The package was developed by the Canadian Government.
 License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.2),
-    actuar,
     FAdist,
     fitdistrplus,
     graphics,
     VGAM,
     stats
 Imports:
+    actuar,
     dplyr,
     checkr,
     ggplot2,
