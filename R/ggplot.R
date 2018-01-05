@@ -2,8 +2,8 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-SSDStatECD <- ggplot2::ggproto(
-  "SSDStatECD", ggplot2::Stat,
+StatEcd <- ggplot2::ggproto(
+  "StatEcd", ggplot2::Stat,
   compute_group = function(data, scales) {
     data$density <- (rank(data$x) - 0.5) / length(data$x)
     data
@@ -16,8 +16,8 @@ SSDStatECD <- ggplot2::ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-SSDStatCDF <- ggplot2::ggproto(
-  "SSDStatCDF", ggplot2::Stat,
+StatCdf <- ggplot2::ggproto(
+  "StatCdf", ggplot2::Stat,
   compute_group = function(data, scales, dist) {
     fit <- ssd_fit_dist(data$x, dist = dist)
     pred <- predict(fit, nboot = 10)
@@ -25,6 +25,14 @@ SSDStatCDF <- ggplot2::ggproto(
   },
   default_aes = ggplot2::aes(y = ..density..),
   required_aes = "x"
+)
+
+#' ECD Geom
+#' @format NULL
+#' @usage NULL
+#' @export
+GeomEcd <- ggplot2::ggproto(
+  "GeomEcd", ggplot2::GeomPoint
 )
 
 #' Calculate Empirical Cumulative Density
@@ -36,12 +44,32 @@ SSDStatCDF <- ggplot2::ggproto(
 #' @export
 #' @examples
 #' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
-#'   ssd_stat_ecd()
-ssd_stat_ecd <- function(mapping = NULL, data = NULL, geom = "point",
-                          position = "identity", na.rm = FALSE, show.legend = NA,
-                          inherit.aes = TRUE, ...) {
+#'   stat_ecd()
+stat_ecd <- function(mapping = NULL, data = NULL, geom = "point",
+                     position = "identity", na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE, ...) {
   ggplot2::layer(
-    stat = SSDStatECD, data = data, mapping = mapping, geom = geom,
+    stat = StatEcd, data = data, mapping = mapping, geom = geom,
+    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
+    params = list(na.rm = na.rm, ...)
+  )
+}
+
+#' Calculate Empirical Cumulative Density
+#'
+#' The empirical cumulative density/distribution provides a way to visualize species sensitivity data.
+#'
+#' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::geom_point
+#' @export
+#' @examples
+#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
+#'   geom_ecd()
+geom_ecd <- function(mapping = NULL, data = NULL, stat = "ecd",
+                     position = "identity", na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE, ...) {
+  ggplot2::layer(
+    geom = GeomEcd, data = data, mapping = mapping, stat = stat,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
@@ -59,12 +87,13 @@ ssd_stat_ecd <- function(mapping = NULL, data = NULL, geom = "point",
 #' @export
 #' @examples
 #' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
-#'   ssd_stat_cdf()
-ssd_stat_cdf <- function(mapping = NULL, data = NULL, geom = "line",
-                          position = "identity", na.rm = FALSE, show.legend = NA,
-                          inherit.aes = TRUE, dist = "lnorm", ...) {
+#'   stat_ecd() +
+#'   stat_cdf()
+stat_cdf <- function(mapping = NULL, data = NULL, geom = "line",
+                     position = "identity", na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE, dist = "lnorm", ...) {
   ggplot2::layer(
-    stat = SSDStatCDF, data = data, mapping = mapping, geom = geom,
+    stat = StatCdf, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, dist = dist, ...)
   )
