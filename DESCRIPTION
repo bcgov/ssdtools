@@ -1,10 +1,9 @@
 Package: ssdca
-Title: Species Sensitivity Distributions
-Version: 0.0.0.9006
+Title: Species Sensitivity Data
+Version: 0.0.0.9007
 Date: 2018-01-05
 Authors@R: 'Joe Thorley <joe@poissonconsulting.ca> [aut,cre]'
-Description: Fits and plots Species Sensitivity Data and Distributions.
-  The package was developed by the Canadian Government.
+Description: Fits distributions to Species Sensitivity Data.
 License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.0),

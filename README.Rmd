@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "tools/README-"
 )
 ```
 
@@ -18,19 +18,55 @@ knitr::opts_chunk$set(
 
 # ssdca
 
-`ssdca` is an R package to fit Species Sensitivity Distributions using Maximum Likelihood and plot the data and results.
-
-This package is under development for the B.C. Ministry of Environment by [Poisson Consulting](https://github.com/poissonconsulting). 
+`ssdca` is an R package to fit distributions to Species Sensitivity Data.
+It is being developed for the B.C. Ministry of Environment by [Poisson Consulting](https://github.com/poissonconsulting).
 
 ## Installation
 
-To install the latest version of `ssdca`:
+To install the latest version:
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("bcgov/ssdca")
+```
+
+## Introduction
+
+`ssdca` loads `fitdistrplus`, which it extends, as well several other packages.
+```{r}
 library(ssdca)
 ```
+
+`ssdca` provides a data set for several chemicals including Boron.
+```{r}
+boron_data <- ccme_data[ccme_data$Chemical == "Boron",]
+boron_data
+```
+
+Multiple distributions can be fit using `ssd_fit_dists()`
+```{r}
+boron_dists <- ssd_fit_dists(boron_data$Conc, c("lnorm", "weibull"))
+boron_dists
+```
+
+and plot using the `ggplot2` generic `autoplot`
+```{r}
+library(ggplot2)
+autoplot(boron_dists)
+```
+
+Model-averaged predictions complete with confidence intervals can be produced using the `stats` generic.
+```{r}
+boron_avg <- predict(boron_dists)
+boron_avg
+```
+and plotted together with the original data using `ssd_plot` to produce a publication quality plot.
+
+How to use `ssdca` in conjuction with `fitdistrplus` and `ggplot2` to 
+assess alternative fits and produce custom plots is described in the 
+ssdca vignette.
+
+A shiny webpage is being developed for non-users of R.
 
 ## Getting Help or Reporting an Issue
 
@@ -43,8 +79,6 @@ If you would like to contribute to the package, please see our
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). 
 By participating in this project you agree to abide by its terms.
-
-## Source Data
 
 ## License
 
