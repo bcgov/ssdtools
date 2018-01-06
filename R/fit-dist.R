@@ -4,11 +4,7 @@
 #' @param dist A string of the distribution to fit.
 #'
 #' @return An object of class fitdist.
-#' @export
-#'
-#' @examples
-#' ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"])
-ssd_fit_dist <- function(x, dist = "lnorm") {
+fit_dist_internal <- function(x, dist = "lnorm") {
   check_vector(x, 1)
   check_string(dist)
 
@@ -41,4 +37,18 @@ ssd_fit_dist <- function(x, dist = "lnorm") {
 
   fit <- do.call(fitdistrplus::fitdist, dist)
   fit
+}
+
+#' Fit Distribution
+#'
+#' @param x A numeric vector of the data.
+#' @param dist A string of the distribution to fit.
+#'
+#' @return An object of class fitdist.
+#' @export
+#'
+#' @examples
+#' ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"])
+ssd_fit_dist <- function(x, dist = "lnorm") {
+  fit_dist_internal(x, dist)
 }
