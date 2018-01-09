@@ -15,7 +15,7 @@
 context("moments")
 
 test_that("moments", {
-  moments <- ssd_moments(ccme_data$Conc)
+  moments <- ssd_moments(ccme_data$Concentration)
   expect_is(moments, "tbl")
   expect_identical(colnames(moments),
                    c("min", "max", "median", "mean", "sd",

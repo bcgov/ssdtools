@@ -16,7 +16,7 @@ A tbl data frame with 1 row and the columns min, max, median, mean, sd, skewness
 Calculates the min, max, median and unbiased estimates of the first four moments.
 }
 \examples{
-ssd_moments(ccme_data$Conc[ccme_data$Chemical == "Cadmium"])
+ssd_moments(ccme_data$Concentration[ccme_data$Chemical == "Cadmium"])
 }
 \seealso{
 \code{\link[fitdistrplus]{descdist}}

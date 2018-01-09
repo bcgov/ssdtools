@@ -8,7 +8,8 @@
 \describe{
   \item{Chemical}{The chemical <chr>.}
   \item{Species}{The species binomial name <chr>.}
-  \item{Conc}{The chemical concentration <dbl>.}
+  \item{Concentration}{The chemical concentration <dbl>.}
+  \item{Units}{The units <chr>.}
   \item{Group}{The taxonomic group <fctr>.}
 }}
 \usage{
@@ -17,6 +18,8 @@ ccme_data
 \description{
 Species Sensitivity Data from
 the Canadian Council of Ministers of the Environment.
+The taxonomic groups are Amphibian, Fish, Invertebrate and Plant.
+Plants includes freshwater algae.
 }
 \details{
 Additional information on each of the chemicals is available from the

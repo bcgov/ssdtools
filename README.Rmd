@@ -45,7 +45,7 @@ boron_data
 
 Multiple distributions can be fit using `ssd_fit_dists()`
 ```{r}
-boron_dists <- ssd_fit_dists(boron_data$Conc, c("lnorm", "weibull"))
+boron_dists <- ssd_fit_dists(boron_data$Concentration, c("lnorm", "weibull"))
 boron_dists
 ```
 

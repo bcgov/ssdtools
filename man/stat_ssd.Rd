@@ -56,7 +56,7 @@ to the paired geom/stat.}
 Uses the empirical cumulative density/distribution to visualize species sensitivity data.
 }
 \examples{
-ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
+ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Concentration)) +
   stat_ssd()
 }
 \seealso{

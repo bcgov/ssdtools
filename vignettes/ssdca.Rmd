@@ -23,7 +23,7 @@ The core function `ssd_fit_dists()` takes a numeric vector of sensitivity values
 and fits one or more recognized distributions.
 
 ```{r}
-boron <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"], c("lnorm", "weibull"))
+boron <- ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"], c("lnorm", "weibull"))
 print(boron)
 ```
 

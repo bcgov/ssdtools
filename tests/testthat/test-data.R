@@ -15,10 +15,24 @@
 context("data")
 
 test_that("data", {
-  expect_identical(checkr::check_data(ccme_data,
-                                      values = list(Chemical = "",
-                                                    Species = "",
-                                                    Conc = c(0, Inf),
-                                                    Group = factor(1)),
-                                      nrow = c(1, Inf)), ccme_data)
+  expect_identical(checkr::check_data(
+    ccme_data,
+    values = list(
+      Chemical = "",
+      Species = "",
+      Units = c("mg/L", "ug/L", "ng/L"),
+      Concentration = c(0, Inf),
+      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))),
+    nrow = c(1, Inf)), ccme_data)
+  expect_is(ccme_data, "tbl")
+
+  expect_identical(checkr::check_data(
+    boron_pred,
+    values = list(
+      prob = c(0,1),
+      est = 1,
+      se = 1,
+      lcl = 1,
+      ucl = 1)), boron_pred)
+  expect_is(boron_pred, "tbl")
 })

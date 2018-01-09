@@ -15,5 +15,5 @@
 context("skplot")
 
 test_that("ssd_skplot", {
-  expect_true(ssd_skplot(ccme_data$Conc))
+  expect_true(ssd_skplot(ccme_data$Concentration))
 })

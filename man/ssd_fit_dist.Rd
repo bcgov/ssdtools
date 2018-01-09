@@ -18,5 +18,5 @@ An object of class fitdist.
 Fit Distribution
 }
 \examples{
-ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"])
+ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
 }

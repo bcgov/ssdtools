@@ -22,7 +22,7 @@
 #' @export
 #'
 #' @examples
-#' ssd_moments(ccme_data$Conc[ccme_data$Chemical == "Cadmium"])
+#' ssd_moments(ccme_data$Concentration[ccme_data$Chemical == "Cadmium"])
 ssd_moments <- function(x) {
   x %<>% fitdistrplus::descdist(graph = FALSE)
   attr(x, "class") <- NULL

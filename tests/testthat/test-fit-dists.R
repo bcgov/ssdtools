@@ -16,7 +16,7 @@ context("fit-dists")
 
 test_that("fit_dists", {
   dist_names <- ssd_dists(all = TRUE)
-  dists <- ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"], dist_names)
+  dists <- ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"], dist_names)
 
   expect_true(is_fitdists(dists))
 

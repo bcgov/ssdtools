@@ -21,5 +21,5 @@ An object of class fitdists.
 By default fits xx distributions.
 }
 \examples{
-ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"])
+ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
 }

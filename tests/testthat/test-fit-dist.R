@@ -15,7 +15,7 @@
 context("fit-dist")
 
 test_that("fit_dist", {
-  dist <- ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"], "lnorm")
+  dist <- ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"], "lnorm")
 
   expect_is(dist, "fitdist")
 

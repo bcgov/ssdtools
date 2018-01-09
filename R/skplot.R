@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#' ssd_skplot(ccme_data$Conc[ccme_data$Chemical == "Cadmium"])
+#' ssd_skplot(ccme_data$Concentration[ccme_data$Chemical == "Cadmium"])
 ssd_skplot <- function(x) {
   check_vector(x, 1, length = c(2,Inf))
   x %<>% fitdistrplus::descdist(boot=100L)

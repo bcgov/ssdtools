@@ -7,7 +7,7 @@
 #' @seealso \code{\link{geom_ssd}}
 #' @export
 #' @examples
-#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
+#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Concentration)) +
 #'   stat_ssd()
 stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
                      position = "identity", na.rm = FALSE, show.legend = NA,
@@ -29,7 +29,7 @@ stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
 #' @seealso \code{\link{ssd_fit_dist}}
 #' @export
 #' @examples
-#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
+#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Concentration)) +
 #'   stat_ssd() +
 #'   stat_fitdist()
 stat_fitdist <- function(mapping = NULL, data = NULL, geom = "line",

@@ -70,7 +70,7 @@ geom_loghline <- function(mapping = NULL, data = NULL,
 #' @inheritParams ggplot2::geom_point
 #' @export
 #' @examples
-#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
+#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Concentration)) +
 #'   geom_ssd()
 geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
                      position = "identity", na.rm = FALSE, show.legend = NA,
@@ -92,7 +92,7 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #' @seealso \code{\link{ssd_fit_dist}}
 #' @export
 #' @examples
-#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Conc)) +
+#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Concentration)) +
 #'   geom_ssd() +
 #'   geom_fitdist()
 geom_fitdist <- function(mapping = NULL, data = NULL, stat = "fitdist",

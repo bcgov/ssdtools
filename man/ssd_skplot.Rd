@@ -16,7 +16,7 @@ An invisible TRUE.
 Plots a skewness-kurtosis graph similar to the one proposed by Cullen and Frey with 100 bootstrapped values.
 }
 \examples{
-ssd_skplot(ccme_data$Conc[ccme_data$Chemical == "Cadmium"])
+ssd_skplot(ccme_data$Concentration[ccme_data$Chemical == "Cadmium"])
 }
 \seealso{
 \code{\link[fitdistrplus]{descdist}}

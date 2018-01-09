@@ -17,7 +17,7 @@ remove_errors <- function(dist_fit, name, silent) {
 #'
 #' @export
 #' @examples
-#' ssd_fit_dists(ccme_data$Conc[ccme_data$Chemical == "Boron"])
+#' ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
 ssd_fit_dists <- function(x, dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"), silent = FALSE) {
   check_vector(x, 1)
   check_dists(dists)

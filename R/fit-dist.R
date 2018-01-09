@@ -48,7 +48,7 @@ fit_dist_internal <- function(x, dist = "lnorm") {
 #' @export
 #'
 #' @examples
-#' ssd_fit_dist(ccme_data$Conc[ccme_data$Chemical == "Boron"])
+#' ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
 ssd_fit_dist <- function(x, dist = "lnorm") {
   fit_dist_internal(x, dist)
 }
