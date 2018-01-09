@@ -149,13 +149,13 @@ ccme_data %<>% as_tibble()
 
 use_data(ccme_data, overwrite = TRUE)
 
-boron_data <- ccme_data$Concentration[ccme_data$Chemical == "Boron"]
+boron_data <- ccme_data[ccme_data$Chemical == "Boron",]
 use_data(boron_data, overwrite = TRUE)
 
-boron_lnorm <- ssd_fit_dist(boron_data, "lnorm")
+boron_lnorm <- ssd_fit_dist(boron_data$Concentration, "lnorm")
 use_data(boron_lnorm, overwrite = TRUE)
 
-boron_all <- ssd_fit_dists(boron_data, ssd_dists(all = TRUE))
+boron_all <- ssd_fit_dists(boron_data$Concentration, ssd_dists(all = TRUE))
 use_data(boron_all, overwrite = TRUE)
 
 boron_pred <- predict(boron_all)

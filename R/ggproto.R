@@ -24,7 +24,7 @@ NULL
 #' @export
 StatSsd <- ggplot2::ggproto(
   "StatSsd", ggplot2::Stat,
-  compute_group = function(data, scales) {
+  compute_panel = function(data, scales) {
     data$density <- (rank(data$x) - 0.5) / length(data$x)
     data
   },
