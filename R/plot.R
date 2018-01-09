@@ -22,7 +22,7 @@ plot.fitdists <- function(x, breaks = "default", ...) {
 #' ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
 ssd_plot <- function(data, pred, conc = "Concentration",
                      label = NULL, shape = NULL,
-                     xlab = "Concentration", ylab = "Density",
+                     xlab = "Concentration", ylab = "Percent of Species Affected",
                      ci = TRUE, hc5 = TRUE) {
   check_data(data)
   check_data(pred,

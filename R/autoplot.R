@@ -8,7 +8,7 @@
 #' @param ... Unused.
 #' @export
 autoplot.fitdist <- function(object, ci = FALSE, hc5 = FALSE,
-                             xlab = "Concentration", ylab = "Density",
+                             xlab = "Concentration", ylab = "Percent of Species Affected",
                              ...) {
   check_flag(ci)
   check_flag(hc5)
@@ -36,7 +36,7 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = FALSE,
 #'
 #' @inheritParams autoplot.fitdist
 #' @export
-autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Density", ...) {
+autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Percent of Species Affected", ...) {
   check_string(xlab)
   check_string(ylab)
 

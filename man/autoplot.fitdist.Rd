@@ -5,7 +5,7 @@
 \title{Autoplot}
 \usage{
 \method{autoplot}{fitdist}(object, ci = FALSE, hc5 = FALSE,
-  xlab = "Concentration", ylab = "Density", ...)
+  xlab = "Concentration", ylab = "Percent of Species Affected", ...)
 }
 \arguments{
 \item{object}{The object to plot.}

@@ -67,31 +67,6 @@ GeomFitdist <- ggplot2::ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomLoghline <- ggproto("GeomLoghline", Geom,
-  draw_panel = function(data, panel_params, coord) {
-    ranges <- coord$range(panel_params)
-
-    print(coord)
-
-    print(ranges)
-    data$x    <- ranges$x[1]
-    data$xend <- ranges$x[2]
-    data$y    <- data$yintercept
-    data$yend <- data$yintercept
-
-    GeomSegment$draw_panel(unique(data), panel_params, coord)
-  },
-
-  default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
-  required_aes = "yintercept",
-
-  draw_key = draw_key_path
-)
-
-#' @rdname ggplot2-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
 GeomXribbon <- ggproto("GeomXribbon", Geom,
   default_aes = aes(colour = NA, fill = "grey20", size = 0.5, linetype = 1,
     alpha = NA),

@@ -5,7 +5,8 @@
 \title{SSD Plot}
 \usage{
 ssd_plot(data, pred, conc = "Concentration", label = NULL, shape = NULL,
-  xlab = "Concentration", ylab = "Density", ci = TRUE, hc5 = TRUE)
+  xlab = "Concentration", ylab = "Percent of Species Affected", ci = TRUE,
+  hc5 = TRUE)
 }
 \arguments{
 \item{data}{A data frame.}

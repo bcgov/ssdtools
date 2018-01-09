@@ -27,41 +27,6 @@ geom_xribbon <- function(mapping = NULL, data = NULL,
   )
 }
 
-#' Log-hline Plot
-#'
-#' @inheritParams ggplot2::layer
-#' @inheritParams ggplot2::geom_point
-#' @inheritParams ggplot2::geom_hline
-#' @export
-geom_loghline <- function(mapping = NULL, data = NULL,
-                       ...,
-                       yintercept,
-                       na.rm = FALSE,
-                       show.legend = NA) {
-
-  # Act like an annotation
-  if (!missing(yintercept)) {
-    data <- data.frame(yintercept = yintercept)
-    mapping <- aes(yintercept = yintercept)
-    show.legend <- FALSE
-  }
-
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatIdentity,
-    geom = GeomLoghline,
-    position = PositionIdentity,
-    show.legend = show.legend,
-    inherit.aes = FALSE,
-    params = list(
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-
 #' Plot Species Sensitivity Data
 #'
 #' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
