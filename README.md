@@ -113,7 +113,8 @@ a plot for
 publication.
 
 ``` r
-ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species")
+ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
+         ylab = "Concentration (mg/L)")
 ```
 
 ![](tools/README-unnamed-chunk-8-1.png)<!-- -->
