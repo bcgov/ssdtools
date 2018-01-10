@@ -7,6 +7,7 @@
 \alias{StatFitdist}
 \alias{GeomSsd}
 \alias{GeomFitdist}
+\alias{GeomP5}
 \alias{GeomXribbon}
 \title{Base ggproto classes for ggplot2}
 \description{

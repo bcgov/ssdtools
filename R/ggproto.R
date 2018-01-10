@@ -67,6 +67,26 @@ GeomFitdist <- ggplot2::ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
+GeomP5 <- ggproto("GeomP5", Geom,
+  draw_panel = function(data, panel_params, coord) {
+
+    pieces <- data.frame(x = c(0.01, data$xintercept, data$xintercept),
+                         y = c(0.05, 0.05, 0.00))
+
+    data <- cbind(data, pieces)
+    GeomPath$draw_panel(data, panel_params, coord)
+  },
+
+  default_aes = aes(colour = "black", size = 0.5, linetype = "dotted", alpha = NA),
+  required_aes = "xintercept",
+
+  draw_key = draw_key_path
+)
+
+#' @rdname ggplot2-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
 GeomXribbon <- ggproto("GeomXribbon", Geom,
   default_aes = aes(colour = NA, fill = "grey20", size = 0.5, linetype = 1,
     alpha = NA),

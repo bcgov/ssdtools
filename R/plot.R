@@ -45,6 +45,7 @@ ssd_plot <- function(data, pred, conc = "Concentration",
   if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prob"), alpha = 0.3)
 
   gp <- gp +  geom_line(aes_string(y = "prob")) +
+    geom_p5(data = data, xintercept = pred$est[pred$prob == 0.05]) +
     geom_ssd(data = data, aes_string(x = conc, shape = shape)) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
   gp
