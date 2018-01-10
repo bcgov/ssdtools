@@ -5,8 +5,9 @@
 \title{SSD Plot}
 \usage{
 ssd_plot(data, pred, conc = "Concentration", label = NULL, shape = NULL,
-  xlab = "Concentration", ylab = "Percent of Species Affected", ci = TRUE,
-  hc5 = TRUE)
+  color = NULL, size = 2.5, xlab = "Concentration",
+  ylab = "Percent of Species Affected", ci = TRUE, hc5 = TRUE,
+  shift_x = 3)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -19,6 +20,10 @@ ssd_plot(data, pred, conc = "Concentration", label = NULL, shape = NULL,
 
 \item{shape}{A string of the column in data for the shape aesthetic.}
 
+\item{color}{A string of the column in data for the color aesthetic.}
+
+\item{size}{A number for the size of the labels.}
+
 \item{xlab}{A string of the x-axis label.}
 
 \item{ylab}{A string of the x-axis label.}
@@ -26,6 +31,8 @@ ssd_plot(data, pred, conc = "Concentration", label = NULL, shape = NULL,
 \item{ci}{A flag indicating wether to plot confidence intervals}
 
 \item{hc5}{A flag indicating whether to plot the HC5.}
+
+\item{shift_x}{The value to multiply the label x values by.}
 }
 \description{
 SSD Plot

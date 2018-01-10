@@ -4,10 +4,13 @@
 \alias{ssd_ecd}
 \title{Empirical Cumulative Density}
 \usage{
-ssd_ecd(x)
+ssd_ecd(x, ties.method = "first")
 }
 \arguments{
-\item{x}{A numeric vector of species sensitivity values.}
+\item{x}{a numeric, complex, character or logical vector.}
+
+\item{ties.method}{a character string specifying how ties are treated,
+    see \sQuote{Details}; can be abbreviated.}
 }
 \value{
 A numeric vector of the empirical cumulative density.

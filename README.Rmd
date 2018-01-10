@@ -50,6 +50,7 @@ boron_dists <- ssd_fit_dists(boron_data$Concentration)
 and plot using the `ggplot2` generic `autoplot`
 ```{r}
 library(ggplot2)
+theme_set(theme_bw())
 autoplot(boron_dists)
 ```
 
@@ -60,7 +61,7 @@ boron_pred <- predict(boron_dists)
 
 and plotted together with the original data using `ssd_plot` to produce a plot for publication.
 ```{r}
-ssd_plot(boron_data, boron_pred, shape = "Group", label = "Species")
+ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species")
 ```
 
 For more information and examples of how to use `ssdca` in conjuction with `fitdistrplus` and `ggplot2` to 

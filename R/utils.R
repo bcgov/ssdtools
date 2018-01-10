@@ -42,13 +42,12 @@ comma_signif <- function(x, digits = 1, ...) {
 
 #' Empirical Cumulative Density
 #'
-#' @param x A numeric vector of species sensitivity values.
-#'
+#' @inheritParams base::rank
 #' @return A numeric vector of the empirical cumulative density.
 #' @export
 #'
 #' @examples
 #' ssd_ecd(1:10)
-ssd_ecd <- function(x) {
-  (rank(x) - 0.5) / length(x)
+ssd_ecd <- function(x, ties.method = "first") {
+  (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }

@@ -95,6 +95,7 @@ and plot using the `ggplot2` generic `autoplot`
 
 ``` r
 library(ggplot2)
+theme_set(theme_bw())
 autoplot(boron_dists)
 ```
 
@@ -108,10 +109,11 @@ boron_pred <- predict(boron_dists)
 ```
 
 and plotted together with the original data using `ssd_plot` to produce
-a plot for publication.
+a plot for
+publication.
 
 ``` r
-ssd_plot(boron_data, boron_pred, shape = "Group", label = "Species")
+ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species")
 ```
 
 ![](tools/README-unnamed-chunk-8-1.png)<!-- -->
