@@ -39,3 +39,16 @@ comma_signif <- function(x, digits = 1, ...) {
   x %<>% signif(digits = digits)
   scales::comma(x, ...)
 }
+
+#' Empirical Cumulative Density
+#'
+#' @param x A numeric vector of species sensitivity values.
+#'
+#' @return A numeric vector of the empirical cumulative density.
+#' @export
+#'
+#' @examples
+#' ssd_ecd(1:10)
+ssd_ecd <- function(x) {
+  (rank(x) - 0.5) / length(x)
+}

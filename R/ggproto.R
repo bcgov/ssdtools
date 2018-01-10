@@ -25,7 +25,7 @@ NULL
 StatSsd <- ggplot2::ggproto(
   "StatSsd", ggplot2::Stat,
   compute_panel = function(data, scales) {
-    data$density <- (rank(data$x) - 0.5) / length(data$x)
+    data$density <- ssd_ecd(data$x)
     data
   },
   default_aes = ggplot2::aes(y = ..density..),
