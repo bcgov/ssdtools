@@ -78,8 +78,8 @@
 #' Boron.
 #'
 #' @examples
-#' boron_all
-"boron_all"
+#' boron_dists
+"boron_dists"
 
 #' Model averaged predictions for CCME Boron Data
 #'

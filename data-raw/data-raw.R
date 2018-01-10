@@ -155,8 +155,8 @@ use_data(boron_data, overwrite = TRUE)
 boron_lnorm <- ssd_fit_dist(boron_data$Concentration, "lnorm")
 use_data(boron_lnorm, overwrite = TRUE)
 
-boron_all <- ssd_fit_dists(boron_data$Concentration, ssd_dists(all = TRUE))
-use_data(boron_all, overwrite = TRUE)
+boron_dists <- ssd_fit_dists(boron_data$Concentration)
+use_data(boron_dists, overwrite = TRUE)
 
-boron_pred <- predict(boron_all)
+boron_pred <- predict(boron_dists)
 use_data(boron_pred, overwrite = TRUE)

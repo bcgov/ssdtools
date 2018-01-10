@@ -43,7 +43,7 @@ model_average <- function(x) {
 #' @export
 #' @examples
 #' \dontrun{
-#' predict(boron_all, probs = c(0.01, 0.05, 0.5), IC = AICc)
+#' predict(boron_dists, probs = c(0.01, 0.05, 0.5), IC = AICc)
 #' }
 predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.02),
                              nboot = 1001, IC = AICc, average = TRUE, level = 0.95, ...) {

@@ -88,14 +88,14 @@ boron_data
 Multiple distributions can be fit using `ssd_fit_dists()`
 
 ``` r
-boron_all <- ssd_fit_dists(boron_data$Concentration)
+boron_dists <- ssd_fit_dists(boron_data$Concentration)
 ```
 
 and plot using the `ggplot2` generic `autoplot`
 
 ``` r
 library(ggplot2)
-autoplot(boron_all)
+autoplot(boron_dists)
 ```
 
 ![](tools/README-unnamed-chunk-6-1.png)<!-- -->
@@ -104,7 +104,7 @@ Model-averaged predictions complete with confidence intervals can be
 produced using the `stats` generic.
 
 ``` r
-boron_pred <- predict(boron_all)
+boron_pred <- predict(boron_dists)
 ```
 
 and plotted together with the original data using `ssd_plot` to produce
