@@ -39,32 +39,32 @@ library(ssdca)
 
 `ssdca` provides a data set for several chemicals including Boron.
 ```{r}
-boron_data <- ccme_data[ccme_data$Chemical == "Boron",]
 boron_data
 ```
 
 Multiple distributions can be fit using `ssd_fit_dists()`
-```{r}
-boron_dists <- ssd_fit_dists(boron_data$Concentration, c("lnorm", "weibull"))
-boron_dists
+```{r, eval=FALSE}
+boron_all <- ssd_fit_dists(boron_data$Concentration)
 ```
 
 and plot using the `ggplot2` generic `autoplot`
 ```{r}
 library(ggplot2)
-autoplot(boron_dists)
+autoplot(boron_all)
 ```
 
 Model-averaged predictions complete with confidence intervals can be produced using the `stats` generic.
-```{r}
-boron_avg <- predict(boron_dists)
-boron_avg
+```{r, eval=FALSE}
+boron_pred <- predict(boron_all)
 ```
-and plotted together with the original data using `ssd_plot` to produce a publication quality plot.
 
-How to use `ssdca` in conjuction with `fitdistrplus` and `ggplot2` to 
-assess alternative fits and produce custom plots is described in the 
-ssdca vignette.
+and plotted together with the original data using `ssd_plot` to produce a publication quality plot.
+```{r}
+ssd_plot(boron_data, boron_pred)
+```
+
+For more information and examples of how to use `ssdca` in conjuction with `fitdistrplus` and `ggplot2` to 
+assess alternative fits and produce custom plots is described in the vignette ssdca.
 
 A shiny webpage is being developed for non-users of R.
 
