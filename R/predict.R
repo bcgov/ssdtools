@@ -12,8 +12,8 @@ predict_fitdist_prob <- function(prob, boot, level) {
 #' @inheritParams predict.fitdists
 #' @export
 #' @examples
-#' predict(boron_lnorm)
-predict.fitdist <- function(object, probs = seq(0.01, 0.99, by = 0.02),
+#' predict(boron_lnorm, probs = c(0.05, 0.5))
+predict.fitdist <- function(object, probs = seq(0.01, 0.99, by = 0.01),
                             nboot = 1001, level = 0.95, ...) {
   check_vector(probs, c(0.001, 0.999), length = c(1, Inf), unique = TRUE)
   check_count(nboot, coerce = TRUE)

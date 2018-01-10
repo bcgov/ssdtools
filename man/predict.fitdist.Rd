@@ -4,7 +4,7 @@
 \alias{predict.fitdist}
 \title{Predict fitdist}
 \usage{
-\method{predict}{fitdist}(object, probs = seq(0.01, 0.99, by = 0.02),
+\method{predict}{fitdist}(object, probs = seq(0.01, 0.99, by = 0.01),
   nboot = 1001, level = 0.95, ...)
 }
 \arguments{
@@ -22,5 +22,5 @@
 Predict fitdist
 }
 \examples{
-predict(boron_lnorm)
+predict(boron_lnorm, probs = c(0.05, 0.5))
 }
