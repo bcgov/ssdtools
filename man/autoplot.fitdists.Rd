@@ -19,3 +19,9 @@
 \description{
 Autoplot
 }
+\examples{
+\dontrun{
+library(ggplot2)
+autoplot(boron_dists)
+}
+}

@@ -43,11 +43,11 @@ test_that("fit_dists", {
   pred <- predict(dist3, nboot = 10L)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("prob", "est", "se", "lcl", "ucl"))
-  expect_identical(pred$prob, seq(0.01, 0.99, by = 0.02))
+  expect_identical(pred$prob, seq(0.01, 0.99, by = 0.01))
 
   pred <- predict(dist3, nboot = 10L, average = FALSE)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("dist", "prob", "est", "se", "lcl", "ucl", "weight"))
-  expect_identical(nrow(pred), 100L)
+  expect_identical(nrow(pred), 198L)
   expect_output(print(dists))
 })

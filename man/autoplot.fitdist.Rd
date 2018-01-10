@@ -4,7 +4,7 @@
 \alias{autoplot.fitdist}
 \title{Autoplot}
 \usage{
-\method{autoplot}{fitdist}(object, ci = FALSE, hc5 = FALSE,
+\method{autoplot}{fitdist}(object, ci = FALSE, hc5 = TRUE,
   xlab = "Concentration", ylab = "Percent of Species Affected", ...)
 }
 \arguments{
@@ -12,7 +12,7 @@
 
 \item{ci}{A flag indicating wether to plot confidence intervals}
 
-\item{hc5}{A flag indicating whether to plot the HC5 (not yet implemented)}
+\item{hc5}{A flag indicating whether to plot the HC5.}
 
 \item{xlab}{A string of the x-axis label.}
 
@@ -22,4 +22,8 @@
 }
 \description{
 Autoplot
+}
+\examples{
+library(ggplot2)
+autoplot(boron_lnorm)
 }

@@ -108,10 +108,10 @@ boron_pred <- predict(boron_dists)
 ```
 
 and plotted together with the original data using `ssd_plot` to produce
-a publication quality plot.
+a plot for publication.
 
 ``` r
-ssd_plot(boron_data, boron_pred)
+ssd_plot(boron_data, boron_pred, shape = "Group", label = "Species")
 ```
 
 ![](tools/README-unnamed-chunk-8-1.png)<!-- -->

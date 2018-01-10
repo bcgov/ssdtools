@@ -4,7 +4,7 @@
 \alias{predict.fitdists}
 \title{Predict fitdist}
 \usage{
-\method{predict}{fitdists}(object, probs = seq(0.01, 0.99, by = 0.02),
+\method{predict}{fitdists}(object, probs = seq(0.01, 0.99, by = 0.01),
   nboot = 1001, IC = AICc, average = TRUE, level = 0.95, ...)
 }
 \arguments{
@@ -27,7 +27,7 @@ Predict fitdist
 }
 \examples{
 \dontrun{
-predict(boron_dists, probs = c(0.01, 0.05, 0.5), IC = AICc)
+predict(boron_dists)
 }
 }
 \seealso{

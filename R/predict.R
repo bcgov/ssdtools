@@ -43,9 +43,9 @@ model_average <- function(x) {
 #' @export
 #' @examples
 #' \dontrun{
-#' predict(boron_dists, probs = c(0.01, 0.05, 0.5), IC = AICc)
+#' predict(boron_dists)
 #' }
-predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.02),
+predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.01),
                              nboot = 1001, IC = AICc, average = TRUE, level = 0.95, ...) {
   check_function(IC)
   check_flag(average)

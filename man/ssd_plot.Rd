@@ -25,7 +25,7 @@ ssd_plot(data, pred, conc = "Concentration", label = NULL, shape = NULL,
 
 \item{ci}{A flag indicating wether to plot confidence intervals}
 
-\item{hc5}{A flag indicating whether to plot the HC5 (not yet implemented)}
+\item{hc5}{A flag indicating whether to plot the HC5.}
 }
 \description{
 SSD Plot

@@ -2,12 +2,15 @@
 #'
 #' @param object The object to plot.
 #' @param ci A flag indicating wether to plot confidence intervals
-#' @param hc5 A flag indicating whether to plot the HC5 (not yet implemented)
+#' @param hc5 A flag indicating whether to plot the HC5.
 #' @param xlab A string of the x-axis label.
 #' @param ylab A string of the x-axis label.
 #' @param ... Unused.
 #' @export
-autoplot.fitdist <- function(object, ci = FALSE, hc5 = FALSE,
+#' @examples
+#' library(ggplot2)
+#' autoplot(boron_lnorm)
+autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
                              xlab = "Concentration", ylab = "Percent of Species Affected",
                              ...) {
   check_flag(ci)
@@ -27,8 +30,7 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = FALSE,
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(hc5) .NotYetImplemented()
-  #  gp <- gp + geom_loghline(yintercept = 0.05, linetype = "dotted")
+  if(hc5) gp <- gp + geom_p5(xintercept = pred$est[pred$prob == 0.05], linetype = "dotted")
   gp
 }
 
@@ -36,6 +38,11 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = FALSE,
 #'
 #' @inheritParams autoplot.fitdist
 #' @export
+#' @examples
+#' \dontrun{
+#' library(ggplot2)
+#' autoplot(boron_dists)
+#' }
 autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Percent of Species Affected", ...) {
   check_string(xlab)
   check_string(ylab)
