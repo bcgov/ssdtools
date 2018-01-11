@@ -14,6 +14,17 @@
 
 #' Goodness of Fit
 #'
+#' Returns with the following columns
+#' \describe{
+#'   \item{dist}{The distribution name (chr)}
+#'   \item{ad}{Anderson-Darling statistic (dbl)}
+#'   \item{ks}{Kolmogorov-Smirnov statistic (dbl)}
+#'   \item{cvm}{Cramer-von Mises statistic (dbl)}
+#'   \item{aic}{Akaike's Information Criterion (dbl)}
+#'   \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
+#'   \item{bic}{Bayesion Information Criterion (dbl)}
+#' }
+#'
 #' @param x The object.
 #' @param ... Unused.
 #'
