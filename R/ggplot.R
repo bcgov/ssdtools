@@ -72,7 +72,7 @@ GeomFitdist <- ggplot2::ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomP5 <- ggproto("GeomP5", Geom,
+GeomHc5 <- ggproto("GeomHc5", Geom,
   draw_panel = function(data, panel_params, coord) {
 
     pieces <- data.frame(x = c(0.01, data$xintercept, data$xintercept),
@@ -255,7 +255,7 @@ geom_fitdist <- function(mapping = NULL, data = NULL, stat = "fitdist",
 
 #' Fifth Percentile Plot
 #'
-#' For each x value, `geom_p5` displays the fifth percentile.
+#' For each x value, `geom_hc5` displays the fifth percentile.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path
@@ -264,8 +264,8 @@ geom_fitdist <- function(mapping = NULL, data = NULL, stat = "fitdist",
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Concentration)) +
 #'   geom_ssd() +
-#'   geom_p5(xintercept = 1.5)
-geom_p5 <- function(mapping = NULL, data = NULL, xintercept,
+#'   geom_hc5(xintercept = 1.5)
+geom_hc5 <- function(mapping = NULL, data = NULL, xintercept,
                     na.rm = FALSE, show.legend = NA, ...) {
 
   if (!missing(xintercept)) {
@@ -275,7 +275,7 @@ geom_p5 <- function(mapping = NULL, data = NULL, xintercept,
   }
 
   layer(
-    geom = GeomP5,  data = data, mapping = mapping, stat = StatIdentity,
+    geom = GeomHc5,  data = data, mapping = mapping, stat = StatIdentity,
     position = PositionIdentity, show.legend = show.legend, inherit.aes = FALSE,
     params = list(na.rm = na.rm, ...)
   )

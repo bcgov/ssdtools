@@ -56,7 +56,7 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(hc5) gp <- gp + geom_p5(xintercept = pred$est[pred$prob == 0.05], linetype = "dotted")
+  if(hc5) gp <- gp + geom_hc5(xintercept = pred$est[pred$prob == 0.05], linetype = "dotted")
   gp
 }
 
@@ -131,7 +131,7 @@ ssd_plot <- function(data, pred, conc = "Concentration",
     data <- data[order(data[[label]]),]
   }
   gp <- gp + geom_line(aes_string(y = "prob")) +
-    geom_p5(data = data, xintercept = pred$est[pred$prob == 0.05]) +
+    geom_hc5(data = data, xintercept = pred$est[pred$prob == 0.05]) +
     geom_ssd(data = data, aes_string(x = conc, shape = shape, color = color)) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
