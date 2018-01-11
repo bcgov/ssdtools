@@ -12,17 +12,29 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("fit-dist")
+context("predict")
 
-test_that("fit_dist", {
-  dist <- ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"], "lnorm")
-
-  expect_is(dist, "fitdist")
-
-  pred <- predict(dist, nboot = 10)
+test_that("predict.fitdist", {
+  pred <- predict(boron_lnorm, nboot = 10)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("prob", "est", "se", "lcl", "ucl"))
   expect_identical(pred$prob, seq(0.01, 0.99, by = 0.01))
-  pred2 <- predict(dist, nboot = 10)
+  pred2 <- predict(boron_lnorm, nboot = 10)
   expect_identical(pred$est[1], pred2$est[1])
 })
+
+test_that("predict.fitdists", {
+  dists <- boron_dists[c("gamma", "gompertz")]
+  class(dists) <- "fitdists"
+  pred <- predict(dists, nboot = 10L)
+  expect_is(pred, "tbl")
+  expect_identical(colnames(pred), c("prob", "est", "se", "lcl", "ucl"))
+  expect_identical(pred$prob, seq(0.01, 0.99, by = 0.01))
+
+  pred <- predict(dists, nboot = 10L, average = FALSE)
+  expect_is(pred, "tbl")
+  expect_identical(colnames(pred), c("dist", "prob", "est", "se", "lcl", "ucl", "weight"))
+  expect_identical(nrow(pred), 198L)
+  expect_output(print(dists))
+})
+

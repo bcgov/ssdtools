@@ -12,30 +12,17 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("fit-dists")
+context("fit")
+
+test_that("fit_dist", {
+  dist <- ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"], "lnorm")
+  expect_true(is_fitdist(dist))
+  expect_identical(dist, boron_lnorm)
+})
 
 test_that("fit_dists", {
   dist_names <- ssd_dists(all = TRUE)
   dists <- ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"], dist_names)
-
   expect_true(is_fitdists(dists))
-
   expect_identical(names(dists), dist_names)
-  dist1 <- dists[ssd_dists()]
-  dist2 <- dists[setdiff(ssd_dists(all = TRUE), ssd_dists())]
-  class(dist1) <- "fitdists"
-  class(dist2) <- "fitdists"
-
-  dist3 <- dists[c("gamma", "gompertz")]
-  class(dist3) <- "fitdists"
-  pred <- predict(dist3, nboot = 10L)
-  expect_is(pred, "tbl")
-  expect_identical(colnames(pred), c("prob", "est", "se", "lcl", "ucl"))
-  expect_identical(pred$prob, seq(0.01, 0.99, by = 0.01))
-
-  pred <- predict(dist3, nboot = 10L, average = FALSE)
-  expect_is(pred, "tbl")
-  expect_identical(colnames(pred), c("dist", "prob", "est", "se", "lcl", "ucl", "weight"))
-  expect_identical(nrow(pred), 198L)
-  expect_output(print(dists))
 })
