@@ -101,6 +101,21 @@ autoplot(boron_dists)
 
 ![](tools/README-unnamed-chunk-6-1.png)<!-- -->
 
+The goodness of fit can be assessed using `ssd_gof`
+
+``` r
+ssd_gof(boron_dists)
+#> # A tibble: 6 x 4
+#>       dist        ad         ks        cvm
+#>      <chr>     <dbl>      <dbl>      <dbl>
+#> 1    lnorm 0.5070335 0.10651430 0.07033164
+#> 2     llog 0.4870694 0.09934088 0.05950233
+#> 3 gompertz 0.6019526 0.12018812 0.08221874
+#> 4  lgumbel 0.8287721 0.15825915 0.13402809
+#> 5    gamma 0.4409319 0.11691481 0.05550569
+#> 6  weibull 0.4346273 0.11697580 0.05426727
+```
+
 Model-averaged predictions complete with confidence intervals can be
 produced using the `stats` generic.
 
@@ -117,7 +132,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          ylab = "Concentration (mg/L)")
 ```
 
-![](tools/README-unnamed-chunk-8-1.png)<!-- -->
+![](tools/README-unnamed-chunk-9-1.png)<!-- -->
 
 For more information and examples of how to use `ssdca` in conjuction
 with `fitdistrplus` and `ggplot2` to assess alternative fits and produce

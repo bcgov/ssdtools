@@ -54,6 +54,11 @@ theme_set(theme_bw())
 autoplot(boron_dists)
 ```
 
+The goodness of fit can be assessed using `ssd_gof`
+```{r}
+ssd_gof(boron_dists)
+```
+
 Model-averaged predictions complete with confidence intervals can be produced using the `stats` generic.
 ```{r, eval=FALSE}
 boron_pred <- predict(boron_dists)

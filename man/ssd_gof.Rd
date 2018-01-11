@@ -19,4 +19,5 @@ Goodness of Fit
 }
 \examples{
 ssd_gof(boron_lnorm)
+ssd_gof(boron_dists)
 }

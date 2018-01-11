@@ -22,4 +22,11 @@ test_that("ssd_gof", {
   expect_equal(x$ad, 0.5070335, tolerance = 0.0000001)
   expect_equal(x$ks, 0.1065143, tolerance = 0.0000001)
   expect_equal(x$cvm, 0.07033164, tolerance = 0.0000001)
+
+  xs <- ssd_gof(boron_dists)
+  expect_is(xs, "tbl")
+  expect_identical(colnames(xs), c("dist", "ad", "ks", "cvm"))
+  expect_identical(xs$dist, names(boron_dists))
+  expect_identical(xs[xs$dist == "lnorm",], x)
 })
+
