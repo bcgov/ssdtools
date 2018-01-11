@@ -12,11 +12,11 @@ Depends:
     actuar,
     VGAM,
     FAdist,
+    ggplot2,
     fitdistrplus
 Imports:
     checkr,
     dplyr,
-    ggplot2,
     grid,
     magrittr,
     plyr,

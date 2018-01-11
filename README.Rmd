@@ -32,7 +32,7 @@ devtools::install_github("bcgov/ssdca")
 
 ## Introduction
 
-`ssdca` loads `fitdistrplus`, which it extends, as well several other packages.
+`ssdca` loads `fitdistrplus` and `ggplot2`, both of which it extends, as well as several other packages.
 ```{r}
 library(ssdca)
 ```
@@ -49,7 +49,6 @@ boron_dists <- ssd_fit_dists(boron_data$Concentration)
 
 and plot using the `ggplot2` generic `autoplot`
 ```{r}
-library(ggplot2)
 theme_set(theme_bw())
 autoplot(boron_dists)
 ```

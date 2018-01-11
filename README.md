@@ -26,8 +26,8 @@ devtools::install_github("bcgov/ssdca")
 
 ## Introduction
 
-`ssdca` loads `fitdistrplus`, which it extends, as well several other
-packages.
+`ssdca` loads `fitdistrplus` and `ggplot2`, both of which it extends, as
+well as several other packages.
 
 ``` r
 library(ssdca)
@@ -55,14 +55,10 @@ library(ssdca)
 #> The following objects are masked from 'package:actuar':
 #> 
 #>     dgumbel, pgumbel, qgumbel, rgumbel
+#> Loading required package: ggplot2
 #> Loading required package: fitdistrplus
 #> Loading required package: MASS
 #> Loading required package: survival
-#> 
-#> Attaching package: 'ssdca'
-#> The following object is masked from 'package:VGAM':
-#> 
-#>     AICc
 ```
 
 `ssdca` provides a data set for several chemicals including Boron.
@@ -94,7 +90,6 @@ boron_dists <- ssd_fit_dists(boron_data$Concentration)
 and plot using the `ggplot2` generic `autoplot`
 
 ``` r
-library(ggplot2)
 theme_set(theme_bw())
 autoplot(boron_dists)
 ```
@@ -105,15 +100,15 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(boron_dists)
-#> # A tibble: 6 x 4
-#>       dist        ad         ks        cvm
-#>      <chr>     <dbl>      <dbl>      <dbl>
-#> 1    lnorm 0.5070335 0.10651430 0.07033164
-#> 2     llog 0.4870694 0.09934088 0.05950233
-#> 3 gompertz 0.6019526 0.12018812 0.08221874
-#> 4  lgumbel 0.8287721 0.15825915 0.13402809
-#> 5    gamma 0.4409319 0.11691481 0.05550569
-#> 6  weibull 0.4346273 0.11697580 0.05426727
+#> # A tibble: 6 x 7
+#>       dist        ad         ks        cvm      aic     aicc      bic
+#>      <chr>     <dbl>      <dbl>      <dbl>    <dbl>    <dbl>    <dbl>
+#> 1    lnorm 0.5070335 0.10651430 0.07033164 239.0284 239.5084 241.6928
+#> 2     llog 0.4870694 0.09934088 0.05950233 241.0149 241.4949 243.6793
+#> 3 gompertz 0.6019526 0.12018812 0.08221874 237.6112 238.0912 240.2756
+#> 4  lgumbel 0.8287721 0.15825915 0.13402809 100.7338 101.2138 103.3982
+#> 5    gamma 0.4409319 0.11691481 0.05550569 237.6303 238.1103 240.2947
+#> 6  weibull 0.4346273 0.11697580 0.05426727 237.6253 238.1053 240.2897
 ```
 
 Model-averaged predictions complete with confidence intervals can be

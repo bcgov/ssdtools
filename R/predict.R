@@ -60,7 +60,7 @@ predict.fitdist <- function(object, probs = seq(0.01, 0.99, by = 0.01),
 #' predict(boron_dists)
 #' }
 predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.01),
-                             nboot = 1001, ic = "aic", average = TRUE, level = 0.95, ...) {
+                             nboot = 1001, ic = "aicc", average = TRUE, level = 0.95, ...) {
   check_vector(ic, c("aic", "aicc", "bic"), length = 1)
 
   ic <- ssd_gof(object)[c("dist", ic)]
