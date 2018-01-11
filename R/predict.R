@@ -32,28 +32,24 @@ model_average <- function(x) {
 }
 
 #' Predict fitdist
+#'
 #' @param object The object.
 #' @param probs A numeric vector of the densities to calculate the estimated concentrations for.
 #' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
-#' @param IC A function returning the information criterion to use for model averaging.
-#' @param average A flag indicating whether to model average the predictions.
+#' @param ic A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging or use 'no' to not model average.
+#' @param average A flag indicating whether to model-average.
 #' @param level A real of the confidence limit.
 #' @param ... Unused
-#' @seealso \code{\link{AICc}}
 #' @export
 #' @examples
 #' \dontrun{
 #' predict(boron_dists)
 #' }
 predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.01),
-                             nboot = 1001, IC = AICc, average = TRUE, level = 0.95, ...) {
-  check_function(IC)
-  check_flag(average)
+                             nboot = 1001, ic = "aic", average = TRUE, level = 0.95, ...) {
+  check_vector(ic, c("aic", "aicc", "bic"), length = 1)
 
-  ic <- IC(object)
-
-  if(!(is.data.frame(ic) && ncol(ic) == 2 && row.names(ic) == names(object)))
-    stop("IC must return a data frame with two columns and one named row for each object")
+  ic <- ssd_gof(object)[c("dist", ic)]
 
   ic$delta <- ic[[2]] - min(ic[[2]])
   ic$weight <- round(exp(-ic$delta/2)/sum(exp(-ic$delta/2)), 3)

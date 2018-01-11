@@ -19,23 +19,6 @@ test_that("fit_dist", {
 
   expect_is(dist, "fitdist")
 
-  expect_equal(AIC(dist), 239.0284, tolerance = 0.000001)
-  expect_equal(AICc(dist), 239.5084, tolerance = 0.000001)
-  expect_equal(BIC(dist), 241.6928, tolerance = 0.000001)
-
-  dist3 <- dist
-  aic <-  AIC(dist, dist2 = dist3)
-  expect_is(aic, "data.frame")
-  expect_equal(aic$AIC, c(239.0284, 239.0284), tolerance = 0.000001)
-  expect_identical(aic$df, c(2L, 2L))
-  expect_identical(colnames(aic), c("df", "AIC"))
-  expect_identical(rownames(aic), c("dist", "dist2"))
-
-  aic <-  AIC(dist, dist3)
-  expect_identical(rownames(aic), c("dist", "dist3"))
-  aic <-  AIC(object = dist, dist3)
-  expect_identical(rownames(aic), c("dist", "dist3"))
-
   pred <- predict(dist, nboot = 10)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("prob", "est", "se", "lcl", "ucl"))

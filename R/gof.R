@@ -15,8 +15,14 @@ ssd_gof <- function(x, ...) {
 #' @export
 ssd_gof.fitdist <- function(x, ...) {
   dist <- x$distname
+  n <- nobs(x)
+  k <- npars(x)
   x %<>% fitdistrplus::gofstat()
-  dplyr::data_frame(dist = dist, ad = x$ad, ks = x$ks, cvm = x$cvm)
+
+  aicc <- x$aic  + 2 * k * (k + 1) / (n - k - 1)
+
+  dplyr::data_frame(dist = dist, ad = x$ad, ks = x$ks, cvm = x$cvm,
+                    aic = x$aic, aicc = aicc, bic = x$bic)
 }
 
 #' @export

@@ -17,6 +17,6 @@ ssd_hc5.fitdist <- function(object, nboot = 1001, level = 0.95, ...) {
 }
 
 #' @export
-ssd_hc5.fitdists <- function(object, nboot = 1001, IC = AIC, level = 0.95, ...) {
-    predict(object, probs = 0.05, nboot = nboot, IC = IC, level = level)
+ssd_hc5.fitdists <- function(object, nboot = 1001, ic = "aic", level = 0.95, ...) {
+    predict(object, probs = 0.05, nboot = nboot, ic = "aic", level = level)
 }

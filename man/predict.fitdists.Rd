@@ -5,7 +5,7 @@
 \title{Predict fitdist}
 \usage{
 \method{predict}{fitdists}(object, probs = seq(0.01, 0.99, by = 0.01),
-  nboot = 1001, IC = AICc, average = TRUE, level = 0.95, ...)
+  nboot = 1001, ic = "aic", average = TRUE, level = 0.95, ...)
 }
 \arguments{
 \item{object}{The object.}
@@ -14,9 +14,9 @@
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
-\item{IC}{A function returning the information criterion to use for model averaging.}
+\item{ic}{A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging or use 'no' to not model average.}
 
-\item{average}{A flag indicating whether to model average the predictions.}
+\item{average}{A flag indicating whether to model-average.}
 
 \item{level}{A real of the confidence limit.}
 
@@ -29,7 +29,4 @@ Predict fitdist
 \dontrun{
 predict(boron_dists)
 }
-}
-\seealso{
-\code{\link{AICc}}
 }
