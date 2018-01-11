@@ -12,12 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Fit Distribution
-#'
-#' @param x A numeric vector of the data.
-#' @param dist A string of the distribution to fit.
-#'
-#' @return An object of class fitdist.
 fit_dist_internal <- function(x, dist = "lnorm") {
   check_vector(x, 1)
   check_string(dist)
@@ -53,6 +47,14 @@ fit_dist_internal <- function(x, dist = "lnorm") {
   fit
 }
 
+remove_errors <- function(dist_fit, name, silent) {
+  if(!is.null(dist_fit$error)) {
+    if(!silent) warning(name, ": ", dist_fit$error, call. = FALSE)
+    return(NULL)
+  }
+  dist_fit$result
+}
+
 #' Fit Distribution
 #'
 #' @param x A numeric vector of the data.
@@ -65,14 +67,6 @@ fit_dist_internal <- function(x, dist = "lnorm") {
 #' ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
 ssd_fit_dist <- function(x, dist = "lnorm") {
   fit_dist_internal(x, dist)
-}
-
-remove_errors <- function(dist_fit, name, silent) {
-  if(!is.null(dist_fit$error)) {
-    if(!silent) warning(name, ": ", dist_fit$error, call. = FALSE)
-    return(NULL)
-  }
-  dist_fit$result
 }
 
 #' Fit Distributions

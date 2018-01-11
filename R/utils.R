@@ -18,22 +18,6 @@ check_dists <- function(x, x_name = substitute(x)) {
                unique = TRUE, named = FALSE)
 }
 
-#' Get the Number of Parameters
-#'
-#' @param object The object.
-#' @param ... Unused.
-#'
-#' @return A count indicating the number of parameters.
-#' @export
-#' @examples
-#' npars(boron_lnorm)
-npars <- function(object, ...) {
-  UseMethod("npars")
-}
-
-#' @export
-npars.fitdist <- function(object, ...) length(object$estimate)
-
 is_fitdist <- function(x) inherits(x, "fitdist")
 
 is_fitdists <- function(x) inherits(x, "fitdists")
@@ -55,9 +39,39 @@ nobs.fitdists <- function(object, ...) {
   ns[1]
 }
 
+#' Get the Number of Parameters
+#'
+#' @param object The object.
+#' @param ... Unused.
+#'
+#' @return A count indicating the number of parameters.
+#' @export
+#' @examples
+#' npars(boron_lnorm)
+npars <- function(object, ...) {
+  UseMethod("npars")
+}
+
+#' @export
+npars.fitdist <- function(object, ...) length(object$estimate)
+
 comma_signif <- function(x, digits = 1, ...) {
   x %<>% signif(digits = digits)
   scales::comma(x, ...)
+}
+
+# Name ggplot grid object
+# Convenience function to name grid objects
+#
+# @keyword internal
+ggname <- function(prefix, grob) {
+  grob$name <- grobName(grob, prefix)
+  grob
+}
+
+#' @export
+print.fitdists <- function(x, ...) {
+  walk(x, print)
 }
 
 #' Empirical Cumulative Density
@@ -92,9 +106,3 @@ ssd_dists <- function(all = FALSE) {
   return(c("burr", "gamma", "gompertz", "lgumbel",
            "llog", "lnorm", "pareto", "weibull"))
 }
-
-#' @export
-print.fitdists <- function(x, ...) {
-  walk(x, print)
-}
-

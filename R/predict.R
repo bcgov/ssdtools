@@ -21,6 +21,14 @@ predict_fitdist_prob <- function(prob, boot, level) {
   tibble::data_frame(prob = prob, est = est, se = se, lcl = lcl, ucl = ucl)
 }
 
+model_average <- function(x) {
+  est <- sum(x$est * x$weight)
+  se <- sqrt(sum(x$weight * (x$se^2 + (x$est - est)^2)))
+  lcl <- sum(x$lcl * x$weight)
+  ucl <- sum(x$ucl * x$weight)
+  tibble::data_frame(est = est, se = se, lcl = lcl, ucl = ucl)
+}
+
 #' Predict fitdist
 #'
 #' @inheritParams predict.fitdists
@@ -35,14 +43,6 @@ predict.fitdist <- function(object, probs = seq(0.01, 0.99, by = 0.01),
   boot <- bootdist(object, niter = nboot)
   prediction <- map_df(probs, predict_fitdist_prob, boot = boot, level = level)
   prediction
-}
-
-model_average <- function(x) {
-  est <- sum(x$est * x$weight)
-  se <- sqrt(sum(x$weight * (x$se^2 + (x$est - est)^2)))
-  lcl <- sum(x$lcl * x$weight)
-  ucl <- sum(x$ucl * x$weight)
-  tibble::data_frame(est = est, se = se, lcl = lcl, ucl = ucl)
 }
 
 #' Predict fitdist

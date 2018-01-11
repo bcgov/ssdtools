@@ -12,15 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-# Name ggplot grid object
-# Convenience function to name grid objects
-#
-# @keyword internal
-ggname <- function(prefix, grob) {
-  grob$name <- grobName(grob, prefix)
-  grob
-}
-
 #' Base ggproto classes for ggplot2
 #'
 #' If you are creating a new geom, stat, position, or scale in another package,
@@ -144,6 +135,19 @@ GeomXribbon <- ggproto("GeomXribbon", Geom,
   }
 )
 
+plot_coord_scale <- function(data, xlab, ylab) {
+  check_string(xlab)
+  check_string(ylab)
+
+  list(
+    coord_trans(x = "log10"),
+    scale_x_continuous(xlab, breaks = scales::trans_breaks("log10", function(x) 10^x),
+                       labels = comma_signif),
+    scale_y_continuous(ylab, labels = percent, limits = c(0, 1),
+                       breaks = seq(0,1,by = 0.2), expand = c(0,0))
+  )
+}
+
 #' Plot Species Sensitivy Data
 #'
 #' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
@@ -185,19 +189,6 @@ stat_fitdist <- function(mapping = NULL, data = NULL, geom = "line",
     stat = StatFitdist, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, dist = dist, ...)
-  )
-}
-
-plot_coord_scale <- function(data, xlab, ylab) {
-  check_string(xlab)
-  check_string(ylab)
-
-  list(
-    coord_trans(x = "log10"),
-    scale_x_continuous(xlab, breaks = scales::trans_breaks("log10", function(x) 10^x),
-                       labels = comma_signif),
-    scale_y_continuous(ylab, labels = percent, limits = c(0, 1),
-                       breaks = seq(0,1,by = 0.2), expand = c(0,0))
   )
 }
 
