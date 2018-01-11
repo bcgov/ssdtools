@@ -5,7 +5,7 @@
 \title{Predict fitdist}
 \usage{
 \method{predict}{fitdists}(object, probs = seq(0.01, 0.99, by = 0.01),
-  nboot = 1001, ic = "aic", average = TRUE, level = 0.95, ...)
+  nboot = 1001, ic = "aicc", average = TRUE, level = 0.95, ...)
 }
 \arguments{
 \item{object}{The object.}

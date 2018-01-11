@@ -33,27 +33,32 @@ nobs.fitdist <- function(object, ...) object$n
 
 #' @export
 nobs.fitdists <- function(object, ...) {
-  ns <- vapply(object, nobs, 1L)
+  ns <- map_int(object, nobs)
   if(!all(ns == ns[1]))
     stop("the fitdists must have the same number of observations", call. = FALSE)
+  names(ns) <- NULL
   ns[1]
 }
 
 #' Get the Number of Parameters
 #'
-#' @param object The object.
+#' @param x The object.
 #' @param ... Unused.
 #'
 #' @return A count indicating the number of parameters.
 #' @export
 #' @examples
 #' npars(boron_lnorm)
-npars <- function(object, ...) {
+#' npars(boron_dists)
+npars <- function(x, ...) {
   UseMethod("npars")
 }
 
 #' @export
-npars.fitdist <- function(object, ...) length(object$estimate)
+npars.fitdist <- function(x, ...) length(x$estimate)
+
+#' @export
+npars.fitdists <- function(x, ...) map_int(x, npars)
 
 comma_signif <- function(x, digits = 1, ...) {
   x %<>% signif(digits = digits)

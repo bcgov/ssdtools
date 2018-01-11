@@ -4,10 +4,10 @@
 \alias{npars}
 \title{Get the Number of Parameters}
 \usage{
-npars(object, ...)
+npars(x, ...)
 }
 \arguments{
-\item{object}{The object.}
+\item{x}{The object.}
 
 \item{...}{Unused.}
 }
@@ -19,4 +19,5 @@ Get the Number of Parameters
 }
 \examples{
 npars(boron_lnorm)
+npars(boron_dists)
 }

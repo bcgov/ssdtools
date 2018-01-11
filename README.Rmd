@@ -58,6 +58,11 @@ The goodness of fit can be assessed using `ssd_gof`
 ssd_gof(boron_dists)
 ```
 
+and the model-averaged $HC_5$ estimated using `ssd_hc5`
+```{r}
+ssd_hc5(boron_dists)
+```
+
 Model-averaged predictions complete with confidence intervals can be produced using the `stats` generic.
 ```{r, eval=FALSE}
 boron_pred <- predict(boron_dists)

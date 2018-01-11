@@ -39,33 +39,30 @@ NULL
 #' @rdname lgumbel
 #' @export
 dlgumbel <- function(x, location = 0, scale = 0, log = FALSE){
-  x %<>% log()
-  fx <- 1/scale * exp(-(x - location)/scale - exp(-(x - location)/scale))
-  if (log) return(log(fx))
+  fx <- VGAM::dgumbel(log(x), location=location, scale=scale, log=FALSE)/x
+  if(log) fx <- log(fx)
   fx
 }
 
 #' @rdname lgumbel
 #' @export
 qlgumbel <- function(p, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE){
-  if (log.p) p %<>% exp()
-  if (!lower.tail) p <- 1 - p
-  xF <- location - scale * log(-log(p))
-  exp(xF)
+  if(log.p) p<- exp(p)
+  if(!lower.tail) p <- 1-p
+  exp(VGAM::qgumbel(p, location=location, scale=scale))
 }
 
 #' @rdname lgumbel
 #' @export
 plgumbel <- function(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE){
-  q %<>% log()
-  Fx <- exp(-exp(-(q - location)/scale))
-  if (!lower.tail) Fx <- 1 - Fx
-  if (log.p) Fx %<>% log()
-  Fx
+  Fq <- VGAM::pgumbel(log(q), location=location, scale=scale)
+  if(!lower.tail) Fq <- 1-Fq
+  if(log.p) Fq <- log(Fq)
+  Fq
 }
 
 #' @rdname lgumbel
 #' @export
 rlgumbel <- function(n, location = 0, scale = 0){
-  qlgumbel(stats::runif(n), location = location, scale = scale)
+  exp(VGAM::rgumbel(n, location=location, scale=scale))
 }

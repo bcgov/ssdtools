@@ -27,6 +27,17 @@ test_that("data", {
   expect_is(ccme_data, "tbl")
 
   expect_identical(checkr::check_data(
+    boron_data,
+    values = list(
+      Chemical = c("Boron", "Boron"),
+      Species = "",
+      Units = c("mg/L", "mg/L"),
+      Concentration = c(1.0, 70.7),
+      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))),
+    nrow = 28), boron_data)
+  expect_is(boron_data, "tbl")
+
+  expect_identical(checkr::check_data(
     boron_pred,
     values = list(
       prob = c(0,1),
