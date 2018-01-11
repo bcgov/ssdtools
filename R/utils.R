@@ -1,3 +1,9 @@
+check_dists <- function(x, x_name = substitute(x)) {
+  x_name %<>% deparse()
+  check_vector(x, ssd_dists(all = TRUE), length = c(1,length(ssd_dists(all = TRUE))),
+               unique = TRUE, named = FALSE)
+}
+
 #' Get the Number of Parameters
 #'
 #' @param object The object.
@@ -51,3 +57,30 @@ comma_signif <- function(x, digits = 1, ...) {
 ssd_ecd <- function(x, ties.method = "first") {
   (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }
+
+#' Distribution Names
+#'
+#' Returns a sorted character vector of the recognized distribution names.
+#'
+#' @param all A flag indicating whether to return all the distribution names.
+#' @return A sorted character vector of the distribution names.
+#' @export
+#'
+#' @examples
+#' ssd_dists()
+#' ssd_dists(all = TRUE)
+ssd_dists <- function(all = FALSE) {
+  check_flag(all)
+  if(!all) {
+    return(c("gamma", "gompertz", "lgumbel",
+             "llog", "lnorm", "weibull"))
+  }
+  return(c("burr", "gamma", "gompertz", "lgumbel",
+           "llog", "lnorm", "pareto", "weibull"))
+}
+
+#' @export
+print.fitdists <- function(x, ...) {
+  walk(x, print)
+}
+
