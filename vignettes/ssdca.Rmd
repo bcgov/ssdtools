@@ -12,33 +12,96 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 3,
+  fig.height = 3
 )
 library(ssdca)
 ```
 
-The `ssdca` package fits Species Sensitivity Distributions and plots and tabulates the results.
 
-The core function `ssd_fit_dists()` takes a numeric vector of sensitivity values
-and fits one or more recognized distributions.
+## Introduction
 
-```{r}
-#boron_ <- ssd_fit_dists(boron_data, c("lnorm", "weibull"))
-#print(boron)
-```
+The `ssdca` package fits and plots Species Sensitivity Distributions.
+This vignette describes how to use `ssdca` in conjunction with 
+the `fitdistrplus` and `ggplot2` packages.
 
 ```{r}
-#ssd_dists(all = TRUE)
+library(ssdca)
 ```
 
-The base `plot()` generic function plots model diagnostics for `fitdists` objects.
+## Fitting Distributions
+
+The function `ssd_fit_dists()` inputs a data frame with the concentration values, 
+by default, in the `Conc` column and fits one or more distributions.
+Here we fit the log-normal and weibull distributions to species sensitivity data for Boron.
+```{r}
+boron_data
+boron_dists2 <- ssd_fit_dists(boron_data, dists = c("lnorm", "weibull"))
+boron_dists2
+```
+
+## Model Diagnostics and Goodness of Fit
+
+The result `fitdists` object can be plotted to display model diagnostics plots for each fit.
 ```{r, fig.width=6, fig.height=6, fig.show='hold'}
-#plot(boron)
+plot(boron_dists2)
 ```
 
-The more familiar xx plots can be produced using the ggplot2 generic `autoplot()`
-```{r, fig.width=4, fig.height=3}
-#library(ggplot2)
-#autoplot(boron)
+Various goodness of fit statistics including the Akaike's Information Criteron corrected for sample size (aicc) can
+be generated using `ssd_gof()`.
+Moving forwards we consider the same six fits to Boron as Schwarz and Tillmanns (2017).
+```{r}
+boron_dists <- ssd_fit_dists(boron_data)
+ssd_gof(boron_dists)
 ```
 
+## Plotting Fits
+
+The actual fits can be plotted using the ggplot generic `autoplot`
+```{r, fig.width = 5 }
+autoplot(boron_dists)
+```
+
+as `autoplot` returns a `ggplot` object it can be modified prior to plotting, 
+which is extremely useful.
+```{r, fig.width = 5 }
+autoplot(boron_dists) + theme_bw()
+```
+
+## 5% Hazard Concentration
+
+Typically, species sensitivity distribution are fitted to estimate the 5% hazard concentration ($HC_5$).
+This is the concentration that affects just 5% of the species tested.
+The model-averaged $HC_5$ estimate (with 95% confidence limits) can be calculated as follows
+```{r}
+ssd_hc5(boron_dists)
+```
+By default model averaging is based on the Akaike's Weights corrected for small sample size.
+To return the individual estimates and their respective Akaike's Weights set `average = FALSE`
+```{r}
+ssd_hc5(boron_dists, average = FALSE)
+```
+For interpretation of the values see Schwarz and Tillmanns (2017).
+
+## Predictions
+
+The `predict` function can be used to generate model-averaged (or individual) 
+estimates across the full range of hazard concentrations.
+```{r, eval = FALSE}
+boron_pred <- predict(boron_dists)
+```
+
+The resultant values provide valuable information
+```{r}
+boron_pred
+```
+which can be plotted together with the original data to summarise an analysis
+```{r, fig.width = 7, fig.height=7}
+ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
+         ylab = "Concentration (mg/L)") + 
+  scale_color_manual(values = c("Amphibian" = "Black", "Fish" = "Blue", 
+                                "Invertebrate" = "Red", "Plant" = "Brown"))
+```
+Once again the returned object is an `ggplot` object which can be customized prior to plotting.
+Notice how the plot includes 
