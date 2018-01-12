@@ -4,7 +4,7 @@
 \alias{ssd_fit_dists}
 \title{Fit Distributions}
 \usage{
-ssd_fit_dists(data, left = "Conc", right = left, weights = NULL,
+ssd_fit_dists(data, left = "Conc", right = left, weight = NULL,
   dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
   silent = FALSE)
 }
@@ -15,7 +15,7 @@ ssd_fit_dists(data, left = "Conc", right = left, weights = NULL,
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{weights}{A string of the column in data with the weightings (or NULL)}
+\item{weight}{A string of the column in data with the weightings (or NULL)}
 
 \item{dists}{A character vector of the distributions to fit.}
 
@@ -32,6 +32,10 @@ By default the 'lnorm', 'llog', 'gompertz', 'lgumbel', 'gamma' and 'weibull'
 distributions are fitted to the data.
 The ssd_fit_dist and \code{\link{ssd_fit_dist}} functions have also been
 tested with the 'burr' and 'pareto' distributions.
+
+If weight specifies a column in the data frame with positive integers,
+weighted estimation occurs.
+However, currently only the resultant parameter estimates are available (via coef).
 }
 \examples{
 ssd_fit_dists(boron_data)

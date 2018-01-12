@@ -34,20 +34,23 @@ remove_errors <- function(dist_fit, name, silent) {
 #' @examples
 #' ssd_fit_dist(boron_data)
 ssd_fit_dist <- function(
-  data, left = "Conc", right = left, weights = NULL, dist = "lnorm") {
+  data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
 
   check_data(data, nrow = c(1, .Machine$integer.max))
   check_string(left)
   check_string(right)
 
-  checkor(check_null(weights), check_string(weights))
+  checkor(check_null(weight), check_string(weight))
 
-  check_colnames(data, unique(c(left, right, weights)))
+  check_colnames(data, unique(c(left, right, weight)))
   check_string(dist)
 
   x <- data[[left]]
 
   dist %<>% list(data = x, distr = ., method = "mle")
+
+  if(!is.null(weight))
+    dist$weights <- data[[weight]]
 
   if(dist$distr == "burr"){
     dist$start <- list(shape1 = 4, shape2 = 1, rate = 1)
@@ -84,10 +87,14 @@ ssd_fit_dist <- function(
 #' The ssd_fit_dist and \code{\link{ssd_fit_dist}} functions have also been
 #' tested with the 'burr' and 'pareto' distributions.
 #'
+#' If weight specifies a column in the data frame with positive integers,
+#' weighted estimation occurs.
+#' However, currently only the resultant parameter estimates are available (via coef).
+#'
 #' @param data A data frame.
 #' @param left A string of the column in data with the left concentration values.
 #' @param right A string of the column in data with the right concentration values.
-#' @param weights A string of the column in data with the weightings (or NULL)
+#' @param weight A string of the column in data with the weightings (or NULL)
 #' @param dists A character vector of the distributions to fit.
 #' @param silent A flag indicating whether fits should fail silently.
 #' @return An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
@@ -97,7 +104,7 @@ ssd_fit_dist <- function(
 #' @examples
 #' ssd_fit_dists(boron_data)
 ssd_fit_dists <- function(
-  data, left = "Conc", right = left, weights = NULL,
+  data, left = "Conc", right = left, weight = NULL,
   dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
   silent = FALSE
 ) {
@@ -106,7 +113,7 @@ ssd_fit_dists <- function(
 
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
-  dists %<>% map(safe_fit_dist, data = data, left = left, right = right, weights = weights)
+  dists %<>% map(safe_fit_dist, data = data, left = left, right = right, weight = weight)
   dists %<>% imap(remove_errors, silent = silent)
   dists <- dists[!vapply(dists, is.null, TRUE)]
   class(dists) <- "fitdists"

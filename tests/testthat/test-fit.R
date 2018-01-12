@@ -27,3 +27,17 @@ test_that("fit_dists", {
   expect_true(is.fitdists(dists))
   expect_identical(names(dists), dist_names)
 })
+
+test_that("fit_dist", {
+  dist <- ssd_fit_dist(boron_data)
+  expect_true(is.fitdist(dist))
+  expect_identical(dist, boron_lnorm)
+  expect_equal(coef(dist), c(meanlog = 2.561645, sdlog = 1.241540), tolerance = 0.0000001)
+
+  boron_data2 <- boron_data[rev(order(boron_data$Conc)),]
+  boron_data2$Weight <- 1:nrow(boron_data2)
+
+  dist <- ssd_fit_dist(boron_data2, weight = "Weight")
+  expect_true(is.fitdist(dist))
+  expect_equal(coef(dist), c(meanlog = 1.879717, sdlog = 1.127537), tolerance = 0.000001)
+})

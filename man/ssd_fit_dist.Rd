@@ -4,7 +4,7 @@
 \alias{ssd_fit_dist}
 \title{Fit Distribution}
 \usage{
-ssd_fit_dist(data, left = "Conc", right = left, weights = NULL,
+ssd_fit_dist(data, left = "Conc", right = left, weight = NULL,
   dist = "lnorm")
 }
 \arguments{
@@ -14,7 +14,7 @@ ssd_fit_dist(data, left = "Conc", right = left, weights = NULL,
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{weights}{A string of the column in data with the weightings (or NULL)}
+\item{weight}{A string of the column in data with the weightings (or NULL)}
 
 \item{dist}{A string of the distribution to fit.}
 }

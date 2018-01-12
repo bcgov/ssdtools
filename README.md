@@ -31,30 +31,9 @@ well as several other packages.
 
 ``` r
 library(ssdca)
-#> Loading required package: actuar
-#> 
-#> Attaching package: 'actuar'
-#> The following object is masked from 'package:grDevices':
-#> 
-#>     cm
 #> Loading required package: VGAM
 #> Loading required package: stats4
 #> Loading required package: splines
-#> 
-#> Attaching package: 'VGAM'
-#> The following objects are masked from 'package:actuar':
-#> 
-#>     dgumbel, dlgamma, dpareto, pgumbel, plgamma, ppareto, qgumbel,
-#>     qlgamma, qpareto, rgumbel, rlgamma, rpareto
-#> Loading required package: FAdist
-#> 
-#> Attaching package: 'FAdist'
-#> The following objects are masked from 'package:VGAM':
-#> 
-#>     dgev, dgumbel, pgev, pgumbel, qgev, qgumbel, rgev, rgumbel
-#> The following objects are masked from 'package:actuar':
-#> 
-#>     dgumbel, pgumbel, qgumbel, rgumbel
 #> Loading required package: ggplot2
 #> Loading required package: fitdistrplus
 #> Loading required package: MASS
@@ -116,9 +95,9 @@ and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
 ``` r
 ssd_hc5(boron_dists)
 #> # A tibble: 1 x 5
-#>    prop      est        se       lcl      ucl
-#>   <dbl>    <dbl>     <dbl>     <dbl>    <dbl>
-#> 1  0.05 1.250714 0.7215481 0.6141201 3.179775
+#>    prop      est        se       lcl     ucl
+#>   <dbl>    <dbl>     <dbl>     <dbl>   <dbl>
+#> 1  0.05 1.250714 0.7294592 0.5997027 3.17198
 ```
 
 Model-averaged predictions complete with confidence intervals can be
