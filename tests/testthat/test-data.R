@@ -46,4 +46,7 @@ test_that("data", {
       lcl = 1,
       ucl = 1)), boron_pred)
   expect_is(boron_pred, "tbl")
+
+  expect_is(boron_lnorm, "fitdist")
+  expect_is(boron_dists, "fitdists")
 })

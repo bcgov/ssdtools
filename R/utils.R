@@ -12,13 +12,37 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-check_dists <- function(x, x_name = substitute(x)) {
-  x_name %<>% deparse()
+
+#' Is fitdists
+#'
+#' Tests whether an object is a fitdist.
+#' @param x The object to test.
+#'
+#' @return A flag.
+#' @export
+#'
+#' @examples
+#' is.fitdist(boron_lnorm)
+#' is.fitdist(boron_dists)
+#' is.fitdist(boron_dists[["lnorm"]])
+is.fitdist <- function(x) {
+  inherits(x, "fitdist")
 }
 
-is_fitdist <- function(x) inherits(x, "fitdist")
-
-is_fitdists <- function(x) inherits(x, "fitdists")
+#' Is fitdists
+#'
+#' Tests whether an object is a fitdists.
+#' @param x The object to test.
+#'
+#' @return A flag.
+#' @export
+#'
+#' @examples
+#' is.fitdists(boron_lnorm)
+#' is.fitdists(boron_dists)
+is.fitdists <- function(x) {
+  inherits(x, "fitdists")
+}
 
 #' Number of Observations
 #'
@@ -63,10 +87,6 @@ comma_signif <- function(x, digits = 1, ...) {
   scales::comma(x, ...)
 }
 
-# Name ggplot grid object
-# Convenience function to name grid objects
-#
-# @keyword internal
 ggname <- function(prefix, grob) {
   grob$name <- grobName(grob, prefix)
   grob
