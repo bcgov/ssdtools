@@ -11,13 +11,13 @@ Depends:
     graphics,
     stats,
     VGAM,
-    FAdist,
     ggplot2,
     fitdistrplus
 Imports:
     actuar,
     checkr,
     dplyr,
+    FAdist,
     grid,
     magrittr,
     plyr,

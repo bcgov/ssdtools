@@ -56,5 +56,5 @@ hist(x,freq=FALSE,col='gray',border='white')
 curve(dburr(x,10,10),add=TRUE,col='red4',lwd=2)
 }
 \seealso{
-\code{\link[actuar]{burr}}
+\code{\link[actuar]{dburr}}
 }

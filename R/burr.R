@@ -32,7 +32,7 @@
 #' qburr gives the quantile function, rburr generates random deviates and mburr
 #' gives the kth raw moment.
 #' @name burr
-#' @seealso \code{\link[actuar]{burr}}
+#' @seealso \code{\link[actuar]{dburr}}
 #' @examples
 #' x <- rburr(1000,10,10)
 #' hist(x,freq=FALSE,col='gray',border='white')
