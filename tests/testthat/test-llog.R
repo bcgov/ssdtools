@@ -12,23 +12,23 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("lgumbel")
+context("llog")
 
-test_that("rlgumbel", {
+test_that("rllog", {
   set.seed(99)
-  r <- rlgumbel(100000, location = 100, scale = 3)
+  r <- rllog(100000)
   expect_identical(length(r), 100000L)
-  expect_equal(mean(log(r)), 3 * 0.57721 + 100, tolerance = 0.001)
+  expect_equal(mean(log(r)), 1, tolerance = 0.1)
 })
 
-test_that("pqlgumbel", {
-  expect_equal(log(qlgumbel(0.5, 3, 1)), 3.366513, tolerance = 0.000001)
-  expect_equal(plgumbel(exp(3), 3, 1), 0.3678794, tolerance = 0.0000001)
-  expect_equal(plgumbel(exp(4), 3, 1), 0.6922006, tolerance = 0.0000001)
-  expect_identical(plgumbel(qlgumbel(0.5, 3, 1), 3, 1), 0.5)
+test_that("pqllog", {
+  expect_equal(log(qllog(0.5)), 1, tolerance = 0.000001)
+  expect_equal(pllog(exp(3)), 0.8807971, tolerance = 0.0000001)
+  expect_equal(pllog(exp(4)), 0.9525741, tolerance = 0.0000001)
+  expect_identical(pllog(qllog(0.5, 3, 1), 3, 1), 0.5)
 })
 
-test_that("dlgumbel", {
- expect_equal(dlgumbel(exp(3), 3, 1), 0.01831564, tolerance = 0.0000001)
- expect_equal(dlgumbel(exp(4), 3, 1), 0.004664011, tolerance = 0.0000001)
+test_that("dllog", {
+ expect_equal(dllog(exp(3), 3, 1), 0.003720046, tolerance = 0.0000001)
+ expect_equal(dllog(exp(4), 3, 1), 0.001200358, tolerance = 0.0000001)
 })
