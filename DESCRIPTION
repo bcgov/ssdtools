@@ -10,12 +10,12 @@ Depends:
     R (>= 3.4.0),
     graphics,
     stats,
-    actuar,
     VGAM,
     FAdist,
     ggplot2,
     fitdistrplus
 Imports:
+    actuar,
     checkr,
     dplyr,
     grid,

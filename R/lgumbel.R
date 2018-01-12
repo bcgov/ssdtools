@@ -15,8 +15,7 @@
 #' Log-Gumbel Distribution
 #'
 #' Density, distribution function, quantile function and random generation
-#' for the log-Gumbel distribution with scale and location parameters
-#' equal to \code{scale} and \code{location}, respectively.
+#' for the Burr distribution with \code{scale} and \code{location} parameters.
 #'
 #' @param x,q	vector of quantiles.
 #' @param p	vector of probabilities.

@@ -37,8 +37,7 @@ qlgumbel gives the quantile function, and rlgumbel generates random deviates.
 }
 \description{
 Density, distribution function, quantile function and random generation
-for the log-Gumbel distribution with scale and location parameters
-equal to \code{scale} and \code{location}, respectively.
+for the Burr distribution with \code{scale} and \code{location} parameters.
 }
 \examples{
 x <- rlgumbel(1000,1,0.1)
