@@ -19,11 +19,14 @@ ssd_fit_dist(data, left = "Conc", right = left, weights = NULL,
 \item{dist}{A string of the distribution to fit.}
 }
 \value{
-An object of class fitdist.
+An object of class \code{\link[fitdistrplus]{fitdist}}.
 }
 \description{
-Fit Distribution
+Fits a distribution to species sensitivity data.
 }
 \examples{
 ssd_fit_dist(boron_data)
+}
+\seealso{
+\code{\link{ssd_fit_dists}}
 }

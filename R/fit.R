@@ -22,13 +22,13 @@ remove_errors <- function(dist_fit, name, silent) {
 
 #' Fit Distribution
 #'
-#' @param data A data frame.
-#' @param left A string of the column in data with the left concentration values.
-#' @param right A string of the column in data with the right concentration values.
-#' @param weights A string of the column in data with the weightings (or NULL)
+#' Fits a distribution to species sensitivity data.
+#'
+#' @inheritParams ssd_fit_dists
 #' @param dist A string of the distribution to fit.
 #'
-#' @return An object of class fitdist.
+#' @return An object of class \code{\link[fitdistrplus]{fitdist}}.
+#' @seealso \code{\link{ssd_fit_dists}}
 #' @export
 #'
 #' @examples
@@ -70,24 +70,30 @@ ssd_fit_dist <- function(
     fit <- vglm(x~1, paretoff)
     dist$start  <- list(shape = exp(unname(coef(fit))))
     dist$fix.arg<- list(scale = fit@extra$scale)
-  } else if(dist$distr %in% c("lnorm", "weibull")){
-  } else
-    stop("distribution '", dist$distr, "' unrecognised", call. = FALSE)
-
+  }
   fit <- do.call(fitdistrplus::fitdist, dist)
   fit
 }
 
 #' Fit Distributions
 #'
-#' By default fits the "lnorm", "llog", "gompertz", "lgumbel", "gamma" and "weibull" distributions.
+#' Fits one or more distributions to species sensitivity data.
 #'
-#' @inheritParams ssd_fit_dist
+#' By default the 'lnorm', 'llog', 'gompertz', 'lgumbel', 'gamma' and 'weibull'
+#' distributions are fitted to the data.
+#' The ssd_fit_dist and \code{\link{ssd_fit_dist}} functions have also been
+#' tested with the 'burr' and 'pareto' distributions.
+#'
+#' @param data A data frame.
+#' @param left A string of the column in data with the left concentration values.
+#' @param right A string of the column in data with the right concentration values.
+#' @param weights A string of the column in data with the weightings (or NULL)
 #' @param dists A character vector of the distributions to fit.
 #' @param silent A flag indicating whether fits should fail silently.
-#' @return An object of class fitdists.
+#' @return An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
 #'
 #' @export
+#' @seealso \code{\link{ssd_fit_dist}}
 #' @examples
 #' ssd_fit_dists(boron_data)
 ssd_fit_dists <- function(
@@ -95,16 +101,8 @@ ssd_fit_dists <- function(
   dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
   silent = FALSE
 ) {
-  check_data(data, nrow = c(1, .Machine$integer.max))
-  check_string(left)
-  check_string(right)
-
-  checkor(check_null(weights), check_string(weights))
-
-  check_colnames(data, unique(c(left, right, weights)))
-  check_vector(dists, c("burr", "gamma", "gompertz", "lgumbel",
-                        "llog", "lnorm", "pareto", "weibull"),
-               length = c(1,8), unique = TRUE, named = FALSE)
+  check_vector(dists, length = c(1,.Machine$integer.max), unique = TRUE, named = FALSE)
+  check_flag(silent)
 
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists

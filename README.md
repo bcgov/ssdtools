@@ -96,6 +96,9 @@ autoplot(boron_dists)
 
 ![](tools/README-unnamed-chunk-6-1.png)<!-- -->
 
+Currently 8 distributions are recognized: ‘burr’, ‘gamma’, ‘gompertz’,
+‘lgumbel’, “llog”, “lnorm’,”pareto“,”weibull“)
+
 The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
@@ -116,9 +119,9 @@ and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
 ``` r
 ssd_hc5(boron_dists)
 #> # A tibble: 1 x 5
-#>    prop      est       se       lcl      ucl
-#>   <dbl>    <dbl>    <dbl>     <dbl>    <dbl>
-#> 1  0.05 1.250714 0.735619 0.6198247 3.276041
+#>    prop      est        se       lcl      ucl
+#>   <dbl>    <dbl>     <dbl>     <dbl>    <dbl>
+#> 1  0.05 1.250714 0.7522441 0.6044681 3.203172
 ```
 
 Model-averaged predictions complete with confidence intervals can be

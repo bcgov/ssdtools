@@ -22,11 +22,20 @@ ssd_fit_dists(data, left = "Conc", right = left, weights = NULL,
 \item{silent}{A flag indicating whether fits should fail silently.}
 }
 \value{
-An object of class fitdists.
+An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
 }
 \description{
-By default fits the "lnorm", "llog", "gompertz", "lgumbel", "gamma" and "weibull" distributions.
+Fits one or more distributions to species sensitivity data.
+}
+\details{
+By default the 'lnorm', 'llog', 'gompertz', 'lgumbel', 'gamma' and 'weibull'
+distributions are fitted to the data.
+The ssd_fit_dist and \code{\link{ssd_fit_dist}} functions have also been
+tested with the 'burr' and 'pareto' distributions.
 }
 \examples{
 ssd_fit_dists(boron_data)
+}
+\seealso{
+\code{\link{ssd_fit_dist}}
 }

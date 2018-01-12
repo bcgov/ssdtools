@@ -49,13 +49,9 @@ boron_dists <- ssd_fit_dists(boron_data)
 
 and plot using the `ggplot2` generic `autoplot`
 ```{r}
-theme_set(theme_bw())
+theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
 ```
-
-Currently 8 distributions are recognized: 'burr', 'gamma', 'gompertz', 'lgumbel',
-                        "llog", "lnorm', "pareto", "weibull")
-
 
 The goodness of fit can be assessed using `ssd_gof`
 ```{r}
