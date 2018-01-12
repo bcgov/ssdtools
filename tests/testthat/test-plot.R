@@ -12,8 +12,18 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("skplot")
+context("plot")
 
-test_that("ssd_skplot", {
-#  expect_true(ssd_skplot(ccme_data$Concentration))
+test_that("plot", {
+  pdf(tempfile(fileext = ".pdf"))
+  on.exit(dev.off())
+  expect_silent(ssd_cfplot(boron_data))
+  expect_silent(plot(boron_lnorm))
+  expect_silent(plot(boron_dists))
+  expect_is(autoplot(boron_lnorm), "ggplot")
+  expect_is(autoplot(boron_dists), "ggplot")
+  expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
+  gp <- ggplot(boron_data, aes(x = Conc)) + stat_ssd() + stat_fitdist() +
+    geom_ssd() + geom_fitdist() + geom_hc5()
+  expect_is(gp, "ggplot")
 })

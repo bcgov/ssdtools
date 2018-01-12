@@ -90,14 +90,11 @@ boron_dists <- ssd_fit_dists(boron_data)
 and plot using the `ggplot2` generic `autoplot`
 
 ``` r
-theme_set(theme_bw())
+theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
 ```
 
 ![](tools/README-unnamed-chunk-6-1.png)<!-- -->
-
-Currently 8 distributions are recognized: ‘burr’, ‘gamma’, ‘gompertz’,
-‘lgumbel’, “llog”, “lnorm’,”pareto“,”weibull“)
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -121,7 +118,7 @@ ssd_hc5(boron_dists)
 #> # A tibble: 1 x 5
 #>    prop      est        se       lcl      ucl
 #>   <dbl>    <dbl>     <dbl>     <dbl>    <dbl>
-#> 1  0.05 1.250714 0.7522441 0.6044681 3.203172
+#> 1  0.05 1.250714 0.7215481 0.6141201 3.179775
 ```
 
 Model-averaged predictions complete with confidence intervals can be
