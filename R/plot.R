@@ -76,8 +76,8 @@ GeomFitdist <- ggplot2::ggproto(
 GeomHc5 <- ggproto("GeomHc5", Geom,
   draw_panel = function(data, panel_params, coord) {
 
-    pieces <- data.frame(x = c(0.01, data$xintercept, data$xintercept),
-                         y = c(0.05, 0.05, 0.00))
+    pieces <- data.frame(x = c(0.0001, data$xintercept, data$xintercept),
+                         y = c(0.05, 0.05, -Inf))
 
     data <- cbind(data, pieces)
     GeomPath$draw_panel(data, panel_params, coord)

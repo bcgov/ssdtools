@@ -24,46 +24,49 @@ library(ssdca)
 
 The `ssdca` package fits and plots Species Sensitivity Distributions.
 This vignette describes how to use `ssdca` in conjunction with 
-the `fitdistrplus` and `ggplot2` packages.
-
-```{r}
-library(ssdca)
-```
+the `fitdistrplus` and `ggplot2` packages, which it installs and extends.
 
 ## Fitting Distributions
 
-The function `ssd_fit_dists()` inputs a data frame with the concentration values, 
-by default, in the `Conc` column and fits one or more distributions.
+The function `ssd_fit_dists()` inputs a data frame (with the concentration values, 
+by default, in the `Conc` column) and fits one or more distributions.
 Here we fit the log-normal and weibull distributions to species sensitivity data for Boron.
 ```{r}
+library(ssdca)
 boron_data
 boron_dists2 <- ssd_fit_dists(boron_data, dists = c("lnorm", "weibull"))
 boron_dists2
 ```
 
+The coefficients can be extracted using the `coef` function
+```{r}
+lapply(boron_dists2, coef)
+```
+
 ## Model Diagnostics and Goodness of Fit
 
-The result `fitdists` object can be plotted to display model diagnostics plots for each fit.
+The resultant `fitdists` object can be plotted to display model diagnostics plots for each fit.
 ```{r, fig.width=6, fig.height=6, fig.show='hold'}
 plot(boron_dists2)
 ```
 
-Various goodness of fit statistics including the Akaike's Information Criteron corrected for sample size (aicc) can
-be generated using `ssd_gof()`.
+In addition, several goodness of fit statistics including the Akaike's Information Criteron corrected for sample size (`aicc`) can be generated using `ssd_gof()`.
+
 Moving forwards we consider the same six fits to Boron as Schwarz and Tillmanns (2017).
 ```{r}
 boron_dists <- ssd_fit_dists(boron_data)
 ssd_gof(boron_dists)
 ```
+For interpretation of the values see Schwarz and Tillmanns (2017).
 
 ## Plotting Fits
 
-The actual fits can be plotted using the ggplot generic `autoplot`
+The actual fits can be plotted using the ggplot generic `autoplot`.
 ```{r, fig.width = 5 }
 autoplot(boron_dists)
 ```
 
-as `autoplot` returns a `ggplot` object it can be modified prior to plotting, 
+As `autoplot` returns a `ggplot` object it can be modified prior to plotting, 
 which is extremely useful.
 ```{r, fig.width = 5 }
 autoplot(boron_dists) + theme_bw()
@@ -71,14 +74,14 @@ autoplot(boron_dists) + theme_bw()
 
 ## 5% Hazard Concentration
 
-Typically, species sensitivity distribution are fitted to estimate the 5% hazard concentration ($HC_5$).
+Typically, species sensitivity distributions are fitted to estimate the 5% hazard concentration ($HC_5$).
 This is the concentration that affects just 5% of the species tested.
 The model-averaged $HC_5$ estimate (with 95% confidence limits) can be calculated as follows
 ```{r}
 ssd_hc5(boron_dists)
 ```
 By default model averaging is based on the Akaike's Weights corrected for small sample size.
-To return the individual estimates and their respective Akaike's Weights set `average = FALSE`
+To return the individual $HC_5$ estimates and their respective Akaike's Weights set `average = FALSE`
 ```{r}
 ssd_hc5(boron_dists, average = FALSE)
 ```
@@ -97,11 +100,39 @@ The resultant values provide valuable information
 boron_pred
 ```
 which can be plotted together with the original data to summarise an analysis
-```{r, fig.width = 7, fig.height=7}
+```{r, fig.width = 6, fig.height = 4}
+theme_set(theme_bw()) # change the theme
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
          ylab = "Concentration (mg/L)") + 
+  expand_limits(x = 5000) + # to ensure the species labels fit
   scale_color_manual(values = c("Amphibian" = "Black", "Fish" = "Blue", 
                                 "Invertebrate" = "Red", "Plant" = "Brown"))
 ```
-Once again the returned object is an `ggplot` object which can be customized prior to plotting.
-Notice how the plot includes 
+
+Once again the returned object is a `ggplot` object which can be customized prior to plotting.
+By default, the plot includes the model-averaged 95% confidence interval as a shaded band and 
+the model-averaged $HC_5$ as a dotted line.
+
+## ggplot Geoms
+
+The `sscda` package provides four ggplot geoms to allow you construct your own plots.
+They are `geom_ssd()` to plot the data, `geom_fitdist()` to plot a model fit,  
+`geom_hc5()` to plot the $HC_5$, and `geom_xribbon()` to plot the confidence intervals.
+
+They can be used as follows
+
+```{r, fig.width = 5, fig.height = 4}
+gp <- ggplot(boron_pred, aes_string(x = "est")) + 
+  geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.2) +
+  geom_line(aes_string(y = "prop")) +
+  geom_hc5(xintercept = boron_pred$est[boron_pred$prop == 0.05]) +
+  geom_ssd(data = boron_data, aes_string(x = "Conc"))
+print(gp)
+```    
+
+To log the x-axis use `coord_trans()`.
+```{r, fig.width = 5, fig.height = 4}
+gp <- gp + coord_trans(x = "log10") +
+  scale_x_continuous(breaks = scales::trans_breaks("log10", function(x) 10^x))
+print(gp)
+```
