@@ -4,22 +4,29 @@
 \alias{ssd_fit_dists}
 \title{Fit Distributions}
 \usage{
-ssd_fit_dists(x, dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma",
-  "weibull"), silent = FALSE)
+ssd_fit_dists(data, left = "Conc", right = left, weights = NULL,
+  dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
+  silent = FALSE)
 }
 \arguments{
-\item{x}{A numeric vector of the data.}
+\item{data}{A data frame.}
+
+\item{left}{A string of the column in data with the left concentration values.}
+
+\item{right}{A string of the column in data with the right concentration values.}
+
+\item{weights}{A string of the column in data with the weightings (or NULL)}
 
 \item{dists}{A character vector of the distributions to fit.}
 
-\item{silent}{A flag indicating whether fits should fail without issuing errors.}
+\item{silent}{A flag indicating whether fits should fail silently.}
 }
 \value{
 An object of class fitdists.
 }
 \description{
-By default fits xx distributions.
+By default fits the "lnorm", "llog", "gompertz", "lgumbel", "gamma" and "weibull" distributions.
 }
 \examples{
-ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
+ssd_fit_dists(boron_data)
 }

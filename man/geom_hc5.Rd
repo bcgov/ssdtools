@@ -47,7 +47,7 @@ to the paired geom/stat.}
 For each x value, `geom_hc5` displays the fifth percentile.
 }
 \examples{
-ggplot2::ggplot(boron_data, ggplot2::aes(x = Concentration)) +
+ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
   geom_ssd() +
   geom_hc5(xintercept = 1.5)
 }

@@ -12,25 +12,47 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Get HC5
+#' 5\% Hazard Concentration
 #'
-#' @param object The object.
+#' Estimates with bootstrap confidence intervals the hazard concentration
+#' at which 5\% of the species are affected.
+#'
+#' @param x The object.
 #' @param ... Unused.
-#'
-#' @return A data frame of the hc5 estimate with se and upper and lower confidence intervals.
+#' @return A data frame of the estimate with the standard error and upper and lower confidence intervals.
 #' @export
-#' @examples
-#' ssd_hc5(boron_lnorm)
-ssd_hc5 <- function(object, ...) {
+ssd_hc5 <- function(x, ...) {
   UseMethod("ssd_hc5")
 }
 
+#' 5\% Hazard Concentration
+#'
+#' Estimates with bootstrap confidence intervals the hazard concentration
+#' at which 5\% of the species are affected.
+#'
+#' @param x A fitdist object.
+#' @inheritParams predict.fitdist
+#' @param ... Unused.
 #' @export
-ssd_hc5.fitdist <- function(object, nboot = 1001, level = 0.95, ...) {
-  predict(object, probs = 0.05, nboot = nboot, level = level)
+#' @examples
+#' ssd_hc5(boron_lnorm)
+ssd_hc5.fitdist <- function(x, level = 0.95, ...) {
+  predict(x, props = 0.05, level = level)
 }
 
+#' 5\% Hazard Concentration
+#'
+#' Estimates with bootstrap confidence intervals the hazard concentration
+#' at which 5\% of the species are affected.
+#'
+#' @param x A fitdist object.
+#' @inheritParams predict.fitdists
+#' @param ... Unused.
 #' @export
-ssd_hc5.fitdists <- function(object, nboot = 1001, ic = "aicc", average = TRUE, level = 0.95, ...) {
-    predict(object, probs = 0.05, nboot = nboot, ic = ic, average = average, level = level)
+#' @examples
+#' \dontrun{
+#' ssd_hc5(boron_dists)
+#' }
+ssd_hc5.fitdists <- function(x, ic = "aicc", average = TRUE, level = 0.95, ...) {
+    predict(x, props = 0.05, ic = ic, average = average, level = level)
 }

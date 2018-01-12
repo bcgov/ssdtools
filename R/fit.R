@@ -12,9 +12,40 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-fit_dist_internal <- function(x, dist = "lnorm") {
-  check_vector(x, 1)
+remove_errors <- function(dist_fit, name, silent) {
+  if(!is.null(dist_fit$error)) {
+    if(!silent) warning(name, ": ", dist_fit$error, call. = FALSE)
+    return(NULL)
+  }
+  dist_fit$result
+}
+
+#' Fit Distribution
+#'
+#' @param data A data frame.
+#' @param left A string of the column in data with the left concentration values.
+#' @param right A string of the column in data with the right concentration values.
+#' @param weights A string of the column in data with the weightings (or NULL)
+#' @param dist A string of the distribution to fit.
+#'
+#' @return An object of class fitdist.
+#' @export
+#'
+#' @examples
+#' ssd_fit_dist(boron_data)
+ssd_fit_dist <- function(
+  data, left = "Conc", right = left, weights = NULL, dist = "lnorm") {
+
+  check_data(data, nrow = c(1, .Machine$integer.max))
+  check_string(left)
+  check_string(right)
+
+  checkor(check_null(weights), check_string(weights))
+
+  check_colnames(data, unique(c(left, right, weights)))
   check_string(dist)
+
+  x <- data[[left]]
 
   dist %<>% list(data = x, distr = ., method = "mle")
 
@@ -47,50 +78,39 @@ fit_dist_internal <- function(x, dist = "lnorm") {
   fit
 }
 
-remove_errors <- function(dist_fit, name, silent) {
-  if(!is.null(dist_fit$error)) {
-    if(!silent) warning(name, ": ", dist_fit$error, call. = FALSE)
-    return(NULL)
-  }
-  dist_fit$result
-}
-
-#' Fit Distribution
-#'
-#' @param x A numeric vector of the data.
-#' @param dist A string of the distribution to fit.
-#'
-#' @return An object of class fitdist.
-#' @export
-#'
-#' @examples
-#' ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
-ssd_fit_dist <- function(x, dist = "lnorm") {
-  fit_dist_internal(x, dist)
-}
-
 #' Fit Distributions
 #'
-#' By default fits xx distributions.
+#' By default fits the "lnorm", "llog", "gompertz", "lgumbel", "gamma" and "weibull" distributions.
 #'
-#' @param x A numeric vector of the data.
+#' @inheritParams ssd_fit_dist
 #' @param dists A character vector of the distributions to fit.
-#' @param silent A flag indicating whether fits should fail without issuing errors.
+#' @param silent A flag indicating whether fits should fail silently.
 #' @return An object of class fitdists.
 #'
 #' @export
 #' @examples
-#' ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
-ssd_fit_dists <- function(x, dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"), silent = FALSE) {
-  check_vector(x, 1)
-  check_dists(dists)
+#' ssd_fit_dists(boron_data)
+ssd_fit_dists <- function(
+  data, left = "Conc", right = left, weights = NULL,
+  dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
+  silent = FALSE
+) {
+  check_data(data, nrow = c(1, .Machine$integer.max))
+  check_string(left)
+  check_string(right)
+
+  checkor(check_null(weights), check_string(weights))
+
+  check_colnames(data, unique(c(left, right, weights)))
+  check_vector(dists, c("burr", "gamma", "gompertz", "lgumbel",
+                        "llog", "lnorm", "pareto", "weibull"),
+               length = c(1,8), unique = TRUE, named = FALSE)
 
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
-  dists %<>% map(safe_fit_dist, x = x)
+  dists %<>% map(safe_fit_dist, data = data, left = left, right = right, weights = weights)
   dists %<>% imap(remove_errors, silent = silent)
   dists <- dists[!vapply(dists, is.null, TRUE)]
   class(dists) <- "fitdists"
   dists
 }
-

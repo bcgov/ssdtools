@@ -57,6 +57,6 @@ to the paired geom/stat.}
 Uses the empirical cumulative density/distribution to visualize species sensitivity data.
 }
 \examples{
-ggplot2::ggplot(boron_data, ggplot2::aes(x = Concentration)) +
+ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
   geom_ssd()
 }

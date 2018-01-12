@@ -34,10 +34,9 @@ plot.fitdists <- function(x, breaks = "default", ...) {
 #' @param ... Unused.
 #' @export
 #' @examples
-#' library(ggplot2)
 #' autoplot(boron_lnorm)
 autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
-                             xlab = "Concentration", ylab = "Percent of Species Affected",
+                             xlab = "Concentration", ylab = "Species Affected",
                              ...) {
   check_flag(ci)
   check_flag(hc5)
@@ -50,13 +49,13 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prob"), alpha = 0.3)
+  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.3)
 
-  gp <- gp + geom_line(aes_string(y = "prob")) +
+  gp <- gp + geom_line(aes_string(y = "prop")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(hc5) gp <- gp + geom_hc5(xintercept = pred$est[pred$prob == 0.05], linetype = "dotted")
+  if(hc5) gp <- gp + geom_hc5(xintercept = pred$est[pred$prop == 0.05], linetype = "dotted")
   gp
 }
 
@@ -66,10 +65,9 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
 #' @export
 #' @examples
 #' \dontrun{
-#' library(ggplot2)
 #' autoplot(boron_dists)
 #' }
-autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Percent of Species Affected", ...) {
+autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Affected", ...) {
   check_string(xlab)
   check_string(ylab)
 
@@ -79,7 +77,7 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Percent of
   data <- data.frame(x = object[[1]]$data)
 
   gp <- ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(y = "prob", color = "Distribution",
+    geom_line(aes_string(y = "prop", color = "Distribution",
                          linetype = "Distribution")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
@@ -91,7 +89,7 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Percent of
 #' @inheritParams autoplot.fitdist
 #' @param data A data frame.
 #' @param pred A data frame of the predictions.
-#' @param conc A string of the column in data with the concentrations.
+#' @param left A string of the column in data with the concentrations.
 #' @param label A string of the column in data with the labels.
 #' @param shape A string of the column in data for the shape aesthetic.
 #' @param color A string of the column in data for the color aesthetic.
@@ -100,63 +98,66 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Percent of
 #' @export
 #' @examples
 #' ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
-ssd_plot <- function(data, pred, conc = "Concentration",
+ssd_plot <- function(data, pred, left = "Conc",
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
                      ci = TRUE, hc5 = TRUE, shift_x = 3) {
   check_data(data)
   check_data(pred,
              values = list(
-               prob = c(0,1),
+               prop = c(0,1),
                est = 1,
                lcl = 1,
                ucl = 1))
 
   check_vector(shift_x, values = c(1, 1000))
 
-  check_string(conc)
+  check_string(left)
   checkor(check_string(label), check_null(label))
   checkor(check_string(shape), check_null(shape))
   check_flag(ci)
   check_flag(hc5)
 
-  check_colnames(data, conc)
+  check_colnames(data, left)
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prob"), alpha = 0.2)
+  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.2)
 
   if(!is.null(label)) {
     check_colnames(data, label)
     data <- data[order(data[[label]]),]
   }
-  gp <- gp + geom_line(aes_string(y = "prob")) +
-    geom_hc5(data = data, xintercept = pred$est[pred$prob == 0.05]) +
-    geom_ssd(data = data, aes_string(x = conc, shape = shape, color = color)) +
+  gp <- gp + geom_line(aes_string(y = "prop")) +
+    geom_hc5(data = data, xintercept = pred$est[pred$prop == 0.05]) +
+    geom_ssd(data = data, aes_string(x = left, shape = shape, color = color)) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
   if(!is.null(label)) {
-    data$prob <- ssd_ecd(data[[conc]])
-    data[[conc]] %<>% magrittr::multiply_by(shift_x)
-    gp <- gp + geom_text(data = data, aes_string(x = conc, y = "prob", label = label),
+    data$prop <- ssd_ecd(data[[left]])
+    data[[left]] %<>% magrittr::multiply_by(shift_x)
+    gp <- gp + geom_text(data = data, aes_string(x = left, y = "prop", label = label),
                          color = "grey50", hjust = 0, size = size)
   }
 
   gp
 }
 
-#' Plot Skewness-Kurtosis Graph
+#' Cullen and Frey Plot
 #'
-#' Plots a skewness-kurtosis graph similar to the one proposed by Cullen and Frey with 100 bootstrapped values.
-#' @param x A numeric vector.
-#' @return An invisible TRUE.
+#' Plots a Cullen and Frey graph of the skewness and kurtosis
+#'
+#' @inheritParams ssd_fit_dist
 #' @seealso \code{\link[fitdistrplus]{descdist}}
 #' @export
 #'
 #' @examples
-#' ssd_skplot(ccme_data$Concentration[ccme_data$Chemical == "Cadmium"])
-ssd_skplot <- function(x) {
-  check_vector(x, 1, length = c(2,Inf))
-  x %<>% fitdistrplus::descdist(boot=100L)
-  invisible(TRUE)
+#' ssd_cfplot(boron_data)
+ssd_cfplot <- function(data, left = "Conc") {
+  check_data(data)
+  check_string(left)
+  check_colnames(data, left)
+
+  fitdistrplus::descdist(data[[left]], boot = 100L)
+  invisible()
 }

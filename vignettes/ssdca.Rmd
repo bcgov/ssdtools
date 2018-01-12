@@ -23,23 +23,22 @@ The core function `ssd_fit_dists()` takes a numeric vector of sensitivity values
 and fits one or more recognized distributions.
 
 ```{r}
-boron <- ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"], c("lnorm", "weibull"))
-print(boron)
+#boron_ <- ssd_fit_dists(boron_data, c("lnorm", "weibull"))
+#print(boron)
 ```
 
-There are currently `r length(ssd_dists(all = TRUE))` recognized distributions.
 ```{r}
-ssd_dists(all = TRUE)
+#ssd_dists(all = TRUE)
 ```
 
 The base `plot()` generic function plots model diagnostics for `fitdists` objects.
 ```{r, fig.width=6, fig.height=6, fig.show='hold'}
-plot(boron)
+#plot(boron)
 ```
 
 The more familiar xx plots can be produced using the ggplot2 generic `autoplot()`
 ```{r, fig.width=4, fig.height=3}
-library(ggplot2)
-autoplot(boron)
+#library(ggplot2)
+#autoplot(boron)
 ```
 

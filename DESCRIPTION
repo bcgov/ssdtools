@@ -1,9 +1,10 @@
 Package: ssdca
-Title: Species Sensitivity Data
-Version: 0.0.0.9007
-Date: 2018-01-05
-Authors@R: 'Joe Thorley <joe@poissonconsulting.ca> [aut,cre]'
-Description: Fits distributions to Species Sensitivity Data.
+Title: Species Sensitivity Distributions
+Version: 0.0.0.9008
+Date: 2018-01-11
+Authors@R: c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre")),
+             person("Carl", "Scharwz", role = "aut"))
+Description: Fits and plots species sensitivity distributions.
 License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.0),

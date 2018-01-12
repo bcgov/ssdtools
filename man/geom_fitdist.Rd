@@ -57,7 +57,7 @@ to the paired geom/stat.}
 Plots the fit of a univariate distribution as a cumulative density/distribution function.
 }
 \examples{
-ggplot2::ggplot(boron_data, ggplot2::aes(x = Concentration)) +
+ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
   geom_ssd() +
   geom_fitdist()
 }

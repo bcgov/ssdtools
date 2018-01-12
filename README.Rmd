@@ -44,7 +44,7 @@ boron_data
 
 Multiple distributions can be fit using `ssd_fit_dists()`
 ```{r, eval=FALSE}
-boron_dists <- ssd_fit_dists(boron_data$Concentration)
+boron_dists <- ssd_fit_dists(boron_data)
 ```
 
 and plot using the `ggplot2` generic `autoplot`
@@ -53,22 +53,26 @@ theme_set(theme_bw())
 autoplot(boron_dists)
 ```
 
+Currently 8 distributions are recognized: 'burr', 'gamma', 'gompertz', 'lgumbel',
+                        "llog", "lnorm', "pareto", "weibull")
+
+
 The goodness of fit can be assessed using `ssd_gof`
 ```{r}
 ssd_gof(boron_dists)
 ```
 
-and the model-averaged $HC_5$ estimated using `ssd_hc5`
+and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
 ```{r}
 ssd_hc5(boron_dists)
 ```
 
-Model-averaged predictions complete with confidence intervals can be produced using the `stats` generic.
+Model-averaged predictions complete with confidence intervals can be produced using the `stats` generic `predict`
 ```{r, eval=FALSE}
 boron_pred <- predict(boron_dists)
 ```
 
-and plotted together with the original data using `ssd_plot` to produce a plot for publication.
+and plotted together with the original data using `ssd_plot`.
 ```{r}
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
          ylab = "Concentration (mg/L)")

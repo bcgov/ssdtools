@@ -15,14 +15,15 @@
 context("fit")
 
 test_that("fit_dist", {
-  dist <- ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"], "lnorm")
+  dist <- ssd_fit_dist(boron_data)
   expect_true(is_fitdist(dist))
   expect_identical(dist, boron_lnorm)
 })
 
 test_that("fit_dists", {
-  dist_names <- ssd_dists(all = TRUE)
-  dists <- ssd_fit_dists(ccme_data$Concentration[ccme_data$Chemical == "Boron"], dist_names)
+  dist_names <- c("burr", "gamma", "gompertz", "lgumbel",
+                        "llog", "lnorm", "pareto", "weibull")
+  dists <- ssd_fit_dists(boron_data, dists = dist_names)
   expect_true(is_fitdists(dists))
   expect_identical(names(dists), dist_names)
 })

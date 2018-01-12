@@ -58,7 +58,7 @@ to the paired geom/stat.}
 Plots the fit of a univariate distribution as a cumulative density/distribution function.
 }
 \examples{
-ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Concentration)) +
+ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
   stat_ssd() +
   stat_fitdist()
 }

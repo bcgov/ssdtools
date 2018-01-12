@@ -66,25 +66,25 @@ library(ssdca)
 ``` r
 boron_data
 #> # A tibble: 28 x 5
-#>    Chemical                 Species Concentration        Group Units
-#>       <chr>                   <chr>         <dbl>       <fctr> <chr>
-#>  1    Boron     Oncorhynchus mykiss           2.1         Fish  mg/L
-#>  2    Boron     Ictalurus punctatus           2.4         Fish  mg/L
-#>  3    Boron   Micropterus salmoides           4.1         Fish  mg/L
-#>  4    Boron       Brachydanio rerio          10.0         Fish  mg/L
-#>  5    Boron       Carassius auratus          15.6         Fish  mg/L
-#>  6    Boron     Pimephales promelas          18.3         Fish  mg/L
-#>  7    Boron           Daphnia magna           6.0 Invertebrate  mg/L
-#>  8    Boron Opercularia bimarginata          10.0 Invertebrate  mg/L
-#>  9    Boron      Ceriodaphnia dubia          13.4 Invertebrate  mg/L
-#> 10    Boron     Entosiphon sulcatum          15.0 Invertebrate  mg/L
+#>    Chemical                 Species  Conc        Group Units
+#>       <chr>                   <chr> <dbl>       <fctr> <chr>
+#>  1    Boron     Oncorhynchus mykiss   2.1         Fish  mg/L
+#>  2    Boron     Ictalurus punctatus   2.4         Fish  mg/L
+#>  3    Boron   Micropterus salmoides   4.1         Fish  mg/L
+#>  4    Boron       Brachydanio rerio  10.0         Fish  mg/L
+#>  5    Boron       Carassius auratus  15.6         Fish  mg/L
+#>  6    Boron     Pimephales promelas  18.3         Fish  mg/L
+#>  7    Boron           Daphnia magna   6.0 Invertebrate  mg/L
+#>  8    Boron Opercularia bimarginata  10.0 Invertebrate  mg/L
+#>  9    Boron      Ceriodaphnia dubia  13.4 Invertebrate  mg/L
+#> 10    Boron     Entosiphon sulcatum  15.0 Invertebrate  mg/L
 #> # ... with 18 more rows
 ```
 
 Multiple distributions can be fit using `ssd_fit_dists()`
 
 ``` r
-boron_dists <- ssd_fit_dists(boron_data$Concentration)
+boron_dists <- ssd_fit_dists(boron_data)
 ```
 
 and plot using the `ggplot2` generic `autoplot`
@@ -105,29 +105,38 @@ ssd_gof(boron_dists)
 #>      <chr>     <dbl>      <dbl>      <dbl>    <dbl>    <dbl>    <dbl>
 #> 1    lnorm 0.5070335 0.10651430 0.07033164 239.0284 239.5084 241.6928
 #> 2     llog 0.4870694 0.09934088 0.05950233 241.0149 241.4949 243.6793
-#> 3 gompertz 0.6019526 0.12018812 0.08221874 237.6112 238.0912 240.2756
-#> 4  lgumbel 0.8287721 0.15825915 0.13402809 100.7338 101.2138 103.3982
+#> 3 gompertz 0.6019563 0.12018745 0.08221977 237.6112 238.0912 240.2756
+#> 4  lgumbel 0.8286390 0.15826649 0.13401800 244.1860 244.6660 246.8504
 #> 5    gamma 0.4409319 0.11691481 0.05550569 237.6303 238.1103 240.2947
 #> 6  weibull 0.4346273 0.11697580 0.05426727 237.6253 238.1053 240.2897
 ```
 
+and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
+
+``` r
+ssd_hc5(boron_dists)
+#> # A tibble: 1 x 5
+#>    prop      est       se       lcl      ucl
+#>   <dbl>    <dbl>    <dbl>     <dbl>    <dbl>
+#> 1  0.05 1.250714 0.735619 0.6198247 3.276041
+```
+
 Model-averaged predictions complete with confidence intervals can be
-produced using the `stats` generic.
+produced using the `stats` generic `predict`
 
 ``` r
 boron_pred <- predict(boron_dists)
 ```
 
-and plotted together with the original data using `ssd_plot` to produce
-a plot for
-publication.
+and plotted together with the original data using
+`ssd_plot`.
 
 ``` r
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
          ylab = "Concentration (mg/L)")
 ```
 
-![](tools/README-unnamed-chunk-9-1.png)<!-- -->
+![](tools/README-unnamed-chunk-10-1.png)<!-- -->
 
 For more information and examples of how to use `ssdca` in conjuction
 with `fitdistrplus` and `ggplot2` to assess alternative fits and produce

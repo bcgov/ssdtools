@@ -19,8 +19,7 @@ library(dplyr)
 library(ssdca)
 
 ccme_data <- read.csv("data-raw/CCME data.csv", stringsAsFactors = FALSE)
-ccme_data %<>% rename(Concentration = Conc)
-ccme_data <- ccme_data[!is.na(ccme_data$Concentration),]
+ccme_data <- ccme_data[!is.na(ccme_data$Conc),]
 
 ccme_data$Species %<>%
   str_replace("Pseudokirchneriell a", "Pseudokirchneriella") %>%
@@ -152,10 +151,10 @@ use_data(ccme_data, overwrite = TRUE)
 boron_data <- ccme_data[ccme_data$Chemical == "Boron",]
 use_data(boron_data, overwrite = TRUE)
 
-boron_lnorm <- ssd_fit_dist(boron_data$Concentration, "lnorm")
+boron_lnorm <- ssd_fit_dist(boron_data)
 use_data(boron_lnorm, overwrite = TRUE)
 
-boron_dists <- ssd_fit_dists(boron_data$Concentration)
+boron_dists <- ssd_fit_dists(boron_data)
 use_data(boron_dists, overwrite = TRUE)
 
 boron_pred <- predict(boron_dists)

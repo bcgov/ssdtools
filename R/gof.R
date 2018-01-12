@@ -14,7 +14,7 @@
 
 #' Goodness of Fit
 #'
-#' Returns with the following columns
+#' Returns a tbl data frame with the following columns
 #' \describe{
 #'   \item{dist}{The distribution name (chr)}
 #'   \item{ad}{Anderson-Darling statistic (dbl)}

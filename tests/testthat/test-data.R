@@ -21,7 +21,7 @@ test_that("data", {
       Chemical = "",
       Species = "",
       Units = c("mg/L", "ug/L", "ng/L"),
-      Concentration = c(0, Inf),
+      Conc = c(0, Inf),
       Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))),
     nrow = c(1, Inf)), ccme_data)
   expect_is(ccme_data, "tbl")
@@ -32,7 +32,7 @@ test_that("data", {
       Chemical = c("Boron", "Boron"),
       Species = "",
       Units = c("mg/L", "mg/L"),
-      Concentration = c(1.0, 70.7),
+      Conc = c(1.0, 70.7),
       Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))),
     nrow = 28), boron_data)
   expect_is(boron_data, "tbl")
@@ -40,7 +40,7 @@ test_that("data", {
   expect_identical(checkr::check_data(
     boron_pred,
     values = list(
-      prob = c(0,1),
+      prop = c(0,1),
       est = 1,
       se = 1,
       lcl = 1,

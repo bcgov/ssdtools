@@ -4,10 +4,17 @@
 \alias{ssd_fit_dist}
 \title{Fit Distribution}
 \usage{
-ssd_fit_dist(x, dist = "lnorm")
+ssd_fit_dist(data, left = "Conc", right = left, weights = NULL,
+  dist = "lnorm")
 }
 \arguments{
-\item{x}{A numeric vector of the data.}
+\item{data}{A data frame.}
+
+\item{left}{A string of the column in data with the left concentration values.}
+
+\item{right}{A string of the column in data with the right concentration values.}
+
+\item{weights}{A string of the column in data with the weightings (or NULL)}
 
 \item{dist}{A string of the distribution to fit.}
 }
@@ -18,5 +25,5 @@ An object of class fitdist.
 Fit Distribution
 }
 \examples{
-ssd_fit_dist(ccme_data$Concentration[ccme_data$Chemical == "Boron"])
+ssd_fit_dist(boron_data)
 }

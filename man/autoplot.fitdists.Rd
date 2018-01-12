@@ -5,7 +5,7 @@
 \title{Autoplot}
 \usage{
 \method{autoplot}{fitdists}(object, xlab = "Concentration",
-  ylab = "Percent of Species Affected", ...)
+  ylab = "Species Affected", ...)
 }
 \arguments{
 \item{object}{The object to plot.}
@@ -21,7 +21,6 @@ Autoplot
 }
 \examples{
 \dontrun{
-library(ggplot2)
 autoplot(boron_dists)
 }
 }

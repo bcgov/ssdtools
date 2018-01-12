@@ -6,7 +6,7 @@
 \title{Model averaged predictions for CCME Boron Data}
 \format{A tbl data frame:
 \describe{
-  \item{prob}{The proportion of species affected <dbl>.}
+  \item{prop}{The proportion of species affected <dbl>.}
   \item{est}{The estimated concentration <dbl>.}
   \item{se}{The standard error of the estimate <dbl>.}
   \item{lcl}{The lower confidence limit <dbl>.}

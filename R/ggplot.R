@@ -46,7 +46,7 @@ StatFitdist <- ggplot2::ggproto(
   compute_group = function(data, scales, dist) {
     fit <- ssd_fit_dist(data$x, dist = dist)
     pred <- predict(fit, nboot = 10)
-    data.frame(x = pred$est, density = pred$prob)
+    data.frame(x = pred$est, density = pred$prop)
   },
   default_aes = ggplot2::aes(y = ..density..),
   required_aes = "x"
@@ -157,7 +157,7 @@ plot_coord_scale <- function(data, xlab, ylab) {
 #' @seealso \code{\link{geom_ssd}}
 #' @export
 #' @examples
-#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Concentration)) +
+#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   stat_ssd()
 stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
                      position = "identity", na.rm = FALSE, show.legend = NA,
@@ -179,7 +179,7 @@ stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
 #' @seealso \code{\link{ssd_fit_dist}}
 #' @export
 #' @examples
-#' ggplot2::ggplot(ccme_data[ccme_data$Chemical == "Boron",], ggplot2::aes(x = Concentration)) +
+#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   stat_ssd() +
 #'   stat_fitdist()
 stat_fitdist <- function(mapping = NULL, data = NULL, geom = "line",
@@ -218,7 +218,7 @@ geom_xribbon <- function(mapping = NULL, data = NULL, stat = "identity",
 #' @inheritParams ggplot2::geom_point
 #' @export
 #' @examples
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Concentration)) +
+#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssd()
 geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
                      position = "identity", na.rm = FALSE, show.legend = NA,
@@ -240,7 +240,7 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #' @seealso \code{\link{ssd_fit_dist}}
 #' @export
 #' @examples
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Concentration)) +
+#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssd() +
 #'   geom_fitdist()
 geom_fitdist <- function(mapping = NULL, data = NULL, stat = "fitdist",
@@ -262,7 +262,7 @@ geom_fitdist <- function(mapping = NULL, data = NULL, stat = "fitdist",
 #' @param xintercept The x-value for the fifth percentil..
 #' @export
 #' @examples
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Concentration)) +
+#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssd() +
 #'   geom_hc5(xintercept = 1.5)
 geom_hc5 <- function(mapping = NULL, data = NULL, xintercept,

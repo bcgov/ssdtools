@@ -12,13 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-predict_fitdist_prob <- function(prob, boot, level) {
-  quantile <- quantile(boot, prob, CI.level = level)
+predict_fitdist_prop <- function(prop, boot, level) {
+  quantile <- quantile(boot, prop, CI.level = level)
   est <- quantile$quantiles[1,1]
   se <- sd(quantile$bootquant[,1], 2)
   lcl <- quantile$quantCI[1,1]
   ucl <- quantile$quantCI[2,1]
-  tibble::data_frame(prob = prob, est = est, se = se, lcl = lcl, ucl = ucl)
+  tibble::data_frame(prop = prop, est = est, se = se, lcl = lcl, ucl = ucl)
 }
 
 model_average <- function(x) {
@@ -34,32 +34,32 @@ model_average <- function(x) {
 #' @inheritParams predict.fitdists
 #' @export
 #' @examples
-#' predict(boron_lnorm, probs = c(0.05, 0.5))
-predict.fitdist <- function(object, probs = seq(0.01, 0.99, by = 0.01),
+#' predict(boron_lnorm, props = c(0.05, 0.5))
+predict.fitdist <- function(object, props = seq(0.01, 0.99, by = 0.01),
                             nboot = 1001, level = 0.95, ...) {
-  check_vector(probs, c(0.001, 0.999), length = c(1, Inf), unique = TRUE)
+  check_vector(props, c(0.001, 0.999), length = c(1, Inf), unique = TRUE)
   check_count(nboot, coerce = TRUE)
   check_probability(level)
   boot <- bootdist(object, niter = nboot)
-  prediction <- map_df(probs, predict_fitdist_prob, boot = boot, level = level)
+  prediction <- map_df(props, predict_fitdist_prop, boot = boot, level = level)
   prediction
 }
 
 #' Predict fitdist
 #'
 #' @param object The object.
-#' @param probs A numeric vector of the densities to calculate the estimated concentrations for.
+#' @param props A numeric vector of the densities to calculate the estimated concentrations for.
 #' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
-#' @param ic A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging or use 'no' to not model average.
+#' @param ic A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.
 #' @param average A flag indicating whether to model-average.
-#' @param level A real of the confidence limit.
+#' @param level The confidence level.
 #' @param ... Unused
 #' @export
 #' @examples
 #' \dontrun{
 #' predict(boron_dists)
 #' }
-predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.01),
+predict.fitdists <- function(object, props = seq(0.01, 0.99, by = 0.01),
                              nboot = 1001, ic = "aicc", average = TRUE, level = 0.95, ...) {
   check_vector(ic, c("aic", "aicc", "bic"), length = 1)
 
@@ -70,14 +70,14 @@ predict.fitdists <- function(object, probs = seq(0.01, 0.99, by = 0.01),
 
   ic %<>% split(., 1:nrow(.))
 
-  predictions <- lapply(object, predict, probs = probs, nboot = nboot, level = level) %>%
+  predictions <- lapply(object, predict, props = props, nboot = nboot, level = level) %>%
     map2(ic, function(x, y) {x$weight <- y$weight; x}) %>%
     dplyr::bind_rows(.id = "dist")
 
   if(!average) return(predictions)
 
   predictions %<>%
-    plyr::ddply("prob", model_average) %>%
+    plyr::ddply("prop", model_average) %>%
     tibble::as_tibble()
 
   predictions

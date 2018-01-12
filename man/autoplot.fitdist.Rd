@@ -5,7 +5,7 @@
 \title{Autoplot}
 \usage{
 \method{autoplot}{fitdist}(object, ci = FALSE, hc5 = TRUE,
-  xlab = "Concentration", ylab = "Percent of Species Affected", ...)
+  xlab = "Concentration", ylab = "Species Affected", ...)
 }
 \arguments{
 \item{object}{The object to plot.}
@@ -24,6 +24,5 @@
 Autoplot
 }
 \examples{
-library(ggplot2)
 autoplot(boron_lnorm)
 }
