@@ -130,9 +130,10 @@ gp <- ggplot(boron_pred, aes_string(x = "est")) +
 print(gp)
 ```    
 
-To log the x-axis use `coord_trans()`.
+To log the x-axis use the following code.
 ```{r, fig.width = 5, fig.height = 4}
 gp <- gp + coord_trans(x = "log10") +
-  scale_x_continuous(breaks = scales::trans_breaks("log10", function(x) 10^x))
+  scale_x_continuous(breaks = scales::trans_breaks("log10", function(x) 10^x),
+                     labels = comma_signif)
 print(gp)
 ```

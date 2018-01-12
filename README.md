@@ -95,9 +95,9 @@ and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
 ``` r
 ssd_hc5(boron_dists)
 #> # A tibble: 1 x 5
-#>    prop      est        se       lcl     ucl
-#>   <dbl>    <dbl>     <dbl>     <dbl>   <dbl>
-#> 1  0.05 1.250714 0.7294592 0.5997027 3.17198
+#>    prop      est        se       lcl      ucl
+#>   <dbl>    <dbl>     <dbl>     <dbl>    <dbl>
+#> 1  0.05 1.250714 0.7340344 0.6170676 3.214045
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -119,7 +119,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
 
 For more information and examples of how to use `ssdca` in conjuction
 with `fitdistrplus` and `ggplot2` to assess alternative fits and produce
-custom plots is described in the vignette ssdca.
+custom plots is described in the vignette `ssdca`.
 
 A shiny webpage is being developed for non-users of R.
 

@@ -82,6 +82,17 @@ npars.fitdist <- function(x, ...) length(x$estimate)
 #' @export
 npars.fitdists <- function(x, ...) map_int(x, npars)
 
+#' Comma and Significance Formatter
+#'
+#' @inheritParams scales::comma
+#' @inheritParams base::signif
+#'
+#' @return A function that returns a character vector.
+#' @seealso \code{\link[scales]{comma}}
+#' @export
+#'
+#' @examples
+#' comma_signif(1199)
 comma_signif <- function(x, digits = 1, ...) {
   x %<>% signif(digits = digits)
   scales::comma(x, ...)
