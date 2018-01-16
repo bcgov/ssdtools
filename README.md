@@ -12,7 +12,7 @@ Status](https://img.shields.io/codecov/c/github/bcgov/ssdca/master.svg)](https:/
 # ssdca
 
 `ssdca` is an R package to fit distributions to Species Sensitivity
-Data. It is being developed for the B.C. Ministry of Environment by
+Data. It is being developed for the B.C. Ministry of Environment and Climate Change Strategy by
 [Poisson Consulting](https://github.com/poissonconsulting).
 
 ## Installation
