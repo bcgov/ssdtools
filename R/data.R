@@ -97,3 +97,20 @@
 #' head(ccme_data)
 "ccme_data"
 
+#' fitdists for fitdistrplus fluazinam Data
+#'
+#' A fitdists object for Species Sensitivity Data for
+#' Fluazinam.
+#'
+#' @examples
+#' fluazinam_dists
+"fluazinam_dists"
+
+#' fitdist for CCME Boron Data
+#'
+#' A fitdist object for Species Sensitivity Data for
+#' Boron with the lnorm distribution.
+#'
+#' @examples
+#' fluazinam_lnorm
+"fluazinam_lnorm"

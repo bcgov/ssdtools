@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 
-#' Is fitdists
+#' Is fitdist
 #'
 #' Tests whether an object is a fitdist.
 #' @param x The object to test.
@@ -29,6 +29,21 @@ is.fitdist <- function(x) {
   inherits(x, "fitdist")
 }
 
+#' Is censored fitdist
+#'
+#' Tests whether an object is a censored fitdist.
+#' @param x The object to test.
+#'
+#' @return A flag.
+#' @export
+#'
+#' @examples
+#' is.fitdistcens(boron_lnorm)
+#' is.fitdistcens(fluazinam_lnorm)
+is.fitdistcens <- function(x) {
+  inherits(x, "fitdistcens")
+}
+
 #' Is fitdists
 #'
 #' Tests whether an object is a fitdists.
@@ -41,7 +56,23 @@ is.fitdist <- function(x) {
 #' is.fitdists(boron_lnorm)
 #' is.fitdists(boron_dists)
 is.fitdists <- function(x) {
-  inherits(x, "fitdists")
+  inherits(x, "fitdists") & !is.fitdistcens(x)
+}
+
+#' Is censored fitdists
+#'
+#' Tests whether an object is a censored fitdists.
+#' @param x The object to test.
+#'
+#' @return A flag.
+#' @export
+#'
+#' @examples
+#' is.fitdistscens(boron_dists)
+#' is.fitdistscens(fluazinam_lnorm)
+#' is.fitdistscens(fluazinam_dists)
+is.fitdistscens <- function(x) {
+  inherits(x, "fitdistscens")
 }
 
 #' Number of Observations
@@ -52,6 +83,15 @@ is.fitdists <- function(x) {
 #' @examples
 #' nobs(boron_lnorm)
 nobs.fitdist <- function(object, ...) object$n
+
+#' Number of Observations
+#'
+#' @param object The object.
+#' @param ... Unused.
+#' @export
+#' @examples
+#' nobs(boron_lnorm)
+nobs.fitdistcens <- function(object, ...) nrow(object$censdata)
 
 #' @export
 nobs.fitdists <- function(object, ...) {
@@ -78,6 +118,9 @@ npars <- function(x, ...) {
 
 #' @export
 npars.fitdist <- function(x, ...) length(x$estimate)
+
+#' @export
+npars.fitdistcens <- function(x, ...) length(x$estimate)
 
 #' @export
 npars.fitdists <- function(x, ...) map_int(x, npars)

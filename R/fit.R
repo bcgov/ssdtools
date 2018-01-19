@@ -12,46 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-remove_errors <- function(dist_fit, name, silent) {
-  if(!is.null(dist_fit$error)) {
-    if(!silent) warning(name, ": ", dist_fit$error, call. = FALSE)
-    return(NULL)
-  }
-  dist_fit$result
-}
-
-#' Fit Distribution
-#'
-#' Fits a distribution to species sensitivity data.
-#'
-#' @inheritParams ssd_fit_dists
-#' @param dist A string of the distribution to fit.
-#'
-#' @return An object of class \code{\link[fitdistrplus]{fitdist}}.
-#' @seealso \code{\link{ssd_fit_dists}}
-#' @export
-#'
-#' @examples
-#' ssd_fit_dist(boron_data)
-ssd_fit_dist <- function(
-  data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
-
-  check_data(data, nrow = c(1, .Machine$integer.max))
-  check_string(left)
-  check_string(right)
-
-  checkor(check_null(weight), check_string(weight))
-
-  check_colnames(data, unique(c(left, right, weight)))
-  check_string(dist)
-
-  x <- data[[left]]
-
-  dist %<>% list(data = x, distr = ., method = "mle")
-
-  if(!is.null(weight))
-    dist$weights <- data[[weight]]
-
+add_starting_values <- function(dist, x) {
   if(dist$distr == "burr"){
     dist$start <- list(shape1 = 4, shape2 = 1, rate = 1)
     dist$method <- "mme"
@@ -74,7 +35,77 @@ ssd_fit_dist <- function(
     dist$start  <- list(shape = exp(unname(coef(fit))))
     dist$fix.arg<- list(scale = fit@extra$scale)
   }
-  fit <- do.call(fitdistrplus::fitdist, dist)
+  dist
+}
+
+fit_dist_uncensored <- function(data, left, weight, dist) {
+
+  x <- data[[left]]
+
+  dist %<>% list(data = x, distr = ., method = "mle")
+
+  if(!is.null(weight))
+    dist$weights <- data[[weight]]
+
+  dist %<>% add_starting_values(x)
+  do.call(fitdistrplus::fitdist, dist)
+}
+
+fit_dist_censored <- function(data, left, right, weight, dist) {
+
+  if(dist == "burr")
+    stop("distribution fitting not defined for censored data with the burr distribution because it requires moment matching estimation", call. = FALSE)
+
+  x <- rowMeans(data[c(left, right)], na.rm = TRUE)
+
+  censdata <- data.frame(left = data[[left]], right = data[[right]])
+  dist %<>% list(censdata = censdata, distr = .)
+
+  if(!is.null(weight))
+    dist$weights <- data[[weight]]
+
+  dist %<>% add_starting_values(x)
+  do.call(fitdistrplus::fitdistcens, dist)
+}
+
+remove_errors <- function(dist_fit, name, silent) {
+  if(!is.null(dist_fit$error)) {
+    if(!silent) warning(name, ": ", dist_fit$error, call. = FALSE)
+    return(NULL)
+  }
+  dist_fit$result
+}
+
+#' Fit Distribution
+#'
+#' Fits a distribution to species sensitivity data.
+#'
+#' @inheritParams ssd_fit_dists
+#' @param dist A string of the distribution to fit.
+#'
+#' @return An object of class \code{\link[fitdistrplus]{fitdist}}.
+#' @seealso \code{\link{ssd_fit_dists}}
+#' @export
+#'
+#' @examples
+#' ssd_fit_dist(boron_data)
+#' ssd_fit_dist(fluazinam, left = "left", right = "right")
+ssd_fit_dist <- function(
+  data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
+
+  check_data(data, nrow = c(1, .Machine$integer.max))
+  check_string(left)
+  check_string(right)
+
+  checkor(check_null(weight), check_string(weight))
+
+  check_colnames(data, unique(c(left, right, weight)))
+  check_string(dist)
+
+  if(left == right) {
+    fit <-  fit_dist_uncensored(data, left, weight, dist)
+  } else
+    fit <-  fit_dist_censored(data, left, right, weight, dist)
   fit
 }
 
@@ -103,6 +134,8 @@ ssd_fit_dist <- function(
 #' @seealso \code{\link{ssd_fit_dist}}
 #' @examples
 #' ssd_fit_dists(boron_data)
+#' data(fluazinam)
+#' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
   dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
@@ -116,6 +149,9 @@ ssd_fit_dists <- function(
   dists %<>% map(safe_fit_dist, data = data, left = left, right = right, weight = weight)
   dists %<>% imap(remove_errors, silent = silent)
   dists <- dists[!vapply(dists, is.null, TRUE)]
-  class(dists) <- "fitdists"
+  if(left == right) {
+    class(dists) <- "fitdists"
+  } else
+    class(dists) <- c("fitdistscens", "fitdists")
   dists
 }

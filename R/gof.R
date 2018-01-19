@@ -51,6 +51,12 @@ ssd_gof.fitdist <- function(x, ...) {
 }
 
 #' @export
+ssd_gof.fitdistcens <- function(x, ...) {
+  dist <- x$distname
+  dplyr::data_frame(dist = dist, aic = x$aic, bic = x$bic)
+}
+
+#' @export
 ssd_gof.fitdists <- function(x, ...) {
   map_df(x, ssd_gof)
 }

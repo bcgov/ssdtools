@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{is.fitdist}
 \alias{is.fitdist}
-\title{Is fitdists}
+\title{Is fitdist}
 \usage{
 is.fitdist(x)
 }

@@ -159,3 +159,11 @@ use_data(boron_dists, overwrite = TRUE)
 
 boron_pred <- predict(boron_dists)
 use_data(boron_pred, overwrite = TRUE)
+
+data("fluazinam")
+fluazinam_lnorm <- ssd_fit_dist(fluazinam, left = "left", right = "right")
+use_data(fluazinam_lnorm, overwrite = TRUE)
+
+fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")
+use_data(fluazinam_dists, overwrite = TRUE)
+

@@ -41,3 +41,24 @@ test_that("fit_dist", {
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist), c(meanlog = 1.879717, sdlog = 1.127537), tolerance = 0.000001)
 })
+
+test_that("fluazinam", {
+  data(fluazinam)
+  dist <- ssd_fit_dist(fluazinam, left = "left")
+  expect_true(is.fitdist(dist))
+  expect_false(is.fitdistcens(dist))
+  expect_equal(coef(dist), c(meanlog = 4.660186, sdlog = 2.197562), tolerance = 0.0000001)
+
+  dist <- ssd_fit_dist(fluazinam, left = "left", right = "right")
+  expect_false(is.fitdist(dist))
+  expect_true(is.fitdistcens(dist))
+  expect_equal(coef(dist), c(meanlog = 4.976920, sdlog = 2.687785), tolerance = 0.0000001)
+
+  fluazinam2 <- fluazinam[rev(order(fluazinam$left)),]
+  fluazinam2$Weight <- 1:nrow(fluazinam2)
+
+  dist <- ssd_fit_dist(fluazinam2, weight = "Weight", left = "left", right = "right")
+  expect_false(is.fitdist(dist))
+  expect_true(is.fitdistcens(dist))
+  expect_equal(coef(dist), c(meanlog = 3.566750, sdlog = 2.182757), tolerance = 0.000001)
+})

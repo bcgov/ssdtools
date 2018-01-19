@@ -45,6 +45,21 @@ ssd_hc5.fitdist <- function(x, level = 0.95, ...) {
 #' Estimates with bootstrap confidence intervals the hazard concentration
 #' at which 5\% of the species are affected.
 #'
+#' @param x A fitdistcens object.
+#' @inheritParams predict.fitdist
+#' @param ... Unused.
+#' @export
+#' @examples
+#' ssd_hc5(fluazinam_lnorm)
+ssd_hc5.fitdistcens <- function(x, level = 0.95, ...) {
+  predict(x, props = 0.05, level = level)
+}
+
+#' 5\% Hazard Concentration
+#'
+#' Estimates with bootstrap confidence intervals the hazard concentration
+#' at which 5\% of the species are affected.
+#'
 #' @param x A fitdist object.
 #' @inheritParams predict.fitdists
 #' @param ... Unused.
@@ -54,5 +69,22 @@ ssd_hc5.fitdist <- function(x, level = 0.95, ...) {
 #' ssd_hc5(boron_dists)
 #' }
 ssd_hc5.fitdists <- function(x, ic = "aicc", average = TRUE, level = 0.95, ...) {
+    predict(x, props = 0.05, ic = ic, average = average, level = level)
+}
+
+#' 5\% Hazard Concentration
+#'
+#' Estimates with bootstrap confidence intervals the hazard concentration
+#' at which 5\% of the species are affected.
+#'
+#' @param x A fitdistcens object.
+#' @inheritParams predict.fitdists
+#' @param ... Unused.
+#' @export
+#' @examples
+#' \dontrun{
+#' ssd_hc5(fluazinam_dists)
+#' }
+ssd_hc5.fitdistscens <- function(x, ic = "aic", average = TRUE, level = 0.95, ...) {
     predict(x, props = 0.05, ic = ic, average = average, level = level)
 }

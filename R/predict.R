@@ -45,6 +45,22 @@ predict.fitdist <- function(object, props = seq(0.01, 0.99, by = 0.01),
   prediction
 }
 
+#' Predict censored fitdist
+#'
+#' @inheritParams predict.fitdists
+#' @export
+#' @examples
+#' predict(fluazinam_lnorm, props = c(0.05, 0.5))
+predict.fitdistcens <- function(object, props = seq(0.01, 0.99, by = 0.01),
+                            nboot = 1001, level = 0.95, ...) {
+  check_vector(props, c(0.001, 0.999), length = c(1, Inf), unique = TRUE)
+  check_count(nboot, coerce = TRUE)
+  check_probability(level)
+  boot <- bootdistcens(object, niter = nboot)
+  prediction <- map_df(props, predict_fitdist_prop, boot = boot, level = level)
+  prediction
+}
+
 #' Predict fitdist
 #'
 #' @param object The object.
@@ -62,6 +78,8 @@ predict.fitdist <- function(object, props = seq(0.01, 0.99, by = 0.01),
 predict.fitdists <- function(object, props = seq(0.01, 0.99, by = 0.01),
                              nboot = 1001, ic = "aicc", average = TRUE, level = 0.95, ...) {
   check_vector(ic, c("aic", "aicc", "bic"), length = 1)
+
+  print(ic)
 
   ic <- ssd_gof(object)[c("dist", ic)]
 
@@ -81,4 +99,19 @@ predict.fitdists <- function(object, props = seq(0.01, 0.99, by = 0.01),
     tibble::as_tibble()
 
   predictions
+}
+
+#' Predict Censored fitdists
+#'
+#' @inheritParams predict.fitdists
+#' @export
+#' @examples
+#' \dontrun{
+#' predict(fluazinam_dists)
+#' }
+predict.fitdistscens <- function(object, props = seq(0.01, 0.99, by = 0.01),
+                             nboot = 1001, ic = "aic", average = TRUE, level = 0.95, ...) {
+  check_vector(ic, c("aic", "bic"), length = 1)
+  NextMethod(object = object, props = props, nboot = nboot, ic = ic, average = average,
+             level = level, ...)
 }

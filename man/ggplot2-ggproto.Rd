@@ -4,8 +4,10 @@
 \name{ggplot2-ggproto}
 \alias{ggplot2-ggproto}
 \alias{StatSsd}
+\alias{StatSsdcens}
 \alias{StatFitdist}
 \alias{GeomSsd}
+\alias{GeomSsdcens}
 \alias{GeomFitdist}
 \alias{GeomHc5}
 \alias{GeomXribbon}

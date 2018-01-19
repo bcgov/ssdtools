@@ -12,7 +12,7 @@ Status](https://img.shields.io/codecov/c/github/bcgov/ssdca/master.svg)](https:/
 # ssdca
 
 `ssdca` is an R package to fit distributions to Species Sensitivity
-Data. It is being developed for the B.C. Ministry of Environment and Climate Change Strategy by
+Data. It is being developed for the B.C. Ministry of Environment by
 [Poisson Consulting](https://github.com/poissonconsulting).
 
 ## Installation
@@ -95,9 +95,9 @@ and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
 ``` r
 ssd_hc5(boron_dists)
 #> # A tibble: 1 x 5
-#>    prop      est        se     lcl      ucl
-#>   <dbl>    <dbl>     <dbl>   <dbl>    <dbl>
-#> 1  0.05 1.250714 0.7176165 0.58483 3.090533
+#>    prop      est        se       lcl      ucl
+#>   <dbl>    <dbl>     <dbl>     <dbl>    <dbl>
+#> 1  0.05 1.250714 0.7385748 0.6104326 3.233175
 ```
 
 Model-averaged predictions complete with confidence intervals can be

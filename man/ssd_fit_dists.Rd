@@ -39,6 +39,8 @@ However, currently only the resultant parameter estimates are available (via coe
 }
 \examples{
 ssd_fit_dists(boron_data)
+data(fluazinam)
+ssd_fit_dists(fluazinam, left = "left", right = "right")
 }
 \seealso{
 \code{\link{ssd_fit_dist}}
