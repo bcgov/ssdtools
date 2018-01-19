@@ -1,4 +1,4 @@
-## BC Air Zones
+## Data Sources
 
 The file `CCME data.csv` contains data from the Canadian Council of the Ministers of the Environment (CCME).
 
@@ -12,4 +12,4 @@ The data sources are as follows
 - [Uranium](http://ceqg-rcqe.ccme.ca/download/en/328/)
 - [Silver](http://ceqg-rcqe.ccme.ca/download/en/355/)
 
-The data are licensed under the ([Open Government Licence - Canada](http://open.canada.ca/en/open-government-licence-canada)).
+The data are licensed under the ([Open Government Licence - British Columbia](https://www2.gov.bc.ca/gov/content/data/open-data/open-government-license-bc)).
