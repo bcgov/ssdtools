@@ -95,9 +95,9 @@ and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
 ``` r
 ssd_hc5(boron_dists)
 #> # A tibble: 1 x 5
-#>    prop      est        se       lcl      ucl
-#>   <dbl>    <dbl>     <dbl>     <dbl>    <dbl>
-#> 1  0.05 1.250714 0.7340344 0.6170676 3.214045
+#>    prop      est        se     lcl      ucl
+#>   <dbl>    <dbl>     <dbl>   <dbl>    <dbl>
+#> 1  0.05 1.250714 0.7176165 0.58483 3.090533
 ```
 
 Model-averaged predictions complete with confidence intervals can be
