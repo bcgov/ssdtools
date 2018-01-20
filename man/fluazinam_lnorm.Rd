@@ -15,4 +15,7 @@ Boron with the lnorm distribution.
 \examples{
 fluazinam_lnorm
 }
+\seealso{
+\code{\link[fitdistrplus]{fluazinam}}
+}
 \keyword{datasets}

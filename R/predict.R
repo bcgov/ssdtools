@@ -79,8 +79,6 @@ predict.fitdists <- function(object, props = seq(0.01, 0.99, by = 0.01),
                              nboot = 1001, ic = "aicc", average = TRUE, level = 0.95, ...) {
   check_vector(ic, c("aic", "aicc", "bic"), length = 1)
 
-  print(ic)
-
   ic <- ssd_gof(object)[c("dist", ic)]
 
   ic$delta <- ic[[2]] - min(ic[[2]])

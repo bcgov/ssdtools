@@ -102,6 +102,7 @@
 #' A fitdists object for Species Sensitivity Data for
 #' Fluazinam.
 #'
+#' @seealso \code{\link[fitdistrplus]{fluazinam}}
 #' @examples
 #' fluazinam_dists
 "fluazinam_dists"
@@ -111,6 +112,7 @@
 #' A fitdist object for Species Sensitivity Data for
 #' Boron with the lnorm distribution.
 #'
+#' @seealso \code{\link[fitdistrplus]{fluazinam}}
 #' @examples
 #' fluazinam_lnorm
 "fluazinam_lnorm"

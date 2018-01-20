@@ -15,8 +15,8 @@
 library(magrittr)
 library(stringr)
 library(devtools)
-library(dplyr)
 library(ssdca)
+library(dplyr)
 
 ccme_data <- read.csv("data-raw/CCME data.csv", stringsAsFactors = FALSE)
 ccme_data <- ccme_data[!is.na(ccme_data$Conc),]

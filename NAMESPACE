@@ -3,6 +3,7 @@
 S3method(autoplot,fitdist)
 S3method(autoplot,fitdistcens)
 S3method(autoplot,fitdists)
+S3method(autoplot,fitdistscens)
 S3method(nobs,fitdist)
 S3method(nobs,fitdistcens)
 S3method(nobs,fitdists)

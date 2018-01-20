@@ -19,9 +19,11 @@ test_that("plot", {
   on.exit(dev.off())
   expect_silent(ssd_cfplot(boron_data))
   expect_silent(plot(boron_lnorm))
+  expect_silent(plot(fluazinam_lnorm))
   expect_silent(plot(boron_dists))
   expect_is(autoplot(boron_lnorm), "ggplot")
   expect_is(autoplot(boron_dists), "ggplot")
+  expect_is(autoplot(fluazinam_dists), "ggplot")
   expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
   gp <- ggplot(boron_data, aes(x = Conc)) + stat_ssd() + stat_fitdist() +
     geom_ssd() + geom_fitdist() + geom_hc5()

@@ -4,7 +4,7 @@
 \name{fluazinam_dists}
 \alias{fluazinam_dists}
 \title{fitdists for fitdistrplus fluazinam Data}
-\format{An object of class \code{fitdists} of length 4.}
+\format{An object of class \code{fitdistscens} (inherits from \code{fitdists}) of length 4.}
 \usage{
 fluazinam_dists
 }
@@ -14,5 +14,8 @@ Fluazinam.
 }
 \examples{
 fluazinam_dists
+}
+\seealso{
+\code{\link[fitdistrplus]{fluazinam}}
 }
 \keyword{datasets}

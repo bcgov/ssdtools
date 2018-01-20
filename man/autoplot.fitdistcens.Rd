@@ -24,5 +24,7 @@
 Autoplot
 }
 \examples{
+fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
+fluazinam_lnorm$censdata$left[5] <- NA
 autoplot(fluazinam_lnorm)
 }

@@ -379,6 +379,8 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
 #' @inheritParams autoplot.fitdist
 #' @export
 #' @examples
+#' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
+#' fluazinam_lnorm$censdata$left[5] <- NA
 #' autoplot(fluazinam_lnorm)
 autoplot.fitdistcens <- function(object, ci = FALSE, hc5 = TRUE,
                              xlab = "Concentration", ylab = "Species Affected",
@@ -390,14 +392,35 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc5 = TRUE,
 
   data <- object$censdata
 
+  data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
+  data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
+  data$xmean <- rowMeans(data[c("left", "right")], na.rm = TRUE)
+  data$arrowleft <- data$right / 2
+  data$arrowright <- data$left * 2
+  data$y <- ssd_ecd(data$xmean)
+
   pred <- predict(object, nboot = if(ci) 1001 else 10)
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
   if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.3)
 
+  arrow <- arrow(length = unit(0.1, "inches"))
+
+  print(data)
+
   gp <- gp + geom_line(aes_string(y = "prop")) +
-    geom_ssdcens(data = data, aes_string(xmin = "left", xmax = "right")) +
+    geom_segment(data = data[data$xmin != data$xmax,],
+                 aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")) +
+    geom_segment(data = data[is.na(data$left),],
+                 aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
+                 arrow = arrow) +
+    geom_segment(data = data[is.na(data$right),],
+                 aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
+                 arrow = arrow) +
+    geom_point(data = data, aes_string(x = "xmin", y = "y")) +
+    geom_point(data = data[data$xmin != data$xmax,],
+               aes_string(x = "xmax", y = "y")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
   if(hc5) gp <- gp + geom_hc5(xintercept = pred$est[pred$prop == 0.05], linetype = "dotted")
@@ -412,11 +435,11 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc5 = TRUE,
 #' \dontrun{
 #' autoplot(boron_dists)
 #' }
-autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Affected", ...) {
+autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Affected", ic = "aicc", ...) {
   check_string(xlab)
   check_string(ylab)
 
-  pred <- predict(object, nboot = 10, average = FALSE)
+  pred <- predict(object, ic = ic, nboot = 10, average = FALSE)
   pred$Distribution <- pred$dist
 
   data <- data.frame(x = object[[1]]$data)
@@ -428,6 +451,19 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Af
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
   gp
+}
+
+#' Autoplot
+#'
+#' @inheritParams autoplot.fitdist
+#' @export
+#' @examples
+#' \dontrun{
+#' autoplot(boron_dists)
+#' }
+autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Species Affected",
+                                  ic = "aic", ...) {
+  NextMethod(object = object, xlab = xlab, ylab = ylab, ic = ic, ...)
 }
 
 #' SSD Plot
