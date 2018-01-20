@@ -113,6 +113,18 @@ Once again the returned object is a `ggplot` object which can be customized prio
 By default, the plot includes the model-averaged 95% confidence interval as a shaded band and 
 the model-averaged $HC_5$ as a dotted line.
 
+## Weighted Data
+
+The `ssd_fit_dists()` function allows the user to name a column that specifies
+the weights to use in the estimation. 
+However, to date very little functionality has been implemented for weighted fits in the `fitdistrplus` package.
+```{r, error = TRUE}
+boron_data$Weight <- as.integer(boron_data$Group)
+fit <- ssd_fit_dists(boron_data, weight = "Weight", dists = c("lnorm", "weibull"))
+fit
+plot(fit)
+```
+
 ## ggplot Geoms
 
 The `sscda` package provides four ggplot geoms to allow you construct your own plots.

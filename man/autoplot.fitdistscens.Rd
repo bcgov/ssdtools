@@ -14,6 +14,8 @@
 
 \item{ylab}{A string of the x-axis label.}
 
+\item{ic}{A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.}
+
 \item{...}{Unused.}
 }
 \description{

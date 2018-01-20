@@ -89,6 +89,7 @@ remove_errors <- function(dist_fit, name, silent) {
 #'
 #' @examples
 #' ssd_fit_dist(boron_data)
+#' data(fluazinam)
 #' ssd_fit_dist(fluazinam, left = "left", right = "right")
 ssd_fit_dist <- function(
   data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {

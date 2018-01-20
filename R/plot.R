@@ -254,27 +254,6 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
   )
 }
 
-#' Plot Censored Species Sensitivity Data
-#'
-#' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
-#'
-#' @inheritParams ggplot2::layer
-#' @inheritParams ggplot2::geom_point
-#' @export
-#' @examples
-#' data(fluazinam)
-#' ggplot2::ggplot(fluazinam, ggplot2::aes(xmin = left, xmax = right)) +
-#'   geom_ssdcens()
-geom_ssdcens <- function(mapping = NULL, data = NULL, stat = "ssdcens",
-                     position = "identity", na.rm = FALSE, show.legend = NA,
-                     inherit.aes = TRUE, ...) {
-  layer(
-    geom = GeomSsdcens, data = data, mapping = mapping, stat = stat,
-    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(na.rm = na.rm, ...)
-  )
-}
-
 #' Plot fitdist
 #'
 #' Plots the fit of a univariate distribution as a cumulative density/distribution function.
@@ -430,6 +409,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc5 = TRUE,
 #' Autoplot
 #'
 #' @inheritParams autoplot.fitdist
+#' @inheritParams predict.fitdists
 #' @export
 #' @examples
 #' \dontrun{
@@ -456,6 +436,7 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Af
 #' Autoplot
 #'
 #' @inheritParams autoplot.fitdist
+#' @inheritParams predict.fitdists
 #' @export
 #' @examples
 #' \dontrun{
