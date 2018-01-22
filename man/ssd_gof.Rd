@@ -2,9 +2,18 @@
 % Please edit documentation in R/gof.R
 \name{ssd_gof}
 \alias{ssd_gof}
+\alias{ssd_gof.fitdist}
+\alias{ssd_gof.fitdistcens}
+\alias{ssd_gof.fitdists}
 \title{Goodness of Fit}
 \usage{
 ssd_gof(x, ...)
+
+\method{ssd_gof}{fitdist}(x, ...)
+
+\method{ssd_gof}{fitdistcens}(x, ...)
+
+\method{ssd_gof}{fitdists}(x, ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -17,15 +26,27 @@ A tbl data frame of the gof statistics.
 \description{
 Returns a tbl data frame with the following columns
 \describe{
+  \item{aic}{Akaike's Information Criterion (dbl)}
+  \item{bic}{Bayesion Information Criterion (dbl)}
+}
+and if the data are non-censored
+\describe{
   \item{dist}{The distribution name (chr)}
   \item{ad}{Anderson-Darling statistic (dbl)}
   \item{ks}{Kolmogorov-Smirnov statistic (dbl)}
   \item{cvm}{Cramer-von Mises statistic (dbl)}
-  \item{aic}{Akaike's Information Criterion (dbl)}
   \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
-  \item{bic}{Bayesion Information Criterion (dbl)}
 }
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{fitdist}: Goodness of Fit
+
+\item \code{fitdistcens}: Goodness of Fit
+
+\item \code{fitdists}: Goodness of Fit
+}}
+
 \examples{
 ssd_gof(boron_lnorm)
 ssd_gof(boron_dists)

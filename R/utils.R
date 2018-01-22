@@ -116,12 +116,15 @@ npars <- function(x, ...) {
   UseMethod("npars")
 }
 
+#' @describeIn npars Get the Number of parameters
 #' @export
 npars.fitdist <- function(x, ...) length(x$estimate)
 
+#' @describeIn npars Get the Number of parameters
 #' @export
 npars.fitdistcens <- function(x, ...) length(x$estimate)
 
+#' @describeIn npars Get the Number of parameters
 #' @export
 npars.fitdists <- function(x, ...) map_int(x, npars)
 

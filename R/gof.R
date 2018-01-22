@@ -16,13 +16,16 @@
 #'
 #' Returns a tbl data frame with the following columns
 #' \describe{
+#'   \item{aic}{Akaike's Information Criterion (dbl)}
+#'   \item{bic}{Bayesion Information Criterion (dbl)}
+#' }
+#' and if the data are non-censored
+#' \describe{
 #'   \item{dist}{The distribution name (chr)}
 #'   \item{ad}{Anderson-Darling statistic (dbl)}
 #'   \item{ks}{Kolmogorov-Smirnov statistic (dbl)}
 #'   \item{cvm}{Cramer-von Mises statistic (dbl)}
-#'   \item{aic}{Akaike's Information Criterion (dbl)}
 #'   \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
-#'   \item{bic}{Bayesion Information Criterion (dbl)}
 #' }
 #'
 #' @param x The object.
@@ -37,6 +40,7 @@ ssd_gof <- function(x, ...) {
   UseMethod("ssd_gof")
 }
 
+#' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdist <- function(x, ...) {
   dist <- x$distname
@@ -50,12 +54,14 @@ ssd_gof.fitdist <- function(x, ...) {
                     aic = x$aic, aicc = aicc, bic = x$bic)
 }
 
+#' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdistcens <- function(x, ...) {
   dist <- x$distname
   dplyr::data_frame(dist = dist, aic = x$aic, bic = x$bic)
 }
 
+#' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdists <- function(x, ...) {
   map_df(x, ssd_gof)

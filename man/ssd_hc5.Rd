@@ -2,14 +2,34 @@
 % Please edit documentation in R/hc5.R
 \name{ssd_hc5}
 \alias{ssd_hc5}
+\alias{ssd_hc5.fitdist}
+\alias{ssd_hc5.fitdistcens}
+\alias{ssd_hc5.fitdists}
+\alias{ssd_hc5.fitdistscens}
 \title{5\% Hazard Concentration}
 \usage{
 ssd_hc5(x, ...)
+
+\method{ssd_hc5}{fitdist}(x, level = 0.95, ...)
+
+\method{ssd_hc5}{fitdistcens}(x, level = 0.95, ...)
+
+\method{ssd_hc5}{fitdists}(x, ic = "aicc", average = TRUE, level = 0.95,
+  ...)
+
+\method{ssd_hc5}{fitdistscens}(x, ic = "aic", average = TRUE,
+  level = 0.95, ...)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{...}{Unused.}
+
+\item{level}{The confidence level.}
+
+\item{ic}{A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.}
+
+\item{average}{A flag indicating whether to model-average.}
 }
 \value{
 A data frame of the estimate with the standard error and upper and lower confidence intervals.
@@ -17,4 +37,25 @@ A data frame of the estimate with the standard error and upper and lower confide
 \description{
 Estimates with bootstrap confidence intervals the hazard concentration
 at which 5\% of the species are affected.
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{fitdist}: 5\% Hazard Concentration
+
+\item \code{fitdistcens}: 5\% Hazard Concentration
+
+\item \code{fitdists}: 5\% Hazard Concentration
+
+\item \code{fitdistscens}: 5\% Hazard Concentration
+}}
+
+\examples{
+ssd_hc5(boron_lnorm)
+ssd_hc5(fluazinam_lnorm)
+\dontrun{
+ssd_hc5(boron_dists)
+}
+\dontrun{
+ssd_hc5(fluazinam_dists)
+}
 }

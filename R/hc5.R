@@ -19,20 +19,14 @@
 #'
 #' @param x The object.
 #' @param ... Unused.
+#' @inheritParams predict.fitdists
 #' @return A data frame of the estimate with the standard error and upper and lower confidence intervals.
 #' @export
 ssd_hc5 <- function(x, ...) {
   UseMethod("ssd_hc5")
 }
 
-#' 5\% Hazard Concentration
-#'
-#' Estimates with bootstrap confidence intervals the hazard concentration
-#' at which 5\% of the species are affected.
-#'
-#' @param x A fitdist object.
-#' @inheritParams predict.fitdist
-#' @param ... Unused.
+#' @describeIn ssd_hc5 5\% Hazard Concentration
 #' @export
 #' @examples
 #' ssd_hc5(boron_lnorm)
@@ -40,14 +34,7 @@ ssd_hc5.fitdist <- function(x, level = 0.95, ...) {
   predict(x, props = 0.05, level = level)
 }
 
-#' 5\% Hazard Concentration
-#'
-#' Estimates with bootstrap confidence intervals the hazard concentration
-#' at which 5\% of the species are affected.
-#'
-#' @param x A fitdistcens object.
-#' @inheritParams predict.fitdist
-#' @param ... Unused.
+#' @describeIn ssd_hc5 5\% Hazard Concentration
 #' @export
 #' @examples
 #' ssd_hc5(fluazinam_lnorm)
@@ -55,14 +42,7 @@ ssd_hc5.fitdistcens <- function(x, level = 0.95, ...) {
   predict(x, props = 0.05, level = level)
 }
 
-#' 5\% Hazard Concentration
-#'
-#' Estimates with bootstrap confidence intervals the hazard concentration
-#' at which 5\% of the species are affected.
-#'
-#' @param x A fitdist object.
-#' @inheritParams predict.fitdists
-#' @param ... Unused.
+#' @describeIn ssd_hc5 5\% Hazard Concentration
 #' @export
 #' @examples
 #' \dontrun{
@@ -72,14 +52,7 @@ ssd_hc5.fitdists <- function(x, ic = "aicc", average = TRUE, level = 0.95, ...) 
     predict(x, props = 0.05, ic = ic, average = average, level = level)
 }
 
-#' 5\% Hazard Concentration
-#'
-#' Estimates with bootstrap confidence intervals the hazard concentration
-#' at which 5\% of the species are affected.
-#'
-#' @param x A fitdistcens object.
-#' @inheritParams predict.fitdists
-#' @param ... Unused.
+#' @describeIn ssd_hc5 5\% Hazard Concentration
 #' @export
 #' @examples
 #' \dontrun{

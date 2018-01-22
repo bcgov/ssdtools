@@ -2,9 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{npars}
 \alias{npars}
+\alias{npars.fitdist}
+\alias{npars.fitdistcens}
+\alias{npars.fitdists}
 \title{Get the Number of Parameters}
 \usage{
 npars(x, ...)
+
+\method{npars}{fitdist}(x, ...)
+
+\method{npars}{fitdistcens}(x, ...)
+
+\method{npars}{fitdists}(x, ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -17,6 +26,15 @@ A count indicating the number of parameters.
 \description{
 Get the Number of Parameters
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{fitdist}: Get the Number of parameters
+
+\item \code{fitdistcens}: Get the Number of parameters
+
+\item \code{fitdists}: Get the Number of parameters
+}}
+
 \examples{
 npars(boron_lnorm)
 npars(boron_dists)
