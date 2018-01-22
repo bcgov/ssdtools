@@ -4,8 +4,8 @@
 \alias{ssd_plot}
 \title{SSD Plot}
 \usage{
-ssd_plot(data, pred, left = "Conc", label = NULL, shape = NULL,
-  color = NULL, size = 2.5, xlab = "Concentration",
+ssd_plot(data, pred, left = "Conc", right = left, label = NULL,
+  shape = NULL, color = NULL, size = 2.5, xlab = "Concentration",
   ylab = "Percent of Species Affected", ci = TRUE, hc5 = TRUE,
   shift_x = 3)
 }
@@ -15,6 +15,8 @@ ssd_plot(data, pred, left = "Conc", label = NULL, shape = NULL,
 \item{pred}{A data frame of the predictions.}
 
 \item{left}{A string of the column in data with the concentrations.}
+
+\item{right}{A string of the column in data with the right concentration values.}
 
 \item{label}{A string of the column in data with the labels.}
 

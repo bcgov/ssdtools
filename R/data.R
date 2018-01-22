@@ -116,3 +116,20 @@
 #' @examples
 #' fluazinam_lnorm
 "fluazinam_lnorm"
+
+#' Model averaged predictions for fluazinam
+#'
+#' A data frame of the predictions.
+#'
+#' @format A tbl data frame:
+#' \describe{
+#'   \item{prop}{The proportion of species affected <dbl>.}
+#'   \item{est}{The estimated concentration <dbl>.}
+#'   \item{se}{The standard error of the estimate <dbl>.}
+#'   \item{lcl}{The lower confidence limit <dbl>.}
+#'   \item{se}{The upper confidence limit <dbl>.}
+#' }
+#' @examples
+#' head(fluazinam_pred)
+"fluazinam_pred"
+

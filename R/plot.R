@@ -97,19 +97,19 @@ GeomFitdist <- ggplot2::ggproto(
 #' @usage NULL
 #' @export
 GeomHc5 <- ggproto("GeomHc5", Geom,
-  draw_panel = function(data, panel_params, coord) {
+                   draw_panel = function(data, panel_params, coord) {
 
-    pieces <- data.frame(x = c(0.0001, data$xintercept, data$xintercept),
-                         y = c(0.05, 0.05, -Inf))
+                     pieces <- data.frame(x = c(0.0001, data$xintercept, data$xintercept),
+                                          y = c(0.05, 0.05, -Inf))
 
-    data <- cbind(data, pieces)
-    GeomPath$draw_panel(data, panel_params, coord)
-  },
+                     data <- cbind(data, pieces)
+                     GeomPath$draw_panel(data, panel_params, coord)
+                   },
 
-  default_aes = aes(colour = "black", size = 0.5, linetype = "dotted", alpha = NA),
-  required_aes = "xintercept",
+                   default_aes = aes(colour = "black", size = 0.5, linetype = "dotted", alpha = NA),
+                   required_aes = "xintercept",
 
-  draw_key = draw_key_path
+                   draw_key = draw_key_path
 )
 
 #' @rdname ggplot2-ggproto
@@ -117,46 +117,46 @@ GeomHc5 <- ggproto("GeomHc5", Geom,
 #' @usage NULL
 #' @export
 GeomXribbon <- ggproto("GeomXribbon", Geom,
-  default_aes = aes(colour = NA, fill = "grey20", size = 0.5, linetype = 1,
-    alpha = NA),
+                       default_aes = aes(colour = NA, fill = "grey20", size = 0.5, linetype = 1,
+                                         alpha = NA),
 
-  required_aes = c("y", "xmin", "xmax"),
+                       required_aes = c("y", "xmin", "xmax"),
 
-  draw_key = draw_key_polygon,
+                       draw_key = draw_key_polygon,
 
-  handle_na = function(data, params) {
-    data
-  },
+                       handle_na = function(data, params) {
+                         data
+                       },
 
-  draw_group = function(data, panel_params, coord, na.rm = FALSE) {
-    if (na.rm) data <- data[stats::complete.cases(data[c("y", "xmin", "xmax")]), ]
-    data <- data[order(data$group, data$y), ]
+                       draw_group = function(data, panel_params, coord, na.rm = FALSE) {
+                         if (na.rm) data <- data[stats::complete.cases(data[c("y", "xmin", "xmax")]), ]
+                         data <- data[order(data$group, data$y), ]
 
-    # Check that aesthetics are constant
-    aes <- unique(data[c("colour", "fill", "size", "linetype", "alpha")])
-    if (nrow(aes) > 1) {
-      stop("Aesthetics can not vary with a ribbon")
-    }
-    aes <- as.list(aes)
+                         # Check that aesthetics are constant
+                         aes <- unique(data[c("colour", "fill", "size", "linetype", "alpha")])
+                         if (nrow(aes) > 1) {
+                           stop("Aesthetics can not vary with a ribbon")
+                         }
+                         aes <- as.list(aes)
 
-    missing_pos <- !stats::complete.cases(data[c("y", "xmin", "xmax")])
-    ids <- cumsum(missing_pos) + 1
-    ids[missing_pos] <- NA
+                         missing_pos <- !stats::complete.cases(data[c("y", "xmin", "xmax")])
+                         ids <- cumsum(missing_pos) + 1
+                         ids[missing_pos] <- NA
 
-    positions <- plyr::summarise(data,
-      y = c(y, rev(y)), x = c(xmax, rev(xmin)), id = c(ids, rev(ids)))
-    munched <- coord_munch(coord, positions, panel_params)
+                         positions <- plyr::summarise(data,
+                                                      y = c(y, rev(y)), x = c(xmax, rev(xmin)), id = c(ids, rev(ids)))
+                         munched <- coord_munch(coord, positions, panel_params)
 
-    ggname("geom_ribbon", polygonGrob(
-      munched$x, munched$y, id = munched$id,
-      default.units = "native",
-      gp = gpar(
-        fill = alpha(aes$fill, aes$alpha),
-        col = aes$colour,
-        lwd = aes$size * .pt,
-        lty = aes$linetype)
-    ))
-  }
+                         ggname("geom_ribbon", polygonGrob(
+                           munched$x, munched$y, id = munched$id,
+                           default.units = "native",
+                           gp = gpar(
+                             fill = alpha(aes$fill, aes$alpha),
+                             col = aes$colour,
+                             lwd = aes$size * .pt,
+                             lty = aes$linetype)
+                         ))
+                       }
 )
 
 plot_coord_scale <- function(data, xlab, ylab) {
@@ -207,8 +207,8 @@ stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
 #'   stat_ssd() +
 #'   stat_fitdist()
 stat_fitdist <- function(mapping = NULL, data = NULL, geom = "line",
-                     position = "identity", na.rm = FALSE, show.legend = NA,
-                     inherit.aes = TRUE, dist = "lnorm", ...) {
+                         position = "identity", na.rm = FALSE, show.legend = NA,
+                         inherit.aes = TRUE, dist = "lnorm", ...) {
   ggplot2::layer(
     stat = StatFitdist, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
@@ -290,7 +290,7 @@ geom_fitdist <- function(mapping = NULL, data = NULL, stat = "fitdist",
 #'   geom_ssd() +
 #'   geom_hc5(xintercept = 1.5)
 geom_hc5 <- function(mapping = NULL, data = NULL, xintercept,
-                    na.rm = FALSE, show.legend = NA, ...) {
+                     na.rm = FALSE, show.legend = NA, ...) {
 
   if (!missing(xintercept)) {
     data <- data.frame(xintercept = xintercept)
@@ -362,8 +362,8 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
 #' fluazinam_lnorm$censdata$left[5] <- NA
 #' autoplot(fluazinam_lnorm)
 autoplot.fitdistcens <- function(object, ci = FALSE, hc5 = TRUE,
-                             xlab = "Concentration", ylab = "Species Affected",
-                             ...) {
+                                 xlab = "Concentration", ylab = "Species Affected",
+                                 ...) {
   check_flag(ci)
   check_flag(hc5)
   check_string(xlab)
@@ -452,6 +452,7 @@ autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Specie
 #' @param data A data frame.
 #' @param pred A data frame of the predictions.
 #' @param left A string of the column in data with the concentrations.
+#' @param right A string of the column in data with the right concentration values.
 #' @param label A string of the column in data with the labels.
 #' @param shape A string of the column in data for the shape aesthetic.
 #' @param color A string of the column in data for the color aesthetic.
@@ -460,7 +461,7 @@ autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Specie
 #' @export
 #' @examples
 #' ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
-ssd_plot <- function(data, pred, left = "Conc",
+ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
                      ci = TRUE, hc5 = TRUE, shift_x = 3) {
@@ -475,12 +476,13 @@ ssd_plot <- function(data, pred, left = "Conc",
   check_vector(shift_x, values = c(1, 1000))
 
   check_string(left)
+  check_string(right)
   checkor(check_string(label), check_null(label))
   checkor(check_string(shape), check_null(shape))
   check_flag(ci)
   check_flag(hc5)
 
-  check_colnames(data, left)
+  check_colnames(data, unique(c(left, right, label, shape)))
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
@@ -491,9 +493,35 @@ ssd_plot <- function(data, pred, left = "Conc",
     data <- data[order(data[[label]]),]
   }
   gp <- gp + geom_line(aes_string(y = "prop")) +
-    geom_hc5(data = data, xintercept = pred$est[pred$prop == 0.05]) +
-    geom_ssd(data = data, aes_string(x = left, shape = shape, color = color)) +
-    plot_coord_scale(data, xlab = xlab, ylab = ylab)
+    geom_hc5(data = data, xintercept = pred$est[pred$prop == 0.05])
+
+  if(left == right) {
+    gp <- gp + geom_ssd(data = data, aes_string(x = left, shape = shape,
+                                                color = color))
+  } else {
+    data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
+    data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
+    data$xmean <- rowMeans(data[c("left", "right")], na.rm = TRUE)
+    data$arrowleft <- data$right / 2
+    data$arrowright <- data$left * 2
+    data$y <- ssd_ecd(data$xmean)
+
+    arrow <- arrow(length = unit(0.1, "inches"))
+
+    gp <- gp + geom_line(aes_string(y = "prop")) +
+      geom_segment(data = data[data$xmin != data$xmax,],
+                   aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")) +
+      geom_segment(data = data[is.na(data$left),],
+                   aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
+                   arrow = arrow) +
+      geom_segment(data = data[is.na(data$right),],
+                   aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
+                   arrow = arrow) +
+      geom_point(data = data, aes_string(x = "xmin", y = "y")) +
+      geom_point(data = data[data$xmin != data$xmax,],
+                 aes_string(x = "xmax", y = "y"))
+  }
+  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
   if(!is.null(label)) {
     data$prop <- ssd_ecd(data[[left]])

@@ -167,3 +167,5 @@ use_data(fluazinam_lnorm, overwrite = TRUE)
 fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")
 use_data(fluazinam_dists, overwrite = TRUE)
 
+fluazinam_pred <- predict(fluazinam_dists)
+use_data(fluazinam_pred, overwrite = TRUE)

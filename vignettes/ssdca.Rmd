@@ -125,10 +125,38 @@ fit
 plot(fit)
 ```
 
+## Censored Data
+
+Censored data is that for which only a lower and/or upper limit is known for a particular species. 
+If the `right` argument in `ssd_fit_dists()` is different to the `left` argument then the data are considered to be censored. 
+`fluazinam` is a censored data set from the `fitdistrplus` package.
+
+```{r}
+data(fluazinam)
+head(fluazinam)
+```
+
+There are less goodness-of-fit statistics available for
+fits to censored data.
+```{r}
+fluazinam_dists <- ssd_fit_dists(fluazinam)
+ssd_gof(fluazinam_dists)
+```
+But model-averaged predictions can be made using AIC
+```{r, eval = FALSE}
+fluazinam_pred <- predict(fluazinam_dists)
+```
+and the results plotted complete with arrows indicating the censorship.
+```{r, fig.width=5}
+ssd_plot(fluazinam, fluazinam_pred, 
+         left = "left", right = "right", 
+         ylab = "Concentration (mg/L)")
+```
+
 ## ggplot Geoms
 
 The `sscda` package provides four ggplot geoms to allow you construct your own plots.
-They are `geom_ssd()` to plot the data, `geom_fitdist()` to plot a model fit,  
+They are `geom_ssd()` to plot the original data, `geom_fitdist()` to plot a model fit,  
 `geom_hc5()` to plot the $HC_5$, and `geom_xribbon()` to plot the confidence intervals.
 
 They can be used as follows
