@@ -12,19 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
 #' Base ggproto classes for ggplot2
 #'
-#' If you are creating a new geom, stat, position, or scale in another package,
-#' you'll need to extend from `ggplot2::Geom`, `ggplot2::Stat`,
-#' `ggplot2::Position`, or `ggplot2::Scale`.
-#'
-#' @seealso ggproto
-#' @keywords internal
-#' @name ggplot2-ggproto
+#' @seealso \code{\link[ggplot2]{ggplot2-ggproto}}
+#' @name ssdca-ggproto
 NULL
 
-#' @rdname ggplot2-ggproto
+#' @rdname ssdca-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -38,7 +32,7 @@ StatSsd <- ggplot2::ggproto(
   required_aes = "x"
 )
 
-#' @rdname ggplot2-ggproto
+#' @rdname ssdca-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -52,7 +46,7 @@ StatSsdcens <- ggplot2::ggproto(
   required_aes = c("xmin", "xmax")
 )
 
-#' @rdname ggplot2-ggproto
+#' @rdname ssdca-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -60,7 +54,7 @@ GeomSsd <- ggplot2::ggproto(
   "GeomSsd", ggplot2::GeomPoint
 )
 
-#' @rdname ggplot2-ggproto
+#' @rdname ssdca-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -68,7 +62,7 @@ GeomSsdcens <- ggplot2::ggproto(
   "GeomSsdcens", ggplot2::GeomPoint
 )
 
-#' @rdname ggplot2-ggproto
+#' @rdname ssdca-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -89,7 +83,7 @@ GeomHc5 <- ggproto(
   draw_key = draw_key_path
 )
 
-#' @rdname ggplot2-ggproto
+#' @rdname ssdca-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
