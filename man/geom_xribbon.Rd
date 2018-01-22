@@ -54,6 +54,6 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.}
 }
 \description{
-For each y value, `geom_ribbon` displays an x interval defined
+For each y value, `geom_xribbon` displays an x interval defined
 by `xmin` and `xmax`.
 }

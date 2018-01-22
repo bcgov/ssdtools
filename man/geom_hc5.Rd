@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{geom_hc5}
 \alias{geom_hc5}
-\title{Fifth Percentile Plot}
+\title{Hazard Concentration Fifth Percentile Plot}
 \usage{
 geom_hc5(mapping = NULL, data = NULL, xintercept, na.rm = FALSE,
   show.legend = NA, ...)
@@ -27,7 +27,7 @@ A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame.}, and
 will be used as the layer data.}
 
-\item{xintercept}{The x-value for the fifth percentil..}
+\item{xintercept}{The x-value for the fifth percentile.}
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
@@ -44,7 +44,9 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.}
 }
 \description{
-For each x value, `geom_hc5` displays the fifth percentile.
+For each x value, `geom_hc5()` displays the Hazard Concentration 5% level.
+The user must provide `xintercept` which is the concentration
+for the fifth percentile - it can be estimated using `ssd_hc5()`.
 }
 \examples{
 ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +

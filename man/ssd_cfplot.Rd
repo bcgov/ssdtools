@@ -13,6 +13,7 @@ ssd_cfplot(data, left = "Conc")
 }
 \description{
 Plots a Cullen and Frey graph of the skewness and kurtosis
+for non-censored data.
 }
 \examples{
 ssd_cfplot(boron_data)

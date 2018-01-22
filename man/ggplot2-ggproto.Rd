@@ -5,10 +5,8 @@
 \alias{ggplot2-ggproto}
 \alias{StatSsd}
 \alias{StatSsdcens}
-\alias{StatFitdist}
 \alias{GeomSsd}
 \alias{GeomSsdcens}
-\alias{GeomFitdist}
 \alias{GeomHc5}
 \alias{GeomXribbon}
 \title{Base ggproto classes for ggplot2}

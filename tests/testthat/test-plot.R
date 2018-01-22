@@ -25,7 +25,12 @@ test_that("plot", {
   expect_is(autoplot(boron_dists), "ggplot")
   expect_is(autoplot(fluazinam_dists), "ggplot")
   expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
-  gp <- ggplot(boron_data, aes(x = Conc)) + stat_ssd() + stat_fitdist() +
-    geom_ssd() + geom_fitdist() + geom_hc5()
+  gp <- ggplot(boron_data, aes(x = Conc)) +
+    stat_ssd() +
+    geom_ssd() +
+    geom_hc5(xintercept = 1) +
+    geom_xribbon(data = boron_pred,
+                 aes_string(xmin = "lcl", xmax = "ucl", y = "prop"))
+
   expect_is(gp, "ggplot")
 })

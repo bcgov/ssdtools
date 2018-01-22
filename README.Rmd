@@ -74,8 +74,9 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          ylab = "Concentration (mg/L)")
 ```
 
-For more information and examples of how to use `ssdca` in conjuction with `fitdistrplus` and `ggplot2` to 
-assess alternative fits and produce custom plots is described in the vignette `ssdca`.
+For more information and examples of how to use `ssdca` in conjuction with `fitdistrplus` to
+assess alternative fits and deal with weighted and censored data see the vignette `ssdca`.
+The vignette also demonstrates how to use `ssdca` in conjunction with `ggplot2` to produce custom plots.
 
 A shiny webpage is being developed for non-users of R.
 
