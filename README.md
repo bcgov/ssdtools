@@ -97,7 +97,7 @@ ssd_hc5(boron_dists)
 #> # A tibble: 1 x 5
 #>    prop      est        se       lcl      ucl
 #>   <dbl>    <dbl>     <dbl>     <dbl>    <dbl>
-#> 1  0.05 1.250715 0.7374561 0.6071799 3.236181
+#> 1  0.05 1.250715 0.7267972 0.6105961 3.155407
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -118,8 +118,10 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
 ![](tools/README-unnamed-chunk-10-1.png)<!-- -->
 
 For more information and examples of how to use `ssdca` in conjuction
-with `fitdistrplus` and `ggplot2` to assess alternative fits and produce
-custom plots is described in the vignette `ssdca`.
+with `fitdistrplus` to assess alternative fits and deal with weighted
+and censored data see the vignette `ssdca`. The vignette also
+demonstrates how to use `ssdca` in conjunction with `ggplot2` to produce
+custom plots.
 
 A shiny webpage is being developed for non-users of R.
 
