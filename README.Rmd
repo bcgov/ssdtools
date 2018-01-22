@@ -23,11 +23,23 @@ It is being developed for the B.C. Ministry of Environment by [Poisson Consultin
 
 ## Installation
 
-To install the latest version:
+To quickly install the latest version:
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("bcgov/ssdca")
+```
+
+To install the latest version and build its vignette:
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("bcgov/ssdca", force = TRUE, build_vignettes = TRUE)
+```
+
+To view the vignette
+```{r, eval = FALSE}
+vignette("ssdca")
 ```
 
 ## Introduction

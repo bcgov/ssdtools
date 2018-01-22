@@ -155,9 +155,9 @@ ssd_plot(fluazinam, fluazinam_pred,
 
 ## ggplot Geoms
 
-The `sscda` package provides four ggplot geoms to allow you construct your own plots.
-They are `geom_ssd()` to plot the original data, `geom_fitdist()` to plot a model fit,  
-`geom_hc5()` to plot the $HC_5$, and `geom_xribbon()` to plot the confidence intervals.
+The `sscda` package provides three ggplot geoms to allow you construct your own plots.
+They are `geom_ssd()` to plot the original data, 
+`geom_hc5()` to plot the $HC_5$ and `geom_xribbon()` to plot the confidence intervals.
 
 They can be used as follows
 
