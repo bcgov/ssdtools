@@ -1,9 +1,9 @@
 Package: ssdca
 Title: Species Sensitivity Distributions
-Version: 0.0.0.9012
-Date: 2018-01-22
+Version: 0.0.0.9013
+Date: 2018-01-25
 Authors@R: c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre")),
-             person("Carl", "Scharwz", role = "aut"),
+             person("Carl", "Schwarz", role = "aut"),
              person("Angeline", "Tillmanns", role = "ctb"))
 Description: Fits and plots species sensitivity distributions.
 License: Apache License (== 2.0) | file LICENSE
@@ -31,7 +31,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat
-Additional_Repositories: http://poissonconsulting.github.io/drat
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
