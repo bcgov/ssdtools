@@ -17,11 +17,24 @@ Data. It is being developed for the B.C. Ministry of Environment by
 
 ## Installation
 
-To install the latest version:
+To quickly install the latest version:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("bcgov/ssdca")
+```
+
+To install the latest version and build its vignette:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("bcgov/ssdca", force = TRUE, build_vignettes = TRUE)
+```
+
+To view the vignette
+
+``` r
+vignette("ssdca")
 ```
 
 ## Introduction
@@ -45,18 +58,18 @@ library(ssdca)
 ``` r
 boron_data
 #> # A tibble: 28 x 5
-#>    Chemical                 Species  Conc        Group Units
-#>       <chr>                   <chr> <dbl>       <fctr> <chr>
-#>  1    Boron     Oncorhynchus mykiss   2.1         Fish  mg/L
-#>  2    Boron     Ictalurus punctatus   2.4         Fish  mg/L
-#>  3    Boron   Micropterus salmoides   4.1         Fish  mg/L
-#>  4    Boron       Brachydanio rerio  10.0         Fish  mg/L
-#>  5    Boron       Carassius auratus  15.6         Fish  mg/L
-#>  6    Boron     Pimephales promelas  18.3         Fish  mg/L
-#>  7    Boron           Daphnia magna   6.0 Invertebrate  mg/L
-#>  8    Boron Opercularia bimarginata  10.0 Invertebrate  mg/L
-#>  9    Boron      Ceriodaphnia dubia  13.4 Invertebrate  mg/L
-#> 10    Boron     Entosiphon sulcatum  15.0 Invertebrate  mg/L
+#>    Chemical Species                  Conc Group        Units
+#>    <chr>    <chr>                   <dbl> <fct>        <chr>
+#>  1 Boron    Oncorhynchus mykiss      2.10 Fish         mg/L 
+#>  2 Boron    Ictalurus punctatus      2.40 Fish         mg/L 
+#>  3 Boron    Micropterus salmoides    4.10 Fish         mg/L 
+#>  4 Boron    Brachydanio rerio       10.0  Fish         mg/L 
+#>  5 Boron    Carassius auratus       15.6  Fish         mg/L 
+#>  6 Boron    Pimephales promelas     18.3  Fish         mg/L 
+#>  7 Boron    Daphnia magna            6.00 Invertebrate mg/L 
+#>  8 Boron    Opercularia bimarginata 10.0  Invertebrate mg/L 
+#>  9 Boron    Ceriodaphnia dubia      13.4  Invertebrate mg/L 
+#> 10 Boron    Entosiphon sulcatum     15.0  Invertebrate mg/L 
 #> # ... with 18 more rows
 ```
 
@@ -73,21 +86,21 @@ theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
 ```
 
-![](tools/README-unnamed-chunk-6-1.png)<!-- -->
+![](tools/README-unnamed-chunk-8-1.png)<!-- -->
 
 The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(boron_dists)
 #> # A tibble: 6 x 7
-#>       dist        ad         ks        cvm      aic     aicc      bic
-#>      <chr>     <dbl>      <dbl>      <dbl>    <dbl>    <dbl>    <dbl>
-#> 1    lnorm 0.5070335 0.10651430 0.07033164 239.0284 239.5084 241.6928
-#> 2     llog 0.4870694 0.09934088 0.05950233 241.0149 241.4949 243.6793
-#> 3 gompertz 0.6019603 0.12018789 0.08222022 237.6112 238.0912 240.2756
-#> 4  lgumbel 0.8286390 0.15826649 0.13401800 244.1860 244.6660 246.8504
-#> 5    gamma 0.4409319 0.11691481 0.05550569 237.6303 238.1103 240.2947
-#> 6  weibull 0.4346273 0.11697580 0.05426727 237.6253 238.1053 240.2897
+#>   dist        ad     ks    cvm   aic  aicc   bic
+#>   <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl>
+#> 1 lnorm    0.507 0.107  0.0703   239   240   242
+#> 2 llog     0.487 0.0993 0.0595   241   241   244
+#> 3 gompertz 0.602 0.120  0.0822   238   238   240
+#> 4 lgumbel  0.829 0.158  0.134    244   245   247
+#> 5 gamma    0.441 0.117  0.0555   238   238   240
+#> 6 weibull  0.435 0.117  0.0543   238   238   240
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
@@ -95,9 +108,9 @@ and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
 ``` r
 ssd_hc5(boron_dists)
 #> # A tibble: 1 x 5
-#>    prop      est        se       lcl      ucl
-#>   <dbl>    <dbl>     <dbl>     <dbl>    <dbl>
-#> 1  0.05 1.250715 0.7267972 0.6105961 3.155407
+#>     prop   est    se   lcl   ucl
+#>    <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1 0.0500  1.25 0.741 0.603  3.24
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -115,7 +128,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          ylab = "Concentration (mg/L)")
 ```
 
-![](tools/README-unnamed-chunk-10-1.png)<!-- -->
+![](tools/README-unnamed-chunk-12-1.png)<!-- -->
 
 For more information and examples of how to use `ssdca` in conjuction
 with `fitdistrplus` to assess alternative fits and deal with weighted
