@@ -73,6 +73,11 @@ ssd_gof(boron_dists)
 ```
 For interpretation of the values see Schwarz and Tillmanns (2017).
 
+A subset of distributions from a `fitdists` can be selected using the subset function.
+```r
+subset(boron_dists, select = c("gamma", "weibull"))
+```
+
 ## Plotting Fits
 
 The actual fits can be plotted using the ggplot generic `autoplot`.
@@ -83,7 +88,7 @@ autoplot(boron_dists)
 As `autoplot` returns a `ggplot` object it can be modified prior to plotting, 
 which is extremely useful.
 ```{r, fig.width = 5 }
-autoplot(boron_dists) + theme_bw()
+autoplot(boron_dists) + theme_bw() + ggtitle("Species Sensitivity Distributions for Boron")
 ```
 
 ## 5% Hazard Concentration
