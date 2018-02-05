@@ -26,11 +26,25 @@ The `ssdca` package fits and plots Species Sensitivity Distributions.
 This vignette describes how to use `ssdca` in conjunction with 
 the `fitdistrplus` and `ggplot2` packages, which it installs and extends.
 
+## Inputting Data
+
+Data can be input from excel spreadsheets using `readxl::read_excel()` 
+and from csv files using `readr::read_csv()`.
+
+## Cullen Frey Plots
+
+The data can be visualized using a cullen frey plot of the skewness and kurtosis.
+Here we plot species sensitivity data for Boron.
+
+```{r, fig.width = 5, fig.height = 5}
+ssd_cfplot(boron_data)
+```
+
 ## Fitting Distributions
 
 The function `ssd_fit_dists()` inputs a data frame (with the concentration values, 
 by default, in the `Conc` column) and fits one or more distributions.
-Here we fit the log-normal and weibull distributions to species sensitivity data for Boron.
+Here we fit the log-normal and weibull distributions to the Boron data.
 ```{r}
 library(ssdca)
 boron_data
@@ -85,7 +99,7 @@ To return the individual $HC_5$ estimates and their respective Akaike's Weights 
 ```{r}
 ssd_hc5(boron_dists, average = FALSE)
 ```
-For interpretation of the values see Schwarz and Tillmanns (2017).
+For interpretation of the values see Schwarz and Tillmanns (in prep.).
 
 ## Predictions
 
@@ -106,7 +120,8 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          ylab = "Concentration (mg/L)") + 
   expand_limits(x = 5000) + # to ensure the species labels fit
   scale_color_manual(values = c("Amphibian" = "Black", "Fish" = "Blue", 
-                                "Invertebrate" = "Red", "Plant" = "Brown"))
+                                "Invertebrate" = "Red", "Plant" = "Brown")) +
+  ggtitle("Species Sensitivity for Boron")
 ```
 
 Once again the returned object is a `ggplot` object which can be customized prior to plotting.
@@ -137,7 +152,7 @@ head(fluazinam)
 ```
 
 There are less goodness-of-fit statistics available for
-fits to censored data.
+fits to censored data (currently just aic and bic).
 ```{r}
 fluazinam_dists <- ssd_fit_dists(fluazinam)
 ssd_gof(fluazinam_dists)
@@ -153,7 +168,7 @@ ssd_plot(fluazinam, fluazinam_pred,
          ylab = "Concentration (mg/L)")
 ```
 
-## ggplot Geoms
+## Extending ggplot
 
 The `sscda` package provides three ggplot geoms to allow you construct your own plots.
 They are `geom_ssd()` to plot the original data, 
@@ -176,4 +191,10 @@ gp <- gp + coord_trans(x = "log10") +
   scale_x_continuous(breaks = scales::trans_breaks("log10", function(x) 10^x),
                      labels = comma_signif)
 print(gp)
+```
+
+The current plot can be saved as a file using `ggsave()`,
+which also allows the user to set the resolution.
+```r
+ggsave("file_name.png", dpi = 600)
 ```
