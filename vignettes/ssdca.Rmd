@@ -92,14 +92,19 @@ Typically, species sensitivity distributions are fitted to estimate the 5% hazar
 This is the concentration that affects just 5% of the species tested.
 The model-averaged $HC_5$ estimate (with 95% confidence limits) can be calculated as follows
 ```{r}
-ssd_hc5(boron_dists)
+ssd_hc(boron_dists)
 ```
 By default model averaging is based on the Akaike's Weights corrected for small sample size.
 To return the individual $HC_5$ estimates and their respective Akaike's Weights set `average = FALSE`
 ```{r}
-ssd_hc5(boron_dists, average = FALSE)
+ssd_hc(boron_dists, average = FALSE)
 ```
 For interpretation of the values see Schwarz and Tillmanns (in prep.).
+
+To get the $HC_50$ estimates use
+```{r}
+ssd_hc(boron_dists, hc = 0.5)
+```
 
 ## Predictions
 
@@ -172,7 +177,7 @@ ssd_plot(fluazinam, fluazinam_pred,
 
 The `sscda` package provides three ggplot geoms to allow you construct your own plots.
 They are `geom_ssd()` to plot the original data, 
-`geom_hc5()` to plot the $HC_5$ and `geom_xribbon()` to plot the confidence intervals.
+`geom_hc()` to plot the hazard concentration and `geom_xribbon()` to plot the confidence intervals.
 
 They can be used as follows
 
@@ -180,7 +185,7 @@ They can be used as follows
 gp <- ggplot(boron_pred, aes_string(x = "est")) + 
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.2) +
   geom_line(aes_string(y = "prop")) +
-  geom_hc5(xintercept = boron_pred$est[boron_pred$prop == 0.05]) +
+  geom_hc(xintercept = boron_pred$est[boron_pred$prop == 0.05]) +
   geom_ssd(data = boron_data, aes_string(x = "Conc"))
 print(gp)
 ```    

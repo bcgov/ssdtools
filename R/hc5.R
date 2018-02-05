@@ -12,52 +12,57 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' 5\% Hazard Concentration
+#' Hazard Concentration
 #'
 #' Estimates with bootstrap confidence intervals the hazard concentration
-#' at which 5\% of the species are affected.
+#' at which by default 5\% of the species are affected.
 #'
 #' @param x The object.
+#' @param hc A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).
 #' @param ... Unused.
 #' @inheritParams predict.fitdists
 #' @return A data frame of the estimate with the standard error and upper and lower confidence intervals.
 #' @export
-ssd_hc5 <- function(x, ...) {
-  UseMethod("ssd_hc5")
+ssd_hc <- function(x, ...) {
+  UseMethod("ssd_hc")
 }
 
-#' @describeIn ssd_hc5 5\% Hazard Concentration
+#' @describeIn ssd_hc Hazard Concentration
 #' @export
 #' @examples
-#' ssd_hc5(boron_lnorm)
-ssd_hc5.fitdist <- function(x, level = 0.95, ...) {
-  predict(x, props = 0.05, level = level)
+#' ssd_hc(boron_lnorm)
+ssd_hc.fitdist <- function(x, hc = 0.05, level = 0.95, ...) {
+  check_probability(hc)
+  predict(x, props = hc, level = level)
 }
 
-#' @describeIn ssd_hc5 5\% Hazard Concentration
+#' @describeIn ssd_hc Hazard Concentration
 #' @export
 #' @examples
-#' ssd_hc5(fluazinam_lnorm)
-ssd_hc5.fitdistcens <- function(x, level = 0.95, ...) {
-  predict(x, props = 0.05, level = level)
+#' ssd_hc(fluazinam_lnorm)
+ssd_hc.fitdistcens <- function(x, hc = 0.05, level = 0.95, ...) {
+  check_probability(hc)
+  predict(x, props = hc, level = level)
 }
 
-#' @describeIn ssd_hc5 5\% Hazard Concentration
-#' @export
-#' @examples
-#' \dontrun{
-#' ssd_hc5(boron_dists)
-#' }
-ssd_hc5.fitdists <- function(x, ic = "aicc", average = TRUE, level = 0.95, ...) {
-    predict(x, props = 0.05, ic = ic, average = average, level = level)
-}
-
-#' @describeIn ssd_hc5 5\% Hazard Concentration
+#' @describeIn ssd_hc Hazard Concentration
 #' @export
 #' @examples
 #' \dontrun{
-#' ssd_hc5(fluazinam_dists)
+#' ssd_hc(boron_dists)
 #' }
-ssd_hc5.fitdistscens <- function(x, ic = "aic", average = TRUE, level = 0.95, ...) {
-    predict(x, props = 0.05, ic = ic, average = average, level = level)
+ssd_hc.fitdists <- function(x, hc = 0.05, ic = "aicc", average = TRUE, level = 0.95, ...) {
+  check_probability(hc)
+  predict(x, props = hc, ic = ic, average = average, level = level)
+}
+
+#' @describeIn ssd_hc  Hazard Concentration
+#' @export
+#' @examples
+#' \dontrun{
+#' ssd_hc(fluazinam_dists)
+#' }
+ssd_hc.fitdistscens <- function(x, hc = 0.05, ic = "aic", average = TRUE, level = 0.95, ...) {
+  check_probability(hc)
+  predict(x, props = hc, ic = ic, average = average, level = level)
 }

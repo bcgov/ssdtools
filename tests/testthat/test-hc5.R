@@ -12,10 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("hc5")
+context("hc")
 
-test_that("ssd_hc5", {
-  x <- ssd_hc5(boron_lnorm)
+test_that("ssd_hc", {
+  x <- ssd_hc(boron_lnorm)
   expect_is(x, "tbl")
   expect_identical(colnames(x), c("prop", "est", "se", "lcl", "ucl"))
   expect_identical(x$prop, 0.05)

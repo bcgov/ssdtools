@@ -103,14 +103,14 @@ ssd_gof(boron_dists)
 #> 6 weibull  0.435 0.117  0.0543   238   238   240
 ```
 
-and the model-averaged 5% hazard concentration estimated using `ssd_hc5`
+and the model-averaged 5% hazard concentration estimated using `ssd_hc`
 
 ``` r
-ssd_hc5(boron_dists)
+ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>     prop   est    se   lcl   ucl
 #>    <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 0.0500  1.25 0.737 0.617  3.19
+#> 1 0.0500  1.25 0.725 0.627  3.19
 ```
 
 Model-averaged predictions complete with confidence intervals can be

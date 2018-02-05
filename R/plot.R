@@ -66,8 +66,8 @@ GeomSsdcens <- ggplot2::ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomHc5 <- ggproto(
-  "GeomHc5", Geom,
+GeomHc <- ggproto(
+  "GeomHc", Geom,
   draw_panel = function(data, panel_params, coord) {
 
     pieces <- data.frame(x = c(0.0001, data$xintercept, data$xintercept),
@@ -203,21 +203,21 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
   )
 }
 
-#' Hazard Concentration Fifth Percentile Plot
+#' Hazard Concentration Percentile Plot
 #'
-#' For each x value, `geom_hc5()` displays the Hazard Concentration 5% level.
-#' The user must provide `xintercept` which is the concentration
-#' for the fifth percentile - it can be estimated using `ssd_hc5()`.
+#' For each x value, `geom_hc()` displays the Hazard Concentration.
+#' The user must provide `xintercept` which is the concentration -
+#' it can be estimated using `ssd_hc()`.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path
-#' @param xintercept The x-value for the fifth percentile.
+#' @param xintercept The x-value for the percentile.
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssd() +
-#'   geom_hc5(xintercept = 1.5)
-geom_hc5 <- function(mapping = NULL, data = NULL, xintercept,
+#'   geom_hc(xintercept = 1.5)
+geom_hc <- function(mapping = NULL, data = NULL, xintercept,
                      na.rm = FALSE, show.legend = NA, ...) {
 
   if (!missing(xintercept)) {
@@ -227,7 +227,7 @@ geom_hc5 <- function(mapping = NULL, data = NULL, xintercept,
   }
 
   layer(
-    geom = GeomHc5,  data = data, mapping = mapping, stat = StatIdentity,
+    geom = GeomHc,  data = data, mapping = mapping, stat = StatIdentity,
     position = PositionIdentity, show.legend = show.legend, inherit.aes = FALSE,
     params = list(na.rm = na.rm, ...)
   )
@@ -249,18 +249,18 @@ plot.fitdists <- function(x, breaks = "default", ...) {
 #'
 #' @param object The object to plot.
 #' @param ci A flag indicating wether to plot confidence intervals
-#' @param hc5 A flag indicating whether to plot the HC5.
+#' @param hc A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).
 #' @param xlab A string of the x-axis label.
 #' @param ylab A string of the x-axis label.
 #' @param ... Unused.
 #' @export
 #' @examples
 #' autoplot(boron_lnorm)
-autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
+autoplot.fitdist <- function(object, ci = FALSE, hc = 0.05,
                              xlab = "Concentration", ylab = "Species Affected",
                              ...) {
   check_flag(ci)
-  check_flag(hc5)
+  checkor(check_null(hc), check_probability(hc))
   check_string(xlab)
   check_string(ylab)
 
@@ -276,7 +276,7 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(hc5) gp <- gp + geom_hc5(xintercept = pred$est[pred$prop == 0.05], linetype = "dotted")
+  if(!is.null(hc)) gp <- gp + geom_hc(xintercept = pred$est[pred$prop == round(hc, 2)], linetype = "dotted")
   gp
 }
 
@@ -288,11 +288,11 @@ autoplot.fitdist <- function(object, ci = FALSE, hc5 = TRUE,
 #' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 #' fluazinam_lnorm$censdata$left[5] <- NA
 #' autoplot(fluazinam_lnorm)
-autoplot.fitdistcens <- function(object, ci = FALSE, hc5 = TRUE,
+autoplot.fitdistcens <- function(object, ci = FALSE, hc = 0.05,
                                  xlab = "Concentration", ylab = "Species Affected",
                                  ...) {
   check_flag(ci)
-  check_flag(hc5)
+  checkor(check_null(hc), check_probability(hc))
   check_string(xlab)
   check_string(ylab)
 
@@ -329,7 +329,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc5 = TRUE,
                aes_string(x = "xmax", y = "y")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(hc5) gp <- gp + geom_hc5(xintercept = pred$est[pred$prop == 0.05], linetype = "dotted")
+  if(!is.null(hc)) gp <- gp + geom_hc(xintercept = pred$est[pred$prop == round(hc, 2)], linetype = "dotted")
   gp
 }
 
@@ -391,7 +391,7 @@ autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Specie
 ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
-                     ci = TRUE, hc5 = TRUE, shift_x = 3) {
+                     ci = TRUE, hc = 0.05, shift_x = 3) {
   check_data(data)
   check_data(pred,
              values = list(
@@ -407,7 +407,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   checkor(check_string(label), check_null(label))
   checkor(check_string(shape), check_null(shape))
   check_flag(ci)
-  check_flag(hc5)
+  checkor(check_null(hc), check_probability(hc))
 
   check_colnames(data, unique(c(left, right, label, shape)))
 
@@ -419,8 +419,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     check_colnames(data, label)
     data <- data[order(data[[label]]),]
   }
-  gp <- gp + geom_line(aes_string(y = "prop")) +
-    geom_hc5(data = data, xintercept = pred$est[pred$prop == 0.05])
+  gp <- gp + geom_line(aes_string(y = "prop"))
+
+  if(!is.null(hc))
+    gp <- gp + geom_hc(data = data, xintercept = pred$est[pred$prop == round(hc, 2)])
 
   if(left == right) {
     gp <- gp + geom_ssd(data = data, aes_string(x = left, shape = shape,
