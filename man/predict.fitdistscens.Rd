@@ -4,13 +4,13 @@
 \alias{predict.fitdistscens}
 \title{Predict Censored fitdists}
 \usage{
-\method{predict}{fitdistscens}(object, props = seq(0.01, 0.99, by = 0.01),
-  nboot = 1001, ic = "aic", average = TRUE, level = 0.95, ...)
+\method{predict}{fitdistscens}(object, percent = 1:99, nboot = 1001,
+  ic = "aic", average = TRUE, level = 0.95, ...)
 }
 \arguments{
 \item{object}{The object.}
 
-\item{props}{A numeric vector of the densities to calculate the estimated concentrations for.}
+\item{percent}{A numeric vector of the densities to calculate the estimated concentrations for.}
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 

@@ -56,7 +56,7 @@
 #'
 #' @format A tbl data frame:
 #' \describe{
-#'   \item{prop}{The proportion of species affected <dbl>.}
+#'   \item{percent}{The percent of species affected <int>.}
 #'   \item{est}{The estimated concentration <dbl>.}
 #'   \item{se}{The standard error of the estimate <dbl>.}
 #'   \item{lcl}{The lower confidence limit <dbl>.}
@@ -123,7 +123,7 @@
 #'
 #' @format A tbl data frame:
 #' \describe{
-#'   \item{prop}{The proportion of species affected <dbl>.}
+#'   \item{percent}{The percent of species affected <int>.}
 #'   \item{est}{The estimated concentration <dbl>.}
 #'   \item{se}{The standard error of the estimate <dbl>.}
 #'   \item{lcl}{The lower confidence limit <dbl>.}

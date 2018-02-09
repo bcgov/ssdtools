@@ -188,9 +188,9 @@ They can be used as follows
 
 ```{r, fig.width = 5, fig.height = 4}
 gp <- ggplot(boron_pred, aes_string(x = "est")) + 
-  geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.2) +
-  geom_line(aes_string(y = "prop")) +
-  geom_hc(xintercept = boron_pred$est[boron_pred$prop == 0.05]) +
+  geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2) +
+  geom_line(aes_string(y = "percent/100")) +
+  geom_hc(xintercept = boron_pred$est[boron_pred$percent == 5]) +
   geom_ssd(data = boron_data, aes_string(x = "Conc"))
 print(gp)
 ```    

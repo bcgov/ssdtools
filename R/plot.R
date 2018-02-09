@@ -270,13 +270,13 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 0.05,
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.3)
+  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.3)
 
-  gp <- gp + geom_line(aes_string(y = "prop")) +
+  gp <- gp + geom_line(aes_string(y = "percent")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(!is.null(hc)) gp <- gp + geom_hc(xintercept = pred$est[pred$prop == round(hc, 2)], linetype = "dotted")
+  if(!is.null(hc)) gp <- gp + geom_hc(xintercept = pred$est[pred$percent == round(hc, 2)], linetype = "dotted")
   gp
 }
 
@@ -309,13 +309,13 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 0.05,
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.3)
+  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.3)
 
   arrow <- arrow(length = unit(0.1, "inches"))
 
   print(data)
 
-  gp <- gp + geom_line(aes_string(y = "prop")) +
+  gp <- gp + geom_line(aes_string(y = "percent")) +
     geom_segment(data = data[data$xmin != data$xmax,],
                  aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")) +
     geom_segment(data = data[is.na(data$left),],
@@ -329,7 +329,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 0.05,
                aes_string(x = "xmax", y = "y")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(!is.null(hc)) gp <- gp + geom_hc(xintercept = pred$est[pred$prop == round(hc, 2)], linetype = "dotted")
+  if(!is.null(hc)) gp <- gp + geom_hc(xintercept = pred$est[pred$percent == round(hc, 2)], linetype = "dotted")
   gp
 }
 
@@ -352,7 +352,7 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Af
   data <- data.frame(x = object[[1]]$data)
 
   gp <- ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(y = "prop", color = "Distribution",
+    geom_line(aes_string(y = "percent", color = "Distribution",
                          linetype = "Distribution")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
@@ -395,7 +395,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   check_data(data)
   check_data(pred,
              values = list(
-               prop = c(0,1),
+               percent = 1:99,
                est = 1,
                lcl = 1,
                ucl = 1))
@@ -413,16 +413,16 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "prop"), alpha = 0.2)
+  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
 
   if(!is.null(label)) {
     check_colnames(data, label)
     data <- data[order(data[[label]]),]
   }
-  gp <- gp + geom_line(aes_string(y = "prop"))
+  gp <- gp + geom_line(aes_string(y = "percent"))
 
   if(!is.null(hc))
-    gp <- gp + geom_hc(data = data, xintercept = pred$est[pred$prop == round(hc, 2)])
+    gp <- gp + geom_hc(data = data, xintercept = pred$est[pred$percent == round(hc, 2)])
 
   if(left == right) {
     gp <- gp + geom_ssd(data = data, aes_string(x = left, shape = shape,
@@ -437,7 +437,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 
     arrow <- arrow(length = unit(0.1, "inches"))
 
-    gp <- gp + geom_line(aes_string(y = "prop")) +
+    gp <- gp + geom_line(aes_string(y = "percent")) +
       geom_segment(data = data[data$xmin != data$xmax,],
                    aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")) +
       geom_segment(data = data[is.na(data$left),],
@@ -453,9 +453,9 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
   if(!is.null(label)) {
-    data$prop <- ssd_ecd(data[[left]])
+    data$percent <- ssd_ecd(data[[left]])
     data[[left]] %<>% magrittr::multiply_by(shift_x)
-    gp <- gp + geom_text(data = data, aes_string(x = left, y = "prop", label = label),
+    gp <- gp + geom_text(data = data, aes_string(x = left, y = "percent", label = label),
                          color = "grey50", hjust = 0, size = size)
   }
 

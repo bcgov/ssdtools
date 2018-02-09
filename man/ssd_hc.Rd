@@ -10,14 +10,14 @@
 \usage{
 ssd_hc(x, ...)
 
-\method{ssd_hc}{fitdist}(x, hc = 0.05, level = 0.95, ...)
+\method{ssd_hc}{fitdist}(x, hc = 5L, level = 0.95, ...)
 
-\method{ssd_hc}{fitdistcens}(x, hc = 0.05, level = 0.95, ...)
+\method{ssd_hc}{fitdistcens}(x, hc = 5L, level = 0.95, ...)
 
-\method{ssd_hc}{fitdists}(x, hc = 0.05, ic = "aicc", average = TRUE,
+\method{ssd_hc}{fitdists}(x, hc = 5L, ic = "aicc", average = TRUE,
   level = 0.95, ...)
 
-\method{ssd_hc}{fitdistscens}(x, hc = 0.05, ic = "aic", average = TRUE,
+\method{ssd_hc}{fitdistscens}(x, hc = 5L, ic = "aic", average = TRUE,
   level = 0.95, ...)
 }
 \arguments{

@@ -31,18 +31,18 @@ ssd_hc <- function(x, ...) {
 #' @export
 #' @examples
 #' ssd_hc(boron_lnorm)
-ssd_hc.fitdist <- function(x, hc = 0.05, level = 0.95, ...) {
-  check_probability(hc)
-  predict(x, props = hc, level = level)
+ssd_hc.fitdist <- function(x, hc = 5L, level = 0.95, ...) {
+  check_vector(hc, c(1L,99L), length = 1)
+ predict(x, percent = hc, level = level)
 }
 
 #' @describeIn ssd_hc Hazard Concentration
 #' @export
 #' @examples
 #' ssd_hc(fluazinam_lnorm)
-ssd_hc.fitdistcens <- function(x, hc = 0.05, level = 0.95, ...) {
-  check_probability(hc)
-  predict(x, props = hc, level = level)
+ssd_hc.fitdistcens <- function(x, hc = 5L, level = 0.95, ...) {
+  check_vector(hc, c(1L,99L), length = 1)
+  predict(x, percent = hc, level = level)
 }
 
 #' @describeIn ssd_hc Hazard Concentration
@@ -51,9 +51,9 @@ ssd_hc.fitdistcens <- function(x, hc = 0.05, level = 0.95, ...) {
 #' \dontrun{
 #' ssd_hc(boron_dists)
 #' }
-ssd_hc.fitdists <- function(x, hc = 0.05, ic = "aicc", average = TRUE, level = 0.95, ...) {
-  check_probability(hc)
-  predict(x, props = hc, ic = ic, average = average, level = level)
+ssd_hc.fitdists <- function(x, hc = 5L, ic = "aicc", average = TRUE, level = 0.95, ...) {
+  check_vector(hc, c(1L,99L), length = 1)
+  predict(x, percent = hc, ic = ic, average = average, level = level)
 }
 
 #' @describeIn ssd_hc  Hazard Concentration
@@ -62,7 +62,7 @@ ssd_hc.fitdists <- function(x, hc = 0.05, ic = "aicc", average = TRUE, level = 0
 #' \dontrun{
 #' ssd_hc(fluazinam_dists)
 #' }
-ssd_hc.fitdistscens <- function(x, hc = 0.05, ic = "aic", average = TRUE, level = 0.95, ...) {
-  check_probability(hc)
-  predict(x, props = hc, ic = ic, average = average, level = level)
+ssd_hc.fitdistscens <- function(x, hc = 5L, ic = "aic", average = TRUE, level = 0.95, ...) {
+  check_vector(hc, c(1L,99L), length = 1)
+  predict(x, percent = hc, ic = ic, average = average, level = level)
 }

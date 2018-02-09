@@ -30,7 +30,7 @@ test_that("plot", {
     geom_ssd() +
     geom_hc(xintercept = 1) +
     geom_xribbon(data = boron_pred,
-                 aes_string(xmin = "lcl", xmax = "ucl", y = "prop"))
+                 aes_string(xmin = "lcl", xmax = "ucl", y = "percent"))
 
   expect_is(gp, "ggplot")
 })

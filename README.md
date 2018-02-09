@@ -84,6 +84,9 @@ and plot using the `ggplot2` generic `autoplot`
 ``` r
 theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
+#> Warning: Removed 588 rows containing missing values (geom_path).
+#> geom_path: Each group consists of only one observation. Do you need to
+#> adjust the group aesthetic?
 ```
 
 ![](tools/README-unnamed-chunk-8-1.png)<!-- -->
@@ -97,7 +100,7 @@ ssd_gof(boron_dists)
 #>   <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl>
 #> 1 lnorm    0.507 0.107  0.0703   239   240   242
 #> 2 llog     0.487 0.0993 0.0595   241   241   244
-#> 3 gompertz 0.602 0.120  0.0822   238   238   240
+#> 3 gompertz 0.602 0.120  0.0823   238   238   240
 #> 4 lgumbel  0.829 0.158  0.134    244   245   247
 #> 5 gamma    0.441 0.117  0.0555   238   238   240
 #> 6 weibull  0.435 0.117  0.0543   238   238   240
@@ -107,10 +110,20 @@ and the model-averaged 5% hazard concentration estimated using `ssd_hc`
 
 ``` r
 ssd_hc(boron_dists)
-#> # A tibble: 1 x 5
-#>     prop   est    se   lcl   ucl
-#>    <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 0.0500  1.25 0.725 0.627  3.19
+#> # A tibble: 99 x 5
+#>    percent   est    se   lcl   ucl
+#>      <int> <dbl> <dbl> <dbl> <dbl>
+#>  1       1 0.304 0.344 0.127  1.09
+#>  2       2 0.544 0.468 0.239  1.70
+#>  3       3 0.780 0.570 0.355  2.24
+#>  4       4 1.01  0.660 0.478  2.74
+#>  5       5 1.25  0.744 0.606  3.21
+#>  6       6 1.49  0.823 0.736  3.68
+#>  7       7 1.73  0.899 0.871  4.16
+#>  8       8 1.97  0.972 1.01   4.61
+#>  9       9 2.21  1.04  1.15   5.06
+#> 10      10 2.46  1.11  1.30   5.51
+#> # ... with 89 more rows
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -126,6 +139,9 @@ and plotted together with the original data using
 ``` r
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
          ylab = "Concentration (mg/L)")
+#> Warning: Removed 98 rows containing missing values (geom_path).
+#> geom_path: Each group consists of only one observation. Do you need to
+#> adjust the group aesthetic?
 ```
 
 ![](tools/README-unnamed-chunk-12-1.png)<!-- -->
