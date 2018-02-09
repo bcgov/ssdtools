@@ -16,12 +16,12 @@
 #'
 #' Returns a tbl data frame with the following columns
 #' \describe{
+#'   \item{dist}{The distribution name (chr)}
 #'   \item{aic}{Akaike's Information Criterion (dbl)}
-#'   \item{bic}{Bayesion Information Criterion (dbl)}
+#'   \item{bic}{Bayesian Information Criterion (dbl)}
 #' }
 #' and if the data are non-censored
 #' \describe{
-#'   \item{dist}{The distribution name (chr)}
 #'   \item{ad}{Anderson-Darling statistic (dbl)}
 #'   \item{ks}{Kolmogorov-Smirnov statistic (dbl)}
 #'   \item{cvm}{Cramer-von Mises statistic (dbl)}

@@ -26,6 +26,9 @@ test_that("fit_dists", {
   dists <- ssd_fit_dists(boron_data, dists = dist_names)
   expect_true(is.fitdists(dists))
   expect_identical(names(dists), dist_names)
+  coef <- stats::coef(dists)
+  expect_identical(names(coef), dist_names)
+#  expect_equal(coef$burr, c(shape1 = 1, shape2 = 2, rate = 3))
 })
 
 test_that("fit_dist", {
