@@ -10,15 +10,15 @@
 \usage{
 ssd_hc(x, ...)
 
-\method{ssd_hc}{fitdist}(x, hc = 5L, level = 0.95, ...)
+\method{ssd_hc}{fitdist}(x, hc = 5L, nboot = 1001, level = 0.95, ...)
 
-\method{ssd_hc}{fitdistcens}(x, hc = 5L, level = 0.95, ...)
+\method{ssd_hc}{fitdistcens}(x, hc = 5L, nboot = 1001, level = 0.95, ...)
 
 \method{ssd_hc}{fitdists}(x, hc = 5L, ic = "aicc", average = TRUE,
-  level = 0.95, ...)
+  nboot = 1001, level = 0.95, ...)
 
 \method{ssd_hc}{fitdistscens}(x, hc = 5L, ic = "aic", average = TRUE,
-  level = 0.95, ...)
+  nboot = 1001, level = 0.95, ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -26,6 +26,8 @@ ssd_hc(x, ...)
 \item{...}{Unused.}
 
 \item{hc}{A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).}
+
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
 \item{level}{The confidence level.}
 

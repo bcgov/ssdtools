@@ -58,6 +58,7 @@ predict.fitdistcens <- function(object, percent = 1:99,
                           unique = TRUE)
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
+
   boot <- bootdistcens(object, niter = nboot)
   prediction <- map_df(percent, predict_fitdist_percent, boot = boot, level = level)
   prediction
