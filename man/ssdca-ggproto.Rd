@@ -7,7 +7,7 @@
 \alias{StatSsdcens}
 \alias{GeomSsd}
 \alias{GeomSsdcens}
-\alias{GeomHc}
+\alias{GeomHcintersect}
 \alias{GeomXribbon}
 \title{Base ggproto classes for ggplot2}
 \description{

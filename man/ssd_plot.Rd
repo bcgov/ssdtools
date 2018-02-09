@@ -6,8 +6,7 @@
 \usage{
 ssd_plot(data, pred, left = "Conc", right = left, label = NULL,
   shape = NULL, color = NULL, size = 2.5, xlab = "Concentration",
-  ylab = "Percent of Species Affected", ci = TRUE, hc = 0.05,
-  shift_x = 3)
+  ylab = "Percent of Species Affected", ci = TRUE, hc = 5L, shift_x = 3)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -32,7 +31,7 @@ ssd_plot(data, pred, left = "Conc", right = left, label = NULL,
 
 \item{ci}{A flag indicating wether to plot confidence intervals}
 
-\item{hc}{A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).}
+\item{hc}{A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).}
 
 \item{shift_x}{The value to multiply the label x values by.}
 }

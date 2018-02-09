@@ -22,5 +22,5 @@
 Predict censored fitdist
 }
 \examples{
-predict(fluazinam_lnorm, percent = c(5, 50))
+predict(fluazinam_lnorm, percent = c(5L, 50L))
 }

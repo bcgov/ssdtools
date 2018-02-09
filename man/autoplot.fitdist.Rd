@@ -4,7 +4,7 @@
 \alias{autoplot.fitdist}
 \title{Autoplot}
 \usage{
-\method{autoplot}{fitdist}(object, ci = FALSE, hc = 0.05,
+\method{autoplot}{fitdist}(object, ci = FALSE, hc = 5L,
   xlab = "Concentration", ylab = "Species Affected", ...)
 }
 \arguments{
@@ -12,7 +12,7 @@
 
 \item{ci}{A flag indicating wether to plot confidence intervals}
 
-\item{hc}{A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).}
+\item{hc}{A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).}
 
 \item{xlab}{A string of the x-axis label.}
 

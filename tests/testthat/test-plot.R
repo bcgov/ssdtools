@@ -28,7 +28,7 @@ test_that("plot", {
   gp <- ggplot(boron_data, aes(x = Conc)) +
     stat_ssd() +
     geom_ssd() +
-    geom_hc(xintercept = 1) +
+    geom_hcintersect(xintercept = 1, yintercept = 0.05) +
     geom_xribbon(data = boron_pred,
                  aes_string(xmin = "lcl", xmax = "ucl", y = "percent"))
 

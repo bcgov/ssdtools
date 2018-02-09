@@ -66,19 +66,19 @@ GeomSsdcens <- ggplot2::ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomHc <- ggproto(
-  "GeomHc", Geom,
+GeomHcintersect <- ggproto(
+  "GeomHcintersect", Geom,
   draw_panel = function(data, panel_params, coord) {
 
     pieces <- data.frame(x = c(0.0001, data$xintercept, data$xintercept),
-                         y = c(0.05, 0.05, -Inf))
+                         y = c(data$yintercept, data$yintercept, -Inf))
 
     data <- cbind(data, pieces)
     GeomPath$draw_panel(data, panel_params, coord)
   },
 
   default_aes = aes(colour = "black", size = 0.5, linetype = "dotted", alpha = NA),
-  required_aes = "xintercept",
+  required_aes = c("xintercept", "yintercept"),
 
   draw_key = draw_key_path
 )
@@ -203,22 +203,21 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
   )
 }
 
-#' Hazard Concentration Percentile Plot
+#' Hazard Concentration Intersection
 #'
-#' For each x value, `geom_hc()` displays the Hazard Concentration.
-#' The user must provide `xintercept` which is the concentration -
-#' it can be estimated using `ssd_hc()`.
+#' For each x and y value, `geom_hcintersect()` plots the intersection.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path
-#' @param xintercept The x-value for the percentile.
+#' @param xintercept The x-value for the intersect
+#' @param yintercept The y-value for the intersect.
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssd() +
-#'   geom_hc(xintercept = 1.5)
-geom_hc <- function(mapping = NULL, data = NULL, xintercept,
-                     na.rm = FALSE, show.legend = NA, ...) {
+#'   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
+geom_hcintersect <- function(mapping = NULL, data = NULL, xintercept, yintercept,
+                             na.rm = FALSE, show.legend = NA, ...) {
 
   if (!missing(xintercept)) {
     data <- data.frame(xintercept = xintercept)
@@ -226,8 +225,19 @@ geom_hc <- function(mapping = NULL, data = NULL, xintercept,
     show.legend <- FALSE
   }
 
+  if (!missing(yintercept)) {
+    if(!missing(xintercept)) {
+      data$yintercept <- yintercept
+      mapping$yintercept <- yintercept
+    } else {
+      data <- data.frame(yintercept = yintercept)
+      mapping <- aes(yintercept = yintercept)
+    }
+    show.legend <- FALSE
+  }
+
   layer(
-    geom = GeomHc,  data = data, mapping = mapping, stat = StatIdentity,
+    geom = GeomHcintersect,  data = data, mapping = mapping, stat = StatIdentity,
     position = PositionIdentity, show.legend = show.legend, inherit.aes = FALSE,
     params = list(na.rm = na.rm, ...)
   )
@@ -249,18 +259,18 @@ plot.fitdists <- function(x, breaks = "default", ...) {
 #'
 #' @param object The object to plot.
 #' @param ci A flag indicating wether to plot confidence intervals
-#' @param hc A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).
+#' @param hc A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).
 #' @param xlab A string of the x-axis label.
 #' @param ylab A string of the x-axis label.
 #' @param ... Unused.
 #' @export
 #' @examples
 #' autoplot(boron_lnorm)
-autoplot.fitdist <- function(object, ci = FALSE, hc = 0.05,
+autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
                              xlab = "Concentration", ylab = "Species Affected",
                              ...) {
   check_flag(ci)
-  checkor(check_null(hc), check_probability(hc))
+  checkor(check_null(hc), check_vector(hc, 1:99, length = 1))
   check_string(xlab)
   check_string(ylab)
 
@@ -276,7 +286,7 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 0.05,
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(!is.null(hc)) gp <- gp + geom_hc(xintercept = pred$est[pred$percent == round(hc, 2)], linetype = "dotted")
+  if(!is.null(hc)) gp <- gp + geom_hcintersect(xintercept = pred$est[pred$percent == hc], yintercept = hc/100, linetype = "dotted")
   gp
 }
 
@@ -288,11 +298,11 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 0.05,
 #' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 #' fluazinam_lnorm$censdata$left[5] <- NA
 #' autoplot(fluazinam_lnorm)
-autoplot.fitdistcens <- function(object, ci = FALSE, hc = 0.05,
+autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
                                  xlab = "Concentration", ylab = "Species Affected",
                                  ...) {
   check_flag(ci)
-  checkor(check_null(hc), check_probability(hc))
+  checkor(check_null(hc), check_vector(hc, 1:99, length = 1))
   check_string(xlab)
   check_string(ylab)
 
@@ -313,8 +323,6 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 0.05,
 
   arrow <- arrow(length = unit(0.1, "inches"))
 
-  print(data)
-
   gp <- gp + geom_line(aes_string(y = "percent")) +
     geom_segment(data = data[data$xmin != data$xmax,],
                  aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")) +
@@ -329,7 +337,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 0.05,
                aes_string(x = "xmax", y = "y")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(!is.null(hc)) gp <- gp + geom_hc(xintercept = pred$est[pred$percent == round(hc, 2)], linetype = "dotted")
+  if(!is.null(hc)) gp <- gp + geom_hcintersect(xintercept = pred$est[pred$percent == hc], yintercept = hc/100, linetype = "dotted")
   gp
 }
 
@@ -352,7 +360,7 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Af
   data <- data.frame(x = object[[1]]$data)
 
   gp <- ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(y = "percent", color = "Distribution",
+    geom_line(aes_string(y = "percent/100", color = "Distribution",
                          linetype = "Distribution")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
@@ -391,7 +399,7 @@ autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Specie
 ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
-                     ci = TRUE, hc = 0.05, shift_x = 3) {
+                     ci = TRUE, hc = 5L, shift_x = 3) {
   check_data(data)
   check_data(pred,
              values = list(
@@ -407,22 +415,22 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   checkor(check_string(label), check_null(label))
   checkor(check_string(shape), check_null(shape))
   check_flag(ci)
-  checkor(check_null(hc), check_probability(hc))
+  checkor(check_null(hc), check_vector(hc, 1:99, length = 1))
 
   check_colnames(data, unique(c(left, right, label, shape)))
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
+  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2)
 
   if(!is.null(label)) {
     check_colnames(data, label)
     data <- data[order(data[[label]]),]
   }
-  gp <- gp + geom_line(aes_string(y = "percent"))
+  gp <- gp + geom_line(aes_string(y = "percent/100"))
 
   if(!is.null(hc))
-    gp <- gp + geom_hc(data = data, xintercept = pred$est[pred$percent == round(hc, 2)])
+    gp <- gp + geom_hcintersect(data = data, xintercept = pred$est[pred$percent == hc], yintercept = hc/100)
 
   if(left == right) {
     gp <- gp + geom_ssd(data = data, aes_string(x = left, shape = shape,

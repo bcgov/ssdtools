@@ -108,7 +108,7 @@ For interpretation of the values see Schwarz and Tillmanns (in prep.).
 
 To get the $HC_50$ estimates use
 ```{r}
-ssd_hc(boron_dists, hc = 0.5)
+ssd_hc(boron_dists, hc = 5L)
 ```
 
 ## Predictions
@@ -182,7 +182,7 @@ ssd_plot(fluazinam, fluazinam_pred,
 
 The `sscda` package provides three ggplot geoms to allow you construct your own plots.
 They are `geom_ssd()` to plot the original data, 
-`geom_hc()` to plot the hazard concentration and `geom_xribbon()` to plot the confidence intervals.
+`geom_hcintersect()` to plot the hazard concentration and `geom_xribbon()` to plot the confidence intervals.
 
 They can be used as follows
 
@@ -190,7 +190,7 @@ They can be used as follows
 gp <- ggplot(boron_pred, aes_string(x = "est")) + 
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2) +
   geom_line(aes_string(y = "percent/100")) +
-  geom_hc(xintercept = boron_pred$est[boron_pred$percent == 5]) +
+  geom_hcintersect(xintercept = boron_pred$est[boron_pred$percent == 5], yintercept = 5/100) +
   geom_ssd(data = boron_data, aes_string(x = "Conc"))
 print(gp)
 ```    
