@@ -48,7 +48,7 @@ Here we fit the log-normal and weibull distributions to the Boron data.
 ```{r}
 library(ssdca)
 boron_data
-boron_dists2 <- ssd_fit_dists(boron_data, dists = c("lnorm", "weibull", "burr"))
+boron_dists2 <- ssd_fit_dists(boron_data, dists = c("lnorm", "weibull"))
 boron_dists2
 ```
 

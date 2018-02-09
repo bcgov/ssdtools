@@ -31,7 +31,7 @@ Fits one or more distributions to species sensitivity data.
 By default the 'lnorm', 'llog', 'gompertz', 'lgumbel', 'gamma' and 'weibull'
 distributions are fitted to the data.
 The ssd_fit_dist and \code{\link{ssd_fit_dist}} functions have also been
-tested with the 'burr' and 'pareto' distributions.
+tested with the 'pareto' distribution.
 
 If weight specifies a column in the data frame with positive integers,
 weighted estimation occurs.

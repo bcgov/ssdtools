@@ -13,12 +13,7 @@
 #    limitations under the License.
 
 add_starting_values <- function(dist, x) {
-  if(dist$distr == "burr"){
-    dist$start <- list(shape1 = 4, shape2 = 1, rate = 1)
-    dist$method <- "mme"
-    dist$order <- 1:3
-    dist$memp  <- function (x, order){ sum(x^order) }
-  } else if(dist$dist == "gamma"){
+  if(dist$dist == "gamma"){
     dist$start <- list(scale = var(x) / mean(x),
                        shape = mean(x)^2 / var(x)^2)
   } else if(dist$distr == "gompertz"){
@@ -52,9 +47,6 @@ fit_dist_uncensored <- function(data, left, weight, dist) {
 }
 
 fit_dist_censored <- function(data, left, right, weight, dist) {
-
-  if(dist == "burr")
-    stop("distribution fitting not defined for censored data with the burr distribution because it requires moment matching estimation", call. = FALSE)
 
   x <- rowMeans(data[c(left, right)], na.rm = TRUE)
 
@@ -117,7 +109,7 @@ ssd_fit_dist <- function(
 #' By default the 'lnorm', 'llog', 'gompertz', 'lgumbel', 'gamma' and 'weibull'
 #' distributions are fitted to the data.
 #' The ssd_fit_dist and \code{\link{ssd_fit_dist}} functions have also been
-#' tested with the 'burr' and 'pareto' distributions.
+#' tested with the 'pareto' distribution.
 #'
 #' If weight specifies a column in the data frame with positive integers,
 #' weighted estimation occurs.
