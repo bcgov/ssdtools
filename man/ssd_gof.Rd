@@ -37,6 +37,13 @@ and if the data are non-censored
   \item{cvm}{Cramer-von Mises statistic (dbl)}
   \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
 }
+In the case of an object of class fitdists the function also returns
+\describe{
+  \item{delta}{The Information Criterion differences (dbl)}
+  \item{weight}{The Information Criterion weights (dbl)}
+}
+where \code{delta} and \code{weight} are based on \code{aic} for censored data
+and \code{aicc} for non-censored data.
 }
 \section{Methods (by class)}{
 \itemize{

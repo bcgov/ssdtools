@@ -27,6 +27,13 @@
 #'   \item{cvm}{Cramer-von Mises statistic (dbl)}
 #'   \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
 #' }
+#' In the case of an object of class fitdists the function also returns
+#' \describe{
+#'   \item{delta}{The Information Criterion differences (dbl)}
+#'   \item{weight}{The Information Criterion weights (dbl)}
+#' }
+#' where \code{delta} and \code{weight} are based on \code{aic} for censored data
+#' and \code{aicc} for non-censored data.
 #'
 #' @param x The object.
 #' @param ... Unused.
@@ -64,5 +71,13 @@ ssd_gof.fitdistcens <- function(x, ...) {
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdists <- function(x, ...) {
-  map_df(x, ssd_gof)
+  x %<>% map_df(ssd_gof)
+  if(!is.null(x$aicc)) {
+    x$delta <- x$aicc - min(x$aicc)
+  } else # aicc not defined for censored data
+    x$delta <- x$aic - min(x$aic)
+  x$weight <- exp(-x$delta/2)/sum(exp(-x$delta/2))
+  x$weight %<>% round(3)
+  x$delta %<>% round(3)
+  x
 }
