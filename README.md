@@ -92,15 +92,15 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(boron_dists)
-#> # A tibble: 6 x 7
-#>   dist        ad     ks    cvm   aic  aicc   bic
-#>   <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl>
-#> 1 lnorm    0.507 0.107  0.0703   239   240   242
-#> 2 llog     0.487 0.0993 0.0595   241   241   244
-#> 3 gompertz 0.602 0.120  0.0822   238   238   240
-#> 4 lgumbel  0.829 0.158  0.134    244   245   247
-#> 5 gamma    0.441 0.117  0.0555   238   238   240
-#> 6 weibull  0.435 0.117  0.0543   238   238   240
+#> # A tibble: 6 x 9
+#>   dist        ad     ks    cvm   aic  aicc   bic  delta weight
+#>   <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl>  <dbl>  <dbl>
+#> 1 lnorm    0.507 0.107  0.0703   239   240   242 1.42   0.133 
+#> 2 llog     0.487 0.0993 0.0595   241   241   244 3.40   0.0490
+#> 3 gompertz 0.602 0.120  0.0822   238   238   240 0      0.271 
+#> 4 lgumbel  0.829 0.158  0.134    244   245   247 6.58   0.0100
+#> 5 gamma    0.441 0.117  0.0555   238   238   240 0.0190 0.268 
+#> 6 weibull  0.435 0.117  0.0543   238   238   240 0.0140 0.269
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
@@ -110,7 +110,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.725 0.594  3.19
+#> 1       5  1.25 0.742 0.596  3.25
 ```
 
 Model-averaged predictions complete with confidence intervals can be
