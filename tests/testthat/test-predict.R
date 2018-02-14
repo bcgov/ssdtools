@@ -15,7 +15,7 @@
 context("predict")
 
 test_that("predict.fitdist", {
-  pred <- predict(boron_lnorm, nboot = 10)
+  pred <- predict(boron_lnorm, nboot = 10L)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
   expect_identical(pred$percent, 1:99)

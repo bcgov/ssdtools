@@ -151,6 +151,8 @@ use_data(ccme_data, overwrite = TRUE)
 boron_data <- ccme_data[ccme_data$Chemical == "Boron",]
 use_data(boron_data, overwrite = TRUE)
 
+write.csv(boron_data, "inst/extdata/boron_data.csv", row.names = FALSE)
+
 boron_lnorm <- ssd_fit_dist(boron_data)
 use_data(boron_lnorm, overwrite = TRUE)
 

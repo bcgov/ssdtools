@@ -15,7 +15,7 @@
 context("hc")
 
 test_that("ssd_hc", {
-  x <- ssd_hc(boron_lnorm)
+  x <- ssd_hc(boron_lnorm, nboot = 10L)
   expect_is(x, "tbl")
   expect_identical(colnames(x), c("percent", "est", "se", "lcl", "ucl"))
   expect_identical(x$percent, 5L)
