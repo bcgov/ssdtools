@@ -1,7 +1,7 @@
 Package: ssdca
 Title: Species Sensitivity Distributions
-Version: 0.0.0.9017
-Date: 2018-02-14
+Version: 0.0.0.9018
+Date: 2018-02-16
 Authors@R: c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre")),
              person("Carl", "Schwarz", role = "aut"),
              person("Angeline", "Tillmanns", role = "ctb"))

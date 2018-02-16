@@ -86,7 +86,7 @@ remove_errors <- function(dist_fit, name, silent) {
 ssd_fit_dist <- function(
   data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
 
-  check_data(data, nrow = c(1, .Machine$integer.max))
+  check_data(data, nrow = c(8, .Machine$integer.max))
   check_string(left)
   check_string(right)
 
