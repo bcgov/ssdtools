@@ -62,7 +62,7 @@ fit_dist_censored <- function(data, left, right, weight, dist) {
 
 remove_errors <- function(dist_fit, name, silent) {
   if(!is.null(dist_fit$error)) {
-    if(!silent) warning(name, ": ", dist_fit$error, call. = FALSE)
+    if(!silent) warning(name, " failed to fit: ", dist_fit$error, call. = FALSE)
     return(NULL)
   }
   dist_fit$result
