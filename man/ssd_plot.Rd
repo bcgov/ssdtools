@@ -6,7 +6,8 @@
 \usage{
 ssd_plot(data, pred, left = "Conc", right = left, label = NULL,
   shape = NULL, color = NULL, size = 2.5, xlab = "Concentration",
-  ylab = "Percent of Species Affected", ci = TRUE, hc = 5L, shift_x = 3)
+  ylab = "Percent of Species Affected", ci = TRUE, ribbon = TRUE,
+  hc = 5L, shift_x = 3)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -30,6 +31,8 @@ ssd_plot(data, pred, left = "Conc", right = left, label = NULL,
 \item{ylab}{A string of the x-axis label.}
 
 \item{ci}{A flag indicating wether to plot confidence intervals}
+
+\item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to dotted lines.}
 
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).}
 
