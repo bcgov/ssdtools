@@ -164,7 +164,7 @@ head(fluazinam)
 There are less goodness-of-fit statistics available for
 fits to censored data (currently just aic and bic).
 ```{r}
-fluazinam_dists <- ssd_fit_dists(fluazinam)
+fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_gof(fluazinam_dists)
 ```
 But model-averaged predictions can be made using AIC

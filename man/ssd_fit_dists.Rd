@@ -36,11 +36,18 @@ tested with the 'pareto' distribution.
 If weight specifies a column in the data frame with positive integers,
 weighted estimation occurs.
 However, currently only the resultant parameter estimates are available (via coef).
+
+If the `right` argument is different to the `left` argument then the data are considered to be censored.
+It may be possible to use artificial censoring to improve the estimates in the extreme tails
+(Liu et al 2018).
 }
 \examples{
 ssd_fit_dists(boron_data)
 data(fluazinam)
 ssd_fit_dists(fluazinam, left = "left", right = "right")
+}
+\references{
+Liu, Y., Salibián-Barrera, M., Zamar, R.H., and Zidek, J.V. 2018. Using artificial censoring to improve extreme tail quantile estimates. Journal of the Royal Statistical Society: Series C (Applied Statistics).
 }
 \seealso{
 \code{\link{ssd_fit_dist}}

@@ -115,6 +115,10 @@ ssd_fit_dist <- function(
 #' weighted estimation occurs.
 #' However, currently only the resultant parameter estimates are available (via coef).
 #'
+#' If the `right` argument is different to the `left` argument then the data are considered to be censored.
+#' It may be possible to use artificial censoring to improve the estimates in the extreme tails
+#' (Liu et al 2018).
+#'
 #' @param data A data frame.
 #' @param left A string of the column in data with the left concentration values.
 #' @param right A string of the column in data with the right concentration values.
@@ -124,6 +128,9 @@ ssd_fit_dist <- function(
 #' @return An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
 #'
 #' @export
+#' @references
+#' Liu, Y., Salibián-Barrera, M., Zamar, R.H., and Zidek, J.V. 2018. Using artificial censoring to improve extreme tail quantile estimates. Journal of the Royal Statistical Society: Series C (Applied Statistics).
+#'
 #' @seealso \code{\link{ssd_fit_dist}}
 #' @examples
 #' ssd_fit_dists(boron_data)
