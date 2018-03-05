@@ -23,7 +23,8 @@ test_that("fit_dist", {
 test_that("fit_dists", {
   dist_names <- c("gamma", "gompertz", "lgumbel",
                         "llog", "lnorm", "pareto", "weibull")
-  dists <- ssd_fit_dists(boron_data, dists = dist_names)
+  expect_error(ssd_fit_dists(boron_data[1:5,]), "all distributions failed to fit")
+  dists <- ssd_fit_dists(boron_data[1:6,], dists = dist_names)
   expect_true(is.fitdists(dists))
   expect_identical(names(dists), dist_names)
   coef <- stats::coef(dists)
@@ -31,6 +32,7 @@ test_that("fit_dists", {
 })
 
 test_that("fit_dist", {
+  expect_error(ssd_fit_dist(boron_data[1:5,]), "data must have at least 6 rows")
   dist <- ssd_fit_dist(boron_data)
   expect_true(is.fitdist(dist))
   expect_identical(dist, boron_lnorm)

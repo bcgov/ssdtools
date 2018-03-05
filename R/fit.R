@@ -86,7 +86,7 @@ remove_errors <- function(dist_fit, name, silent) {
 ssd_fit_dist <- function(
   data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
 
-  check_data(data, nrow = c(8, .Machine$integer.max))
+  check_data(data, nrow = c(6, .Machine$integer.max))
   check_string(left)
   check_string(right)
 
@@ -149,6 +149,7 @@ ssd_fit_dists <- function(
   dists %<>% map(safe_fit_dist, data = data, left = left, right = right, weight = weight)
   dists %<>% imap(remove_errors, silent = silent)
   dists <- dists[!vapply(dists, is.null, TRUE)]
+  if(!length(dists)) stop("all distributions failed to fit", call. = FALSE)
   if(left == right) {
     class(dists) <- "fitdists"
   } else
