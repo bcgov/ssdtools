@@ -22,10 +22,13 @@
 #' }
 #' and if the data are non-censored
 #' \describe{
+#'   \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
+#'  }
+#' and if there are 8 or more samples
+#' \describe{
 #'   \item{ad}{Anderson-Darling statistic (dbl)}
 #'   \item{ks}{Kolmogorov-Smirnov statistic (dbl)}
 #'   \item{cvm}{Cramer-von Mises statistic (dbl)}
-#'   \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
 #' }
 #' In the case of an object of class fitdists the function also returns
 #' \describe{
@@ -53,12 +56,23 @@ ssd_gof.fitdist <- function(x, ...) {
   dist <- x$distname
   n <- nobs(x)
   k <- npars(x)
-  x %<>% fitdistrplus::gofstat()
 
-  aicc <- x$aic  + 2 * k * (k + 1) / (n - k - 1)
+  aic <- x$aic
+  aicc <- aic  + 2 * k * (k + 1) / (n - k - 1)
+  bic <- x$bic
 
-  dplyr::data_frame(dist = dist, ad = x$ad, ks = x$ks, cvm = x$cvm,
-                    aic = x$aic, aicc = aicc, bic = x$bic)
+  if(n >= 8) {
+    x %<>% fitdistrplus::gofstat()
+    ad <- x$ad
+    ks <- x$ks
+    cvm <- x$cvm
+  } else {
+    ad <- NA_real_
+    ks <- NA_real_
+    cvm <- NA_real_
+  }
+  dplyr::data_frame(dist = dist, ad = ad, ks = ks, cvm = cvm,
+                    aic = aic, aicc = aicc, bic = bic)
 }
 
 #' @describeIn ssd_gof Goodness of Fit

@@ -17,6 +17,8 @@ context("plot")
 test_that("plot", {
   pdf(tempfile(fileext = ".pdf"))
   on.exit(dev.off())
+  boron_lnorm <- ssd_fit_dist(boron_data[1:6,])
+
   expect_silent(ssd_cfplot(boron_data))
   expect_silent(plot(boron_lnorm))
   expect_silent(plot(fluazinam_lnorm))

@@ -15,6 +15,7 @@
 context("predict")
 
 test_that("predict.fitdist", {
+  boron_lnorm <- ssd_fit_dist(boron_data[1:6,])
   pred <- predict(boron_lnorm, nboot = 10L)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
@@ -24,8 +25,7 @@ test_that("predict.fitdist", {
 })
 
 test_that("predict.fitdists", {
-  dists <- boron_dists[c("gamma", "gompertz")]
-  class(dists) <- "fitdists"
+  dists <- ssd_fit_dists(boron_data[1:6,], dists = c("gamma", "gompertz"))
   pred <- predict(dists, nboot = 10L)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))

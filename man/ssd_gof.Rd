@@ -32,10 +32,13 @@ Returns a tbl data frame with the following columns
 }
 and if the data are non-censored
 \describe{
+  \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
+ }
+and if there are 8 or more samples
+\describe{
   \item{ad}{Anderson-Darling statistic (dbl)}
   \item{ks}{Kolmogorov-Smirnov statistic (dbl)}
   \item{cvm}{Cramer-von Mises statistic (dbl)}
-  \item{aicc}{Akaike's Information Criterion corrected for sample size (dbl)}
 }
 In the case of an object of class fitdists the function also returns
 \describe{
