@@ -110,7 +110,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.713 0.596  3.19
+#> 1       5  1.25 0.754 0.604  3.28
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -136,7 +136,10 @@ and censored data see the vignette `ssdca`. The vignette also
 demonstrates how to use `ssdca` in conjunction with `ggplot2` to produce
 custom plots.
 
-A shiny webpage is being developed for non-users of R.
+A shiny webpage that was developed by [Seb
+Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for
+non-users of R is available at
+<https://poissonconsulting.shinyapps.io/ssdca-shiny/>.
 
 ## Citation
 
