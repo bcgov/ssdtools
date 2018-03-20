@@ -83,7 +83,7 @@ boron_pred <- predict(boron_dists)
 and plotted together with the original data using `ssd_plot`.
 ```{r}
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
-         ylab = "Concentration (mg/L)")
+         xlab = "Concentration (mg/L)")
 ```
 
 For more information and examples of how to use `ssdca` in conjuction with `fitdistrplus` to
@@ -91,6 +91,12 @@ assess alternative fits and deal with weighted and censored data see the vignett
 The vignette also demonstrates how to use `ssdca` in conjunction with `ggplot2` to produce custom plots.
 
 A shiny webpage is being developed for non-users of R.
+
+## Citation
+
+```{r, comment="", echo=FALSE}
+citation(package = "ssdca")
+```
 
 ## Getting Help or Reporting an Issue
 

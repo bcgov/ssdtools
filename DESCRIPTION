@@ -1,10 +1,11 @@
 Package: ssdca
 Title: Species Sensitivity Distributions
-Version: 0.0.0.9024
+Version: 0.0.0.9025
 Date: 2018-03-19
 Authors@R: c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre")),
              person("Carl", "Schwarz", role = "aut"),
-             person("Angeline", "Tillmanns", role = "ctb"))
+             person("Angeline", "Tillmanns", role = "ctb"),
+             person("Province of British Columbia", role = "cph"))
 Description: Fits and plots species sensitivity distributions.
 License: Apache License (== 2.0) | file LICENSE
 Depends:

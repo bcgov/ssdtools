@@ -392,7 +392,7 @@ autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Specie
 #' @param shape A string of the column in data for the shape aesthetic.
 #' @param color A string of the column in data for the color aesthetic.
 #' @param size A number for the size of the labels.
-#' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to dotted lines.
+#' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param shift_x The value to multiply the label x values by.
 #' @export
 #' @examples
@@ -400,7 +400,7 @@ autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Specie
 ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
-                     ci = TRUE, ribbon = TRUE, hc = 5L, shift_x = 3) {
+                     ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3) {
   check_data(data)
   check_data(pred,
              values = list(
@@ -428,8 +428,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2)
     } else {
       gp <- gp +
-        geom_line(aes_string(x = "lcl", y = "percent/100"), linetype = "dashed", color = "grey33") +
-        geom_line(aes_string(x = "ucl", y = "percent/100"), linetype = "dashed", color = "grey33")
+        geom_line(aes_string(x = "lcl", y = "percent/100"), color = "darkgreen") +
+        geom_line(aes_string(x = "ucl", y = "percent/100"), color = "darkgreen")
     }
 
   }
@@ -437,7 +437,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     check_colnames(data, label)
     data <- data[order(data[[label]]),]
   }
-  gp <- gp + geom_line(aes_string(y = "percent/100"))
+  gp <- gp + geom_line(aes_string(y = "percent/100"), color = if(ribbon) "black" else "red")
 
   if(!is.null(hc))
     gp <- gp + geom_hcintersect(data = data, xintercept = pred$est[pred$percent == hc], yintercept = hc/100)

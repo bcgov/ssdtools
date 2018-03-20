@@ -95,12 +95,12 @@ ssd_gof(boron_dists)
 #> # A tibble: 6 x 9
 #>   dist        ad     ks    cvm   aic  aicc   bic  delta weight
 #>   <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl>  <dbl>  <dbl>
-#> 1 lnorm    0.507 0.107  0.0703   239   240   242 1.42   0.133 
-#> 2 llog     0.487 0.0993 0.0595   241   241   244 3.40   0.0490
-#> 3 gompertz 0.602 0.120  0.0822   238   238   240 0      0.271 
-#> 4 lgumbel  0.829 0.158  0.134    244   245   247 6.58   0.0100
-#> 5 gamma    0.441 0.117  0.0555   238   238   240 0.0190 0.268 
-#> 6 weibull  0.435 0.117  0.0543   238   238   240 0.0140 0.269
+#> 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133 
+#> 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.0490
+#> 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0.     0.271 
+#> 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.0100
+#> 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.0190 0.268 
+#> 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.0140 0.269
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
@@ -110,7 +110,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.740 0.605  3.21
+#> 1       5  1.25 0.713 0.596  3.19
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -125,7 +125,7 @@ and plotted together with the original data using
 
 ``` r
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
-         ylab = "Concentration (mg/L)")
+         xlab = "Concentration (mg/L)")
 ```
 
 ![](tools/README-unnamed-chunk-12-1.png)<!-- -->
@@ -137,6 +137,25 @@ demonstrates how to use `ssdca` in conjunction with `ggplot2` to produce
 custom plots.
 
 A shiny webpage is being developed for non-users of R.
+
+## Citation
+
+``` 
+
+To cite package 'ssdca' in publications use:
+
+  Joe Thorley and Carl Schwarz (2018). ssdca: Species Sensitivity
+  Distributions. R package version 0.0.0.9025.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {ssdca: Species Sensitivity Distributions},
+    author = {Joe Thorley and Carl Schwarz},
+    year = {2018},
+    note = {R package version 0.0.0.9025},
+  }
+```
 
 ## Getting Help or Reporting an Issue
 
