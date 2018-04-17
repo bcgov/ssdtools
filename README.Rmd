@@ -92,6 +92,9 @@ The vignette also demonstrates how to use `ssdca` in conjunction with `ggplot2` 
 
 A shiny webpage that was developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for non-users of R is available at <https://poissonconsulting.shinyapps.io/ssdca-shiny/>.
 
+The data included in `ssdca` are sourced from the Canadian environmental quality guidelines [published by the Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the `data-raw` folder for more information.
+
+
 ## Citation
 
 ```{r, comment="", echo=FALSE}
@@ -128,6 +131,4 @@ The code is released under the Apache License 2.0
     See the License for the specific language governing permissions and
     limitations under the License.
     
-The data are licensed under the ([Open Government Licence - Canada](http://open.canada.ca/en/open-government-licence-canada)).
-See the `data-raw` folder for more information.
 
