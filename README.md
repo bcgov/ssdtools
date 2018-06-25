@@ -60,16 +60,16 @@ boron_data
 #> # A tibble: 28 x 5
 #>    Chemical Species                  Conc Group        Units
 #>    <chr>    <chr>                   <dbl> <fct>        <chr>
-#>  1 Boron    Oncorhynchus mykiss      2.10 Fish         mg/L 
-#>  2 Boron    Ictalurus punctatus      2.40 Fish         mg/L 
-#>  3 Boron    Micropterus salmoides    4.10 Fish         mg/L 
-#>  4 Boron    Brachydanio rerio       10.0  Fish         mg/L 
-#>  5 Boron    Carassius auratus       15.6  Fish         mg/L 
-#>  6 Boron    Pimephales promelas     18.3  Fish         mg/L 
-#>  7 Boron    Daphnia magna            6.00 Invertebrate mg/L 
-#>  8 Boron    Opercularia bimarginata 10.0  Invertebrate mg/L 
-#>  9 Boron    Ceriodaphnia dubia      13.4  Invertebrate mg/L 
-#> 10 Boron    Entosiphon sulcatum     15.0  Invertebrate mg/L 
+#>  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L 
+#>  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L 
+#>  3 Boron    Micropterus salmoides     4.1 Fish         mg/L 
+#>  4 Boron    Brachydanio rerio        10   Fish         mg/L 
+#>  5 Boron    Carassius auratus        15.6 Fish         mg/L 
+#>  6 Boron    Pimephales promelas      18.3 Fish         mg/L 
+#>  7 Boron    Daphnia magna             6   Invertebrate mg/L 
+#>  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L 
+#>  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L 
+#> 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L 
 #> # ... with 18 more rows
 ```
 
@@ -93,14 +93,14 @@ The goodness of fit can be assessed using `ssd_gof`
 ``` r
 ssd_gof(boron_dists)
 #> # A tibble: 6 x 9
-#>   dist        ad     ks    cvm   aic  aicc   bic  delta weight
-#>   <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl>  <dbl>  <dbl>
-#> 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133 
-#> 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.0490
-#> 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0.     0.271 
-#> 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.0100
-#> 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.0190 0.268 
-#> 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.0140 0.269
+#>   dist        ad     ks    cvm   aic  aicc   bic delta weight
+#>   <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133
+#> 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049
+#> 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271
+#> 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 
+#> 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268
+#> 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
@@ -110,7 +110,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.754 0.604  3.28
+#> 1       5  1.25 0.730 0.616  3.25
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -140,6 +140,11 @@ A shiny webpage that was developed by [Seb
 Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for
 non-users of R is available at
 <https://poissonconsulting.shinyapps.io/ssdca-shiny/>.
+
+The data included in `ssdca` are sourced from the Canadian environmental
+quality guidelines [published by the Canadian Council of Ministers of
+the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the
+`data-raw` folder for more information.
 
 ## Citation
 
@@ -191,7 +196,3 @@ The code is released under the Apache License 2.0
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-The data are licensed under the ([Open Government Licence -
-Canada](http://open.canada.ca/en/open-government-licence-canada)). See
-the `data-raw` folder for more information.
