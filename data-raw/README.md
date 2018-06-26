@@ -1,6 +1,6 @@
 ## Data Sources
 
-The file `CCME data.csv` contains data from the [Canadian Council of the Ministers of the Environment (CCME)](http://ceqg-rcqe.ccme.ca/en/index.html).
+The `CCME data.csv` data file is provided&mdash;with permission to use and redistribute&mdash;by the [Canadian Council of the Ministers of the Environment (CCME)](http://ceqg-rcqe.ccme.ca/en/index.html).
 
 The citations and data sources are as follows:
 
