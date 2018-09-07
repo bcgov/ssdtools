@@ -7,13 +7,11 @@
 comma_signif(x, digits = 1, ...)
 }
 \arguments{
-\item{x}{a numeric vector to format}
+\item{x}{A numeric vector to format.}
 
-\item{digits}{integer indicating the number of decimal places
-    (\code{round}) or significant digits (\code{signif}) to be used.
-    Negative values are allowed (see \sQuote{Details}).}
+\item{digits}{Deprecated, use \code{accuracy} instead.}
 
-\item{...}{other arguments passed on to \code{\link{format}}}
+\item{...}{Other arguments passed on to \code{\link[base:format]{base::format()}}.}
 }
 \value{
 A function that returns a character vector.

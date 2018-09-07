@@ -1,15 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<div id="devex-badge">
+# ssdca
 
-<a rel="Exploration" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." />
+[![BCDevExchange
+Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
 [![Travis-CI Build
 Status](https://travis-ci.org/bcgov/ssdca.svg?branch=master)](https://travis-ci.org/bcgov/ssdca)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/bcgov/ssdca/master.svg)](https://codecov.io/github/bcgov/ssdca?branch=master)
-
-# ssdca
 
 `ssdca` is an R package to fit distributions to Species Sensitivity
 Data. It is being developed for the B.C. Ministry of Environment by
@@ -86,7 +85,7 @@ theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
 ```
 
-![](tools/README-unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -110,7 +109,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.730 0.616  3.25
+#> 1       5  1.25 0.745 0.593  3.24
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -128,7 +127,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)")
 ```
 
-![](tools/README-unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
 For more information and examples of how to use `ssdca` in conjuction
 with `fitdistrplus` to assess alternative fits and deal with weighted
@@ -153,7 +152,8 @@ the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the
 To cite package 'ssdca' in publications use:
 
   Joe Thorley and Carl Schwarz (2018). ssdca: Species Sensitivity
-  Distributions. R package version 0.0.0.9025.
+  Distributions. R package version 0.0.1.9000.
+  https://github.com/bcgov/ssdca
 
 A BibTeX entry for LaTeX users is
 
@@ -161,7 +161,8 @@ A BibTeX entry for LaTeX users is
     title = {ssdca: Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
     year = {2018},
-    note = {R package version 0.0.0.9025},
+    note = {R package version 0.0.1.9000},
+    url = {https://github.com/bcgov/ssdca},
   }
 ```
 

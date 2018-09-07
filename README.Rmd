@@ -4,19 +4,19 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "tools/README-"
+  fig.path = "man/figures/README-"
 )
 ```
 
-<div id="devex-badge"><a rel="Exploration" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." />
+# ssdca
+
+[![BCDevExchange Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
 [![Travis-CI Build Status](https://travis-ci.org/bcgov/ssdca.svg?branch=master)](https://travis-ci.org/bcgov/ssdca)
 [![Coverage Status](https://img.shields.io/codecov/c/github/bcgov/ssdca/master.svg)](https://codecov.io/github/bcgov/ssdca?branch=master)
-
-# ssdca
 
 `ssdca` is an R package to fit distributions to Species Sensitivity Data.
 It is being developed for the B.C. Ministry of Environment by [Poisson Consulting](https://github.com/poissonconsulting).
@@ -60,18 +60,18 @@ boron_dists <- ssd_fit_dists(boron_data)
 ```
 
 and plot using the `ggplot2` generic `autoplot`
-```{r}
+```{r, warning = FALSE}
 theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
 ```
 
 The goodness of fit can be assessed using `ssd_gof`
-```{r}
+```{r, warning = FALSE}
 ssd_gof(boron_dists)
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
-```{r}
+```{r, warning = FALSE}
 ssd_hc(boron_dists)
 ```
 

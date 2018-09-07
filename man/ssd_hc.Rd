@@ -12,7 +12,8 @@ ssd_hc(x, ...)
 
 \method{ssd_hc}{fitdist}(x, hc = 5L, nboot = 1001, level = 0.95, ...)
 
-\method{ssd_hc}{fitdistcens}(x, hc = 5L, nboot = 1001, level = 0.95, ...)
+\method{ssd_hc}{fitdistcens}(x, hc = 5L, nboot = 1001, level = 0.95,
+  ...)
 
 \method{ssd_hc}{fitdists}(x, hc = 5L, ic = "aicc", average = TRUE,
   nboot = 1001, level = 0.95, ...)
