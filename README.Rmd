@@ -12,13 +12,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ssdca
+# ssdtools
 
 [![BCDevExchange Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
-[![Travis-CI Build Status](https://travis-ci.org/bcgov/ssdca.svg?branch=master)](https://travis-ci.org/bcgov/ssdca)
-[![Coverage Status](https://img.shields.io/codecov/c/github/bcgov/ssdca/master.svg)](https://codecov.io/github/bcgov/ssdca?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-ci.org/bcgov/ssdtools)
+[![Coverage Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
 
-`ssdca` is an R package to fit distributions to Species Sensitivity Data.
+`ssdtools` is an R package to fit distributions to Species Sensitivity Data.
 It is being developed for the B.C. Ministry of Environment by [Poisson Consulting](https://github.com/poissonconsulting).
 
 ## Installation
@@ -27,29 +27,29 @@ To quickly install the latest version:
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("bcgov/ssdca")
+devtools::install_github("bcgov/ssdtools")
 ```
 
 To install the latest version and build its vignette:
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("bcgov/ssdca", force = TRUE, build_vignettes = TRUE)
+devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
 ```
 
 To view the vignette
 ```{r, eval = FALSE}
-vignette("ssdca")
+vignette("ssdtools")
 ```
 
 ## Introduction
 
-`ssdca` loads `fitdistrplus` and `ggplot2`, both of which it extends, as well as several other packages.
+`ssdtools` loads `fitdistrplus` and `ggplot2`, both of which it extends, as well as several other packages.
 ```{r}
-library(ssdca)
+library(ssdtools)
 ```
 
-`ssdca` provides a data set for several chemicals including Boron.
+`ssdtools` provides a data set for several chemicals including Boron.
 ```{r}
 boron_data
 ```
@@ -86,24 +86,24 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)")
 ```
 
-For more information and examples of how to use `ssdca` in conjuction with `fitdistrplus` to
-assess alternative fits and deal with weighted and censored data see the vignette `ssdca`.
-The vignette also demonstrates how to use `ssdca` in conjunction with `ggplot2` to produce custom plots.
+For more information and examples of how to use `ssdtools` in conjuction with `fitdistrplus` to
+assess alternative fits and deal with weighted and censored data see the vignette `ssdtools`.
+The vignette also demonstrates how to use `ssdtools` in conjunction with `ggplot2` to produce custom plots.
 
 A shiny webpage that was developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for non-users of R is available at <https://poissonconsulting.shinyapps.io/ssdca-shiny/>.
 
-The data included in `ssdca` are sourced from the Canadian environmental quality guidelines [published by the Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the `data-raw` folder for more information.
+The data included in `ssdtools` are sourced from the Canadian environmental quality guidelines [published by the Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the `data-raw` folder for more information.
 
 
 ## Citation
 
 ```{r, comment="", echo=FALSE}
-citation(package = "ssdca")
+citation(package = "ssdtools")
 ```
 
 ## Getting Help or Reporting an Issue
 
-To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/ssdca/issues/).
+To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/ssdtools/issues/).
 
 ## How to Contribute
 

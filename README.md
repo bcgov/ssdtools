@@ -1,16 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ssdca
+# ssdtools
 
 [![BCDevExchange
 Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
 [![Travis-CI Build
-Status](https://travis-ci.org/bcgov/ssdca.svg?branch=master)](https://travis-ci.org/bcgov/ssdca)
+Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-ci.org/bcgov/ssdtools)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/bcgov/ssdca/master.svg)](https://codecov.io/github/bcgov/ssdca?branch=master)
+Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
 
-`ssdca` is an R package to fit distributions to Species Sensitivity
+`ssdtools` is an R package to fit distributions to Species Sensitivity
 Data. It is being developed for the B.C. Ministry of Environment by
 [Poisson Consulting](https://github.com/poissonconsulting).
 
@@ -20,29 +20,29 @@ To quickly install the latest version:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("bcgov/ssdca")
+devtools::install_github("bcgov/ssdtools")
 ```
 
 To install the latest version and build its vignette:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("bcgov/ssdca", force = TRUE, build_vignettes = TRUE)
+devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
 ```
 
 To view the vignette
 
 ``` r
-vignette("ssdca")
+vignette("ssdtools")
 ```
 
 ## Introduction
 
-`ssdca` loads `fitdistrplus` and `ggplot2`, both of which it extends, as
-well as several other packages.
+`ssdtools` loads `fitdistrplus` and `ggplot2`, both of which it extends,
+as well as several other packages.
 
 ``` r
-library(ssdca)
+library(ssdtools)
 #> Loading required package: VGAM
 #> Loading required package: stats4
 #> Loading required package: splines
@@ -52,7 +52,7 @@ library(ssdca)
 #> Loading required package: survival
 ```
 
-`ssdca` provides a data set for several chemicals including Boron.
+`ssdtools` provides a data set for several chemicals including Boron.
 
 ``` r
 boron_data
@@ -109,7 +109,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.745 0.593  3.24
+#> 1       5  1.25 0.730 0.638  3.20
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -129,39 +129,39 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
 
 ![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
-For more information and examples of how to use `ssdca` in conjuction
+For more information and examples of how to use `ssdtools` in conjuction
 with `fitdistrplus` to assess alternative fits and deal with weighted
-and censored data see the vignette `ssdca`. The vignette also
-demonstrates how to use `ssdca` in conjunction with `ggplot2` to produce
-custom plots.
+and censored data see the vignette `ssdtools`. The vignette also
+demonstrates how to use `ssdtools` in conjunction with `ggplot2` to
+produce custom plots.
 
 A shiny webpage that was developed by [Seb
 Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for
 non-users of R is available at
 <https://poissonconsulting.shinyapps.io/ssdca-shiny/>.
 
-The data included in `ssdca` are sourced from the Canadian environmental
-quality guidelines [published by the Canadian Council of Ministers of
-the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the
-`data-raw` folder for more information.
+The data included in `ssdtools` are sourced from the Canadian
+environmental quality guidelines [published by the Canadian Council of
+Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html).
+See the `data-raw` folder for more information.
 
 ## Citation
 
 ``` 
 
-To cite package 'ssdca' in publications use:
+To cite package 'ssdtools' in publications use:
 
-  Joe Thorley and Carl Schwarz (2018). ssdca: Species Sensitivity
-  Distributions. R package version 0.0.1.9000.
+  Joe Thorley and Carl Schwarz (2018). ssdtools: Species
+  Sensitivity Distributions. R package version 0.0.1.9001.
   https://github.com/bcgov/ssdca
 
 A BibTeX entry for LaTeX users is
 
   @Manual{,
-    title = {ssdca: Species Sensitivity Distributions},
+    title = {ssdtools: Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
     year = {2018},
-    note = {R package version 0.0.1.9000},
+    note = {R package version 0.0.1.9001},
     url = {https://github.com/bcgov/ssdca},
   }
 ```
@@ -169,7 +169,7 @@ A BibTeX entry for LaTeX users is
 ## Getting Help or Reporting an Issue
 
 To report bugs/issues/feature requests, please file an
-[issue](https://github.com/bcgov/ssdca/issues/).
+[issue](https://github.com/bcgov/ssdtools/issues/).
 
 ## How to Contribute
 

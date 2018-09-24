@@ -15,10 +15,10 @@
 #' Base ggproto classes for ggplot2
 #'
 #' @seealso \code{\link[ggplot2]{ggplot2-ggproto}}
-#' @name ssdca-ggproto
+#' @name ssdtools-ggproto
 NULL
 
-#' @rdname ssdca-ggproto
+#' @rdname ssdtools-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -32,7 +32,7 @@ StatSsd <- ggplot2::ggproto(
   required_aes = "x"
 )
 
-#' @rdname ssdca-ggproto
+#' @rdname ssdtools-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -46,7 +46,7 @@ StatSsdcens <- ggplot2::ggproto(
   required_aes = c("xmin", "xmax")
 )
 
-#' @rdname ssdca-ggproto
+#' @rdname ssdtools-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -54,7 +54,7 @@ GeomSsd <- ggplot2::ggproto(
   "GeomSsd", ggplot2::GeomPoint
 )
 
-#' @rdname ssdca-ggproto
+#' @rdname ssdtools-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -62,7 +62,7 @@ GeomSsdcens <- ggplot2::ggproto(
   "GeomSsdcens", ggplot2::GeomPoint
 )
 
-#' @rdname ssdca-ggproto
+#' @rdname ssdtools-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -83,7 +83,7 @@ GeomHcintersect <- ggproto(
   draw_key = draw_key_path
 )
 
-#' @rdname ssdca-ggproto
+#' @rdname ssdtools-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export

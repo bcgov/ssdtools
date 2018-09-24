@@ -13,6 +13,6 @@
 #    limitations under the License.
 
 library(testthat)
-library(ssdca)
+library(ssdtools)
 
-test_check("ssdca")
+test_check("ssdtools")

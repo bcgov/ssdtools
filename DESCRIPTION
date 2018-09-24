@@ -1,6 +1,6 @@
-Package: ssdca
-Version: 0.0.1.9000
-Date: 2018-09-07
+Package: ssdtools
+Version: 0.0.1.9001
+Date: 2018-09-24
 Title: Species Sensitivity Distributions
 Description: Fits and plots species sensitivity distributions.
 Authors@R: c(

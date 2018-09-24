@@ -7,7 +7,7 @@
 
 #' ## Introduction
 
-#' This script demonstrates the use of the `ssdca` package to perform
+#' This script demonstrates the use of the `ssdtools` package to perform
 #' a species sensitivity distribution analysis consistent with the
 #' associated shiny app with confidence intervals.
 #'
@@ -16,18 +16,18 @@
 #'
 #' ## Demonstration
 #'
-#' ### ssdca
-#' First, install and then load the `ssdca` R package.
+#' ### ssdtools
+#' First, install and then load the `ssdtools` R package.
 #' ```
 #' install.packages("devtools")
-#' devtools::install_github("bcgov/ssdca")
+#' devtools::install_github("bcgov/ssdtools")
 #' ```
-library(ssdca)
+library(ssdtools)
 
 #' ### Data
 
 #' Next, load the data set.
-file <- system.file("extdata", "boron_data.csv", package = "ssdca")
+file <- system.file("extdata", "boron_data.csv", package = "ssdtools")
 data <- read.csv(file)
 head(data)
 

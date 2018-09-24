@@ -1,5 +1,5 @@
 ---
-title: "Introduction to ssdca"
+title: "Introduction to ssdtools"
 author: "Joe Thorley"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -16,14 +16,14 @@ knitr::opts_chunk$set(
   fig.width = 3,
   fig.height = 3
 )
-library(ssdca)
+library(ssdtools)
 ```
 
 
 ## Introduction
 
-The `ssdca` package fits and plots Species Sensitivity Distributions.
-This vignette describes how to use `ssdca` in conjunction with 
+The `ssdtools` package fits and plots Species Sensitivity Distributions.
+This vignette describes how to use `ssdtools` in conjunction with 
 the `fitdistrplus` and `ggplot2` packages, which it installs and extends.
 
 ## Inputting Data
@@ -46,7 +46,7 @@ The function `ssd_fit_dists()` inputs a data frame (with the concentration value
 by default, in the `Conc` column) and fits one or more distributions.
 Here we fit the log-normal and weibull distributions to the Boron data.
 ```{r}
-library(ssdca)
+library(ssdtools)
 boron_data
 boron_dists2 <- ssd_fit_dists(boron_data, dists = c("lnorm", "weibull"))
 boron_dists2
