@@ -12,14 +12,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ssdtools
+# ssdtools <img src="man/figures/logo.png" align="right" />
 
 [![BCDevExchange Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
 [![Travis-CI Build Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-ci.org/bcgov/ssdtools)
 [![Coverage Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
 
 `ssdtools` is an R package to fit distributions to Species Sensitivity Data.
-It is being developed for the B.C. Ministry of Environment by [Poisson Consulting](https://github.com/poissonconsulting).
 
 ## Installation
 

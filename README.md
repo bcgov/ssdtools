@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ssdtools
+# ssdtools <img src="man/figures/logo.png" align="right" />
 
 [![BCDevExchange
 Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
@@ -11,8 +11,7 @@ Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-
 Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
 
 `ssdtools` is an R package to fit distributions to Species Sensitivity
-Data. It is being developed for the B.C. Ministry of Environment by
-[Poisson Consulting](https://github.com/poissonconsulting).
+Data.
 
 ## Installation
 
@@ -109,7 +108,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.730 0.638  3.20
+#> 1       5  1.25 0.746 0.621  3.25
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -152,7 +151,7 @@ See the `data-raw` folder for more information.
 To cite package 'ssdtools' in publications use:
 
   Joe Thorley and Carl Schwarz (2018). ssdtools: Species
-  Sensitivity Distributions. R package version 0.0.1.9001.
+  Sensitivity Distributions. R package version 0.0.1.9002.
   https://github.com/bcgov/ssdca
 
 A BibTeX entry for LaTeX users is
@@ -161,7 +160,7 @@ A BibTeX entry for LaTeX users is
     title = {ssdtools: Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
     year = {2018},
-    note = {R package version 0.0.1.9001},
+    note = {R package version 0.0.1.9002},
     url = {https://github.com/bcgov/ssdca},
   }
 ```

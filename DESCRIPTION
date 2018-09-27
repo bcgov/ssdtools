@@ -1,12 +1,13 @@
 Package: ssdtools
-Version: 0.0.1.9001
-Date: 2018-09-24
+Version: 0.0.1.9002
+Date: 2018-09-27
 Title: Species Sensitivity Distributions
 Description: Fits and plots species sensitivity distributions.
 Authors@R: c(
-  person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"), 
+  person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre", "ctr"), 
     comment = c(ORCID = "0000-0002-7683-4592")),
-  person("Carl", "Schwarz", role = "aut"),
+  person("Carl", "Schwarz", role = c("aut", "ctr")),
+  person("Ali", "Azizishirazi", email = "Ali.Azizishirazi@gov.bc.ca", role = "ctb"),
   person("Angeline", "Tillmanns", role = "ctb"),
   person("Stephanie", "Hazlitt", role = "ctb"),
   person("Province of British Columbia", role = "cph")
