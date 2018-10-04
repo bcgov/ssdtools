@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9002</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9003</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
       <h1>Introduction to ssdtools</h1>
                         <h4 class="author">Joe Thorley</h4>
             
-            <h4 class="date">2018-09-27</h4>
+            <h4 class="date">2018-10-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdca/blob/master/vignettes/ssdca.Rmd"><code>vignettes/ssdca.Rmd</code></a></small>
       <div class="hidden name"><code>ssdca.Rmd</code></div>
@@ -160,16 +160,25 @@
 <p>In addition, several goodness of fit statistics including the Akaike’s Information Criteron corrected for sample size (<code>aicc</code>) can be generated using <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code>.</p>
 <p>Moving forwards we consider the same six fits to Boron as Schwarz and Tillmanns (2017).</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; Warning in (function (data, distr, method = c("mle", "mme", "qme",</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; "mge"), : The dgompertz function should return a zero-length vector when</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; input has length zero</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; Warning in (function (data, distr, method = c("mle", "mme", "qme",</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; "mge"), : The pgompertz function should return a zero-length vector when</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; input has length zero</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; Warning in (function (data, distr, method = c("mle", "mme", "qme",</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; "mge"), : The plgumbel function should return a zero-length vector when</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; input has length zero</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
 <p>For interpretation of the values see Schwarz and Tillmanns (2017).</p>
 <p>A subset of distributions from a <code>fitdists</code> can be selected using the subset function.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">subset</span>(boron_dists, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">"gamma"</span>, <span class="st">"weibull"</span>))</a></code></pre></div>
@@ -192,25 +201,25 @@
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.737 0.595  3.19</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.718 0.596  3.14</span></a></code></pre></div>
 <p>By default model averaging is based on the Akaike’s Weights corrected for small sample size. To return the individual <span class="math inline">\(HC_5\)</span> estimates and their respective Akaike’s Weights set <code>average = FALSE</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">average =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt;   dist     percent   est    se   lcl   ucl weight</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.696 0.884  3.57  0.133</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 2 llog           5  1.56 0.727 0.687  3.55  0.049</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.419 0.994  2.68  0.271</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.518 1.16   3.10  0.01 </span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; 5 gamma          5  1.08 0.849 0.319  3.56  0.268</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 6 weibull        5  1.09 0.747 0.361  3.16  0.269</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.692 0.873  3.52  0.133</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 2 llog           5  1.56 0.773 0.645  3.69  0.049</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.428 0.983  2.69  0.271</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.527 1.15   3.17  0.01 </span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; 5 gamma          5  1.08 0.833 0.269  3.45  0.268</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 6 weibull        5  1.09 0.732 0.345  2.95  0.269</span></a></code></pre></div>
 <p>For interpretation of the values see Schwarz and Tillmanns (in prep.).</p>
 <p>To get the <span class="math inline">\(HC_50\)</span> estimates use</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">hc =</span> 5L)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.730 0.611  3.17</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.747 0.621  3.26</span></a></code></pre></div>
 </div>
 <div id="predictions" class="section level2">
 <h2 class="hasAnchor">
@@ -250,24 +259,26 @@
 <p>The <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> function allows the user to name a column that specifies the weights to use in the estimation. However, to date very little functionality has been implemented for weighted fits in the <code>fitdistrplus</code> package.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">boron_data<span class="op">$</span>Weight &lt;-<span class="st"> </span><span class="kw">as.integer</span>(boron_data<span class="op">$</span>Group)</a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data, <span class="dt">weight =</span> <span class="st">"Weight"</span>, <span class="dt">dists =</span> <span class="kw">c</span>(<span class="st">"lnorm"</span>, <span class="st">"weibull"</span>))</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; Warning in mledist(data, distname, start, fix.arg, ...): weights are not</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; taken into account in the default initial values</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; Warning in mledist(data, distname, start, fix.arg, ...): weights are not</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; taken into account in the default initial values</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">fit</a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood </span></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; Parameters:</span></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt;         estimate Std. Error</span></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt; meanlog 2.352547  0.1414815</span></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">#&gt; sdlog   1.233407  0.1000467</span></a>
-<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co">#&gt; Fitting of the distribution ' weibull ' by maximum likelihood </span></a>
-<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="co">#&gt; Parameters:</span></a>
-<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="co">#&gt;         estimate Std. Error</span></a>
-<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="co">#&gt; shape  0.9458077 0.08532335</span></a>
-<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="co">#&gt; scale 19.1184792 2.44996931</span></a>
-<a class="sourceLine" id="cb15-19" data-line-number="19"><span class="kw">plot</span>(fit)</a>
-<a class="sourceLine" id="cb15-20" data-line-number="20"><span class="co">#&gt; Error in plot.fitdist(x, breaks = breaks, ...): The plot of the fit is not yet available when using weights</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; Warning in mledist(data, distname, start = arg_startfix$start.arg, fix.arg</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; = arg_startfix$fix.arg, : weights are not taken into account in the default</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; initial values</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; Warning in mledist(data, distname, start = arg_startfix$start.arg, fix.arg</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; = arg_startfix$fix.arg, : weights are not taken into account in the default</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; initial values</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">fit</a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood </span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt; Parameters:</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">#&gt;         estimate Std. Error</span></a>
+<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co">#&gt; meanlog 2.352547  0.1414815</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="co">#&gt; sdlog   1.233407  0.1000467</span></a>
+<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="co">#&gt; Fitting of the distribution ' weibull ' by maximum likelihood </span></a>
+<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="co">#&gt; Parameters:</span></a>
+<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="co">#&gt;         estimate Std. Error</span></a>
+<a class="sourceLine" id="cb15-19" data-line-number="19"><span class="co">#&gt; shape  0.9458077 0.08532335</span></a>
+<a class="sourceLine" id="cb15-20" data-line-number="20"><span class="co">#&gt; scale 19.1184792 2.44996931</span></a>
+<a class="sourceLine" id="cb15-21" data-line-number="21"><span class="kw">plot</span>(fit)</a>
+<a class="sourceLine" id="cb15-22" data-line-number="22"><span class="co">#&gt; Error in plot.fitdist(x, breaks = breaks, ...): The plot of the fit is not yet available when using weights</span></a></code></pre></div>
 </div>
 <div id="censored-data" class="section level2">
 <h2 class="hasAnchor">
@@ -284,19 +295,22 @@
 <a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt; 6 1155.0    NA</span></a></code></pre></div>
 <p>There are less goodness-of-fit statistics available for fits to censored data (currently just aic and bic).</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">fluazinam_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(fluazinam, <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; &lt;simpleError in optim(par = vstart, fn = fnobjcens, fix.arg = fix.arg, gr = gradient,     rcens = rcens, lcens = lcens, icens = icens, ncens = ncens,     ddistnam = ddistname, pdistnam = pdistname, hessian = TRUE,     method = meth, lower = lower, upper = upper, ...): function cannot be evaluated at initial parameters&gt;</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; Warning: gompertz failed to fit: Error in if (one.more) {: missing value where TRUE/FALSE needed</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; Warning: lgumbel failed to fit: Error in (function (censdata, distr, start = NULL, fix.arg = NULL, keepdata = TRUE, : the function mle failed to estimate the parameters, </span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt;         with the error code 100</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(fluazinam_dists)</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; Warning: Unknown or uninitialised column: 'aicc'.</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; # A tibble: 4 x 5</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt;   dist      aic   bic delta weight</span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; 1 lnorm    150.  151. 0      0.398</span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; 2 llog     150.  151. 0.284  0.346</span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt; 3 gamma    153.  154. 3.18   0.081</span></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt; 4 weibull  151.  153. 1.65   0.175</span></a></code></pre></div>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; Warning in (function (censdata, distr, start = NULL, fix.arg = NULL,</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; keepdata = TRUE, : The plgumbel function should return a zero-length vector</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; when input has length zero</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; &lt;simpleError in optim(par = vstart, fn = fnobjcens, fix.arg = fix.arg, gr = gradient,     rcens = rcens, lcens = lcens, icens = icens, ncens = ncens,     ddistnam = ddistname, pdistnam = pdistname, hessian = TRUE,     method = meth, lower = lower, upper = upper, ...): function cannot be evaluated at initial parameters&gt;</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; Warning: gompertz failed to fit: Error in if (one.more) {: missing value where TRUE/FALSE needed</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; Warning: lgumbel failed to fit: Error in (function (censdata, distr, start = NULL, fix.arg = NULL, keepdata = TRUE, : the function mle failed to estimate the parameters, </span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt;         with the error code 100</span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(fluazinam_dists)</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; Warning: Unknown or uninitialised column: 'aicc'.</span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; # A tibble: 4 x 5</span></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt;   dist      aic   bic delta weight</span></a>
+<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt; 1 lnorm    150.  151. 0      0.398</span></a>
+<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="co">#&gt; 2 llog     150.  151. 0.284  0.346</span></a>
+<a class="sourceLine" id="cb17-16" data-line-number="16"><span class="co">#&gt; 3 gamma    153.  154. 3.18   0.081</span></a>
+<a class="sourceLine" id="cb17-17" data-line-number="17"><span class="co">#&gt; 4 weibull  151.  153. 1.65   0.175</span></a></code></pre></div>
 <p>But model-averaged predictions can be made using AIC</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">fluazinam_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fluazinam_dists)</a></code></pre></div>
 <p>and the results plotted complete with arrows indicating the censorship.</p>

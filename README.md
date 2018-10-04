@@ -10,8 +10,9 @@ Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
 
-`ssdtools` is an R package to fit distributions to Species Sensitivity
-Data.
+`ssdtools` is an R package to plot and fit Species Sensitivity
+Distributions (SSD). It uses Maximum Likelihood and
+Information-Theoretic based model averaging.
 
 ## Installation
 
@@ -49,6 +50,8 @@ library(ssdtools)
 #> Loading required package: fitdistrplus
 #> Loading required package: MASS
 #> Loading required package: survival
+#> Loading required package: npsurv
+#> Loading required package: lsei
 ```
 
 `ssdtools` provides a data set for several chemicals including Boron.
@@ -108,7 +111,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.746 0.621  3.25
+#> 1       5  1.25 0.747 0.603  3.18
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -134,10 +137,10 @@ and censored data see the vignette `ssdtools`. The vignette also
 demonstrates how to use `ssdtools` in conjunction with `ggplot2` to
 produce custom plots.
 
-A shiny webpage that was developed by [Seb
+A shiny webpage developed by [Seb
 Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for
 non-users of R is available at
-<https://poissonconsulting.shinyapps.io/ssdca-shiny/>.
+<https://poissonconsulting.shinyapps.io/ssdtools/>.
 
 The data included in `ssdtools` are sourced from the Canadian
 environmental quality guidelines [published by the Canadian Council of
