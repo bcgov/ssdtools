@@ -39,7 +39,9 @@ ssd_hc.fitdist <- function(x, hc = 5L, nboot = 1001, level = 0.95, ...) {
 #' @describeIn ssd_hc Hazard Concentration
 #' @export
 #' @examples
+#' \dontrun{
 #' ssd_hc(fluazinam_lnorm)
+#' }
 ssd_hc.fitdistcens <- function(x, hc = 5L, nboot = 1001, level = 0.95, ...) {
   check_vector(hc, c(1L,99L), length = 1)
   predict(x, percent = hc, nboot = nboot, level = level)

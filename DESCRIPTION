@@ -1,5 +1,5 @@
 Package: ssdtools
-Version: 0.0.1.9003
+Version: 0.0.2
 Date: 2018-10-04
 Title: Species Sensitivity Distributions
 Description: Fits and plots species sensitivity distributions using 

@@ -10,3 +10,4 @@
 ^CONTRIBUTING.md$
 ^docs$
 ^build.R$
+^cran-comments\.md$

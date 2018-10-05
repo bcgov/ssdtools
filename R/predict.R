@@ -51,7 +51,9 @@ predict.fitdist <- function(object, percent = 1:99,
 #' @inheritParams predict.fitdists
 #' @export
 #' @examples
+#' \dontrun{
 #' predict(fluazinam_lnorm, percent = c(5L, 50L))
+#' }
 predict.fitdistcens <- function(object, percent = 1:99,
                             nboot = 1001, level = 0.95, ...) {
   check_vector(percent, c(1L, 99L), length = c(1, Inf),

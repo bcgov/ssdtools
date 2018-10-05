@@ -56,7 +56,9 @@ at which by default 5\% of the species are affected.
 
 \examples{
 ssd_hc(boron_lnorm)
+\dontrun{
 ssd_hc(fluazinam_lnorm)
+}
 \dontrun{
 ssd_hc(boron_dists)
 }

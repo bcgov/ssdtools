@@ -22,5 +22,7 @@
 Predict censored fitdist
 }
 \examples{
+\dontrun{
 predict(fluazinam_lnorm, percent = c(5L, 50L))
+}
 }

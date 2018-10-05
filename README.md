@@ -111,7 +111,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.747 0.603  3.18
+#> 1       5  1.25 0.717 0.619  3.13
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -154,7 +154,7 @@ See the `data-raw` folder for more information.
 To cite package 'ssdtools' in publications use:
 
   Joe Thorley and Carl Schwarz (2018). ssdtools: Species
-  Sensitivity Distributions. R package version 0.0.1.9002.
+  Sensitivity Distributions. R package version 0.0.1.9003.
   https://github.com/bcgov/ssdca
 
 A BibTeX entry for LaTeX users is
@@ -163,7 +163,7 @@ A BibTeX entry for LaTeX users is
     title = {ssdtools: Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
     year = {2018},
-    note = {R package version 0.0.1.9002},
+    note = {R package version 0.0.1.9003},
     url = {https://github.com/bcgov/ssdca},
   }
 ```
