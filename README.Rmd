@@ -17,23 +17,29 @@ knitr::opts_chunk$set(
 [![BCDevExchange Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
 [![Travis-CI Build Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-ci.org/bcgov/ssdtools)
 [![Coverage Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 
 `ssdtools` is an R package to plot and fit Species Sensitivity Distributions (SSD). 
 It uses Maximum Likelihood and Information-Theoretic based model averaging.
 
 ## Installation
 
-To quickly install the latest version:
+To install the latest version from CRAN
+```{r, eval = FALSE}
+install.packages("ssdtools")
+```
+
+To quickly install the latest development  version:
 
 ```{r, eval = FALSE}
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("bcgov/ssdtools")
 ```
 
-To install the latest version and build its vignette:
+To install the latest version development version and build its vignette:
 
 ```{r, eval = FALSE}
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
 ```
 
@@ -93,7 +99,6 @@ The vignette also demonstrates how to use `ssdtools` in conjunction with `ggplot
 A shiny webpage developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for non-users of R is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
 The data included in `ssdtools` are sourced from the Canadian environmental quality guidelines [published by the Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the `data-raw` folder for more information.
-
 
 ## Citation
 

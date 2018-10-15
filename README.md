@@ -9,6 +9,8 @@ Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https:/
 Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-ci.org/bcgov/ssdtools)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 
 `ssdtools` is an R package to plot and fit Species Sensitivity
 Distributions (SSD). It uses Maximum Likelihood and
@@ -16,17 +18,24 @@ Information-Theoretic based model averaging.
 
 ## Installation
 
-To quickly install the latest version:
+To install the latest version from CRAN
 
 ``` r
-# install.packages("devtools")
+install.packages("ssdtools")
+```
+
+To quickly install the latest development version:
+
+``` r
+install.packages("devtools")
 devtools::install_github("bcgov/ssdtools")
 ```
 
-To install the latest version and build its vignette:
+To install the latest version development version and build its
+vignette:
 
 ``` r
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
 ```
 
@@ -87,7 +96,7 @@ theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -111,7 +120,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.717 0.619  3.13
+#> 1       5  1.25 0.753 0.593  3.22
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -129,7 +138,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)")
 ```
 
-![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
 
 For more information and examples of how to use `ssdtools` in conjuction
 with `fitdistrplus` to assess alternative fits and deal with weighted
@@ -154,8 +163,8 @@ See the `data-raw` folder for more information.
 To cite package 'ssdtools' in publications use:
 
   Joe Thorley and Carl Schwarz (2018). ssdtools: Species
-  Sensitivity Distributions. R package version 0.0.1.9003.
-  https://github.com/bcgov/ssdca
+  Sensitivity Distributions. R package version 0.0.2.
+  https://CRAN.R-project.org/package=ssdtools
 
 A BibTeX entry for LaTeX users is
 
@@ -163,8 +172,8 @@ A BibTeX entry for LaTeX users is
     title = {ssdtools: Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
     year = {2018},
-    note = {R package version 0.0.1.9003},
-    url = {https://github.com/bcgov/ssdca},
+    note = {R package version 0.0.2},
+    url = {https://CRAN.R-project.org/package=ssdtools},
   }
 ```
 

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ssdtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.2.9000</span>
       </span>
     </div>
 
@@ -94,74 +94,76 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>To quickly install the latest version:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>)</a></code></pre></div>
-<p>To install the latest version and build its vignette:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>To install the latest version from CRAN</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"ssdtools"</span>)</a></code></pre></div>
+<p>To quickly install the latest development version:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>)</a></code></pre></div>
+<p>To install the latest version development version and build its vignette:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>To view the vignette</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">vignette</span>(<span class="st">"ssdtools"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">vignette</span>(<span class="st">"ssdtools"</span>)</a></code></pre></div>
 </div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p><code>ssdtools</code> loads <code>fitdistrplus</code> and <code>ggplot2</code>, both of which it extends, as well as several other packages.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(ssdtools)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Loading required package: VGAM</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; Loading required package: stats4</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; Loading required package: splines</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; Loading required package: ggplot2</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; Loading required package: fitdistrplus</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Loading required package: MASS</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; Loading required package: survival</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; Loading required package: npsurv</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; Loading required package: lsei</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(ssdtools)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; Loading required package: VGAM</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; Loading required package: stats4</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; Loading required package: splines</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; Loading required package: ggplot2</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; Loading required package: fitdistrplus</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; Loading required package: MASS</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; Loading required package: survival</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; Loading required package: npsurv</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; Loading required package: lsei</span></a></code></pre></div>
 <p><code>ssdtools</code> provides a data set for several chemicals including Boron.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">boron_data</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 28 x 5</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    Chemical Species                  Conc Group        Units</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  3 Boron    Micropterus salmoides     4.1 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  4 Boron    Brachydanio rerio        10   Fish         mg/L </span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  5 Boron    Carassius auratus        15.6 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  6 Boron    Pimephales promelas      18.3 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  7 Boron    Daphnia magna             6   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; # ... with 18 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">boron_data</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 28 x 5</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;    Chemical Species                  Conc Group        Units</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;  3 Boron    Micropterus salmoides     4.1 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt;  4 Boron    Brachydanio rerio        10   Fish         mg/L </span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt;  5 Boron    Carassius auratus        15.6 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;  6 Boron    Pimephales promelas      18.3 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt;  7 Boron    Daphnia magna             6   Invertebrate mg/L </span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; # ... with 18 more rows</span></a></code></pre></div>
 <p>Multiple distributions can be fit using <code><a href="reference/ssd_fit_dists.html">ssd_fit_dists()</a></code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</a></code></pre></div>
 <p>and plot using the <code>ggplot2</code> generic <code>autoplot</code></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>()) <span class="co"># set plotting theme</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">autoplot</span>(boron_dists)</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="700"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>()) <span class="co"># set plotting theme</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">autoplot</span>(boron_dists)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="700"></p>
 <p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
 <p>and the model-averaged 5% hazard concentration estimated using <code>ssd_hc</code></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/ssd_hc.html">ssd_hc</a></span>(boron_dists)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.710 0.597  3.13</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="reference/ssd_hc.html">ssd_hc</a></span>(boron_dists)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.763 0.611  3.25</span></a></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">boron_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(boron_dists)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">boron_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(boron_dists)</a></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">shape =</span> <span class="st">"Group"</span>, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">         <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>)</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="700"></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">shape =</span> <span class="st">"Group"</span>, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">         <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="700"></p>
 <p>For more information and examples of how to use <code>ssdtools</code> in conjuction with <code>fitdistrplus</code> to assess alternative fits and deal with weighted and censored data see the vignette <code>ssdtools</code>. The vignette also demonstrates how to use <code>ssdtools</code> in conjunction with <code>ggplot2</code> to produce custom plots.</p>
 <p>A shiny webpage developed by <a href="https://github.com/sebdalgarno">Seb Dalgaro</a> of Poisson Consulting for non-users of R is available at <a href="https://poissonconsulting.shinyapps.io/ssdtools/" class="uri">https://poissonconsulting.shinyapps.io/ssdtools/</a>.</p>
 <p>The data included in <code>ssdtools</code> are sourced from the Canadian environmental quality guidelines <a href="http://ceqg-rcqe.ccme.ca/en/index.html">published by the Canadian Council of Ministers of the Environment</a>. See the <code>data-raw</code> folder for more information.</p>
@@ -173,8 +175,8 @@
 To cite package 'ssdtools' in publications use:
 
   Joe Thorley and Carl Schwarz (2018). ssdtools: Species
-  Sensitivity Distributions. R package version 0.0.1.9003.
-  https://github.com/bcgov/ssdca
+  Sensitivity Distributions. R package version 0.0.2.
+  https://CRAN.R-project.org/package=ssdtools
 
 A BibTeX entry for LaTeX users is
 
@@ -182,8 +184,8 @@ A BibTeX entry for LaTeX users is
     title = {ssdtools: Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
     year = {2018},
-    note = {R package version 0.0.1.9003},
-    url = {https://github.com/bcgov/ssdca},
+    note = {R package version 0.0.2},
+    url = {https://CRAN.R-project.org/package=ssdtools},
   }</code></pre>
 </div>
 <div id="getting-help-or-reporting-an-issue" class="section level2">
@@ -222,6 +224,8 @@ limitations under the License.</code></pre>
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=ssdtools">https://​cloud.r-project.org/​package=ssdtools</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/bcgov/ssdca">https://​github.com/​bcgov/​ssdca</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/bcgov/ssdca/issues">https://​github.com/​bcgov/​ssdca/​issues</a>
@@ -250,6 +254,7 @@ limitations under the License.</code></pre>
 <li><a href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.html"><img src="https://assets.bcdevexchange.org/images/badges/exploration.svg" alt="BCDevExchange Status"></a></li>
 <li><a href="https://travis-ci.org/bcgov/ssdtools"><img src="https://travis-ci.org/bcgov/ssdtools.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://codecov.io/github/bcgov/ssdtools?branch=master"><img src="https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg" alt="Coverage Status"></a></li>
+<li><a href="https://cran.r-project.org/package=ssdtools"><img src="https://www.r-pkg.org/badges/version/ssdtools" alt="CRAN status"></a></li>
 </ul>
 </div>
 </div>
