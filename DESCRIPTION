@@ -16,9 +16,9 @@ Authors@R: c(
   person("Stephanie", "Hazlitt", role = "ctb"),
   person("Province of British Columbia", role = "cph")
   )
-License: Apache License (== 2.0) | file LICENSE
 URL: https://github.com/bcgov/ssdca
 BugReports: https://github.com/bcgov/ssdca/issues
+License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.0),
     graphics,

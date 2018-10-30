@@ -20,7 +20,10 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 
 `ssdtools` is an R package to plot and fit Species Sensitivity Distributions (SSD). 
-It uses Maximum Likelihood and Information-Theoretic based model averaging.
+Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for multiple species.
+The ssdtools package uses Maximum Likelihood to fit log-normal, log-logistic, gompertz, lgumbel, gamma or weibull distributions.
+Multiple distributions can be averaged using Information Criteria.
+Confidence intervals are produced by bootstrapping.
 
 ## Installation
 
@@ -29,23 +32,23 @@ To install the latest version from CRAN
 install.packages("ssdtools")
 ```
 
-To quickly install the latest development  version:
+To install the latest development version:
 
 ```{r, eval = FALSE}
 install.packages("devtools")
 devtools::install_github("bcgov/ssdtools")
 ```
 
-To install the latest version development version and build its vignette:
+To install the latest version development version and build its vignettes:
 
 ```{r, eval = FALSE}
 install.packages("devtools")
 devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
 ```
 
-To view the vignette
+To see the available vignettes
 ```{r, eval = FALSE}
-vignette("ssdtools")
+vignette()
 ```
 
 ## Introduction
@@ -92,8 +95,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)")
 ```
 
-For more information and examples of how to use `ssdtools` in conjuction with `fitdistrplus` to
-assess alternative fits and deal with weighted and censored data see the vignette `ssdtools`.
+For more information and examples of how to use `ssdtools` in conjuction with `fitdistrplus` to assess alternative fits and deal with weighted and censored data see the vignette `ssdtools`.
 The vignette also demonstrates how to use `ssdtools` in conjunction with `ggplot2` to produce custom plots.
 
 A shiny webpage developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for non-users of R is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.
