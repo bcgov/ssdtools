@@ -1,8 +1,12 @@
 Package: ssdtools
-Version: 0.0.2.9001
+Version: 0.0.2.9002
 Title: Species Sensitivity Distributions
-Description: Fits and plots species sensitivity distributions using 
-  maximum likelihood and information-theoretic-based model averaging.
+Description: Species sensitivity distributions are cumulative probability 
+  distributions which are fitted to toxicity concentrations for multiple species.
+  The ssdtools package uses Maximum Likelihood to fit
+  log-normal, log-logistic, gompertz, lgumbel, gamma or weibull distributions.
+  Multiple distributions can be averaged using Information Criteria.
+  Confidence intervals are produced by bootstrapping.
 Authors@R: c(
   person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre", "ctr"), 
     comment = c(ORCID = "0000-0002-7683-4592")),

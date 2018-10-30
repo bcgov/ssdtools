@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CCME Species Sensitivity Data — ccme_data • ssdtools</title>
+<title>ssdtools: Species Sensitivity Distributions — ssdtools-package • ssdtools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,12 +30,15 @@
 
 
 
-<meta property="og:title" content="CCME Species Sensitivity Data — ccme_data" />
+<meta property="og:title" content="ssdtools: Species Sensitivity Distributions — ssdtools-package" />
 
-<meta property="og:description" content="Species Sensitivity Data from
-the Canadian Council of Ministers of the Environment.
-The taxonomic groups are Amphibian, Fish, Invertebrate and Plant.
-Plants includes freshwater algae." />
+<meta property="og:description" content="
+Species sensitivity distributions are cumulative probability 
+  distributions which are fitted to toxicity concentrations for multiple species.
+  The ssdtools package uses Maximum Likelihood to fit
+  log-normal, log-logistic, gompertz, lgumbel, gamma or weibull distributions.
+  Multiple distributions can be averaged using Information Criteria.
+  Confidence intervals are produced by bootstrapping." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -117,67 +120,57 @@ Plants includes freshwater algae." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CCME Species Sensitivity Data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdca/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>ccme_data.Rd</code></div>
+    <h1>ssdtools: Species Sensitivity Distributions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdca/blob/master/R/ssdtools-package.R'><code>R/ssdtools-package.R</code></a></small>
+    <div class="hidden name"><code>ssdtools-package.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Species Sensitivity Data from
-the Canadian Council of Ministers of the Environment.
-The taxonomic groups are Amphibian, Fish, Invertebrate and Plant.
-Plants includes freshwater algae.</p>
+    <p><img src='figures/logo.png' align='right' /></p>
+<p>Species sensitivity distributions are cumulative probability 
+  distributions which are fitted to toxicity concentrations for multiple species.
+  The ssdtools package uses Maximum Likelihood to fit
+  log-normal, log-logistic, gompertz, lgumbel, gamma or weibull distributions.
+  Multiple distributions can be averaged using Information Criteria.
+  Confidence intervals are produced by bootstrapping.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>ccme_data</span></pre>
         
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>A tbl data frame:</p><dl class='dl-horizontal'>
-  <dt>Chemical</dt><dd><p>The chemical &lt;chr&gt;.</p></dd>
-  <dt>Species</dt><dd><p>The species binomial name &lt;chr&gt;.</p></dd>
-  <dt>Concentration</dt><dd><p>The chemical concentration &lt;dbl&gt;.</p></dd>
-  <dt>Units</dt><dd><p>The units &lt;chr&gt;.</p></dd>
-  <dt>Group</dt><dd><p>The taxonomic group &lt;fctr&gt;.</p></dd>
-</dl>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Additional information on each of the chemicals is available from the
-CCME website.</p><dl class='dl-horizontal'>
-  <dt>Boron</dt><dd><p><a href='http://ceqg-rcqe.ccme.ca/download/en/324/'>http://ceqg-rcqe.ccme.ca/download/en/324/</a></p></dd>
-  <dt>Cadmium</dt><dd><p><a href='http://ceqg-rcqe.ccme.ca/download/en/148/'>http://ceqg-rcqe.ccme.ca/download/en/148/</a></p></dd>
-  <dt>Chloride</dt><dd><p><a href='http://ceqg-rcqe.ccme.ca/download/en/337/'>http://ceqg-rcqe.ccme.ca/download/en/337/</a></p></dd>
-  <dt>Endosulfan</dt><dd><p><a href='http://ceqg-rcqe.ccme.ca/download/en/327/'>http://ceqg-rcqe.ccme.ca/download/en/327/</a></p></dd>
-  <dt>Glyphosate</dt><dd><p><a href='http://ceqg-rcqe.ccme.ca/download/en/182/'>http://ceqg-rcqe.ccme.ca/download/en/182/</a></p></dd>
-  <dt>Uranium</dt><dd><p><a href='http://ceqg-rcqe.ccme.ca/download/en/328/'>http://ceqg-rcqe.ccme.ca/download/en/328/</a></p></dd>
-  <dt>Silver</dt><dd><p><a href='http://ceqg-rcqe.ccme.ca/download/en/355/'>http://ceqg-rcqe.ccme.ca/download/en/355/</a></p></dd>
-</dl>
+    <div class='dont-index'><p>Useful links:</p><ul>
+<li><p><a href='https://github.com/bcgov/ssdca'>https://github.com/bcgov/ssdca</a></p></li>
+<li><p>Report bugs at <a href='https://github.com/bcgov/ssdca/issues'>https://github.com/bcgov/ssdca/issues</a></p></li>
+</ul></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>head</span>(<span class='no'>ccme_data</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 5
-#&gt;   Chemical Species                Conc Group Units
-#&gt;   &lt;chr&gt;    &lt;chr&gt;                 &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt;
-#&gt; 1 Boron    Oncorhynchus mykiss     2.1 Fish  mg/L 
-#&gt; 2 Boron    Ictalurus punctatus     2.4 Fish  mg/L 
-#&gt; 3 Boron    Micropterus salmoides   4.1 Fish  mg/L 
-#&gt; 4 Boron    Brachydanio rerio      10   Fish  mg/L 
-#&gt; 5 Boron    Carassius auratus      15.6 Fish  mg/L 
-#&gt; 6 Boron    Pimephales promelas    18.3 Fish  mg/L </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#format">Format</a></li>
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+    <h2>Author</h2>
+    
+<strong>Maintainer</strong>: Joe Thorley <a href='mailto:joe@poissonconsulting.ca'>joe@poissonconsulting.ca</a> (0000-0002-7683-4592) [contractor]
+
+Authors:
+<ul>
+<li><p>Carl Schwarz [contractor]</p></li>
+</ul>
+
+Other contributors:
+<ul>
+<li><p>Ali Azizishirazi <a href='mailto:Ali.Azizishirazi@gov.bc.ca'>Ali.Azizishirazi@gov.bc.ca</a> [contributor]</p></li>
+<li><p>Angeline Tillmanns [contributor]</p></li>
+<li><p>Stephanie Hazlitt [contributor]</p></li>
+<li><p>Province of British Columbia [copyright holder]</p></li>
+</ul>
+
 
   </div>
 </div>

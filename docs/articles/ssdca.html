@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.2.9001</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.2.9002</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
       <h1>Introduction to ssdtools</h1>
                         <h4 class="author">Joe Thorley</h4>
             
-            <h4 class="date">2018-10-23</h4>
+            <h4 class="date">2018-10-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdca/blob/master/vignettes/ssdca.Rmd"><code>vignettes/ssdca.Rmd</code></a></small>
       <div class="hidden name"><code>ssdca.Rmd</code></div>
@@ -201,25 +201,25 @@
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.744 0.607  3.20</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.737 0.628  3.20</span></a></code></pre></div>
 <p>By default model averaging is based on the Akaike’s Weights corrected for small sample size. To return the individual <span class="math inline">\(HC_5\)</span> estimates and their respective Akaike’s Weights set <code>average = FALSE</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">average =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt;   dist     percent   est    se   lcl   ucl weight</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.698 0.875  3.69  0.133</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 2 llog           5  1.56 0.784 0.624  3.50  0.049</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.455 0.975  2.69  0.271</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.507 1.17   3.11  0.01 </span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; 5 gamma          5  1.08 0.845 0.287  3.61  0.268</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 6 weibull        5  1.09 0.729 0.407  3.24  0.269</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.695 0.870  3.44  0.133</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 2 llog           5  1.56 0.740 0.685  3.44  0.049</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.484 1.00   2.81  0.271</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.505 1.13   3.10  0.01 </span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; 5 gamma          5  1.08 0.839 0.299  3.41  0.268</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 6 weibull        5  1.09 0.739 0.359  3.16  0.269</span></a></code></pre></div>
 <p>For interpretation of the values see Schwarz and Tillmanns (in prep.).</p>
 <p>To get the <span class="math inline">\(HC_50\)</span> estimates use</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">hc =</span> 5L)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.751 0.617  3.34</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.738 0.627  3.21</span></a></code></pre></div>
 </div>
 <div id="predictions" class="section level2">
 <h2 class="hasAnchor">
