@@ -15,7 +15,8 @@
   The ssdtools package uses Maximum Likelihood to fit
   log-normal, log-logistic, gompertz, lgumbel, gamma or weibull distributions.
   Multiple distributions can be averaged using Information Criteria.
-  Confidence intervals are produced by bootstrapping.">
+  Confidence intervals on fits and hazard concentrations 
+  are produced by bootstrapping.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -94,20 +95,20 @@
 <a href="#ssdtools" class="anchor"></a>ssdtools <img src="reference/figures/logo.png" align="right">
 </h1></div>
 
-<p><code>ssdtools</code> is an R package to plot and fit Species Sensitivity Distributions (SSD). It uses Maximum Likelihood and Information-Theoretic based model averaging.</p>
+<p><code>ssdtools</code> is an R package to plot and fit Species Sensitivity Distributions (SSD). Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for multiple species. The ssdtools package uses Maximum Likelihood to fit log-normal, log-logistic, gompertz, lgumbel, gamma or weibull distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on fits and hazard concentrations are produced by bootstrapping.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>To install the latest version from CRAN</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"ssdtools"</span>)</a></code></pre></div>
-<p>To quickly install the latest development version:</p>
+<p>To install the latest development version:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>)</a></code></pre></div>
-<p>To install the latest version development version and build its vignette:</p>
+<p>To install the latest version development version and build its vignettes:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p>To view the vignette</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">vignette</span>(<span class="st">"ssdtools"</span>)</a></code></pre></div>
+<p>To see the available vignettes</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">vignette</span>()</a></code></pre></div>
 </div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
@@ -161,7 +162,7 @@
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.731 0.601  3.13</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 1       5  1.25 0.750 0.615  3.32</span></a></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">boron_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(boron_dists)</a></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>

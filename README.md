@@ -18,7 +18,8 @@ probability distributions which are fitted to toxicity concentrations
 for multiple species. The ssdtools package uses Maximum Likelihood to
 fit log-normal, log-logistic, gompertz, lgumbel, gamma or weibull
 distributions. Multiple distributions can be averaged using Information
-Criteria. Confidence intervals are produced by bootstrapping.
+Criteria. Confidence intervals on fits and hazard concentrations are
+produced by bootstrapping.
 
 ## Installation
 
@@ -124,7 +125,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.751 0.598  3.29
+#> 1       5  1.25 0.755 0.608  3.28
 ```
 
 Model-averaged predictions complete with confidence intervals can be

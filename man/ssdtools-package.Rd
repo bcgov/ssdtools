@@ -13,7 +13,8 @@ Species sensitivity distributions are cumulative probability
   The ssdtools package uses Maximum Likelihood to fit
   log-normal, log-logistic, gompertz, lgumbel, gamma or weibull distributions.
   Multiple distributions can be averaged using Information Criteria.
-  Confidence intervals are produced by bootstrapping.
+  Confidence intervals on fits and hazard concentrations 
+  are produced by bootstrapping.
 }
 \seealso{
 Useful links:

@@ -20,10 +20,11 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 
 `ssdtools` is an R package to plot and fit Species Sensitivity Distributions (SSD). 
-Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for multiple species.
+
+SSDs are cumulative probability distributions which are fitted to toxicity concentrations for multiple species.
 The ssdtools package uses Maximum Likelihood to fit log-normal, log-logistic, gompertz, lgumbel, gamma or weibull distributions.
 Multiple distributions can be averaged using Information Criteria.
-Confidence intervals are produced by bootstrapping.
+Confidence intervals on fits and hazard concentrations are produced by bootstrapping.
 
 ## Installation
 
