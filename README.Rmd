@@ -49,7 +49,7 @@ devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
 
 To see the available vignettes
 ```{r, eval = FALSE}
-vignette()
+browseVignettes("ssdtools")
 ```
 
 ## Introduction
