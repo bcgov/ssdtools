@@ -23,12 +23,12 @@ affiliations:
 
 # Summary
 
-Species sensitivity distributions (SSDs) are cumulative probability distributions which are fitted to toxicity concentrations for multiple species. 
+Species sensitivity distributions (SSDs) are cumulative probability distributions which are fitted to toxicity concentrations for multiple species (Figure 1). 
 They are used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 
 `ssdtools` is an R package [@r] to fit log-normal (lnorm), log-logistic (llog), gompertz, log-gumbel (lgumbel), gamma or weibull distributions to species concentration data.
 
-![](dists.png)
+![Species sensitivity distributions for example species concentration values](dists.png)
 
 The user can also define their own distributions.
 Multiple distributions can be averaged using Information Criteria [@burnham_model_2002].
