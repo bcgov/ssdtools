@@ -185,57 +185,8 @@ It may be possible to use artificial censoring to improve the estimates in the e
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_fit_dists</span>(<span class='no'>boron_data</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The dgompertz function should return a zero-length vector when input has length zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The pgompertz function should return a zero-length vector when input has length zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The plgumbel function should return a zero-length vector when input has length zero</span></div><div class='output co'>#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;         estimate Std. Error
-#&gt; meanlog 2.561645  0.2346291
-#&gt; sdlog   1.241540  0.1659073
-#&gt; Fitting of the distribution ' llog ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;        estimate Std. Error
-#&gt; shape 0.7404232  0.1143730
-#&gt; scale 2.6261311  0.2482597
-#&gt; Fitting of the distribution ' gompertz ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;          estimate  Std. Error
-#&gt; shape 0.039409038 0.011957924
-#&gt; scale 0.002603172 0.009957045
-#&gt; Fitting of the distribution ' lgumbel ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;          estimate Std. Error
-#&gt; location 1.922498  0.2473440
-#&gt; scale    1.232358  0.1730647
-#&gt; Fitting of the distribution ' gamma ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;        estimate Std. Error
-#&gt; scale 25.108064  7.6313816
-#&gt; shape  0.950757  0.2226832
-#&gt; Fitting of the distribution ' weibull ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;         estimate Std. Error
-#&gt; shape  0.9662825  0.1454446
-#&gt; scale 23.5097478  4.8528313</div><div class='input'><span class='fu'>data</span>(<span class='no'>fluazinam</span>)
-<span class='fu'>ssd_fit_dists</span>(<span class='no'>fluazinam</span>, <span class='kw'>left</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='st'>"right"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The plgumbel function should return a zero-length vector when input has length zero</span></div><div class='output co'>#&gt; &lt;simpleError in optim(par = vstart, fn = fnobjcens, fix.arg = fix.arg, gr = gradient,     rcens = rcens, lcens = lcens, icens = icens, ncens = ncens,     ddistnam = ddistname, pdistnam = pdistname, hessian = TRUE,     method = meth, lower = lower, upper = upper, ...): function cannot be evaluated at initial parameters&gt;</div><div class='output co'>#&gt; <span class='warning'>Warning: gompertz failed to fit: Error in if (one.more) {: missing value where TRUE/FALSE needed</span></div><div class='output co'>#&gt; <span class='warning'>Warning: lgumbel failed to fit: Error in (function (censdata, distr, start = NULL, fix.arg = NULL, keepdata = TRUE, : the function mle failed to estimate the parameters, </span>
-#&gt; <span class='warning'>        with the error code 100</span></div><div class='output co'>#&gt; Fitting of the distribution ' lnorm ' on censored data by maximum likelihood 
-#&gt; Parameters:
-#&gt;         estimate
-#&gt; meanlog 4.976920
-#&gt; sdlog   2.687785
-#&gt; Fitting of the distribution ' llog ' on censored data by maximum likelihood 
-#&gt; Parameters:
-#&gt;       estimate
-#&gt; shape 1.591448
-#&gt; scale 4.954329
-#&gt; Fitting of the distribution ' gamma ' on censored data by maximum likelihood 
-#&gt; Parameters:
-#&gt;           estimate
-#&gt; scale 2445.7299203
-#&gt; shape    0.3464374
-#&gt; Fitting of the distribution ' weibull ' on censored data by maximum likelihood 
-#&gt; Parameters:
-#&gt;          estimate
-#&gt; shape   0.4411236
-#&gt; scale 434.4368078</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>ssd_fit_dists</span>(<span class='no'>boron_data</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: internal error -3 in R_decompress1</span></div><div class='output co'>#&gt; <span class='error'>Error in ssd_fit_dists(boron_data): lazy-load database '/Library/Frameworks/R.framework/Versions/3.5/Resources/library/checkr/R/checkr.rdb' is corrupt</span></div><div class='input'><span class='fu'>data</span>(<span class='no'>fluazinam</span>)
+<span class='fu'>ssd_fit_dists</span>(<span class='no'>fluazinam</span>, <span class='kw'>left</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='st'>"right"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: internal error -3 in R_decompress1</span></div><div class='output co'>#&gt; <span class='warning'>Warning: restarting interrupted promise evaluation</span></div><div class='output co'>#&gt; <span class='warning'>Warning: internal error -3 in R_decompress1</span></div><div class='output co'>#&gt; <span class='error'>Error in ssd_fit_dists(fluazinam, left = "left", right = "right"): lazy-load database '/Library/Frameworks/R.framework/Versions/3.5/Resources/library/checkr/R/checkr.rdb' is corrupt</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
