@@ -8,6 +8,7 @@ authors:
   name: Carl Schwarz
 date: '2018-11-01'
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 bibliography: paper.bib
