@@ -33,7 +33,7 @@ They are used for the derivation of environmental quality criteria and ecologica
 The user can also define their own distributions.
 Multiple distributions can be averaged using Information Criteria [@burnham_model_2002].
 The available Information Criteria are the Akaike Information Criterion (AIC), the Akaike Information Criterion corrected for small sample size (AICc) and Bayesian Information Criterion (BIC).
-Confidence intervals can be calculated for the fitted cdf or specific hazard concentrations (percentiles).
+Confidence intervals can be calculated for the fitted cumulative distribution function or specific hazard concentrations (percentiles).
 The confidence intervals are currently produced by parametric bootstrap resampling.
 
 `ssdtools` loads the `fitdistrplus` R package [@fitdistrplus] upon which it depends for model fitting, calculation of AIC and bootstrapping.

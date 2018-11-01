@@ -126,7 +126,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.721 0.601  3.13
+#> 1       5  1.25 0.739 0.622  3.21
 ```
 
 Model-averaged predictions complete with confidence intervals can be
