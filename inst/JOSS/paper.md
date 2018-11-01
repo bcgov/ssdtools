@@ -6,8 +6,10 @@ authors:
   orcid: 0000-0002-7683-4592
 - affiliation: 2
   name: Carl Schwarz
-date: '2018-10-30'
-output: pdf_document
+date: '2018-11-01'
+output:
+  html_document:
+    df_print: paged
 bibliography: paper.bib
 tags:
 - ssd
