@@ -13,13 +13,14 @@ Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](http
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 
 `ssdtools` is an R package to plot and fit Species Sensitivity
-Distributions (SSD). Species sensitivity distributions are cumulative
-probability distributions which are fitted to toxicity concentrations
-for multiple species. The ssdtools package uses Maximum Likelihood to
-fit log-normal, log-logistic, gompertz, lgumbel, gamma or weibull
-distributions. Multiple distributions can be averaged using Information
-Criteria. Confidence intervals on fits and hazard concentrations are
-produced by bootstrapping.
+Distributions (SSD).
+
+SSDs are cumulative probability distributions which are fitted to
+toxicity concentrations for multiple species. The ssdtools package uses
+Maximum Likelihood to fit log-normal, log-logistic, gompertz, lgumbel,
+gamma or weibull distributions. Multiple distributions can be averaged
+using Information Criteria. Confidence intervals on fits and hazard
+concentrations are produced by bootstrapping.
 
 ## Installation
 
@@ -47,7 +48,7 @@ devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
 To see the available vignettes
 
 ``` r
-vignette()
+browseVignettes("ssdtools")
 ```
 
 ## Introduction
@@ -125,7 +126,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.755 0.608  3.28
+#> 1       5  1.25 0.721 0.601  3.13
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -166,13 +167,11 @@ See the `data-raw` folder for more
 
     Warning in citation(package = "ssdtools"): no date field in DESCRIPTION
     file of package 'ssdtools'
-    Warning in citation(package = "ssdtools"): could not determine year for
-    'ssdtools' from package DESCRIPTION file
     
     To cite package 'ssdtools' in publications use:
     
-      Joe Thorley and Carl Schwarz (NA). ssdtools: Species Sensitivity
-      Distributions. R package version 0.0.2.9002.
+      Joe Thorley and Carl Schwarz (2018). ssdtools: Species
+      Sensitivity Distributions. R package version 0.0.2.9002.
       https://github.com/bcgov/ssdca
     
     A BibTeX entry for LaTeX users is
@@ -180,6 +179,7 @@ See the `data-raw` folder for more
       @Manual{,
         title = {ssdtools: Species Sensitivity Distributions},
         author = {Joe Thorley and Carl Schwarz},
+        year = {2018},
         note = {R package version 0.0.2.9002},
         url = {https://github.com/bcgov/ssdca},
       }
