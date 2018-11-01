@@ -156,7 +156,11 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>predict</span>(<span class='no'>boron_lnorm</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5L</span>, <span class='fl'>50L</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: internal error -3 in R_decompress1</span></div><div class='output co'>#&gt; <span class='error'>Error in predict.fitdist(boron_lnorm, percent = c(5L, 50L)): lazy-load database '/Library/Frameworks/R.framework/Versions/3.5/Resources/library/checkr/R/checkr.rdb' is corrupt</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>predict</span>(<span class='no'>boron_lnorm</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5L</span>, <span class='fl'>50L</span>))</div><div class='output co'>#&gt; # A tibble: 2 x 5
+#&gt;   percent   est    se   lcl   ucl
+#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1       5  1.68 0.712 0.846  3.62
+#&gt; 2      50 13.0  3.08  8.04  20.4 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
