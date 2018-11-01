@@ -38,6 +38,10 @@ Other contributors:
   \item Ali Azizishirazi \email{Ali.Azizishirazi@gov.bc.ca} [contributor]
   \item Angeline Tillmanns [contributor]
   \item Stephanie Hazlitt [contributor]
+  \item Kathleen McTavish [contributor]
+  \item Emilie Doussantousse [contributor]
+  \item Heather Thompson [contributor]
+  \item Andy Teucher [contributor]
   \item Province of British Columbia [copyright holder]
 }
 

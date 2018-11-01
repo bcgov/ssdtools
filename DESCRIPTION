@@ -16,6 +16,10 @@ Authors@R: c(
   person("Ali", "Azizishirazi", email = "Ali.Azizishirazi@gov.bc.ca", role = "ctb"),
   person("Angeline", "Tillmanns", role = "ctb"),
   person("Stephanie", "Hazlitt", role = "ctb"),
+  person("Kathleen", "McTavish", role = "ctb"),
+  person("Emilie", "Doussantousse", role = "ctb"),
+  person("Heather", "Thompson", role = "ctb"),
+  person("Andy", "Teucher", role = "ctb"),
   person("Province of British Columbia", role = "cph")
   )
 URL: https://github.com/bcgov/ssdca
@@ -29,14 +33,12 @@ Depends:
     ggplot2,
     fitdistrplus
 Imports:
-    actuar,
     checkr,
     dplyr,
     FAdist,
     grid,
     magrittr,
     plyr,
-    pryr,
     purrr,
     tibble,
     scales

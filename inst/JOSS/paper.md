@@ -30,10 +30,10 @@ Species sensitivity distributions (SSDs) are cumulative probability distribution
 They are used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 
 `ssdtools` is an R package [@r] to fit log-normal (lnorm), log-logistic (llog), Gompertz, log-Gumbel (lgumbel), gamma or Weibull distributions to species concentration data.
+The user can also define their own distributions.
 
 ![Species sensitivity distributions for sample species concentration values](dists.png)
 
-The user can also define their own distributions.
 Multiple distributions can be averaged using Information Criteria [@burnham_model_2002].
 The available Information Criteria are the Akaike Information Criterion (AIC), the Akaike Information Criterion corrected for small sample size (AICc) and Bayesian Information Criterion (BIC).
 Confidence intervals can be calculated for the fitted cumulative distribution function or specific hazard concentrations (percentiles).
@@ -42,8 +42,9 @@ The confidence intervals are currently produced by parametric bootstrap resampli
 `ssdtools` loads the `fitdistrplus` R package [@fitdistrplus] upon which it depends for model fitting, calculation of AIC and bootstrapping.
 `ssdtools` also loads the `ggplot2` R package [@ggplot2] which it extends by defining `ssdfit`, `xribbon` and `hcintersect` geometries to allow the user to produce custom SSD plots.
 
-Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia.
+# Acknowledgements
 
-The software archive is at <https://github.com/bcgov/ssdtools>.
+We acknowledge contributions from Ali Azizishirazi, Angeline Tillmanns, Stephanie Hazlitt, Kathleen McTavish, Emilie Doussantousse, Heather Thompson and Andy Teucher.
+Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia.
 
 # References
