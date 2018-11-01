@@ -39,7 +39,7 @@ The confidence intervals are currently produced by parametric bootstrap resampli
 `ssdtools` loads the `fitdistrplus` R package [@fitdistrplus] upon which it depends for model fitting, calculation of AIC and bootstrapping.
 `ssdtools` also loads the `ggplot2` R package [@ggplot2] which it extends by defining `ssdfit`, `xribbon` and `hcintersect` geometries to allow the user to produce custom SSD plots.
 
-Development of `ssdtools` was funded by the Ministry of Environment, British Columbia.
+Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia.
 
 The software archive is at <https://github.com/bcgov/ssdtools>.
 
