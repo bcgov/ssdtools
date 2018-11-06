@@ -1,0 +1,134 @@
+---
+title: "ssdtools User Manual"
+author: "Joe Thorley"
+date: "`r Sys.Date()`"
+bibliography: references.bib
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ssdtools User Manual}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Background
+
+`ssdtools` is an R package to fit Species Sensitivity Distributions (SSDs) using Maximum Likelihood and model averaging.
+
+SSDs are cumulative probability distributions that are used to estimate the
+proportion of a range of species that are affected by a given concentration of a chemical.
+The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC).
+For more information on SSDs the reader is referred to @posthuma_species_2001.
+
+In order to use `ssdtools` you need to install R (see below) or use the Shiny [app](https://poissonconsulting.shinyapps.io/ssdtools/).
+The shiny app includes a user guide. 
+This vignette is a user manual for the R package.
+
+## Installation
+
+In order to install R [@r] the appropriate binary for the users operating system should be downloaded from [CRAN](https://cran.r-project.org) and then installed.
+
+Once R is installed, the `ssdtools` package can be installed by executing the following code at the R console
+```r
+install.packages("ssdtools")
+```
+The `ssdtools` package can then be loaded into the current session using
+```{r}
+library(ssdtools)
+```
+
+The `ssdtool` package loads several other R packages including `ggplot2` [@ggplot2] for plotting 
+and `fitdistrplus` [@fitdistrplus] for model fitting.
+
+## Getting Help
+
+To get additional information on a particular function just type `?` followed by the name of the function at the R console.
+For example `?ssd_gof` brings up the R documentation for the `ssdtools` goodness of fit function.
+
+## Input Data
+
+Once the `ssdtools` package has been loaded the next task is to input some data.
+An easy way to do this is to save the concentration data for a *single* chemical as a column called `Conc` in a comma separated file (`.csv`). 
+Each row should be the sensitivity concentration for a separate species.
+If species and/or group information is available then this can be saved as `Species` and `Group` columns.
+The `.csv` file can then be read into R using 
+```r
+data <- read.csv(file = "path/to/file.csv")
+```
+For the purposes of this manual we use the CCME dataset for boron which is provided with the ssdtools package
+```{r}
+data <- ssdtools::boron_data
+print(data)
+```
+
+## Fit Distributions
+
+With the data loaded the user can use the `ssd_fit_dists()` function to fit one or more distributions.
+By default `ssd_fit_dists()` fits the log-normal (`lnorm`), log-logistic (`llog`), log-Gumbel (`lgumbel`), Gompertz (`gompertz`), gamma (`gamma`) and Weibull (`weibull`) distributions.
+The user can change specify a subset using the `dists` argument.
+```{r}
+dists <- ssd_fit_dists(data, dists = c("lnorm", "gompertz", "gamma", "weibull"))
+```
+
+The fits can be plotted using `autoplot`.
+```{r, fig.width = 6, fig.height= 6}
+autoplot(dists)
+```
+
+
+Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+
+- Never uses retina figures
+- Has a smaller default figure size
+- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+
+## Vignette Info
+
+Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
+
+## References
+

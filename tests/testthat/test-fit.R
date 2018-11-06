@@ -26,6 +26,7 @@ test_that("fit_dists", {
   expect_error(ssd_fit_dists(boron_data[1:5,]), "all distributions failed to fit")
   dists <- ssd_fit_dists(boron_data[1:6,], dists = dist_names)
   expect_true(is.fitdists(dists))
+  print(names(dists))
   expect_identical(names(dists), dist_names)
   coef <- stats::coef(dists)
   expect_identical(names(coef), dist_names)
