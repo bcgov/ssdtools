@@ -33,7 +33,7 @@ ssd_hc <- function(x, ...) {
 #' ssd_hc(boron_lnorm)
 ssd_hc.fitdist <- function(x, hc = 5L, nboot = 1001, level = 0.95, ...) {
   check_vector(hc, c(1L,99L), length = 1)
- predict(x, percent = hc, nboot = nboot, level = level)
+  predict(x, percent = hc, nboot = nboot, level = level)
 }
 
 #' @describeIn ssd_hc Hazard Concentration

@@ -18,7 +18,8 @@ predict_fitdist_percent <- function(percent, boot, level) {
   se <- sd(quantile$bootquant[,1], 2)
   lcl <- quantile$quantCI[1,1]
   ucl <- quantile$quantCI[2,1]
-  tibble::data_frame(percent = percent, est = est, se = se, lcl = lcl, ucl = ucl)
+  data.frame(percent = percent, est = est, se = se, lcl = lcl, ucl = ucl, 
+             stringsAsFactors = FALSE)
 }
 
 model_average <- function(x) {
@@ -26,7 +27,8 @@ model_average <- function(x) {
   se <- sqrt(sum(x$weight * (x$se^2 + (x$est - est)^2)))
   lcl <- sum(x$lcl * x$weight)
   ucl <- sum(x$ucl * x$weight)
-  tibble::data_frame(percent = x$percent[1], est = est, se = se, lcl = lcl, ucl = ucl)
+  data.frame(percent = x$percent[1], est = est, se = se, lcl = lcl, ucl = ucl,
+             stringsAsFactors = FALSE)
 }
 
 #' Predict fitdist
@@ -44,7 +46,8 @@ predict.fitdist <- function(object, percent = 1:99,
   boot <- bootdist(object, niter = nboot)
   prediction <- lapply(percent, predict_fitdist_percent, boot = boot, level = level)
   prediction$stringsAsFactors <- FALSE
-  do.call("rbind", prediction)
+  prediction <- do.call("rbind", prediction)
+  as_conditional_tibble(prediction)
 }
 
 #' Predict censored fitdist
@@ -65,7 +68,8 @@ predict.fitdistcens <- function(object, percent = 1:99,
   boot <- bootdistcens(object, niter = nboot)
   prediction <- lapply(percent, predict_fitdist_percent, boot = boot, level = level)
   prediction$stringsAsFactors <- FALSE
-  do.call("rbind", prediction)
+  prediction <- do.call("rbind", prediction)
+  as_conditional_tibble(prediction)
 }
 
 #' Predict fitdist
@@ -106,9 +110,7 @@ predict.fitdists <- function(object, percent = 1:99,
   predictions <- lapply(predictions, model_average)
   predictions$stringsAsFactors <- FALSE
   predictions <- do.call("rbind", predictions)
-  predictions <- tibble::as_tibble(predictions)
-
-  predictions
+  as_conditional_tibble(predictions)
 }
 
 #' Predict Censored fitdists

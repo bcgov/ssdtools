@@ -71,15 +71,18 @@ ssd_gof.fitdist <- function(x, ...) {
     ks <- NA_real_
     cvm <- NA_real_
   }
-  tibble::tibble(dist = dist, ad = ad, ks = ks, cvm = cvm,
-                    aic = aic, aicc = aicc, bic = bic)
+  data <- data.frame(dist = dist, ad = ad, ks = ks, cvm = cvm,
+                    aic = aic, aicc = aicc, bic = bic, stringsAsFactors = FALSE)
+  as_conditional_tibble(data)
 }
 
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdistcens <- function(x, ...) {
   dist <- x$distname
-  tibble::tibble(dist = dist, aic = x$aic, bic = x$bic)
+  data <- data.frame(dist = dist, aic = x$aic, bic = x$bic, 
+                     stringsAsFactors = FALSE)
+  as_conditional_tibble(data)
 }
 
 #' @describeIn ssd_gof Goodness of Fit
