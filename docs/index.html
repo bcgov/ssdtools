@@ -152,7 +152,7 @@
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; * &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
 <a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
 <a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
@@ -164,7 +164,7 @@
 <a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1       5  1.25 0.751 0.598  3.28</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1       5  1.25 0.730 0.639  3.24</span></a></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">boron_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(boron_dists)</a></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
@@ -174,29 +174,6 @@
 <p>For more information and examples of how to use <code>ssdtools</code> in conjuction with <code>fitdistrplus</code> to assess alternative fits and deal with weighted and censored data see the vignette <code>ssdtools</code>. The vignette also demonstrates how to use <code>ssdtools</code> in conjunction with <code>ggplot2</code> to produce custom plots.</p>
 <p>A shiny webpage developed by <a href="https://github.com/sebdalgarno">Seb Dalgaro</a> of Poisson Consulting for non-users of R is available at <a href="https://poissonconsulting.shinyapps.io/ssdtools/" class="uri">https://poissonconsulting.shinyapps.io/ssdtools/</a>.</p>
 <p>The data included in <code>ssdtools</code> are sourced from the Canadian environmental quality guidelines <a href="http://ceqg-rcqe.ccme.ca/en/index.html">published by the Canadian Council of Ministers of the Environment</a>. See the <code>data-raw</code> folder for more information.</p>
-</div>
-<div id="citation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h2>
-<pre><code>Warning in citation(package = "ssdtools"): no date field in DESCRIPTION
-file of package 'ssdtools'
-Warning in citation(package = "ssdtools"): could not determine year for
-'ssdtools' from package DESCRIPTION file
-
-To cite package 'ssdtools' in publications use:
-
-  Joe Thorley and Carl Schwarz (NA). ssdtools: Species Sensitivity
-  Distributions. R package version 0.0.3.9002.
-  https://github.com/bcgov/ssdca
-
-A BibTeX entry for LaTeX users is
-
-  @Manual{,
-    title = {ssdtools: Species Sensitivity Distributions},
-    author = {Joe Thorley and Carl Schwarz},
-    note = {R package version 0.0.3.9002},
-    url = {https://github.com/bcgov/ssdca},
-  }</code></pre>
 </div>
 <div id="getting-help-or-reporting-an-issue" class="section level2">
 <h2 class="hasAnchor">

@@ -146,8 +146,9 @@ ssd_fit_dists <- function(
 
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
-  dists <- map(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
-  dists <- imap(dists, remove_errors, silent = silent)
+  dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
+  dists <- mapply(remove_errors, dists, names(dists), 
+                  MoreArgs = list(silent = silent), SIMPLIFY = FALSE)
   dists <- dists[!vapply(dists, is.null, TRUE)]
   if(!length(dists)) stop("all distributions failed to fit", call. = FALSE)
   if(left == right) {

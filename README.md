@@ -108,7 +108,7 @@ The goodness of fit can be assessed using `ssd_gof`
 ssd_gof(boron_dists)
 #> # A tibble: 6 x 9
 #>   dist        ad     ks    cvm   aic  aicc   bic delta weight
-#>   <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> * <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
 #> 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133
 #> 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049
 #> 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271
@@ -124,7 +124,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.731 0.596  3.19
+#> 1       5  1.25 0.725 0.618  3.16
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -158,30 +158,7 @@ non-users of R is available at
 The data included in `ssdtools` are sourced from the Canadian
 environmental quality guidelines [published by the Canadian Council of
 Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html).
-See the `data-raw` folder for more
-    information.
-
-## Citation
-
-    Warning in citation(package = "ssdtools"): no date field in DESCRIPTION
-    file of package 'ssdtools'
-    Warning in citation(package = "ssdtools"): could not determine year for
-    'ssdtools' from package DESCRIPTION file
-    
-    To cite package 'ssdtools' in publications use:
-    
-      Joe Thorley and Carl Schwarz (NA). ssdtools: Species Sensitivity
-      Distributions. R package version 0.0.3.9002.
-      https://github.com/bcgov/ssdca
-    
-    A BibTeX entry for LaTeX users is
-    
-      @Manual{,
-        title = {ssdtools: Species Sensitivity Distributions},
-        author = {Joe Thorley and Carl Schwarz},
-        note = {R package version 0.0.3.9002},
-        url = {https://github.com/bcgov/ssdca},
-      }
+See the `data-raw` folder for more information.
 
 ## Getting Help or Reporting an Issue
 

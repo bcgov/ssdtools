@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import checkr ggplot2 purrr stats
+#' @import checkr ggplot2 stats
 #' @importFrom FAdist dllog
 #' @importFrom fitdistrplus bootdist bootdistcens
 #' @importFrom graphics par plot title

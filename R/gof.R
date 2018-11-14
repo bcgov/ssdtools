@@ -88,7 +88,9 @@ ssd_gof.fitdistcens <- function(x, ...) {
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdists <- function(x, ...) {
-  x <- map_df(x, ssd_gof)
+  x <- lapply(x, ssd_gof)
+  x$stringsAsFactors <- FALSE
+  x <- do.call("rbind", x)
   if(!is.null(x$aicc)) {
     x$delta <- x$aicc - min(x$aicc)
   } else # aicc not defined for censored data

@@ -95,7 +95,7 @@ nobs.fitdistcens <- function(object, ...) nrow(object$censdata)
 
 #' @export
 nobs.fitdists <- function(object, ...) {
-  ns <- map_int(object, nobs)
+  ns <- vapply(object, nobs, 1L)
   if(!all(ns == ns[1]))
     stop("the fitdists must have the same number of observations", call. = FALSE)
   names(ns) <- NULL
@@ -126,7 +126,7 @@ npars.fitdistcens <- function(x, ...) length(x$estimate)
 
 #' @describeIn npars Get the Number of parameters
 #' @export
-npars.fitdists <- function(x, ...) map_int(x, npars)
+npars.fitdists <- function(x, ...) vapply(x, npars, 1L)
 
 #' Comma and Significance Formatter
 #'
@@ -151,7 +151,8 @@ ggname <- function(prefix, grob) {
 
 #' @export
 print.fitdists <- function(x, ...) {
-  walk(x, print)
+  lapply(x, print)
+  invisible(x)
 }
 
 #' Empirical Cumulative Density

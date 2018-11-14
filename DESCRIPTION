@@ -35,7 +35,6 @@ Imports:
     checkr,
     FAdist,
     grid,
-    purrr,
     scales,
     VGAM
 Suggests:

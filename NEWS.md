@@ -1,4 +1,4 @@
-- Removed dependencies: dplyr, magrittr, plyr
+- Removed dependencies: dplyr, magrittr, plyr, purrr
 - Moved from depends to imports: VGAM
 - Moved from imports to suggests: tibble
 

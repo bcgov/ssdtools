@@ -166,10 +166,10 @@
 <a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
 <a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
 <a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; * &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
 <a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
 <a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
 <a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
 <a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
@@ -195,25 +195,25 @@
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.752 0.594  3.22</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.735 0.606  3.20</span></a></code></pre></div>
 <p>By default model averaging is based on the Akaike’s Weights corrected for small sample size. To return the individual <span class="math inline">\(HC_5\)</span> estimates and their respective Akaike’s Weights set <code>average = FALSE</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">average =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;   dist     percent   est    se   lcl   ucl weight</span></a>
 <a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.727 0.842  3.64  0.133</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 2 llog           5  1.56 0.736 0.691  3.48  0.049</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.412 1.03   2.61  0.271</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.535 1.12   3.30  0.01 </span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 5 gamma          5  1.08 0.840 0.281  3.43  0.268</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 6 weibull        5  1.09 0.736 0.350  3.05  0.269</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.741 0.825  3.80  0.133</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 2 llog           5  1.56 0.762 0.669  3.52  0.049</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.418 0.984  2.65  0.271</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.542 1.13   3.09  0.01 </span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 5 gamma          5  1.08 0.885 0.300  3.66  0.268</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 6 weibull        5  1.09 0.751 0.399  3.26  0.269</span></a></code></pre></div>
 <p>For interpretation of the values see Schwarz and Tillmanns (in prep.).</p>
 <p>To get the <span class="math inline">\(HC_50\)</span> estimates use</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">hc =</span> 5L)</a>
 <a class="sourceLine" id="cb11-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 1       5  1.25 0.734 0.603  3.16</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 1       5  1.25 0.749 0.603  3.22</span></a></code></pre></div>
 </div>
 <div id="predictions" class="section level2">
 <h2 class="hasAnchor">
@@ -289,12 +289,12 @@
 <a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt; 6 1155.0    NA</span></a></code></pre></div>
 <p>There are less goodness-of-fit statistics available for fits to censored data (currently just aic and bic).</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">fluazinam_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(fluazinam, <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>)</a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="co">#&gt; Warning: gompertz failed to fit: Error in if (one.more) {: missing value where TRUE/FALSE needed</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="co">#&gt; Warning: gompertz failed to fit: Error in if (one.more) { : missing value where TRUE/FALSE needed</span></a>
 <a class="sourceLine" id="cb17-3" title="3"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(fluazinam_dists)</a>
 <a class="sourceLine" id="cb17-4" title="4"><span class="co">#&gt; Warning: Unknown or uninitialised column: 'aicc'.</span></a>
 <a class="sourceLine" id="cb17-5" title="5"><span class="co">#&gt; # A tibble: 5 x 5</span></a>
 <a class="sourceLine" id="cb17-6" title="6"><span class="co">#&gt;   dist      aic   bic delta weight</span></a>
-<a class="sourceLine" id="cb17-7" title="7"><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="co">#&gt; * &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb17-8" title="8"><span class="co">#&gt; 1 lnorm    150.  151. 0.269  0.274</span></a>
 <a class="sourceLine" id="cb17-9" title="9"><span class="co">#&gt; 2 llog     150.  151. 0.552  0.237</span></a>
 <a class="sourceLine" id="cb17-10" title="10"><span class="co">#&gt; 3 lgumbel  149.  151. 0      0.313</span></a>

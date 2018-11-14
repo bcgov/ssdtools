@@ -98,8 +98,10 @@ predict.fitdists <- function(object, percent = 1:99,
   ic <- split(ic, 1:nrow(ic))
 
   predictions <- lapply(object, predict, percent = percent, nboot = nboot, level = level)
-  predictions <- map2(predictions, ic, function(x, y) {x$weight <- y$weight; x})
-  predictions <- map2(predictions, names(predictions), function(x, y) {x$dist <- y;x})
+  predictions <- mapply(function(x, y) {x$weight <- y$weight; x}, predictions, ic,
+                        SIMPLIFY = FALSE)
+  predictions <- mapply(function(x, y) {x$dist <- y;x}, predictions, names(predictions),
+                        SIMPLIFY = FALSE)
   predictions$stringsAsFactors <- FALSE
   predictions <- do.call("rbind", predictions)
   predictions <- predictions[c("dist", "percent", "est", "se", "lcl", "ucl", "weight")]

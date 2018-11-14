@@ -103,12 +103,6 @@ A shiny webpage developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Po
 
 The data included in `ssdtools` are sourced from the Canadian environmental quality guidelines [published by the Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the `data-raw` folder for more information.
 
-## Citation
-
-```{r, comment="", echo=FALSE}
-citation(package = "ssdtools")
-```
-
 ## Getting Help or Reporting an Issue
 
 To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/ssdtools/issues/).

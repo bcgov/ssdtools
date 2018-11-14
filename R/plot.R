@@ -251,7 +251,7 @@ plot_fitdist <- function(x, breaks = "default", ...) {
 
 #' @export
 plot.fitdists <- function(x, breaks = "default", ...) {
-  walk(x, plot_fitdist, breaks = breaks, ...)
+  lapply(x, plot_fitdist, breaks = breaks, ...)
   invisible()
 }
 
