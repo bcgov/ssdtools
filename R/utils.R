@@ -140,7 +140,7 @@ npars.fitdists <- function(x, ...) map_int(x, npars)
 #' @examples
 #' comma_signif(1199)
 comma_signif <- function(x, digits = 1, ...) {
-  x %<>% signif(digits = digits)
+  x <- signif(x, digits = digits)
   scales::comma(x, ...)
 }
 

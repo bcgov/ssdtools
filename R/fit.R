@@ -37,12 +37,12 @@ fit_dist_uncensored <- function(data, left, weight, dist) {
 
   x <- data[[left]]
 
-  dist %<>% list(data = x, distr = ., method = "mle")
+  dist <- list(data = x, distr = dist, method = "mle")
 
   if(!is.null(weight))
     dist$weights <- data[[weight]]
 
-  dist %<>% add_starting_values(x)
+  dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdist, dist)
 }
 
@@ -51,12 +51,12 @@ fit_dist_censored <- function(data, left, right, weight, dist) {
   x <- rowMeans(data[c(left, right)], na.rm = TRUE)
 
   censdata <- data.frame(left = data[[left]], right = data[[right]])
-  dist %<>% list(censdata = censdata, distr = .)
+  dist <- list(censdata = censdata, distr = dist)
 
   if(!is.null(weight))
     dist$weights <- data[[weight]]
 
-  dist %<>% add_starting_values(x)
+  dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdistcens, dist)
 }
 
@@ -146,8 +146,8 @@ ssd_fit_dists <- function(
 
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
-  dists %<>% map(safe_fit_dist, data = data, left = left, right = right, weight = weight)
-  dists %<>% imap(remove_errors, silent = silent)
+  dists <- map(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
+  dists <- imap(dists, remove_errors, silent = silent)
   dists <- dists[!vapply(dists, is.null, TRUE)]
   if(!length(dists)) stop("all distributions failed to fit", call. = FALSE)
   if(left == right) {

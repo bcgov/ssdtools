@@ -17,7 +17,6 @@
 #' @importFrom fitdistrplus bootdist bootdistcens
 #' @importFrom graphics par plot title
 #' @importFrom grid grobName polygonGrob gpar
-#' @importFrom magrittr %<>% %>%
 #' @importFrom scales percent
 #' @importFrom VGAM vglm
 NULL

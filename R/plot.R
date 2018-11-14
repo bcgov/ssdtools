@@ -472,7 +472,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 
   if(!is.null(label)) {
     data$percent <- ssd_ecd(data[[left]])
-    data[[left]] %<>% magrittr::multiply_by(shift_x)
+    data[[left]] <- data[[left]] * shift_x
     gp <- gp + geom_text(data = data, aes_string(x = left, y = "percent", label = label),
                          hjust = 0, size = size, fontface = "italic")
   }

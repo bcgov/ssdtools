@@ -89,7 +89,7 @@ predict.fitdists <- function(object, percent = 1:99,
   ic$delta <- ic[[2]] - min(ic[[2]])
   ic$weight <- round(exp(-ic$delta/2)/sum(exp(-ic$delta/2)), 3)
 
-  ic %<>% split(., 1:nrow(.))
+  ic <- split(ic, 1:nrow(ic))
 
   predictions <- lapply(object, predict, percent = percent, nboot = nboot, level = level) %>%
     map2(ic, function(x, y) {x$weight <- y$weight; x}) %>%
@@ -97,9 +97,8 @@ predict.fitdists <- function(object, percent = 1:99,
 
   if(!average) return(predictions)
 
-  predictions %<>%
-    plyr::ddply("percent", model_average) %>%
-    tibble::as_tibble()
+  predictions <- plyr::ddply(predictions, "percent", model_average)
+  predictions <- tibble::as_tibble(predictions)
 
   predictions
 }
