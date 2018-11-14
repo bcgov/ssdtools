@@ -28,7 +28,6 @@ License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.0),
     graphics,
-    stats,
     ggplot2,
     fitdistrplus
 Imports:
@@ -36,6 +35,7 @@ Imports:
     FAdist,
     grid,
     scales,
+    stats,
     VGAM
 Suggests:
     covr,
