@@ -71,7 +71,7 @@ ssd_gof.fitdist <- function(x, ...) {
     ks <- NA_real_
     cvm <- NA_real_
   }
-  dplyr::data_frame(dist = dist, ad = ad, ks = ks, cvm = cvm,
+  tibble::tibble(dist = dist, ad = ad, ks = ks, cvm = cvm,
                     aic = aic, aicc = aicc, bic = bic)
 }
 
@@ -79,7 +79,7 @@ ssd_gof.fitdist <- function(x, ...) {
 #' @export
 ssd_gof.fitdistcens <- function(x, ...) {
   dist <- x$distname
-  dplyr::data_frame(dist = dist, aic = x$aic, bic = x$bic)
+  tibble::tibble(dist = dist, aic = x$aic, bic = x$bic)
 }
 
 #' @describeIn ssd_gof Goodness of Fit
