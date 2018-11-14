@@ -33,7 +33,6 @@ Depends:
     fitdistrplus
 Imports:
     checkr,
-    dplyr,
     FAdist,
     grid,
     plyr,
