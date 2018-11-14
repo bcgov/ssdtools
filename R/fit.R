@@ -17,7 +17,7 @@ add_starting_values <- function(dist, x) {
     dist$start <- list(scale = var(x) / mean(x),
                        shape = mean(x)^2 / var(x)^2)
   } else if(dist$distr == "gompertz"){
-    fit <- vglm(x~1, gompertz)
+    fit <- vglm(x~1, VGAM::gompertz)
     dist$start <- list(shape = exp(unname(coef(fit)[2])),
                        scale = exp(unname(coef(fit)[1])) )
   } else if(dist$distr == "lgumbel"){
@@ -26,7 +26,7 @@ add_starting_values <- function(dist, x) {
   } else if(dist$distr == "llog" ){
     dist$start <- list(shape = mean(log(x)), scale = pi*sd(log(x))/sqrt(3))
   } else if(dist$distr == "pareto"){
-    fit <- vglm(x~1, paretoff)
+    fit <- vglm(x~1, VGAM::paretoff)
     dist$start  <- list(shape = exp(unname(coef(fit))))
     dist$fix.arg<- list(scale = fit@extra$scale)
   }

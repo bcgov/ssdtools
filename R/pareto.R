@@ -12,55 +12,54 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Gompertz Distribution
+#' Pareto Distribution
 #'
 #' Density, distribution function, quantile function and random generation
-#' for the Gompertz distribution.
-#' The functions are wrappers on the equivalent VGAM functions that
-#' return a zero length numeric vector if x, q or p are zero length.
+#' for the Pareto distribution with parameters scale and shape.
+#' The functions are wrappers on the equivalent VGAM functions.
 #'
 #' @param x,q	vector of quantiles.
 #' @param p	vector of probabilities.
 #' @param n	number of observations.
-#' @param scale	scale parameter.
-#' @param shape shape parameter.
+#' @param scale	alpha parameter.
+#' @param shape k parameter.
 #' @param log,log.p logical; if TRUE, probabilities p are given as log(p).
 #' @param lower.tail	logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].
 #' @return
-#' dgompertz gives the density, pgompertz gives the distribution function,
-#' qgompertz gives the quantile function, and rgompertz generates random deviates.
-#' @seealso \code{\link[VGAM]{dgompertz}}
-#' @name gompertz
+#' dpareto gives the density, ppareto gives the distribution function,
+#' qpareto gives the quantile function, and rpareto generates random deviates.
+#' @seealso \code{\link[VGAM]{dpareto}}
+#' @name pareto
 #' @examples
-#' x <- rgompertz(1000,1,0.1)
+#' x <- rpareto(1000,1,0.1)
 #' hist(log(x),freq=FALSE,col='gray',border='white')
 #' hist(x,freq=FALSE,col='gray',border='white')
-#' curve(dgompertz(x,1,0.1),add=TRUE,col='red4',lwd=2)
+#' curve(dpareto(x,1,0.1),add=TRUE,col='red4',lwd=2)
 NULL
 
-#' @rdname gompertz
+#' @rdname pareto
 #' @export
-dgompertz <- function(x, scale = 1, shape, log = FALSE){
+dpareto <- function(x, scale = 1, shape, log = FALSE){
   if(!length(x)) return(numeric(0))
-  VGAM::dgompertz(x, scale = scale, shape = shape, log = log)
+  VGAM::dpareto(x, scale = scale, shape = shape, log = log)
 }
 
-#' @rdname gompertz
+#' @rdname pareto
 #' @export
-qgompertz <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE){
+qpareto <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE){
   if(!length(q)) return(numeric(0))
-  VGAM::qgompertz(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
+  VGAM::qpareto(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname gompertz
+#' @rdname pareto
 #' @export
-pgompertz <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE){
+ppareto <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE){
   if(!length(p)) return(numeric(0))
-  VGAM::pgompertz(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
+  VGAM::ppareto(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname gompertz
+#' @rdname pareto
 #' @export
-rgompertz <- function(n, scale = 1, shape){
-  VGAM::rgompertz(n, scale = scale, shape = shape)
+rpareto <- function(n, scale = 1, shape){
+  VGAM::rpareto(n, scale = scale, shape = shape)
 }

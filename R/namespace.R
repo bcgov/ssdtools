@@ -19,5 +19,5 @@
 #' @importFrom grid grobName polygonGrob gpar
 #' @importFrom magrittr %<>% %>%
 #' @importFrom scales percent
-#' @importFrom VGAM dgompertz gompertz paretoff vglm
+#' @importFrom VGAM vglm
 NULL

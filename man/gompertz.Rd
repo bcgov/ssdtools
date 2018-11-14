@@ -38,10 +38,15 @@ qgompertz gives the quantile function, and rgompertz generates random deviates.
 \description{
 Density, distribution function, quantile function and random generation
 for the Gompertz distribution.
+The functions are wrappers on the equivalent VGAM functions that
+return a zero length numeric vector if x, q or p are zero length.
 }
 \examples{
 x <- rgompertz(1000,1,0.1)
 hist(log(x),freq=FALSE,col='gray',border='white')
 hist(x,freq=FALSE,col='gray',border='white')
 curve(dgompertz(x,1,0.1),add=TRUE,col='red4',lwd=2)
+}
+\seealso{
+\code{\link[VGAM]{dgompertz}}
 }
