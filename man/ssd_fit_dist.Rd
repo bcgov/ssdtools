@@ -26,7 +26,7 @@ Fits a distribution to species sensitivity data.
 }
 \examples{
 ssd_fit_dist(boron_data)
-data(fluazinam)
+data(fluazinam, package = "fitdistrplus")
 ssd_fit_dist(fluazinam, left = "left", right = "right")
 }
 \seealso{

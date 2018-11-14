@@ -60,11 +60,6 @@ as well as several other packages.
 ``` r
 library(ssdtools)
 #> Loading required package: ggplot2
-#> Loading required package: fitdistrplus
-#> Loading required package: MASS
-#> Loading required package: survival
-#> Loading required package: npsurv
-#> Loading required package: lsei
 ```
 
 `ssdtools` provides a data set for several chemicals including Boron.
@@ -124,7 +119,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.753 0.593  3.23
+#> 1       5  1.25 0.734 0.605  3.19
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -172,7 +167,7 @@ If you would like to contribute to the package, please see our
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+to abide by its terms
 
 ## License
 

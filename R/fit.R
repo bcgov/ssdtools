@@ -81,7 +81,7 @@ remove_errors <- function(dist_fit, name, silent) {
 #'
 #' @examples
 #' ssd_fit_dist(boron_data)
-#' data(fluazinam)
+#' data(fluazinam, package = "fitdistrplus")
 #' ssd_fit_dist(fluazinam, left = "left", right = "right")
 ssd_fit_dist <- function(
   data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
@@ -134,7 +134,7 @@ ssd_fit_dist <- function(
 #' @seealso \code{\link{ssd_fit_dist}}
 #' @examples
 #' ssd_fit_dists(boron_data)
-#' data(fluazinam)
+#' data(fluazinam, package = "fitdistrplus")
 #' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,

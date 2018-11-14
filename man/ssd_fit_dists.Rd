@@ -43,7 +43,7 @@ It may be possible to use artificial censoring to improve the estimates in the e
 }
 \examples{
 ssd_fit_dists(boron_data)
-data(fluazinam)
+data(fluazinam, package = "fitdistrplus")
 ssd_fit_dists(fluazinam, left = "left", right = "right")
 }
 \references{

@@ -157,7 +157,7 @@ If the `right` argument in `ssd_fit_dists()` is different to the `left` argument
 `fluazinam` is a censored data set from the `fitdistrplus` package.
 
 ```{r}
-data(fluazinam)
+data(fluazinam, package = "fitdistrplus")
 head(fluazinam)
 ```
 

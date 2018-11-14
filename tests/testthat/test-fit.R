@@ -48,7 +48,7 @@ test_that("fit_dist", {
 })
 
 test_that("fluazinam", {
-  data(fluazinam)
+  data(fluazinam, package = "fitdistrplus")
   dist <- ssd_fit_dist(fluazinam, left = "left")
   expect_true(is.fitdist(dist))
   expect_false(is.fitdistcens(dist))

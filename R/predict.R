@@ -43,7 +43,7 @@ predict.fitdist <- function(object, percent = 1:99,
                           unique = TRUE)
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
-  boot <- bootdist(object, niter = nboot)
+  boot <- fitdistrplus::bootdist(object, niter = nboot)
   prediction <- lapply(percent, predict_fitdist_percent, boot = boot, level = level)
   prediction$stringsAsFactors <- FALSE
   prediction <- do.call("rbind", prediction)
@@ -65,7 +65,7 @@ predict.fitdistcens <- function(object, percent = 1:99,
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
 
-  boot <- bootdistcens(object, niter = nboot)
+  boot <- fitdistrplus::bootdistcens(object, niter = nboot)
   prediction <- lapply(percent, predict_fitdist_percent, boot = boot, level = level)
   prediction$stringsAsFactors <- FALSE
   prediction <- do.call("rbind", prediction)

@@ -14,7 +14,6 @@
 
 #' @import checkr ggplot2 stats
 #' @importFrom FAdist dllog
-#' @importFrom fitdistrplus bootdist bootdistcens
 #' @importFrom graphics par plot title
 #' @importFrom grid grobName polygonGrob gpar
 #' @importFrom scales percent

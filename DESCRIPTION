@@ -28,10 +28,10 @@ License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.0),
     graphics,
-    ggplot2,
-    fitdistrplus
+    ggplot2
 Imports:
     checkr,
+    fitdistrplus,
     FAdist,
     grid,
     scales,
