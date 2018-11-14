@@ -14,6 +14,7 @@
 
 .onLoad <- function(...) {
   register_s3_method("stats", "coef", "fitdists")
+  register_s3_method("graphics", "plot", "fitdists")
   invisible()
 }
 

@@ -244,9 +244,9 @@ geom_hcintersect <- function(mapping = NULL, data = NULL, xintercept, yintercept
 }
 
 plot_fitdist <- function(x, breaks = "default", ...) {
-  par(oma=c(0,0,2,0))
-  plot(x, breaks = breaks, ...)
-  title(paste("Distribution:", x$distname), outer = TRUE)
+  graphics::par(oma=c(0,0,2,0))
+  graphics::plot(x, breaks = breaks, ...)
+  graphics::title(paste("Distribution:", x$distname), outer = TRUE)
 }
 
 #' @export

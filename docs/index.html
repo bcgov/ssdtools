@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ssdtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9002</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9003</span>
       </span>
     </div>
 
@@ -120,12 +120,7 @@
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p><code>ssdtools</code> loads <code>fitdistrplus</code> and <code>ggplot2</code>, both of which it extends, as well as several other packages.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(ssdtools)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co">#&gt; Loading required package: ggplot2</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; Loading required package: fitdistrplus</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; Loading required package: MASS</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; Loading required package: survival</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; Loading required package: npsurv</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; Loading required package: lsei</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co">#&gt; Loading required package: ggplot2</span></a></code></pre></div>
 <p><code>ssdtools</code> provides a data set for several chemicals including Boron.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">boron_data</a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; # A tibble: 28 x 5</span></a>
@@ -164,7 +159,7 @@
 <a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1       5  1.25 0.738 0.612  3.22</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1       5  1.25 0.725 0.612  3.11</span></a></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">boron_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(boron_dists)</a></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
@@ -173,7 +168,7 @@
 <p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="700"></p>
 <p>For more information and examples of how to use <code>ssdtools</code> in conjuction with <code>fitdistrplus</code> to assess alternative fits and deal with weighted and censored data see the vignette <code>ssdtools</code>. The vignette also demonstrates how to use <code>ssdtools</code> in conjunction with <code>ggplot2</code> to produce custom plots.</p>
 <p>A shiny webpage developed by <a href="https://github.com/sebdalgarno">Seb Dalgaro</a> of Poisson Consulting for non-users of R is available at <a href="https://poissonconsulting.shinyapps.io/ssdtools/" class="uri">https://poissonconsulting.shinyapps.io/ssdtools/</a>.</p>
-<p>The data included in <code>ssdtools</code> are sourced from the Canadian environmental quality guidelines <a href="http://ceqg-rcqe.ccme.ca/en/index.html">published by the Canadian Council of Ministers of the Environment</a>. See the <code>data-raw</code> folder for more information.</p>
+<p>The data included in <code>ssdtools</code> are sourced from the Canadian environmental quality guidelines published by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html">Canadian Council of Ministers of the Environment</a>. See the <code>data-raw</code> folder for more information.</p>
 </div>
 <div id="getting-help-or-reporting-an-issue" class="section level2">
 <h2 class="hasAnchor">
@@ -184,7 +179,7 @@
 <h2 class="hasAnchor">
 <a href="#how-to-contribute" class="anchor"></a>How to Contribute</h2>
 <p>If you would like to contribute to the package, please see our <a href="CONTRIBUTING.html">CONTRIBUTING</a> guidelines.</p>
-<p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms</p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">

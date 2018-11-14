@@ -1,5 +1,5 @@
 - Removed dependencies: dplyr, magrittr, plyr, purrr
-- Moved from depends to imports: VGAM
+- Moved from depends to imports: VGAM, fitdistrplus, graphics
 - Moved from imports to suggests: tibble
 
 # ssdtools 0.0.3

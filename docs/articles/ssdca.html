@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9002</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9003</span>
       </span>
     </div>
 
@@ -169,7 +169,7 @@
 <a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; * &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
 <a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
 <a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
 <a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
 <a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
@@ -195,25 +195,25 @@
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.745 0.589  3.19</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.737 0.588  3.20</span></a></code></pre></div>
 <p>By default model averaging is based on the Akaike’s Weights corrected for small sample size. To return the individual <span class="math inline">\(HC_5\)</span> estimates and their respective Akaike’s Weights set <code>average = FALSE</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">average =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;   dist     percent   est    se   lcl   ucl weight</span></a>
 <a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.677 0.873  3.52  0.133</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 2 llog           5  1.56 0.734 0.726  3.52  0.049</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.443 0.989  2.75  0.271</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.545 1.12   3.19  0.01 </span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 5 gamma          5  1.08 0.861 0.280  3.49  0.268</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 6 weibull        5  1.09 0.735 0.349  3.13  0.269</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.725 0.903  3.76  0.133</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 2 llog           5  1.56 0.745 0.690  3.65  0.049</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.466 0.988  2.75  0.271</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.526 1.13   3.15  0.01 </span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 5 gamma          5  1.08 0.863 0.303  3.53  0.268</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 6 weibull        5  1.09 0.715 0.360  3.20  0.269</span></a></code></pre></div>
 <p>For interpretation of the values see Schwarz and Tillmanns (in prep.).</p>
 <p>To get the <span class="math inline">\(HC_50\)</span> estimates use</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">hc =</span> 5L)</a>
 <a class="sourceLine" id="cb11-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 1       5  1.25 0.733 0.615  3.17</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 1       5  1.25 0.762 0.596  3.30</span></a></code></pre></div>
 </div>
 <div id="predictions" class="section level2">
 <h2 class="hasAnchor">
@@ -278,7 +278,7 @@
 <h2 class="hasAnchor">
 <a href="#censored-data" class="anchor"></a>Censored Data</h2>
 <p>Censored data is that for which only a lower and/or upper limit is known for a particular species. If the <code>right</code> argument in <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> is different to the <code>left</code> argument then the data are considered to be censored. <code>fluazinam</code> is a censored data set from the <code>fitdistrplus</code> package.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">data</span>(fluazinam)</a>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">data</span>(fluazinam, <span class="dt">package =</span> <span class="st">"fitdistrplus"</span>)</a>
 <a class="sourceLine" id="cb16-2" title="2"><span class="kw">head</span>(fluazinam)</a>
 <a class="sourceLine" id="cb16-3" title="3"><span class="co">#&gt;     left right</span></a>
 <a class="sourceLine" id="cb16-4" title="4"><span class="co">#&gt; 1    3.8   3.8</span></a>

@@ -1,5 +1,5 @@
 Package: ssdtools
-Version: 0.0.3.9002
+Version: 0.0.3.9003
 Title: Species Sensitivity Distributions
 Description: Species sensitivity distributions are cumulative probability 
   distributions which are fitted to toxicity concentrations for multiple species.
@@ -27,12 +27,12 @@ BugReports: https://github.com/bcgov/ssdca/issues
 License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.0),
-    graphics,
     ggplot2
 Imports:
     checkr,
     fitdistrplus,
     FAdist,
+    graphics,
     grid,
     scales,
     stats,

@@ -119,7 +119,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.734 0.605  3.19
+#> 1       5  1.25 0.737 0.613  3.18
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -151,7 +151,7 @@ non-users of R is available at
 <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
 The data included in `ssdtools` are sourced from the Canadian
-environmental quality guidelines [published by the Canadian Council of
+environmental quality guidelines published by the [Canadian Council of
 Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html).
 See the `data-raw` folder for more information.
 
