@@ -28,7 +28,7 @@ Confidence intervals on fits and hazard concentrations are produced by bootstrap
 
 ## Installation
 
-To install the latest version from CRAN
+To install the latest version from [CRAN](https://CRAN.R-project.org/package=ssdtools)
 ```{r, eval = FALSE}
 install.packages("ssdtools")
 ```

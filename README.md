@@ -24,7 +24,8 @@ concentrations are produced by bootstrapping.
 
 ## Installation
 
-To install the latest version from CRAN
+To install the latest version from
+[CRAN](https://CRAN.R-project.org/package=ssdtools)
 
 ``` r
 install.packages("ssdtools")
@@ -58,9 +59,6 @@ as well as several other packages.
 
 ``` r
 library(ssdtools)
-#> Loading required package: VGAM
-#> Loading required package: stats4
-#> Loading required package: splines
 #> Loading required package: ggplot2
 #> Loading required package: fitdistrplus
 #> Loading required package: MASS
@@ -126,7 +124,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.735 0.616  3.21
+#> 1       5  1.25 0.748 0.622  3.21
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -167,11 +165,13 @@ See the `data-raw` folder for more
 
     Warning in citation(package = "ssdtools"): no date field in DESCRIPTION
     file of package 'ssdtools'
+    Warning in citation(package = "ssdtools"): could not determine year for
+    'ssdtools' from package DESCRIPTION file
     
     To cite package 'ssdtools' in publications use:
     
-      Joe Thorley and Carl Schwarz (2018). ssdtools: Species
-      Sensitivity Distributions. R package version 0.0.2.9002.
+      Joe Thorley and Carl Schwarz (NA). ssdtools: Species Sensitivity
+      Distributions. R package version 0.0.3.9001.
       https://github.com/bcgov/ssdca
     
     A BibTeX entry for LaTeX users is
@@ -179,8 +179,7 @@ See the `data-raw` folder for more
       @Manual{,
         title = {ssdtools: Species Sensitivity Distributions},
         author = {Joe Thorley and Carl Schwarz},
-        year = {2018},
-        note = {R package version 0.0.2.9002},
+        note = {R package version 0.0.3.9001},
         url = {https://github.com/bcgov/ssdca},
       }
 

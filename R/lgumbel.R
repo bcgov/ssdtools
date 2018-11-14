@@ -54,6 +54,7 @@ qlgumbel <- function(p, location = 0, scale = 0, lower.tail = TRUE, log.p = FALS
 #' @rdname lgumbel
 #' @export
 plgumbel <- function(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE){
+  if(!length(q)) return(numeric(0))
   Fq <- VGAM::pgumbel(log(q), location=location, scale=scale)
   if(!lower.tail) Fq <- 1-Fq
   if(log.p) Fq <- log(Fq)
