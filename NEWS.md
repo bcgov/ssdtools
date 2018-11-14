@@ -1,6 +1,5 @@
-- Removed dependencies: dplyr, magrittr
+- Removed dependencies: dplyr, magrittr, plyr
 - Moved from depends to imports: VGAM
-- Export 
 
 # ssdtools 0.0.3
 

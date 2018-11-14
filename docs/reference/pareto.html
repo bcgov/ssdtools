@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Autoplot — autoplot.fitdists • ssdtools</title>
+<title>Pareto Distribution — pareto • ssdtools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Autoplot — autoplot.fitdists" />
+<meta property="og:title" content="Pareto Distribution — pareto" />
 
-<meta property="og:description" content="Autoplot" />
+<meta property="og:description" content="Density, distribution function, quantile function and random generation
+for the Pareto distribution with parameters scale and shape.
+The functions are wrappers on the equivalent VGAM functions." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -117,57 +119,83 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Autoplot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdca/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
-    <div class="hidden name"><code>autoplot.fitdists.Rd</code></div>
+    <h1>Pareto Distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdca/blob/master/R/pareto.R'><code>R/pareto.R</code></a></small>
+    <div class="hidden name"><code>pareto.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Autoplot</p>
+    <p>Density, distribution function, quantile function and random generation
+for the Pareto distribution with parameters scale and shape.
+The functions are wrappers on the equivalent VGAM functions.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for fitdists</span>
-<span class='fu'>autoplot</span>(<span class='no'>object</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Concentration"</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Species Affected"</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aicc"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>dpareto</span>(<span class='no'>x</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>shape</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>qpareto</span>(<span class='no'>q</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>shape</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>ppareto</span>(<span class='no'>p</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>shape</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>rpareto</span>(<span class='no'>n</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>shape</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>The object to plot.</p></td>
+      <th>x, q</th>
+      <td><p>vector of quantiles.</p></td>
     </tr>
     <tr>
-      <th>xlab</th>
-      <td><p>A string of the x-axis label.</p></td>
+      <th>scale</th>
+      <td><p>alpha parameter.</p></td>
     </tr>
     <tr>
-      <th>ylab</th>
-      <td><p>A string of the x-axis label.</p></td>
+      <th>shape</th>
+      <td><p>k parameter.</p></td>
     </tr>
     <tr>
-      <th>ic</th>
-      <td><p>A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.</p></td>
+      <th>log, log.p</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Unused.</p></td>
+      <th>lower.tail</th>
+      <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td><p>vector of probabilities.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>number of observations.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>dpareto gives the density, ppareto gives the distribution function,
+qpareto gives the quantile function, and rpareto generates random deviates.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/VGAM/topics/ParetoUC'>dpareto</a></code></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>autoplot</span>(<span class='no'>boron_dists</span>)
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rpareto</span>(<span class='fl'>1000</span>,<span class='fl'>1</span>,<span class='fl'>0.1</span>)
+<span class='fu'>hist</span>(<span class='fu'>log</span>(<span class='no'>x</span>),<span class='kw'>freq</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>col</span><span class='kw'>=</span><span class='st'>'gray'</span>,<span class='kw'>border</span><span class='kw'>=</span><span class='st'>'white'</span>)</div><div class='img'><img src='pareto-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>hist</span>(<span class='no'>x</span>,<span class='kw'>freq</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>col</span><span class='kw'>=</span><span class='st'>'gray'</span>,<span class='kw'>border</span><span class='kw'>=</span><span class='st'>'white'</span>)</div><div class='input'><span class='fu'>curve</span>(<span class='fu'>dpareto</span>(<span class='no'>x</span>,<span class='fl'>1</span>,<span class='fl'>0.1</span>),<span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>col</span><span class='kw'>=</span><span class='st'>'red4'</span>,<span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='img'><img src='pareto-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

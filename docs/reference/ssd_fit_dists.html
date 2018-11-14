@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9002</span>
       </span>
     </div>
 
@@ -87,6 +87,9 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/ssdca.html">Introduction to ssdtools</a>
+    </li>
+    <li>
+      <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
   </ul>
 </li>
@@ -185,7 +188,7 @@ It may be possible to use artificial censoring to improve the estimates in the e
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_fit_dists</span>(<span class='no'>boron_data</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The dgompertz function should return a zero-length vector when input has length zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The pgompertz function should return a zero-length vector when input has length zero</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The plgumbel function should return a zero-length vector when input has length zero</span></div><div class='output co'>#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood 
+    <pre class="examples"><div class='input'><span class='fu'>ssd_fit_dists</span>(<span class='no'>boron_data</span>)</div><div class='output co'>#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood 
 #&gt; Parameters:
 #&gt;         estimate Std. Error
 #&gt; meanlog 2.561645  0.2346291
@@ -198,8 +201,8 @@ It may be possible to use artificial censoring to improve the estimates in the e
 #&gt; Fitting of the distribution ' gompertz ' by maximum likelihood 
 #&gt; Parameters:
 #&gt;          estimate  Std. Error
-#&gt; shape 0.039409038 0.011957924
-#&gt; scale 0.002603172 0.009957045
+#&gt; shape 0.039410051 0.011958014
+#&gt; scale 0.002601579 0.009957111
 #&gt; Fitting of the distribution ' lgumbel ' by maximum likelihood 
 #&gt; Parameters:
 #&gt;          estimate Std. Error
@@ -215,8 +218,7 @@ It may be possible to use artificial censoring to improve the estimates in the e
 #&gt;         estimate Std. Error
 #&gt; shape  0.9662825  0.1454446
 #&gt; scale 23.5097478  4.8528313</div><div class='input'><span class='fu'>data</span>(<span class='no'>fluazinam</span>)
-<span class='fu'>ssd_fit_dists</span>(<span class='no'>fluazinam</span>, <span class='kw'>left</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='st'>"right"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The plgumbel function should return a zero-length vector when input has length zero</span></div><div class='output co'>#&gt; &lt;simpleError in optim(par = vstart, fn = fnobjcens, fix.arg = fix.arg, gr = gradient,     rcens = rcens, lcens = lcens, icens = icens, ncens = ncens,     ddistnam = ddistname, pdistnam = pdistname, hessian = TRUE,     method = meth, lower = lower, upper = upper, ...): function cannot be evaluated at initial parameters&gt;</div><div class='output co'>#&gt; <span class='warning'>Warning: gompertz failed to fit: Error in if (one.more) {: missing value where TRUE/FALSE needed</span></div><div class='output co'>#&gt; <span class='warning'>Warning: lgumbel failed to fit: Error in (function (censdata, distr, start = NULL, fix.arg = NULL, keepdata = TRUE, : the function mle failed to estimate the parameters, </span>
-#&gt; <span class='warning'>        with the error code 100</span></div><div class='output co'>#&gt; Fitting of the distribution ' lnorm ' on censored data by maximum likelihood 
+<span class='fu'>ssd_fit_dists</span>(<span class='no'>fluazinam</span>, <span class='kw'>left</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='st'>"right"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: gompertz failed to fit: Error in if (one.more) {: missing value where TRUE/FALSE needed</span></div><div class='output co'>#&gt; Fitting of the distribution ' lnorm ' on censored data by maximum likelihood 
 #&gt; Parameters:
 #&gt;         estimate
 #&gt; meanlog 4.976920
@@ -226,6 +228,11 @@ It may be possible to use artificial censoring to improve the estimates in the e
 #&gt;       estimate
 #&gt; shape 1.591448
 #&gt; scale 4.954329
+#&gt; Fitting of the distribution ' lgumbel ' on censored data by maximum likelihood 
+#&gt; Parameters:
+#&gt;          estimate
+#&gt; location 3.758518
+#&gt; scale    2.633732
 #&gt; Fitting of the distribution ' gamma ' on censored data by maximum likelihood 
 #&gt; Parameters:
 #&gt;           estimate

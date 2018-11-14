@@ -26,7 +26,7 @@ model_average <- function(x) {
   se <- sqrt(sum(x$weight * (x$se^2 + (x$est - est)^2)))
   lcl <- sum(x$lcl * x$weight)
   ucl <- sum(x$ucl * x$weight)
-  tibble::data_frame(est = est, se = se, lcl = lcl, ucl = ucl)
+  tibble::data_frame(percent = x$percent[1], est = est, se = se, lcl = lcl, ucl = ucl)
 }
 
 #' Predict fitdist
@@ -42,8 +42,9 @@ predict.fitdist <- function(object, percent = 1:99,
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
   boot <- bootdist(object, niter = nboot)
-  prediction <- map_df(percent, predict_fitdist_percent, boot = boot, level = level)
-  prediction
+  prediction <- lapply(percent, predict_fitdist_percent, boot = boot, level = level)
+  prediction$stringsAsFactors <- FALSE
+  do.call("rbind", prediction)
 }
 
 #' Predict censored fitdist
@@ -62,8 +63,9 @@ predict.fitdistcens <- function(object, percent = 1:99,
   check_probability(level)
 
   boot <- bootdistcens(object, niter = nboot)
-  prediction <- map_df(percent, predict_fitdist_percent, boot = boot, level = level)
-  prediction
+  prediction <- lapply(percent, predict_fitdist_percent, boot = boot, level = level)
+  prediction$stringsAsFactors <- FALSE
+  do.call("rbind", prediction)
 }
 
 #' Predict fitdist
@@ -99,8 +101,11 @@ predict.fitdists <- function(object, percent = 1:99,
   predictions <- predictions[c("dist", "percent", "est", "se", "lcl", "ucl", "weight")]
 
   if(!average) return(predictions)
-
-  predictions <- plyr::ddply(predictions, "percent", model_average)
+  
+  predictions <- split(predictions, predictions$percent)
+  predictions <- lapply(predictions, model_average)
+  predictions$stringsAsFactors <- FALSE
+  predictions <- do.call("rbind", predictions)
   predictions <- tibble::as_tibble(predictions)
 
   predictions
