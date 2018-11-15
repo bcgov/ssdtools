@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ssdtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9003</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9004</span>
       </span>
     </div>
 
@@ -50,6 +50,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/ssdtools.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -60,9 +63,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/ssdca.html">Introduction to ssdtools</a>
-    </li>
-    <li>
       <a href="articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
   </ul>
@@ -139,8 +139,8 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</a></code></pre></div>
 <p>and plot using the <code>ggplot2</code> generic <code>autoplot</code></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plotting theme</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw"><a href="ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(boron_dists)</a></code></pre></div>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme_get">theme_set</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_bw</a></span>()) <span class="co"># set plotting theme</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(boron_dists)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="700"></p>
 <p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
@@ -158,14 +158,14 @@
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.749 0.613  3.19</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.751 0.624  3.28</span></a></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">boron_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(boron_dists)</a></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">shape =</span> <span class="st">"Group"</span>, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
 <a class="sourceLine" id="cb11-2" title="2">         <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="700"></p>
-<p>For more information and examples of how to use <code>ssdtools</code> to assess alternative fits and deal with weighted and censored data see the vignette <code>ssdtools</code>. The vignette also demonstrates how to use <code>ssdtools</code> in conjunction with <code>ggplot2</code> to produce custom plots.</p>
+<p>For more information and examples of how to use <code>ssdtools</code> see the vignette <code>ssdtools</code>.</p>
 <p>A shiny webpage developed by <a href="https://github.com/sebdalgarno">Seb Dalgaro</a> of Poisson Consulting for non-users of R is available at <a href="https://poissonconsulting.shinyapps.io/ssdtools/" class="uri">https://poissonconsulting.shinyapps.io/ssdtools/</a>.</p>
 <p>The data included in <code>ssdtools</code> are sourced from the Canadian environmental quality guidelines published by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw"><code>data-raw</code></a> folder for more information.</p>
 </div>

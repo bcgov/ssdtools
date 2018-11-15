@@ -93,8 +93,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)")
 ```
 
-For more information and examples of how to use `ssdtools` to assess alternative fits and deal with weighted and censored data see the vignette `ssdtools`.
-The vignette also demonstrates how to use `ssdtools` in conjunction with `ggplot2` to produce custom plots.
+For more information and examples of how to use `ssdtools` see the vignette `ssdtools`.
 
 A shiny webpage developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for non-users of R is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.
 

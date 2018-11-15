@@ -113,7 +113,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.771 0.614  3.35
+#> 1       5  1.25 0.734 0.611  3.15
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -133,10 +133,8 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
 
 ![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
-For more information and examples of how to use `ssdtools` to assess
-alternative fits and deal with weighted and censored data see the
-vignette `ssdtools`. The vignette also demonstrates how to use
-`ssdtools` in conjunction with `ggplot2` to produce custom plots.
+For more information and examples of how to use `ssdtools` see the
+vignette `ssdtools`.
 
 A shiny webpage developed by [Seb
 Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for

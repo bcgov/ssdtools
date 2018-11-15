@@ -1,10 +1,10 @@
 ---
-title: "Introduction to ssdtools"
+title: "ssdtools"
 author: "Joe Thorley"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
- %\VignetteIndexEntry{Introduction to ssdtools}
+ %\VignetteIndexEntry{ssdtools}
  %\VignetteEngine{knitr::rmarkdown}
  %\VignetteEncoding{UTF-8}
 ---

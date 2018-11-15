@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9003</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.3.9004</span>
       </span>
     </div>
 
@@ -43,6 +43,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/ssdtools.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -53,9 +56,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/ssdca.html">Introduction to ssdtools</a>
-    </li>
-    <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
   </ul>
@@ -147,7 +147,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(data, <span class="dt">dists =</span> <span class="kw">c</span>(<span class="st">"lnorm"</span>, <span class="st">"gompertz"</span>, <span class="st">"gamma"</span>, <span class="st">"weibull"</span>))</a></code></pre></div>
 <p>The fits can be plotted using <code>autoplot</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw"><a href="ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(dists)</a></code></pre></div>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(dists)</a></code></pre></div>
 <p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
 <ul>
