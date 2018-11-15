@@ -40,18 +40,6 @@ install.packages("devtools")
 devtools::install_github("bcgov/ssdtools")
 ```
 
-To install the latest version development version and build its vignettes:
-
-```{r, eval = FALSE}
-install.packages("devtools")
-devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
-```
-
-To see the available vignettes
-```{r, eval = FALSE}
-browseVignettes("ssdtools")
-```
-
 ## Introduction
 
 `ssdtools` provides a data set for several chemicals including Boron.
@@ -68,7 +56,7 @@ boron_dists <- ssd_fit_dists(boron_data)
 and plot using the `ggplot2` generic `autoplot`
 ```{r, warning = FALSE}
 library(ggplot2)
-theme_set(theme_bw()) # set plotting theme
+theme_set(theme_bw())
 autoplot(boron_dists)
 ```
 
@@ -90,12 +78,12 @@ boron_pred <- predict(boron_dists)
 and plotted together with the original data using `ssd_plot`.
 ```{r}
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
-         xlab = "Concentration (mg/L)")
+         xlab = "Concentration (mg/L)", ribbon = TRUE) + expand_limits(x = 3000)
 ```
 
-For more information and examples of how to use `ssdtools` see the vignette `ssdtools`.
+The ssdtools manual is available at <https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html>.
 
-A shiny webpage developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for non-users of R is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.
+A shiny webpage developed for non-R-users is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
 The data included in `ssdtools` are sourced from the Canadian environmental quality guidelines published by the [Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the [`data-raw`](https://github.com/bcgov/ssdtools/tree/master/data-raw) folder for more information.
 

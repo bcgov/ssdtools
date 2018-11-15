@@ -38,20 +38,6 @@ install.packages("devtools")
 devtools::install_github("bcgov/ssdtools")
 ```
 
-To install the latest version development version and build its
-vignettes:
-
-``` r
-install.packages("devtools")
-devtools::install_github("bcgov/ssdtools", force = TRUE, build_vignettes = TRUE)
-```
-
-To see the available vignettes
-
-``` r
-browseVignettes("ssdtools")
-```
-
 ## Introduction
 
 `ssdtools` provides a data set for several chemicals including Boron.
@@ -85,11 +71,11 @@ and plot using the `ggplot2` generic `autoplot`
 
 ``` r
 library(ggplot2)
-theme_set(theme_bw()) # set plotting theme
+theme_set(theme_bw())
 autoplot(boron_dists)
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -113,7 +99,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.734 0.611  3.15
+#> 1       5  1.25 0.727 0.618  3.15
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -128,17 +114,15 @@ and plotted together with the original data using
 
 ``` r
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
-         xlab = "Concentration (mg/L)")
+         xlab = "Concentration (mg/L)", ribbon = TRUE) + expand_limits(x = 3000)
 ```
 
-![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
 
-For more information and examples of how to use `ssdtools` see the
-vignette `ssdtools`.
+The ssdtools manual is available at
+<https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html>.
 
-A shiny webpage developed by [Seb
-Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for
-non-users of R is available at
+A shiny webpage developed for non-R-users is available at
 <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
 The data included in `ssdtools` are sourced from the Canadian

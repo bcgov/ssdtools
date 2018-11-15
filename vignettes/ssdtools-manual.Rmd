@@ -13,16 +13,17 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 4,
+  fig.height = 4
 )
 ```
 
-## Background
+## Introduction
 
 `ssdtools` is an R package to fit Species Sensitivity Distributions (SSDs) using Maximum Likelihood and model averaging.
 
-SSDs are cumulative probability distributions that are used to estimate the
-proportion of a range of species that are affected by a given concentration of a chemical.
+SSDs are cumulative probability distributions that are used to estimate the proportion of a range of species that are affected by a given concentration of a chemical.
 The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC).
 For more information on SSDs the reader is referred to @posthuma_species_2001.
 
@@ -30,7 +31,7 @@ In order to use `ssdtools` you need to install R (see below) or use the Shiny [a
 The shiny app includes a user guide. 
 This vignette is a user manual for the R package.
 
-## Installation
+## Installing
 
 In order to install R [@r] the appropriate binary for the users operating system should be downloaded from [CRAN](https://cran.r-project.org) and then installed.
 
@@ -43,15 +44,12 @@ The `ssdtools` package can then be loaded into the current session using
 library(ssdtools)
 ```
 
-The `ssdtool` package loads several other R packages including `ggplot2` [@ggplot2] for plotting 
-and `fitdistrplus` [@fitdistrplus] for model fitting.
-
 ## Getting Help
 
 To get additional information on a particular function just type `?` followed by the name of the function at the R console.
 For example `?ssd_gof` brings up the R documentation for the `ssdtools` goodness of fit function.
 
-## Input Data
+## Inputting Data
 
 Once the `ssdtools` package has been loaded the next task is to input some data.
 An easy way to do this is to save the concentration data for a *single* chemical as a column called `Conc` in a comma separated file (`.csv`). 
@@ -67,69 +65,172 @@ data <- ssdtools::boron_data
 print(data)
 ```
 
-## Fit Distributions
+## Fitting Distributions
 
-With the data loaded the user can use the `ssd_fit_dists()` function to fit one or more distributions.
-By default `ssd_fit_dists()` fits the log-normal (`lnorm`), log-logistic (`llog`), log-Gumbel (`lgumbel`), Gompertz (`gompertz`), gamma (`gamma`) and Weibull (`weibull`) distributions.
-The user can change specify a subset using the `dists` argument.
+The function `ssd_fit_dists()` inputs a data frame and fits one or more distributions.
+The user can specify a subset of the log-normal (`lnorm`), log-logistic (`llog`), log-Gumbel (`lgumbel`), Gompertz (`gompertz`), gamma (`gamma`) and Weibull (`weibull`) distributions and/or include the pareto (`pareto`) distribution using the `dists` argument.
 ```{r}
-dists <- ssd_fit_dists(data, dists = c("lnorm", "gompertz", "gamma", "weibull"))
+dists <- ssd_fit_dists(data, dists = c("lnorm", "gompertz"))
 ```
 
-The fits can be plotted using `autoplot`.
-```{r, fig.width = 6, fig.height= 6}
+The coefficients can be extracted using the `coef` function.
+In and off themselves the coefficients are not that helpful.
+```{r}
+lapply(dists, coef)
+```
+
+It is generally much more informative to plot the fits using the `ggplot2` `autoplot` generic function.
+As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
+```{r, fig.width = 5}
 library(ggplot2)
-autoplot(dists)
+autoplot(dists) + theme_bw() + ggtitle("Species Sensitivity Distributions for Boron")
 ```
 
+## Assessing Goodness of Fit
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+In addition, several goodness of fit statistics including the Akaike's Information Criteron corrected for sample size (`aicc`) can be generated using `ssd_gof()`.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+Moving forwards we consider the same six fits to boron as Schwarz and Tillmanns (2017).
+```{r}
+boron_dists <- ssd_fit_dists(boron_data)
+ssd_gof(boron_dists)
+```
+For interpretation of the values see Schwarz and Tillmanns (2017).
 
-## Vignette Info
+## 5% Hazard Concentration
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+Typically, species sensitivity distributions are fitted to estimate the 5% hazard concentration ($HC_5$).
+This is the concentration that affects just 5% of the species tested.
+The model-averaged $HC_5$ estimate (with 95% confidence limits) can be calculated as follows
+```{r}
+ssd_hc(boron_dists)
+```
+By default model averaging is based on the Akaike's Weights corrected for small sample size.
+To return the individual $HC_5$ estimates and their respective Akaike's Weights set `average = FALSE`
+```{r}
+ssd_hc(boron_dists, average = FALSE)
+```
+For interpretation of the values see Schwarz and Tillmanns (in prep.).
 
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+To get the $HC_50$ estimates use
+```{r}
+ssd_hc(boron_dists, hc = 5L)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+## Predicting
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+The `predict` function can be used to generate model-averaged (or individual) 
+estimates across the full range of hazard concentrations.
+```{r, eval = FALSE}
+boron_pred <- predict(boron_dists)
 ```
 
-Also a quote using `>`:
+The resultant values provide valuable information
+```{r}
+boron_pred
+```
+which can be plotted together with the original data to summarise an analysis
+```{r, fig.height = 5, fig.width = 6}
+theme_set(theme_bw()) # change the theme
+ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
+         ylab = "Concentration (mg/L)") + 
+  expand_limits(x = 5000) + # to ensure the species labels fit
+  scale_color_manual(values = c("Amphibian" = "Black", "Fish" = "Blue", 
+                                "Invertebrate" = "Red", "Plant" = "Brown")) +
+  ggtitle("Species Sensitivity for Boron")
+```
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+Once again the returned object is a `ggplot` object which can be customized prior to plotting.
+By default, the plot includes the model-averaged 95% confidence interval as a shaded band and 
+the model-averaged $HC_5$ as a dotted line.
+
+## Extending ggplot
+
+The `sscda` package provides three ggplot geoms to allow you construct your own plots.
+They are `geom_ssd()` to plot the original data, 
+`geom_hcintersect()` to plot the hazard concentration and `geom_xribbon()` to plot the confidence intervals.
+
+They can be used as follows
+
+```{r}
+gp <- ggplot(boron_pred, aes_string(x = "est")) + 
+  geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2) +
+  geom_line(aes_string(y = "percent/100")) +
+  geom_hcintersect(xintercept = boron_pred$est[boron_pred$percent == 5], yintercept = 5/100) +
+  geom_ssd(data = boron_data, aes_string(x = "Conc"))
+print(gp)
+```    
+
+To log the x-axis use the following code.
+```{r}
+gp <- gp + coord_trans(x = "log10") +
+  scale_x_continuous(breaks = scales::trans_breaks("log10", function(x) 10^x),
+                     labels = comma_signif)
+print(gp)
+```
+
+The current plot can be saved as a file using `ggsave()`,
+which also allows the user to set the resolution.
+```r
+ggsave("file_name.png", dpi = 600)
+```
+
+## Additional Features
+
+### Cullen Frey Plots
+
+The data can be visualized using a cullen frey plot of the skewness and kurtosis.
+
+```{r, fig.width = 6, fig.height = 6}
+library(ssdtools)
+ssd_cfplot(boron_data)
+```
+
+### Model Diagnostics
+
+A `fitdists` object can be plotted to display model diagnostics plots for each fit.
+```{r, fig.width=6, fig.height=6, fig.show='hold'}
+plot(dists)
+```
+
+### Weighted Data
+
+The `ssd_fit_dists()` function allows the user to name a column that specifies
+the weights to use in the estimation. 
+However, to date very little functionality has been implemented for weighted fits in the `fitdistrplus` package.
+```{r, error = TRUE}
+boron_data$Weight <- as.integer(boron_data$Group)
+fit <- ssd_fit_dists(boron_data, weight = "Weight", dists = c("lnorm", "weibull"))
+fit
+plot(fit)
+```
+
+### Censored Data
+
+Censored data is that for which only a lower and/or upper limit is known for a particular species. 
+If the `right` argument in `ssd_fit_dists()` is different to the `left` argument then the data are considered to be censored. 
+`fluazinam` is a censored data set from the `fitdistrplus` package.
+
+```{r}
+data(fluazinam, package = "fitdistrplus")
+head(fluazinam)
+```
+
+There are less goodness-of-fit statistics available for
+fits to censored data (currently just aic and bic).
+```{r}
+fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")
+ssd_gof(fluazinam_dists)
+```
+But model-averaged predictions can be made using AIC
+```{r, eval = FALSE}
+fluazinam_pred <- predict(fluazinam_dists)
+```
+and the results plotted complete with arrows indicating the censorship.
+```{r}
+ssd_plot(fluazinam, fluazinam_pred, 
+         left = "left", right = "right", 
+         ylab = "Concentration (mg/L)")
+```
 
 ## References
-
