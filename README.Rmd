@@ -98,7 +98,7 @@ The vignette also demonstrates how to use `ssdtools` in conjunction with `ggplot
 
 A shiny webpage developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for non-users of R is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
-The data included in `ssdtools` are sourced from the Canadian environmental quality guidelines published by the [Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the `data-raw` folder for more information.
+The data included in `ssdtools` are sourced from the Canadian environmental quality guidelines published by the [Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the [`data-raw`](https://github.com/bcgov/ssdtools/tree/master/data-raw) folder for more information.
 
 ## Getting Help or Reporting an Issue
 

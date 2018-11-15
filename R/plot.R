@@ -22,13 +22,13 @@ NULL
 #' @format NULL
 #' @usage NULL
 #' @export
-StatSsd <- ggplot2::ggproto(
-  "StatSsd", ggplot2::Stat,
+StatSsd <- ggproto(
+  "StatSsd", Stat,
   compute_panel = function(data, scales) {
     data$density <- ssd_ecd(data$x)
     data
   },
-  default_aes = ggplot2::aes(y = ..density..),
+  default_aes = aes(y = ..density..),
   required_aes = "x"
 )
 
@@ -36,13 +36,13 @@ StatSsd <- ggplot2::ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatSsdcens <- ggplot2::ggproto(
-  "StatSsdcens", ggplot2::Stat,
+StatSsdcens <- ggproto(
+  "StatSsdcens", Stat,
   compute_panel = function(data, scales) {
     data$density <- ssd_ecd(rowMeans(data[c("xmin", "xmax")], na.rm = TRUE))
     data
   },
-  default_aes = ggplot2::aes(y = ..density..),
+  default_aes = aes(y = ..density..),
   required_aes = c("xmin", "xmax")
 )
 
@@ -50,16 +50,16 @@ StatSsdcens <- ggplot2::ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomSsd <- ggplot2::ggproto(
-  "GeomSsd", ggplot2::GeomPoint
+GeomSsd <- ggproto(
+  "GeomSsd", GeomPoint
 )
 
 #' @rdname ssdtools-ggproto
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomSsdcens <- ggplot2::ggproto(
-  "GeomSsdcens", ggplot2::GeomPoint
+GeomSsdcens <- ggproto(
+  "GeomSsdcens", GeomPoint
 )
 
 #' @rdname ssdtools-ggproto
@@ -158,7 +158,7 @@ plot_coord_scale <- function(data, xlab, ylab) {
 stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, ...) {
-  ggplot2::layer(
+  layer(
     stat = StatSsd, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
