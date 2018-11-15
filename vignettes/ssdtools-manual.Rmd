@@ -181,7 +181,7 @@ print(gp)
 In the above plot the model-averaged 95% confidence interval is indicated by the shaded band and the model-averaged 5% Hazard Concentration ($HC_5$) by the dotted line.
 Hazard concentrations are discussed below.
 
-## 5% Hazard Concentration
+## Hazard Concentrations
 
 The 5% hazard concentration ($HC_5$) is the concentration that affects 5% of the species tested.
 It can be obtained by selecting the estimated prediction with a percent value of 5.

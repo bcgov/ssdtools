@@ -177,8 +177,8 @@
 <a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; 2.561645 1.241540 </span></a>
 <a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; $gompertz</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt;      shape      scale </span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; 0.03940970 0.00260192</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt;       shape       scale </span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; 0.039405250 0.002606669</span></a></code></pre></div>
 <p>It is generally much more informative to plot the fits using the <code>ggplot2</code> <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting (printing) to make it look prettier.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="kw"><a href="ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plot theme</span></a>
@@ -258,9 +258,9 @@
 <p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
 <p>In the above plot the model-averaged 95% confidence interval is indicated by the shaded band and the model-averaged 5% Hazard Concentration (<span class="math inline">\(HC_5\)</span>) by the dotted line. Hazard concentrations are discussed below.</p>
 </div>
-<div id="hazard-concentration" class="section level2">
+<div id="hazard-concentrations" class="section level2">
 <h2 class="hasAnchor">
-<a href="#hazard-concentration" class="anchor"></a>5% Hazard Concentration</h2>
+<a href="#hazard-concentrations" class="anchor"></a>Hazard Concentrations</h2>
 <p>The 5% hazard concentration (<span class="math inline">\(HC_5\)</span>) is the concentration that affects 5% of the species tested. It can be obtained by selecting the estimated prediction with a percent value of 5.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">boron_pred[boron_pred<span class="op">$</span>percent <span class="op">==</span><span class="st"> </span><span class="dv">5</span>,]</a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
@@ -417,7 +417,7 @@
       <li><a href="#selecting-one-distribution">Selecting One Distribution</a></li>
       <li><a href="#averaging-multiple-distributions">Averaging Multiple Distributions</a></li>
       <li><a href="#estimating-the-fit">Estimating the Fit</a></li>
-      <li><a href="#hazard-concentration">5% Hazard Concentration</a></li>
+      <li><a href="#hazard-concentrations">Hazard Concentrations</a></li>
       <li><a href="#plotting">Plotting</a></li>
       <li><a href="#additional-features">Additional Features</a></li>
       <li><a href="#references">References</a></li>
