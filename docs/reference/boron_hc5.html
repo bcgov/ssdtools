@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Autoplot — autoplot.fitdistscens • ssdtools</title>
+<title>Model averaged 5% hazard concentration for CCME Boron Data — boron_hc5 • ssdtools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Autoplot — autoplot.fitdistscens" />
+<meta property="og:title" content="Model averaged 5% hazard concentration for CCME Boron Data — boron_hc5" />
 
-<meta property="og:description" content="Autoplot" />
+<meta property="og:description" content="A data frame of the predictions based on 10000 bootstrap." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -114,57 +114,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Autoplot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
-    <div class="hidden name"><code>autoplot.fitdistscens.Rd</code></div>
+    <h1>Model averaged 5% hazard concentration for CCME Boron Data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>boron_hc5.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Autoplot</p>
+    <p>A data frame of the predictions based on 10000 bootstrap.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for fitdistscens</span>
-<span class='fu'>autoplot</span>(<span class='no'>object</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Concentration"</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Species Affected"</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aic"</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>object</th>
-      <td><p>The object to plot.</p></td>
-    </tr>
-    <tr>
-      <th>xlab</th>
-      <td><p>A string of the x-axis label.</p></td>
-    </tr>
-    <tr>
-      <th>ylab</th>
-      <td><p>A string of the x-axis label.</p></td>
-    </tr>
-    <tr>
-      <th>ic</th>
-      <td><p>A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Unused.</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='no'>boron_hc5</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A tbl data frame:</p><dl class='dl-horizontal'>
+  <dt>percent</dt><dd><p>The percent of species affected &lt;int&gt;.</p></dd>
+  <dt>est</dt><dd><p>The estimated concentration &lt;dbl&gt;.</p></dd>
+  <dt>se</dt><dd><p>The standard error of the estimate &lt;dbl&gt;.</p></dd>
+  <dt>lcl</dt><dd><p>The lower confidence limit &lt;dbl&gt;.</p></dd>
+  <dt>se</dt><dd><p>The upper confidence limit &lt;dbl&gt;.</p></dd>
+</dl>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='ggplot2.tidyverse.org/reference/autoplot.html'>autoplot</a></span>(<span class='no'>boron_dists</span>)
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='no'>boron_hc5</span></div><div class='output co'>#&gt; # A tibble: 1 x 5
+#&gt;   percent   est    se   lcl   ucl
+#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1       5  1.25 0.734 0.600  3.20</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#format">Format</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

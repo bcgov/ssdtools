@@ -4,7 +4,7 @@
 \alias{predict.fitdist}
 \title{Predict fitdist}
 \usage{
-\method{predict}{fitdist}(object, percent = 1:99, nboot = 1001,
+\method{predict}{fitdist}(object, percent = 1:99, nboot = 1000,
   level = 0.95, ...)
 }
 \arguments{

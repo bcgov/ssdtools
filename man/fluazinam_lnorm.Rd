@@ -4,7 +4,7 @@
 \name{fluazinam_lnorm}
 \alias{fluazinam_lnorm}
 \title{fitdist for CCME Boron Data}
-\format{An object of class \code{fitdistcens} of length 13.}
+\format{An object of class \code{fitdistcens} of length 17.}
 \usage{
 fluazinam_lnorm
 }

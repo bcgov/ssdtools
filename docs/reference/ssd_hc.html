@@ -98,7 +98,7 @@ at which by default 5% of the species are affected." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bcgov/ssdca">
+  <a href="https://github.com/bcgov/ssdtools">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -116,7 +116,7 @@ at which by default 5% of the species are affected." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Hazard Concentration</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdca/blob/master/R/hc.R'><code>R/hc.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/hc.R'><code>R/hc.R</code></a></small>
     <div class="hidden name"><code>ssd_hc.Rd</code></div>
     </div>
 
@@ -130,19 +130,19 @@ at which by default 5% of the species are affected.</p>
     <pre class="usage"><span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for fitdist</span>
-<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1001</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
+<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for fitdistcens</span>
-<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1001</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='no'>...</span>)
 
 <span class='co'># S3 method for fitdists</span>
 <span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aicc"</span>, <span class='kw'>average</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1001</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
+  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for fitdistscens</span>
 <span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aic"</span>, <span class='kw'>average</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1001</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,7 +195,7 @@ at which by default 5% of the species are affected.</p>
     <pre class="examples"><div class='input'><span class='fu'>ssd_hc</span>(<span class='no'>boron_lnorm</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 5
 #&gt;   percent   est    se   lcl   ucl
 #&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1       5  1.68 0.735 0.808  3.72</div><span class='co'># NOT RUN {</span>
+#&gt; 1       5  1.68 0.734 0.808  3.72</div><span class='co'># NOT RUN {</span>
 <span class='fu'>ssd_hc</span>(<span class='no'>fluazinam_lnorm</span>)
 <span class='co'># }</span><span class='co'># NOT RUN {</span>
 <span class='fu'>ssd_hc</span>(<span class='no'>boron_dists</span>)

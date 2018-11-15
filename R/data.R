@@ -52,7 +52,7 @@
 
 #' Model averaged predictions for CCME Boron Data
 #'
-#' A data frame of the predictions.
+#' A data frame of the predictions based on 1,000 bootstrap iterations.
 #'
 #' @format A tbl data frame:
 #' \describe{
@@ -65,6 +65,22 @@
 #' @examples
 #' head(boron_pred)
 "boron_pred"
+
+#' Model averaged 5\% hazard concentration for CCME Boron Data
+#'
+#' A data frame of the predictions based on 10000 bootstrap.
+#'
+#' @format A tbl data frame:
+#' \describe{
+#'   \item{percent}{The percent of species affected <int>.}
+#'   \item{est}{The estimated concentration <dbl>.}
+#'   \item{se}{The standard error of the estimate <dbl>.}
+#'   \item{lcl}{The lower confidence limit <dbl>.}
+#'   \item{se}{The upper confidence limit <dbl>.}
+#' }
+#' @examples
+#' boron_hc5
+"boron_hc5"
 
 #' CCME Species Sensitivity Data
 #'

@@ -141,7 +141,7 @@ ssd_fit_dists <- function(
   dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
   silent = FALSE
 ) {
-  check_vector(dists, length = c(1,.Machine$integer.max), unique = TRUE, named = FALSE)
+  check_vector(dists, length = TRUE, unique = TRUE, named = FALSE)
   check_flag(silent)
 
   safe_fit_dist <- safely(ssd_fit_dist)

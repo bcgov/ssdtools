@@ -14,9 +14,9 @@
 
 library(magrittr)
 library(stringr)
-library(devtools)
-library(ssdca)
 library(dplyr)
+library(ssdtools)
+library(usethis)
 
 ccme_data <- read.csv("data-raw/CCME data.csv", stringsAsFactors = FALSE)
 ccme_data <- ccme_data[!is.na(ccme_data$Conc),]
@@ -162,7 +162,10 @@ use_data(boron_dists, overwrite = TRUE)
 boron_pred <- predict(boron_dists)
 use_data(boron_pred, overwrite = TRUE)
 
-data("fluazinam")
+boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
+use_data(boron_hc5, overwrite = TRUE)
+
+data("fluazinam", package = "fitdistrplus")
 fluazinam_lnorm <- ssd_fit_dist(fluazinam, left = "left", right = "right")
 use_data(fluazinam_lnorm, overwrite = TRUE)
 
