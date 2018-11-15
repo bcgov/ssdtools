@@ -109,41 +109,41 @@
 <h2 class="hasAnchor">
 <a href="#cullen-frey-plots" class="anchor"></a>Cullen Frey Plots</h2>
 <p>The data can be visualized using a cullen frey plot of the skewness and kurtosis. Here we plot species sensitivity data for Boron.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="../reference/ssd_cfplot.html">ssd_cfplot</a></span>(boron_data)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(ssdtools)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="../reference/ssd_cfplot.html">ssd_cfplot</a></span>(boron_data)</a></code></pre></div>
 <p><img src="ssdca_files/figure-html/unnamed-chunk-1-1.png" width="480"></p>
 </div>
 <div id="fitting-distributions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#fitting-distributions" class="anchor"></a>Fitting Distributions</h2>
 <p>The function <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> inputs a data frame (with the concentration values, by default, in the <code>Conc</code> column) and fits one or more distributions. Here we fit the log-normal and weibull distributions to the Boron data.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(ssdtools)</a>
-<a class="sourceLine" id="cb2-2" title="2">boron_data</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; # A tibble: 28 x 5</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt;    Chemical Species                  Conc Group        Units</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt;  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt;  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt;  3 Boron    Micropterus salmoides     4.1 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt;  4 Boron    Brachydanio rerio        10   Fish         mg/L </span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt;  5 Boron    Carassius auratus        15.6 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt;  6 Boron    Pimephales promelas      18.3 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt;  7 Boron    Daphnia magna             6   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; # ... with 18 more rows</span></a>
-<a class="sourceLine" id="cb2-17" title="17">boron_dists2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data, <span class="dt">dists =</span> <span class="kw">c</span>(<span class="st">"lnorm"</span>, <span class="st">"weibull"</span>))</a>
-<a class="sourceLine" id="cb2-18" title="18">boron_dists2</a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood </span></a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt; Parameters:</span></a>
-<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt;         estimate Std. Error</span></a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; meanlog 2.561645  0.2346291</span></a>
-<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; sdlog   1.241540  0.1659073</span></a>
-<a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; Fitting of the distribution ' weibull ' by maximum likelihood </span></a>
-<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt; Parameters:</span></a>
-<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt;         estimate Std. Error</span></a>
-<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt; shape  0.9662825  0.1454446</span></a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt; scale 23.5097478  4.8528313</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">boron_data</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt; # A tibble: 28 x 5</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt;    Chemical Species                  Conc Group        Units</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt;  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt;  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt;  3 Boron    Micropterus salmoides     4.1 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt;  4 Boron    Brachydanio rerio        10   Fish         mg/L </span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt;  5 Boron    Carassius auratus        15.6 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt;  6 Boron    Pimephales promelas      18.3 Fish         mg/L </span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt;  7 Boron    Daphnia magna             6   Invertebrate mg/L </span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; # ... with 18 more rows</span></a>
+<a class="sourceLine" id="cb2-16" title="16">boron_dists2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data, <span class="dt">dists =</span> <span class="kw">c</span>(<span class="st">"lnorm"</span>, <span class="st">"weibull"</span>))</a>
+<a class="sourceLine" id="cb2-17" title="17">boron_dists2</a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood </span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; Parameters:</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt;         estimate Std. Error</span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt; meanlog 2.561645  0.2346291</span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; sdlog   1.241540  0.1659073</span></a>
+<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; Fitting of the distribution ' weibull ' by maximum likelihood </span></a>
+<a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; Parameters:</span></a>
+<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt;         estimate Std. Error</span></a>
+<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt; shape  0.9662825  0.1454446</span></a>
+<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt; scale 23.5097478  4.8528313</span></a></code></pre></div>
 <p>The coefficients can be extracted using the <code>coef</code> function</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">lapply</span>(boron_dists2, coef)</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="co">#&gt; $lnorm</span></a>
@@ -180,11 +180,12 @@
 <div id="plotting-fits" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-fits" class="anchor"></a>Plotting Fits</h2>
-<p>The actual fits can be plotted using the ggplot generic <code>autoplot</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">autoplot</span>(boron_dists)</a></code></pre></div>
+<p>The actual fits can be plotted using the ggplot2 generic <code>autoplot</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(boron_dists)</a></code></pre></div>
 <p><img src="ssdca_files/figure-html/unnamed-chunk-6-1.png" width="480"></p>
 <p>As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting, which is extremely useful.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">autoplot</span>(boron_dists) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">"Species Sensitivity Distributions for Boron"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(boron_dists) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_bw</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Species Sensitivity Distributions for Boron"</span>)</a></code></pre></div>
 <p><img src="ssdca_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
 </div>
 <div id="hazard-concentration" class="section level2">
@@ -195,25 +196,25 @@
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.737 0.588  3.20</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.743 0.589  3.21</span></a></code></pre></div>
 <p>By default model averaging is based on the Akaike’s Weights corrected for small sample size. To return the individual <span class="math inline">\(HC_5\)</span> estimates and their respective Akaike’s Weights set <code>average = FALSE</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">average =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;   dist     percent   est    se   lcl   ucl weight</span></a>
 <a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.725 0.903  3.76  0.133</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 2 llog           5  1.56 0.745 0.690  3.65  0.049</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.466 0.988  2.75  0.271</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.526 1.13   3.15  0.01 </span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 5 gamma          5  1.08 0.863 0.303  3.53  0.268</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 6 weibull        5  1.09 0.715 0.360  3.20  0.269</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.729 0.862  3.64  0.133</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 2 llog           5  1.56 0.772 0.728  3.65  0.049</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.469 0.962  2.79  0.271</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.529 1.16   3.21  0.01 </span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 5 gamma          5  1.08 0.857 0.305  3.56  0.268</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 6 weibull        5  1.09 0.773 0.373  3.23  0.269</span></a></code></pre></div>
 <p>For interpretation of the values see Schwarz and Tillmanns (in prep.).</p>
 <p>To get the <span class="math inline">\(HC_50\)</span> estimates use</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">hc =</span> 5L)</a>
 <a class="sourceLine" id="cb11-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 1       5  1.25 0.762 0.596  3.30</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 1       5  1.25 0.742 0.614  3.26</span></a></code></pre></div>
 </div>
 <div id="predictions" class="section level2">
 <h2 class="hasAnchor">
@@ -237,13 +238,13 @@
 <a class="sourceLine" id="cb13-14" title="14"><span class="co">#&gt; 10      10 2.46  1.10  1.32   5.46</span></a>
 <a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt; # ... with 89 more rows</span></a></code></pre></div>
 <p>which can be plotted together with the original data to summarise an analysis</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">theme_set</span>(<span class="kw">theme_bw</span>()) <span class="co"># change the theme</span></a>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme_get">theme_set</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_bw</a></span>()) <span class="co"># change the theme</span></a>
 <a class="sourceLine" id="cb14-2" title="2"><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">shape =</span> <span class="st">"Group"</span>, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
 <a class="sourceLine" id="cb14-3" title="3">         <span class="dt">ylab =</span> <span class="st">"Concentration (mg/L)"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">x =</span> <span class="dv">5000</span>) <span class="op">+</span><span class="st"> </span><span class="co"># to ensure the species labels fit</span></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">"Amphibian"</span> =<span class="st"> "Black"</span>, <span class="st">"Fish"</span> =<span class="st"> "Blue"</span>, </a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/expand_limits">expand_limits</a></span>(<span class="dt">x =</span> <span class="dv">5000</span>) <span class="op">+</span><span class="st"> </span><span class="co"># to ensure the species labels fit</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_manual">scale_color_manual</a></span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">"Amphibian"</span> =<span class="st"> "Black"</span>, <span class="st">"Fish"</span> =<span class="st"> "Blue"</span>, </a>
 <a class="sourceLine" id="cb14-6" title="6">                                <span class="st">"Invertebrate"</span> =<span class="st"> "Red"</span>, <span class="st">"Plant"</span> =<span class="st"> "Brown"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Species Sensitivity for Boron"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb14-7" title="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Species Sensitivity for Boron"</span>)</a></code></pre></div>
 <p><img src="ssdca_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
 <p>Once again the returned object is a <code>ggplot</code> object which can be customized prior to plotting. By default, the plot includes the model-averaged 95% confidence interval as a shaded band and the model-averaged <span class="math inline">\(HC_5\)</span> as a dotted line.</p>
 </div>
@@ -316,21 +317,21 @@
 <a href="#extending-ggplot" class="anchor"></a>Extending ggplot</h2>
 <p>The <code>sscda</code> package provides three ggplot geoms to allow you construct your own plots. They are <code><a href="../reference/geom_ssd.html">geom_ssd()</a></code> to plot the original data, <code><a href="../reference/geom_hcintersect.html">geom_hcintersect()</a></code> to plot the hazard concentration and <code><a href="../reference/geom_xribbon.html">geom_xribbon()</a></code> to plot the confidence intervals.</p>
 <p>They can be used as follows</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">gp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(boron_pred, <span class="kw">aes_string</span>(<span class="dt">x =</span> <span class="st">"est"</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span>(<span class="kw">aes_string</span>(<span class="dt">xmin =</span> <span class="st">"lcl"</span>, <span class="dt">xmax =</span> <span class="st">"ucl"</span>, <span class="dt">y =</span> <span class="st">"percent/100"</span>), <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes_string</span>(<span class="dt">y =</span> <span class="st">"percent/100"</span>)) <span class="op">+</span></a>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">gp &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(boron_pred, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes_">aes_string</a></span>(<span class="dt">x =</span> <span class="st">"est"</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes_">aes_string</a></span>(<span class="dt">xmin =</span> <span class="st">"lcl"</span>, <span class="dt">xmax =</span> <span class="st">"ucl"</span>, <span class="dt">y =</span> <span class="st">"percent/100"</span>), <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes_">aes_string</a></span>(<span class="dt">y =</span> <span class="st">"percent/100"</span>)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb20-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span>(<span class="dt">xintercept =</span> boron_pred<span class="op">$</span>est[boron_pred<span class="op">$</span>percent <span class="op">==</span><span class="st"> </span><span class="dv">5</span>], <span class="dt">yintercept =</span> <span class="dv">5</span><span class="op">/</span><span class="dv">100</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb20-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/geom_ssd.html">geom_ssd</a></span>(<span class="dt">data =</span> boron_data, <span class="kw">aes_string</span>(<span class="dt">x =</span> <span class="st">"Conc"</span>))</a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/geom_ssd.html">geom_ssd</a></span>(<span class="dt">data =</span> boron_data, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes_">aes_string</a></span>(<span class="dt">x =</span> <span class="st">"Conc"</span>))</a>
 <a class="sourceLine" id="cb20-6" title="6"><span class="kw">print</span>(gp)</a></code></pre></div>
 <p><img src="ssdca_files/figure-html/unnamed-chunk-19-1.png" width="480"></p>
 <p>To log the x-axis use the following code.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">gp &lt;-<span class="st"> </span>gp <span class="op">+</span><span class="st"> </span><span class="kw">coord_trans</span>(<span class="dt">x =</span> <span class="st">"log10"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/trans_breaks">trans_breaks</a></span>(<span class="st">"log10"</span>, <span class="cf">function</span>(x) <span class="dv">10</span><span class="op">^</span>x),</a>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">gp &lt;-<span class="st"> </span>gp <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/coord_trans">coord_trans</a></span>(<span class="dt">x =</span> <span class="st">"log10"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_x_continuous</a></span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/trans_breaks">trans_breaks</a></span>(<span class="st">"log10"</span>, <span class="cf">function</span>(x) <span class="dv">10</span><span class="op">^</span>x),</a>
 <a class="sourceLine" id="cb21-3" title="3">                     <span class="dt">labels =</span> comma_signif)</a>
 <a class="sourceLine" id="cb21-4" title="4"><span class="kw">print</span>(gp)</a></code></pre></div>
 <p><img src="ssdca_files/figure-html/unnamed-chunk-20-1.png" width="480"></p>
-<p>The current plot can be saved as a file using <code>ggsave()</code>, which also allows the user to set the resolution.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">ggsave</span>(<span class="st">"file_name.png"</span>, <span class="dt">dpi =</span> <span class="dv">600</span>)</a></code></pre></div>
+<p>The current plot can be saved as a file using <code><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggsave">ggsave()</a></code>, which also allows the user to set the resolution.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggsave">ggsave</a></span>(<span class="st">"file_name.png"</span>, <span class="dt">dpi =</span> <span class="dv">600</span>)</a></code></pre></div>
 </div>
   </div>
 

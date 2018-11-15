@@ -119,10 +119,10 @@ GeomXribbon <- ggproto(
                                  y = c(y, rev(y)), x = c(xmax, rev(xmin)), id = c(ids, rev(ids)))
     munched <- coord_munch(coord, positions, panel_params)
 
-    ggname("geom_ribbon", polygonGrob(
+    ggname("geom_ribbon", grid::polygonGrob(
       munched$x, munched$y, id = munched$id,
       default.units = "native",
-      gp = gpar(
+      gp = grid::gpar(
         fill = alpha(aes$fill, aes$alpha),
         col = aes$colour,
         lwd = aes$size * .pt,
@@ -139,7 +139,7 @@ plot_coord_scale <- function(data, xlab, ylab) {
     coord_trans(x = "log10"),
     scale_x_continuous(xlab, breaks = scales::trans_breaks("log10", function(x) 10^x),
                        labels = comma_signif),
-    scale_y_continuous(ylab, labels = percent, limits = c(0, 1),
+    scale_y_continuous(ylab, labels = scales::percent, limits = c(0, 1),
                        breaks = seq(0,1,by = 0.2), expand = c(0,0))
   )
 }
@@ -265,7 +265,7 @@ plot.fitdists <- function(x, breaks = "default", ...) {
 #' @param ... Unused.
 #' @export
 #' @examples
-#' autoplot(boron_lnorm)
+#' ggplot2::autoplot(boron_lnorm)
 autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
                              xlab = "Concentration", ylab = "Species Affected",
                              ...) {
@@ -297,7 +297,7 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
 #' @examples
 #' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 #' fluazinam_lnorm$censdata$left[5] <- NA
-#' autoplot(fluazinam_lnorm)
+#' ggplot2::autoplot(fluazinam_lnorm)
 autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
                                  xlab = "Concentration", ylab = "Species Affected",
                                  ...) {
@@ -348,7 +348,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
 #' @export
 #' @examples
 #' \dontrun{
-#' autoplot(boron_dists)
+#' ggplot2::autoplot(boron_dists)
 #' }
 autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Affected", ic = "aicc", ...) {
   check_string(xlab)
@@ -375,7 +375,7 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Af
 #' @export
 #' @examples
 #' \dontrun{
-#' autoplot(boron_dists)
+#' ggplot2::autoplot(boron_dists)
 #' }
 autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Species Affected",
                                   ic = "aic", ...) {

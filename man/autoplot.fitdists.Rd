@@ -23,6 +23,6 @@ Autoplot
 }
 \examples{
 \dontrun{
-autoplot(boron_dists)
+ggplot2::autoplot(boron_dists)
 }
 }

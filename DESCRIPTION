@@ -26,12 +26,12 @@ URL: https://github.com/bcgov/ssdca
 BugReports: https://github.com/bcgov/ssdca/issues
 License: Apache License (== 2.0) | file LICENSE
 Depends:
-    R (>= 3.4.0),
-    ggplot2
+    R (>= 3.4.0)
 Imports:
     checkr,
     fitdistrplus,
     FAdist,
+    ggplot2,
     graphics,
     grid,
     scales,

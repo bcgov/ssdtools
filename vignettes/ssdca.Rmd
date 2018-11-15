@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
   fig.width = 3,
   fig.height = 3
 )
-library(ssdtools)
 ```
 
 
@@ -37,6 +36,7 @@ The data can be visualized using a cullen frey plot of the skewness and kurtosis
 Here we plot species sensitivity data for Boron.
 
 ```{r, fig.width = 5, fig.height = 5}
+library(ssdtools)
 ssd_cfplot(boron_data)
 ```
 
@@ -46,7 +46,6 @@ The function `ssd_fit_dists()` inputs a data frame (with the concentration value
 by default, in the `Conc` column) and fits one or more distributions.
 Here we fit the log-normal and weibull distributions to the Boron data.
 ```{r}
-library(ssdtools)
 boron_data
 boron_dists2 <- ssd_fit_dists(boron_data, dists = c("lnorm", "weibull"))
 boron_dists2
@@ -80,8 +79,9 @@ subset(boron_dists, select = c("gamma", "weibull"))
 
 ## Plotting Fits
 
-The actual fits can be plotted using the ggplot generic `autoplot`.
+The actual fits can be plotted using the ggplot2 generic `autoplot`.
 ```{r, fig.width = 5 }
+library(ggplot2)
 autoplot(boron_dists)
 ```
 

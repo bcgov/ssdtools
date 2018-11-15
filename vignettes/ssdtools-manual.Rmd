@@ -78,6 +78,7 @@ dists <- ssd_fit_dists(data, dists = c("lnorm", "gompertz", "gamma", "weibull"))
 
 The fits can be plotted using `autoplot`.
 ```{r, fig.width = 6, fig.height= 6}
+library(ggplot2)
 autoplot(dists)
 ```
 

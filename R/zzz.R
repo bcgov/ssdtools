@@ -13,8 +13,16 @@
 #    limitations under the License.
 
 .onLoad <- function(...) {
+  register_s3_method("stats", "nobs", "fitdist")
+  register_s3_method("stats", "nobs", "fitdists")
+  register_s3_method("stats", "nobs", "fitdistcens")
   register_s3_method("stats", "coef", "fitdists")
+  register_s3_method("stats", "predict", "fitdists")
   register_s3_method("graphics", "plot", "fitdists")
+  register_s3_method("ggplot2", "autoplot", "fitdist")
+  register_s3_method("ggplot2", "autoplot", "fitdists")
+  register_s3_method("ggplot2", "autoplot", "fitdistcens")
+  register_s3_method("ggplot2", "autoplot", "fitdistscens")
   invisible()
 }
 

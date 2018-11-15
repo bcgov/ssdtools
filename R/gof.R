@@ -54,7 +54,7 @@ ssd_gof <- function(x, ...) {
 #' @export
 ssd_gof.fitdist <- function(x, ...) {
   dist <- x$distname
-  n <- nobs(x)
+  n <- stats::nobs(x)
   k <- npars(x)
 
   aic <- x$aic

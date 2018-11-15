@@ -24,5 +24,5 @@
 Autoplot
 }
 \examples{
-autoplot(boron_lnorm)
+ggplot2::autoplot(boron_lnorm)
 }

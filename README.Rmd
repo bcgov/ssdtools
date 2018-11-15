@@ -54,13 +54,9 @@ browseVignettes("ssdtools")
 
 ## Introduction
 
-`ssdtools` loads `fitdistrplus` and `ggplot2`, both of which it extends, as well as several other packages.
-```{r}
-library(ssdtools)
-```
-
 `ssdtools` provides a data set for several chemicals including Boron.
 ```{r}
+library(ssdtools)
 boron_data
 ```
 
@@ -71,6 +67,7 @@ boron_dists <- ssd_fit_dists(boron_data)
 
 and plot using the `ggplot2` generic `autoplot`
 ```{r, warning = FALSE}
+library(ggplot2)
 theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
 ```
@@ -96,7 +93,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)")
 ```
 
-For more information and examples of how to use `ssdtools` in conjuction with `fitdistrplus` to assess alternative fits and deal with weighted and censored data see the vignette `ssdtools`.
+For more information and examples of how to use `ssdtools` to assess alternative fits and deal with weighted and censored data see the vignette `ssdtools`.
 The vignette also demonstrates how to use `ssdtools` in conjunction with `ggplot2` to produce custom plots.
 
 A shiny webpage developed by [Seb Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for non-users of R is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.

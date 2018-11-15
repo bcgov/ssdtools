@@ -5,13 +5,12 @@ knitr::opts_chunk$set(
   fig.width = 3,
   fig.height = 3
 )
-library(ssdtools)
 
 ## ---- fig.width = 5, fig.height = 5--------------------------------------
+library(ssdtools)
 ssd_cfplot(boron_data)
 
 ## ------------------------------------------------------------------------
-library(ssdtools)
 boron_data
 boron_dists2 <- ssd_fit_dists(boron_data, dists = c("lnorm", "weibull"))
 boron_dists2

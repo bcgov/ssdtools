@@ -12,9 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import checkr ggplot2 stats
-#' @importFrom FAdist dllog
-#' @importFrom grid grobName polygonGrob gpar
-#' @importFrom scales percent
+#' @import checkr ggplot2
+#' @importFrom graphics plot
+#' @importFrom stats coef nobs predict
 #' @importFrom VGAM vglm
 NULL

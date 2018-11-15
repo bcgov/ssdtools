@@ -15,5 +15,5 @@
 Number of Observations
 }
 \examples{
-nobs(boron_lnorm)
+stats::nobs(boron_lnorm)
 }

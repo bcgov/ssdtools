@@ -14,17 +14,17 @@
 
 add_starting_values <- function(dist, x) {
   if(dist$dist == "gamma"){
-    dist$start <- list(scale = var(x) / mean(x),
-                       shape = mean(x)^2 / var(x)^2)
+    dist$start <- list(scale = stats::var(x) / mean(x),
+                       shape = mean(x)^2 / stats::var(x)^2)
   } else if(dist$distr == "gompertz"){
     fit <- vglm(x~1, VGAM::gompertz)
     dist$start <- list(shape = exp(unname(coef(fit)[2])),
                        scale = exp(unname(coef(fit)[1])) )
   } else if(dist$distr == "lgumbel"){
     dist$start <- list(location = mean(log(x)),
-                       scale = pi*sd(log(x))/sqrt(6))
+                       scale = pi*stats::sd(log(x))/sqrt(6))
   } else if(dist$distr == "llog" ){
-    dist$start <- list(shape = mean(log(x)), scale = pi*sd(log(x))/sqrt(3))
+    dist$start <- list(shape = mean(log(x)), scale = pi*stats::sd(log(x))/sqrt(3))
   } else if(dist$distr == "pareto"){
     fit <- vglm(x~1, VGAM::paretoff)
     dist$start  <- list(shape = exp(unname(coef(fit))))

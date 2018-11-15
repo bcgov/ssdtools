@@ -15,7 +15,7 @@
 predict_fitdist_percent <- function(percent, boot, level) {
   quantile <- quantile(boot, percent/100, CI.level = level)
   est <- quantile$quantiles[1,1]
-  se <- sd(quantile$bootquant[,1], 2)
+  se <- stats::sd(quantile$bootquant[,1], 2)
   lcl <- quantile$quantCI[1,1]
   ucl <- quantile$quantCI[2,1]
   data.frame(percent = percent, est = est, se = se, lcl = lcl, ucl = ucl, 

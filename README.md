@@ -54,17 +54,10 @@ browseVignettes("ssdtools")
 
 ## Introduction
 
-`ssdtools` loads `fitdistrplus` and `ggplot2`, both of which it extends,
-as well as several other packages.
-
-``` r
-library(ssdtools)
-#> Loading required package: ggplot2
-```
-
 `ssdtools` provides a data set for several chemicals including Boron.
 
 ``` r
+library(ssdtools)
 boron_data
 #> # A tibble: 28 x 5
 #>    Chemical Species                  Conc Group        Units
@@ -91,11 +84,12 @@ boron_dists <- ssd_fit_dists(boron_data)
 and plot using the `ggplot2` generic `autoplot`
 
 ``` r
+library(ggplot2)
 theme_set(theme_bw()) # set plotting theme
 autoplot(boron_dists)
 ```
 
-![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -119,7 +113,7 @@ ssd_hc(boron_dists)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.737 0.613  3.18
+#> 1       5  1.25 0.734 0.595  3.20
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -137,13 +131,12 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)")
 ```
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
-For more information and examples of how to use `ssdtools` in conjuction
-with `fitdistrplus` to assess alternative fits and deal with weighted
-and censored data see the vignette `ssdtools`. The vignette also
-demonstrates how to use `ssdtools` in conjunction with `ggplot2` to
-produce custom plots.
+For more information and examples of how to use `ssdtools` to assess
+alternative fits and deal with weighted and censored data see the
+vignette `ssdtools`. The vignette also demonstrates how to use
+`ssdtools` in conjunction with `ggplot2` to produce custom plots.
 
 A shiny webpage developed by [Seb
 Dalgaro](https://github.com/sebdalgarno) of Poisson Consulting for
