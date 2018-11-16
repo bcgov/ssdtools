@@ -63,7 +63,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bcgov/ssdca">
+  <a href="https://github.com/bcgov/ssdtools">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -83,9 +83,9 @@
       <h1>ssdtools User Manual</h1>
                         <h4 class="author">Joe Thorley</h4>
             
-            <h4 class="date">2018-11-14</h4>
+            <h4 class="date">2018-11-15</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdca/blob/master/vignettes/ssdtools-manual.Rmd"><code>vignettes/ssdtools-manual.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/ssdtools-manual.Rmd"><code>vignettes/ssdtools-manual.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools-manual.Rmd</code></div>
 
     </div>
@@ -96,8 +96,13 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p><code>ssdtools</code> is an R package to fit Species Sensitivity Distributions (SSDs) using Maximum Likelihood and model averaging.</p>
-<p>SSDs are cumulative probability distributions that are used to estimate the proportion of a range of species that are affected by a given concentration of a chemical. The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC). For more information on SSDs the reader is referred to <span class="citation">Posthuma, Suter II, and Traas (2001)</span>.</p>
+<p>SSDs are cumulative probability distributions that are used to estimate the percent of species that are affected by a given concentration of a chemical. The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC). For more information on SSDs the reader is referred to <span class="citation">Posthuma, Suter II, and Traas (2001)</span>.</p>
 <p>In order to use <code>ssdtools</code> you need to install R (see below) or use the Shiny <a href="https://poissonconsulting.shinyapps.io/ssdtools/">app</a>. The shiny app includes a user guide. This vignette is a user manual for the R package.</p>
+</div>
+<div id="philosophy" class="section level2">
+<h2 class="hasAnchor">
+<a href="#philosophy" class="anchor"></a>Philosophy</h2>
+<p><code>ssdtools</code> provides the key functionality required to fit SSDs using Maximum Likelihood and model averaging in R. It is intended to be used in conjunction with other R packages such as <code>readr</code> to input data, <code>dplyr</code> to manipulate data and <code>ggplot2</code> to plot data. The general package design is in keeping with the tidyverse</p>
 </div>
 <div id="installing" class="section level2">
 <h2 class="hasAnchor">
@@ -112,6 +117,8 @@
 <h2 class="hasAnchor">
 <a href="#getting-help" class="anchor"></a>Getting Help</h2>
 <p>To get additional information on a particular function just type <code>?</code> followed by the name of the function at the R console. For example <code><a href="../reference/ssd_gof.html">?ssd_gof</a></code> brings up the R documentation for the <code>ssdtools</code> goodness of fit function.</p>
+<p>For more information on using R the reader is referred to <a href="https://r4ds.had.co.nz">R for Data Science</a> <span class="citation">(Wickham and Grolemund 2016)</span>.</p>
+<p>If you discover a bug in <code>ssdtools</code> please file an issue with a <a href="https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html">reprex</a> (repeatable example) at <a href="https://github.com/bcgov/ssdtools/issues" class="uri">https://github.com/bcgov/ssdtools/issues</a>.</p>
 </div>
 <div id="inputting-data" class="section level2">
 <h2 class="hasAnchor">
@@ -135,124 +142,160 @@
 <a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></a>
 <a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></a>
 <a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; # ... with 18 more rows</span></a></code></pre></div>
+<p>For cleaner printing of data frames install the <code>tibble</code> package</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">install.packages</span>(<span class="st">"tibble"</span>)</a></code></pre></div>
 </div>
 <div id="fitting-distributions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#fitting-distributions" class="anchor"></a>Fitting Distributions</h2>
-<p>The function <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> inputs a data frame and fits one or more distributions. The user can specify a subset of the log-normal (<code>lnorm</code>), log-logistic (<code>llog</code>), log-Gumbel (<code>lgumbel</code>), Gompertz (<code>gompertz</code>), gamma (<code>gamma</code>) and Weibull (<code>weibull</code>) distributions and/or include the pareto (<code>pareto</code>) distribution using the <code>dists</code> argument.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(data, <span class="dt">dists =</span> <span class="kw">c</span>(<span class="st">"lnorm"</span>, <span class="st">"gompertz"</span>))</a></code></pre></div>
-<p>The coefficients can be extracted using the <code>coef</code> function. In and off themselves the coefficients are not that helpful.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">lapply</span>(dists, coef)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; $lnorm</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt;  meanlog    sdlog </span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; 2.561645 1.241540 </span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; $gompertz</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;       shape       scale </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039412888 0.002598132</span></a></code></pre></div>
-<p>It is generally much more informative to plot the fits using the <code>ggplot2</code> <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(dists) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Species Sensitivity Distributions for Boron"</span>)</a></code></pre></div>
+<p>The function <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> inputs a data frame and fits one or more distributions. The user can specify a subset of the</p>
+<ul>
+<li>
+<a href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal</a> (<code>lnorm</code>),</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Log-logistic_distribution">log-logistic</a> (<code>llog</code>),</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Gumbel_distribution">log-Gumbel</a> (<code>lgumbel</code>),</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Gompertz_distribution">Gompertz</a> (<code>gompertz</code>),</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma</a> (<code>gamma</code>) and</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Weibull_distribution">Weibull</a> (<code>weibull</code>)</li>
+</ul>
+<p>distributions and/or include the</p>
+<ul>
+<li>
+<a href="https://en.wikipedia.org/wiki/Pareto_distribution">Pareto</a> (<code>pareto</code>)</li>
+</ul>
+<p>distribution using the <code>dists</code> argument.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(data, <span class="dt">dists =</span> <span class="kw">c</span>(<span class="st">"lnorm"</span>, <span class="st">"gompertz"</span>))</a></code></pre></div>
+<p>The coefficients can be extracted using the <code>coef</code> function. However, in and off themselves the coefficients are not that helpful.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">coef</span>(dists)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; $lnorm</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt;  meanlog    sdlog </span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; 2.561645 1.241540 </span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; $gompertz</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt;       shape       scale </span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; 0.039405250 0.002606669</span></a></code></pre></div>
+<p>It is generally much more informative to plot the fits using the <code>ggplot2</code> <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting (printing) to make it look prettier.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw"><a href="ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plot theme</span></a>
+<a class="sourceLine" id="cb8-3" title="3">gp &lt;-<span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(dists) </a>
+<a class="sourceLine" id="cb8-4" title="4">gp &lt;-<span class="st"> </span>gp <span class="op">+</span><span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Species Sensitivity Distributions for Boron"</span>)</a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="kw">print</span>(gp)</a></code></pre></div>
 <p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-5-1.png" width="480"></p>
 </div>
-<div id="assessing-goodness-of-fit" class="section level2">
+<div id="selecting-one-distribution" class="section level2">
 <h2 class="hasAnchor">
-<a href="#assessing-goodness-of-fit" class="anchor"></a>Assessing Goodness of Fit</h2>
-<p>In addition, several goodness of fit statistics including the Akaike’s Information Criteron corrected for sample size (<code>aicc</code>) can be generated using <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code>.</p>
-<p>Moving forwards we consider the same six fits to boron as Schwarz and Tillmanns (2017).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; * &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
-<p>For interpretation of the values see Schwarz and Tillmanns (2017).</p>
+<a href="#selecting-one-distribution" class="anchor"></a>Selecting One Distribution</h2>
+<p>Given multiple distributions the user is faced with choosing the best fitting distribution (or as discussed below averaging the results weighted by the fit).</p>
+<p>For illustrative purposes we consider the same six distributions as <span class="citation">Schwarz and Tillmans (2017)</span>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; * &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
+<p>The <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code> function returns several goodness of fit measures that can be used to select the best distribution including three statistics</p>
+<ul>
+<li>
+<a href="https://en.wikipedia.org/wiki/Anderson%E2%80%93Darling_test">Anderson-Darling</a> (<code>ad</code>) statistic,</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test">Kolmogorov-Smirnov</a> (<code>ks</code>) statistic and</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Cram%C3%A9r%E2%80%93von_Mises_criterion">Cramer-von Mises</a> (<code>cvm</code>) statistic</li>
+</ul>
+<p>and three information criteria</p>
+<ul>
+<li>Akaike’s Information Criterion (<code>aic</code>),</li>
+<li>Akaike’s Information Criterion corrected for sample size (<code>aicc</code>) and</li>
+<li>Bayesian Information Criterion (<code>bic</code>)</li>
+</ul>
+<p>Following <span class="citation">Burnham and Anderson (2002)</span> we recommend the <code>aicc</code> for model selection. The best fitting model is that with the lowest <code>aicc</code> (indicated by the model with a <code>delta</code> value of 0.000 in the goodness of fit table). In the current example the best fitting model is the Gompertz distribution.</p>
+<p>For further information on the advantages of an information theoretic approach in the context of selecting SSDs the reader is referred to <span class="citation">Schwarz and Tillmans (2017)</span>.</p>
 </div>
-<div id="hazard-concentration" class="section level2">
+<div id="averaging-multiple-distributions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#hazard-concentration" class="anchor"></a>5% Hazard Concentration</h2>
-<p>Typically, species sensitivity distributions are fitted to estimate the 5% hazard concentration (<span class="math inline">\(HC_5\)</span>). This is the concentration that affects just 5% of the species tested. The model-averaged <span class="math inline">\(HC_5\)</span> estimate (with 95% confidence limits) can be calculated as follows</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists)</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; 1       5  1.25 0.744 0.604  3.21</span></a></code></pre></div>
-<p>By default model averaging is based on the Akaike’s Weights corrected for small sample size. To return the individual <span class="math inline">\(HC_5\)</span> estimates and their respective Akaike’s Weights set <code>average = FALSE</code></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">average =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;   dist     percent   est    se   lcl   ucl weight</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 1 lnorm          5  1.68 0.701 0.876  3.56  0.133</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 2 llog           5  1.56 0.758 0.681  3.59  0.049</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 3 gompertz       5  1.30 0.465 0.963  2.72  0.271</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 4 lgumbel        5  1.77 0.533 1.08   3.16  0.01 </span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 5 gamma          5  1.08 0.837 0.314  3.41  0.268</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 6 weibull        5  1.09 0.754 0.378  3.20  0.269</span></a></code></pre></div>
-<p>For interpretation of the values see Schwarz and Tillmanns (in prep.).</p>
-<p>To get the <span class="math inline">\(HC_50\)</span> estimates use</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">hc =</span> 5L)</a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; 1       5  1.25 0.717 0.602  3.11</span></a></code></pre></div>
+<a href="#averaging-multiple-distributions" class="anchor"></a>Averaging Multiple Distributions</h2>
+<p>Often other distributions will fit the data almost as well as the best distribution as evidenced by <code>delta</code> values &lt; 2. In this situation the recommended approach is to estimate the average fit based on the relative weights of the distributions <span class="citation">(Burnham and Anderson 2002)</span>. The <code>aicc</code> based weights are indicated by the <code>weight</code> column in the goodness of fit table. In the current example, the gamma, Weibull and log-normal distributions have <code>delta</code> values &lt; 2.</p>
 </div>
-<div id="predicting" class="section level2">
+<div id="estimating-the-fit" class="section level2">
 <h2 class="hasAnchor">
-<a href="#predicting" class="anchor"></a>Predicting</h2>
-<p>The <code>predict</code> function can be used to generate model-averaged (or individual) estimates across the full range of hazard concentrations.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">boron_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(boron_dists)</a></code></pre></div>
-<p>The resultant values provide valuable information</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">boron_pred</a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="co">#&gt; # A tibble: 99 x 5</span></a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="co">#&gt;    percent   est    se   lcl   ucl</span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb13-5" title="5"><span class="co">#&gt;  1       1 0.304 0.335 0.129  1.07</span></a>
-<a class="sourceLine" id="cb13-6" title="6"><span class="co">#&gt;  2       2 0.544 0.457 0.243  1.71</span></a>
-<a class="sourceLine" id="cb13-7" title="7"><span class="co">#&gt;  3       3 0.780 0.557 0.364  2.26</span></a>
-<a class="sourceLine" id="cb13-8" title="8"><span class="co">#&gt;  4       4 1.01  0.646 0.486  2.76</span></a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt;  5       5 1.25  0.729 0.615  3.25</span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt;  6       6 1.49  0.808 0.746  3.71</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co">#&gt;  7       7 1.73  0.884 0.883  4.16</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt;  8       8 1.97  0.958 1.02   4.59</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co">#&gt;  9       9 2.21  1.03  1.17   5.03</span></a>
-<a class="sourceLine" id="cb13-14" title="14"><span class="co">#&gt; 10      10 2.46  1.10  1.32   5.46</span></a>
-<a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt; # ... with 89 more rows</span></a></code></pre></div>
-<p>which can be plotted together with the original data to summarise an analysis</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># change the theme</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">shape =</span> <span class="st">"Group"</span>, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
-<a class="sourceLine" id="cb14-3" title="3">         <span class="dt">ylab =</span> <span class="st">"Concentration (mg/L)"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(<span class="dt">x =</span> <span class="dv">5000</span>) <span class="op">+</span><span class="st"> </span><span class="co"># to ensure the species labels fit</span></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">"Amphibian"</span> =<span class="st"> "Black"</span>, <span class="st">"Fish"</span> =<span class="st"> "Blue"</span>, </a>
-<a class="sourceLine" id="cb14-6" title="6">                                <span class="st">"Invertebrate"</span> =<span class="st"> "Red"</span>, <span class="st">"Plant"</span> =<span class="st"> "Brown"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-7" title="7"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Species Sensitivity for Boron"</span>)</a></code></pre></div>
-<p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
-<p>Once again the returned object is a <code>ggplot</code> object which can be customized prior to plotting. By default, the plot includes the model-averaged 95% confidence interval as a shaded band and the model-averaged <span class="math inline">\(HC_5\)</span> as a dotted line.</p>
+<a href="#estimating-the-fit" class="anchor"></a>Estimating the Fit</h2>
+<p>The <code>predict</code> function can be used to generate estimates model-averaged (or if <code>average = FALSE</code> individual) estimates. By default model averaging is based on <code>aicc</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">boron_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(boron_dists)</a></code></pre></div>
+<p>The resultant object is a data frame of the estimated concentration (<code>est</code>) with standard error (<code>se</code>) and lower (<code>lcl</code>) and upper (<code>ucl</code>) 95% confidence limits by percent of species affected (<code>percent</code>). The uncertainty in the estimates is generated using parametric bootstrapping.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">boron_pred</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co">#&gt; # A tibble: 99 x 5</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="co">#&gt;    percent   est    se   lcl   ucl</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">#&gt;  *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt;  1       1 0.304 0.335 0.123  1.06</span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="co">#&gt;  2       2 0.544 0.454 0.234  1.64</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt;  3       3 0.780 0.552 0.348  2.16</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt;  4       4 1.01  0.639 0.465  2.65</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="co">#&gt;  5       5 1.25  0.719 0.587  3.12</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt;  6       6 1.49  0.796 0.717  3.56</span></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&gt;  7       7 1.73  0.870 0.847  3.99</span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="co">#&gt;  8       8 1.97  0.942 0.985  4.42</span></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="co">#&gt;  9       9 2.21  1.01  1.12   4.87</span></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="co">#&gt; 10      10 2.46  1.08  1.27   5.31</span></a>
+<a class="sourceLine" id="cb11-15" title="15"><span class="co">#&gt; # ... with 89 more rows</span></a></code></pre></div>
+<p>The data frame of the estimates can then be plotted together with the original data to summarise an analysis. Once again the returned object is a <code>ggplot</code> object which can be customized prior to plotting.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">gp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
+<a class="sourceLine" id="cb12-2" title="2">         <span class="dt">ylab =</span> <span class="st">"Concentration (mg/L)"</span>, <span class="dt">ribbon =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb12-3" title="3">gp &lt;-<span class="st"> </span>gp <span class="op">+</span><span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(<span class="dt">x =</span> <span class="dv">5000</span>) <span class="op">+</span><span class="st"> </span><span class="co"># to ensure the species labels fit</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">"Amphibian"</span> =<span class="st"> "Black"</span>, <span class="st">"Fish"</span> =<span class="st"> "Blue"</span>, </a>
+<a class="sourceLine" id="cb12-5" title="5">                                <span class="st">"Invertebrate"</span> =<span class="st"> "Red"</span>, <span class="st">"Plant"</span> =<span class="st"> "Brown"</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Species Sensitivity for Boron"</span>)</a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="kw">print</span>(gp)</a></code></pre></div>
+<p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
+<p>In the above plot the model-averaged 95% confidence interval is indicated by the shaded band and the model-averaged 5% Hazard Concentration (<span class="math inline">\(HC_5\)</span>) by the dotted line. Hazard concentrations are discussed below.</p>
 </div>
-<div id="extending-ggplot" class="section level2">
+<div id="hazard-concentrations" class="section level2">
 <h2 class="hasAnchor">
-<a href="#extending-ggplot" class="anchor"></a>Extending ggplot</h2>
+<a href="#hazard-concentrations" class="anchor"></a>Hazard Concentrations</h2>
+<p>The 5% hazard concentration (<span class="math inline">\(HC_5\)</span>) is the concentration that affects 5% of the species tested. It can be obtained by selecting the estimated prediction with a percent value of 5.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">boron_pred[boron_pred<span class="op">$</span>percent <span class="op">==</span><span class="st"> </span><span class="dv">5</span>,]</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="co">#&gt; 1       5  1.25 0.719 0.587  3.12</span></a></code></pre></div>
+<p>By default the uncertainty in the predicted estimates is generated from 1,000 bootstrap iterations. However in the case of a specific hazard concentration we recommend the use of 10,000 bootstrap iterations to ensure repeatability. Rather than regenerate all the predicted estimates with 10,000 iterations which may be prohibitively time-consuming we recommend the use of <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> to generate the single estimate of interest with 10,000 iterations.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">boron_hc5 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">nboot =</span> <span class="dv">10000</span>)</a></code></pre></div>
+<p>The code may still take upwards of several minutes to run.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">print</span>(boron_hc5)</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; 1       5  1.25 0.734 0.600  3.20</span></a></code></pre></div>
+</div>
+<div id="plotting" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plotting" class="anchor"></a>Plotting</h2>
 <p>The <code>sscda</code> package provides three ggplot geoms to allow you construct your own plots. They are <code><a href="../reference/geom_ssd.html">geom_ssd()</a></code> to plot the original data, <code><a href="../reference/geom_hcintersect.html">geom_hcintersect()</a></code> to plot the hazard concentration and <code><a href="../reference/geom_xribbon.html">geom_xribbon()</a></code> to plot the confidence intervals.</p>
 <p>They can be used as follows</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">gp &lt;-<span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(boron_pred, <span class="kw"><a href="ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(<span class="dt">x =</span> <span class="st">"est"</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span>(<span class="kw"><a href="ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(<span class="dt">xmin =</span> <span class="st">"lcl"</span>, <span class="dt">xmax =</span> <span class="st">"ucl"</span>, <span class="dt">y =</span> <span class="st">"percent/100"</span>), <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(<span class="dt">y =</span> <span class="st">"percent/100"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span>(<span class="dt">xintercept =</span> boron_pred<span class="op">$</span>est[boron_pred<span class="op">$</span>percent <span class="op">==</span><span class="st"> </span><span class="dv">5</span>], <span class="dt">yintercept =</span> <span class="dv">5</span><span class="op">/</span><span class="dv">100</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/geom_ssd.html">geom_ssd</a></span>(<span class="dt">data =</span> boron_data, <span class="kw"><a href="ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(<span class="dt">x =</span> <span class="st">"Conc"</span>))</a>
-<a class="sourceLine" id="cb15-6" title="6"><span class="kw">print</span>(gp)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">gp &lt;-<span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(boron_pred, <span class="kw"><a href="ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(<span class="dt">x =</span> <span class="st">"est"</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span>(<span class="kw"><a href="ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(<span class="dt">xmin =</span> <span class="st">"lcl"</span>, <span class="dt">xmax =</span> <span class="st">"ucl"</span>, <span class="dt">y =</span> <span class="st">"percent/100"</span>), <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(<span class="dt">y =</span> <span class="st">"percent/100"</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span>(<span class="dt">xintercept =</span> boron_pred<span class="op">$</span>est[boron_pred<span class="op">$</span>percent <span class="op">==</span><span class="st"> </span><span class="dv">5</span>], <span class="dt">yintercept =</span> <span class="dv">5</span><span class="op">/</span><span class="dv">100</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/geom_ssd.html">geom_ssd</a></span>(<span class="dt">data =</span> boron_data, <span class="kw"><a href="ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(<span class="dt">x =</span> <span class="st">"Conc"</span>))</a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="kw">print</span>(gp)</a></code></pre></div>
 <p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-13-1.png" width="384"></p>
 <p>To log the x-axis use the following code.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">gp &lt;-<span class="st"> </span>gp <span class="op">+</span><span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/coord_trans.html">coord_trans</a></span>(<span class="dt">x =</span> <span class="st">"log10"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/trans_breaks">trans_breaks</a></span>(<span class="st">"log10"</span>, <span class="cf">function</span>(x) <span class="dv">10</span><span class="op">^</span>x),</a>
-<a class="sourceLine" id="cb16-3" title="3">                     <span class="dt">labels =</span> comma_signif)</a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="kw">print</span>(gp)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">gp &lt;-<span class="st"> </span>gp <span class="op">+</span><span class="st"> </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/coord_trans.html">coord_trans</a></span>(<span class="dt">x =</span> <span class="st">"log10"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw"><a href="ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/trans_breaks">trans_breaks</a></span>(<span class="st">"log10"</span>, <span class="cf">function</span>(x) <span class="dv">10</span><span class="op">^</span>x),</a>
+<a class="sourceLine" id="cb17-3" title="3">                     <span class="dt">labels =</span> comma_signif)</a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="kw">print</span>(gp)</a></code></pre></div>
 <p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-14-1.png" width="384"></p>
 <p>The current plot can be saved as a file using <code><a href="ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>, which also allows the user to set the resolution.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span>(<span class="st">"file_name.png"</span>, <span class="dt">dpi =</span> <span class="dv">600</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span>(<span class="st">"file_name.png"</span>, <span class="dt">dpi =</span> <span class="dv">600</span>)</a></code></pre></div>
 </div>
 <div id="additional-features" class="section level2">
 <h2 class="hasAnchor">
@@ -261,79 +304,79 @@
 <h3 class="hasAnchor">
 <a href="#cullen-frey-plots" class="anchor"></a>Cullen Frey Plots</h3>
 <p>The data can be visualized using a cullen frey plot of the skewness and kurtosis.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">library</span>(ssdtools)</a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="kw"><a href="../reference/ssd_cfplot.html">ssd_cfplot</a></span>(boron_data)</a></code></pre></div>
-<p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">library</span>(ssdtools)</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw"><a href="../reference/ssd_cfplot.html">ssd_cfplot</a></span>(boron_data)</a></code></pre></div>
+<p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-15-1.png" width="480"></p>
 </div>
 <div id="model-diagnostics" class="section level3">
 <h3 class="hasAnchor">
 <a href="#model-diagnostics" class="anchor"></a>Model Diagnostics</h3>
 <p>A <code>fitdists</code> object can be plotted to display model diagnostics plots for each fit.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">plot</span>(dists)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">plot</span>(dists)</a></code></pre></div>
 <p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-16-1.png" width="576"><img src="ssdtools-manual_files/figure-html/unnamed-chunk-16-2.png" width="576"></p>
 </div>
 <div id="weighted-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#weighted-data" class="anchor"></a>Weighted Data</h3>
 <p>The <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> function allows the user to name a column that specifies the weights to use in the estimation. However, to date very little functionality has been implemented for weighted fits in the <code>fitdistrplus</code> package.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">boron_data<span class="op">$</span>Weight &lt;-<span class="st"> </span><span class="kw">as.integer</span>(boron_data<span class="op">$</span>Group)</a>
-<a class="sourceLine" id="cb20-2" title="2">fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data, <span class="dt">weight =</span> <span class="st">"Weight"</span>, <span class="dt">dists =</span> <span class="kw">c</span>(<span class="st">"lnorm"</span>, <span class="st">"weibull"</span>))</a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="co">#&gt; Warning in mledist(data, distname, start = arg_startfix$start.arg, fix.arg</span></a>
-<a class="sourceLine" id="cb20-4" title="4"><span class="co">#&gt; = arg_startfix$fix.arg, : weights are not taken into account in the default</span></a>
-<a class="sourceLine" id="cb20-5" title="5"><span class="co">#&gt; initial values</span></a>
-<a class="sourceLine" id="cb20-6" title="6"></a>
-<a class="sourceLine" id="cb20-7" title="7"><span class="co">#&gt; Warning in mledist(data, distname, start = arg_startfix$start.arg, fix.arg</span></a>
-<a class="sourceLine" id="cb20-8" title="8"><span class="co">#&gt; = arg_startfix$fix.arg, : weights are not taken into account in the default</span></a>
-<a class="sourceLine" id="cb20-9" title="9"><span class="co">#&gt; initial values</span></a>
-<a class="sourceLine" id="cb20-10" title="10">fit</a>
-<a class="sourceLine" id="cb20-11" title="11"><span class="co">#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood </span></a>
-<a class="sourceLine" id="cb20-12" title="12"><span class="co">#&gt; Parameters:</span></a>
-<a class="sourceLine" id="cb20-13" title="13"><span class="co">#&gt;         estimate Std. Error</span></a>
-<a class="sourceLine" id="cb20-14" title="14"><span class="co">#&gt; meanlog 2.352547  0.1414815</span></a>
-<a class="sourceLine" id="cb20-15" title="15"><span class="co">#&gt; sdlog   1.233407  0.1000467</span></a>
-<a class="sourceLine" id="cb20-16" title="16"><span class="co">#&gt; Fitting of the distribution ' weibull ' by maximum likelihood </span></a>
-<a class="sourceLine" id="cb20-17" title="17"><span class="co">#&gt; Parameters:</span></a>
-<a class="sourceLine" id="cb20-18" title="18"><span class="co">#&gt;         estimate Std. Error</span></a>
-<a class="sourceLine" id="cb20-19" title="19"><span class="co">#&gt; shape  0.9458077 0.08532335</span></a>
-<a class="sourceLine" id="cb20-20" title="20"><span class="co">#&gt; scale 19.1184792 2.44996931</span></a>
-<a class="sourceLine" id="cb20-21" title="21"><span class="kw">plot</span>(fit)</a>
-<a class="sourceLine" id="cb20-22" title="22"><span class="co">#&gt; Error in plot.fitdist(x, breaks = breaks, ...): The plot of the fit is not yet available when using weights</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">boron_data<span class="op">$</span>Weight &lt;-<span class="st"> </span><span class="kw">as.integer</span>(boron_data<span class="op">$</span>Group)</a>
+<a class="sourceLine" id="cb21-2" title="2">fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data, <span class="dt">weight =</span> <span class="st">"Weight"</span>, <span class="dt">dists =</span> <span class="kw">c</span>(<span class="st">"lnorm"</span>, <span class="st">"weibull"</span>))</a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="co">#&gt; Warning in mledist(data, distname, start = arg_startfix$start.arg, fix.arg</span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="co">#&gt; = arg_startfix$fix.arg, : weights are not taken into account in the default</span></a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="co">#&gt; initial values</span></a>
+<a class="sourceLine" id="cb21-6" title="6"></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="co">#&gt; Warning in mledist(data, distname, start = arg_startfix$start.arg, fix.arg</span></a>
+<a class="sourceLine" id="cb21-8" title="8"><span class="co">#&gt; = arg_startfix$fix.arg, : weights are not taken into account in the default</span></a>
+<a class="sourceLine" id="cb21-9" title="9"><span class="co">#&gt; initial values</span></a>
+<a class="sourceLine" id="cb21-10" title="10">fit</a>
+<a class="sourceLine" id="cb21-11" title="11"><span class="co">#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood </span></a>
+<a class="sourceLine" id="cb21-12" title="12"><span class="co">#&gt; Parameters:</span></a>
+<a class="sourceLine" id="cb21-13" title="13"><span class="co">#&gt;         estimate Std. Error</span></a>
+<a class="sourceLine" id="cb21-14" title="14"><span class="co">#&gt; meanlog 2.352547  0.1414815</span></a>
+<a class="sourceLine" id="cb21-15" title="15"><span class="co">#&gt; sdlog   1.233407  0.1000467</span></a>
+<a class="sourceLine" id="cb21-16" title="16"><span class="co">#&gt; Fitting of the distribution ' weibull ' by maximum likelihood </span></a>
+<a class="sourceLine" id="cb21-17" title="17"><span class="co">#&gt; Parameters:</span></a>
+<a class="sourceLine" id="cb21-18" title="18"><span class="co">#&gt;         estimate Std. Error</span></a>
+<a class="sourceLine" id="cb21-19" title="19"><span class="co">#&gt; shape  0.9458077 0.08532335</span></a>
+<a class="sourceLine" id="cb21-20" title="20"><span class="co">#&gt; scale 19.1184792 2.44996931</span></a>
+<a class="sourceLine" id="cb21-21" title="21"><span class="kw">plot</span>(fit)</a>
+<a class="sourceLine" id="cb21-22" title="22"><span class="co">#&gt; Error in plot.fitdist(x, breaks = breaks, ...): The plot of the fit is not yet available when using weights</span></a></code></pre></div>
 </div>
 <div id="censored-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#censored-data" class="anchor"></a>Censored Data</h3>
 <p>Censored data is that for which only a lower and/or upper limit is known for a particular species. If the <code>right</code> argument in <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> is different to the <code>left</code> argument then the data are considered to be censored. <code>fluazinam</code> is a censored data set from the <code>fitdistrplus</code> package.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">data</span>(fluazinam, <span class="dt">package =</span> <span class="st">"fitdistrplus"</span>)</a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="kw">head</span>(fluazinam)</a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="co">#&gt;     left right</span></a>
-<a class="sourceLine" id="cb21-4" title="4"><span class="co">#&gt; 1    3.8   3.8</span></a>
-<a class="sourceLine" id="cb21-5" title="5"><span class="co">#&gt; 2   33.6  33.6</span></a>
-<a class="sourceLine" id="cb21-6" title="6"><span class="co">#&gt; 3   87.0  87.0</span></a>
-<a class="sourceLine" id="cb21-7" title="7"><span class="co">#&gt; 4 1700.0    NA</span></a>
-<a class="sourceLine" id="cb21-8" title="8"><span class="co">#&gt; 5  640.0 640.0</span></a>
-<a class="sourceLine" id="cb21-9" title="9"><span class="co">#&gt; 6 1155.0    NA</span></a></code></pre></div>
-<p>There are less goodness-of-fit statistics available for fits to censored data (currently just aic and bic).</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">fluazinam_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(fluazinam, <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>)</a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="co">#&gt; Warning: gompertz failed to fit: Error in if (one.more) { : missing value where TRUE/FALSE needed</span></a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(fluazinam_dists)</a>
-<a class="sourceLine" id="cb22-4" title="4"><span class="co">#&gt; Warning: Unknown or uninitialised column: 'aicc'.</span></a>
-<a class="sourceLine" id="cb22-5" title="5"><span class="co">#&gt; # A tibble: 5 x 5</span></a>
-<a class="sourceLine" id="cb22-6" title="6"><span class="co">#&gt;   dist      aic   bic delta weight</span></a>
-<a class="sourceLine" id="cb22-7" title="7"><span class="co">#&gt; * &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb22-8" title="8"><span class="co">#&gt; 1 lnorm    150.  151. 0.269  0.274</span></a>
-<a class="sourceLine" id="cb22-9" title="9"><span class="co">#&gt; 2 llog     150.  151. 0.552  0.237</span></a>
-<a class="sourceLine" id="cb22-10" title="10"><span class="co">#&gt; 3 lgumbel  149.  151. 0      0.313</span></a>
-<a class="sourceLine" id="cb22-11" title="11"><span class="co">#&gt; 4 gamma    153.  154. 3.45   0.056</span></a>
-<a class="sourceLine" id="cb22-12" title="12"><span class="co">#&gt; 5 weibull  151.  153. 1.92   0.12</span></a></code></pre></div>
-<p>But model-averaged predictions can be made using AIC</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">fluazinam_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fluazinam_dists)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">data</span>(fluazinam, <span class="dt">package =</span> <span class="st">"fitdistrplus"</span>)</a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">head</span>(fluazinam)</a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="co">#&gt;     left right</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="co">#&gt; 1    3.8   3.8</span></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="co">#&gt; 2   33.6  33.6</span></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="co">#&gt; 3   87.0  87.0</span></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="co">#&gt; 4 1700.0    NA</span></a>
+<a class="sourceLine" id="cb22-8" title="8"><span class="co">#&gt; 5  640.0 640.0</span></a>
+<a class="sourceLine" id="cb22-9" title="9"><span class="co">#&gt; 6 1155.0    NA</span></a></code></pre></div>
+<p>There are less goodness-of-fit statistics available for fits to censored data (currently just <code>aic</code> and <code>bic</code>).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">fluazinam_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(fluazinam, <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="co">#&gt; Warning: gompertz failed to fit: Error in if (one.more) { : missing value where TRUE/FALSE needed</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(fluazinam_dists)</a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">#&gt; Warning: Unknown or uninitialised column: 'aicc'.</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co">#&gt; # A tibble: 5 x 5</span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="co">#&gt;   dist      aic   bic delta weight</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="co">#&gt; * &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="co">#&gt; 1 lnorm    150.  151. 0.269  0.274</span></a>
+<a class="sourceLine" id="cb23-9" title="9"><span class="co">#&gt; 2 llog     150.  151. 0.552  0.237</span></a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="co">#&gt; 3 lgumbel  149.  151. 0      0.313</span></a>
+<a class="sourceLine" id="cb23-11" title="11"><span class="co">#&gt; 4 gamma    153.  154. 3.45   0.056</span></a>
+<a class="sourceLine" id="cb23-12" title="12"><span class="co">#&gt; 5 weibull  151.  153. 1.92   0.12</span></a></code></pre></div>
+<p>But model-averaged predictions can be made using <code>aic</code></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">fluazinam_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fluazinam_dists)</a></code></pre></div>
 <p>and the results plotted complete with arrows indicating the censorship.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(fluazinam, fluazinam_pred, </a>
-<a class="sourceLine" id="cb24-2" title="2">         <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>, </a>
-<a class="sourceLine" id="cb24-3" title="3">         <span class="dt">ylab =</span> <span class="st">"Concentration (mg/L)"</span>)</a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="co">#&gt; Warning: Removed 98 rows containing missing values (geom_path).</span></a>
-<a class="sourceLine" id="cb24-5" title="5"><span class="co">#&gt; geom_path: Each group consists of only one observation. Do you need to</span></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="co">#&gt; adjust the group aesthetic?</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(fluazinam, fluazinam_pred, </a>
+<a class="sourceLine" id="cb25-2" title="2">         <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>, </a>
+<a class="sourceLine" id="cb25-3" title="3">         <span class="dt">ylab =</span> <span class="st">"Concentration (mg/L)"</span>)</a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="co">#&gt; Warning: Removed 98 rows containing missing values (geom_path).</span></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="co">#&gt; geom_path: Each group consists of only one observation. Do you need to</span></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="co">#&gt; adjust the group aesthetic?</span></a></code></pre></div>
 <p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-21-1.png" width="384"></p>
 </div>
 </div>
@@ -341,11 +384,20 @@
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <div id="refs" class="references">
+<div id="ref-burnham_model_2002">
+<p>Burnham, Kenneth P., and David R. Anderson. 2002. <em>Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach</em>. Vol. Second Edition. New York: Springer.</p>
+</div>
 <div id="ref-posthuma_species_2001">
 <p>Posthuma, Leo, Suter IIGlenn W, and Theo P Traas. 2001. <em>Species Sensitivity Distributions in Ecotoxicology</em>. CRC press. <a href="https://www.crcpress.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783">https://www.crcpress.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783</a>.</p>
 </div>
 <div id="ref-r">
 <p>R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
+</div>
+<div id="ref-schwarz_comparison_2017">
+<p>Schwarz, Carl J., and Angeline R. Tillmans. 2017. “A Comparison of Statistical Methods for Modeling Species Sensitivity Distributions (DRAFT).”</p>
+</div>
+<div id="ref-wickham_r_2016">
+<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. First edition. Sebastopol, CA: O’Reilly. <a href="https://r4ds.had.co.nz">https://r4ds.had.co.nz</a>.</p>
 </div>
 </div>
 </div>
@@ -357,14 +409,16 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
       <li><a href="#installing">Installing</a></li>
       <li><a href="#getting-help">Getting Help</a></li>
       <li><a href="#inputting-data">Inputting Data</a></li>
       <li><a href="#fitting-distributions">Fitting Distributions</a></li>
-      <li><a href="#assessing-goodness-of-fit">Assessing Goodness of Fit</a></li>
-      <li><a href="#hazard-concentration">5% Hazard Concentration</a></li>
-      <li><a href="#predicting">Predicting</a></li>
-      <li><a href="#extending-ggplot">Extending ggplot</a></li>
+      <li><a href="#selecting-one-distribution">Selecting One Distribution</a></li>
+      <li><a href="#averaging-multiple-distributions">Averaging Multiple Distributions</a></li>
+      <li><a href="#estimating-the-fit">Estimating the Fit</a></li>
+      <li><a href="#hazard-concentrations">Hazard Concentrations</a></li>
+      <li><a href="#plotting">Plotting</a></li>
       <li><a href="#additional-features">Additional Features</a></li>
       <li><a href="#references">References</a></li>
       </ul>

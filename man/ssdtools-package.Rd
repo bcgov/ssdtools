@@ -20,8 +20,8 @@ Species sensitivity distributions are cumulative probability
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/bcgov/ssdca}
-  \item Report bugs at \url{https://github.com/bcgov/ssdca/issues}
+  \item \url{https://github.com/bcgov/ssdtools}
+  \item Report bugs at \url{https://github.com/bcgov/ssdtools/issues}
 }
 
 }

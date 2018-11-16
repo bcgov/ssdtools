@@ -270,7 +270,7 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
                              xlab = "Concentration", ylab = "Species Affected",
                              ...) {
   check_flag(ci)
-  checkor(check_null(hc), check_vector(hc, 1:99, length = 1))
+  checkor(check_null(hc), check_scalar(hc, c(1L,99L)))
   check_string(xlab)
   check_string(ylab)
 
@@ -302,7 +302,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
                                  xlab = "Concentration", ylab = "Species Affected",
                                  ...) {
   check_flag(ci)
-  checkor(check_null(hc), check_vector(hc, 1:99, length = 1))
+  checkor(check_null(hc), check_scalar(hc, c(1L,99L)))
   check_string(xlab)
   check_string(ylab)
 
@@ -417,7 +417,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   checkor(check_string(shape), check_null(shape))
   check_flag(ci)
   check_flag(ribbon)
-  checkor(check_null(hc), check_vector(hc, 1:99, length = 1))
+  checkor(check_null(hc), check_scalar(hc, c(1L,99L)))
 
   check_colnames(data, unique(c(left, right, label, shape)))
 

@@ -95,11 +95,15 @@ ssd_gof(boron_dists)
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
 
 ``` r
-ssd_hc(boron_dists)
+boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
+```
+
+``` r
+print(boron_hc5)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.727 0.618  3.15
+#> 1       5  1.25 0.734 0.600  3.20
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -117,7 +121,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)", ribbon = TRUE) + expand_limits(x = 3000)
 ```
 
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
 
 The ssdtools manual is available at
 <https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html>.

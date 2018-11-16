@@ -38,9 +38,8 @@ model_average <- function(x) {
 #' @examples
 #' predict(boron_lnorm, percent = c(5L, 50L))
 predict.fitdist <- function(object, percent = 1:99,
-                            nboot = 1001, level = 0.95, ...) {
-  check_vector(percent, c(1L, 99L), length = c(1, Inf),
-                          unique = TRUE)
+                            nboot = 1000, level = 0.95, ...) {
+  check_vector(percent, c(1L, 99L), length = TRUE, unique = TRUE)
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
   boot <- fitdistrplus::bootdist(object, niter = nboot)
@@ -59,9 +58,8 @@ predict.fitdist <- function(object, percent = 1:99,
 #' predict(fluazinam_lnorm, percent = c(5L, 50L))
 #' }
 predict.fitdistcens <- function(object, percent = 1:99,
-                            nboot = 1001, level = 0.95, ...) {
-  check_vector(percent, c(1L, 99L), length = c(1, Inf),
-                          unique = TRUE)
+                            nboot = 1000, level = 0.95, ...) {
+  check_vector(percent, c(1L, 99L), length = TRUE, unique = TRUE)
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
 
@@ -87,8 +85,8 @@ predict.fitdistcens <- function(object, percent = 1:99,
 #' predict(boron_dists)
 #' }
 predict.fitdists <- function(object, percent = 1:99,
-                             nboot = 1001, ic = "aicc", average = TRUE, level = 0.95, ...) {
-  check_vector(ic, c("aic", "aicc", "bic"), length = 1)
+                             nboot = 1000, ic = "aicc", average = TRUE, level = 0.95, ...) {
+  check_scalar(ic, c("aic", "aicc", "bic"))
 
   ic <- ssd_gof(object)[c("dist", ic)]
 
@@ -124,8 +122,8 @@ predict.fitdists <- function(object, percent = 1:99,
 #' predict(fluazinam_dists)
 #' }
 predict.fitdistscens <- function(object, percent = 1:99,
-                             nboot = 1001, ic = "aic", average = TRUE, level = 0.95, ...) {
-  check_vector(ic, c("aic", "bic"), length = 1)
+                             nboot = 1000, ic = "aic", average = TRUE, level = 0.95, ...) {
+  check_scalar(ic, c("aic", "bic", "bic"))
   NextMethod(object = object, percent = percent, nboot = nboot, ic = ic, average = average,
              level = level, ...)
 }

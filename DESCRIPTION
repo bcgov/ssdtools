@@ -22,8 +22,8 @@ Authors@R: c(
   person("Andy", "Teucher", role = "ctb"),
   person("Province of British Columbia", role = "cph")
   )
-URL: https://github.com/bcgov/ssdca
-BugReports: https://github.com/bcgov/ssdca/issues
+URL: https://github.com/bcgov/ssdtools
+BugReports: https://github.com/bcgov/ssdtools/issues
 License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.4.0)
