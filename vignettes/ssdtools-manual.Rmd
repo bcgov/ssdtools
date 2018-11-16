@@ -35,7 +35,7 @@ This vignette is a user manual for the R package.
 
 `ssdtools` provides the key functionality required to fit SSDs using Maximum Likelihood and model averaging in R.
 It is intended to be used in conjunction with [tidyverse](https://www.tidyverse.org) packages such as `readr` to input data, `tidyr` and `dplyr` to group and manipulate data and `ggplot2` to plot data.
-Examples are provided below.
+As such it endeavours fulfill the tidyverse [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html).
 
 ## Installing
 
@@ -265,9 +265,11 @@ boron_datas <- unnest(boron_datas, Prediction)
 ```
 
 The resultant data and predictions can then be plotted as follows.
-The addition of hazard concentrations is left as an exercise for the reader.
 ```{r, fig.width = 5, fig.height = 5}
-gp %+% boron_datas + facet_wrap(~Group)
+boron_hc5s <- filter(boron_datas, percent == 5)
+gp %+% boron_datas + 
+  facet_wrap(~Group) + 
+  geom_hcintersect(data = boron_hc5s, aes(xintercept = est, yintercept = percent/100))
 ```
 
 ## Additional Features
