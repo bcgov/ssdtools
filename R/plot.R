@@ -485,7 +485,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 #' Plots a Cullen and Frey graph of the skewness and kurtosis
 #' for non-censored data.
 #'
-#' @inheritParams ssd_fit_dist
+#' @inheritParams ssd_fit_dists
 #' @seealso \code{\link[fitdistrplus]{descdist}}
 #' @export
 #'

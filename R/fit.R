@@ -68,21 +68,6 @@ remove_errors <- function(dist_fit, name, silent) {
   dist_fit$result
 }
 
-#' Fit Distribution
-#'
-#' Fits a distribution to species sensitivity data.
-#'
-#' @inheritParams ssd_fit_dists
-#' @param dist A string of the distribution to fit.
-#'
-#' @return An object of class \code{\link[fitdistrplus]{fitdist}}.
-#' @seealso \code{\link{ssd_fit_dists}}
-#' @export
-#'
-#' @examples
-#' ssd_fit_dist(boron_data)
-#' data(fluazinam, package = "fitdistrplus")
-#' ssd_fit_dist(fluazinam, left = "left", right = "right")
 ssd_fit_dist <- function(
   data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
 
@@ -108,7 +93,7 @@ ssd_fit_dist <- function(
 #'
 #' By default the 'lnorm', 'llog', 'gompertz', 'lgumbel', 'gamma' and 'weibull'
 #' distributions are fitted to the data.
-#' The ssd_fit_dist and \code{\link{ssd_fit_dist}} functions have also been
+#' The ssd_fit_dists function has also been
 #' tested with the 'pareto' distribution.
 #'
 #' If weight specifies a column in the data frame with positive integers,
@@ -131,7 +116,6 @@ ssd_fit_dist <- function(
 #' @references
 #' Liu, Y., Salibián-Barrera, M., Zamar, R.H., and Zidek, J.V. 2018. Using artificial censoring to improve extreme tail quantile estimates. Journal of the Royal Statistical Society: Series C (Applied Statistics).
 #'
-#' @seealso \code{\link{ssd_fit_dist}}
 #' @examples
 #' ssd_fit_dists(boron_data)
 #' data(fluazinam, package = "fitdistrplus")
