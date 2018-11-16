@@ -34,20 +34,27 @@ This vignette is a user manual for the R package.
 ## Philosophy
 
 `ssdtools` provides the key functionality required to fit SSDs using Maximum Likelihood and model averaging in R.
-It is intended to be used in conjunction with other R packages such as `readr` to input data, `dplyr` to manipulate data and `ggplot2` to plot data.
-The general package design is in keeping with the tidyverse 
+It is intended to be used in conjunction with [tidyverse](https://www.tidyverse.org) packages such as `readr` to input data, `tidyr` and `dplyr` to group and manipulate data and `ggplot2` to plot data.
+Examples are provided below.
 
 ## Installing
 
 In order to install R [@r] the appropriate binary for the users operating system should be downloaded from [CRAN](https://cran.r-project.org) and then installed.
 
-Once R is installed, the `ssdtools` package can be installed by executing the following code at the R console
+Once R is installed, the `ssdtools` package can be installed (together with the tidyverse) by executing the following code at the R console
 ```r
 install.packages("ssdtools")
+install.packages("tidyverse")
 ```
-The `ssdtools` package can then be loaded into the current session using
+
+The `ssdtools` package (and key tidyverse packages) can then be loaded into the current session using
 ```{r}
 library(ssdtools)
+library(readr)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(purrr)
 ```
 
 ## Getting Help
@@ -66,18 +73,13 @@ An easy way to do this is to save the concentration data for a *single* chemical
 Each row should be the sensitivity concentration for a separate species.
 If species and/or group information is available then this can be saved as `Species` and `Group` columns.
 The `.csv` file can then be read into R using 
-```r
-data <- read.csv(file = "path/to/file.csv")
+```{r, eval = FALSE}
+data <- read_csv(file = "path/to/file.csv")
 ```
 For the purposes of this manual we use the CCME dataset for boron which is provided with the ssdtools package
 ```{r}
 data <- ssdtools::boron_data
 print(data)
-```
-
-For cleaner printing of data frames install the `tibble` package
-```r
-install.packages("tibble")
 ```
 
 ## Fitting Distributions
@@ -107,10 +109,9 @@ However, in and off themselves the coefficients are not that helpful.
 coef(dists)
 ```
 
-It is generally much more informative to plot the fits using the `ggplot2` `autoplot` generic function.
+It is generally much more informative to plot the fits using the `autoplot` generic function.
 As `autoplot` returns a `ggplot` object it can be modified prior to plotting (printing) to make it look prettier.
 ```{r, fig.width = 5}
-library(ggplot2)
 theme_set(theme_bw()) # set plot theme
 gp <- autoplot(dists) 
 gp <- gp + ggtitle("Species Sensitivity Distributions for Boron")
@@ -166,7 +167,7 @@ The uncertainty in the estimates is generated using parametric bootstrapping.
 ```{r}
 boron_pred
 ```
-The data frame of the estimates can then be plotted together with the original data to summarise an analysis.
+The data frame of the estimates can then be plotted together with the original data using the `ssd_plot()` function to summarise an analysis.
 Once again the returned object is a `ggplot` object which can be customized prior to plotting.
 ```{r, fig.height = 5, fig.width = 6}
 gp <- ssd_plot(boron_data, boron_pred, color = "Group", label = "Species",
@@ -203,7 +204,7 @@ The code may still take upwards of several minutes to run.
 print(boron_hc5)
 ```
 
-## Plotting with ggplot2
+## Plotting
 
 The `sscda` package provides three ggplot geoms to allow you construct your own plots.
 
@@ -227,16 +228,14 @@ ggplot() +
 
 They can be combined together as follows
 ```{r}
-library(scales)
 gp <- ggplot(boron_pred, aes_string(x = "est")) + 
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2) +
   geom_line(aes_string(y = "percent/100")) +
-  geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5/100) +
   geom_ssd(data = boron_data, aes_string(x = "Conc")) +
-  scale_y_continuous("Species Affected (%)", labels = percent) +
+  scale_y_continuous("Species Affected (%)", labels = scales::percent) +
   expand_limits(y = c(0, 1)) +
   xlab("Concentration (mg/L)")
-print(gp)
+print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5/100))
 ```
 
 To log the x-axis add the following code.
@@ -244,12 +243,31 @@ To log the x-axis add the following code.
 gp <- gp + coord_trans(x = "log10") +
   scale_x_continuous(breaks = scales::trans_breaks("log10", function(x) 10^x),
                      labels = comma_signif)
-print(gp)
+print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5/100))
 ```
 
 The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
 ```r
 ggsave("file_name.png", dpi = 600)
+```
+
+## Grouping
+
+A common question is how do I fit distributions to multiple groups such taxa and/or chemicals?
+An elegant approach using the tidyverse is demonstrated below.
+
+```{r}
+boron_datas <- nest(boron_data, -Group)
+boron_datas <- mutate(boron_datas, 
+                      Fit = map(data, ssd_fit_dists, dists = "lnorm"), 
+                      Prediction = map(Fit, predict))
+boron_datas <- unnest(boron_datas, Prediction)
+```
+
+The resultant data and predictions can then be plotted as follows.
+The addition of hazard concentrations is left as an exercise for the reader.
+```{r, fig.width = 5, fig.height = 5}
+gp %+% boron_datas + facet_wrap(~Group)
 ```
 
 ## Additional Features
