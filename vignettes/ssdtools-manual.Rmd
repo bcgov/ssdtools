@@ -203,7 +203,7 @@ The code may still take upwards of several minutes to run.
 print(boron_hc5)
 ```
 
-## Plotting
+## Plotting with ggplot2
 
 The `sscda` package provides three ggplot geoms to allow you construct your own plots.
 
@@ -222,7 +222,7 @@ ggplot(boron_pred) +
 And the third is `geom_hcintersect()` which plots hazard concentrations
 ```{r}
 ggplot() + 
-  geom_hcintersect(xintercept = 1, yintercept = 5/100) 
+  geom_hcintersect(xintercept = c(1,2,3), yintercept = c(5,10,20)/100) 
 ```    
 
 They can be combined together as follows
@@ -247,7 +247,7 @@ gp <- gp + coord_trans(x = "log10") +
 print(gp)
 ```
 
-The current plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
+The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
 ```r
 ggsave("file_name.png", dpi = 600)
 ```

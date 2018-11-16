@@ -69,11 +69,16 @@ GeomSsdcens <- ggproto(
 GeomHcintersect <- ggproto(
   "GeomHcintersect", Geom,
   draw_panel = function(data, panel_params, coord) {
-
-    pieces <- data.frame(x = c(0.0001, data$xintercept, data$xintercept),
-                         y = c(data$yintercept, data$yintercept, -Inf))
-
-    data <- cbind(data, pieces)
+    
+    data$group <- 1:nrow(data)
+    data$x <- data$xintercept
+    data$y <- data$yintercept
+    start <- data
+    start$x <- 0.0001
+    end <- data
+    end$y <- -Inf
+    
+    data <- rbind(start, data, end)
     GeomPath$draw_panel(data, panel_params, coord)
   },
 
@@ -417,7 +422,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   checkor(check_string(shape), check_null(shape))
   check_flag(ci)
   check_flag(ribbon)
-  checkor(check_null(hc), check_scalar(hc, c(1L,99L)))
+  checkor(check_null(hc), check_vector(hc, pred$percent, only = TRUE, length = TRUE))
 
   check_colnames(data, unique(c(left, right, label, shape)))
 
@@ -440,7 +445,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   gp <- gp + geom_line(aes_string(y = "percent/100"), color = if(ribbon) "black" else "red")
 
   if(!is.null(hc))
-    gp <- gp + geom_hcintersect(data = data, xintercept = pred$est[pred$percent == hc], yintercept = hc/100)
+    gp <- gp + geom_hcintersect(data = data, xintercept = pred$est[pred$percent %in% hc], yintercept = hc/100)
 
   if(left == right) {
     gp <- gp + geom_ssd(data = data, aes_string(x = left, shape = shape,
