@@ -170,7 +170,7 @@ The data frame of the estimates can then be plotted together with the original d
 Once again the returned object is a `ggplot` object which can be customized prior to plotting.
 ```{r, fig.height = 5, fig.width = 6}
 gp <- ssd_plot(boron_data, boron_pred, color = "Group", label = "Species",
-         ylab = "Concentration (mg/L)", ribbon = TRUE)
+         xlab = "Concentration (mg/L)", ribbon = TRUE)
 gp <- gp + expand_limits(x = 5000) + # to ensure the species labels fit
   scale_color_manual(values = c("Amphibian" = "Black", "Fish" = "Blue", 
                                 "Invertebrate" = "Red", "Plant" = "Brown")) +
@@ -206,21 +206,40 @@ print(boron_hc5)
 ## Plotting
 
 The `sscda` package provides three ggplot geoms to allow you construct your own plots.
-They are `geom_ssd()` to plot the original data, 
-`geom_hcintersect()` to plot the hazard concentration and `geom_xribbon()` to plot the confidence intervals.
 
-They can be used as follows
-
+The first is `geom_ssd()` which plots species sensitivity data 
 ```{r}
+ggplot(boron_data) + 
+  geom_ssd(aes_string(x = "Conc"))
+``` 
+
+The second is `geom_xribbon()` which plots species sensitivity confidence intervals
+```{r}
+ggplot(boron_pred) + 
+  geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"))
+```  
+
+And the third is `geom_hcintersect()` which plots hazard concentrations
+```{r}
+ggplot() + 
+  geom_hcintersect(xintercept = 1, yintercept = 5/100) 
+```    
+
+They can be combined together as follows
+```{r}
+library(scales)
 gp <- ggplot(boron_pred, aes_string(x = "est")) + 
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2) +
   geom_line(aes_string(y = "percent/100")) +
-  geom_hcintersect(xintercept = boron_pred$est[boron_pred$percent == 5], yintercept = 5/100) +
-  geom_ssd(data = boron_data, aes_string(x = "Conc"))
+  geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5/100) +
+  geom_ssd(data = boron_data, aes_string(x = "Conc")) +
+  scale_y_continuous("Species Affected (%)", labels = percent) +
+  expand_limits(y = c(0, 1)) +
+  xlab("Concentration (mg/L)")
 print(gp)
-```    
+```
 
-To log the x-axis use the following code.
+To log the x-axis add the following code.
 ```{r}
 gp <- gp + coord_trans(x = "log10") +
   scale_x_continuous(breaks = scales::trans_breaks("log10", function(x) 10^x),
@@ -288,7 +307,7 @@ and the results plotted complete with arrows indicating the censorship.
 ```{r}
 ssd_plot(fluazinam, fluazinam_pred, 
          left = "left", right = "right", 
-         ylab = "Concentration (mg/L)")
+         xlab = "Concentration (mg/L)")
 ```
 
 ## References
