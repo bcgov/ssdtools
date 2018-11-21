@@ -1,6 +1,6 @@
 pandoc: '2.4'
 pkgdown: 1.1.0.9000
-pkgdown_sha: 6feddc6202be27878016b507f3f69e892ba8e1e1
+pkgdown_sha: a108d4c45c6680a2c4c3250f5b691e46bd74ac04
 articles:
   ssdtools-manual: ssdtools-manual.html
 

@@ -1,5 +1,6 @@
 devtools::test()
 devtools::document()
+demo(ssdtools, ask = FALSE)
 # knitr::knit("README.Rmd")
 if(file.exists("DESCRIPTION")) unlink("docs", recursive = TRUE)
 pkgdown::build_site()
