@@ -23,7 +23,6 @@
 #' devtools::install_github("bcgov/ssdtools")
 #' ```
 library(ssdtools)
-library(ggplot2)
 
 #' ### Data
 
