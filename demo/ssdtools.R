@@ -39,7 +39,7 @@ fits <- ssd_fit_dists(data, left = "Conc",
                       dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"))
 
 #' The `autoplot()` function can be used to plot the fits (for more information type `?autoplot.fitdists`)
-autoplot(fits)
+ggplot2::autoplot(fits)
 
 #' And `ssd_gof()` can be used to generate the goodness of fit statistics.
 ssd_gof(fits)
