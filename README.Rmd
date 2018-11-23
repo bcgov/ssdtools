@@ -69,6 +69,7 @@ and the model-averaged 5% hazard concentration estimated using `ssd_hc`
 ```{r, eval = FALSE}
 boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
 ```
+
 ```{r}
 print(boron_hc5)
 ```
@@ -118,4 +119,4 @@ The code is released under the Apache License 2.0
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
-    limitations under the License
+    limitations under the License.

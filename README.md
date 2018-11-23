@@ -103,7 +103,7 @@ print(boron_hc5)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
 #> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.734 0.600  3.20
+#> 1       5  1.25 0.736 0.602  3.22
 ```
 
 Model-averaged predictions complete with confidence intervals can be
