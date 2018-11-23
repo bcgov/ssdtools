@@ -44,10 +44,8 @@ library(ggplot2)
 dists <- ssd_fit_dists(boron_data)
 hc <- ssd_hc(dists)
 
-gp <- autoplot(dists) +
+autoplot(dists) +
   geom_hcintersect(data = hc, aes(xintercept = est, yintercept = percent/100))
-
-print(gp)
 ```
 
 ![Species sensitivity distributions for sample species concentration values](dists.png)
