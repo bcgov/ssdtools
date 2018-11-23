@@ -6,11 +6,7 @@ authors:
   orcid: 0000-0002-7683-4592
 - affiliation: 2
   name: Carl Schwarz
-date: '2018-11-15'
-output:
-  pdf_document: default
-  html_document:
-    df_print: paged
+date: '2018-11-23'
 bibliography: paper.bib
 tags:
 - ssd
@@ -26,21 +22,31 @@ affiliations:
 
 # Summary
 
-Species sensitivity distributions (SSDs) are cumulative probability distributions which are fitted to toxicity concentrations for multiple species (Figure 1). 
-They are used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
+Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate the percent of species that are affected by a given concentration of a chemical. 
+The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC).
+Hazard concentrations are used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 
-`ssdtools` is an R package [@r] to fit log-normal (lnorm), log-logistic (llog), Gompertz, log-Gumbel (lgumbel), gamma or Weibull distributions to species concentration data.
-The user can also define their own distributions.
+`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011]. 
+The available distributions include the log-normal (lnorm), log-logistic (llog), Gompertz, log-Gumbel (lgumbel), gamma and Weibull distributions.
+Model selection or model averaging can be performed using Akaike Information Criterion (AIC), AIC corrected for small sample size (AICc) and Bayesian Information Criterion (BIC) [@burnham_model_2002].
+Confidence intervals can be calculated for the cumulative distribution or specific hazard concentrations (percentiles) using parametric bootstrap resampling.
+
+`ssdtools` uses the `fitdistrplus` R package [@fitdistrplus] for model fitting, calculation of information criteria and bootstrapping.
+`ssdtools` extends the `ggplot2` R package [@ggplot2] by defining `ssdfit`, `xribbon` and `hcintersect` geometries to allow the user to produce custom SSD plots.
+The following code fits the default distributions to the data set for boron and plots the results using the ggplot2 `autoplot()` generic.
+
+```r
+install.packages("ssdtools")
+library(ssdtools)
+
+data <- ssdtools::boron_data
+dists <- ssd_fit_dists(data)
+
+ggplot2::autoplot(dists) 
+```
 
 ![Species sensitivity distributions for sample species concentration values](dists.png)
 
-Multiple distributions can be averaged using Information Criteria [@burnham_model_2002].
-The available Information Criteria are the Akaike Information Criterion (AIC), the Akaike Information Criterion corrected for small sample size (AICc) and Bayesian Information Criterion (BIC).
-Confidence intervals can be calculated for the fitted cumulative distribution function or specific hazard concentrations (percentiles).
-The confidence intervals are currently produced by parametric bootstrap resampling.
-
-`ssdtools` uses the `fitdistrplus` R package [@fitdistrplus] for model fitting, calculation of AIC and bootstrapping.
-`ssdtools` also extends the `ggplot2` R package [@ggplot2] by defining `ssdfit`, `xribbon` and `hcintersect` geometries to allow the user to produce custom SSD plots.
 
 # Acknowledgements
 
