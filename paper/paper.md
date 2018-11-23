@@ -33,16 +33,18 @@ Confidence intervals can be calculated for the cumulative distribution or specif
 
 `ssdtools` uses the `fitdistrplus` R package [@fitdistrplus] for model fitting, calculation of information criteria and bootstrapping.
 `ssdtools` extends the `ggplot2` R package [@ggplot2] by defining `ssdfit`, `xribbon` and `hcintersect` geometries to allow the user to produce custom SSD plots.
-The following code fits the default distributions to the data set for boron and plots the results using the ggplot2 `autoplot()` generic.
+The following code fits the default distributions to the data set for boron and plots the results with the model averaged 5% HC as a dotted intersection (Figure 1).
 
 ```r
-install.packages("ssdtools")
+# install.packages("ssdtools")
 library(ssdtools)
+library(ggplot2)
 
-data <- ssdtools::boron_data
-dists <- ssd_fit_dists(data)
+dists <- ssd_fit_dists(boron_data)
+hc <- ssd_hc(dists)
 
-ggplot2::autoplot(dists) 
+gp <- autoplot(dists) +
+  geom_hcintersect(data = hc, aes(xintercept = est, yintercept = percent/100))
 ```
 
 ![Species sensitivity distributions for sample species concentration values](dists.png)
@@ -54,3 +56,4 @@ We acknowledge contributions from Ali Azizishirazi, Angeline Tillmanns, Stephani
 Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia.
 
 # References
+
