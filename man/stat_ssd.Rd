@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{stat_ssd}
 \alias{stat_ssd}
-\title{Plot Species Sensitivy Data}
+\title{Plot Species Sensitivity Data}
 \usage{
 stat_ssd(mapping = NULL, data = NULL, geom = "point",
   position = "identity", na.rm = FALSE, show.legend = NA,

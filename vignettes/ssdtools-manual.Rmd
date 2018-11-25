@@ -167,7 +167,7 @@ The uncertainty in the estimates is generated using parametric bootstrapping.
 ```{r}
 boron_pred
 ```
-The data frame of the estimates can then be plotted together with the original data using the `ssd_plot()` function to summarise an analysis.
+The data frame of the estimates can then be plotted together with the original data using the `ssd_plot()` function to summarize an analysis.
 Once again the returned object is a `ggplot` object which can be customized prior to plotting.
 ```{r, fig.height = 5, fig.width = 6}
 gp <- ssd_plot(boron_data, boron_pred, color = "Group", label = "Species",

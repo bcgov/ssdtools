@@ -10,7 +10,7 @@
 \arguments{
 \item{object}{The object to plot.}
 
-\item{ci}{A flag indicating wether to plot confidence intervals}
+\item{ci}{A flag indicating whether to plot confidence intervals}
 
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).}
 

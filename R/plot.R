@@ -149,7 +149,7 @@ plot_coord_scale <- function(data, xlab, ylab) {
   )
 }
 
-#' Plot Species Sensitivy Data
+#' Plot Species Sensitivity Data
 #'
 #' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
 #'
@@ -263,7 +263,7 @@ plot.fitdists <- function(x, breaks = "default", ...) {
 #' Autoplot
 #'
 #' @param object The object to plot.
-#' @param ci A flag indicating wether to plot confidence intervals
+#' @param ci A flag indicating whether to plot confidence intervals
 #' @param hc A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).
 #' @param xlab A string of the x-axis label.
 #' @param ylab A string of the x-axis label.
