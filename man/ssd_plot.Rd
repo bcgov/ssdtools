@@ -30,7 +30,7 @@ ssd_plot(data, pred, left = "Conc", right = left, label = NULL,
 
 \item{ylab}{A string of the x-axis label.}
 
-\item{ci}{A flag indicating wether to plot confidence intervals}
+\item{ci}{A flag indicating whether to plot confidence intervals}
 
 \item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
 

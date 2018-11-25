@@ -191,7 +191,7 @@
 <a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; $gompertz</span></a>
 <a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;       shape       scale </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039409621 0.002601607</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039409508 0.002601867</span></a></code></pre></div>
 <p>It is generally much more informative to plot the fits using the <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting (printing) to make it look prettier.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plot theme</span></a>
 <a class="sourceLine" id="cb7-2" title="2">gp &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(dists) </a>
@@ -259,7 +259,7 @@
 <a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt;  9       9 2.21  1.03  1.14   4.92</span></a>
 <a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt; 10      10 2.46  1.10  1.29   5.35</span></a>
 <a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt; # ... with 89 more rows</span></a></code></pre></div>
-<p>The data frame of the estimates can then be plotted together with the original data using the <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> function to summarise an analysis. Once again the returned object is a <code>ggplot</code> object which can be customized prior to plotting.</p>
+<p>The data frame of the estimates can then be plotted together with the original data using the <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> function to summarize an analysis. Once again the returned object is a <code>ggplot</code> object which can be customized prior to plotting.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">gp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
 <a class="sourceLine" id="cb11-2" title="2">         <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>, <span class="dt">ribbon =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb11-3" title="3">gp &lt;-<span class="st"> </span>gp <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(<span class="dt">x =</span> <span class="dv">5000</span>) <span class="op">+</span><span class="st"> </span><span class="co"># to ensure the species labels fit</span></a>
@@ -327,11 +327,11 @@
 <h2 class="hasAnchor">
 <a href="#grouping" class="anchor"></a>Grouping</h2>
 <p>A common question is how do I fit distributions to multiple groups such taxa and/or chemicals? An elegant approach using the tidyverse is demonstrated below.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">boron_datas &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/tidyr/topics/nest">nest</a></span>(boron_data, <span class="op">-</span>Group)</a>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">boron_datas &lt;-<span class="st"> </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(boron_data, <span class="op">-</span>Group)</a>
 <a class="sourceLine" id="cb21-2" title="2">boron_datas &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(boron_datas, </a>
 <a class="sourceLine" id="cb21-3" title="3">                      <span class="dt">Fit =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(data, ssd_fit_dists, <span class="dt">dists =</span> <span class="st">"lnorm"</span>), </a>
 <a class="sourceLine" id="cb21-4" title="4">                      <span class="dt">Prediction =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(Fit, predict))</a>
-<a class="sourceLine" id="cb21-5" title="5">boron_datas &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/tidyr/topics/unnest">unnest</a></span>(boron_datas, Prediction)</a></code></pre></div>
+<a class="sourceLine" id="cb21-5" title="5">boron_datas &lt;-<span class="st"> </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span>(boron_datas, Prediction)</a></code></pre></div>
 <p>The resultant data and predictions can then be plotted as follows.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">boron_hc5s &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(boron_datas, percent <span class="op">==</span><span class="st"> </span><span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb22-2" title="2">gp <span class="op">%+%</span><span class="st"> </span>boron_datas <span class="op">+</span><span class="st"> </span></a>
