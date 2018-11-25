@@ -17,10 +17,10 @@ Distributions (SSD).
 
 SSDs are cumulative probability distributions which are fitted to
 toxicity concentrations for multiple species. The ssdtools package uses
-Maximum Likelihood to fit log-normal, log-logistic, gompertz, lgumbel,
-gamma or weibull distributions. Multiple distributions can be averaged
-using Information Criteria. Confidence intervals on fits and hazard
-concentrations are produced by bootstrapping.
+Maximum Likelihood to fit log-normal, log-logistic, log-Gumbel,
+Gompertz, gamma or Weibull distributions. Multiple distributions can be
+averaged using Information Criteria. Confidence intervals on fits and
+hazard concentrations are produced by bootstrapping.
 
 ## Installation
 
