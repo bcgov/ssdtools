@@ -15,9 +15,9 @@ tags:
 - hazard concentration
 affiliations:
 - index: 1
-  name: Poisson Consulting Ltd., British Columbia
+  name: Poisson Consulting Ltd., Nelson, Canada
 - index: 2
-  name: Simon Fraser University, British Columbia
+  name: Simon Fraser University, Vancouver, Canada
 ---
 
 # Summary
