@@ -86,6 +86,8 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
          xlab = "Concentration (mg/L)", ribbon = TRUE) + expand_limits(x = 3000)
 ```
 
+## Information
+
 The ssdtools manual is available at <https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html>.
 
 A shiny webpage developed for non-R-users is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.
@@ -95,6 +97,13 @@ The data included in `ssdtools` are sourced from the Canadian environmental qual
 ## Getting Help or Reporting an Issue
 
 To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/ssdtools/issues/).
+
+## Citation
+
+```{r, comment = "", echo = FALSE}
+citation(package = "ssdtools")
+```
+
 
 ## How to Contribute
 

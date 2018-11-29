@@ -128,8 +128,8 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</a></code></pre></div>
 <p>and plot using the <code>ggplot2</code> generic <code>autoplot</code></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme_get">theme_set</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_bw</a></span>())</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/autoplot">autoplot</a></span>(boron_dists)</a></code></pre></div>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>())</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(boron_dists)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="700"></p>
 <p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
@@ -153,8 +153,12 @@
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">boron_pred &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(boron_dists)</a></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">shape =</span> <span class="st">"Group"</span>, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
-<a class="sourceLine" id="cb10-2" title="2">         <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>, <span class="dt">ribbon =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/expand_limits">expand_limits</a></span>(<span class="dt">x =</span> <span class="dv">3000</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb10-2" title="2">         <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>, <span class="dt">ribbon =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(<span class="dt">x =</span> <span class="dv">3000</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="700"></p>
+</div>
+<div id="information" class="section level2">
+<h2 class="hasAnchor">
+<a href="#information" class="anchor"></a>Information</h2>
 <p>The ssdtools manual is available at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html" class="uri">https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html</a>.</p>
 <p>A shiny webpage developed for non-R-users is available at <a href="https://poissonconsulting.shinyapps.io/ssdtools/" class="uri">https://poissonconsulting.shinyapps.io/ssdtools/</a>.</p>
 <p>The data included in <code>ssdtools</code> are sourced from the Canadian environmental quality guidelines published by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw"><code>data-raw</code></a> folder for more information.</p>
@@ -163,6 +167,29 @@
 <h2 class="hasAnchor">
 <a href="#getting-help-or-reporting-an-issue" class="anchor"></a>Getting Help or Reporting an Issue</h2>
 <p>To report bugs/issues/feature requests, please file an <a href="https://github.com/bcgov/ssdtools/issues/">issue</a>.</p>
+</div>
+<div id="citation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#citation" class="anchor"></a>Citation</h2>
+<pre><code>
+To cite ssdtools in publications use:
+
+  Thorley et al., (2018). ssdtools An R package to fit Species
+  Sensitivity Distributions. Journal of Open Source Software,
+  3(31), 1082. https://doi.org/10.21105/joss.01082
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
+    author = {Joe Thorley and Carl Schwarz},
+    journal = {Journal of Open Source Software},
+    year = {2018},
+    volume = {3},
+    number = {31},
+    pages = {1082},
+    doi = {10.21105/joss.01082},
+  }</code></pre>
 </div>
 <div id="how-to-contribute" class="section level2">
 <h2 class="hasAnchor">
@@ -208,6 +235,12 @@ limitations under the License.</code></pre>
 <ul class="list-unstyled">
 <li>Apache License (== 2.0) | file <a href="LICENSE-text.html">LICENSE</a>
 </li>
+</ul>
+</div>
+<div class="citation">
+<h2>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html">Citing ssdtools</a></li>
 </ul>
 </div>
 <div class="developers">

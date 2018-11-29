@@ -1,5 +1,6 @@
 # ssdtools 0.0.3
 
+- added citation
 - Added ssdtools-manual vignette
 - Changed predict() and ssd_hc() nboot argument from 1001 to 1000
 - Added hc5_boron data object
