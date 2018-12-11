@@ -12,6 +12,7 @@ Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](http
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/ssdtools)
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.01082/status.svg)](https://doi.org/10.21105/joss.01082)
 
 `ssdtools` is an R package to plot and fit Species Sensitivity
 Distributions (SSD).
