@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![Travis-CI Build Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-ci.org/bcgov/ssdtools)
 [![Coverage Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/ssdtools)]( https://CRAN.R-project.org/package=ssdtools)
+![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/ssdtools)
 
 `ssdtools` is an R package to plot and fit Species Sensitivity Distributions (SSD). 
 

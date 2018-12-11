@@ -191,7 +191,7 @@
 <a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; $gompertz</span></a>
 <a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;       shape       scale </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039409918 0.002601642</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039412931 0.002598741</span></a></code></pre></div>
 <p>It is generally much more informative to plot the fits using the <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting (printing) to make it look prettier.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plot theme</span></a>
 <a class="sourceLine" id="cb7-2" title="2">gp &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(dists) </a>
