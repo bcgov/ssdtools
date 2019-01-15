@@ -34,7 +34,7 @@ This vignette is a user manual for the R package.
 ## Philosophy
 
 `ssdtools` provides the key functionality required to fit SSDs using Maximum Likelihood and model averaging in R.
-It is intended to be used in conjunction with [tidyverse](https://www.tidyverse.org) packages such as `readr` to input data, `tidyr` and `dplyr` to group and manipulate data and `ggplot2` to plot data.
+It is intended to be used in conjunction with [tidyverse](https://www.tidyverse.org) packages such as `readr` to input data, `tidyr` and `dplyr` to group and manipulate data and `ggplot2` [@ggplot2] to plot data.
 As such it endeavours fulfill the tidyverse [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html).
 
 ## Installing
@@ -285,7 +285,7 @@ ssd_cfplot(boron_data)
 
 ### Model Diagnostics
 
-A `fitdists` object can be plotted to display model diagnostics plots for each fit.
+A `fitdists` [@fitdists] object can be plotted to display model diagnostics plots for each fit.
 ```{r, fig.width=6, fig.height=6, fig.show='hold'}
 plot(dists)
 ```
