@@ -299,7 +299,6 @@ However, to date very little functionality has been implemented for weighted fit
 boron_data$Weight <- as.integer(boron_data$Group)
 fit <- ssd_fit_dists(boron_data, weight = "Weight", dists = c("lnorm", "weibull"))
 fit
-plot(fit)
 ```
 
 ### Censored Data
