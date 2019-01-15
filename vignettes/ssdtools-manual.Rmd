@@ -285,7 +285,7 @@ ssd_cfplot(boron_data)
 
 ### Model Diagnostics
 
-A `fitdists` [@fitdists] object can be plotted to display model diagnostics plots for each fit.
+A `fitdists` [@fitdistrplus] object can be plotted to display model diagnostics plots for each fit.
 ```{r, fig.width=6, fig.height=6, fig.show='hold'}
 plot(dists)
 ```
