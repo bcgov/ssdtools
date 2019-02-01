@@ -125,7 +125,8 @@ Given multiple distributions the user is faced with choosing the best fitting di
 For illustrative purposes we consider the same six distributions as @schwarz_comparison_2017.
 ```{r}
 boron_dists <- ssd_fit_dists(boron_data)
-ssd_gof(boron_dists)
+gof <- ssd_gof(boron_dists)
+gof[order(gof$delta),]
 ```
 
 The `ssd_gof()` function returns several goodness of fit measures that can be used to select the best distribution including three statistics 
@@ -148,10 +149,10 @@ For further information on the advantages of an information theoretic approach i
 
 ## Averaging Multiple Distributions
 
-Often other distributions will fit the data almost as well as the best distribution as evidenced by `delta` values < 2. 
+Often other distributions will fit the data almost as well as the best distribution as evidenced by `delta` values < 2 [@burnham_model_2002]. 
 In this situation the recommended approach is to estimate the average fit based on the relative weights of the distributions  [@burnham_model_2002].
 The `aicc` based weights are indicated by the `weight` column in the goodness of fit table.
-In the current example, the gamma, Weibull and log-normal distributions have `delta` values < 2.
+In the current example, the gompertz, gamma, Weibull and log-normal distributions have `delta` values < 2.
 
 ## Estimating the Fit
 
@@ -206,7 +207,7 @@ print(boron_hc5)
 
 ## Plotting
 
-The `sscda` package provides three ggplot geoms to allow you construct your own plots.
+The `ssdtools` package provides three ggplot geoms to allow you construct your own plots.
 
 The first is `geom_ssd()` which plots species sensitivity data 
 ```{r}
@@ -290,18 +291,6 @@ A `fitdists` object can be plotted to display model diagnostics plots for each f
 plot(dists)
 ```
 
-### Weighted Data
-
-The `ssd_fit_dists()` function allows the user to name a column that specifies
-the weights to use in the estimation. 
-However, to date very little functionality has been implemented for weighted fits in the `fitdistrplus` package.
-```{r, error = TRUE}
-boron_data$Weight <- as.integer(boron_data$Group)
-fit <- ssd_fit_dists(boron_data, weight = "Weight", dists = c("lnorm", "weibull"))
-fit
-plot(fit)
-```
-
 ### Censored Data
 
 Censored data is that for which only a lower and/or upper limit is known for a particular species. 
@@ -315,6 +304,8 @@ head(fluazinam)
 
 There are less goodness-of-fit statistics available for
 fits to censored data (currently just `aic` and `bic`).
+The `delta` values are calculated using `aic`.
+
 ```{r}
 fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_gof(fluazinam_dists)

@@ -60,7 +60,7 @@ boron_data
 #>  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L 
 #>  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L 
 #> 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L 
-#> # ... with 18 more rows
+#> # … with 18 more rows
 ```
 
 Multiple distributions can be fit using `ssd_fit_dists()`
@@ -149,23 +149,20 @@ To report bugs/issues/feature requests, please file an
 
 ``` 
 
-To cite ssdtools in publications use:
+To cite package 'ssdtools' in publications use:
 
-  Thorley et al., (2018). ssdtools An R package to fit Species
-  Sensitivity Distributions. Journal of Open Source Software,
-  3(31), 1082. https://doi.org/10.21105/joss.01082
+  Joe Thorley and Carl Schwarz (2018). ssdtools: Species
+  Sensitivity Distributions. R package version 0.0.3.
+  https://CRAN.R-project.org/package=ssdtools
 
 A BibTeX entry for LaTeX users is
 
-  @Article{,
-    title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
+  @Manual{,
+    title = {ssdtools: Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
-    journal = {Journal of Open Source Software},
     year = {2018},
-    volume = {3},
-    number = {31},
-    pages = {1082},
-    doi = {10.21105/joss.01082},
+    note = {R package version 0.0.3},
+    url = {https://CRAN.R-project.org/package=ssdtools},
   }
 ```
 
@@ -176,7 +173,7 @@ If you would like to contribute to the package, please see our
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+to abide by its terms
 
 ## License
 
