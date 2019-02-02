@@ -42,6 +42,8 @@ Other contributors:
   \item Emilie Doussantousse [contributor]
   \item Heather Thompson [contributor]
   \item Andy Teucher [contributor]
+  \item Nan-Hung Hsieh [contributor]
+  \item Sergio Ibarra Espinosa [contributor]
   \item Province of British Columbia [copyright holder]
 }
 
