@@ -35,7 +35,7 @@ This vignette is a user manual for the R package.
 
 `ssdtools` provides the key functionality required to fit SSDs using Maximum Likelihood and model averaging in R.
 It is intended to be used in conjunction with [tidyverse](https://www.tidyverse.org) packages such as `readr` to input data, `tidyr` and `dplyr` to group and manipulate data and `ggplot2` [@ggplot2] to plot data.
-As such it endeavours fulfill the tidyverse [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html).
+As such it endeavours to fulfill the tidyverse [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html).
 
 ## Installing
 
@@ -72,11 +72,11 @@ Once the `ssdtools` package has been loaded the next task is to input some data.
 An easy way to do this is to save the concentration data for a *single* chemical as a column called `Conc` in a comma separated file (`.csv`). 
 Each row should be the sensitivity concentration for a separate species.
 If species and/or group information is available then this can be saved as `Species` and `Group` columns.
-The `.csv` file can then be read into R using 
+The `.csv` file can then be read into R using the following
 ```{r, eval = FALSE}
 data <- read_csv(file = "path/to/file.csv")
 ```
-For the purposes of this manual we use the CCME dataset for boron which is provided with the ssdtools package
+For the purposes of this manual we use the CCME dataset for boron which is provided with the `ssdtools` package.
 ```{r}
 data <- ssdtools::boron_data
 print(data)
