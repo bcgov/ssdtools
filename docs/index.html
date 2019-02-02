@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9002</span>
       </span>
     </div>
 
@@ -140,19 +140,19 @@
 <a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
 <a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; * &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; 1 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; 2 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; 3 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 4 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; 5 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
 <a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
 <p>and the model-averaged 5% hazard concentration estimated using <code>ssd_hc</code></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">boron_hc5 &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">nboot =</span> <span class="dv">10000</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(boron_hc5)</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; *   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; 1       5  1.25 0.736 0.602  3.22</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; 1       5  1.25 0.736 0.604  3.20</span></a></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">boron_pred &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(boron_dists)</a></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
@@ -176,27 +176,30 @@
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
 <pre><code>
-To cite package 'ssdtools' in publications use:
+To cite ssdtools in publications use:
 
-  Joe Thorley and Carl Schwarz (2018). ssdtools: Species
-  Sensitivity Distributions. R package version 0.0.3.
-  https://CRAN.R-project.org/package=ssdtools
+  Thorley et al., (2018). ssdtools An R package to fit Species
+  Sensitivity Distributions. Journal of Open Source Software,
+  3(31), 1082. https://doi.org/10.21105/joss.01082
 
 A BibTeX entry for LaTeX users is
 
-  @Manual{,
-    title = {ssdtools: Species Sensitivity Distributions},
+  @Article{,
+    title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
+    journal = {Journal of Open Source Software},
     year = {2018},
-    note = {R package version 0.0.3},
-    url = {https://CRAN.R-project.org/package=ssdtools},
+    volume = {3},
+    number = {31},
+    pages = {1082},
+    doi = {10.21105/joss.01082},
   }</code></pre>
 </div>
 <div id="how-to-contribute" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-to-contribute" class="anchor"></a>How to Contribute</h2>
 <p>If you would like to contribute to the package, please see our <a href="CONTRIBUTING.html">CONTRIBUTING</a> guidelines.</p>
-<p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms</p>
+<p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">

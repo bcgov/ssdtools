@@ -21,7 +21,8 @@ test_that("utils", {
   expect_identical(nobs(boron_lnorm), 28L)
   expect_identical(nobs(boron_dists), nobs(boron_lnorm))
   expect_identical(npars(boron_lnorm), 2L)
-  expect_identical(npars(boron_dists), c(lnorm = 2L, llog = 2L, gompertz = 2L, lgumbel = 2L, gamma = 2L, weibull = 2L))
+  expect_identical(npars(boron_dists), c(gamma = 2L, gompertz = 2L, lgumbel = 2L,
+                                         llog = 2L, lnorm = 2L, weibull = 2L))
   expect_identical(comma_signif(1111), "1,000")
   expect_equal(ssd_ecd(1:10), seq(0.05, 0.95, by = 0.1))
 })

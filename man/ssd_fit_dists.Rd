@@ -5,7 +5,7 @@
 \title{Fit Distributions}
 \usage{
 ssd_fit_dists(data, left = "Conc", right = left, weight = NULL,
-  dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
+  dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
   silent = FALSE)
 }
 \arguments{
@@ -28,8 +28,8 @@ An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objec
 Fits one or more distributions to species sensitivity data.
 }
 \details{
-By default the 'lnorm', 'llog', 'gompertz', 'lgumbel', 'gamma' and 'weibull'
-distributions are fitted to the data.
+By default the 'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and
+'weibull' distributions are fitted to the data.
 The ssd_fit_dists function has also been
 tested with the 'pareto' distribution.
 

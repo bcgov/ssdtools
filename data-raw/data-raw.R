@@ -58,7 +58,7 @@ spp <- c("Simocephalus serrulatus",
          "Scenedesmus acutus",
          "Potamogeton pectinatus")
 
-spp <- data_frame(Species = spp, Spp = str_replace(spp, "^(\\w)([^\\s]+)", "\\1."))
+spp <- tibble(Species = spp, Spp = str_replace(spp, "^(\\w)([^\\s]+)", "\\1."))
 
 ccme_data %<>% left_join(spp, by = c(Species = "Spp"))
 
@@ -153,7 +153,7 @@ use_data(boron_data, overwrite = TRUE)
 
 write.csv(boron_data, "inst/extdata/boron_data.csv", row.names = FALSE)
 
-boron_lnorm <- ssd_fit_dist(boron_data)
+boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")[[1]]
 use_data(boron_lnorm, overwrite = TRUE)
 
 boron_dists <- ssd_fit_dists(boron_data)
@@ -166,7 +166,8 @@ boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
 use_data(boron_hc5, overwrite = TRUE)
 
 data("fluazinam", package = "fitdistrplus")
-fluazinam_lnorm <- ssd_fit_dist(fluazinam, left = "left", right = "right")
+fluazinam_lnorm <- ssd_fit_dists(fluazinam, left = "left", right = "right",
+                                 dists = "lnorm")[[1]]
 use_data(fluazinam_lnorm, overwrite = TRUE)
 
 fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")

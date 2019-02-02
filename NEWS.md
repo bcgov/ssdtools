@@ -1,3 +1,5 @@
+- Default ssd_fit_dists distributions now orderd alphabetically
+
 # ssdtools 0.0.3
 
 - added citation

@@ -91,8 +91,8 @@ ssd_fit_dist <- function(
 #'
 #' Fits one or more distributions to species sensitivity data.
 #'
-#' By default the 'lnorm', 'llog', 'gompertz', 'lgumbel', 'gamma' and 'weibull'
-#' distributions are fitted to the data.
+#' By default the 'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and
+#' 'weibull' distributions are fitted to the data.
 #' The ssd_fit_dists function has also been
 #' tested with the 'pareto' distribution.
 #'
@@ -122,7 +122,7 @@ ssd_fit_dist <- function(
 #' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
-  dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"),
+  dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
   silent = FALSE
 ) {
   check_vector(dists, length = TRUE, unique = TRUE, named = FALSE)

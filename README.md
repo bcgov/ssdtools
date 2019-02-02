@@ -86,11 +86,11 @@ ssd_gof(boron_dists)
 #> # A tibble: 6 x 9
 #>   dist        ad     ks    cvm   aic  aicc   bic delta weight
 #> * <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133
-#> 2 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049
-#> 3 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271
-#> 4 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 
-#> 5 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268
+#> 1 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268
+#> 2 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271
+#> 3 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 
+#> 4 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049
+#> 5 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133
 #> 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269
 ```
 
@@ -104,8 +104,8 @@ boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
 print(boron_hc5)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
-#> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.736 0.602  3.22
+#>     <int> <dbl> <dbl> <dbl> <dbl>
+#> 1       5  1.25 0.736 0.604  3.20
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -149,20 +149,23 @@ To report bugs/issues/feature requests, please file an
 
 ``` 
 
-To cite package 'ssdtools' in publications use:
+To cite ssdtools in publications use:
 
-  Joe Thorley and Carl Schwarz (2018). ssdtools: Species
-  Sensitivity Distributions. R package version 0.0.3.
-  https://CRAN.R-project.org/package=ssdtools
+  Thorley et al., (2018). ssdtools An R package to fit Species
+  Sensitivity Distributions. Journal of Open Source Software,
+  3(31), 1082. https://doi.org/10.21105/joss.01082
 
 A BibTeX entry for LaTeX users is
 
-  @Manual{,
-    title = {ssdtools: Species Sensitivity Distributions},
+  @Article{,
+    title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
     author = {Joe Thorley and Carl Schwarz},
+    journal = {Journal of Open Source Software},
     year = {2018},
-    note = {R package version 0.0.3},
-    url = {https://CRAN.R-project.org/package=ssdtools},
+    volume = {3},
+    number = {31},
+    pages = {1082},
+    doi = {10.21105/joss.01082},
   }
 ```
 
@@ -173,7 +176,7 @@ If you would like to contribute to the package, please see our
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms
+to abide by its terms.
 
 ## License
 
