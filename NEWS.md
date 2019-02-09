@@ -1,4 +1,4 @@
-- Default ssd_fit_dists distributions now orderd alphabetically
+- Default ssd_fit_dists distributions now ordered alphabetically
 
 # ssdtools 0.0.3
 

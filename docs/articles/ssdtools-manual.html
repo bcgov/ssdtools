@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9005</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
       <h1>ssdtools User Manual</h1>
                         <h4 class="author">Joe Thorley</h4>
             
-            <h4 class="date">2019-02-01</h4>
+            <h4 class="date">2019-02-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/ssdtools-manual.Rmd"><code>vignettes/ssdtools-manual.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools-manual.Rmd</code></div>
@@ -194,7 +194,7 @@
 <a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; $gompertz</span></a>
 <a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;       shape       scale </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039408388 0.002603271</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039410445 0.002600513</span></a></code></pre></div>
 <p>It is generally much more informative to plot the fits using the <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting (printing) to make it look prettier.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plot theme</span></a>
 <a class="sourceLine" id="cb7-2" title="2">gp &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(dists) </a>
@@ -216,7 +216,7 @@
 <a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
 <a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
 <a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 1 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 1 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></a>
 <a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; 2 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a>
 <a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; 3 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
 <a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; 4 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>

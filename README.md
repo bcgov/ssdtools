@@ -151,9 +151,9 @@ To report bugs/issues/feature requests, please file an
 
 To cite ssdtools in publications use:
 
-  Thorley et al., (2018). ssdtools An R package to fit Species
-  Sensitivity Distributions. Journal of Open Source Software,
-  3(31), 1082. https://doi.org/10.21105/joss.01082
+  Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
+  Species Sensitivity Distributions. Journal of Open Source
+  Software, 3(31), 1082. https://doi.org/10.21105/joss.01082
 
 A BibTeX entry for LaTeX users is
 

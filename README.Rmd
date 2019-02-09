@@ -106,7 +106,6 @@ To report bugs/issues/feature requests, please file an [issue](https://github.co
 citation(package = "ssdtools")
 ```
 
-
 ## How to Contribute
 
 If you would like to contribute to the package, please see our 
