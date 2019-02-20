@@ -310,7 +310,7 @@ The `delta` values are calculated using `aic`.
 fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_gof(fluazinam_dists)
 ```
-But model-averaged predictions can be made using `aic`
+But model-averaged predictions (and hazard concentrations complete with 95% confidence limits) can be calculated using `aic`
 ```{r, eval = FALSE}
 fluazinam_pred <- predict(fluazinam_dists)
 ```

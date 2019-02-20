@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9006</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
       <h1>ssdtools User Manual</h1>
                         <h4 class="author">Joe Thorley</h4>
             
-            <h4 class="date">2019-02-08</h4>
+            <h4 class="date">2019-02-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/ssdtools-manual.Rmd"><code>vignettes/ssdtools-manual.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools-manual.Rmd</code></div>
@@ -139,7 +139,7 @@
 <h2 class="hasAnchor">
 <a href="#inputting-data" class="anchor"></a>Inputting Data</h2>
 <p>Once the <code>ssdtools</code> package has been loaded the next task is to input some data. An easy way to do this is to save the concentration data for a <em>single</em> chemical as a column called <code>Conc</code> in a comma separated file (<code>.csv</code>). Each row should be the sensitivity concentration for a separate species. If species and/or group information is available then this can be saved as <code>Species</code> and <code>Group</code> columns. The <code>.csv</code> file can then be read into R using the following</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/readr/topics/read_delim">read_csv</a></span>(<span class="dt">file =</span> <span class="st">"path/to/file.csv"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">data &lt;-<span class="st"> </span><span class="kw"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="dt">file =</span> <span class="st">"path/to/file.csv"</span>)</a></code></pre></div>
 <p>For the purposes of this manual we use the CCME dataset for boron which is provided with the <code>ssdtools</code> package.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">data &lt;-<span class="st"> </span>ssdtools<span class="op">::</span>boron_data</a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(data)</a>
@@ -194,7 +194,7 @@
 <a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; $gompertz</span></a>
 <a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;       shape       scale </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039410445 0.002600513</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 0.039405345 0.002606449</span></a></code></pre></div>
 <p>It is generally much more informative to plot the fits using the <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting (printing) to make it look prettier.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plot theme</span></a>
 <a class="sourceLine" id="cb7-2" title="2">gp &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(dists) </a>
@@ -390,7 +390,7 @@
 <a class="sourceLine" id="cb26-10" title="10"><span class="co">#&gt; 3 llog     150.  151. 0.552  0.237</span></a>
 <a class="sourceLine" id="cb26-11" title="11"><span class="co">#&gt; 4 lnorm    150.  151. 0.269  0.274</span></a>
 <a class="sourceLine" id="cb26-12" title="12"><span class="co">#&gt; 5 weibull  151.  153. 1.92   0.12</span></a></code></pre></div>
-<p>But model-averaged predictions can be made using <code>aic</code></p>
+<p>But model-averaged predictions (and hazard concentrations complete with 95% confidence limits) can be calculated using <code>aic</code></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">fluazinam_pred &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(fluazinam_dists)</a></code></pre></div>
 <p>and the results plotted complete with arrows indicating the censorship.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(fluazinam, fluazinam_pred, </a>
