@@ -15,6 +15,7 @@
 context("hc")
 
 test_that("ssd_hc", {
+  boron_data <- ssdtools::boron_data
   boron_lnorm <- ssd_fit_dist(boron_data[1:6,])
   x <- ssd_hc(boron_lnorm, nboot = 10L)
   expect_is(x, "tbl")

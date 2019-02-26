@@ -15,6 +15,7 @@
 context("predict")
 
 test_that("predict.fitdist", {
+  boron_data <- ssdtools::boron_data
   boron_lnorm <- ssd_fit_dist(boron_data[1:6,])
   pred <- predict(boron_lnorm, nboot = 10L)
   expect_is(pred, "tbl")
@@ -22,6 +23,11 @@ test_that("predict.fitdist", {
   expect_identical(pred$percent, 1:99)
   pred2 <- predict(boron_lnorm, nboot = 10)
   expect_identical(pred$est[1], pred2$est[1])
+  
+  boron_data$Conc <- boron_data$Conc / 1000
+  boron_lnorm3 <- ssd_fit_dist(boron_data[1:6,])
+  pred3 <- predict(boron_lnorm3, nboot = 10)
+  expect_equal(pred3$est[1], pred2$est[1]/1000)
 })
 
 test_that("predict.fitdists", {
@@ -37,4 +43,3 @@ test_that("predict.fitdists", {
   expect_identical(nrow(pred), 198L)
   expect_output(print(dists))
 })
-
