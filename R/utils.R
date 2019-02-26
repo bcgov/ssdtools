@@ -141,7 +141,10 @@ npars.fitdists <- function(x, ...) vapply(x, npars, 1L)
 #' comma_signif(1199)
 comma_signif <- function(x, digits = 1, ...) {
   x <- signif(x, digits = digits)
-  scales::comma(x, ...)
+  y <- as.character(x)
+  bol <- !is.na(x) & as.numeric(x) >= 1
+  y[bol] <- scales::comma(x[bol], ...)
+  y
 }
 
 ggname <- function(prefix, grob) {
