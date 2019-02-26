@@ -15,9 +15,16 @@
 context("fit")
 
 test_that("fit_dist", {
-  dist <- ssd_fit_dist(boron_data)
+  dist <- ssd_fit_dist(ssdtools::boron_data)
   expect_true(is.fitdist(dist))
   expect_identical(dist, boron_lnorm)
+})
+
+test_that("fit_dist tiny llog", {
+  data <- ssdtools::boron_data
+  data$Conc <- data$Conc / 100
+  # llog initial values need adjusting when small values
+  expect_error(ssd_fit_dist(data, dist = "llog"), "the function mle failed to estimate the parameters")
 })
 
 test_that("fit_dists", {
