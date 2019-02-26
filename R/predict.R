@@ -46,7 +46,7 @@ predict.fitdist <- function(object, percent = 1:99,
   prediction <- lapply(percent, predict_fitdist_percent, boot = boot, level = level)
   prediction$stringsAsFactors <- FALSE
   prediction <- do.call("rbind", prediction)
-  as_conditional_tibble(prediction)
+  as_tibble(prediction)
 }
 
 #' Predict censored fitdist
@@ -67,7 +67,7 @@ predict.fitdistcens <- function(object, percent = 1:99,
   prediction <- lapply(percent, predict_fitdist_percent, boot = boot, level = level)
   prediction$stringsAsFactors <- FALSE
   prediction <- do.call("rbind", prediction)
-  as_conditional_tibble(prediction)
+  as_tibble(prediction)
 }
 
 #' Predict fitdist
@@ -110,7 +110,7 @@ predict.fitdists <- function(object, percent = 1:99,
   predictions <- lapply(predictions, model_average)
   predictions$stringsAsFactors <- FALSE
   predictions <- do.call("rbind", predictions)
-  as_conditional_tibble(predictions)
+  as_tibble(predictions)
 }
 
 #' Predict Censored fitdists

@@ -73,7 +73,7 @@ ssd_gof.fitdist <- function(x, ...) {
   }
   data <- data.frame(dist = dist, ad = ad, ks = ks, cvm = cvm,
                     aic = aic, aicc = aicc, bic = bic, stringsAsFactors = FALSE)
-  as_conditional_tibble(data)
+  as_tibble(data)
 }
 
 #' @describeIn ssd_gof Goodness of Fit
@@ -82,7 +82,7 @@ ssd_gof.fitdistcens <- function(x, ...) {
   dist <- x$distname
   data <- data.frame(dist = dist, aic = x$aic, bic = x$bic, 
                      stringsAsFactors = FALSE)
-  as_conditional_tibble(data)
+  as_tibble(data)
 }
 
 #' @describeIn ssd_gof Goodness of Fit

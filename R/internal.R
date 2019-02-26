@@ -12,9 +12,9 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-as_conditional_tibble <- function(x) {
-  if(requireNamespace("tibble", quietly = TRUE))
-    x <- tibble::as_tibble(x)
+as_tibble <- function(x) {
+  stopifnot(is.data.frame(x))
+  class(x) <- c("tbl_df", "tbl", "data.frame")
   x
 }
 
