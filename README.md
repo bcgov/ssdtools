@@ -133,10 +133,9 @@ The ssdtools manual is available at
 A shiny webpage developed for non-R-users is available at
 <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
-The data included in `ssdtools` are sourced from the Canadian
-environmental quality guidelines published by the [Canadian Council of
-Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html).
-See the
+The CCME `data.csv` data file is derived from a factsheet prepared by
+the [Canadian Council of Ministers of the
+Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the
 [`data-raw`](https://github.com/bcgov/ssdtools/tree/master/data-raw)
 folder for more information.
 
