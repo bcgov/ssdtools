@@ -132,6 +132,13 @@ The ssdtools manual is available at
 A shiny webpage developed for non-R-users is available at
 <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
+The ssdtool package was developed as a result of earlier drafts of:
+
+Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for
+Modeling Species Sensitivity Distributions. Province of British
+Columbia, Victoria, BC. Available from
+<http://a100.gov.bc.ca/appsdata/acat/documents/r57400/2_1568399094009_8398900200.pdf>.
+
 The CCME `data.csv` data file is derived from a factsheet prepared by
 the [Canadian Council of Ministers of the
 Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the
