@@ -11,7 +11,7 @@ Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-
 Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
-![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/ssdtools)
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.01082/status.svg)](https://doi.org/10.21105/joss.01082)
 
 `ssdtools` is an R package to plot and fit Species Sensitivity
@@ -115,8 +115,7 @@ produced using the `stats` generic `predict`
 boron_pred <- predict(boron_dists)
 ```
 
-and plotted together with the original data using
-`ssd_plot`.
+and plotted together with the original data using `ssd_plot`.
 
 ``` r
 ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
