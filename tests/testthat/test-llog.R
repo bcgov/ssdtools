@@ -29,6 +29,6 @@ test_that("pqllog", {
 })
 
 test_that("dllog", {
- expect_equal(dllog(exp(3), 3, 1), 0.003720046, tolerance = 0.0000001)
- expect_equal(dllog(exp(4), 3, 1), 0.001200358, tolerance = 0.0000001)
+  expect_equal(dllog(exp(3), 3, 1), 0.003720046, tolerance = 0.0000001)
+  expect_equal(dllog(exp(4), 3, 1), 0.001200358, tolerance = 0.0000001)
 })

@@ -32,7 +32,7 @@ ssd_hc <- function(x, ...) {
 #' @examples
 #' ssd_hc(boron_lnorm)
 ssd_hc.fitdist <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
-  check_scalar(hc, c(1L,99L))
+  check_scalar(hc, c(1L, 99L))
   predict(x, percent = hc, nboot = nboot, level = level)
 }
 
@@ -43,7 +43,7 @@ ssd_hc.fitdist <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
 #' ssd_hc(fluazinam_lnorm)
 #' }
 ssd_hc.fitdistcens <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
-  check_scalar(hc, c(1L,99L)) 
+  check_scalar(hc, c(1L, 99L))
   predict(x, percent = hc, nboot = nboot, level = level)
 }
 
@@ -54,7 +54,7 @@ ssd_hc.fitdistcens <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
 #' ssd_hc(boron_dists)
 #' }
 ssd_hc.fitdists <- function(x, hc = 5L, ic = "aicc", average = TRUE, nboot = 1000, level = 0.95, ...) {
-  check_scalar(hc, c(1L,99L))
+  check_scalar(hc, c(1L, 99L))
   predict(x, percent = hc, ic = ic, nboot = nboot, average = average, level = level)
 }
 
@@ -65,6 +65,6 @@ ssd_hc.fitdists <- function(x, hc = 5L, ic = "aicc", average = TRUE, nboot = 100
 #' ssd_hc(fluazinam_dists)
 #' }
 ssd_hc.fitdistscens <- function(x, hc = 5L, ic = "aic", average = TRUE, nboot = 1000, level = 0.95, ...) {
-  check_scalar(hc, c(1L,99L))
+  check_scalar(hc, c(1L, 99L))
   predict(x, percent = hc, ic = ic, nboot = nboot, average = average, level = level)
 }

@@ -148,4 +148,3 @@
 #' @examples
 #' head(fluazinam_pred)
 "fluazinam_pred"
-

@@ -69,7 +69,6 @@ GeomSsdcens <- ggproto(
 GeomHcintersect <- ggproto(
   "GeomHcintersect", Geom,
   draw_panel = function(data, panel_params, coord) {
-    
     data$group <- 1:nrow(data)
     data$x <- data$xintercept
     data$y <- data$yintercept
@@ -77,7 +76,7 @@ GeomHcintersect <- ggproto(
     start$x <- 0.0001
     end <- data
     end$y <- -Inf
-    
+
     data <- rbind(start, data, end)
     GeomPath$draw_panel(data, panel_params, coord)
   },
@@ -94,8 +93,10 @@ GeomHcintersect <- ggproto(
 #' @export
 GeomXribbon <- ggproto(
   "GeomXribbon", Geom,
-  default_aes = aes(colour = NA, fill = "grey20", size = 0.5, linetype = 1,
-                    alpha = NA),
+  default_aes = aes(
+    colour = NA, fill = "grey20", size = 0.5, linetype = 1,
+    alpha = NA
+  ),
 
   required_aes = c("y", "xmin", "xmax"),
 
@@ -121,17 +122,20 @@ GeomXribbon <- ggproto(
     ids[missing_pos] <- NA
 
     positions <- plyr::summarise(data,
-                                 y = c(y, rev(y)), x = c(xmax, rev(xmin)), id = c(ids, rev(ids)))
+      y = c(y, rev(y)), x = c(xmax, rev(xmin)), id = c(ids, rev(ids))
+    )
     munched <- coord_munch(coord, positions, panel_params)
 
     ggname("geom_ribbon", grid::polygonGrob(
-      munched$x, munched$y, id = munched$id,
+      munched$x, munched$y,
+      id = munched$id,
       default.units = "native",
       gp = grid::gpar(
         fill = alpha(aes$fill, aes$alpha),
         col = aes$colour,
         lwd = aes$size * .pt,
-        lty = aes$linetype)
+        lty = aes$linetype
+      )
     ))
   }
 )
@@ -142,10 +146,14 @@ plot_coord_scale <- function(data, xlab, ylab) {
 
   list(
     coord_trans(x = "log10"),
-    scale_x_continuous(xlab, breaks = scales::trans_breaks("log10", function(x) 10^x),
-                       labels = comma_signif),
-    scale_y_continuous(ylab, labels = scales::percent, limits = c(0, 1),
-                       breaks = seq(0,1,by = 0.2), expand = c(0,0))
+    scale_x_continuous(xlab,
+      breaks = scales::trans_breaks("log10", function(x) 10^x),
+      labels = comma_signif
+    ),
+    scale_y_continuous(ylab,
+      labels = scales::percent, limits = c(0, 1),
+      breaks = seq(0, 1, by = 0.2), expand = c(0, 0)
+    )
   )
 }
 
@@ -223,7 +231,6 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #'   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
 geom_hcintersect <- function(mapping = NULL, data = NULL, xintercept, yintercept,
                              na.rm = FALSE, show.legend = NA, ...) {
-
   if (!missing(xintercept)) {
     data <- data.frame(xintercept = xintercept)
     mapping <- aes(xintercept = xintercept)
@@ -231,7 +238,7 @@ geom_hcintersect <- function(mapping = NULL, data = NULL, xintercept, yintercept
   }
 
   if (!missing(yintercept)) {
-    if(!missing(xintercept)) {
+    if (!missing(xintercept)) {
       data$yintercept <- yintercept
       mapping$yintercept <- yintercept
     } else {
@@ -242,14 +249,14 @@ geom_hcintersect <- function(mapping = NULL, data = NULL, xintercept, yintercept
   }
 
   layer(
-    geom = GeomHcintersect,  data = data, mapping = mapping, stat = StatIdentity,
+    geom = GeomHcintersect, data = data, mapping = mapping, stat = StatIdentity,
     position = PositionIdentity, show.legend = show.legend, inherit.aes = FALSE,
     params = list(na.rm = na.rm, ...)
   )
 }
 
 plot_fitdist <- function(x, breaks = "default", ...) {
-  graphics::par(oma=c(0,0,2,0))
+  graphics::par(oma = c(0, 0, 2, 0))
   graphics::plot(x, breaks = breaks, ...)
   graphics::title(paste("Distribution:", x$distname), outer = TRUE)
 }
@@ -275,23 +282,23 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
                              xlab = "Concentration", ylab = "Species Affected",
                              ...) {
   check_flag(ci)
-  checkor(check_null(hc), check_scalar(hc, c(1L,99L)))
+  checkor(check_null(hc), check_scalar(hc, c(1L, 99L)))
   check_string(xlab)
   check_string(ylab)
 
   data <- data.frame(x = object$data)
 
-  pred <- predict(object, nboot = if(ci) 1001 else 10)
+  pred <- predict(object, nboot = if (ci) 1001 else 10)
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.3)
+  if (ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.3)
 
   gp <- gp + geom_line(aes_string(y = "percent")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(!is.null(hc)) gp <- gp + geom_hcintersect(xintercept = pred$est[pred$percent == hc], yintercept = hc/100, linetype = "dotted")
+  if (!is.null(hc)) gp <- gp + geom_hcintersect(xintercept = pred$est[pred$percent == hc], yintercept = hc / 100, linetype = "dotted")
   gp
 }
 
@@ -307,7 +314,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
                                  xlab = "Concentration", ylab = "Species Affected",
                                  ...) {
   check_flag(ci)
-  checkor(check_null(hc), check_scalar(hc, c(1L,99L)))
+  checkor(check_null(hc), check_scalar(hc, c(1L, 99L)))
   check_string(xlab)
   check_string(ylab)
 
@@ -320,29 +327,37 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
   data$arrowright <- data$left * 2
   data$y <- ssd_ecd(data$xmean)
 
-  pred <- predict(object, nboot = if(ci) 1001 else 10)
+  pred <- predict(object, nboot = if (ci) 1001 else 10)
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.3)
+  if (ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.3)
 
   arrow <- arrow(length = unit(0.1, "inches"))
 
   gp <- gp + geom_line(aes_string(y = "percent")) +
-    geom_segment(data = data[data$xmin != data$xmax,],
-                 aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")) +
-    geom_segment(data = data[is.na(data$left),],
-                 aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
-                 arrow = arrow) +
-    geom_segment(data = data[is.na(data$right),],
-                 aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
-                 arrow = arrow) +
+    geom_segment(
+      data = data[data$xmin != data$xmax, ],
+      aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")
+    ) +
+    geom_segment(
+      data = data[is.na(data$left), ],
+      aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
+      arrow = arrow
+    ) +
+    geom_segment(
+      data = data[is.na(data$right), ],
+      aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
+      arrow = arrow
+    ) +
     geom_point(data = data, aes_string(x = "xmin", y = "y")) +
-    geom_point(data = data[data$xmin != data$xmax,],
-               aes_string(x = "xmax", y = "y")) +
+    geom_point(
+      data = data[data$xmin != data$xmax, ],
+      aes_string(x = "xmax", y = "y")
+    ) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(!is.null(hc)) gp <- gp + geom_hcintersect(xintercept = pred$est[pred$percent == hc], yintercept = hc/100, linetype = "dotted")
+  if (!is.null(hc)) gp <- gp + geom_hcintersect(xintercept = pred$est[pred$percent == hc], yintercept = hc / 100, linetype = "dotted")
   gp
 }
 
@@ -365,8 +380,10 @@ autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Af
   data <- data.frame(x = object[[1]]$data)
 
   gp <- ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(y = "percent/100", color = "Distribution",
-                         linetype = "Distribution")) +
+    geom_line(aes_string(
+      y = "percent/100", color = "Distribution",
+      linetype = "Distribution"
+    )) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
@@ -408,11 +425,13 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3) {
   check_data(data)
   check_data(pred,
-             values = list(
-               percent = 1:99,
-               est = 1,
-               lcl = 1,
-               ucl = 1))
+    values = list(
+      percent = 1:99,
+      est = 1,
+      lcl = 1,
+      ucl = 1
+    )
+  )
 
   check_vector(shift_x, values = c(1, 1000))
 
@@ -428,28 +447,30 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 
   gp <- ggplot(pred, aes_string(x = "est"))
 
-  if(ci) {
-    if(ribbon) {
+  if (ci) {
+    if (ribbon) {
       gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2)
     } else {
       gp <- gp +
         geom_line(aes_string(x = "lcl", y = "percent/100"), color = "darkgreen") +
         geom_line(aes_string(x = "ucl", y = "percent/100"), color = "darkgreen")
     }
-
   }
-  if(!is.null(label)) {
+  if (!is.null(label)) {
     check_colnames(data, label)
-    data <- data[order(data[[label]]),]
+    data <- data[order(data[[label]]), ]
   }
-  gp <- gp + geom_line(aes_string(y = "percent/100"), color = if(ribbon) "black" else "red")
+  gp <- gp + geom_line(aes_string(y = "percent/100"), color = if (ribbon) "black" else "red")
 
-  if(!is.null(hc))
-    gp <- gp + geom_hcintersect(data = data, xintercept = pred$est[pred$percent %in% hc], yintercept = hc/100)
+  if (!is.null(hc)) {
+    gp <- gp + geom_hcintersect(data = data, xintercept = pred$est[pred$percent %in% hc], yintercept = hc / 100)
+  }
 
-  if(left == right) {
-    gp <- gp + geom_ssd(data = data, aes_string(x = left, shape = shape,
-                                                color = color))
+  if (left == right) {
+    gp <- gp + geom_ssd(data = data, aes_string(
+      x = left, shape = shape,
+      color = color
+    ))
   } else {
     data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
     data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
@@ -461,25 +482,35 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     arrow <- arrow(length = unit(0.1, "inches"))
 
     gp <- gp + geom_line(aes_string(y = "percent")) +
-      geom_segment(data = data[data$xmin != data$xmax,],
-                   aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")) +
-      geom_segment(data = data[is.na(data$left),],
-                   aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
-                   arrow = arrow) +
-      geom_segment(data = data[is.na(data$right),],
-                   aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
-                   arrow = arrow) +
+      geom_segment(
+        data = data[data$xmin != data$xmax, ],
+        aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")
+      ) +
+      geom_segment(
+        data = data[is.na(data$left), ],
+        aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
+        arrow = arrow
+      ) +
+      geom_segment(
+        data = data[is.na(data$right), ],
+        aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
+        arrow = arrow
+      ) +
       geom_point(data = data, aes_string(x = "xmin", y = "y")) +
-      geom_point(data = data[data$xmin != data$xmax,],
-                 aes_string(x = "xmax", y = "y"))
+      geom_point(
+        data = data[data$xmin != data$xmax, ],
+        aes_string(x = "xmax", y = "y")
+      )
   }
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab)
 
-  if(!is.null(label)) {
+  if (!is.null(label)) {
     data$percent <- ssd_ecd(data[[left]])
     data[[left]] <- data[[left]] * shift_x
-    gp <- gp + geom_text(data = data, aes_string(x = left, y = "percent", label = label),
-                         hjust = 0, size = size, fontface = "italic")
+    gp <- gp + geom_text(
+      data = data, aes_string(x = left, y = "percent", label = label),
+      hjust = 0, size = size, fontface = "italic"
+    )
   }
 
   gp

@@ -33,8 +33,9 @@ register_s3_method <- function(pkg, generic, class) {
 
   fun <- get(paste0(generic, ".", class), envir = parent.frame())
 
-  if (pkg %in% loadedNamespaces())
+  if (pkg %in% loadedNamespaces()) {
     registerS3method(generic, class, fun, envir = asNamespace(pkg))
+  }
 
   setHook(
     packageEvent(pkg, "onLoad"),

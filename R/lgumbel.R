@@ -29,40 +29,42 @@
 #' qlgumbel gives the quantile function, and rlgumbel generates random deviates.
 #' @name lgumbel
 #' @examples
-#' x <- rlgumbel(1000,1,0.1)
-#' hist(log(x),freq=FALSE,col='gray',border='white')
-#' hist(x,freq=FALSE,col='gray',border='white')
-#' curve(dlgumbel(x,1,0.1),add=TRUE,col='red4',lwd=2)
+#' x <- rlgumbel(1000, 1, 0.1)
+#' hist(log(x), freq = FALSE, col = "gray", border = "white")
+#' hist(x, freq = FALSE, col = "gray", border = "white")
+#' curve(dlgumbel(x, 1, 0.1), add = TRUE, col = "red4", lwd = 2)
 NULL
 
 #' @rdname lgumbel
 #' @export
-dlgumbel <- function(x, location = 0, scale = 0, log = FALSE){
-  fx <- VGAM::dgumbel(log(x), location=location, scale=scale, log=FALSE)/x
-  if(log) fx <- log(fx)
+dlgumbel <- function(x, location = 0, scale = 0, log = FALSE) {
+  fx <- VGAM::dgumbel(log(x), location = location, scale = scale, log = FALSE) / x
+  if (log) fx <- log(fx)
   fx
 }
 
 #' @rdname lgumbel
 #' @export
-qlgumbel <- function(p, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE){
-  if(log.p) p<- exp(p)
-  if(!lower.tail) p <- 1-p
-  exp(VGAM::qgumbel(p, location=location, scale=scale))
+qlgumbel <- function(p, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE) {
+  if (log.p) p <- exp(p)
+  if (!lower.tail) p <- 1 - p
+  exp(VGAM::qgumbel(p, location = location, scale = scale))
 }
 
 #' @rdname lgumbel
 #' @export
-plgumbel <- function(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE){
-  if(!length(q)) return(numeric(0))
-  Fq <- VGAM::pgumbel(log(q), location=location, scale=scale)
-  if(!lower.tail) Fq <- 1-Fq
-  if(log.p) Fq <- log(Fq)
+plgumbel <- function(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(q)) {
+    return(numeric(0))
+  }
+  Fq <- VGAM::pgumbel(log(q), location = location, scale = scale)
+  if (!lower.tail) Fq <- 1 - Fq
+  if (log.p) Fq <- log(Fq)
   Fq
 }
 
 #' @rdname lgumbel
 #' @export
-rlgumbel <- function(n, location = 0, scale = 0){
-  exp(VGAM::rgumbel(n, location=location, scale=scale))
+rlgumbel <- function(n, location = 0, scale = 0) {
+  exp(VGAM::rgumbel(n, location = location, scale = scale))
 }

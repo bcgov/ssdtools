@@ -13,13 +13,15 @@
 #    limitations under the License.
 
 predict_fitdist_percent <- function(percent, boot, level) {
-  quantile <- quantile(boot, percent/100, CI.level = level)
-  est <- quantile$quantiles[1,1]
-  se <- stats::sd(quantile$bootquant[,1], 2)
-  lcl <- quantile$quantCI[1,1]
-  ucl <- quantile$quantCI[2,1]
-  data.frame(percent = percent, est = est, se = se, lcl = lcl, ucl = ucl, 
-             stringsAsFactors = FALSE)
+  quantile <- quantile(boot, percent / 100, CI.level = level)
+  est <- quantile$quantiles[1, 1]
+  se <- stats::sd(quantile$bootquant[, 1], 2)
+  lcl <- quantile$quantCI[1, 1]
+  ucl <- quantile$quantCI[2, 1]
+  data.frame(
+    percent = percent, est = est, se = se, lcl = lcl, ucl = ucl,
+    stringsAsFactors = FALSE
+  )
 }
 
 model_average <- function(x) {
@@ -27,8 +29,10 @@ model_average <- function(x) {
   se <- sqrt(sum(x$weight * (x$se^2 + (x$est - est)^2)))
   lcl <- sum(x$lcl * x$weight)
   ucl <- sum(x$ucl * x$weight)
-  data.frame(percent = x$percent[1], est = est, se = se, lcl = lcl, ucl = ucl,
-             stringsAsFactors = FALSE)
+  data.frame(
+    percent = x$percent[1], est = est, se = se, lcl = lcl, ucl = ucl,
+    stringsAsFactors = FALSE
+  )
 }
 
 #' Predict fitdist
@@ -58,7 +62,7 @@ predict.fitdist <- function(object, percent = 1:99,
 #' predict(fluazinam_lnorm, percent = c(5L, 50L))
 #' }
 predict.fitdistcens <- function(object, percent = 1:99,
-                            nboot = 1000, level = 0.95, ...) {
+                                nboot = 1000, level = 0.95, ...) {
   check_vector(percent, c(1L, 99L), length = TRUE, unique = TRUE)
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
@@ -91,21 +95,31 @@ predict.fitdists <- function(object, percent = 1:99,
   ic <- ssd_gof(object)[c("dist", ic)]
 
   ic$delta <- ic[[2]] - min(ic[[2]])
-  ic$weight <- round(exp(-ic$delta/2)/sum(exp(-ic$delta/2)), 3)
+  ic$weight <- round(exp(-ic$delta / 2) / sum(exp(-ic$delta / 2)), 3)
 
   ic <- split(ic, 1:nrow(ic))
 
   predictions <- lapply(object, predict, percent = percent, nboot = nboot, level = level)
-  predictions <- mapply(function(x, y) {x$weight <- y$weight; x}, predictions, ic,
-                        SIMPLIFY = FALSE)
-  predictions <- mapply(function(x, y) {x$dist <- y;x}, predictions, names(predictions),
-                        SIMPLIFY = FALSE)
+  predictions <- mapply(function(x, y) {
+    x$weight <- y$weight
+    x
+  }, predictions, ic,
+  SIMPLIFY = FALSE
+  )
+  predictions <- mapply(function(x, y) {
+    x$dist <- y
+    x
+  }, predictions, names(predictions),
+  SIMPLIFY = FALSE
+  )
   predictions$stringsAsFactors <- FALSE
   predictions <- do.call("rbind", predictions)
   predictions <- predictions[c("dist", "percent", "est", "se", "lcl", "ucl", "weight")]
 
-  if(!average) return(predictions)
-  
+  if (!average) {
+    return(predictions)
+  }
+
   predictions <- split(predictions, predictions$percent)
   predictions <- lapply(predictions, model_average)
   predictions$stringsAsFactors <- FALSE
@@ -122,8 +136,10 @@ predict.fitdists <- function(object, percent = 1:99,
 #' predict(fluazinam_dists)
 #' }
 predict.fitdistscens <- function(object, percent = 1:99,
-                             nboot = 1000, ic = "aic", average = TRUE, level = 0.95, ...) {
+                                 nboot = 1000, ic = "aic", average = TRUE, level = 0.95, ...) {
   check_scalar(ic, c("aic", "bic", "bic"))
-  NextMethod(object = object, percent = percent, nboot = nboot, ic = ic, average = average,
-             level = level, ...)
+  NextMethod(
+    object = object, percent = percent, nboot = nboot, ic = ic, average = average,
+    level = level, ...
+  )
 }

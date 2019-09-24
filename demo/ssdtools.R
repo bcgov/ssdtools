@@ -35,8 +35,10 @@ head(data)
 
 #' Then fit one or more distributions to the data. Don't forget to specify
 #' the column with the concentration values.
-fits <- ssd_fit_dists(data, left = "Conc",
-                      dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull"))
+fits <- ssd_fit_dists(data,
+  left = "Conc",
+  dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull")
+)
 
 #' The `autoplot()` function can be used to plot the fits (for more information type `?autoplot.fitdists`)
 ggplot2::autoplot(fits)
@@ -53,8 +55,10 @@ ssd_gof(fits)
 #' For more information type `?predict.fitdists`
 pred <- predict(fits, nboot = 10L)
 
-ssd_plot(data, pred, left = "Conc", label = "Species", color = "Group",
-         xlab = "Concentration (mg/L)", ci = FALSE, hc = 5L, shift = 2)
+ssd_plot(data, pred,
+  left = "Conc", label = "Species", color = "Group",
+  xlab = "Concentration (mg/L)", ci = FALSE, hc = 5L, shift = 2
+)
 
 #' ### Hazard Concentration
 

@@ -13,64 +13,69 @@
 #    limitations under the License.
 
 add_starting_values <- function(dist, x) {
-  if(dist$dist == "gamma"){
-    dist$start <- list(scale = stats::var(x) / mean(x),
-                       shape = mean(x)^2 / stats::var(x)^2)
-  } else if(dist$distr == "gompertz"){
-    fit <- vglm(x~1, VGAM::gompertz)
-    dist$start <- list(shape = exp(unname(coef(fit)[2])),
-                       scale = exp(unname(coef(fit)[1])) )
-  } else if(dist$distr == "lgumbel"){
-    dist$start <- list(location = mean(log(x)),
-                       scale = pi*stats::sd(log(x))/sqrt(6))
-  } else if(dist$distr == "llog" ){
-    dist$start <- list(shape = mean(log(x)), scale = pi*stats::sd(log(x))/sqrt(3))
-  } else if(dist$distr == "pareto"){
-    fit <- vglm(x~1, VGAM::paretoff)
-    dist$start  <- list(shape = exp(unname(coef(fit))))
-    dist$fix.arg<- list(scale = fit@extra$scale)
+  if (dist$dist == "gamma") {
+    dist$start <- list(
+      scale = stats::var(x) / mean(x),
+      shape = mean(x)^2 / stats::var(x)^2
+    )
+  } else if (dist$distr == "gompertz") {
+    fit <- vglm(x ~ 1, VGAM::gompertz)
+    dist$start <- list(
+      shape = exp(unname(coef(fit)[2])),
+      scale = exp(unname(coef(fit)[1]))
+    )
+  } else if (dist$distr == "lgumbel") {
+    dist$start <- list(
+      location = mean(log(x)),
+      scale = pi * stats::sd(log(x)) / sqrt(6)
+    )
+  } else if (dist$distr == "llog") {
+    dist$start <- list(shape = mean(log(x)), scale = pi * stats::sd(log(x)) / sqrt(3))
+  } else if (dist$distr == "pareto") {
+    fit <- vglm(x ~ 1, VGAM::paretoff)
+    dist$start <- list(shape = exp(unname(coef(fit))))
+    dist$fix.arg <- list(scale = fit@extra$scale)
   }
   dist
 }
 
 fit_dist_uncensored <- function(data, left, weight, dist) {
-
   x <- data[[left]]
 
   dist <- list(data = x, distr = dist, method = "mle")
 
-  if(!is.null(weight))
+  if (!is.null(weight)) {
     dist$weights <- data[[weight]]
+  }
 
   dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdist, dist)
 }
 
 fit_dist_censored <- function(data, left, right, weight, dist) {
-
   x <- rowMeans(data[c(left, right)], na.rm = TRUE)
 
   censdata <- data.frame(left = data[[left]], right = data[[right]])
   dist <- list(censdata = censdata, distr = dist)
 
-  if(!is.null(weight))
+  if (!is.null(weight)) {
     dist$weights <- data[[weight]]
+  }
 
   dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdistcens, dist)
 }
 
 remove_errors <- function(dist_fit, name, silent) {
-  if(!is.null(dist_fit$error)) {
-    if(!silent) warning(name, " failed to fit: ", dist_fit$error, call. = FALSE)
+  if (!is.null(dist_fit$error)) {
+    if (!silent) warning(name, " failed to fit: ", dist_fit$error, call. = FALSE)
     return(NULL)
   }
   dist_fit$result
 }
 
 ssd_fit_dist <- function(
-  data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
-
+                         data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
   check_data(data, nrow = c(6, .Machine$integer.max))
   check_string(left)
   check_string(right)
@@ -80,10 +85,11 @@ ssd_fit_dist <- function(
   check_colnames(data, unique(c(left, right, weight)))
   check_string(dist)
 
-  if(left == right) {
-    fit <-  fit_dist_uncensored(data, left, weight, dist)
-  } else
-    fit <-  fit_dist_censored(data, left, right, weight, dist)
+  if (left == right) {
+    fit <- fit_dist_uncensored(data, left, weight, dist)
+  } else {
+    fit <- fit_dist_censored(data, left, right, weight, dist)
+  }
   fit
 }
 
@@ -121,23 +127,24 @@ ssd_fit_dist <- function(
 #' data(fluazinam, package = "fitdistrplus")
 #' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
-  data, left = "Conc", right = left, weight = NULL,
-  dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
-  silent = FALSE
-) {
+                          data, left = "Conc", right = left, weight = NULL,
+                          dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
+                          silent = FALSE) {
   check_vector(dists, length = TRUE, unique = TRUE, named = FALSE)
   check_flag(silent)
 
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
   dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
-  dists <- mapply(remove_errors, dists, names(dists), 
-                  MoreArgs = list(silent = silent), SIMPLIFY = FALSE)
+  dists <- mapply(remove_errors, dists, names(dists),
+    MoreArgs = list(silent = silent), SIMPLIFY = FALSE
+  )
   dists <- dists[!vapply(dists, is.null, TRUE)]
-  if(!length(dists)) stop("all distributions failed to fit", call. = FALSE)
-  if(left == right) {
+  if (!length(dists)) stop("all distributions failed to fit", call. = FALSE)
+  if (left == right) {
     class(dists) <- "fitdists"
-  } else
+  } else {
     class(dists) <- c("fitdistscens", "fitdists")
+  }
   dists
 }

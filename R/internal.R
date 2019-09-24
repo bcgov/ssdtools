@@ -21,7 +21,9 @@ as_tibble <- function(x) {
 safely <- function(.f) {
   function(...) {
     x <- try(.f(...), silent = TRUE)
-    if(inherits(x, "try-error")) return(list(result = NULL, error = as.character(x)))
+    if (inherits(x, "try-error")) {
+      return(list(result = NULL, error = as.character(x)))
+    }
     list(result = x, error = NULL)
   }
 }

@@ -29,6 +29,6 @@ test_that("pqlgumbel", {
 })
 
 test_that("dlgumbel", {
- expect_equal(dlgumbel(exp(3), 3, 1), 0.01831564, tolerance = 0.0000001)
- expect_equal(dlgumbel(exp(4), 3, 1), 0.004664011, tolerance = 0.0000001)
+  expect_equal(dlgumbel(exp(3), 3, 1), 0.01831564, tolerance = 0.0000001)
+  expect_equal(dlgumbel(exp(4), 3, 1), 0.004664011, tolerance = 0.0000001)
 })

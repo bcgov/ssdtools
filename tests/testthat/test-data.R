@@ -22,8 +22,10 @@ test_that("data", {
       Species = "",
       Units = c("mg/L", "ug/L", "ng/L"),
       Conc = c(0, Inf),
-      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))),
-    nrow = c(1, Inf)), ccme_data)
+      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
+    ),
+    nrow = c(1, Inf)
+  ), ccme_data)
   expect_is(ccme_data, "tbl")
 
   expect_identical(checkr::check_data(
@@ -33,8 +35,10 @@ test_that("data", {
       Species = "",
       Units = c("mg/L", "mg/L"),
       Conc = c(1.0, 70.7),
-      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))),
-    nrow = 28), boron_data)
+      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
+    ),
+    nrow = 28
+  ), boron_data)
   expect_is(boron_data, "tbl")
 
   expect_identical(checkr::check_data(
@@ -44,7 +48,9 @@ test_that("data", {
       est = 1,
       se = 1,
       lcl = 1,
-      ucl = 1)), boron_pred)
+      ucl = 1
+    )
+  ), boron_pred)
   expect_is(boron_pred, "tbl")
 
   expect_is(boron_lnorm, "fitdist")

@@ -32,35 +32,41 @@
 #' @seealso \code{\link[VGAM]{dgompertz}}
 #' @name gompertz
 #' @examples
-#' x <- rgompertz(1000,1,0.1)
-#' hist(log(x),freq=FALSE,col='gray',border='white')
-#' hist(x,freq=FALSE,col='gray',border='white')
-#' curve(dgompertz(x,1,0.1),add=TRUE,col='red4',lwd=2)
+#' x <- rgompertz(1000, 1, 0.1)
+#' hist(log(x), freq = FALSE, col = "gray", border = "white")
+#' hist(x, freq = FALSE, col = "gray", border = "white")
+#' curve(dgompertz(x, 1, 0.1), add = TRUE, col = "red4", lwd = 2)
 NULL
 
 #' @rdname gompertz
 #' @export
-dgompertz <- function(x, scale = 1, shape, log = FALSE){
-  if(!length(x)) return(numeric(0))
+dgompertz <- function(x, scale = 1, shape, log = FALSE) {
+  if (!length(x)) {
+    return(numeric(0))
+  }
   VGAM::dgompertz(x, scale = scale, shape = shape, log = log)
 }
 
 #' @rdname gompertz
 #' @export
-qgompertz <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE){
-  if(!length(q)) return(numeric(0))
+qgompertz <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(q)) {
+    return(numeric(0))
+  }
   VGAM::qgompertz(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-pgompertz <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE){
-  if(!length(p)) return(numeric(0))
+pgompertz <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(p)) {
+    return(numeric(0))
+  }
   VGAM::pgompertz(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-rgompertz <- function(n, scale = 1, shape){
+rgompertz <- function(n, scale = 1, shape) {
   VGAM::rgompertz(n, scale = scale, shape = shape)
 }

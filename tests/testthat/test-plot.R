@@ -17,7 +17,7 @@ context("plot")
 test_that("plot", {
   pdf(tempfile(fileext = ".pdf"))
   on.exit(dev.off())
-  boron_lnorm <- ssd_fit_dist(boron_data[1:6,])
+  boron_lnorm <- ssd_fit_dist(boron_data[1:6, ])
 
   expect_silent(ssd_cfplot(boron_data))
   expect_silent(plot(boron_lnorm))
@@ -31,8 +31,10 @@ test_that("plot", {
     stat_ssd() +
     geom_ssd() +
     geom_hcintersect(xintercept = 1, yintercept = 0.05) +
-    geom_xribbon(data = boron_pred,
-                 aes_string(xmin = "lcl", xmax = "ucl", y = "percent"))
+    geom_xribbon(
+      data = boron_pred,
+      aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
+    )
 
   expect_is(gp, "ggplot")
 })

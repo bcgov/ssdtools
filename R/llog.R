@@ -33,30 +33,30 @@
 #' @seealso \code{\link[FAdist]{dllog}}
 #' @examples
 #' x <- rllog(1000)
-#' hist(x,freq=FALSE,col='gray',border='white')
-#' curve(dllog(x),add=TRUE,col='red4',lwd=2)
+#' hist(x, freq = FALSE, col = "gray", border = "white")
+#' curve(dllog(x), add = TRUE, col = "red4", lwd = 2)
 NULL
 
 #' @rdname llog
 #' @export
-dllog <- function(x, shape = 1, scale = 1, log = FALSE){
+dllog <- function(x, shape = 1, scale = 1, log = FALSE) {
   FAdist::dllog(x = x, shape = shape, scale = scale, log = log)
 }
 
 #' @rdname llog
 #' @export
-qllog <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE){
+qllog <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   FAdist::qllog(p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llog
 #' @export
-pllog <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE){
+pllog <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   FAdist::pllog(q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llog
 #' @export
-rllog <- function(n, shape = 1, scale = 1){
+rllog <- function(n, shape = 1, scale = 1) {
   FAdist::rllog(n = n, shape = shape, scale = scale)
 }

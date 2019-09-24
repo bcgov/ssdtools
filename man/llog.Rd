@@ -44,8 +44,8 @@ The functions are wrappers to export the identical functions from the FAdist pac
 }
 \examples{
 x <- rllog(1000)
-hist(x,freq=FALSE,col='gray',border='white')
-curve(dllog(x),add=TRUE,col='red4',lwd=2)
+hist(x, freq = FALSE, col = "gray", border = "white")
+curve(dllog(x), add = TRUE, col = "red4", lwd = 2)
 }
 \seealso{
 \code{\link[FAdist]{dllog}}

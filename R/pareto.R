@@ -31,35 +31,41 @@
 #' @seealso \code{\link[VGAM]{dpareto}}
 #' @name pareto
 #' @examples
-#' x <- rpareto(1000,1,0.1)
-#' hist(log(x),freq=FALSE,col='gray',border='white')
-#' hist(x,freq=FALSE,col='gray',border='white')
-#' curve(dpareto(x,1,0.1),add=TRUE,col='red4',lwd=2)
+#' x <- rpareto(1000, 1, 0.1)
+#' hist(log(x), freq = FALSE, col = "gray", border = "white")
+#' hist(x, freq = FALSE, col = "gray", border = "white")
+#' curve(dpareto(x, 1, 0.1), add = TRUE, col = "red4", lwd = 2)
 NULL
 
 #' @rdname pareto
 #' @export
-dpareto <- function(x, scale = 1, shape, log = FALSE){
-  if(!length(x)) return(numeric(0))
+dpareto <- function(x, scale = 1, shape, log = FALSE) {
+  if (!length(x)) {
+    return(numeric(0))
+  }
   VGAM::dpareto(x, scale = scale, shape = shape, log = log)
 }
 
 #' @rdname pareto
 #' @export
-qpareto <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE){
-  if(!length(q)) return(numeric(0))
+qpareto <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(q)) {
+    return(numeric(0))
+  }
   VGAM::qpareto(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname pareto
 #' @export
-ppareto <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE){
-  if(!length(p)) return(numeric(0))
+ppareto <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(p)) {
+    return(numeric(0))
+  }
   VGAM::ppareto(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname pareto
 #' @export
-rpareto <- function(n, scale = 1, shape){
+rpareto <- function(n, scale = 1, shape) {
   VGAM::rpareto(n, scale = scale, shape = shape)
 }

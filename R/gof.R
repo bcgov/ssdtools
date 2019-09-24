@@ -58,10 +58,10 @@ ssd_gof.fitdist <- function(x, ...) {
   k <- npars(x)
 
   aic <- x$aic
-  aicc <- aic  + 2 * k * (k + 1) / (n - k - 1)
+  aicc <- aic + 2 * k * (k + 1) / (n - k - 1)
   bic <- x$bic
 
-  if(n >= 8) {
+  if (n >= 8) {
     x <- fitdistrplus::gofstat(x)
     ad <- x$ad
     ks <- x$ks
@@ -71,8 +71,10 @@ ssd_gof.fitdist <- function(x, ...) {
     ks <- NA_real_
     cvm <- NA_real_
   }
-  data <- data.frame(dist = dist, ad = ad, ks = ks, cvm = cvm,
-                    aic = aic, aicc = aicc, bic = bic, stringsAsFactors = FALSE)
+  data <- data.frame(
+    dist = dist, ad = ad, ks = ks, cvm = cvm,
+    aic = aic, aicc = aicc, bic = bic, stringsAsFactors = FALSE
+  )
   as_tibble(data)
 }
 
@@ -80,8 +82,10 @@ ssd_gof.fitdist <- function(x, ...) {
 #' @export
 ssd_gof.fitdistcens <- function(x, ...) {
   dist <- x$distname
-  data <- data.frame(dist = dist, aic = x$aic, bic = x$bic, 
-                     stringsAsFactors = FALSE)
+  data <- data.frame(
+    dist = dist, aic = x$aic, bic = x$bic,
+    stringsAsFactors = FALSE
+  )
   as_tibble(data)
 }
 
@@ -91,11 +95,12 @@ ssd_gof.fitdists <- function(x, ...) {
   x <- lapply(x, ssd_gof)
   x$stringsAsFactors <- FALSE
   x <- do.call("rbind", x)
-  if(!is.null(x$aicc)) {
+  if (!is.null(x$aicc)) {
     x$delta <- x$aicc - min(x$aicc)
-  } else # aicc not defined for censored data
+  } else { # aicc not defined for censored data
     x$delta <- x$aic - min(x$aic)
-  x$weight <- exp(-x$delta/2)/sum(exp(-x$delta/2))
+  }
+  x$weight <- exp(-x$delta / 2) / sum(exp(-x$delta / 2))
   x$weight <- round(x$weight, 3)
   x$delta <- round(x$delta, 3)
   x

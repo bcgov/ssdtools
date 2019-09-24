@@ -19,7 +19,7 @@ library(ssdtools)
 library(usethis)
 
 ccme_data <- read.csv("data-raw/CCME data.csv", stringsAsFactors = FALSE)
-ccme_data <- ccme_data[!is.na(ccme_data$Conc),]
+ccme_data <- ccme_data[!is.na(ccme_data$Conc), ]
 
 ccme_data$Species %<>%
   str_replace("Pseudokirchneriell a", "Pseudokirchneriella") %>%
@@ -47,16 +47,18 @@ ccme_data$Species[!is.na(ccme_data$Species.y)] <-
 ccme_data$Species.y <- NULL
 ccme_data$Reference <- NULL
 
-spp <- c("Simocephalus serrulatus",
-         "Cryptomonas erosa",
-         "Anabaena flosaquae",
-         "Myriophyllum sibiricum",
-         "Navicula pelliculosa",
-         "Pseudosuccinea columella",
-         "Scenedesmus quadricauda",
-         "Scenedesmus obliquus",
-         "Scenedesmus acutus",
-         "Potamogeton pectinatus")
+spp <- c(
+  "Simocephalus serrulatus",
+  "Cryptomonas erosa",
+  "Anabaena flosaquae",
+  "Myriophyllum sibiricum",
+  "Navicula pelliculosa",
+  "Pseudosuccinea columella",
+  "Scenedesmus quadricauda",
+  "Scenedesmus obliquus",
+  "Scenedesmus acutus",
+  "Potamogeton pectinatus"
+)
 
 spp <- tibble(Species = spp, Spp = str_replace(spp, "^(\\w)([^\\s]+)", "\\1."))
 
@@ -148,7 +150,7 @@ ccme_data %<>% as_tibble()
 
 use_data(ccme_data, overwrite = TRUE)
 
-boron_data <- ccme_data[ccme_data$Chemical == "Boron",]
+boron_data <- ccme_data[ccme_data$Chemical == "Boron", ]
 use_data(boron_data, overwrite = TRUE)
 
 write.csv(boron_data, "inst/extdata/boron_data.csv", row.names = FALSE)
@@ -166,8 +168,10 @@ boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
 use_data(boron_hc5, overwrite = TRUE)
 
 data("fluazinam", package = "fitdistrplus")
-fluazinam_lnorm <- ssd_fit_dists(fluazinam, left = "left", right = "right",
-                                 dists = "lnorm")[[1]]
+fluazinam_lnorm <- ssd_fit_dists(fluazinam,
+  left = "left", right = "right",
+  dists = "lnorm"
+)[[1]]
 use_data(fluazinam_lnorm, overwrite = TRUE)
 
 fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")

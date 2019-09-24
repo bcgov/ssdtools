@@ -1,3 +1,4 @@
+styler::style_pkg()
 devtools::test()
 devtools::document()
 demo(ssdtools, ask = FALSE)
