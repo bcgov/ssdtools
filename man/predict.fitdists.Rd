@@ -4,8 +4,15 @@
 \alias{predict.fitdists}
 \title{Predict fitdist}
 \usage{
-\method{predict}{fitdists}(object, percent = 1:99, nboot = 1000,
-  ic = "aicc", average = TRUE, level = 0.95, ...)
+\method{predict}{fitdists}(
+  object,
+  percent = 1:99,
+  nboot = 1000,
+  ic = "aicc",
+  average = TRUE,
+  level = 0.95,
+  ...
+)
 }
 \arguments{
 \item{object}{The object.}

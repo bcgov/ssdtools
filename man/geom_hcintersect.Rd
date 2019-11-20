@@ -4,8 +4,15 @@
 \alias{geom_hcintersect}
 \title{Hazard Concentration Intersection}
 \usage{
-geom_hcintersect(mapping = NULL, data = NULL, xintercept, yintercept,
-  na.rm = FALSE, show.legend = NA, ...)
+geom_hcintersect(
+  mapping = NULL,
+  data = NULL,
+  xintercept,
+  yintercept,
+  na.rm = FALSE,
+  show.legend = NA,
+  ...
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or

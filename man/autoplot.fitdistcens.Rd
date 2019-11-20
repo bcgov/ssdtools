@@ -4,8 +4,14 @@
 \alias{autoplot.fitdistcens}
 \title{Autoplot}
 \usage{
-\method{autoplot}{fitdistcens}(object, ci = FALSE, hc = 5L,
-  xlab = "Concentration", ylab = "Species Affected", ...)
+\method{autoplot}{fitdistcens}(
+  object,
+  ci = FALSE,
+  hc = 5L,
+  xlab = "Concentration",
+  ylab = "Species Affected",
+  ...
+)
 }
 \arguments{
 \item{object}{The object to plot.}

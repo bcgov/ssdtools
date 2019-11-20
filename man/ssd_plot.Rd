@@ -4,10 +4,22 @@
 \alias{ssd_plot}
 \title{SSD Plot}
 \usage{
-ssd_plot(data, pred, left = "Conc", right = left, label = NULL,
-  shape = NULL, color = NULL, size = 2.5, xlab = "Concentration",
-  ylab = "Percent of Species Affected", ci = TRUE, ribbon = FALSE,
-  hc = 5L, shift_x = 3)
+ssd_plot(
+  data,
+  pred,
+  left = "Conc",
+  right = left,
+  label = NULL,
+  shape = NULL,
+  color = NULL,
+  size = 2.5,
+  xlab = "Concentration",
+  ylab = "Percent of Species Affected",
+  ci = TRUE,
+  ribbon = FALSE,
+  hc = 5L,
+  shift_x = 3
+)
 }
 \arguments{
 \item{data}{A data frame.}
