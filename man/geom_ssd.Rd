@@ -4,9 +4,16 @@
 \alias{geom_ssd}
 \title{Plot Species Sensitivity Data}
 \usage{
-geom_ssd(mapping = NULL, data = NULL, stat = "ssd",
-  position = "identity", na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE, ...)
+geom_ssd(
+  mapping = NULL,
+  data = NULL,
+  stat = "ssd",
+  position = "identity",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or

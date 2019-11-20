@@ -4,8 +4,7 @@
 \alias{predict.fitdistcens}
 \title{Predict censored fitdist}
 \usage{
-\method{predict}{fitdistcens}(object, percent = 1:99, nboot = 1000,
-  level = 0.95, ...)
+\method{predict}{fitdistcens}(object, percent = 1:99, nboot = 1000, level = 0.95, ...)
 }
 \arguments{
 \item{object}{The object.}

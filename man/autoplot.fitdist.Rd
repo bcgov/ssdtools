@@ -4,8 +4,14 @@
 \alias{autoplot.fitdist}
 \title{Autoplot}
 \usage{
-\method{autoplot}{fitdist}(object, ci = FALSE, hc = 5L,
-  xlab = "Concentration", ylab = "Species Affected", ...)
+\method{autoplot}{fitdist}(
+  object,
+  ci = FALSE,
+  hc = 5L,
+  xlab = "Concentration",
+  ylab = "Species Affected",
+  ...
+)
 }
 \arguments{
 \item{object}{The object to plot.}

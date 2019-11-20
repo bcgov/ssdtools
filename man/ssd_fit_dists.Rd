@@ -4,9 +4,14 @@
 \alias{ssd_fit_dists}
 \title{Fit Distributions}
 \usage{
-ssd_fit_dists(data, left = "Conc", right = left, weight = NULL,
+ssd_fit_dists(
+  data,
+  left = "Conc",
+  right = left,
+  weight = NULL,
   dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
-  silent = FALSE)
+  silent = FALSE
+)
 }
 \arguments{
 \item{data}{A data frame.}
