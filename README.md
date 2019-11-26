@@ -132,7 +132,7 @@ The ssdtools manual is available at
 A shiny webpage developed for non-R-users is available at
 <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
-The ssdtool package was developed as a result of earlier drafts of:
+The ssdtools package was developed as a result of earlier drafts of:
 
 Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for
 Modeling Species Sensitivity Distributions. Province of British
@@ -157,8 +157,8 @@ To report bugs/issues/feature requests, please file an
 To cite ssdtools in publications use:
 
   Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
-  Species Sensitivity Distributions. Journal of Open Source
-  Software, 3(31), 1082. https://doi.org/10.21105/joss.01082
+  Species Sensitivity Distributions. Journal of Open Source Software,
+  3(31), 1082. https://doi.org/10.21105/joss.01082
 
 A BibTeX entry for LaTeX users is
 
