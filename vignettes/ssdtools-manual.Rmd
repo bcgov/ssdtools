@@ -122,7 +122,6 @@ print(gp)
 
 Given multiple distributions the user is faced with choosing the best fitting distribution (or as discussed below averaging the results weighted by the fit).
 
-For illustrative purposes we consider the same six distributions as @schwarz_improving_2019
 ```{r}
 boron_dists <- ssd_fit_dists(boron_data)
 gof <- ssd_gof(boron_dists)

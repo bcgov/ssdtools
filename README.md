@@ -83,15 +83,12 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(boron_dists)
-#> # A tibble: 6 x 9
-#>   dist        ad     ks    cvm   aic  aicc   bic delta weight
-#> * <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268
-#> 2 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271
-#> 3 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 
-#> 4 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049
-#> 5 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133
-#> 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269
+#> # A tibble: 3 x 9
+#>   dist       ad    ks    cvm   aic  aicc   bic delta weight
+#> * <chr>   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 gamma   0.441 0.117 0.0555  238.  238.  240. 0.005  0.4  
+#> 2 lnorm   0.507 0.107 0.0703  239.  240.  242. 1.40   0.199
+#> 3 weibull 0.435 0.117 0.0543  238.  238.  240. 0      0.401
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
@@ -104,8 +101,8 @@ boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
 print(boron_hc5)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
-#>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.736 0.604  3.20
+#> *   <int> <dbl> <dbl> <dbl> <dbl>
+#> 1       5  1.20 0.809 0.434  3.39
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -132,7 +129,7 @@ The ssdtools manual is available at
 A shiny webpage developed for non-R-users is available at
 <https://poissonconsulting.shinyapps.io/ssdtools/>.
 
-The ssdtool package was developed as a result of earlier drafts of:
+The ssdtools package was developed as a result of earlier drafts of:
 
 Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for
 Modeling Species Sensitivity Distributions. Province of British
@@ -157,8 +154,8 @@ To report bugs/issues/feature requests, please file an
 To cite ssdtools in publications use:
 
   Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
-  Species Sensitivity Distributions. Journal of Open Source
-  Software, 3(31), 1082. https://doi.org/10.21105/joss.01082
+  Species Sensitivity Distributions. Journal of Open Source Software,
+  3(31), 1082. https://doi.org/10.21105/joss.01082
 
 A BibTeX entry for LaTeX users is
 
