@@ -30,7 +30,8 @@ add_starting_values <- function(dist, x) {
       scale = pi * stats::sd(log(x)) / sqrt(6)
     )
   } else if (dist$distr == "llog") {
-    dist$start <- list(shape = mean(log(x)), scale = pi * stats::sd(log(x)) / sqrt(3))
+    dist$start <- list(scale = mean(log(x)),
+shape = pi * stats::sd(log(x)) / sqrt(3))
   } else if (dist$distr == "pareto") {
     fit <- vglm(x ~ 1, VGAM::paretoff)
     dist$start <- list(shape = exp(unname(coef(fit))))

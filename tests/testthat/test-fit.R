@@ -22,9 +22,14 @@ test_that("fit_dist", {
 
 test_that("fit_dist tiny llog", {
   data <- ssdtools::boron_data
+  fit <- ssdtools:::ssd_fit_dist(data, dist = "llog")
+  expect_equal(fit$estimate, 
+               c(scale = 2.6261248978507, shape = 0.740309228071107))
+  
   data$Conc <- data$Conc / 100
-  # llog initial values need adjusting when small values
-  expect_error(ssd_fit_dist(data, dist = "llog"), "the function mle failed to estimate the parameters")
+  fit <- ssdtools:::ssd_fit_dist(data, dist = "llog")
+  expect_equal(fit$estimate, 
+               c(scale = -1.97890271677598, shape = 0.740452665894763))
 })
 
 test_that("fit_dists", {
