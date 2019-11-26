@@ -4,7 +4,7 @@
 # ssdtools <img src="man/figures/logo.png" align="right" />
 
 [![BCDevExchange
-Status](https://assets.bcdevexchange.org/images/badges/exploration.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
+Status](https://assets.bcdevexchange.org/images/badges/delivery.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
 [![Travis-CI Build
 Status](https://travis-ci.org/bcgov/ssdtools.svg?branch=master)](https://travis-ci.org/bcgov/ssdtools)
 [![Coverage
