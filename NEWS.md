@@ -1,3 +1,4 @@
+- Fix llog distribution with small concentrations.
 - Ensure concentrations below 1 have 1 significant figure in plots
 - Default ssd_fit_dists distributions now ordered alphabetically
 
