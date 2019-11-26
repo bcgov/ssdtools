@@ -81,9 +81,8 @@ ssd_gof.fitdist <- function(x, ...) {
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdistcens <- function(x, ...) {
-  dist <- x$distname
   data <- data.frame(
-    dist = dist, aic = x$aic, bic = x$bic,
+    dist = x$distname, aic = x$aic, bic = x$bic,
     stringsAsFactors = FALSE
   )
   as_tibble(data)
