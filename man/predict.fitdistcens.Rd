@@ -4,7 +4,15 @@
 \alias{predict.fitdistcens}
 \title{Predict censored fitdist}
 \usage{
-\method{predict}{fitdistcens}(object, percent = 1:99, nboot = 1000, level = 0.95, ...)
+\method{predict}{fitdistcens}(
+  object,
+  percent = 1:99,
+  nboot = 1000,
+  level = 0.95,
+  parallel = "no",
+  ncpus = 1,
+  ...
+)
 }
 \arguments{
 \item{object}{The object.}
@@ -14,6 +22,12 @@
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
 \item{level}{The confidence level.}
+
+\item{parallel}{A string of "no", "snow" or "multicore".
+The "multicore" option is not avaiable on Windows.}
+
+\item{ncpus}{The number of parallel processes to use.
+Recommended to be the number of available CPUs.}
 
 \item{...}{Unused}
 }
