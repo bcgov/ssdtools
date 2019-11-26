@@ -6,9 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Species Sensitivity Distributions • ssdtools</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Species Sensitivity Distributions">
 <meta property="og:description" content="Species sensitivity distributions are cumulative probability 
   distributions which are fitted to toxicity concentrations for multiple species.
@@ -26,7 +33,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -38,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9008</span>
       </span>
     </div>
 
@@ -46,7 +53,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -72,7 +79,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/bcgov/ssdtools">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -85,87 +92,85 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="ssdtools" class="section level1">
+      </header><div class="row">
+  <div class="contents col-md-9">
+<div id="ssdtools-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ssdtools" class="anchor"></a>ssdtools <img src="reference/figures/logo.png" align="right">
+<a href="#ssdtools-" class="anchor"></a>ssdtools <img src="reference/figures/logo.png" align="right">
 </h1></div>
-<p><a href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img src="https://assets.bcdevexchange.org/images/badges/exploration.svg" alt="BCDevExchange Status"></a> <a href="https://travis-ci.org/bcgov/ssdtools"><img src="https://travis-ci.org/bcgov/ssdtools.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/bcgov/ssdtools?branch=master"><img src="https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg" alt="Coverage Status"></a> <a href="https://cran.r-project.org/package=ssdtools"><img src="https://www.r-pkg.org/badges/version/ssdtools" alt="CRAN status"></a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/ssdtools" alt="CRAN Downloads"><a href="https://doi.org/10.21105/joss.01082"><img src="http://joss.theoj.org/papers/10.21105/joss.01082/status.svg" alt="DOI"></a></p>
+<p><a href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img src="https://assets.bcdevexchange.org/images/badges/delivery.svg" alt="BCDevExchange Status"></a> <a href="https://travis-ci.org/bcgov/ssdtools"><img src="https://travis-ci.org/bcgov/ssdtools.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/bcgov/ssdtools?branch=master"><img src="https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg" alt="Coverage Status"></a> <a href="https://cran.r-project.org/package=ssdtools"><img src="https://www.r-pkg.org/badges/version/ssdtools" alt="CRAN status"></a> <img src="https://cranlogs.r-pkg.org/badges/ssdtools" alt="CRAN downloads"><a href="https://doi.org/10.21105/joss.01082"><img src="http://joss.theoj.org/papers/10.21105/joss.01082/status.svg" alt="DOI"></a></p>
 <p><code>ssdtools</code> is an R package to plot and fit Species Sensitivity Distributions (SSD).</p>
 <p>SSDs are cumulative probability distributions which are fitted to toxicity concentrations for multiple species. The ssdtools package uses Maximum Likelihood to fit log-normal, log-logistic, log-Gumbel, Gompertz, gamma or Weibull distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on fits and hazard concentrations are produced by bootstrapping.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>To install the latest version from <a href="https://CRAN.R-project.org/package=ssdtools">CRAN</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"ssdtools"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ssdtools"</span>)</span></code></pre></div>
 <p>To install the latest development version:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>)</span></code></pre></div>
 </div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p><code>ssdtools</code> provides a data set for several chemicals including Boron.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ssdtools)</a>
-<a class="sourceLine" id="cb3-2" title="2">boron_data</a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; # A tibble: 28 x 5</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt;    Chemical Species                  Conc Group        Units</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt;  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt;  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt;  3 Boron    Micropterus salmoides     4.1 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt;  4 Boron    Brachydanio rerio        10   Fish         mg/L </span></a>
-<a class="sourceLine" id="cb3-10" title="10"><span class="co">#&gt;  5 Boron    Carassius auratus        15.6 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt;  6 Boron    Pimephales promelas      18.3 Fish         mg/L </span></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt;  7 Boron    Daphnia magna             6   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></a>
-<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; # … with 18 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ssdtools)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>boron_data</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; # A tibble: 28 x 5</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt;    Chemical Species                  Conc Group        Units</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L </span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L </span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;  3 Boron    Micropterus salmoides     4.1 Fish         mg/L </span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  4 Boron    Brachydanio rerio        10   Fish         mg/L </span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  5 Boron    Carassius auratus        15.6 Fish         mg/L </span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;  6 Boron    Pimephales promelas      18.3 Fish         mg/L </span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;  7 Boron    Daphnia magna             6   Invertebrate mg/L </span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; # … with 18 more rows</span></span></code></pre></div>
 <p>Multiple distributions can be fit using <code><a href="reference/ssd_fit_dists.html">ssd_fit_dists()</a></code></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</span></code></pre></div>
 <p>and plot using the <code>ggplot2</code> generic <code>autoplot</code></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>())</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(boron_dists)</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="700"></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>())</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(boron_dists)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png"><!-- --></p>
 <p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; * &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; 1 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; 2 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; 3 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 4 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; 5 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 6 x 9</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; * &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 4 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 5 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></span></code></pre></div>
 <p>and the model-averaged 5% hazard concentration estimated using <code>ssd_hc</code></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">boron_hc5 &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">nboot =</span> <span class="dv">10000</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(boron_hc5)</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt;   percent   est    se   lcl   ucl</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; 1       5  1.25 0.736 0.604  3.20</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>boron_hc5 &lt;-<span class="st"> </span><span class="kw"><a href="reference/ssd_hc.html">ssd_hc</a></span>(boron_dists, <span class="dt">nboot =</span> <span class="dv">10000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(boron_hc5)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; # A tibble: 1 x 5</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt;   percent   est    se   lcl   ucl</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 1       5  1.25 0.736 0.604  3.20</span></span></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">boron_pred &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(boron_dists)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>boron_pred &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(boron_dists)</span></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">shape =</span> <span class="st">"Group"</span>, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</a>
-<a class="sourceLine" id="cb10-2" title="2">         <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>, <span class="dt">ribbon =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(<span class="dt">x =</span> <span class="dv">3000</span>)</a></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="700"></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_pred, <span class="dt">shape =</span> <span class="st">"Group"</span>, <span class="dt">color =</span> <span class="st">"Group"</span>, <span class="dt">label =</span> <span class="st">"Species"</span>,</span>
+<span id="cb10-2"><a href="#cb10-2"></a>         <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>, <span class="dt">ribbon =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(<span class="dt">x =</span> <span class="dv">3000</span>)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.png"><!-- --></p>
 </div>
 <div id="information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#information" class="anchor"></a>Information</h2>
 <p>The ssdtools manual is available at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html" class="uri">https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html</a>.</p>
 <p>A shiny webpage developed for non-R-users is available at <a href="https://poissonconsulting.shinyapps.io/ssdtools/" class="uri">https://poissonconsulting.shinyapps.io/ssdtools/</a>.</p>
-<p>The data included in <code>ssdtools</code> are sourced from the Canadian environmental quality guidelines published by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw"><code>data-raw</code></a> folder for more information.</p>
+<p>The ssdtools package was developed as a result of earlier drafts of:</p>
+<p>Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for Modeling Species Sensitivity Distributions. Province of British Columbia, Victoria, BC. Available from <a href="http://a100.gov.bc.ca/appsdata/acat/documents/r57400/2_1568399094009_8398900200.pdf" class="uri">http://a100.gov.bc.ca/appsdata/acat/documents/r57400/2_1568399094009_8398900200.pdf</a>.</p>
+<p>The CCME <code>data.csv</code> data file is derived from a factsheet prepared by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw"><code>data-raw</code></a> folder for more information.</p>
 </div>
 <div id="getting-help-or-reporting-an-issue" class="section level2">
 <h2 class="hasAnchor">
@@ -179,8 +184,8 @@
 To cite ssdtools in publications use:
 
   Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
-  Species Sensitivity Distributions. Journal of Open Source
-  Software, 3(31), 1082. https://doi.org/10.21105/joss.01082
+  Species Sensitivity Distributions. Journal of Open Source Software,
+  3(31), 1082. https://doi.org/10.21105/joss.01082
 
 A BibTeX entry for LaTeX users is
 
@@ -205,19 +210,19 @@ A BibTeX entry for LaTeX users is
 <h2 class="hasAnchor">
 <a href="#license" class="anchor"></a>License</h2>
 <p>The code is released under the Apache License 2.0</p>
-<pre><code>Copyright 2015 Province of British Columbia
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at 
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>Copyright <span class="dv">2015</span> Province of British Columbia</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a>Licensed under the Apache License, Version <span class="fl">2.0</span> (the <span class="st">"License"</span>);</span>
+<span id="cb12-4"><a href="#cb12-4"></a>you may not use this file except <span class="cf">in</span> compliance with the License.</span>
+<span id="cb12-5"><a href="#cb12-5"></a>You may obtain a copy of the License at </span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>   http<span class="op">:</span><span class="er">//</span>www.apache.org<span class="op">/</span>licenses<span class="op">/</span>LICENSE<span class="fl">-2.0</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a>Unless required by applicable law or agreed to <span class="cf">in</span> writing, software</span>
+<span id="cb12-10"><a href="#cb12-10"></a>distributed under the License is distributed on an <span class="st">"AS IS"</span> BASIS,</span>
+<span id="cb12-11"><a href="#cb12-11"></a>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span id="cb12-12"><a href="#cb12-12"></a>See the License <span class="cf">for</span> the specific language governing permissions and</span>
+<span id="cb12-13"><a href="#cb12-13"></a>limitations under the License.</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -241,6 +246,13 @@ limitations under the License.</code></pre>
 </li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 <div class="citation">
 <h2>Citation</h2>
 <ul class="list-unstyled">
@@ -250,14 +262,13 @@ limitations under the License.</code></pre>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Joe Thorley <br><small class="roles"> Author, maintainer, contractor </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Joe Thorley <br><small class="roles"> Author, maintainer, contractor </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 <li>Carl Schwarz <br><small class="roles"> Author, contractor </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
-      </div>
-
+  </div>
 </div>
 
 
@@ -266,12 +277,14 @@ limitations under the License.</code></pre>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
