@@ -9,7 +9,7 @@ ssd_fit_dists(
   left = "Conc",
   right = left,
   weight = NULL,
-  dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
+  dists = c("gamma", "lnorm", "weibull"),
   silent = FALSE
 )
 }
@@ -33,10 +33,18 @@ An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objec
 Fits one or more distributions to species sensitivity data.
 }
 \details{
-By default the 'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and
+By default the 'gamma', 'lnorm' and
 'weibull' distributions are fitted to the data.
 The ssd_fit_dists function has also been
-tested with the 'pareto' distribution.
+tested with the 'gompertz', 'lgumbel', 'llog' 
+and 'pareto' distribution. 
+
+Due to an issue in fitdistrplus the 'llog' distribution 
+errors (code 100) if the concentrations are too low.
+In this case it is recommended to change the units.
+
+The 'pareto' distribution often fails to fit due to its 
+sensitivity to the initial values.
 
 If weight specifies a column in the data frame with positive integers,
 weighted estimation occurs.

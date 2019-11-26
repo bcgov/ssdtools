@@ -1,5 +1,6 @@
+- Default `ssd_fit_dists()` distributions now `gamma`, `lnorm` and `weibull`.
 - Ensure concentrations below 1 have 1 significant figure in plots
-- Default ssd_fit_dists distributions now ordered alphabetically
+- Default `ssd_fit_dists()` distributions now ordered alphabetically
 
 # ssdtools 0.0.3
 

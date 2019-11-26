@@ -22,8 +22,7 @@ test_that("utils", {
   expect_identical(nobs(boron_dists), nobs(boron_lnorm))
   expect_identical(npars(boron_lnorm), 2L)
   expect_identical(npars(boron_dists), c(
-    gamma = 2L, gompertz = 2L, lgumbel = 2L,
-    llog = 2L, lnorm = 2L, weibull = 2L
+    gamma = 2L, lnorm = 2L, weibull = 2L
   ))
   expect_identical(
     comma_signif(c(0.0191, 1, NA, 1111)),
