@@ -12,3 +12,5 @@
 ^build.R$
 ^cran-comments\.md$
 ^paper$
+^pkgdown$
+
