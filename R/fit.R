@@ -16,7 +16,7 @@ add_starting_values <- function(dist, x) {
   if (dist$dist == "gamma") {
     dist$start <- list(
       scale = stats::var(x) / mean(x),
-      shape = mean(x)^2 / stats::var(x)^2
+      shape = mean(x)^2 / stats::var(x)
     )
   } else if (dist$distr == "gompertz") {
     fit <- vglm(x ~ 1, VGAM::gompertz)
