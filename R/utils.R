@@ -95,7 +95,7 @@ nobs.fitdistcens <- function(object, ...) nrow(object$censdata)
 
 #' @export
 nobs.fitdists <- function(object, ...) {
-  ns <- vapply(object, stats::nobs, 1L)
+  ns <- vapply(object, nobs, 1L)
   if (!all(ns == ns[1])) {
     stop("the fitdists must have the same number of observations", call. = FALSE)
   }
