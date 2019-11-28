@@ -8,13 +8,13 @@
 \alias{rgompertz}
 \title{Gompertz Distribution}
 \usage{
-dgompertz(x, scale = 1, shape, log = FALSE)
+dgompertz(x, scale = 1, shape = 1, log = FALSE)
 
-qgompertz(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE)
+qgompertz(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-pgompertz(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE)
+pgompertz(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-rgompertz(n, scale = 1, shape)
+rgompertz(n, scale = 1, shape = 1)
 }
 \arguments{
 \item{x, q}{vector of quantiles.}

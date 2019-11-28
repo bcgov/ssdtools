@@ -40,33 +40,27 @@ NULL
 
 #' @rdname gompertz
 #' @export
-dgompertz <- function(x, scale = 1, shape, log = FALSE) {
-  if (!length(x)) {
-    return(numeric(0))
-  }
+dgompertz <- function(x, scale = 1, shape = 1, log = FALSE) {
+  if (!length(x)) return(numeric(0))
   VGAM::dgompertz(x, scale = scale, shape = shape, log = log)
 }
 
 #' @rdname gompertz
 #' @export
-qgompertz <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(q)) {
-    return(numeric(0))
-  }
+qgompertz <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(q)) return(numeric(0))
   VGAM::qgompertz(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-pgompertz <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(p)) {
-    return(numeric(0))
-  }
+pgompertz <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(p)) return(numeric(0))
   VGAM::pgompertz(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-rgompertz <- function(n, scale = 1, shape) {
+rgompertz <- function(n, scale = 1, shape = 1) {
   VGAM::rgompertz(n, scale = scale, shape = shape)
 }
