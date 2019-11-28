@@ -62,12 +62,12 @@ test_that("fit_dist", {
 
 test_that("fluazinam", {
   data(fluazinam, package = "fitdistrplus")
-  dist <- ssd_fit_dist(fluazinam, left = "left")
+  dist <- ssdtools:::ssd_fit_dist(fluazinam, left = "left")
   expect_true(is.fitdist(dist))
   expect_false(is.fitdistcens(dist))
   expect_equal(coef(dist), c(meanlog = 4.660186, sdlog = 2.197562), tolerance = 0.0000001)
 
-  dist <- ssd_fit_dist(fluazinam, left = "left", right = "right")
+  dist <- ssdtools:::ssd_fit_dist(fluazinam, left = "left", right = "right")
   expect_false(is.fitdist(dist))
   expect_true(is.fitdistcens(dist))
   expect_equal(coef(dist), c(meanlog = 4.976920, sdlog = 2.687785), tolerance = 0.0000001)
@@ -75,7 +75,10 @@ test_that("fluazinam", {
   fluazinam2 <- fluazinam[rev(order(fluazinam$left)), ]
   fluazinam2$Weight <- 1:nrow(fluazinam2)
 
-  dist <- ssd_fit_dist(fluazinam2, weight = "Weight", left = "left", right = "right")
+  dist <- ssd_fit_dists(fluazinam2, weight = "Weight", left = "left", right = "right",
+                        dist = "lnorm")
+  expect_identical(class(dist), c("fitdistscens", "fitdists"))
+  dist <- dist[[1]]
   expect_false(is.fitdist(dist))
   expect_true(is.fitdistcens(dist))
   expect_equal(coef(dist), c(meanlog = 3.566750, sdlog = 2.182757), tolerance = 0.000001)
