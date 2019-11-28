@@ -10,9 +10,9 @@
 \usage{
 dgompertz(x, scale = 1, shape = 1, log = FALSE)
 
-qgompertz(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
+qgompertz(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-pgompertz(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
+pgompertz(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
 rgompertz(n, scale = 1, shape = 1)
 }
@@ -25,9 +25,9 @@ rgompertz(n, scale = 1, shape = 1)
 
 \item{log, log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
-\item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].}
-
 \item{p}{vector of probabilities.}
+
+\item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].}
 
 \item{n}{number of observations.}
 }

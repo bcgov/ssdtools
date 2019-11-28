@@ -47,16 +47,16 @@ dgompertz <- function(x, scale = 1, shape = 1, log = FALSE) {
 
 #' @rdname gompertz
 #' @export
-qgompertz <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(q)) return(numeric(0))
-  VGAM::qgompertz(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
+qgompertz <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(p)) return(numeric(0))
+  VGAM::qgompertz(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-pgompertz <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(p)) return(numeric(0))
-  VGAM::pgompertz(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
+pgompertz <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+  if (!length(q)) return(numeric(0))
+  VGAM::pgompertz(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
