@@ -8,13 +8,13 @@
 \alias{rpareto}
 \title{Pareto Distribution}
 \usage{
-dpareto(x, scale = 1, shape, log = FALSE)
+dpareto(x, scale = 1, shape = 1, log = FALSE)
 
-qpareto(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE)
+qpareto(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-ppareto(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE)
+ppareto(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-rpareto(n, scale = 1, shape)
+rpareto(n, scale = 1, shape = 1)
 }
 \arguments{
 \item{x, q}{vector of quantiles.}

@@ -39,7 +39,7 @@ NULL
 
 #' @rdname pareto
 #' @export
-dpareto <- function(x, scale = 1, shape, log = FALSE) {
+dpareto <- function(x, scale = 1, shape = 1, log = FALSE) {
   if (!length(x)) {
     return(numeric(0))
   }
@@ -48,7 +48,7 @@ dpareto <- function(x, scale = 1, shape, log = FALSE) {
 
 #' @rdname pareto
 #' @export
-qpareto <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
+qpareto <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   if (!length(q)) {
     return(numeric(0))
   }
@@ -57,7 +57,7 @@ qpareto <- function(q, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
 
 #' @rdname pareto
 #' @export
-ppareto <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
+ppareto <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   if (!length(p)) {
     return(numeric(0))
   }
@@ -66,6 +66,6 @@ ppareto <- function(p, scale = 1, shape, lower.tail = TRUE, log.p = FALSE) {
 
 #' @rdname pareto
 #' @export
-rpareto <- function(n, scale = 1, shape) {
+rpareto <- function(n, scale = 1, shape = 1) {
   VGAM::rpareto(n, scale = scale, shape = shape)
 }
