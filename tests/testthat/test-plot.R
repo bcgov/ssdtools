@@ -14,19 +14,9 @@
 
 context("plot")
 
-test_that("plot", {
-  pdf(tempfile(fileext = ".pdf"))
-  on.exit(dev.off())
-  boron_lnorm <- ssd_fit_dist(boron_data[1:6, ])
-
-  expect_silent(ssd_cfplot(boron_data))
-  expect_silent(plot(boron_lnorm))
-  expect_silent(plot(fluazinam_lnorm))
-  expect_silent(plot(boron_dists))
-  expect_is(autoplot(boron_lnorm), "ggplot")
-  expect_is(autoplot(boron_dists), "ggplot")
-  expect_is(autoplot(fluazinam_dists), "ggplot")
-  expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
+test_that("plot geoms", {
+  data <- boron_data
+  data$yintercept <- 0.10
   gp <- ggplot(boron_data, aes(x = Conc)) +
     stat_ssd() +
     geom_ssd() +
@@ -35,6 +25,32 @@ test_that("plot", {
       data = boron_pred,
       aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
     )
-
   expect_is(gp, "ggplot")
+})
+
+test_that("plot", {
+  expect_silent(plot(boron_lnorm))
+  expect_silent(plot(fluazinam_lnorm))
+  expect_silent(plot(boron_dists))
+})
+
+test_that("cfplot", {
+  expect_silent(ssd_cfplot(boron_data))
+})
+
+test_that("autoplot", {
+  expect_is(autoplot(boron_lnorm), "ggplot")
+  expect_is(autoplot(boron_lnorm, ci = TRUE), "ggplot")
+  expect_is(autoplot(boron_dists), "ggplot")
+  expect_is(autoplot(fluazinam_dists), "ggplot")
+  fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
+  fluazinam_lnorm$censdata$left[5] <- NA
+  expect_is(autoplot(fluazinam_lnorm), "ggplot")
+  expect_is(autoplot(fluazinam_lnorm, ci = TRUE), "ggplot")
+
+})
+
+test_that("ssd_plot", {
+  expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
+  expect_is(ssd_plot(boron_data, boron_pred, ribbon = TRUE, label = "Species"), "ggplot")
 })
