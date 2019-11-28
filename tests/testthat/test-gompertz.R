@@ -11,7 +11,7 @@ test_that("qgompertz", {
   expect_identical(qgompertz(0.8),
                    0.959134838920824)
   expect_identical(qgompertz(log(0.8), log.p = TRUE), qgompertz(0.8))
-  expect_identical(qgompertz(pgompertz(0.9)), 0.9)
+  expect_equal(qgompertz(pgompertz(0.9)), 0.9)
 })
 
 test_that("pgompertz", {
