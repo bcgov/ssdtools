@@ -141,8 +141,8 @@ GeomXribbon <- ggproto(
 )
 
 plot_coord_scale <- function(data, xlab, ylab) {
-  check_string(xlab)
-  check_string(ylab)
+  chk_string(xlab)
+  chk_string(ylab)
 
   list(
     coord_trans(x = "log10"),
@@ -281,10 +281,10 @@ plot.fitdists <- function(x, breaks = "default", ...) {
 autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
                              xlab = "Concentration", ylab = "Species Affected",
                              ...) {
-  check_flag(ci)
+  chk_flag(ci)
   checkor(check_null(hc), check_scalar(hc, c(1L, 99L)))
-  check_string(xlab)
-  check_string(ylab)
+  chk_string(xlab)
+  chk_string(ylab)
 
   data <- data.frame(x = object$data)
 
@@ -313,10 +313,10 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
 autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
                                  xlab = "Concentration", ylab = "Species Affected",
                                  ...) {
-  check_flag(ci)
+  chk_flag(ci)
   checkor(check_null(hc), check_scalar(hc, c(1L, 99L)))
-  check_string(xlab)
-  check_string(ylab)
+  chk_string(xlab)
+  chk_string(ylab)
 
   data <- object$censdata
 
@@ -371,8 +371,8 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
 #' ggplot2::autoplot(boron_dists)
 #' }
 autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Affected", ic = "aicc", ...) {
-  check_string(xlab)
-  check_string(ylab)
+  chk_string(xlab)
+  chk_string(ylab)
 
   pred <- predict(object, ic = ic, nboot = 10, average = FALSE)
   pred$Distribution <- pred$dist
@@ -435,12 +435,12 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 
   check_vector(shift_x, values = c(1, 1000))
 
-  check_string(left)
-  check_string(right)
+  chk_string(left)
+  chk_string(right)
   checkor(check_string(label), check_null(label))
   checkor(check_string(shape), check_null(shape))
-  check_flag(ci)
-  check_flag(ribbon)
+  chk_flag(ci)
+  chk_flag(ribbon)
   checkor(check_null(hc), check_vector(hc, pred$percent, only = TRUE, length = TRUE))
 
   check_colnames(data, unique(c(left, right, label, shape)))
@@ -529,7 +529,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 #' ssd_cfplot(boron_data)
 ssd_cfplot <- function(data, left = "Conc") {
   check_data(data)
-  check_string(left)
+  chk_string(left)
   check_colnames(data, left)
 
   fitdistrplus::descdist(data[[left]], boot = 100L)

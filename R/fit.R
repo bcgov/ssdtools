@@ -78,13 +78,13 @@ remove_errors <- function(dist_fit, name, silent) {
 ssd_fit_dist <- function(
                          data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
   check_data(data, nrow = c(6, .Machine$integer.max))
-  check_string(left)
-  check_string(right)
+  chk_string(left)
+  chk_string(right)
 
   checkor(check_null(weight), check_string(weight))
 
   check_colnames(data, unique(c(left, right, weight)))
-  check_string(dist)
+  chk_string(dist)
 
   if (left == right) {
     fit <- fit_dist_uncensored(data, left, weight, dist)
@@ -132,7 +132,7 @@ ssd_fit_dists <- function(
                           dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
                           silent = FALSE) {
   check_vector(dists, length = TRUE, unique = TRUE, named = FALSE)
-  check_flag(silent)
+  chk_flag(silent)
 
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
