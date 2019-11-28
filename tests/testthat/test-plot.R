@@ -15,6 +15,8 @@
 context("plot")
 
 test_that("plot geoms", {
+  setup(pdf(tempfile(fileext = ".pdf")))
+  teardown(dev.off())
   data <- boron_data
   data$yintercept <- 0.10
   gp <- ggplot(boron_data, aes(x = Conc)) +
@@ -29,16 +31,25 @@ test_that("plot geoms", {
 })
 
 test_that("plot", {
+  setup(pdf(tempfile(fileext = ".pdf")))
+  teardown(dev.off())
+  
   expect_silent(plot(boron_lnorm))
   expect_silent(plot(fluazinam_lnorm))
   expect_silent(plot(boron_dists))
 })
 
 test_that("cfplot", {
+  setup(pdf(tempfile(fileext = ".pdf")))
+  teardown(dev.off())
+
   expect_silent(ssd_cfplot(boron_data))
 })
 
 test_that("autoplot", {
+  setup(pdf(tempfile(fileext = ".pdf")))
+  teardown(dev.off())
+
   expect_is(autoplot(boron_lnorm), "ggplot")
   expect_is(autoplot(boron_lnorm, ci = TRUE), "ggplot")
   expect_is(autoplot(boron_dists), "ggplot")
@@ -51,6 +62,9 @@ test_that("autoplot", {
 })
 
 test_that("ssd_plot", {
+  setup(pdf(tempfile(fileext = ".pdf")))
+  teardown(dev.off())
+
   expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
   expect_is(ssd_plot(boron_data, boron_pred, ribbon = TRUE, label = "Species"), "ggplot")
 })
