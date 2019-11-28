@@ -23,6 +23,7 @@ test_that("plot geoms", {
     stat_ssd() +
     geom_ssd() +
     geom_hcintersect(xintercept = 1, yintercept = 0.05) +
+    geom_hcintersect(yintercept = 0.05) +
     geom_xribbon(
       data = boron_pred,
       aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
@@ -67,4 +68,8 @@ test_that("ssd_plot", {
 
   expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
   expect_is(ssd_plot(boron_data, boron_pred, ribbon = TRUE, label = "Species"), "ggplot")
+  
+  data(fluazinam, package = "fitdistrplus")
+  expect_is(ssd_plot(fluazinam, fluazinam_pred,
+                     left = "left", right = "right"), "ggplot")
 })
