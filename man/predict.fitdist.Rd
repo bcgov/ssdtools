@@ -4,10 +4,18 @@
 \alias{predict.fitdist}
 \title{Predict fitdist}
 \usage{
-\method{predict}{fitdist}(object, percent = 1:99, nboot = 1000, level = 0.95, ...)
+\method{predict}{fitdist}(
+  object,
+  percent = 1:99,
+  nboot = 1000,
+  level = 0.95,
+  parallel = "no",
+  ncpus = 1L,
+  ...
+)
 }
 \arguments{
-\item{object}{The object.}
+\item{object}{ An object of class \code{"bootdist"}.  }
 
 \item{percent}{A numeric vector of the densities to calculate the estimated concentrations for.}
 
@@ -15,7 +23,14 @@
 
 \item{level}{The confidence level.}
 
-\item{...}{Unused}
+\item{parallel}{The type of parallel operation to be used, \code{"snow"} or \code{"multicore"}
+  (the second one not being available on Windows),
+  or \code{"no"} if no parallel operation.}
+
+\item{ncpus}{Number of processes to be used in parallel operation : 
+  typically one would fix it to the number of available CPUs.}
+
+\item{...}{ Further arguments to be passed to generic methods }
 }
 \description{
 Predict fitdist

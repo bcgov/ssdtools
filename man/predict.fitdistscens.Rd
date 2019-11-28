@@ -11,6 +11,8 @@
   ic = "aic",
   average = TRUE,
   level = 0.95,
+  parallel = "no",
+  ncpus = 1L,
   ...
 )
 }
@@ -26,6 +28,13 @@
 \item{average}{A flag indicating whether to model-average.}
 
 \item{level}{The confidence level.}
+
+\item{parallel}{The type of parallel operation to be used, \code{"snow"} or \code{"multicore"}
+  (the second one not being available on Windows),
+  or \code{"no"} if no parallel operation.}
+
+\item{ncpus}{Number of processes to be used in parallel operation : 
+  typically one would fix it to the number of available CPUs.}
 
 \item{...}{Unused}
 }
