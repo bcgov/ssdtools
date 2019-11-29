@@ -37,24 +37,10 @@ ssd_pp <- function(x, ...) {
   as_tibble(data.frame(conc = conc, percent = p))
 }
 
-#' @describeIn ssd_pp Percent Protected fitdist
-#' @export
-#' @examples
-#' ssd_pp(boron_lnorm, c(0, 1, 30, Inf))
-ssd_pp.fitdist <- function(x, conc, ...) {
-  chk_unused(...)
-  .ssd_pp_fitdist(x, conc)
-}
-
-#' @describeIn ssd_pp Percent Protected fitdists
-#' @export
-#' @examples
-#' ssd_pp(boron_dists, c(0, 1, 30, Inf))
-ssd_pp.fitdists <- function(x, conc, ic = "aicc", ...) {
+.ssd_pp_fitdists <- function(x, conc, ic) {
   chk_vector(conc)
   chk_numeric(conc)
-  chk_unused(...)
-  
+
   if(!length(x)) { 
     return(as_tibble(data.frame(conc = conc, 
                                 percent = rep(NA_real_, length(conc)))))
@@ -74,6 +60,25 @@ ssd_pp.fitdists <- function(x, conc, ic = "aicc", ...) {
   ps
 }
 
+#' @describeIn ssd_pp Percent Protected fitdist
+#' @export
+#' @examples
+#' ssd_pp(boron_lnorm, c(0, 1, 30, Inf))
+ssd_pp.fitdist <- function(x, conc, ...) {
+  chk_unused(...)
+  .ssd_pp_fitdist(x, conc)
+}
+
+#' @describeIn ssd_pp Percent Protected fitdists
+#' @export
+#' @examples
+#' ssd_pp(boron_dists, c(0, 1, 30, Inf))
+ssd_pp.fitdists <- function(x, conc, ic = "aicc", ...) {
+  chk_unused(...)
+  
+  .ssd_pp_fitdists(x, conc, ic)
+}
+
 #' @describeIn ssd_pp Percent Protected fitdistcens
 #' @export
 #' @examples
@@ -81,4 +86,13 @@ ssd_pp.fitdists <- function(x, conc, ic = "aicc", ...) {
 ssd_pp.fitdistcens <- function(x, conc, ...) {
   chk_unused(...)
   .ssd_pp_fitdist(x, conc)
+}
+
+#' @describeIn ssd_pp Percent Protected fitdistcens
+#' @export
+#' @examples
+#' ssd_pp(fluazinam_dists, c(0, 1, 30, Inf))
+ssd_pp.fitdistscens <- function(x, conc, ic = "aic", ...) {
+  chk_unused(...)
+  .ssd_pp_fitdists(x, conc, ic)
 }

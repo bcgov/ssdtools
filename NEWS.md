@@ -1,3 +1,4 @@
+- Added `ssd_exposure()` to calculate proportion exposed based on distribution of concentrations.
 - Added `ssd_pp()` to calculate percent species protected at specific concentrations.
 - Added `ssd_plot_cdf()` to plot cumulative distribution function.
 - Deprecated `ssd_cfplot()` for `ssd_plot_cf()`.

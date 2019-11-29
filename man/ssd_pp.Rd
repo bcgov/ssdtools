@@ -5,6 +5,7 @@
 \alias{ssd_pp.fitdist}
 \alias{ssd_pp.fitdists}
 \alias{ssd_pp.fitdistcens}
+\alias{ssd_pp.fitdistscens}
 \title{Percent Protected}
 \usage{
 ssd_pp(x, ...)
@@ -14,6 +15,8 @@ ssd_pp(x, ...)
 \method{ssd_pp}{fitdists}(x, conc, ic = "aicc", ...)
 
 \method{ssd_pp}{fitdistcens}(x, conc, ...)
+
+\method{ssd_pp}{fitdistscens}(x, conc, ic = "aic", ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -37,10 +40,13 @@ Gets percent species protected at specified concentrations.
 \item \code{fitdists}: Percent Protected fitdists
 
 \item \code{fitdistcens}: Percent Protected fitdistcens
+
+\item \code{fitdistscens}: Percent Protected fitdistcens
 }}
 
 \examples{
 ssd_pp(boron_lnorm, c(0, 1, 30, Inf))
 ssd_pp(boron_dists, c(0, 1, 30, Inf))
 ssd_pp(fluazinam_lnorm, c(0, 1, 30, Inf))
+ssd_pp(fluazinam_dists, c(0, 1, 30, Inf))
 }
