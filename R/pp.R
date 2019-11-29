@@ -26,21 +26,24 @@ ssd_pp <- function(x, ...) {
   UseMethod("ssd_pp")
 }
 
-#' @describeIn ssd_pp Percent Protected fitdist
-#' @export
-#' @examples
-#' ssd_pp(boron_lnorm, c(0, 1, 30, Inf))
-ssd_pp.fitdist <- function(x, conc, ...) {
-  chk_unused(...)
-  
+.ssd_pp_fitdist <- function(x, conc) {
   args <- as.list(x$estimate)
   args$q <- conc
   
   what <- paste0("p", x$distname)
   
   p <- do.call(what, args)
-  p * 100
+  p <- p * 100
   as_tibble(data.frame(conc = conc, percent = p))
+}
+
+#' @describeIn ssd_pp Percent Protected fitdist
+#' @export
+#' @examples
+#' ssd_pp(boron_lnorm, c(0, 1, 30, Inf))
+ssd_pp.fitdist <- function(x, conc, ...) {
+  chk_unused(...)
+  .ssd_pp_fitdist(x, conc)
 }
 
 #' @describeIn ssd_pp Percent Protected fitdists
@@ -69,4 +72,13 @@ ssd_pp.fitdists <- function(x, conc, ic = "aicc", ...) {
   ps$percent <- apply(mat, 1, weighted.mean, w = ic$weight)
   
   ps
+}
+
+#' @describeIn ssd_pp Percent Protected fitdistcens
+#' @export
+#' @examples
+#' ssd_pp(fluazinam_lnorm, c(0, 1, 30, Inf))
+ssd_pp.fitdistcens <- function(x, conc, ...) {
+  chk_unused(...)
+  .ssd_pp_fitdist(x, conc)
 }
