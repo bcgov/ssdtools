@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
       <h1>ssdtools User Manual</h1>
                         <h4 class="author">Joe Thorley</h4>
             
-            <h4 class="date">2019-11-26</h4>
+            <h4 class="date">2019-11-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/ssdtools-manual.Rmd"><code>vignettes/ssdtools-manual.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools-manual.Rmd</code></div>
@@ -106,7 +106,7 @@
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p><code>ssdtools</code> is an R package to fit Species Sensitivity Distributions (SSDs) using Maximum Likelihood and model averaging.</p>
 <p>SSDs are cumulative probability distributions that are used to estimate the percent of species that are affected by a given concentration of a chemical. The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC). For more information on SSDs the reader is referred to <span class="citation">Posthuma, Suter II, and Traas (2001)</span>.</p>
-<p>In order to use <code>ssdtools</code> you need to install R (see below) or use the Shiny <a href="https://poissonconsulting.shinyapps.io/ssdtools/">app</a>. The shiny app includes a user guide. This vignette is a user manual for the R package.</p>
+<p>In order to use <code>ssdtools</code> you need to install R (see below) or use the Shiny <a href="https://bcgov-env.shinyapps.io/ssdtools/">app</a>. The shiny app includes a user guide. This vignette is a user manual for the R package.</p>
 </div>
 <div id="philosophy" class="section level2">
 <h2 class="hasAnchor">
@@ -190,9 +190,7 @@
 <a href="https://en.wikipedia.org/wiki/Pareto_distribution">Pareto</a> (<code>pareto</code>)</li>
 </ul>
 <p>distribution using the <code>dists</code> argument.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(data, <span class="dt">dists =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lnorm"</span>, <span class="st">"gompertz"</span>))</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; Warning in (function (data, distr, method = c("mle", "mme", "qme", "mge"), : The</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; pgompertz function should have its first argument named: q as in base R</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(data, <span class="dt">dists =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lnorm"</span>, <span class="st">"gompertz"</span>))</span></code></pre></div>
 <p>The coefficients can be extracted using the <code>coef</code> function. However, in and off themselves the coefficients are not that helpful.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span>(dists)</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; $lnorm</span></span>
@@ -201,7 +199,7 @@
 <span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; </span></span>
 <span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; $gompertz</span></span>
 <span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;       shape       scale </span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 0.039406842 0.002604712</span></span></code></pre></div>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 0.039410634 0.002601287</span></span></code></pre></div>
 <p>It is generally much more informative to plot the fits using the <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting (printing) to make it look prettier.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plot theme</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>gp &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(dists) </span>
@@ -215,19 +213,17 @@
 <p>Given multiple distributions the user is faced with choosing the best fitting distribution (or as discussed below averaging the results weighted by the fit).</p>
 <p>For illustrative purposes we consider the same six distributions as <span class="citation">Schwarz and Tillmanns (2019)</span></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; Warning in (function (data, distr, method = c("mle", "mme", "qme", "mge"), : The</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; pgompertz function should have its first argument named: q as in base R</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>gof &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</span>
-<span id="cb8-5"><a href="#cb8-5"></a>gof[<span class="kw"><a href="https://rdrr.io/r/base/order.html">order</a></span>(gof<span class="op">$</span>delta),]</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; # A tibble: 6 x 9</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 1 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 2 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 3 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 4 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; 5 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; 6 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01</span></span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2"></a>gof &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(boron_dists)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>gof[<span class="kw"><a href="https://rdrr.io/r/base/order.html">order</a></span>(gof<span class="op">$</span>delta),]</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; # A tibble: 6 x 9</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 1 gompertz 0.602 0.120  0.0822  238.  238.  240. 0      0.271</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 2 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 3 gamma    0.440 0.117  0.0554  238.  238.  240. 0.019  0.268</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 4 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 5 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 6 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01</span></span></code></pre></div>
 <p>The <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code> function returns several goodness of fit measures that can be used to select the best distribution including three statistics</p>
 <ul>
 <li>
@@ -362,7 +358,11 @@
 <a href="#cullen-frey-plots" class="anchor"></a>Cullen Frey Plots</h3>
 <p>The data can be visualized using a cullen frey plot of the skewness and kurtosis.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ssdtools)</span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="kw"><a href="../reference/ssd_cfplot.html">ssd_cfplot</a></span>(boron_data)</span></code></pre></div>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw"><a href="../reference/ssd_plot_cf.html">ssd_cfplot</a></span>(boron_data)</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">#&gt; Warning: `ssd_cfplot()` is deprecated as of lifecycle 0.1.0.</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#&gt; Please use `ssd_plot_cf()` instead.</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#&gt; This warning is displayed once per session.</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></span></code></pre></div>
 <p><img src="ssdtools-manual_files/figure-html/unnamed-chunk-21-1.png" width="480"></p>
 </div>
 <div id="model-diagnostics" class="section level3">
@@ -389,15 +389,14 @@
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>fluazinam_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(fluazinam, <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>)</span>
 <span id="cb26-2"><a href="#cb26-2"></a><span class="co">#&gt; Warning: gompertz failed to fit: Error in if (one.more) { : missing value where TRUE/FALSE needed</span></span>
 <span id="cb26-3"><a href="#cb26-3"></a><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(fluazinam_dists)</span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co">#&gt; Warning: Unknown or uninitialised column: 'aicc'.</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#&gt; # A tibble: 5 x 5</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#&gt;   dist      aic   bic delta weight</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co">#&gt; * &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a><span class="co">#&gt; 1 gamma    153.  154. 3.45   0.056</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a><span class="co">#&gt; 2 lgumbel  149.  151. 0      0.313</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="co">#&gt; 3 llog     150.  151. 0.552  0.237</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a><span class="co">#&gt; 4 lnorm    150.  151. 0.269  0.274</span></span>
-<span id="cb26-12"><a href="#cb26-12"></a><span class="co">#&gt; 5 weibull  151.  153. 1.92   0.12</span></span></code></pre></div>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co">#&gt; # A tibble: 5 x 5</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#&gt;   dist      aic   bic delta weight</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#&gt; * &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="co">#&gt; 1 gamma    153.  154. 3.45   0.056</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="co">#&gt; 2 lgumbel  149.  151. 0      0.313</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="co">#&gt; 3 llog     150.  151. 0.552  0.237</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co">#&gt; 4 lnorm    150.  151. 0.269  0.274</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a><span class="co">#&gt; 5 weibull  151.  153. 1.92   0.12</span></span></code></pre></div>
 <p>But model-averaged predictions (and hazard concentrations complete with 95% confidence limits) can be calculated using <code>aic</code></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>fluazinam_pred &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(fluazinam_dists)</span></code></pre></div>
 <p>and the results plotted complete with arrows indicating the censorship.</p>

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
       </span>
     </div>
 
@@ -195,16 +195,16 @@ It may be possible to use artificial censoring to improve the estimates in the e
     <p>Liu, Y., Salibián-Barrera, M., Zamar, R.H., and Zidek, J.V. 2018. Using artificial censoring to improve extreme tail quantile estimates. Journal of the Royal Statistical Society: Series C (Applied Statistics).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_fit_dists</span>(<span class='no'>boron_data</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The pgompertz function should have its first argument named: q as in base R</span></div><div class='output co'>#&gt; Fitting of the distribution ' gamma ' by maximum likelihood 
+    <pre class="examples"><div class='input'><span class='fu'>ssd_fit_dists</span>(<span class='no'>boron_data</span>)</div><div class='output co'>#&gt; Fitting of the distribution ' gamma ' by maximum likelihood 
 #&gt; Parameters:
-#&gt;        estimate Std. Error
-#&gt; scale 25.108064  7.6313816
-#&gt; shape  0.950757  0.2226832
+#&gt;         estimate Std. Error
+#&gt; scale 25.1263769  7.6375478
+#&gt; shape  0.9500513  0.2224988
 #&gt; Fitting of the distribution ' gompertz ' by maximum likelihood 
 #&gt; Parameters:
 #&gt;          estimate  Std. Error
-#&gt; shape 0.039409345 0.011957816
-#&gt; scale 0.002602223 0.009957062
+#&gt; shape 0.039407871 0.011957431
+#&gt; scale 0.002603667 0.009956961
 #&gt; Fitting of the distribution ' lgumbel ' by maximum likelihood 
 #&gt; Parameters:
 #&gt;          estimate Std. Error
@@ -228,8 +228,8 @@ It may be possible to use artificial censoring to improve the estimates in the e
 <span class='fu'>ssd_fit_dists</span>(<span class='no'>fluazinam</span>, <span class='kw'>left</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='st'>"right"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: gompertz failed to fit: Error in if (one.more) { : missing value where TRUE/FALSE needed</span></div><div class='output co'>#&gt; Fitting of the distribution ' gamma ' on censored data by maximum likelihood 
 #&gt; Parameters:
 #&gt;           estimate
-#&gt; scale 2445.7299203
-#&gt; shape    0.3464374
+#&gt; scale 2446.6063266
+#&gt; shape    0.3465141
 #&gt; Fitting of the distribution ' lgumbel ' on censored data by maximum likelihood 
 #&gt; Parameters:
 #&gt;          estimate

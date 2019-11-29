@@ -78,7 +78,7 @@ at which by default 5% of the species are affected." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
       </span>
     </div>
 
@@ -144,9 +144,6 @@ at which by default 5% of the species are affected.</p>
 <span class='co'># S3 method for fitdist</span>
 <span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for fitdistcens</span>
-<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
-
 <span class='co'># S3 method for fitdists</span>
 <span class='fu'>ssd_hc</span>(
   <span class='no'>x</span>,
@@ -157,6 +154,9 @@ at which by default 5% of the species are affected.</p>
   <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='no'>...</span>
 )
+
+<span class='co'># S3 method for fitdistcens</span>
+<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for fitdistscens</span>
 <span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aic"</span>, <span class='kw'>average</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
@@ -202,20 +202,20 @@ at which by default 5% of the species are affected.</p>
     
 <ul>
 <li><p><code>fitdist</code>: Hazard Concentration</p></li>
-<li><p><code>fitdistcens</code>: Hazard Concentration</p></li>
 <li><p><code>fitdists</code>: Hazard Concentration</p></li>
+<li><p><code>fitdistcens</code>: Hazard Concentration</p></li>
 <li><p><code>fitdistscens</code>: Hazard Concentration</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>ssd_hc</span>(<span class='no'>boron_lnorm</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 5</span><span>
 #&gt;   percent   est    se   lcl   ucl
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>       5  1.68 0.692 0.822  3.57</div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>ssd_hc</span>(<span class='no'>fluazinam_lnorm</span>)
+#&gt; </span><span style='color: #555555;'>*</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>       5  1.68 0.676 0.883  3.44</div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>ssd_hc</span>(<span class='no'>boron_dists</span>)
 }
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>ssd_hc</span>(<span class='no'>boron_dists</span>)
+<span class='fu'>ssd_hc</span>(<span class='no'>fluazinam_lnorm</span>)
 }
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>ssd_hc</span>(<span class='no'>fluazinam_dists</span>)

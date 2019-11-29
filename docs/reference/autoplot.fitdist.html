@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Autoplot — autoplot.fitdist • ssdtools</title>
+<title>Autoplot fitdist — autoplot.fitdist • ssdtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,9 @@
 
 
 
-<meta property="og:title" content="Autoplot — autoplot.fitdist" />
-<meta property="og:description" content="Autoplot" />
+<meta property="og:title" content="Autoplot fitdist — autoplot.fitdist" />
+<meta property="og:description" content="Plots the cumulative distribution function (cdf) using the ggplot2
+generic." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
       </span>
     </div>
 
@@ -128,24 +129,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Autoplot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
+    <h1>Autoplot fitdist</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/autoplot.R'><code>R/autoplot.R</code></a></small>
     <div class="hidden name"><code>autoplot.fitdist.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Autoplot</p>
+    <p>Plots the cumulative distribution function (cdf) using the ggplot2
+generic.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for fitdist</span>
-<span class='fu'>autoplot</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Concentration"</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Species Affected"</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'>autoplot</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for fitdists</span>
+<span class='fu'>autoplot</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for fitdistcens</span>
+<span class='fu'>autoplot</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,36 +156,29 @@
       <td><p>The object to plot.</p></td>
     </tr>
     <tr>
-      <th>ci</th>
-      <td><p>A flag indicating whether to plot confidence intervals</p></td>
-    </tr>
-    <tr>
-      <th>hc</th>
-      <td><p>A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).</p></td>
-    </tr>
-    <tr>
-      <th>xlab</th>
-      <td><p>A string of the x-axis label.</p></td>
-    </tr>
-    <tr>
-      <th>ylab</th>
-      <td><p>A string of the x-axis label.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
       <td><p>Unused.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>autoplot.fitdists</code>: Autoplot fitdists</p></li>
+<li><p><code>autoplot.fitdistcens</code>: Autoplot fitdistcens</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot</a></span>(<span class='no'>boron_lnorm</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 98 rows containing missing values (geom_path).</span></div><div class='output co'>#&gt; <span class='message'>geom_path: Each group consists of only one observation. Do you need to adjust</span>
-#&gt; <span class='message'>the group aesthetic?</span></div><div class='img'><img src='autoplot.fitdist-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot</a></span>(<span class='no'>boron_lnorm</span>)</div><div class='img'><img src='autoplot.fitdist-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot</a></span>(<span class='no'>boron_dists</span>)</div><div class='img'><img src='autoplot.fitdist-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>right</span>[<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>left</span>[<span class='fl'>3</span>] * <span class='fl'>1.5</span>
+<span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>left</span>[<span class='fl'>5</span>] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/autoplot.html'>autoplot</a></span>(<span class='no'>fluazinam_lnorm</span>)</div><div class='img'><img src='autoplot.fitdist-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#functions">Functions</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -80,7 +80,7 @@ return a zero length numeric vector if x, q or p are zero length." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
       </span>
     </div>
 
@@ -143,13 +143,13 @@ The functions are wrappers on the equivalent VGAM functions that
 return a zero length numeric vector if x, q or p are zero length.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dgompertz</span>(<span class='no'>x</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>shape</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dgompertz</span>(<span class='no'>x</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qgompertz</span>(<span class='no'>q</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>shape</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qgompertz</span>(<span class='no'>p</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>pgompertz</span>(<span class='no'>p</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>shape</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>pgompertz</span>(<span class='no'>q</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rgompertz</span>(<span class='no'>n</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>shape</span>)</pre>
+<span class='fu'>rgompertz</span>(<span class='no'>n</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,12 +171,12 @@ return a zero length numeric vector if x, q or p are zero length.</p>
       <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
-      <th>lower.tail</th>
-      <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
-    </tr>
-    <tr>
       <th>p</th>
       <td><p>vector of probabilities.</p></td>
+    </tr>
+    <tr>
+      <th>lower.tail</th>
+      <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
     </tr>
     <tr>
       <th>n</th>

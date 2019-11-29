@@ -92,7 +92,7 @@ ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Spec
 
 The ssdtools manual is available at <https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html>.
 
-A shiny webpage developed for non-R-users is available at <https://poissonconsulting.shinyapps.io/ssdtools/>.
+A shiny webpage developed for non-R-users is available at <https://bcgov-env.shinyapps.io/ssdtools/>.
 
 The ssdtools package was developed as a result of earlier drafts of:
 
