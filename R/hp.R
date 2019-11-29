@@ -27,6 +27,9 @@ ssd_hp <- function(x, ...) {
 }
 
 .ssd_hp_fitdist <- function(x, conc) {
+  chk_vector(conc)
+  chk_numeric(conc)
+
   args <- as.list(x$estimate)
   args$q <- conc
   
@@ -38,25 +41,18 @@ ssd_hp <- function(x, ...) {
 }
 
 .ssd_hp_fitdists <- function(x, conc, ic) {
-  chk_vector(conc)
-  chk_numeric(conc)
+  hp <- data.frame(conc = conc, est = rep(NA_real_, length(conc)))
 
-  if(!length(x)) { 
-    return(as_tibble(data.frame(conc = conc, 
-                                est = rep(NA_real_, length(conc)))))
-  }
+  if(!length(x) || !length(conc)) return(as_tibble(hp))
+
+  weight <- .ssd_gof_fitdists(x)$weight
+
+  mat <- lapply(x, ssd_hp, conc = conc)
+  mat <- lapply(mat, function(x) x$est)
+  mat <- as.matrix(as.data.frame(mat))
   
-  ps <- lapply(x, ssd_hp, conc = conc)
-  ps <- lapply(ps, function(x) x$est)
-  ps <- c(list(conc = conc, est = NA_real_), ps)
-  ps <- as.data.frame(ps)
-  
-  ic <- ssd_gof(x)[c("dist", ic)]
-  ic$delta <- ic[[2]] - min(ic[[2]])
-  ic$weight <- exp(-ic$delta / 2) / sum(exp(-ic$delta / 2))
-  mat <- ps[,3:ncol(ps),drop = FALSE]
-  ps$est <- apply(mat, 1, weighted.mean, w = ic$weight)
-  ps[c("conc", "est")]
+  hp$est <- apply(mat, 1, weighted.mean, w = weight)
+  hp
 }
 
 #' @describeIn ssd_hp Percent Protected fitdist
@@ -65,6 +61,7 @@ ssd_hp <- function(x, ...) {
 #' ssd_hp(boron_lnorm, c(0, 1, 30, Inf))
 ssd_hp.fitdist <- function(x, conc, ...) {
   chk_unused(...)
+  
   .ssd_hp_fitdist(x, conc)
 }
 
@@ -73,6 +70,8 @@ ssd_hp.fitdist <- function(x, conc, ...) {
 #' @examples
 #' ssd_hp(boron_dists, c(0, 1, 30, Inf))
 ssd_hp.fitdists <- function(x, conc, ic = "aicc", ...) {
+  chk_string(ic)
+  chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
   
   .ssd_hp_fitdists(x, conc, ic)
@@ -84,6 +83,7 @@ ssd_hp.fitdists <- function(x, conc, ic = "aicc", ...) {
 #' ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
 ssd_hp.fitdistcens <- function(x, conc, ...) {
   chk_unused(...)
+  
   .ssd_hp_fitdist(x, conc)
 }
 
@@ -92,6 +92,9 @@ ssd_hp.fitdistcens <- function(x, conc, ...) {
 #' @examples
 #' ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))
 ssd_hp.fitdistscens <- function(x, conc, ic = "aic", ...) {
+  chk_string(ic)
+  chk_subset(ic, c("aic", "bic"))
   chk_unused(...)
+  
   .ssd_hp_fitdists(x, conc, ic)
 }

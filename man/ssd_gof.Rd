@@ -3,17 +3,20 @@
 \name{ssd_gof}
 \alias{ssd_gof}
 \alias{ssd_gof.fitdist}
-\alias{ssd_gof.fitdistcens}
 \alias{ssd_gof.fitdists}
+\alias{ssd_gof.fitdistcens}
+\alias{ssd_gof.fitdistscens}
 \title{Goodness of Fit}
 \usage{
 ssd_gof(x, ...)
 
 \method{ssd_gof}{fitdist}(x, ...)
 
+\method{ssd_gof}{fitdists}(x, ...)
+
 \method{ssd_gof}{fitdistcens}(x, ...)
 
-\method{ssd_gof}{fitdists}(x, ...)
+\method{ssd_gof}{fitdistscens}(x, ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -52,12 +55,18 @@ and \code{aicc} for non-censored data.
 \itemize{
 \item \code{fitdist}: Goodness of Fit
 
+\item \code{fitdists}: Goodness of Fit
+
 \item \code{fitdistcens}: Goodness of Fit
 
-\item \code{fitdists}: Goodness of Fit
+\item \code{fitdistscens}: Goodness of Fit
 }}
 
 \examples{
 ssd_gof(boron_lnorm)
 ssd_gof(boron_dists)
+ssd_gof(boron_lnorm)
+ssd_gof(boron_dists)
+ssd_gof(fluazinam_lnorm)
+ssd_gof(fluazinam_lnorm)
 }
