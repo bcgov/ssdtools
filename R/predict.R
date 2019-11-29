@@ -97,7 +97,8 @@ predict.fitdistcens <- function(object, percent = 1:99,
 predict.fitdists <- function(object, percent = 1:99,
                              nboot = 1000, ic = "aicc", average = TRUE, 
                              level = 0.95, parallel = "no", ncpus = 1L, ...) {
-  check_scalar(ic, c("aic", "aicc", "bic"))
+  chk_string(ic)
+  chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
   
   ic <- ssd_gof(object)[c("dist", ic)]
@@ -148,7 +149,9 @@ predict.fitdists <- function(object, percent = 1:99,
 predict.fitdistscens <- function(object, percent = 1:99,
                                  nboot = 1000, ic = "aic", average = TRUE, 
                                  level = 0.95, parallel = "no", ncpus = 1L, ...) {
-  check_scalar(ic, c("aic", "bic", "bic"))
+  chk_string(ic)
+  chk_subset(ic, c("aic", "bic"))
+  
   NextMethod(
     object = object, percent = percent, nboot = nboot, ic = ic, average = average,
     level = level, parallel = parallel, ncpus = ncpus, ...
