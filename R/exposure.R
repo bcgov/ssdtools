@@ -38,6 +38,7 @@
 #' @return A number of the proportion exposed.
 #' @export
 #' @examples 
+#' set.seed(10)
 #' ssd_exposure(boron_lnorm)
 #' ssd_exposure(boron_lnorm, meanlog = 1)
 #' ssd_exposure(boron_lnorm, meanlog = 1, sdlog = 1)
