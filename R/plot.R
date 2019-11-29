@@ -526,8 +526,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 #' @export
 #'
 #' @examples
-#' ssd_cfplot(boron_data)
-ssd_cfplot <- function(data, left = "Conc") {
+#' ssd_plot_cf(boron_data)
+ssd_plot_cf <- function(data, left = "Conc") {
   check_data(data)
   chk_string(left)
   check_colnames(data, left)

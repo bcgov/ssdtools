@@ -44,7 +44,7 @@ test_that("cfplot", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())
 
-  expect_silent(ssd_cfplot(boron_data))
+  expect_silent(ssd_plot_cf(boron_data))
 })
 
 test_that("autoplot", {
