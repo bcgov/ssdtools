@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+ggname <- function(prefix, grob) {
+  grob$name <- grid::grobName(grob, prefix)
+  grob
+}
+
 #' Base ggproto classes for ggplot2
 #'
 #' @seealso \code{\link[ggplot2]{ggplot2-ggproto}}

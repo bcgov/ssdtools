@@ -2,33 +2,48 @@
 % Please edit documentation in R/autoplot.R
 \name{autoplot.fitdist}
 \alias{autoplot.fitdist}
-\title{Autoplot}
+\alias{autoplot.fitdistcens}
+\alias{autoplot.fitdists}
+\alias{autoplot.fitdistscens}
+\title{Autoplot fitdist}
 \usage{
-\method{autoplot}{fitdist}(
-  object,
-  ci = FALSE,
-  hc = 5L,
-  xlab = "Concentration",
-  ylab = "Species Affected",
-  ...
-)
+\method{autoplot}{fitdist}(object, type = "cdf", ...)
+
+\method{autoplot}{fitdistcens}(object, type = "cdf", ...)
+
+\method{autoplot}{fitdists}(object, type = "cdf", ...)
+
+\method{autoplot}{fitdistscens}(object, type = "cdf", ...)
 }
 \arguments{
 \item{object}{The object to plot.}
 
-\item{ci}{A flag indicating whether to plot confidence intervals}
-
-\item{hc}{A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).}
-
-\item{xlab}{A string of the x-axis label.}
-
-\item{ylab}{A string of the x-axis label.}
+\item{type}{A string specifying whether to plot the cdf or pdf.}
 
 \item{...}{Unused.}
 }
 \description{
-Autoplot
+Plots the cumulative distribution function (cdf) using the ggplot2
+generic.
 }
+\section{Functions}{
+\itemize{
+\item \code{autoplot.fitdistcens}: Autoplot fitdistcens
+
+\item \code{autoplot.fitdists}: Autoplot fitdists
+
+\item \code{autoplot.fitdistscens}: Autoplot fitdistscens
+}}
+
 \examples{
 ggplot2::autoplot(boron_lnorm)
+fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
+fluazinam_lnorm$censdata$left[5] <- NA
+ggplot2::autoplot(fluazinam_lnorm)
+\dontrun{
+#' ggplot2::autoplot(boron_dists)
+}
+\dontrun{
+ggplot2::autoplot(fluazinam_dists)
+}
 }

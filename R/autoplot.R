@@ -12,150 +12,62 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Autoplot
+.autoplot <- function(object, type = "cdf") {
+  chk_string(type)
+  chk_subset(type, c("cdf", "pdf"))
+
+  if(type == "cdf") return(ssd_plot_cdf(object))
+#  ssd_plot_pdf(object)
+  NULL
+}
+
+#' Autoplot fitdist
+#' 
+#' Plots the cumulative distribution function (cdf) using the ggplot2
+#' generic.
 #'
 #' @param object The object to plot.
-#' @param ci A flag indicating whether to plot confidence intervals
-#' @param hc A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).
-#' @param xlab A string of the x-axis label.
-#' @param ylab A string of the x-axis label.
+#' @param type A string specifying whether to plot the cdf or pdf.
 #' @param ... Unused.
 #' @export
 #' @examples
 #' ggplot2::autoplot(boron_lnorm)
-autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
-                             xlab = "Concentration", ylab = "Species Affected",
-                             ...) {
-  chk_flag(ci)
-  if(!is.null(hc)) {
-    chk_number(hc)
-    chk_range(hc, c(1, 99))
-  }
-  chk_string(xlab)
-  chk_string(ylab)
+autoplot.fitdist <- function(object, type = "cdf", ...) {
   chk_unused(...)
-  
-  data <- data.frame(x = object$data)
-  
-  pred <- predict(object, nboot = if (ci) 1001 else 10)
-  
-  gp <- ggplot(pred, aes_string(x = "est"))
-  
-  if (ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.3)
-  
-  gp <- gp + geom_line(aes_string(y = "percent")) +
-    geom_ssd(data = data, aes_string(x = "x")) +
-    plot_coord_scale(data, xlab = xlab, ylab = ylab)
-  
-  if (!is.null(hc)) gp <- gp + geom_hcintersect(xintercept = pred$est[pred$percent == hc], yintercept = hc / 100, linetype = "dotted")
-  gp
+  .autoplot(object, type = type)
 }
 
-#' Autoplot
-#'
-#' @inheritParams autoplot.fitdist
+#' @describeIn autoplot.fitdist Autoplot fitdistcens
 #' @export
 #' @examples
 #' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 #' fluazinam_lnorm$censdata$left[5] <- NA
 #' ggplot2::autoplot(fluazinam_lnorm)
-autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
-                                 xlab = "Concentration", ylab = "Species Affected",
-                                 ...) {
-  chk_flag(ci)
-  if(!is.null(hc)) {
-    chk_number(hc)
-    chk_range(hc, c(1, 99))
-  }
-  chk_string(xlab)
-  chk_string(ylab)
+autoplot.fitdistcens <- function(object, type = "cdf", ...) {
   chk_unused(...)
-  
-  data <- object$censdata
-  
-  data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
-  data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
-  data$xmean <- rowMeans(data[c("left", "right")], na.rm = TRUE)
-  data$arrowleft <- data$right / 2
-  data$arrowright <- data$left * 2
-  data$y <- ssd_ecd(data$xmean)
-  
-  pred <- predict(object, nboot = if (ci) 1001 else 10)
-  
-  gp <- ggplot(pred, aes_string(x = "est"))
-  
-  if (ci) gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.3)
-  
-  arrow <- arrow(length = unit(0.1, "inches"))
-  
-  gp <- gp + geom_line(aes_string(y = "percent")) +
-    geom_segment(
-      data = data[data$xmin != data$xmax, ],
-      aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")
-    ) +
-    geom_segment(
-      data = data[is.na(data$left), ],
-      aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
-      arrow = arrow
-    ) +
-    geom_segment(
-      data = data[is.na(data$right), ],
-      aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
-      arrow = arrow
-    ) +
-    geom_point(data = data, aes_string(x = "xmin", y = "y")) +
-    geom_point(
-      data = data[data$xmin != data$xmax, ],
-      aes_string(x = "xmax", y = "y")
-    ) +
-    plot_coord_scale(data, xlab = xlab, ylab = ylab)
-  
-  if (!is.null(hc)) gp <- gp + geom_hcintersect(xintercept = pred$est[pred$percent == hc], yintercept = hc / 100, linetype = "dotted")
-  gp
+  .autoplot(object, type = type)
 }
 
-#' Autoplot
+#' @describeIn autoplot.fitdist Autoplot fitdists
 #'
-#' @inheritParams autoplot.fitdist
-#' @inheritParams predict.fitdists
 #' @export
 #' @examples
 #' \dontrun{
-#' ggplot2::autoplot(boron_dists)
+#' #' ggplot2::autoplot(boron_dists)
 #' }
-autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Affected", ic = "aicc", ...) {
-  chk_string(xlab)
-  chk_string(ylab)
-
-  pred <- predict(object, ic = ic, nboot = 10, average = FALSE)
-  pred$Distribution <- pred$dist
-  
-  data <- data.frame(x = object[[1]]$data)
-  
-  gp <- ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(
-      y = "percent/100", color = "Distribution",
-      linetype = "Distribution"
-    )) +
-    geom_ssd(data = data, aes_string(x = "x")) +
-    plot_coord_scale(data, xlab = xlab, ylab = ylab)
-  
-  gp
+autoplot.fitdists <- function(object, type = "cdf", ...) {
+  chk_unused(...)
+  .autoplot(object, type = type)
 }
 
-#' Autoplot
+#' @describeIn autoplot.fitdist Autoplot fitdistscens
 #'
-#' @inheritParams autoplot.fitdist
-#' @inheritParams predict.fitdists
 #' @export
-#' @examples
+#' @examples 
 #' \dontrun{
-#' ggplot2::autoplot(boron_dists)
+#' ggplot2::autoplot(fluazinam_dists)
 #' }
-autoplot.fitdistscens <- function(object, xlab = "Concentration", ylab = "Species Affected",
-                                  ic = "aic", ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "bic"))
-  
-  NextMethod(object = object, xlab = xlab, ylab = ylab, ic = ic, ...)
+autoplot.fitdistscens <- function(object, type = "cdf", ...) {
+  chk_unused(...)
+  .autoplot(object, type = type)
 }

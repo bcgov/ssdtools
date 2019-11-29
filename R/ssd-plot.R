@@ -30,7 +30,7 @@ plot_coord_scale <- function(data, xlab, ylab) {
 }
 
 #' SSD Plot
-#' @inheritParams autoplot.fitdist
+#' @inheritParams ssd_plot_cdf.fitdist
 #' @param data A data frame.
 #' @param pred A data frame of the predictions.
 #' @param left A string of the column in data with the concentrations.

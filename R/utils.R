@@ -141,11 +141,6 @@ comma_signif <- function(x, digits = 1, ...) {
   y
 }
 
-ggname <- function(prefix, grob) {
-  grob$name <- grid::grobName(grob, prefix)
-  grob
-}
-
 #' @export
 print.fitdists <- function(x, ...) {
   lapply(x, print)

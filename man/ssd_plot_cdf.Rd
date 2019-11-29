@@ -2,20 +2,81 @@
 % Please edit documentation in R/ssd-plot-cdf.R
 \name{ssd_plot_cdf}
 \alias{ssd_plot_cdf}
-\title{Cumulative Distribution Function Plot}
+\alias{ssd_plot_cdf.fitdist}
+\alias{ssd_plot_cdf.fitdistcens}
+\alias{ssd_plot_cdf.fitdists}
+\alias{ssd_plot_cdf.fitdistscens}
+\title{Plot Cumulative Distribution Function}
 \usage{
-ssd_plot_cdf(data, xlab = "Concentration", ylab = "Species Affected")
+ssd_plot_cdf(object, ...)
+
+\method{ssd_plot_cdf}{fitdist}(
+  object,
+  ci = FALSE,
+  hc = 5L,
+  xlab = "Concentration",
+  ylab = "Species Affected",
+  ...
+)
+
+\method{ssd_plot_cdf}{fitdistcens}(
+  object,
+  ci = FALSE,
+  hc = 5L,
+  xlab = "Concentration",
+  ylab = "Species Affected",
+  ...
+)
+
+\method{ssd_plot_cdf}{fitdists}(
+  object,
+  xlab = "Concentration",
+  ylab = "Species Affected",
+  ic = "aicc",
+  ...
+)
+
+\method{ssd_plot_cdf}{fitdistscens}(
+  object,
+  xlab = "Concentration",
+  ylab = "Species Affected",
+  ic = "aic",
+  ...
+)
 }
 \arguments{
-\item{data}{A data frame.}
+\item{object}{The object to plot.}
+
+\item{...}{Unused.}
+
+\item{ci}{A flag indicating whether to plot confidence intervals}
+
+\item{hc}{A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).}
 
 \item{xlab}{A string of the x-axis label.}
 
 \item{ylab}{A string of the x-axis label.}
+
+\item{ic}{A string of the information-theoretic criterion to use.}
 }
 \description{
-Plots the cdf for a dists object.
+Plots the cdf.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{fitdist}: Plot CDF fitdist
+
+\item \code{fitdistcens}: Plot CDF fitdistcens
+
+\item \code{fitdists}: Plot CDF fitdists
+
+\item \code{fitdistscens}: Plot CDF fitdistscens
+}}
+
 \examples{
+ssd_plot_cdf(boron_lnorm)
+fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
+fluazinam_lnorm$censdata$left[5] <- NA
+ssd_plot_cdf(fluazinam_lnorm)
 ssd_plot_cdf(boron_dists)
 }

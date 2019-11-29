@@ -47,26 +47,25 @@ test_that("cfplot", {
   expect_silent(ssd_plot_cf(boron_data))
 })
 
-test_that("autoplot", {
+test_that("ssd_plot_cdf", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())
 
-  expect_is(autoplot(boron_lnorm), "ggplot")
-  expect_is(autoplot(boron_lnorm, ci = TRUE), "ggplot")
-  expect_is(autoplot(boron_dists), "ggplot")
-  expect_is(autoplot(fluazinam_dists), "ggplot")
+  expect_is(ssd_plot_cdf(boron_lnorm), "ggplot")
+  expect_is(ssd_plot_cdf(boron_lnorm, ci = TRUE), "ggplot")
+  expect_is(ssd_plot_cdf(boron_dists), "ggplot")
+  expect_is(ssd_plot_cdf(fluazinam_dists), "ggplot")
   fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
   fluazinam_lnorm$censdata$left[5] <- NA
-  expect_is(autoplot(fluazinam_lnorm), "ggplot")
-  expect_is(autoplot(fluazinam_lnorm, ci = TRUE), "ggplot")
-
+  expect_is(ssd_plot_cdf(fluazinam_lnorm), "ggplot")
+  expect_is(ssd_plot_cdf(fluazinam_lnorm, ci = TRUE), "ggplot")
 })
 
-test_that("ssd_plot_cdf", {
-  expect_is(ssd_plot_cdf(boron_lnorm), "ggplot")
-  expect_is(ssd_plot_cdf(boron_dists), "ggplot")
-  expect_is(ssd_plot_cdf(fluazinam_lnorm), "ggplot")
-  expect_is(ssd_plot_cdf(fluazinam_dists), "ggplot")
+test_that("autoplot", {
+  expect_is(autoplot(boron_lnorm), "ggplot")
+  expect_is(autoplot(boron_dists), "ggplot")
+  expect_is(autoplot(fluazinam_lnorm), "ggplot")
+  expect_is(autoplot(fluazinam_dists), "ggplot")
 })
 
 test_that("ssd_plot", {
