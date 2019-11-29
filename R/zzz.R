@@ -22,7 +22,6 @@
   register_s3_method("ggplot2", "autoplot", "fitdist")
   register_s3_method("ggplot2", "autoplot", "fitdists")
   register_s3_method("ggplot2", "autoplot", "fitdistcens")
-  register_s3_method("ggplot2", "autoplot", "fitdistscens")
   invisible()
 }
 

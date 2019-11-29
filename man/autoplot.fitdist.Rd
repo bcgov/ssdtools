@@ -2,23 +2,18 @@
 % Please edit documentation in R/autoplot.R
 \name{autoplot.fitdist}
 \alias{autoplot.fitdist}
-\alias{autoplot.fitdistcens}
 \alias{autoplot.fitdists}
-\alias{autoplot.fitdistscens}
+\alias{autoplot.fitdistcens}
 \title{Autoplot fitdist}
 \usage{
-\method{autoplot}{fitdist}(object, type = "cdf", ...)
+\method{autoplot}{fitdist}(object, ...)
 
-\method{autoplot}{fitdistcens}(object, type = "cdf", ...)
+\method{autoplot}{fitdists}(object, ...)
 
-\method{autoplot}{fitdists}(object, type = "cdf", ...)
-
-\method{autoplot}{fitdistscens}(object, type = "cdf", ...)
+\method{autoplot}{fitdistcens}(object, ...)
 }
 \arguments{
 \item{object}{The object to plot.}
-
-\item{type}{A string specifying whether to plot the cdf or pdf.}
 
 \item{...}{Unused.}
 }
@@ -28,22 +23,15 @@ generic.
 }
 \section{Functions}{
 \itemize{
-\item \code{autoplot.fitdistcens}: Autoplot fitdistcens
-
 \item \code{autoplot.fitdists}: Autoplot fitdists
 
-\item \code{autoplot.fitdistscens}: Autoplot fitdistscens
+\item \code{autoplot.fitdistcens}: Autoplot fitdistcens
 }}
 
 \examples{
 ggplot2::autoplot(boron_lnorm)
+ggplot2::autoplot(boron_dists)
 fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 fluazinam_lnorm$censdata$left[5] <- NA
 ggplot2::autoplot(fluazinam_lnorm)
-\dontrun{
-#' ggplot2::autoplot(boron_dists)
-}
-\dontrun{
-ggplot2::autoplot(fluazinam_dists)
-}
 }

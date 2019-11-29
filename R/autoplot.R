@@ -12,29 +12,29 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.autoplot <- function(object, type = "cdf") {
-  chk_string(type)
-  chk_subset(type, c("cdf", "pdf"))
-
-  if(type == "cdf") return(ssd_plot_cdf(object))
-#  ssd_plot_pdf(object)
-  NULL
-}
-
 #' Autoplot fitdist
 #' 
 #' Plots the cumulative distribution function (cdf) using the ggplot2
 #' generic.
 #'
 #' @param object The object to plot.
-#' @param type A string specifying whether to plot the cdf or pdf.
 #' @param ... Unused.
 #' @export
 #' @examples
 #' ggplot2::autoplot(boron_lnorm)
-autoplot.fitdist <- function(object, type = "cdf", ...) {
+autoplot.fitdist <- function(object, ...) {
   chk_unused(...)
-  .autoplot(object, type = type)
+  ssd_plot_cdf(object)
+}
+
+#' @describeIn autoplot.fitdist Autoplot fitdists
+#'
+#' @export
+#' @examples
+#' ggplot2::autoplot(boron_dists)
+autoplot.fitdists <- function(object, ...) {
+  chk_unused(...)
+  ssd_plot_cdf(object)
 }
 
 #' @describeIn autoplot.fitdist Autoplot fitdistcens
@@ -43,19 +43,7 @@ autoplot.fitdist <- function(object, type = "cdf", ...) {
 #' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 #' fluazinam_lnorm$censdata$left[5] <- NA
 #' ggplot2::autoplot(fluazinam_lnorm)
-autoplot.fitdistcens <- function(object, type = "cdf", ...) {
+autoplot.fitdistcens <- function(object, ...) {
   chk_unused(...)
-  .autoplot(object, type = type)
-}
-
-#' @describeIn autoplot.fitdist Autoplot fitdists
-#'
-#' @export
-#' @examples
-#' \dontrun{
-#' #' ggplot2::autoplot(boron_dists)
-#' }
-autoplot.fitdists <- function(object, type = "cdf", ...) {
-  chk_unused(...)
-  .autoplot(object, type = type)
+  ssd_plot_cdf(object)
 }
