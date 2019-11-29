@@ -1,11 +1,11 @@
 - Added `ssd_exposure()` to calculate proportion exposed based on distribution of concentrations.
-- Added `ssd_pp()` to calculate percent species protected at specific concentrations.
+- Added `ssd_hp()` to calculate hazard percent at specific concentrations.
 - Added `ssd_plot_cdf()` to plot cumulative distribution function.
 - Deprecated `ssd_cfplot()` for `ssd_plot_cf()`.
 - Optimized `predict()` and added parallel argument.
 - Fix llog distribution with small concentrations.
 - Ensure concentrations below 1 have 1 significant figure in plots
-- Default ssd_fit_dists distributions now ordered alphabetically
+- Default `ssd_fit_dists()` distributions now ordered alphabetically
 
 # ssdtools 0.0.3
 

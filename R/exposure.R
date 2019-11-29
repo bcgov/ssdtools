@@ -43,5 +43,5 @@
 #' ssd_exposure(boron_lnorm, meanlog = 1, sdlog = 1)
 ssd_exposure <- function(x, meanlog = 0, sdlog = 1, nboot = 1000) {
   conc <- rlnorm(nboot, meanlog = meanlog, sdlog = sdlog)
-  mean(ssd_pp(x, conc)$percent) / 100
+  mean(ssd_hp(x, conc)$percent) / 100
 }
