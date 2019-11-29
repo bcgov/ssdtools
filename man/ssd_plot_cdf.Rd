@@ -3,20 +3,17 @@
 \name{ssd_plot_cdf}
 \alias{ssd_plot_cdf}
 \alias{ssd_plot_cdf.fitdist}
-\alias{ssd_plot_cdf.fitdistcens}
 \alias{ssd_plot_cdf.fitdists}
-\alias{ssd_plot_cdf.fitdistscens}
+\alias{ssd_plot_cdf.fitdistcens}
 \title{Plot Cumulative Distribution Function}
 \usage{
 ssd_plot_cdf(x, ...)
 
 \method{ssd_plot_cdf}{fitdist}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 
-\method{ssd_plot_cdf}{fitdistcens}(x, xlab = "Concentration", ylab = "Species Affected", ...)
-
 \method{ssd_plot_cdf}{fitdists}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 
-\method{ssd_plot_cdf}{fitdistscens}(x, xlab = "Concentration", ylab = "Species Affected", ...)
+\method{ssd_plot_cdf}{fitdistcens}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 }
 \arguments{
 \item{x}{The object to plot.}
@@ -34,17 +31,15 @@ Plots the cdf.
 \itemize{
 \item \code{fitdist}: Plot CDF fitdist
 
-\item \code{fitdistcens}: Plot CDF fitdistcens
-
 \item \code{fitdists}: Plot CDF fitdists
 
-\item \code{fitdistscens}: Plot CDF fitdistscens
+\item \code{fitdistcens}: Plot CDF fitdistcens
 }}
 
 \examples{
 ssd_plot_cdf(boron_lnorm)
+ssd_plot_cdf(boron_dists)
 fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 fluazinam_lnorm$censdata$left[5] <- NA
 ssd_plot_cdf(fluazinam_lnorm)
-ssd_plot_cdf(boron_dists)
 }

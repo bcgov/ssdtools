@@ -62,6 +62,30 @@ ssd_plot_cdf.fitdist <- function(x,
   gp
 }
 
+#' @describeIn ssd_plot_cdf Plot CDF fitdists
+#' @export
+#' @examples
+#' ssd_plot_cdf(boron_dists)
+ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
+  chk_string(xlab)
+  chk_string(ylab)
+  
+  pred <- predict(x, nboot = 10, average = FALSE)
+  pred$Distribution <- pred$dist
+  
+  data <- data.frame(x = x[[1]]$data)
+  
+  gp <- ggplot(pred, aes_string(x = "est")) +
+    geom_line(aes_string(
+      y = "percent/100", color = "Distribution",
+      linetype = "Distribution"
+    )) +
+    geom_ssd(data = data, aes_string(x = "x")) +
+    plot_coord_scale(data, xlab = xlab, ylab = ylab)
+  
+  gp
+}
+
 #' @describeIn ssd_plot_cdf Plot CDF fitdistcens
 #' @export
 #' @examples
@@ -111,35 +135,4 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
     ) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
   gp
-}
-
-#' @describeIn ssd_plot_cdf Plot CDF fitdists
-#' @export
-#' @examples
-#' ssd_plot_cdf(boron_dists)
-ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
-  chk_string(xlab)
-  chk_string(ylab)
-  
-  pred <- predict(x, nboot = 10, average = FALSE)
-  pred$Distribution <- pred$dist
-  
-  data <- data.frame(x = x[[1]]$data)
-  
-  gp <- ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(
-      y = "percent/100", color = "Distribution",
-      linetype = "Distribution"
-    )) +
-    geom_ssd(data = data, aes_string(x = "x")) +
-    plot_coord_scale(data, xlab = xlab, ylab = ylab)
-  
-  gp
-}
-
-#' @describeIn ssd_plot_cdf Plot CDF fitdistscens
-#' @export
-ssd_plot_cdf.fitdistscens <- function(x, xlab = "Concentration", ylab = "Species Affected",
-                                     ...) {
-  NextMethod(x = x, xlab = xlab, ylab = ylab, ...)
 }
