@@ -12,33 +12,23 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Comma and Significance Formatter
+#' Number of Observations
 #'
-#' @inheritParams scales::comma
-#' @inheritParams base::signif
-#'
-#' @return A function that returns a character vector.
-#' @seealso \code{\link[scales]{comma}}
+#' @param object The object.
+#' @param ... Unused.
 #' @export
-#'
 #' @examples
-#' comma_signif(1199)
-comma_signif <- function(x, digits = 1, ...) {
-  x <- signif(x, digits = digits)
-  y <- as.character(x)
-  bol <- !is.na(x) & as.numeric(x) >= 1
-  y[bol] <- scales::comma(x[bol], ...)
-  y
-}
+#' stats::nobs(boron_lnorm)
+nobs.fitdist <- function(object, ...) object$n
 
-#' Empirical Cumulative Density
+#' Number of Observations
 #'
-#' @inheritParams base::rank
-#' @return A numeric vector of the empirical cumulative density.
+#' @param object The object.
+#' @param ... Unused.
 #' @export
-#'
 #' @examples
-#' ssd_ecd(1:10)
-ssd_ecd <- function(x, ties.method = "first") {
-  (rank(x, ties.method = ties.method) - 0.5) / length(x)
-}
+#' stats::nobs(boron_lnorm)
+nobs.fitdistcens <- function(object, ...) nrow(object$censdata)
+
+#' @export
+nobs.fitdists <- function(object, ...) nobs(object[[1]])
