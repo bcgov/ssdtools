@@ -24,6 +24,7 @@ A number of the proportion exposed.
 Calculates average proportion exposed based on log-normal distribution of concentrations.
 }
 \examples{
+set.seed(10)
 ssd_exposure(boron_lnorm)
 ssd_exposure(boron_lnorm, meanlog = 1)
 ssd_exposure(boron_lnorm, meanlog = 1, sdlog = 1)

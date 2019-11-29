@@ -56,8 +56,7 @@ ssd_hp <- function(x, ...) {
   ic$weight <- exp(-ic$delta / 2) / sum(exp(-ic$delta / 2))
   mat <- ps[,3:ncol(ps),drop = FALSE]
   ps$percent <- apply(mat, 1, weighted.mean, w = ic$weight)
-  
-  ps
+  ps[c("conc", "percent")]
 }
 
 #' @describeIn ssd_hp Percent Protected fitdist
