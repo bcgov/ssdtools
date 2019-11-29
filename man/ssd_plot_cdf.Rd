@@ -8,10 +8,10 @@
 \alias{ssd_plot_cdf.fitdistscens}
 \title{Plot Cumulative Distribution Function}
 \usage{
-ssd_plot_cdf(object, ...)
+ssd_plot_cdf(x, ...)
 
 \method{ssd_plot_cdf}{fitdist}(
-  object,
+  x,
   ci = FALSE,
   hc = 5L,
   xlab = "Concentration",
@@ -20,7 +20,7 @@ ssd_plot_cdf(object, ...)
 )
 
 \method{ssd_plot_cdf}{fitdistcens}(
-  object,
+  x,
   ci = FALSE,
   hc = 5L,
   xlab = "Concentration",
@@ -29,7 +29,7 @@ ssd_plot_cdf(object, ...)
 )
 
 \method{ssd_plot_cdf}{fitdists}(
-  object,
+  x,
   xlab = "Concentration",
   ylab = "Species Affected",
   ic = "aicc",
@@ -37,7 +37,7 @@ ssd_plot_cdf(object, ...)
 )
 
 \method{ssd_plot_cdf}{fitdistscens}(
-  object,
+  x,
   xlab = "Concentration",
   ylab = "Species Affected",
   ic = "aic",
@@ -45,7 +45,7 @@ ssd_plot_cdf(object, ...)
 )
 }
 \arguments{
-\item{object}{The object to plot.}
+\item{x}{The object to plot.}
 
 \item{...}{Unused.}
 

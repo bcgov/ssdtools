@@ -30,7 +30,7 @@
 #' 
 #' Plots the cdf.
 #'
-#' @param object The object to plot.
+#' @param x The object to plot.
 #' @param ci A flag indicating whether to plot confidence intervals
 #' @param hc A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).
 #' @param xlab A string of the x-axis label.
@@ -38,7 +38,7 @@
 #' @param ic A string of the information-theoretic criterion to use.
 #' @param ... Unused.
 #' @export
-ssd_plot_cdf <- function(object, ...) {
+ssd_plot_cdf <- function(x, ...) {
   UseMethod("ssd_plot_cdf")
 }
 
@@ -46,7 +46,7 @@ ssd_plot_cdf <- function(object, ...) {
 #' @export
 #' @examples
 #' ssd_plot_cdf(boron_lnorm)
-ssd_plot_cdf.fitdist <- function(object, ci = FALSE, hc = 5L,
+ssd_plot_cdf.fitdist <- function(x, ci = FALSE, hc = 5L,
                              xlab = "Concentration", ylab = "Species Affected",
                              ...) {
   chk_flag(ci)
@@ -58,9 +58,9 @@ ssd_plot_cdf.fitdist <- function(object, ci = FALSE, hc = 5L,
   chk_string(ylab)
   chk_unused(...)
   
-  data <- data.frame(x = object$data)
+  data <- data.frame(x = x$data)
   
-  pred <- predict(object, nboot = if (ci) 1001 else 10)
+  pred <- predict(x, nboot = if (ci) 1001 else 10)
   
   gp <- ggplot(pred, aes_string(x = "est"))
   
@@ -80,7 +80,7 @@ ssd_plot_cdf.fitdist <- function(object, ci = FALSE, hc = 5L,
 #' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 #' fluazinam_lnorm$censdata$left[5] <- NA
 #' ssd_plot_cdf(fluazinam_lnorm)
-ssd_plot_cdf.fitdistcens <- function(object, ci = FALSE, hc = 5L,
+ssd_plot_cdf.fitdistcens <- function(x, ci = FALSE, hc = 5L,
                                  xlab = "Concentration", ylab = "Species Affected",
                                  ...) {
   chk_flag(ci)
@@ -92,7 +92,7 @@ ssd_plot_cdf.fitdistcens <- function(object, ci = FALSE, hc = 5L,
   chk_string(ylab)
   chk_unused(...)
   
-  data <- object$censdata
+  data <- x$censdata
   
   data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
   data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
@@ -101,7 +101,7 @@ ssd_plot_cdf.fitdistcens <- function(object, ci = FALSE, hc = 5L,
   data$arrowright <- data$left * 2
   data$y <- ssd_ecd(data$xmean)
   
-  pred <- predict(object, nboot = if (ci) 1001 else 10)
+  pred <- predict(x, nboot = if (ci) 1001 else 10)
   
   gp <- ggplot(pred, aes_string(x = "est"))
   
@@ -139,14 +139,14 @@ ssd_plot_cdf.fitdistcens <- function(object, ci = FALSE, hc = 5L,
 #' @export
 #' @examples
 #' ssd_plot_cdf(boron_dists)
-ssd_plot_cdf.fitdists <- function(object, xlab = "Concentration", ylab = "Species Affected", ic = "aicc", ...) {
+ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ic = "aicc", ...) {
   chk_string(xlab)
   chk_string(ylab)
 
-  pred <- predict(object, ic = ic, nboot = 10, average = FALSE)
+  pred <- predict(x, ic = ic, nboot = 10, average = FALSE)
   pred$Distribution <- pred$dist
   
-  data <- data.frame(x = object[[1]]$data)
+  data <- data.frame(x = x[[1]]$data)
   
   gp <- ggplot(pred, aes_string(x = "est")) +
     geom_line(aes_string(
@@ -161,10 +161,10 @@ ssd_plot_cdf.fitdists <- function(object, xlab = "Concentration", ylab = "Specie
 
 #' @describeIn ssd_plot_cdf Plot CDF fitdistscens
 #' @export
-ssd_plot_cdf.fitdistscens <- function(object, xlab = "Concentration", ylab = "Species Affected",
+ssd_plot_cdf.fitdistscens <- function(x, xlab = "Concentration", ylab = "Species Affected",
                                   ic = "aic", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "bic"))
   
-  NextMethod(object = object, xlab = xlab, ylab = ylab, ic = ic, ...)
+  NextMethod(x = x, xlab = xlab, ylab = ylab, ic = ic, ...)
 }
