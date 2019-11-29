@@ -12,14 +12,22 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-plot_fitdist <- function(x, breaks = "default", ...) {
-  graphics::par(oma = c(0, 0, 2, 0))
-  graphics::plot(x, breaks = breaks, ...)
-  graphics::title(paste("Distribution:", x$distname), outer = TRUE)
-}
-
+#' Cullen and Frey Plot
+#'
+#' Plots a Cullen and Frey graph of the skewness and kurtosis
+#' for non-censored data.
+#'
+#' @inheritParams ssd_fit_dists
+#' @seealso \code{\link[fitdistrplus]{descdist}}
 #' @export
-plot.fitdists <- function(x, breaks = "default", ...) {
-  lapply(x, plot_fitdist, breaks = breaks, ...)
+#'
+#' @examples
+#' ssd_plot_cf(boron_data)
+ssd_plot_cf <- function(data, left = "Conc") {
+  chk_s3_class(data, "data.frame")
+  chk_string(left)
+  chk_superset(colnames(data), left)
+
+  fitdistrplus::descdist(data[[left]], boot = 100L)
   invisible()
 }

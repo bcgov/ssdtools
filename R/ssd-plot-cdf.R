@@ -12,14 +12,16 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-plot_fitdist <- function(x, breaks = "default", ...) {
-  graphics::par(oma = c(0, 0, 2, 0))
-  graphics::plot(x, breaks = breaks, ...)
-  graphics::title(paste("Distribution:", x$distname), outer = TRUE)
-}
-
+#' Cumulative Distribution Function Plot
+#' 
+#' Plots the cdf for a dists object.
+#'
+#' @inheritParams ssd_fit_dists
+#' @inheritParams autoplot.fitdist
 #' @export
-plot.fitdists <- function(x, breaks = "default", ...) {
-  lapply(x, plot_fitdist, breaks = breaks, ...)
-  invisible()
+#'
+#' @examples
+#' ssd_plot_cdf(boron_dists)
+ssd_plot_cdf <- function(data, xlab = "Concentration", ylab = "Species Affected") {
+  autoplot(data, hc = NULL, xlab = xlab, ylab = ylab)
 }
