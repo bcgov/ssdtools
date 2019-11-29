@@ -3,11 +3,14 @@
 \name{ssd_pp}
 \alias{ssd_pp}
 \alias{ssd_pp.fitdist}
+\alias{ssd_pp.fitdists}
 \title{Percent Protected}
 \usage{
 ssd_pp(x, ...)
 
 \method{ssd_pp}{fitdist}(x, conc, ...)
+
+\method{ssd_pp}{fitdists}(x, conc, ic = "aicc", ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -15,18 +18,23 @@ ssd_pp(x, ...)
 \item{...}{Unused.}
 
 \item{conc}{A numeric vector of the concentrations.}
+
+\item{ic}{A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.}
 }
 \value{
-A numeric vector of percent values between 0 and 100.
+A data frame of the conc and percent.
 }
 \description{
 Gets percent species protected at specified concentrations.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fitdist}: Percent Protected ssd_pp
+\item \code{fitdist}: Percent Protected fitdist
+
+\item \code{fitdists}: Percent Protected fitdists
 }}
 
 \examples{
 ssd_pp(boron_lnorm, c(0, 1, 30, Inf))
+ssd_pp(boron_dists, c(0, 1, 30, Inf))
 }

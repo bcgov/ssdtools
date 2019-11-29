@@ -18,14 +18,15 @@
 #'
 #' @param x The object.
 #' @param conc A numeric vector of the concentrations.
+#' @inheritParams predict.fitdists
 #' @param ... Unused.
-#' @return A numeric vector of percent values between 0 and 100.
+#' @return A data frame of the conc and percent.
 #' @export
 ssd_pp <- function(x, ...) {
   UseMethod("ssd_pp")
 }
 
-#' @describeIn ssd_pp Percent Protected ssd_pp
+#' @describeIn ssd_pp Percent Protected fitdist
 #' @export
 #' @examples
 #' ssd_pp(boron_lnorm, c(0, 1, 30, Inf))
@@ -39,4 +40,33 @@ ssd_pp.fitdist <- function(x, conc, ...) {
   
   p <- do.call(what, args)
   p * 100
+  as_tibble(data.frame(conc = conc, percent = p))
+}
+
+#' @describeIn ssd_pp Percent Protected fitdists
+#' @export
+#' @examples
+#' ssd_pp(boron_dists, c(0, 1, 30, Inf))
+ssd_pp.fitdists <- function(x, conc, ic = "aicc", ...) {
+  chk_vector(conc)
+  chk_numeric(conc)
+  chk_unused(...)
+  
+  if(!length(x)) { 
+    return(as_tibble(data.frame(conc = conc, 
+                                percent = rep(NA_real_, length(conc)))))
+  }
+  
+  ps <- lapply(x, ssd_pp, conc = conc)
+  ps <- lapply(ps, function(x) x$percent)
+  ps <- c(list(conc = conc, percent = NA_real_), ps)
+  ps <- as.data.frame(ps)
+  
+  ic <- ssd_gof(x)[c("dist", ic)]
+  ic$delta <- ic[[2]] - min(ic[[2]])
+  ic$weight <- exp(-ic$delta / 2) / sum(exp(-ic$delta / 2))
+  mat <- ps[,3:ncol(ps),drop = FALSE]
+  ps$percent <- apply(mat, 1, weighted.mean, w = ic$weight)
+  
+  ps
 }
