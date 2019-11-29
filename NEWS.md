@@ -1,4 +1,5 @@
-- Deprecate `ssd_cfplot()` for `ssd_plot_cf()`.
+- Added `ssd_plot_cdf()` to plot cumulative distribution function.
+- Deprecated `ssd_cfplot()` for `ssd_plot_cf()`.
 - Optimized `predict()` and added parallel argument.
 - Fix llog distribution with small concentrations.
 - Ensure concentrations below 1 have 1 significant figure in plots

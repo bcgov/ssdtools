@@ -18,9 +18,9 @@ quantile_data <- function(boot, percent, level) {
   est <- t(as.matrix(quantile$quantiles))
   se <- as.matrix(quantile$bootquant)
   se <- apply(as.matrix(quantile$bootquant), 2, sd)
-
-  data <- data.frame(percent = percent, est = est[[1]], se = se, 
-                           lcl = ci[[1]], ucl = ci[[2]])
+  
+  data <- data.frame(percent = percent, est = est[,1], se = se, 
+                           lcl = ci[,1], ucl = ci[,2])
   as_tibble(data)
 }
 

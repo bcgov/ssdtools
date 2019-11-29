@@ -62,6 +62,13 @@ test_that("autoplot", {
 
 })
 
+test_that("ssd_plot_cdf", {
+  expect_is(ssd_plot_cdf(boron_lnorm), "ggplot")
+  expect_is(ssd_plot_cdf(boron_dists), "ggplot")
+  expect_is(ssd_plot_cdf(fluazinam_lnorm), "ggplot")
+  expect_is(ssd_plot_cdf(fluazinam_dists), "ggplot")
+})
+
 test_that("ssd_plot", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())
