@@ -34,7 +34,7 @@ ssd_hp <- function(x, ...) {
   
   p <- do.call(what, args)
   p <- p * 100
-  as_tibble(data.frame(conc = conc, percent = p))
+  as_tibble(data.frame(conc = conc, est = p))
 }
 
 .ssd_hp_fitdists <- function(x, conc, ic) {
@@ -43,20 +43,20 @@ ssd_hp <- function(x, ...) {
 
   if(!length(x)) { 
     return(as_tibble(data.frame(conc = conc, 
-                                percent = rep(NA_real_, length(conc)))))
+                                est = rep(NA_real_, length(conc)))))
   }
   
   ps <- lapply(x, ssd_hp, conc = conc)
-  ps <- lapply(ps, function(x) x$percent)
-  ps <- c(list(conc = conc, percent = NA_real_), ps)
+  ps <- lapply(ps, function(x) x$est)
+  ps <- c(list(conc = conc, est = NA_real_), ps)
   ps <- as.data.frame(ps)
   
   ic <- ssd_gof(x)[c("dist", ic)]
   ic$delta <- ic[[2]] - min(ic[[2]])
   ic$weight <- exp(-ic$delta / 2) / sum(exp(-ic$delta / 2))
   mat <- ps[,3:ncol(ps),drop = FALSE]
-  ps$percent <- apply(mat, 1, weighted.mean, w = ic$weight)
-  ps[c("conc", "percent")]
+  ps$est <- apply(mat, 1, weighted.mean, w = ic$weight)
+  ps[c("conc", "est")]
 }
 
 #' @describeIn ssd_hp Percent Protected fitdist
