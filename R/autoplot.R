@@ -59,15 +59,3 @@ autoplot.fitdists <- function(object, type = "cdf", ...) {
   chk_unused(...)
   .autoplot(object, type = type)
 }
-
-#' @describeIn autoplot.fitdist Autoplot fitdistscens
-#'
-#' @export
-#' @examples 
-#' \dontrun{
-#' ggplot2::autoplot(fluazinam_dists)
-#' }
-autoplot.fitdistscens <- function(object, type = "cdf", ...) {
-  chk_unused(...)
-  .autoplot(object, type = type)
-}
