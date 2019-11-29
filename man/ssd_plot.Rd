@@ -42,11 +42,11 @@ ssd_plot(
 
 \item{ylab}{A string of the x-axis label.}
 
-\item{ci}{A flag indicating whether to plot confidence intervals}
+\item{ci}{A flag specifying whether to plot confidence intervals.}
 
 \item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
 
-\item{hc}{A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).}
+\item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 
 \item{shift_x}{The value to multiply the label x values by.}
 }

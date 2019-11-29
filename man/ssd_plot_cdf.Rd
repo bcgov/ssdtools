@@ -10,54 +10,22 @@
 \usage{
 ssd_plot_cdf(x, ...)
 
-\method{ssd_plot_cdf}{fitdist}(
-  x,
-  ci = FALSE,
-  hc = 5L,
-  xlab = "Concentration",
-  ylab = "Species Affected",
-  ...
-)
+\method{ssd_plot_cdf}{fitdist}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 
-\method{ssd_plot_cdf}{fitdistcens}(
-  x,
-  ci = FALSE,
-  hc = 5L,
-  xlab = "Concentration",
-  ylab = "Species Affected",
-  ...
-)
+\method{ssd_plot_cdf}{fitdistcens}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 
-\method{ssd_plot_cdf}{fitdists}(
-  x,
-  xlab = "Concentration",
-  ylab = "Species Affected",
-  ic = "aicc",
-  ...
-)
+\method{ssd_plot_cdf}{fitdists}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 
-\method{ssd_plot_cdf}{fitdistscens}(
-  x,
-  xlab = "Concentration",
-  ylab = "Species Affected",
-  ic = "aic",
-  ...
-)
+\method{ssd_plot_cdf}{fitdistscens}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 }
 \arguments{
 \item{x}{The object to plot.}
 
 \item{...}{Unused.}
 
-\item{ci}{A flag indicating whether to plot confidence intervals}
-
-\item{hc}{A count between 1 and 99 indicating the percent hazard concentration to plot (or NULL).}
-
 \item{xlab}{A string of the x-axis label.}
 
 \item{ylab}{A string of the x-axis label.}
-
-\item{ic}{A string of the information-theoretic criterion to use.}
 }
 \description{
 Plots the cdf.
