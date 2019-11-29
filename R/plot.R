@@ -282,7 +282,10 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
                              xlab = "Concentration", ylab = "Species Affected",
                              ...) {
   chk_flag(ci)
-  checkor(check_null(hc), check_scalar(hc, c(1L, 99L)))
+  if(!is.null(hc)) {
+    chk_number(hc)
+    chk_range(hc, c(1, 99))
+  }
   chk_string(xlab)
   chk_string(ylab)
   chk_unused(...)
@@ -315,7 +318,10 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
                                  xlab = "Concentration", ylab = "Species Affected",
                                  ...) {
   chk_flag(ci)
-  checkor(check_null(hc), check_scalar(hc, c(1L, 99L)))
+  if(!is.null(hc)) {
+    chk_number(hc)
+    chk_range(hc, c(1, 99))
+  }
   chk_string(xlab)
   chk_string(ylab)
   chk_unused(...)
@@ -442,12 +448,17 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   
   chk_string(left)
   chk_string(right)
-  checkor(check_string(label), check_null(label))
-  checkor(check_string(shape), check_null(shape))
+  if(!is.null(label)) chk_string(label)
+  if(!is.null(shape)) chk_string(shape)
   chk_flag(ci)
   chk_flag(ribbon)
-  checkor(check_null(hc), check_vector(hc, pred$percent, only = TRUE, length = TRUE))
-  
+  if(!is.null(hc)) {
+    chk_vector(hc)
+    chk_numeric(hc)
+    chk_gt(length(hc))
+    chk_subset(hc, pred$percent)
+  }
+
   check_colnames(data, unique(c(left, right, label, shape)))
   
   gp <- ggplot(pred, aes_string(x = "est"))
