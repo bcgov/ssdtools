@@ -54,9 +54,10 @@ ssd_plot_cdf.fitdist <- function(x,
   
   pred <- predict(x, nboot = 10)
   
-  gp <- ggplot(pred, aes_string(x = "est"))
+  pred$percent <- pred$percent  / 100
   
-  gp <- gp + geom_line(aes_string(y = "percent")) +
+  gp <- ggplot(pred, aes_string(x = "est")) + 
+    geom_line(aes_string(y = "percent")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
   gp
@@ -108,6 +109,7 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
   data$y <- ssd_ecd(data$xmean)
   
   pred <- predict(x, nboot = 10)
+  pred$percent <- pred$percent / 100
   
   gp <- ggplot(pred, aes_string(x = "est"))
   
@@ -135,11 +137,4 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
     ) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
   gp
-}
-
-#' @describeIn ssd_plot_cdf Plot CDF fitdistscens
-#' @export
-ssd_plot_cdf.fitdistscens <- function(x, xlab = "Concentration", ylab = "Species Affected",
-                                     ...) {
-  NextMethod(x = x, xlab = xlab, ylab = ylab, ...)
 }

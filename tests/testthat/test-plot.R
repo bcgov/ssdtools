@@ -53,7 +53,6 @@ test_that("ssd_plot_cdf", {
 
   expect_is(ssd_plot_cdf(boron_lnorm), "ggplot")
   expect_is(ssd_plot_cdf(boron_dists), "ggplot")
-  expect_is(ssd_plot_cdf(fluazinam_dists), "ggplot")
   fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
   fluazinam_lnorm$censdata$left[5] <- NA
   expect_is(ssd_plot_cdf(fluazinam_lnorm), "ggplot")
@@ -66,7 +65,6 @@ test_that("autoplot", {
   expect_is(ggplot2::autoplot(boron_lnorm), "ggplot")
   expect_is(ggplot2::autoplot(boron_dists), "ggplot")
   expect_is(ggplot2::autoplot(fluazinam_lnorm), "ggplot")
-  expect_is(ggplot2::autoplot(fluazinam_dists), "ggplot")
 })
 
 test_that("ssd_plot", {

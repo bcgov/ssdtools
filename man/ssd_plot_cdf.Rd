@@ -5,7 +5,6 @@
 \alias{ssd_plot_cdf.fitdist}
 \alias{ssd_plot_cdf.fitdists}
 \alias{ssd_plot_cdf.fitdistcens}
-\alias{ssd_plot_cdf.fitdistscens}
 \title{Plot Cumulative Distribution Function}
 \usage{
 ssd_plot_cdf(x, ...)
@@ -15,8 +14,6 @@ ssd_plot_cdf(x, ...)
 \method{ssd_plot_cdf}{fitdists}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 
 \method{ssd_plot_cdf}{fitdistcens}(x, xlab = "Concentration", ylab = "Species Affected", ...)
-
-\method{ssd_plot_cdf}{fitdistscens}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 }
 \arguments{
 \item{x}{The object to plot.}
@@ -37,8 +34,6 @@ Plots the cdf.
 \item \code{fitdists}: Plot CDF fitdists
 
 \item \code{fitdistcens}: Plot CDF fitdistcens
-
-\item \code{fitdistscens}: Plot CDF fitdistscens
 }}
 
 \examples{
