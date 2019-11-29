@@ -48,7 +48,8 @@ predict.fitdist <- function(object, percent = 1:99,
   check_vector(percent, c(1L, 99L), length = TRUE, unique = TRUE)
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
-  
+  chk_unused(...)
+
   boot <- fitdistrplus::bootdist(object, niter = nboot, parallel = parallel,
                                  ncpus  = ncpus)
   quantile_data(boot, percent, level)
@@ -69,7 +70,8 @@ predict.fitdistcens <- function(object, percent = 1:99,
   check_vector(percent, c(1L, 99L), length = TRUE, unique = TRUE)
   nboot <- check_count(nboot, coerce = TRUE)
   check_probability(level)
-  
+  chk_unused(...)
+
   boot <- fitdistrplus::bootdistcens(object, niter = nboot, parallel = parallel,
                                      ncpus = ncpus)
   quantile_data(boot, percent, level)
@@ -94,6 +96,7 @@ predict.fitdists <- function(object, percent = 1:99,
                              nboot = 1000, ic = "aicc", average = TRUE, 
                              level = 0.95, parallel = "no", ncpus = 1L, ...) {
   check_scalar(ic, c("aic", "aicc", "bic"))
+  chk_unused(...)
   
   ic <- ssd_gof(object)[c("dist", ic)]
   

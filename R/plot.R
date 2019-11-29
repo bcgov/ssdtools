@@ -285,6 +285,7 @@ autoplot.fitdist <- function(object, ci = FALSE, hc = 5L,
   checkor(check_null(hc), check_scalar(hc, c(1L, 99L)))
   chk_string(xlab)
   chk_string(ylab)
+  chk_unused(...)
 
   data <- data.frame(x = object$data)
 
@@ -317,6 +318,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
   checkor(check_null(hc), check_scalar(hc, c(1L, 99L)))
   chk_string(xlab)
   chk_string(ylab)
+  chk_unused(...)
 
   data <- object$censdata
 
@@ -373,6 +375,7 @@ autoplot.fitdistcens <- function(object, ci = FALSE, hc = 5L,
 autoplot.fitdists <- function(object, xlab = "Concentration", ylab = "Species Affected", ic = "aicc", ...) {
   chk_string(xlab)
   chk_string(ylab)
+  chk_unused(...)
 
   pred <- predict(object, ic = ic, nboot = 10, average = FALSE)
   pred$Distribution <- pred$dist

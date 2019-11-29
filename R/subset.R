@@ -23,6 +23,8 @@
 subset.fitdists <- function(x, select = names(x), ...) {
   check_vector(select, "", unique = TRUE)
   check_names(x, select)
+  chk_unused(...)
+
   class <- class(x)
   x <- x[names(x) %in% select]
   class(x) <- class

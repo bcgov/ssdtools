@@ -53,6 +53,8 @@ ssd_gof <- function(x, ...) {
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdist <- function(x, ...) {
+  chk_unused(...)
+
   dist <- x$distname
   n <- nobs(x)
   k <- npars(x)
@@ -81,6 +83,8 @@ ssd_gof.fitdist <- function(x, ...) {
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdistcens <- function(x, ...) {
+  chk_unused(...)
+
   data <- data.frame(
     dist = x$distname, aic = x$aic, bic = x$bic,
     stringsAsFactors = FALSE
@@ -91,6 +95,8 @@ ssd_gof.fitdistcens <- function(x, ...) {
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 ssd_gof.fitdists <- function(x, ...) {
+  chk_unused(...)
+
   x <- lapply(x, ssd_gof)
   x$stringsAsFactors <- FALSE
   x <- do.call("rbind", x)
