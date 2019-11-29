@@ -31,7 +31,6 @@ Depends:
     R (>= 3.4.0)
 Imports:
     chk,
-    checkr,
     fitdistrplus,
     FAdist,
     ggplot2,
@@ -42,6 +41,7 @@ Imports:
     stats,
     VGAM
 Suggests:
+    checkr,
     covr,
     knitr,
     rmarkdown,

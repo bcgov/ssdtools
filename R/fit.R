@@ -77,13 +77,14 @@ remove_errors <- function(dist_fit, name, silent) {
 
 ssd_fit_dist <- function(
                          data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
-  check_data(data, nrow = c(6, .Machine$integer.max))
+  chk_s3_class(data, "data.frame")
+  chk_gte(nrow(data), 6)
   chk_string(left)
   chk_string(right)
 
   if(!is.null(weight)) chk_string(weight)
 
-  check_colnames(data, unique(c(left, right, weight)))
+  chk_superset(colnames(data), c(left, right, weight))
   chk_string(dist)
 
   if (left == right) {

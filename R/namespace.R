@@ -12,8 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import stats checkr ggplot2
-#' @importFrom chk chk_flag chk_string chk_unused chk_subset chk_whole_number chk_gt chk_unique chk_number chk_range chk_s3_class chk_vector chk_numeric chk_not_any_na chk_named chk_superset
+#' @import stats chk ggplot2
 #' @importFrom graphics plot
 #' @importFrom VGAM vglm
 NULL

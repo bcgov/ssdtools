@@ -434,15 +434,14 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
                      ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3) {
-  check_data(data)
-  check_data(pred,
-             values = list(
-               percent = 1:99,
-               est = 1,
-               lcl = 1,
-               ucl = 1
-             )
-  )
+  chk_s3_class(data, "data.frame")
+  chk_s3_class(pred, "data.frame")
+  chk_superset(colnames(pred), c("percent", "est", "lcl", "ucl"))
+  chk_numeric(pred$percent)
+  chk_range(pred$percent, c(1, 99))
+  chk_numeric(pred$est)
+  chk_numeric(pred$lcl)
+  chk_numeric(pred$ucl)
   
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
@@ -460,7 +459,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_subset(hc, pred$percent)
   }
 
-  check_colnames(data, unique(c(left, right, label, shape)))
+  chk_superset(colnames(data), c(left, right, label, shape))
   
   gp <- ggplot(pred, aes_string(x = "est"))
   
@@ -474,7 +473,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     }
   }
   if (!is.null(label)) {
-    check_colnames(data, label)
+    chk_superset(colnames(data), label)
     data <- data[order(data[[label]]), ]
   }
   gp <- gp + geom_line(aes_string(y = "percent/100"), color = if (ribbon) "black" else "red")
@@ -545,10 +544,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 #' @examples
 #' ssd_plot_cf(boron_data)
 ssd_plot_cf <- function(data, left = "Conc") {
-  check_data(data)
+  chk_s3_class(data, "data.frame")
   chk_string(left)
-  check_colnames(data, left)
-  
+  chk_superset(colnames(data), left)
+
   fitdistrplus::descdist(data[[left]], boot = 100L)
   invisible()
 }

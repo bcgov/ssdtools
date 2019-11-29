@@ -46,7 +46,7 @@ test_that("fit_dists", {
 })
 
 test_that("fit_dist", {
-  expect_error(ssd_fit_dist(boron_data[1:5, ]), "data must have at least 6 rows")
+  expect_error(ssd_fit_dist(boron_data[1:5, ]), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$", c("chk_error", "rlang_error", "error", "condition"))
   dist <- ssd_fit_dist(boron_data)
   expect_true(is.fitdist(dist))
   expect_identical(dist, boron_lnorm)
