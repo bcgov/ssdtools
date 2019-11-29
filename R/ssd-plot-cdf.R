@@ -136,3 +136,10 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
   gp
 }
+
+#' @describeIn ssd_plot_cdf Plot CDF fitdistscens
+#' @export
+ssd_plot_cdf.fitdistscens <- function(x, xlab = "Concentration", ylab = "Species Affected",
+                                     ...) {
+  NextMethod(x = x, xlab = xlab, ylab = ylab, ...)
+}
