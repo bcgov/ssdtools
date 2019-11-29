@@ -131,7 +131,9 @@ ssd_fit_dists <- function(
                           data, left = "Conc", right = left, weight = NULL,
                           dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
                           silent = FALSE) {
-  check_vector(dists, length = TRUE, unique = TRUE, named = FALSE)
+  chk_s3_class(dists, "character")
+  chk_unique(dists)
+  chk_gt(length(dists))
   chk_flag(silent)
 
   safe_fit_dist <- safely(ssd_fit_dist)

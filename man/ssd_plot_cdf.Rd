@@ -14,7 +14,7 @@ ssd_plot_cdf(data, xlab = "Concentration", ylab = "Species Affected")
 \item{ylab}{A string of the x-axis label.}
 }
 \description{
-Plots the cdf for a dists object using \code{\link{autoplot}}.
+Plots the cdf for a dists object.
 }
 \examples{
 ssd_plot_cdf(boron_dists)
