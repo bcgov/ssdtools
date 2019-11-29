@@ -42,19 +42,6 @@ ssd_hc.fitdist <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
 #' @export
 #' @examples
 #' \dontrun{
-#' ssd_hc(fluazinam_lnorm)
-#' }
-ssd_hc.fitdistcens <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
-  chk_unused(...)
-  chk_number(hc)
-  chk_range(hc, c(1, 99))
-  predict(x, percent = hc, nboot = nboot, level = level)
-}
-
-#' @describeIn ssd_hc Hazard Concentration
-#' @export
-#' @examples
-#' \dontrun{
 #' ssd_hc(boron_dists)
 #' }
 ssd_hc.fitdists <- function(x, hc = 5L, ic = "aicc", average = TRUE, nboot = 1000, level = 0.95, ...) {
@@ -62,6 +49,19 @@ ssd_hc.fitdists <- function(x, hc = 5L, ic = "aicc", average = TRUE, nboot = 100
   chk_number(hc)
   chk_range(hc, c(1, 99))
   predict(x, percent = hc, ic = ic, nboot = nboot, average = average, level = level)
+}
+
+#' @describeIn ssd_hc Hazard Concentration
+#' @export
+#' @examples
+#' \dontrun{
+#' ssd_hc(fluazinam_lnorm)
+#' }
+ssd_hc.fitdistcens <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
+  chk_unused(...)
+  chk_number(hc)
+  chk_range(hc, c(1, 99))
+  predict(x, percent = hc, nboot = nboot, level = level)
 }
 
 #' @describeIn ssd_hc  Hazard Concentration

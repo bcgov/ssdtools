@@ -3,16 +3,14 @@
 \name{ssd_hc}
 \alias{ssd_hc}
 \alias{ssd_hc.fitdist}
-\alias{ssd_hc.fitdistcens}
 \alias{ssd_hc.fitdists}
+\alias{ssd_hc.fitdistcens}
 \alias{ssd_hc.fitdistscens}
 \title{Hazard Concentration}
 \usage{
 ssd_hc(x, ...)
 
 \method{ssd_hc}{fitdist}(x, hc = 5L, nboot = 1000, level = 0.95, ...)
-
-\method{ssd_hc}{fitdistcens}(x, hc = 5L, nboot = 1000, level = 0.95, ...)
 
 \method{ssd_hc}{fitdists}(
   x,
@@ -23,6 +21,8 @@ ssd_hc(x, ...)
   level = 0.95,
   ...
 )
+
+\method{ssd_hc}{fitdistcens}(x, hc = 5L, nboot = 1000, level = 0.95, ...)
 
 \method{ssd_hc}{fitdistscens}(x, hc = 5L, ic = "aic", average = TRUE, nboot = 1000, level = 0.95, ...)
 }
@@ -52,9 +52,9 @@ at which by default 5\% of the species are affected.
 \itemize{
 \item \code{fitdist}: Hazard Concentration
 
-\item \code{fitdistcens}: Hazard Concentration
-
 \item \code{fitdists}: Hazard Concentration
+
+\item \code{fitdistcens}: Hazard Concentration
 
 \item \code{fitdistscens}: Hazard Concentration
 }}
@@ -62,10 +62,10 @@ at which by default 5\% of the species are affected.
 \examples{
 ssd_hc(boron_lnorm)
 \dontrun{
-ssd_hc(fluazinam_lnorm)
+ssd_hc(boron_dists)
 }
 \dontrun{
-ssd_hc(boron_dists)
+ssd_hc(fluazinam_lnorm)
 }
 \dontrun{
 ssd_hc(fluazinam_dists)
