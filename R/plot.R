@@ -444,7 +444,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
              )
   )
   
-  check_vector(shift_x, values = c(1, 1000))
+  chk_number(shift_x)
+  chk_range(shift_x, c(1, 1000))
   
   chk_string(left)
   chk_string(right)

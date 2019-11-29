@@ -21,8 +21,12 @@
 #' @examples
 #' subset(boron_dists, c("gamma", "weibull"))
 subset.fitdists <- function(x, select = names(x), ...) {
-  check_vector(select, "", unique = TRUE)
-  check_names(x, select)
+  chk_s3_class(select, "character")
+  chk_vector(select)
+  chk_unique(select)
+  chk_named(x)
+  chk_superset(names(x), select)
+  
   chk_unused(...)
 
   class <- class(x)

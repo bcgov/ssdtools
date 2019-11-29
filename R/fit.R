@@ -81,7 +81,7 @@ ssd_fit_dist <- function(
   chk_string(left)
   chk_string(right)
 
-  checkor(check_null(weight), check_string(weight))
+  if(!is.null(weight)) chk_string(weight)
 
   check_colnames(data, unique(c(left, right, weight)))
   chk_string(dist)

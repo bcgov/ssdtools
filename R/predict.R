@@ -20,8 +20,14 @@ quantile_data <- function(boot, percent, level) {
   se <- apply(as.matrix(quantile$bootquant), 2, sd)
   
   data <- data.frame(percent = percent, est = est[,1], se = se, 
-                           lcl = ci[,1], ucl = ci[,2])
+                     lcl = ci[,1], ucl = ci[,2])
   as_tibble(data)
+}
+
+empty_quantile_data <- function(percent) {
+  stopifnot(!length(percent))
+  as_tibble(data.frame(percent = percent, est = numeric(0), se = numeric(0), 
+                       lcl = numeric(0), ucl = numeric(0)))
 }
 
 model_average <- function(x) {
@@ -45,12 +51,18 @@ model_average <- function(x) {
 predict.fitdist <- function(object, percent = 1:99,
                             nboot = 1000, level = 0.95, 
                             parallel = "no", ncpus = 1L, ...) {
-  check_vector(percent, c(1L, 99L), length = TRUE, unique = TRUE)
+  chk_numeric(percent)
+  chk_range(percent, c(1, 99))
+  chk_not_any_na(percent)
+  chk_unique(percent)
   chk_whole_number(nboot)
+  chk_gt(nboot)
   chk_number(level)
   chk_range(level)
   chk_unused(...)
-
+  
+  if(!length(percent)) return(empty_quantile_data(percent))
+  
   boot <- fitdistrplus::bootdist(object, niter = nboot, parallel = parallel,
                                  ncpus  = ncpus)
   quantile_data(boot, percent, level)
@@ -68,12 +80,18 @@ predict.fitdist <- function(object, percent = 1:99,
 predict.fitdistcens <- function(object, percent = 1:99,
                                 nboot = 1000, level = 0.95, 
                                 parallel = "no", ncpus = 1L, ...) {
-  check_vector(percent, c(1L, 99L), length = TRUE, unique = TRUE)
+  chk_numeric(percent)
+  chk_range(percent, c(1, 99))
+  chk_not_any_na(percent)
+  chk_unique(percent)
+  
   chk_whole_number(nboot)
   chk_number(level)
   chk_range(level)
   chk_unused(...)
-
+  
+  if(!length(percent)) return(empty_quantile_data(percent))
+  
   boot <- fitdistrplus::bootdistcens(object, niter = nboot, parallel = parallel,
                                      ncpus = ncpus)
   quantile_data(boot, percent, level)
