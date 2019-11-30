@@ -63,8 +63,7 @@ predict.fitdist <- function(object, percent = 1:99,
   
   if(!length(percent)) return(empty_quantile_data(percent))
   
-  boot <- fitdistrplus::bootdist(object, niter = nboot, parallel = parallel,
-                                 ncpus  = ncpus)
+  boot <- boot(object, nboot = nboot, parallel = parallel, ncpus  = ncpus)
   quantile_data(boot, percent, level)
 }
 
@@ -92,8 +91,7 @@ predict.fitdistcens <- function(object, percent = 1:99,
   
   if(!length(percent)) return(empty_quantile_data(percent))
   
-  boot <- fitdistrplus::bootdistcens(object, niter = nboot, parallel = parallel,
-                                     ncpus = ncpus)
+  boot <- boot(object, nboot = nboot, parallel = parallel, ncpus = ncpus)
   quantile_data(boot, percent, level)
 }
 
