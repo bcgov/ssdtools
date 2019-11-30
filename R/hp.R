@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Percent Protected
+#' Hazard Percent
 #'
 #' Gets percent species protected at specified concentrations.
 #'
@@ -55,7 +55,7 @@ ssd_hp <- function(x, ...) {
   hp
 }
 
-#' @describeIn ssd_hp Percent Protected fitdist
+#' @describeIn ssd_hp Hazard Percent fitdist
 #' @export
 #' @examples
 #' ssd_hp(boron_lnorm, c(0, 1, 30, Inf))
@@ -65,7 +65,7 @@ ssd_hp.fitdist <- function(x, conc, ...) {
   .ssd_hp_fitdist(x, conc)
 }
 
-#' @describeIn ssd_hp Percent Protected fitdists
+#' @describeIn ssd_hp Hazard Percent fitdists
 #' @export
 #' @examples
 #' ssd_hp(boron_dists, c(0, 1, 30, Inf))
@@ -77,7 +77,7 @@ ssd_hp.fitdists <- function(x, conc, ic = "aicc", ...) {
   .ssd_hp_fitdists(x, conc, ic)
 }
 
-#' @describeIn ssd_hp Percent Protected fitdistcens
+#' @describeIn ssd_hp Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
@@ -87,7 +87,7 @@ ssd_hp.fitdistcens <- function(x, conc, ...) {
   .ssd_hp_fitdist(x, conc)
 }
 
-#' @describeIn ssd_hp Percent Protected fitdistcens
+#' @describeIn ssd_hp Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))

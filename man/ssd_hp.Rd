@@ -6,7 +6,7 @@
 \alias{ssd_hp.fitdists}
 \alias{ssd_hp.fitdistcens}
 \alias{ssd_hp.fitdistscens}
-\title{Percent Protected}
+\title{Hazard Percent}
 \usage{
 ssd_hp(x, ...)
 
@@ -35,13 +35,13 @@ Gets percent species protected at specified concentrations.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fitdist}: Percent Protected fitdist
+\item \code{fitdist}: Hazard Percent fitdist
 
-\item \code{fitdists}: Percent Protected fitdists
+\item \code{fitdists}: Hazard Percent fitdists
 
-\item \code{fitdistcens}: Percent Protected fitdistcens
+\item \code{fitdistcens}: Hazard Percent fitdistcens
 
-\item \code{fitdistscens}: Percent Protected fitdistcens
+\item \code{fitdistscens}: Hazard Percent fitdistcens
 }}
 
 \examples{
