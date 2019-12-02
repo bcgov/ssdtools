@@ -14,13 +14,14 @@
 
 #' Log-Gumbel Distribution
 #'
-#' Density, distribution function, quantile function and random generation
-#' for the Log-Gumbel distribution with \code{scale} and \code{location} parameters.
+#' Density, distribution function, quantile function, random generation
+#' and starting values for the 
+#' Log-Gumbel distribution 
+#' with \code{scale} and \code{location} parameters.
 #'
+#' @param x A numeric vector of values.
 #' @inheritParams params
-#' @return
-#' dlgumbel gives the density, plgumbel gives the distribution function,
-#' qlgumbel gives the quantile function, and rlgumbel generates random deviates.
+#' @return A numeric vector.
 #' @name lgumbel
 #' @examples
 #' x <- rlgumbel(1000, 1, 0.1)
@@ -61,4 +62,11 @@ plgumbel <- function(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALS
 #' @export
 rlgumbel <- function(n, location = 0, scale = 0) {
   exp(VGAM::rgumbel(n, location = location, scale = scale))
+}
+
+#' @rdname lgumbel
+#' @export
+slgumbel <- function(x) {
+  c(location = mean(log(x), na.rm = TRUE), 
+    scale = pi * sd(log(x), na.rm = TRUE) / sqrt(6))
 }

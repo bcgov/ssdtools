@@ -14,7 +14,7 @@
 
 \item{...}{Unused.}
 
-\item{x, q}{vector of quantiles.}
+\item{q}{vector of quantiles.}
 
 \item{p}{vector of probabilities.}
 

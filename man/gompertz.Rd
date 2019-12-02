@@ -6,6 +6,7 @@
 \alias{qgompertz}
 \alias{pgompertz}
 \alias{rgompertz}
+\alias{sgompertz}
 \title{Gompertz Distribution}
 \usage{
 dgompertz(x, scale = 1, shape = 1, log = FALSE)
@@ -15,9 +16,11 @@ qgompertz(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 pgompertz(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
 rgompertz(n, scale = 1, shape = 1)
+
+sgompertz(x)
 }
 \arguments{
-\item{x}{The object.}
+\item{x}{A numeric vector of values.}
 
 \item{scale}{scale parameter.}
 
@@ -36,12 +39,14 @@ rgompertz(n, scale = 1, shape = 1)
 \item{n}{number of observations.}
 }
 \value{
-dgompertz gives the density, pgompertz gives the distribution function,
-qgompertz gives the quantile function, and rgompertz generates random deviates.
+A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation
-for the Gompertz distribution.
+Density, distribution function, quantile function, random generation
+and starting values for the 
+Gompertz distribution.
+}
+\details{
 The functions are wrappers on the equivalent VGAM functions that
 return a zero length numeric vector if x, q or p are zero length.
 }

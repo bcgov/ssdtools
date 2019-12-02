@@ -13,34 +13,11 @@
 #    limitations under the License.
 
 add_starting_values <- function(dist, x) {
-  if (dist$dist == "gamma") {
-    dist$start <- list(
-      scale = var(x) / mean(x),
-      shape = mean(x)^2 / var(x)
-    )
-  } else if (dist$distr == "gompertz") {
-    fit <- vglm(x ~ 1, VGAM::gompertz)
-    dist$start <- list(
-      shape = exp(unname(coef(fit)[2])),
-      scale = exp(unname(coef(fit)[1]))
-    )
-  } else if (dist$distr == "lgumbel") {
-    dist$start <- list(
-      location = mean(log(x)),
-      scale = pi * sd(log(x)) / sqrt(6)
-    )
-  } else if (dist$distr == "llog") {
-    dist$start <- list(scale = mean(log(x)),
-                       shape = pi * sd(log(x)) / sqrt(3))
-  } else if (dist$distr == "burrIII2") {
-    dist$start <- list(lshape=log(1), lscale=log(1))
-  } else if (dist$distr == "burrIII3") {
-    dist$start <- list(lshape1=log(1), lshape2=log(1), lscale=log(1))
-  }else if (dist$distr == "pareto") {
-    fit <- vglm(x ~ 1, VGAM::paretoff)
-    dist$start <- list(shape = exp(unname(coef(fit))))
-    dist$fix.arg <- list(scale = fit@extra$scale)
-  }
+  
+  if(!exists(paste0("s", dist$distr))) return(dist)
+  
+  start <- do.call(paste0("s", dist$distr), list(x = x))
+  dist$start <- as.list(start)
   dist
 }
 

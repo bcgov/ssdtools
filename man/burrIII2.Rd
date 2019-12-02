@@ -6,6 +6,7 @@
 \alias{qburrIII2}
 \alias{pburrIII2}
 \alias{rburrIII2}
+\alias{sburrIII2}
 \title{Burr Type III Two-Parameter Distribution}
 \usage{
 dburrIII2(x, lshape = log(1), lscale = log(1), log = FALSE)
@@ -27,9 +28,11 @@ pburrIII2(
 )
 
 rburrIII2(n, lshape = log(1), lscale = log(1))
+
+sburrIII2(x)
 }
 \arguments{
-\item{x}{The object.}
+\item{x}{A numeric vector of values.}
 
 \item{lshape}{log shape parameter.}
 
@@ -48,13 +51,13 @@ rburrIII2(n, lshape = log(1), lscale = log(1))
 \item{n}{number of observations.}
 }
 \value{
-dburrIII2 gives the density, pburrIII2 gives the distribution function,
-qburrIII2 gives the quantile function, and rburrIII2 generates random samples.
+A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation
-for the Burr Type III two-parameter distribution with 
-\code{lshape} and \code{lscale} parameters.
+Density, distribution function, quantile function, random generation
+and starting values for the 
+Burr Type III two-parameter distribution 
+with \code{lshape} and \code{lscale} parameters.
 }
 \details{
 The Burr 12 distribution from the actuar package is used as a base.

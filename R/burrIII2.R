@@ -14,9 +14,10 @@
 
 #' Burr Type III Two-Parameter Distribution
 #'
-#' Density, distribution function, quantile function and random generation
-#' for the Burr Type III two-parameter distribution with 
-#' \code{lshape} and \code{lscale} parameters.
+#' Density, distribution function, quantile function, random generation
+#' and starting values for the 
+#' Burr Type III two-parameter distribution 
+#' with \code{lshape} and \code{lscale} parameters.
 #' 
 #' The Burr 12 distribution from the actuar package is used as a base.
 #' The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
@@ -25,10 +26,9 @@
 #' The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
 #' The two shape parameters are set to be equal to produce a two-parameter model.
 #'
+#' @param x A numeric vector of values.
 #' @inheritParams params
-#' @return
-#' dburrIII2 gives the density, pburrIII2 gives the distribution function,
-#' qburrIII2 gives the quantile function, and rburrIII2 generates random samples.
+#' @return A numeric vector.
 #' @name burrIII2
 #' @seealso \code{\link[actuar]{dburr}} and \code{\link{burrIII3}}
 #' @examples
@@ -71,4 +71,10 @@ pburrIII2 <- function (q, lshape=log(1),  lscale=log(1), lower.tail=TRUE, log.p=
 rburrIII2 <- function(n, lshape=log(1), lscale=log(1)) {
   r <- actuar::rburr(n, shape1=exp(lshape), shape2=exp(lshape), scale=exp(lscale))
   1/r
+}
+
+#' @rdname burrIII2
+#' @export
+sburrIII2 <- function(x) {
+  c(lshape=log(1), lscale=log(1))
 }

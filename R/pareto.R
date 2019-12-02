@@ -14,14 +14,16 @@
 
 #' Pareto Distribution
 #'
-#' Density, distribution function, quantile function and random generation
-#' for the Pareto distribution with parameters scale and shape.
+#' Density, distribution function, quantile function, random generation
+#' and starting values for the
+#' Pareto distribution
+#' with scale and shape parameters.
+#'  
 #' The functions are wrappers on the equivalent VGAM functions.
 #'
+#' @param x A numeric vector of values.
 #' @inheritParams params
-#' @return
-#' dpareto gives the density, ppareto gives the distribution function,
-#' qpareto gives the quantile function, and rpareto generates random deviates.
+#' @return A numeric vector.
 #' @seealso \code{\link[VGAM]{dpareto}}
 #' @name pareto
 #' @examples
@@ -56,4 +58,11 @@ ppareto <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
 #' @export
 rpareto <- function(n, scale = 1, shape = 1) {
   VGAM::rpareto(n, scale = scale, shape = shape)
+}
+
+#' @rdname pareto
+#' @export
+spareto <- function(x) {
+  fit <- vglm(x ~ 1, VGAM::paretoff)
+  c(shape = exp(unname(coef(fit))))
 }

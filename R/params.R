@@ -5,7 +5,7 @@
 #' @param ic A string specifying the information-theoretic criterion to use for model averaging ('aic', 'aicc' or 'bic').
 #' @param ci A flag specifying whether to estimate confidence intervals by parametric bootstrapping.
 #' @param ... Unused.
-#' @param x,q	vector of quantiles.
+#' @param q	vector of quantiles.
 #' @param p	vector of probabilities.
 #' @param n	number of observations.
 #' @param shape	shape parameter.

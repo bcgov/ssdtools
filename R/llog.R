@@ -14,15 +14,16 @@
 
 #' Log-Logistic Distribution
 #'
-#' Density, distribution function, quantile function and random generation
-#' for the log-logistic distribution with \code{shape} and \code{scale} parameters.
+#' Density, distribution function, quantile function, random generation
+#' and starting values for the 
+#' log-logistic distribution 
+#' with \code{shape} and \code{scale} parameters.
 #'
 #' The functions are wrappers to export the identical functions from the FAdist package.
 #'
+#' @param x A numeric vector of values.
 #' @inheritParams params
-#' @return
-#' dllog gives the density, pllog gives the distribution function,
-#' qllog gives the quantile function, and rllog generates random deviates.
+#' @return A numeric vector.
 #' @name llog
 #' @seealso \code{\link[FAdist]{dllog}}
 #' @examples
@@ -53,4 +54,11 @@ pllog <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
 #' @export
 rllog <- function(n, shape = 1, scale = 1) {
   FAdist::rllog(n = n, shape = shape, scale = scale)
+}
+
+#' @rdname llog
+#' @export
+sllog <- function(x) {
+  c(scale = mean(log(x), na.rm = TRUE),
+    shape = pi * sd(log(x), na.rm = TRUE) / sqrt(3))
 }

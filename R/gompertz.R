@@ -14,15 +14,16 @@
 
 #' Gompertz Distribution
 #'
-#' Density, distribution function, quantile function and random generation
-#' for the Gompertz distribution.
+#' Density, distribution function, quantile function, random generation
+#' and starting values for the 
+#' Gompertz distribution.
+#' 
 #' The functions are wrappers on the equivalent VGAM functions that
 #' return a zero length numeric vector if x, q or p are zero length.
 #'
+#' @param x A numeric vector of values.
 #' @inheritParams params
-#' @return
-#' dgompertz gives the density, pgompertz gives the distribution function,
-#' qgompertz gives the quantile function, and rgompertz generates random deviates.
+#' @return A numeric vector.
 #' @seealso \code{\link[VGAM]{dgompertz}}
 #' @name gompertz
 #' @examples
@@ -57,4 +58,11 @@ pgompertz <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 #' @export
 rgompertz <- function(n, scale = 1, shape = 1) {
   VGAM::rgompertz(n, scale = scale, shape = shape)
+}
+
+#' @rdname gompertz
+#' @export
+sgompertz <- function(x) {
+  fit <- vglm(x ~ 1, VGAM::gompertz)
+  c(shape = exp(unname(coef(fit)[2])), scale = exp(unname(coef(fit)[1])))
 }

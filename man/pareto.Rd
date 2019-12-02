@@ -6,6 +6,7 @@
 \alias{qpareto}
 \alias{ppareto}
 \alias{rpareto}
+\alias{spareto}
 \title{Pareto Distribution}
 \usage{
 dpareto(x, scale = 1, shape = 1, log = FALSE)
@@ -15,9 +16,11 @@ qpareto(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 ppareto(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
 rpareto(n, scale = 1, shape = 1)
+
+spareto(x)
 }
 \arguments{
-\item{x}{The object.}
+\item{x}{A numeric vector of values.}
 
 \item{scale}{scale parameter.}
 
@@ -36,12 +39,14 @@ rpareto(n, scale = 1, shape = 1)
 \item{n}{number of observations.}
 }
 \value{
-dpareto gives the density, ppareto gives the distribution function,
-qpareto gives the quantile function, and rpareto generates random deviates.
+A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation
-for the Pareto distribution with parameters scale and shape.
+Density, distribution function, quantile function, random generation
+and starting values for the
+Pareto distribution
+with scale and shape parameters.
+ 
 The functions are wrappers on the equivalent VGAM functions.
 }
 \examples{

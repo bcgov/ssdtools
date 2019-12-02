@@ -6,6 +6,7 @@
 \alias{qlgumbel}
 \alias{plgumbel}
 \alias{rlgumbel}
+\alias{slgumbel}
 \title{Log-Gumbel Distribution}
 \usage{
 dlgumbel(x, location = 0, scale = 0, log = FALSE)
@@ -15,9 +16,11 @@ qlgumbel(p, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE)
 plgumbel(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE)
 
 rlgumbel(n, location = 0, scale = 0)
+
+slgumbel(x)
 }
 \arguments{
-\item{x}{The object.}
+\item{x}{A numeric vector of values.}
 
 \item{location}{location parameter.}
 
@@ -36,12 +39,13 @@ rlgumbel(n, location = 0, scale = 0)
 \item{n}{number of observations.}
 }
 \value{
-dlgumbel gives the density, plgumbel gives the distribution function,
-qlgumbel gives the quantile function, and rlgumbel generates random deviates.
+A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation
-for the Log-Gumbel distribution with \code{scale} and \code{location} parameters.
+Density, distribution function, quantile function, random generation
+and starting values for the 
+Log-Gumbel distribution 
+with \code{scale} and \code{location} parameters.
 }
 \examples{
 x <- rlgumbel(1000, 1, 0.1)

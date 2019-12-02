@@ -6,6 +6,7 @@
 \alias{qllog}
 \alias{pllog}
 \alias{rllog}
+\alias{sllog}
 \title{Log-Logistic Distribution}
 \usage{
 dllog(x, shape = 1, scale = 1, log = FALSE)
@@ -15,9 +16,11 @@ qllog(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 pllog(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 rllog(n, shape = 1, scale = 1)
+
+sllog(x)
 }
 \arguments{
-\item{x}{The object.}
+\item{x}{A numeric vector of values.}
 
 \item{shape}{shape parameter.}
 
@@ -36,12 +39,13 @@ rllog(n, shape = 1, scale = 1)
 \item{n}{number of observations.}
 }
 \value{
-dllog gives the density, pllog gives the distribution function,
-qllog gives the quantile function, and rllog generates random deviates.
+A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation
-for the log-logistic distribution with \code{shape} and \code{scale} parameters.
+Density, distribution function, quantile function, random generation
+and starting values for the 
+log-logistic distribution 
+with \code{shape} and \code{scale} parameters.
 }
 \details{
 The functions are wrappers to export the identical functions from the FAdist package.
