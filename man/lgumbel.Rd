@@ -47,9 +47,3 @@ and starting values for the
 Log-Gumbel distribution
 with \code{scale} and \code{location} parameters.
 }
-\examples{
-x <- rlgumbel(1000, 1, 0.1)
-hist(log(x), freq = FALSE, col = "gray", border = "white")
-hist(x, freq = FALSE, col = "gray", border = "white")
-curve(dlgumbel(x, 1, 0.1), add = TRUE, col = "red4", lwd = 2)
-}

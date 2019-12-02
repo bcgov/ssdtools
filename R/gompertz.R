@@ -27,10 +27,8 @@
 #' @seealso \code{\link[VGAM]{dgompertz}}
 #' @name gompertz
 #' @examples
-#' x <- rgompertz(1000, 1, 0.1)
-#' hist(log(x), freq = FALSE, col = "gray", border = "white")
-#' hist(x, freq = FALSE, col = "gray", border = "white")
-#' curve(dgompertz(x, 1, 0.1), add = TRUE, col = "red4", lwd = 2)
+#' x <- seq(0.01, 5, by = 0.01)
+#' plot(x, dgompertz(x), type = "l")
 NULL
 
 #' @rdname gompertz

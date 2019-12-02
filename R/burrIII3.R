@@ -30,9 +30,8 @@
 #' @name burrIII3
 #' @seealso \code{\link[actuar]{dburr}} and \code{\link{burrIII2}}
 #' @examples
-#' x <- rburrIII3(1000)
-#' hist(x, freq = FALSE, col = "gray", border = "white")
-#' curve(dburrIII3(x), add = TRUE, col = "red4", lwd = 2)
+#' x <- seq(0.01, 5, by = 0.01)
+#' plot(x, dburrIII3(x), type = "l")
 NULL
 
 #' @rdname burrIII3

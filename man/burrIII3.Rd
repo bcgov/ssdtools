@@ -70,9 +70,8 @@ refer to https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3p
 The shape1, shape2, and scale paramters are on the log(scale) as these must be positive.
 }
 \examples{
-x <- rburrIII3(1000)
-hist(x, freq = FALSE, col = "gray", border = "white")
-curve(dburrIII3(x), add = TRUE, col = "red4", lwd = 2)
+x <- seq(0.01, 5, by = 0.01)
+plot(x, dburrIII3(x), type = "l")
 }
 \seealso{
 \code{\link[actuar]{dburr}} and \code{\link{burrIII2}}

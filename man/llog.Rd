@@ -51,9 +51,8 @@ with \code{shape} and \code{scale} parameters.
 The functions are wrappers to export the identical functions from the FAdist package.
 }
 \examples{
-x <- rllog(1000)
-hist(x, freq = FALSE, col = "gray", border = "white")
-curve(dllog(x), add = TRUE, col = "red4", lwd = 2)
+x <- seq(0.01, 5, by = 0.01)
+plot(x, dllog(x), type = "l")
 }
 \seealso{
 \code{\link[FAdist]{dllog}}

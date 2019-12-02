@@ -68,9 +68,8 @@ The shape1, shape2, and scale parameters are on the log(scale) as these must be 
 The two shape parameters are set to be equal to produce a two-parameter model.
 }
 \examples{
-x <- rburrIII2(1000)
-hist(x, freq = FALSE, col = "gray", border = "white")
-curve(dburrIII2(x), add = TRUE, col = "red4", lwd = 2)
+x <- seq(0.01, 5, by = 0.01)
+plot(x, dburrIII2(x), type = "l")
 }
 \seealso{
 \code{\link[actuar]{dburr}} and \code{\link{burrIII3}}

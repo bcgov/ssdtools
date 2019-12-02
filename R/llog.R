@@ -27,9 +27,8 @@
 #' @name llog
 #' @seealso \code{\link[FAdist]{dllog}}
 #' @examples
-#' x <- rllog(1000)
-#' hist(x, freq = FALSE, col = "gray", border = "white")
-#' curve(dllog(x), add = TRUE, col = "red4", lwd = 2)
+#' x <- seq(0.01, 5, by = 0.01)
+#' plot(x, dllog(x), type = "l")
 NULL
 
 #' @rdname llog
