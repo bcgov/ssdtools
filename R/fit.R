@@ -92,7 +92,7 @@ ssd_fit_dist <- function(
 #' distributions are fitted to the data.
 
 #' The ssd_fit_dists function has also been
-#' tested with the 'burrIII3', 'gompertz', 'lgumbel', 'llog', 'pareto'
+#' tested with the 'burrIII3', 'gompertz', 'lgumbel', 'llogis', 'pareto'
 #' and 'weibull' distributions.
 #'
 #' If weight specifies a column in the data frame with positive integers,
@@ -134,7 +134,7 @@ ssd_fit_dists <- function(
   if (missing(dists)) {
     deprecate_soft("0.1.0",
       "ssd_fit_dists(dists = )",
-      details = "More specifically the default value of c('gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm', 'weibull') has been replaced by c('burrIII2', 'gamma', 'lnorm')."
+      details = "More specifically the default value of c('gamma', 'gompertz', 'lgumbel', 'llogis', 'lnorm', 'weibull') has been replaced by c('burrIII2', 'gamma', 'lnorm')."
     )
   }
 
