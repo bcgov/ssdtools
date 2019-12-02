@@ -43,8 +43,8 @@ A numeric vector.
 }
 \description{
 Density, distribution function, quantile function, random generation
-and starting values for the 
-log-logistic distribution 
+and starting values for the
+log-logistic distribution
 with \code{shape} and \code{scale} parameters.
 }
 \details{

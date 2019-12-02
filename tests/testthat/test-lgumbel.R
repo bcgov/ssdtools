@@ -24,10 +24,13 @@ test_that("rlgumbel", {
 test_that("pqlgumbel", {
   expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1)), c(2.52411500467289, 3.36651292058166, 5.25036732731245))
   expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1,
-                            lower.tail = FALSE)), c(4.49993998675952, 3.36651292058166, 2.16596755475204))
-  
-  expect_identical(log(qlgumbel(-1, log.p = TRUE)), 
-               log(qlgumbel(exp(-1))))
+    lower.tail = FALSE
+  )), c(4.49993998675952, 3.36651292058166, 2.16596755475204))
+
+  expect_identical(
+    log(qlgumbel(-1, log.p = TRUE)),
+    log(qlgumbel(exp(-1)))
+  )
 
   expect_equal(plgumbel(exp(3), 3, 1), 0.3678794, tolerance = 0.0000001)
   expect_equal(plgumbel(exp(4), 3, 1), 0.6922006, tolerance = 0.0000001)

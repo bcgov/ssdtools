@@ -46,7 +46,8 @@ Density, distribution function, quantile function, random generation
 and starting values for the
 Pareto distribution
 with scale and shape parameters.
- 
+}
+\details{
 The functions are wrappers on the equivalent VGAM functions.
 }
 \examples{

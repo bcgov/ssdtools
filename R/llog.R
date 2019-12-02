@@ -15,8 +15,8 @@
 #' Log-Logistic Distribution
 #'
 #' Density, distribution function, quantile function, random generation
-#' and starting values for the 
-#' log-logistic distribution 
+#' and starting values for the
+#' log-logistic distribution
 #' with \code{shape} and \code{scale} parameters.
 #'
 #' The functions are wrappers to export the identical functions from the FAdist package.
@@ -59,6 +59,8 @@ rllog <- function(n, shape = 1, scale = 1) {
 #' @rdname llog
 #' @export
 sllog <- function(x) {
-  c(scale = mean(log(x), na.rm = TRUE),
-    shape = pi * sd(log(x), na.rm = TRUE) / sqrt(3))
+  c(
+    scale = mean(log(x), na.rm = TRUE),
+    shape = pi * sd(log(x), na.rm = TRUE) / sqrt(3)
+  )
 }

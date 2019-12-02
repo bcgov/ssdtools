@@ -13,9 +13,10 @@
 #    limitations under the License.
 
 add_starting_values <- function(dist, x) {
-  
-  if(!exists(paste0("s", dist$distr))) return(dist)
-  
+  if (!exists(paste0("s", dist$distr))) {
+    return(dist)
+  }
+
   start <- do.call(paste0("s", dist$distr), list(x = x))
   dist$start <- as.list(start)
   dist
@@ -23,27 +24,27 @@ add_starting_values <- function(dist, x) {
 
 fit_dist_uncensored <- function(data, left, weight, dist) {
   x <- data[[left]]
-  
+
   dist <- list(data = x, distr = dist, method = "mle")
-  
+
   if (!is.null(weight)) {
     dist$weights <- data[[weight]]
   }
-  
+
   dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdist, dist)
 }
 
 fit_dist_censored <- function(data, left, right, weight, dist) {
   x <- rowMeans(data[c(left, right)], na.rm = TRUE)
-  
+
   censdata <- data.frame(left = data[[left]], right = data[[right]])
   dist <- list(censdata = censdata, distr = dist)
-  
+
   if (!is.null(weight)) {
     dist$weights <- data[[weight]]
   }
-  
+
   dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdistcens, dist)
 }
@@ -54,25 +55,27 @@ remove_errors <- function(dist_fit, name, computable, silent) {
     return(NULL)
   }
   sd <- dist_fit$result$sd
-  if(is.null(sd) || any(is.na(sd))) {
+  if (is.null(sd) || any(is.na(sd))) {
     if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).", call. = FALSE)
-    if(computable) return(NULL)
+    if (computable) {
+      return(NULL)
+    }
   }
   dist_fit$result
 }
 
 ssd_fit_dist <- function(
-  data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
+                         data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
   chk_s3_class(data, "data.frame")
   chk_gte(nrow(data), 6)
   chk_string(left)
   chk_string(right)
-  
-  if(!is.null(weight)) chk_string(weight)
-  
+
+  if (!is.null(weight)) chk_string(weight)
+
   chk_superset(colnames(data), c(left, right, weight))
   chk_string(dist)
-  
+
   if (left == right) {
     fit <- fit_dist_uncensored(data, left, weight, dist)
   } else {
@@ -89,7 +92,7 @@ ssd_fit_dist <- function(
 #' distributions are fitted to the data.
 
 #' The ssd_fit_dists function has also been
-#' tested with the 'burrIII3', 'gompertz', 'lgumbel', 'llog', 'pareto' 
+#' tested with the 'burrIII3', 'gompertz', 'lgumbel', 'llog', 'pareto'
 #' and 'weibull' distributions.
 #'
 #' If weight specifies a column in the data frame with positive integers,
@@ -118,27 +121,28 @@ ssd_fit_dist <- function(
 #' data(fluazinam, package = "fitdistrplus")
 #' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
-  data, left = "Conc", right = left, weight = NULL,
-  dists = c("burrIII2", "gamma", "lnorm"),
-  computable = TRUE,
-  silent = FALSE) {
+                          data, left = "Conc", right = left, weight = NULL,
+                          dists = c("burrIII2", "gamma", "lnorm"),
+                          computable = TRUE,
+                          silent = FALSE) {
   chk_s3_class(dists, "character")
   chk_unique(dists)
   chk_gt(length(dists))
   chk_flag(computable)
   chk_flag(silent)
-  
-  if(missing(dists)) {
-    deprecate_soft("0.1.0", 
-                   "ssd_fit_dists(dists = )", 
-                   details = "More specifically the default value of c('gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm', 'weibull') has been replaced by c('burrIII2', 'gamma', 'lnorm').")
+
+  if (missing(dists)) {
+    deprecate_soft("0.1.0",
+      "ssd_fit_dists(dists = )",
+      details = "More specifically the default value of c('gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm', 'weibull') has been replaced by c('burrIII2', 'gamma', 'lnorm')."
+    )
   }
-  
+
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
   dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
   dists <- mapply(remove_errors, dists, names(dists),
-                  MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
+    MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
   )
   dists <- dists[!vapply(dists, is.null, TRUE)]
   if (!length(dists)) err("All distributions failed to fit.")

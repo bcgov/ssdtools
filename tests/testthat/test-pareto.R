@@ -11,10 +11,10 @@ test_that("dpareto", {
 
 test_that("ppareto", {
   expect_equal(ppareto(1), 0)
-  expect_equal(ppareto(2), 1/2)
-  expect_equal(ppareto(3), 2/3)
+  expect_equal(ppareto(2), 1 / 2)
+  expect_equal(ppareto(3), 2 / 3)
   expect_equal(ppareto(3, log.p = TRUE), log(ppareto(3)))
-  expect_equal(ppareto(3, lower.tail = FALSE), 1/3)
+  expect_equal(ppareto(3, lower.tail = FALSE), 1 / 3)
   expect_equal(ppareto(numeric(0)), numeric(0))
 })
 

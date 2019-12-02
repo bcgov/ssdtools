@@ -15,8 +15,8 @@
 #' Log-Gumbel Distribution
 #'
 #' Density, distribution function, quantile function, random generation
-#' and starting values for the 
-#' Log-Gumbel distribution 
+#' and starting values for the
+#' Log-Gumbel distribution
 #' with \code{scale} and \code{location} parameters.
 #'
 #' @param x A numeric vector of values.
@@ -67,6 +67,8 @@ rlgumbel <- function(n, location = 0, scale = 0) {
 #' @rdname lgumbel
 #' @export
 slgumbel <- function(x) {
-  c(location = mean(log(x), na.rm = TRUE), 
-    scale = pi * sd(log(x), na.rm = TRUE) / sqrt(6))
+  c(
+    location = mean(log(x), na.rm = TRUE),
+    scale = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
+  )
 }

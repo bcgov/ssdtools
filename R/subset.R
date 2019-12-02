@@ -26,7 +26,7 @@ subset.fitdists <- function(x, select = names(x), ...) {
   chk_unique(select)
   chk_named(x)
   chk_superset(names(x), select)
-  
+
   chk_unused(...)
 
   class <- class(x)

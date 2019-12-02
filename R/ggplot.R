@@ -91,7 +91,7 @@ geom_hcintersect <- function(mapping = NULL, data = NULL, xintercept, yintercept
     mapping <- aes(xintercept = xintercept)
     show.legend <- FALSE
   }
-  
+
   if (!missing(yintercept)) {
     if (!missing(xintercept)) {
       data$yintercept <- yintercept
@@ -102,7 +102,7 @@ geom_hcintersect <- function(mapping = NULL, data = NULL, xintercept, yintercept
     }
     show.legend <- FALSE
   }
-  
+
   layer(
     geom = GeomHcintersect, data = data, mapping = mapping, stat = StatIdentity,
     position = PositionIdentity, show.legend = show.legend, inherit.aes = FALSE,

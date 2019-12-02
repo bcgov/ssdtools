@@ -43,8 +43,8 @@ A numeric vector.
 }
 \description{
 Density, distribution function, quantile function, random generation
-and starting values for the 
-Log-Gumbel distribution 
+and starting values for the
+Log-Gumbel distribution
 with \code{scale} and \code{location} parameters.
 }
 \examples{

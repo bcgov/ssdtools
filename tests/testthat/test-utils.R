@@ -21,11 +21,11 @@ test_that("utils", {
   expect_true(is.fitdistcens(fluazinam_lnorm))
   expect_true(is.fitdistscens(fluazinam_dists))
   expect_true(is.fitdistcens(fluazinam_dists[[1]]))
-  
+
   expect_identical(nobs(boron_lnorm), 28L)
   expect_identical(nobs(boron_dists), nobs(boron_lnorm))
   expect_identical(nobs(fluazinam_dists), 14L)
-  
+
   expect_identical(npars(boron_lnorm), 2L)
   expect_identical(npars(boron_dists), c(
     burrIII2 = 2L, gamma = 2L, lnorm = 2L

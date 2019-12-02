@@ -15,13 +15,13 @@
 #' Burr Type III Two-Parameter Distribution
 #'
 #' Density, distribution function, quantile function, random generation
-#' and starting values for the 
-#' Burr Type III two-parameter distribution 
+#' and starting values for the
+#' Burr Type III two-parameter distribution
 #' with \code{lshape} and \code{lscale} parameters.
-#' 
+#'
 #' The Burr 12 distribution from the actuar package is used as a base.
 #' The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
-#' refer to 
+#' refer to
 #' \url{https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm } for details.
 #' The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
 #' The two shape parameters are set to be equal to produce a two-parameter model.
@@ -40,41 +40,55 @@ NULL
 #' @rdname burrIII2
 #' @export
 dburrIII2 <- function(x, lshape = log(1), lscale = log(1), log = FALSE) {
-  if(!length(x))return(numeric(0))
-  
-  fx <- actuar::dburr(1/x, shape1 = exp(lshape), shape2 = exp(lshape), 
-                      scale = exp(lscale), log = FALSE)
-  fx <- fx / (x+(x==0))^2  # avoid dividing by 0. Can only occur if fx is 0.
-  if(log) return(log(fx))
+  if (!length(x)) {
+    return(numeric(0))
+  }
+
+  fx <- actuar::dburr(1 / x,
+    shape1 = exp(lshape), shape2 = exp(lshape),
+    scale = exp(lscale), log = FALSE
+  )
+  fx <- fx / (x + (x == 0))^2 # avoid dividing by 0. Can only occur if fx is 0.
+  if (log) {
+    return(log(fx))
+  }
   fx
 }
 
 #' @rdname burrIII2
 #' @export
 qburrIII2 <- function(p, lshape = log(1), lscale = log(1), lower.tail = TRUE, log.p = FALSE) {
-  if(!length(q)) return(numeric(0))
-  q <- actuar::qburr(1-p, shape1=exp(lshape), shape2=exp(lshape), scale=exp(lscale), 
-             lower.tail=lower.tail, log.p=log.p)
-  1/q
+  if (!length(q)) {
+    return(numeric(0))
+  }
+  q <- actuar::qburr(1 - p,
+    shape1 = exp(lshape), shape2 = exp(lshape), scale = exp(lscale),
+    lower.tail = lower.tail, log.p = log.p
+  )
+  1 / q
 }
 
 #' @rdname burrIII2
 #' @export
-pburrIII2 <- function (q, lshape=log(1),  lscale=log(1), lower.tail=TRUE, log.p=FALSE) {
-  if(!length(q)) return(numeric(0))
-  actuar::pburr(1/q, shape1=exp(lshape), shape2=exp(lshape), scale=exp(lscale), 
-                lower.tail=!lower.tail, log.p=log.p)
+pburrIII2 <- function(q, lshape = log(1), lscale = log(1), lower.tail = TRUE, log.p = FALSE) {
+  if (!length(q)) {
+    return(numeric(0))
+  }
+  actuar::pburr(1 / q,
+    shape1 = exp(lshape), shape2 = exp(lshape), scale = exp(lscale),
+    lower.tail = !lower.tail, log.p = log.p
+  )
 }
 
 #' @rdname burrIII2
 #' @export
-rburrIII2 <- function(n, lshape=log(1), lscale=log(1)) {
-  r <- actuar::rburr(n, shape1=exp(lshape), shape2=exp(lshape), scale=exp(lscale))
-  1/r
+rburrIII2 <- function(n, lshape = log(1), lscale = log(1)) {
+  r <- actuar::rburr(n, shape1 = exp(lshape), shape2 = exp(lshape), scale = exp(lscale))
+  1 / r
 }
 
 #' @rdname burrIII2
 #' @export
 sburrIII2 <- function(x) {
-  c(lshape=log(1), lscale=log(1))
+  c(lshape = log(1), lscale = log(1))
 }

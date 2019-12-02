@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 #' Autoplot fitdist
-#' 
+#'
 #' Plots the cumulative distribution function (cdf) using the ggplot2
 #' generic.
 #'

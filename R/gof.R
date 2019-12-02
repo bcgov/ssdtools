@@ -52,19 +52,19 @@ ssd_gof <- function(x, ...) {
 
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
-#' @examples 
+#' @examples
 #' ssd_gof(boron_lnorm)
 ssd_gof.fitdist <- function(x, ...) {
   chk_unused(...)
-  
+
   dist <- x$distname
   n <- nobs(x)
   k <- npars(x)
-  
+
   aic <- x$aic
   aicc <- aic + 2 * k * (k + 1) / (n - k - 1)
   bic <- x$bic
-  
+
   if (n >= 8) {
     x <- fitdistrplus::gofstat(x)
     ad <- x$ad
@@ -97,11 +97,11 @@ ssd_gof.fitdist <- function(x, ...) {
 
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
-#' @examples 
+#' @examples
 #' ssd_gof(boron_dists)
 ssd_gof.fitdists <- function(x, ...) {
   chk_unused(...)
-  
+
   x <- .ssd_gof_fitdists(x)
   x$weight <- round(x$weight, 3)
   x$delta <- round(x$delta, 3)
@@ -110,11 +110,11 @@ ssd_gof.fitdists <- function(x, ...) {
 
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
-#' @examples 
+#' @examples
 #' ssd_gof(fluazinam_lnorm)
 ssd_gof.fitdistcens <- function(x, ...) {
   chk_unused(...)
-  
+
   data <- data.frame(
     dist = x$distname, aic = x$aic, bic = x$bic,
     stringsAsFactors = FALSE
@@ -124,7 +124,7 @@ ssd_gof.fitdistcens <- function(x, ...) {
 
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
-#' @examples 
+#' @examples
 #' ssd_gof(fluazinam_lnorm)
 ssd_gof.fitdistscens <- function(x, ...) {
   chk_unused(...)

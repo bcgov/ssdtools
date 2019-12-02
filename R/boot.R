@@ -17,11 +17,15 @@ boot <- function(x, nboot, parallel, ncpus) {
 }
 
 boot.fitdist <- function(x, nboot, parallel, ncpus) {
-  fitdistrplus::bootdist(x, niter = nboot, parallel = parallel,
-                                 ncpus  = ncpus)
+  fitdistrplus::bootdist(x,
+    niter = nboot, parallel = parallel,
+    ncpus = ncpus
+  )
 }
 
 boot.fitdistcens <- function(x, nboot, parallel, ncpus) {
-  fitdistrplus::bootdistcens(x, niter = nboot, parallel = parallel,
-                                 ncpus  = ncpus)
+  fitdistrplus::bootdistcens(x,
+    niter = nboot, parallel = parallel,
+    ncpus = ncpus
+  )
 }

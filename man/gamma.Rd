@@ -14,7 +14,7 @@ sgamma(x)
 A numeric vector.
 }
 \description{
-Starting values for the 
+Starting values for the
 Gamma distribution.
 }
 \examples{

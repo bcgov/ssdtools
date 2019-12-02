@@ -74,6 +74,6 @@ ssd_hc.fitdistscens <- function(x, hc = 5L, ic = "aic", average = TRUE, nboot = 
   chk_unused(...)
   chk_number(hc)
   chk_range(hc, c(1, 99))
-  
+
   predict(x, percent = hc, ic = ic, nboot = nboot, average = average, level = level)
 }

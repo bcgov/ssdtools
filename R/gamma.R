@@ -14,7 +14,7 @@
 
 #' Gamma Distribution
 #'
-#' Starting values for the 
+#' Starting values for the
 #' Gamma distribution.
 #'
 #' @param x A numeric vector of values.
@@ -31,6 +31,8 @@ NULL
 #' @rdname gamma
 #' @export
 sgamma <- function(x) {
-      c(scale = var(x, na.rm = TRUE) / mean(x, na.rm = TRUE),
-      shape = mean(x, na.rm = TRUE)^2 / var(x, na.rm = TRUE))
+  c(
+    scale = var(x, na.rm = TRUE) / mean(x, na.rm = TRUE),
+    shape = mean(x, na.rm = TRUE)^2 / var(x, na.rm = TRUE)
+  )
 }

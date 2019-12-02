@@ -31,7 +31,7 @@ test_that("predict.fitdist", {
 
 test_that("predict.fitdist parallel", {
   boron_lnorm <- ssd_fit_dist(ssdtools::boron_data)
-  
+
   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
@@ -54,7 +54,7 @@ test_that("predict.fitdists", {
 
 test_that("predict.fitdists parallel", {
   boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "gompertz"))
-  
+
   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))

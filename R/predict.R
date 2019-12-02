@@ -18,16 +18,20 @@ quantile_data <- function(boot, percent, level) {
   est <- t(as.matrix(quantile$quantiles))
   se <- as.matrix(quantile$bootquant)
   se <- apply(as.matrix(quantile$bootquant), 2, sd)
-  
-  data <- data.frame(percent = percent, est = est[,1], se = se, 
-                     lcl = ci[,1], ucl = ci[,2])
+
+  data <- data.frame(
+    percent = percent, est = est[, 1], se = se,
+    lcl = ci[, 1], ucl = ci[, 2]
+  )
   as_tibble(data)
 }
 
 empty_quantile_data <- function(percent) {
   stopifnot(!length(percent))
-  as_tibble(data.frame(percent = percent, est = numeric(0), se = numeric(0), 
-                       lcl = numeric(0), ucl = numeric(0)))
+  as_tibble(data.frame(
+    percent = percent, est = numeric(0), se = numeric(0),
+    lcl = numeric(0), ucl = numeric(0)
+  ))
 }
 
 model_average <- function(x) {
@@ -49,7 +53,7 @@ model_average <- function(x) {
 #' @examples
 #' predict(boron_lnorm, percent = c(5L, 50L))
 predict.fitdist <- function(object, percent = 1:99,
-                            nboot = 1000, level = 0.95, 
+                            nboot = 1000, level = 0.95,
                             parallel = "no", ncpus = 1L, ...) {
   chk_numeric(percent)
   chk_range(percent, c(1, 99))
@@ -60,10 +64,12 @@ predict.fitdist <- function(object, percent = 1:99,
   chk_number(level)
   chk_range(level)
   chk_unused(...)
-  
-  if(!length(percent)) return(empty_quantile_data(percent))
-  
-  boot <- boot(object, nboot = nboot, parallel = parallel, ncpus  = ncpus)
+
+  if (!length(percent)) {
+    return(empty_quantile_data(percent))
+  }
+
+  boot <- boot(object, nboot = nboot, parallel = parallel, ncpus = ncpus)
   quantile_data(boot, percent, level)
 }
 
@@ -77,20 +83,22 @@ predict.fitdist <- function(object, percent = 1:99,
 #' predict(fluazinam_lnorm, percent = c(5L, 50L))
 #' }
 predict.fitdistcens <- function(object, percent = 1:99,
-                                nboot = 1000, level = 0.95, 
+                                nboot = 1000, level = 0.95,
                                 parallel = "no", ncpus = 1L, ...) {
   chk_numeric(percent)
   chk_range(percent, c(1, 99))
   chk_not_any_na(percent)
   chk_unique(percent)
-  
+
   chk_whole_number(nboot)
   chk_number(level)
   chk_range(level)
   chk_unused(...)
-  
-  if(!length(percent)) return(empty_quantile_data(percent))
-  
+
+  if (!length(percent)) {
+    return(empty_quantile_data(percent))
+  }
+
   boot <- boot(object, nboot = nboot, parallel = parallel, ncpus = ncpus)
   quantile_data(boot, percent, level)
 }
@@ -111,21 +119,23 @@ predict.fitdistcens <- function(object, percent = 1:99,
 #' predict(boron_dists)
 #' }
 predict.fitdists <- function(object, percent = 1:99,
-                             nboot = 1000, ic = "aicc", average = TRUE, 
+                             nboot = 1000, ic = "aicc", average = TRUE,
                              level = 0.95, parallel = "no", ncpus = 1L, ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
-  
+
   ic <- ssd_gof(object)[c("dist", ic)]
-  
+
   ic$delta <- ic[[2]] - min(ic[[2]])
   ic$weight <- round(exp(-ic$delta / 2) / sum(exp(-ic$delta / 2)), 3)
-  
+
   ic <- split(ic, 1:nrow(ic))
-  
-  predictions <- lapply(object, predict, percent = percent, nboot = nboot, 
-                        level = level, parallel = parallel, ncpus = ncpus)
+
+  predictions <- lapply(object, predict,
+    percent = percent, nboot = nboot,
+    level = level, parallel = parallel, ncpus = ncpus
+  )
   predictions <- mapply(function(x, y) {
     x$weight <- y$weight
     x
@@ -141,11 +151,11 @@ predict.fitdists <- function(object, percent = 1:99,
   predictions$stringsAsFactors <- FALSE
   predictions <- do.call("rbind", predictions)
   predictions <- predictions[c("dist", "percent", "est", "se", "lcl", "ucl", "weight")]
-  
+
   if (!average) {
     return(predictions)
   }
-  
+
   predictions <- split(predictions, predictions$percent)
   predictions <- lapply(predictions, model_average)
   predictions$stringsAsFactors <- FALSE
@@ -163,11 +173,11 @@ predict.fitdists <- function(object, percent = 1:99,
 #' predict(fluazinam_dists)
 #' }
 predict.fitdistscens <- function(object, percent = 1:99,
-                                 nboot = 1000, ic = "aic", average = TRUE, 
+                                 nboot = 1000, ic = "aic", average = TRUE,
                                  level = 0.95, parallel = "no", ncpus = 1L, ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "bic"))
-  
+
   NextMethod(
     object = object, percent = percent, nboot = nboot, ic = ic, average = average,
     level = level, parallel = parallel, ncpus = ncpus, ...

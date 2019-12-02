@@ -23,13 +23,17 @@ test_that("fit_dist", {
 test_that("fit_dist tiny llog", {
   data <- ssdtools::boron_data
   fit <- ssdtools:::ssd_fit_dist(data, dist = "llog")
-  expect_equal(fit$estimate, 
-               c(scale = 2.6261248978507, shape = 0.740309228071107))
-  
+  expect_equal(
+    fit$estimate,
+    c(scale = 2.6261248978507, shape = 0.740309228071107)
+  )
+
   data$Conc <- data$Conc / 100
   fit <- ssdtools:::ssd_fit_dist(data, dist = "llog")
-  expect_equal(fit$estimate, 
-               c(scale = -1.97890271677598, shape = 0.740452665894763))
+  expect_equal(
+    fit$estimate,
+    c(scale = -1.97890271677598, shape = 0.740452665894763)
+  )
 })
 
 test_that("fit_dists", {
@@ -75,8 +79,10 @@ test_that("fluazinam", {
   fluazinam2 <- fluazinam[rev(order(fluazinam$left)), ]
   fluazinam2$Weight <- 1:nrow(fluazinam2)
 
-  dist <- ssd_fit_dists(fluazinam2, weight = "Weight", left = "left", right = "right",
-                        dist = "lnorm")
+  dist <- ssd_fit_dists(fluazinam2,
+    weight = "Weight", left = "left", right = "right",
+    dist = "lnorm"
+  )
   expect_identical(class(dist), c("fitdistscens", "fitdists"))
   dist <- dist[[1]]
   expect_false(is.fitdist(dist))
@@ -86,17 +92,21 @@ test_that("fluazinam", {
 
 
 test_that("fit_dists computable", {
-  data <- data.frame(Conc = c(0.1, 0.12, 0.24, 0.42, 0.67, 
-                              0.78, 120, 2030, 9033, 15000, 
-                              15779, 20000, 31000, 40000, 105650))
-                     
-  expect_error(ssd_fit_dists(data, dists = "gamma"),
-               "^All distributions failed to fit[.]$")
+  data <- data.frame(Conc = c(
+    0.1, 0.12, 0.24, 0.42, 0.67,
+    0.78, 120, 2030, 9033, 15000,
+    15779, 20000, 31000, 40000, 105650
+  ))
+
+  expect_error(
+    ssd_fit_dists(data, dists = "gamma"),
+    "^All distributions failed to fit[.]$"
+  )
 
   fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]]
   expect_equal(fit$sd, c(scale = NaN, shape = 0.0414094229126189))
   expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
-  
+
   data$Conc <- data$Conc / 100
   fit <- ssd_fit_dists(data, dists = "gamma")[[1]]
   expect_equal(fit$sd, c(scale = 673.801371511101, shape = 0.0454275860604086))

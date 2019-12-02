@@ -43,7 +43,7 @@ A numeric vector.
 }
 \description{
 Density, distribution function, quantile function, random generation
-and starting values for the 
+and starting values for the
 Gompertz distribution.
 }
 \details{

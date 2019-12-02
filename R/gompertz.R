@@ -15,9 +15,9 @@
 #' Gompertz Distribution
 #'
 #' Density, distribution function, quantile function, random generation
-#' and starting values for the 
+#' and starting values for the
 #' Gompertz distribution.
-#' 
+#'
 #' The functions are wrappers on the equivalent VGAM functions that
 #' return a zero length numeric vector if x, q or p are zero length.
 #'
@@ -36,21 +36,27 @@ NULL
 #' @rdname gompertz
 #' @export
 dgompertz <- function(x, scale = 1, shape = 1, log = FALSE) {
-  if (!length(x)) return(numeric(0))
+  if (!length(x)) {
+    return(numeric(0))
+  }
   VGAM::dgompertz(x, scale = scale, shape = shape, log = log)
 }
 
 #' @rdname gompertz
 #' @export
 qgompertz <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(p)) return(numeric(0))
+  if (!length(p)) {
+    return(numeric(0))
+  }
   VGAM::qgompertz(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
 pgompertz <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(q)) return(numeric(0))
+  if (!length(q)) {
+    return(numeric(0))
+  }
   VGAM::pgompertz(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 

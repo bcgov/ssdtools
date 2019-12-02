@@ -18,7 +18,7 @@
 #' and starting values for the
 #' Pareto distribution
 #' with scale and shape parameters.
-#'  
+#'
 #' The functions are wrappers on the equivalent VGAM functions.
 #'
 #' @param x A numeric vector of values.
@@ -36,21 +36,27 @@ NULL
 #' @rdname pareto
 #' @export
 dpareto <- function(x, scale = 1, shape = 1, log = FALSE) {
-  if (!length(x)) return(numeric(0))
+  if (!length(x)) {
+    return(numeric(0))
+  }
   VGAM::dpareto(x, scale = scale, shape = shape, log = log)
 }
 
 #' @rdname pareto
 #' @export
 qpareto <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(p)) return(numeric(0))
+  if (!length(p)) {
+    return(numeric(0))
+  }
   VGAM::qpareto(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname pareto
 #' @export
 ppareto <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(q)) return(numeric(0))
+  if (!length(q)) {
+    return(numeric(0))
+  }
   VGAM::ppareto(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 

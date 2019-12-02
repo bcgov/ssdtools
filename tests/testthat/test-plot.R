@@ -34,7 +34,7 @@ test_that("plot geoms", {
 test_that("plot", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())
-  
+
   expect_silent(plot(boron_lnorm))
   expect_silent(plot(fluazinam_lnorm))
   expect_silent(plot(boron_dists))
@@ -61,7 +61,7 @@ test_that("ssd_plot_cdf", {
 test_that("autoplot", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())
-  
+
   expect_is(ggplot2::autoplot(boron_lnorm), "ggplot")
   expect_is(ggplot2::autoplot(boron_dists), "ggplot")
   expect_is(ggplot2::autoplot(fluazinam_lnorm), "ggplot")
@@ -73,8 +73,9 @@ test_that("ssd_plot", {
 
   expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
   expect_is(ssd_plot(boron_data, boron_pred, ribbon = TRUE, label = "Species"), "ggplot")
-  
+
   data(fluazinam, package = "fitdistrplus")
   expect_is(ssd_plot(fluazinam, fluazinam_pred,
-                     left = "left", right = "right"), "ggplot")
+    left = "left", right = "right"
+  ), "ggplot")
 })

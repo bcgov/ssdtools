@@ -27,7 +27,7 @@
 #    limitations under the License.
 
 #' Percent Exposure
-#' 
+#'
 #' Calculates average proportion exposed based on log-normal distribution of concentrations.
 #'
 #' @param x The object to plot.
@@ -37,7 +37,7 @@
 #' @param ... Unused.
 #' @return A number of the proportion exposed.
 #' @export
-#' @examples 
+#' @examples
 #' set.seed(10)
 #' ssd_exposure(boron_lnorm)
 #' ssd_exposure(boron_lnorm, meanlog = 1)
