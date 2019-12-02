@@ -36,7 +36,7 @@ NULL
 
 #' @rdname burrIII3
 #' @export
-dburrIII3 <- function(x, shape1log = log(1), shape2log = log(1), scalelog = log(1), log = FALSE) {
+dburrIII3 <- function(x, shape1log = 0, shape2log = 0, scalelog = 1, log = FALSE) {
   if (!length(x)) {
     return(numeric(0))
   }
@@ -53,7 +53,7 @@ dburrIII3 <- function(x, shape1log = log(1), shape2log = log(1), scalelog = log(
 
 #' @rdname burrIII3
 #' @export
-qburrIII3 <- function(p, shape1log = log(1), shape2log = log(1), scalelog = log(1), lower.tail = TRUE, log.p = FALSE) {
+qburrIII3 <- function(p, shape1log = 0, shape2log = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   if (!length(q)) {
     return(numeric(0))
   }
@@ -66,7 +66,7 @@ qburrIII3 <- function(p, shape1log = log(1), shape2log = log(1), scalelog = log(
 
 #' @rdname burrIII3
 #' @export
-pburrIII3 <- function(q, shape1log = log(1), shape2log = log(1), scalelog = log(1), lower.tail = TRUE, log.p = FALSE) {
+pburrIII3 <- function(q, shape1log = 0, shape2log = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   if (!length(q)) {
     return(numeric(0))
   }
@@ -78,7 +78,7 @@ pburrIII3 <- function(q, shape1log = log(1), shape2log = log(1), scalelog = log(
 
 #' @rdname burrIII3
 #' @export
-rburrIII3 <- function(n, shape1log = log(1), shape2log = log(1), scalelog = log(1)) {
+rburrIII3 <- function(n, shape1log = 0, shape2log = 0, scalelog = 1) {
   r <- actuar::rburr(n, shape1 = exp(shape1log), shape2 = exp(shape2log), scale = exp(scalelog))
   1 / r
 }
@@ -86,5 +86,5 @@ rburrIII3 <- function(n, shape1log = log(1), shape2log = log(1), scalelog = log(
 #' @rdname burrIII3
 #' @export
 sburrIII3 <- function(x) {
-  c(shape1log = log(1), shape2log = log(1), scalelog = log(1))
+  c(shape1log = 0, shape2log = 0, scalelog = 1)
 }

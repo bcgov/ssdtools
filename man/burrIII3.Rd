@@ -9,33 +9,27 @@
 \alias{sburrIII3}
 \title{Burr Type III Three-Parameter Distribution}
 \usage{
-dburrIII3(
-  x,
-  shape1log = log(1),
-  shape2log = log(1),
-  scalelog = log(1),
-  log = FALSE
-)
+dburrIII3(x, shape1log = 0, shape2log = 0, scalelog = 1, log = FALSE)
 
 qburrIII3(
   p,
-  shape1log = log(1),
-  shape2log = log(1),
-  scalelog = log(1),
+  shape1log = 0,
+  shape2log = 0,
+  scalelog = 1,
   lower.tail = TRUE,
   log.p = FALSE
 )
 
 pburrIII3(
   q,
-  shape1log = log(1),
-  shape2log = log(1),
-  scalelog = log(1),
+  shape1log = 0,
+  shape2log = 0,
+  scalelog = 1,
   lower.tail = TRUE,
   log.p = FALSE
 )
 
-rburrIII3(n, shape1log = log(1), shape2log = log(1), scalelog = log(1))
+rburrIII3(n, shape1log = 0, shape2log = 0, scalelog = 1)
 
 sburrIII3(x)
 }

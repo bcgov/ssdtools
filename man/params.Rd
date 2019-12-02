@@ -28,11 +28,11 @@
 
 \item{locationlog}{location parameter on the log scale.}
 
-\item{shape}{shape parameter.}
-
 \item{scale}{scale parameter.}
 
 \item{scalelog}{scale parameter on the log scale.}
+
+\item{shape}{shape parameter.}
 
 \item{shapelog}{shape parameter on the log scale.}
 

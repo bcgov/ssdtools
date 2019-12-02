@@ -12,9 +12,9 @@
 #' @param lower.tail	logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].
 #' @param location location parameter.
 #' @param locationlog location parameter on the log scale.
-#' @param shape	shape parameter.
 #' @param scale scale parameter.
 #' @param scalelog scale parameter on the log scale.
+#' @param shape	shape parameter.
 #' @param shapelog shape parameter on the log scale.
 #' @param shape1log shape1 parameter on the log scale.
 #' @param shape2log shape2 parameter on the log scale.
