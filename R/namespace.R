@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import stats chk ggplot2
+#' @import stats chk ggplot2 lifecycle
 #' @importFrom graphics plot
 #' @importFrom VGAM vglm
 NULL

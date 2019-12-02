@@ -4,7 +4,7 @@
 \name{fluazinam_dists}
 \alias{fluazinam_dists}
 \title{fitdists for fitdistrplus fluazinam Data}
-\format{An object of class \code{fitdistscens} (inherits from \code{fitdists}) of length 5.}
+\format{An object of class \code{fitdistscens} (inherits from \code{fitdists}) of length 3.}
 \usage{
 fluazinam_dists
 }

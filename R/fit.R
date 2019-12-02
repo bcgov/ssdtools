@@ -85,10 +85,12 @@ ssd_fit_dist <- function(
 #'
 #' Fits one or more distributions to species sensitivity data.
 #'
-#' By default the 'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and
-#' 'weibull' distributions are fitted to the data.
+#' By default the 'burrIII2', 'gamma' and 'lnorm'
+#' distributions are fitted to the data.
+
 #' The ssd_fit_dists function has also been
-#' tested with the 'pareto' distribution.
+#' tested with the 'burrIII3', 'gompertz', 'lgumbel', 'llog', 'pareto' 
+#' and 'weibull' distributions.
 #'
 #' If weight specifies a column in the data frame with positive integers,
 #' weighted estimation occurs.
@@ -117,7 +119,7 @@ ssd_fit_dist <- function(
 #' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
-  dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
+  dists = c("burrIII2", "gamma", "lnorm"),
   computable = TRUE,
   silent = FALSE) {
   chk_s3_class(dists, "character")
@@ -125,6 +127,12 @@ ssd_fit_dists <- function(
   chk_gt(length(dists))
   chk_flag(computable)
   chk_flag(silent)
+  
+  if(missing(dists)) {
+    deprecate_soft("0.1.0", 
+                   "ssd_fit_dists(dists = )", 
+                   details = "More specifically the default value of c('gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm', 'weibull') has been replaced by c('burrIII2', 'gamma', 'lnorm').")
+  }
   
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists

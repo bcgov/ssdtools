@@ -16,5 +16,5 @@ context("subset")
 
 test_that("subset", {
   expect_identical(subset(boron_dists), boron_dists)
-  expect_identical(names(subset(boron_dists, c("weibull", "gamma"))), c("gamma", "weibull"))
+  expect_identical(names(subset(boron_dists, c("lnorm", "gamma"))), c("gamma", "lnorm"))
 })

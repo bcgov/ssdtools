@@ -19,7 +19,7 @@
 #' @param ... Unused
 #' @export
 #' @examples
-#' subset(boron_dists, c("gamma", "weibull"))
+#' subset(boron_dists, c("gamma", "lnorm"))
 subset.fitdists <- function(x, select = names(x), ...) {
   chk_s3_class(select, "character")
   chk_vector(select)

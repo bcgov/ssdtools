@@ -36,9 +36,9 @@ test_that("hp fitdists with no dists", {
 })
 
 test_that("hp fitdists", {
-  expect_equal(ssd_hp(boron_dists, 1)$est, 3.94776512989495)
+  expect_equal(ssd_hp(boron_dists, 1)$est, 3.66480402177009)
   expect_equal(ssd_hp(boron_dists, c(0, 1, 30, Inf))$est,
-               c(0, 3.94776512989495, 72.0361745625695, 100))
+               c(0, 3.66480402177009, 72.8682760255365, 100))
 })
 
 test_that("hp fitdistcens", {
@@ -48,5 +48,5 @@ test_that("hp fitdistcens", {
 
 test_that("hp fitdistscens", {
   expect_equal(ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))$est,
-               c(0, 3.58823076789627, 28.6257342451691, 100))
+               c(0, 4.2330766654294, 26.9580291772613, 100))
 })

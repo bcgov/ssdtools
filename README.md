@@ -83,15 +83,12 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(boron_dists)
-#> # A tibble: 6 x 9
-#>   dist        ad     ks    cvm   aic  aicc   bic delta weight
-#> * <chr>    <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 gamma    0.441 0.117  0.0555  238.  238.  240. 0.019  0.268
-#> 2 gompertz 0.602 0.120  0.0823  238.  238.  240. 0      0.271
-#> 3 lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 
-#> 4 llog     0.487 0.0993 0.0595  241.  241.  244. 3.40   0.049
-#> 5 lnorm    0.507 0.107  0.0703  239.  240.  242. 1.42   0.133
-#> 6 weibull  0.435 0.117  0.0543  238.  238.  240. 0.014  0.269
+#> # A tibble: 3 x 9
+#>   dist        ad    ks    cvm   aic  aicc   bic delta weight
+#> * <chr>    <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 burrIII2 0.501 0.108 0.0629  241.  242.  244.  3.74  0.093
+#> 2 gamma    0.440 0.117 0.0554  238.  238.  240.  0     0.606
+#> 3 lnorm    0.507 0.107 0.0703  239.  240.  242.  1.40  0.301
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
@@ -104,8 +101,8 @@ boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
 print(boron_hc5)
 #> # A tibble: 1 x 5
 #>   percent   est    se   lcl   ucl
-#>     <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.25 0.736 0.604  3.20
+#> *   <int> <dbl> <dbl> <dbl> <dbl>
+#> 1       5  1.30 0.855 0.504  3.53
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -130,7 +127,7 @@ The ssdtools manual is available at
 <https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html>.
 
 A shiny webpage developed for non-R-users is available at
-<https://poissonconsulting.shinyapps.io/ssdtools/>.
+<https://bcgov-env.shinyapps.io/ssdtools/>.
 
 The ssdtools package was developed as a result of earlier drafts of:
 

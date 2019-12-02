@@ -17,5 +17,5 @@
 Subset fitdists
 }
 \examples{
-subset(boron_dists, c("gamma", "weibull"))
+subset(boron_dists, c("gamma", "lnorm"))
 }
