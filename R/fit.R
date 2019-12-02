@@ -31,7 +31,9 @@ add_starting_values <- function(dist, x) {
     )
   } else if (dist$distr == "llog") {
     dist$start <- list(scale = mean(log(x)),
-shape = pi * sd(log(x)) / sqrt(3))
+                       shape = pi * sd(log(x)) / sqrt(3))
+  } else if (dist$distr == "burrIII2") {
+    dist$start <- list(lshape=log(1), lscale=log(1))
   } else if (dist$distr == "pareto") {
     fit <- vglm(x ~ 1, VGAM::paretoff)
     dist$start <- list(shape = exp(unname(coef(fit))))
@@ -42,27 +44,27 @@ shape = pi * sd(log(x)) / sqrt(3))
 
 fit_dist_uncensored <- function(data, left, weight, dist) {
   x <- data[[left]]
-
+  
   dist <- list(data = x, distr = dist, method = "mle")
-
+  
   if (!is.null(weight)) {
     dist$weights <- data[[weight]]
   }
-
+  
   dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdist, dist)
 }
 
 fit_dist_censored <- function(data, left, right, weight, dist) {
   x <- rowMeans(data[c(left, right)], na.rm = TRUE)
-
+  
   censdata <- data.frame(left = data[[left]], right = data[[right]])
   dist <- list(censdata = censdata, distr = dist)
-
+  
   if (!is.null(weight)) {
     dist$weights <- data[[weight]]
   }
-
+  
   dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdistcens, dist)
 }
@@ -76,17 +78,17 @@ remove_errors <- function(dist_fit, name, silent) {
 }
 
 ssd_fit_dist <- function(
-                         data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
+  data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
   chk_s3_class(data, "data.frame")
   chk_gte(nrow(data), 6)
   chk_string(left)
   chk_string(right)
-
+  
   if(!is.null(weight)) chk_string(weight)
-
+  
   chk_superset(colnames(data), c(left, right, weight))
   chk_string(dist)
-
+  
   if (left == right) {
     fit <- fit_dist_uncensored(data, left, weight, dist)
   } else {
@@ -129,19 +131,19 @@ ssd_fit_dist <- function(
 #' data(fluazinam, package = "fitdistrplus")
 #' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
-                          data, left = "Conc", right = left, weight = NULL,
-                          dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
-                          silent = FALSE) {
+  data, left = "Conc", right = left, weight = NULL,
+  dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
+  silent = FALSE) {
   chk_s3_class(dists, "character")
   chk_unique(dists)
   chk_gt(length(dists))
   chk_flag(silent)
-
+  
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
   dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
   dists <- mapply(remove_errors, dists, names(dists),
-    MoreArgs = list(silent = silent), SIMPLIFY = FALSE
+                  MoreArgs = list(silent = silent), SIMPLIFY = FALSE
   )
   dists <- dists[!vapply(dists, is.null, TRUE)]
   if (!length(dists)) stop("all distributions failed to fit", call. = FALSE)

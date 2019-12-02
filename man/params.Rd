@@ -13,6 +13,24 @@
 \item{ci}{A flag specifying whether to estimate confidence intervals by parametric bootstrapping.}
 
 \item{...}{Unused.}
+
+\item{x, q}{vector of quantiles.}
+
+\item{p}{vector of probabilities.}
+
+\item{n}{number of observations.}
+
+\item{shape}{shape parameter.}
+
+\item{scale}{scale parameter.}
+
+\item{lshape}{log shape parameter.}
+
+\item{lscale}{log scale parameter.}
+
+\item{log, log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].}
 }
 \description{
 Parameter Descriptions for ssdtools Functions
