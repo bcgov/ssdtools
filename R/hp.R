@@ -26,6 +26,7 @@ ssd_hp <- function(x, ...) {
 .ssd_hp_fitdist <- function(x, conc, ci) {
   chk_vector(conc)
   chk_numeric(conc)
+  na <- rep(NA_real_, length(conc))
 
   args <- as.list(x$estimate)
   args$q <- conc
@@ -34,7 +35,8 @@ ssd_hp <- function(x, ...) {
   
   p <- do.call(what, args)
   p <- p * 100
-  if(!ci) return(as_tibble(data.frame(conc = conc, est = p)))
+  if(!ci) return(as_tibble(data.frame(conc = conc, est = p, 
+                                      se = na, lcl = na, ucl = na)))
   .NotYetImplemented()
   samples <- boot(x, nboot = 1000, parallel = FALSE, ncpus = 1)
   samples
@@ -53,7 +55,7 @@ ssd_hp <- function(x, ...) {
   mat <- as.matrix(as.data.frame(mat))
   
   hp$est <- apply(mat, 1, weighted.mean, w = weight)
-  if(!ci) as_tibble(hp)
+  if(!ci) return(as_tibble(hp))
   .NotYetImplemented()
   hp
 }

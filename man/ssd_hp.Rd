@@ -26,6 +26,8 @@ ssd_hp(x, ...)
 \item{conc}{A numeric vector of the concentrations.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals by parametric bootstrapping.}
+
+\item{ic}{A string specifying the information-theoretic criterion to use for model averaging ('aic', 'aicc' or 'bic').}
 }
 \value{
 A data frame of the conc and percent.
