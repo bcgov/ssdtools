@@ -1,3 +1,4 @@
+- `ssd_fit_dists()` now checks if standard errors computable.
 - Added `sdist(x)` functionality to set starting values for distributions.
 - Added Burr Type-III Three-Parameter Distribution (`burrIII3`).
 - Added Burr Type-III Two-Parameter Distribution (`burrIII2`).

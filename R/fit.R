@@ -48,10 +48,15 @@ fit_dist_censored <- function(data, left, right, weight, dist) {
   do.call(fitdistrplus::fitdistcens, dist)
 }
 
-remove_errors <- function(dist_fit, name, silent) {
+remove_errors <- function(dist_fit, name, computable, silent) {
   if (!is.null(dist_fit$error)) {
     if (!silent) warning(name, " failed to fit: ", dist_fit$error, call. = FALSE)
     return(NULL)
+  }
+  sd <- dist_fit$result$sd
+  if(is.null(sd) || any(is.na(sd))) {
+    if (!silent) warning(name, " failed to compute standard errors (try rescaling the data or increasing the sample size).", call. = FALSE)
+    if(computable) return(NULL)
   }
   dist_fit$result
 }
@@ -98,6 +103,7 @@ ssd_fit_dist <- function(
 #' @param right A string of the column in data with the right concentration values.
 #' @param weight A string of the column in data with the weightings (or NULL)
 #' @param dists A character vector of the distributions to fit.
+#' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
 #' @param silent A flag indicating whether fits should fail silently.
 #' @return An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
 #'
@@ -112,17 +118,19 @@ ssd_fit_dist <- function(
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
   dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
+  computable = TRUE,
   silent = FALSE) {
   chk_s3_class(dists, "character")
   chk_unique(dists)
   chk_gt(length(dists))
+  chk_flag(computable)
   chk_flag(silent)
   
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
   dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
   dists <- mapply(remove_errors, dists, names(dists),
-                  MoreArgs = list(silent = silent), SIMPLIFY = FALSE
+                  MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
   )
   dists <- dists[!vapply(dists, is.null, TRUE)]
   if (!length(dists)) stop("all distributions failed to fit", call. = FALSE)

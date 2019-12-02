@@ -10,6 +10,7 @@ ssd_fit_dists(
   right = left,
   weight = NULL,
   dists = c("gamma", "gompertz", "lgumbel", "llog", "lnorm", "weibull"),
+  computable = TRUE,
   silent = FALSE
 )
 }
@@ -23,6 +24,8 @@ ssd_fit_dists(
 \item{weight}{A string of the column in data with the weightings (or NULL)}
 
 \item{dists}{A character vector of the distributions to fit.}
+
+\item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 }

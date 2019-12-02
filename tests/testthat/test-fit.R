@@ -83,3 +83,22 @@ test_that("fluazinam", {
   expect_true(is.fitdistcens(dist))
   expect_equal(coef(dist), c(meanlog = 3.566750, sdlog = 2.182757), tolerance = 0.000001)
 })
+
+
+test_that("fit_dists computable", {
+  data <- data.frame(Conc = c(0.1, 0.12, 0.24, 0.42, 0.67, 
+                              0.78, 120, 2030, 9033, 15000, 
+                              15779, 20000, 31000, 40000, 105650))
+                     
+  expect_error(ssd_fit_dists(data, dists = "gamma"),
+               "all distributions failed to fit")
+
+  fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]]
+  expect_equal(fit$sd, c(scale = NaN, shape = 0.0414094229126189))
+  expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
+  
+  data$Conc <- data$Conc / 100
+  fit <- ssd_fit_dists(data, dists = "gamma")[[1]]
+  expect_equal(fit$sd, c(scale = 673.801371511101, shape = 0.0454275860604086))
+  expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
+})
