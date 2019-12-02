@@ -10,13 +10,13 @@
 \usage{
 ssd_hp(x, ...)
 
-\method{ssd_hp}{fitdist}(x, conc, ...)
+\method{ssd_hp}{fitdist}(x, conc, ci = FALSE, ...)
 
-\method{ssd_hp}{fitdists}(x, conc, ic = "aicc", ...)
+\method{ssd_hp}{fitdists}(x, conc, ic = "aicc", ci = FALSE, ...)
 
-\method{ssd_hp}{fitdistcens}(x, conc, ...)
+\method{ssd_hp}{fitdistcens}(x, conc, ci = FALSE, ...)
 
-\method{ssd_hp}{fitdistscens}(x, conc, ic = "aic", ...)
+\method{ssd_hp}{fitdistscens}(x, conc, ic = "aic", ci = FALSE, ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -25,7 +25,7 @@ ssd_hp(x, ...)
 
 \item{conc}{A numeric vector of the concentrations.}
 
-\item{ic}{A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.}
+\item{ci}{A flag specifying whether to estimate confidence intervals by parametric bootstrapping.}
 }
 \value{
 A data frame of the conc and percent.
