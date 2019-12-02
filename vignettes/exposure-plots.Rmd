@@ -14,7 +14,8 @@ vignette: >
 knitr::opts_chunk$set(
   echo = TRUE,
   fig.width = 6,
-  fig.height = 4)
+  fig.height = 4
+)
 library(ggplot2)
 library(ssdtools)
 ```
@@ -35,7 +36,7 @@ For example, suppose we want to superimpose an evironmental concentration cumula
 ```{r echo=FALSE}
 # what are the mean and sd on the log-scale for the envirionmental concentration
 ex.mean.log <- log(0.1)
-ex.sd.log   <- 1
+ex.sd.log <- 1
 ```
 
 Finding a suitable probability distribution to describe the exposure concentration is beyond the scope of this document -- we will assume that this has been done elsewhere.
@@ -45,38 +46,40 @@ From the exposure distribution, we construct a data frame with the concentration
 Notice that some care is needed because the plot for *ssdtools* in on the logarithmic base 10 scale and not the natural logarithm base $e$ scale.
 
 ```{r }
-ex.cdf <- data.frame(Conc=exp(seq(log(.01), log(10), .1)))  # generate a grid of concentrations
-ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc, 
-                        meanlog=ex.mean.log, 
-                        sdlog=ex.sd.log) # generate the cdf
-
+ex.cdf <- data.frame(Conc = exp(seq(log(.01), log(10), .1))) # generate a grid of concentrations
+ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc,
+  meanlog = ex.mean.log,
+  sdlog = ex.sd.log
+) # generate the cdf
 ```
 
 We now add this to the plot
 ```{r }
-fit.plot + geom_line(data=ex.cdf, aes(x=Conc, y=ex.cdf), color="red", size=2)+
-           annotate("text", label=paste("Exposure distribution"),
-                            x=1.08*ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5 )], y=0.5, angle=75 )
+fit.plot + geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
+  annotate("text",
+    label = paste("Exposure distribution"),
+    x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
+  )
 ```
 
 The *ssdtools* package contains a function *ssd_exposure* that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.
 
 ```{r echo=TRUE}
-ex.risk <- ssd_exposure(fit, meanlog=ex.mean.log, sdlog=ex.sd.log)
+ex.risk <- ssd_exposure(fit, meanlog = ex.mean.log, sdlog = ex.sd.log)
 ex.risk
-
 ```
 The risk of `r round(ex.risk, 5)` can also be added to the plot in the usual way:
 
 ```{r echo=TRUE}
-fit.plot + geom_line(dat=ex.cdf, aes(x=Conc, y=ex.cdf), color="red", size=2) +
-          annotate("text", label=paste("Exposure distribution"),
-                            x=1.08*ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5 )], y=0.5, angle=75 )+
-          annotate("text", 
-                    label=paste("Verdonck risk :", round(ex.risk,5)),
-                    x=Inf, y=0, hjust=1.1, vjust=-.5)
-
-
+fit.plot + geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
+  annotate("text",
+    label = paste("Exposure distribution"),
+    x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
+  ) +
+  annotate("text",
+    label = paste("Verdonck risk :", round(ex.risk, 5)),
+    x = Inf, y = 0, hjust = 1.1, vjust = -.5
+  )
 ```
 
 ## Other embellishments
