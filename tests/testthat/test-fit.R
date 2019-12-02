@@ -37,7 +37,7 @@ test_that("fit_dists", {
     "gamma", "gompertz", "lgumbel",
     "llog", "lnorm", "pareto", "weibull"
   )
-  expect_error(ssd_fit_dists(boron_data[1:5, ]), "all distributions failed to fit")
+  expect_error(ssd_fit_dists(boron_data[1:5, ]), "^All distributions failed to fit[.]$")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = dist_names)
   expect_true(is.fitdists(dists))
   expect_identical(names(dists), dist_names)
@@ -91,7 +91,7 @@ test_that("fit_dists computable", {
                               15779, 20000, 31000, 40000, 105650))
                      
   expect_error(ssd_fit_dists(data, dists = "gamma"),
-               "all distributions failed to fit")
+               "^All distributions failed to fit[.]$")
 
   fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]]
   expect_equal(fit$sd, c(scale = NaN, shape = 0.0414094229126189))

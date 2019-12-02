@@ -1,3 +1,4 @@
+- Tidyverse style error and warning messages.
 - Default distributions changed to 'burrIII2', 'gamma' and 'lnorm' from
 'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and 'weibull'.
 - `ssd_fit_dists()` now checks if standard errors computable.

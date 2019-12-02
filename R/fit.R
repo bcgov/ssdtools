@@ -50,12 +50,12 @@ fit_dist_censored <- function(data, left, right, weight, dist) {
 
 remove_errors <- function(dist_fit, name, computable, silent) {
   if (!is.null(dist_fit$error)) {
-    if (!silent) warning(name, " failed to fit: ", dist_fit$error, call. = FALSE)
+    if (!silent) wrn("Distribution ", name, " failed to fit: ", dist_fit$error)
     return(NULL)
   }
   sd <- dist_fit$result$sd
   if(is.null(sd) || any(is.na(sd))) {
-    if (!silent) warning(name, " failed to compute standard errors (try rescaling the data or increasing the sample size).", call. = FALSE)
+    if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).", call. = FALSE)
     if(computable) return(NULL)
   }
   dist_fit$result
@@ -141,7 +141,7 @@ ssd_fit_dists <- function(
                   MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
   )
   dists <- dists[!vapply(dists, is.null, TRUE)]
-  if (!length(dists)) stop("all distributions failed to fit", call. = FALSE)
+  if (!length(dists)) err("All distributions failed to fit.")
   if (left == right) {
     class(dists) <- "fitdists"
   } else {
