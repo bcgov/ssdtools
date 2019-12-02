@@ -9,6 +9,14 @@ test_that("dpareto", {
   expect_equal(dpareto(numeric(0)), numeric(0))
 })
 
+test_that("fit pareto", {
+  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
+
+  expect_true(is.fitdist(dist))
+  expect_equal(coef(dist),
+  c(shape = 0.390374158489078))
+})
+
 test_that("ppareto", {
   expect_equal(ppareto(1), 0)
   expect_equal(ppareto(2), 1 / 2)

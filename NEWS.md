@@ -1,3 +1,4 @@
+- Replaced `location` and `scale` arguments to `lgumbel()` with `locationlog` and `scalelog`.
 - Tidyverse style error and warning messages.
 - Default distributions changed to 'burrIII2', 'gamma' and 'lnorm' from
 'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and 'weibull'.

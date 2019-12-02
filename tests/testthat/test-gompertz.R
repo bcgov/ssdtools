@@ -6,6 +6,15 @@ test_that("dgompertz", {
   expect_identical(dgompertz(numeric(0), shape = 1, log = TRUE), numeric(0))
 })
 
+test_that("fit gompertz", {
+  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+
+  expect_true(is.fitdist(dist))
+  expect_equal(coef(dist),
+  c(shape = 0.0394118062171637, scale = 0.00260015114608545),
+  tolerance = 1e-05)
+})
+
 test_that("qgompertz", {
   expect_identical(qgompertz(numeric(0)), numeric(0))
   expect_identical(

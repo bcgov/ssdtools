@@ -17,7 +17,7 @@
 #' Density, distribution function, quantile function, random generation
 #' and starting values for the
 #' Log-Gumbel distribution
-#' with \code{scale} and \code{location} parameters.
+#' with \code{scalelog} and \code{locationlog} parameters.
 #'
 #' @param x A numeric vector of values.
 #' @inheritParams params
@@ -27,27 +27,27 @@ NULL
 
 #' @rdname lgumbel
 #' @export
-dlgumbel <- function(x, location = 0, scale = 0, log = FALSE) {
-  fx <- VGAM::dgumbel(log(x), location = location, scale = scale, log = FALSE) / x
+dlgumbel <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
+  fx <- VGAM::dgumbel(log(x), location = exp(locationlog), scale = exp(scalelog), log = FALSE) / x
   if (log) fx <- log(fx)
   fx
 }
 
 #' @rdname lgumbel
 #' @export
-qlgumbel <- function(p, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE) {
+qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   if (log.p) p <- exp(p)
   if (!lower.tail) p <- 1 - p
-  exp(VGAM::qgumbel(p, location = location, scale = scale))
+  exp(VGAM::qgumbel(p, location = exp(locationlog), scale = exp(scalelog)))
 }
 
 #' @rdname lgumbel
 #' @export
-plgumbel <- function(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE) {
+plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   if (!length(q)) {
     return(numeric(0))
   }
-  Fq <- VGAM::pgumbel(log(q), location = location, scale = scale)
+  Fq <- VGAM::pgumbel(log(q), location = exp(locationlog), scale = exp(scalelog))
   if (!lower.tail) Fq <- 1 - Fq
   if (log.p) Fq <- log(Fq)
   Fq
@@ -55,15 +55,15 @@ plgumbel <- function(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALS
 
 #' @rdname lgumbel
 #' @export
-rlgumbel <- function(n, location = 0, scale = 0) {
-  exp(VGAM::rgumbel(n, location = location, scale = scale))
+rlgumbel <- function(n, locationlog = 0, scalelog = 1) {
+  exp(VGAM::rgumbel(n, location = exp(locationlog), scale = exp(scalelog)))
 }
 
 #' @rdname lgumbel
 #' @export
 slgumbel <- function(x) {
   c(
-    location = mean(log(x), na.rm = TRUE),
-    scale = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
+    locationlog = mean(log(x), na.rm = TRUE),
+    scalelog = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
   )
 }

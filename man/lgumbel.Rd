@@ -9,22 +9,22 @@
 \alias{slgumbel}
 \title{Log-Gumbel Distribution}
 \usage{
-dlgumbel(x, location = 0, scale = 0, log = FALSE)
+dlgumbel(x, locationlog = 0, scalelog = 1, log = FALSE)
 
-qlgumbel(p, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE)
+qlgumbel(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 
-plgumbel(q, location = 0, scale = 0, lower.tail = TRUE, log.p = FALSE)
+plgumbel(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 
-rlgumbel(n, location = 0, scale = 0)
+rlgumbel(n, locationlog = 0, scalelog = 1)
 
 slgumbel(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{location}{location parameter.}
+\item{locationlog}{location parameter on the log scale.}
 
-\item{scale}{scale parameter.}
+\item{scalelog}{scale parameter on the log scale.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -45,5 +45,5 @@ A numeric vector.
 Density, distribution function, quantile function, random generation
 and starting values for the
 Log-Gumbel distribution
-with \code{scale} and \code{location} parameters.
+with \code{scalelog} and \code{locationlog} parameters.
 }

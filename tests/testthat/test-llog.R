@@ -21,6 +21,14 @@ test_that("rllog", {
   expect_equal(mean(log(r)), 1, tolerance = 0.1)
 })
 
+test_that("fit llog", {
+  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "llog")
+
+  expect_true(is.fitdist(dist))
+  expect_equal(coef(dist),
+  c(scale = 2.6261248978507, shape = 0.740309228071107))
+})
+
 test_that("pqllog", {
   expect_equal(log(qllog(0.5)), 1, tolerance = 0.000001)
   expect_equal(pllog(exp(3)), 0.8807971, tolerance = 0.0000001)

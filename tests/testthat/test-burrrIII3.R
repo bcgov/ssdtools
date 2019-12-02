@@ -20,7 +20,9 @@ test_that("dburrIII3", {
       0.00591715976331361
     ))
   )
-  
+})
+
+test_that("fit burrIII3", {
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
   
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
