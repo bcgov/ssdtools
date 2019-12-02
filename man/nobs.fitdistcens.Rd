@@ -15,5 +15,5 @@
 Number of Observations
 }
 \examples{
-stats::nobs(boron_lnorm)
+stats::nobs(fluazinam_lnorm)
 }

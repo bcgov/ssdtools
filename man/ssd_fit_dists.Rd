@@ -39,7 +39,7 @@ Fits one or more distributions to species sensitivity data.
 By default the 'burrIII2', 'gamma' and 'lnorm'
 distributions are fitted to the data.
 The ssd_fit_dists function has also been
-tested with the 'burrIII3', 'gompertz', 'lgumbel', 'llog', 'pareto'
+tested with the 'burrIII3', 'gompertz', 'lgumbel', 'llogis', 'pareto'
 and 'weibull' distributions.
 
 If weight specifies a column in the data frame with positive integers,

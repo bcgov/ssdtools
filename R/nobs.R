@@ -27,8 +27,8 @@ nobs.fitdist <- function(object, ...) object$n
 #' @param ... Unused.
 #' @export
 #' @examples
-#' stats::nobs(boron_lnorm)
-nobs.fitdistcens <- function(object, ...) nrow(object$censdata)
+#' stats::nobs(fluazinam_lnorm)
+nobs.fitdistcens <- function(object, ...) NA_integer_
 
 #' @export
 nobs.fitdists <- function(object, ...) nobs(object[[1]])

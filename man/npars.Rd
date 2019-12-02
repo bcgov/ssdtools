@@ -38,4 +38,6 @@ Get the Number of Parameters
 \examples{
 npars(boron_lnorm)
 npars(boron_dists)
+npars(fluazinam_lnorm)
+npars(fluazinam_dists)
 }

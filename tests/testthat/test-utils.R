@@ -24,13 +24,15 @@ test_that("utils", {
 
   expect_identical(nobs(boron_lnorm), 28L)
   expect_identical(nobs(boron_dists), nobs(boron_lnorm))
-  expect_identical(nobs(fluazinam_dists), 14L)
+  expect_identical(nobs(fluazinam_lnorm), NA_integer_)
+  expect_identical(nobs(fluazinam_dists), NA_integer_)
 
   expect_identical(npars(boron_lnorm), 2L)
   expect_identical(npars(boron_dists), c(
     burrIII2 = 2L, gamma = 2L, lnorm = 2L
   ))
   expect_identical(npars(fluazinam_lnorm), 2L)
+  expect_identical(npars(fluazinam_dists), c(burrIII2 = 2L, gamma = 2L, lnorm = 2L))
   expect_identical(
     comma_signif(c(0.0191, 1, NA, 1111)),
     c("0.02", "1", NA, "1,000")
