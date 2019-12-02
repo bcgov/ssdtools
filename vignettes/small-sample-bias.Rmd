@@ -2,22 +2,17 @@
 title: "Small sample bias in estimates"
 author: "sstools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
-output:
-  html_document:
-    number_sections: yes
-    toc: yes
-  word_document:
-    fig_caption: yes
-    reference_docx: SampleRmarkdown-Template-STYLE.docx
-    toc: yes
-  pdf_document:
-    number_sections: yes
-    toc: yes
-    fig_caption: true
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Small sample bias in estimates}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.width = 6,
+                      fig.height = 6)
 
 library(ggplot2)
 library(mle.tools)
@@ -27,8 +22,10 @@ library(ssdtools)
 nsim <- 1000 # number of simulations for effect of bias correction
 ```
 
-# Introduction
-## What is the issue
+## Introduction
+
+### What is the issue
+
 The *ssdtools* package uses the method of Maximum Likelihood (ML) to estimate parameters for each distribution that is fit to the data. Statistical theory
 says that maximum likelihood estimators are asymptotically unbiased, but does
 not guarantee performance in small samples.
@@ -150,8 +147,6 @@ scale or `r round(REG.HC5,3)` on the concentration scale.
 The ratio of HC5 values 
 is `r round(REG.HC5/MLE.HC5,2)`x on the concentration scale.
 
-
-
 The differences between the HCx computed from the MLE fit and using the corrected
 standard deviation will become more pronounced for small HCx values. For example,
 the HC1 estimated from the MLE fit is `r round(MLE.HC1,3)` 
@@ -161,13 +156,13 @@ The ratio of the HC1 values
 is `r round(REG.HC1/MLE.HC1,2)`x on the concentrations scale
 
 
-# What can be done?
+## What can be done?
 A similar concernalso occurs with other distributions. Howeve, except for a few distributions,
 such as the normal distribution, analytical expressions for the MLE
 and for unbiased estimators do not exist. The *mle.tools* package from CRAN
 provides a method that numerically corrects the bias after the fit is completed.
 
-## Bias correction using Cox-Snell method - log-normal distribution
+### Bias correction using Cox-Snell method - log-normal distribution
 
 For example, again using the Ag log-normal fit we have:
 ```{r }
@@ -440,10 +435,8 @@ the anti-log of the average, $exp(-1.65)=.192$ which is not the same value.
 
 The total bias does not appear to be large except in the case of very small sample sizes.
 
+### Bias correction using Cox-Snell method - gamma distribution
 
-
-
-## Bias correction using Cox-Snell method - gamma distribution
 We can also apply this to other distributions such as the gamma
 distribution. If we fit a gamma distribution to the
 Ag data we obtain:
@@ -776,8 +769,7 @@ Finally, the estimated $HC1$ and $HC5$ values are again biased upwards (upper le
 on the MLEs, but the estimated $HCx$ values based on the bias-corrected estimates appear to exhibit 
 less bias despite the bias in the $\log(HCx)$ values.
 
-
-# Recommendations
+## Recommendations
 
 In cases with reasonably large sample sizes (around 15+), the small sample bias is 
 unlikely to be of concern given the uncertainty in the endpoints actually used
@@ -799,8 +791,6 @@ and (b) extrapoloting even to a moderate tail fraction (e.g. HC5) is very, very
 dependent on the chosen distribution; (c) there is no data available
 to support even moderate extrapolation to tail proportions. Higher certainty in 
 the estimates can only be obtained by increasing sample sizes.
-
-
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
 style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
