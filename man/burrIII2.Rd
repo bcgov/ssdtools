@@ -53,14 +53,15 @@ qburrIII2 gives the quantile function, and rburrIII2 generates random samples.
 }
 \description{
 Density, distribution function, quantile function and random generation
-for the Burr Type III Two-Parameter distribution with 
+for the Burr Type III two-parameter distribution with 
 \code{lshape} and \code{lscale} parameters.
 }
 \details{
 The Burr 12 distribution from the actuar package is used as a base.
 The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
-refer to https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm for details.
-The shape1, shape2, and scale paramters are on the log(scale) as these must be positive.
+refer to 
+\url{https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm } for details.
+The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
 The two shape parameters are set to be equal to produce a two-parameter model.
 }
 \examples{
@@ -69,5 +70,5 @@ hist(x, freq = FALSE, col = "gray", border = "white")
 curve(dburrIII2(x), add = TRUE, col = "red4", lwd = 2)
 }
 \seealso{
-\code{\link[actuar]{dburr}}
+\code{\link[actuar]{dburr}} and \code{\link{burrIII3}}
 }

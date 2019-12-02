@@ -17,13 +17,7 @@
 #' Density, distribution function, quantile function and random generation
 #' for the Log-Gumbel distribution with \code{scale} and \code{location} parameters.
 #'
-#' @param x,q	vector of quantiles.
-#' @param p	vector of probabilities.
-#' @param n	number of observations.
-#' @param scale	scale parameter.
-#' @param location location parameter.
-#' @param log,log.p logical; if TRUE, probabilities p are given as log(p).
-#' @param lower.tail	logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].
+#' @inheritParams params
 #' @return
 #' dlgumbel gives the density, plgumbel gives the distribution function,
 #' qlgumbel gives the quantile function, and rlgumbel generates random deviates.

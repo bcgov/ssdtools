@@ -12,22 +12,17 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#
-# The actuar package has the Burr 12 distribution 
-# We model the shape1, shape2, and scale paramters on the log(scale) as these must be positive
-# We force the two shape parameters to be equal
-
 #' Burr Type III Two-Parameter Distribution
 #'
 #' Density, distribution function, quantile function and random generation
-#' for the Burr Type III Two-Parameter distribution with 
+#' for the Burr Type III two-parameter distribution with 
 #' \code{lshape} and \code{lscale} parameters.
-#' 
 #' 
 #' The Burr 12 distribution from the actuar package is used as a base.
 #' The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
-#' refer to https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm for details.
-#' The shape1, shape2, and scale paramters are on the log(scale) as these must be positive.
+#' refer to 
+#' \url{https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm } for details.
+#' The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
 #' The two shape parameters are set to be equal to produce a two-parameter model.
 #'
 #' @inheritParams params
@@ -35,7 +30,7 @@
 #' dburrIII2 gives the density, pburrIII2 gives the distribution function,
 #' qburrIII2 gives the quantile function, and rburrIII2 generates random samples.
 #' @name burrIII2
-#' @seealso \code{\link[actuar]{dburr}}
+#' @seealso \code{\link[actuar]{dburr}} and \code{\link{burrIII3}}
 #' @examples
 #' x <- rburrIII2(1000)
 #' hist(x, freq = FALSE, col = "gray", border = "white")

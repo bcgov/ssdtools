@@ -72,5 +72,5 @@ hist(x, freq = FALSE, col = "gray", border = "white")
 curve(dburrIII3(x), add = TRUE, col = "red4", lwd = 2)
 }
 \seealso{
-\code{\link[actuar]{dburr}}
+\code{\link[actuar]{dburr}} and \code{\link{burrIII2}}
 }

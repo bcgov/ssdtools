@@ -18,13 +18,7 @@
 #' for the Pareto distribution with parameters scale and shape.
 #' The functions are wrappers on the equivalent VGAM functions.
 #'
-#' @param x,q	vector of quantiles.
-#' @param p	vector of probabilities.
-#' @param n	number of observations.
-#' @param scale	alpha parameter.
-#' @param shape k parameter.
-#' @param log,log.p logical; if TRUE, probabilities p are given as log(p).
-#' @param lower.tail	logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].
+#' @inheritParams params
 #' @return
 #' dpareto gives the density, ppareto gives the distribution function,
 #' qpareto gives the quantile function, and rpareto generates random deviates.
