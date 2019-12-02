@@ -1,3 +1,4 @@
+- Deprecated `dllog()` etc for `dllogis()`.
 - Replaced `shape` and `scale` arguments to `llog()` with `shapelog` and `scalelog`.
 - Replaced `location` and `scale` arguments to `lgumbel()` with `locationlog` and `scalelog`.
 - Tidyverse style error and warning messages.

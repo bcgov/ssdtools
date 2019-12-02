@@ -20,16 +20,16 @@ test_that("fit_dist", {
   expect_identical(dist, boron_lnorm)
 })
 
-test_that("fit_dist tiny llog", {
+test_that("fit_dist tiny llogis", {
   data <- ssdtools::boron_data
-  fit <- ssdtools:::ssd_fit_dist(data, dist = "llog")
+  fit <- ssdtools:::ssd_fit_dist(data, dist = "llogis")
   expect_equal(
     fit$estimate,
     c(scalelog = 0.965466010495141, shapelog = -0.300741556664549)
   )
 
   data$Conc <- data$Conc / 100
-  fit <- ssdtools:::ssd_fit_dist(data, dist = "llog")
+  fit <- ssdtools:::ssd_fit_dist(data, dist = "llogis")
   expect_equal(
     fit$estimate,
     c(scalelog = -19.3827405930646, shapelog = 0.359228660334252)
@@ -39,7 +39,7 @@ test_that("fit_dist tiny llog", {
 test_that("fit_dists", {
   dist_names <- c(
     "gamma", "gompertz", "lgumbel",
-    "llog", "lnorm", "pareto", "weibull"
+    "llogis", "lnorm", "pareto", "weibull"
   )
   expect_error(ssd_fit_dists(boron_data[1:5, ]), "^All distributions failed to fit[.]$")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = dist_names)

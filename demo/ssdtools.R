@@ -37,7 +37,7 @@ head(data)
 #' the column with the concentration values.
 fits <- ssd_fit_dists(data,
   left = "Conc",
-  dists = c("lnorm", "llog", "gompertz", "lgumbel", "gamma", "weibull")
+  dists = c("lnorm", "llogis", "gompertz", "lgumbel", "gamma", "weibull")
 )
 
 #' The `autoplot()` function can be used to plot the fits (for more information type `?autoplot.fitdists`)
@@ -69,7 +69,7 @@ ssd_hc(fits, nboot = 100L)
 #' ### Confidence Intervals
 #'
 #' To generate and plot precise confidence intervals run the following code.
-#' It will take around 5-10 hours to complete
+#' It will take around 1 hour to complete
 #' ```
 #'  pred <- predict(fits, nboot = 10000L)
 #'  ssd_plot(data, pred, left = "Conc", label = "Species", color = "Group",

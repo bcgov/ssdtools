@@ -12,31 +12,31 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("llog")
+context("llogis")
 
-test_that("dllog", {
-  expect_equal(dllog(exp(3), log(3), log(1)), 0.003720046, tolerance = 0.0000001)
-  expect_equal(dllog(exp(4), log(3), log(1)), 0.001200358, tolerance = 0.0000001)
+test_that("dllogis", {
+  expect_equal(dllogis(exp(3), log(3), log(1)), 0.003720046, tolerance = 0.0000001)
+  expect_equal(dllogis(exp(4), log(3), log(1)), 0.001200358, tolerance = 0.0000001)
 })
 
-test_that("fit llog", {
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "llog")
+test_that("fit llogis", {
+  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
 
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist),
   c(scalelog = 0.965466010495141, shapelog = -0.300741556664549))
 })
 
-test_that("pqllog", {
-  expect_equal(log(qllog(0.5, 0, 0)), 1, tolerance = 0.000001)
-  expect_equal(pllog(exp(3), 0, 0), 0.8807971, tolerance = 0.0000001)
-  expect_equal(pllog(exp(4), 0, 0), 0.9525741, tolerance = 0.0000001)
-  expect_identical(pllog(qllog(0.5, 3, 1), 3, 1), 0.5)
+test_that("pqllogis", {
+  expect_equal(log(qllogis(0.5, 0, 0)), 1, tolerance = 0.000001)
+  expect_equal(pllogis(exp(3), 0, 0), 0.8807971, tolerance = 0.0000001)
+  expect_equal(pllogis(exp(4), 0, 0), 0.9525741, tolerance = 0.0000001)
+  expect_identical(pllogis(qllogis(0.5, 3, 1), 3, 1), 0.5)
 })
 
-test_that("rllog", {
+test_that("rllogis", {
   set.seed(99)
-  r <- rllog(100000, 0, 0)
+  r <- rllogis(100000, 0, 0)
   expect_identical(length(r), 100000L)
   expect_equal(mean(log(r)), 1, tolerance = 0.1)
 })

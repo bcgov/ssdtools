@@ -24,45 +24,45 @@
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
-#' @name llog
-#' @seealso \code{\link[FAdist]{dllog}}
+#' @name llogis
+#' @seealso \code{\link[stats]{dlogis}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
-#' plot(x, dllog(x), type = "l")
+#' plot(x, dllogis(x), type = "l")
 NULL
 
-#' @rdname llog
+#' @rdname llogis
 #' @export
-dllog <- function(x, shapelog = 0, scalelog = 1, log = FALSE) {
+dllogis <- function(x, shapelog = 0, scalelog = 1, log = FALSE) {
   if(!length(x)) return(numeric(0))
   d <- dlogis(log(x), location = exp(scalelog), scale = exp(shapelog)) / x
   if(log) return(log(d))
   d
 }
 
-#' @rdname llog
+#' @rdname llogis
 #' @export
-qllog <- function(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+qllogis <- function(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   if(log.p) p <- exp(p)
   if(!lower.tail) p <- 1 - p
   exp(qlogis(p, location = exp(scalelog), scale = exp(shapelog)))
 }
 
-#' @rdname llog
+#' @rdname llogis
 #' @export
-pllog <- function(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+pllogis <- function(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   plogis(log(q), location = exp(scalelog), scale = exp(shapelog), lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname llog
+#' @rdname llogis
 #' @export
-rllog <- function(n, shapelog = 0, scalelog = 1) {
+rllogis <- function(n, shapelog = 0, scalelog = 1) {
   exp(rlogis(n = n, location = exp(scalelog), scale = exp(shapelog)))
 }
 
-#' @rdname llog
+#' @rdname llogis
 #' @export
-sllog <- function(x) {
+sllogis <- function(x) {
   c(
     scalelog = mean(log(x), na.rm = TRUE),
     shapelog = pi * sd(log(x), na.rm = TRUE) / sqrt(3)
