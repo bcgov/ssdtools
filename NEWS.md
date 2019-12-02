@@ -1,3 +1,4 @@
+- Replaced `shape` and `scale` arguments to `llog()` with `shapelog` and `scalelog`.
 - Replaced `location` and `scale` arguments to `lgumbel()` with `locationlog` and `scalelog`.
 - Tidyverse style error and warning messages.
 - Default distributions changed to 'burrIII2', 'gamma' and 'lnorm' from

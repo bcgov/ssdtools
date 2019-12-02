@@ -35,7 +35,7 @@ test_that("ssd_hc fitdists", {
   expect_is(x, "tbl")
   expect_identical(colnames(x), c("percent", "est", "se", "lcl", "ucl"))
   expect_identical(x$percent, 5L)
-  expect_equal(x$est, 1.30460379074604)
+  expect_equal(x$est, 1.30451507985013)
 })
 
 test_that("ssd_hc fitdistscens", {
@@ -43,5 +43,5 @@ test_that("ssd_hc fitdistscens", {
   expect_is(x, "tbl")
   expect_identical(colnames(x), c("percent", "est", "se", "lcl", "ucl"))
   expect_identical(x$percent, 5L)
-  expect_equal(x$est, 1.3531923916458)
+  expect_equal(x$est, 1.35228097954393)
 })

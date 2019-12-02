@@ -9,22 +9,22 @@
 \alias{sllog}
 \title{Log-Logistic Distribution}
 \usage{
-dllog(x, shape = 1, scale = 1, log = FALSE)
+dllog(x, shapelog = 0, scalelog = 1, log = FALSE)
 
-qllog(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
+qllog(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 
-pllog(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
+pllog(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 
-rllog(n, shape = 1, scale = 1)
+rllog(n, shapelog = 0, scalelog = 1)
 
 sllog(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{shape}{shape parameter.}
+\item{shapelog}{shape parameter on the log scale.}
 
-\item{scale}{scale parameter.}
+\item{scalelog}{scale parameter on the log scale.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 

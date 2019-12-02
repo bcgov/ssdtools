@@ -33,33 +33,33 @@ NULL
 
 #' @rdname llog
 #' @export
-dllog <- function(x, shape = 1, scale = 1, log = FALSE) {
-  FAdist::dllog(x = x, shape = shape, scale = scale, log = log)
+dllog <- function(x, shapelog = 0, scalelog = 1, log = FALSE) {
+  FAdist::dllog(x = x, shape = exp(shapelog), scale = exp(scalelog), log = log)
 }
 
 #' @rdname llog
 #' @export
-qllog <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-  FAdist::qllog(p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+qllog <- function(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+  FAdist::qllog(p = p, shape = exp(shapelog), scale = exp(scalelog), lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llog
 #' @export
-pllog <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-  FAdist::pllog(q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+pllog <- function(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+  FAdist::pllog(q = q, shape = exp(shapelog), scale = exp(scalelog), lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llog
 #' @export
-rllog <- function(n, shape = 1, scale = 1) {
-  FAdist::rllog(n = n, shape = shape, scale = scale)
+rllog <- function(n, shapelog = 0, scalelog = 1) {
+  FAdist::rllog(n = n, shape = exp(shapelog), scale = exp(scalelog))
 }
 
 #' @rdname llog
 #' @export
 sllog <- function(x) {
   c(
-    scale = mean(log(x), na.rm = TRUE),
-    shape = pi * sd(log(x), na.rm = TRUE) / sqrt(3)
+    scalelog = mean(log(x), na.rm = TRUE),
+    shapelog = pi * sd(log(x), na.rm = TRUE) / sqrt(3)
   )
 }
