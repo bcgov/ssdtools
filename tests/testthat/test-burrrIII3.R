@@ -26,14 +26,14 @@ test_that("dburrIII3", {
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(lshape1 = 13.7306749122748, lshape2 = -0.148593002318655, lscale = 12.4107584491757))
+  expect_equal(coef(dist), c(shape1log = 13.7306749122748, shape2log = -0.148593002318655, scalelog = 12.4107584491757))
 
   data$Conc <- data$Conc / 1000
 
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(lshape1 = 14.9250144484367, lshape2 = -0.148438502049071, lscale = 20.7011702445245))
+  expect_equal(coef(dist), c(shape1log = 14.9250144484367, shape2log = -0.148438502049071, scalelog = 20.7011702445245))
 })
 
 test_that("qburrIII3", {

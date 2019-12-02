@@ -8,15 +8,16 @@
 #' @param q	vector of quantiles.
 #' @param p	vector of probabilities.
 #' @param n	number of observations.
-#' @param shape	shape parameter.
-#' @param scale scale parameter.
-#' @param lshape log shape parameter.
-#' @param lshape1 log shape1 parameter.
-#' @param lshape2 log shape2 parameter.
-#' @param lscale log scale parameter.
-#' @param location location parameter.
 #' @param log,log.p logical; if TRUE, probabilities p are given as log(p).
 #' @param lower.tail	logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].
+#' @param location location parameter.
+#' @param locationlog location parameter on the log scale.
+#' @param shape	shape parameter.
+#' @param scale scale parameter.
+#' @param scalelog scale parameter on the log scale.
+#' @param shapelog shape parameter on the log scale.
+#' @param shape1log shape1 parameter on the log scale.
+#' @param shape2log shape2 parameter on the log scale.
 #' @keywords internal
 #' @name params
 NULL
