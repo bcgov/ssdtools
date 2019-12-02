@@ -32,7 +32,6 @@ Depends:
 Imports:
     chk,
     fitdistrplus,
-    FAdist,
     actuar,
     ggplot2,
     graphics,

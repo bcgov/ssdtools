@@ -34,25 +34,30 @@ NULL
 #' @rdname llog
 #' @export
 dllog <- function(x, shapelog = 0, scalelog = 1, log = FALSE) {
-  FAdist::dllog(x = x, shape = exp(shapelog), scale = exp(scalelog), log = log)
+  if(!length(x)) return(numeric(0))
+  d <- dlogis(log(x), location = exp(scalelog), scale = exp(shapelog)) / x
+  if(log) return(log(d))
+  d
 }
 
 #' @rdname llog
 #' @export
 qllog <- function(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
-  FAdist::qllog(p = p, shape = exp(shapelog), scale = exp(scalelog), lower.tail = lower.tail, log.p = log.p)
+  if(log.p) p <- exp(p)
+  if(!lower.tail) p <- 1 - p
+  exp(qlogis(p, location = exp(scalelog), scale = exp(shapelog)))
 }
 
 #' @rdname llog
 #' @export
 pllog <- function(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
-  FAdist::pllog(q = q, shape = exp(shapelog), scale = exp(scalelog), lower.tail = lower.tail, log.p = log.p)
+  plogis(log(q), location = exp(scalelog), scale = exp(shapelog), lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llog
 #' @export
 rllog <- function(n, shapelog = 0, scalelog = 1) {
-  FAdist::rllog(n = n, shape = exp(shapelog), scale = exp(scalelog))
+  exp(rlogis(n = n, location = exp(scalelog), scale = exp(shapelog)))
 }
 
 #' @rdname llog
