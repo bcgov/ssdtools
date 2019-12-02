@@ -16,17 +16,14 @@
 #'
 #' Gets percent species protected at specified concentrations.
 #'
-#' @param x The object.
-#' @param conc A numeric vector of the concentrations.
-#' @inheritParams predict.fitdists
-#' @param ... Unused.
+#' @inheritParams params
 #' @return A data frame of the conc and percent.
 #' @export
 ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-.ssd_hp_fitdist <- function(x, conc) {
+.ssd_hp_fitdist <- function(x, conc, ci) {
   chk_vector(conc)
   chk_numeric(conc)
 
@@ -37,11 +34,15 @@ ssd_hp <- function(x, ...) {
   
   p <- do.call(what, args)
   p <- p * 100
-  as_tibble(data.frame(conc = conc, est = p))
+  if(!ci) return(as_tibble(data.frame(conc = conc, est = p)))
+  .NotYetImplemented()
+  samples <- boot(x, nboot = 1000, parallel = FALSE, ncpus = 1)
+  samples
 }
 
-.ssd_hp_fitdists <- function(x, conc, ic) {
-  hp <- data.frame(conc = conc, est = rep(NA_real_, length(conc)))
+.ssd_hp_fitdists <- function(x, conc, ic, ci) {
+  na <- rep(NA_real_, length(conc))
+  hp <- data.frame(conc = conc, est = na, se = na, lcl = na, ucl = na)
 
   if(!length(x) || !length(conc)) return(as_tibble(hp))
 
@@ -52,6 +53,8 @@ ssd_hp <- function(x, ...) {
   mat <- as.matrix(as.data.frame(mat))
   
   hp$est <- apply(mat, 1, weighted.mean, w = weight)
+  if(!ci) as_tibble(hp)
+  .NotYetImplemented()
   hp
 }
 
@@ -59,42 +62,42 @@ ssd_hp <- function(x, ...) {
 #' @export
 #' @examples
 #' ssd_hp(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hp.fitdist <- function(x, conc, ...) {
+ssd_hp.fitdist <- function(x, conc, ci = FALSE, ...) {
   chk_unused(...)
   
-  .ssd_hp_fitdist(x, conc)
+  .ssd_hp_fitdist(x, conc, ci = ci)
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdists
 #' @export
 #' @examples
 #' ssd_hp(boron_dists, c(0, 1, 30, Inf))
-ssd_hp.fitdists <- function(x, conc, ic = "aicc", ...) {
+ssd_hp.fitdists <- function(x, conc, ic = "aicc", ci = FALSE, ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
   
-  .ssd_hp_fitdists(x, conc, ic)
+  .ssd_hp_fitdists(x, conc, ic = ic, ci = ci)
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
-ssd_hp.fitdistcens <- function(x, conc, ...) {
+ssd_hp.fitdistcens <- function(x, conc, ci = FALSE, ...) {
   chk_unused(...)
   
-  .ssd_hp_fitdist(x, conc)
+  .ssd_hp_fitdist(x, conc, ci = ci)
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))
-ssd_hp.fitdistscens <- function(x, conc, ic = "aic", ...) {
+ssd_hp.fitdistscens <- function(x, conc, ic = "aic", ci = FALSE, ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "bic"))
   chk_unused(...)
   
-  .ssd_hp_fitdists(x, conc, ic)
+  .ssd_hp_fitdists(x, conc, ic = ic, ci = ci)
 }
