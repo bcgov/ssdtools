@@ -34,7 +34,9 @@ add_starting_values <- function(dist, x) {
                        shape = pi * sd(log(x)) / sqrt(3))
   } else if (dist$distr == "burrIII2") {
     dist$start <- list(lshape=log(1), lscale=log(1))
-  } else if (dist$distr == "pareto") {
+  } else if (dist$distr == "burrIII3") {
+    dist$start <- list(lshape1=log(1), lshape2=log(1), lscale=log(1))
+  }else if (dist$distr == "pareto") {
     fit <- vglm(x ~ 1, VGAM::paretoff)
     dist$start <- list(shape = exp(unname(coef(fit))))
     dist$fix.arg <- list(scale = fit@extra$scale)

@@ -1,3 +1,4 @@
+- Added Burr Type-III Three-Parameter Distribution (`burrIII3`).
 - Added Burr Type-III Two-Parameter Distribution (`burrIII2`).
 - Added `ssd_exposure()` to calculate proportion exposed based on distribution of concentrations.
 - Added `ssd_hp()` to calculate hazard percent at specific concentrations.

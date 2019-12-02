@@ -26,6 +26,10 @@
 
 \item{lshape}{log shape parameter.}
 
+\item{lshape1}{log shape1 parameter.}
+
+\item{lshape2}{log shape2 parameter.}
+
 \item{lscale}{log scale parameter.}
 
 \item{log, log.p}{logical; if TRUE, probabilities p are given as log(p).}

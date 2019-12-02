@@ -11,6 +11,8 @@
 #' @param shape	shape parameter.
 #' @param scale scale parameter.
 #' @param lshape log shape parameter.
+#' @param lshape1 log shape1 parameter.
+#' @param lshape2 log shape2 parameter.
 #' @param lscale log scale parameter.
 #' @param log,log.p logical; if TRUE, probabilities p are given as log(p).
 #' @param lower.tail	logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].
