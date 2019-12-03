@@ -3,8 +3,8 @@
 \name{ssd_hp}
 \alias{ssd_hp}
 \alias{ssd_hp.fitdist}
-\alias{ssd_hp.fitdists}
 \alias{ssd_hp.fitdistcens}
+\alias{ssd_hp.fitdists}
 \alias{ssd_hp.fitdistscens}
 \title{Hazard Percent}
 \usage{
@@ -13,18 +13,6 @@ ssd_hp(x, ...)
 \method{ssd_hp}{fitdist}(
   x,
   conc,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  ...
-)
-
-\method{ssd_hp}{fitdists}(
-  x,
-  conc,
-  ic = "aicc",
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
@@ -44,15 +32,29 @@ ssd_hp(x, ...)
   ...
 )
 
-\method{ssd_hp}{fitdistscens}(
+\method{ssd_hp}{fitdists}(
   x,
   conc,
-  ic = "aic",
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
   parallel = NULL,
   ncpus = 1,
+  average = TRUE,
+  ic = "aicc",
+  ...
+)
+
+\method{ssd_hp}{fitdistscens}(
+  x,
+  conc,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  average = TRUE,
+  ic = "aic",
   ...
 )
 }
@@ -73,6 +75,8 @@ ssd_hp(x, ...)
 
 \item{ncpus}{A count of the number of parallel processes to use.}
 
+\item{average}{A flag specifying whether to model average the estimates.}
+
 \item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 }
 \value{
@@ -85,16 +89,16 @@ Gets percent species protected at specified concentrations.
 \itemize{
 \item \code{fitdist}: Hazard Percent fitdist
 
-\item \code{fitdists}: Hazard Percent fitdists
-
 \item \code{fitdistcens}: Hazard Percent fitdistcens
+
+\item \code{fitdists}: Hazard Percent fitdists
 
 \item \code{fitdistscens}: Hazard Percent fitdistcens
 }}
 
 \examples{
 ssd_hp(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hp(boron_dists, c(0, 1, 30, Inf))
 ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
+ssd_hp(boron_dists, c(0, 1, 30, Inf))
 ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))
 }
