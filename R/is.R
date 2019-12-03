@@ -15,7 +15,7 @@
 #' Is fitdist
 #'
 #' Tests whether an object is a fitdist.
-#' @param x The object to test.
+#' @inheritParams params
 #'
 #' @return A flag.
 #' @export
@@ -31,7 +31,7 @@ is.fitdist <- function(x) {
 #' Is censored fitdist
 #'
 #' Tests whether an object is a censored fitdist.
-#' @param x The object to test.
+#' @inheritParams params
 #'
 #' @return A flag.
 #' @export
@@ -46,7 +46,7 @@ is.fitdistcens <- function(x) {
 #' Is fitdists
 #'
 #' Tests whether an object is a fitdists.
-#' @param x The object to test.
+#' @inheritParams params
 #'
 #' @return A flag.
 #' @export
@@ -61,7 +61,7 @@ is.fitdists <- function(x) {
 #' Is censored fitdists
 #'
 #' Tests whether an object is a censored fitdists.
-#' @param x The object to test.
+#' @inheritParams params
 #'
 #' @return A flag.
 #' @export

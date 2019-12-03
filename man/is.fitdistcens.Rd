@@ -7,7 +7,7 @@
 is.fitdistcens(x)
 }
 \arguments{
-\item{x}{The object to test.}
+\item{x}{The object.}
 }
 \value{
 A flag.

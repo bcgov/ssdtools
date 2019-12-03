@@ -14,9 +14,7 @@
 
 #' Subset fitdists
 #'
-#' @param x The object to subset.
-#' @param select A character vector of the distributions to select.
-#' @param ... Unused
+#' @inheritParams params
 #' @export
 #' @examples
 #' subset(boron_dists, c("gamma", "lnorm"))

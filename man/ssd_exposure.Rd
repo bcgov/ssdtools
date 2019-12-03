@@ -7,15 +7,13 @@
 ssd_exposure(x, meanlog = 0, sdlog = 1, nboot = 1000)
 }
 \arguments{
-\item{x}{The object to plot.}
+\item{x}{The object.}
 
 \item{meanlog}{A number of the mean of the exposure concentrations on the log scale.}
 
 \item{sdlog}{A number of the standard deviation of the exposure concentrations on the log scale.}
 
 \item{nboot}{A whole number of the number of samples to use to calculate the exposure.}
-
-\item{...}{Unused.}
 }
 \value{
 A number of the proportion exposed.

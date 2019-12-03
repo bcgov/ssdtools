@@ -27,6 +27,9 @@
 #' @param shapelog shape parameter on the log scale.
 #' @param shape1log shape1 parameter on the log scale.
 #' @param shape2log shape2 parameter on the log scale.
+#' @param xintercept The x-value for the intersect
+#' @param yintercept The y-value for the intersect.
+#' @param select A character vector of the distributions to select.
 #' @keywords internal
 #' @name params
 NULL

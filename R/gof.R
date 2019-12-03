@@ -38,9 +38,7 @@
 #' where \code{delta} and \code{weight} are based on \code{aic} for censored data
 #' and \code{aicc} for non-censored data.
 #'
-#' @param x The object.
-#' @param ... Unused.
-#'
+#' @inheritParams params
 #' @return A tbl data frame of the gof statistics.
 #' @export
 #' @examples

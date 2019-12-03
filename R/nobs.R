@@ -14,8 +14,7 @@
 
 #' Number of Observations
 #'
-#' @param object The object.
-#' @param ... Unused.
+#' @inheritParams params
 #' @export
 #' @examples
 #' stats::nobs(boron_lnorm)
@@ -23,8 +22,7 @@ nobs.fitdist <- function(object, ...) object$n
 
 #' Number of Observations
 #'
-#' @param object The object.
-#' @param ... Unused.
+#' @inheritParams params
 #' @export
 #' @examples
 #' stats::nobs(fluazinam_lnorm)

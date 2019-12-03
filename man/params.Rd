@@ -57,6 +57,12 @@
 \item{shape1log}{shape1 parameter on the log scale.}
 
 \item{shape2log}{shape2 parameter on the log scale.}
+
+\item{xintercept}{The x-value for the intersect}
+
+\item{yintercept}{The y-value for the intersect.}
+
+\item{select}{A character vector of the distributions to select.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

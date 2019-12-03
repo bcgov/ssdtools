@@ -1,8 +1,7 @@
 
 #' Get the Number of Parameters
 #'
-#' @param x The object.
-#' @param ... Unused.
+#' @inheritParams params
 #'
 #' @return A count indicating the number of parameters.
 #' @export

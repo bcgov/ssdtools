@@ -7,11 +7,11 @@
 \method{subset}{fitdists}(x, select = names(x), ...)
 }
 \arguments{
-\item{x}{The object to subset.}
+\item{x}{The object.}
 
 \item{select}{A character vector of the distributions to select.}
 
-\item{...}{Unused}
+\item{...}{Unused.}
 }
 \description{
 Subset fitdists

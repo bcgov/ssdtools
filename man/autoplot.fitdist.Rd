@@ -13,7 +13,7 @@
 \method{autoplot}{fitdistcens}(object, ...)
 }
 \arguments{
-\item{object}{The object to plot.}
+\item{object}{The object.}
 
 \item{...}{Unused.}
 }

@@ -17,8 +17,7 @@
 #' Plots the cumulative distribution function (cdf) using the ggplot2
 #' generic.
 #'
-#' @param object The object to plot.
-#' @param ... Unused.
+#' @inheritParams params
 #' @export
 #' @examples
 #' ggplot2::autoplot(boron_lnorm)

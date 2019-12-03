@@ -77,8 +77,7 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path
-#' @param xintercept The x-value for the intersect
-#' @param yintercept The y-value for the intersect.
+#' @inheritParams params
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
