@@ -23,7 +23,7 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-.ssd_hp_fitdist <- function(x, conc, ci) {
+.ssd_hp_fitdist <- function(x, conc, ci, level, nboot, parallel, ncpus) {
   chk_vector(conc)
   chk_numeric(conc)
   na <- rep(NA_real_, length(conc))
@@ -34,19 +34,21 @@ ssd_hp <- function(x, ...) {
   what <- paste0("p", x$distname)
 
   p <- do.call(what, args)
-  p <- p * 100
   if (!ci) {
     return(as_tibble(data.frame(
-      conc = conc, est = p,
+      conc = conc, est = p * 100,
       se = na, lcl = na, ucl = na
     )))
   }
-  .NotYetImplemented()
-  samples <- boot(x, nboot = 1000, parallel = FALSE, ncpus = 1)
-  samples
+  samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
+  cis <- cis(samples, p = TRUE, level = level, x = conc)
+  as_tibble(data.frame(
+      conc = conc, est = p * 100,
+      se = cis$se * 100, lcl = cis$lcl * 100, ucl = cis$ucl* 100
+    ))
 }
 
-.ssd_hp_fitdists <- function(x, conc, ic, ci) {
+.ssd_hp_fitdists <- function(x, conc, ic, ci, level, nboot, parallel, ncpus) {
   na <- rep(NA_real_, length(conc))
   hp <- data.frame(conc = conc, est = na, se = na, lcl = na, ucl = na)
 
@@ -56,7 +58,8 @@ ssd_hp <- function(x, ...) {
 
   weight <- .ssd_gof_fitdists(x)$weight
 
-  mat <- lapply(x, ssd_hp, conc = conc)
+  mat <- lapply(x, ssd_hp, conc = conc, ci = ci, level = level, nboot = nboot, 
+                parallel = parallel, ncpus = ncpus)
   mat <- lapply(mat, function(x) x$est)
   mat <- as.matrix(as.data.frame(mat))
 
@@ -72,42 +75,55 @@ ssd_hp <- function(x, ...) {
 #' @export
 #' @examples
 #' ssd_hp(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hp.fitdist <- function(x, conc, ci = FALSE, ...) {
+ssd_hp.fitdist <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,...) {
+  chk_number(level)
+  chk_range(level)
+  
   chk_unused(...)
 
-  .ssd_hp_fitdist(x, conc, ci = ci)
+  .ssd_hp_fitdist(x, conc, ci = ci, level = level, nboot = nboot, 
+                  parallel = parallel, ncpus = ncpus)
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdists
 #' @export
 #' @examples
 #' ssd_hp(boron_dists, c(0, 1, 30, Inf))
-ssd_hp.fitdists <- function(x, conc, ic = "aicc", ci = FALSE, ...) {
+ssd_hp.fitdists <- function(x, conc, ic = "aicc", ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
+  chk_number(level)
+  chk_range(level)
   chk_unused(...)
 
-  .ssd_hp_fitdists(x, conc, ic = ic, ci = ci)
+  .ssd_hp_fitdists(x, conc, ic = ic, ci = ci, level = level, nboot = nboot, 
+                   parallel = parallel, ncpus = ncpus)
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
-ssd_hp.fitdistcens <- function(x, conc, ci = FALSE, ...) {
+ssd_hp.fitdistcens <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+  chk_number(level)
+  chk_range(level)
   chk_unused(...)
 
-  .ssd_hp_fitdist(x, conc, ci = ci)
+  .ssd_hp_fitdist(x, conc, ci = ci, level = level, nboot = nboot, 
+                  parallel = parallel, ncpus = ncpus)
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))
-ssd_hp.fitdistscens <- function(x, conc, ic = "aic", ci = FALSE, ...) {
+ssd_hp.fitdistscens <- function(x, conc, ic = "aic", ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "bic"))
+  chk_number(level)
+  chk_range(level)
   chk_unused(...)
 
-  .ssd_hp_fitdists(x, conc, ic = ic, ci = ci)
+  .ssd_hp_fitdists(x, conc, ic = ic, ci = ci, level = level, nboot = nboot, 
+                   parallel = parallel, ncpus = ncpus)
 }
