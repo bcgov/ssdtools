@@ -20,6 +20,7 @@
 #' predict(boron_lnorm, percent = c(5L, 50L))
 predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95, 
                             nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+  chk_unused(...)
   ssd_hc(object, percent = percent, ci = ci, level = level, 
          nboot = nboot, parallel = parallel, ncpus = ncpus)
 }
@@ -32,6 +33,7 @@ predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95,
 #' predict(fluazinam_lnorm, percent = c(5L, 50L))
 predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95, 
                             nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+  chk_unused(...)
   ssd_hc(object, percent = percent, ci = ci, level = level, 
          nboot = nboot, parallel = parallel, ncpus = ncpus)
 }
@@ -42,9 +44,26 @@ predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95
 #' @export
 #' @examples
 #' predict(boron_dists)
+predict.fitdists <- function(object, percent = 1:99, ci = FALSE, 
+                             level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, 
+                             average = TRUE, ic = "aicc", ...) {
+  chk_unused(...)
+  ssd_hc(object, percent = percent, ci = ci, level = level, 
+         nboot = nboot, parallel = parallel, ncpus = ncpus,
+         average = average, ic = ic)
+}
+
+#' Predict censored fitdists
+#'
+#' @inheritParams params
+#' @export
+#' @examples
 #' predict(fluazinam_dists)
-predict.fitdists <- function(object, percent = 1:99, ic = "aicc", ci = FALSE, 
-                             level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
-  ssd_hc(object, percent = percent, ic = ic, ci = ci, level = level, 
-         nboot = nboot, parallel = parallel, ncpus = ncpus)
+predict.fitdistscens <- function(object, percent = 1:99, ci = FALSE, 
+                             level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, 
+                             average = TRUE, ic = "aic", ...) {
+  chk_unused(...)
+  ssd_hc(object, percent = percent, ci = ci, level = level, 
+         nboot = nboot, parallel = parallel, ncpus = ncpus,
+         average = average, ic = ic)
 }

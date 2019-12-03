@@ -14,6 +14,8 @@
 
 \item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 
+\item{average}{A flag specifying whether to model average the estimates.}
+
 \item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}

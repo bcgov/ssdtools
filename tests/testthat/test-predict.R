@@ -18,7 +18,7 @@ test_that("predict.fitdist", {
   boron_lnorm <- ssdtools:::ssd_fit_dist(ssdtools::boron_data[1:6, ])
   pred <- predict(boron_lnorm, nboot = 10L)
   expect_is(pred, "tbl")
-  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
   pred2 <- predict(boron_lnorm, ci = TRUE, nboot = 10)
   expect_identical(pred$est[1], pred2$est[1])
@@ -34,7 +34,7 @@ test_that("predict.fitdist parallel", {
 
   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
-  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
 })
 
@@ -42,14 +42,14 @@ test_that("predict.fitdists", {
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("gamma", "gompertz"))
   pred <- predict(dists, nboot = 10L)
   expect_is(pred, "tbl")
-  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
 
-  # pred <- predict(dists, nboot = 10L, average = FALSE)
-  # expect_is(pred, "tbl")
-  # expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl", "weight"))
-  # expect_identical(nrow(pred), 198L)
-  # expect_output(print(dists))
+  pred <- predict(dists, average = FALSE)
+  expect_is(pred, "tbl")
+  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(nrow(pred), 198L)
+  expect_output(print(dists))
 })
 
 test_that("predict.fitdists parallel", {
@@ -57,6 +57,6 @@ test_that("predict.fitdists parallel", {
 
   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
-  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
 })

@@ -28,42 +28,57 @@ ssd_hc <- function(x, ...) {
   chk_numeric(percent)
   
   percent <- percent / 100
-  na <- rep(NA_real_, length(percent))
-
+  
   args <- as.list(x$estimate)
   args$p <- percent
-
-  what <- paste0("q", x$distname)
-
+  dist <- x$distname
+  what <- paste0("q", dist)
+  
   est <- do.call(what, args)
   if (!ci) {
+    na <- rep(NA_real_, length(percent))
     return(as_tibble(data.frame(
       percent = percent * 100, est = est,
-      se = na, lcl = na, ucl = na
+      se = na, lcl = na, ucl = na, dist = dist,
+     stringsAsFactors = FALSE
     )))
   }
   samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
   cis <- cis(samples, p = FALSE, level = level, x = percent)
   as_tibble(data.frame(
-      percent = percent * 100, est = est,
-      se = cis$se, lcl = cis$lcl, ucl = cis$ucl))
+    percent = percent * 100, est = est,
+    se = cis$se, lcl = cis$lcl, ucl = cis$ucl, dist = dist,
+    stringsAsFactors = FALSE))
 }
 
-.ssd_hc_fitdists <- function(x, percent, ic, ci, level, nboot, parallel, ncpus) {
-  na <- rep(NA_real_, length(percent))
-  hc <- data.frame(percent = percent, est = na, se = na, lcl = na, ucl = na)
-
+.ssd_hc_fitdists <- function(x, percent, ci, level, nboot, parallel, ncpus, 
+                             average, ic) {
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_number(level)
+  chk_range(level)
+  chk_flag(average)
+  
   if (!length(x) || !length(percent)) {
+    no <- numeric(0)
+    return(as_tibble(data.frame(percent = no, est = no, se = no, 
+                                lcl = no, ucl = no, dist = character(0))))
+  }
+  
+  hc <- lapply(x, ssd_hc, percent = percent, ci = ci, level = level, nboot = nboot, 
+               parallel = parallel, ncpus = ncpus)
+  if(!average) {
+    hc <- do.call("rbind", hc)
+    row.names(hc) <- NULL
     return(as_tibble(hc))
   }
-
-  hc <- lapply(x, ssd_hc, percent = percent, ci = ci, level = level, nboot = nboot, 
-                parallel = parallel, ncpus = ncpus)
+  hc <- lapply(hc, function(x) x[1:5])
   hc <- lapply(hc, as.matrix)
   hc <- Reduce(function(x, y) { abind(x, y, along = 3) }, hc)
   weight <- .ssd_gof_fitdists(x)$weight
   hc <- apply(hc, c(1, 2), weighted.mean, w = weight)
   hc <- as.data.frame(hc)
+  hc$dist <- "average"
   as_tibble(hc)
 }
 
@@ -78,26 +93,9 @@ ssd_hc.fitdist <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 100
   chk_range(level)
   
   chk_unused(...)
-
+  
   .ssd_hc_fitdist(x, percent, ci = ci, level = level, nboot = nboot, 
                   parallel = parallel, ncpus = ncpus)
-}
-
-#' @describeIn ssd_hc Hazard Percent fitdists
-#' @export
-#' @examples
-#' ssd_hc(boron_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdists <- function(x, percent = 5, ic = "aicc", ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
-  chk_vector(percent)
-  chk_numeric(percent)
-  chk_string(ic)
-  chk_subset(ic, c("aic", "aicc", "bic"))
-  chk_number(level)
-  chk_range(level)
-  chk_unused(...)
-
-  .ssd_hc_fitdists(x, percent, ic = ic, ci = ci, level = level, nboot = nboot, 
-                   parallel = parallel, ncpus = ncpus)
 }
 
 #' @describeIn ssd_hc Hazard Percent fitdistcens
@@ -110,24 +108,33 @@ ssd_hc.fitdistcens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
   chk_number(level)
   chk_range(level)
   chk_unused(...)
-
+  
   .ssd_hc_fitdist(x, percent, ci = ci, level = level, nboot = nboot, 
                   parallel = parallel, ncpus = ncpus)
+}
+
+#' @describeIn ssd_hc Hazard Percent fitdists
+#' @export
+#' @examples
+#' ssd_hc(boron_dists, c(0, 1, 30, Inf))
+ssd_hc.fitdists <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
+  chk_string(ic)
+  chk_subset(ic, c("aic", "aicc", "bic"))
+  chk_unused(...)
+  
+  .ssd_hc_fitdists(x, percent, ci = ci, level = level, nboot = nboot, 
+                   parallel = parallel, ncpus = ncpus, average = average, ic = ic)
 }
 
 #' @describeIn ssd_hc Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdistscens <- function(x, percent = 5, ic = "aic", ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
-  chk_vector(percent)
-  chk_numeric(percent)
+ssd_hc.fitdistscens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aic", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "bic"))
-  chk_number(level)
-  chk_range(level)
   chk_unused(...)
-
-  .ssd_hc_fitdists(x, percent, ic = ic, ci = ci, level = level, nboot = nboot, 
-                   parallel = parallel, ncpus = ncpus)
+  
+  .ssd_hc_fitdists(x, percent, ci = ci, level = level, nboot = nboot, 
+                   parallel = parallel, ncpus = ncpus, average = average, ic = ic)
 }
