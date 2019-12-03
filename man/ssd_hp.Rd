@@ -61,7 +61,7 @@ ssd_hp(x, ...)
 
 \item{...}{Unused.}
 
-\item{conc}{A numeric vector of the concentrations.}
+\item{conc}{A numeric vector of concentrations.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 

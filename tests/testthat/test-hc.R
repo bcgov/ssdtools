@@ -15,33 +15,29 @@
 context("hc")
 
 test_that("ssd_hc fitdist", {
-  x <- ssd_hc(boron_lnorm, nboot = 10L)
-  expect_is(x, "tbl")
-  expect_identical(colnames(x), c("percent", "est", "se", "lcl", "ucl"))
-  expect_identical(x$percent, 5L)
-  expect_equal(x$est, 1.68117483775796)
+  expect_equal(as.data.frame(ssd_hc(boron_lnorm)),
+               structure(list(percent = 5, est = 1.68117483775796, se = NA_real_, 
+    lcl = NA_real_, ucl = NA_real_), class = "data.frame", row.names = c(NA, 
+-1L)))
 })
 
 test_that("ssd_hc fitdistcens", {
-  x <- ssd_hc(fluazinam_lnorm, nboot = 10L)
-  expect_is(x, "tbl")
-  expect_identical(colnames(x), c("percent", "est", "se", "lcl", "ucl"))
-  expect_identical(x$percent, 5L)
-  expect_equal(x$est, 1.74352219048516)
+  expect_equal(as.data.frame(ssd_hc(fluazinam_lnorm)),
+  structure(list(percent = 5, est = 1.74352219048516, se = NA_real_, 
+    lcl = NA_real_, ucl = NA_real_), class = "data.frame", row.names = c(NA, 
+-1L)))
 })
 
 test_that("ssd_hc fitdists", {
-  x <- ssd_hc(boron_dists, nboot = 10L)
-  expect_is(x, "tbl")
-  expect_identical(colnames(x), c("percent", "est", "se", "lcl", "ucl"))
-  expect_identical(x$percent, 5L)
-  expect_equal(x$est, 1.30451507985013)
+  expect_equal(as.data.frame(ssd_hc(boron_dists)),
+               structure(list(percent = 5, est = 1.30474651622516, se = NA_real_, 
+    lcl = NA_real_, ucl = NA_real_), class = "data.frame", row.names = c(NA, 
+-1L)))
 })
 
 test_that("ssd_hc fitdistscens", {
-  x <- ssd_hc(fluazinam_dists, nboot = 10L)
-  expect_is(x, "tbl")
-  expect_identical(colnames(x), c("percent", "est", "se", "lcl", "ucl"))
-  expect_identical(x$percent, 5L)
-  expect_equal(x$est, 1.35228097954393)
+  expect_equal(as.data.frame(ssd_hc(fluazinam_dists)),
+               structure(list(percent = 5, est = 1.35230977078523, se = NA_real_, 
+    lcl = NA_real_, ucl = NA_real_), class = "data.frame", row.names = c(NA, 
+-1L)))
 })

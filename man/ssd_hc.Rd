@@ -10,64 +10,91 @@
 \usage{
 ssd_hc(x, ...)
 
-\method{ssd_hc}{fitdist}(x, hc = 5L, nboot = 1000, level = 0.95, ...)
-
-\method{ssd_hc}{fitdists}(
+\method{ssd_hc}{fitdist}(
   x,
-  hc = 5L,
-  ic = "aicc",
-  average = TRUE,
-  nboot = 1000,
+  percent = 5,
+  ci = FALSE,
   level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
   ...
 )
 
-\method{ssd_hc}{fitdistcens}(x, hc = 5L, nboot = 1000, level = 0.95, ...)
+\method{ssd_hc}{fitdists}(
+  x,
+  percent = 5,
+  ic = "aicc",
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
 
-\method{ssd_hc}{fitdistscens}(x, hc = 5L, ic = "aic", average = TRUE, nboot = 1000, level = 0.95, ...)
+\method{ssd_hc}{fitdistcens}(
+  x,
+  percent = 5,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
+
+\method{ssd_hc}{fitdistscens}(
+  x,
+  percent = 5,
+  ic = "aic",
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{...}{Unused.}
 
-\item{hc}{A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).}
+\item{percent}{A numeric vector of percentages.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
 \item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
-\item{average}{A flag indicating whether to model-average.}
+\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
+
+\item{ncpus}{A count of the number of parallel processes to use.}
+
+\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 }
 \value{
-A data frame of the estimate with the standard error and upper and lower confidence intervals.
+A data frame of the percent and concentrations.
 }
 \description{
-Estimates with bootstrap confidence intervals the hazard concentration
-at which by default 5\% of the species are affected.
+Gets concentrations that protect specified percentages of species.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fitdist}: Hazard Concentration
+\item \code{fitdist}: Hazard Percent fitdist
 
-\item \code{fitdists}: Hazard Concentration
+\item \code{fitdists}: Hazard Percent fitdists
 
-\item \code{fitdistcens}: Hazard Concentration
+\item \code{fitdistcens}: Hazard Percent fitdistcens
 
-\item \code{fitdistscens}: Hazard Concentration
+\item \code{fitdistscens}: Hazard Percent fitdistcens
 }}
 
 \examples{
-ssd_hc(boron_lnorm)
-\dontrun{
-ssd_hc(boron_dists)
-}
-\dontrun{
-ssd_hc(fluazinam_lnorm)
-}
-\dontrun{
-ssd_hc(fluazinam_dists)
-}
+ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
+ssd_hc(boron_dists, c(0, 1, 30, Inf))
+ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
+ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
 }

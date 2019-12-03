@@ -14,66 +14,120 @@
 
 #' Hazard Concentration
 #'
-#' Estimates with bootstrap confidence intervals the hazard concentration
-#' at which by default 5\% of the species are affected.
+#' Gets concentrations that protect specified percentages of species.
 #'
-#' @param x The object.
-#' @param hc A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).
-#' @param ... Unused.
-#' @inheritParams predict.fitdists
-#' @return A data frame of the estimate with the standard error and upper and lower confidence intervals.
+#' @inheritParams params
+#' @return A data frame of the percent and concentrations.
 #' @export
 ssd_hc <- function(x, ...) {
   UseMethod("ssd_hc")
 }
 
-#' @describeIn ssd_hc Hazard Concentration
-#' @export
-#' @examples
-#' ssd_hc(boron_lnorm)
-ssd_hc.fitdist <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
-  chk_unused(...)
-  chk_number(hc)
-  chk_range(hc, c(1, 99))
-  predict(x, percent = hc, nboot = nboot, level = level)
+.ssd_hc_fitdist <- function(x, percent, ci, level, nboot, parallel, ncpus) {
+  chk_vector(percent)
+  chk_numeric(percent)
+  
+  percent <- percent / 100
+  na <- rep(NA_real_, length(percent))
+
+  args <- as.list(x$estimate)
+  args$p <- percent
+
+  what <- paste0("q", x$distname)
+
+  est <- do.call(what, args)
+  if (!ci) {
+    return(as_tibble(data.frame(
+      percent = percent * 100, est = est,
+      se = na, lcl = na, ucl = na
+    )))
+  }
+  samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
+  cis <- cis(samples, p = FALSE, level = level, x = percent)
+  as_tibble(data.frame(
+      percent = percent * 100, est = est,
+      se = cis$se, lcl = cis$lcl, ucl = cis$ucl))
 }
 
-#' @describeIn ssd_hc Hazard Concentration
-#' @export
-#' @examples
-#' \dontrun{
-#' ssd_hc(boron_dists)
-#' }
-ssd_hc.fitdists <- function(x, hc = 5L, ic = "aicc", average = TRUE, nboot = 1000, level = 0.95, ...) {
-  chk_unused(...)
-  chk_number(hc)
-  chk_range(hc, c(1, 99))
-  predict(x, percent = hc, ic = ic, nboot = nboot, average = average, level = level)
+.ssd_hc_fitdists <- function(x, percent, ic, ci, level, nboot, parallel, ncpus) {
+  na <- rep(NA_real_, length(percent))
+  hc <- data.frame(percent = percent, est = na, se = na, lcl = na, ucl = na)
+
+  if (!length(x) || !length(percent)) {
+    return(as_tibble(hc))
+  }
+
+  hc <- lapply(x, ssd_hc, percent = percent, ci = ci, level = level, nboot = nboot, 
+                parallel = parallel, ncpus = ncpus)
+  hc <- lapply(hc, as.matrix)
+  hc <- Reduce(function(x, y) { abind(x, y, along = 3) }, hc)
+  weight <- .ssd_gof_fitdists(x)$weight
+  hc <- apply(hc, c(1, 2), weighted.mean, w = weight)
+  hc <- as.data.frame(hc)
+  as_tibble(hc)
 }
 
-#' @describeIn ssd_hc Hazard Concentration
+#' @describeIn ssd_hc Hazard Percent fitdist
 #' @export
 #' @examples
-#' \dontrun{
-#' ssd_hc(fluazinam_lnorm)
-#' }
-ssd_hc.fitdistcens <- function(x, hc = 5L, nboot = 1000, level = 0.95, ...) {
+#' ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
+ssd_hc.fitdist <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,...) {
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_number(level)
+  chk_range(level)
+  
   chk_unused(...)
-  chk_number(hc)
-  chk_range(hc, c(1, 99))
-  predict(x, percent = hc, nboot = nboot, level = level)
+
+  .ssd_hc_fitdist(x, percent, ci = ci, level = level, nboot = nboot, 
+                  parallel = parallel, ncpus = ncpus)
 }
 
-#' @describeIn ssd_hc  Hazard Concentration
+#' @describeIn ssd_hc Hazard Percent fitdists
 #' @export
 #' @examples
-#' \dontrun{
-#' ssd_hc(fluazinam_dists)
-#' }
-ssd_hc.fitdistscens <- function(x, hc = 5L, ic = "aic", average = TRUE, nboot = 1000, level = 0.95, ...) {
+#' ssd_hc(boron_dists, c(0, 1, 30, Inf))
+ssd_hc.fitdists <- function(x, percent = 5, ic = "aicc", ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_string(ic)
+  chk_subset(ic, c("aic", "aicc", "bic"))
+  chk_number(level)
+  chk_range(level)
   chk_unused(...)
-  chk_number(hc)
-  chk_range(hc, c(1, 99))
 
-  predict(x, percent = hc, ic = ic, nboot = nboot, average = average, level = level)
+  .ssd_hc_fitdists(x, percent, ic = ic, ci = ci, level = level, nboot = nboot, 
+                   parallel = parallel, ncpus = ncpus)
+}
+
+#' @describeIn ssd_hc Hazard Percent fitdistcens
+#' @export
+#' @examples
+#' ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
+ssd_hc.fitdistcens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_number(level)
+  chk_range(level)
+  chk_unused(...)
+
+  .ssd_hc_fitdist(x, percent, ci = ci, level = level, nboot = nboot, 
+                  parallel = parallel, ncpus = ncpus)
+}
+
+#' @describeIn ssd_hc Hazard Percent fitdistcens
+#' @export
+#' @examples
+#' ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
+ssd_hc.fitdistscens <- function(x, percent = 5, ic = "aic", ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_string(ic)
+  chk_subset(ic, c("aic", "bic"))
+  chk_number(level)
+  chk_range(level)
+  chk_unused(...)
+
+  .ssd_hc_fitdists(x, percent, ic = ic, ci = ci, level = level, nboot = nboot, 
+                   parallel = parallel, ncpus = ncpus)
 }

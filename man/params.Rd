@@ -8,7 +8,9 @@
 
 \item{object}{The object.}
 
-\item{conc}{A numeric vector of the concentrations.}
+\item{conc}{A numeric vector of concentrations.}
+
+\item{percent}{A numeric vector of percentages.}
 
 \item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 

@@ -2,7 +2,8 @@
 #'
 #' @param x The object.
 #' @param object The object.
-#' @param conc A numeric vector of the concentrations.
+#' @param conc A numeric vector of concentrations.
+#' @param percent A numeric vector of percentages.
 #' @param ic A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .
 #' @param ci A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).
 #' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
