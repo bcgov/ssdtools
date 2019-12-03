@@ -15,27 +15,27 @@
 context("predict")
 
 test_that("predict.fitdist", {
-  boron_lnorm <- ssd_fit_dist(ssdtools::boron_data[1:6, ])
+  boron_lnorm <- ssdtools:::ssd_fit_dist(ssdtools::boron_data[1:6, ])
   pred <- predict(boron_lnorm, nboot = 10L)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
-  expect_identical(pred$percent, 1:99)
-  pred2 <- predict(boron_lnorm, nboot = 10)
+  expect_equal(pred$percent, 1:99)
+  pred2 <- predict(boron_lnorm, ci = TRUE, nboot = 10)
   expect_identical(pred$est[1], pred2$est[1])
 
   boron_data$Conc <- boron_data$Conc / 1000
-  boron_lnorm3 <- ssd_fit_dist(boron_data[1:6, ])
+  boron_lnorm3 <- ssdtools:::ssd_fit_dist(boron_data[1:6, ])
   pred3 <- predict(boron_lnorm3, nboot = 10)
   expect_equal(pred3$est[1], pred2$est[1] / 1000)
 })
 
 test_that("predict.fitdist parallel", {
-  boron_lnorm <- ssd_fit_dist(ssdtools::boron_data)
+  boron_lnorm <- ssdtools:::ssd_fit_dist(ssdtools::boron_data)
 
   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
-  expect_identical(pred$percent, 1:99)
+  expect_equal(pred$percent, 1:99)
 })
 
 test_that("predict.fitdists", {
@@ -43,13 +43,13 @@ test_that("predict.fitdists", {
   pred <- predict(dists, nboot = 10L)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
-  expect_identical(pred$percent, 1:99)
+  expect_equal(pred$percent, 1:99)
 
-  pred <- predict(dists, nboot = 10L, average = FALSE)
-  expect_is(pred, "tbl")
-  expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl", "weight"))
-  expect_identical(nrow(pred), 198L)
-  expect_output(print(dists))
+  # pred <- predict(dists, nboot = 10L, average = FALSE)
+  # expect_is(pred, "tbl")
+  # expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl", "weight"))
+  # expect_identical(nrow(pred), 198L)
+  # expect_output(print(dists))
 })
 
 test_that("predict.fitdists parallel", {
@@ -58,5 +58,5 @@ test_that("predict.fitdists parallel", {
   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl"))
-  expect_identical(pred$percent, 1:99)
+  expect_equal(pred$percent, 1:99)
 })

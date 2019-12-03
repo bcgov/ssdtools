@@ -7,27 +7,27 @@
 \method{predict}{fitdists}(
   object,
   percent = 1:99,
-  nboot = 1000,
   ic = "aicc",
-  average = TRUE,
+  ci = FALSE,
   level = 0.95,
-  parallel = "no",
-  ncpus = 1L,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
   ...
 )
 }
 \arguments{
 \item{object}{The object.}
 
-\item{percent}{A numeric vector of the densities to calculate the estimated concentrations for.}
-
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+\item{percent}{A numeric vector of percentages.}
 
 \item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 
-\item{average}{A flag indicating whether to model-average.}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
 \item{level}{A number between 0 and 1 of the confidence level.}
+
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
 \item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
 
@@ -39,7 +39,6 @@
 Predict fitdists
 }
 \examples{
-\dontrun{
 predict(boron_dists)
-}
+predict(fluazinam_dists)
 }

@@ -7,30 +7,30 @@
 \method{predict}{fitdist}(
   object,
   percent = 1:99,
-  nboot = 1000,
+  ci = FALSE,
   level = 0.95,
-  parallel = "no",
-  ncpus = 1L,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
   ...
 )
 }
 \arguments{
-\item{object}{ An object of class \code{"bootdist"}.  }
+\item{object}{The object.}
 
-\item{percent}{A numeric vector of the densities to calculate the estimated concentrations for.}
+\item{percent}{A numeric vector of percentages.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
 \item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{parallel}{The type of parallel operation to be used, \code{"snow"} or \code{"multicore"}
-  (the second one not being available on Windows),
-  or \code{"no"} if no parallel operation.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
-\item{ncpus}{Number of processes to be used in parallel operation : 
-  typically one would fix it to the number of available CPUs.}
+\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
 
-\item{...}{ Further arguments to be passed to generic methods }
+\item{ncpus}{A count of the number of parallel processes to use.}
+
+\item{...}{Unused.}
 }
 \description{
 Predict fitdist
