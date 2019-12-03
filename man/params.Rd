@@ -83,6 +83,14 @@
 \item{shift_x}{The value to multiply the label x values by.}
 
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
+
+\item{weight}{A string of the column in data with the weightings (or NULL)}
+
+\item{dists}{A character vector of the distributions to fit.}
+
+\item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
+
+\item{silent}{A flag indicating whether fits should fail silently.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

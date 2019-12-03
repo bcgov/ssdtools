@@ -102,14 +102,7 @@ ssd_fit_dist <- function(
 #' If the `right` argument is different to the `left` argument then the data are considered to be censored.
 #' It may be possible to use artificial censoring to improve the estimates in the extreme tails
 #' (Liu et al 2018).
-#'
-#' @param data A data frame.
-#' @param left A string of the column in data with the left concentration values.
-#' @param right A string of the column in data with the right concentration values.
-#' @param weight A string of the column in data with the weightings (or NULL)
-#' @param dists A character vector of the distributions to fit.
-#' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
-#' @param silent A flag indicating whether fits should fail silently.
+#' @inheritParams params
 #' @return An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
 #'
 #' @export

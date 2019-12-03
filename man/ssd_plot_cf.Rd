@@ -12,7 +12,7 @@ ssd_plot_cf(data, left = "Conc")
 \arguments{
 \item{data}{A data frame.}
 
-\item{left}{A string of the column in data with the left concentration values.}
+\item{left}{A string of the column in data with the concentrations.}
 }
 \description{
 Plots a Cullen and Frey graph of the skewness and kurtosis

@@ -13,7 +13,7 @@ ssd_exposure(x, meanlog = 0, sdlog = 1, nboot = 1000)
 
 \item{sdlog}{A number of the standard deviation of the exposure concentrations on the log scale.}
 
-\item{nboot}{A whole number of the number of samples to use to calculate the exposure.}
+\item{nboot}{The number of samples to use to calculate the exposure.}
 }
 \value{
 A number of the proportion exposed.

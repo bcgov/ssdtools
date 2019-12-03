@@ -33,7 +33,7 @@
 #' @inheritParams params
 #' @param meanlog A number of the mean of the exposure concentrations on the log scale.
 #' @param sdlog A number of the standard deviation of the exposure concentrations on the log scale.
-#' @param nboot A whole number of the number of samples to use to calculate the exposure.
+#' @param nboot The number of samples to use to calculate the exposure.
 #' @return A number of the proportion exposed.
 #' @export
 #' @examples
