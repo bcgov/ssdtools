@@ -49,18 +49,17 @@ ssd_plot_cdf.fitdist <- function(x,
   chk_string(xlab)
   chk_string(ylab)
   chk_unused(...)
-
+  
   data <- data.frame(x = x$data)
-
+  
   pred <- ssd_hc(x)
-
+  
   pred$percent <- pred$percent / 100
-
-  gp <- ggplot(pred, aes_string(x = "est")) +
+  
+  ggplot(pred, aes_string(x = "est")) +
     geom_line(aes_string(y = "percent")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
-  gp
 }
 
 #' @describeIn ssd_plot_cdf Plot CDF fitdistcens
@@ -74,24 +73,24 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
   chk_string(xlab)
   chk_string(ylab)
   chk_unused(...)
-
+  
   data <- x$censdata
-
+  
   data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
   data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
   data$xmean <- rowMeans(data[c("left", "right")], na.rm = TRUE)
   data$arrowleft <- data$right / 2
   data$arrowright <- data$left * 2
   data$y <- ssd_ecd(data$xmean)
-
+  
   pred <- ssd_hc(x)
   pred$percent <- pred$percent / 100
-
+  
   gp <- ggplot(pred, aes_string(x = "est"))
-
+  
   arrow <- arrow(length = unit(0.1, "inches"))
-
-  gp <- gp + geom_line(aes_string(y = "percent")) +
+  
+  gp + geom_line(aes_string(y = "percent")) +
     geom_segment(
       data = data[data$xmin != data$xmax, ],
       aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")
@@ -112,7 +111,6 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
       aes_string(x = "xmax", y = "y")
     ) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
-  gp
 }
 
 #' @describeIn ssd_plot_cdf Plot CDF fitdists
@@ -122,19 +120,17 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
 ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
   chk_string(xlab)
   chk_string(ylab)
-
+  
   pred <- ssd_hc(x, average = FALSE)
   pred$Distribution <- pred$dist
-
+  
   data <- data.frame(x = x[[1]]$data)
-
-  gp <- ggplot(pred, aes_string(x = "est")) +
+  
+  ggplot(pred, aes_string(x = "est")) +
     geom_line(aes_string(
       y = "percent/100", color = "Distribution",
       linetype = "Distribution"
     )) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
-
-  gp
 }
