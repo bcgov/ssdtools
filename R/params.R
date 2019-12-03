@@ -2,6 +2,8 @@
 #'
 #' @param x The object.
 #' @param object The object.
+#' @param data A data frame.
+#' @param pred A data frame of the predictions.
 #' @param xlab A string of the x-axis label.
 #' @param ylab A string of the x-axis label.
 #' @param conc A numeric vector of concentrations.
@@ -30,6 +32,15 @@
 #' @param xintercept The x-value for the intersect
 #' @param yintercept The y-value for the intersect.
 #' @param select A character vector of the distributions to select.
+#' @param left A string of the column in data with the concentrations.
+#' @param right A string of the column in data with the right concentration values.
+#' @param label A string of the column in data with the labels.
+#' @param shape A string of the column in data for the shape aesthetic.
+#' @param color A string of the column in data for the color aesthetic.
+#' @param size A number for the size of the labels.
+#' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
+#' @param shift_x The value to multiply the label x values by.
+#' @param hc A count between 1 and 99 indicating the percent hazard concentration (or NULL).
 #' @keywords internal
 #' @name params
 NULL

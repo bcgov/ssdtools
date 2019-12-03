@@ -30,19 +30,7 @@ plot_coord_scale <- function(data, xlab, ylab) {
 }
 
 #' SSD Plot
-#' @inheritParams ssd_plot_cdf.fitdist
-#' @param data A data frame.
-#' @param pred A data frame of the predictions.
-#' @param left A string of the column in data with the concentrations.
-#' @param right A string of the column in data with the right concentration values.
-#' @param label A string of the column in data with the labels.
-#' @param shape A string of the column in data for the shape aesthetic.
-#' @param color A string of the column in data for the color aesthetic.
-#' @param size A number for the size of the labels.
-#' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
-#' @param shift_x The value to multiply the label x values by.
-#' @param ci A flag specifying whether to plot confidence intervals.
-#' @param hc A count between 1 and 99 indicating the percent hazard concentration (or NULL).
+#' @inheritParams params
 #' @export
 #' @examples
 #' ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")

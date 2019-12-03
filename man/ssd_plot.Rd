@@ -42,7 +42,7 @@ ssd_plot(
 
 \item{ylab}{A string of the x-axis label.}
 
-\item{ci}{A flag specifying whether to plot confidence intervals.}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
 \item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
 

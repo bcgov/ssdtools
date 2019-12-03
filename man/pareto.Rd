@@ -24,7 +24,7 @@ spareto(x)
 
 \item{scale}{scale parameter.}
 
-\item{shape}{shape parameter.}
+\item{shape}{A string of the column in data for the shape aesthetic.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 

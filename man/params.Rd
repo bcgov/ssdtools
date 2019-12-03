@@ -8,6 +8,10 @@
 
 \item{object}{The object.}
 
+\item{data}{A data frame.}
+
+\item{pred}{A data frame of the predictions.}
+
 \item{xlab}{A string of the x-axis label.}
 
 \item{ylab}{A string of the x-axis label.}
@@ -50,8 +54,6 @@
 
 \item{scalelog}{scale parameter on the log scale.}
 
-\item{shape}{shape parameter.}
-
 \item{shapelog}{shape parameter on the log scale.}
 
 \item{shape1log}{shape1 parameter on the log scale.}
@@ -63,6 +65,24 @@
 \item{yintercept}{The y-value for the intersect.}
 
 \item{select}{A character vector of the distributions to select.}
+
+\item{left}{A string of the column in data with the concentrations.}
+
+\item{right}{A string of the column in data with the right concentration values.}
+
+\item{label}{A string of the column in data with the labels.}
+
+\item{shape}{A string of the column in data for the shape aesthetic.}
+
+\item{color}{A string of the column in data for the color aesthetic.}
+
+\item{size}{A number for the size of the labels.}
+
+\item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
+
+\item{shift_x}{The value to multiply the label x values by.}
+
+\item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 }
 \description{
 Parameter Descriptions for ssdtools Functions
