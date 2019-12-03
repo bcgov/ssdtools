@@ -23,20 +23,17 @@
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
-\item{ic}{A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.}
+\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 
 \item{average}{A flag indicating whether to model-average.}
 
-\item{level}{The confidence level.}
+\item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{parallel}{The type of parallel operation to be used, \code{"snow"} or \code{"multicore"}
-  (the second one not being available on Windows),
-  or \code{"no"} if no parallel operation.}
+\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
 
-\item{ncpus}{Number of processes to be used in parallel operation : 
-  typically one would fix it to the number of available CPUs.}
+\item{ncpus}{A count of the number of parallel processes to use.}
 
-\item{...}{Unused}
+\item{...}{Unused.}
 }
 \description{
 Predict Censored fitdists

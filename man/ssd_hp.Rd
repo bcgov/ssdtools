@@ -10,13 +10,51 @@
 \usage{
 ssd_hp(x, ...)
 
-\method{ssd_hp}{fitdist}(x, conc, ci = FALSE, ...)
+\method{ssd_hp}{fitdist}(
+  x,
+  conc,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
 
-\method{ssd_hp}{fitdists}(x, conc, ic = "aicc", ci = FALSE, ...)
+\method{ssd_hp}{fitdists}(
+  x,
+  conc,
+  ic = "aicc",
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
 
-\method{ssd_hp}{fitdistcens}(x, conc, ci = FALSE, ...)
+\method{ssd_hp}{fitdistcens}(
+  x,
+  conc,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
 
-\method{ssd_hp}{fitdistscens}(x, conc, ic = "aic", ci = FALSE, ...)
+\method{ssd_hp}{fitdistscens}(
+  x,
+  conc,
+  ic = "aic",
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
 }
 \arguments{
 \item{x}{The object.}
@@ -25,9 +63,17 @@ ssd_hp(x, ...)
 
 \item{conc}{A numeric vector of the concentrations.}
 
-\item{ci}{A flag specifying whether to estimate confidence intervals by parametric bootstrapping.}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
-\item{ic}{A string specifying the information-theoretic criterion to use for model averaging ('aic', 'aicc' or 'bic').}
+\item{level}{A number between 0 and 1 of the confidence level.}
+
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+
+\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
+
+\item{ncpus}{A count of the number of parallel processes to use.}
+
+\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 }
 \value{
 A data frame of the conc and percent.

@@ -33,6 +33,7 @@ Imports:
     chk,
     fitdistrplus,
     actuar,
+    abind,
     ggplot2,
     graphics,
     grid,

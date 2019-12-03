@@ -21,7 +21,7 @@
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
-\item{level}{The confidence level.}
+\item{level}{A number between 0 and 1 of the confidence level.}
 
 \item{parallel}{The type of parallel operation to be used, \code{"snow"} or \code{"multicore"}
   (the second one not being available on Windows),

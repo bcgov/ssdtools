@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+probs <- function(level) {
+  probs <- (1 - level) / 2
+  c(probs, 1 - probs)
+}
+
 as_tibble <- function(x) {
   stopifnot(is.data.frame(x))
   class(x) <- c("tbl_df", "tbl", "data.frame")

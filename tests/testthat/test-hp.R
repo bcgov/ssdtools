@@ -39,6 +39,19 @@ test_that("hp fitdist", {
   expect_equal(ssd_hp(boron_lnorm, c(1, 30))$est, c(1.95430302556699, 75.0549005516342))
 })
 
+test_that("hp fitdist cis", {
+  set.seed(10)
+  expect_equal(as.data.frame(ssd_hp(boron_lnorm, 1, ci = TRUE, nboot = 10)), structure(list(conc = 1, est = 1.95430302556699, se = 1.35685517597222, 
+    lcl = 0.752600358938875, ucl = 4.40350933171247), class = "data.frame", row.names = c(NA, 
+-1L)))
+  
+  set.seed(10)
+  expect_equal(as.data.frame(ssd_hp(boron_lnorm, c(1, 30), ci = TRUE, nboot = 10)), structure(list(conc = c(1, 30), est = c(1.95430302556699, 75.0549005516342
+), se = c(1.35685517597222, 5.11971864981164), lcl = c(0.752600358938875, 
+71.4251808998576), ucl = c(4.40350933171247, 87.0556765560242
+)), class = "data.frame", row.names = c(NA, -2L)))
+})
+
 test_that("hp fitdists with no dists", {
   x <- list()
   class(x) <- c("fitdists")
@@ -60,23 +73,48 @@ test_that("hp fitdists with no dists", {
 })
 
 test_that("hp fitdists", {
-  expect_equal(ssd_hp(boron_dists, 1)$est, 3.6651119524728)
-  expect_equal(
-    ssd_hp(boron_dists, c(0, 1, 30, Inf))$est,
-    c(0, 3.6651119524728, 72.8664372774006, 100)
-  )
+  expect_equal(as.data.frame(ssd_hp(boron_dists, 1)), structure(list(conc = 1, est = 3.6651119524728, se = NA_real_, 
+    lcl = NA_real_, ucl = NA_real_), class = "data.frame", row.names = c(NA, 
+-1L)))
+  expect_equal(as.data.frame(ssd_hp(boron_dists, c(0, 1, 30, Inf))), structure(list(conc = c(0, 1, 30, Inf), est = c(0, 3.6651119524728, 
+72.8664372774006, 100), se = c(NA_real_, NA_real_, NA_real_, 
+NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, NA_real_), ucl = c(NA_real_, 
+NA_real_, NA_real_, NA_real_)), class = "data.frame", row.names = c(NA, 
+-4L)))
+})
+
+test_that("hp fitdists cis", {
+  set.seed(10)
+  expect_equal(as.data.frame(ssd_hp(boron_dists, 1, ci = TRUE, nboot = 10)), structure(list(conc = 1, est = 3.6651119524728, se = 2.47335604452443, 
+    lcl = 0.542279934470833, ucl = 7.19977242012522), class = "data.frame", row.names = c(NA, 
+-1L)))
+  
+  set.seed(10)
+  expect_equal(as.data.frame(ssd_hp(boron_dists, c(0, 1, 30, Inf), ci = TRUE, nboot = 10)), structure(list(conc = c(0, 1, 30, Inf), est = c(0, 3.6651119524728, 
+72.8664372774006, 100), se = c(0, 2.47335604452443, 7.70065027209822, 
+0), lcl = c(0, 0.542279934470833, 59.7304054310305, 100), ucl = c(0, 
+7.19977242012522, 82.2246167336774, 100)), class = "data.frame", row.names = c(NA, 
+-4L)))
 })
 
 test_that("hp fitdistcens", {
   expect_equal(
-    ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))$est,
-    c(0, 3.20358281527575, 27.8852630254455, 100)
+    as.data.frame(ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))),
+    structure(list(conc = c(0, 1, 30, Inf), est = c(0, 3.20358281527575, 
+27.8852630254455, 100), se = c(NA_real_, NA_real_, NA_real_, 
+NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, NA_real_), ucl = c(NA_real_, 
+NA_real_, NA_real_, NA_real_)), class = "data.frame", row.names = c(NA, 
+-4L))
   )
 })
 
 test_that("hp fitdistscens", {
   expect_equal(
-    ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))$est,
-    c(0, 4.23518701256203, 26.9619242506997, 100)
+    as.data.frame(ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))),
+    structure(list(conc = c(0, 1, 30, Inf), est = c(0, 4.23518701256203, 
+26.9619242506997, 100), se = c(NA_real_, NA_real_, NA_real_, 
+NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, NA_real_), ucl = c(NA_real_, 
+NA_real_, NA_real_, NA_real_)), class = "data.frame", row.names = c(NA, 
+-4L))
   )
 })

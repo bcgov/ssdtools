@@ -12,19 +12,22 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-cis <- function(samples, p, level, x) {
-  fun <- samples$fitpart$distname
-  args <- list()
-  if(p) {
-    fun <- paste0("p", fun)
+xcis <- function(x, samples, p, level, fun, args) {
+  if(p) { 
     args$q <- x
-  } else {
-    fun <- paste0("q", fun)
+  } else
     args$p <- x
-  }
-  args <- c(args, as.list(samples$estim))
   samples <- do.call(fun, args)
-  quantile <- quantile(samples, probs = c(0.025, 0.975))
+  quantile <- quantile(samples, probs = probs(level))
   data.frame(se = sd(samples), lcl = quantile[1], ucl = quantile[2],
                    row.names = NULL)
+}
+
+cis <- function(samples, p, level, x) {
+  fun <- if(p) "p" else "q"
+  fun <- paste0(fun, samples$fitpart$distname)
+  args <- as.list(samples$estim)
+  samples <- lapply(x, xcis, samples = samples, p = p, level = level, 
+                    fun = fun, args = args)
+  do.call("rbind", samples)
 }

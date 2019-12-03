@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 #' @import stats chk ggplot2 lifecycle
+#' @import abind abind
 #' @importFrom graphics plot
 #' @importFrom VGAM vglm
 NULL

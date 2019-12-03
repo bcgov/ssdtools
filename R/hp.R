@@ -33,17 +33,17 @@ ssd_hp <- function(x, ...) {
 
   what <- paste0("p", x$distname)
 
-  p <- do.call(what, args)
+  est <- do.call(what, args)
   if (!ci) {
     return(as_tibble(data.frame(
-      conc = conc, est = p * 100,
+      conc = conc, est = est * 100,
       se = na, lcl = na, ucl = na
     )))
   }
   samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
   cis <- cis(samples, p = TRUE, level = level, x = conc)
   as_tibble(data.frame(
-      conc = conc, est = p * 100,
+      conc = conc, est = est * 100,
       se = cis$se * 100, lcl = cis$lcl * 100, ucl = cis$ucl* 100
     ))
 }
@@ -56,19 +56,14 @@ ssd_hp <- function(x, ...) {
     return(as_tibble(hp))
   }
 
-  weight <- .ssd_gof_fitdists(x)$weight
-
-  mat <- lapply(x, ssd_hp, conc = conc, ci = ci, level = level, nboot = nboot, 
+  hp <- lapply(x, ssd_hp, conc = conc, ci = ci, level = level, nboot = nboot, 
                 parallel = parallel, ncpus = ncpus)
-  mat <- lapply(mat, function(x) x$est)
-  mat <- as.matrix(as.data.frame(mat))
-
-  hp$est <- apply(mat, 1, weighted.mean, w = weight)
-  if (!ci) {
-    return(as_tibble(hp))
-  }
-  .NotYetImplemented()
-  hp
+  hp <- lapply(hp, as.matrix)
+  hp <- Reduce(function(x, y) { abind(x, y, along = 3) }, hp)
+  weight <- .ssd_gof_fitdists(x)$weight
+  hp <- apply(hp, c(1, 2), weighted.mean, w = weight)
+  hp <- as.data.frame(hp)
+  as_tibble(hp)
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdist

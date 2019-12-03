@@ -35,9 +35,9 @@ ssd_hc(x, ...)
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
-\item{level}{The confidence level.}
+\item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{ic}{A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.}
+\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 
 \item{average}{A flag indicating whether to model-average.}
 }

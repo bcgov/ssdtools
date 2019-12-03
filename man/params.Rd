@@ -6,11 +6,21 @@
 \arguments{
 \item{x}{The object.}
 
+\item{object}{The object.}
+
 \item{conc}{A numeric vector of the concentrations.}
 
-\item{ic}{A string specifying the information-theoretic criterion to use for model averaging ('aic', 'aicc' or 'bic').}
+\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 
-\item{ci}{A flag specifying whether to estimate confidence intervals by parametric bootstrapping.}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
+
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+
+\item{level}{A number between 0 and 1 of the confidence level.}
+
+\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
+
+\item{ncpus}{A count of the number of parallel processes to use.}
 
 \item{...}{Unused.}
 

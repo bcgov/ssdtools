@@ -105,14 +105,9 @@ predict.fitdistcens <- function(object, percent = 1:99,
 
 #' Predict fitdists
 #'
-#' @inheritParams fitdistrplus::bootdist
-#' @param object The object.
+#' @inheritParams params
 #' @param percent A numeric vector of the densities to calculate the estimated concentrations for.
-#' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
-#' @param ic A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.
 #' @param average A flag indicating whether to model-average.
-#' @param level The confidence level.
-#' @param ... Unused
 #' @export
 #' @examples
 #' \dontrun{
