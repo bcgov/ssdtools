@@ -56,6 +56,7 @@ test_that("ssd_plot_cdf", {
   fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
   fluazinam_lnorm$censdata$left[5] <- NA
   expect_is(ssd_plot_cdf(fluazinam_lnorm), "ggplot")
+  expect_is(ssd_plot_cdf(fluazinam_dists), "ggplot")
 })
 
 test_that("autoplot", {
