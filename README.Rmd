@@ -23,11 +23,11 @@ knitr::opts_chunk$set(
 
 `ssdtools` is an R package to plot and fit Species Sensitivity Distributions (SSD). 
 
-SSDs are cumulative probability distributions which are fitted to toxicity concentrations for multiple species.
-The ssdtools package uses Maximum Likelihood to fit log-normal, log-logistic,
-log-Gumbel, Gompertz, gamma or Weibull distributions.
+SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species.
+The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, gamma, burr Type-III, log-logistic, log-Gumbel, Gompertz and Weibull.
+The user can provide custom distributions.
 Multiple distributions can be averaged using Information Criteria.
-Confidence intervals on fits and hazard concentrations are produced by bootstrapping.
+Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.
 
 ## Installation
 
@@ -52,7 +52,7 @@ boron_data
 ```
 
 Multiple distributions can be fit using `ssd_fit_dists()`
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 boron_dists <- ssd_fit_dists(boron_data)
 ```
 
@@ -70,7 +70,7 @@ ssd_gof(boron_dists)
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
 ```{r, eval = FALSE}
-boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
+boron_hc5 <- ssd_hc(boron_dists)
 ```
 
 ```{r}

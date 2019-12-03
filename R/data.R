@@ -61,6 +61,7 @@
 #'   \item{se}{The standard error of the estimate <dbl>.}
 #'   \item{lcl}{The lower confidence limit <dbl>.}
 #'   \item{se}{The upper confidence limit <dbl>.}
+#'   \item{dist}{The distribution <chr>.}
 #' }
 #' @examples
 #' head(boron_pred)
@@ -77,6 +78,7 @@
 #'   \item{se}{The standard error of the estimate <dbl>.}
 #'   \item{lcl}{The lower confidence limit <dbl>.}
 #'   \item{se}{The upper confidence limit <dbl>.}
+#'   \item{dist}{The distribution <chr>.}
 #' }
 #' @examples
 #' boron_hc5
@@ -144,6 +146,7 @@
 #'   \item{se}{The standard error of the estimate <dbl>.}
 #'   \item{lcl}{The lower confidence limit <dbl>.}
 #'   \item{se}{The upper confidence limit <dbl>.}
+#'   \item{dist}{The distribution <chr>.}
 #' }
 #' @examples
 #' head(fluazinam_pred)

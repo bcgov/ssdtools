@@ -18,11 +18,12 @@ status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.o
 Distributions (SSD).
 
 SSDs are cumulative probability distributions which are fitted to
-toxicity concentrations for multiple species. The ssdtools package uses
-Maximum Likelihood to fit log-normal, log-logistic, log-Gumbel,
-Gompertz, gamma or Weibull distributions. Multiple distributions can be
-averaged using Information Criteria. Confidence intervals on fits and
-hazard concentrations are produced by bootstrapping.
+toxicity concentrations for different species. The ssdtools package uses
+Maximum Likelihood to fit distributions such as the log-normal, gamma,
+burr Type-III, log-logistic, log-Gumbel, Gompertz and Weibull. The user
+can provide custom distributions. Multiple distributions can be averaged
+using Information Criteria. Confidence intervals on hazard
+concentrations and proportions are produced by parametric bootstrapping.
 
 ## Installation
 
@@ -86,7 +87,7 @@ ssd_gof(boron_dists)
 #> # A tibble: 3 x 9
 #>   dist        ad    ks    cvm   aic  aicc   bic delta weight
 #> * <chr>    <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 burrIII2 0.501 0.108 0.0629  241.  242.  244.  3.74  0.093
+#> 1 burrIII2 0.500 0.108 0.0628  241.  242.  244.  3.74  0.093
 #> 2 gamma    0.440 0.117 0.0554  238.  238.  240.  0     0.606
 #> 3 lnorm    0.507 0.107 0.0703  239.  240.  242.  1.40  0.301
 ```
@@ -94,15 +95,15 @@ ssd_gof(boron_dists)
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
 
 ``` r
-boron_hc5 <- ssd_hc(boron_dists, nboot = 10000)
+boron_hc5 <- ssd_hc(boron_dists)
 ```
 
 ``` r
 print(boron_hc5)
-#> # A tibble: 1 x 5
-#>   percent   est    se   lcl   ucl
-#> *   <int> <dbl> <dbl> <dbl> <dbl>
-#> 1       5  1.30 0.855 0.504  3.53
+#> # A tibble: 1 x 6
+#>   percent   est    se   lcl   ucl dist   
+#>     <dbl> <dbl> <dbl> <dbl> <dbl> <chr>  
+#> 1       5  1.30 0.813 0.521  3.58 average
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -115,8 +116,10 @@ boron_pred <- predict(boron_dists)
 and plotted together with the original data using `ssd_plot`.
 
 ``` r
-ssd_plot(boron_data, boron_pred, shape = "Group", color = "Group", label = "Species",
-         xlab = "Concentration (mg/L)", ribbon = TRUE) + expand_limits(x = 3000)
+ssd_plot(boron_data, boron_pred,
+  shape = "Group", color = "Group", label = "Species",
+  xlab = "Concentration (mg/L)", ribbon = TRUE
+) + expand_limits(x = 3000)
 ```
 
 ![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->

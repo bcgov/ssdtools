@@ -11,6 +11,7 @@
   \item{se}{The standard error of the estimate <dbl>.}
   \item{lcl}{The lower confidence limit <dbl>.}
   \item{se}{The upper confidence limit <dbl>.}
+  \item{dist}{The distribution <chr>.}
 }}
 \usage{
 boron_hc5

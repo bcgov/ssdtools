@@ -44,12 +44,13 @@ test_that("data", {
   expect_identical(checkr::check_data(
     boron_pred,
     values = list(
-      percent = 1:99,
+      percent = 1,
       est = 1,
       se = 1,
       lcl = 1,
       ucl = 1
-    )
+    ),
+    nrow = 99L
   ), boron_pred)
   expect_is(boron_pred, "tbl")
 
