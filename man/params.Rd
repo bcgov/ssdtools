@@ -8,6 +8,10 @@
 
 \item{object}{The object.}
 
+\item{xlab}{A string of the x-axis label.}
+
+\item{ylab}{A string of the x-axis label.}
+
 \item{conc}{A numeric vector of concentrations.}
 
 \item{percent}{A numeric vector of percentages.}

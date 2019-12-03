@@ -16,7 +16,7 @@ ssd_plot_cdf(x, ...)
 \method{ssd_plot_cdf}{fitdists}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 }
 \arguments{
-\item{x}{The object to plot.}
+\item{x}{The object.}
 
 \item{...}{Unused.}
 

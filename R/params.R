@@ -2,6 +2,8 @@
 #'
 #' @param x The object.
 #' @param object The object.
+#' @param xlab A string of the x-axis label.
+#' @param ylab A string of the x-axis label.
 #' @param conc A numeric vector of concentrations.
 #' @param percent A numeric vector of percentages.
 #' @param ic A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .

@@ -30,10 +30,7 @@
 #'
 #' Plots the cdf.
 #'
-#' @param x The object to plot.
-#' @param xlab A string of the x-axis label.
-#' @param ylab A string of the x-axis label.
-#' @param ... Unused.
+#' @inheritParams params
 #' @export
 ssd_plot_cdf <- function(x, ...) {
   UseMethod("ssd_plot_cdf")
@@ -52,7 +49,7 @@ ssd_plot_cdf.fitdist <- function(x,
   
   data <- data.frame(x = x$data)
   
-  pred <- ssd_hc(x)
+  pred <- ssd_hc(x, percent = 1:99)
   
   pred$percent <- pred$percent / 100
   
@@ -83,7 +80,7 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
   data$arrowright <- data$left * 2
   data$y <- ssd_ecd(data$xmean)
   
-  pred <- ssd_hc(x)
+  pred <- ssd_hc(x, percent = 1:99)
   pred$percent <- pred$percent / 100
   
   gp <- ggplot(pred, aes_string(x = "est"))
@@ -121,7 +118,7 @@ ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Aff
   chk_string(xlab)
   chk_string(ylab)
   
-  pred <- ssd_hc(x, average = FALSE)
+  pred <- ssd_hc(x, average = FALSE, percent = 1:99)
   pred$Distribution <- pred$dist
   
   data <- data.frame(x = x[[1]]$data)
