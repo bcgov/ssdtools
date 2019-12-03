@@ -1,2 +1,3 @@
 R/deprecated.R
 R/zzz.R
+R/release.R
