@@ -60,3 +60,27 @@ test_that("predict.fitdists parallel", {
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
 })
+
+test_that("predict.fitdistscens", {
+  expect_equal(as.data.frame(predict(ssdtools::fluazinam_dists, percent = c(1,99))), 
+               structure(list(percent = c(1, 99), est = c(0.165191855589344, 
+74931.0016372917), se = c(NA_real_, NA_real_), lcl = c(NA_real_, 
+NA_real_), ucl = c(NA_real_, NA_real_), dist = c("average", "average"
+)), class = "data.frame", row.names = c(NA, -2L)))
+})
+
+test_that("predict.fitdistscens cis", {
+  set.seed(77)
+  expect_equal(as.data.frame(predict(ssdtools::fluazinam_dists, percent = c(1,99),
+                                     ci = TRUE, average = FALSE, nboot = 10)), 
+               structure(list(percent = c(1, 99, 1, 99, 1, 99), est = c(0.0556070303830483, 
+93128.5004982232, 0.00297074136543809, 6884.80066910368, 0.279206726612854, 
+75330.7588691179), se = c(1.07296504986295, 1272681.81740671, 
+0.872766260156123, 6345.89256418346, 3.45777933776596, 85956.7343517397
+), lcl = c(0.00124359669989287, 19577.9878196641, 0.000259260753867323, 
+2709.72803943194, 0.0485617987224599, 15976.8461419439), ucl = c(2.83621750264073, 
+3440879.02972863, 2.21539429115628, 20960.9973187754, 9.29978158602369, 
+252695.315652253), dist = c("burrIII2", "burrIII2", "gamma", 
+"gamma", "lnorm", "lnorm")), row.names = c(NA, -6L), class = "data.frame"))
+})
+
