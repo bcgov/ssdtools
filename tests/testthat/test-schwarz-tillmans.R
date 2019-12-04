@@ -36,6 +36,10 @@ test_that("manual", {
 ), weight = c(0.268, 0.271, 0.01, 0.049, 0.133, 0.269)), row.names = c("gamma", 
 "gompertz", "lgumbel", "llogis", "lnorm", "weibull"), class = "data.frame"))
   
+  expect_equal(ssd_hc(dists, average = FALSE)$est,
+               c(1.07373870642628, 1.29945366523807, 1.76898186161132, 1.56257332292696, 
+1.68117483775796, 1.0871695998917))
+  
   set.seed(99)
   expect_equal(as.data.frame(ssd_hc(dists, ci = TRUE, nboot = 10)),
                structure(list(percent = 5, est = 1.25049880604773, se = 0.631765909916202, 
