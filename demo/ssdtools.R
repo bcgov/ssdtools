@@ -19,8 +19,7 @@
 #' ### ssdtools
 #' First, install and then load the `ssdtools` R package.
 #' ```
-#' install.packages("devtools")
-#' devtools::install_github("bcgov/ssdtools")
+#' install.packages("ssdtools")
 #' ```
 library(ssdtools)
 
@@ -37,7 +36,7 @@ head(data)
 #' the column with the concentration values.
 fits <- ssd_fit_dists(data,
   left = "Conc",
-  dists = c("lnorm", "llogis", "gompertz", "lgumbel", "gamma", "weibull")
+  dists = c("burrIII2", "lnorm", "gamma")
 )
 
 #' The `autoplot()` function can be used to plot the fits (for more information type `?autoplot.fitdists`)
@@ -46,32 +45,17 @@ ggplot2::autoplot(fits)
 #' And `ssd_gof()` can be used to generate the goodness of fit statistics.
 ssd_gof(fits)
 
-#' ### Predict
-
-#' The following code block does not use confidence intervals therefore we can use
-#' just 10 bootstrap samples when generating the predictions -
-#' unlike the upper and lower confidence limits, the precision of the
-#' estimates is not affected by the number of bootstrap samples.
-#' For more information type `?predict.fitdists`
-pred <- predict(fits, nboot = 10L)
-
-ssd_plot(data, pred,
-  left = "Conc", label = "Species", color = "Group",
-  xlab = "Concentration (mg/L)", ci = FALSE, hc = 5L, shift = 2
-)
-
 #' ### Hazard Concentration
 
-#' To get precise confidence limits on the hazard concentration use at least 10,000 bootstrap samples.
-#' Here for demonstrative purposes just 100 samples are used.
-ssd_hc(fits, nboot = 100L)
+#' The `ssd_hc()` function returns the hazard concentration.
+#' If `ci = TRUE` confidence intervals are estimated by parameteric bootstrapping.
+ssd_hc(fits, ci = TRUE)
 
-#' ### Confidence Intervals
-#'
-#' To generate and plot precise confidence intervals run the following code.
-#' It will take around 1 hour to complete
-#' ```
-#'  pred <- predict(fits, nboot = 10000L)
-#'  ssd_plot(data, pred, left = "Conc", label = "Species", color = "Group",
-#'           xlab = "Concentration (mg/L)", hc = 5)
-#' ```
+#' ### Predict
+#' 
+#' By default the generic `predict()` function predicts the species affected.
+pred <- predict(fits, ci = TRUE)
+
+ssd_plot(data, pred, left = "Conc", label = "Species", color = "Group",
+           xlab = "Concentration (mg/L)", hc = 5) +
+  expand_limits(x = 3000)
