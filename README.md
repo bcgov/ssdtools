@@ -128,8 +128,8 @@ ssd_plot(boron_data, boron_pred,
 
 ## Information
 
-The ssdtools manual is available at
-<https://bcgov.github.io/ssdtools/articles/ssdtools-manual.html>.
+Get started with ssdtools at
+<https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
 
 A shiny webpage developed for non-R-users is available at
 <https://bcgov-env.shinyapps.io/ssdtools/>.

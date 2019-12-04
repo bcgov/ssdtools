@@ -1,11 +1,11 @@
 ---
-title: "ssdtools User Manual"
+title: "Get Started with ssdtools"
 author: "ssdtools Team"
 date: "`r Sys.Date()`"
 bibliography: references.bib
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ssdtools User Manual}
+  %\VignetteIndexEntry{Get Started with ssdtools}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
