@@ -63,8 +63,8 @@ rllogis <- function(n, shapelog = 0, scalelog = 1) {
 #' @rdname llogis
 #' @export
 sllogis <- function(x) {
-  c(
+  list(start = list(
     scalelog = mean(log(x), na.rm = TRUE),
     shapelog = pi * sd(log(x), na.rm = TRUE) / sqrt(3)
-  )
+  ))
 }

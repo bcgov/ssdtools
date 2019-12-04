@@ -29,8 +29,8 @@ NULL
 #' @rdname gamma
 #' @export
 sgamma <- function(x) {
-  c(
+  list(start = list(
     scale = var(x, na.rm = TRUE) / mean(x, na.rm = TRUE),
     shape = mean(x, na.rm = TRUE)^2 / var(x, na.rm = TRUE)
-  )
+  ))
 }

@@ -86,5 +86,5 @@ rburrIII3 <- function(n, shape1log = 0, shape2log = 0, scalelog = 1) {
 #' @rdname burrIII3
 #' @export
 sburrIII3 <- function(x) {
-  c(shape1log = 0, shape2log = 0, scalelog = 1)
+  list(start = list(shape1log = 0, shape2log = 0, scalelog = 1))
 }

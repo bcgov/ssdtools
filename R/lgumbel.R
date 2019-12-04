@@ -62,8 +62,8 @@ rlgumbel <- function(n, locationlog = 0, scalelog = 1) {
 #' @rdname lgumbel
 #' @export
 slgumbel <- function(x) {
-  c(
+  list(start = list(
     locationlog = mean(log(x), na.rm = TRUE),
     scalelog = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
-  )
+  ))
 }

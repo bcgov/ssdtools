@@ -18,8 +18,7 @@ add_starting_values <- function(dist, x) {
   }
 
   start <- do.call(paste0("s", dist$distr), list(x = x))
-  dist$start <- as.list(start)
-  dist
+  c(dist, start)
 }
 
 fit_dist_uncensored <- function(data, left, weight, dist) {
