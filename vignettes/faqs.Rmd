@@ -1,0 +1,66 @@
+---
+title: "Frequently Asked Questions"
+author: "ssdtools Team"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Frequently Asked Questions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+  ```{r, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+```
+
+```{r}
+library(ssdtools)
+library(ggplot2)
+```
+
+## How do I fit a custom distribution?
+
+The user can also specify one or more custom distributions (called say `custom`) provided vectorized density (`dcustom()`), distribution (`pcustom()`), quantile (`qcustom()`) and starting value (`scustom()`) functions are defined. 
+For example see the [llogis source code](https://github.com/bcgov/ssdtools/blob/master/R/llogis.R).
+
+## How do I fit distributions to multiple groups such taxa and/or chemicals?
+
+An elegant approach using some tidyverse packages is demonstrated below.
+
+```{r, message=FALSE}
+library(purrr)
+library(tidyr)
+library(dplyr)
+
+boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Units)) %>%
+  mutate(Fit = map(data, ssd_fit_dists, dists = "lnorm"),
+         Prediction = map(Fit, predict)) %>% 
+  unnest(Prediction)
+
+boron_hc5s <- filter(boron_preds, percent == 5)
+```
+
+The resultant data and predictions can then be plotted as follows.
+```{r, fig.width = 5, fig.height = 5}
+ssd_plot(boron_data, boron_preds, xlab = "Concentration (mg/L)") +
+  facet_wrap(~Group) +
+  geom_hcintersect(data = boron_hc5s, aes(xintercept = est, yintercept = percent / 100))
+```
+
+### How do I plot a Cullen Frey plot?
+
+The data can be visualized using a Cullen Frey plot of the skewness and kurtosis.
+
+```{r, fig.width = 5, fig.height = 5}
+ssd_plot_cf(boron_data)
+```
+
+## How do I plot model diagnostics?
+
+A `fitdists` object can be plotted to display model diagnostics plots for each fit.
+```{r, fig.width=6, fig.height=6, fig.show='hold'}
+plot(boron_dists)
+```

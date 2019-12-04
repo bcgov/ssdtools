@@ -1,6 +1,6 @@
 ---
 title: "Embellishing Plots with an Exposure Distribution"
-author: "sstools Team"
+author: "ssdtools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
 bibliography: references.bib
 output: rmarkdown::html_vignette

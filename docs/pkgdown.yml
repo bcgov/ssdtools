@@ -3,5 +3,6 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   exposure-plots: exposure-plots.html
+  faqs: faqs.html
   ssdtools: ssdtools.html
 

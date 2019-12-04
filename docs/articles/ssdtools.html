@@ -66,6 +66,9 @@
 <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
+    <li>
+      <a href="../articles/faqs.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -182,11 +185,7 @@
 </ul>
 <p>distribution using the <code>dists</code> argument.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>boron_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(boron_data, <span class="dt">dists =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"burrIII2"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span>))</span></code></pre></div>
-</div>
-<div id="custom-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#custom-distributions" class="anchor"></a>Custom Distributions</h2>
-<p>The user can also specify one or more custom distributions (called say <code>custom</code>) provided vectorized density (<code>dcustom()</code>), distribution (<code>pcustom()</code>), quantile (<code>qcustom()</code>) and starting value (<code>scustom()</code>) functions are defined. For example see the <a href="https://github.com/bcgov/ssdtools/blob/master/R/llogis.R">llogis source code</a>.</p>
+<p>The user can also specify one or more custom distributions.</p>
 </div>
 <div id="coefficients" class="section level2">
 <h2 class="hasAnchor">
@@ -335,74 +334,34 @@
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-18-1.png" width="384"></p>
 <p>The most recent plot can be saved as a file using <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>, which also allows the user to set the resolution.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span>(<span class="st">"file_name.png"</span>, <span class="dt">dpi =</span> <span class="dv">600</span>)</span></code></pre></div>
-</div>
-<div id="grouping" class="section level2">
-<h2 class="hasAnchor">
-<a href="#grouping" class="anchor"></a>Grouping</h2>
-<p>A common question is how do I fit distributions to multiple groups such taxa and/or chemicals? An elegant approach using some tidyverse packages is demonstrated below.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(purrr)</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyr)</span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
-<span id="cb20-4"><a href="#cb20-4"></a></span>
-<span id="cb20-5"><a href="#cb20-5"></a>boron_datas &lt;-<span class="st"> </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(boron_data, <span class="dt">data =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(Chemical, Species, Conc, Units))</span>
-<span id="cb20-6"><a href="#cb20-6"></a>boron_datas &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(boron_datas,</span>
-<span id="cb20-7"><a href="#cb20-7"></a>  <span class="dt">Fit =</span> <span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(data, ssd_fit_dists, <span class="dt">dists =</span> <span class="st">"lnorm"</span>),</span>
-<span id="cb20-8"><a href="#cb20-8"></a>  <span class="dt">Prediction =</span> <span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(Fit, predict)</span>
-<span id="cb20-9"><a href="#cb20-9"></a>)</span>
-<span id="cb20-10"><a href="#cb20-10"></a>boron_datas &lt;-<span class="st"> </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(boron_datas, Prediction)</span></code></pre></div>
-<p>The resultant data and predictions can then be plotted as follows.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>boron_hc5s &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(boron_datas, percent <span class="op">==</span><span class="st"> </span><span class="dv">5</span>)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>gp <span class="op">%+%</span><span class="st"> </span>boron_datas <span class="op">+</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>Group) <span class="op">+</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="st">  </span><span class="kw"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span>(<span class="dt">data =</span> boron_hc5s, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">xintercept =</span> est, <span class="dt">yintercept =</span> percent <span class="op">/</span><span class="st"> </span><span class="dv">100</span>))</span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-20-1.png" width="480"></p>
-</div>
-<div id="additional-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#additional-features" class="anchor"></a>Additional Features</h2>
-<div id="cullen-frey-plots" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cullen-frey-plots" class="anchor"></a>Cullen Frey Plots</h3>
-<p>The data can be visualized using a cullen frey plot of the skewness and kurtosis.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ssdtools)</span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="kw"><a href="../reference/ssd_plot_cf.html">ssd_plot_cf</a></span>(boron_data)</span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-21-1.png" width="480"></p>
-</div>
-<div id="model-diagnostics" class="section level3">
-<h3 class="hasAnchor">
-<a href="#model-diagnostics" class="anchor"></a>Model Diagnostics</h3>
-<p>A <code>fitdists</code> <span class="citation">(Delignette-Muller and Dutang 2015)</span> object can be plotted to display model diagnostics plots for each fit.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(boron_dists)</span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-22-1.png" width="576"><img src="ssdtools_files/figure-html/unnamed-chunk-22-2.png" width="576"><img src="ssdtools_files/figure-html/unnamed-chunk-22-3.png" width="576"></p>
-</div>
 <div id="censored-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#censored-data" class="anchor"></a>Censored Data</h3>
 <p>Censored data is that for which only a lower and/or upper limit is known for a particular species. If the <code>right</code> argument in <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> is different to the <code>left</code> argument then the data are considered to be censored. <code>fluazinam</code> is a censored data set from the <code>fitdistrplus</code> package.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(fluazinam, <span class="dt">package =</span> <span class="st">"fitdistrplus"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fluazinam)</span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="co">#&gt;     left right</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="co">#&gt; 1    3.8   3.8</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="co">#&gt; 2   33.6  33.6</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a><span class="co">#&gt; 3   87.0  87.0</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a><span class="co">#&gt; 4 1700.0    NA</span></span>
-<span id="cb24-8"><a href="#cb24-8"></a><span class="co">#&gt; 5  640.0 640.0</span></span>
-<span id="cb24-9"><a href="#cb24-9"></a><span class="co">#&gt; 6 1155.0    NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(fluazinam, <span class="dt">package =</span> <span class="st">"fitdistrplus"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fluazinam)</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#&gt;     left right</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; 1    3.8   3.8</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt; 2   33.6  33.6</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">#&gt; 3   87.0  87.0</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co">#&gt; 4 1700.0    NA</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">#&gt; 5  640.0 640.0</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; 6 1155.0    NA</span></span></code></pre></div>
 <p>There are less goodness-of-fit statistics available for fits to censored data (currently just <code>aic</code> and <code>bic</code>). The <code>delta</code> values are calculated using <code>aic</code>.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>fluazinam_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(fluazinam, <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>)</span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(fluazinam_dists)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>fluazinam_dists &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(fluazinam, <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(fluazinam_dists)</span></code></pre></div>
 <p>But model-averaged predictions (and hazard concentrations complete with 95% confidence limits) can be calculated using <code>aic</code></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">99</span>)</span>
-<span id="cb26-2"><a href="#cb26-2"></a>fluazinam_pred &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(fluazinam_dists, <span class="dt">ci =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">99</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>fluazinam_pred &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(fluazinam_dists, <span class="dt">ci =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>and the results plotted complete with arrows indicating the censorship.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(fluazinam, fluazinam_pred,</span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>,</span>
-<span id="cb27-3"><a href="#cb27-3"></a>  <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a>)</span>
-<span id="cb27-5"><a href="#cb27-5"></a><span class="co">#&gt; Warning: Removed 98 rows containing missing values (geom_path).</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a><span class="co">#&gt; geom_path: Each group consists of only one observation. Do you need to adjust</span></span>
-<span id="cb27-7"><a href="#cb27-7"></a><span class="co">#&gt; the group aesthetic?</span></span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-26-1.png" width="384"></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(fluazinam, fluazinam_pred,</span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="dt">left =</span> <span class="st">"left"</span>, <span class="dt">right =</span> <span class="st">"right"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>)</span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#&gt; Warning: Removed 98 rows containing missing values (geom_path).</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#&gt; geom_path: Each group consists of only one observation. Do you need to adjust</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="co">#&gt; the group aesthetic?</span></span></code></pre></div>
+<p><img src="ssdtools_files/figure-html/unnamed-chunk-22-1.png" width="384"></p>
 <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia </span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"> Creative Commons Attribution 4.0 International License</a>.</p>
 </div>
 </div>
@@ -412,9 +371,6 @@
 <div id="refs" class="references">
 <div id="ref-burnham_model_2002">
 <p>Burnham, Kenneth P., and David R. Anderson, eds. 2002. <em>Model Selection and Multimodel Inference</em>. New York, NY: Springer New York. <a href="https://doi.org/10.1007/b97636">https://doi.org/10.1007/b97636</a>.</p>
-</div>
-<div id="ref-fitdistrplus">
-<p>Delignette-Muller, Marie Laure, and Christophe Dutang. 2015. “fitdistrplus: An R Package for Fitting Distributions.” <em>Journal of Statistical Software</em> 64 (4): 1–34. <a href="http://www.jstatsoft.org/v64/i04/">http://www.jstatsoft.org/v64/i04/</a>.</p>
 </div>
 <div id="ref-posthuma_species_2001">
 <p>Posthuma, Leo, Glenn W Suter II, and Theo P Traas. 2001. <em>Species Sensitivity Distributions in Ecotoxicology</em>. CRC press. <a href="https://www.crcpress.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783">https://www.crcpress.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783</a>.</p>
@@ -447,7 +403,6 @@
       <li><a href="#getting-help">Getting Help</a></li>
       <li><a href="#inputting-data">Inputting Data</a></li>
       <li><a href="#fitting-distributions">Fitting Distributions</a></li>
-      <li><a href="#custom-distributions">Custom Distributions</a></li>
       <li><a href="#coefficients">Coefficients</a></li>
       <li><a href="#plots">Plots</a></li>
       <li><a href="#selecting-one-distribution">Selecting One Distribution</a></li>
@@ -455,8 +410,6 @@
       <li><a href="#estimating-the-fit">Estimating the Fit</a></li>
       <li><a href="#hazard-concentrations">Hazard Concentrations</a></li>
       <li><a href="#plotting">Plotting</a></li>
-      <li><a href="#grouping">Grouping</a></li>
-      <li><a href="#additional-features">Additional Features</a></li>
       <li><a href="#references">References</a></li>
       </ul>
 </div>

@@ -99,10 +99,7 @@ distribution using the `dists` argument.
 boron_dists <- ssd_fit_dists(boron_data, dists = c("burrIII2", "lnorm", "gamma"))
 ```
 
-## Custom Distributions
-
-The user can also specify one or more custom distributions (called say `custom`) provided vectorized density (`dcustom()`), distribution (`pcustom()`), quantile (`qcustom()`) and starting value (`scustom()`) functions are defined. 
-For example see the [llogis source code](https://github.com/bcgov/ssdtools/blob/master/R/llogis.R).
+The user can also specify one or more custom distributions.
 
 ## Coefficients
 
@@ -251,50 +248,6 @@ print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5 / 100))
 The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
 ```r
 ggsave("file_name.png", dpi = 600)
-```
-
-## Grouping
-
-A common question is how do I fit distributions to multiple groups such taxa and/or chemicals?
-An elegant approach using some tidyverse packages is demonstrated below.
-
-```{r, message=FALSE}
-library(purrr)
-library(tidyr)
-library(dplyr)
-
-boron_datas <- nest(boron_data, data = c(Chemical, Species, Conc, Units))
-boron_datas <- mutate(boron_datas,
-  Fit = map(data, ssd_fit_dists, dists = "lnorm"),
-  Prediction = map(Fit, predict)
-)
-boron_datas <- unnest(boron_datas, Prediction)
-```
-
-The resultant data and predictions can then be plotted as follows.
-```{r, fig.width = 5, fig.height = 5}
-boron_hc5s <- filter(boron_datas, percent == 5)
-gp %+% boron_datas +
-  facet_wrap(~Group) +
-  geom_hcintersect(data = boron_hc5s, aes(xintercept = est, yintercept = percent / 100))
-```
-
-## Additional Features
-
-### Cullen Frey Plots
-
-The data can be visualized using a cullen frey plot of the skewness and kurtosis.
-
-```{r, fig.width = 5, fig.height = 5}
-library(ssdtools)
-ssd_plot_cf(boron_data)
-```
-
-### Model Diagnostics
-
-A `fitdists` [@fitdistrplus] object can be plotted to display model diagnostics plots for each fit.
-```{r, fig.width=6, fig.height=6, fig.show='hold'}
-plot(boron_dists)
 ```
 
 ### Censored Data
