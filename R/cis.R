@@ -19,11 +19,11 @@ xcis <- function(x, samples, p, level, fun, args, na.rm) {
     args$p <- x
   samples <- do.call(fun, args)
   if(!na.rm && any(is.na(samples))) {
-    wrn("Distribution '", substr(fun, 2, nchar(fun)),
+    err("Distribution '", substr(fun, 2, nchar(fun)),
         "' bootstraps include missing values.")
   }
-  quantile <- quantile(samples, probs = probs(level), na.rm = TRUE)
-  data.frame(se = sd(samples, na.rm = TRUE), lcl = quantile[1], ucl = quantile[2],
+  quantile <- quantile(samples, probs = probs(level), na.rm = na.rm)
+  data.frame(se = sd(samples, na.rm = na.rm), lcl = quantile[1], ucl = quantile[2],
                    row.names = NULL)
 }
 
