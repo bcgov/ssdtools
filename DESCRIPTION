@@ -1,5 +1,5 @@
 Package: ssdtools
-Version: 0.0.3.9013
+Version: 0.0.3.9014
 Title: Species Sensitivity Distributions
 Description: Species sensitivity distributions are 
   cumulative probability distributions which are fitted to 
@@ -15,13 +15,15 @@ Authors@R: c(
   person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre", "ctr"), 
     comment = c(ORCID = "0000-0002-7683-4592")),
   person("Carl", "Schwarz", role = c("aut", "ctr")),
-  person("Ali", "Azizishirazi", email = "Ali.Azizishirazi@gov.bc.ca", role = "ctb"),
   person("Angeline", "Tillmanns", role = "ctb"),
-  person("Stephanie", "Hazlitt", role = "ctb"),
+  person("Ali", "Azizishirazi", role = "ctb"),
+  person("Rebecca", "Fisher", role = "ctb"),
+  person("David", "Fox", role = "ctb"),
   person("Kathleen", "McTavish", role = "ctb"),
-  person("Emilie", "Doussantousse", role = "ctb"),
   person("Heather", "Thompson", role = "ctb"),
   person("Andy", "Teucher", role = "ctb"),
+  person("Emilie", "Doussantousse", role = "ctb"),
+  person("Stephanie", "Hazlitt", role = "ctb"),
   person("Nan-Hung", "Hsieh", role = "ctb"),
   person("Sergio", "Ibarra Espinosa", role = "ctb"),
   person("Province of British Columbia", role = "cph")
