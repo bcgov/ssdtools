@@ -1,6 +1,6 @@
 ---
 title: "ssdtools User Manual"
-author: "sstools Team"
+author: "ssdtools Team"
 date: "`r Sys.Date()`"
 bibliography: references.bib
 output: rmarkdown::html_vignette
