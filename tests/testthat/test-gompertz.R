@@ -22,11 +22,33 @@ test_that("dgompertz", {
 
 test_that("fit gompertz", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
-
+  
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist),
-  c(shape = 0.0394118062171637, scale = 0.00260015114608545),
-  tolerance = 1e-05)
+               c(shape = 0.0394118062171637, scale = 0.00260015114608545),
+               tolerance = 1e-05)
+})
+
+test_that("fit gompertz cis", {
+  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+  
+  set.seed(77)
+  expect_warning(ssd_hc(dist, ci = TRUE, nboot = 10), 
+                 "^Distribution 'gompertz' bootstraps include missing values[.]$")
+  set.seed(77)
+  # expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10, na.rm = TRUE)),
+  #              structure(list(percent = 5, est = 1.29966505882089, se = 0.100230440665109, 
+  #                             lcl = 1.42485102455154, ucl = 1.6614858025352, dist = "gompertz"), class = "data.frame", row.names = c(NA, 
+  #                                                                                                                                    -1L)))
+  set.seed(77)
+  expect_warning(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10), 
+                 "^Distribution 'gompertz' bootstraps include missing values[.]$")
+  
+  set.seed(77)
+#   expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10, na.rm = TRUE)),
+#                structure(list(conc = 2, est = 7.59650778517607, se = 0.410438032197045, 
+#     lcl = 5.99532980515702, ucl = 6.97057265138909, dist = "gompertz"), class = "data.frame", row.names = c(NA, 
+# -1L)))
 })
 
 test_that("qgompertz", {
@@ -34,6 +56,14 @@ test_that("qgompertz", {
   expect_identical(
     qgompertz(0.8),
     0.959134838920824
+  )
+  expect_identical(
+    qgompertz(0),
+    0
+  )
+  expect_identical(
+    qgompertz(1),
+    Inf
   )
   expect_identical(qgompertz(log(0.8), log.p = TRUE), qgompertz(0.8))
   expect_equal(qgompertz(pgompertz(0.9)), 0.9)

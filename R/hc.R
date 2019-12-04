@@ -23,12 +23,13 @@ ssd_hc <- function(x, ...) {
   UseMethod("ssd_hc")
 }
 
-.ssd_hc_fitdist <- function(x, percent, ci, level, nboot, parallel, ncpus) {
+.ssd_hc_fitdist <- function(x, percent, ci, level, nboot, parallel, ncpus, na.rm) {
   chk_vector(percent)
   chk_numeric(percent)
   chk_number(level)
   chk_range(level)
-  
+  chk_flag(na.rm)
+
   percent <- percent / 100
   
   args <- as.list(x$estimate)
@@ -46,7 +47,7 @@ ssd_hc <- function(x, ...) {
     )))
   }
   samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
-  cis <- cis(samples, p = FALSE, level = level, x = percent)
+  cis <- cis(samples, p = FALSE, level = level, x = percent, na.rm = na.rm)
   as_tibble(data.frame(
     percent = percent * 100, est = est,
     se = cis$se, lcl = cis$lcl, ucl = cis$ucl, dist = dist,
@@ -54,7 +55,7 @@ ssd_hc <- function(x, ...) {
 }
 
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot, parallel, ncpus, 
-                             average, ic) {
+                             na.rm, average, ic) {
   if (!length(x) || !length(percent)) {
     no <- numeric(0)
     return(as_tibble(data.frame(percent = no, est = no, se = no, 
@@ -63,7 +64,7 @@ ssd_hc <- function(x, ...) {
   }
   
   hc <- lapply(x, ssd_hc, percent = percent, ci = ci, level = level, nboot = nboot, 
-               parallel = parallel, ncpus = ncpus)
+               parallel = parallel, ncpus = ncpus, na.rm = na.rm)
   if(!average) {
     hc <- do.call("rbind", hc)
     row.names(hc) <- NULL
@@ -84,46 +85,48 @@ ssd_hc <- function(x, ...) {
 #' @export
 #' @examples
 #' ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hc.fitdist <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,...) {
+ssd_hc.fitdist <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, na.rm = FALSE, ...) {
   chk_unused(...)
   
   .ssd_hc_fitdist(x, percent, ci = ci, level = level, nboot = nboot, 
-                  parallel = parallel, ncpus = ncpus)
+                  parallel = parallel, ncpus = ncpus, na.rm = na.rm)
 }
 
 #' @describeIn ssd_hc Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
-ssd_hc.fitdistcens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+ssd_hc.fitdistcens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, na.rm = FALSE, ...) {
   chk_unused(...)
   
   .ssd_hc_fitdist(x, percent, ci = ci, level = level, nboot = nboot, 
-                  parallel = parallel, ncpus = ncpus)
+                  parallel = parallel, ncpus = ncpus, na.rm = na.rm)
 }
 
 #' @describeIn ssd_hc Hazard Percent fitdists
 #' @export
 #' @examples
 #' ssd_hc(boron_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdists <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
+ssd_hc.fitdists <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, na.rm = FALSE, average = TRUE, ic = "aicc", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
   
   .ssd_hc_fitdists(x, percent, ci = ci, level = level, nboot = nboot, 
-                   parallel = parallel, ncpus = ncpus, average = average, ic = ic)
+                   parallel = parallel, ncpus = ncpus, na.rm = na.rm, 
+                   average = average, ic = ic)
 }
 
 #' @describeIn ssd_hc Hazard Percent fitdistcens
 #' @export
 #' @examples
 #' ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdistscens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aic", ...) {
+ssd_hc.fitdistscens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, na.rm = FALSE, average = TRUE, ic = "aic", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "bic"))
   chk_unused(...)
   
   .ssd_hc_fitdists(x, percent, ci = ci, level = level, nboot = nboot, 
-                   parallel = parallel, ncpus = ncpus, average = average, ic = ic)
+                   parallel = parallel, ncpus = ncpus, na.rm = na.rm,
+                   average = average, ic = ic)
 }

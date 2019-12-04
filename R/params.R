@@ -59,6 +59,8 @@
 #' @param dists A character vector of the distributions to fit.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
 #' @param silent A flag indicating whether fits should fail silently.
+#' @param na.rm A flag specifying whether to silently remove missing values or
+#' remove them with a warning.
 #' @keywords internal
 #' @name params
 NULL

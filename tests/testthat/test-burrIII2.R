@@ -17,6 +17,7 @@ context("burrIII2")
 test_that("dburrIII2", {
   expect_identical(dburrIII2(numeric(0)), numeric(0))
   expect_identical(dburrIII2(NA), NA_real_)
+  expect_equal(dburrIII2(c(0, 1, Inf, NaN, -1)), c(0, 0.196611933241482, 0, NA, 0))
 
   expect_equal(
     dburrIII2(c(31, 15, 32, 32, 642, 778, 187, 12), scalelog = 0),
@@ -50,6 +51,21 @@ test_that("fit burrIII2", {
 
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist), c(shapelog = 0.101250994107126, scalelog = 2.98432920414956))
+})
+
+test_that("fit burrIII2 cis", {
+  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
+
+  set.seed(77)
+  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
+               structure(list(percent = 5, est = 1.58920212463066, se = 0.561779293276257, 
+    lcl = 0.933413683053849, ucl = 2.4171610278875, dist = "burrIII2"), class = "data.frame", row.names = c(NA, 
+-1L)))
+  set.seed(77)
+  expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
+               structure(list(conc = 2, est = 6.84079666045762, se = 2.8457114994266, 
+    lcl = 3.57247087396272, ucl = 11.2796053723563, dist = "burrIII2"), class = "data.frame", row.names = c(NA, 
+-1L)))
 })
 
 test_that("qburrIII2", {

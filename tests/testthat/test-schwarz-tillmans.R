@@ -37,6 +37,8 @@ test_that("manual", {
 "gompertz", "lgumbel", "llogis", "lnorm", "weibull"), class = "data.frame"))
   
   set.seed(99)
-  # ssd_hc(dists, ci = TRUE, nboot = 10) this needs fixing!!
+  expect_equal(as.data.frame(ssd_hc(dists, ci = TRUE, nboot = 10, na.rm = TRUE)),
+               structure(list(percent = 5, est = 1.25049880604773, se = 0.636379022661767, 
+    lcl = 0.809778609248693, ucl = 2.608591328752, dist = "average"), row.names = c(NA, 
+-1L), class = "data.frame"))
 })
-

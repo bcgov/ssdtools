@@ -91,6 +91,9 @@
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
+
+\item{na.rm}{A flag specifying whether to silently remove missing values or
+remove them with a warning.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

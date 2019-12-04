@@ -55,6 +55,23 @@ test_that("fit burrIII3", {
 scalelog = 23.5089158967839))
 })
 
+test_that("fit burrIII3 cis", {
+  data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
+
+  dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
+
+  set.seed(77)
+  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
+               structure(list(percent = 5, est = 9.3654970353837, se = 12.1627650023649, 
+    lcl = 2.96137016375762, ucl = 38.498485438982, dist = "burrIII3"), class = "data.frame", row.names = c(NA, 
+-1L)))
+  set.seed(77)
+  expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
+               structure(list(conc = 2, est = 0.00301316714398456, se = 1.4331681739529, 
+    lcl = 1.79517479162082e-10, ucl = 3.65177244931149, dist = "burrIII3"), class = "data.frame", row.names = c(NA, 
+-1L)))
+})
+
 test_that("qburrIII3", {
   expect_identical(qburrIII3(numeric(0)), numeric(0))
   expect_identical(qburrIII3(0), 0)
