@@ -34,7 +34,7 @@ test_that("ssd_gof", {
     check.attributes = FALSE
   )
 
-  dists <- ssd_fit_dists(boron_data[1:6, ])
+  dists <- ssd_fit_dists(boron_data[1:6,], dists = c('burrIII2', 'gamma', 'lnorm'))
   xx <- ssd_gof(dists)
 
   expect_is(xx, "tbl")

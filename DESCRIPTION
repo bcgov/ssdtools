@@ -49,13 +49,11 @@ Suggests:
     checkr,
     covr,
     knitr,
-    mle.tools,
-    reshape2,
     rmarkdown,
     testthat,
-    tidyr,
     readr,
     purrr,
+    tidyr,
     dplyr
 Encoding: UTF-8
 LazyData: true

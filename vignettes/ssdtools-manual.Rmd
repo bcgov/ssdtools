@@ -47,10 +47,11 @@ install.packages("ssdtools")
 install.packages("tidyverse")
 ```
 
-The `ssdtools` package (and tidyverse packages) can then be loaded into the current session using
+The `ssdtools` package (and key packages) can then be loaded into the current session using
 ```{r, message = FALSE}
 library(ssdtools)
-library(tidyverse)
+library(readr)
+library(ggplot2)
 ```
 
 ## Getting Help
@@ -255,9 +256,13 @@ ggsave("file_name.png", dpi = 600)
 ## Grouping
 
 A common question is how do I fit distributions to multiple groups such taxa and/or chemicals?
-An elegant approach using the tidyverse is demonstrated below.
+An elegant approach using some tidyverse packages is demonstrated below.
 
-```{r}
+```{r, message=FALSE}
+library(purrr)
+library(tidyr)
+library(dplyr)
+
 boron_datas <- nest(boron_data, data = c(Chemical, Species, Conc, Units))
 boron_datas <- mutate(boron_datas,
   Fit = map(data, ssd_fit_dists, dists = "lnorm"),

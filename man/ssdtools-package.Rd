@@ -37,13 +37,15 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Ali Azizishirazi \email{Ali.Azizishirazi@gov.bc.ca} [contributor]
   \item Angeline Tillmanns [contributor]
-  \item Stephanie Hazlitt [contributor]
+  \item Ali Azizishirazi [contributor]
+  \item Rebecca Fisher [contributor]
+  \item David Fox [contributor]
   \item Kathleen McTavish [contributor]
-  \item Emilie Doussantousse [contributor]
   \item Heather Thompson [contributor]
   \item Andy Teucher [contributor]
+  \item Emilie Doussantousse [contributor]
+  \item Stephanie Hazlitt [contributor]
   \item Nan-Hung Hsieh [contributor]
   \item Sergio Ibarra Espinosa [contributor]
   \item Province of British Columbia [copyright holder]
