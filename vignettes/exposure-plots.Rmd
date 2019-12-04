@@ -65,6 +65,7 @@ fit.plot + geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", si
 The *ssdtools* package contains a function *ssd_exposure* that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.
 
 ```{r echo=TRUE}
+set.seed(99)
 ex.risk <- ssd_exposure(fit, meanlog = ex.mean.log, sdlog = ex.sd.log)
 ex.risk
 ```

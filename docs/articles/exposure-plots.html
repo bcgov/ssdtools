@@ -128,8 +128,8 @@
 <p>The <em>ssdtools</em> package contains a function <em>ssd_exposure</em> that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ex.risk &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ssd_exposure.html">ssd_exposure</a></span>(fit, <span class="dt">meanlog =</span> ex.mean.log, <span class="dt">sdlog =</span> ex.sd.log)</span>
 <span id="cb4-2"><a href="#cb4-2"></a>ex.risk</span></code></pre></div>
-<pre><code>## [1] 0.005917484</code></pre>
-<p>The risk of 0.00592 can also be added to the plot in the usual way:</p>
+<pre><code>## [1] 0.006141225</code></pre>
+<p>The risk of 0.00614 can also be added to the plot in the usual way:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>fit.plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">dat =</span> ex.cdf, <span class="kw">aes</span>(<span class="dt">x =</span> Conc, <span class="dt">y =</span> ex.cdf), <span class="dt">color =</span> <span class="st">"red"</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">"text"</span>,</span>
 <span id="cb6-3"><a href="#cb6-3"></a>    <span class="dt">label =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Exposure distribution"</span>),</span>
