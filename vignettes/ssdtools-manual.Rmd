@@ -42,19 +42,15 @@ As such it endeavours to fulfill the tidyverse [manifesto](https://tidyverse.tid
 In order to install R [@r] the appropriate binary for the users operating system should be downloaded from [CRAN](https://cran.r-project.org) and then installed.
 
 Once R is installed, the `ssdtools` package can be installed (together with the tidyverse) by executing the following code at the R console
-```r
+```{r, eval = FALSE}
 install.packages("ssdtools")
 install.packages("tidyverse")
 ```
 
-The `ssdtools` package (and key tidyverse packages) can then be loaded into the current session using
-```{r, message=FALSE}
+The `ssdtools` package (and tidyverse packages) can then be loaded into the current session using
+```{r, message = FALSE}
 library(ssdtools)
-library(readr)
-library(ggplot2)
-library(tidyr)
-library(dplyr)
-library(purrr)
+library(tidyverse)
 ```
 
 ## Getting Help
@@ -171,7 +167,7 @@ boron_pred <- predict(boron_dists, ci = TRUE)
 ```
 
 The resultant object is a data frame of the estimated concentration (`est`) with standard error (`se`) and lower (`lcl`) and upper (`ucl`) 95% confidence limits by percent of species affected (`percent`).
-The uncertainty in the estimates is generated using parametric bootstrapping.
+The confidence limits are estimated using parametric bootstrapping.
 ```{r}
 boron_pred
 ```
@@ -202,8 +198,6 @@ The 5% hazard concentration ($HC_5$) is the concentration that affects 5% of the
 set.seed(99)
 boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
 ```
-
-The code may still take upwards of several minutes to run.
 
 ```{r}
 print(boron_hc5)
@@ -313,13 +307,14 @@ There are less goodness-of-fit statistics available for
 fits to censored data (currently just `aic` and `bic`).
 The `delta` values are calculated using `aic`.
 
-```{r}
+```{r, eval = FALSE}
 fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_gof(fluazinam_dists)
 ```
 But model-averaged predictions (and hazard concentrations complete with 95% confidence limits) can be calculated using `aic`
-```{r}
-fluazinam_pred <- predict(fluazinam_dists)
+```{r, eval = FALSE}
+set.seed(99)
+fluazinam_pred <- predict(fluazinam_dists, ci = TRUE)
 ```
 and the results plotted complete with arrows indicating the censorship.
 ```{r}
