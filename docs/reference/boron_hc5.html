@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -99,6 +99,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -148,14 +151,15 @@
   <dt>se</dt><dd><p>The standard error of the estimate &lt;dbl&gt;.</p></dd>
   <dt>lcl</dt><dd><p>The lower confidence limit &lt;dbl&gt;.</p></dd>
   <dt>se</dt><dd><p>The upper confidence limit &lt;dbl&gt;.</p></dd>
+  <dt>dist</dt><dd><p>The distribution &lt;chr&gt;.</p></dd>
 
 </dl>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>boron_hc5</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 5</span><span>
-#&gt;   percent   est    se   lcl   ucl
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>       5  1.25 0.736 0.604  3.20</div></span></pre>
+    <pre class="examples"><div class='input'><span class='no'>boron_hc5</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 6</span><span>
+#&gt;   percent   est    se   lcl   ucl dist   
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'>1</span><span>       5  1.30 0.813 0.521  3.58 average</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

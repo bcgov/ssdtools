@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -99,6 +99,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -145,7 +148,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>The object to subset.</p></td>
+      <td><p>The object.</p></td>
     </tr>
     <tr>
       <th>select</th>
@@ -153,22 +156,22 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Unused</p></td>
+      <td><p>Unused.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>boron_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gamma"</span>, <span class='st'>"weibull"</span>))</div><div class='output co'>#&gt; Fitting of the distribution ' gamma ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;        estimate Std. Error
-#&gt; scale 25.108064  7.6313816
-#&gt; shape  0.950757  0.2226832
-#&gt; Fitting of the distribution ' weibull ' by maximum likelihood 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>boron_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gamma"</span>, <span class='st'>"lnorm"</span>))</div><div class='output co'>#&gt; Fitting of the distribution ' gamma ' by maximum likelihood 
 #&gt; Parameters:
 #&gt;         estimate Std. Error
-#&gt; shape  0.9662825  0.1454446
-#&gt; scale 23.5097478  4.8528313</div></pre>
+#&gt; scale 25.1263769  7.6375478
+#&gt; shape  0.9500513  0.2224988
+#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood 
+#&gt; Parameters:
+#&gt;         estimate Std. Error
+#&gt; meanlog 2.561645  0.2346291
+#&gt; sdlog   1.241540  0.1659073</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

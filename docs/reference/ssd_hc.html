@@ -43,8 +43,7 @@
 
 
 <meta property="og:title" content="Hazard Concentration — ssd_hc" />
-<meta property="og:description" content="Estimates with bootstrap confidence intervals the hazard concentration
-at which by default 5% of the species are affected." />
+<meta property="og:description" content="Gets concentrations that protect specified percentages of species." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -78,7 +77,7 @@ at which by default 5% of the species are affected." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -100,6 +99,9 @@ at which by default 5% of the species are affected." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -135,31 +137,62 @@ at which by default 5% of the species are affected." />
     </div>
 
     <div class="ref-description">
-    <p>Estimates with bootstrap confidence intervals the hazard concentration
-at which by default 5% of the species are affected.</p>
+    <p>Gets concentrations that protect specified percentages of species.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for fitdist</span>
-<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for fitdists</span>
 <span class='fu'>ssd_hc</span>(
   <span class='no'>x</span>,
-  <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>,
-  <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aicc"</span>,
-  <span class='kw'>average</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='no'>...</span>
 )
 
 <span class='co'># S3 method for fitdistcens</span>
-<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
+<span class='fu'>ssd_hc</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='no'>...</span>
+)
+
+<span class='co'># S3 method for fitdists</span>
+<span class='fu'>ssd_hc</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>average</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aicc"</span>,
+  <span class='no'>...</span>
+)
 
 <span class='co'># S3 method for fitdistscens</span>
-<span class='fu'>ssd_hc</span>(<span class='no'>x</span>, <span class='kw'>hc</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aic"</span>, <span class='kw'>average</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>ssd_hc</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>average</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aic"</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,53 +206,78 @@ at which by default 5% of the species are affected.</p>
       <td><p>Unused.</p></td>
     </tr>
     <tr>
-      <th>hc</th>
-      <td><p>A number between 0 and 1 indicating the percent hazard concentration to plot (or NULL).</p></td>
+      <th>percent</th>
+      <td><p>A numeric vector of percentages.</p></td>
+    </tr>
+    <tr>
+      <th>ci</th>
+      <td><p>A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).</p></td>
+    </tr>
+    <tr>
+      <th>level</th>
+      <td><p>A number between 0 and 1 of the confidence level.</p></td>
     </tr>
     <tr>
       <th>nboot</th>
       <td><p>A count of the number of bootstrap samples to use to estimate the se and confidence limits.</p></td>
     </tr>
     <tr>
-      <th>level</th>
-      <td><p>The confidence level.</p></td>
+      <th>parallel</th>
+      <td><p>A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').</p></td>
     </tr>
     <tr>
-      <th>ic</th>
-      <td><p>A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.</p></td>
+      <th>ncpus</th>
+      <td><p>A count of the number of parallel processes to use.</p></td>
     </tr>
     <tr>
       <th>average</th>
-      <td><p>A flag indicating whether to model-average.</p></td>
+      <td><p>A flag specifying whether to model average the estimates.</p></td>
+    </tr>
+    <tr>
+      <th>ic</th>
+      <td><p>A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame of the estimate with the standard error and upper and lower confidence intervals.</p>
+    <p>A data frame of the percent and concentrations.</p>
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
     
 <ul>
-<li><p><code>fitdist</code>: Hazard Concentration</p></li>
-<li><p><code>fitdists</code>: Hazard Concentration</p></li>
-<li><p><code>fitdistcens</code>: Hazard Concentration</p></li>
-<li><p><code>fitdistscens</code>: Hazard Concentration</p></li>
+<li><p><code>fitdist</code>: Hazard Percent fitdist</p></li>
+<li><p><code>fitdistcens</code>: Hazard Percent fitdistcens</p></li>
+<li><p><code>fitdists</code>: Hazard Percent fitdists</p></li>
+<li><p><code>fitdistscens</code>: Hazard Percent fitdistcens</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_hc</span>(<span class='no'>boron_lnorm</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 5</span><span>
-#&gt;   percent   est    se   lcl   ucl
-#&gt; </span><span style='color: #555555;'>*</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>       5  1.68 0.676 0.883  3.44</div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>ssd_hc</span>(<span class='no'>boron_dists</span>)
-}
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>ssd_hc</span>(<span class='no'>fluazinam_lnorm</span>)
-}
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>ssd_hc</span>(<span class='no'>fluazinam_dists</span>)
-}</div></span></pre>
+    <pre class="examples"><div class='input'><span class='fu'>ssd_hc</span>(<span class='no'>boron_lnorm</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 6</span><span>
+#&gt;   percent     est    se   lcl   ucl dist 
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>       0   0        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
+#&gt; </span><span style='color: #555555;'>2</span><span>       1   0.721    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
+#&gt; </span><span style='color: #555555;'>3</span><span>      30   6.76     </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
+#&gt; </span><span style='color: #555555;'>4</span><span>     </span><span style='color: #BB0000;'>Inf</span><span> </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span>(<span class='no'>fluazinam_lnorm</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
+#&gt;   percent     est    se   lcl   ucl dist 
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>       0   0        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
+#&gt; </span><span style='color: #555555;'>2</span><span>       1   0.279    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
+#&gt; </span><span style='color: #555555;'>3</span><span>      30  35.4      </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
+#&gt; </span><span style='color: #555555;'>4</span><span>     </span><span style='color: #BB0000;'>Inf</span><span> </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span>(<span class='no'>boron_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
+#&gt;   percent     est    se   lcl   ucl dist   
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'>1</span><span>      0    0        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
+#&gt; </span><span style='color: #555555;'>2</span><span>      1    0.383    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
+#&gt; </span><span style='color: #555555;'>3</span><span>     30.   7.62     </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
+#&gt; </span><span style='color: #555555;'>4</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>  </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average</div><div class='input'><span class='fu'>ssd_hc</span>(<span class='no'>fluazinam_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
+#&gt;   percent     est    se   lcl   ucl dist   
+#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'>1</span><span>      0    0        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
+#&gt; </span><span style='color: #555555;'>2</span><span>      1    0.165    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
+#&gt; </span><span style='color: #555555;'>3</span><span>     30.  39.2      </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
+#&gt; </span><span style='color: #555555;'>4</span><span>    </span><span style='color: #BB0000;'>Inf</span><span>  </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

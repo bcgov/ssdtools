@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -99,6 +99,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -144,7 +147,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>The object to plot.</p></td>
+      <td><p>The object.</p></td>
     </tr>
     <tr>
       <th>meanlog</th>
@@ -156,11 +159,7 @@
     </tr>
     <tr>
       <th>nboot</th>
-      <td><p>A whole number of the number of samples to use to calculate the exposure.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Unused.</p></td>
+      <td><p>The number of samples to use to calculate the exposure.</p></td>
     </tr>
     </table>
 
@@ -169,7 +168,8 @@
     <p>A number of the proportion exposed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_exposure</span>(<span class='no'>boron_lnorm</span>)</div><div class='output co'>#&gt; [1] 0.04846563</div><div class='input'><span class='fu'>ssd_exposure</span>(<span class='no'>boron_lnorm</span>, <span class='kw'>meanlog</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.1793289</div><div class='input'><span class='fu'>ssd_exposure</span>(<span class='no'>boron_lnorm</span>, <span class='kw'>meanlog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>sdlog</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.1687563</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>10</span>)
+<span class='fu'>ssd_exposure</span>(<span class='no'>boron_lnorm</span>)</div><div class='output co'>#&gt; [1] 0.05389226</div><div class='input'><span class='fu'>ssd_exposure</span>(<span class='no'>boron_lnorm</span>, <span class='kw'>meanlog</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.1705359</div><div class='input'><span class='fu'>ssd_exposure</span>(<span class='no'>boron_lnorm</span>, <span class='kw'>meanlog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>sdlog</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.1609468</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

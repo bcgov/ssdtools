@@ -95,7 +95,7 @@ and aicc for non-censored data." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -117,6 +117,9 @@ and aicc for non-censored data." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -178,10 +181,13 @@ and <code>aicc</code> for non-censored data.</p>
 <span class='co'># S3 method for fitdist</span>
 <span class='fu'>ssd_gof</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
+<span class='co'># S3 method for fitdists</span>
+<span class='fu'>ssd_gof</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
 <span class='co'># S3 method for fitdistcens</span>
 <span class='fu'>ssd_gof</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for fitdists</span>
+<span class='co'># S3 method for fitdistscens</span>
 <span class='fu'>ssd_gof</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -205,23 +211,35 @@ and <code>aicc</code> for non-censored data.</p>
     
 <ul>
 <li><p><code>fitdist</code>: Goodness of Fit</p></li>
-<li><p><code>fitdistcens</code>: Goodness of Fit</p></li>
 <li><p><code>fitdists</code>: Goodness of Fit</p></li>
+<li><p><code>fitdistcens</code>: Goodness of Fit</p></li>
+<li><p><code>fitdistscens</code>: Goodness of Fit</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>ssd_gof</span>(<span class='no'>boron_lnorm</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 7</span><span>
 #&gt;   dist     ad    ks    cvm   aic  aicc   bic
 #&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> lnorm 0.507 0.107 0.070</span><span style='text-decoration: underline;'>3</span><span>  239.  240.  242.</div><div class='input'><span class='fu'>ssd_gof</span>(<span class='no'>boron_dists</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 9</span><span>
-#&gt;   dist        ad     ks    cvm   aic  aicc   bic delta weight
-#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> gamma    0.441 0.117  0.055</span><span style='text-decoration: underline;'>5</span><span>  238.  238.  240. 0.019  0.268
-#&gt; </span><span style='color: #555555;'>2</span><span> gompertz 0.602 0.120  0.082</span><span style='text-decoration: underline;'>3</span><span>  238.  238.  240. 0      0.271
-#&gt; </span><span style='color: #555555;'>3</span><span> lgumbel  0.829 0.158  0.134   244.  245.  247. 6.58   0.01 
-#&gt; </span><span style='color: #555555;'>4</span><span> llog     0.487 0.099</span><span style='text-decoration: underline;'>3</span><span> 0.059</span><span style='text-decoration: underline;'>5</span><span>  241.  241.  244. 3.40   0.049
-#&gt; </span><span style='color: #555555;'>5</span><span> lnorm    0.507 0.107  0.070</span><span style='text-decoration: underline;'>3</span><span>  239.  240.  242. 1.42   0.133
-#&gt; </span><span style='color: #555555;'>6</span><span> weibull  0.435 0.117  0.054</span><span style='text-decoration: underline;'>3</span><span>  238.  238.  240. 0.014  0.269</div></span></pre>
+#&gt; </span><span style='color: #555555;'>1</span><span> lnorm 0.507 0.107 0.070</span><span style='text-decoration: underline;'>3</span><span>  239.  240.  242.</div><div class='input'><span class='fu'>ssd_gof</span>(<span class='no'>boron_dists</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 9</span><span>
+#&gt;   dist        ad    ks    cvm   aic  aicc   bic delta weight
+#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> burrIII2 0.500 0.108 0.062</span><span style='text-decoration: underline;'>8</span><span>  241.  242.  244.  3.74  0.093
+#&gt; </span><span style='color: #555555;'>2</span><span> gamma    0.440 0.117 0.055</span><span style='text-decoration: underline;'>4</span><span>  238.  238.  240.  0     0.606
+#&gt; </span><span style='color: #555555;'>3</span><span> lnorm    0.507 0.107 0.070</span><span style='text-decoration: underline;'>3</span><span>  239.  240.  242.  1.40  0.301</div><div class='input'><span class='fu'>ssd_gof</span>(<span class='no'>boron_lnorm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 7</span><span>
+#&gt;   dist     ad    ks    cvm   aic  aicc   bic
+#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> lnorm 0.507 0.107 0.070</span><span style='text-decoration: underline;'>3</span><span>  239.  240.  242.</div><div class='input'><span class='fu'>ssd_gof</span>(<span class='no'>boron_dists</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 9</span><span>
+#&gt;   dist        ad    ks    cvm   aic  aicc   bic delta weight
+#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> burrIII2 0.500 0.108 0.062</span><span style='text-decoration: underline;'>8</span><span>  241.  242.  244.  3.74  0.093
+#&gt; </span><span style='color: #555555;'>2</span><span> gamma    0.440 0.117 0.055</span><span style='text-decoration: underline;'>4</span><span>  238.  238.  240.  0     0.606
+#&gt; </span><span style='color: #555555;'>3</span><span> lnorm    0.507 0.107 0.070</span><span style='text-decoration: underline;'>3</span><span>  239.  240.  242.  1.40  0.301</div><div class='input'><span class='fu'>ssd_gof</span>(<span class='no'>fluazinam_lnorm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+#&gt;   dist    aic   bic
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> lnorm  150.  151.</div><div class='input'><span class='fu'>ssd_gof</span>(<span class='no'>fluazinam_lnorm</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 3</span><span>
+#&gt;   dist    aic   bic
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> lnorm  150.  151.</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

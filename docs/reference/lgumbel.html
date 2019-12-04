@@ -43,8 +43,10 @@
 
 
 <meta property="og:title" content="Log-Gumbel Distribution — lgumbel" />
-<meta property="og:description" content="Density, distribution function, quantile function and random generation
-for the Log-Gumbel distribution with scale and location parameters." />
+<meta property="og:description" content="Density, distribution function, quantile function, random generation
+and starting values for the
+Log-Gumbel distribution
+with scalelog and locationlog parameters." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -78,7 +80,7 @@ for the Log-Gumbel distribution with scale and location parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -100,6 +102,9 @@ for the Log-Gumbel distribution with scale and location parameters." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -135,35 +140,39 @@ for the Log-Gumbel distribution with scale and location parameters." />
     </div>
 
     <div class="ref-description">
-    <p>Density, distribution function, quantile function and random generation
-for the Log-Gumbel distribution with <code>scale</code> and <code>location</code> parameters.</p>
+    <p>Density, distribution function, quantile function, random generation
+and starting values for the
+Log-Gumbel distribution
+with <code>scalelog</code> and <code>locationlog</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dlgumbel</span>(<span class='no'>x</span>, <span class='kw'>location</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dlgumbel</span>(<span class='no'>x</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qlgumbel</span>(<span class='no'>p</span>, <span class='kw'>location</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qlgumbel</span>(<span class='no'>p</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>plgumbel</span>(<span class='no'>q</span>, <span class='kw'>location</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>plgumbel</span>(<span class='no'>q</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rlgumbel</span>(<span class='no'>n</span>, <span class='kw'>location</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+<span class='fu'>rlgumbel</span>(<span class='no'>n</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='fu'>slgumbel</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x, q</th>
-      <td><p>vector of quantiles.</p></td>
+      <th>x</th>
+      <td><p>A numeric vector of values.</p></td>
     </tr>
     <tr>
-      <th>location</th>
-      <td><p>location parameter.</p></td>
+      <th>locationlog</th>
+      <td><p>location parameter on the log scale.</p></td>
     </tr>
     <tr>
-      <th>scale</th>
-      <td><p>scale parameter.</p></td>
+      <th>scalelog</th>
+      <td><p>scale parameter on the log scale.</p></td>
     </tr>
     <tr>
-      <th>log, log.p</th>
+      <th>log</th>
       <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
@@ -175,6 +184,14 @@ for the Log-Gumbel distribution with <code>scale</code> and <code>location</code
       <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
     </tr>
     <tr>
+      <th>log.p</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>q</th>
+      <td><p>vector of quantiles.</p></td>
+    </tr>
+    <tr>
       <th>n</th>
       <td><p>number of observations.</p></td>
     </tr>
@@ -182,19 +199,14 @@ for the Log-Gumbel distribution with <code>scale</code> and <code>location</code
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>dlgumbel gives the density, plgumbel gives the distribution function,
-qlgumbel gives the quantile function, and rlgumbel generates random deviates.</p>
+    <p>A numeric vector.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>rlgumbel</span>(<span class='fl'>1000</span>, <span class='fl'>1</span>, <span class='fl'>0.1</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>x</span>), <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"gray"</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"white"</span>)</div><div class='img'><img src='lgumbel-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>x</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"gray"</span>, <span class='kw'>border</span> <span class='kw'>=</span> <span class='st'>"white"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/curve.html'>curve</a></span>(<span class='fu'>dlgumbel</span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>0.1</span>), <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red4"</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='lgumbel-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

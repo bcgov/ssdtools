@@ -78,7 +78,7 @@ Boron." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -100,6 +100,9 @@ Boron." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -144,39 +147,189 @@ Boron.</p>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An object of class <code>fitdists</code> of length 6.</p>
+    <p>An object of class <code>fitdists</code> of length 3.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>boron_dists</span></div><div class='output co'>#&gt; Fitting of the distribution ' gamma ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;        estimate Std. Error
-#&gt; scale 25.108064  7.6313816
-#&gt; shape  0.950757  0.2226832
-#&gt; Fitting of the distribution ' gompertz ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;          estimate  Std. Error
-#&gt; shape 0.039403137 0.011956234
-#&gt; scale 0.002608438 0.009956637
-#&gt; Fitting of the distribution ' lgumbel ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;          estimate Std. Error
-#&gt; location 1.922498  0.2473440
-#&gt; scale    1.232358  0.1730647
-#&gt; Fitting of the distribution ' llog ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;        estimate Std. Error
-#&gt; shape 0.7404232  0.1143730
-#&gt; scale 2.6261311  0.2482597
-#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;         estimate Std. Error
-#&gt; meanlog 2.561645  0.2346291
-#&gt; sdlog   1.241540  0.1659073
-#&gt; Fitting of the distribution ' weibull ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;         estimate Std. Error
-#&gt; shape  0.9662825  0.1454446
-#&gt; scale 23.5097478  4.8528313</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>boron_dists</span></div><div class='output co'>#&gt; $estimate
+#&gt;   shapelog   scalelog 
+#&gt;  0.2076248 -2.3663820 
+#&gt; 
+#&gt; $method
+#&gt; [1] "mle"
+#&gt; 
+#&gt; $sd
+#&gt;  shapelog  scalelog 
+#&gt; 0.1134175 0.2798350 
+#&gt; 
+#&gt; $cor
+#&gt;           shapelog  scalelog
+#&gt; shapelog 1.0000000 0.4210718
+#&gt; scalelog 0.4210718 1.0000000
+#&gt; 
+#&gt; $vcov
+#&gt;            shapelog   scalelog
+#&gt; shapelog 0.01286353 0.01336406
+#&gt; scalelog 0.01336406 0.07830765
+#&gt; 
+#&gt; $loglik
+#&gt; [1] -118.6838
+#&gt; 
+#&gt; $aic
+#&gt; [1] 241.3675
+#&gt; 
+#&gt; $bic
+#&gt; [1] 244.0319
+#&gt; 
+#&gt; $n
+#&gt; [1] 28
+#&gt; 
+#&gt; $data
+#&gt;  [1]  2.1  2.4  4.1 10.0 15.6 18.3  6.0 10.0 13.4 15.0 20.0 20.0 20.4 48.6 50.0
+#&gt; [16] 70.7 70.7 70.7  1.0  1.8  2.0  4.0  5.2 12.3 30.0 34.2 50.0 60.0
+#&gt; 
+#&gt; $distname
+#&gt; [1] "burrIII2"
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; 
+#&gt; $fix.arg.fun
+#&gt; NULL
+#&gt; 
+#&gt; $dots
+#&gt; NULL
+#&gt; 
+#&gt; $convergence
+#&gt; [1] 0
+#&gt; 
+#&gt; $discrete
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $weights
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "fitdist"
+#&gt; $estimate
+#&gt;      scale      shape 
+#&gt; 25.1263769  0.9500513 
+#&gt; 
+#&gt; $method
+#&gt; [1] "mle"
+#&gt; 
+#&gt; $sd
+#&gt;     scale     shape 
+#&gt; 7.6375478 0.2224988 
+#&gt; 
+#&gt; $cor
+#&gt;            scale      shape
+#&gt; scale  1.0000000 -0.7702356
+#&gt; shape -0.7702356  1.0000000
+#&gt; 
+#&gt; $vcov
+#&gt;           scale      shape
+#&gt; scale 58.332136 -1.3088959
+#&gt; shape -1.308896  0.0495057
+#&gt; 
+#&gt; $loglik
+#&gt; [1] -116.8152
+#&gt; 
+#&gt; $aic
+#&gt; [1] 237.6303
+#&gt; 
+#&gt; $bic
+#&gt; [1] 240.2947
+#&gt; 
+#&gt; $n
+#&gt; [1] 28
+#&gt; 
+#&gt; $data
+#&gt;  [1]  2.1  2.4  4.1 10.0 15.6 18.3  6.0 10.0 13.4 15.0 20.0 20.0 20.4 48.6 50.0
+#&gt; [16] 70.7 70.7 70.7  1.0  1.8  2.0  4.0  5.2 12.3 30.0 34.2 50.0 60.0
+#&gt; 
+#&gt; $distname
+#&gt; [1] "gamma"
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; 
+#&gt; $fix.arg.fun
+#&gt; NULL
+#&gt; 
+#&gt; $dots
+#&gt; NULL
+#&gt; 
+#&gt; $convergence
+#&gt; [1] 0
+#&gt; 
+#&gt; $discrete
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $weights
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "fitdist"
+#&gt; $estimate
+#&gt;  meanlog    sdlog 
+#&gt; 2.561645 1.241540 
+#&gt; 
+#&gt; $method
+#&gt; [1] "mle"
+#&gt; 
+#&gt; $sd
+#&gt;   meanlog     sdlog 
+#&gt; 0.2346291 0.1659073 
+#&gt; 
+#&gt; $cor
+#&gt;         meanlog sdlog
+#&gt; meanlog       1     0
+#&gt; sdlog         0     1
+#&gt; 
+#&gt; $vcov
+#&gt;           meanlog      sdlog
+#&gt; meanlog 0.0550508 0.00000000
+#&gt; sdlog   0.0000000 0.02752524
+#&gt; 
+#&gt; $loglik
+#&gt; [1] -117.5142
+#&gt; 
+#&gt; $aic
+#&gt; [1] 239.0284
+#&gt; 
+#&gt; $bic
+#&gt; [1] 241.6928
+#&gt; 
+#&gt; $n
+#&gt; [1] 28
+#&gt; 
+#&gt; $data
+#&gt;  [1]  2.1  2.4  4.1 10.0 15.6 18.3  6.0 10.0 13.4 15.0 20.0 20.0 20.4 48.6 50.0
+#&gt; [16] 70.7 70.7 70.7  1.0  1.8  2.0  4.0  5.2 12.3 30.0 34.2 50.0 60.0
+#&gt; 
+#&gt; $distname
+#&gt; [1] "lnorm"
+#&gt; 
+#&gt; $fix.arg
+#&gt; NULL
+#&gt; 
+#&gt; $fix.arg.fun
+#&gt; NULL
+#&gt; 
+#&gt; $dots
+#&gt; NULL
+#&gt; 
+#&gt; $convergence
+#&gt; [1] 0
+#&gt; 
+#&gt; $discrete
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $weights
+#&gt; NULL
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "fitdist"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

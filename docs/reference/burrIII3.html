@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Percent Protected — ssd_pp • ssdtools</title>
+<title>Burr Type III Three-Parameter Distribution — burrIII3 • ssdtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,11 @@
 
 
 
-<meta property="og:title" content="Percent Protected — ssd_pp" />
-<meta property="og:description" content="Gets percent species protected at specified concentrations." />
+<meta property="og:title" content="Burr Type III Three-Parameter Distribution — burrIII3" />
+<meta property="og:description" content="Density, distribution function, quantile function, random generation
+and starting values for the
+Burr Type III Three-Parameter distribution
+with shapelog and scalelog parameters." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -77,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -99,6 +102,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -128,97 +134,111 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Percent Protected</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/pp.R'><code>R/pp.R</code></a></small>
-    <div class="hidden name"><code>ssd_pp.Rd</code></div>
+    <h1>Burr Type III Three-Parameter Distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/burrIII3.R'><code>R/burrIII3.R</code></a></small>
+    <div class="hidden name"><code>burrIII3.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Gets percent species protected at specified concentrations.</p>
+    <p>Density, distribution function, quantile function, random generation
+and starting values for the
+Burr Type III Three-Parameter distribution
+with <code>shapelog</code> and <code>scalelog</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ssd_pp</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>dburrIII3</span>(<span class='no'>x</span>, <span class='kw'>shape1log</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>shape2log</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='co'># S3 method for fitdist</span>
-<span class='fu'>ssd_pp</span>(<span class='no'>x</span>, <span class='no'>conc</span>, <span class='no'>...</span>)
+<span class='fu'>qburrIII3</span>(
+  <span class='no'>p</span>,
+  <span class='kw'>shape1log</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>shape2log</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
-<span class='co'># S3 method for fitdists</span>
-<span class='fu'>ssd_pp</span>(<span class='no'>x</span>, <span class='no'>conc</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aicc"</span>, <span class='no'>...</span>)
+<span class='fu'>pburrIII3</span>(
+  <span class='no'>q</span>,
+  <span class='kw'>shape1log</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>shape2log</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
-<span class='co'># S3 method for fitdistcens</span>
-<span class='fu'>ssd_pp</span>(<span class='no'>x</span>, <span class='no'>conc</span>, <span class='no'>...</span>)
+<span class='fu'>rburrIII3</span>(<span class='no'>n</span>, <span class='kw'>shape1log</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>shape2log</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
-<span class='co'># S3 method for fitdistscens</span>
-<span class='fu'>ssd_pp</span>(<span class='no'>x</span>, <span class='no'>conc</span>, <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aic"</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>sburrIII3</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>The object.</p></td>
+      <td><p>A numeric vector of values.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Unused.</p></td>
+      <th>shape1log</th>
+      <td><p>shape1 parameter on the log scale.</p></td>
     </tr>
     <tr>
-      <th>conc</th>
-      <td><p>A numeric vector of the concentrations.</p></td>
+      <th>shape2log</th>
+      <td><p>shape2 parameter on the log scale.</p></td>
     </tr>
     <tr>
-      <th>ic</th>
-      <td><p>A string indicating which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging.</p></td>
+      <th>scalelog</th>
+      <td><p>scale parameter on the log scale.</p></td>
+    </tr>
+    <tr>
+      <th>log</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td><p>vector of probabilities.</p></td>
+    </tr>
+    <tr>
+      <th>lower.tail</th>
+      <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
+    </tr>
+    <tr>
+      <th>log.p</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>q</th>
+      <td><p>vector of quantiles.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>number of observations.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame of the conc and percent.</p>
-    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+    <p>A numeric vector.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<ul>
-<li><p><code>fitdist</code>: Percent Protected fitdist</p></li>
-<li><p><code>fitdists</code>: Percent Protected fitdists</p></li>
-<li><p><code>fitdistcens</code>: Percent Protected fitdistcens</p></li>
-<li><p><code>fitdistscens</code>: Percent Protected fitdistcens</p></li>
-</ul>
+    <p>The Burr 12 distribution from the actuar package is used as a base.
+The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
+refer to https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm for details.
+The shape1, shape2, and scale paramters are on the log(scale) as these must be positive.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/actuar/man/Burr.html'>dburr</a></code> and <code><a href='burrIII2.html'>burrIII2</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_pp</span>(<span class='no'>boron_lnorm</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 2</span><span>
-#&gt;    conc percent
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     0    0   
-#&gt; </span><span style='color: #555555;'>2</span><span>     1    1.95
-#&gt; </span><span style='color: #555555;'>3</span><span>    30   75.1 
-#&gt; </span><span style='color: #555555;'>4</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>  100   </div><div class='input'><span class='fu'>ssd_pp</span>(<span class='no'>boron_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))</div><div class='output co'>#&gt;   conc    percent      gamma   gompertz     lgumbel       llog      lnorm
-#&gt; 1    0   0.000000   0.000000   0.000000   0.0000000   0.000000   0.000000
-#&gt; 2    1   3.947765   4.671058   3.868638   0.8575097   2.800963   1.954303
-#&gt; 3   30  72.036175  71.630886  70.758341  73.9910476  74.015768  75.054901
-#&gt; 4  Inf 100.000000 100.000000 100.000000 100.0000000 100.000000 100.000000
-#&gt;      weibull
-#&gt; 1   0.000000
-#&gt; 2   4.621188
-#&gt; 3  71.793578
-#&gt; 4 100.000000</div><div class='input'><span class='fu'>ssd_pp</span>(<span class='no'>fluazinam_lnorm</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 2</span><span>
-#&gt;    conc percent
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     0    0   
-#&gt; </span><span style='color: #555555;'>2</span><span>     1    3.20
-#&gt; </span><span style='color: #555555;'>3</span><span>    30   27.9 
-#&gt; </span><span style='color: #555555;'>4</span><span>   </span><span style='color: #BB0000;'>Inf</span><span>  100   </div><div class='input'><span class='fu'>ssd_pp</span>(<span class='no'>fluazinam_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))</div><div class='output co'>#&gt;   conc    percent      gamma    lgumbel       llog      lnorm   weibull
-#&gt; 1    0   0.000000   0.000000   0.000000   0.000000   0.000000   0.00000
-#&gt; 2    1   3.588231   7.515398   1.550688   4.257031   3.203583   6.63035
-#&gt; 3   30  28.625734  24.342197  31.812689  27.370140  27.885263  26.47673
-#&gt; 4  Inf 100.000000 100.000000 100.000000 100.000000 100.000000 100.00000</div></span></pre>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='fu'>dburrIII3</span>(<span class='no'>x</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"l"</span>)</div><div class='img'><img src='burrIII3-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

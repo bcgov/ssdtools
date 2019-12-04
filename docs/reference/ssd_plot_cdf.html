@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -99,6 +99,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -129,7 +132,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot Cumulative Distribution Function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/ssd-plot-cdf.R'><code>R/ssd-plot-cdf.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/plot-cdf.R'><code>R/plot-cdf.R</code></a></small>
     <div class="hidden name"><code>ssd_plot_cdf.Rd</code></div>
     </div>
 
@@ -142,10 +145,10 @@
 <span class='co'># S3 method for fitdist</span>
 <span class='fu'>ssd_plot_cdf</span>(<span class='no'>x</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Concentration"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Species Affected"</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for fitdists</span>
+<span class='co'># S3 method for fitdistcens</span>
 <span class='fu'>ssd_plot_cdf</span>(<span class='no'>x</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Concentration"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Species Affected"</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for fitdistcens</span>
+<span class='co'># S3 method for fitdists</span>
 <span class='fu'>ssd_plot_cdf</span>(<span class='no'>x</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Concentration"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Species Affected"</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -153,7 +156,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>The object to plot.</p></td>
+      <td><p>The object.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -174,14 +177,14 @@
     
 <ul>
 <li><p><code>fitdist</code>: Plot CDF fitdist</p></li>
-<li><p><code>fitdists</code>: Plot CDF fitdists</p></li>
 <li><p><code>fitdistcens</code>: Plot CDF fitdistcens</p></li>
+<li><p><code>fitdists</code>: Plot CDF fitdists</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_dists</span>)</div><div class='img'><img src='ssd_plot_cdf-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>right</span>[<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>left</span>[<span class='fl'>3</span>] * <span class='fl'>1.5</span>
+    <pre class="examples"><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>right</span>[<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>left</span>[<span class='fl'>3</span>] * <span class='fl'>1.5</span>
 <span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>left</span>[<span class='fl'>5</span>] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
-<span class='fu'>ssd_plot_cdf</span>(<span class='no'>fluazinam_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>ssd_plot_cdf</span>(<span class='no'>fluazinam_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_dists</span>)</div><div class='img'><img src='ssd_plot_cdf-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

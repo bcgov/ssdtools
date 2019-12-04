@@ -44,14 +44,16 @@
 
 <meta property="og:title" content="ssdtools: Species Sensitivity Distributions — ssdtools-package" />
 <meta property="og:description" content="
-Species sensitivity distributions are cumulative probability 
-  distributions which are fitted to toxicity concentrations for multiple species.
-  The ssdtools package uses Maximum Likelihood to fit
-  log-normal, log-logistic, log-Gumbel, Gompertz, gamma or Weibull distributions.
+Species sensitivity distributions are 
+  cumulative probability distributions which are fitted to 
+  toxicity concentrations for different species.
+  The ssdtools package uses Maximum Likelihood to fit distributions 
+  such as the log-normal, gamma, burr Type-III, log-logistic, 
+  log-Gumbel, Gompertz and Weibull.
+  The user can provide custom distributions.
   Multiple distributions can be averaged using Information Criteria.
-  Confidence intervals can be calculated for the fitted cumulative distribution 
-  function or specific hazard concentrations (percentiles).
-  Confidence intervals are currently produced by bootstrapping." />
+  Confidence intervals on hazard concentrations and proportions are produced by 
+  parametric bootstrapping." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -85,7 +87,7 @@ Species sensitivity distributions are cumulative probability
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
       </span>
     </div>
 
@@ -107,6 +109,9 @@ Species sensitivity distributions are cumulative probability
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
+    </li>
     <li>
       <a href="../articles/ssdtools-manual.html">ssdtools User Manual</a>
     </li>
@@ -143,14 +148,16 @@ Species sensitivity distributions are cumulative probability
 
     <div class="ref-description">
     <p><img src='figures/logo.png' align='right' alt='logo' width='120' /></p>
-<p>Species sensitivity distributions are cumulative probability 
-  distributions which are fitted to toxicity concentrations for multiple species.
-  The ssdtools package uses Maximum Likelihood to fit
-  log-normal, log-logistic, log-Gumbel, Gompertz, gamma or Weibull distributions.
+<p>Species sensitivity distributions are 
+  cumulative probability distributions which are fitted to 
+  toxicity concentrations for different species.
+  The ssdtools package uses Maximum Likelihood to fit distributions 
+  such as the log-normal, gamma, burr Type-III, log-logistic, 
+  log-Gumbel, Gompertz and Weibull.
+  The user can provide custom distributions.
   Multiple distributions can be averaged using Information Criteria.
-  Confidence intervals can be calculated for the fitted cumulative distribution 
-  function or specific hazard concentrations (percentiles).
-  Confidence intervals are currently produced by bootstrapping.</p>
+  Confidence intervals on hazard concentrations and proportions are produced by 
+  parametric bootstrapping.</p>
     </div>
 
 
@@ -178,13 +185,15 @@ Species sensitivity distributions are cumulative probability
 </ul>
 
 <p>Other contributors:</p><ul>
-<li><p>Ali Azizishirazi <a href='mailto:Ali.Azizishirazi@gov.bc.ca'>Ali.Azizishirazi@gov.bc.ca</a> [contributor]</p></li>
 <li><p>Angeline Tillmanns [contributor]</p></li>
-<li><p>Stephanie Hazlitt [contributor]</p></li>
+<li><p>Ali Azizishirazi [contributor]</p></li>
+<li><p>Rebecca Fisher [contributor]</p></li>
+<li><p>David Fox [contributor]</p></li>
 <li><p>Kathleen McTavish [contributor]</p></li>
-<li><p>Emilie Doussantousse [contributor]</p></li>
 <li><p>Heather Thompson [contributor]</p></li>
 <li><p>Andy Teucher [contributor]</p></li>
+<li><p>Emilie Doussantousse [contributor]</p></li>
+<li><p>Stephanie Hazlitt [contributor]</p></li>
 <li><p>Nan-Hung Hsieh [contributor]</p></li>
 <li><p>Sergio Ibarra Espinosa [contributor]</p></li>
 <li><p>Province of British Columbia [copyright holder]</p></li>
