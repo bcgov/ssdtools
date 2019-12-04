@@ -95,7 +95,7 @@ ssd_gof(boron_dists)
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
 
 ``` r
-boron_hc5 <- ssd_hc(boron_dists)
+boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
 ```
 
 ``` r
@@ -110,7 +110,7 @@ Model-averaged predictions complete with confidence intervals can be
 produced using the `stats` generic `predict`
 
 ``` r
-boron_pred <- predict(boron_dists)
+boron_pred <- predict(boron_dists, ci = TRUE)
 ```
 
 and plotted together with the original data using `ssd_plot`.
