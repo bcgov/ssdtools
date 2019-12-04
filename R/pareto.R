@@ -37,7 +37,9 @@ dpareto <- function(x, scale = 1, shape = 1, log = FALSE) {
   if (!length(x)) {
     return(numeric(0))
   }
-  VGAM::dpareto(x, scale = scale, shape = shape, log = log)
+  is.na(x[is.na(x)]) <- TRUE  
+  x[!is.na(x)] <- VGAM::dpareto(x[!is.na(x)], scale = scale, shape = shape, log = log)
+  x
 }
 
 #' @rdname pareto
