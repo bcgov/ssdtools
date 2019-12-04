@@ -39,15 +39,12 @@ boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Unit
   mutate(Fit = map(data, ssd_fit_dists, dists = "lnorm"),
          Prediction = map(Fit, predict)) %>% 
   unnest(Prediction)
-
-boron_hc5s <- filter(boron_preds, percent == 5)
 ```
 
 The resultant data and predictions can then be plotted as follows.
 ```{r, fig.width = 5, fig.height = 5}
 ssd_plot(boron_data, boron_preds, xlab = "Concentration (mg/L)") +
-  facet_wrap(~Group) +
-  geom_hcintersect(data = boron_hc5s, aes(xintercept = est, yintercept = percent / 100))
+  facet_wrap(~Group)
 ```
 
 ### How do I plot a Cullen Frey plot?

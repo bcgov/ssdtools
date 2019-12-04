@@ -82,8 +82,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   }
   gp <- gp + geom_line(aes_string(y = "percent/100"), color = if (ribbon) "black" else "red")
 
+  
   if (!is.null(hc)) {
-    gp <- gp + geom_hcintersect(data = data, xintercept = pred$est[pred$percent %in% hc], yintercept = hc / 100)
+    gp <- gp + geom_hcintersect(data = pred[pred$percent %in% hc,], 
+                                aes_string(xintercept = "est", yintercept = "percent/ 100"))
   }
 
   if (left == right) {
