@@ -15,40 +15,34 @@
 context("gompertz")
 
 test_that("dgompertz", {
-  expect_equal(dgompertz(1, shape = 1), 0.487589298719261)
-  expect_equal(dgompertz(1, shape = 1, log = TRUE), log(0.487589298719261))
-  expect_identical(dgompertz(numeric(0), shape = 1, log = TRUE), numeric(0))
+  expect_equal(dgompertz(1, shapelog = 0), 0.487589298719261)
+  expect_equal(dgompertz(1, shapelog = 0, log = TRUE), log(0.487589298719261))
+  expect_identical(dgompertz(numeric(0), shapelog = 0, log = TRUE), numeric(0))
 })
 
 test_that("fit gompertz", {
+  set.seed(9)
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
   
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist),
-               c(shape = 0.0394118062171637, scale = 0.00260015114608545),
-               tolerance = 1e-05)
+               c(shapelog = -3.23394197210355, scalelog = -5.94837894139464))
 })
 
 test_that("fit gompertz cis", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
   
   set.seed(77)
-  expect_warning(ssd_hc(dist, ci = TRUE, nboot = 10), 
-                 "^Distribution 'gompertz' bootstraps include missing values[.]$")
-  set.seed(77)
-  # expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10, na.rm = TRUE)),
-  #              structure(list(percent = 5, est = 1.29966505882089, se = 0.100230440665109, 
-  #                             lcl = 1.42485102455154, ucl = 1.6614858025352, dist = "gompertz"), class = "data.frame", row.names = c(NA, 
-  #                                                                                                                                    -1L)))
-  set.seed(77)
-  expect_warning(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10), 
-                 "^Distribution 'gompertz' bootstraps include missing values[.]$")
+  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10, na.rm = TRUE)),
+  structure(list(percent = 5, est = 1.29966505882089, se = 0.210577831926091, 
+    lcl = 1.06020559561544, ucl = 1.65959404402591, dist = "gompertz"), class = "data.frame", row.names = c(NA, 
+-1L)), tolerance = 1e-03)
   
   set.seed(77)
-#   expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10, na.rm = TRUE)),
-#                structure(list(conc = 2, est = 7.59650778517607, se = 0.410438032197045, 
-#     lcl = 5.99532980515702, ucl = 6.97057265138909, dist = "gompertz"), class = "data.frame", row.names = c(NA, 
-# -1L)))
+   expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10, na.rm = TRUE)),
+structure(list(conc = 2, est = 7.59650778517607, se = 1.14878323330099, 
+    lcl = 6.00209908449661, ucl = 9.2251620377782, dist = "gompertz"), class = "data.frame", row.names = c(NA, 
+-1L)), tolerance = 1e-03)
 })
 
 test_that("qgompertz", {
@@ -78,5 +72,5 @@ test_that("pgompertz", {
 
 test_that("rgompertz", {
   set.seed(1)
-  expect_equal(rgompertz(1, shape = 1), 0.268940346907911)
+  expect_equal(rgompertz(1, shapelog = 0), 0.268940346907911)
 })
