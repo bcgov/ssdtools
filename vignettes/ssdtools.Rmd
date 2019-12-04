@@ -99,7 +99,7 @@ distribution using the `dists` argument.
 boron_dists <- ssd_fit_dists(boron_data, dists = c("burrIII2", "lnorm", "gamma"))
 ```
 
-The user can also specify one or more custom distributions.
+The user can also specify one or more [custom distributions](https://bcgov.github.io/ssdtools/articles/faqs.html#how-do-i-fit-a-custom-distribution).
 
 ## Coefficients
 

@@ -73,8 +73,9 @@ ssd_hc <- function(x, ...) {
   hc <- lapply(hc, as.matrix)
   hc <- Reduce(function(x, y) { abind(x, y, along = 3) }, hc)
   weight <- .ssd_gof_fitdists(x)$weight
-  hc <- apply(hc, c(1, 2), weighted.mean, w = weight)
+  suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   hc <- as.data.frame(hc)
+  hc$percent <- percent
   hc$dist <- "average"
   as_tibble(hc)
 }
