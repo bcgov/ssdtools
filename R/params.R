@@ -36,13 +36,13 @@
 #' @param log,log.p logical; if TRUE, probabilities p are given as log(p).
 #' @param lower.tail	logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].
 #' @param location location parameter.
-#' @param locationlog location parameter on the log scale.
+#' @param llocation location parameter on the log scale.
 #' @param scale scale parameter.
-#' @param scalelog scale parameter on the log scale.
+#' @param lscale scale parameter on the log scale.
 #' @param shape	shape parameter.
-#' @param shapelog shape parameter on the log scale.
-#' @param shape1log shape1 parameter on the log scale.
-#' @param shape2log shape2 parameter on the log scale.
+#' @param lshape shape parameter on the log scale.
+#' @param lshape1 shape1 parameter on the log scale.
+#' @param lshape2 shape2 parameter on the log scale.
 #' @param xintercept The x-value for the intersect
 #' @param yintercept The y-value for the intersect.
 #' @param select A character vector of the distributions to select.

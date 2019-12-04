@@ -33,35 +33,35 @@ NULL
 
 #' @rdname gompertz
 #' @export
-dgompertz <- function(x, scalelog = 0, shapelog = 0, log = FALSE) {
+dgompertz <- function(x, lscale = 0, lshape = 0, log = FALSE) {
   if (!length(x)) {
     return(numeric(0))
   }
-  VGAM::dgompertz(x, scale = exp(scalelog), shape = exp(shapelog), log = log)
+  VGAM::dgompertz(x, scale = exp(lscale), shape = exp(lshape), log = log)
 }
 
 #' @rdname gompertz
 #' @export
-qgompertz <- function(p, scalelog = 0, shapelog = 0, lower.tail = TRUE, log.p = FALSE) {
+qgompertz <- function(p, lscale = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
   if (!length(p)) {
     return(numeric(0))
   }
-  VGAM::qgompertz(p, scale = exp(scalelog), shape = exp(shapelog), lower.tail = lower.tail, log.p = log.p)
+  VGAM::qgompertz(p, scale = exp(lscale), shape = exp(lshape), lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-pgompertz <- function(q, scalelog = 0, shapelog = 0, lower.tail = TRUE, log.p = FALSE) {
+pgompertz <- function(q, lscale = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
   if (!length(q)) {
     return(numeric(0))
   }
-  VGAM::pgompertz(q, scale = exp(scalelog), shape = exp(shapelog), lower.tail = lower.tail, log.p = log.p)
+  VGAM::pgompertz(q, scale = exp(lscale), shape = exp(lshape), lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-rgompertz <- function(n, scalelog = 0, shapelog = 0) {
-  VGAM::rgompertz(n, scale = exp(scalelog), shape = exp(shapelog))
+rgompertz <- function(n, lscale = 0, lshape = 0) {
+  VGAM::rgompertz(n, scale = exp(lscale), shape = exp(lshape))
 }
 
 #' @rdname gompertz
@@ -69,5 +69,5 @@ rgompertz <- function(n, scalelog = 0, shapelog = 0) {
 sgompertz <- function(x) {
   fit <- vglm(x ~ 1, VGAM::gompertz)
   list(start = list(
-    shapelog = unname(coef(fit)[2]), scalelog = unname(coef(fit)[1])))
+    lshape = unname(coef(fit)[2]), lscale = unname(coef(fit)[1])))
 }

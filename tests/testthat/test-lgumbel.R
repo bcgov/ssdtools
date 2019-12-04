@@ -24,7 +24,7 @@ test_that("fit lgumbel", {
 
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist),
-  c(locationlog = 0.653681627422279, scalelog = 0.208983173310441
+  c(llocation = 0.653681627422279, lscale = 0.208983173310441
 ))
 })
 
@@ -61,7 +61,7 @@ test_that("pqlgumbel", {
 
 test_that("rlgumbel", {
   set.seed(99)
-  r <- rlgumbel(100000, location = log(100), scale = log(3))
+  r <- rlgumbel(100000, llocation = log(100), lscale = log(3))
   expect_identical(length(r), 100000L)
   expect_equal(mean(log(r)), 3 * 0.57721 + 100, tolerance = 0.001)
 })

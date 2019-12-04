@@ -19,7 +19,7 @@ test_that("dburrIII3", {
   expect_identical(dburrIII3(NA), NA_real_)
   
   expect_equal(
-    dburrIII3(c(31, 15, 32, 32, 642, 778, 187, 12), scalelog = 0),
+    dburrIII3(c(31, 15, 32, 32, 642, 778, 187, 12), lscale = 0),
     c(
       0.0009765625, 0.00390625, 0.000918273645546373, 0.000918273645546373,
       2.41867799897932e-06, 1.64787810975198e-06, 2.82933454051607e-05,
@@ -27,7 +27,7 @@ test_that("dburrIII3", {
     )
   )
   expect_equal(
-    dburrIII3(c(31, 15, 32, 32, 642, 778, 187, 12), scalelog = 0, log = TRUE),
+    dburrIII3(c(31, 15, 32, 32, 642, 778, 187, 12), lscale = 0, log = TRUE),
     log(c(
       0.0009765625, 0.00390625, 0.000918273645546373, 0.000918273645546373,
       2.41867799897932e-06, 1.64787810975198e-06, 2.82933454051607e-05,
@@ -43,16 +43,16 @@ test_that("fit burrIII3", {
   
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist), 
-               c(shape1log = 3.59302197294215, shape2log = -0.133674768538566, 
-                 scalelog = 0.568325580801304))
+               c(lshape1 = 3.59302197294215, lshape2 = -0.133674768538566, 
+                 lscale = 0.568325580801304))
   
   data$Conc <- data$Conc / 1000
   
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
   
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(shape1log = 17.3403456134406, shape2log = -0.148732959674022, 
-scalelog = 23.5089158967839))
+  expect_equal(coef(dist), c(lshape1 = 17.3403456134406, lshape2 = -0.148732959674022, 
+lscale = 23.5089158967839))
 })
 
 test_that("fit burrIII3 cis", {
@@ -77,14 +77,14 @@ test_that("qburrIII3", {
   expect_identical(qburrIII3(0), 0)
   expect_identical(qburrIII3(1), Inf)
   expect_identical(qburrIII3(NA), NA_real_)
-  expect_identical(qburrIII3(0.5, scalelog = 0), 1)
-  expect_equal(qburrIII3(c(0.1, 0.2), scalelog = 0), c(0.111111111111111, 0.25))
+  expect_identical(qburrIII3(0.5, lscale = 0), 1)
+  expect_equal(qburrIII3(c(0.1, 0.2), lscale = 0), c(0.111111111111111, 0.25))
 })
 
 test_that("pburrIII3", {
   expect_identical(pburrIII3(numeric(0)), numeric(0))
   expect_identical(pburrIII3(0), 0)
-  expect_identical(pburrIII3(1, scalelog = 0), 0.5)
+  expect_identical(pburrIII3(1, lscale = 0), 0.5)
   expect_identical(pburrIII3(NA), NA_real_)
   expect_identical(pburrIII3(qburrIII3(0.5)), 0.5)
   expect_equal(
@@ -97,7 +97,7 @@ test_that("rburrIII3", {
   expect_identical(rburrIII3(0), numeric(0))
   set.seed(101)
   expect_equal(
-    rburrIII3(10, scalelog = 0),
+    rburrIII3(10, lscale = 0),
     c(
       0.592859849849427, 0.0458334582732346, 2.44452273715775, 1.92133200433186,
       0.33307689063302, 0.428683341542249, 1.40886438557549, 0.500301132990527,

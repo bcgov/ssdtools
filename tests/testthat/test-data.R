@@ -44,7 +44,7 @@ test_that("data", {
   expect_identical(checkr::check_data(
     boron_pred,
     values = list(
-      percent = 1,
+      percent = 1L,
       est = 1,
       se = 1,
       lcl = 1,

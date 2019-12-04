@@ -7,30 +7,30 @@ ssd_cfplot <- function(data, left = "Conc") {
 
 #' @rdname llogis
 #' @export
-dllog <- function(x, shapelog = 0, scalelog = 1, log = FALSE) {
+dllog <- function(x, lshape = 0, lscale = 1, log = FALSE) {
   deprecate_soft("0.1.0", "dllog()", "dllogis()")
-  dllogis(x, shapelog = shapelog, scalelog = scalelog, log = log)
+  dllogis(x, lshape = lshape, lscale = lscale, log = log)
 }
 
 #' @rdname llogis
 #' @export
-qllog <- function(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+qllog <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
   deprecate_soft("0.1.0", "qllog()", "qllogis()")
-  qllogis(p, shapelog = shapelog, scalelog = scalelog, lower.tail = lower.tail, log.p = log.p)
+  qllogis(p, lshape = lshape, lscale = lscale, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llogis
 #' @export
-pllog <- function(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+pllog <- function(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
   deprecate_soft("0.1.0", "pllog()", "pllogis()")
-  pllogis(q, shapelog = shapelog, scalelog = scalelog, lower.tail = lower.tail, log.p = log.p)
+  pllogis(q, lshape = lshape, lscale = lscale, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llogis
 #' @export
-rllog <- function(n, shapelog = 0, scalelog = 1) {
+rllog <- function(n, lshape = 0, lscale = 1) {
   deprecate_soft("0.1.0", "rllog()", "rllogis()")
-  rllogis(q, shapelog = shapelog, scalelog = scalelog)
+  rllogis(q, lshape = lshape, lscale = lscale)
 }
 
 #' @rdname llogis

@@ -15,9 +15,9 @@
 context("gompertz")
 
 test_that("dgompertz", {
-  expect_equal(dgompertz(1, shapelog = 0), 0.487589298719261)
-  expect_equal(dgompertz(1, shapelog = 0, log = TRUE), log(0.487589298719261))
-  expect_identical(dgompertz(numeric(0), shapelog = 0, log = TRUE), numeric(0))
+  expect_equal(dgompertz(1, lshape = 0), 0.487589298719261)
+  expect_equal(dgompertz(1, lshape = 0, log = TRUE), log(0.487589298719261))
+  expect_identical(dgompertz(numeric(0), lshape = 0, log = TRUE), numeric(0))
 })
 
 test_that("fit gompertz", {
@@ -26,7 +26,7 @@ test_that("fit gompertz", {
   
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist),
-               c(shapelog = -3.23394197210355, scalelog = -5.94837894139464))
+               c(lshape = -3.23394197210355, lscale = -5.94837894139464))
 })
 
 test_that("fit gompertz cis", {
@@ -72,5 +72,5 @@ test_that("pgompertz", {
 
 test_that("rgompertz", {
   set.seed(1)
-  expect_equal(rgompertz(1, shapelog = 0), 0.268940346907911)
+  expect_equal(rgompertz(1, lshape = 0), 0.268940346907911)
 })

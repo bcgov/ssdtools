@@ -14,32 +14,32 @@
 \alias{sllogis}
 \title{Log-Logistic Distribution}
 \usage{
-dllog(x, shapelog = 0, scalelog = 1, log = FALSE)
+dllog(x, lshape = 0, lscale = 1, log = FALSE)
 
-qllog(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
+qllog(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
-pllog(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
+pllog(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
-rllog(n, shapelog = 0, scalelog = 1)
+rllog(n, lshape = 0, lscale = 1)
 
 sllog(x)
 
-dllogis(x, shapelog = 0, scalelog = 1, log = FALSE)
+dllogis(x, lshape = 0, lscale = 1, log = FALSE)
 
-qllogis(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
+qllogis(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
-pllogis(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
+pllogis(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
-rllogis(n, shapelog = 0, scalelog = 1)
+rllogis(n, lshape = 0, lscale = 1)
 
 sllogis(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{shapelog}{shape parameter on the log scale.}
+\item{lshape}{shape parameter on the log scale.}
 
-\item{scalelog}{scale parameter on the log scale.}
+\item{lscale}{scale parameter on the log scale.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 

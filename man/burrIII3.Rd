@@ -9,38 +9,38 @@
 \alias{sburrIII3}
 \title{Burr Type III Three-Parameter Distribution}
 \usage{
-dburrIII3(x, shape1log = 0, shape2log = 0, scalelog = 1, log = FALSE)
+dburrIII3(x, lshape1 = 0, lshape2 = 0, lscale = 1, log = FALSE)
 
 qburrIII3(
   p,
-  shape1log = 0,
-  shape2log = 0,
-  scalelog = 1,
+  lshape1 = 0,
+  lshape2 = 0,
+  lscale = 1,
   lower.tail = TRUE,
   log.p = FALSE
 )
 
 pburrIII3(
   q,
-  shape1log = 0,
-  shape2log = 0,
-  scalelog = 1,
+  lshape1 = 0,
+  lshape2 = 0,
+  lscale = 1,
   lower.tail = TRUE,
   log.p = FALSE
 )
 
-rburrIII3(n, shape1log = 0, shape2log = 0, scalelog = 1)
+rburrIII3(n, lshape1 = 0, lshape2 = 0, lscale = 1)
 
 sburrIII3(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{shape1log}{shape1 parameter on the log scale.}
+\item{lshape1}{shape1 parameter on the log scale.}
 
-\item{shape2log}{shape2 parameter on the log scale.}
+\item{lshape2}{shape2 parameter on the log scale.}
 
-\item{scalelog}{scale parameter on the log scale.}
+\item{lscale}{scale parameter on the log scale.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -61,7 +61,7 @@ A numeric vector.
 Density, distribution function, quantile function, random generation
 and starting values for the
 Burr Type III Three-Parameter distribution
-with \code{shapelog} and \code{scalelog} parameters.
+with \code{lshape} and \code{lscale} parameters.
 }
 \details{
 The Burr 12 distribution from the actuar package is used as a base.

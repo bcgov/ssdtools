@@ -9,22 +9,22 @@
 \alias{sgompertz}
 \title{Gompertz Distribution}
 \usage{
-dgompertz(x, scalelog = 0, shapelog = 0, log = FALSE)
+dgompertz(x, lscale = 0, lshape = 0, log = FALSE)
 
-qgompertz(p, scalelog = 0, shapelog = 0, lower.tail = TRUE, log.p = FALSE)
+qgompertz(p, lscale = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE)
 
-pgompertz(q, scalelog = 0, shapelog = 0, lower.tail = TRUE, log.p = FALSE)
+pgompertz(q, lscale = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE)
 
-rgompertz(n, scalelog = 0, shapelog = 0)
+rgompertz(n, lscale = 0, lshape = 0)
 
 sgompertz(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{scalelog}{scale parameter on the log scale.}
+\item{lscale}{scale parameter on the log scale.}
 
-\item{shapelog}{shape parameter on the log scale.}
+\item{lshape}{shape parameter on the log scale.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 

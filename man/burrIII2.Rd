@@ -9,22 +9,22 @@
 \alias{sburrIII2}
 \title{Burr Type III Two-Parameter Distribution}
 \usage{
-dburrIII2(x, shapelog = 0, scalelog = 1, log = FALSE)
+dburrIII2(x, lshape = 0, lscale = 1, log = FALSE)
 
-qburrIII2(p, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
+qburrIII2(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
-pburrIII2(q, shapelog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
+pburrIII2(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
-rburrIII2(n, shapelog = 0, scalelog = 1)
+rburrIII2(n, lshape = 0, lscale = 1)
 
 sburrIII2(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{shapelog}{shape parameter on the log scale.}
+\item{lshape}{shape parameter on the log scale.}
 
-\item{scalelog}{scale parameter on the log scale.}
+\item{lscale}{scale parameter on the log scale.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -45,7 +45,7 @@ A numeric vector.
 Density, distribution function, quantile function, random generation
 and starting values for the
 Burr Type III two-parameter distribution
-with \code{shapelog} and \code{scalelog} parameters.
+with \code{lshape} and \code{lscale} parameters.
 }
 \details{
 The Burr 12 distribution from the actuar package is used as a base.

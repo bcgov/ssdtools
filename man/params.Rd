@@ -48,17 +48,17 @@
 
 \item{location}{location parameter.}
 
-\item{locationlog}{location parameter on the log scale.}
+\item{llocation}{location parameter on the log scale.}
 
 \item{scale}{scale parameter.}
 
-\item{scalelog}{scale parameter on the log scale.}
+\item{lscale}{scale parameter on the log scale.}
 
-\item{shapelog}{shape parameter on the log scale.}
+\item{lshape}{shape parameter on the log scale.}
 
-\item{shape1log}{shape1 parameter on the log scale.}
+\item{lshape1}{shape1 parameter on the log scale.}
 
-\item{shape2log}{shape2 parameter on the log scale.}
+\item{lshape2}{shape2 parameter on the log scale.}
 
 \item{xintercept}{The x-value for the intersect}
 
