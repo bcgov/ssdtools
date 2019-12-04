@@ -43,7 +43,7 @@ boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Unit
 
 The resultant data and predictions can then be plotted as follows.
 ```{r, fig.width = 5, fig.height = 5}
-ssd_plot(boron_data, boron_preds, xlab = "Concentration (mg/L)") +
+ssd_plot(boron_data, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
   facet_wrap(~Group)
 ```
 
