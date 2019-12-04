@@ -12,6 +12,7 @@
   nboot = 1000,
   parallel = NULL,
   ncpus = 1,
+  na.rm = FALSE,
   average = TRUE,
   ic = "aic",
   ...
@@ -31,6 +32,9 @@
 \item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
 
 \item{ncpus}{A count of the number of parallel processes to use.}
+
+\item{na.rm}{A flag specifying whether to silently remove missing values or
+remove them with a warning.}
 
 \item{average}{A flag specifying whether to model average the estimates.}
 
