@@ -33,13 +33,13 @@ test_that("fit gompertz cis", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
   
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10, na.rm = TRUE)),
+  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
   structure(list(percent = 5, est = 1.29966505882089, se = 0.210577831926091, 
     lcl = 1.06020559561544, ucl = 1.65959404402591, dist = "gompertz"), class = "data.frame", row.names = c(NA, 
 -1L)), tolerance = 1e-03)
   
   set.seed(77)
-   expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10, na.rm = TRUE)),
+   expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
 structure(list(conc = 2, est = 7.59650778517607, se = 1.14878323330099, 
     lcl = 6.00209908449661, ucl = 9.2251620377782, dist = "gompertz"), class = "data.frame", row.names = c(NA, 
 -1L)), tolerance = 1e-03)

@@ -19,11 +19,11 @@
 #' @examples
 #' predict(boron_lnorm, percent = c(5L, 50L))
 predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95, 
-                            nboot = 1000, parallel = NULL, ncpus = 1, na.rm = FALSE,
+                            nboot = 1000, parallel = NULL, ncpus = 1,
                             ...) {
   chk_unused(...)
   ssd_hc(object, percent = percent, ci = ci, level = level, 
-         nboot = nboot, parallel = parallel, ncpus = ncpus, na.rm = na.rm)
+         nboot = nboot, parallel = parallel, ncpus = ncpus)
 }
 
 #' Predict censored fitdist
@@ -34,10 +34,10 @@ predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95,
 #' predict(fluazinam_lnorm, percent = c(5L, 50L))
 predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95, 
                             nboot = 1000, parallel = NULL, ncpus = 1, 
-                            na.rm = FALSE, ...) {
+                            ...) {
   chk_unused(...)
   ssd_hc(object, percent = percent, ci = ci, level = level, 
-         nboot = nboot, parallel = parallel, ncpus = ncpus, na.rm = na.rm)
+         nboot = nboot, parallel = parallel, ncpus = ncpus)
 }
 
 #' Predict fitdists
@@ -48,11 +48,11 @@ predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95
 #' predict(boron_dists)
 predict.fitdists <- function(object, percent = 1:99, ci = FALSE, 
                              level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, 
-                             na.rm = FALSE, average = TRUE, ic = "aicc", 
+                             average = TRUE, ic = "aicc", 
                              ...) {
   chk_unused(...)
   ssd_hc(object, percent = percent, ci = ci, level = level, 
-         nboot = nboot, parallel = parallel, ncpus = ncpus, na.rm = na.rm,
+         nboot = nboot, parallel = parallel, ncpus = ncpus,
          average = average, ic = ic)
 }
 
@@ -64,9 +64,9 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
 #' predict(fluazinam_dists)
 predict.fitdistscens <- function(object, percent = 1:99, ci = FALSE, 
                              level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, 
-                             na.rm = FALSE, average = TRUE, ic = "aic", ...) {
+                             average = TRUE, ic = "aic", ...) {
   chk_unused(...)
   ssd_hc(object, percent = percent, ci = ci, level = level, 
-         nboot = nboot, parallel = parallel, ncpus = ncpus, na.rm = na.rm,
+         nboot = nboot, parallel = parallel, ncpus = ncpus,
          average = average, ic = ic)
 }
