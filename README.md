@@ -203,6 +203,8 @@ The code is released under the Apache License 2.0
     See the License for the specific language governing permissions and
     limitations under the License.
 
+-----
+
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
 style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span>
 by
