@@ -14,6 +14,48 @@
 
 context("hc")
 
+test_that("ssd_hc list", {
+  expect_error(ssd_hc(list()), "^`x` must be named[.]$", class = "chk_error")
+
+  expect_identical(ssd_hc(structure(list(), .Names = character(0))), 
+               structure(list(percent = numeric(0), est = numeric(0), se = numeric(0), 
+    lcl = numeric(0), ucl = numeric(0), dist = character(0)), class = c("tbl_df", 
+"tbl", "data.frame"), row.names = integer(0)))
+
+  expect_error(ssd_hc(list("lnorm" = NULL, "lnorm" = NULL)), "^`names[(]x[)]` must be unique[.]$", class = "chk_error")
+
+  expect_equal(as.data.frame(ssd_hc(list("lnorm" = NULL))),
+              structure(list(percent = 5, est = 0.193040816698737, se = NA_real_, 
+    lcl = NA_real_, ucl = NA_real_, dist = "lnorm"), row.names = "lnorm", class = "data.frame")) 
+  expect_equal(as.data.frame(ssd_hc(list("lnorm" = NULL), percent = c(1,99))),
+               structure(list(percent = c(1, 99), est = c(0.097651733070336, 
+10.2404736563121), se = c(NA_real_, NA_real_), lcl = c(NA_real_, 
+NA_real_), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "lnorm"
+)), row.names = c("lnorm.1", "lnorm.2"), class = "data.frame"))
+  
+  expect_equal(as.data.frame(ssd_hc(list("lnorm" = list(meanlog = 0, sdlog = 1)))),
+               structure(list(percent = 5, est = 0.193040816698737, se = NA_real_, 
+    lcl = NA_real_, ucl = NA_real_, dist = "lnorm"), row.names = "lnorm", class = "data.frame"))
+  
+  expect_equal(as.data.frame(ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 2)))),
+                             structure(list(percent = 5, est = 0.275351379333677, se = NA_real_, 
+    lcl = NA_real_, ucl = NA_real_, dist = "lnorm"), row.names = "lnorm", class = "data.frame"))
+  
+  expect_equal(as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL))),
+               structure(list(percent = c(5, 5), est = c(0.193040816698737, 
+0.79759274955154), se = c(NA_real_, NA_real_), lcl = c(NA_real_, 
+NA_real_), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "llogis"
+)), row.names = c("lnorm", "llogis"), class = "data.frame"))
+  
+  expect_equal(as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL), percent = c(1, 99))),
+               structure(list(percent = c(1, 99, 1, 99), est = c(0.097651733070336, 
+10.2404736563121, 0.153073355974538, 1500.27196190644), se = c(NA_real_, 
+NA_real_, NA_real_, NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, 
+NA_real_), ucl = c(NA_real_, NA_real_, NA_real_, NA_real_), dist = c("lnorm", 
+"lnorm", "llogis", "llogis")), row.names = c("lnorm.1", "lnorm.2", 
+"llogis.1", "llogis.2"), class = "data.frame"))
+})
+
 test_that("ssd_hc fitdist", {
   expect_equal(as.data.frame(ssd_hc(boron_lnorm)),
                structure(list(percent = 5, est = 1.68117483775796, se = NA_real_, 

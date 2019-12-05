@@ -23,12 +23,36 @@ ssd_hc <- function(x, ...) {
   UseMethod("ssd_hc")
 }
 
+no_ssd_hc <- function() {
+  as_tibble(data.frame(percent = numeric(0), 
+                       est = numeric(0), 
+                       se = numeric(0), 
+                       lcl = numeric(0), 
+                       ucl = numeric(0), 
+                       dist = character(0),
+                              stringsAsFactors = FALSE))
+}
+
+.ssd_hc_dist <- function(x, dist, percent) {
+  chk_vector(percent)
+  chk_numeric(percent)
+  
+  percent <- percent / 100
+  fun <- paste0("q", dist)
+  args <- list(p = percent)
+  args <- c(as.list(x), args)
+  est <- do.call(fun, args)
+  data.frame(percent = percent * 100, est = est, 
+                 se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = dist,
+                stringsAsFactors = FALSE)
+}
+
 .ssd_hc_fitdist <- function(x, percent, ci, level, nboot, parallel, ncpus) {
   chk_vector(percent)
   chk_numeric(percent)
   chk_number(level)
   chk_range(level)
-
+  
   percent <- percent / 100
   
   args <- as.list(x$estimate)
@@ -42,7 +66,7 @@ ssd_hc <- function(x, ...) {
     return(as_tibble(data.frame(
       percent = percent * 100, est = est,
       se = na, lcl = na, ucl = na, dist = rep(dist, length(percent)),
-     stringsAsFactors = FALSE
+      stringsAsFactors = FALSE
     )))
   }
   samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
@@ -56,10 +80,7 @@ ssd_hc <- function(x, ...) {
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot, parallel, ncpus, 
                              average, ic) {
   if (!length(x) || !length(percent)) {
-    no <- numeric(0)
-    return(as_tibble(data.frame(percent = no, est = no, se = no, 
-                                lcl = no, ucl = no, dist = character(0),
-                                stringsAsFactors = FALSE)))
+    return(no_ssd_hc())
   }
   
   hc <- lapply(x, ssd_hc, percent = percent, ci = ci, level = level, nboot = nboot, 
@@ -77,6 +98,25 @@ ssd_hc <- function(x, ...) {
   hc <- as.data.frame(hc)
   hc$percent <- percent
   hc$dist <- "average"
+  as_tibble(hc)
+}
+
+#' @describeIn ssd_hc Hazard Percent list of distributions
+#' @export
+#' @examples
+#' ssd_hc(list("lnorm" = NULL))
+ssd_hc.list <- function(x, percent = 5, ...) {
+  chk_list(x)
+  chk_named(x)
+  chk_unique(names(x))
+  chk_unused(...)
+  
+  if(!length(x)) {
+    return(no_ssd_hc())
+  }
+  hc <- mapply(.ssd_hc_dist, x, names(x), MoreArgs = list(percent = percent),
+               SIMPLIFY = FALSE)
+  hc <- do.call("rbind", hc)
   as_tibble(hc)
 }
 

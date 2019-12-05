@@ -2,6 +2,7 @@
 % Please edit documentation in R/hc.R
 \name{ssd_hc}
 \alias{ssd_hc}
+\alias{ssd_hc.list}
 \alias{ssd_hc.fitdist}
 \alias{ssd_hc.fitdistcens}
 \alias{ssd_hc.fitdists}
@@ -9,6 +10,8 @@
 \title{Hazard Concentration}
 \usage{
 ssd_hc(x, ...)
+
+\method{ssd_hc}{list}(x, percent = 5, ...)
 
 \method{ssd_hc}{fitdist}(
   x,
@@ -87,6 +90,8 @@ Gets concentrations that protect specified percentages of species.
 }
 \section{Methods (by class)}{
 \itemize{
+\item \code{list}: Hazard Percent list of distributions
+
 \item \code{fitdist}: Hazard Percent fitdist
 
 \item \code{fitdistcens}: Hazard Percent fitdistcens
@@ -97,6 +102,7 @@ Gets concentrations that protect specified percentages of species.
 }}
 
 \examples{
+ssd_hc(list("lnorm" = NULL))
 ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
 ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
 ssd_hc(boron_dists, c(0, 1, 30, Inf))
