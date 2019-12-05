@@ -33,7 +33,7 @@ NULL
 
 #' @rdname llogis
 #' @export
-dllogis <- function(x, lshape = 0, lscale = 1, log = FALSE) {
+dllogis <- function(x, lshape = 0, lscale = 0, log = FALSE) {
   if(!length(x)) return(numeric(0))
   d <- dlogis(log(x), location = exp(lscale), scale = exp(lshape)) / x
   if(log) return(log(d))
@@ -42,7 +42,7 @@ dllogis <- function(x, lshape = 0, lscale = 1, log = FALSE) {
 
 #' @rdname llogis
 #' @export
-qllogis <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+qllogis <- function(p, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
   if(log.p) p <- exp(p)
   if(!lower.tail) p <- 1 - p
   exp(qlogis(p, location = exp(lscale), scale = exp(lshape)))
@@ -50,13 +50,13 @@ qllogis <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
 #' @rdname llogis
 #' @export
-pllogis <- function(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+pllogis <- function(q, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
   plogis(log(q), location = exp(lscale), scale = exp(lshape), lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llogis
 #' @export
-rllogis <- function(n, lshape = 0, lscale = 1) {
+rllogis <- function(n, lshape = 0, lscale = 0) {
   exp(rlogis(n = n, location = exp(lscale), scale = exp(lshape)))
 }
 

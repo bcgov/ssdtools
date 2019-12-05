@@ -24,13 +24,13 @@ rllog(n, lshape = 0, lscale = 1)
 
 sllog(x)
 
-dllogis(x, lshape = 0, lscale = 1, log = FALSE)
+dllogis(x, lshape = 0, lscale = 0, log = FALSE)
 
-qllogis(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
+qllogis(p, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE)
 
-pllogis(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
+pllogis(q, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE)
 
-rllogis(n, lshape = 0, lscale = 1)
+rllogis(n, lshape = 0, lscale = 0)
 
 sllogis(x)
 }
