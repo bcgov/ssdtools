@@ -46,7 +46,7 @@
 <meta property="og:description" content="Density, distribution function, quantile function, random generation
 and starting values for the
 Log-Gumbel distribution
-with scalelog and locationlog parameters." />
+with lscale and llocation parameters." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -80,7 +80,7 @@ with scalelog and locationlog parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9015</span>
       </span>
     </div>
 
@@ -105,6 +105,9 @@ with scalelog and locationlog parameters." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
     <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
@@ -146,16 +149,16 @@ with scalelog and locationlog parameters." />
     <p>Density, distribution function, quantile function, random generation
 and starting values for the
 Log-Gumbel distribution
-with <code>scalelog</code> and <code>locationlog</code> parameters.</p>
+with <code>lscale</code> and <code>llocation</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dlgumbel</span>(<span class='no'>x</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dlgumbel</span>(<span class='no'>x</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qlgumbel</span>(<span class='no'>p</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qlgumbel</span>(<span class='no'>p</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>plgumbel</span>(<span class='no'>q</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>plgumbel</span>(<span class='no'>q</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rlgumbel</span>(<span class='no'>n</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>rlgumbel</span>(<span class='no'>n</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
 
 <span class='fu'>slgumbel</span>(<span class='no'>x</span>)</pre>
 
@@ -167,11 +170,11 @@ with <code>scalelog</code> and <code>locationlog</code> parameters.</p>
       <td><p>A numeric vector of values.</p></td>
     </tr>
     <tr>
-      <th>locationlog</th>
+      <th>llocation</th>
       <td><p>location parameter on the log scale.</p></td>
     </tr>
     <tr>
-      <th>scalelog</th>
+      <th>lscale</th>
       <td><p>scale parameter on the log scale.</p></td>
     </tr>
     <tr>

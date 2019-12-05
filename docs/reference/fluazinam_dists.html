@@ -78,7 +78,7 @@ Fluazinam." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9015</span>
       </span>
     </div>
 
@@ -103,6 +103,9 @@ Fluazinam." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
     <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
@@ -157,25 +160,25 @@ Fluazinam.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>fluazinam_dists</span></div><div class='output co'>#&gt; $estimate
-#&gt;   shapelog   scalelog 
+#&gt;     lshape     lscale 
 #&gt; -0.3068955 -5.6156439 
 #&gt; 
 #&gt; $method
 #&gt; [1] "mle"
 #&gt; 
 #&gt; $sd
-#&gt;  shapelog  scalelog 
+#&gt;    lshape    lscale 
 #&gt; 0.1729682 0.8514975 
 #&gt; 
 #&gt; $cor
-#&gt;           shapelog  scalelog
-#&gt; shapelog 1.0000000 0.5444416
-#&gt; scalelog 0.5444416 1.0000000
+#&gt;           lshape    lscale
+#&gt; lshape 1.0000000 0.5444416
+#&gt; lscale 0.5444416 1.0000000
 #&gt; 
 #&gt; $vcov
-#&gt;            shapelog   scalelog
-#&gt; shapelog 0.02991801 0.08018646
-#&gt; scalelog 0.08018646 0.72504793
+#&gt;            lshape     lscale
+#&gt; lshape 0.02991801 0.08018646
+#&gt; lscale 0.08018646 0.72504793
 #&gt; 
 #&gt; $loglik
 #&gt; [1] -73.11495

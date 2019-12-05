@@ -80,7 +80,7 @@ with shape and scale parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9015</span>
       </span>
     </div>
 
@@ -105,6 +105,9 @@ with shape and scale parameters." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
     <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
@@ -149,23 +152,23 @@ log-logistic distribution
 with <code>shape</code> and <code>scale</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dllog</span>(<span class='no'>x</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dllog</span>(<span class='no'>x</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qllog</span>(<span class='no'>p</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qllog</span>(<span class='no'>p</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>pllog</span>(<span class='no'>q</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>pllog</span>(<span class='no'>q</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rllog</span>(<span class='no'>n</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>rllog</span>(<span class='no'>n</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
 <span class='fu'>sllog</span>(<span class='no'>x</span>)
 
-<span class='fu'>dllogis</span>(<span class='no'>x</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>dllogis</span>(<span class='no'>x</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qllogis</span>(<span class='no'>p</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qllogis</span>(<span class='no'>p</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>pllogis</span>(<span class='no'>q</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>pllogis</span>(<span class='no'>q</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rllogis</span>(<span class='no'>n</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>rllogis</span>(<span class='no'>n</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
 <span class='fu'>sllogis</span>(<span class='no'>x</span>)</pre>
 
@@ -177,11 +180,11 @@ with <code>shape</code> and <code>scale</code> parameters.</p>
       <td><p>A numeric vector of values.</p></td>
     </tr>
     <tr>
-      <th>shapelog</th>
+      <th>lshape</th>
       <td><p>shape parameter on the log scale.</p></td>
     </tr>
     <tr>
-      <th>scalelog</th>
+      <th>lscale</th>
       <td><p>scale parameter on the log scale.</p></td>
     </tr>
     <tr>

@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9015</span>
       </span>
     </div>
 
@@ -102,6 +102,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
     <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
@@ -145,6 +148,9 @@
 
     <pre class="usage"><span class='fu'>ssd_plot_cdf</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
+<span class='co'># S3 method for list</span>
+<span class='fu'>ssd_plot_cdf</span>(<span class='no'>x</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Concentration"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Species Affected"</span>, <span class='no'>...</span>)
+
 <span class='co'># S3 method for fitdist</span>
 <span class='fu'>ssd_plot_cdf</span>(<span class='no'>x</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Concentration"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Species Affected"</span>, <span class='no'>...</span>)
 
@@ -179,15 +185,16 @@
 
     
 <ul>
+<li><p><code>list</code>: Plot list</p></li>
 <li><p><code>fitdist</code>: Plot CDF fitdist</p></li>
 <li><p><code>fitdistcens</code>: Plot CDF fitdistcens</p></li>
 <li><p><code>fitdists</code>: Plot CDF fitdists</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>right</span>[<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>left</span>[<span class='fl'>3</span>] * <span class='fl'>1.5</span>
+    <pre class="examples"><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>right</span>[<span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>left</span>[<span class='fl'>3</span>] * <span class='fl'>1.5</span>
 <span class='no'>fluazinam_lnorm</span>$<span class='no'>censdata</span>$<span class='no'>left</span>[<span class='fl'>5</span>] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
-<span class='fu'>ssd_plot_cdf</span>(<span class='no'>fluazinam_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_dists</span>)</div><div class='img'><img src='ssd_plot_cdf-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>ssd_plot_cdf</span>(<span class='no'>fluazinam_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='no'>boron_dists</span>)</div><div class='img'><img src='ssd_plot_cdf-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

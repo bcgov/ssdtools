@@ -46,7 +46,7 @@
 <meta property="og:description" content="Density, distribution function, quantile function, random generation
 and starting values for the
 Burr Type III two-parameter distribution
-with shapelog and scalelog parameters." />
+with lshape and lscale parameters." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -80,7 +80,7 @@ with shapelog and scalelog parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9015</span>
       </span>
     </div>
 
@@ -105,6 +105,9 @@ with shapelog and scalelog parameters." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
     <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
@@ -146,16 +149,16 @@ with shapelog and scalelog parameters." />
     <p>Density, distribution function, quantile function, random generation
 and starting values for the
 Burr Type III two-parameter distribution
-with <code>shapelog</code> and <code>scalelog</code> parameters.</p>
+with <code>lshape</code> and <code>lscale</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dburrIII2</span>(<span class='no'>x</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dburrIII2</span>(<span class='no'>x</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qburrIII2</span>(<span class='no'>p</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qburrIII2</span>(<span class='no'>p</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>pburrIII2</span>(<span class='no'>q</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>pburrIII2</span>(<span class='no'>q</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rburrIII2</span>(<span class='no'>n</span>, <span class='kw'>shapelog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>rburrIII2</span>(<span class='no'>n</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
 <span class='fu'>sburrIII2</span>(<span class='no'>x</span>)</pre>
 
@@ -167,11 +170,11 @@ with <code>shapelog</code> and <code>scalelog</code> parameters.</p>
       <td><p>A numeric vector of values.</p></td>
     </tr>
     <tr>
-      <th>shapelog</th>
+      <th>lshape</th>
       <td><p>shape parameter on the log scale.</p></td>
     </tr>
     <tr>
-      <th>scalelog</th>
+      <th>lscale</th>
       <td><p>scale parameter on the log scale.</p></td>
     </tr>
     <tr>

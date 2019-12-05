@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>fitdists for CCME Boron Data — boron_dists • ssdtools</title>
+<title>Weibull Distribution — weibull • ssdtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,9 @@
 
 
 
-<meta property="og:title" content="fitdists for CCME Boron Data — boron_dists" />
-<meta property="og:description" content="A fitdists object for Species Sensitivity Data for
-Boron." />
+<meta property="og:title" content="Weibull Distribution — weibull" />
+<meta property="og:description" content="Density, distribution function, quantile function and random generation for the weibull distribution with 
+parameters shape and scale with default values." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -138,209 +138,82 @@ Boron." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>fitdists for CCME Boron Data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>boron_dists.Rd</code></div>
+    <h1>Weibull Distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/weibull.R'><code>R/weibull.R</code></a></small>
+    <div class="hidden name"><code>weibull.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A fitdists object for Species Sensitivity Data for
-Boron.</p>
+    <p>Density, distribution function, quantile function and random generation for the weibull distribution with 
+parameters shape and scale with default values.</p>
     </div>
 
-    <pre class="usage"><span class='no'>boron_dists</span></pre>
+    <pre class="usage"><span class='fu'>dweibull</span>(<span class='no'>x</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
+<span class='fu'>pweibull</span>(<span class='no'>q</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+<span class='fu'>qweibull</span>(<span class='no'>p</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-    <p>An object of class <code>fitdists</code> of length 3.</p>
+<span class='fu'>rweibull</span>(<span class='no'>n</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A numeric vector of values.</p></td>
+    </tr>
+    <tr>
+      <th>shape</th>
+      <td><p>A string of the column in data for the shape aesthetic.</p></td>
+    </tr>
+    <tr>
+      <th>scale</th>
+      <td><p>scale parameter.</p></td>
+    </tr>
+    <tr>
+      <th>log</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>q</th>
+      <td><p>vector of quantiles.</p></td>
+    </tr>
+    <tr>
+      <th>lower.tail</th>
+      <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
+    </tr>
+    <tr>
+      <th>log.p</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td><p>vector of probabilities.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>number of observations.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A numeric vector.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/Weibull.html'>dweibull</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>boron_dists</span></div><div class='output co'>#&gt; $estimate
-#&gt;     lshape     lscale 
-#&gt;  0.2076248 -2.3663820 
-#&gt; 
-#&gt; $method
-#&gt; [1] "mle"
-#&gt; 
-#&gt; $sd
-#&gt;    lshape    lscale 
-#&gt; 0.1134175 0.2798350 
-#&gt; 
-#&gt; $cor
-#&gt;           lshape    lscale
-#&gt; lshape 1.0000000 0.4210718
-#&gt; lscale 0.4210718 1.0000000
-#&gt; 
-#&gt; $vcov
-#&gt;            lshape     lscale
-#&gt; lshape 0.01286353 0.01336406
-#&gt; lscale 0.01336406 0.07830765
-#&gt; 
-#&gt; $loglik
-#&gt; [1] -118.6838
-#&gt; 
-#&gt; $aic
-#&gt; [1] 241.3675
-#&gt; 
-#&gt; $bic
-#&gt; [1] 244.0319
-#&gt; 
-#&gt; $n
-#&gt; [1] 28
-#&gt; 
-#&gt; $data
-#&gt;  [1]  2.1  2.4  4.1 10.0 15.6 18.3  6.0 10.0 13.4 15.0 20.0 20.0 20.4 48.6 50.0
-#&gt; [16] 70.7 70.7 70.7  1.0  1.8  2.0  4.0  5.2 12.3 30.0 34.2 50.0 60.0
-#&gt; 
-#&gt; $distname
-#&gt; [1] "burrIII2"
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $fix.arg.fun
-#&gt; NULL
-#&gt; 
-#&gt; $dots
-#&gt; NULL
-#&gt; 
-#&gt; $convergence
-#&gt; [1] 0
-#&gt; 
-#&gt; $discrete
-#&gt; [1] FALSE
-#&gt; 
-#&gt; $weights
-#&gt; NULL
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "fitdist"
-#&gt; $estimate
-#&gt;      scale      shape 
-#&gt; 25.1263769  0.9500513 
-#&gt; 
-#&gt; $method
-#&gt; [1] "mle"
-#&gt; 
-#&gt; $sd
-#&gt;     scale     shape 
-#&gt; 7.6375478 0.2224988 
-#&gt; 
-#&gt; $cor
-#&gt;            scale      shape
-#&gt; scale  1.0000000 -0.7702356
-#&gt; shape -0.7702356  1.0000000
-#&gt; 
-#&gt; $vcov
-#&gt;           scale      shape
-#&gt; scale 58.332136 -1.3088959
-#&gt; shape -1.308896  0.0495057
-#&gt; 
-#&gt; $loglik
-#&gt; [1] -116.8152
-#&gt; 
-#&gt; $aic
-#&gt; [1] 237.6303
-#&gt; 
-#&gt; $bic
-#&gt; [1] 240.2947
-#&gt; 
-#&gt; $n
-#&gt; [1] 28
-#&gt; 
-#&gt; $data
-#&gt;  [1]  2.1  2.4  4.1 10.0 15.6 18.3  6.0 10.0 13.4 15.0 20.0 20.0 20.4 48.6 50.0
-#&gt; [16] 70.7 70.7 70.7  1.0  1.8  2.0  4.0  5.2 12.3 30.0 34.2 50.0 60.0
-#&gt; 
-#&gt; $distname
-#&gt; [1] "gamma"
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $fix.arg.fun
-#&gt; NULL
-#&gt; 
-#&gt; $dots
-#&gt; NULL
-#&gt; 
-#&gt; $convergence
-#&gt; [1] 0
-#&gt; 
-#&gt; $discrete
-#&gt; [1] FALSE
-#&gt; 
-#&gt; $weights
-#&gt; NULL
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "fitdist"
-#&gt; $estimate
-#&gt;  meanlog    sdlog 
-#&gt; 2.561645 1.241540 
-#&gt; 
-#&gt; $method
-#&gt; [1] "mle"
-#&gt; 
-#&gt; $sd
-#&gt;   meanlog     sdlog 
-#&gt; 0.2346291 0.1659073 
-#&gt; 
-#&gt; $cor
-#&gt;         meanlog sdlog
-#&gt; meanlog       1     0
-#&gt; sdlog         0     1
-#&gt; 
-#&gt; $vcov
-#&gt;           meanlog      sdlog
-#&gt; meanlog 0.0550508 0.00000000
-#&gt; sdlog   0.0000000 0.02752524
-#&gt; 
-#&gt; $loglik
-#&gt; [1] -117.5142
-#&gt; 
-#&gt; $aic
-#&gt; [1] 239.0284
-#&gt; 
-#&gt; $bic
-#&gt; [1] 241.6928
-#&gt; 
-#&gt; $n
-#&gt; [1] 28
-#&gt; 
-#&gt; $data
-#&gt;  [1]  2.1  2.4  4.1 10.0 15.6 18.3  6.0 10.0 13.4 15.0 20.0 20.0 20.4 48.6 50.0
-#&gt; [16] 70.7 70.7 70.7  1.0  1.8  2.0  4.0  5.2 12.3 30.0 34.2 50.0 60.0
-#&gt; 
-#&gt; $distname
-#&gt; [1] "lnorm"
-#&gt; 
-#&gt; $fix.arg
-#&gt; NULL
-#&gt; 
-#&gt; $fix.arg.fun
-#&gt; NULL
-#&gt; 
-#&gt; $dots
-#&gt; NULL
-#&gt; 
-#&gt; $convergence
-#&gt; [1] 0
-#&gt; 
-#&gt; $discrete
-#&gt; [1] FALSE
-#&gt; 
-#&gt; $weights
-#&gt; NULL
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "fitdist"</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='fu'>dweibull</span>(<span class='no'>x</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"l"</span>)</div><div class='img'><img src='weibull-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

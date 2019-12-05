@@ -79,7 +79,7 @@ Gompertz distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9015</span>
       </span>
     </div>
 
@@ -104,6 +104,9 @@ Gompertz distribution." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
     <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
@@ -147,13 +150,13 @@ and starting values for the
 Gompertz distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dgompertz</span>(<span class='no'>x</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dgompertz</span>(<span class='no'>x</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qgompertz</span>(<span class='no'>p</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qgompertz</span>(<span class='no'>p</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>pgompertz</span>(<span class='no'>q</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>pgompertz</span>(<span class='no'>q</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rgompertz</span>(<span class='no'>n</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>rgompertz</span>(<span class='no'>n</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
 <span class='fu'>sgompertz</span>(<span class='no'>x</span>)</pre>
 
@@ -165,12 +168,12 @@ Gompertz distribution.</p>
       <td><p>A numeric vector of values.</p></td>
     </tr>
     <tr>
-      <th>scale</th>
-      <td><p>scale parameter.</p></td>
+      <th>lscale</th>
+      <td><p>scale parameter on the log scale.</p></td>
     </tr>
     <tr>
-      <th>shape</th>
-      <td><p>A string of the column in data for the shape aesthetic.</p></td>
+      <th>lshape</th>
+      <td><p>shape parameter on the log scale.</p></td>
     </tr>
     <tr>
       <th>log</th>

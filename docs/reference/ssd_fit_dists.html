@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9015</span>
       </span>
     </div>
 
@@ -102,6 +102,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
     <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
@@ -212,9 +215,9 @@ It may be possible to use artificial censoring to improve the estimates in the e
 #&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once per session.</span><span></span>
 #&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; Fitting of the distribution ' burrIII2 ' by maximum likelihood 
 #&gt; Parameters:
-#&gt;            estimate Std. Error
-#&gt; shapelog  0.2076248  0.1134175
-#&gt; scalelog -2.3663820  0.2798350
+#&gt;          estimate Std. Error
+#&gt; lshape  0.2076248  0.1134175
+#&gt; lscale -2.3663820  0.2798350
 #&gt; Fitting of the distribution ' gamma ' by maximum likelihood 
 #&gt; Parameters:
 #&gt;         estimate Std. Error
@@ -227,9 +230,9 @@ It may be possible to use artificial censoring to improve the estimates in the e
 #&gt; sdlog   1.241540  0.1659073</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fluazinam</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"fitdistrplus"</span>)
 <span class='fu'>ssd_fit_dists</span>(<span class='no'>fluazinam</span>, <span class='kw'>left</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='st'>"right"</span>)</div><div class='output co'>#&gt; Fitting of the distribution ' burrIII2 ' on censored data by maximum likelihood 
 #&gt; Parameters:
-#&gt;            estimate
-#&gt; shapelog -0.3068955
-#&gt; scalelog -5.6156439
+#&gt;          estimate
+#&gt; lshape -0.3068955
+#&gt; lscale -5.6156439
 #&gt; Fitting of the distribution ' gamma ' on censored data by maximum likelihood 
 #&gt; Parameters:
 #&gt;           estimate

@@ -2,6 +2,7 @@ pandoc: 2.7.3
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  distributions: distributions.html
   exposure-plots: exposure-plots.html
   faqs: faqs.html
   ssdtools: ssdtools.html

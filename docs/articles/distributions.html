@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Frequently Asked Questions • ssdtools</title>
+<title>Distributions • ssdtools</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Frequently Asked Questions">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Distributions">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -98,13 +98,13 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Frequently Asked Questions</h1>
+      <h1>Distributions</h1>
                         <h4 class="author">ssdtools Team</h4>
             
             <h4 class="date">2019-12-04</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/faqs.Rmd"><code>vignettes/faqs.Rmd</code></a></small>
-      <div class="hidden name"><code>faqs.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/distributions.Rmd"><code>vignettes/distributions.Rmd</code></a></small>
+      <div class="hidden name"><code>distributions.Rmd</code></div>
 
     </div>
 
@@ -112,41 +112,38 @@
     
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ssdtools)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</span></code></pre></div>
-<div id="how-do-i-fit-a-custom-distribution" class="section level2">
+<div id="default-distributions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#how-do-i-fit-a-custom-distribution" class="anchor"></a>How do I fit a custom distribution?</h2>
-<p>The user can also specify one or more custom distributions (called say <code>custom</code>) provided vectorized density (<code>dcustom()</code>), distribution (<code>pcustom()</code>), quantile (<code>qcustom()</code>) and starting value (<code>scustom()</code>) functions are defined. For example see the <a href="https://github.com/bcgov/ssdtools/blob/master/R/llogis.R">llogis source code</a>.</p>
-</div>
-<div id="how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals" class="anchor"></a>How do I fit distributions to multiple groups such taxa and/or chemicals?</h2>
-<p>An elegant approach using some tidyverse packages is demonstrated below.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(purrr)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyr)</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>boron_preds &lt;-<span class="st"> </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(ssdtools<span class="op">::</span>boron_data, <span class="dt">data =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(Chemical, Species, Conc, Units)) <span class="op">%&gt;%</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Fit =</span> <span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(data, ssd_fit_dists, <span class="dt">dists =</span> <span class="st">"lnorm"</span>),</span>
-<span id="cb2-7"><a href="#cb2-7"></a>         <span class="dt">Prediction =</span> <span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(Fit, predict)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(Prediction)</span></code></pre></div>
-<p>The resultant data and predictions can then be plotted as follows.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(boron_data, boron_preds, <span class="dt">xlab =</span> <span class="st">"Concentration (mg/L)"</span>, <span class="dt">ci =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>Group)</span></code></pre></div>
-<p><img src="faqs_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
-<div id="how-do-i-plot-a-cullen-frey-plot" class="section level3">
+<a href="#default-distributions" class="anchor"></a>Default Distributions</h2>
+<p>By default, <code>ssdtools</code> fits three distributions to species sensitivity data: the Burr Type-III 2-parameter, gamma and log-normal distributions.</p>
+<div id="default-hazard-concentrations" class="section level3">
 <h3 class="hasAnchor">
-<a href="#how-do-i-plot-a-cullen-frey-plot" class="anchor"></a>How do I plot a Cullen Frey plot?</h3>
-<p>The data can be visualized using a Cullen Frey plot of the skewness and kurtosis.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/ssd_plot_cf.html">ssd_plot_cf</a></span>(boron_data)</span></code></pre></div>
-<p><img src="faqs_files/figure-html/unnamed-chunk-5-1.png" width="480"></p>
+<a href="#default-hazard-concentrations" class="anchor"></a>Default Hazard Concentrations</h3>
+<p>The hazard concentrations for the three default distributions with their default parameter values are plotted below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">burrIII2 =</span> <span class="ot">NULL</span>, <span class="dt">gamma =</span> <span class="ot">NULL</span>, <span class="dt">lnorm =</span> <span class="ot">NULL</span>))</span></code></pre></div>
+<p><img src="distributions_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
+</div>
+<div id="equally-distributed-hazard-concentrations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#equally-distributed-hazard-concentrations" class="anchor"></a>Equally Distributed Hazard Concentrations</h3>
+<p>For comparative purposes we also plot the three default distributions with a mean of 1.648 and standard deviation of 2.16 (equivalent to a mean of 0 and standard deviation of 1 on the logarithmic scale).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>mu &lt;-<span class="st"> </span><span class="fl">1.648</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>sigma &lt;-<span class="st"> </span><span class="fl">2.162</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">burrIII2 =</span> <span class="ot">NULL</span>, </span>
+<span id="cb3-4"><a href="#cb3-4"></a>                  <span class="dt">gamma =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">shape =</span> mu<span class="op">^</span><span class="dv">2</span><span class="op">/</span>sigma<span class="op">^</span><span class="dv">2</span>, <span class="dt">scale =</span> sigma<span class="op">^</span><span class="dv">2</span><span class="op">/</span>mu), </span>
+<span id="cb3-5"><a href="#cb3-5"></a>                  <span class="dt">lnorm =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">meanlog =</span> <span class="dv">0</span>, <span class="dt">sdlog =</span> <span class="dv">1</span>)))</span></code></pre></div>
+<p><img src="distributions_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 </div>
 </div>
-<div id="how-do-i-plot-model-diagnostics" class="section level2">
+<div id="all-distributions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#how-do-i-plot-model-diagnostics" class="anchor"></a>How do I plot model diagnostics?</h2>
-<p>A <code>fitdists</code> object can be plotted to display model diagnostics plots for each fit.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(boron_dists)</span></code></pre></div>
-<p><img src="faqs_files/figure-html/unnamed-chunk-6-1.png" width="576"><img src="faqs_files/figure-html/unnamed-chunk-6-2.png" width="576"><img src="faqs_files/figure-html/unnamed-chunk-6-3.png" width="576"></p>
+<a href="#all-distributions" class="anchor"></a>All Distributions</h2>
+<p>For completeness the hazard concentrations for all the distributions that have been tested with <code>ssdtools</code> are plotted below with their default parameter values (by default the gamma and weibull hazard concentrations are identical).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">burrIII2 =</span> <span class="ot">NULL</span>, <span class="dt">burrIII3 =</span> <span class="ot">NULL</span>, <span class="dt">gamma =</span> <span class="ot">NULL</span>,</span>
+<span id="cb4-2"><a href="#cb4-2"></a>                  <span class="dt">gompertz =</span> <span class="ot">NULL</span>, <span class="dt">lgumbel =</span> <span class="ot">NULL</span>, <span class="dt">llogis =</span> <span class="ot">NULL</span>,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>                  <span class="dt">lnorm =</span> <span class="ot">NULL</span>, <span class="dt">pareto =</span> <span class="ot">NULL</span>, <span class="dt">weibull =</span> <span class="ot">NULL</span>)) <span class="op">+</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div>
+<p><img src="distributions_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 </div>
   </div>
 
@@ -156,9 +153,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#how-do-i-fit-a-custom-distribution">How do I fit a custom distribution?</a></li>
-      <li><a href="#how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals">How do I fit distributions to multiple groups such taxa and/or chemicals?</a></li>
-      <li><a href="#how-do-i-plot-model-diagnostics">How do I plot model diagnostics?</a></li>
+<li><a href="#default-distributions">Default Distributions</a></li>
+      <li><a href="#all-distributions">All Distributions</a></li>
       </ul>
 </div>
       </div>

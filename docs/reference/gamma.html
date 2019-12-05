@@ -43,8 +43,7 @@
 
 
 <meta property="og:title" content="Gamma Distribution — gamma" />
-<meta property="og:description" content="Starting values for the
-Gamma distribution." />
+<meta property="og:description" content="Density, distribution function, quantile function and random generation for the Gamma distribution with #' parameters shape and scale with default values." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -78,7 +77,7 @@ Gamma distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9015</span>
       </span>
     </div>
 
@@ -103,6 +102,9 @@ Gamma distribution." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/distributions.html">Distributions</a>
+    </li>
     <li>
       <a href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
     </li>
@@ -141,11 +143,18 @@ Gamma distribution." />
     </div>
 
     <div class="ref-description">
-    <p>Starting values for the
-Gamma distribution.</p>
+    <p>Density, distribution function, quantile function and random generation for the Gamma distribution with #' parameters shape and scale with default values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sgamma</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>dgamma</span>(<span class='no'>x</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>pgamma</span>(<span class='no'>q</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>qgamma</span>(<span class='no'>p</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>rgamma</span>(<span class='no'>n</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='fu'>sgamma</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,6 +162,38 @@ Gamma distribution.</p>
     <tr>
       <th>x</th>
       <td><p>A numeric vector of values.</p></td>
+    </tr>
+    <tr>
+      <th>shape</th>
+      <td><p>A string of the column in data for the shape aesthetic.</p></td>
+    </tr>
+    <tr>
+      <th>scale</th>
+      <td><p>scale parameter.</p></td>
+    </tr>
+    <tr>
+      <th>log</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>q</th>
+      <td><p>vector of quantiles.</p></td>
+    </tr>
+    <tr>
+      <th>lower.tail</th>
+      <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
+    </tr>
+    <tr>
+      <th>log.p</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td><p>vector of probabilities.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>number of observations.</p></td>
     </tr>
     </table>
 
@@ -165,7 +206,7 @@ Gamma distribution.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='fu'><a href='https://rdrr.io/r/stats/GammaDist.html'>dgamma</a></span>(<span class='no'>x</span>, <span class='fl'>1</span>, <span class='fl'>1</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"l"</span>)</div><div class='img'><img src='gamma-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='fu'>dgamma</span>(<span class='no'>x</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"l"</span>)</div><div class='img'><img src='gamma-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
