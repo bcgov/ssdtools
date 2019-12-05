@@ -52,6 +52,7 @@ ssd_plot(boron_data, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
 The data can be visualized using a Cullen Frey plot of the skewness and kurtosis.
 
 ```{r, fig.width = 5, fig.height = 5}
+set.seed(10)
 ssd_plot_cf(boron_data)
 ```
 
