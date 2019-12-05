@@ -43,13 +43,13 @@ NA_real_), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "lnorm"
   
   expect_equal(as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL))),
                structure(list(percent = c(5, 5), est = c(0.193040816698737, 
-0.79759274955154), se = c(NA_real_, NA_real_), lcl = c(NA_real_, 
+0.143067464655739), se = c(NA_real_, NA_real_), lcl = c(NA_real_, 
 NA_real_), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "llogis"
 )), row.names = c("lnorm", "llogis"), class = "data.frame"))
   
   expect_equal(as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL), percent = c(1, 99))),
                structure(list(percent = c(1, 99, 1, 99), est = c(0.097651733070336, 
-10.2404736563121, 0.153073355974538, 1500.27196190644), se = c(NA_real_, 
+10.2404736563121, 0.027457392206657, 269.109901017445), se = c(NA_real_, 
 NA_real_, NA_real_, NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, 
 NA_real_), ucl = c(NA_real_, NA_real_, NA_real_, NA_real_), dist = c("lnorm", 
 "lnorm", "llogis", "llogis")), row.names = c("lnorm.1", "lnorm.2", 
