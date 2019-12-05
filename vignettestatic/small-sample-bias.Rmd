@@ -2,7 +2,7 @@
 title: "Small sample bias in estimates"
 author: "sstools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
-output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Small sample bias in estimates}
   %\VignetteEngine{knitr::rmarkdown}
