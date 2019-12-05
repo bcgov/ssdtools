@@ -46,7 +46,7 @@ ssd_plot_cdf(list(burrIII2 = NULL, gamma = NULL, lnorm = list(meanlog = 0, sdlog
 For completeness the hazard concentrations for all the distributions that have been tested with `ssdtools` are plotted below with their default parameter values (by default the gamma and weibull hazard concentrations are identical).
 ```{r}
 ssd_plot_cdf(list(burrIII2 = NULL, burrIII3 = NULL, gamma = NULL,
-                  gompertz = NULL, lgumbel = NULL, llogis = NULL,
+                  gompertz = NULL, lgumbel = list(llocation = -1, lscale = -1), llogis = NULL,
                   lnorm = NULL, pareto = NULL, weibull = NULL))
 
 ```
