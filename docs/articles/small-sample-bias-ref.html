@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Distributions • ssdtools</title>
+<title>Small sample bias in estimates - reference • ssdtools</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Distributions">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Small sample bias in estimates - reference">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -101,67 +101,25 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Distributions</h1>
-                        <h4 class="author">ssdtools Team</h4>
+      <h1>Small sample bias in estimates - reference</h1>
+                        <h4 class="author">sstools Team</h4>
             
             <h4 class="date">2019-12-05</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/distributions.Rmd"><code>vignettes/distributions.Rmd</code></a></small>
-      <div class="hidden name"><code>distributions.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/small-sample-bias-ref.Rmd"><code>vignettes/small-sample-bias-ref.Rmd</code></a></small>
+      <div class="hidden name"><code>small-sample-bias-ref.Rmd</code></div>
 
     </div>
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ssdtools)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</span></code></pre></div>
-<div id="default-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#default-distributions" class="anchor"></a>Default Distributions</h2>
-<p>By default, <code>ssdtools</code> fits three distributions to species sensitivity data: the Burr Type-III 2-parameter, gamma and log-normal distributions.</p>
-<div id="default-hazard-concentrations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#default-hazard-concentrations" class="anchor"></a>Default Hazard Concentrations</h3>
-<p>The hazard concentrations for the three default distributions with their default parameter values are plotted below.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">burrIII2 =</span> <span class="ot">NULL</span>, <span class="dt">gamma =</span> <span class="ot">NULL</span>, <span class="dt">lnorm =</span> <span class="ot">NULL</span>))</span></code></pre></div>
-<p><img src="distributions_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
-</div>
-<div id="equally-distributed-hazard-concentrations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#equally-distributed-hazard-concentrations" class="anchor"></a>Equally Distributed Hazard Concentrations</h3>
-<p>For comparative purposes we also plot the three default distributions with a mean of 1.648 and standard deviation of 2.16 (equivalent to a mean of 0 and standard deviation of 1 on the logarithmic scale).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>mu &lt;-<span class="st"> </span><span class="fl">1.648</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>sigma &lt;-<span class="st"> </span><span class="fl">2.162</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">burrIII2 =</span> <span class="ot">NULL</span>, </span>
-<span id="cb3-4"><a href="#cb3-4"></a>                  <span class="dt">gamma =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">shape =</span> mu<span class="op">^</span><span class="dv">2</span><span class="op">/</span>sigma<span class="op">^</span><span class="dv">2</span>, <span class="dt">scale =</span> sigma<span class="op">^</span><span class="dv">2</span><span class="op">/</span>mu), </span>
-<span id="cb3-5"><a href="#cb3-5"></a>                  <span class="dt">lnorm =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">meanlog =</span> <span class="dv">0</span>, <span class="dt">sdlog =</span> <span class="dv">1</span>)))</span></code></pre></div>
-<p><img src="distributions_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
-</div>
-</div>
-<div id="all-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#all-distributions" class="anchor"></a>All Distributions</h2>
-<p>For completeness the hazard concentrations for all the distributions that have been tested with <code>ssdtools</code> are plotted below with their default parameter values (by default the gamma and weibull hazard concentrations are identical).</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">burrIII2 =</span> <span class="ot">NULL</span>, <span class="dt">burrIII3 =</span> <span class="ot">NULL</span>, <span class="dt">gamma =</span> <span class="ot">NULL</span>,</span>
-<span id="cb4-2"><a href="#cb4-2"></a>                  <span class="dt">gompertz =</span> <span class="ot">NULL</span>, <span class="dt">lgumbel =</span> <span class="ot">NULL</span>, <span class="dt">llogis =</span> <span class="ot">NULL</span>,</span>
-<span id="cb4-3"><a href="#cb4-3"></a>                  <span class="dt">lnorm =</span> <span class="ot">NULL</span>, <span class="dt">pareto =</span> <span class="ot">NULL</span>, <span class="dt">weibull =</span> <span class="ot">NULL</span>)) <span class="op">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div>
-<p><img src="distributions_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
+<p>The small sample bias in estimates vignette is available as a <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/small-sample-bias.pdf">pdf</a>.</p>
 <hr>
 <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia </span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"> Creative Commons Attribution 4.0 International License</a>.</p>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#default-distributions">Default Distributions</a></li>
-      <li><a href="#all-distributions">All Distributions</a></li>
-      </ul>
-</div>
       </div>
 
 </div>
