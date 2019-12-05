@@ -2,12 +2,15 @@
 % Please edit documentation in R/plot-cdf.R
 \name{ssd_plot_cdf}
 \alias{ssd_plot_cdf}
+\alias{ssd_plot_cdf.list}
 \alias{ssd_plot_cdf.fitdist}
 \alias{ssd_plot_cdf.fitdistcens}
 \alias{ssd_plot_cdf.fitdists}
 \title{Plot Cumulative Distribution Function}
 \usage{
 ssd_plot_cdf(x, ...)
+
+\method{ssd_plot_cdf}{list}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 
 \method{ssd_plot_cdf}{fitdist}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 
@@ -29,6 +32,8 @@ Plots the cdf.
 }
 \section{Methods (by class)}{
 \itemize{
+\item \code{list}: Plot list
+
 \item \code{fitdist}: Plot CDF fitdist
 
 \item \code{fitdistcens}: Plot CDF fitdistcens
@@ -37,6 +42,7 @@ Plots the cdf.
 }}
 
 \examples{
+ssd_plot_cdf(boron_lnorm)
 ssd_plot_cdf(boron_lnorm)
 fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 fluazinam_lnorm$censdata$left[5] <- NA

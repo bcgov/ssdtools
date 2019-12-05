@@ -1,0 +1,52 @@
+---
+title: "Distributions"
+author: "ssdtools Team"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Distributions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.height = 4,
+  fig.width = 6
+)
+```
+
+```{r setup, message=FALSE}
+library(ssdtools)
+```
+
+## Default Distributions
+
+By default, `ssdtools` fits three distributions to species sensitivity data:
+the Burr Type-III 2-parameter, gamma and log-normal distributions.
+
+### Default Hazard Concentrations
+
+The hazard concentrations for the three default distributions with their default parameter values are plotted below.
+```{r}
+ssd_plot_cdf(list(burrIII2 = NULL, gamma = NULL, lnorm = NULL))
+```
+
+### Equally Distributed Hazard Concentrations
+
+For comparative purposes we also plot the three default distributions with a mean of 0 and standard deviation of 1 on the logarithmic scale.
+```{r}
+ssd_plot_cdf(list(burrIII2 = NULL, gamma = NULL, lnorm = list(meanlog = 0, sdlog = 1)))
+```
+
+## All Distributions
+
+For completeness the hazard concentrations for all the distributions that have been tested with `ssdtools` are plotted below with their default parameter values (by default the gamma and weibull hazard concentrations are identical).
+```{r}
+ssd_plot_cdf(list(burrIII2 = NULL, burrIII3 = NULL, gamma = NULL,
+                  gompertz = NULL, lgumbel = NULL, llogis = NULL,
+                  lnorm = NULL, pareto = NULL, weibull = NULL))
+
+```

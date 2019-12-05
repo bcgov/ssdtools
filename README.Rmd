@@ -46,7 +46,7 @@ devtools::install_github("bcgov/ssdtools")
 ## Introduction
 
 `ssdtools` provides a data set for several chemicals including Boron.
-```{r}
+```{r, message=FALSE}
 library(ssdtools)
 boron_data
 ```

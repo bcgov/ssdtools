@@ -22,6 +22,29 @@ ssd_plot_cdf <- function(x, ...) {
   UseMethod("ssd_plot_cdf")
 }
 
+#' @describeIn ssd_plot_cdf Plot list
+#' @export
+#' @examples
+#' ssd_plot_cdf(boron_lnorm)
+ssd_plot_cdf.list <- function(x,
+                                 xlab = "Concentration", ylab = "Species Affected",
+                                 ...) {
+  chk_string(xlab)
+  chk_string(ylab)
+  chk_unused(...)
+
+  pred <- ssd_hc(x, percent = 1:99)
+  
+  pred$Distribution <- pred$dist
+
+  ggplot(pred, aes_string(x = "est")) +
+    geom_line(aes_string(
+      y = "percent/100", color = "Distribution",
+      linetype = "Distribution"
+    )) +
+    plot_coord_scale(pred, xlab = xlab, ylab = ylab)
+}
+
 #' @describeIn ssd_plot_cdf Plot CDF fitdist
 #' @export
 #' @examples
@@ -37,10 +60,8 @@ ssd_plot_cdf.fitdist <- function(x,
   
   pred <- ssd_hc(x, percent = 1:99)
   
-  pred$percent <- pred$percent / 100
-  
   ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(y = "percent")) +
+    geom_line(aes_string(y = "percent/100")) +
     geom_ssd(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 }
@@ -67,13 +88,12 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
   data$y <- ssd_ecd(data$xmean)
   
   pred <- ssd_hc(x, percent = 1:99)
-  pred$percent <- pred$percent / 100
-  
+
   gp <- ggplot(pred, aes_string(x = "est"))
   
   arrow <- arrow(length = unit(0.1, "inches"))
   
-  gp + geom_line(aes_string(y = "percent")) +
+  gp + geom_line(aes_string(y = "percent/100")) +
     geom_segment(
       data = data[data$xmin != data$xmax, ],
       aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")

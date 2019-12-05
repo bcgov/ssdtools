@@ -16,7 +16,7 @@ comment = "#>"
 )
 ```
 
-```{r}
+```{r, message=FALSE}
 library(ssdtools)
 library(ggplot2)
 ```
