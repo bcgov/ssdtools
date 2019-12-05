@@ -1,10 +1,10 @@
 ---
-title: "Distributions"
+title: "Selecting Distributions"
 author: "ssdtools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Distributions}
+  %\VignetteIndexEntry{Selecting Distributions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,10 +18,19 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Model selection
+
+It can be difficult to select a 'best fitting' distribution when modeling species sensitivity data with low sample sizes.
+In these situations, model averaging can be used to fit multiple distributions and calculate a weighted average HCx and confidence limits (Schwarz and Tillmanns 2009).
+Distributions selected to use in model averaging must be bounded by zero given that effect concentrations cannot be negative.
+Furthermore, the selected distributions should provide a variety of shapes to capture the diversity of shapes in empirical species sensitivity distributions.
+
+By default, the ssdtools uses Akaike Information Criterion corrected for small sample size (AICc) as a measure of relative quality of fit for different distributions and as the basis for calculating the model-averaged HCx.  
+However, if two or more similar models fit the data well then the support for this type of shape will be over-inflated (Burnham and Anderson 2002).  
+
 ## Default Distributions
 
-By default, `ssdtools` fits three distributions to species sensitivity data:
-the Burr Type-III 2-parameter, gamma and log-normal distributions.
+To avoid such model redundancy (Burnham and Anderson 2002), ssdtools and the accompanying Shiny app (Dalgarno 2018) fit three different shape distributions by default: the log-normal, gamma and the Burr Type-III 2-parameter distributions.
 
 The three distributions are plotted below with a mean of 1.648 and standard deviation of 2.16 on the concentration scale.
 ```{r, message=FALSE}
@@ -35,6 +44,32 @@ ssd_plot_cdf(list(burrIII2 = NULL,
                   lnorm = list(meanlog = 0, sdlog = 1)))
 ```
 
+### Log-normal distribution
+
+The [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) distribution was selected as the starting distribution given the data are for effect concentrations.
+The log-logistic distribution is often used as a candidate SSD primarily because of its analytic tractability (Aldenderg and Slob 1993).
+However, we did not include the log-logistic distribution in the default set of distribution because 1) it has a very similar shape to the log-normal distribution and 2) it is a specific case of the more general Burr family of distributions (Shao reference).
+
+The log-normal distribution does have a couple limitations to consider when fitting species sensitivity data.
+First, on the logarithmic scale, the normal distribution is symmetrical.
+Second, the log-normal distribution decays too quickly in the tails giving narrow tails which may not adequately fit the data.
+Additional distributions were selected to compensate for these deficiencies.  
+
+### Gamma distribution
+
+The [gamma](https://en.wikipedia.org/wiki/Gamma_distribution) distribution is a two-parameter distribution commonly used to model failure times or time to events.
+For use in modelling species sensitivity data, the gamma distribution has two key features that provide additional flexibility relative to the log-normal distribution: 1) it is non-symmetrical on the logarithmic scale; and 2) it has wider tails.
+The Weibell distribution was considered as an alternative but the Gamma distribution is generally more flexible.  
+
+### Burr Type III
+
+Burr (1942) developed a family of 12 distributions with a flexible shape. 
+The original Burr Type III distribution (also known as the inverse Burr distribution or the [Dagum](https://en.wikipedia.org/wiki/Dagum_distribution) distribution) is a three parameter distribution that can take many shapes as dictated by the data and has a heavy tail which is useful in modeling extreme concentrations (Domma et al 2011).
+
+The original Burr III distribution has three parameters (two shape and one scale parameter). 
+However, the estimated  parameters are very highly correlated for small samples and the distribution is essentially non-identifiable (i.e. different sets of parameter values give rise to essentially the same fit).
+For this reason, we have selected as a default distribution, the two-parameter (one shape and one scale parameter) version of the Burr III distribution that has better properties in small samples.
+
 ## All Distributions
 
 For completeness the hazard concentrations for all the distributions that have been tested with `ssdtools` are plotted below with their default parameter values (by default the gamma and weibull distributions are identical).
@@ -44,6 +79,22 @@ ssd_plot_cdf(list(burrIII2 = NULL, burrIII3 = NULL, gamma = NULL,
                   lnorm = NULL, pareto = NULL, weibull = NULL)) +
   theme(legend.position = "bottom")
 ```
+
+## References
+
+Aldenderg and Slob 1993.
+
+Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY.  http://doi.org/10.1007/b97636.
+
+Burr, I. W. 1942. Cumulative frequency functions. Annals of Mathematical Statistics. 13:2, 215–232.
+
+Dalgarno, D. 2018. ssdtools: A shiny web app to analyse species sensitivity distributions. Prepared by Poisson Consulting for the Ministry of the Environment, British Columbia. https://bcgov-env.shinyapps.io/ssdtools/
+
+Domma, F., Giordano, S. and Zenga, M. 2011. Maximum likelihood estimation in Dagum distribution with censored samples. Journal of Applied Statistics. 38:12, 2971-2985, DOI: 10.1080/02664763.2011.578613
+
+Schwarz, C.J. and A.R. Tillmanns. 2019.  Improving statistical methods to derive species sensitivity distributions.  Water Science Series, WSS2019-07, Province of British Columbia, Victoria.
+
+Shao reference
 
 -----
 
