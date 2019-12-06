@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log-Gumbel Distribution — lgumbel • ssdtools</title>
+<title>Match Moments — ssd_match_moments • ssdtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,11 +42,8 @@
 
 
 
-<meta property="og:title" content="Log-Gumbel Distribution — lgumbel" />
-<meta property="og:description" content="Density, distribution function, quantile function, random generation
-and starting values for the
-Log-Gumbel distribution
-with lscale and llocation parameters." />
+<meta property="og:title" content="Match Moments — ssd_match_moments" />
+<meta property="og:description" content="Match Moments" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -143,79 +140,72 @@ with lscale and llocation parameters." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Log-Gumbel Distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/lgumbel.R'><code>R/lgumbel.R</code></a></small>
-    <div class="hidden name"><code>lgumbel.Rd</code></div>
+    <h1>Match Moments</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/match-moments.R'><code>R/match-moments.R</code></a></small>
+    <div class="hidden name"><code>ssd_match_moments.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Density, distribution function, quantile function, random generation
-and starting values for the
-Log-Gumbel distribution
-with <code>lscale</code> and <code>llocation</code> parameters.</p>
+    <p>Match Moments</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dlgumbel</span>(<span class='no'>x</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>qlgumbel</span>(<span class='no'>p</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>plgumbel</span>(<span class='no'>q</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>rlgumbel</span>(<span class='no'>n</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-
-<span class='fu'>slgumbel</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>ssd_match_moments</span>(
+  <span class='kw'>dists</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"burrIII2"</span>, <span class='st'>"gamma"</span>, <span class='st'>"lnorm"</span>),
+  <span class='kw'>meanlog</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>sdlog</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>nsim</span> <span class='kw'>=</span> <span class='fl'>1e+05</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A numeric vector of values.</p></td>
+      <th>dists</th>
+      <td><p>A character vector of the distribution names.</p></td>
     </tr>
     <tr>
-      <th>llocation</th>
-      <td><p>location parameter on the log scale.</p></td>
+      <th>meanlog</th>
+      <td><p>A number of the mean on the log scale.</p></td>
     </tr>
     <tr>
-      <th>lscale</th>
-      <td><p>scale parameter on the log scale.</p></td>
+      <th>sdlog</th>
+      <td><p>A number of the standard deviation on the log scale.</p></td>
     </tr>
     <tr>
-      <th>log</th>
-      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
-    </tr>
-    <tr>
-      <th>p</th>
-      <td><p>vector of probabilities.</p></td>
-    </tr>
-    <tr>
-      <th>lower.tail</th>
-      <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
-    </tr>
-    <tr>
-      <th>log.p</th>
-      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
-    </tr>
-    <tr>
-      <th>q</th>
-      <td><p>vector of quantiles.</p></td>
-    </tr>
-    <tr>
-      <th>n</th>
-      <td><p>number of observations.</p></td>
+      <th>nsim</th>
+      <td><p>A positive whole number of the number of simulations to generate.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A numeric vector.</p>
+    <p>A named list of the parameter values that produce a distribution 
+with moments closest to the meanlog and sdlog.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p><code><a href='ssd_plot_cdf.html'>ssd_plot_cdf</a>()</code>.</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>ssd_match_moments</span>()</div><div class='output co'>#&gt; $burrIII2
+#&gt;     lshape     lscale 
+#&gt;  0.3993591 -0.6023193 
+#&gt; 
+#&gt; $gamma
+#&gt;    shape    scale 
+#&gt; 1.460638 2.721954 
+#&gt; 
+#&gt; $lnorm
+#&gt;   meanlog     sdlog 
+#&gt; 0.9812500 0.9515625 
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
