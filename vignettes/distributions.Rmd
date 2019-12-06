@@ -37,6 +37,7 @@ The three distributions are plotted below with a mean of 1 and standard deviatio
 library(ssdtools)
 library(ggplot2)
 
+set.seed(7)
 ssd_plot_cdf(ssd_match_moments())
 ```
 
@@ -70,6 +71,7 @@ For this reason, we have selected as a default distribution, the two-parameter (
 
 For completeness the hazard concentrations for the other distributions provided by `ssdtools` are plotted below with a mean of 1 and standard deviation of 1 on the log concentration scale.
 ```{r,fig.height=5}
+set.seed(7)
 ssd_plot_cdf(ssd_match_moments(dists = c("burrIII2", "burrIII3", "gamma",
                   "gompertz", "lgumbel", "llogis",
                   "lnorm", "weibull"))) +
