@@ -68,11 +68,11 @@ For this reason, we have selected as a default distribution, the two-parameter (
 
 ## All Distributions
 
-For completeness the hazard concentrations for all the distributions that have been tested with `ssdtools` are plotted below with their default parameter values (by default the gamma and weibull distributions are identical).
+For completeness the hazard concentrations for the other distributions provided by `ssdtools` are plotted below with a mean of 1 and standard deviation of 1 on the log concentration scale.
 ```{r,fig.height=5}
 ssd_plot_cdf(ssd_match_moments(dists = c("burrIII2", "burrIII3", "gamma",
                   "gompertz", "lgumbel", "llogis",
-                  "lnorm", "pareto", "weibull"))) +
+                  "lnorm", "weibull"))) +
   theme(legend.position = "bottom")
 ```
 
