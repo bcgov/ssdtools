@@ -9,13 +9,13 @@
 \alias{slgumbel}
 \title{Log-Gumbel Distribution}
 \usage{
-dlgumbel(x, llocation = -1, lscale = -1, log = FALSE)
+dlgumbel(x, llocation = 0, lscale = 0, log = FALSE)
 
-qlgumbel(p, llocation = -1, lscale = -1, lower.tail = TRUE, log.p = FALSE)
+qlgumbel(p, llocation = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE)
 
-plgumbel(q, llocation = -1, lscale = -1, lower.tail = TRUE, log.p = FALSE)
+plgumbel(q, llocation = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE)
 
-rlgumbel(n, llocation = -1, lscale = -1)
+rlgumbel(n, llocation = 0, lscale = 0)
 
 slgumbel(x)
 }

@@ -86,7 +86,7 @@
 
 \item{weight}{A string of the column in data with the weightings (or NULL)}
 
-\item{dists}{A character vector of the distributions to fit.}
+\item{dists}{A character vector of the distribution names.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 
@@ -94,6 +94,8 @@
 
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
+
+\item{nsim}{A positive whole number of the number of simulations to generate.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

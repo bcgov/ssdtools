@@ -1,7 +1,7 @@
 - `nobs()` for censored data now returns a missing value.
 - Deprecated `dllog()` etc for `dllogis()`.
-- Replaced `shape` and `scale` arguments to `llog()` with `shapelog` and `scalelog`.
-- Replaced `location` and `scale` arguments to `lgumbel()` with `locationlog` and `scalelog`.
+- Replaced `shape` and `scale` arguments to `llog()` with `lshape` and `lscale`.
+- Replaced `location` and `scale` arguments to `lgumbel()` with `llocation` and `lscale`.
 - Tidyverse style error and warning messages.
 - Default distributions changed to 'burrIII2', 'gamma' and 'lnorm' from
 'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and 'weibull'.

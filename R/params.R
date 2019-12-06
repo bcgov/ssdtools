@@ -56,11 +56,12 @@
 #' @param shift_x The value to multiply the label x values by.
 #' @param hc A count between 1 and 99 indicating the percent hazard concentration (or NULL).
 #' @param weight A string of the column in data with the weightings (or NULL)
-#' @param dists A character vector of the distributions to fit.
+#' @param dists A character vector of the distribution names.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
 #' @param silent A flag indicating whether fits should fail silently.
 #' @param na.rm A flag specifying whether to silently remove missing values or
 #' remove them with a warning.
+#' @param nsim A positive whole number of the number of simulations to generate.
 #' @keywords internal
 #' @name params
 NULL

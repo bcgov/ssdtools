@@ -23,7 +23,7 @@ ssd_fit_dists(
 
 \item{weight}{A string of the column in data with the weightings (or NULL)}
 
-\item{dists}{A character vector of the distributions to fit.}
+\item{dists}{A character vector of the distribution names.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 

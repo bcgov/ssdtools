@@ -26,6 +26,7 @@ match.moments.logscale <- function(mean.log, sd.log, dist.base, ival.log=c(1,0),
 
 # test for log-normal
 fit <- match.moments.logscale(2, 1, "lnorm", log(c(2,1)) )
+
 fit$fit$par
 exp(fit$fit$par)
 test.rv <- rlnorm(1000000, exp(fit$fit$par[1]), exp(fit$fit$par[2]))
