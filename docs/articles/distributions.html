@@ -124,7 +124,7 @@ However, if two or more similar models fit the data well then the support for th
 <h2 class="hasAnchor">
 <a href="#default-distributions" class="anchor"></a>Default Distributions</h2>
 <p>To avoid such model redundancy (Burnham and Anderson 2002), ssdtools and the accompanying Shiny app (Dalgarno 2018) fit three different shape distributions by default: the log-normal, gamma and the Burr Type-III 2-parameter distributions.</p>
-<p>The three distributions are plotted below with a mean of 1 and standard deviation of 1 on the log concentration scale.</p>
+<p>The three distributions are plotted below with a mean of 1 and standard deviation of 1 on the (natural) log concentration scale or around 2.7 on the concentration scale.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ssdtools)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -152,7 +152,7 @@ However, if two or more similar models fit the data well then the support for th
 <div id="all-distributions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#all-distributions" class="anchor"></a>All Distributions</h2>
-<p>For completeness the hazard concentrations for the other distributions provided by <code>ssdtools</code> are plotted below with a mean of 1 and standard deviation of 1 on the log concentration scale.</p>
+<p>For completeness the hazard concentrations for the other distributions provided by <code>ssdtools</code> are plotted below with a mean of 1 and standard deviation of 1 on the (natural) log concentration scale or around 2.7 on the concentration scale.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="dv">7</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="kw"><a href="../reference/ssd_match_moments.html">ssd_match_moments</a></span>(<span class="dt">dists =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"burrIII2"</span>, <span class="st">"burrIII3"</span>, <span class="st">"gamma"</span>,</span>
 <span id="cb2-3"><a href="#cb2-3"></a>                  <span class="st">"gompertz"</span>, <span class="st">"lgumbel"</span>, <span class="st">"llogis"</span>,</span>
