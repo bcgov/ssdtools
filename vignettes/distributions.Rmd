@@ -45,7 +45,7 @@ ssd_plot_cdf(ssd_match_moments())
 
 The [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) distribution was selected as the starting distribution given the data are for effect concentrations.
 The log-logistic distribution is often used as a candidate SSD primarily because of its analytic tractability (Aldenderg and Slob 1993).
-However, we did not include the log-logistic distribution in the default set of distribution because 1) it has a very similar shape to the log-normal distribution and 2) it is a specific case of the more general Burr family of distributions (Shao reference).
+However, we did not include the log-logistic distribution in the default set of distribution because 1) it has a very similar shape to the log-normal distribution and 2) it is a specific case of the more general Burr family of distributions (Shao 2000).
 
 The log-normal distribution does have a couple limitations to consider when fitting species sensitivity data.
 First, on the logarithmic scale, the normal distribution is symmetrical.
@@ -80,7 +80,7 @@ ssd_plot_cdf(ssd_match_moments(dists = c("burrIII2", "burrIII3", "gamma",
 
 ## References
 
-Aldenderg and Slob 1993.
+Aldenberg, T., and Slob, W. 1993. Confidence Limits for Hazardous Concentrations Based on Logistically Distributed NOEC Toxicity Data. Ecotoxicology and Environmental Safety 25(1): 48–63. http://doi.org/10.1006/eesa.1993.1006.
 
 Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY.  http://doi.org/10.1007/b97636.
 
@@ -92,7 +92,7 @@ Domma, F., Giordano, S. and Zenga, M. 2011. Maximum likelihood estimation in Dag
 
 Schwarz, C.J. and A.R. Tillmanns. 2019.  Improving statistical methods to derive species sensitivity distributions.  Water Science Series, WSS2019-07, Province of British Columbia, Victoria.
 
-Shao reference
+Shao, Q. 2000. Estimation for hazardous concentrations based on NOEC toxicity data: an alternative approach. : 13.
 
 -----
 
