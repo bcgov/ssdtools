@@ -1,12 +1,12 @@
 ---
 title: "Small sample bias in estimates"
 author: "sstools Team"
-date: '`r format(Sys.time(), "%Y-%m-%d")`'
-output: pdf_document
-vignette: >
-  %\VignetteIndexEntry{Small sample bias in estimates}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+date: "`r format(Sys.time(), "%Y-%m-%d")`"
+output:
+  html_document:
+    df_print: paged
+vignette: |
+  %\VignetteIndexEntry{Small sample bias in estimates} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -95,7 +95,7 @@ which is neglible given the uncertainties in the actual end points.
 Conversly, as the sample size decreases, the absolute size of the bias could become quite large, i.e.,
 if $n=4$, then the MLE is `r round(sqrt((4-1)/(4)),2)`x the traditional estimator. But
 if you are fitting a species sensitivity distribution to only 4 data values, 
-perhaps concern about bias in MLE is misplaced.
+perhaps concern about bias in MLE is misplaced. Australian guidelines recommend a minimum sample size of 8 species.
 
 ## What is the impact on the HCx value?
 If the standard deviation is underestimated, then the tails of the 
@@ -145,7 +145,8 @@ The HC5 estimated after correcting the standard deviation for small sample bias 
 `r round(REG.HC5.log,2)` on the logarithmic concentrations
 scale or `r round(REG.HC5,3)` on the concentration scale. 
 The ratio of HC5 values 
-is `r round(REG.HC5/MLE.HC5,2)`x on the concentration scale.
+is `r round(REG.HC5/MLE.HC5,2)`x on the concentration scale, i.e.
+the estimated HC5 from the MLE is `r round(MLE.HC5/REG.HC5/,1)`x larger than the HC5 computed using the bias correction.
 
 The differences between the HCx computed from the MLE fit and using the corrected
 standard deviation will become more pronounced for small HCx values. For example,
@@ -153,7 +154,8 @@ the HC1 estimated from the MLE fit is `r round(MLE.HC1,3)`
 and the HC1 estimated using the corrected standard deviation
 is `r round(REG.HC1,3)` on the concentration scale. 
 The ratio of the HC1 values
-is `r round(REG.HC1/MLE.HC1,2)`x on the concentrations scale
+is `r round(REG.HC1/MLE.HC1,2)`x on the concentrations scale, i.e.
+the estimated HC1 from the MLE is `r round(MLE.HC1/REG.HC1/,1)`x larger than the HC5 computed using the bias correction.
 
 
 ## What can be done?
@@ -486,6 +488,7 @@ ggplot(data=plotdata, aes(x=logConc, y=density))+
    geom_line(aes(color=source, linetype=source))+
    geom_hline(yintercept=.05)+
    xlab("log(Concentration) \n Horizontal line represents the HC5")+
+   ylab("Cumulative probability")+
    geom_point(data=Ag, aes(x=log(Conc),y=ecdf))
 
 ```
@@ -518,14 +521,17 @@ scale or `r round(MLE.gamma.HC5,3)` on the concentration scale.
 The HC5 estimated after correcting for small sample bias is
 `r round(REG.gamma.HC5.log,2)` on the logarithmic concentrations
 scale or `r round(REG.gamma.HC5,3)` on the concentration scale. The ratio of these two HC5 values
-is `r round(REG.gamma.HC5/MLE.gamma.HC5,3)`x on the concentration scale.
+is `r round(REG.gamma.HC5/MLE.gamma.HC5,3)`x on the concentration scale, 
+i.e. the HCx based on the MLE is `r round(MLE.gamma.HC5/REG.gamma.HC5,1)`x larger on the concentration scale.
 
 The differences between the HCx computed from the MLE and for
 the bias corrected estimates will become more pronounced for small HCx values. For example,
 the HC1 estimated from the MLE.gamma fit is `r round(MLE.gamma.HC1,3)` 
 and the HC1 estimated using the biased corrected estimates
 is `r formatC(REG.gamma.HC1,digits=6, format="f")` on the concentration scale. The ratio of these two values
-is now `r round(REG.gamma.HC1/MLE.gamma.HC1,3)`x.
+is now `r round(REG.gamma.HC1/MLE.gamma.HC1,3)`x,
+i.e. the HCx based on the MLE is `r round(MLE.gamma.HC1/REG.gamma.HC1,1)`x larger on the concentration scale.
+
 
 We repeated a similar simulation study with the gamma distribution. The shape and scale
 parameters were chosen to match the mean and variance of the log-normal distribution used
