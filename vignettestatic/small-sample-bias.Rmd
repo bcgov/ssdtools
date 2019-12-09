@@ -1,12 +1,12 @@
 ---
 title: "Small sample bias in estimates"
 author: "sstools Team"
-date: "`r format(Sys.time(), "%Y-%m-%d")`"
-output:
-  html_document:
-    df_print: paged
-vignette: |
-  %\VignetteIndexEntry{Small sample bias in estimates} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+output: pdf_document
+vignette: >
+  %\VignetteIndexEntry{Small sample bias in estimates}   
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -146,7 +146,7 @@ The HC5 estimated after correcting the standard deviation for small sample bias 
 scale or `r round(REG.HC5,3)` on the concentration scale. 
 The ratio of HC5 values 
 is `r round(REG.HC5/MLE.HC5,2)`x on the concentration scale, i.e.
-the estimated HC5 from the MLE is `r round(MLE.HC5/REG.HC5/,1)`x larger than the HC5 computed using the bias correction.
+the estimated HC5 from the MLE is `r round(MLE.HC5/REG.HC5,1)`x larger than the HC5 computed using the bias correction.
 
 The differences between the HCx computed from the MLE fit and using the corrected
 standard deviation will become more pronounced for small HCx values. For example,
@@ -155,7 +155,7 @@ and the HC1 estimated using the corrected standard deviation
 is `r round(REG.HC1,3)` on the concentration scale. 
 The ratio of the HC1 values
 is `r round(REG.HC1/MLE.HC1,2)`x on the concentrations scale, i.e.
-the estimated HC1 from the MLE is `r round(MLE.HC1/REG.HC1/,1)`x larger than the HC5 computed using the bias correction.
+the estimated HC1 from the MLE is `r round(MLE.HC1/REG.HC1,1)`x larger than the HC5 computed using the bias correction.
 
 
 ## What can be done?
