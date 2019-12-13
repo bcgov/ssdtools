@@ -21,9 +21,9 @@
 
 ## Deprecated
 
+- Deprecated `ssd_hc()` argument `hc = 5L` for `percent = 5L`.
 - Deprecated `dllog()` etc for `dllogis()`.
 - Deprecated `ssd_cfplot()` for `ssd_plot_cf()`.
-
 - Replaced `shape` and `scale` arguments to `llog()` with `lshape` and `lscale`.
 - Replaced `location` and `scale` arguments to `lgumbel()` with `llocation` and `lscale`.
 

@@ -57,6 +57,8 @@ NA_real_), ucl = c(NA_real_, NA_real_, NA_real_, NA_real_), dist = c("lnorm",
 })
 
 test_that("ssd_hc fitdist", {
+  expect_warning(ssd_hc(boron_lnorm, hc = 5L), "The `hc` argument of `ssd_hc[(][)]` is deprecated as of lifecycle 0.1.0.")
+  expect_identical(ssd_hc(boron_lnorm, hc = 6), ssd_hc(boron_lnorm, percent = 6))
   expect_equal(as.data.frame(ssd_hc(boron_lnorm)),
                structure(list(percent = 5, est = 1.68117483775796, se = NA_real_, 
     lcl = NA_real_, ucl = NA_real_, dist = "lnorm"), class = "data.frame", row.names = c(NA, 

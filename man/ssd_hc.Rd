@@ -11,11 +11,12 @@
 \usage{
 ssd_hc(x, ...)
 
-\method{ssd_hc}{list}(x, percent = 5, ...)
+\method{ssd_hc}{list}(x, percent = 5, hc = 5, ...)
 
 \method{ssd_hc}{fitdist}(
   x,
   percent = 5,
+  hc = 5,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
@@ -27,6 +28,7 @@ ssd_hc(x, ...)
 \method{ssd_hc}{fitdistcens}(
   x,
   percent = 5,
+  hc = 5,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
@@ -38,6 +40,7 @@ ssd_hc(x, ...)
 \method{ssd_hc}{fitdists}(
   x,
   percent = 5,
+  hc = 5,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
@@ -51,6 +54,7 @@ ssd_hc(x, ...)
 \method{ssd_hc}{fitdistscens}(
   x,
   percent = 5,
+  hc = 5,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
@@ -67,6 +71,8 @@ ssd_hc(x, ...)
 \item{...}{Unused.}
 
 \item{percent}{A numeric vector of percentages.}
+
+\item{hc}{A numeric vector of percentages.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 

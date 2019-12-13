@@ -17,6 +17,7 @@
 #' Gets concentrations that protect specified percentages of species.
 #'
 #' @inheritParams params
+#' @param hc A numeric vector of percentages.
 #' @return A data frame of the percent and concentrations.
 #' @export
 ssd_hc <- function(x, ...) {
@@ -30,7 +31,7 @@ no_ssd_hc <- function() {
                        lcl = numeric(0), 
                        ucl = numeric(0), 
                        dist = character(0),
-                              stringsAsFactors = FALSE))
+                       stringsAsFactors = FALSE))
 }
 
 .ssd_hc_dist <- function(x, dist, percent) {
@@ -43,8 +44,8 @@ no_ssd_hc <- function() {
   args <- c(as.list(x), args)
   est <- do.call(fun, args)
   data.frame(percent = percent * 100, est = est, 
-                 se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = dist,
-                stringsAsFactors = FALSE)
+             se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = dist,
+             stringsAsFactors = FALSE)
 }
 
 .ssd_hc_fitdist <- function(x, percent, ci, level, nboot, parallel, ncpus) {
@@ -105,12 +106,17 @@ no_ssd_hc <- function() {
 #' @export
 #' @examples
 #' ssd_hc(list("lnorm" = NULL))
-ssd_hc.list <- function(x, percent = 5, ...) {
+ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   chk_list(x)
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
   
+  if (!missing(hc)) {
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    percent <- hc
+  }
+
   if(!length(x)) {
     return(no_ssd_hc())
   }
@@ -124,8 +130,13 @@ ssd_hc.list <- function(x, percent = 5, ...) {
 #' @export
 #' @examples
 #' ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hc.fitdist <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+ssd_hc.fitdist <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
   chk_unused(...)
+
+  if (!missing(hc)) {
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    percent <- hc
+  }
   
   .ssd_hc_fitdist(x, percent, ci = ci, level = level, nboot = nboot, 
                   parallel = parallel, ncpus = ncpus)
@@ -135,9 +146,14 @@ ssd_hc.fitdist <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 100
 #' @export
 #' @examples
 #' ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
-ssd_hc.fitdistcens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+ssd_hc.fitdistcens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
   chk_unused(...)
   
+  if (!missing(hc)) {
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    percent <- hc
+  }
+
   .ssd_hc_fitdist(x, percent, ci = ci, level = level, nboot = nboot, 
                   parallel = parallel, ncpus = ncpus)
 }
@@ -146,11 +162,16 @@ ssd_hc.fitdistcens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
 #' @export
 #' @examples
 #' ssd_hc(boron_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdists <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
+ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
   
+  if (!missing(hc)) {
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    percent <- hc
+  }
+
   .ssd_hc_fitdists(x, percent, ci = ci, level = level, nboot = nboot, 
                    parallel = parallel, ncpus = ncpus, 
                    average = average, ic = ic)
@@ -160,10 +181,15 @@ ssd_hc.fitdists <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 10
 #' @export
 #' @examples
 #' ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdistscens <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aic", ...) {
+ssd_hc.fitdistscens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aic", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "bic"))
   chk_unused(...)
+  
+  if (!missing(hc)) {
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    percent <- hc
+  }
   
   .ssd_hc_fitdists(x, percent, ci = ci, level = level, nboot = nboot, 
                    parallel = parallel, ncpus = ncpus,
