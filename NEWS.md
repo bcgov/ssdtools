@@ -1,10 +1,16 @@
 # ssdtools 0.1.0
 
+## Breaking Changes
+
+- Default distributions changed to 'burrIII2', 'gamma' and 'lnorm' from
+'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and 'weibull'.
+- Changed implicit behaviour of `ssd_hc()` and `predict()` where `ci = FALSE` to explicit `ssd_hc(ci = TRUE)` and `predict(ci = TRUE)`.
+- Replaced `shape` and `scale` arguments to `llog()` with `lshape` and `lscale`.
+- Replaced `location` and `scale` arguments to `lgumbel()` with `llocation` and `lscale`.
+
 ## Major Features
 
 - Added Burr Type-III Two-Parameter Distribution (`burrIII2`).
-- Default distributions changed to 'burrIII2', 'gamma' and 'lnorm' from
-'gamma', 'gompertz', 'lgumbel', 'llog', 'lnorm' and 'weibull'.
 - Added `ssd_hp()` to calculate hazard percent at specific concentrations.
 - Added `ssd_exposure()` to calculate proportion exposed based on distribution of concentrations.
 - Optimized `predict()` and added parallel argument.
@@ -24,12 +30,10 @@
 - Deprecated `ssd_hc()` argument `hc = 5L` for `percent = 5L`.
 - Deprecated `dllog()` etc for `dllogis()`.
 - Deprecated `ssd_cfplot()` for `ssd_plot_cf()`.
-- Replaced `shape` and `scale` arguments to `llog()` with `lshape` and `lscale`.
-- Replaced `location` and `scale` arguments to `lgumbel()` with `llocation` and `lscale`.
 
 ## Bug Fixes
 
-- Fixed llog distribution with small concentrations.
+- Fixed `llog` distribution with small concentrations.
 - Ensured concentrations below 1 have 1 significant figure in plots.
 
 # ssdtools 0.0.3
