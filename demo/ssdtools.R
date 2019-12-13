@@ -17,11 +17,13 @@
 #' ## Demonstration
 #'
 #' ### ssdtools
-#' First, install and then load the `ssdtools` R package.
+#' First, install and then load the `ssdtools` and `ggplot2` R packages.
 #' ```
 #' install.packages("ssdtools")
+#' install.packages("ggplot2")
 #' ```
 library(ssdtools)
+library(ggplot2)
 
 #' ### Data
 
@@ -40,7 +42,7 @@ fits <- ssd_fit_dists(data,
 )
 
 #' The `autoplot()` function can be used to plot the fits (for more information type `?autoplot.fitdists`)
-ggplot2::autoplot(fits)
+autoplot(fits)
 
 #' And `ssd_gof()` can be used to generate the goodness of fit statistics.
 ssd_gof(fits)
