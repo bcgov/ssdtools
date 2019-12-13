@@ -34,17 +34,21 @@ NULL
 #' @rdname llogis
 #' @export
 dllogis <- function(x, lshape = 0, lscale = 0, log = FALSE) {
-  if(!length(x)) return(numeric(0))
+  if (!length(x)) {
+    return(numeric(0))
+  }
   d <- dlogis(log(x), location = exp(lscale), scale = exp(lshape)) / x
-  if(log) return(log(d))
+  if (log) {
+    return(log(d))
+  }
   d
 }
 
 #' @rdname llogis
 #' @export
 qllogis <- function(p, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
-  if(log.p) p <- exp(p)
-  if(!lower.tail) p <- 1 - p
+  if (log.p) p <- exp(p)
+  if (!lower.tail) p <- 1 - p
   exp(qlogis(p, location = exp(lscale), scale = exp(lshape)))
 }
 

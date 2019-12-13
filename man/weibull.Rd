@@ -39,7 +39,7 @@ rweibull(n, shape = 1, scale = 1)
 A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation for the weibull distribution with 
+Density, distribution function, quantile function and random generation for the weibull distribution with
 parameters shape and scale with default values.
 }
 \examples{

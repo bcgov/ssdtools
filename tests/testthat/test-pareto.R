@@ -28,23 +28,37 @@ test_that("fit pareto", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist),
-  c(shape = 0.390374158489078))
+  expect_equal(
+    coef(dist),
+    c(shape = 0.390374158489078)
+  )
 })
 
 test_that("fit pareto cis", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
 
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-               structure(list(percent = 5, est = 1.14041839659127, se = 0.0212780854747505, 
-    lcl = 1.11896006602472, ucl = 1.17955575595707, dist = "pareto"), class = "data.frame", row.names = c(NA, 
--1L)))
+  expect_equal(
+    as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
+    structure(list(
+      percent = 5, est = 1.14041839659127, se = 0.0212780854747505,
+      lcl = 1.11896006602472, ucl = 1.17955575595707, dist = "pareto"
+    ), class = "data.frame", row.names = c(
+      NA,
+      -1L
+    ))
+  )
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-               structure(list(conc = 2, est = 23.7068285156163, se = 2.7637435813203, 
-    lcl = 19.3919509212197, ucl = 27.1171096778786, dist = "pareto"), class = "data.frame", row.names = c(NA, 
--1L)))
+  expect_equal(
+    as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
+    structure(list(
+      conc = 2, est = 23.7068285156163, se = 2.7637435813203,
+      lcl = 19.3919509212197, ucl = 27.1171096778786, dist = "pareto"
+    ), class = "data.frame", row.names = c(
+      NA,
+      -1L
+    ))
+  )
 })
 
 test_that("ppareto", {

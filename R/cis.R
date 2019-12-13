@@ -13,25 +13,32 @@
 #    limitations under the License.
 
 xcis <- function(x, samples, p, level, fun, args) {
-  if(p) { 
+  if (p) {
     args$q <- x
-  } else
+  } else {
     args$p <- x
+  }
   samples <- do.call(fun, args)
-  if(any(is.na(samples))) {
-    err("Distribution '", substr(fun, 2, nchar(fun)),
-        "' bootstraps include missing values.")
+  if (any(is.na(samples))) {
+    err(
+      "Distribution '", substr(fun, 2, nchar(fun)),
+      "' bootstraps include missing values."
+    )
   }
   quantile <- quantile(samples, probs = probs(level))
-  data.frame(se = sd(samples), lcl = quantile[1], ucl = quantile[2],
-                   row.names = NULL)
+  data.frame(
+    se = sd(samples), lcl = quantile[1], ucl = quantile[2],
+    row.names = NULL
+  )
 }
 
 cis <- function(samples, p, level, x) {
-  fun <- if(p) "p" else "q"
+  fun <- if (p) "p" else "q"
   fun <- paste0(fun, samples$fitpart$distname)
   args <- as.list(samples$estim)
-  samples <- lapply(x, xcis, samples = samples, p = p, level = level, 
-                    fun = fun, args = args)
+  samples <- lapply(x, xcis,
+    samples = samples, p = p, level = level,
+    fun = fun, args = args
+  )
   do.call("rbind", samples)
 }

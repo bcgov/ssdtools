@@ -52,10 +52,12 @@ ssd_gof(fits)
 ssd_hc(fits, ci = TRUE)
 
 #' ### Predict
-#' 
+#'
 #' By default the generic `predict()` function predicts the species affected.
 pred <- predict(fits, ci = TRUE)
 
-ssd_plot(data, pred, left = "Conc", label = "Species", color = "Group",
-           xlab = "Concentration (mg/L)", hc = 5) +
+ssd_plot(data, pred,
+  left = "Conc", label = "Species", color = "Group",
+  xlab = "Concentration (mg/L)", hc = 5
+) +
   expand_limits(x = 3000)

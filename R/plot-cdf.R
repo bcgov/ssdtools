@@ -27,14 +27,14 @@ ssd_plot_cdf <- function(x, ...) {
 #' @examples
 #' ssd_plot_cdf(boron_lnorm)
 ssd_plot_cdf.list <- function(x,
-                                 xlab = "Concentration", ylab = "Species Affected",
-                                 ...) {
+                              xlab = "Concentration", ylab = "Species Affected",
+                              ...) {
   chk_string(xlab)
   chk_string(ylab)
   chk_unused(...)
 
   pred <- ssd_hc(x, percent = 1:99)
-  
+
   pred$Distribution <- pred$dist
 
   ggplot(pred, aes_string(x = "est")) +
@@ -55,11 +55,11 @@ ssd_plot_cdf.fitdist <- function(x,
   chk_string(xlab)
   chk_string(ylab)
   chk_unused(...)
-  
+
   data <- data.frame(x = x$data)
-  
+
   pred <- ssd_hc(x, percent = 1:99)
-  
+
   ggplot(pred, aes_string(x = "est")) +
     geom_line(aes_string(y = "percent/100")) +
     geom_ssd(data = data, aes_string(x = "x")) +
@@ -77,22 +77,22 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
   chk_string(xlab)
   chk_string(ylab)
   chk_unused(...)
-  
+
   data <- x$censdata
-  
+
   data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
   data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
   data$xmean <- rowMeans(data[c("left", "right")], na.rm = TRUE)
   data$arrowleft <- data$right / 2
   data$arrowright <- data$left * 2
   data$y <- ssd_ecd(data$xmean)
-  
+
   pred <- ssd_hc(x, percent = 1:99)
 
   gp <- ggplot(pred, aes_string(x = "est"))
-  
+
   arrow <- arrow(length = unit(0.1, "inches"))
-  
+
   gp + geom_line(aes_string(y = "percent/100")) +
     geom_segment(
       data = data[data$xmin != data$xmax, ],
@@ -123,12 +123,12 @@ ssd_plot_cdf.fitdistcens <- function(x, xlab = "Concentration", ylab = "Species 
 ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
   chk_string(xlab)
   chk_string(ylab)
-  
+
   pred <- ssd_hc(x, average = FALSE, percent = 1:99)
   pred$Distribution <- pred$dist
-  
+
   data <- data.frame(x = x[[1]]$data)
-  
+
   ggplot(pred, aes_string(x = "est")) +
     geom_line(aes_string(
       y = "percent/100", color = "Distribution",

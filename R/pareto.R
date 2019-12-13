@@ -69,6 +69,8 @@ rpareto <- function(n, scale = 1, shape = 1) {
 #' @export
 spareto <- function(x) {
   fit <- vglm(x ~ 1, VGAM::paretoff)
-  list(start = list(shape = exp(unname(coef(fit)))),
-       fix.arg = list(scale = fit@extra$scale))
+  list(
+    start = list(shape = exp(unname(coef(fit)))),
+    fix.arg = list(scale = fit@extra$scale)
+  )
 }

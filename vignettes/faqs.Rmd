@@ -11,8 +11,8 @@ vignette: >
   
   ```{r, include = FALSE}
 knitr::opts_chunk$set(
-collapse = TRUE,
-comment = "#>"
+  collapse = TRUE,
+  comment = "#>"
 )
 ```
 
@@ -36,8 +36,10 @@ library(tidyr)
 library(dplyr)
 
 boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Units)) %>%
-  mutate(Fit = map(data, ssd_fit_dists, dists = "lnorm"),
-         Prediction = map(Fit, predict)) %>% 
+  mutate(
+    Fit = map(data, ssd_fit_dists, dists = "lnorm"),
+    Prediction = map(Fit, predict)
+  ) %>%
   unnest(Prediction)
 ```
 

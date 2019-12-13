@@ -72,9 +72,11 @@ For this reason, we have selected as a default distribution, the two-parameter (
 For completeness the hazard concentrations for the other distributions provided by `ssdtools` are plotted below with a mean of 1 and standard deviation of 1 on the (natural) log concentration scale or around 2.7 on the concentration scale.
 ```{r,fig.height=5}
 set.seed(7)
-ssd_plot_cdf(ssd_match_moments(dists = c("burrIII2", "burrIII3", "gamma",
-                  "gompertz", "lgumbel", "llogis",
-                  "lnorm", "weibull"))) +
+ssd_plot_cdf(ssd_match_moments(dists = c(
+  "burrIII2", "burrIII3", "gamma",
+  "gompertz", "lgumbel", "llogis",
+  "lnorm", "weibull"
+))) +
   theme(legend.position = "bottom")
 ```
 

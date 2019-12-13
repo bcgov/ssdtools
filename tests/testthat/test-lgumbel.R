@@ -23,24 +23,37 @@ test_that("fit lgumbel", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist),
-  c(llocation = 0.653681627422279, lscale = 0.208983173310441
-))
+  expect_equal(
+    coef(dist),
+    c(llocation = 0.653681627422279, lscale = 0.208983173310441)
+  )
 })
 
 test_that("fit lgumbel cis", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
 
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-               structure(list(percent = 5, est = 1.76898186161132, se = 0.370544140148798, 
-    lcl = 1.23066000903158, ucl = 2.26731711889413, dist = "lgumbel"), class = "data.frame", row.names = c(NA, 
--1L)))
+  expect_equal(
+    as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
+    structure(list(
+      percent = 5, est = 1.76898186161132, se = 0.370544140148798,
+      lcl = 1.23066000903158, ucl = 2.26731711889413, dist = "lgumbel"
+    ), class = "data.frame", row.names = c(
+      NA,
+      -1L
+    ))
+  )
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-               structure(list(conc = 2, est = 6.64205158066981, se = 3.00152144129526, 
-    lcl = 3.43280320738647, ucl = 12.0632543930362, dist = "lgumbel"), class = "data.frame", row.names = c(NA, 
--1L)))
+  expect_equal(
+    as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
+    structure(list(
+      conc = 2, est = 6.64205158066981, se = 3.00152144129526,
+      lcl = 3.43280320738647, ucl = 12.0632543930362, dist = "lgumbel"
+    ), class = "data.frame", row.names = c(
+      NA,
+      -1L
+    ))
+  )
 })
 
 test_that("pqlgumbel", {

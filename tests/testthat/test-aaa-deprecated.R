@@ -15,15 +15,19 @@
 context("deprecated")
 
 test_that("deprecated fit dists", {
-  expect_warning(ssd_fit_dists(ssdtools::boron_data),
-                 "^The `dists` argument of `ssd_fit_dists[(][)]` is deprecated as of lifecycle 0.1.0.
-More specifically the default value of c[(]'gamma', 'gompertz', 'lgumbel', 'llogis', 'lnorm', 'weibull'[)] has been replaced by c[(]'burrIII2', 'gamma', 'lnorm'[)][.]$")
+  expect_warning(
+    ssd_fit_dists(ssdtools::boron_data),
+    "^The `dists` argument of `ssd_fit_dists[(][)]` is deprecated as of lifecycle 0.1.0.
+More specifically the default value of c[(]'gamma', 'gompertz', 'lgumbel', 'llogis', 'lnorm', 'weibull'[)] has been replaced by c[(]'burrIII2', 'gamma', 'lnorm'[)][.]$"
+  )
 })
 
 test_that("deprecated llog", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist),
-  c(lscale = 0.965466010495141, lshape = -0.300741556664549))
+  expect_equal(
+    coef(dist),
+    c(lscale = 0.965466010495141, lshape = -0.300741556664549)
+  )
 })

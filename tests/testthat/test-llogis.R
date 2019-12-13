@@ -23,8 +23,10 @@ test_that("fit llogis", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist),
-  c(lscale = 0.965466010495141, lshape = -0.300741556664549))
+  expect_equal(
+    coef(dist),
+    c(lscale = 0.965466010495141, lshape = -0.300741556664549)
+  )
 })
 
 test_that("pqllogis", {

@@ -28,7 +28,7 @@ test_that("dburrIII2", {
     )
   )
   expect_equal(
-    dburrIII2(c(31, 15, 32, 32, 642, 778, 187, 12),  lscale = 0, log = TRUE),
+    dburrIII2(c(31, 15, 32, 32, 642, 778, 187, 12), lscale = 0, log = TRUE),
     log(c(
       0.0009765625, 0.00390625, 0.000918273645546373, 0.000918273645546373,
       2.41867799897932e-06, 1.64787810975198e-06, 2.82933454051607e-05,
@@ -57,15 +57,27 @@ test_that("fit burrIII2 cis", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
 
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-               structure(list(percent = 5, est = 1.58920212463066, se = 0.561779293276257, 
-    lcl = 0.933413683053849, ucl = 2.4171610278875, dist = "burrIII2"), class = "data.frame", row.names = c(NA, 
--1L)))
+  expect_equal(
+    as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
+    structure(list(
+      percent = 5, est = 1.58920212463066, se = 0.561779293276257,
+      lcl = 0.933413683053849, ucl = 2.4171610278875, dist = "burrIII2"
+    ), class = "data.frame", row.names = c(
+      NA,
+      -1L
+    ))
+  )
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-               structure(list(conc = 2, est = 6.84079666045762, se = 2.8457114994266, 
-    lcl = 3.57247087396272, ucl = 11.2796053723563, dist = "burrIII2"), class = "data.frame", row.names = c(NA, 
--1L)))
+  expect_equal(
+    as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
+    structure(list(
+      conc = 2, est = 6.84079666045762, se = 2.8457114994266,
+      lcl = 3.57247087396272, ucl = 11.2796053723563, dist = "burrIII2"
+    ), class = "data.frame", row.names = c(
+      NA,
+      -1L
+    ))
+  )
 })
 
 test_that("qburrIII2", {

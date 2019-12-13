@@ -69,5 +69,6 @@ rgompertz <- function(n, lscale = 0, lshape = 0) {
 sgompertz <- function(x) {
   fit <- vglm(x ~ 1, VGAM::gompertz)
   list(start = list(
-    lshape = unname(coef(fit)[2]), lscale = unname(coef(fit)[1])))
+    lshape = unname(coef(fit)[2]), lscale = unname(coef(fit)[1])
+  ))
 }

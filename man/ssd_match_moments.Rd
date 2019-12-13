@@ -21,7 +21,7 @@ ssd_match_moments(
 \item{nsim}{A positive whole number of the number of simulations to generate.}
 }
 \value{
-A named list of the parameter values that produce a distribution 
+A named list of the parameter values that produce a distribution
 with moments closest to the meanlog and sdlog.
 }
 \description{

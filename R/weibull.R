@@ -14,7 +14,7 @@
 
 #' Weibull Distribution
 #'
-#' Density, distribution function, quantile function and random generation for the weibull distribution with 
+#' Density, distribution function, quantile function and random generation for the weibull distribution with
 #' parameters shape and scale with default values.
 #'
 #' @inheritParams params
