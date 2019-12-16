@@ -20,7 +20,6 @@ plot_fitdist <- function(x, breaks = "default", ...) {
 
 #' @export
 plot.fitdists <- function(x, breaks = "default", ...) {
-  requireNamespace("fitdistrplus", quietly = TRUE)
   lapply(x, plot_fitdist, breaks = breaks, ...)
   invisible()
 }
