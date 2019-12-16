@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3.9017</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -143,6 +143,63 @@
       <small>Source: <a href='https://github.com/bcgov/ssdtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="ssdtools-010" class="section level1">
+<h1 class="page-header">
+<a href="#ssdtools-010" class="anchor"></a>ssdtools 0.1.0<small> Unreleased </small>
+</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h2>
+<ul>
+<li>Default distributions changed to ‘burrIII2’, ‘gamma’ and ‘lnorm’ from ‘gamma’, ‘gompertz’, ‘lgumbel’, ‘llog’, ‘lnorm’ and ‘weibull’.</li>
+<li>Changed implicit behaviour of <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> where <code>ci = FALSE</code> to explicit <code><a href="../reference/ssd_hc.html">ssd_hc(ci = TRUE)</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html">predict(ci = TRUE)</a></code>.</li>
+<li>Replaced <code>shape</code> and <code>scale</code> arguments to <code>llog()</code> with <code>lshape</code> and <code>lscale</code>.</li>
+<li>Replaced <code>location</code> and <code>scale</code> arguments to <code><a href="../reference/lgumbel.html">lgumbel()</a></code> with <code>llocation</code> and <code>lscale</code>.</li>
+</ul>
+</div>
+<div id="major-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-features" class="anchor"></a>Major Features</h2>
+<ul>
+<li>Added Burr Type-III Two-Parameter Distribution (<code>burrIII2</code>).</li>
+<li>Added <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> to calculate hazard percent at specific concentrations.</li>
+<li>Added <code><a href="../reference/ssd_exposure.html">ssd_exposure()</a></code> to calculate proportion exposed based on distribution of concentrations.</li>
+<li>Optimized <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> and added parallel argument.</li>
+<li>Tidyverse style error and warning messages.</li>
+</ul>
+</div>
+<div id="minor-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-features" class="anchor"></a>Minor Features</h2>
+<ul>
+<li>
+<code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> now checks if standard errors computable.</li>
+<li>Added Burr Type-III Three-Parameter Distribution (<code>burrIII3</code>).</li>
+<li>Added <code>sdist(x)</code> functionality to set starting values for distributions.</li>
+<li>Added <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code> to plot cumulative distribution function (equivalent to <code>autoplot()</code>)</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/nobs.html">nobs()</a></code> for censored data now returns a missing value.</li>
+<li>Default <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> distributions now ordered alphabetically.</li>
+</ul>
+</div>
+<div id="deprecated" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecated" class="anchor"></a>Deprecated</h2>
+<ul>
+<li>Deprecated <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> argument <code>hc = 5L</code> for <code>percent = 5L</code>.</li>
+<li>Deprecated <code><a href="../reference/llogis.html">dllog()</a></code> etc for <code><a href="../reference/llogis.html">dllogis()</a></code>.</li>
+<li>Deprecated <code><a href="../reference/ssd_plot_cf.html">ssd_cfplot()</a></code> for <code><a href="../reference/ssd_plot_cf.html">ssd_plot_cf()</a></code>.</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>Fixed <code>llog</code> distribution with small concentrations.</li>
+<li>Ensured concentrations below 1 have 1 significant figure in plots.</li>
+</ul>
+</div>
+</div>
     <div id="ssdtools-003" class="section level1">
 <h1 class="page-header">
 <a href="#ssdtools-003" class="anchor"></a>ssdtools 0.0.3<small> 2018-11-25 </small>
@@ -184,6 +241,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#ssdtools-010">0.1.0</a></li>
         <li><a href="#ssdtools-003">0.0.3</a></li>
         <li><a href="#ssdtools-002">0.0.2</a></li>
         <li><a href="#ssdtools-001">0.0.1</a></li>
