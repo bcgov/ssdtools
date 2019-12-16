@@ -38,7 +38,7 @@ library(ssdtools)
 library(ggplot2)
 
 set.seed(7)
-ssd_plot_cdf(ssd_match_moments())
+ssd_plot_cdf(ssd_match_moments(meanlog = 2,sdlog = 2))
 ```
 
 ### Log-normal distribution
