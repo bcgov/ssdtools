@@ -32,13 +32,13 @@ However, if two or more similar models fit the data well then the support for th
 
 To avoid such model redundancy (Burnham and Anderson 2002), ssdtools and the accompanying Shiny app (Dalgarno 2018) fit three different shape distributions by default: the log-normal, gamma and the Burr Type-III 2-parameter distributions.
 
-The three distributions are plotted below with a mean of 1 and standard deviation of 1 on the (natural) log concentration scale or around 2.7 on the concentration scale.
+The three distributions are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.
 ```{r, message=FALSE}
 library(ssdtools)
 library(ggplot2)
 
 set.seed(7)
-ssd_plot_cdf(ssd_match_moments(meanlog = 2,sdlog = 2))
+ssd_plot_cdf(ssd_match_moments(meanlog = 2, sdlog = 2))
 ```
 
 ### Log-normal distribution
@@ -69,14 +69,14 @@ For this reason, we have selected as a default distribution, the two-parameter (
 
 ## All Distributions
 
-For completeness the hazard concentrations for the other distributions provided by `ssdtools` are plotted below with a mean of 1 and standard deviation of 1 on the (natural) log concentration scale or around 2.7 on the concentration scale.
+For completeness the hazard concentrations for the other distributions provided by `ssdtools` are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.
 ```{r,fig.height=5}
 set.seed(7)
 ssd_plot_cdf(ssd_match_moments(dists = c(
   "burrIII2", "burrIII3", "gamma",
   "gompertz", "lgumbel", "llogis",
   "lnorm", "weibull"
-))) +
+), meanlog = 2, sdlog = 2)) +
   theme(legend.position = "bottom")
 ```
 
