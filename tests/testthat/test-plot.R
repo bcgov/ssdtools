@@ -35,8 +35,6 @@ test_that("plot", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())
 
-  expect_silent(plot(boron_lnorm))
-  expect_silent(plot(fluazinam_lnorm))
   expect_silent(plot(boron_dists))
 })
 
