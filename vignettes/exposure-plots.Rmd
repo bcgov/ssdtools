@@ -40,7 +40,7 @@ ex.sd.log <- 1
 ```
 
 Finding a suitable probability distribution to describe the exposure concentration is beyond the scope of this document -- we will assume that this has been done elsewhere.
-In particular, suppose that the exposure concentration follows a log-normal distribution with a mean of `r ex.mean.log` and a standard devation of `r ex.sd.log` on the logarithmic scale. 
+In particular, suppose that the exposure concentration follows a log-normal distribution with a mean of `r ex.mean.log` and a standard deviation of `r ex.sd.log` on the logarithmic scale. 
 From the exposure distribution, we construct a data frame with the concentration values and the cumulative probability of seeing this exposure or less in the environment.
 
 Notice that some care is needed because the plot for *ssdtools* in on the logarithmic base 10 scale and not the natural logarithm base $e$ scale.
