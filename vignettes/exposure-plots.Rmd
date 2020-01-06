@@ -89,7 +89,7 @@ Other embellishments can be added in a similar fashion using the features of [*g
 
 ## References
 
-Verdonck, F. A., Aldenberg, T. , Jaworska, J. and Vanrolleghem, P. A. (2003), Limitations of current risk characterization methods in probabilistic environmental risk assessment. Environmental Toxicology and Chemistry, 22: 2209-2213. doi:10.1897/02-435
+Verdonck, F. A., Aldenberg, T. , Jaworska, J. and Vanrolleghem, P. A. (2003), Limitations of current risk characterization methods in probabilistic environmental risk assessment. Environmental Toxicology and Chemistry, 22: 2209-2213. http://doi.wiley.com/10.1897/02-435.
 
 -----
 
