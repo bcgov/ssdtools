@@ -123,13 +123,6 @@ ssd_fit_dists <- function(
   chk_flag(computable)
   chk_flag(silent)
 
-  if (missing(dists)) {
-    deprecate_soft("0.1.0",
-      "ssd_fit_dists(dists = )",
-      details = "More specifically the default value of c('gamma', 'gompertz', 'lgumbel', 'llogis', 'lnorm', 'weibull') has been replaced by c('burrIII2', 'gamma', 'lnorm')."
-    )
-  }
-
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
   dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
