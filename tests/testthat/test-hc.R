@@ -97,7 +97,6 @@ test_that("ssd_hc list", {
 })
 
 test_that("ssd_hc fitdist", {
-  expect_warning(ssd_hc(boron_lnorm, hc = 5L), "The `hc` argument of `ssd_hc[(][)]` is deprecated as of lifecycle 0.1.0.")
   expect_identical(ssd_hc(boron_lnorm, hc = 6), ssd_hc(boron_lnorm, percent = 6))
   expect_equal(
     as.data.frame(ssd_hc(boron_lnorm)),
