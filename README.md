@@ -18,11 +18,12 @@ status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.o
 Distributions (SSD).
 
 SSDs are cumulative probability distributions which are fitted to
-toxicity concentrations for different species. The ssdtools package uses
-Maximum Likelihood to fit distributions such as the log-normal, gamma,
-burr Type-III, log-logistic, log-Gumbel, Gompertz and Weibull. The user
-can also provide custom distributions. Multiple distributions can be
-averaged using Information Criteria. Confidence intervals on hazard
+toxicity concentrations for different species as described by Posthuma
+et al. (2001). The ssdtools package uses Maximum Likelihood to fit
+distributions such as the log-normal, gamma, burr Type-III,
+log-logistic, log-Gumbel, Gompertz and Weibull. The user can also
+provide custom distributions. Multiple distributions can be averaged
+using Information Criteria. Confidence intervals on hazard
 concentrations and proportions are produced by parametric bootstrapping.
 
 ## Installation
@@ -127,6 +128,9 @@ ssd_plot(boron_data, boron_pred,
 ![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
 
 ## Information
+
+Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
+Distributions in Ecotoxicology. CRC Press.
 
 Get started with ssdtools at
 <https://bcgov.github.io/ssdtools/articles/ssdtools.html>.

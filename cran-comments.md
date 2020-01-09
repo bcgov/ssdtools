@@ -32,7 +32,14 @@ I've replaced with fully specified URLs.
 
 Is there some reference about the method you can add in the Description field in the form Authors (year) <doi:.....>?
 
+I've added the following text.
 
+  Species sensitivity distributions are 
+  cumulative probability distributions which are fitted to 
+  toxicity concentrations for different species as described by
+  Posthuma et al. (2001) <isbn:9781566705783>.
+
+Note I've used the 13 digit ISBN as there is no doi for the book.
 
 ## Reverse dependencies
 

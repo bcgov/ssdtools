@@ -19,7 +19,8 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="Species Sensitivity Distributions">
 <meta property="og:description" content="Species sensitivity distributions are 
   cumulative probability distributions which are fitted to 
-  toxicity concentrations for different species.
+  toxicity concentrations for different species as described by
+  Posthuma et al. (2001) &lt;isbn:9781566705783&gt;.
   The ssdtools package uses Maximum Likelihood to fit distributions 
   such as the log-normal, gamma, burr Type-III, log-logistic, 
   log-Gumbel, Gompertz and Weibull.
@@ -115,7 +116,7 @@
 </h1></div>
 <p><a href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img src="https://assets.bcdevexchange.org/images/badges/delivery.svg" alt="BCDevExchange Status"></a> <a href="https://travis-ci.org/bcgov/ssdtools"><img src="https://travis-ci.org/bcgov/ssdtools.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/bcgov/ssdtools?branch=master"><img src="https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg" alt="Coverage Status"></a> <a href="https://cran.r-project.org/package=ssdtools"><img src="https://www.r-pkg.org/badges/version/ssdtools" alt="CRAN status"></a> <img src="https://cranlogs.r-pkg.org/badges/ssdtools" alt="CRAN downloads"><a href="https://doi.org/10.21105/joss.01082"><img src="http://joss.theoj.org/papers/10.21105/joss.01082/status.svg" alt="DOI"></a></p>
 <p><code>ssdtools</code> is an R package to plot and fit Species Sensitivity Distributions (SSD).</p>
-<p>SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species. The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, gamma, burr Type-III, log-logistic, log-Gumbel, Gompertz and Weibull. The user can also provide custom distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.</p>
+<p>SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al. (2001). The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, gamma, burr Type-III, log-logistic, log-Gumbel, Gompertz and Weibull. The user can also provide custom distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -181,6 +182,7 @@
 <div id="information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#information" class="anchor"></a>Information</h2>
+<p>Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.</p>
 <p>Get started with ssdtools at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="uri">https://bcgov.github.io/ssdtools/articles/ssdtools.html</a>.</p>
 <p>A shiny webpage developed for non-R-users is available at <a href="https://bcgov-env.shinyapps.io/ssdtools/" class="uri">https://bcgov-env.shinyapps.io/ssdtools/</a>.</p>
 <p>The ssdtools package was developed as a result of earlier drafts of:</p>
