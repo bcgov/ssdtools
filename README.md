@@ -179,11 +179,12 @@ A BibTeX entry for LaTeX users is
 ## How to Contribute
 
 If you would like to contribute to the package, please see our
-[CONTRIBUTING](CONTRIBUTING.md) guidelines.
+[CONTRIBUTING](https://github.com/bcgov/ssdtools/blob/master/CONTRIBUTING.md)
+guidelines.
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms
+Conduct](https://github.com/bcgov/ssdtools/blob/master/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
 ## License
 

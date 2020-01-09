@@ -20,6 +20,20 @@ Found the following (possibly) invalid URLs:
 
 The url is valid.
 
+Found the following (possibly) invalid file URIs:
+   URI: CONTRIBUTING.md
+     From: README.md
+   URI: CODE_OF_CONDUCT.md
+     From: README.md
+
+Please use fully specified URLs or include the files in your package - or omit the links at all.
+
+I've replaced with fully specified URLs.
+
+Is there some reference about the method you can add in the Description field in the form Authors (year) <doi:.....>?
+
+
+
 ## Reverse dependencies
 
 There are no reverse dependencies.
