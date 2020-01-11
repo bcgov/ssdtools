@@ -109,7 +109,7 @@ test_that("fit_dists computable", {
 
   data$Conc <- data$Conc / 100
   fit <- ssd_fit_dists(data, dists = "gamma")[[1]]
-  expect_equal(fit$sd$scale, 673.801371511101, tolerance = 3e-01) # for noLD
-  expect_equal(fit$sd$shape, 0.0454275860604086, tolerance = 3e-06) # for noLD
+  expect_equal(fit$sd["scale"], c(scale = 673.801371511101), tolerance = 3e-01) # for noLD
+  expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086), tolerance = 3e-06) # for noLD
   expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
 })
