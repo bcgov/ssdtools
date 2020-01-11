@@ -104,7 +104,7 @@
       <h1>Frequently Asked Questions</h1>
                         <h4 class="author">ssdtools Team</h4>
             
-            <h4 class="date">2020-01-08</h4>
+            <h4 class="date">2020-01-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/faqs.Rmd"><code>vignettes/faqs.Rmd</code></a></small>
       <div class="hidden name"><code>faqs.Rmd</code></div>
@@ -129,7 +129,7 @@
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
 <span id="cb2-5"><a href="#cb2-5"></a>boron_preds &lt;-<span class="st"> </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(ssdtools<span class="op">::</span>boron_data, <span class="dt">data =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(Chemical, Species, Conc, Units)) <span class="op">%&gt;%</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span>(</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</span>
 <span id="cb2-7"><a href="#cb2-7"></a>    <span class="dt">Fit =</span> <span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(data, ssd_fit_dists, <span class="dt">dists =</span> <span class="st">"lnorm"</span>),</span>
 <span id="cb2-8"><a href="#cb2-8"></a>    <span class="dt">Prediction =</span> <span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(Fit, predict)</span>
 <span id="cb2-9"><a href="#cb2-9"></a>  ) <span class="op">%&gt;%</span></span>
