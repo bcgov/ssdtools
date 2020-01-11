@@ -47,7 +47,7 @@ test_that("fit pareto cis", {
       NA,
       -1L
     )),
-    tolerance = 1e-07
+    tolerance = 1e-07 # for noLD
   )
   set.seed(77)
   expect_equal(
@@ -59,7 +59,7 @@ test_that("fit pareto cis", {
       NA,
       -1L
     )),
-    tolerance = 1e-07
+    tolerance = 1e-07 # for noLD
   )
 })
 
