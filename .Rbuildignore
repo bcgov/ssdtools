@@ -16,3 +16,5 @@
 ^\.covrignore$
 ^vignettestatic$
 ^CRAN-RELEASE$
+^COMPLIANCE.yaml$
+
