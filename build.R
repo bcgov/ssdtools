@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-styler::style_pkg(filetype = c("R", "Rprofile", "Rmd"))
+styler::style_pkg(filetype = c("R", "Rmd"))
 
 devtools::test()
 devtools::document()
