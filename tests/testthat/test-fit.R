@@ -98,14 +98,14 @@ test_that("fit_dists computable", {
     15779, 20000, 31000, 40000, 105650
   ))
 
-# gamma converging on noLD systems!
-#  expect_error(
-#    ssd_fit_dists(data, dists = "gamma"),
-#    "^All distributions failed to fit[.]$"
-#  )
+  # gamma converging on noLD systems!
+  #  expect_error(
+  #    ssd_fit_dists(data, dists = "gamma"),
+  #    "^All distributions failed to fit[.]$"
+  #  )
 
   fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]]
-#  expect_equal(fit$sd["scale"], c(scale = NaN)) fitting on noLD!
+  #  expect_equal(fit$sd["scale"], c(scale = NaN)) fitting on noLD!
   expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189), tolerance = 0.0003) # for noLD
   expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
 

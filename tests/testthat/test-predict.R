@@ -77,15 +77,18 @@ test_that("predict.fitdistscens", {
 test_that("predict.fitdistscens cis", {
   set.seed(77)
   pred <- predict(ssdtools::fluazinam_dists,
-      percent = c(1, 99),
-      ci = TRUE, average = FALSE, nboot = 10)
+    percent = c(1, 99),
+    ci = TRUE, average = FALSE, nboot = 10
+  )
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_identical(pred$percent, c(1, 99, 1, 99, 1, 99))
   expect_equal(pred$est, c(
-      0.0556070303830483,
-      93128.5004982232, 0.00297074136543809, 6884.80066910368, 0.279206726612854,
-      75330.7588691179))
+    0.0556070303830483,
+    93128.5004982232, 0.00297074136543809, 6884.80066910368, 0.279206726612854,
+    75330.7588691179
+  ))
   expect_identical(pred$dist, c(
-      "burrIII2", "burrIII2", "gamma",
-      "gamma", "lnorm", "lnorm"))
+    "burrIII2", "burrIII2", "gamma",
+    "gamma", "lnorm", "lnorm"
+  ))
 })
