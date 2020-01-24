@@ -1,10 +1,11 @@
 ## Test environments
 
-release 3.6.1
+Release 3.6.2
 
 * OS X (local) - release
-* Ubuntu (travis) - release and devel
-* win-builder - release and devel
+* Ubuntu (travis) - devel, release, oldrel and 3.5 - 3.4
+* Windows (appveyor) - release
+* Windows (win-builder) - devel
 
 ## R CMD check results
 
