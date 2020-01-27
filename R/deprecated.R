@@ -30,7 +30,7 @@ pllog <- function(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
 #' @export
 rllog <- function(n, lshape = 0, lscale = 1) {
   deprecate_soft("0.1.0", "rllog()", "rllogis()")
-  rllogis(q, lshape = lshape, lscale = lscale)
+  rllogis(n, lshape = lshape, lscale = lscale)
 }
 
 #' @rdname llogis
