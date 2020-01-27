@@ -1,3 +1,6 @@
+- Enforce only 'llogis', 'llog' or 'burrIII2'.
+- Fix bug in `rllog()` causing error.
+
 # ssdtools 0.1.1
 
 - Fix test for CRAN R 3.5
