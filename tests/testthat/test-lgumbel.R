@@ -27,6 +27,16 @@ test_that("fit lgumbel", {
   )
 })
 
+test_that("fit lgumbel Mn LT", {
+  mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT",]
+  dist <- ssdtools:::ssd_fit_dist(mn_lt, dist = "lgumbel")
+  expect_true(is.fitdist(dist))
+  expect_equal(
+    coef(dist),
+    c(llocation = 0.653681627422279, lscale = 0.208983173310441)
+  )  
+})
+
 test_that("fit lgumbel cis", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
 
