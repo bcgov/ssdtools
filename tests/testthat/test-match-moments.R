@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("match-moments")
-
 test_that("match_moments default", {
   set.seed(10)
   pars <- ssd_match_moments()

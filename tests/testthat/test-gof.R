@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("gof")
-
 test_that("ssd_gof", {
   x <- ssd_gof(boron_lnorm)
   expect_is(x, "tbl")

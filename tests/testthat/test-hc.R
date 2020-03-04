@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("hc")
-
 test_that("ssd_hc list", {
   expect_error(ssd_hc(list()), "^`x` must be named[.]$", class = "chk_error")
 

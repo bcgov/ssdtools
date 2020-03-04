@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("fit")
-
 test_that("fit_dist", {
   dist <- ssd_fit_dist(ssdtools::boron_data)
   expect_true(is.fitdist(dist))

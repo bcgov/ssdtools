@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("data")
-
 test_that("data", {
   expect_null(chk::check_data(
     ccme_data,

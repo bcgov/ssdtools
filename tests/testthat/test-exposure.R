@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("exposure")
-
 test_that("exposure fitdist", {
   set.seed(1)
   expect_equal(ssd_exposure(boron_lnorm), 0.0554388690712784)

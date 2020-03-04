@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("hp")
-
 test_that("hp fitdist", {
   expect_equal(ssd_hp(boron_lnorm, numeric(0)), structure(list(
     conc = numeric(0), est = numeric(0), se = numeric(0),

@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("deprecated")
-
 test_that("deprecated llog", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "llog")
 

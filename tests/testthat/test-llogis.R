@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("llogis")
-
 test_that("dllogis", {
   expect_equal(dllogis(exp(3), log(3), log(1)), 0.003720046, tolerance = 0.0000001)
   expect_equal(dllogis(exp(4), log(3), log(1)), 0.001200358, tolerance = 0.0000001)

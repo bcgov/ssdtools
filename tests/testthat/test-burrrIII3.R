@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("burrIII3")
-
 test_that("dburrIII3", {
   expect_identical(dburrIII3(numeric(0)), numeric(0))
   expect_identical(dburrIII3(NA), NA_real_)

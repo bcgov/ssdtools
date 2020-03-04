@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("pareto")
-
 test_that("dpareto", {
   expect_equal(dpareto(numeric(0)), numeric(0))
   expect_equal(dpareto(c(0, 1, Inf, NaN, -1)), c(0, 1, 0, NA, 0))

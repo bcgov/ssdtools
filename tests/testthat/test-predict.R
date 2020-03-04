@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("predict")
-
 test_that("predict.fitdist", {
   boron_lnorm <- ssdtools:::ssd_fit_dist(ssdtools::boron_data[1:6, ])
   pred <- predict(boron_lnorm, nboot = 10L)

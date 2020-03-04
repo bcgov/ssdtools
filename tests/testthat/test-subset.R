@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("subset")
-
 test_that("subset", {
   expect_identical(subset(boron_dists), boron_dists)
   expect_identical(names(subset(boron_dists, c("lnorm", "gamma"))), c("gamma", "lnorm"))

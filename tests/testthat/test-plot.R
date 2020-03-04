@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("plot")
-
 test_that("plot geoms", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())

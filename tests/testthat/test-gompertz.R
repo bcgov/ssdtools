@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("gompertz")
-
 test_that("dgompertz", {
   expect_equal(dgompertz(1, lshape = 0), 0.487589298719261)
   expect_equal(dgompertz(1, lshape = 0, log = TRUE), log(0.487589298719261))

@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("manual")
-
 test_that("manual", {
   set.seed(10)
   dists <- ssd_fit_dists(ssdtools::boron_data, dists = c(

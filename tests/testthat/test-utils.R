@@ -12,8 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-context("utils")
-
 test_that("utils", {
   expect_true(is.fitdist(boron_lnorm))
   expect_true(is.fitdists(boron_dists))
