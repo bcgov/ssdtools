@@ -47,7 +47,6 @@ Imports:
     stats,
     VGAM
 Suggests:
-    checkr,
     covr,
     knitr,
     rmarkdown,

@@ -15,7 +15,7 @@
 context("data")
 
 test_that("data", {
-  expect_identical(checkr::check_data(
+  expect_null(chk::check_data(
     ccme_data,
     values = list(
       Chemical = "",
@@ -24,11 +24,11 @@ test_that("data", {
       Conc = c(0, Inf),
       Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
     ),
-    nrow = c(1, Inf)
-  ), ccme_data)
+    nrow = c(1L, 2147483647L)
+  ))
   expect_is(ccme_data, "tbl")
 
-  expect_identical(checkr::check_data(
+  expect_null(chk::check_data(
     boron_data,
     values = list(
       Chemical = c("Boron", "Boron"),
@@ -38,10 +38,10 @@ test_that("data", {
       Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
     ),
     nrow = 28
-  ), boron_data)
+  ))
   expect_is(boron_data, "tbl")
 
-  expect_identical(checkr::check_data(
+  expect_null(chk::check_data(
     boron_pred,
     values = list(
       percent = 1L,
@@ -51,7 +51,7 @@ test_that("data", {
       ucl = 1
     ),
     nrow = 99L
-  ), boron_pred)
+  ))
   expect_is(boron_pred, "tbl")
 
   expect_is(boron_lnorm, "fitdist")
