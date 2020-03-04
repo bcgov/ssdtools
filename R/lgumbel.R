@@ -63,7 +63,7 @@ rlgumbel <- function(n, llocation = 0, lscale = 0) {
 #' @export
 slgumbel <- function(x) {
   list(start = list(
-    llocation = mean(log(x), na.rm = TRUE),
-    lscale = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
+    llocation = log(mean(log(x), na.rm = TRUE)),
+    lscale = log(pi * sd(log(x), na.rm = TRUE) / sqrt(6))
   ))
 }

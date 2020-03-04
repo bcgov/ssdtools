@@ -28,19 +28,20 @@ test_that("fit lgumbel", {
 })
 
 test_that("fit lgumbel Mn LT", {
-#  mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT",]
-  mn_lt <- structure(list(Chemical = c("Mn LT", "Mn LT", "Mn LT", "Mn LT", 
-"Mn LT", "Mn LT", "Mn LT", "Mn LT", "Mn LT", "Mn LT", "Mn LT", 
-"Mn LT", "Mn LT", "Mn LT"), Conc = c(283.3008636, 964.9718428, 
-1096, 1232, 1868, 2052, 2223, 2563, 3194, 3555, 4341, 4612, 12892, 
-13725)), row.names = c(NA, -14L), class = c("tbl_df", "tbl", 
-"data.frame"))
+#     mn_lt <- structure(list(Chemical = c("Mn LT", "Mn LT", "Mn LT", "Mn LT", 
+# "Mn LT", "Mn LT", "Mn LT", "Mn LT", "Mn LT", "Mn LT", "Mn LT", 
+# "Mn LT", "Mn LT", "Mn LT"), Conc = c(283.3008636, 964.9718428, 
+# 1096, 1232, 1868, 2052, 2223, 2563, 3194, 3555, 4341, 4612, 12892, 
+# 13725)), row.names = c(NA, -14L), class = c("tbl_df", "tbl", 
+# "data.frame"))
+    
+  mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT",]
   
   dist <- ssdtools:::ssd_fit_dist(mn_lt, dist = "lgumbel")
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(llocation = 0.653681627422279, lscale = 0.208983173310441)
+    c(llocation = 1.99017718099042, lscale = 0.00898526674430878)
   )  
 })
 
