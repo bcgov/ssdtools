@@ -56,4 +56,16 @@ test_that("data", {
 
   expect_is(boron_lnorm, "fitdist")
   expect_is(boron_dists, "fitdists")
+  
+  expect_null(chk::check_data(
+    test_data,
+    values = list(
+      Chemical = "",
+      Conc = c(0.04, 76500)
+    ),
+    exclusive = TRUE,
+    order = TRUE,
+    nrow = 141L
+  ))
+  expect_is(test_data, "tbl")
 })

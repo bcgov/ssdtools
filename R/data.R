@@ -107,9 +107,9 @@
 #' \describe{
 #'   \item{Chemical}{The chemical <chr>.}
 #'   \item{Species}{The species binomial name <chr>.}
-#'   \item{Concentration}{The chemical concentration <dbl>.}
-#'   \item{Units}{The units <chr>.}
+#'   \item{Conc}{The chemical concentration <dbl>.}
 #'   \item{Group}{The taxonomic group <fctr>.}
+#'   \item{Units}{The units <chr>.}
 #' }
 #' @examples
 #' head(ccme_data)
@@ -151,3 +151,16 @@
 #' @examples
 #' head(fluazinam_pred)
 "fluazinam_pred"
+
+#' Test Data
+#'
+#' Data to test ssdtools.
+#'
+#' @format A tbl data frame:
+#' \describe{
+#'   \item{Chemical}{The chemical <chr>.}
+#'   \item{Conc}{The chemical concentration <dbl>.}
+#' }
+#' @examples
+#' head(test_data)
+"test_data"

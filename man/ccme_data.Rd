@@ -8,9 +8,9 @@
 \describe{
   \item{Chemical}{The chemical <chr>.}
   \item{Species}{The species binomial name <chr>.}
-  \item{Concentration}{The chemical concentration <dbl>.}
-  \item{Units}{The units <chr>.}
+  \item{Conc}{The chemical concentration <dbl>.}
   \item{Group}{The taxonomic group <fctr>.}
+  \item{Units}{The units <chr>.}
 }}
 \usage{
 ccme_data
