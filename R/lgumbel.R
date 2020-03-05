@@ -27,27 +27,27 @@ NULL
 
 #' @rdname lgumbel
 #' @export
-dlgumbel <- function(x, llocation = 0, lscale = 0, log = FALSE) {
-  fx <- VGAM::dgumbel(log(x), location = exp(llocation), scale = exp(lscale), log = FALSE) / x
+dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
+  fx <- VGAM::dgumbel(log(x), location = llocation, scale = lscale, log = FALSE) / x
   if (log) fx <- log(fx)
   fx
 }
 
 #' @rdname lgumbel
 #' @export
-qlgumbel <- function(p, llocation = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
+qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
   if (log.p) p <- exp(p)
   if (!lower.tail) p <- 1 - p
-  exp(VGAM::qgumbel(p, location = exp(llocation), scale = exp(lscale)))
+  exp(VGAM::qgumbel(p, location = llocation, scale = lscale))
 }
 
 #' @rdname lgumbel
 #' @export
-plgumbel <- function(q, llocation = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
+plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
   if (!length(q)) {
     return(numeric(0))
   }
-  Fq <- VGAM::pgumbel(log(q), location = exp(llocation), scale = exp(lscale))
+  Fq <- VGAM::pgumbel(log(q), location = llocation, scale = lscale)
   if (!lower.tail) Fq <- 1 - Fq
   if (log.p) Fq <- log(Fq)
   Fq
@@ -55,15 +55,15 @@ plgumbel <- function(q, llocation = 0, lscale = 0, lower.tail = TRUE, log.p = FA
 
 #' @rdname lgumbel
 #' @export
-rlgumbel <- function(n, llocation = 0, lscale = 0) {
-  exp(VGAM::rgumbel(n, location = exp(llocation), scale = exp(lscale)))
+rlgumbel <- function(n, llocation = 0, lscale = 1) {
+  exp(VGAM::rgumbel(n, location = llocation, scale = lscale))
 }
 
 #' @rdname lgumbel
 #' @export
 slgumbel <- function(x) {
   list(start = list(
-    llocation = log(mean(log(x), na.rm = TRUE)),
-    lscale = log(pi * sd(log(x), na.rm = TRUE) / sqrt(6))
+    llocation = mean(log(x), na.rm = TRUE),
+    lscale = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
   ))
 }
