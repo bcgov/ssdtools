@@ -17,12 +17,6 @@ probs <- function(level) {
   c(probs, 1 - probs)
 }
 
-as_tibble <- function(x) {
-  stopifnot(is.data.frame(x))
-  class(x) <- c("tbl_df", "tbl", "data.frame")
-  x
-}
-
 safely <- function(.f) {
   function(...) {
     x <- try(.f(...), silent = TRUE)

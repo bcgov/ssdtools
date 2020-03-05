@@ -16,4 +16,5 @@
 #' @import abind abind
 #' @importFrom graphics plot
 #' @importFrom VGAM vglm
+#' @importFrom tibble as_tibble
 NULL
