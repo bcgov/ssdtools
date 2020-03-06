@@ -39,13 +39,15 @@ NULL
 #' @rdname burrIII2
 #' @export
 dburrIII2 <- function(x, lshape = 0, lscale = 1, log = FALSE) {
+  deprecate_soft("0.1.2", "xburrIII2()", 
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
   if (!length(x)) {
     return(numeric(0))
   }
-
+  
   fx <- actuar::dburr(1 / x,
-    shape1 = exp(lshape), shape2 = exp(lshape),
-    scale = exp(lscale), log = FALSE
+                      shape1 = exp(lshape), shape2 = exp(lshape),
+                      scale = exp(lscale), log = FALSE
   )
   fx <- fx / (x + (x == 0))^2 # avoid dividing by 0. Can only occur if fx is 0.
   if (log) {
@@ -57,12 +59,14 @@ dburrIII2 <- function(x, lshape = 0, lscale = 1, log = FALSE) {
 #' @rdname burrIII2
 #' @export
 qburrIII2 <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+  deprecate_soft("0.1.2", "xburrIII2()", 
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
   if (!length(q)) {
     return(numeric(0))
   }
   q <- actuar::qburr(1 - p,
-    shape1 = exp(lshape), shape2 = exp(lshape), scale = exp(lscale),
-    lower.tail = lower.tail, log.p = log.p
+                     shape1 = exp(lshape), shape2 = exp(lshape), scale = exp(lscale),
+                     lower.tail = lower.tail, log.p = log.p
   )
   1 / q
 }
@@ -70,18 +74,22 @@ qburrIII2 <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALS
 #' @rdname burrIII2
 #' @export
 pburrIII2 <- function(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+  deprecate_soft("0.1.2", "xburrIII2()", 
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
   if (!length(q)) {
     return(numeric(0))
   }
   actuar::pburr(1 / q,
-    shape1 = exp(lshape), shape2 = exp(lshape), scale = exp(lscale),
-    lower.tail = !lower.tail, log.p = log.p
+                shape1 = exp(lshape), shape2 = exp(lshape), scale = exp(lscale),
+                lower.tail = !lower.tail, log.p = log.p
   )
 }
 
 #' @rdname burrIII2
 #' @export
 rburrIII2 <- function(n, lshape = 0, lscale = 1) {
+  deprecate_soft("0.1.2", "xburrIII2()", 
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
   r <- actuar::rburr(n, shape1 = exp(lshape), shape2 = exp(lshape), scale = exp(lscale))
   1 / r
 }
@@ -89,5 +97,7 @@ rburrIII2 <- function(n, lshape = 0, lscale = 1) {
 #' @rdname burrIII2
 #' @export
 sburrIII2 <- function(x) {
+  deprecate_soft("0.1.2", "xburrIII2()", 
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
   list(start = list(lshape = 0, lscale = 1))
 }
