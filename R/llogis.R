@@ -19,8 +19,6 @@
 #' log-logistic distribution
 #' with \code{shape} and \code{scale} parameters.
 #'
-#' The functions are wrappers to export the identical functions from the FAdist package.
-#'
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
@@ -33,11 +31,11 @@ NULL
 
 #' @rdname llogis
 #' @export
-dllogis <- function(x, lshape = 0, lscale = 0, log = FALSE) {
+dllogis <- function(x, lshape = 1, lscale = 1, log = FALSE) {
   if (!length(x)) {
     return(numeric(0))
   }
-  d <- dlogis(log(x), location = exp(lscale), scale = exp(lshape)) / x
+  d <- dlogis(log(x), location = lscale, scale = lshape) / x
   if (log) {
     return(log(d))
   }
@@ -46,22 +44,22 @@ dllogis <- function(x, lshape = 0, lscale = 0, log = FALSE) {
 
 #' @rdname llogis
 #' @export
-qllogis <- function(p, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
+qllogis <- function(p, lshape = 1, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
   if (log.p) p <- exp(p)
   if (!lower.tail) p <- 1 - p
-  exp(qlogis(p, location = exp(lscale), scale = exp(lshape)))
+  exp(qlogis(p, location = lscale, scale = lshape))
 }
 
 #' @rdname llogis
 #' @export
-pllogis <- function(q, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
-  plogis(log(q), location = exp(lscale), scale = exp(lshape), lower.tail = lower.tail, log.p = log.p)
+pllogis <- function(q, lshape = 1, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+  plogis(log(q), location = lscale, scale = lshape, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname llogis
 #' @export
-rllogis <- function(n, lshape = 0, lscale = 0) {
-  exp(rlogis(n = n, location = exp(lscale), scale = exp(lshape)))
+rllogis <- function(n, lshape = 1, lscale = 1) {
+  exp(rlogis(n = n, location = lscale, scale = lshape))
 }
 
 #' @rdname llogis

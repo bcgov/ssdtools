@@ -13,8 +13,8 @@
 #    limitations under the License.
 
 test_that("dllogis", {
-  expect_equal(dllogis(exp(3), log(3), log(1)), 0.003720046, tolerance = 0.0000001)
-  expect_equal(dllogis(exp(4), log(3), log(1)), 0.001200358, tolerance = 0.0000001)
+  expect_equal(dllogis(exp(3), 3, 1), 0.003720046, tolerance = 0.0000001)
+  expect_equal(dllogis(exp(4), 3, 1), 0.001200358, tolerance = 0.0000001)
 })
 
 test_that("fit llogis", {
@@ -23,20 +23,20 @@ test_that("fit llogis", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(lscale = 0.965466010495141, lshape = -0.300741556664549)
+    c(lscale = 2.6261248978507, lshape = 0.740309228071107)
   )
 })
 
 test_that("pqllogis", {
-  expect_equal(log(qllogis(0.5, 0, 0)), 1, tolerance = 0.000001)
-  expect_equal(pllogis(exp(3), 0, 0), 0.8807971, tolerance = 0.0000001)
-  expect_equal(pllogis(exp(4), 0, 0), 0.9525741, tolerance = 0.0000001)
+  expect_equal(log(qllogis(0.5, 1, 1)), 1, tolerance = 0.000001)
+  expect_equal(pllogis(exp(3), 1, 1), 0.8807971, tolerance = 0.0000001)
+  expect_equal(pllogis(exp(4), 1, 1), 0.9525741, tolerance = 0.0000001)
   expect_identical(pllogis(qllogis(0.5, 3, 1), 3, 1), 0.5)
 })
 
 test_that("rllogis", {
   set.seed(99)
-  r <- rllogis(100000, 0, 0)
+  r <- rllogis(100000, 1, 1)
   expect_identical(length(r), 100000L)
   expect_equal(mean(log(r)), 1, tolerance = 0.1)
 })

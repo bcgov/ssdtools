@@ -18,13 +18,13 @@ test_that("deprecated llog", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(lscale = 0.965466010495141, lshape = -0.300741556664549)
+    c(lscale = 2.6261249, lshape = 0.7403092)
   )
   set.seed(101)
   pred <- predict(dist, percent = 1, ci = TRUE, nboot = 10L)
-  expect_equal(as.data.frame(pred), structure(list(percent = 1, est = 0.460421015127, se = 0.304833508255187, 
-    lcl = 0.124202690634833, ucl = 1.04418866156736, dist = "llog"), class = "data.frame", row.names = c(NA, 
--1L)))
+  expect_equal(as.data.frame(pred), structure(list(percent = 1, est = 0.460388430679064, se = 0.305015200817155, 
+    lcl = 0.124204402582017, ucl = 1.04527103315379, dist = "llog"), row.names = c(NA, 
+-1L), class = "data.frame"))
 })
 
 test_that("deprecated llog", {
