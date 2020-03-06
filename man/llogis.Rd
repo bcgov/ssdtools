@@ -24,13 +24,13 @@ rllog(n, lshape = 0, lscale = 1)
 
 sllog(x)
 
-dllogis(x, lshape = 0, lscale = 0, log = FALSE)
+dllogis(x, lshape = 1, lscale = 1, log = FALSE)
 
-qllogis(p, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE)
+qllogis(p, lshape = 1, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
-pllogis(q, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE)
+pllogis(q, lshape = 1, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
-rllogis(n, lshape = 0, lscale = 0)
+rllogis(n, lshape = 1, lscale = 1)
 
 sllogis(x)
 }
@@ -61,9 +61,6 @@ Density, distribution function, quantile function, random generation
 and starting values for the
 log-logistic distribution
 with \code{shape} and \code{scale} parameters.
-}
-\details{
-The functions are wrappers to export the identical functions from the FAdist package.
 }
 \examples{
 x <- seq(0.01, 5, by = 0.01)
