@@ -55,7 +55,7 @@ remove_errors <- function(dist_fit, name, computable, silent) {
   }
   sd <- dist_fit$result$sd
   if (is.null(sd) || any(is.na(sd))) {
-    if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).", call. = FALSE)
+    if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).")
     if (computable) {
       return(NULL)
     }
