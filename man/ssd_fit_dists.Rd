@@ -9,7 +9,7 @@ ssd_fit_dists(
   left = "Conc",
   right = left,
   weight = NULL,
-  dists = c("burrIII2", "gamma", "lnorm"),
+  dists = c("llogis", "gamma", "lnorm"),
   computable = TRUE,
   silent = FALSE
 )

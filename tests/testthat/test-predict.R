@@ -79,13 +79,10 @@ test_that("predict.fitdistscens", {
 In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.")
   expect_equal(
     as.data.frame(pred),
-    structure(list(percent = c(1, 99), est = c(
-      0.165191855589344,
-      74931.0016372917
-    ), se = c(NA_real_, NA_real_), lcl = c(
-      NA_real_,
-      NA_real_
-    ), ucl = c(NA_real_, NA_real_), dist = c("average", "average")), class = "data.frame", row.names = c(NA, -2L))
+    structure(list(percent = c(1, 99), est = c(0.17476496294754, 
+126041.188199444), se = c(NA_real_, NA_real_), lcl = c(NA_real_, 
+NA_real_), ucl = c(NA_real_, NA_real_), dist = c("average", "average"
+)), row.names = c(NA, -2L), class = "data.frame")
   )
 })
 
@@ -97,13 +94,11 @@ test_that("predict.fitdistscens cis", {
   )
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_identical(pred$percent, c(1, 99, 1, 99, 1, 99))
-  expect_equal(pred$est, c(
-    0.0556070303830483,
-    93128.5004982232, 0.00297074136543809, 6884.80066910368, 0.279206726612854,
-    75330.7588691179
-  ))
+  expect_equal(pred$est,
+c(0.0947064911703993, 212423.73904855, 0.00297074136543809, 6884.80066910368, 
+0.279206726612854, 75330.7588691179))
   expect_identical(pred$dist, c(
-    "burrIII2", "burrIII2", "gamma",
+    "llogis", "llogis", "gamma",
     "gamma", "lnorm", "lnorm"
   ))
 })

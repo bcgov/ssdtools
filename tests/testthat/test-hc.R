@@ -105,7 +105,7 @@ test_that("ssd_hc fitdists", {
   expect_equal(
     as.data.frame(ssd_hc(boron_dists)),
     structure(list(
-      percent = 5, est = 1.30474651622516, se = NA_real_,
+      percent = 5, est = 1.30686521357099, se = NA_real_,
       lcl = NA_real_, ucl = NA_real_, dist = "average"
     ), class = "data.frame", row.names = c(
       NA,
@@ -118,7 +118,7 @@ test_that("ssd_hc fitdists not average", {
   expect_equal(
     as.data.frame(ssd_hc(boron_dists, average = FALSE)),
     structure(list(percent = c(5, 5, 5), est = c(
-      1.58920212463066,
+      1.56256632555312,
       1.07373870642628, 1.68117483775796
     ), se = c(
       NA_real_, NA_real_,
@@ -126,7 +126,7 @@ test_that("ssd_hc fitdists not average", {
     ), lcl = c(NA_real_, NA_real_, NA_real_), ucl = c(
       NA_real_,
       NA_real_, NA_real_
-    ), dist = c("burrIII2", "gamma", "lnorm")), row.names = c(
+    ), dist = c("llogis", "gamma", "lnorm")), row.names = c(
       NA,
       -3L
     ), class = "data.frame")
@@ -137,7 +137,7 @@ test_that("ssd_hc fitdistscens", {
   expect_equal(
     as.data.frame(ssd_hc(fluazinam_dists)),
     structure(list(
-      percent = 5, est = 1.35230977078523, se = NA_real_,
+      percent = 5, est = 1.42068088873316, se = NA_real_,
       lcl = NA_real_, ucl = NA_real_, dist = "average"
     ), class = "data.frame", row.names = c(
       NA,
@@ -150,7 +150,7 @@ test_that("ssd_hc fitdistscens not average", {
   expect_equal(
     as.data.frame(ssd_hc(fluazinam_dists, average = FALSE)),
     structure(list(percent = c(5, 5, 5), est = c(
-      1.11030265567844,
+      1.30938169835089,
       0.309067069393034, 1.74352219048516
     ), se = c(
       NA_real_, NA_real_,
@@ -158,7 +158,7 @@ test_that("ssd_hc fitdistscens not average", {
     ), lcl = c(NA_real_, NA_real_, NA_real_), ucl = c(
       NA_real_,
       NA_real_, NA_real_
-    ), dist = c("burrIII2", "gamma", "lnorm")), row.names = c(
+    ), dist = c("llogis", "gamma", "lnorm")), row.names = c(
       NA,
       -3L
     ), class = "data.frame")

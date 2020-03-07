@@ -114,7 +114,7 @@ ssd_fit_dist <- function(
 #' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
-  dists = c("burrIII2", "gamma", "lnorm"),
+  dists = c("llogis", "gamma", "lnorm"),
   computable = TRUE,
   silent = FALSE) {
   chk_s3_class(dists, "character")

@@ -3,6 +3,8 @@
 
 # ssdtools <img src="man/figures/logo.png" align="right" />
 
+<!-- badges: start -->
+
 [![BCDevExchange
 Status](https://assets.bcdevexchange.org/images/badges/delivery.svg)](https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md)
 [![Travis-CI Build
@@ -13,6 +15,7 @@ Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](http
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.01082/status.svg)](https://doi.org/10.21105/joss.01082)
+<!-- badges: end -->
 
 `ssdtools` is an R package to plot and fit Species Sensitivity
 Distributions (SSD).
@@ -20,11 +23,11 @@ Distributions (SSD).
 SSDs are cumulative probability distributions which are fitted to
 toxicity concentrations for different species as described by Posthuma
 et al. (2001). The ssdtools package uses Maximum Likelihood to fit
-distributions such as the log-normal, gamma, burr Type-III,
-log-logistic, log-Gumbel, Gompertz and Weibull. The user can also
-provide custom distributions. Multiple distributions can be averaged
-using Information Criteria. Confidence intervals on hazard
-concentrations and proportions are produced by parametric bootstrapping.
+distributions such as the log-normal, gamma, log-logistic, log-Gumbel,
+Gompertz and Weibull. The user can also provide custom distributions.
+Multiple distributions can be averaged using Information Criteria.
+Confidence intervals on hazard concentrations and proportions are
+produced by parametric bootstrapping.
 
 ## Installation
 
@@ -86,11 +89,11 @@ The goodness of fit can be assessed using `ssd_gof`
 ``` r
 ssd_gof(boron_dists)
 #> # A tibble: 3 x 9
-#>   dist        ad    ks    cvm   aic  aicc   bic delta weight
-#> * <chr>    <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 burrIII2 0.500 0.108 0.0628  241.  242.  244.  3.74  0.093
-#> 2 gamma    0.440 0.117 0.0554  238.  238.  240.  0     0.606
-#> 3 lnorm    0.507 0.107 0.0703  239.  240.  242.  1.40  0.301
+#>   dist      ad     ks    cvm   aic  aicc   bic delta weight
+#> * <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 llogis 0.487 0.0993 0.0595  241.  241.  244.  3.38  0.11 
+#> 2 gamma  0.440 0.117  0.0554  238.  238.  240.  0     0.595
+#> 3 lnorm  0.507 0.107  0.0703  239.  240.  242.  1.40  0.296
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
@@ -105,7 +108,7 @@ print(boron_hc5)
 #> # A tibble: 1 x 6
 #>   percent   est    se   lcl   ucl dist   
 #>     <dbl> <dbl> <dbl> <dbl> <dbl> <chr>  
-#> 1       5  1.30 0.813 0.521  3.58 average
+#> 1       5  1.31 0.808 0.527  3.57 average
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -120,8 +123,8 @@ and plotted together with the original data using `ssd_plot`.
 
 ``` r
 ssd_plot(boron_data, boron_pred,
-  shape = "Group", color = "Group", label = "Species",
-  xlab = "Concentration (mg/L)", ribbon = TRUE
+         shape = "Group", color = "Group", label = "Species",
+         xlab = "Concentration (mg/L)", ribbon = TRUE
 ) + expand_limits(x = 3000)
 ```
 
@@ -194,19 +197,19 @@ By participating in this project you agree to abide by its terms.
 
 The code is released under the Apache License 2.0
 
-    Copyright 2015 Province of British Columbia
-    
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at 
-    
-       http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Copyright 2015 Province of British Columbia
+
+Licensed under the Apache License, Version 2.0 (the “License”); you may
+not use this file except in compliance with the License. You may obtain
+a copy of the License at
+
+<http://www.apache.org/licenses/LICENSE-2.0>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an “AS IS” BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -----
 

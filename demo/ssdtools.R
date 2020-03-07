@@ -38,7 +38,7 @@ head(data)
 #' the column with the concentration values.
 fits <- ssd_fit_dists(data,
   left = "Conc",
-  dists = c("burrIII2", "lnorm", "gamma")
+  dists = c("llogis", "lnorm", "gamma")
 )
 
 #' The `autoplot()` function can be used to plot the fits (for more information type `?autoplot.fitdists`)

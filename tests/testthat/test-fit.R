@@ -12,6 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+  
 test_that("fit_dist", {
   dist <- ssd_fit_dist(ssdtools::boron_data)
   expect_true(is.fitdist(dist))
@@ -45,6 +46,12 @@ test_that("fit_dists", {
   expect_identical(names(dists), dist_names)
   coef <- coef(dists)
   expect_identical(names(coef), dist_names)
+})
+
+test_that("burrIII2", {
+  dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("burrIII2", "gamma", "lnorm"))
+  expect_identical(names(dists), c("burrIII2", "gamma", "lnorm"))
+  expect_equal(coef(dists$burrIII2), c(lshape = 0.493452552733572, lscale = -1.37955270951911))
 })
 
 test_that("fit_dist", {
