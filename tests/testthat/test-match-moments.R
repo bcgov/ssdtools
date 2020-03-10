@@ -15,7 +15,9 @@
 test_that("match_moments default", {
   set.seed(10)
   pars <- ssd_match_moments()
-  expect_equal(pars, list(burrIII2 = c(lshape = 0.399359130859376, lscale = -0.602319335937502), gamma = c(shape = 1.46063842773437, scale = 2.72195434570313), lnorm = c(meanlog = 0.98125, sdlog = 0.9515625)))
+  expect_equal(pars, list(llogis = c(lshape = 0.6, lscale = 0.975000000000001), gamma = c(shape = 1.4796875, 
+scale = 2.5890625), lnorm = c(meanlog = 0.98125, sdlog = 0.9515625
+)))
   expect_is(ssd_plot_cdf(pars), "ggplot")
 })
 
