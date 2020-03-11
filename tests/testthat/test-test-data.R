@@ -29,7 +29,8 @@ test_that("test_data", {
 test_that("test_data Quinoline", {
   quin <- test_data[test_data$Chemical == "Quinoline",]
   
-  expect_warning(dists <- ssd_fit_dists(quin, dist = c("gamma", "lnorm")),
+  expect_warning(dists <- ssd_fit_dists(quin, dist = c("gamma", "lnorm"),
+                                        computable = TRUE),
                  "^Distribution gamma failed to compute standard errors [(]try rescaling the data or increasing the sample size[)]")
   expect_identical(names(dists), "lnorm")
   expect_equal(coef(dists),

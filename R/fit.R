@@ -119,7 +119,7 @@ ssd_fit_dist <- function(
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
   dists = c("llogis", "gamma", "lnorm"),
-  computable = TRUE,
+  computable = FALSE,
   silent = FALSE) {
   chk_s3_class(dists, "character")
   chk_unique(dists)

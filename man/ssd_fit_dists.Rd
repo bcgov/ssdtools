@@ -10,7 +10,7 @@ ssd_fit_dists(
   right = left,
   weight = NULL,
   dists = c("llogis", "gamma", "lnorm"),
-  computable = TRUE,
+  computable = FALSE,
   silent = FALSE
 )
 }
