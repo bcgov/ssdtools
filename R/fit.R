@@ -87,27 +87,31 @@ ssd_fit_dist <- function(
 #'
 #' Fits one or more distributions to species sensitivity data.
 #'
-#' By default the 'burrIII2', 'gamma' and 'lnorm'
+#' By default the 'llogis', 'gamma' and 'lnorm'
 #' distributions are fitted to the data.
 
 #' The ssd_fit_dists function has also been
-#' tested with the 'burrIII3', 'gompertz', 'lgumbel', 'llogis', 'pareto'
-#' and 'weibull' distributions.
+#' tested with the 'burrIII3', 'gompertz', 'lgumbel' and 'weibull' distributions.
 #'
 #' If weight specifies a column in the data frame with positive integers,
 #' weighted estimation occurs.
 #' However, currently only the resultant parameter estimates are available (via coef).
 #'
 #' If the `right` argument is different to the `left` argument then the data are considered to be censored.
-#' It may be possible to use artificial censoring to improve the estimates in the extreme tails
-#' (Liu et al 2018).
+#' 
+#' The fits are performed using \code{\link[fitdistrplus]{fitdist}} 
+#' (and \code{\link[fitdistrplus]{fitdistcens}} in the case of censored data). 
+#' The method used is "mle" (maximum likelihood estimation) 
+#' which means that numerical optimization is carried out in 
+#' \code{\link[fitdistrplus]{mledist}} using \code{\link[stats]{optim}}
+#' unless finite bounds are supplied in the (lower and upper) in which 
+#' it is carried out using \code{\link[stats]{constrOptim}}.
+#' In both cases the "Nelder-Mead" method is used.
+#' 
 #' @inheritParams params
 #' @return An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
 #'
 #' @export
-#' @references
-#' Liu, Y., Salibián-Barrera, M., Zamar, R.H., and Zidek, J.V. 2018. Using artificial censoring to improve extreme tail quantile estimates. Journal of the Royal Statistical Society: Series C (Applied Statistics).
-#'
 #' @examples
 #' ssd_fit_dists(boron_data)
 #' data(fluazinam, package = "fitdistrplus")
