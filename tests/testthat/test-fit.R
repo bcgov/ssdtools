@@ -120,3 +120,8 @@ test_that("fit_dists computable", {
   expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086), tolerance = 3e-06) # for noLD
   expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
 })
+
+test_that("fit_dists fail to converge when identical data", {
+    data <- data.frame(Conc = rep(6, 6))
+    expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit."))
+})
