@@ -1,3 +1,16 @@
+# ssdtools 0.1.1.9003
+
+- Change computable (standard errors) to FALSE by default.
+- Only give warning about standard errors if computable = TRUE.
+- Replaced 'burrIII2' for 'llogis' in default set.
+- Deprecated 'burrIII2' for 'llogis'.
+- Provide warning message about change in default for ci argument in predict function.
+- Use tibble package to create tibbles.
+- Fixed lgumbel failing to fit.
+- Added test_data tibble for testing.
+- Remove dependency on checkr.
+
+
 # ssdtools 0.1.1.9002
 
 - Enforce only 'llogis', 'llog' or 'burrIII2'.
