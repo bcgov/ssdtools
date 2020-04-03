@@ -41,12 +41,9 @@ test_that("ssd_gof", {
 })
 
 test_that("ssd_gof fitdistscens", {
-  expect_equal(
-    as.data.frame(ssd_gof(fluazinam_dists)),
-structure(list(dist = c("llogis", "gamma", "lnorm"), aic = c(149.908903257135, 
-152.809136132656, 149.625327602334), bic = c(151.187017916366, 
-154.087250791887, 150.903442261564), delta = c(0.284, 3.184, 
-0), weight = c(0.419, 0.098, 0.483)), row.names = c("llogis", 
-"gamma", "lnorm"), class = "data.frame")
-  )
+  dists <- ssd_gof(fluazinam_dists)
+  expect_is(dists, "tbl_df")
+  expect_identical(colnames(dists), c("dist", "aic", "bic", "delta", "weight"))
+  expect_equal(dists$aic, c(149.908903257135, 152.809136132656, 149.625327602334))
+  expect_equal(dists$weight, c(0.419, 0.098, 0.483))
 })
