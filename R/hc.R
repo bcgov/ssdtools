@@ -115,6 +115,7 @@ no_ssd_hc <- function() {
 #' @export
 #' @examples
 #' ssd_hc(list("lnorm" = NULL))
+#' ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
 ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   chk_list(x)
   chk_named(x)

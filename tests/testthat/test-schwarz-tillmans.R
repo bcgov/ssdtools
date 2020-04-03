@@ -18,6 +18,20 @@ test_that("manual", {
     "gamma", "gompertz", "lgumbel", "llogis", "lnorm", "weibull"
   ))
   expect_true(is.fitdists(dists))
+  
+  expect_equal(
+    ssd_hc(dists, average = FALSE)$est,
+    c(1.07373870642628, 1.29945366523807, 1.76891782851293, 1.56256632555312, 
+1.68117483775796, 1.0871695998917)
+  )
+
+  set.seed(99)
+  expect_equal(
+    as.data.frame(ssd_hc(dists, ci = TRUE, nboot = 10)),
+    structure(list(percent = 5, est = 1.25049782701963, se = 0.631766229432851, 
+    lcl = 0.775282589272772, ucl = 2.60353063438925, dist = "average"), row.names = c(NA, 
+-1L), class = "data.frame")
+  )
 
   dists <- ssd_gof(dists)
   expect_is(dists, "tbl_df")
@@ -42,18 +56,4 @@ test_that("manual", {
   expect_equal(dists$delta, c(0.019, 0, 6.575, 3.404, 1.417, 0.014
 ))
   expect_equal(dists$weight, c(0.268, 0.271, 0.01, 0.049, 0.133, 0.269))
-
-  expect_equal(
-    ssd_hc(dists, average = FALSE)$est,
-    c(1.07373870642628, 1.29945366523807, 1.76891782851293, 1.56256632555312, 
-1.68117483775796, 1.0871695998917)
-  )
-
-  set.seed(99)
-  expect_equal(
-    as.data.frame(ssd_hc(dists, ci = TRUE, nboot = 10)),
-    structure(list(percent = 5, est = 1.25049782701963, se = 0.631766229432851, 
-    lcl = 0.775282589272772, ucl = 2.60353063438925, dist = "average"), row.names = c(NA, 
--1L), class = "data.frame")
-  )
 })

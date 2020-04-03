@@ -109,6 +109,7 @@ Gets concentrations that protect specified percentages of species.
 
 \examples{
 ssd_hc(list("lnorm" = NULL))
+ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
 ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
 ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
 ssd_hc(boron_dists, c(0, 1, 30, Inf))
