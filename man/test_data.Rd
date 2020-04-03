@@ -4,11 +4,13 @@
 \name{test_data}
 \alias{test_data}
 \title{Test Data}
-\format{A tbl data frame:
+\format{
+A tbl data frame:
 \describe{
   \item{Chemical}{The chemical <chr>.}
   \item{Conc}{The chemical concentration <dbl>.}
-}}
+}
+}
 \usage{
 test_data
 }

@@ -4,7 +4,8 @@
 \name{fluazinam_pred}
 \alias{fluazinam_pred}
 \title{Model averaged predictions for fluazinam}
-\format{A tbl data frame:
+\format{
+A tbl data frame:
 \describe{
   \item{percent}{The percent of species affected <int>.}
   \item{est}{The estimated concentration <dbl>.}
@@ -12,7 +13,8 @@
   \item{lcl}{The lower confidence limit <dbl>.}
   \item{se}{The upper confidence limit <dbl>.}
   \item{dist}{The distribution <chr>.}
-}}
+}
+}
 \usage{
 fluazinam_pred
 }

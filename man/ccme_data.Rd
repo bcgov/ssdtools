@@ -4,14 +4,16 @@
 \name{ccme_data}
 \alias{ccme_data}
 \title{CCME Species Sensitivity Data}
-\format{A tbl data frame:
+\format{
+A tbl data frame:
 \describe{
   \item{Chemical}{The chemical <chr>.}
   \item{Species}{The species binomial name <chr>.}
   \item{Conc}{The chemical concentration <dbl>.}
   \item{Group}{The taxonomic group <fctr>.}
   \item{Units}{The units <chr>.}
-}}
+}
+}
 \usage{
 ccme_data
 }

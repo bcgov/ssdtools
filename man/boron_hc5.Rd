@@ -4,7 +4,8 @@
 \name{boron_hc5}
 \alias{boron_hc5}
 \title{Model averaged 5\% hazard concentration for CCME Boron Data}
-\format{A tbl data frame:
+\format{
+A tbl data frame:
 \describe{
   \item{percent}{The percent of species affected <int>.}
   \item{est}{The estimated concentration <dbl>.}
@@ -12,7 +13,8 @@
   \item{lcl}{The lower confidence limit <dbl>.}
   \item{se}{The upper confidence limit <dbl>.}
   \item{dist}{The distribution <chr>.}
-}}
+}
+}
 \usage{
 boron_hc5
 }

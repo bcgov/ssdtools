@@ -4,14 +4,16 @@
 \name{boron_data}
 \alias{boron_data}
 \title{CCME Species Sensitivity Data for Boron}
-\format{A tbl data frame:
+\format{
+A tbl data frame:
 \describe{
   \item{Chemical}{The chemical <chr>.}
   \item{Species}{The species binomial name <chr>.}
   \item{Concentration}{The chemical concentration <dbl>.}
   \item{Units}{The units <chr>.}
   \item{Group}{The taxonomic group <fctr>.}
-}}
+}
+}
 \usage{
 boron_data
 }

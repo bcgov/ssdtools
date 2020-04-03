@@ -4,7 +4,9 @@
 \name{boron_dists}
 \alias{boron_dists}
 \title{fitdists for CCME Boron Data}
-\format{An object of class \code{fitdists} of length 3.}
+\format{
+An object of class \code{fitdists} of length 3.
+}
 \usage{
 boron_dists
 }
