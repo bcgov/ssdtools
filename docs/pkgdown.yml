@@ -1,5 +1,5 @@
-pandoc: 2.7.3
-pkgdown: 1.4.1
+pandoc: 2.9.2.1
+pkgdown: 1.5.0
 pkgdown_sha: ~
 articles:
   distributions: distributions.html
@@ -7,4 +7,5 @@ articles:
   faqs: faqs.html
   small-sample-bias-ref: small-sample-bias-ref.html
   ssdtools: ssdtools.html
+last_built: 2020-04-06T20:30Z
 
