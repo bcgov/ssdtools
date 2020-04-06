@@ -90,7 +90,7 @@ The goodness of fit can be assessed using `ssd_gof`
 ssd_gof(boron_dists)
 #> # A tibble: 3 x 9
 #>   dist      ad     ks    cvm   aic  aicc   bic delta weight
-#> * <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
 #> 1 llogis 0.487 0.0993 0.0595  241.  241.  244.  3.38  0.11 
 #> 2 gamma  0.440 0.117  0.0554  238.  238.  240.  0     0.595
 #> 3 lnorm  0.507 0.107  0.0703  239.  240.  242.  1.40  0.296
@@ -123,8 +123,8 @@ and plotted together with the original data using `ssd_plot`.
 
 ``` r
 ssd_plot(boron_data, boron_pred,
-         shape = "Group", color = "Group", label = "Species",
-         xlab = "Concentration (mg/L)", ribbon = TRUE
+  shape = "Group", color = "Group", label = "Species",
+  xlab = "Concentration (mg/L)", ribbon = TRUE
 ) + expand_limits(x = 3000)
 ```
 
