@@ -1,25 +1,23 @@
-# ssdtools 0.1.1.9004
+# ssdtools 0.2.0
 
-- Internal changes only.
+## Breaking Changes
 
+- Changed computable (whether standard errors must be computable to be considered to have converged) to FALSE by default.
+- Enforces only one of 'llogis', 'llog' or 'burrIII2' in all sets (as identical).
 
-# ssdtools 0.1.1.9003
+## Major Changes
 
-- Change computable (standard errors) to FALSE by default.
-- Only give warning about standard errors if computable = TRUE.
-- Replaced 'burrIII2' for 'llogis' in default set.
-- Deprecated 'burrIII2' for 'llogis'.
-- Provide warning message about change in default for ci argument in predict function.
-- Use tibble package to create tibbles.
-- Fixed lgumbel failing to fit.
-- Added test_data tibble for testing.
-- Remove dependency on checkr.
+- Deprecated 'burrIII2' for 'llogis' as identical.
+- Replaced 'burrIII2' for (identical) 'llogis' in default set.
+- Fixed bug in `rllog()` that was causing error.
+- Fixed parameterisation of 'lgumbel' that was causing it to fail to fit with some data.
 
+## Minor Changes
 
-# ssdtools 0.1.1.9002
-
-- Enforce only 'llogis', 'llog' or 'burrIII2'.
-- Fix bug in `rllog()` causing error.
+- Provides warning message about change in default for ci argument in predict function.
+- Only gives warning about standard errors not being computable if computable = TRUE.
+- Uses tibble package to create tibbles.
+- Removed dependency on checkr.
 
 # ssdtools 0.1.1
 
