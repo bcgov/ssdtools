@@ -22,9 +22,13 @@ test_that("deprecated llog", {
   )
   set.seed(101)
   pred <- predict(dist, percent = 1, ci = TRUE, nboot = 10L)
-  expect_equal(as.data.frame(pred), structure(list(percent = 1, est = 0.460388430679064, se = 0.305015200817155, 
-    lcl = 0.124204402582017, ucl = 1.04527103315379, dist = "llog"), row.names = c(NA, 
--1L), class = "data.frame"))
+  expect_equal(as.data.frame(pred), structure(list(
+    percent = 1, est = 0.460388430679064, se = 0.305015200817155,
+    lcl = 0.124204402582017, ucl = 1.04527103315379, dist = "llog"
+  ), row.names = c(
+    NA,
+    -1L
+  ), class = "data.frame"))
 })
 
 test_that("deprecated llog", {

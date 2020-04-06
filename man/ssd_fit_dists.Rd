@@ -47,12 +47,12 @@ However, currently only the resultant parameter estimates are available (via coe
 
 If the `right` argument is different to the `left` argument then the data are considered to be censored.
 
-The fits are performed using \code{\link[fitdistrplus]{fitdist}} 
-(and \code{\link[fitdistrplus]{fitdistcens}} in the case of censored data). 
-The method used is "mle" (maximum likelihood estimation) 
-which means that numerical optimization is carried out in 
+The fits are performed using \code{\link[fitdistrplus]{fitdist}}
+(and \code{\link[fitdistrplus]{fitdistcens}} in the case of censored data).
+The method used is "mle" (maximum likelihood estimation)
+which means that numerical optimization is carried out in
 \code{\link[fitdistrplus]{mledist}} using \code{\link[stats]{optim}}
-unless finite bounds are supplied in the (lower and upper) in which 
+unless finite bounds are supplied in the (lower and upper) in which
 it is carried out using \code{\link[stats]{constrOptim}}.
 In both cases the "Nelder-Mead" method is used.
 }

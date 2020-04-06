@@ -89,8 +89,8 @@ boron_pred <- predict(boron_dists, ci = TRUE)
 and plotted together with the original data using `ssd_plot`.
 ```{r}
 ssd_plot(boron_data, boron_pred,
-         shape = "Group", color = "Group", label = "Species",
-         xlab = "Concentration (mg/L)", ribbon = TRUE
+  shape = "Group", color = "Group", label = "Species",
+  xlab = "Concentration (mg/L)", ribbon = TRUE
 ) + expand_limits(x = 3000)
 ```
 

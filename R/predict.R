@@ -22,14 +22,16 @@ predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95,
                             nboot = 1000, parallel = NULL, ncpus = 1,
                             ...) {
   chk_unused(...)
-  if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
-                   id = "predict")
+  if (missing(ci)) {
+    deprecate_soft("0.1.0", "ssdtools::predict(ci = )",
+      details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.",
+      id = "predict"
+    )
   }
-  
+
   ssd_hc(object,
-         percent = percent, ci = ci, level = level,
-         nboot = nboot, parallel = parallel, ncpus = ncpus
+    percent = percent, ci = ci, level = level,
+    nboot = nboot, parallel = parallel, ncpus = ncpus
   )
 }
 
@@ -43,13 +45,15 @@ predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95
                                 nboot = 1000, parallel = NULL, ncpus = 1,
                                 ...) {
   chk_unused(...)
-  if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
-                   id = "predict")
+  if (missing(ci)) {
+    deprecate_soft("0.1.0", "ssdtools::predict(ci = )",
+      details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.",
+      id = "predict"
+    )
   }
   ssd_hc(object,
-         percent = percent, ci = ci, level = level,
-         nboot = nboot, parallel = parallel, ncpus = ncpus
+    percent = percent, ci = ci, level = level,
+    nboot = nboot, parallel = parallel, ncpus = ncpus
   )
 }
 
@@ -64,14 +68,16 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              average = TRUE, ic = "aicc",
                              ...) {
   chk_unused(...)
-  if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
-                   id = "predict")
+  if (missing(ci)) {
+    deprecate_soft("0.1.0", "ssdtools::predict(ci = )",
+      details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.",
+      id = "predict"
+    )
   }
   ssd_hc(object,
-         percent = percent, ci = ci, level = level,
-         nboot = nboot, parallel = parallel, ncpus = ncpus,
-         average = average, ic = ic
+    percent = percent, ci = ci, level = level,
+    nboot = nboot, parallel = parallel, ncpus = ncpus,
+    average = average, ic = ic
   )
 }
 
@@ -85,13 +91,15 @@ predict.fitdistscens <- function(object, percent = 1:99, ci = FALSE,
                                  level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,
                                  average = TRUE, ic = "aic", ...) {
   chk_unused(...)
-  if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
-                   id = "predict")
+  if (missing(ci)) {
+    deprecate_soft("0.1.0", "ssdtools::predict(ci = )",
+      details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.",
+      id = "predict"
+    )
   }
   ssd_hc(object,
-         percent = percent, ci = ci, level = level,
-         nboot = nboot, parallel = parallel, ncpus = ncpus,
-         average = average, ic = ic
+    percent = percent, ci = ci, level = level,
+    nboot = nboot, parallel = parallel, ncpus = ncpus,
+    average = average, ic = ic
   )
 }

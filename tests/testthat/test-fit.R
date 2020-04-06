@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-  
+
 test_that("fit_dist", {
   dist <- ssd_fit_dist(ssdtools::boron_data)
   expect_true(is.fitdist(dist))
@@ -122,6 +122,6 @@ test_that("fit_dists computable", {
 })
 
 test_that("fit_dists fail to converge when identical data", {
-    data <- data.frame(Conc = rep(6, 6))
-    expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit."))
+  data <- data.frame(Conc = rep(6, 6))
+  expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit."))
 })

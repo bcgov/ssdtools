@@ -16,34 +16,34 @@ add_starting_values <- function(dist, x) {
   if (!exists(paste0("s", dist$distr))) {
     return(dist)
   }
-  
+
   start <- do.call(paste0("s", dist$distr), list(x = x))
   c(dist, start)
 }
 
 fit_dist_uncensored <- function(data, left, weight, dist) {
   x <- data[[left]]
-  
+
   dist <- list(data = x, distr = dist, method = "mle")
-  
+
   if (!is.null(weight)) {
     dist$weights <- data[[weight]]
   }
-  
+
   dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdist, dist)
 }
 
 fit_dist_censored <- function(data, left, right, weight, dist) {
   x <- rowMeans(data[c(left, right)], na.rm = TRUE)
-  
+
   censdata <- data.frame(left = data[[left]], right = data[[right]])
   dist <- list(censdata = censdata, distr = dist)
-  
+
   if (!is.null(weight)) {
     dist$weights <- data[[weight]]
   }
-  
+
   dist <- add_starting_values(dist, x)
   do.call(fitdistrplus::fitdistcens, dist)
 }
@@ -64,17 +64,17 @@ remove_errors <- function(dist_fit, name, computable, silent) {
 }
 
 ssd_fit_dist <- function(
-  data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
+                         data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
   chk_s3_class(data, "data.frame")
   chk_gte(nrow(data), 6)
   chk_string(left)
   chk_string(right)
-  
+
   if (!is.null(weight)) chk_string(weight)
-  
+
   chk_superset(colnames(data), c(left, right, weight))
   chk_string(dist)
-  
+
   if (left == right) {
     fit <- fit_dist_uncensored(data, left, weight, dist)
   } else {
@@ -98,16 +98,16 @@ ssd_fit_dist <- function(
 #' However, currently only the resultant parameter estimates are available (via coef).
 #'
 #' If the `right` argument is different to the `left` argument then the data are considered to be censored.
-#' 
-#' The fits are performed using \code{\link[fitdistrplus]{fitdist}} 
-#' (and \code{\link[fitdistrplus]{fitdistcens}} in the case of censored data). 
-#' The method used is "mle" (maximum likelihood estimation) 
-#' which means that numerical optimization is carried out in 
+#'
+#' The fits are performed using \code{\link[fitdistrplus]{fitdist}}
+#' (and \code{\link[fitdistrplus]{fitdistcens}} in the case of censored data).
+#' The method used is "mle" (maximum likelihood estimation)
+#' which means that numerical optimization is carried out in
 #' \code{\link[fitdistrplus]{mledist}} using \code{\link[stats]{optim}}
-#' unless finite bounds are supplied in the (lower and upper) in which 
+#' unless finite bounds are supplied in the (lower and upper) in which
 #' it is carried out using \code{\link[stats]{constrOptim}}.
 #' In both cases the "Nelder-Mead" method is used.
-#' 
+#'
 #' @inheritParams params
 #' @return An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
 #'
@@ -117,32 +117,32 @@ ssd_fit_dist <- function(
 #' data(fluazinam, package = "fitdistrplus")
 #' ssd_fit_dists(fluazinam, left = "left", right = "right")
 ssd_fit_dists <- function(
-  data, left = "Conc", right = left, weight = NULL,
-  dists = c("llogis", "gamma", "lnorm"),
-  computable = FALSE,
-  silent = FALSE) {
+                          data, left = "Conc", right = left, weight = NULL,
+                          dists = c("llogis", "gamma", "lnorm"),
+                          computable = FALSE,
+                          silent = FALSE) {
   chk_s3_class(dists, "character")
   chk_unique(dists)
   chk_gt(length(dists))
   chk_flag(computable)
   chk_flag(silent)
 
-  if(sum(c("llog", "burrIII2", "llogis") %in% dists) > 1) {
+  if (sum(c("llog", "burrIII2", "llogis") %in% dists) > 1) {
     err("Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
   }
-  
-  if("llog" %in% dists) {
+
+  if ("llog" %in% dists) {
     .Deprecated("'llogis'", msg = "Distribution 'llog' has been deprecated for 'llogis'. Please use 'llogis'.")
   }
-  if("burrIII2" %in% dists) {
+  if ("burrIII2" %in% dists) {
     .Deprecated("'burrIII2'", msg = "Distribution 'burrIII2' has been deprecated for 'llogis'. Please use 'llogis'.")
   }
-  
+
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
   dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
   dists <- mapply(remove_errors, dists, names(dists),
-                  MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
+    MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
   )
   dists <- dists[!vapply(dists, is.null, TRUE)]
   if (!length(dists)) err("All distributions failed to fit.")

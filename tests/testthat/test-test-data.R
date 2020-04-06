@@ -27,25 +27,36 @@ test_that("test_data", {
 })
 
 test_that("test_data Quinoline", {
-  quin <- test_data[test_data$Chemical == "Quinoline",]
-  
-  expect_warning(dists <- ssd_fit_dists(quin, dist = c("gamma", "lnorm"),
-                                        computable = TRUE),
-                 "^Distribution gamma failed to compute standard errors [(]try rescaling the data or increasing the sample size[)]")
+  quin <- test_data[test_data$Chemical == "Quinoline", ]
+
+  expect_warning(
+    dists <- ssd_fit_dists(quin,
+      dist = c("gamma", "lnorm"),
+      computable = TRUE
+    ),
+    "^Distribution gamma failed to compute standard errors [(]try rescaling the data or increasing the sample size[)]"
+  )
   expect_identical(names(dists), "lnorm")
-  expect_equal(coef(dists),
-                   list(lnorm = c(meanlog = 8.68875153351101, sdlog = 1.99119217351429
-)))
-  
+  expect_equal(
+    coef(dists),
+    list(lnorm = c(meanlog = 8.68875153351101, sdlog = 1.99119217351429))
+  )
+
   dists <- ssd_fit_dists(quin, dist = c("gamma", "lnorm"), computable = FALSE)
   expect_identical(names(dists), c("gamma", "lnorm"))
-  expect_equal(coef(dists),
-                   list(gamma = c(scale = 41276.5658303504, shape = 0.504923953282222
-), lnorm = c(meanlog = 8.68875153351101, sdlog = 1.99119217351429
-)))
+  expect_equal(
+    coef(dists),
+    list(gamma = c(scale = 41276.5658303504, shape = 0.504923953282222), lnorm = c(meanlog = 8.68875153351101, sdlog = 1.99119217351429))
+  )
   set.seed(99)
-  expect_equal(as.data.frame(ssd_hc(dists, ci = TRUE, nboot = 10)),
-                   structure(list(percent = 5, est = 134.81374077839, se = 171.657247532188, 
-    lcl = 45.9882119991699, ucl = 518.208614896573, dist = "average"), row.names = c(NA, 
--1L), class = "data.frame"))
+  expect_equal(
+    as.data.frame(ssd_hc(dists, ci = TRUE, nboot = 10)),
+    structure(list(
+      percent = 5, est = 134.81374077839, se = 171.657247532188,
+      lcl = 45.9882119991699, ucl = 518.208614896573, dist = "average"
+    ), row.names = c(
+      NA,
+      -1L
+    ), class = "data.frame")
+  )
 })

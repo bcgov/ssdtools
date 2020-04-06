@@ -28,14 +28,14 @@ test_that("fit lgumbel", {
 })
 
 test_that("fit lgumbel Mn LT", {
-  mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT",]
-  
+  mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT", ]
+
   dist <- ssdtools:::ssd_fit_dist(mn_lt, dist = "lgumbel")
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
     c(llocation = 7.31628089226769, lscale = 1.00893875176455)
-  )  
+  )
 })
 
 test_that("fit lgumbel cis", {
@@ -44,16 +44,24 @@ test_that("fit lgumbel cis", {
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-structure(list(percent = 5, est = 1.76891782851293, se = 0.370590354900628, 
-    lcl = 1.2300542477102, ucl = 2.26678393125552, dist = "lgumbel"), class = "data.frame", row.names = c(NA, 
--1L))
+    structure(list(
+      percent = 5, est = 1.76891782851293, se = 0.370590354900628,
+      lcl = 1.2300542477102, ucl = 2.26678393125552, dist = "lgumbel"
+    ), class = "data.frame", row.names = c(
+      NA,
+      -1L
+    ))
   )
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-    structure(list(conc = 2, est = 6.6426765222485, se = 3.00359276728387, 
-    lcl = 3.43548429065931, ucl = 12.0724651584046, dist = "lgumbel"), class = "data.frame", row.names = c(NA, 
--1L))
+    structure(list(
+      conc = 2, est = 6.6426765222485, se = 3.00359276728387,
+      lcl = 3.43548429065931, ucl = 12.0724651584046, dist = "lgumbel"
+    ), class = "data.frame", row.names = c(
+      NA,
+      -1L
+    ))
   )
 })
 

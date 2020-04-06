@@ -6,4 +6,3 @@ test_data <- tidyr::pivot_longer(test_data, everything(), names_to = "Chemical",
 test_data <- dplyr::arrange(test_data, Chemical)
 
 usethis::use_data(test_data, overwrite = TRUE)
-
