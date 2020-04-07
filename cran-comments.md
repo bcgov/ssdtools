@@ -9,17 +9,7 @@ Release 3.6.2
 
 ## R CMD check results
 
-0 errors | 0 warnings | 3 notes
-
-> See https://cran.r-project.org/web/checks/check_results_ssdtools.html .
-
-> It seems this does not work with R 3.5.x despite
-
-> Depends: 	R (≥ 3.4.0)
-
-> Please correct (preferably by making it work with earlier versions, before Jan 31 to safely retain the package on CRAN.
-
-Done
+0 errors | 0 warnings | 2 notes
 
 > Possibly mis-spelled words in DESCRIPTION:
   Posthuma (7:3)
@@ -30,14 +20,22 @@ Done
 The words are spelt correctly.
 
 > Found the following (possibly) invalid URLs:
+  URL: http://creativecommons.org/licenses/by/4.0/
+    From: inst/doc/distributions.html
+          inst/doc/exposure-plots.html
+          inst/doc/small-sample-bias-ref.html
+          inst/doc/ssdtools.html
+          README.md
+    Status: 521
   URL: https://bcgov-env.shinyapps.io/ssdtools/
     From: inst/doc/distributions.html
           inst/doc/ssdtools.html
+          README.md
     Status: Error
     Message: libcurl error code 35:
       	Unknown SSL protocol error in connection to bcgov-env.shinyapps.io:443
       	
-The url is valid.
+The urls are valid.
 
 ## Reverse dependencies
 

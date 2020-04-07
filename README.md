@@ -139,7 +139,7 @@ Get started with ssdtools at
 <https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
 
 A shiny webpage developed for non-R-users is available at
-<https://bcgov-env.shinyapps.io/ssdtools/>.
+<https://bcgov-env.shinyapps.io/ssdtools>.
 
 The ssdtools package was developed as a result of earlier drafts of:
 

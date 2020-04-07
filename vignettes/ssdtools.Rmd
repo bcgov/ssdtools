@@ -27,7 +27,7 @@ SSDs are cumulative probability distributions that are used to estimate the perc
 The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC).
 For more information on SSDs the reader is referred to @posthuma_species_2001.
 
-In order to use `ssdtools` you need to install R (see below) or use the Shiny [app](https://bcgov-env.shinyapps.io/ssdtools/).
+In order to use `ssdtools` you need to install R (see below) or use the Shiny [app](https://bcgov-env.shinyapps.io/ssdtools).
 The shiny app includes a user guide. 
 This vignette is a user manual for the R package.
 
@@ -287,7 +287,7 @@ ssd_plot(fluazinam, fluazinam_pred,
 
 -----
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
 style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
 xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span
 xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia

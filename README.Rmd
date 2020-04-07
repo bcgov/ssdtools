@@ -100,7 +100,7 @@ Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distribu
 
 Get started with ssdtools at <https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
 
-A shiny webpage developed for non-R-users is available at <https://bcgov-env.shinyapps.io/ssdtools/>.
+A shiny webpage developed for non-R-users is available at <https://bcgov-env.shinyapps.io/ssdtools>.
 
 The ssdtools package was developed as a result of earlier drafts of:
 

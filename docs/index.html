@@ -21,7 +21,7 @@
 <meta property="og:description" content="Species sensitivity distributions are 
   cumulative probability distributions which are fitted to 
   toxicity concentrations for different species as described by
-  Posthuma et al. (2001) &lt;isbn:9781566705783&gt;.
+  Posthuma et al.(2001) &lt;isbn:9781566705783&gt;.
   The ssdtools package uses Maximum Likelihood to fit distributions 
   such as the log-normal, gamma, burr Type-III, log-logistic, 
   log-Gumbel, Gompertz and Weibull.
@@ -117,7 +117,7 @@
 <!-- badges: start -->
 
 <p><code>ssdtools</code> is an R package to plot and fit Species Sensitivity Distributions (SSD).</p>
-<p>SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al. (2001). The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, gamma, log-logistic, log-Gumbel, Gompertz and Weibull. The user can also provide custom distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.</p>
+<p>SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al.Â (2001). The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, gamma, log-logistic, log-Gumbel, Gompertz and Weibull. The user can also provide custom distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -146,7 +146,7 @@
 <span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span>
 <span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span>
 <span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span>
-<span class="co">#&gt; # … with 18 more rows</span></pre></div>
+<span class="co">#&gt; # â¦ with 18 more rows</span></pre></div>
 <p>Multiple distributions can be fit using <code><a href="reference/ssd_fit_dists.html">ssd_fit_dists()</a></code></p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="no">boron_dists</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(<span class="no">boron_data</span>)</pre></div>
 <p>and plot using the <code>ggplot2</code> generic <code>autoplot</code></p>
@@ -185,7 +185,7 @@
 <a href="#information" class="anchor"></a>Information</h2>
 <p>Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.</p>
 <p>Get started with ssdtools at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="uri">https://bcgov.github.io/ssdtools/articles/ssdtools.html</a>.</p>
-<p>A shiny webpage developed for non-R-users is available at <a href="https://bcgov-env.shinyapps.io/ssdtools/" class="uri">https://bcgov-env.shinyapps.io/ssdtools/</a>.</p>
+<p>A shiny webpage developed for non-R-users is available at <a href="https://bcgov-env.shinyapps.io/ssdtools" class="uri">https://bcgov-env.shinyapps.io/ssdtools</a>.</p>
 <p>The ssdtools package was developed as a result of earlier drafts of:</p>
 <p>Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for Modeling Species Sensitivity Distributions. Province of British Columbia, Victoria, BC. Available from <a href="http://a100.gov.bc.ca/appsdata/acat/documents/r57400/2_1568399094009_8398900200.pdf" class="uri">http://a100.gov.bc.ca/appsdata/acat/documents/r57400/2_1568399094009_8398900200.pdf</a>.</p>
 <p>The CCME <code>data.csv</code> data file is derived from a factsheet prepared by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw"><code>data-raw</code></a> folder for more information.</p>
@@ -229,9 +229,9 @@ A BibTeX entry for LaTeX users is
 <a href="#license" class="anchor"></a>License</h2>
 <p>The code is released under the Apache License 2.0</p>
 <p>Copyright 2015 Province of British Columbia</p>
-<p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p>Licensed under the Apache License, Version 2.0 (the âLicenseâ); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
 <p><a href="http://www.apache.org/licenses/LICENSE-2.0" class="uri">http://www.apache.org/licenses/LICENSE-2.0</a></p>
-<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an âAS ISâ BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
 <hr>
 <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia </span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"> Creative Commons Attribution 4.0 International License</a>.</p>
 </div>

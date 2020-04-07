@@ -11,7 +11,7 @@
 Species sensitivity distributions are 
   cumulative probability distributions which are fitted to 
   toxicity concentrations for different species as described by
-  Posthuma et al. (2001) <isbn:9781566705783>.
+  Posthuma et al.(2001) <isbn:9781566705783>.
   The ssdtools package uses Maximum Likelihood to fit distributions 
   such as the log-normal, gamma, burr Type-III, log-logistic, 
   log-Gumbel, Gompertz and Weibull.
