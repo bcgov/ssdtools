@@ -19,23 +19,16 @@ Release 3.6.2
   
 The words are spelt correctly.
 
-> Found the following (possibly) invalid URLs:
-  URL: http://creativecommons.org/licenses/by/4.0/
-    From: inst/doc/distributions.html
-          inst/doc/exposure-plots.html
-          inst/doc/small-sample-bias-ref.html
-          inst/doc/ssdtools.html
-          README.md
-    Status: 521
-  URL: https://bcgov-env.shinyapps.io/ssdtools/
+> Found the following (possibly) invalid URL:
+  URL: https://bcgov-env.shinyapps.io/ssdtools
     From: inst/doc/distributions.html
           inst/doc/ssdtools.html
           README.md
     Status: Error
     Message: libcurl error code 35:
       	Unknown SSL protocol error in connection to bcgov-env.shinyapps.io:443
-      	
-The urls are valid.
+
+The url is valid.
 
 ## Reverse dependencies
 
