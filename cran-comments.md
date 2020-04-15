@@ -3,9 +3,15 @@
 Release 3.6.2
 
 * OS X (local) - release
-* Ubuntu (travis) - devel, release, oldrel and 3.5 - 3.4
+* Ubuntu (travis) - devel, release, oldrel and 3.4
 * Windows (appveyor) - release
 * Windows (win-builder) - devel
+
+## Existing CRAN check Problems
+
+Includes fix for recent upgrade of package 'tibble' to version 3.0.0 
+that caused the following problems
+<https://cran.r-project.org/web/checks/check_results_ssdtools.html>.
 
 ## R CMD check results
 
