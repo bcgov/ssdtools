@@ -53,6 +53,7 @@ Suggests:
     rmarkdown,
     testthat,
     readr,
+    rlang,
     purrr,
     tidyr,
     dplyr,

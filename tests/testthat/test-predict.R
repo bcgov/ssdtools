@@ -13,59 +13,43 @@
 #    limitations under the License.
 
 test_that("predict.fitdist", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  
   boron_lnorm <- ssdtools:::ssd_fit_dist(ssdtools::boron_data[1:6, ])
-  expect_warning(
-    pred <- predict(boron_lnorm, nboot = 10L),
-    "The `ci` argument of `predict[(][)]` is deprecated as of ssdtools 0.1.0.
-In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`."
-  )
-
+  pred <- predict(boron_lnorm, nboot = 10L)
+  
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
   pred2 <- predict(boron_lnorm, ci = TRUE, nboot = 10)
   expect_identical(pred$est[1], pred2$est[1])
-
+  
   boron_data$Conc <- boron_data$Conc / 1000
   boron_lnorm3 <- ssdtools:::ssd_fit_dist(boron_data[1:6, ])
-  expect_warning(
-    pred3 <- predict(boron_lnorm3, nboot = 10),
-    "The `ci` argument of `predict[(][)]` is deprecated as of ssdtools 0.1.0.
-In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`."
-  )
+  pred3 <- predict(boron_lnorm3, nboot = 10)
   expect_equal(pred3$est[1], pred2$est[1] / 1000)
 })
 
 test_that("predict.fitdist parallel", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   boron_lnorm <- ssdtools:::ssd_fit_dist(ssdtools::boron_data)
-
-  expect_warning(
-    pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2),
-    "The `ci` argument of `predict[(][)]` is deprecated as of ssdtools 0.1.0.
-In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`."
-  )
+  
+  pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
 })
 
 test_that("predict.fitdists", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("gamma", "gompertz"))
-  expect_warning(
-    pred <- predict(dists, nboot = 10L),
-    "The `ci` argument of `predict[(][)]` is deprecated as of ssdtools 0.1.0.
-In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`."
-  )
-
+  pred <- predict(dists, nboot = 10L)
+  
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
-
-  expect_warning(
-    pred <- predict(dists, average = FALSE),
-    "The `ci` argument of `predict[(][)]` is deprecated as of ssdtools 0.1.0.
-In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`."
-  )
+  
+  pred <- predict(dists, average = FALSE)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_identical(nrow(pred), 198L)
@@ -73,21 +57,18 @@ In particular, the `ci` has been switched from TRUE to FALSE. To retain the prev
 })
 
 test_that("predict.fitdists parallel", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "gompertz"))
-
-  expect_warning(
-    pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2),
-    "The `ci` argument of `predict[(][)]` is deprecated as of ssdtools 0.1.0.
-In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`."
-  )
+  
+  pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_equal(pred$percent, 1:99)
 })
 
 test_that("predict.fitdistscens", {
-  expect_warning(pred <- predict(ssdtools::fluazinam_dists, percent = c(1, 99)), "The `ci` argument of `predict[(][)]` is deprecated as of ssdtools 0.1.0.
-In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.")
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  pred <- predict(ssdtools::fluazinam_dists, percent = c(1, 99))
   expect_equal(
     as.data.frame(pred),
     structure(list(percent = c(1, 99), est = c(
@@ -103,8 +84,8 @@ In particular, the `ci` has been switched from TRUE to FALSE. To retain the prev
 test_that("predict.fitdistscens cis", {
   set.seed(77)
   pred <- predict(ssdtools::fluazinam_dists,
-    percent = c(1, 99),
-    ci = TRUE, average = FALSE, nboot = 10
+                  percent = c(1, 99),
+                  ci = TRUE, average = FALSE, nboot = 10
   )
   expect_identical(colnames(pred), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_identical(pred$percent, c(1, 99, 1, 99, 1, 99))
