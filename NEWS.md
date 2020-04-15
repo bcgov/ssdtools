@@ -2,7 +2,6 @@
 
 - Internal changes only.
 
-
 # ssdtools 0.2.0
 
 ## Breaking Changes
