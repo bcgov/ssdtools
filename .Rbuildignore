@@ -9,7 +9,6 @@
 ^CODE_OF_CONDUCT.md$
 ^CONTRIBUTING.md$
 ^docs$
-^build.R$
 ^cran-comments\.md$
 ^paper$
 ^pkgdown$
@@ -17,6 +16,5 @@
 ^vignettestatic$
 ^CRAN-RELEASE$
 ^COMPLIANCE.yaml$
-
 ^\.github$
 ^scripts$

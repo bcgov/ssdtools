@@ -13,13 +13,12 @@
 #    limitations under the License.
 
 styler::style_pkg(filetype = c("R", "Rmd"))
+lintr::lint_package()
 
 devtools::test()
 devtools::document()
+
+rmarkdown::render("README.Rmd", output_format = "md_document")
+pkgdown::build_site()
 demo(ssdtools, ask = FALSE)
-# knitr::knit("README.Rmd")
-if(FALSE) {
-  if(file.exists("DESCRIPTION")) unlink("docs", recursive = TRUE)
-  pkgdown::build_site()
-}
 devtools::check()
