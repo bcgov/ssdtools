@@ -49,4 +49,4 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.POISSON_SLACK_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: success()
+        if: failure()
