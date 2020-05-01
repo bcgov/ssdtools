@@ -47,6 +47,6 @@ jobs:
           author_name: "github action: coverage"
           fields: repo, workflow, commit, message, author, action
         env:
-          POISSON_SLACK_WEBHOOK_URL: ${{ secrets.POISSON_SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.POISSON_SLACK_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: success()
