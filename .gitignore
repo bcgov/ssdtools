@@ -2,9 +2,14 @@
 .Rhistory
 .RData
 .Ruserdata
-inst/doc
-demo/ssdtool.html
 
-paper/paper.html
-paper/paper.pdf
+.DS_Store
+.Renviron
+.RProfile
+.httr-oauth
+
+*.html
+
 docs/
+inst/docs/
+scripts/

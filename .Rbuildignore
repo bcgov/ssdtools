@@ -18,3 +18,4 @@
 ^COMPLIANCE.yaml$
 ^\.github$
 ^scripts$
+^\.gitignore$

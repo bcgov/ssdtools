@@ -15,6 +15,10 @@ Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](http
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.01082/status.svg)](https://doi.org/10.21105/joss.01082)
+[![Codecov test
+coverage](https://codecov.io/gh/poissonconsulting/ssdtools/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/ssdtools?branch=master)
+[![R build
+status](https://github.com/poissonconsulting/ssdtools/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/ssdtools/actions)
 <!-- badges: end -->
 
 `ssdtools` is an R package to plot and fit Species Sensitivity
@@ -189,9 +193,12 @@ If you would like to contribute to the package, please see our
 [CONTRIBUTING](https://github.com/bcgov/ssdtools/blob/master/CONTRIBUTING.md)
 guidelines.
 
-Please note that this project is released with a [Contributor Code of
-Conduct](https://github.com/bcgov/ssdtools/blob/master/CODE_OF_CONDUCT.md).
-By participating in this project you agree to abide by its terms.
+## Code of Conduct
+
+Please note that the ssdtools project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## License
 
