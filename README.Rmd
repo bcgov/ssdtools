@@ -21,8 +21,6 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.01082/status.svg)](https://doi.org/10.21105/joss.01082)
-[![Codecov test coverage](https://codecov.io/gh/poissonconsulting/ssdtools/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/ssdtools?branch=master)
-[![R build status](https://github.com/poissonconsulting/ssdtools/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/ssdtools/actions)
 <!-- badges: end -->
 
 `ssdtools` is an R package to plot and fit Species Sensitivity Distributions (SSD). 
@@ -43,8 +41,8 @@ install.packages("ssdtools")
 To install the latest development version:
 
 ```{r, eval = FALSE}
-install.packages("devtools")
-devtools::install_github("bcgov/ssdtools")
+install.packages("remotes")
+remotes::install_github("bcgov/ssdtools")
 ```
 
 ## Introduction
@@ -156,4 +154,3 @@ xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <s
 xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia
 </span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 Creative Commons Attribution 4.0 International License</a>.
-
