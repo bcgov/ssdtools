@@ -41,8 +41,8 @@ install.packages("ssdtools")
 To install the latest development version:
 
 ``` r
-install.packages("devtools")
-devtools::install_github("bcgov/ssdtools")
+install.packages("remotes")
+remotes::install_github("bcgov/ssdtools")
 ```
 
 ## Introduction
