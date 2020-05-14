@@ -46,7 +46,8 @@ Imports:
     tibble,
     scales,
     stats,
-    VGAM
+    VGAM,
+    Rcpp
 Suggests:
     covr,
     knitr,
@@ -67,3 +68,5 @@ VignetteBuilder:
   knitr,
   R.rsp
 Language: en-US
+LinkingTo: 
+    Rcpp
