@@ -83,6 +83,7 @@ sburrIII2 <- function(x) {
   deprecate_soft("0.1.2", "xburrIII2()",
     details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2"
   )
-  s <- sburrIII3(x)
-  list(start = list(lshape = s$lshape1, lscale = s$lscale))
+  list <- sburrIII3(x)
+  list$start <- list(lshape = list$start$lshape1, lscale = list$start$lscale)
+  list
 }
