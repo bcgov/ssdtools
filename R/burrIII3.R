@@ -34,13 +34,19 @@
 #' plot(x, dburrIII3(x), type = "l")
 NULL
 
+dburrXII <- function(x, shape1, shape2, scale, log = FALSE) {
+  fx <- (shape1 * shape2 * (x/scale)^shape2)/(x * (1 + (x/scale)^shape2)^(shape1 + 1))
+  if(log) return(log(fx))
+  fx
+}
+
 #' @rdname burrIII3
 #' @export
 dburrIII3 <- function(x, lshape1 = 0, lshape2 = 0, lscale = 1, log = FALSE) {
   if (!length(x)) {
     return(numeric(0))
   }
-  fx <- actuar::dburr(1 / x,
+  fx <- dburrXII(1 / x,
     shape1 = exp(lshape1), shape2 = exp(lshape2),
     scale = exp(lscale), log = FALSE
   )

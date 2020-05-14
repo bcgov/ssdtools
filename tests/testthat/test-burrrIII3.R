@@ -15,7 +15,7 @@
 test_that("dburrIII3", {
   expect_identical(dburrIII3(numeric(0)), numeric(0))
   expect_identical(dburrIII3(NA), NA_real_)
-
+  
   expect_equal(
     dburrIII3(c(31, 15, 32, 32, 642, 778, 187, 12), lscale = 0),
     c(
@@ -36,9 +36,9 @@ test_that("dburrIII3", {
 
 test_that("fit burrIII3", {
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
-
+  
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
-
+  
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
@@ -47,23 +47,23 @@ test_that("fit burrIII3", {
       lscale = 0.568325580801304
     )
   )
-
+  
   data$Conc <- data$Conc / 1000
-
+  
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
-
+  
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(
-    lshape1 = 17.3403456134406, lshape2 = -0.148732959674022,
-    lscale = 23.5089158967839
-  ))
+  expect_equal(coef(dist), 
+               c(lshape1 = 17.1408835835623, 
+                 lshape2 = -0.148688158406167, lscale = 23.2767219745654
+               ))
 })
 
 test_that("fit burrIII3 cis", {
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
-
+  
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
-
+  
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
