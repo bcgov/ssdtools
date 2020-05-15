@@ -36,11 +36,12 @@ test_that("fit_dist tiny llogis", {
 })
 
 test_that("fit_dists", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   dist_names <- c(
     "gamma", "gompertz", "lgumbel",
     "llogis", "lnorm", "pareto", "weibull"
   )
-  expect_error(ssd_fit_dists(boron_data[1:5, ], dists = dist_names), "^All distributions failed to fit[.]$")
+  expect_error(expect_warning(ssd_fit_dists(boron_data[1:5, ], dists = dist_names)), "^All distributions failed to fit[.]$")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = dist_names)
   expect_true(is.fitdists(dists))
   expect_identical(names(dists), dist_names)
@@ -49,6 +50,7 @@ test_that("fit_dists", {
 })
 
 test_that("burrIII2", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("burrIII2", "gamma", "lnorm"))
   expect_identical(names(dists), c("burrIII2", "gamma", "lnorm"))
   expect_equal(coef(dists$burrIII2), c(lshape = 0.493452552733572, lscale = -1.37955270951911))
@@ -64,7 +66,7 @@ test_that("fit_dist", {
   boron_data2 <- boron_data[rev(order(boron_data$Conc)), ]
   boron_data2$Weight <- 1:nrow(boron_data2)
 
-  dist <- ssd_fit_dist(boron_data2, weight = "Weight")
+  expect_warning(dist <- ssd_fit_dist(boron_data2, weight = "Weight"), "weights are not taken into account in the default initial values")
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist), c(meanlog = 1.879717, sdlog = 1.127537), tolerance = 0.000001)
 })
@@ -84,10 +86,10 @@ test_that("fluazinam", {
   fluazinam2 <- fluazinam[rev(order(fluazinam$left)), ]
   fluazinam2$Weight <- 1:nrow(fluazinam2)
 
-  dist <- ssd_fit_dists(fluazinam2,
+  expect_warning(dist <- ssd_fit_dists(fluazinam2,
     weight = "Weight", left = "left", right = "right",
     dist = "lnorm"
-  )
+  ), "weights are not taken into account in the default initial values")
   expect_identical(class(dist), c("fitdistscens", "fitdists"))
   dist <- dist[[1]]
   expect_false(is.fitdist(dist))
@@ -109,7 +111,8 @@ test_that("fit_dists computable", {
   #    "^All distributions failed to fit[.]$"
   #  )
 
-  fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]]
+  expect_warning(fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]],
+                 "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
   #  expect_equal(fit$sd["scale"], c(scale = NaN)) fitting on noLD!
   expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189), tolerance = 0.0003) # for noLD
   expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))

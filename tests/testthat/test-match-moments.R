@@ -23,6 +23,7 @@ test_that("match_moments default", {
 })
 
 test_that("match_moments all", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   set.seed(10)
   pars <- ssd_match_moments(dists = c(
     "burrIII2", "burrIII3", "gamma",
@@ -47,6 +48,7 @@ test_that("match_moments all", {
 })
 
 test_that("match_moments all", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   set.seed(10)
   pars <- ssd_match_moments(dists = c(
     "burrIII2", "burrIII3", "gamma",

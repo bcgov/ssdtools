@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 test_that("deprecated llog", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "llog")
 
   expect_true(is.fitdist(dist))

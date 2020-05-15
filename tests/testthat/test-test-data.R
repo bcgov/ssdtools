@@ -42,7 +42,8 @@ test_that("test_data Quinoline", {
     list(lnorm = c(meanlog = 8.68875153351101, sdlog = 1.99119217351429))
   )
 
-  dists <- ssd_fit_dists(quin, dist = c("gamma", "lnorm"), computable = FALSE)
+  expect_warning(dists <- ssd_fit_dists(quin, dist = c("gamma", "lnorm"), computable = FALSE),
+                 "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
   expect_identical(names(dists), c("gamma", "lnorm"))
   expect_equal(
     coef(dists),
