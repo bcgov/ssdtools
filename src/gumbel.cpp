@@ -2,15 +2,15 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-NumericVector dgumbel_cpp(NumericVector x, NumericVector location, NumericVector scale) {
+NumericVector dgumbel_cpp(NumericVector x, double location, double scale) {
   NumericVector z = (x - location) / scale;
   NumericVector log_d = -z - exp(-z) - log(scale);
   return exp(log_d);
 }
 
 // [[Rcpp::export]]
-NumericVector qgumbel_cpp(NumericVector p, NumericVector location, NumericVector scale) {
-  location - scale * log(-log(p));
+NumericVector qgumbel_cpp(NumericVector p, double location, double scale) {
+  NumericVector q = location - scale * log(-log(p));
   return q;
 }
 
