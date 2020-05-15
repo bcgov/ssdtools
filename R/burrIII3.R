@@ -34,21 +34,15 @@
 #' plot(x, dburrIII3(x), type = "l")
 NULL
 
-dburrXII <- function(x, shape1, shape2, scale, log = FALSE) {
-  fx <- (shape1 * shape2 * (x/scale)^shape2)/(x * (1 + (x/scale)^shape2)^(shape1 + 1))
-  if(log) return(log(fx))
-  fx
-}
-
 #' @rdname burrIII3
 #' @export
 dburrIII3 <- function(x, lshape1 = 0, lshape2 = 0, lscale = 1, log = FALSE) {
   if (!length(x)) {
     return(numeric(0))
   }
-  fx <- dburrXII(1 / x,
+  fx <- dburrXII_(1 / x,
     shape1 = exp(lshape1), shape2 = exp(lshape2),
-    scale = exp(lscale), log = FALSE
+    scale = exp(lscale), log_ = FALSE
   )
   fx <- fx / (x + (x == 0))^2 # avoid dividing by 0. Can only occur if fx is 0.
   if (log) {

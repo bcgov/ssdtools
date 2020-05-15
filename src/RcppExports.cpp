@@ -5,6 +5,21 @@
 
 using namespace Rcpp;
 
+// dburrXII_
+NumericVector dburrXII_(NumericVector x, double shape1, double shape2, double scale, bool log_);
+RcppExport SEXP _ssdtools_dburrXII_(SEXP xSEXP, SEXP shape1SEXP, SEXP shape2SEXP, SEXP scaleSEXP, SEXP log_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type shape1(shape1SEXP);
+    Rcpp::traits::input_parameter< double >::type shape2(shape2SEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< bool >::type log_(log_SEXP);
+    rcpp_result_gen = Rcpp::wrap(dburrXII_(x, shape1, shape2, scale, log_));
+    return rcpp_result_gen;
+END_RCPP
+}
 // timesTwo
 NumericVector timesTwo(NumericVector x);
 RcppExport SEXP _ssdtools_timesTwo(SEXP xSEXP) {
@@ -18,6 +33,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_ssdtools_dburrXII_", (DL_FUNC) &_ssdtools_dburrXII_, 5},
     {"_ssdtools_timesTwo", (DL_FUNC) &_ssdtools_timesTwo, 1},
     {NULL, NULL, 0}
 };
