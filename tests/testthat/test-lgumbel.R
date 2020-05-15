@@ -21,19 +21,24 @@ test_that("dlgumbel extremes", {
 })
 
 test_that("dlgumbel values", {
+  expect_equal(dlgumbel(1), 0.367879441171442)
+  expect_equal(dlgumbel(2), 0.151632664928158)
+  expect_equal(dlgumbel(c(1, 2)), c(0.367879441171442, 0.151632664928158))
   expect_equal(dlgumbel(exp(3), 3, 1), 0.0183156388887342)
   expect_equal(dlgumbel(exp(4), 3, 1), 0.00466401114120162)
 })
 
 test_that("qlgumbel extremes", {
-  # expect_identical(qlgumbel(numeric(0)), numeric(0))
-  # expect_identical(qlgumbel(NA), NA_real_)
-  # expect_identical(qlgumbel(0), NaN)
-  # expect_identical(qlgumbel(-Inf), NaN)
-  # expect_identical(qlgumbel(Inf), 0)
+  expect_identical(qlgumbel(numeric(0)), numeric(0))
+  expect_identical(qlgumbel(NA), NA_real_)
+  expect_identical(qlgumbel(0), 0)
+  expect_identical(qlgumbel(1), Inf)
+  expect_identical(qlgumbel(-Inf), NaN)
+  expect_identical(qlgumbel(Inf), NaN)
 })
 
-test_that("qlgumbel", {
+test_that("qlgumbel values", {
+  expect_equal(qlgumbel(0.5), 1.44269504088896)
   expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1)), 
                c(2.52411500467289, 3.36651292058166, 5.25036732731245))
   expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1,

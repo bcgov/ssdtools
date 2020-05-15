@@ -38,7 +38,7 @@ dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
 qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
   if (log.p) p <- exp(p)
   if (!lower.tail) p <- 1 - p
-  exp(VGAM::qgumbel(p, location = llocation, scale = lscale))
+  exp(qgumbel_cpp(p, location = llocation, scale = lscale))
 }
 
 #' @rdname lgumbel
