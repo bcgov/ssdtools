@@ -13,9 +13,6 @@
 #    limitations under the License.
 
 xcis <- function(x, samples, p, level, fun, args) {
-  # this is a hack to deal with the fact that currently the Rcpp 
-  # distribution functions can only accept scalars for parameter values
-  fun <- Vectorize(fun, vectorize.args = names(args), USE.NAMES = FALSE)
   if (p) {
     args$q <- x
   } else {

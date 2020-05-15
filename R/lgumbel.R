@@ -36,9 +36,10 @@ dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
 #' @rdname lgumbel
 #' @export
 qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+  if(!length(p)) return(numeric(0))
   if (log.p) p <- exp(p)
   if (!lower.tail) p <- 1 - p
-  exp(qgumbel_cpp(p, location = llocation, scale = lscale))
+  exp(mapply(qgumbel_cpp, p = p, location = llocation, scale = lscale))
 }
 
 #' @rdname lgumbel

@@ -9,7 +9,7 @@ NumericVector dgumbel_cpp(NumericVector x, double location = 0, double scale = 1
 }
 
 // [[Rcpp::export]]
-NumericVector qgumbel_cpp(NumericVector p, double location = 0, double scale = 1) {
+NumericVector qgumbel_cpp(NumericVector p, NumericVector location, NumericVector scale) {
   NumericVector q = location - scale * log(-log(p));
   return q;
 }

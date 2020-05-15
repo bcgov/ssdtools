@@ -34,14 +34,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // qgumbel_cpp
-NumericVector qgumbel_cpp(NumericVector p, double location, double scale);
+NumericVector qgumbel_cpp(NumericVector p, NumericVector location, NumericVector scale);
 RcppExport SEXP _ssdtools_qgumbel_cpp(SEXP pSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type location(locationSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type scale(scaleSEXP);
     rcpp_result_gen = Rcpp::wrap(qgumbel_cpp(p, location, scale));
     return rcpp_result_gen;
 END_RCPP

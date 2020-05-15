@@ -9,7 +9,7 @@ dgumbel_cpp <- function(x, location = 0, scale = 1) {
     .Call('_ssdtools_dgumbel_cpp', PACKAGE = 'ssdtools', x, location, scale)
 }
 
-qgumbel_cpp <- function(p, location = 0, scale = 1) {
+qgumbel_cpp <- function(p, location, scale) {
     .Call('_ssdtools_qgumbel_cpp', PACKAGE = 'ssdtools', p, location, scale)
 }
 
