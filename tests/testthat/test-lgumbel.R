@@ -12,14 +12,49 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("dlgumbel", {
-  expect_equal(dlgumbel(exp(3), 3, 1), 0.01831564, tolerance = 0.0000001)
-  expect_equal(dlgumbel(exp(4), 3, 1), 0.004664011, tolerance = 0.0000001)
+test_that("dlgumbel extremes", {
+  expect_identical(dlgumbel(numeric(0)), numeric(0))
+  expect_identical(dlgumbel(NA), NA_real_)
+  expect_identical(dlgumbel(0), NaN)
+  expect_identical(dlgumbel(-Inf), NaN)
+  expect_identical(dlgumbel(Inf), 0)
+})
+
+test_that("dlgumbel values", {
+  expect_equal(dlgumbel(exp(3), 3, 1), 0.0183156388887342)
+  expect_equal(dlgumbel(exp(4), 3, 1), 0.00466401114120162)
+})
+
+test_that("qlgumbel extremes", {
+  # expect_identical(qlgumbel(numeric(0)), numeric(0))
+  # expect_identical(qlgumbel(NA), NA_real_)
+  # expect_identical(qlgumbel(0), NaN)
+  # expect_identical(qlgumbel(-Inf), NaN)
+  # expect_identical(qlgumbel(Inf), 0)
+})
+
+test_that("qlgumbel", {
+  expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1)), 
+               c(2.52411500467289, 3.36651292058166, 5.25036732731245))
+  expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1,
+                            lower.tail = FALSE
+  )), c(4.49993998675952, 3.36651292058166, 2.16596755475204))
+  
+  expect_identical(
+    log(qlgumbel(-1, log.p = TRUE)),
+    log(qlgumbel(exp(-1)))
+  )
+})
+
+test_that("plgumbel", {
+  expect_equal(plgumbel(exp(3), 3, 1), 0.3678794, tolerance = 0.0000001)
+  expect_equal(plgumbel(exp(4), 3, 1), 0.6922006, tolerance = 0.0000001)
+  expect_identical(plgumbel(qlgumbel(0.5, 3, 1), 3, 1), 0.5)
 })
 
 test_that("fit lgumbel", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
-
+  
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
@@ -29,7 +64,7 @@ test_that("fit lgumbel", {
 
 test_that("fit lgumbel Mn LT", {
   mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT", ]
-
+  
   dist <- ssdtools:::ssd_fit_dist(mn_lt, dist = "lgumbel")
   expect_true(is.fitdist(dist))
   expect_equal(
@@ -40,7 +75,7 @@ test_that("fit lgumbel Mn LT", {
 
 test_that("fit lgumbel cis", {
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
-
+  
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
@@ -63,22 +98,6 @@ test_that("fit lgumbel cis", {
       -1L
     ))
   )
-})
-
-test_that("pqlgumbel", {
-  expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1)), c(2.52411500467289, 3.36651292058166, 5.25036732731245))
-  expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1,
-    lower.tail = FALSE
-  )), c(4.49993998675952, 3.36651292058166, 2.16596755475204))
-
-  expect_identical(
-    log(qlgumbel(-1, log.p = TRUE)),
-    log(qlgumbel(exp(-1)))
-  )
-
-  expect_equal(plgumbel(exp(3), 3, 1), 0.3678794, tolerance = 0.0000001)
-  expect_equal(plgumbel(exp(4), 3, 1), 0.6922006, tolerance = 0.0000001)
-  expect_identical(plgumbel(qlgumbel(0.5, 3, 1), 3, 1), 0.5)
 })
 
 test_that("rlgumbel", {
