@@ -132,8 +132,8 @@ ssd_fit_dists <- function(
   }
 
   if ("llog" %in% dists) {
-    deprecate_soft("0.1.0", "xllog()",
-                   details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.", id = "xllog")
+    deprecate_soft("0.1.0", "dllog()", "dllogis()", id = "xllog", 
+                   details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
   }
   if ("burrIII2" %in% dists) {
     deprecate_soft("0.1.2", "xburrIII2()",
