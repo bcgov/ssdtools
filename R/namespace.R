@@ -17,4 +17,6 @@
 #' @importFrom graphics plot
 #' @importFrom VGAM vglm
 #' @importFrom tibble as_tibble
+#' @importFrom Rcpp sourceCpp
+#' @useDynLib ssdtools
 NULL

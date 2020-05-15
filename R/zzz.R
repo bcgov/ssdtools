@@ -43,3 +43,8 @@ register_s3_method <- function(pkg, generic, class) {
     }
   )
 }
+
+.onUnload <- function (libpath) {
+  library.dynam.unload("ssdtools", libpath)
+}
+
