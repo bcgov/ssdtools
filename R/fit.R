@@ -132,10 +132,12 @@ ssd_fit_dists <- function(
   }
 
   if ("llog" %in% dists) {
-    .Deprecated("'llogis'", msg = "Distribution 'llog' has been deprecated for 'llogis'. Please use 'llogis'.")
+    deprecate_soft("0.1.0", "dllog()", "dllogis()", id = "xllog", 
+                   details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
   }
   if ("burrIII2" %in% dists) {
-    .Deprecated("'burrIII2'", msg = "Distribution 'burrIII2' has been deprecated for 'llogis'. Please use 'llogis'.")
+    deprecate_soft("0.1.2", "xburrIII2()",
+                   details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
   }
 
   safe_fit_dist <- safely(ssd_fit_dist)

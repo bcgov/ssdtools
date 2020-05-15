@@ -13,8 +13,10 @@
 #    limitations under the License.
 
 test_that("dburrIII2", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  
   expect_identical(dburrIII2(numeric(0)), numeric(0))
-  expect_identical(dburrIII2(NA), NA_real_)
+  expect_equal(dburrIII2(NA), NA_real_) # equal for windows
 #  expect_equal(dburrIII2(c(0, 1, Inf, NaN, -1)), c(0, 0.196611933241482, 0, NaN, 0))
 
   expect_equal(
@@ -36,6 +38,7 @@ test_that("dburrIII2", {
 })
 
 test_that("fit burrIII2", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
 
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII2")
@@ -52,6 +55,7 @@ test_that("fit burrIII2", {
 })
 
 test_that("fit burrIII2 cis", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
 
   set.seed(77)
@@ -79,6 +83,7 @@ test_that("fit burrIII2 cis", {
 })
 
 test_that("qburrIII2", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(qburrIII2(numeric(0)), numeric(0))
   expect_identical(qburrIII2(0), 0)
   expect_identical(qburrIII2(1), Inf)
@@ -88,6 +93,7 @@ test_that("qburrIII2", {
 })
 
 test_that("pburrIII2", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(pburrIII2(numeric(0)), numeric(0))
   expect_identical(pburrIII2(0), 0)
   expect_identical(pburrIII2(1, lscale = 0), 0.5)
@@ -100,6 +106,7 @@ test_that("pburrIII2", {
 })
 
 test_that("rburrIII2", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(rburrIII2(0), numeric(0))
   set.seed(101)
   expect_equal(
@@ -110,4 +117,12 @@ test_that("rburrIII2", {
       1.6455863786175, 1.20181169357475
     )
   )
+})
+
+test_that("deprecated burrIII2", {
+  expect_error(ssd_fit_dists(ssdtools::boron_data, dist = c("llog", "burrIII2")), "Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
+})
+
+test_that("deprecated burrIII2", {
+  expect_error(ssd_fit_dists(ssdtools::boron_data, dist = c("llogis", "burrIII2")), "Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
 })

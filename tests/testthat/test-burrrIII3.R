@@ -14,7 +14,7 @@
 
 test_that("dburrIII3", {
   expect_identical(dburrIII3(numeric(0)), numeric(0))
-  expect_identical(dburrIII3(NA), NA_real_)
+  expect_equal(dburrIII3(NA), NA_real_) # equal for windows
   
   expect_equal(
     dburrIII3(c(31, 15, 32, 32, 642, 778, 187, 12), lscale = 0),

@@ -101,6 +101,7 @@ test_that("ssd_hc list", {
 })
 
 test_that("ssd_hc fitdist", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(ssd_hc(boron_lnorm, hc = 6), ssd_hc(boron_lnorm, percent = 6))
   expect_equal(
     as.data.frame(ssd_hc(boron_lnorm)),
