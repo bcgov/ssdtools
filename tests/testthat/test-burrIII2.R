@@ -118,3 +118,11 @@ test_that("rburrIII2", {
     )
   )
 })
+
+test_that("deprecated burrIII2", {
+  expect_error(ssd_fit_dists(ssdtools::boron_data, dist = c("llog", "burrIII2")), "Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
+})
+
+test_that("deprecated burrIII2", {
+  expect_error(ssd_fit_dists(ssdtools::boron_data, dist = c("llogis", "burrIII2")), "Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
+})
