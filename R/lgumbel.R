@@ -28,7 +28,7 @@ NULL
 #' @rdname lgumbel
 #' @export
 dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
-  fx <- VGAM::dgumbel(log(x), location = llocation, scale = lscale, log = FALSE) / x
+  fx <- dgumbel_(log(x), location = llocation, scale = lscale, log_ = FALSE) / x
   if (log) fx <- log(fx)
   fx
 }

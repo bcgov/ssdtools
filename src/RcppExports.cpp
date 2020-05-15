@@ -20,9 +20,24 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dgumbel_
+NumericVector dgumbel_(NumericVector x, double location, double scale, bool log_);
+RcppExport SEXP _ssdtools_dgumbel_(SEXP xSEXP, SEXP locationSEXP, SEXP scaleSEXP, SEXP log_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< bool >::type log_(log_SEXP);
+    rcpp_result_gen = Rcpp::wrap(dgumbel_(x, location, scale, log_));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ssdtools_dburrXII_", (DL_FUNC) &_ssdtools_dburrXII_, 5},
+    {"_ssdtools_dgumbel_", (DL_FUNC) &_ssdtools_dgumbel_, 4},
     {NULL, NULL, 0}
 };
 
