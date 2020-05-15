@@ -39,9 +39,8 @@ NULL
 #' @rdname burrIII2
 #' @export
 dburrIII2 <- function(x, lshape = 0, lscale = 1, log = FALSE) {
-  deprecate_soft("0.1.2", "xburrIII2()",
-    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2"
-  )
+  deprecate_soft("0.1.2", "dburrIII2()", "dllogis()", id = "xburrIII2",
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   dburrIII3(x, lshape1 = lshape, lshape2 = lshape, lscale = lscale, 
                    log = log)
 }
@@ -49,9 +48,8 @@ dburrIII2 <- function(x, lshape = 0, lscale = 1, log = FALSE) {
 #' @rdname burrIII2
 #' @export
 qburrIII2 <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  deprecate_soft("0.1.2", "xburrIII2()",
-    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2"
-  )
+  deprecate_soft("0.1.2", "qburrIII2()", "qllogis()", id = "xburrIII2",
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   qburrIII3(p, lshape1 = lshape, lshape2 = lshape, lscale = lscale, 
             lower.tail = lower.tail,
             log.p = log.p)
@@ -60,9 +58,8 @@ qburrIII2 <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALS
 #' @rdname burrIII2
 #' @export
 pburrIII2 <- function(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  deprecate_soft("0.1.2", "xburrIII2()",
-    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2"
-  )
+  deprecate_soft("0.1.2", "pburrIII2()", "pllogis()", id = "xburrIII2",
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   pburrIII3(q, lshape1 = lshape, lshape2 = lshape, lscale = lscale, 
             lower.tail = lower.tail,
             log.p = log.p)
@@ -71,18 +68,16 @@ pburrIII2 <- function(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALS
 #' @rdname burrIII2
 #' @export
 rburrIII2 <- function(n, lshape = 0, lscale = 1) {
-  deprecate_soft("0.1.2", "xburrIII2()",
-    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2"
-  )
+  deprecate_soft("0.1.2", "rburrIII2()", "rllogis()", id = "xburrIII2",
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   rburrIII3(n, lshape1 = lshape, lshape2 = lshape, lscale = lscale)
 }
 
 #' @rdname burrIII2
 #' @export
 sburrIII2 <- function(x) {
-  deprecate_soft("0.1.2", "xburrIII2()",
-    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2"
-  )
+  deprecate_soft("0.1.2", "sburrIII2()", "sllogis()", id = "xburrIII2",
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   list <- sburrIII3(x)
   list$start <- list(lshape = list$start$lshape1, lscale = list$start$lscale)
   list

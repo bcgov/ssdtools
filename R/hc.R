@@ -123,7 +123,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   chk_unused(...)
 
   if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
 
@@ -146,7 +146,7 @@ ssd_hc.fitdist <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nbo
   chk_unused(...)
 
   if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
 
@@ -164,7 +164,7 @@ ssd_hc.fitdistcens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95,
   chk_unused(...)
 
   if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
 
@@ -184,7 +184,7 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   chk_unused(...)
 
   if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
 
@@ -205,7 +205,7 @@ ssd_hc.fitdistscens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95
   chk_unused(...)
 
   if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent =)")
+    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
 
