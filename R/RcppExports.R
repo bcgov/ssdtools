@@ -5,7 +5,7 @@ dburrXII_ <- function(x, shape1 = 1, shape2 = 1, scale = 2.718282, log_ = FALSE)
     .Call('_ssdtools_dburrXII_', PACKAGE = 'ssdtools', x, shape1, shape2, scale, log_)
 }
 
-dgumbel_cpp <- function(x, location = 0, scale = 1) {
+dgumbel_cpp <- function(x, location, scale) {
     .Call('_ssdtools_dgumbel_cpp', PACKAGE = 'ssdtools', x, location, scale)
 }
 

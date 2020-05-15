@@ -28,9 +28,11 @@ NULL
 #' @rdname lgumbel
 #' @export
 dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
-  fx <- dgumbel_cpp(log(x), location = llocation, scale = lscale) / x
-  if (log) fx <- log(fx)
-  fx
+  if(!length(x)) return(numeric(0))
+  d <-  mapply(dgumbel_cpp, x = log(x), location = llocation, scale = lscale)
+  d <- d / x
+  if (log) return(log(d))
+  d
 }
 
 #' @rdname lgumbel
@@ -39,7 +41,8 @@ qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FA
   if(!length(p)) return(numeric(0))
   if (log.p) p <- exp(p)
   if (!lower.tail) p <- 1 - p
-  exp(mapply(qgumbel_cpp, p = p, location = llocation, scale = lscale))
+  q <- mapply(qgumbel_cpp, p = p, location = llocation, scale = lscale)
+  exp(q)
 }
 
 #' @rdname lgumbel
