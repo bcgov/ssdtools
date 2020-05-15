@@ -5,11 +5,3 @@ dburrXII_ <- function(x, shape1 = 1, shape2 = 1, scale = 2.718282, log_ = FALSE)
     .Call('_ssdtools_dburrXII_', PACKAGE = 'ssdtools', x, shape1, shape2, scale, log_)
 }
 
-#' Multiply a number by two
-#' 
-#' @param x A single integer.
-#' @export
-timesTwo <- function(x) {
-    .Call('_ssdtools_timesTwo', PACKAGE = 'ssdtools', x)
-}
-
