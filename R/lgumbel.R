@@ -51,7 +51,7 @@ plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FA
   if (!length(q)) {
     return(numeric(0))
   }
-  Fq <- VGAM::pgumbel(log(q), location = llocation, scale = lscale)
+  Fq <- mapply(pgumbel_cpp, q = log(q), location = llocation, scale = lscale)
   if (!lower.tail) Fq <- 1 - Fq
   if (log.p) Fq <- log(Fq)
   Fq

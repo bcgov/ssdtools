@@ -13,3 +13,7 @@ qgumbel_cpp <- function(p, location, scale) {
     .Call('_ssdtools_qgumbel_cpp', PACKAGE = 'ssdtools', p, location, scale)
 }
 
+pgumbel_cpp <- function(q, location, scale) {
+    .Call('_ssdtools_pgumbel_cpp', PACKAGE = 'ssdtools', q, location, scale)
+}
+

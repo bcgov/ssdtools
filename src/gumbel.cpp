@@ -14,8 +14,16 @@ NumericVector qgumbel_cpp(NumericVector p, double location, double scale) {
   return q;
 }
 
+// [[Rcpp::export]]
+NumericVector pgumbel_cpp(NumericVector q, double location, double scale) {
+  NumericVector p = exp(-exp(-(q - location)/scale));
+  return p;
+}
+
+
 /*** R
 dgumbel_cpp(c(31, 15, 32, 32, 642, 778, 187, 12), 0, 1)
 qgumbel_cpp(c(0.5), 0, 1)
+pgumbel_cpp(c(0.5), 0, 1)
 */
 

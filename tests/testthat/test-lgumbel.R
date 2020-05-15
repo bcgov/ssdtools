@@ -51,6 +51,14 @@ test_that("qlgumbel values", {
   )
 })
 
+test_that("plgumbel extremes", {
+  expect_identical(plgumbel(numeric(0)), numeric(0))
+  expect_identical(plgumbel(NA), NA_real_)
+  expect_identical(plgumbel(0), 0)
+  expect_identical(plgumbel(-Inf), NaN)
+  expect_identical(plgumbel(Inf), 1)
+})
+
 test_that("plgumbel", {
   expect_equal(plgumbel(exp(3), 3, 1), 0.3678794, tolerance = 0.0000001)
   expect_equal(plgumbel(exp(4), 3, 1), 0.6922006, tolerance = 0.0000001)
