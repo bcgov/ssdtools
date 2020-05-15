@@ -1,10 +1,17 @@
-<!--- Did you remember to include tests? Unless you are just changing
-grammar, please include new tests for your change -->
+Thank you for taking the time to submit a pull request!
 
-## Description
+To maximize the chances of acceptance:
 
-Describe your changes in detail
+* The title of your PR should briefly describe the change.
 
-## Related Issue
+* The body of your PR should contain `Fixes #issue-number` (if relevant).
 
-If the pull request closes an issue please include for example "fix #4" or if just relates to an issue simply include for example "#4".
+* Commit/merge messages to be included in NEWS.md should begin with `-`.
+
+* Code should follow the tidyverse [style guide](https://style.tidyverse.org).
+
+* Documentation should use roxygen2, with Markdown syntax.
+
+* Contributions should include unit tests (using `testthat`).
+
+For more information see [Contributing](/.github/CONTRIBUTING.md).
