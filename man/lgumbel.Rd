@@ -3,17 +3,17 @@
 \name{lgumbel}
 \alias{lgumbel}
 \alias{dlgumbel}
-\alias{qlgumbel}
 \alias{plgumbel}
+\alias{qlgumbel}
 \alias{rlgumbel}
 \alias{slgumbel}
 \title{Log-Gumbel Distribution}
 \usage{
 dlgumbel(x, llocation = 0, lscale = 1, log = FALSE)
 
-qlgumbel(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
-
 plgumbel(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
+
+qlgumbel(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
 
 rlgumbel(n, llocation = 0, lscale = 1)
 
@@ -28,13 +28,13 @@ slgumbel(x)
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
-\item{p}{vector of probabilities.}
+\item{q}{vector of quantiles.}
 
 \item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
-\item{q}{vector of quantiles.}
+\item{p}{vector of probabilities.}
 
 \item{n}{number of observations.}
 }

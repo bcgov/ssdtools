@@ -28,8 +28,7 @@ NULL
 #' @rdname lgumbel
 #' @export
 dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
-  if(!length(x)) return(numeric(0))
-  d <-  mapply(dgumbel_cpp, x = log(x), location = llocation, scale = lscale)
+  d <- d_apply("gumbel", x = log(x),  location = llocation, scale = lscale)
   d <- d / x
   if (log) return(log(d))
   d
@@ -37,30 +36,27 @@ dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
 
 #' @rdname lgumbel
 #' @export
+plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+  p_apply("gumbel", q = log(q),  location = llocation, scale = lscale,
+          lower.tail = lower.tail, log.p = log.p)
+}
+
+#' @rdname lgumbel
+#' @export
 qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  if(!length(p)) return(numeric(0))
-  if (log.p) p <- exp(p)
-  if (!lower.tail) p <- 1 - p
-  q <- mapply(qgumbel_cpp, p = p, location = llocation, scale = lscale)
+  q <- q_apply("gumbel", p = p,  location = llocation, scale = lscale,
+          lower.tail = lower.tail, log.p = log.p)
   exp(q)
 }
 
 #' @rdname lgumbel
 #' @export
-plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(q)) {
-    return(numeric(0))
-  }
-  Fq <- mapply(pgumbel_cpp, q = log(q), location = llocation, scale = lscale)
-  if (!lower.tail) Fq <- 1 - Fq
-  if (log.p) Fq <- log(Fq)
-  Fq
-}
-
-#' @rdname lgumbel
-#' @export
 rlgumbel <- function(n, llocation = 0, lscale = 1) {
-  exp(VGAM::rgumbel(n, location = llocation, scale = lscale))
+  r <- r_apply("gumbel", n = n,  location = llocation, scale = lscale)
+  if(!length(r)) return(r)
+  r <- exp(r)
+  r[lscale <= 0] <- NaN
+  r
 }
 
 #' @rdname lgumbel

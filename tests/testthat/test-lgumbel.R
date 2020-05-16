@@ -28,6 +28,20 @@ test_that("dlgumbel values", {
   expect_equal(dlgumbel(exp(4), 3, 1), 0.00466401114120162)
 })
 
+test_that("plgumbel extremes", {
+  expect_identical(plgumbel(numeric(0)), numeric(0))
+  expect_identical(plgumbel(NA), NA_real_)
+  expect_identical(plgumbel(0), 0)
+  expect_identical(plgumbel(-Inf), NaN)
+  expect_identical(plgumbel(Inf), 1)
+})
+
+test_that("plgumbel values", {
+  expect_equal(plgumbel(exp(3), 3, 1), 0.3678794, tolerance = 0.0000001)
+  expect_equal(plgumbel(exp(4), 3, 1), 0.6922006, tolerance = 0.0000001)
+  expect_identical(plgumbel(qlgumbel(0.5, 3, 1), 3, 1), 0.5)
+})
+
 test_that("qlgumbel extremes", {
   expect_identical(qlgumbel(numeric(0)), numeric(0))
   expect_identical(qlgumbel(NA), NA_real_)
@@ -51,18 +65,19 @@ test_that("qlgumbel values", {
   )
 })
 
-test_that("plgumbel extremes", {
-  expect_identical(plgumbel(numeric(0)), numeric(0))
-  expect_identical(plgumbel(NA), NA_real_)
-  expect_identical(plgumbel(0), 0)
-  expect_identical(plgumbel(-Inf), NaN)
-  expect_identical(plgumbel(Inf), 1)
+test_that("rlgumbel extremes", {
+  expect_identical(rlgumbel(0), numeric(0))
+  chk::expect_chk_error(rlgumbel(-1))
+  chk::expect_chk_error(rlgumbel(NA_integer_))
+  expect_identical(rlgumbel(1, lscale = 0), NaN)
+  expect_identical(rlgumbel(1, lscale = -1), NaN)
 })
 
-test_that("plgumbel", {
-  expect_equal(plgumbel(exp(3), 3, 1), 0.3678794, tolerance = 0.0000001)
-  expect_equal(plgumbel(exp(4), 3, 1), 0.6922006, tolerance = 0.0000001)
-  expect_identical(plgumbel(qlgumbel(0.5, 3, 1), 3, 1), 0.5)
+test_that("rlgumbel values", {
+  set.seed(99)
+  expect_equal(rlgumbel(1), 1.86346012295971)
+  set.seed(99)
+  expect_equal(rlgumbel(2), c(1.86346012295971, 0.460092963476341))
 })
 
 test_that("fit lgumbel", {
@@ -111,11 +126,4 @@ test_that("fit lgumbel cis", {
       -1L
     ))
   )
-})
-
-test_that("rlgumbel", {
-  set.seed(99)
-  r <- rlgumbel(100000, llocation = 100, lscale = 3)
-  expect_identical(length(r), 100000L)
-  expect_equal(mean(log(r)), 3 * 0.57721 + 100, tolerance = 0.001)
 })
