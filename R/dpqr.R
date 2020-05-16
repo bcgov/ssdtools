@@ -5,9 +5,8 @@ vectorise_vectors <- function(...) {
 }
 
 d_apply <- function(dist, x, ..., log = FALSE) {
-  chk_flag(log)
-  
   if(!length(x)) return(numeric(0))
+  
   list <- vectorise_vectors(x = x, ...)
   list$log_cpp <- log
   fun <- paste0("d", dist, "_cpp")
@@ -15,36 +14,33 @@ d_apply <- function(dist, x, ..., log = FALSE) {
 }
 
 p_apply <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE) {
-  chk_flag(lower.tail)
-  chk_flag(log.p)
-  
   if(!length(q)) return(numeric(0))
+  
   list <- vectorise_vectors(q = q, ...)
-  list$lower_tail <- lower.tail
-  list$log_p <- log.p
   fun <- paste0("p", dist, "_cpp")
-  do.call(fun, list)
+  p <- do.call(fun, list)
+  
+  if(!lower.tail) p <- 1 - p
+  if(log.p) p <- log(p)
+  p
 }
 
 q_apply <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE) {
-  chk_flag(lower.tail)
-  chk_flag(log.p)
-  
   if(!length(p)) return(numeric(0))
+  
+  if (log.p) p <- exp(p)
+  if (!lower.tail) p <- 1 - p
+  
   list <- vectorise_vectors(p = p, ...)
-  list$lower_tail <- lower.tail
-  list$log_p <- log.p
   fun <- paste0("q", dist, "_cpp")
   do.call(fun, list)
 }
 
 r_apply <- function(dist, n, ...) {
-  chk_whole_number(n)
-  chk_gte(n)
   if(n == 0L) return(numeric(0))
-  n <- rep(1, n)
-  list <- vectorise_vectors(n = n, ...)
-  list$n <- NULL
+  
+  list <- vectorise_vectors(n = rep(1, n), ...)
+  list$n <- n
   fun <- paste0("r", dist, "_cpp")
   do.call(fun, list)
 }

@@ -53,10 +53,7 @@ qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FA
 #' @export
 rlgumbel <- function(n, llocation = 0, lscale = 1) {
   r <- r_apply("gumbel", n = n,  location = llocation, scale = lscale)
-  if(!length(r)) return(r)
-  r <- exp(r)
-  r[lscale <= 0] <- NaN
-  r
+  exp(r)
 }
 
 #' @rdname lgumbel

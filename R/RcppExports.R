@@ -9,15 +9,15 @@ dgumbel_cpp <- function(x, location, scale, log_cpp) {
     .Call('_ssdtools_dgumbel_cpp', PACKAGE = 'ssdtools', x, location, scale, log_cpp)
 }
 
-pgumbel_cpp <- function(q, location, scale, lower_tail, log_p) {
-    .Call('_ssdtools_pgumbel_cpp', PACKAGE = 'ssdtools', q, location, scale, lower_tail, log_p)
+pgumbel_cpp <- function(q, location, scale) {
+    .Call('_ssdtools_pgumbel_cpp', PACKAGE = 'ssdtools', q, location, scale)
 }
 
-qgumbel_cpp <- function(p, location, scale, lower_tail, log_p) {
-    .Call('_ssdtools_qgumbel_cpp', PACKAGE = 'ssdtools', p, location, scale, lower_tail, log_p)
+qgumbel_cpp <- function(p, location, scale) {
+    .Call('_ssdtools_qgumbel_cpp', PACKAGE = 'ssdtools', p, location, scale)
 }
 
-rgumbel_cpp <- function(location, scale) {
-    .Call('_ssdtools_rgumbel_cpp', PACKAGE = 'ssdtools', location, scale)
+rgumbel_cpp <- function(n, location, scale) {
+    .Call('_ssdtools_rgumbel_cpp', PACKAGE = 'ssdtools', n, location, scale)
 }
 

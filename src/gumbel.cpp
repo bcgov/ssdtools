@@ -12,26 +12,22 @@ NumericVector dgumbel_cpp(NumericVector x, NumericVector location,
 
 // [[Rcpp::export]]
 NumericVector pgumbel_cpp(NumericVector q, NumericVector location, 
-                          NumericVector scale, bool lower_tail, bool log_p) {
+                          NumericVector scale) {
   NumericVector p = exp(-exp(-(q - location)/scale));
-  if(!lower_tail) p = 1 - p;
-  if(log_p) p = log(p);
   return p;
 }
 
 // [[Rcpp::export]]
 NumericVector qgumbel_cpp(NumericVector p, NumericVector location, 
-                          NumericVector scale, bool lower_tail, bool log_p) {
-  if (log_p) p = exp(p);
-  if (!lower_tail) p = 1 - p;
+                          NumericVector scale) {
   NumericVector q = location - scale * log(-log(p));
   return q;
 }
 
 // [[Rcpp::export]]
-NumericVector rgumbel_cpp(NumericVector location, NumericVector scale) {
-  int n = location.length();
+NumericVector rgumbel_cpp(int n, NumericVector location, NumericVector scale) {
   NumericVector r = location - scale * log(-log(runif(n)));
+  r[scale <= 0] = R_NaN;
   return r;
 }
 
