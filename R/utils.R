@@ -42,3 +42,4 @@ comma_signif <- function(x, digits = 1, ...) {
 ssd_ecd <- function(x, ties.method = "first") {
   (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }
+

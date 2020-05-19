@@ -2,32 +2,39 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-NumericVector dgumbel_cpp(NumericVector x, NumericVector location, 
-                          NumericVector scale, bool log_cpp) {
-  NumericVector z = (x - location) / scale;
-  NumericVector log_d = -z - exp(-z) - log(scale);
+double dgumbel_cpp(double x, double location, 
+                          double scale, bool log_cpp) {
+  if(scale <= 0) return R_NaN;
+  
+  double z = (x - location) / scale;
+  double log_d = -z - exp(-z) - log(scale);
   if(log_cpp) return log_d;
   return exp(log_d);
 }
 
 // [[Rcpp::export]]
-NumericVector pgumbel_cpp(NumericVector q, NumericVector location, 
-                          NumericVector scale) {
-  NumericVector p = exp(-exp(-(q - location)/scale));
+double pgumbel_cpp(double q, double location, 
+                          double scale) {
+  if(scale <= 0) return R_NaN;
+  double p = exp(-exp(-(q - location)/scale));
   return p;
 }
 
 // [[Rcpp::export]]
-NumericVector qgumbel_cpp(NumericVector p, NumericVector location, 
-                          NumericVector scale) {
-  NumericVector q = location - scale * log(-log(p));
+double qgumbel_cpp(double p, double location, 
+                          double scale) {
+  if(scale <= 0) return R_NaN;
+  double q = location - scale * log(-log(p));
   return q;
 }
 
 // [[Rcpp::export]]
-NumericVector rgumbel_cpp(int n, NumericVector location, NumericVector scale) {
+NumericVector rgumbel_cpp(int n, double location, double scale) {
+  if(scale <= 0) {
+    NumericVector v (n, R_NaN);
+    return v;
+  }
   NumericVector r = location - scale * log(-log(runif(n)));
-  r[scale <= 0] = R_NaN;
   return r;
 }
 
