@@ -126,6 +126,59 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dweibull_ssd
+double dweibull_ssd(double x, double shape, double scale, bool log_ssd);
+RcppExport SEXP _ssdtools_dweibull_ssd(SEXP xSEXP, SEXP shapeSEXP, SEXP scaleSEXP, SEXP log_ssdSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< bool >::type log_ssd(log_ssdSEXP);
+    rcpp_result_gen = Rcpp::wrap(dweibull_ssd(x, shape, scale, log_ssd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// pweibull_ssd
+double pweibull_ssd(double q, double shape, double scale);
+RcppExport SEXP _ssdtools_pweibull_ssd(SEXP qSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type q(qSEXP);
+    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(pweibull_ssd(q, shape, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// qweibull_ssd
+double qweibull_ssd(double p, double shape, double scale);
+RcppExport SEXP _ssdtools_qweibull_ssd(SEXP pSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(qweibull_ssd(p, shape, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rweibull_ssd
+NumericVector rweibull_ssd(int n, double shape, double scale);
+RcppExport SEXP _ssdtools_rweibull_ssd(SEXP nSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(rweibull_ssd(n, shape, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ssdtools_dburrXII_", (DL_FUNC) &_ssdtools_dburrXII_, 5},
@@ -137,6 +190,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ssdtools_pgumbel_ssd", (DL_FUNC) &_ssdtools_pgumbel_ssd, 3},
     {"_ssdtools_qgumbel_ssd", (DL_FUNC) &_ssdtools_qgumbel_ssd, 3},
     {"_ssdtools_rgumbel_ssd", (DL_FUNC) &_ssdtools_rgumbel_ssd, 3},
+    {"_ssdtools_dweibull_ssd", (DL_FUNC) &_ssdtools_dweibull_ssd, 4},
+    {"_ssdtools_pweibull_ssd", (DL_FUNC) &_ssdtools_pweibull_ssd, 3},
+    {"_ssdtools_qweibull_ssd", (DL_FUNC) &_ssdtools_qweibull_ssd, 3},
+    {"_ssdtools_rweibull_ssd", (DL_FUNC) &_ssdtools_rweibull_ssd, 3},
     {NULL, NULL, 0}
 };
 
