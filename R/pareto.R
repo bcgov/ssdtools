@@ -34,6 +34,7 @@ NULL
 #' @rdname pareto
 #' @export
 dpareto <- function(x, scale = 1, shape = 1, log = FALSE) {
+  deprecate_soft("0.2.1", "dpareto()", id = "xpareto")
   if (!length(x)) {
     return(numeric(0))
   }
@@ -44,6 +45,7 @@ dpareto <- function(x, scale = 1, shape = 1, log = FALSE) {
 #' @rdname pareto
 #' @export
 qpareto <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+  deprecate_soft("0.2.1", "qpareto()", id = "xpareto")
   if (!length(p)) {
     return(numeric(0))
   }
@@ -53,6 +55,7 @@ qpareto <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
 #' @rdname pareto
 #' @export
 ppareto <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+  deprecate_soft("0.2.1", "ppareto()", id = "xpareto")
   if (!length(q)) {
     return(numeric(0))
   }
@@ -62,12 +65,14 @@ ppareto <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
 #' @rdname pareto
 #' @export
 rpareto <- function(n, scale = 1, shape = 1) {
+  deprecate_soft("0.2.1", "rpareto()", id = "xpareto")
   VGAM::rpareto(n, scale = scale, shape = shape)
 }
 
 #' @rdname pareto
 #' @export
 spareto <- function(x) {
+  deprecate_soft("0.2.1", "spareto()", id = "xpareto")
   fit <- vglm(x ~ 1, VGAM::paretoff)
   list(
     start = list(shape = exp(unname(coef(fit)))),
