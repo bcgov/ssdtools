@@ -37,3 +37,19 @@ rgumbel_ssd <- function(n, location, scale) {
     .Call('_ssdtools_rgumbel_ssd', PACKAGE = 'ssdtools', n, location, scale)
 }
 
+dweibull_ssd <- function(x, shape, scale, log_ssd) {
+    .Call('_ssdtools_dweibull_ssd', PACKAGE = 'ssdtools', x, shape, scale, log_ssd)
+}
+
+pweibull_ssd <- function(q, shape, scale) {
+    .Call('_ssdtools_pweibull_ssd', PACKAGE = 'ssdtools', q, shape, scale)
+}
+
+qweibull_ssd <- function(p, shape, scale) {
+    .Call('_ssdtools_qweibull_ssd', PACKAGE = 'ssdtools', p, shape, scale)
+}
+
+rweibull_ssd <- function(n, shape, scale) {
+    .Call('_ssdtools_rweibull_ssd', PACKAGE = 'ssdtools', n, shape, scale)
+}
+
