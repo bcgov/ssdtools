@@ -28,7 +28,7 @@ NULL
 #' @rdname lgumbel
 #' @export
 dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
-  d <- d_apply("gumbel", x = log_silent(x),  location = llocation, scale = lscale)
+  d <- ddist("gumbel", x = log_silent(x),  location = llocation, scale = lscale)
   d <- d / x
   if (log) return(log_silent(d))
   d
@@ -37,14 +37,14 @@ dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
 #' @rdname lgumbel
 #' @export
 plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  p_apply("gumbel", q = log_silent(q),  location = llocation, scale = lscale,
+  pdist("gumbel", q = log_silent(q),  location = llocation, scale = lscale,
           lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname lgumbel
 #' @export
 qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  q <- q_apply("gumbel", p = p,  location = llocation, scale = lscale,
+  q <- qdist("gumbel", p = p,  location = llocation, scale = lscale,
           lower.tail = lower.tail, log.p = log.p)
   exp(q)
 }
@@ -52,7 +52,7 @@ qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FA
 #' @rdname lgumbel
 #' @export
 rlgumbel <- function(n, llocation = 0, lscale = 1) {
-  r <- r_apply("gumbel", n = n,  location = llocation, scale = lscale)
+  r <- rdist("gumbel", n = n,  location = llocation, scale = lscale)
   exp(r)
 }
 

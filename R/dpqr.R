@@ -3,7 +3,7 @@ any_missing <- function(...) {
   any(is.na(x) & !is.nan(x))
 }
 
-d_apply <- function(dist, x, ..., log = FALSE) {
+ddist <- function(dist, x, ..., log = FALSE) {
   if(!length(x)) return(numeric(0))
 
   fun <- paste0("d", dist, "_ssd")
@@ -12,7 +12,7 @@ d_apply <- function(dist, x, ..., log = FALSE) {
   d
 }
 
-p_apply <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE) {
+pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE) {
   if(!length(q)) return(numeric(0))
 
   fun <- paste0("p", dist, "_ssd")
@@ -24,7 +24,7 @@ p_apply <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE) {
   p
 }
 
-q_apply <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE) {
+qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE) {
   if(!length(p)) return(numeric(0))
   
   if (log.p) p <- exp(p)
@@ -36,7 +36,7 @@ q_apply <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE) {
   q
 }
 
-r_apply <- function(dist, n, ...) {
+rdist <- function(dist, n, ...) {
   if(n == 0L) return(numeric(0))
   
   fun <- paste0("r", dist, "_ssd")
