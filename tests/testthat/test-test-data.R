@@ -39,25 +39,23 @@ test_that("test_data Quinoline", {
   expect_identical(names(dists), "lnorm")
   expect_equal(
     coef(dists),
-    list(lnorm = c(meanlog = 8.68875153351101, sdlog = 1.99119217351429))
-  )
+    list(lnorm = c(meanlog = 8.68875725361798, sdlog = 1.9908920631944
+    )))
 
   expect_warning(dists <- ssd_fit_dists(quin, dist = c("gamma", "lnorm"), computable = FALSE),
                  "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
   expect_identical(names(dists), c("gamma", "lnorm"))
   expect_equal(
     coef(dists),
-    list(gamma = c(scale = 41276.5658303504, shape = 0.504923953282222), lnorm = c(meanlog = 8.68875153351101, sdlog = 1.99119217351429))
+    list(gamma = c(scale = 41276.5658303504, shape = 0.504923953282222
+    ), lnorm = c(meanlog = 8.68875725361798, sdlog = 1.9908920631944
+    ))
   )
   set.seed(99)
   expect_equal(
     as.data.frame(ssd_hc(dists, ci = TRUE, nboot = 10)),
-    structure(list(
-      percent = 5, est = 134.81374077839, se = 171.657247532188,
-      lcl = 45.9882119991699, ucl = 518.208614896573, dist = "average"
-    ), row.names = c(
-      NA,
-      -1L
-    ), class = "data.frame")
+    structure(list(percent = 5, est = 134.853117244289, se = 171.585648187402, 
+                   lcl = 46.0424235514809, ucl = 517.999234124554, dist = "average"), row.names = c(NA, 
+                                                                                                    -1L), class = "data.frame")
   )
 })

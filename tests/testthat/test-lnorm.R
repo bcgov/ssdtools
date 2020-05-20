@@ -85,7 +85,7 @@ test_that("fit lnorm quinoline", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(meanlog = 8.68875153351101, sdlog = 1.99119217351429)
+    c(meanlog = 8.68875725361798, sdlog = 1.9908920631944)
   )
 })
 
@@ -94,6 +94,6 @@ test_that("fit lnorm boron", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(meanlog = 2.56164496371788, sdlog = 1.2415403249591)
+    c(meanlog = 2.56164375310683, sdlog = 1.24172540661694)
   )
 })

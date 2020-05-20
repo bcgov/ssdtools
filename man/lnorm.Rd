@@ -6,6 +6,7 @@
 \alias{plnorm}
 \alias{qlnorm}
 \alias{rlnorm}
+\alias{slnorm}
 \title{lnorm Distribution}
 \usage{
 dlnorm(x, meanlog = 0, sdlog = 1, log = FALSE)
@@ -15,6 +16,8 @@ plnorm(q, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE)
 qlnorm(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE)
 
 rlnorm(n, meanlog = 0, sdlog = 1)
+
+slnorm(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
