@@ -1,3 +1,7 @@
+# ssdtools 0.2.0.9001
+
+- Soft-deprecated pareto distribution as unsuitable for SSD data.
+
 # ssdtools 0.2.0.9000
 
 - Internal changes only.
