@@ -39,11 +39,13 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE) {
 rdist <- function(dist, n, ...) {
   if(!length(n)) return(numeric(0))
   
-  chk_whole_number(n)
-  chk_gte(n)
-  
+  if(length(n) > 1) {
+    n <- length(n)
+  }
+  n <- floor(n)
+  if(n < 0) stop("invalid arguments")
   if(n == 0L) return(numeric(0))
-  
+    
   fun <- paste0("r", dist, "_ssd")
   args <- list(...)
   args$n <- n
