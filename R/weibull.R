@@ -30,19 +30,22 @@ NULL
 #' @rdname weibull
 #' @export
 dweibull <- function(x, shape = 1, scale = 1, log = FALSE) {
-  stats::dweibull(x = x, shape = shape, scale = scale, log = log)
+  #  stats::dweibull(x = x, shape = shape, scale = scale, log = log)
+  d_apply("weibull", x,  shape = shape, scale = scale, log = log)
 }
 
 #' @rdname weibull
 #' @export
 pweibull <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-  stats::pweibull(q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+  #  stats::pweibull(q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+  p_apply("weibull", q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname weibull
 #' @export
 qweibull <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-  stats::qweibull(p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+  #  stats::qweibull(p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+  q_apply("weibull", p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname weibull
