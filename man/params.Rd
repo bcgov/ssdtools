@@ -54,6 +54,10 @@
 
 \item{lscale}{scale parameter on the log scale.}
 
+\item{meanlog}{mean on log scale parameter.}
+
+\item{sdlog}{standard deviation on log scale parameter.}
+
 \item{lshape}{shape parameter on the log scale.}
 
 \item{lshape1}{shape1 parameter on the log scale.}
