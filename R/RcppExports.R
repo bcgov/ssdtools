@@ -5,19 +5,23 @@ dburrXII_ <- function(x, shape1 = 1, shape2 = 1, scale = 2.718282, log_ = FALSE)
     .Call('_ssdtools_dburrXII_', PACKAGE = 'ssdtools', x, shape1, shape2, scale, log_)
 }
 
-dgumbel_cpp <- function(x, location, scale, log_cpp) {
-    .Call('_ssdtools_dgumbel_cpp', PACKAGE = 'ssdtools', x, location, scale, log_cpp)
+dgamma_ssd <- function(x, shape, scale, log_ssd) {
+    .Call('_ssdtools_dgamma_ssd', PACKAGE = 'ssdtools', x, shape, scale, log_ssd)
 }
 
-pgumbel_cpp <- function(q, location, scale) {
-    .Call('_ssdtools_pgumbel_cpp', PACKAGE = 'ssdtools', q, location, scale)
+dgumbel_ssd <- function(x, location, scale, log_ssd) {
+    .Call('_ssdtools_dgumbel_ssd', PACKAGE = 'ssdtools', x, location, scale, log_ssd)
 }
 
-qgumbel_cpp <- function(p, location, scale) {
-    .Call('_ssdtools_qgumbel_cpp', PACKAGE = 'ssdtools', p, location, scale)
+pgumbel_ssd <- function(q, location, scale) {
+    .Call('_ssdtools_pgumbel_ssd', PACKAGE = 'ssdtools', q, location, scale)
 }
 
-rgumbel_cpp <- function(n, location, scale) {
-    .Call('_ssdtools_rgumbel_cpp', PACKAGE = 'ssdtools', n, location, scale)
+qgumbel_ssd <- function(p, location, scale) {
+    .Call('_ssdtools_qgumbel_ssd', PACKAGE = 'ssdtools', p, location, scale)
+}
+
+rgumbel_ssd <- function(n, location, scale) {
+    .Call('_ssdtools_rgumbel_ssd', PACKAGE = 'ssdtools', n, location, scale)
 }
 

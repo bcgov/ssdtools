@@ -20,66 +20,81 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// dgumbel_cpp
-double dgumbel_cpp(double x, double location, double scale, bool log_cpp);
-RcppExport SEXP _ssdtools_dgumbel_cpp(SEXP xSEXP, SEXP locationSEXP, SEXP scaleSEXP, SEXP log_cppSEXP) {
+// dgamma_ssd
+double dgamma_ssd(double x, double shape, double scale, bool log_ssd);
+RcppExport SEXP _ssdtools_dgamma_ssd(SEXP xSEXP, SEXP shapeSEXP, SEXP scaleSEXP, SEXP log_ssdSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< bool >::type log_ssd(log_ssdSEXP);
+    rcpp_result_gen = Rcpp::wrap(dgamma_ssd(x, shape, scale, log_ssd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dgumbel_ssd
+double dgumbel_ssd(double x, double location, double scale, bool log_ssd);
+RcppExport SEXP _ssdtools_dgumbel_ssd(SEXP xSEXP, SEXP locationSEXP, SEXP scaleSEXP, SEXP log_ssdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type location(locationSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    Rcpp::traits::input_parameter< bool >::type log_cpp(log_cppSEXP);
-    rcpp_result_gen = Rcpp::wrap(dgumbel_cpp(x, location, scale, log_cpp));
+    Rcpp::traits::input_parameter< bool >::type log_ssd(log_ssdSEXP);
+    rcpp_result_gen = Rcpp::wrap(dgumbel_ssd(x, location, scale, log_ssd));
     return rcpp_result_gen;
 END_RCPP
 }
-// pgumbel_cpp
-double pgumbel_cpp(double q, double location, double scale);
-RcppExport SEXP _ssdtools_pgumbel_cpp(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+// pgumbel_ssd
+double pgumbel_ssd(double q, double location, double scale);
+RcppExport SEXP _ssdtools_pgumbel_ssd(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type q(qSEXP);
     Rcpp::traits::input_parameter< double >::type location(locationSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(pgumbel_cpp(q, location, scale));
+    rcpp_result_gen = Rcpp::wrap(pgumbel_ssd(q, location, scale));
     return rcpp_result_gen;
 END_RCPP
 }
-// qgumbel_cpp
-double qgumbel_cpp(double p, double location, double scale);
-RcppExport SEXP _ssdtools_qgumbel_cpp(SEXP pSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+// qgumbel_ssd
+double qgumbel_ssd(double p, double location, double scale);
+RcppExport SEXP _ssdtools_qgumbel_ssd(SEXP pSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
     Rcpp::traits::input_parameter< double >::type location(locationSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(qgumbel_cpp(p, location, scale));
+    rcpp_result_gen = Rcpp::wrap(qgumbel_ssd(p, location, scale));
     return rcpp_result_gen;
 END_RCPP
 }
-// rgumbel_cpp
-NumericVector rgumbel_cpp(int n, double location, double scale);
-RcppExport SEXP _ssdtools_rgumbel_cpp(SEXP nSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+// rgumbel_ssd
+NumericVector rgumbel_ssd(int n, double location, double scale);
+RcppExport SEXP _ssdtools_rgumbel_ssd(SEXP nSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
     Rcpp::traits::input_parameter< double >::type location(locationSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(rgumbel_cpp(n, location, scale));
+    rcpp_result_gen = Rcpp::wrap(rgumbel_ssd(n, location, scale));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ssdtools_dburrXII_", (DL_FUNC) &_ssdtools_dburrXII_, 5},
-    {"_ssdtools_dgumbel_cpp", (DL_FUNC) &_ssdtools_dgumbel_cpp, 4},
-    {"_ssdtools_pgumbel_cpp", (DL_FUNC) &_ssdtools_pgumbel_cpp, 3},
-    {"_ssdtools_qgumbel_cpp", (DL_FUNC) &_ssdtools_qgumbel_cpp, 3},
-    {"_ssdtools_rgumbel_cpp", (DL_FUNC) &_ssdtools_rgumbel_cpp, 3},
+    {"_ssdtools_dgamma_ssd", (DL_FUNC) &_ssdtools_dgamma_ssd, 4},
+    {"_ssdtools_dgumbel_ssd", (DL_FUNC) &_ssdtools_dgumbel_ssd, 4},
+    {"_ssdtools_pgumbel_ssd", (DL_FUNC) &_ssdtools_pgumbel_ssd, 3},
+    {"_ssdtools_qgumbel_ssd", (DL_FUNC) &_ssdtools_qgumbel_ssd, 3},
+    {"_ssdtools_rgumbel_ssd", (DL_FUNC) &_ssdtools_rgumbel_ssd, 3},
     {NULL, NULL, 0}
 };
 
