@@ -14,8 +14,8 @@
 
 #' Gamma Distribution
 #'
-#' Density, distribution function, quantile function and random generation for the Gamma distribution with 
-#' #' parameters shape and scale with default values.
+#' Density, distribution function, quantile function and random generation for 
+#' the Gamma distribution with parameters shape and scale.
 #'
 #' @inheritParams params
 #' @param x A numeric vector of values.
@@ -30,35 +30,37 @@ NULL
 #' @rdname gamma
 #' @export
 dgamma <- function(x, shape = 1, scale = 1, log = FALSE) {
-#  stats::dgamma(x = x, shape = shape, scale = scale, log = log)
-  d_apply("gamma", x,  shape = shape, scale = scale, log = log)
+  ddist("gamma", x,  shape = shape, scale = scale, 
+        log = log)
 }
 
 #' @rdname gamma
 #' @export
 pgamma <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-#  stats::pgamma(q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
-  p_apply("gamma", q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+  pdist("gamma", q = q, shape = shape, scale = scale, 
+        lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gamma
 #' @export
 qgamma <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-#  stats::qgamma(p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
-  q_apply("gamma", p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+  qdist("gamma", p = p, shape = shape, scale = scale, 
+        lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gamma
 #' @export
 rgamma <- function(n, shape = 1, scale = 1) {
-  stats::rgamma(n = n, shape = shape, scale = scale)
+  rdist("gamma", n = n, shape = shape, scale = scale)
 }
 
 #' @rdname gamma
 #' @export
 sgamma <- function(x) {
+  var <- var(x, na.rm = TRUE)
+  mean <- mean(x, na.rm = TRUE)
   list(start = list(
-    scale = var(x, na.rm = TRUE) / mean(x, na.rm = TRUE),
-    shape = mean(x, na.rm = TRUE)^2 / var(x, na.rm = TRUE)
+    scale = var / mean,
+    shape = mean^2 / var
   ))
 }

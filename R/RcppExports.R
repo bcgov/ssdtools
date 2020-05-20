@@ -17,6 +17,10 @@ qgamma_ssd <- function(p, shape, scale) {
     .Call('_ssdtools_qgamma_ssd', PACKAGE = 'ssdtools', p, shape, scale)
 }
 
+rgamma_ssd <- function(n, shape, scale) {
+    .Call('_ssdtools_rgamma_ssd', PACKAGE = 'ssdtools', n, shape, scale)
+}
+
 dgumbel_ssd <- function(x, location, scale, log_ssd) {
     .Call('_ssdtools_dgumbel_ssd', PACKAGE = 'ssdtools', x, location, scale, log_ssd)
 }
