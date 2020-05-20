@@ -126,6 +126,59 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dlnorm_ssd
+double dlnorm_ssd(double x, double meanlog, double sdlog, bool log_ssd);
+RcppExport SEXP _ssdtools_dlnorm_ssd(SEXP xSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP, SEXP log_ssdSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type meanlog(meanlogSEXP);
+    Rcpp::traits::input_parameter< double >::type sdlog(sdlogSEXP);
+    Rcpp::traits::input_parameter< bool >::type log_ssd(log_ssdSEXP);
+    rcpp_result_gen = Rcpp::wrap(dlnorm_ssd(x, meanlog, sdlog, log_ssd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// plnorm_ssd
+double plnorm_ssd(double q, double meanlog, double sdlog);
+RcppExport SEXP _ssdtools_plnorm_ssd(SEXP qSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type q(qSEXP);
+    Rcpp::traits::input_parameter< double >::type meanlog(meanlogSEXP);
+    Rcpp::traits::input_parameter< double >::type sdlog(sdlogSEXP);
+    rcpp_result_gen = Rcpp::wrap(plnorm_ssd(q, meanlog, sdlog));
+    return rcpp_result_gen;
+END_RCPP
+}
+// qlnorm_ssd
+double qlnorm_ssd(double p, double meanlog, double sdlog);
+RcppExport SEXP _ssdtools_qlnorm_ssd(SEXP pSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type meanlog(meanlogSEXP);
+    Rcpp::traits::input_parameter< double >::type sdlog(sdlogSEXP);
+    rcpp_result_gen = Rcpp::wrap(qlnorm_ssd(p, meanlog, sdlog));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rlnorm_ssd
+NumericVector rlnorm_ssd(int n, double meanlog, double sdlog);
+RcppExport SEXP _ssdtools_rlnorm_ssd(SEXP nSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type meanlog(meanlogSEXP);
+    Rcpp::traits::input_parameter< double >::type sdlog(sdlogSEXP);
+    rcpp_result_gen = Rcpp::wrap(rlnorm_ssd(n, meanlog, sdlog));
+    return rcpp_result_gen;
+END_RCPP
+}
 // dweibull_ssd
 double dweibull_ssd(double x, double shape, double scale, bool log_ssd);
 RcppExport SEXP _ssdtools_dweibull_ssd(SEXP xSEXP, SEXP shapeSEXP, SEXP scaleSEXP, SEXP log_ssdSEXP) {
@@ -190,6 +243,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ssdtools_pgumbel_ssd", (DL_FUNC) &_ssdtools_pgumbel_ssd, 3},
     {"_ssdtools_qgumbel_ssd", (DL_FUNC) &_ssdtools_qgumbel_ssd, 3},
     {"_ssdtools_rgumbel_ssd", (DL_FUNC) &_ssdtools_rgumbel_ssd, 3},
+    {"_ssdtools_dlnorm_ssd", (DL_FUNC) &_ssdtools_dlnorm_ssd, 4},
+    {"_ssdtools_plnorm_ssd", (DL_FUNC) &_ssdtools_plnorm_ssd, 3},
+    {"_ssdtools_qlnorm_ssd", (DL_FUNC) &_ssdtools_qlnorm_ssd, 3},
+    {"_ssdtools_rlnorm_ssd", (DL_FUNC) &_ssdtools_rlnorm_ssd, 3},
     {"_ssdtools_dweibull_ssd", (DL_FUNC) &_ssdtools_dweibull_ssd, 4},
     {"_ssdtools_pweibull_ssd", (DL_FUNC) &_ssdtools_pweibull_ssd, 3},
     {"_ssdtools_qweibull_ssd", (DL_FUNC) &_ssdtools_qweibull_ssd, 3},
