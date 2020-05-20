@@ -61,14 +61,14 @@ test_that("fit_dist", {
   dist <- ssd_fit_dist(boron_data)
   expect_true(is.fitdist(dist))
   expect_equal(dist, boron_lnorm)
-  expect_equal(coef(dist), c(meanlog = 2.561645, sdlog = 1.241540), tolerance = 0.0000001)
+  expect_equal(coef(dist), c(meanlog = 2.56164375310683, sdlog = 1.24172540661694))
 
   boron_data2 <- boron_data[rev(order(boron_data$Conc)), ]
   boron_data2$Weight <- 1:nrow(boron_data2)
 
   expect_warning(dist <- ssd_fit_dist(boron_data2, weight = "Weight"), "weights are not taken into account in the default initial values")
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(meanlog = 1.879717, sdlog = 1.127537), tolerance = 0.000001)
+  expect_equal(coef(dist), c(meanlog = 1.87960101694348, sdlog = 1.12780324755743))
 })
 
 test_that("fluazinam", {
@@ -76,12 +76,12 @@ test_that("fluazinam", {
   dist <- ssdtools:::ssd_fit_dist(fluazinam, left = "left")
   expect_true(is.fitdist(dist))
   expect_false(is.fitdistcens(dist))
-  expect_equal(coef(dist), c(meanlog = 4.660186, sdlog = 2.197562), tolerance = 0.0000001)
+  expect_equal(coef(dist), c(meanlog = 4.66057985615203, sdlog = 2.19746964708252))
 
   dist <- ssdtools:::ssd_fit_dist(fluazinam, left = "left", right = "right")
   expect_false(is.fitdist(dist))
   expect_true(is.fitdistcens(dist))
-  expect_equal(coef(dist), c(meanlog = 4.976920, sdlog = 2.687785), tolerance = 0.0000001)
+  expect_equal(coef(dist), c(meanlog = 4.97758390559042, sdlog = 2.68757112403832))
 
   fluazinam2 <- fluazinam[rev(order(fluazinam$left)), ]
   fluazinam2$Weight <- 1:nrow(fluazinam2)
@@ -94,7 +94,7 @@ test_that("fluazinam", {
   dist <- dist[[1]]
   expect_false(is.fitdist(dist))
   expect_true(is.fitdistcens(dist))
-  expect_equal(coef(dist), c(meanlog = 3.566750, sdlog = 2.182757), tolerance = 0.000001)
+  expect_equal(coef(dist), c(meanlog = 3.56609317317434, sdlog = 2.18316425603543))
 })
 
 

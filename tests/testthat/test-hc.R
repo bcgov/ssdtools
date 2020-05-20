@@ -14,7 +14,7 @@
 
 test_that("ssd_hc list", {
   expect_error(ssd_hc(list()), "^`x` must be named[.]$", class = "chk_error")
-
+  
   expect_identical(
     ssd_hc(structure(list(), .Names = character(0))),
     structure(list(
@@ -25,9 +25,9 @@ test_that("ssd_hc list", {
       "tbl", "data.frame"
     ), row.names = integer(0))
   )
-
+  
   expect_error(ssd_hc(list("lnorm" = NULL, "lnorm" = NULL)), "^`names[(]x[)]` must be unique[.]$", class = "chk_error")
-
+  
   expect_equal(
     as.data.frame(ssd_hc(list("lnorm" = NULL))),
     structure(list(
@@ -48,7 +48,7 @@ test_that("ssd_hc list", {
       NA_real_
     ), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "lnorm")), row.names = c(NA, -2L), class = "data.frame")
   )
-
+  
   expect_equal(
     as.data.frame(ssd_hc(list("lnorm" = list(meanlog = 0, sdlog = 1)))),
     structure(list(
@@ -59,7 +59,7 @@ test_that("ssd_hc list", {
       -1L
     ), class = "data.frame")
   )
-
+  
   expect_equal(
     as.data.frame(ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 2)))),
     structure(list(
@@ -70,7 +70,7 @@ test_that("ssd_hc list", {
       -1L
     ), class = "data.frame")
   )
-
+  
   expect_equal(
     as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL))),
     structure(list(percent = c(5, 5), est = c(
@@ -81,7 +81,7 @@ test_that("ssd_hc list", {
       NA_real_
     ), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "llogis")), row.names = c(NA, -2L), class = "data.frame")
   )
-
+  
   expect_equal(
     as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL), percent = c(1, 99))),
     structure(list(percent = c(1, 99, 1, 99), est = c(
@@ -106,7 +106,7 @@ test_that("ssd_hc fitdist", {
   expect_equal(
     as.data.frame(ssd_hc(boron_lnorm)),
     structure(list(
-      percent = 5, est = 1.68117483775796, se = NA_real_,
+      percent = 5, est = 1.68066107721146, se = NA_real_,
       lcl = NA_real_, ucl = NA_real_, dist = "lnorm"
     ), class = "data.frame", row.names = c(
       NA,
@@ -119,7 +119,7 @@ test_that("ssd_hc fitdistcens", {
   expect_equal(
     as.data.frame(ssd_hc(fluazinam_lnorm)),
     structure(list(
-      percent = 5, est = 1.74352219048516, se = NA_real_,
+      percent = 5, est = 1.74529360152777, se = NA_real_,
       lcl = NA_real_, ucl = NA_real_, dist = "lnorm"
     ), class = "data.frame", row.names = c(
       NA,
@@ -132,7 +132,7 @@ test_that("ssd_hc fitdists", {
   expect_equal(
     as.data.frame(ssd_hc(boron_dists)),
     structure(list(
-      percent = 5, est = 1.30686521357099, se = NA_real_,
+      percent = 5, est = 1.30671324518567, se = NA_real_,
       lcl = NA_real_, ucl = NA_real_, dist = "average"
     ), class = "data.frame", row.names = c(
       NA,
@@ -144,19 +144,19 @@ test_that("ssd_hc fitdists", {
 test_that("ssd_hc fitdists not average", {
   expect_equal(
     as.data.frame(ssd_hc(boron_dists, average = FALSE)),
-    structure(list(percent = c(5, 5, 5), est = c(
-      1.56256632555312,
-      1.07373870642628, 1.68117483775796
-    ), se = c(
-      NA_real_, NA_real_,
-      NA_real_
-    ), lcl = c(NA_real_, NA_real_, NA_real_), ucl = c(
-      NA_real_,
-      NA_real_, NA_real_
-    ), dist = c("llogis", "gamma", "lnorm")), row.names = c(
-      NA,
-      -3L
-    ), class = "data.frame")
+    structure(list(
+      percent = c(5, 5, 5), 
+      est =  c(1.56256632555312, 1.07373870642628, 1.68066107721146), 
+      se = c(
+        NA_real_, NA_real_,
+        NA_real_
+      ), lcl = c(NA_real_, NA_real_, NA_real_), ucl = c(
+        NA_real_,
+        NA_real_, NA_real_
+      ), dist = c("llogis", "gamma", "lnorm")), row.names = c(
+        NA,
+        -3L
+      ), class = "data.frame")
   )
 })
 
@@ -164,7 +164,7 @@ test_that("ssd_hc fitdistscens", {
   expect_equal(
     as.data.frame(ssd_hc(fluazinam_dists)),
     structure(list(
-      percent = 5, est = 1.42068088873316, se = NA_real_,
+      percent = 5, est = 1.42153606844833, se = NA_real_,
       lcl = NA_real_, ucl = NA_real_, dist = "average"
     ), class = "data.frame", row.names = c(
       NA,
@@ -176,18 +176,18 @@ test_that("ssd_hc fitdistscens", {
 test_that("ssd_hc fitdistscens not average", {
   expect_equal(
     as.data.frame(ssd_hc(fluazinam_dists, average = FALSE)),
-    structure(list(percent = c(5, 5, 5), est = c(
-      1.30938169835089,
-      0.309067069393034, 1.74352219048516
-    ), se = c(
-      NA_real_, NA_real_,
-      NA_real_
-    ), lcl = c(NA_real_, NA_real_, NA_real_), ucl = c(
-      NA_real_,
-      NA_real_, NA_real_
-    ), dist = c("llogis", "gamma", "lnorm")), row.names = c(
-      NA,
-      -3L
-    ), class = "data.frame")
+    structure(list(
+      percent = c(5, 5, 5), 
+      est = c(1.30938169835089, 0.309067069393034, 1.74529360152777), 
+      se = c(
+        NA_real_, NA_real_,
+        NA_real_
+      ), lcl = c(NA_real_, NA_real_, NA_real_), ucl = c(
+        NA_real_,
+        NA_real_, NA_real_
+      ), dist = c("llogis", "gamma", "lnorm")), row.names = c(
+        NA,
+        -3L
+      ), class = "data.frame")
   )
 })
