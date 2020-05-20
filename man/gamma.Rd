@@ -42,7 +42,8 @@ sgamma(x)
 A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation for the Gamma distribution with #' parameters shape and scale with default values.
+Density, distribution function, quantile function and random generation for the Gamma distribution with 
+#' parameters shape and scale with default values.
 }
 \examples{
 x <- seq(0.01, 5, by = 0.01)

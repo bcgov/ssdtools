@@ -1,3 +1,24 @@
+test_that("dgamma extremes", {
+  expect_identical(dgamma(numeric(0)), numeric(0))
+  expect_identical(dgamma(NA), NA_real_)
+  expect_identical(dgamma(NaN), NaN)
+  expect_identical(dgamma(0), 1)
+  expect_equal(dgamma(1), 0.367879441171442)
+  expect_equal(dgamma(1, log = TRUE), log(0.367879441171442))
+  expect_equal(dgamma(1, shape = -1), NaN)
+  expect_equal(dgamma(1, scale = -1), NaN)
+  expect_identical(dgamma(-Inf), 0)
+  expect_identical(dgamma(Inf), 0)
+  
+})
+
+test_that("dgamma vectorized", {
+  expect_identical(dgamma(c(NA, NaN, 0, Inf, -Inf)), 
+                   c(NA, NaN, 1, 0, 0))
+  expect_equal(dgamma(1:2, shape = 1:2, scale = 3:4), 
+                   c(0.238843770191263, 0.0758163324640792))
+})
+
 test_that("fit gamma quinoline", {
   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
 

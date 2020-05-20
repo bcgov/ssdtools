@@ -14,7 +14,8 @@
 
 #' Gamma Distribution
 #'
-#' Density, distribution function, quantile function and random generation for the Gamma distribution with #' parameters shape and scale with default values.
+#' Density, distribution function, quantile function and random generation for the Gamma distribution with 
+#' #' parameters shape and scale with default values.
 #'
 #' @inheritParams params
 #' @param x A numeric vector of values.
@@ -29,19 +30,22 @@ NULL
 #' @rdname gamma
 #' @export
 dgamma <- function(x, shape = 1, scale = 1, log = FALSE) {
-  stats::dgamma(x = x, shape = shape, scale = scale, log = log)
+#  stats::dgamma(x = x, shape = shape, scale = scale, log = log)
+  d_apply("gamma", x,  shape = shape, scale = scale, log = log)
 }
 
 #' @rdname gamma
 #' @export
 pgamma <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-  stats::pgamma(q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+#  stats::pgamma(q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+  p_apply("gamma", q = q, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gamma
 #' @export
 qgamma <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-  stats::qgamma(p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+#  stats::qgamma(p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
+  q_apply("gamma", p = p, shape = shape, scale = scale, lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gamma
