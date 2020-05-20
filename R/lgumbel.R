@@ -28,16 +28,16 @@ NULL
 #' @rdname lgumbel
 #' @export
 dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
-  d <- d_apply("gumbel", x = log(x),  location = llocation, scale = lscale)
+  d <- d_apply("gumbel", x = log_silent(x),  location = llocation, scale = lscale)
   d <- d / x
-  if (log) return(log(d))
+  if (log) return(log_silent(d))
   d
 }
 
 #' @rdname lgumbel
 #' @export
 plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  p_apply("gumbel", q = log(q),  location = llocation, scale = lscale,
+  p_apply("gumbel", q = log_silent(q),  location = llocation, scale = lscale,
           lower.tail = lower.tail, log.p = log.p)
 }
 
@@ -60,7 +60,7 @@ rlgumbel <- function(n, llocation = 0, lscale = 1) {
 #' @export
 slgumbel <- function(x) {
   list(start = list(
-    llocation = mean(log(x), na.rm = TRUE),
-    lscale = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
+    llocation = mean(log_silent(x), na.rm = TRUE),
+    lscale = pi * sd(log_silent(x), na.rm = TRUE) / sqrt(6)
   ))
 }

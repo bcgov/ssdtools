@@ -67,7 +67,7 @@ test_that("qlgumbel values", {
 
 test_that("rlgumbel extremes", {
   expect_identical(rlgumbel(0), numeric(0))
-  chk::expect_chk_error(rlgumbel(-1))
+  expect_error(rlgumbel(-1))
   expect_error(rlgumbel(NA_integer_))
   expect_identical(rlgumbel(1, lscale = 0), NaN)
   expect_identical(rlgumbel(1, lscale = -1), NaN)
