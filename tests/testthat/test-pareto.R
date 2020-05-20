@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 test_that("dpareto", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_equal(dpareto(numeric(0)), numeric(0))
   expect_equal(dpareto(c(0, 1, Inf, NaN, -1)), c(0, 1, 0, NA, 0))
   expect_equal(dpareto(2), 0.25)
@@ -23,6 +24,7 @@ test_that("dpareto", {
 })
 
 test_that("fit pareto", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
 
   expect_true(is.fitdist(dist))
@@ -33,6 +35,7 @@ test_that("fit pareto", {
 })
 
 test_that("fit pareto cis", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
 
   set.seed(77)
@@ -62,6 +65,7 @@ test_that("fit pareto cis", {
 })
 
 test_that("ppareto", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_equal(ppareto(1), 0)
   expect_equal(ppareto(2), 1 / 2)
   expect_equal(ppareto(3), 2 / 3)
@@ -71,11 +75,13 @@ test_that("ppareto", {
 })
 
 test_that("qpareto", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_equal(qpareto(ppareto(2)), 2)
   expect_equal(qpareto(numeric(0)), numeric(0))
 })
 
 test_that("rpareto", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   set.seed(1)
   expect_equal(rpareto(1), 3.7663554483147)
 })
