@@ -10,6 +10,12 @@ test_that("dgamma extremes", {
   expect_identical(dgamma(0), 1)
   expect_identical(dgamma(-Inf), 0)
   expect_identical(dgamma(Inf), 0)
+  expect_identical(dgamma(c(NA, NaN, 0, Inf, -Inf)), 
+                   c(NA, NaN, 1, 0, 0))
+  expect_equal(dgamma(1:2, shape = 1:2, scale = 3:4), 
+               c(dgamma(1, 1, 3), dgamma(2, 2, 4)))
+  expect_equal(dgamma(1:2, shape = c(1, NA), scale = 3:4), 
+               c(dgamma(1, 1, 3), NA))
 })
 
 test_that("pgamma extremes", {
@@ -26,6 +32,12 @@ test_that("pgamma extremes", {
   expect_identical(pgamma(0), 0)
   expect_identical(pgamma(-Inf), 0)
   expect_identical(pgamma(Inf), 1)
+  expect_identical(pgamma(c(NA, NaN, 0, Inf, -Inf)), 
+                   c(NA, NaN, 0, 1, 0))
+  expect_equal(pgamma(1:2, shape = 1:2, scale = 3:4), 
+               c(pgamma(1, 1, 3), pgamma(2, 2, 4)))
+  expect_equal(pgamma(1:2, shape = c(1, NA), scale = 3:4), 
+               c(pgamma(1, 1, 3), NA))
 })
 
 test_that("qgamma extremes", {
@@ -44,13 +56,32 @@ test_that("qgamma extremes", {
   expect_identical(qgamma(0), 0)
   expect_identical(qgamma(-Inf), NaN)
   expect_identical(qgamma(Inf), NaN)
+  expect_identical(qgamma(c(NA, NaN, 0, Inf, -Inf)), 
+                   c(NA, NaN, 0, NaN, NaN))
+  expect_equal(qgamma(1:2, shape = 1:2, scale = 3:4), 
+               c(qgamma(1, 1, 3), qgamma(2, 2, 4)))
+  expect_equal(qgamma(1:2, shape = c(1, NA), scale = 3:4), 
+               c(qgamma(1, 1, 3), NA))
 })
 
-test_that("dgamma vectorized", {
-  expect_identical(dgamma(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(NA, NaN, 1, 0, 0))
-  expect_equal(dgamma(1:2, shape = 1:2, scale = 3:4), 
-                   c(0.238843770191263, 0.0758163324640792))
+test_that("rgamma extremes", {
+  expect_identical(rgamma(numeric(0)), numeric(0))
+  expect_error(rgamma(NA))
+  expect_identical(rgamma(0), numeric(0))
+  expect_error(rgamma(1:2))
+  set.seed(42)
+  expect_equal(rgamma(1), 1.93929578065309)
+  set.seed(42)
+  expect_equal(rgamma(2), c(1.93929578065309, 0.180419099876704))
+  expect_equal(rgamma(0, shape = -1), numeric(0))
+  expect_equal(rgamma(1, shape = -1), NaN)
+  expect_equal(rgamma(2, shape = -1), c(NaN, NaN))
+  expect_equal(rgamma(0, scale = -1), numeric(0))
+  expect_equal(rgamma(1, scale = -1), NaN)
+  expect_equal(rgamma(2, scale = -1), c(NaN, NaN))
+  expect_error(rgamma(1, shape = 1:2))
+  expect_error(rgamma(1, scale = 1:2))
+  expect_identical(rgamma(1, shape = NA), NA_real_)
 })
 
 test_that("fit gamma quinoline", {

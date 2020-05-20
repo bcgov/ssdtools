@@ -37,10 +37,17 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE) {
 }
 
 rdist <- function(dist, n, ...) {
+  if(!length(n)) return(numeric(0))
+  
+  chk_whole_number(n)
+  chk_gte(n)
+  
   if(n == 0L) return(numeric(0))
   
   fun <- paste0("r", dist, "_ssd")
-  list <- list(...)
-  list$n <- n
-  do.call(fun, list)
+  args <- list(...)
+  args$n <- n
+  r <- do.call(fun, args)
+  if(any_missing(...)) return(NA_real_)
+  r
 }
