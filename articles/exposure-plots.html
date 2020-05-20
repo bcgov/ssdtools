@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9001</span>
       </span>
     </div>
 
@@ -125,7 +125,7 @@
 <p>Finding a suitable probability distribution to describe the exposure concentration is beyond the scope of this document – we will assume that this has been done elsewhere. In particular, suppose that the exposure concentration follows a log-normal distribution with a mean of -2.3025851 and a standard deviation of 1 on the logarithmic scale. From the exposure distribution, we construct a data frame with the concentration values and the cumulative probability of seeing this exposure or less in the environment.</p>
 <p>Notice that some care is needed because the plot for <em>ssdtools</em> in on the logarithmic base 10 scale and not the natural logarithm base <span class="math inline">\(e\)</span> scale.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">ex.cdf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">Conc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fl">.01</span>), <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fl">10</span>), <span class="fl">.1</span>))) <span class="co"># generate a grid of concentrations</span>
-<span class="no">ex.cdf</span>$<span class="no">ex.cdf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">plnorm</a></span>(<span class="no">ex.cdf</span>$<span class="no">Conc</span>,
+<span class="no">ex.cdf</span>$<span class="no">ex.cdf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lnorm.html">plnorm</a></span>(<span class="no">ex.cdf</span>$<span class="no">Conc</span>,
   <span class="kw">meanlog</span> <span class="kw">=</span> <span class="no">ex.mean.log</span>,
   <span class="kw">sdlog</span> <span class="kw">=</span> <span class="no">ex.sd.log</span>
 ) <span class="co"># generate the cdf</span></pre></body></html></div>
@@ -140,8 +140,8 @@
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
 <span class="no">ex.risk</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ssd_exposure.html">ssd_exposure</a></span>(<span class="no">fit</span>, <span class="kw">meanlog</span> <span class="kw">=</span> <span class="no">ex.mean.log</span>, <span class="kw">sdlog</span> <span class="kw">=</span> <span class="no">ex.sd.log</span>)
 <span class="no">ex.risk</span></pre></body></html></div>
-<pre><code>## [1] 0.005594817</code></pre>
-<p>The risk of 0.00559 can also be added to the plot in the usual way:</p>
+<pre><code>## [1] 0.005595128</code></pre>
+<p>The risk of 0.0056 can also be added to the plot in the usual way:</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">fit.plot</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">dat</span> <span class="kw">=</span> <span class="no">ex.cdf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Conc</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">ex.cdf</span>), <span class="kw">color</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">2</span>) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span>(<span class="st">"text"</span>,
     <span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Exposure distribution"</span>),
