@@ -14,7 +14,7 @@ d_apply <- function(dist, x, ..., log = FALSE) {
 
 p_apply <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE) {
   if(!length(q)) return(numeric(0))
-  
+
   fun <- paste0("p", dist, "_ssd")
   p <- mapply(fun, q, ...)
   p[mapply(any_missing, q, ...)] <- NA_real_
