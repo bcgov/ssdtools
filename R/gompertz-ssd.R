@@ -16,19 +16,22 @@
 dgompertz_ssd<- function(x, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
-  log(shape) + x * scale - (shape/scale) * (exp(x * scale) - 1)
-}
-
-qgompertz_ssd <- function(p, scale, shape) {
-  if(is.na(scale) || is.na(shape)) return (NA_real_)
-  if(scale <= 0 || shape <= 0) return (NaN)
-  log(1 - scale/shape * log(1-p)) / scale
+#  log(shape) + x * scale - (shape/scale) * (exp(x * scale) - 1)
+  VGAM::dgompertz(x, scale = scale, shape = shape)
 }
 
 pgompertz_ssd <- function(q, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
-  1 - exp(-scale/shape * (exp(shape*q) - 1))
+#  1 - exp(-scale/shape * (exp(shape*q) - 1))
+  VGAM::pgompertz(q, scale = scale, shape = shape)
+}
+
+qgompertz_ssd <- function(p, scale, shape) {
+  if(is.na(scale) || is.na(shape)) return (NA_real_)
+  if(scale <= 0 || shape <= 0) return (NaN)
+#  log(1 - scale/shape * log(1-p)) / scale
+  VGAM::qgompertz(p, scale = scale, shape = shape)
 }
 
 rgompertz_ssd <- function(n, scale, shape) {
@@ -36,5 +39,6 @@ rgompertz_ssd <- function(n, scale, shape) {
   stopifnot(identical(length(shape), 1L))
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (rep(NaN, n))
-  qgompertz_ssd(runif(n), scale = scale, shape = shape)
+#  qgompertz_ssd(runif(n), scale = scale, shape = shape)
+  VGAM::rgompertz(n, scale = scale, shape = shape)
 }
