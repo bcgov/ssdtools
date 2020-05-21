@@ -113,11 +113,12 @@ test_that("fit gompertz quinoline", {
 })
 
 test_that("fit gompertz boron", {
+  set.seed(42)
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(shape = 0.0394088987295895, scale = 0.00260264763026028)
+    c(shape = 0.0394104684415101, scale = 0.00260161531844944)
   )
 })
 
