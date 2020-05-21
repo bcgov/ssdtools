@@ -18,9 +18,6 @@
 dgompertz_ssd<- function(x, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
-  if(is.nan(x)) return(NaN)
-  if(is.na(x)) return(NA_real_)
-  if(is.infinite(x)) return(-Inf)
   log(shape) + x * scale - (shape/scale) * (exp(x * scale) - 1)
 }
 

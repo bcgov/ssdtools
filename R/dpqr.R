@@ -6,9 +6,12 @@ any_missing <- function(...) {
 ddist <- function(dist, x, ..., log = FALSE) {
   if(!length(x)) return(numeric(0))
 
+  inf <- !is.na(x) & is.infinite(x) 
+  x[inf] <- NA_real_
   fun <- paste0("d", dist, "_ssd")
   d <- mapply(fun, x, ...)
   d[mapply(any_missing, x, ...)] <- NA_real_
+  d[inf] <- -Inf
   if(!log) d <- exp(d)
   d
 }
