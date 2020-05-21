@@ -49,6 +49,3 @@ the gompertz distribution with parameters lshape and lscale.
 x <- seq(0.01, 5, by = 0.01)
 plot(x, dgompertz(x), type = "l")
 }
-\seealso{
-\code{\link[stats]{dgompertz}}
-}
