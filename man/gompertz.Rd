@@ -9,22 +9,22 @@
 \alias{sgompertz}
 \title{gompertz Distribution}
 \usage{
-dgompertz(x, shape = 1, scale = 1, log = FALSE)
+dgompertz(x, lshape = 0, lscale = 0, log = FALSE)
 
-pgompertz(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
+pgompertz(q, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE)
 
-qgompertz(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
+qgompertz(p, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE)
 
-rgompertz(n, shape = 1, scale = 1)
+rgompertz(n, lshape = 0, lscale = 0)
 
 sgompertz(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{shape}{A string of the column in data for the shape aesthetic.}
+\item{lshape}{shape parameter on the log scale.}
 
-\item{scale}{scale parameter.}
+\item{lscale}{scale parameter on the log scale.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -43,7 +43,7 @@ A numeric vector.
 }
 \description{
 Density, distribution function, quantile function and random generation for 
-the gompertz distribution with parameters shape and scale.
+the gompertz distribution with parameters lshape and lscale.
 }
 \examples{
 x <- seq(0.01, 5, by = 0.01)

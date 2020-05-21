@@ -15,7 +15,7 @@
 #' gompertz Distribution
 #'
 #' Density, distribution function, quantile function and random generation for 
-#' the gompertz distribution with parameters shape and scale.
+#' the gompertz distribution with parameters lshape and lscale.
 #'
 #' @inheritParams params
 #' @param x A numeric vector of values.
@@ -29,29 +29,29 @@ NULL
 
 #' @rdname gompertz
 #' @export
-dgompertz <- function(x, shape = 1, scale = 1, log = FALSE) {
-  ddist("gompertz", x,  shape = shape, scale = scale, 
+dgompertz <- function(x, lshape = 0, lscale = 0, log = FALSE) {
+  ddist("gompertz", x,  shape = exp(lshape), scale = exp(lscale), 
         log = log)
 }
 
 #' @rdname gompertz
 #' @export
-pgompertz <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-  pdist("gompertz", q = q, shape = shape, scale = scale, 
+pgompertz <- function(q, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
+  pdist("gompertz", q = q, shape = exp(lshape), scale = exp(lscale), 
         lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-qgompertz <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
-  qdist("gompertz", p = p, shape = shape, scale = scale, 
+qgompertz <- function(p, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
+  qdist("gompertz", p = p, shape = exp(lshape), scale = exp(lscale), 
         lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-rgompertz <- function(n, shape = 1, scale = 1) {
-  rdist("gompertz", n = n, shape = shape, scale = scale)
+rgompertz <- function(n, lshape = 0, lscale = 0) {
+  rdist("gompertz", n = n, shape = exp(lshape), scale = exp(lscale))
 }
 
 #' @rdname gompertz
@@ -59,6 +59,6 @@ rgompertz <- function(n, shape = 1, scale = 1) {
 sgompertz <- function(x) {
   fit <- vglm(x ~ 1, VGAM::gompertz)
   list(start = list(
-    shape = exp(unname(coef(fit)[2])), scale = exp(unname(coef(fit)[1]))
+    lshape = unname(coef(fit)[2]), lscale = unname(coef(fit)[1])
   ))
 }
