@@ -19,14 +19,14 @@ ddist <- function(dist, x, ..., log = FALSE) {
 pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE) {
   if(!length(q)) return(numeric(0))
 
-  inf <- !is.na(q) & is.infinite(q) 
-  lte <- !is.na(q) & q <= 0
-  q[inf | lte] <- NA_real_
+  inf <- !is.na(q) & is.infinite(q)
+  pos <- is.na(q) | q > 0
+  q[inf] <- NA_real_
   fun <- paste0("p", dist, "_ssd")
   p <- mapply(fun, q, ...)
   p[mapply(any_missing, q, ...)] <- NA_real_
-  p[inf] <- 1
-  p[lte] <- 0
+  p[inf & pos] <- 1
+  p[inf & !pos] <- 0
   if(!lower.tail) p <- 1 - p
   if(log.p) p <- log(p)
   p

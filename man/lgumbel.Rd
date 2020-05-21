@@ -47,3 +47,7 @@ and starting values for the
 Log-Gumbel distribution
 with \code{lscale} and \code{llocation} parameters.
 }
+\examples{
+x <- seq(0.01, 5, by = 0.01)
+plot(x, dlgumbel(x), type = "l")
+}
