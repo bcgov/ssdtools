@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gompertz Distribution — gompertz • ssdtools</title>
+<title>gompertz Distribution — gompertz • ssdtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="Gompertz Distribution — gompertz" />
-<meta property="og:description" content="Density, distribution function, quantile function, random generation
-and starting values for the
-Gompertz distribution." />
+<meta property="og:title" content="gompertz Distribution — gompertz" />
+<meta property="og:description" content="Density, distribution function, quantile function and random generation for 
+the gompertz distribution with parameters llocation and lshape." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -145,24 +144,23 @@ Gompertz distribution." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Gompertz Distribution</h1>
+    <h1>gompertz Distribution</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/gompertz.R'><code>R/gompertz.R</code></a></small>
     <div class="hidden name"><code>gompertz.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Density, distribution function, quantile function, random generation
-and starting values for the
-Gompertz distribution.</p>
+    <p>Density, distribution function, quantile function and random generation for 
+the gompertz distribution with parameters llocation and lshape.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dgompertz</span>(<span class='no'>x</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dgompertz</span>(<span class='no'>x</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qgompertz</span>(<span class='no'>p</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>pgompertz</span>(<span class='no'>q</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>pgompertz</span>(<span class='no'>q</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qgompertz</span>(<span class='no'>p</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rgompertz</span>(<span class='no'>n</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+<span class='fu'>rgompertz</span>(<span class='no'>n</span>, <span class='kw'>llocation</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
 <span class='fu'>sgompertz</span>(<span class='no'>x</span>)</pre>
 
@@ -174,8 +172,8 @@ Gompertz distribution.</p>
       <td><p>A numeric vector of values.</p></td>
     </tr>
     <tr>
-      <th>lscale</th>
-      <td><p>scale parameter on the log scale.</p></td>
+      <th>llocation</th>
+      <td><p>location parameter on the log scale.</p></td>
     </tr>
     <tr>
       <th>lshape</th>
@@ -186,8 +184,8 @@ Gompertz distribution.</p>
       <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
-      <th>p</th>
-      <td><p>vector of probabilities.</p></td>
+      <th>q</th>
+      <td><p>vector of quantiles.</p></td>
     </tr>
     <tr>
       <th>lower.tail</th>
@@ -198,8 +196,8 @@ Gompertz distribution.</p>
       <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
-      <th>q</th>
-      <td><p>vector of quantiles.</p></td>
+      <th>p</th>
+      <td><p>vector of probabilities.</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -210,13 +208,6 @@ Gompertz distribution.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A numeric vector.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The functions are wrappers on the equivalent VGAM functions that
-return a zero length numeric vector if x, q or p are zero length.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/VGAM/man/gompertzUC.html'>dgompertz</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)
