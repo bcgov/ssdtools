@@ -59,6 +59,7 @@ test_that("qlnorm extremes", {
                c(qlnorm(1, 1, 3), qlnorm(2, 2, 4)))
   expect_equal(qlnorm(1:2, meanlog = c(1, NA), sdlog = 3:4), 
                c(qlnorm(1, 1, 3), NA))
+  expect_equal(qlnorm(plnorm(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
 })
 
 test_that("rlnorm extremes", {

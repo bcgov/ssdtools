@@ -12,28 +12,28 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-dgompertz_ssd<- function(x, scale, shape) {
-  if(is.na(scale) || is.na(shape)) return (NA_real_)
-  if(scale <= 0 || shape <= 0) return (NaN)
-  log(shape) + x * scale - (shape/scale) * (exp(x * scale) - 1)
+dgompertz_ssd<- function(x, location, shape) {
+  if(is.na(location) || is.na(shape)) return (NA_real_)
+  if(location <= 0 || shape <= 0) return (NaN)
+  log(location) + x * shape - (location/shape) * (exp(x * shape) - 1)
 }
 
-pgompertz_ssd <- function(q, scale, shape) {
-  if(is.na(scale) || is.na(shape)) return (NA_real_)
-  if(scale <= 0 || shape <= 0) return (NaN)
-  1 - exp(-scale/shape * (exp(shape*q) - 1))
+pgompertz_ssd <- function(q, location, shape) {
+  if(is.na(location) || is.na(shape)) return (NA_real_)
+  if(location <= 0 || shape <= 0) return (NaN)
+  1 - exp(-location/shape * (exp(q * shape) - 1))
 }
 
-qgompertz_ssd <- function(p, scale, shape) {
-  if(is.na(scale) || is.na(shape)) return (NA_real_)
-  if(scale <= 0 || shape <= 0) return (NaN)
-  log(1 - scale/shape * log(1-p)) / scale
+qgompertz_ssd <- function(p, location, shape) {
+  if(is.na(location) || is.na(shape)) return (NA_real_)
+  if(location <= 0 || shape <= 0) return (NaN)
+  log(1 - shape/location * log(1-p)) / shape
 }
 
-rgompertz_ssd <- function(n, scale, shape) {
-  stopifnot(identical(length(scale), 1L))
+rgompertz_ssd <- function(n, location, shape) {
+  stopifnot(identical(length(location), 1L))
   stopifnot(identical(length(shape), 1L))
-  if(is.na(scale) || is.na(shape)) return (NA_real_)
-  if(scale <= 0 || shape <= 0) return (rep(NaN, n))
-  qgompertz_ssd(runif(n), scale = scale, shape = shape)
+  if(is.na(location) || is.na(shape)) return (NA_real_)
+  if(location <= 0 || shape <= 0) return (rep(NaN, n))
+  qgompertz_ssd(runif(n), location = location, shape = shape)
 }

@@ -24,9 +24,9 @@ test_that("dgompertz extremes", {
   expect_identical(dgompertz(Inf), 0)
   expect_identical(dgompertz(c(NA, NaN, 0, Inf, -Inf)), 
                    c(dgompertz(NA), dgompertz(NaN), dgompertz(0), dgompertz(Inf), dgompertz(-Inf)))
-  expect_equal(dgompertz(1:2, lshape = 1:2, lscale = 3:4), 
+  expect_equal(dgompertz(1:2, llocation = 1:2, lshape = 3:4), 
                c(dgompertz(1, 1, 3), dgompertz(2, 2, 4)))
-  expect_equal(dgompertz(1:2, lshape = c(1, NA), lscale = 3:4), 
+  expect_equal(dgompertz(1:2, llocation = c(1, NA), lshape = 3:4), 
                c(dgompertz(1, 1, 3), NA))
 })
 
@@ -44,9 +44,9 @@ test_that("pgompertz extremes", {
   expect_identical(pgompertz(Inf), 1)
   expect_identical(pgompertz(c(NA, NaN, 0, Inf, -Inf)), 
                    c(pgompertz(NA), pgompertz(NaN), pgompertz(0), pgompertz(Inf), pgompertz(-Inf)))
-  expect_equal(pgompertz(1:2, lshape = 1:2, lscale = 3:4), 
+  expect_equal(pgompertz(1:2, llocation = 1:2, lshape = 3:4), 
                c(pgompertz(1, 1, 3), pgompertz(2, 2, 4)))
-  expect_equal(pgompertz(1:2, lshape = c(1, NA), lscale = 3:4), 
+  expect_equal(pgompertz(1:2, llocation = c(1, NA), lshape = 3:4), 
                c(pgompertz(1, 1, 3), NA))
 })
 
@@ -66,11 +66,11 @@ test_that("qgompertz extremes", {
   expect_identical(qgompertz(Inf), NaN)
   expect_identical(qgompertz(c(NA, NaN, 0, Inf, -Inf)), 
                    c(qgompertz(NA), qgompertz(NaN), qgompertz(0), qgompertz(Inf), qgompertz(-Inf)))
-  expect_equal(qgompertz(1:2, lshape = 1:2, lscale = 3:4), 
+  expect_equal(qgompertz(1:2, llocation = 1:2, lshape = 3:4), 
                c(qgompertz(1, 1, 3), qgompertz(2, 2, 4)))
-  expect_equal(qgompertz(1:2, lshape = c(1, NA), lscale = 3:4), 
+  expect_equal(qgompertz(1:2, llocation = c(1, NA), lshape = 3:4), 
                c(qgompertz(1, 1, 3), NA))
-  expect_equal(qgompertz(pgompertz(0.9)), 0.9)
+  expect_equal(qgompertz(pgompertz(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
 })
 
 test_that("rgompertz extremes", {
@@ -85,10 +85,11 @@ test_that("rgompertz extremes", {
   expect_equal(rgompertz(2), c(1.24208466660006, 1.32596518320944))
   set.seed(42)
   expect_equal(rgompertz(3:4), c(1.24208466660006, 1.32596518320944))
+  expect_equal(rgompertz(0, llocation = -1), numeric(0))
   expect_equal(rgompertz(0, lshape = -1), numeric(0))
-  expect_equal(rgompertz(0, lscale = -1), numeric(0))
+  expect_error(rgompertz(1, llocation = 1:2))
   expect_error(rgompertz(1, lshape = 1:2))
-  expect_error(rgompertz(1, lscale = 1:2))
+  expect_identical(rgompertz(1, llocation = NA), NA_real_)
   expect_identical(rgompertz(1, lshape = NA), NA_real_)
 })
 
@@ -100,7 +101,7 @@ test_that("sgompertz", {
 
 # test_that("fit gompertz quinoline", {
 #   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
-#   
+# 
 #   expect_warning(dist <- ssdtools:::ssd_fit_dist(quin, dist = "gompertz"))
 #   expect_true(is.fitdist(dist))
 #   expect_equal(
@@ -115,7 +116,7 @@ test_that("fit gompertz boron", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(lshape = -3.23372380148428, lscale = -5.95162275054023)
+    c(llocation = -3.23372380148428, lshape = -5.95162275054023)
   )
 })
 
@@ -126,27 +127,23 @@ test_that("fit gompertz", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(lshape = -3.23394197210355, lscale = -5.94837894139464)
+    c(llocation = -3.23394197210355, lshape = -5.94837894139464)
   )
 })
 
 test_that("fit gompertz cis", {
-  warning("why difference depending on how run")
+  warning("why difference depending on how run (tolerance only 1e-2)")
   dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
 
   set.seed(77)
   expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
                structure(list(percent = 5, est = 1.29966505882091, se = 0.210602817456456, 
                               lcl = 1.06020559352889, ucl = 1.6595940440259, dist = "gompertz"), row.names = c(NA, 
-                                                                                                               -1L), class = "data.frame"),
-               tolerance = 1e-02
-  )
+                                                                                                               -1L), class = "data.frame"), tolerance = 1e-2)
 
   set.seed(77)
   expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-               structure(list(conc = 2, est = 0.542327883834004, se = 1.25841910443346, 
-                              lcl = 1.24859704936364e-06, ucl = 3.34707626356115, dist = "gompertz"), row.names = c(NA, 
-                                                                                                                    -1L), class = "data.frame"),
-               tolerance = 1e-02
-  )
+               structure(list(conc = 2, est = 7.59756164161489, se = 1.14837721039132, 
+                              lcl = 6.00396142120025, ucl = 9.2258760434535, dist = "gompertz"), row.names = c(NA, 
+                                                                                                               -1L), class = "data.frame"))
 })
