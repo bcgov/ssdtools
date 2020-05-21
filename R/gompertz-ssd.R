@@ -37,8 +37,7 @@ qgompertz_ssd <- function(p, scale, shape) {
 pgompertz_ssd <- function(q, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
-  ans <- -expm1((-shape/scale) * expm1(scale * q))
-  ans
+  1 - exp(-scale/shape * (exp(shape*q) - 1))
 }
 
 #' @rdname gompertz
