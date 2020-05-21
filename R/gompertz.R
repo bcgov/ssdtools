@@ -12,19 +12,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Gompertz Distribution
+#' gompertz Distribution
 #'
-#' Density, distribution function, quantile function, random generation
-#' and starting values for the
-#' Gompertz distribution.
+#' Density, distribution function, quantile function and random generation for 
+#' the gompertz distribution with parameters llocation and lshape.
 #'
-#' The functions are wrappers on the equivalent VGAM functions that
-#' return a zero length numeric vector if x, q or p are zero length.
-#'
-#' @param x A numeric vector of values.
 #' @inheritParams params
+#' @param x A numeric vector of values.
 #' @return A numeric vector.
-#' @seealso \code{\link[VGAM]{dgompertz}}
 #' @name gompertz
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
@@ -33,35 +28,29 @@ NULL
 
 #' @rdname gompertz
 #' @export
-dgompertz <- function(x, lscale = 0, lshape = 0, log = FALSE) {
-  if (!length(x)) {
-    return(numeric(0))
-  }
-  VGAM::dgompertz(x, scale = exp(lscale), shape = exp(lshape), log = log)
+dgompertz <- function(x, llocation = 0, lshape = 0, log = FALSE) {
+  ddist("gompertz", x,  location = exp(llocation), shape = exp(lshape), 
+        log = log)
 }
 
 #' @rdname gompertz
 #' @export
-qgompertz <- function(p, lscale = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(p)) {
-    return(numeric(0))
-  }
-  VGAM::qgompertz(p, scale = exp(lscale), shape = exp(lshape), lower.tail = lower.tail, log.p = log.p)
+pgompertz <- function(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
+  pdist("gompertz", q = q, location = exp(llocation), shape = exp(lshape), 
+        lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-pgompertz <- function(q, lscale = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
-  if (!length(q)) {
-    return(numeric(0))
-  }
-  VGAM::pgompertz(q, scale = exp(lscale), shape = exp(lshape), lower.tail = lower.tail, log.p = log.p)
+qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
+  qdist("gompertz", p = p, location = exp(llocation), shape = exp(lshape), 
+        lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-rgompertz <- function(n, lscale = 0, lshape = 0) {
-  VGAM::rgompertz(n, scale = exp(lscale), shape = exp(lshape))
+rgompertz <- function(n, llocation = 0, lshape = 0) {
+  rdist("gompertz", n = n, location = exp(llocation), shape = exp(lshape))
 }
 
 #' @rdname gompertz
@@ -69,6 +58,6 @@ rgompertz <- function(n, lscale = 0, lshape = 0) {
 sgompertz <- function(x) {
   fit <- vglm(x ~ 1, VGAM::gompertz)
   list(start = list(
-    lshape = unname(coef(fit)[2]), lscale = unname(coef(fit)[1])
+    llocation = unname(coef(fit)[2]), lshape = unname(coef(fit)[1])
   ))
 }

@@ -62,6 +62,7 @@ test_that("qgamma extremes", {
                c(qgamma(1, 1, 3), qgamma(2, 2, 4)))
   expect_equal(qgamma(1:2, shape = c(1, NA), scale = 3:4), 
                c(qgamma(1, 1, 3), NA))
+  expect_equal(qgamma(pgamma(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
 })
 
 test_that("rgamma extremes", {

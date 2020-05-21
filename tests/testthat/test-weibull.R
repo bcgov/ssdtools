@@ -62,6 +62,7 @@ test_that("qweibull extremes", {
                c(qweibull(1, 1, 3), qweibull(2, 2, 4)))
   expect_equal(qweibull(1:2, shape = c(1, NA), scale = 3:4), 
                c(qweibull(1, 1, 3), NA))
+  expect_equal(qweibull(pweibull(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
 })
 
 test_that("rweibull extremes", {

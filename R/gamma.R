@@ -38,7 +38,7 @@ dgamma <- function(x, shape = 1, scale = 1, log = FALSE) {
 #' @export
 pgamma <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("gamma", q = q, shape = shape, scale = scale, 
-        lower.tail = lower.tail, log.p = log.p)
+             lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gamma

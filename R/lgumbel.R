@@ -23,37 +23,46 @@
 #' @inheritParams params
 #' @return A numeric vector.
 #' @name lgumbel
+#' @examples
+#' x <- seq(0.01, 5, by = 0.01)
+#' plot(x, dlgumbel(x), type = "l")
 NULL
 
 #' @rdname lgumbel
 #' @export
 dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
-  d <- ddist("gumbel", x = log_silent(x),  location = llocation, scale = lscale)
+  lte <- !is.na(x) & x <= 0
+  x[lte] <- NA_real_
+  d <- ddist("gumbel", x = log(x),  location = llocation, scale = lscale)
   d <- d / x
-  if (log) return(log_silent(d))
+  d[lte] <- 0
+  if (log) return(log(d))
   d
 }
 
 #' @rdname lgumbel
 #' @export
 plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  pdist("gumbel", q = log_silent(q),  location = llocation, scale = lscale,
-          lower.tail = lower.tail, log.p = log.p)
+  lte <- !is.na(q) & q <= 0
+  q[lte] <- NA_real_
+  p <- pdist("gumbel", q = log(q),  location = llocation, scale = lscale)
+  p[lte] <- 0
+  if(!lower.tail) p <- 1 - p
+  if(log.p) p <- log(p)
+  p
 }
 
 #' @rdname lgumbel
 #' @export
 qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  q <- qdist("gumbel", p = p,  location = llocation, scale = lscale,
-          lower.tail = lower.tail, log.p = log.p)
-  exp(q)
+  exp(qdist("gumbel", p = p,  location = llocation, scale = lscale,
+          lower.tail = lower.tail, log.p = log.p))
 }
 
 #' @rdname lgumbel
 #' @export
 rlgumbel <- function(n, llocation = 0, lscale = 1) {
-  r <- rdist("gumbel", n = n,  location = llocation, scale = lscale)
-  exp(r)
+  exp(rdist("gumbel", n = n,  location = llocation, scale = lscale))
 }
 
 #' @rdname lgumbel
