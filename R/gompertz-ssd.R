@@ -18,15 +18,10 @@
 dgompertz_ssd<- function(x, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
-  index0 <- (x < 0)
-  index1 <- abs(x * scale) < 0.1 & is.finite(x * scale)
-  ans <- log(shape) + x * scale - (shape/scale) * (exp(x * 
-                                                         scale) - 1)
-  ans[index1] <- log(shape[index1]) + x[index1] * scale[index1] - 
-    (shape[index1]/scale[index1]) * expm1(x[index1] * scale[index1])
-  ans[index0] <- log(0)
-  ans[x == Inf] <- log(0)
-  ans
+  if(is.nan(x)) return(NaN)
+  if(is.na(x)) return(NA_real_)
+  if(is.infinite(x)) return(-Inf)
+  log(shape) + x * scale - (shape/scale) * (exp(x * scale) - 1)
 }
 
 #' @rdname gompertz
@@ -34,12 +29,7 @@ dgompertz_ssd<- function(x, scale, shape) {
 qgompertz_ssd <- function(p, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
-  ans <- log1p((-scale/shape) * log1p(-p))/scale
-  ans[p < 0] <- NaN
-  ans[p == 0] <- 0
-  ans[p == 1] <- Inf
-  ans[p > 1] <- NaN
-  ans
+  log(1 - scale/shape * log(1-p)) / scale
 }
 
 #' @rdname gompertz

@@ -31,9 +31,12 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE) {
   if (log.p) p <- exp(p)
   if (!lower.tail) p <- 1 - p
   
+  nvld <- !is.na(p) & !(p >= 0 & p <= 1)
+  p[nvld] <- NA_real_
   fun <- paste0("q", dist, "_ssd")
   q <- mapply(fun, p, ...)
   q[mapply(any_missing, p, ...)] <- NA_real_
+  q[nvld] <- NaN
   q
 }
 
