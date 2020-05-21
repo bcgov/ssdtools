@@ -101,6 +101,11 @@ test_that("rgompertz extremes", {
   expect_identical(rgompertz(1, shape = NA), NA_real_)
 })
 
+test_that("sgompertz", {
+  x <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]$Conc
+  sgompertz(x)
+})
+
 test_that("fit gompertz quinoline", {
   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
   

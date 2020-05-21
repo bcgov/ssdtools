@@ -13,32 +13,24 @@
 #    limitations under the License.
 
 
-#' @rdname gompertz
-#' @export
 dgompertz_ssd<- function(x, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
   log(shape) + x * scale - (shape/scale) * (exp(x * scale) - 1)
 }
 
-#' @rdname gompertz
-#' @export
 qgompertz_ssd <- function(p, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
   log(1 - scale/shape * log(1-p)) / scale
 }
 
-#' @rdname gompertz
-#' @export
 pgompertz_ssd <- function(q, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
   1 - exp(-scale/shape * (exp(shape*q) - 1))
 }
 
-#' @rdname gompertz
-#' @export
 rgompertz_ssd <- function(n, scale, shape) {
   stopifnot(identical(length(scale), 1L))
   stopifnot(identical(length(shape), 1L))
