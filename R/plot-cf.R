@@ -31,3 +31,11 @@ ssd_plot_cf <- function(data, left = "Conc") {
   fitdistrplus::descdist(data[[left]], boot = 100L)
   invisible()
 }
+
+#' @describeIn ssd_plot_cf Deprecated Cullen and Frey Plot
+#' @export
+ssd_cfplot <- function(data, left = "Conc") {
+  deprecate_soft("0.1.0", "ssd_cfplot()", "ssd_plot_cf()")
+  ssd_plot_cf(data, left)
+}
+

@@ -24,14 +24,15 @@ test_that("fit_dist tiny llogis", {
   fit <- ssdtools:::ssd_fit_dist(data, dist = "llogis")
   expect_equal(
     fit$estimate,
-    c(lscale = 2.6261248978507, lshape = 0.740309228071107)
+    c(locationlog = 2.6261248978507, scalelog = 0.740309228071107)
   )
 
   data$Conc <- data$Conc / 100
   fit <- ssdtools:::ssd_fit_dist(data, dist = "llogis")
   expect_equal(
     fit$estimate,
-    c(lscale = -1.97890271677598, lshape = 0.740452665894763)
+    c(locationlog = -1.97890271677598, scalelog = 0.740452665894763
+    )
   )
 })
 

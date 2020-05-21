@@ -17,7 +17,7 @@
 #' Density, distribution function, quantile function, random generation
 #' and starting values for the
 #' log-logistic distribution
-#' with \code{shape} and \code{scale} parameters.
+#' with \code{locationlog} and \code{scalelog} parameters.
 #'
 #' @param x A numeric vector of values.
 #' @inheritParams params
@@ -31,42 +31,36 @@ NULL
 
 #' @rdname llogis
 #' @export
-dllogis <- function(x, lshape = 1, lscale = 1, log = FALSE) {
-  if (!length(x)) {
-    return(numeric(0))
-  }
-  d <- dlogis(log(x), location = lscale, scale = lshape) / x
-  if (log) {
-    return(log(d))
-  }
-  d
+dllogis <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
+  ddist("logis", x = x,  location = locationlog, scale = scalelog, 
+        log = log, .lgt = TRUE)
 }
 
 #' @rdname llogis
 #' @export
-qllogis <- function(p, lshape = 1, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  if (log.p) p <- exp(p)
-  if (!lower.tail) p <- 1 - p
-  exp(qlogis(p, location = lscale, scale = lshape))
+pllogis <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+  pdist("logis", q = q,  location = locationlog, scale = scalelog, 
+        lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 #' @rdname llogis
 #' @export
-pllogis <- function(q, lshape = 1, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  plogis(log(q), location = lscale, scale = lshape, lower.tail = lower.tail, log.p = log.p)
+qllogis <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+  qdist("logis", p = p,  location = locationlog, scale = scalelog,
+        lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 #' @rdname llogis
 #' @export
-rllogis <- function(n, lshape = 1, lscale = 1) {
-  exp(rlogis(n = n, location = lscale, scale = lshape))
+rllogis <- function(n, locationlog = 0, scalelog = 1) {
+  rdist("logis", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE)
 }
 
 #' @rdname llogis
 #' @export
 sllogis <- function(x) {
   list(start = list(
-    lscale = mean(log(x), na.rm = TRUE),
-    lshape = pi * sd(log(x), na.rm = TRUE) / sqrt(3)
+    locationlog = mean(log(x), na.rm = TRUE),
+    scalelog = pi * sd(log(x), na.rm = TRUE) / sqrt(3)
   ))
 }

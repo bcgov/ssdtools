@@ -56,7 +56,11 @@
 
 \item{meanlog}{mean on log scale parameter.}
 
+\item{locationlog}{location on log scale parameter.}
+
 \item{sdlog}{standard deviation on log scale parameter.}
+
+\item{scalelog}{scale on log scale parameter.}
 
 \item{lshape}{shape parameter on the log scale.}
 

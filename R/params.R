@@ -41,7 +41,9 @@
 #' @param lscale scale parameter on the log scale.
 #' @param shape	shape parameter.
 #' @param meanlog mean on log scale parameter.
+#' @param locationlog location on log scale parameter.
 #' @param sdlog standard deviation on log scale parameter.
+#' @param scalelog scale on log scale parameter.
 #' @param lshape shape parameter on the log scale.
 #' @param lshape1 shape1 parameter on the log scale.
 #' @param lshape2 shape2 parameter on the log scale.

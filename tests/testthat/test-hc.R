@@ -73,30 +73,19 @@ test_that("ssd_hc list", {
   
   expect_equal(
     as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL))),
-    structure(list(percent = c(5, 5), est = c(
-      0.193040816698737,
-      0.143067464655739
-    ), se = c(NA_real_, NA_real_), lcl = c(
-      NA_real_,
-      NA_real_
-    ), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "llogis")), row.names = c(NA, -2L), class = "data.frame")
+    structure(list(percent = c(5, 5), est = c(0.193040816698737, 
+                                              0.0526315789473684), se = c(NA_real_, NA_real_), lcl = c(NA_real_, 
+                                                                                                       NA_real_), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "llogis"
+                                                                                                       )), row.names = c(NA, -2L), class = "data.frame")
   )
   
   expect_equal(
     as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL), percent = c(1, 99))),
-    structure(list(percent = c(1, 99, 1, 99), est = c(
-      0.097651733070336,
-      10.2404736563121, 0.027457392206657, 269.109901017445
-    ), se = c(
-      NA_real_,
-      NA_real_, NA_real_, NA_real_
-    ), lcl = c(
-      NA_real_, NA_real_, NA_real_,
-      NA_real_
-    ), ucl = c(NA_real_, NA_real_, NA_real_, NA_real_), dist = c(
-      "lnorm",
-      "lnorm", "llogis", "llogis"
-    )), row.names = c(NA, -4L), class = "data.frame")
+    structure(list(percent = c(1, 99, 1, 99), est = c(0.097651733070336, 
+                                                      10.2404736563121, 0.0101010101010101, 98.9999999999999), se = c(NA_real_, 
+                                                                                                                      NA_real_, NA_real_, NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, 
+                                                                                                                                                             NA_real_), ucl = c(NA_real_, NA_real_, NA_real_, NA_real_), dist = c("lnorm", 
+                                                                                                                                                                                                                                  "lnorm", "llogis", "llogis")), row.names = c(NA, -4L), class = "data.frame")
   )
 })
 

@@ -176,6 +176,58 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dlogis_ssd
+double dlogis_ssd(double x, double location, double scale);
+RcppExport SEXP _ssdtools_dlogis_ssd(SEXP xSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(dlogis_ssd(x, location, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// plogis_ssd
+double plogis_ssd(double q, double location, double scale);
+RcppExport SEXP _ssdtools_plogis_ssd(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type q(qSEXP);
+    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(plogis_ssd(q, location, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// qlogis_ssd
+double qlogis_ssd(double p, double location, double scale);
+RcppExport SEXP _ssdtools_qlogis_ssd(SEXP pSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(qlogis_ssd(p, location, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rlogis_ssd
+NumericVector rlogis_ssd(int n, double location, double scale);
+RcppExport SEXP _ssdtools_rlogis_ssd(SEXP nSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(rlogis_ssd(n, location, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
 // dweibull_ssd
 double dweibull_ssd(double x, double shape, double scale);
 RcppExport SEXP _ssdtools_dweibull_ssd(SEXP xSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
@@ -243,6 +295,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ssdtools_plnorm_ssd", (DL_FUNC) &_ssdtools_plnorm_ssd, 3},
     {"_ssdtools_qlnorm_ssd", (DL_FUNC) &_ssdtools_qlnorm_ssd, 3},
     {"_ssdtools_rlnorm_ssd", (DL_FUNC) &_ssdtools_rlnorm_ssd, 3},
+    {"_ssdtools_dlogis_ssd", (DL_FUNC) &_ssdtools_dlogis_ssd, 3},
+    {"_ssdtools_plogis_ssd", (DL_FUNC) &_ssdtools_plogis_ssd, 3},
+    {"_ssdtools_qlogis_ssd", (DL_FUNC) &_ssdtools_qlogis_ssd, 3},
+    {"_ssdtools_rlogis_ssd", (DL_FUNC) &_ssdtools_rlogis_ssd, 3},
     {"_ssdtools_dweibull_ssd", (DL_FUNC) &_ssdtools_dweibull_ssd, 3},
     {"_ssdtools_pweibull_ssd", (DL_FUNC) &_ssdtools_pweibull_ssd, 3},
     {"_ssdtools_qweibull_ssd", (DL_FUNC) &_ssdtools_qweibull_ssd, 3},
