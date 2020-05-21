@@ -3,13 +3,12 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 double dgumbel_ssd(double x, double location, 
-                          double scale, bool log_ssd) {
+                          double scale) {
   if(scale <= 0) return R_NaN;
   
   double z = (x - location) / scale;
-  double log_d = -z - exp(-z) - log(scale);
-  if(log_ssd) return log_d;
-  return exp(log_d);
+  double d = -z - exp(-z) - log(scale);
+  return d;
 }
 
 // [[Rcpp::export]]
