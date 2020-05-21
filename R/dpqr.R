@@ -7,8 +7,9 @@ ddist <- function(dist, x, ..., log = FALSE) {
   if(!length(x)) return(numeric(0))
 
   fun <- paste0("d", dist, "_ssd")
-  d <- mapply(fun, x, ..., MoreArgs = list(log_ssd = log))
+  d <- mapply(fun, x, ...)
   d[mapply(any_missing, x, ...)] <- NA_real_
+  if(!log) d <- exp(d)
   d
 }
 

@@ -2,9 +2,9 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-double dlnorm_ssd(double x, double meanlog, double sdlog, bool log_ssd) {
+double dlnorm_ssd(double x, double meanlog, double sdlog) {
   if(sdlog <= 0) return R_NaN;
-  return R::dlnorm(x, meanlog, sdlog, log_ssd);
+  return R::dlnorm(x, meanlog, sdlog, true);
 }
 
 // [[Rcpp::export]]

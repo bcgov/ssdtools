@@ -21,16 +21,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // dgamma_ssd
-double dgamma_ssd(double x, double shape, double scale, bool log_ssd);
-RcppExport SEXP _ssdtools_dgamma_ssd(SEXP xSEXP, SEXP shapeSEXP, SEXP scaleSEXP, SEXP log_ssdSEXP) {
+double dgamma_ssd(double x, double shape, double scale);
+RcppExport SEXP _ssdtools_dgamma_ssd(SEXP xSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    Rcpp::traits::input_parameter< bool >::type log_ssd(log_ssdSEXP);
-    rcpp_result_gen = Rcpp::wrap(dgamma_ssd(x, shape, scale, log_ssd));
+    rcpp_result_gen = Rcpp::wrap(dgamma_ssd(x, shape, scale));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -74,16 +73,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // dgumbel_ssd
-double dgumbel_ssd(double x, double location, double scale, bool log_ssd);
-RcppExport SEXP _ssdtools_dgumbel_ssd(SEXP xSEXP, SEXP locationSEXP, SEXP scaleSEXP, SEXP log_ssdSEXP) {
+double dgumbel_ssd(double x, double location, double scale);
+RcppExport SEXP _ssdtools_dgumbel_ssd(SEXP xSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type location(locationSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    Rcpp::traits::input_parameter< bool >::type log_ssd(log_ssdSEXP);
-    rcpp_result_gen = Rcpp::wrap(dgumbel_ssd(x, location, scale, log_ssd));
+    rcpp_result_gen = Rcpp::wrap(dgumbel_ssd(x, location, scale));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -127,16 +125,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // dlnorm_ssd
-double dlnorm_ssd(double x, double meanlog, double sdlog, bool log_ssd);
-RcppExport SEXP _ssdtools_dlnorm_ssd(SEXP xSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP, SEXP log_ssdSEXP) {
+double dlnorm_ssd(double x, double meanlog, double sdlog);
+RcppExport SEXP _ssdtools_dlnorm_ssd(SEXP xSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type meanlog(meanlogSEXP);
     Rcpp::traits::input_parameter< double >::type sdlog(sdlogSEXP);
-    Rcpp::traits::input_parameter< bool >::type log_ssd(log_ssdSEXP);
-    rcpp_result_gen = Rcpp::wrap(dlnorm_ssd(x, meanlog, sdlog, log_ssd));
+    rcpp_result_gen = Rcpp::wrap(dlnorm_ssd(x, meanlog, sdlog));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -180,16 +177,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // dweibull_ssd
-double dweibull_ssd(double x, double shape, double scale, bool log_ssd);
-RcppExport SEXP _ssdtools_dweibull_ssd(SEXP xSEXP, SEXP shapeSEXP, SEXP scaleSEXP, SEXP log_ssdSEXP) {
+double dweibull_ssd(double x, double shape, double scale);
+RcppExport SEXP _ssdtools_dweibull_ssd(SEXP xSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    Rcpp::traits::input_parameter< bool >::type log_ssd(log_ssdSEXP);
-    rcpp_result_gen = Rcpp::wrap(dweibull_ssd(x, shape, scale, log_ssd));
+    rcpp_result_gen = Rcpp::wrap(dweibull_ssd(x, shape, scale));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -235,19 +231,19 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ssdtools_dburrXII_", (DL_FUNC) &_ssdtools_dburrXII_, 5},
-    {"_ssdtools_dgamma_ssd", (DL_FUNC) &_ssdtools_dgamma_ssd, 4},
+    {"_ssdtools_dgamma_ssd", (DL_FUNC) &_ssdtools_dgamma_ssd, 3},
     {"_ssdtools_pgamma_ssd", (DL_FUNC) &_ssdtools_pgamma_ssd, 3},
     {"_ssdtools_qgamma_ssd", (DL_FUNC) &_ssdtools_qgamma_ssd, 3},
     {"_ssdtools_rgamma_ssd", (DL_FUNC) &_ssdtools_rgamma_ssd, 3},
-    {"_ssdtools_dgumbel_ssd", (DL_FUNC) &_ssdtools_dgumbel_ssd, 4},
+    {"_ssdtools_dgumbel_ssd", (DL_FUNC) &_ssdtools_dgumbel_ssd, 3},
     {"_ssdtools_pgumbel_ssd", (DL_FUNC) &_ssdtools_pgumbel_ssd, 3},
     {"_ssdtools_qgumbel_ssd", (DL_FUNC) &_ssdtools_qgumbel_ssd, 3},
     {"_ssdtools_rgumbel_ssd", (DL_FUNC) &_ssdtools_rgumbel_ssd, 3},
-    {"_ssdtools_dlnorm_ssd", (DL_FUNC) &_ssdtools_dlnorm_ssd, 4},
+    {"_ssdtools_dlnorm_ssd", (DL_FUNC) &_ssdtools_dlnorm_ssd, 3},
     {"_ssdtools_plnorm_ssd", (DL_FUNC) &_ssdtools_plnorm_ssd, 3},
     {"_ssdtools_qlnorm_ssd", (DL_FUNC) &_ssdtools_qlnorm_ssd, 3},
     {"_ssdtools_rlnorm_ssd", (DL_FUNC) &_ssdtools_rlnorm_ssd, 3},
-    {"_ssdtools_dweibull_ssd", (DL_FUNC) &_ssdtools_dweibull_ssd, 4},
+    {"_ssdtools_dweibull_ssd", (DL_FUNC) &_ssdtools_dweibull_ssd, 3},
     {"_ssdtools_pweibull_ssd", (DL_FUNC) &_ssdtools_pweibull_ssd, 3},
     {"_ssdtools_qweibull_ssd", (DL_FUNC) &_ssdtools_qweibull_ssd, 3},
     {"_ssdtools_rweibull_ssd", (DL_FUNC) &_ssdtools_rweibull_ssd, 3},

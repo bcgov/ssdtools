@@ -2,10 +2,10 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-double dweibull_ssd(double x, double shape, double scale, bool log_ssd) {
+double dweibull_ssd(double x, double shape, double scale) {
   if(shape <= 0) return R_NaN;
   if(scale <= 0) return R_NaN;
-  return R::dweibull(x, shape, scale, log_ssd);
+  return R::dweibull(x, shape, scale, true);
 }
 
 // [[Rcpp::export]]

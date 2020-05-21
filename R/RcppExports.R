@@ -5,8 +5,8 @@ dburrXII_ <- function(x, shape1 = 1, shape2 = 1, scale = 2.718282, log_ = FALSE)
     .Call('_ssdtools_dburrXII_', PACKAGE = 'ssdtools', x, shape1, shape2, scale, log_)
 }
 
-dgamma_ssd <- function(x, shape, scale, log_ssd) {
-    .Call('_ssdtools_dgamma_ssd', PACKAGE = 'ssdtools', x, shape, scale, log_ssd)
+dgamma_ssd <- function(x, shape, scale) {
+    .Call('_ssdtools_dgamma_ssd', PACKAGE = 'ssdtools', x, shape, scale)
 }
 
 pgamma_ssd <- function(q, shape, scale) {
@@ -21,8 +21,8 @@ rgamma_ssd <- function(n, shape, scale) {
     .Call('_ssdtools_rgamma_ssd', PACKAGE = 'ssdtools', n, shape, scale)
 }
 
-dgumbel_ssd <- function(x, location, scale, log_ssd) {
-    .Call('_ssdtools_dgumbel_ssd', PACKAGE = 'ssdtools', x, location, scale, log_ssd)
+dgumbel_ssd <- function(x, location, scale) {
+    .Call('_ssdtools_dgumbel_ssd', PACKAGE = 'ssdtools', x, location, scale)
 }
 
 pgumbel_ssd <- function(q, location, scale) {
@@ -37,8 +37,8 @@ rgumbel_ssd <- function(n, location, scale) {
     .Call('_ssdtools_rgumbel_ssd', PACKAGE = 'ssdtools', n, location, scale)
 }
 
-dlnorm_ssd <- function(x, meanlog, sdlog, log_ssd) {
-    .Call('_ssdtools_dlnorm_ssd', PACKAGE = 'ssdtools', x, meanlog, sdlog, log_ssd)
+dlnorm_ssd <- function(x, meanlog, sdlog) {
+    .Call('_ssdtools_dlnorm_ssd', PACKAGE = 'ssdtools', x, meanlog, sdlog)
 }
 
 plnorm_ssd <- function(q, meanlog, sdlog) {
@@ -53,8 +53,8 @@ rlnorm_ssd <- function(n, meanlog, sdlog) {
     .Call('_ssdtools_rlnorm_ssd', PACKAGE = 'ssdtools', n, meanlog, sdlog)
 }
 
-dweibull_ssd <- function(x, shape, scale, log_ssd) {
-    .Call('_ssdtools_dweibull_ssd', PACKAGE = 'ssdtools', x, shape, scale, log_ssd)
+dweibull_ssd <- function(x, shape, scale) {
+    .Call('_ssdtools_dweibull_ssd', PACKAGE = 'ssdtools', x, shape, scale)
 }
 
 pweibull_ssd <- function(q, shape, scale) {
