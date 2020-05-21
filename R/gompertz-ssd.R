@@ -38,8 +38,6 @@ pgompertz_ssd <- function(q, scale, shape) {
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (NaN)
   ans <- -expm1((-shape/scale) * expm1(scale * q))
-  ans[q <= 0] <- 0
-  ans[q == Inf] <- 1
   ans
 }
 
