@@ -41,7 +41,7 @@ pgompertz_ssd <- function(q, scale, shape) {
 #' @export
 rgompertz_ssd <- function(n, scale, shape) {
   stopifnot(identical(length(scale), 1L))
-  stopifnot(identical(length(scale), 1L))
+  stopifnot(identical(length(shape), 1L))
   if(is.na(scale) || is.na(shape)) return (NA_real_)
   if(scale <= 0 || shape <= 0) return (rep(NaN, n))
   qgompertz_ssd(runif(n), scale = scale, shape = shape)
