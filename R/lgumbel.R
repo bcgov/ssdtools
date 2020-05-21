@@ -31,38 +31,28 @@ NULL
 #' @rdname lgumbel
 #' @export
 dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
-  lte <- !is.na(x) & x <= 0
-  x[lte] <- NA_real_
-  d <- ddist("gumbel", x = log(x),  location = llocation, scale = lscale)
-  d <- d / x
-  d[lte] <- 0
-  if (log) return(log(d))
-  d
+  ddist("gumbel", x = x,  location = llocation, scale = lscale, 
+        log = log, .lgt = TRUE)
 }
 
 #' @rdname lgumbel
 #' @export
 plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  lte <- !is.na(q) & q <= 0
-  q[lte] <- NA_real_
-  p <- pdist("gumbel", q = log(q),  location = llocation, scale = lscale)
-  p[lte] <- 0
-  if(!lower.tail) p <- 1 - p
-  if(log.p) p <- log(p)
-  p
+  pdist("gumbel", q = q,  location = llocation, scale = lscale, 
+        lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 #' @rdname lgumbel
 #' @export
 qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  exp(qdist("gumbel", p = p,  location = llocation, scale = lscale,
-          lower.tail = lower.tail, log.p = log.p))
+  qdist("gumbel", p = p,  location = llocation, scale = lscale,
+          lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 #' @rdname lgumbel
 #' @export
 rlgumbel <- function(n, llocation = 0, lscale = 1) {
-  exp(rdist("gumbel", n = n,  location = llocation, scale = lscale))
+  rdist("gumbel", n = n,  location = llocation, scale = lscale, .lgt = TRUE)
 }
 
 #' @rdname lgumbel

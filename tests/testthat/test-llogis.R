@@ -13,8 +13,8 @@
 #    limitations under the License.
 
 test_that("dllogis", {
-  expect_equal(dllogis(exp(3), 3, 1), 0.003720046, tolerance = 0.0000001)
-  expect_equal(dllogis(exp(4), 3, 1), 0.001200358, tolerance = 0.0000001)
+  expect_equal(dllogis(exp(3), 1, 3), 0.003720046, tolerance = 0.0000001)
+  expect_equal(dllogis(exp(4), 1, 3), 0.001200358, tolerance = 0.0000001)
 })
 
 test_that("fit llogis", {
@@ -23,7 +23,7 @@ test_that("fit llogis", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(lscale = 2.6261248978507, lshape = 0.740309228071107)
+    c(locationlog = 2.6261248978507, scalelog = 0.740309228071107)
   )
 })
 
