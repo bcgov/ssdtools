@@ -83,7 +83,7 @@ with lshape and lscale parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9002</span>
       </span>
     </div>
 
@@ -158,15 +158,13 @@ Burr Type III two-parameter distribution
 with <code>lshape</code> and <code>lscale</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dburrIII2</span>(<span class='no'>x</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dburrIII2</span>(<span class='no'>x</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qburrIII2</span>(<span class='no'>p</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>qburrIII2</span>(<span class='no'>p</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>pburrIII2</span>(<span class='no'>q</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>pburrIII2</span>(<span class='no'>q</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>rburrIII2</span>(<span class='no'>n</span>, <span class='kw'>lshape</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-
-<span class='fu'>sburrIII2</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>rburrIII2</span>(<span class='no'>n</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,12 +174,12 @@ with <code>lshape</code> and <code>lscale</code> parameters.</p>
       <td><p>A numeric vector of values.</p></td>
     </tr>
     <tr>
-      <th>lshape</th>
-      <td><p>shape parameter on the log scale.</p></td>
+      <th>locationlog</th>
+      <td><p>location on log scale parameter.</p></td>
     </tr>
     <tr>
-      <th>lscale</th>
-      <td><p>scale parameter on the log scale.</p></td>
+      <th>scalelog</th>
+      <td><p>scale on log scale parameter.</p></td>
     </tr>
     <tr>
       <th>log</th>
@@ -212,17 +210,9 @@ with <code>lshape</code> and <code>lscale</code> parameters.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A numeric vector.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The Burr 12 distribution from the actuar package is used as a base.
-The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
-refer to
-<a href='https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm '>https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm </a> for details.
-The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
-The two shape parameters are set to be equal to produce a two-parameter model.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/actuar/man/Burr.html'>dburr</a></code> and <code><a href='burrIII3.html'>burrIII3</a></code></p></div>
+    <div class='dont-index'><p><code><a href='llogis.html'>llogis</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)

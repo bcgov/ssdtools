@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log-Logistic Distribution — dllog • ssdtools</title>
+<title>Log-Logistic Distribution — sburrIII2 • ssdtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Log-Logistic Distribution — dllog" />
+<meta property="og:title" content="Log-Logistic Distribution — sburrIII2" />
 <meta property="og:description" content="Density, distribution function, quantile function, random generation
 and starting values for the
 log-logistic distribution
@@ -83,7 +83,7 @@ with locationlog and scalelog parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9002</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@ with locationlog and scalelog parameters." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Log-Logistic Distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/llog.R'><code>R/llog.R</code></a>, <a href='https://github.com/bcgov/ssdtools/blob/master/R/llogis.R'><code>R/llogis.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/burrIII2.R'><code>R/burrIII2.R</code></a>, <a href='https://github.com/bcgov/ssdtools/blob/master/R/llog.R'><code>R/llog.R</code></a>, <a href='https://github.com/bcgov/ssdtools/blob/master/R/llogis.R'><code>R/llogis.R</code></a></small>
     <div class="hidden name"><code>llogis.Rd</code></div>
     </div>
 
@@ -158,7 +158,9 @@ log-logistic distribution
 with <code>locationlog</code> and <code>scalelog</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dllog</span>(<span class='no'>x</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>sburrIII2</span>(<span class='no'>x</span>)
+
+<span class='fu'>dllog</span>(<span class='no'>x</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>qllog</span>(<span class='no'>p</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 

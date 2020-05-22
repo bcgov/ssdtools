@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9002</span>
       </span>
     </div>
 
@@ -174,21 +174,19 @@
 <ul>
 <li>Burr type-III 3-parameter (<code>burrIII3</code>),</li>
 <li>
-<a href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma</a> (<code>gamma</code>) and</li>
+<a href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma</a> (<code>gamma</code>),</li>
 <li>
 <a href="https://en.wikipedia.org/wiki/Gompertz_distribution">Gompertz</a> (<code>gompertz</code>),</li>
 <li>
-<a href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal</a> (<code>lnorm</code>),</li>
+<a href="https://en.wikipedia.org/wiki/Gumbel_distribution">log-Gumbel</a> (<code>lgumbel</code>),</li>
 <li>
 <a href="https://en.wikipedia.org/wiki/Log-logistic_distribution">log-logistic</a> (<code>llog</code>),</li>
 <li>
-<a href="https://en.wikipedia.org/wiki/Gumbel_distribution">log-Gumbel</a> (<code>lgumbel</code>),</li>
-<li>
-<a href="https://en.wikipedia.org/wiki/Pareto_distribution">pareto</a> (<code>pareto</code>)</li>
+<a href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal</a> (<code>lnorm</code>) and</li>
 <li>
 <a href="https://en.wikipedia.org/wiki/Weibull_distribution">Weibull</a> (<code>weibull</code>)</li>
 </ul>
-<p>distribution using the <code>dists</code> argument.</p>
+<p>distributions using the <code>dists</code> argument.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">boron_dists</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(<span class="no">boron_data</span>, <span class="kw">dists</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span>))</pre></body></html></div>
 <p>The user can also specify one or more <a href="https://bcgov.github.io/ssdtools/articles/faqs.html#how-do-i-fit-a-custom-distribution">custom distributions</a>.</p>
 </div>
