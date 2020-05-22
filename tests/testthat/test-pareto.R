@@ -25,7 +25,7 @@ test_that("dpareto", {
 
 test_that("fit pareto", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
 
   expect_true(is.fitdist(dist))
   expect_equal(
@@ -36,7 +36,7 @@ test_that("fit pareto", {
 
 test_that("fit pareto cis", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
 
   set.seed(77)
   expect_equal(

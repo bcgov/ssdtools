@@ -133,7 +133,7 @@ test_that("rlgumbel values", {
 })
 
 test_that("fit lgumbel", {
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
   
   expect_true(is.fitdist(dist))
   expect_equal(
@@ -145,7 +145,7 @@ test_that("fit lgumbel", {
 test_that("fit lgumbel Mn LT", {
   mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT", ]
   
-  dist <- ssdtools:::ssd_fit_dist(mn_lt, dist = "lgumbel")
+  dist <- ssd_fit_dist(mn_lt, dist = "lgumbel")
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
@@ -154,7 +154,7 @@ test_that("fit lgumbel Mn LT", {
 })
 
 test_that("fit lgumbel cis", {
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
   
   set.seed(77)
   expect_equal(

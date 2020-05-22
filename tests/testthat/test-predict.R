@@ -15,7 +15,7 @@
 test_that("predict.fitdist", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
 
-  boron_lnorm <- ssdtools:::ssd_fit_dist(ssdtools::boron_data[1:6, ])
+  boron_lnorm <- ssd_fit_dist(ssdtools::boron_data[1:6, ])
   pred <- predict(boron_lnorm, nboot = 10L)
 
   expect_is(pred, "tbl")
@@ -25,14 +25,14 @@ test_that("predict.fitdist", {
   expect_identical(pred$est[1], pred2$est[1])
 
   boron_data$Conc <- boron_data$Conc / 1000
-  boron_lnorm3 <- ssdtools:::ssd_fit_dist(boron_data[1:6, ])
+  boron_lnorm3 <- ssd_fit_dist(boron_data[1:6, ])
   pred3 <- predict(boron_lnorm3, nboot = 10)
   expect_equal(pred3$est[1], pred2$est[1] / 1000, tolerance = 1e-07)
 })
 
 test_that("predict.fitdist parallel", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-  boron_lnorm <- ssdtools:::ssd_fit_dist(ssdtools::boron_data)
+  boron_lnorm <- ssd_fit_dist(ssdtools::boron_data)
 
   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")

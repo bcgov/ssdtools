@@ -115,7 +115,7 @@ test_that("dburrIII3", {
 test_that("fit burrIII3", {
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
   
-  dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
+  dist <- ssd_fit_dist(data, dist = "burrIII3")
   
   expect_true(is.fitdist(dist))
   expect_equal(
@@ -126,7 +126,7 @@ test_that("fit burrIII3", {
   
   data$Conc <- data$Conc / 1000
   
-  dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
+  dist <- ssd_fit_dist(data, dist = "burrIII3")
   
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist), 
@@ -137,7 +137,7 @@ test_that("fit burrIII3", {
 test_that("fit burrIII3 cis", {
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
   
-  dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII3")
+  dist <- ssd_fit_dist(data, dist = "burrIII3")
   
   set.seed(77)
   expect_equal(
@@ -188,3 +188,11 @@ test_that("rburrIII3", {
     )
   )
 })
+
+test_that("burrIII3", {
+  warning("burrIII3 failing to fit with boron_data")
+  expect_error(expect_warning(ssd_fit_dists(ssdtools::boron_data, dist = "burrIII3"),
+                              "burrIII3 failed to fit"),
+               "All distributions failed to fit.")
+})
+

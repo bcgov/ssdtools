@@ -100,12 +100,12 @@ test_that("sgompertz", {
 
   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
 
-  expect_error(dist <- ssdtools:::ssd_fit_dist(quin, dist = "gompertz"))
+  expect_error(dist <- ssd_fit_dist(quin, dist = "gompertz"))
 })
 
 test_that("fit gompertz boron", {
   set.seed(42)
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
@@ -115,7 +115,7 @@ test_that("fit gompertz boron", {
 
 test_that("fit gompertz", {
   set.seed(9)
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
 
   expect_true(is.fitdist(dist))
   expect_equal(
@@ -126,7 +126,7 @@ test_that("fit gompertz", {
 
 test_that("fit gompertz cis", {
   warning("why difference depending on how run (tolerance only 1e-2)")
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
 
   set.seed(77)
   expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),

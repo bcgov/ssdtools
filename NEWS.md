@@ -1,9 +1,9 @@
-# ssdtools 0.2.0.9002
+# ssdtools 0.2.0.9003
 
 - Reparameterized 'llogis' distribution in terms of locationlog and scalelog.
 - Reparameterized 'burrIII3' distribution in terms of lshape1, lshape2 and lscale.
-- Reparameterised 'burrIII2' in terms of lshape1 and lshape2.
-- Soft-deprecated pareto distribution as poor fit on SSD data.
+- Reparamaterized 'burrIII2' distribution in terms of locationlog and scalelog.
+- Soft-deprecated 'pareto' distribution as poor fit on SSD data.
 - Added slnorm() to get starting values for log-normal distribution.
 - rdist() functions now use length of n if length(n) > 1.
 

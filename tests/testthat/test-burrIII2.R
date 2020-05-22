@@ -116,7 +116,7 @@ test_that("fit dburrIII2", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
 
-  dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII2")
+  dist <- ssd_fit_dist(data, dist = "burrIII2")
 
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist), c(locationlog = 4.07989187488155, scalelog = 0.937136717088929
@@ -124,7 +124,7 @@ test_that("fit dburrIII2", {
 
   data$Conc <- data$Conc / 1000
 
-  dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII2")
+  dist <- ssd_fit_dist(data, dist = "burrIII2")
 
   expect_true(is.fitdist(dist))
   expect_equal(coef(dist), c(locationlog = -2.82742464158491, scalelog = 0.937137287983746
@@ -133,7 +133,7 @@ test_that("fit dburrIII2", {
 
 test_that("fit dburrIII2 cis", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
 
   set.seed(77)
   expect_equal(

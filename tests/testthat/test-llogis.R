@@ -18,7 +18,7 @@ test_that("dllogis", {
 })
 
 test_that("fit llogis", {
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
 
   expect_true(is.fitdist(dist))
   expect_equal(
