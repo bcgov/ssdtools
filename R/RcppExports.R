@@ -21,6 +21,22 @@ rgamma_ssd <- function(n, shape, scale) {
     .Call('_ssdtools_rgamma_ssd', PACKAGE = 'ssdtools', n, shape, scale)
 }
 
+dgompertz_ssd <- function(x, location, shape) {
+    .Call('_ssdtools_dgompertz_ssd', PACKAGE = 'ssdtools', x, location, shape)
+}
+
+pgompertz_ssd <- function(q, location, shape) {
+    .Call('_ssdtools_pgompertz_ssd', PACKAGE = 'ssdtools', q, location, shape)
+}
+
+qgompertz_ssd <- function(p, location, shape) {
+    .Call('_ssdtools_qgompertz_ssd', PACKAGE = 'ssdtools', p, location, shape)
+}
+
+rgompertz_ssd <- function(n, location, shape) {
+    .Call('_ssdtools_rgompertz_ssd', PACKAGE = 'ssdtools', n, location, shape)
+}
+
 dgumbel_ssd <- function(x, location, scale) {
     .Call('_ssdtools_dgumbel_ssd', PACKAGE = 'ssdtools', x, location, scale)
 }

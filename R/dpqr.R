@@ -57,6 +57,13 @@ pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   p
 }
 
+.qdist <- function(dist, p, ...) {
+  fun <- paste0("q", dist, "_ssd")
+  q <- mapply(fun, p, ...)
+  q[mapply(any_missing, p, ...)] <- NA_real_
+  q
+}
+
 qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) {
   if(!length(p)) return(numeric(0))
   
@@ -65,12 +72,19 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   
   nvld <- !is.na(p) & !(p >= 0 & p <= 1)
   p[nvld] <- NA_real_
-  fun <- paste0("q", dist, "_ssd")
-  q <- mapply(fun, p, ...)
-  q[mapply(any_missing, p, ...)] <- NA_real_
+  q <- .qdist(dist, p = p, ...)
   q[nvld] <- NaN
   if(.lgt) q <- exp(q)
   q
+}
+
+.rdist <- function(dist, n, ...) {
+  fun <- paste0("r", dist, "_ssd")
+  args <- list(...)
+  args$n <- n
+  r <- do.call(fun, args)
+  if(any_missing(...)) return(NA_real_)
+  r
 }
 
 rdist <- function(dist, n, ..., .lgt = FALSE) {
@@ -82,12 +96,8 @@ rdist <- function(dist, n, ..., .lgt = FALSE) {
   n <- floor(n)
   if(n < 0) stop("invalid arguments")
   if(n == 0L) return(numeric(0))
-    
-  fun <- paste0("r", dist, "_ssd")
-  args <- list(...)
-  args$n <- n
-  r <- do.call(fun, args)
-  if(any_missing(...)) return(NA_real_)
+
+  r <- .rdist(dist, n = n, ...)
   if(.lgt) r <- exp(r)
   r
 }
