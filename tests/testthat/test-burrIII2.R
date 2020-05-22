@@ -149,6 +149,12 @@ test_that("fit dburrIII2 cis", {
   )
 })
 
+# test_that("burrIII2 and llogis identical", {
+#   burr <- ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
+#   llogis <- ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
+#   expect_identical(ssd_hc(burr)$est, ssd_hc(llogis)$est)
+# })
+
 test_that("deprecated dburrIII2", {
   expect_error(ssd_fit_dists(ssdtools::boron_data, dist = c("llog", "burrIII2")), "Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
 })
@@ -156,3 +162,5 @@ test_that("deprecated dburrIII2", {
 test_that("deprecated dburrIII2", {
   expect_error(ssd_fit_dists(ssdtools::boron_data, dist = c("llogis", "burrIII2")), "Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
 })
+
+
