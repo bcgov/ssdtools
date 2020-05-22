@@ -87,28 +87,21 @@ test_that("rgompertz extremes", {
   expect_equal(rgompertz(3:4), c(1.24208466660006, 1.32596518320944))
   expect_equal(rgompertz(0, llocation = -1), numeric(0))
   expect_equal(rgompertz(0, lshape = -1), numeric(0))
-#  expect_error(rgompertz(1, llocation = 1:2))
-#  expect_error(rgompertz(1, lshape = 1:2))
+  expect_error(rgompertz(1, llocation = 1:2))
+  expect_error(rgompertz(1, lshape = 1:2))
   expect_identical(rgompertz(1, llocation = NA), NA_real_)
   expect_identical(rgompertz(1, lshape = NA), NA_real_)
 })
 
 test_that("sgompertz", {
-  warning("vglm not working with these values....")
+  warning("sgompertz errors")
   x <- c(160, 800, 840, 1500, 8200, 12800, 22000, 38000, 60900, 63000)
   expect_error(sgompertz(x))
-})
 
-# test_that("fit gompertz quinoline", {
-#   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
-# 
-#   expect_warning(dist <- ssdtools:::ssd_fit_dist(quin, dist = "gompertz"))
-#   expect_true(is.fitdist(dist))
-#   expect_equal(
-#     coef(dist),
-#     c(shape = 0.627542681172847, scale = 15343.492101029)
-#   )
-# })
+  quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
+
+  expect_error(dist <- ssdtools:::ssd_fit_dist(quin, dist = "gompertz"))
+})
 
 test_that("fit gompertz boron", {
   set.seed(42)

@@ -7,7 +7,7 @@
 \alias{qlnorm}
 \alias{rlnorm}
 \alias{slnorm}
-\title{lnorm Distribution}
+\title{Log-Normal Distribution}
 \usage{
 dlnorm(x, meanlog = 0, sdlog = 1, log = FALSE)
 
@@ -42,8 +42,8 @@ slnorm(x)
 A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation for 
-the lnorm distribution with parameters meanlog and sdlog.
+Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions.
 }
 \examples{
 x <- seq(0.01, 5, by = 0.01)

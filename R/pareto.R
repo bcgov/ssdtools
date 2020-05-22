@@ -23,7 +23,7 @@
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
-#' @name gamma
+#' @name pareto
 #' @seealso \code{\link[VGAM]{dpareto}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)

@@ -20,7 +20,7 @@
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
-#' @name gamma
+#' @name gompertz
 #' @seealso \code{\link[stats]{dgamma}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)

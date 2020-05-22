@@ -42,10 +42,13 @@ sgompertz(x)
 A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation for 
-the gompertz distribution with parameters llocation and lshape.
+Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions.
 }
 \examples{
 x <- seq(0.01, 5, by = 0.01)
 plot(x, dgompertz(x), type = "l")
+}
+\seealso{
+\code{\link[stats]{dgamma}}
 }

@@ -40,10 +40,10 @@ A numeric vector.
 }
 \description{
 Probability density, cumulative distribution, 
-inverse cumulative distribution, random sample and starting values functions
-for the
-Burr Type III two-parameter distribution
-with \code{locationlog} and \code{scalelog} parameters.
+inverse cumulative distribution, random sample and starting values functions.
+}
+\details{
+The burrIII2 distribution has been deprecated for the identical llogis distribution.
 }
 \examples{
 x <- seq(0.01, 5, by = 0.01)
