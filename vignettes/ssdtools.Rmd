@@ -85,15 +85,14 @@ The function `ssd_fit_dists()` inputs a data frame and fits one or more distribu
 The user can specify a subset of the 
 
 - Burr type-III 3-parameter (`burrIII3`),
-- [gamma](https://en.wikipedia.org/wiki/Gamma_distribution) (`gamma`) and 
+- [gamma](https://en.wikipedia.org/wiki/Gamma_distribution) (`gamma`), 
 - [Gompertz](https://en.wikipedia.org/wiki/Gompertz_distribution) (`gompertz`),
-- [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) (`lnorm`),
-- [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) (`llog`),
 - [log-Gumbel](https://en.wikipedia.org/wiki/Gumbel_distribution) (`lgumbel`),
-- [pareto](https://en.wikipedia.org/wiki/Pareto_distribution) (`pareto`)
+- [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) (`llog`),
+- [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) (`lnorm`) and
 - [Weibull](https://en.wikipedia.org/wiki/Weibull_distribution) (`weibull`) 
 
-distribution using the `dists` argument.
+distributions using the `dists` argument.
 ```{r}
 boron_dists <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
 ```
