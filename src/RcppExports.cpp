@@ -5,18 +5,59 @@
 
 using namespace Rcpp;
 
-// dburrXII_
-NumericVector dburrXII_(NumericVector x, double shape1, double shape2, double scale, bool log_);
-RcppExport SEXP _ssdtools_dburrXII_(SEXP xSEXP, SEXP shape1SEXP, SEXP shape2SEXP, SEXP scaleSEXP, SEXP log_SEXP) {
+// dburrIII3_ssd
+double dburrIII3_ssd(double x, double shape1, double shape2, double scale);
+RcppExport SEXP _ssdtools_dburrIII3_ssd(SEXP xSEXP, SEXP shape1SEXP, SEXP shape2SEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type shape1(shape1SEXP);
     Rcpp::traits::input_parameter< double >::type shape2(shape2SEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    Rcpp::traits::input_parameter< bool >::type log_(log_SEXP);
-    rcpp_result_gen = Rcpp::wrap(dburrXII_(x, shape1, shape2, scale, log_));
+    rcpp_result_gen = Rcpp::wrap(dburrIII3_ssd(x, shape1, shape2, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// pburrIII3_ssd
+double pburrIII3_ssd(double q, double shape1, double shape2, double scale);
+RcppExport SEXP _ssdtools_pburrIII3_ssd(SEXP qSEXP, SEXP shape1SEXP, SEXP shape2SEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type q(qSEXP);
+    Rcpp::traits::input_parameter< double >::type shape1(shape1SEXP);
+    Rcpp::traits::input_parameter< double >::type shape2(shape2SEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(pburrIII3_ssd(q, shape1, shape2, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// qburrIII3_ssd
+double qburrIII3_ssd(double p, double shape1, double shape2, double scale);
+RcppExport SEXP _ssdtools_qburrIII3_ssd(SEXP pSEXP, SEXP shape1SEXP, SEXP shape2SEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type shape1(shape1SEXP);
+    Rcpp::traits::input_parameter< double >::type shape2(shape2SEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(qburrIII3_ssd(p, shape1, shape2, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rburrIII3_ssd
+NumericVector rburrIII3_ssd(int n, double shape1, double shape2, double scale);
+RcppExport SEXP _ssdtools_rburrIII3_ssd(SEXP nSEXP, SEXP shape1SEXP, SEXP shape2SEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type shape1(shape1SEXP);
+    Rcpp::traits::input_parameter< double >::type shape2(shape2SEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(rburrIII3_ssd(n, shape1, shape2, scale));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -334,7 +375,10 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ssdtools_dburrXII_", (DL_FUNC) &_ssdtools_dburrXII_, 5},
+    {"_ssdtools_dburrIII3_ssd", (DL_FUNC) &_ssdtools_dburrIII3_ssd, 4},
+    {"_ssdtools_pburrIII3_ssd", (DL_FUNC) &_ssdtools_pburrIII3_ssd, 4},
+    {"_ssdtools_qburrIII3_ssd", (DL_FUNC) &_ssdtools_qburrIII3_ssd, 4},
+    {"_ssdtools_rburrIII3_ssd", (DL_FUNC) &_ssdtools_rburrIII3_ssd, 4},
     {"_ssdtools_dgamma_ssd", (DL_FUNC) &_ssdtools_dgamma_ssd, 3},
     {"_ssdtools_pgamma_ssd", (DL_FUNC) &_ssdtools_pgamma_ssd, 3},
     {"_ssdtools_qgamma_ssd", (DL_FUNC) &_ssdtools_qgamma_ssd, 3},
