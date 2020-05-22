@@ -23,8 +23,13 @@ library(ggplot2)
 
 ## How do I fit a custom distribution?
 
-The user can also specify one or more custom distributions (called say `custom`) provided vectorized density (`dcustom()`), distribution (`pcustom()`), quantile (`qcustom()`) and starting value (`scustom()`) functions are defined. 
-For example see the [llogis source code](https://github.com/bcgov/ssdtools/blob/master/R/llogis.R).
+The user can also specify a custom distribution (called say `dist`) provided the following functions are defined:
+
+- probability density (`ddist(x, par1, par2, log = FALSE)`)
+- cumulative distribution (`pdist(q, par1, par2, lower.tail = TRUE, log.p = FALSE)`)
+- inverse cumulative distribution (`qdist(p, par1, par2, lower.tail = TRUE, log.p = FALSE)`)
+- random (`rdist(n, par1, par2)`)
+- starting values (`sdist(x)`)
 
 ## How do I fit distributions to multiple groups such taxa and/or chemicals?
 
