@@ -26,7 +26,3 @@ safely <- function(.f) {
     list(result = x, error = NULL)
   }
 }
-
-log_silent <- function(x) {
-  suppressWarnings(log(x))
-}

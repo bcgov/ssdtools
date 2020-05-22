@@ -19,15 +19,15 @@ test_that("dlgumbel extremes", {
   expect_identical(dlgumbel(0), 0)
   expect_equal(dlgumbel(1), 0.367879441171442)
   expect_equal(dlgumbel(1, log = TRUE), log(dlgumbel(1)))
-  expect_equal(dlgumbel(1, lscale = -1), NaN)
+  expect_equal(dlgumbel(1, scalelog = -1), NaN)
   expect_identical(dlgumbel(0), 0)
   expect_identical(dlgumbel(-Inf), 0)
   expect_identical(dlgumbel(Inf), 0)
   expect_identical(dlgumbel(c(NA, NaN, 0, Inf, -Inf)), 
                    c(dlgumbel(NA), dlgumbel(NaN), dlgumbel(0), dlgumbel(Inf), dlgumbel(-Inf)))
-  expect_equal(dlgumbel(1:2, llocation = 1:2, lscale = 3:4), 
+  expect_equal(dlgumbel(1:2, locationlog = 1:2, scalelog = 3:4), 
                c(dlgumbel(1, 1, 3), dlgumbel(2, 2, 4)))
-  expect_equal(dlgumbel(1:2, llocation = c(1, NA), lscale = 3:4), 
+  expect_equal(dlgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4), 
                c(dlgumbel(1, 1, 3), NA))
 })
 
@@ -40,15 +40,15 @@ test_that("plgumbel extremes", {
   expect_equal(plgumbel(1, log.p = TRUE), log(plgumbel(1)))
   expect_equal(plgumbel(1, lower.tail = FALSE), 1 - plgumbel(1))
   expect_equal(plgumbel(1, lower.tail = FALSE, log.p = TRUE), log(1 - plgumbel(1)))
-  expect_equal(plgumbel(1, lscale = -1), NaN)
+  expect_equal(plgumbel(1, scalelog = -1), NaN)
   expect_identical(plgumbel(0), 0)
   expect_identical(plgumbel(-Inf), 0)
   expect_identical(plgumbel(Inf), 1)
   expect_identical(plgumbel(c(NA, NaN, 0, Inf, -Inf)), 
                    c(plgumbel(NA), plgumbel(NaN), plgumbel(0), plgumbel(Inf), plgumbel(-Inf)))
-  expect_equal(plgumbel(1:2, llocation = 1:2, lscale = 3:4), 
+  expect_equal(plgumbel(1:2, locationlog = 1:2, scalelog = 3:4), 
                c(plgumbel(1, 1, 3), plgumbel(2, 2, 4)))
-  expect_equal(plgumbel(1:2, llocation = c(1, NA), lscale = 3:4), 
+  expect_equal(plgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4), 
                c(plgumbel(1, 1, 3), NA))
 })
 
@@ -63,15 +63,15 @@ test_that("qlgumbel extremes", {
   expect_equal(qlgumbel(log(0.75), log.p = TRUE), qlgumbel(0.75))
   expect_equal(qlgumbel(0.75, lower.tail = FALSE), qlgumbel(0.25))
   expect_equal(qlgumbel(log(0.75), lower.tail = FALSE, log.p = TRUE), qlgumbel(0.25))
-  expect_equal(qlgumbel(0.5, lscale = -1), NaN)
+  expect_equal(qlgumbel(0.5, scalelog = -1), NaN)
   expect_identical(qlgumbel(0), 0)
   expect_identical(qlgumbel(-Inf), NaN)
   expect_identical(qlgumbel(Inf), NaN)
   expect_identical(qlgumbel(c(NA, NaN, 0, Inf, -Inf)), 
                    c(qlgumbel(NA), qlgumbel(NaN), qlgumbel(0), qlgumbel(Inf), qlgumbel(-Inf)))
-  expect_equal(qlgumbel(1:2, llocation = 1:2, lscale = 3:4), 
+  expect_equal(qlgumbel(1:2, locationlog = 1:2, scalelog = 3:4), 
                c(qlgumbel(1, 1, 3), qlgumbel(2, 2, 4)))
-  expect_equal(qlgumbel(1:2, llocation = c(1, NA), lscale = 3:4), 
+  expect_equal(qlgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4), 
                c(qlgumbel(1, 1, 3), NA))
   expect_equal(qlgumbel(plgumbel(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
 })
@@ -88,13 +88,13 @@ test_that("rlgumbel extremes", {
   expect_equal(rlgumbel(2), c(11.2305025213646, 15.3866236451648))
   set.seed(42)
   expect_equal(rlgumbel(3:4), c(11.2305025213646, 15.3866236451648))
-  expect_equal(rlgumbel(0, lscale = -1), numeric(0))
-  expect_equal(rlgumbel(1, lscale = -1), NaN)
-  expect_equal(rlgumbel(2, lscale = -1), c(NaN, NaN))
-  expect_error(rlgumbel(1, llocation = 1:2))
-  expect_error(rlgumbel(1, lscale = 1:2))
-  expect_identical(rlgumbel(1, llocation = NA), NA_real_)
-  expect_identical(rlgumbel(1, lscale = NA), NA_real_)
+  expect_equal(rlgumbel(0, scalelog = -1), numeric(0))
+  expect_equal(rlgumbel(1, scalelog = -1), NaN)
+  expect_equal(rlgumbel(2, scalelog = -1), c(NaN, NaN))
+  expect_error(rlgumbel(1, locationlog = 1:2))
+  expect_error(rlgumbel(1, scalelog = 1:2))
+  expect_identical(rlgumbel(1, locationlog = NA), NA_real_)
+  expect_identical(rlgumbel(1, scalelog = NA), NA_real_)
 })
 
 test_that("dlgumbel values", {
@@ -138,7 +138,7 @@ test_that("fit lgumbel", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(llocation = 1.92249767793641, lscale = 1.23235840307164)
+    c(locationlog = 1.92249767793641, scalelog = 1.23235840307164)
   )
 })
 
@@ -149,7 +149,7 @@ test_that("fit lgumbel Mn LT", {
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
-    c(llocation = 7.31628089226769, lscale = 1.00893875176455)
+    c(locationlog = 7.31628089226769, scalelog = 1.00893875176455)
   )
 })
 

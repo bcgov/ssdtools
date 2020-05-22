@@ -25,8 +25,8 @@ test_that("match_moments all", {
     list(burrIII3 = c(lshape1 = 0.777777777777778, lshape2 = 0.318518518518519, 
                       lscale = -0.851851851851852), gamma = c(shape = 1.4873062133789, 
                                                               scale = 2.46362762451172), gompertz = c(llocation = -2.08669910430908, 
-                                                                                                      lshape = -1.28236985206604), lgumbel = c(llocation = 0.534375, 
-                                                                                                                                               lscale = 0.7625), llogis = c(locationlog = 0.96875, scalelog = 0.525
+                                                                                                      lshape = -1.28236985206604), lgumbel = c(locationlog = 0.534375, 
+                                                                                                                                               scalelog = 0.7625), llogis = c(locationlog = 0.96875, scalelog = 0.525
                                                                                                                                                ), lnorm = c(meanlog = 0.98125, sdlog = 0.9515625), weibull = c(shape = 1.26367187500001, 
                                                                                                                                                                                                                scale = 4.325390625))
   )
