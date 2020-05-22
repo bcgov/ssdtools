@@ -7,7 +7,7 @@
 \alias{qburrIII3}
 \alias{rburrIII3}
 \alias{sburrIII3}
-\title{burrIII3 Distribution}
+\title{Burr Type III Three-Parameter Distribution}
 \usage{
 dburrIII3(x, lshape1 = 0, lshape2 = 0, lscale = 0, log = FALSE)
 

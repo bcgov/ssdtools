@@ -14,14 +14,14 @@
 
 #' Gamma Distribution
 #'
-#' Density, distribution function, quantile function and random generation for 
-#' the Gamma distribution with parameters shape and scale.
+#' Probability density, cumulative distribution, 
+#' inverse cumulative distribution, random sample and starting values functions.
 #'
-#' @inheritParams params
 #' @param x A numeric vector of values.
+#' @inheritParams params
 #' @return A numeric vector.
-#' @seealso \code{\link[stats]{dgamma}}
 #' @name gamma
+#' @seealso \code{\link[stats]{dgamma}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dgamma(x), type = "l")

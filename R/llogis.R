@@ -14,15 +14,15 @@
 
 #' Log-Logistic Distribution
 #'
-#' Density, distribution function, quantile function, random generation
-#' and starting values for the
-#' log-logistic distribution
-#' with \code{locationlog} and \code{scalelog} parameters.
+#' Probability density, cumulative distribution, 
+#' inverse cumulative distribution, random sample and starting values functions.
+#' 
+#' The llog distribution has been deprecated for the identical llogis distribution.
 #'
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
-#' @name llogis
+#' @name gamma
 #' @seealso \code{\link[stats]{dlogis}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)

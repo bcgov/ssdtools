@@ -12,15 +12,16 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' gompertz Distribution
+#' Gompertz Distribution
 #'
-#' Density, distribution function, quantile function and random generation for 
-#' the gompertz distribution with parameters llocation and lshape.
+#' Probability density, cumulative distribution, 
+#' inverse cumulative distribution, random sample and starting values functions.
 #'
-#' @inheritParams params
 #' @param x A numeric vector of values.
+#' @inheritParams params
 #' @return A numeric vector.
-#' @name gompertz
+#' @name gamma
+#' @seealso \code{\link[stats]{dgamma}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dgompertz(x), type = "l")

@@ -7,7 +7,7 @@
 \alias{qgompertz}
 \alias{rgompertz}
 \alias{sgompertz}
-\title{gompertz Distribution}
+\title{Gompertz Distribution}
 \usage{
 dgompertz(x, llocation = 0, lshape = 0, log = FALSE)
 

@@ -14,15 +14,13 @@
 
 #' Log-Gumbel Distribution
 #'
-#' Density, distribution function, quantile function, random generation
-#' and starting values for the
-#' Log-Gumbel distribution
-#' with \code{lscale} and \code{llocation} parameters.
+#' Probability density, cumulative distribution, 
+#' inverse cumulative distribution, random sample and starting values functions.
 #'
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
-#' @name lgumbel
+#' @name gamma
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dlgumbel(x), type = "l")
