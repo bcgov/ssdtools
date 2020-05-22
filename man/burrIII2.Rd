@@ -6,25 +6,22 @@
 \alias{qburrIII2}
 \alias{pburrIII2}
 \alias{rburrIII2}
-\alias{sburrIII2}
 \title{Burr Type III Two-Parameter Distribution}
 \usage{
-dburrIII2(x, lshape1 = 0, lshape2 = 0, log = FALSE)
+dburrIII2(x, locationlog = 0, scalelog = 1, log = FALSE)
 
-qburrIII2(p, lshape1 = 0, lshape2 = 0, lower.tail = TRUE, log.p = FALSE)
+qburrIII2(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 
-pburrIII2(q, lshape1 = 0, lshape2 = 0, lower.tail = TRUE, log.p = FALSE)
+pburrIII2(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 
-rburrIII2(n, lshape1 = 0, lshape2 = 0)
-
-sburrIII2(x)
+rburrIII2(n, locationlog = 0, scalelog = 1)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{lshape1}{shape1 parameter on the log scale.}
+\item{locationlog}{location on log scale parameter.}
 
-\item{lshape2}{shape2 parameter on the log scale.}
+\item{scalelog}{scale on log scale parameter.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -52,5 +49,5 @@ x <- seq(0.01, 5, by = 0.01)
 plot(x, dburrIII2(x), type = "l")
 }
 \seealso{
-\code{\link{burrIII3}}
+\code{\link{llogis}}
 }

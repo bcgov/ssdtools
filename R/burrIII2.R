@@ -23,7 +23,7 @@
 #' @inheritParams params
 #' @return A numeric vector.
 #' @name burrIII2
-#' @seealso \code{\link{burrIII3}}
+#' @seealso \code{\link{llogis}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dburrIII2(x), type = "l")
@@ -31,46 +31,44 @@ NULL
 
 #' @rdname burrIII2
 #' @export
-dburrIII2 <- function(x, lshape1 = 0, lshape2 = 0, log = FALSE) {
+dburrIII2 <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
   deprecate_soft("0.1.2", "dburrIII2()", "dllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
-  dburrIII3(x, lshape1 = lshape1, lshape2 = lshape2, log = log)
+  dllogis(x, locationlog = locationlog, scalelog = scalelog, log = log)
 }
 
 #' @rdname burrIII2
 #' @export
-qburrIII2 <- function(p, lshape1 = 0, lshape2 = 0, lower.tail = TRUE, log.p = FALSE) {
+qburrIII2 <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   deprecate_soft("0.1.2", "qburrIII2()", "qllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
-  qburrIII3(p, lshape1 = lshape1, lshape2 = lshape2,
+  qllogis(p, locationlog = locationlog,scalelog = scalelog,
             lower.tail = lower.tail,
             log.p = log.p)
 }
 
 #' @rdname burrIII2
 #' @export
-pburrIII2 <- function(q, lshape1 = 0, lshape2 = 0, lower.tail = TRUE, log.p = FALSE) {
+pburrIII2 <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   deprecate_soft("0.1.2", "pburrIII2()", "pllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
-  pburrIII3(q, lshape1 = lshape1, lshape2 = lshape2,
+  pllogis(q, locationlog = locationlog, scalelog = scalelog,
             lower.tail = lower.tail,
             log.p = log.p)
 }
 
 #' @rdname burrIII2
 #' @export
-rburrIII2 <- function(n, lshape1 = 0, lshape2 = 0) {
+rburrIII2 <- function(n, locationlog = 0, scalelog = 1) {
   deprecate_soft("0.1.2", "rburrIII2()", "rllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
-  rburrIII3(n, lshape1 = lshape1, lshape2 = lshape2)
+  rllogis(n, locationlog = locationlog, scalelog = scalelog)
 }
 
-#' @rdname burrIII2
+#' @rdname llogis
 #' @export
 sburrIII2 <- function(x) {
   deprecate_soft("0.1.2", "sburrIII2()", "sllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
-  list <- sburrIII3(x)
-  list$start <- list(lshape1 = list$start$lshape1, lshape2 = list$start$lshape2)
-  list
+  sllogis(x)
 }

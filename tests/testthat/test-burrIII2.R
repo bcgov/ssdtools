@@ -119,14 +119,16 @@ test_that("fit dburrIII2", {
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII2")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(lshape1 = 3.13568869540405, lshape2 = -0.12443019146876))
+  expect_equal(coef(dist), c(locationlog = 4.07989187488155, scalelog = 0.937136717088929
+  ))
 
   data$Conc <- data$Conc / 1000
 
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII2")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(lshape1 = -5.22664832199343, lshape2 = 4.2450565922882))
+  expect_equal(coef(dist), c(locationlog = -2.82742464158491, scalelog = 0.937137287983746
+  ))
 })
 
 test_that("fit dburrIII2 cis", {
@@ -136,24 +138,25 @@ test_that("fit dburrIII2 cis", {
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-    structure(list(percent = 5, est = 1.74797415656131, se = 0.42320974631633, 
-                   lcl = 1.12612594785749, ucl = 2.30795886438306, dist = "burrIII2"), row.names = c(NA, 
-                                                                                                     -1L), class = "data.frame")
+    structure(list(percent = 5, est = 1.56256632555312, se = 0.533080817076427, 
+                   lcl = 1.02028787432084, ucl = 2.4100026087857, dist = "burrIII2"), row.names = c(NA, 
+                                                                                                    -1L), class = "data.frame")
   )
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-    structure(list(conc = 2, est = 6.58247588184456, se = 3.03512140227532, 
-                   lcl = 3.40005098838945, ucl = 12.1183411640976, dist = "burrIII2"), row.names = c(NA, 
+    structure(list(conc = 2, est = 6.8431214411277, se = 2.53471375726922, 
+                   lcl = 3.73102816675466, ucl = 10.3929969316288, dist = "burrIII2"), row.names = c(NA, 
                                                                                                      -1L), class = "data.frame")
   )
 })
 
-# test_that("burrIII2 and llogis identical", {
-#   burr <- ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
-#   llogis <- ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
-#   expect_identical(ssd_hc(burr)$est, ssd_hc(llogis)$est)
-# })
+test_that("burrIII2 and llogis identical", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  burr <- ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
+  llogis <- ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
+  expect_identical(ssd_hc(burr)$est, ssd_hc(llogis)$est)
+})
 
 test_that("deprecated dburrIII2", {
   expect_error(ssd_fit_dists(ssdtools::boron_data, dist = c("llog", "burrIII2")), "Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
