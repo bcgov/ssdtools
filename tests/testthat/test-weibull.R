@@ -91,7 +91,7 @@ test_that("rweibull extremes", {
 test_that("fit weibull quinoline", {
   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
   
-  expect_warning(dist <- ssdtools:::ssd_fit_dist(quin, dist = "weibull"))
+  expect_warning(dist <- ssd_fit_dist(quin, dist = "weibull"))
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),
@@ -100,7 +100,7 @@ test_that("fit weibull quinoline", {
 })
 
 test_that("fit weibull boron", {
-  dist <- ssdtools:::ssd_fit_dist(ssdtools::boron_data, dist = "weibull")
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "weibull")
   expect_true(is.fitdist(dist))
   expect_equal(
     coef(dist),

@@ -21,14 +21,14 @@ test_that("fit_dist", {
 
 test_that("fit_dist tiny llogis", {
   data <- ssdtools::boron_data
-  fit <- ssdtools:::ssd_fit_dist(data, dist = "llogis")
+  fit <- ssd_fit_dist(data, dist = "llogis")
   expect_equal(
     fit$estimate,
     c(locationlog = 2.6261248978507, scalelog = 0.740309228071107)
   )
 
   data$Conc <- data$Conc / 100
-  fit <- ssdtools:::ssd_fit_dist(data, dist = "llogis")
+  fit <- ssd_fit_dist(data, dist = "llogis")
   expect_equal(
     fit$estimate,
     c(locationlog = -1.97890271677598, scalelog = 0.740452665894763
@@ -75,12 +75,12 @@ test_that("fit_dist", {
 
 test_that("fluazinam", {
   data(fluazinam, package = "fitdistrplus")
-  dist <- ssdtools:::ssd_fit_dist(fluazinam, left = "left")
+  dist <- ssd_fit_dist(fluazinam, left = "left")
   expect_true(is.fitdist(dist))
   expect_false(is.fitdistcens(dist))
   expect_equal(coef(dist), c(meanlog = 4.66057985615203, sdlog = 2.19746964708252))
 
-  dist <- ssdtools:::ssd_fit_dist(fluazinam, left = "left", right = "right")
+  dist <- ssd_fit_dist(fluazinam, left = "left", right = "right")
   expect_false(is.fitdist(dist))
   expect_true(is.fitdistcens(dist))
   expect_equal(coef(dist), c(meanlog = 4.97758390559042, sdlog = 2.68757112403832))
