@@ -19,18 +19,11 @@
 #' Burr Type III two-parameter distribution
 #' with \code{lshape} and \code{lscale} parameters.
 #'
-#' The Burr 12 distribution from the actuar package is used as a base.
-#' The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
-#' refer to
-#' \url{https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm } for details.
-#' The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
-#' The two shape parameters are set to be equal to produce a two-parameter model.
-#'
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
 #' @name burrIII2
-#' @seealso \code{\link[actuar]{dburr}} and \code{\link{burrIII3}}
+#' @seealso \code{\link{burrIII3}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dburrIII2(x), type = "l")
@@ -38,7 +31,7 @@ NULL
 
 #' @rdname burrIII2
 #' @export
-dburrIII2 <- function(x, lshape = 0, lscale = 1, log = FALSE) {
+dburrIII2 <- function(x, lshape = 0, lscale = 0, log = FALSE) {
   deprecate_soft("0.1.2", "dburrIII2()", "dllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   dburrIII3(x, lshape1 = lshape, lshape2 = lshape, lscale = lscale, 
@@ -47,7 +40,7 @@ dburrIII2 <- function(x, lshape = 0, lscale = 1, log = FALSE) {
 
 #' @rdname burrIII2
 #' @export
-qburrIII2 <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+qburrIII2 <- function(p, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
   deprecate_soft("0.1.2", "qburrIII2()", "qllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   qburrIII3(p, lshape1 = lshape, lshape2 = lshape, lscale = lscale, 
@@ -57,7 +50,7 @@ qburrIII2 <- function(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALS
 
 #' @rdname burrIII2
 #' @export
-pburrIII2 <- function(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
+pburrIII2 <- function(q, lshape = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
   deprecate_soft("0.1.2", "pburrIII2()", "pllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   pburrIII3(q, lshape1 = lshape, lshape2 = lshape, lscale = lscale, 
@@ -67,7 +60,7 @@ pburrIII2 <- function(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALS
 
 #' @rdname burrIII2
 #' @export
-rburrIII2 <- function(n, lshape = 0, lscale = 1) {
+rburrIII2 <- function(n, lshape = 0, lscale = 0) {
   deprecate_soft("0.1.2", "rburrIII2()", "rllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   rburrIII3(n, lshape1 = lshape, lshape2 = lshape, lscale = lscale)

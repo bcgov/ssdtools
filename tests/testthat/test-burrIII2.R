@@ -44,14 +44,14 @@ test_that("fit burrIII2", {
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII2")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(lshape = 0.101242679105766, lscale = -3.92364881206751))
+  expect_equal(coef(dist), c(lshape = -0.726960251340646, lscale = -12.8922702957061))
 
   data$Conc <- data$Conc / 1000
 
   dist <- ssdtools:::ssd_fit_dist(data, dist = "burrIII2")
 
   expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(lshape = 0.101250994107126, lscale = 2.98432920414956))
+  expect_equal(coef(dist), c(lshape = -0.937536104279982, lscale = -18.6335005571638))
 })
 
 test_that("fit burrIII2 cis", {
@@ -61,13 +61,9 @@ test_that("fit burrIII2 cis", {
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-    structure(list(
-      percent = 5, est = 1.58920212463066, se = 0.561779293276257,
-      lcl = 0.933413683053849, ucl = 2.4171610278875, dist = "burrIII2"
-    ), class = "data.frame", row.names = c(
-      NA,
-      -1L
-    ))
+    structure(list(percent = 5, est = 0.181727845613536, se = 0.0402479788953482, 
+                   lcl = 0.122886892436456, ucl = 0.238158841188363, dist = "burrIII2"), row.names = c(NA, 
+                                                                                                       -1L), class = "data.frame")
   )
   set.seed(77)
   expect_equal(

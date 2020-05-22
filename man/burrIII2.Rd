@@ -47,18 +47,10 @@ and starting values for the
 Burr Type III two-parameter distribution
 with \code{lshape} and \code{lscale} parameters.
 }
-\details{
-The Burr 12 distribution from the actuar package is used as a base.
-The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
-refer to
-\url{https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm } for details.
-The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
-The two shape parameters are set to be equal to produce a two-parameter model.
-}
 \examples{
 x <- seq(0.01, 5, by = 0.01)
 plot(x, dburrIII2(x), type = "l")
 }
 \seealso{
-\code{\link[actuar]{dburr}} and \code{\link{burrIII3}}
+\code{\link{burrIII3}}
 }

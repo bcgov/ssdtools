@@ -22,13 +22,13 @@ test_that("match_moments all", {
   ))
   expect_equal(
     pars,
-    list(burrIII3 = c(lshape1 = 0.707510288065844, lshape2 = 0.348559670781893, 
-                      lscale = -0.215226337448561), gamma = c(shape = 1.639794921875, 
-                                                              scale = 2.38969726562501), gompertz = c(llocation = -2.03521111605224, 
-                                                                                                      lshape = -1.32377847020398), lgumbel = c(llocation = 0.534375, 
+    list(burrIII3 = c(lshape1 = 0.777777777777778, lshape2 = 0.318518518518519, 
+                      lscale = -0.851851851851852), gamma = c(shape = 1.4873062133789, 
+                                                              scale = 2.46362762451172), gompertz = c(llocation = -2.08669910430908, 
+                                                                                                      lshape = -1.28236985206604), lgumbel = c(llocation = 0.534375, 
                                                                                                                                                lscale = 0.7625), llogis = c(locationlog = 0.96875, scalelog = 0.525
-                                                                                                                                               ), lnorm = c(meanlog = 0.98125, sdlog = 0.9515625), weibull = c(shape = 1.35231933593751, 
-                                                                                                                                                                                                               scale = 4.5020751953125))
+                                                                                                                                               ), lnorm = c(meanlog = 0.98125, sdlog = 0.9515625), weibull = c(shape = 1.26367187500001, 
+                                                                                                                                                                                                               scale = 4.325390625))
   )
 
   expect_is(ssd_plot_cdf(pars), "ggplot")

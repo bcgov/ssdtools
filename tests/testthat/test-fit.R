@@ -54,7 +54,7 @@ test_that("burrIII2", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("burrIII2", "gamma", "lnorm"))
   expect_identical(names(dists), c("burrIII2", "gamma", "lnorm"))
-  expect_equal(coef(dists$burrIII2), c(lshape = 0.493452552733572, lscale = -1.37955270951911))
+  expect_equal(coef(dists$burrIII2), c(lshape = 0.120397973016376, lscale = -16.1376294443525))
 })
 
 test_that("fit_dist", {
