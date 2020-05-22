@@ -93,7 +93,7 @@ ssd_gof(boron_dists)
 #>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
 #> 1 llogis 0.487 0.0993 0.0595  241.  241.  244.  3.38  0.11 
 #> 2 gamma  0.440 0.117  0.0554  238.  238.  240.  0     0.595
-#> 3 lnorm  0.507 0.107  0.0703  239.  240.  242.  1.40  0.296
+#> 3 lnorm  0.507 0.106  0.0703  239.  240.  242.  1.40  0.296
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
