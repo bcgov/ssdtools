@@ -42,12 +42,11 @@ spareto(x)
 A numeric vector.
 }
 \description{
-Density, distribution function, quantile function, random generation
-and starting values for the
-Pareto distribution
-with scale and shape parameters.
+Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions.
 }
 \details{
+The pareto distribution has been deprecated as it is not suitable for SSD data.
 The functions are wrappers on the equivalent VGAM functions.
 }
 \examples{

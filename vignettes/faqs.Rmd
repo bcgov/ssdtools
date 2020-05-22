@@ -28,7 +28,7 @@ The user can also specify a custom distribution (called say `dist`) provided the
 - probability density (`ddist(x, par1, par2, log = FALSE)`)
 - cumulative distribution (`pdist(q, par1, par2, lower.tail = TRUE, log.p = FALSE)`)
 - inverse cumulative distribution (`qdist(p, par1, par2, lower.tail = TRUE, log.p = FALSE)`)
-- random (`rdist(n, par1, par2)`)
+- random samples (`rdist(n, par1, par2)`)
 - starting values (`sdist(x)`)
 
 ## How do I fit distributions to multiple groups such taxa and/or chemicals?

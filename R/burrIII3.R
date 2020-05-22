@@ -12,13 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' burrIII3 Distribution
+#' Burr Type III Three-Parameter Distribution
 #'
-#' Density, distribution function, quantile function and random generation for 
-#' the burrIII3 distribution with parameters shape1, shape2 and scale.
+#' Probability density, cumulative distribution, 
+#' inverse cumulative distribution, random sample and starting values functions.
 #'
-#' @inheritParams params
 #' @param x A numeric vector of values.
+#' @inheritParams params
 #' @return A numeric vector.
 #' @name burrIII3
 #' @examples

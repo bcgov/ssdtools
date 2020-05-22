@@ -12,16 +12,16 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' lnorm Distribution
+#' Log-Normal Distribution
 #'
-#' Density, distribution function, quantile function and random generation for 
-#' the lnorm distribution with parameters meanlog and sdlog.
+#' Probability density, cumulative distribution, 
+#' inverse cumulative distribution, random sample and starting values functions.
 #'
-#' @inheritParams params
 #' @param x A numeric vector of values.
+#' @inheritParams params
 #' @return A numeric vector.
-#' @seealso \code{\link[stats]{dlnorm}}
 #' @name lnorm
+#' @seealso \code{\link[stats]{dlnorm}}
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dlnorm(x), type = "l")

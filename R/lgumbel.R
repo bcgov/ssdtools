@@ -14,10 +14,8 @@
 
 #' Log-Gumbel Distribution
 #'
-#' Density, distribution function, quantile function, random generation
-#' and starting values for the
-#' Log-Gumbel distribution
-#' with \code{lscale} and \code{llocation} parameters.
+#' Probability density, cumulative distribution, 
+#' inverse cumulative distribution, random sample and starting values functions.
 #'
 #' @param x A numeric vector of values.
 #' @inheritParams params
@@ -30,36 +28,36 @@ NULL
 
 #' @rdname lgumbel
 #' @export
-dlgumbel <- function(x, llocation = 0, lscale = 1, log = FALSE) {
-  ddist("gumbel", x = x,  location = llocation, scale = lscale, 
+dlgumbel <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
+  ddist("gumbel", x = x,  location = locationlog, scale = scalelog, 
         log = log, .lgt = TRUE)
 }
 
 #' @rdname lgumbel
 #' @export
-plgumbel <- function(q, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  pdist("gumbel", q = q,  location = llocation, scale = lscale, 
+plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+  pdist("gumbel", q = q,  location = locationlog, scale = scalelog, 
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 #' @rdname lgumbel
 #' @export
-qlgumbel <- function(p, llocation = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE) {
-  qdist("gumbel", p = p,  location = llocation, scale = lscale,
+qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+  qdist("gumbel", p = p,  location = locationlog, scale = scalelog,
           lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 #' @rdname lgumbel
 #' @export
-rlgumbel <- function(n, llocation = 0, lscale = 1) {
-  rdist("gumbel", n = n,  location = llocation, scale = lscale, .lgt = TRUE)
+rlgumbel <- function(n, locationlog = 0, scalelog = 1) {
+  rdist("gumbel", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE)
 }
 
 #' @rdname lgumbel
 #' @export
 slgumbel <- function(x) {
   list(start = list(
-    llocation = mean(log_silent(x), na.rm = TRUE),
-    lscale = pi * sd(log_silent(x), na.rm = TRUE) / sqrt(6)
+    locationlog = mean(log(x), na.rm = TRUE),
+    scalelog = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
   ))
 }

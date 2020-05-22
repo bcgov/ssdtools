@@ -7,7 +7,7 @@
 \alias{qburrIII3}
 \alias{rburrIII3}
 \alias{sburrIII3}
-\title{burrIII3 Distribution}
+\title{Burr Type III Three-Parameter Distribution}
 \usage{
 dburrIII3(x, lshape1 = 0, lshape2 = 0, lscale = 0, log = FALSE)
 
@@ -58,8 +58,8 @@ sburrIII3(x)
 A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation for 
-the burrIII3 distribution with parameters shape1, shape2 and scale.
+Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions.
 }
 \examples{
 x <- seq(0.01, 5, by = 0.01)

@@ -60,10 +60,11 @@ sllogis(x)
 A numeric vector.
 }
 \description{
-Density, distribution function, quantile function, random generation
-and starting values for the
-log-logistic distribution
-with \code{locationlog} and \code{scalelog} parameters.
+Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions.
+}
+\details{
+The llog distribution has been deprecated for the identical llogis distribution.
 }
 \examples{
 x <- seq(0.01, 5, by = 0.01)
