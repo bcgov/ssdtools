@@ -9,22 +9,22 @@
 \alias{sburrIII2}
 \title{Burr Type III Two-Parameter Distribution}
 \usage{
-dburrIII2(x, lshape = 0, lscale = 1, log = FALSE)
+dburrIII2(x, lshape1 = 0, lshape2 = 0, log = FALSE)
 
-qburrIII2(p, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
+qburrIII2(p, lshape1 = 0, lshape2 = 0, lower.tail = TRUE, log.p = FALSE)
 
-pburrIII2(q, lshape = 0, lscale = 1, lower.tail = TRUE, log.p = FALSE)
+pburrIII2(q, lshape1 = 0, lshape2 = 0, lower.tail = TRUE, log.p = FALSE)
 
-rburrIII2(n, lshape = 0, lscale = 1)
+rburrIII2(n, lshape1 = 0, lshape2 = 0)
 
 sburrIII2(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{lshape}{shape parameter on the log scale.}
+\item{lshape1}{shape1 parameter on the log scale.}
 
-\item{lscale}{scale parameter on the log scale.}
+\item{lshape2}{shape2 parameter on the log scale.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
