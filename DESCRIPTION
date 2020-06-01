@@ -37,7 +37,6 @@ Depends:
 Imports:
     chk,
     fitdistrplus,
-    actuar,
     abind,
     ggplot2,
     graphics,
@@ -51,6 +50,7 @@ Imports:
 Suggests:
     covr,
     knitr,
+    actuar,
     rmarkdown,
     testthat,
     readr,
