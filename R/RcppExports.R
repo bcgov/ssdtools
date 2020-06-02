@@ -17,6 +17,22 @@ rburrIII3_ssd <- function(n, shape1, shape2, scale) {
     .Call('_ssdtools_rburrIII3_ssd', PACKAGE = 'ssdtools', n, shape1, shape2, scale)
 }
 
+dburrXII_ssd <- function(x, shape1, shape2, scale) {
+    .Call('_ssdtools_dburrXII_ssd', PACKAGE = 'ssdtools', x, shape1, shape2, scale)
+}
+
+pburrXII_ssd <- function(q, shape1, shape2, scale) {
+    .Call('_ssdtools_pburrXII_ssd', PACKAGE = 'ssdtools', q, shape1, shape2, scale)
+}
+
+qburrXII_ssd <- function(p, shape1, shape2, scale) {
+    .Call('_ssdtools_qburrXII_ssd', PACKAGE = 'ssdtools', p, shape1, shape2, scale)
+}
+
+rburrXII_ssd <- function(n, shape1, shape2, scale) {
+    .Call('_ssdtools_rburrXII_ssd', PACKAGE = 'ssdtools', n, shape1, shape2, scale)
+}
+
 dgamma_ssd <- function(x, shape, scale) {
     .Call('_ssdtools_dgamma_ssd', PACKAGE = 'ssdtools', x, shape, scale)
 }
