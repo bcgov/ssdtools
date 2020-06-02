@@ -47,10 +47,8 @@
 
 
 <meta property="og:title" content="Burr Type III Two-Parameter Distribution — burrIII2" />
-<meta property="og:description" content="Density, distribution function, quantile function, random generation
-and starting values for the
-Burr Type III two-parameter distribution
-with lshape and lscale parameters." />
+<meta property="og:description" content="Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -83,7 +81,7 @@ with lshape and lscale parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
       </span>
     </div>
 
@@ -152,17 +150,15 @@ with lshape and lscale parameters." />
     </div>
 
     <div class="ref-description">
-    <p>Density, distribution function, quantile function, random generation
-and starting values for the
-Burr Type III two-parameter distribution
-with <code>lshape</code> and <code>lscale</code> parameters.</p>
+    <p>Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions.</p>
     </div>
 
     <pre class="usage"><span class='fu'>dburrIII2</span>(<span class='no'>x</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>qburrIII2</span>(<span class='no'>p</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
 <span class='fu'>pburrIII2</span>(<span class='no'>q</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>qburrIII2</span>(<span class='no'>p</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>rburrIII2</span>(<span class='no'>n</span>, <span class='kw'>locationlog</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scalelog</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
@@ -186,8 +182,8 @@ with <code>lshape</code> and <code>lscale</code> parameters.</p>
       <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
-      <th>p</th>
-      <td><p>vector of probabilities.</p></td>
+      <th>q</th>
+      <td><p>vector of quantiles.</p></td>
     </tr>
     <tr>
       <th>lower.tail</th>
@@ -198,8 +194,8 @@ with <code>lshape</code> and <code>lscale</code> parameters.</p>
       <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
-      <th>q</th>
-      <td><p>vector of quantiles.</p></td>
+      <th>p</th>
+      <td><p>vector of probabilities.</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -210,6 +206,9 @@ with <code>lshape</code> and <code>lscale</code> parameters.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A numeric vector.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The burrIII2 distribution has been deprecated for the identical llogis distribution.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='llogis.html'>llogis</a></code></p></div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CCME Species Sensitivity Data for Boron — boron_data • ssdtools</title>
+<title>Burr Type III Three-Parameter Distribution — burrIII3b • ssdtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="CCME Species Sensitivity Data for Boron — boron_data" />
-<meta property="og:description" content="Species Sensitivity Data from
-the Canadian Council of Ministers of the Environment." />
+<meta property="og:title" content="Burr Type III Three-Parameter Distribution — burrIII3b" />
+<meta property="og:description" content="Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -144,47 +144,96 @@ the Canadian Council of Ministers of the Environment." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CCME Species Sensitivity Data for Boron</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>boron_data.Rd</code></div>
+    <h1>Burr Type III Three-Parameter Distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/burrIII3b.R'><code>R/burrIII3b.R</code></a></small>
+    <div class="hidden name"><code>burrIII3b.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Species Sensitivity Data from
-the Canadian Council of Ministers of the Environment.</p>
+    <p>Probability density, cumulative distribution, 
+inverse cumulative distribution, random sample and starting values functions.</p>
     </div>
 
-    <pre class="usage"><span class='no'>boron_data</span></pre>
+    <pre class="usage"><span class='fu'>dburrIII3b</span>(<span class='no'>x</span>, <span class='kw'>lshape1</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape2</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
+<span class='fu'>pburrIII3b</span>(
+  <span class='no'>q</span>,
+  <span class='kw'>lshape1</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>lshape2</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+<span class='fu'>qburrIII3b</span>(
+  <span class='no'>p</span>,
+  <span class='kw'>lshape1</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>lshape2</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
-    <p>A tbl data frame:</p><dl>
-  <dt>Chemical</dt><dd><p>The chemical &lt;chr&gt;.</p></dd>
-  <dt>Species</dt><dd><p>The species binomial name &lt;chr&gt;.</p></dd>
-  <dt>Concentration</dt><dd><p>The chemical concentration &lt;dbl&gt;.</p></dd>
-  <dt>Units</dt><dd><p>The units &lt;chr&gt;.</p></dd>
-  <dt>Group</dt><dd><p>The taxonomic group &lt;fctr&gt;.</p></dd>
+<span class='fu'>rburrIII3b</span>(<span class='no'>n</span>, <span class='kw'>lshape1</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape2</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
-</dl>
+<span class='fu'>sburrIII3b</span>(<span class='no'>x</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A numeric vector of values.</p></td>
+    </tr>
+    <tr>
+      <th>lshape1</th>
+      <td><p>shape1 parameter on the log scale.</p></td>
+    </tr>
+    <tr>
+      <th>lshape2</th>
+      <td><p>shape2 parameter on the log scale.</p></td>
+    </tr>
+    <tr>
+      <th>lscale</th>
+      <td><p>scale parameter on the log scale.</p></td>
+    </tr>
+    <tr>
+      <th>log</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>q</th>
+      <td><p>vector of quantiles.</p></td>
+    </tr>
+    <tr>
+      <th>lower.tail</th>
+      <td><p>logical; if TRUE (default), probabilities are P[X &lt;= x],otherwise, P[X &gt; x].</p></td>
+    </tr>
+    <tr>
+      <th>log.p</th>
+      <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td><p>vector of probabilities.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>number of observations.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A numeric vector.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Additional information is available from <a href='http://ceqg-rcqe.ccme.ca/download/en/324/'>http://ceqg-rcqe.ccme.ca/download/en/324/</a>.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>The Burr III distribution is the distribution of 1/x where 
+x has the Burr Type 12 distribution 
+refer to 
+https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm 
+for details.</p>
 
-    <div class='dont-index'><p>ccme_data</p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>ccme_data</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 5</span><span>
-#&gt;   Chemical Species                Conc Group Units
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Boron    Oncorhynchus mykiss     2.1 Fish  mg/L 
-#&gt; </span><span style='color: #555555;'>2</span><span> Boron    Ictalurus punctatus     2.4 Fish  mg/L 
-#&gt; </span><span style='color: #555555;'>3</span><span> Boron    Micropterus salmoides   4.1 Fish  mg/L 
-#&gt; </span><span style='color: #555555;'>4</span><span> Boron    Brachydanio rerio      10   Fish  mg/L 
-#&gt; </span><span style='color: #555555;'>5</span><span> Boron    Carassius auratus      15.6 Fish  mg/L 
-#&gt; </span><span style='color: #555555;'>6</span><span> Boron    Pimephales promelas    18.3 Fish  mg/L </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
