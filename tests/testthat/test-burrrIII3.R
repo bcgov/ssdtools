@@ -17,6 +17,7 @@ test_that("dburrIII3 extremes", {
   expect_identical(dburrIII3(NA), NA_real_)
   expect_identical(dburrIII3(NaN), NaN)
   expect_identical(dburrIII3(0), 0)
+  expect_equal(dburrIII3b(2), 1/9)
   expect_equal(dburrIII3(1), 0.25)
   expect_equal(dburrIII3(1, log = TRUE), log(dburrIII3(1)))
   expect_identical(dburrIII3(0), 0)
