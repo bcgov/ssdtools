@@ -99,11 +99,11 @@ jobs:
           path: check
 
       - name: action-slack
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.POISSON_SLACK_WEBHOOK_URL }}
         uses: 8398a7/action-slack@v3.0.0
         with:
           status: ${{ job.status }}
           author_name: "github action: R-CMD-check"
           fields: repo, workflow, commit, message, author, action
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.POISSON_SLACK_WEBHOOK_URL }}
-        if: failure()
