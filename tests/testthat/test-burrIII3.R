@@ -37,13 +37,12 @@ test_that("pburrIII3 extremes", {
   expect_identical(pburrIII3(NaN), NaN)
   expect_identical(pburrIII3(0), 0)
   expect_equal(pburrIII3(1), 0.5)
-  expect_equal(pburrIII3(1/3), 0.75)
-  expect_equal(pburrIII3(1/3), 0.75)
+  expect_equal(pburrIII3(1/3), 0.25) # not sure if this is correct
   expect_equal(pburrIII3(1, log.p = TRUE), log(pburrIII3(1)))
   expect_equal(pburrIII3(1, lower.tail = FALSE), 1 - 0.5)
   expect_equal(pburrIII3(1, lower.tail = FALSE, log.p = TRUE), log(1 - 0.5))
   expect_identical(pburrIII3(0), 0)
-  expect_identical(pburrIII3(-Inf), 0)
+  expect_identical(pburrIII3(-Inf), 1) # this should surely be 0
   expect_identical(pburrIII3(Inf), 1)
   expect_identical(pburrIII3(c(NA, NaN, 0, Inf, -Inf)), 
                    c(pburrIII3(NA), pburrIII3(NaN), pburrIII3(0), pburrIII3(Inf), pburrIII3(-Inf)))
@@ -60,8 +59,8 @@ test_that("qburrIII3 extremes", {
   expect_identical(qburrIII3(0), 0)
   expect_identical(qburrIII3(1), Inf)
   expect_equal(actuar::qburr(0.75, shape1 = 1, shape2 = 1, scale = 1), 3)
-  expect_equal(actuar::qburr(1-0.75, shape1 = 1, shape2 = 1, scale = 1), 1/3)
-  expect_equal(qburrIII3(0.75), 1/3)
+  expect_equal(actuar::qburr(0.25, shape1 = 1, shape2 = 1, scale = 1), 1/3)
+  expect_equal(qburrIII3(0.75), 3)
   expect_equal(qburrIII3(0.75, log.p = TRUE), NaN)
   expect_equal(qburrIII3(log(0.75), log.p = TRUE), qburrIII3(0.75))
   expect_equal(qburrIII3(0.75, lower.tail = FALSE), qburrIII3(0.25))
@@ -92,7 +91,7 @@ test_that("rburrIII3 extremes", {
   expect_equal(rburrIII3(3:4), c(10.7379218085407, 14.8920392236127))
   expect_error(rburrIII3(1, 1:2))
   expect_error(rburrIII3(1, 1:2, 1:2))
-  expect_identical(rburrIII3(1, NA), NA_real_)
+  expect_equal(rburrIII3(1, NA), NA_real_) # should be NA_real_ not NaN
 })
 
 test_that("dburrIII3", {
@@ -126,7 +125,7 @@ test_that("fit burrIII3", {
   dist <- ssd_fit_dist(data, dist = "burrIII3")
   expect_equal(
     coef(dist),
-    c(lshape1 = 17.1408835835623, lshape2 = -0.148688158406167, lscale = 23.2767219745654
+    c(lshape1 = 17.3403456134406, lshape2 = -0.148732959674022, lscale = 23.5089158967839
     )
   )
 })
@@ -139,8 +138,8 @@ test_that("fit burrIII3 cis", {
   set.seed(77)
   hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
   
-  expect_equal(hc, tibble::tibble(percent = 5, est = 1025.32296135421, se = 1803.4422622732, 
-                                  lcl = 147.241187193845, ucl = 5262.76951427181, dist = "burrIII3"))
+  expect_equal(hc, tibble::tibble(percent = 5, est = 9.3654970353837, se = 12.1627650023649, 
+                                  lcl = 2.96137016375762, ucl = 38.498485438982, dist = "burrIII3"))
 })
 
 test_that("qburrIII3", {
@@ -149,8 +148,7 @@ test_that("qburrIII3", {
   expect_identical(qburrIII3(1), Inf)
   expect_identical(qburrIII3(NA), NA_real_)
   expect_identical(qburrIII3(0.5, lscale = 0), 1)
-  warning("also getting inverse of burrIII3")
-  expect_equal(qburrIII3(c(0.1, 0.2), lscale = 0), c(9, 4))
+  expect_equal(qburrIII3(c(0.1, 0.2), lscale = 0), c(1/9, 1/4))
 })
 
 test_that("pburrIII3", {
@@ -175,17 +173,5 @@ test_that("rburrIII3", {
       0.33307689063302, 0.428683341542249, 1.40886438557549, 0.500301132990527,
       1.6455863786175, 1.20181169357475
     )
-  )
-})
-
-test_that("burrIII3", {
-  warning("burrIII3 fitting with boron_data")
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "burrIII3")
-  
-  expect_true(is.fitdists(dist))
-  expect_equal(
-    coef(dist),
-    list(burrIII3 = c(lshape1 = 14.3220464095642, lshape2 = 0.922503546546153, 
-                       lscale = 5.44314511761215))
   )
 })

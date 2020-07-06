@@ -6,29 +6,32 @@
 \alias{qburrIII3}
 \alias{pburrIII3}
 \alias{rburrIII3}
+\alias{sburrIII3}
 \title{Burr Type III Three-Parameter Distribution}
 \usage{
-dburrIII3(x, lshape1 = log(1), lshape2 = log(1), lscale = log(1), log = FALSE)
+dburrIII3(x, lshape1 = 0, lshape2 = 0, lscale = 0, log = FALSE)
 
 qburrIII3(
   p,
-  lshape1 = log(1),
-  lshape2 = log(1),
-  lscale = log(1),
+  lshape1 = 0,
+  lshape2 = 0,
+  lscale = 0,
   lower.tail = TRUE,
   log.p = FALSE
 )
 
 pburrIII3(
   q,
-  lshape1 = log(1),
-  lshape2 = log(1),
-  lscale = log(1),
+  lshape1 = 0,
+  lshape2 = 0,
+  lscale = 0,
   lower.tail = TRUE,
   log.p = FALSE
 )
 
-rburrIII3(n, lshape1 = log(1), lshape2 = log(1), lscale = log(1))
+rburrIII3(n, lshape1 = 0, lshape2 = 0, lscale = 0)
+
+sburrIII3(x)
 }
 \arguments{
 \item{x}{The object.}

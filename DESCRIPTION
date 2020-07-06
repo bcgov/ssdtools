@@ -38,6 +38,7 @@ Imports:
     chk,
     fitdistrplus,
     abind,
+    actuar,
     ggplot2,
     graphics,
     grid,
@@ -50,7 +51,6 @@ Imports:
 Suggests:
     covr,
     knitr,
-    actuar,
     rmarkdown,
     testthat,
     readr,
