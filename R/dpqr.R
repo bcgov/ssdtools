@@ -33,12 +33,16 @@ ddist <- function(dist, x, ..., log = FALSE, .lgt = FALSE) {
   pos <- is.na(q) | q > 0
   q[inf] <- NA_real_
   fun <- paste0("p", dist, "_ssd")
+  print(q)
+  print(lower.tail)
+  print(log.p)
   p <- mapply(fun, q, ...)
   p[mapply(any_missing, q, ...)] <- NA_real_
   p[inf & pos] <- 1
   p[inf & !pos] <- 0
   if(!lower.tail) p <- 1 - p
   if(log.p) p <- log(p)
+  print(p)
   p
 }
 
