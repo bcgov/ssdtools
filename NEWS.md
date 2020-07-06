@@ -1,3 +1,15 @@
+# ssdtools 0.2.0.9004
+
+- Rolled back to original implementation of burrIII3
+- Reparamaterize burrIII2 in terms of locationlog and scalelog.
+- llogis distribution parameterised in terms of locationlog and scalelog
+- rdist() functions now use length of n if length(n) > 1.
+- Added slnorm() to get starting values for log-normal distribution.
+- Soft-deprecated pareto distribution as unsuitable for SSD data.
+- Switched d, p, q and r functions for gumbel distribution from VGAM::lgumbel to using C++ lgumbel.
+- Switched to C++ for dburrXII
+
+
 # ssdtools 0.2.0.9003
 
 - Reparameterized 'llogis' distribution in terms of locationlog and scalelog.
