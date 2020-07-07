@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -146,44 +146,72 @@
       <small>Source: <a href='https://github.com/bcgov/ssdtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="ssdtools-0209003" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0.9003">
-<a href="#ssdtools-0209003" class="anchor"></a>ssdtools 0.2.0.9003<small> Unreleased </small>
-</h1>
-<ul>
-<li>Reparameterized ‘llogis’ distribution in terms of locationlog and scalelog.</li>
-<li>Reparameterized ‘burrIII3’ distribution in terms of lshape1, lshape2 and lscale.</li>
-<li>Reparamaterized ‘burrIII2’ distribution in terms of locationlog and scalelog.</li>
-<li>Soft-deprecated ‘pareto’ distribution as poor fit on SSD data.</li>
-<li>Added slnorm() to get starting values for log-normal distribution.</li>
-<li>rdist() functions now use length of n if length(n) &gt; 1.</li>
-</ul>
-</div>
-    <div id="ssdtools-020" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#ssdtools-020" class="anchor"></a>ssdtools 0.2.0<small> 2020-04-15 </small>
+    <div id="ssdtools-0209005" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0.9005">
+<a href="#ssdtools-0209005" class="anchor"></a>ssdtools 0.2.0.9005<small> Unreleased </small>
 </h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking Changes</h2>
 <ul>
-<li>Changed computable (whether standard errors must be computable to be considered to have converged) to FALSE by default.</li>
-<li>Enforces only one of ‘llogis’, ‘llog’ or ‘burrIII2’ in all sets (as identical).</li>
+<li>Soft-deprecated ‘burrIII3’ distribution as poorly defined.</li>
+<li>Soft-deprecated ‘pareto’ distribution as poor fit on SSD data.</li>
 </ul>
 </div>
 <div id="major-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#major-changes" class="anchor"></a>Major Changes</h2>
 <ul>
-<li>Deprecated ‘burrIII2’ for ‘llogis’ as identical.</li>
-<li>Replaced ‘burrIII2’ for (identical) ‘llogis’ in default set.</li>
-<li>Fixed bug in <code><a href="../reference/llogis.html">rllog()</a></code> that was causing error.</li>
-<li>Fixed parameterisation of ‘lgumbel’ that was causing it to fail to fit with some data.</li>
+<li>Reparameterized ‘llogis’ distribution in terms of locationlog and scalelog.</li>
+<li>Reparameterized ‘burrIII3’ distribution in terms of lshape1, lshape2 and lscale.</li>
+<li>Reparamaterized ‘burrIII2’ distribution in terms of locationlog and scalelog.</li>
+<li>Reparamaterized ‘lgumbel’ distribution in terms of locationlog and scalelog.</li>
+<li>Reparamaterized ‘gompertz’ distribution in terms of llocation and lshape.</li>
+<li>Standardized handling of arguments for d,p,q,r and s functions for distributions.</li>
 </ul>
 </div>
 <div id="minor-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-changes" class="anchor"></a>Minor Changes</h2>
+<ul>
+<li>
+<code>rdist()</code> functions now use length of n if <code>length(n) &gt; 1</code>.</li>
+<li>Added <code><a href="https://rdrr.io/pkg/ssdtools/man/lnorm.html">slnorm()</a></code> to get starting values for ‘dlnorm’ distribution.</li>
+</ul>
+</div>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal Changes</h2>
+<ul>
+<li>Switch to C++ implementation for distributions.</li>
+</ul>
+</div>
+</div>
+    <div id="ssdtools-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#ssdtools-020" class="anchor"></a>ssdtools 0.2.0<small> 2020-04-15 </small>
+</h1>
+<div id="breaking-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes-1" class="anchor"></a>Breaking Changes</h2>
+<ul>
+<li>Changed computable (whether standard errors must be computable to be considered to have converged) to FALSE by default.</li>
+<li>Enforces only one of ‘llogis’, ‘llog’ or ‘burrIII2’ in all sets (as identical).</li>
+</ul>
+</div>
+<div id="major-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes-1" class="anchor"></a>Major Changes</h2>
+<ul>
+<li>Deprecated ‘burrIII2’ for ‘llogis’ as identical.</li>
+<li>Replaced ‘burrIII2’ for (identical) ‘llogis’ in default set.</li>
+<li>Fixed bug in <code><a href="https://rdrr.io/pkg/ssdtools/man/llogis.html">rllog()</a></code> that was causing error.</li>
+<li>Fixed parameterisation of ‘lgumbel’ that was causing it to fail to fit with some data.</li>
+</ul>
+</div>
+<div id="minor-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-1" class="anchor"></a>Minor Changes</h2>
 <ul>
 <li>Provides warning message about change in default for ci argument in predict function.</li>
 <li>Only gives warning about standard errors not being computable if computable = TRUE.</li>
@@ -204,14 +232,14 @@
 <h1 class="page-header" data-toc-text="0.1.0">
 <a href="#ssdtools-010" class="anchor"></a>ssdtools 0.1.0<small> 2020-01-13 </small>
 </h1>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking Changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking Changes</h2>
 <ul>
 <li>Default distributions changed to ‘burrIII2’, ‘gamma’ and ‘lnorm’ from ‘gamma’, ‘gompertz’, ‘lgumbel’, ‘llog’, ‘lnorm’ and ‘weibull’.</li>
-<li>Changed implicit behaviour of <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> where <code>ci = TRUE</code> to explicit <code><a href="../reference/ssd_hc.html">ssd_hc(ci = FALSE)</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html">predict(ci = FALSE)</a></code>.</li>
+<li>Changed implicit behaviour of <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_hc.html">ssd_hc()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> where <code>ci = TRUE</code> to explicit <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_hc.html">ssd_hc(ci = FALSE)</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html">predict(ci = FALSE)</a></code>.</li>
 <li>Replaced <code>shape</code> and <code>scale</code> arguments to <code>llog()</code> with <code>lshape</code> and <code>lscale</code>.</li>
-<li>Replaced <code>location</code> and <code>scale</code> arguments to <code><a href="../reference/lgumbel.html">lgumbel()</a></code> with <code>llocation</code> and <code>lscale</code>.</li>
+<li>Replaced <code>location</code> and <code>scale</code> arguments to <code><a href="https://rdrr.io/pkg/ssdtools/man/lgumbel.html">lgumbel()</a></code> with <code>llocation</code> and <code>lscale</code>.</li>
 </ul>
 </div>
 <div id="major-features" class="section level2">
@@ -219,8 +247,8 @@
 <a href="#major-features" class="anchor"></a>Major Features</h2>
 <ul>
 <li>Added Burr Type-III Two-Parameter Distribution (<code>burrIII2</code>).</li>
-<li>Added <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> to calculate hazard percent at specific concentrations.</li>
-<li>Added <code><a href="../reference/ssd_exposure.html">ssd_exposure()</a></code> to calculate proportion exposed based on distribution of concentrations.</li>
+<li>Added <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_hp.html">ssd_hp()</a></code> to calculate hazard percent at specific concentrations.</li>
+<li>Added <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_exposure.html">ssd_exposure()</a></code> to calculate proportion exposed based on distribution of concentrations.</li>
 <li>Optimized <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> and added parallel argument.</li>
 <li>Tidyverse style error and warning messages.</li>
 </ul>
@@ -230,22 +258,22 @@
 <a href="#minor-features" class="anchor"></a>Minor Features</h2>
 <ul>
 <li>
-<code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> now checks if standard errors computable.</li>
+<code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_fit_dists.html">ssd_fit_dists()</a></code> now checks if standard errors computable.</li>
 <li>Added Burr Type-III Three-Parameter Distribution (<code>burrIII3</code>).</li>
 <li>Added <code>sdist(x)</code> functionality to set starting values for distributions.</li>
-<li>Added <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code> to plot cumulative distribution function (equivalent to <code>autoplot()</code>)</li>
+<li>Added <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html">ssd_plot_cdf()</a></code> to plot cumulative distribution function (equivalent to <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot()</a></code>)</li>
 <li>
 <code><a href="https://rdrr.io/r/stats/nobs.html">nobs()</a></code> for censored data now returns a missing value.</li>
-<li>Default <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> distributions now ordered alphabetically.</li>
+<li>Default <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_fit_dists.html">ssd_fit_dists()</a></code> distributions now ordered alphabetically.</li>
 </ul>
 </div>
 <div id="deprecated" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deprecated" class="anchor"></a>Deprecated</h2>
 <ul>
-<li>Deprecated <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> argument <code>hc = 5L</code> for <code>percent = 5L</code>.</li>
-<li>Deprecated <code><a href="../reference/llogis.html">dllog()</a></code> etc for <code><a href="../reference/llogis.html">dllogis()</a></code>.</li>
-<li>Deprecated <code><a href="../reference/ssd_plot_cf.html">ssd_cfplot()</a></code> for <code><a href="../reference/ssd_plot_cf.html">ssd_plot_cf()</a></code>.</li>
+<li>Deprecated <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_hc.html">ssd_hc()</a></code> argument <code>hc = 5L</code> for <code>percent = 5L</code>.</li>
+<li>Deprecated <code><a href="https://rdrr.io/pkg/ssdtools/man/llogis.html">dllog()</a></code> etc for <code><a href="https://rdrr.io/pkg/ssdtools/man/llogis.html">dllogis()</a></code>.</li>
+<li>Deprecated <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_plot_cf.html">ssd_cfplot()</a></code> for <code><a href="https://rdrr.io/pkg/ssdtools/man/ssd_plot_cf.html">ssd_plot_cf()</a></code>.</li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">

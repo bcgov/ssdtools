@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -152,14 +152,14 @@
     <p>Fits one or more distributions to species sensitivity data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ssd_fit_dists</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>left</span> <span class='kw'>=</span> <span class='st'>"Conc"</span>,
-  <span class='kw'>right</span> <span class='kw'>=</span> <span class='no'>left</span>,
-  <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dists</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"llogis"</span>, <span class='st'>"gamma"</span>, <span class='st'>"lnorm"</span>),
-  <span class='kw'>computable</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_fit_dists.html'>ssd_fit_dists</a></span>(
+  <span class='kw'>data</span>,
+  left = <span class='st'>"Conc"</span>,
+  right = <span class='kw'>left</span>,
+  weight = <span class='kw'>NULL</span>,
+  dists = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"llogis"</span>, <span class='st'>"gamma"</span>, <span class='st'>"lnorm"</span>),
+  computable = <span class='fl'>FALSE</span>,
+  silent = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -203,7 +203,7 @@
     <p>By default the 'llogis', 'gamma' and 'lnorm'
 distributions are fitted to the data.
 The ssd_fit_dists function has also been
-tested with the 'burrIII3', 'gompertz', 'lgumbel' and 'weibull' distributions.</p>
+tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.</p>
 <p>If weight specifies a column in the data frame with positive integers,
 weighted estimation occurs.
 However, currently only the resultant parameter estimates are available (via coef).</p>
@@ -218,7 +218,7 @@ it is carried out using <code><a href='https://rdrr.io/r/stats/constrOptim.html'
 In both cases the "Nelder-Mead" method is used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_fit_dists</span>(<span class='no'>boron_data</span>)</div><div class='output co'>#&gt; Fitting of the distribution ' llogis ' by maximum likelihood 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_fit_dists.html'>ssd_fit_dists</a></span>(<span class='kw'>boron_data</span>)</div><div class='output co'>#&gt; Fitting of the distribution ' llogis ' by maximum likelihood 
 #&gt; Parameters:
 #&gt;              estimate Std. Error
 #&gt; locationlog 2.6261249  0.2482332
@@ -232,8 +232,8 @@ In both cases the "Nelder-Mead" method is used.</p>
 #&gt; Parameters:
 #&gt;         estimate Std. Error
 #&gt; meanlog 2.561644  0.2346640
-#&gt; sdlog   1.241725  0.1659692</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fluazinam</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"fitdistrplus"</span>)
-<span class='fu'>ssd_fit_dists</span>(<span class='no'>fluazinam</span>, <span class='kw'>left</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>right</span> <span class='kw'>=</span> <span class='st'>"right"</span>)</div><div class='output co'>#&gt; Fitting of the distribution ' llogis ' on censored data by maximum likelihood 
+#&gt; sdlog   1.241725  0.1659692</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>fluazinam</span>, package = <span class='st'>"fitdistrplus"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_fit_dists.html'>ssd_fit_dists</a></span>(<span class='kw'>fluazinam</span>, left = <span class='st'>"left"</span>, right = <span class='st'>"right"</span>)</div><div class='output co'>#&gt; Fitting of the distribution ' llogis ' on censored data by maximum likelihood 
 #&gt; Parameters:
 #&gt;             estimate
 #&gt; locationlog 4.954683

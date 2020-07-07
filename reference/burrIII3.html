@@ -47,8 +47,9 @@
 
 
 <meta property="og:title" content="Burr Type III Three-Parameter Distribution — burrIII3" />
-<meta property="og:description" content="Probability density, cumulative distribution, 
-inverse cumulative distribution, random sample and starting values functions." />
+<meta property="og:description" content="Density, distribution function, quantile function and random generation
+for the Burr Type III Three-Parameter distribution with 
+lshape and lscale parameters." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -81,7 +82,7 @@ inverse cumulative distribution, random sample and starting values functions." /
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -145,45 +146,46 @@ inverse cumulative distribution, random sample and starting values functions." /
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Burr Type III Three-Parameter Distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/burrIII3.R'><code>R/burrIII3.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/burrrIII3.R'><code>R/burrrIII3.R</code></a></small>
     <div class="hidden name"><code>burrIII3.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Probability density, cumulative distribution, 
-inverse cumulative distribution, random sample and starting values functions.</p>
+    <p>Density, distribution function, quantile function and random generation
+for the Burr Type III Three-Parameter distribution with 
+<code>lshape</code> and <code>lscale</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dburrIII3</span>(<span class='no'>x</span>, <span class='kw'>lshape1</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape2</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>dburrIII3</a></span>(<span class='kw'>x</span>, lshape1 = <span class='fl'>0</span>, lshape2 = <span class='fl'>0</span>, lscale = <span class='fl'>0</span>, log = <span class='fl'>FALSE</span>)
 
-<span class='fu'>pburrIII3</span>(
-  <span class='no'>q</span>,
-  <span class='kw'>lshape1</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lshape2</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>qburrIII3</a></span>(
+  <span class='kw'>p</span>,
+  lshape1 = <span class='fl'>0</span>,
+  lshape2 = <span class='fl'>0</span>,
+  lscale = <span class='fl'>0</span>,
+  lower.tail = <span class='fl'>TRUE</span>,
+  log.p = <span class='fl'>FALSE</span>
 )
 
-<span class='fu'>qburrIII3</span>(
-  <span class='no'>p</span>,
-  <span class='kw'>lshape1</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lshape2</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lower.tail</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>log.p</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>pburrIII3</a></span>(
+  <span class='kw'>q</span>,
+  lshape1 = <span class='fl'>0</span>,
+  lshape2 = <span class='fl'>0</span>,
+  lscale = <span class='fl'>0</span>,
+  lower.tail = <span class='fl'>TRUE</span>,
+  log.p = <span class='fl'>FALSE</span>
 )
 
-<span class='fu'>rburrIII3</span>(<span class='no'>n</span>, <span class='kw'>lshape1</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lshape2</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>lscale</span> <span class='kw'>=</span> <span class='fl'>0</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>rburrIII3</a></span>(<span class='kw'>n</span>, lshape1 = <span class='fl'>0</span>, lshape2 = <span class='fl'>0</span>, lscale = <span class='fl'>0</span>)
 
-<span class='fu'>sburrIII3</span>(<span class='no'>x</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>sburrIII3</a></span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A numeric vector of values.</p></td>
+      <td><p>The object.</p></td>
     </tr>
     <tr>
       <th>lshape1</th>
@@ -202,8 +204,8 @@ inverse cumulative distribution, random sample and starting values functions.</p
       <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
-      <th>q</th>
-      <td><p>vector of quantiles.</p></td>
+      <th>p</th>
+      <td><p>vector of probabilities.</p></td>
     </tr>
     <tr>
       <th>lower.tail</th>
@@ -214,8 +216,8 @@ inverse cumulative distribution, random sample and starting values functions.</p
       <td><p>logical; if TRUE, probabilities p are given as log(p).</p></td>
     </tr>
     <tr>
-      <th>p</th>
-      <td><p>vector of probabilities.</p></td>
+      <th>q</th>
+      <td><p>vector of quantiles.</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -225,11 +227,23 @@ inverse cumulative distribution, random sample and starting values functions.</p
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A numeric vector.</p>
+    <p>dburrIII3 gives the density, pburrIII3 gives the distribution function,
+qburrIII3 gives the quantile function, and rburrIII3 generates random samples.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The Burr 12 distribution from the actuar package is used as a base.
+The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
+refer to https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm for details.
+The shape1, shape2, and scale paramters are on the log(scale) as these must be positive.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/actuar/man/Burr.html'>dburr</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.01</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='fu'>dburrIII3</span>(<span class='no'>x</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"l"</span>)</div><div class='img'><img src='burrIII3-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>rburrIII3</a></span>(<span class='fl'>1000</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `rburrIII3()` is deprecated as of lifecycle 0.2.1.</span>
+#&gt; <span class='warning'>The 'burrIII3' distribution is under review.</span>
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='kw'>x</span>, freq = <span class='fl'>FALSE</span>, col = <span class='st'>"gray"</span>, border = <span class='st'>"white"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/curve.html'>curve</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>dburrIII3</a></span>(<span class='kw'>x</span>), add = <span class='fl'>TRUE</span>, col = <span class='st'>"red4"</span>, lwd = <span class='fl'>2</span>)</div><div class='img'><img src='burrIII3-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -98,13 +98,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="exposure-plots_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Embellishing Plots with an Exposure Distribution</h1>
                         <h4 class="author">ssdtools Team</h4>
             
-            <h4 class="date">2020-06-03</h4>
+            <h4 class="date">2020-07-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/exposure-plots.Rmd"><code>vignettes/exposure-plots.Rmd</code></a></small>
       <div class="hidden name"><code>exposure-plots.Rmd</code></div>
@@ -114,43 +114,53 @@
     
     
 <p>The <em>ssdtools</em> package produces a plot of the cumulative distributions for several distribution through the use of the <em>autoplot()</em> function. For example, consider the boron data that ships with the <em>ssdtools</em> package.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ssdtools</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">boron_data</span>)
-<span class="no">fit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(<span class="no">boron_data</span>, <span class="kw">dists</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span>))
-<span class="no">fit.plot</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="no">fit</span>)
-<span class="no">fit.plot</span></pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/bcgov/ssdtools">ssdtools</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">boron_data</span>)
+<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(<span class="kw">boron_data</span>, dists = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span>))
+<span class="kw">fit.plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="kw">fit</span>)
+<span class="kw">fit.plot</span>
+</pre></div>
 <p><img src="exposure-plots_files/figure-html/unnamed-chunk-1-1.png" width="576"></p>
 <p>This graphic is a <em>ggplot</em> object and so can be saved and embellished in the usual way. For example, suppose we want to superimpose an evironmental concentration cumulative distribution and compute the exposure risk as outlined in Verdonck et al (2003).</p>
 <p>Finding a suitable probability distribution to describe the exposure concentration is beyond the scope of this document – we will assume that this has been done elsewhere. In particular, suppose that the exposure concentration follows a log-normal distribution with a mean of -2.3025851 and a standard deviation of 1 on the logarithmic scale. From the exposure distribution, we construct a data frame with the concentration values and the cumulative probability of seeing this exposure or less in the environment.</p>
 <p>Notice that some care is needed because the plot for <em>ssdtools</em> in on the logarithmic base 10 scale and not the natural logarithm base <span class="math inline">\(e\)</span> scale.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">ex.cdf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">Conc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fl">.01</span>), <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fl">10</span>), <span class="fl">.1</span>))) <span class="co"># generate a grid of concentrations</span>
-<span class="no">ex.cdf</span>$<span class="no">ex.cdf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/lnorm.html">plnorm</a></span>(<span class="no">ex.cdf</span>$<span class="no">Conc</span>,
-  <span class="kw">meanlog</span> <span class="kw">=</span> <span class="no">ex.mean.log</span>,
-  <span class="kw">sdlog</span> <span class="kw">=</span> <span class="no">ex.sd.log</span>
-) <span class="co"># generate the cdf</span></pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">ex.cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(Conc = <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fl">.01</span>), <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fl">10</span>), <span class="fl">.1</span>))) <span class="co"># generate a grid of concentrations</span>
+<span class="kw">ex.cdf</span><span class="op">$</span><span class="kw">ex.cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lnorm.html">plnorm</a></span>(<span class="kw">ex.cdf</span><span class="op">$</span><span class="kw">Conc</span>,
+  meanlog = <span class="kw">ex.mean.log</span>,
+  sdlog = <span class="kw">ex.sd.log</span>
+) <span class="co"># generate the cdf</span>
+</pre></div>
 <p>We now add this to the plot</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">fit.plot</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">ex.cdf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Conc</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">ex.cdf</span>), <span class="kw">color</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">2</span>) +
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">fit.plot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(data = <span class="kw">ex.cdf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Conc</span>, y = <span class="kw">ex.cdf</span>), color = <span class="st">"red"</span>, size = <span class="fl">2</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span>(<span class="st">"text"</span>,
-    <span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Exposure distribution"</span>),
-    <span class="kw">x</span> <span class="kw">=</span> <span class="fl">1.08</span> * <span class="no">ex.cdf</span>$<span class="no">Conc</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span>(<span class="no">ex.cdf</span>$<span class="no">ex.cdf</span> <span class="kw">&gt;</span> <span class="fl">0.5</span>)], <span class="kw">y</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">angle</span> <span class="kw">=</span> <span class="fl">75</span>
-  )</pre></body></html></div>
+    label = <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Exposure distribution"</span>),
+    x = <span class="fl">1.08</span> <span class="op">*</span> <span class="kw">ex.cdf</span><span class="op">$</span><span class="kw">Conc</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span>(<span class="kw">ex.cdf</span><span class="op">$</span><span class="kw">ex.cdf</span> <span class="op">&gt;</span> <span class="fl">0.5</span>)], y = <span class="fl">0.5</span>, angle = <span class="fl">75</span>
+  )
+</pre></div>
 <p><img src="exposure-plots_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <p>The <em>ssdtools</em> package contains a function <em>ssd_exposure</em> that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
-<span class="no">ex.risk</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ssd_exposure.html">ssd_exposure</a></span>(<span class="no">fit</span>, <span class="kw">meanlog</span> <span class="kw">=</span> <span class="no">ex.mean.log</span>, <span class="kw">sdlog</span> <span class="kw">=</span> <span class="no">ex.sd.log</span>)
-<span class="no">ex.risk</span></pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
+<span class="kw">ex.risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_exposure.html">ssd_exposure</a></span>(<span class="kw">fit</span>, meanlog = <span class="kw">ex.mean.log</span>, sdlog = <span class="kw">ex.sd.log</span>)
+<span class="kw">ex.risk</span>
+</pre></div>
 <pre><code>## [1] 0.005595128</code></pre>
 <p>The risk of 0.0056 can also be added to the plot in the usual way:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">fit.plot</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">dat</span> <span class="kw">=</span> <span class="no">ex.cdf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">Conc</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">ex.cdf</span>), <span class="kw">color</span> <span class="kw">=</span> <span class="st">"red"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">2</span>) +
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">fit.plot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(dat = <span class="kw">ex.cdf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">Conc</span>, y = <span class="kw">ex.cdf</span>), color = <span class="st">"red"</span>, size = <span class="fl">2</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span>(<span class="st">"text"</span>,
-    <span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Exposure distribution"</span>),
-    <span class="kw">x</span> <span class="kw">=</span> <span class="fl">1.08</span> * <span class="no">ex.cdf</span>$<span class="no">Conc</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span>(<span class="no">ex.cdf</span>$<span class="no">ex.cdf</span> <span class="kw">&gt;</span> <span class="fl">0.5</span>)], <span class="kw">y</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">angle</span> <span class="kw">=</span> <span class="fl">75</span>
-  ) +
+    label = <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Exposure distribution"</span>),
+    x = <span class="fl">1.08</span> <span class="op">*</span> <span class="kw">ex.cdf</span><span class="op">$</span><span class="kw">Conc</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span>(<span class="kw">ex.cdf</span><span class="op">$</span><span class="kw">ex.cdf</span> <span class="op">&gt;</span> <span class="fl">0.5</span>)], y = <span class="fl">0.5</span>, angle = <span class="fl">75</span>
+  ) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span>(<span class="st">"text"</span>,
-    <span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Verdonck risk :"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">ex.risk</span>, <span class="fl">5</span>)),
-    <span class="kw">x</span> <span class="kw">=</span> <span class="fl">Inf</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">hjust</span> <span class="kw">=</span> <span class="fl">1.1</span>, <span class="kw">vjust</span> <span class="kw">=</span> -<span class="fl">.5</span>
-  )</pre></body></html></div>
+    label = <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"Verdonck risk :"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">ex.risk</span>, <span class="fl">5</span>)),
+    x = <span class="fl">Inf</span>, y = <span class="fl">0</span>, hjust = <span class="fl">1.1</span>, vjust = <span class="op">-</span><span class="fl">.5</span>
+  )
+</pre></div>
 <p><img src="exposure-plots_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 <div id="other-embellishments" class="section level2">
 <h2 class="hasAnchor">

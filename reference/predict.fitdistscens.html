@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -154,16 +154,16 @@
 
     <pre class="usage"><span class='co'># S3 method for fitdistscens</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(
-  <span class='no'>object</span>,
-  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>99</span>,
-  <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
-  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>average</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ic</span> <span class='kw'>=</span> <span class='st'>"aic"</span>,
-  <span class='no'>...</span>
+  <span class='kw'>object</span>,
+  percent = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>99</span>,
+  ci = <span class='fl'>FALSE</span>,
+  level = <span class='fl'>0.95</span>,
+  nboot = <span class='fl'>1000</span>,
+  parallel = <span class='kw'>NULL</span>,
+  ncpus = <span class='fl'>1</span>,
+  average = <span class='fl'>TRUE</span>,
+  ic = <span class='st'>"aic"</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -213,7 +213,7 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>fluazinam_dists</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 99 x 6</span><span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='kw'>fluazinam_dists</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 99 x 6</span><span>
 #&gt;    percent   est    se   lcl   ucl dist   
 #&gt;      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #555555;'> 1</span><span>       1 0.175    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average

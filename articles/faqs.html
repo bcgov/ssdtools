@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -98,13 +98,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="faqs_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Frequently Asked Questions</h1>
                         <h4 class="author">ssdtools Team</h4>
             
-            <h4 class="date">2020-06-03</h4>
+            <h4 class="date">2020-07-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/faqs.Rmd"><code>vignettes/faqs.Rmd</code></a></small>
       <div class="hidden name"><code>faqs.Rmd</code></div>
@@ -113,8 +113,10 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ssdtools</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/bcgov/ssdtools">ssdtools</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+</pre></div>
 <div id="how-do-i-fit-a-custom-distribution" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-do-i-fit-a-custom-distribution" class="anchor"></a>How do I fit a custom distribution?</h2>
@@ -131,26 +133,32 @@
 <h2 class="hasAnchor">
 <a href="#how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals" class="anchor"></a>How do I fit distributions to multiple groups such taxa and/or chemicals?</h2>
 <p>An elegant approach using some tidyverse packages is demonstrated below.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">purrr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://purrr.tidyverse.org">purrr</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tidyr.tidyverse.org">tidyr</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
 
-<span class="no">boron_preds</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(<span class="kw pkg">ssdtools</span><span class="kw ns">::</span><span class="no"><a href="../reference/boron_data.html">boron_data</a></span>, <span class="kw">data</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">Chemical</span>, <span class="no">Species</span>, <span class="no">Conc</span>, <span class="no">Units</span>)) <span class="kw">%&gt;%</span>
+<span class="kw">boron_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span>(<span class="kw">ssdtools</span>::<span class="kw"><a href="../reference/boron_data.html">boron_data</a></span>, data = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">Chemical</span>, <span class="kw">Species</span>, <span class="kw">Conc</span>, <span class="kw">Units</span>)) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-    <span class="kw">Fit</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">data</span>, <span class="no">ssd_fit_dists</span>, <span class="kw">dists</span> <span class="kw">=</span> <span class="st">"lnorm"</span>),
-    <span class="kw">Prediction</span> <span class="kw">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="no">Fit</span>, <span class="no">predict</span>)
-  ) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">Prediction</span>)</pre></body></html></div>
+    Fit = <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="kw">data</span>, <span class="kw">ssd_fit_dists</span>, dists = <span class="st">"lnorm"</span>),
+    Prediction = <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="kw">Fit</span>, <span class="kw">predict</span>)
+  ) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">Prediction</span>)
+</pre></div>
 <p>The resultant data and predictions can then be plotted as follows.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(<span class="no">boron_data</span>, <span class="no">boron_preds</span>, <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Concentration (mg/L)"</span>, <span class="kw">ci</span> <span class="kw">=</span> <span class="fl">FALSE</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~<span class="no">Group</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(<span class="kw">boron_data</span>, <span class="kw">boron_preds</span>, xlab = <span class="st">"Concentration (mg/L)"</span>, ci = <span class="fl">FALSE</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span><span class="kw">Group</span>)
+</pre></div>
 <p><img src="faqs_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
 <div id="how-do-i-plot-a-cullen-frey-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#how-do-i-plot-a-cullen-frey-plot" class="anchor"></a>How do I plot a Cullen Frey plot?</h3>
 <p>The data can be visualized using a Cullen Frey plot of the skewness and kurtosis.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">10</span>)
-<span class="fu"><a href="../reference/ssd_plot_cf.html">ssd_plot_cf</a></span>(<span class="no">boron_data</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">10</span>)
+<span class="fu"><a href="../reference/ssd_plot_cf.html">ssd_plot_cf</a></span>(<span class="kw">boron_data</span>)
+</pre></div>
 <p><img src="faqs_files/figure-html/unnamed-chunk-5-1.png" width="480"></p>
 </div>
 </div>
@@ -158,7 +166,9 @@
 <h2 class="hasAnchor">
 <a href="#how-do-i-plot-model-diagnostics" class="anchor"></a>How do I plot model diagnostics?</h2>
 <p>A <code>fitdists</code> object can be plotted to display model diagnostics plots for each fit.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">boron_dists</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">boron_dists</span>)
+</pre></div>
 <p><img src="faqs_files/figure-html/unnamed-chunk-6-1.png" width="576"><img src="faqs_files/figure-html/unnamed-chunk-6-2.png" width="576"><img src="faqs_files/figure-html/unnamed-chunk-6-3.png" width="576"></p>
 </div>
   </div>

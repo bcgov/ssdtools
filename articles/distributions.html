@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -98,13 +98,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="distributions_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Selecting Distributions</h1>
                         <h4 class="author">ssdtools Team</h4>
             
-            <h4 class="date">2020-06-03</h4>
+            <h4 class="date">2020-07-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/distributions.Rmd"><code>vignettes/distributions.Rmd</code></a></small>
       <div class="hidden name"><code>distributions.Rmd</code></div>
@@ -125,11 +125,13 @@ However, if two or more similar models fit the data well then the support for th
 <a href="#default-distributions" class="anchor"></a>Default Distributions</h2>
 <p>To avoid such model redundancy (Burnham and Anderson 2002), ssdtools and the accompanying Shiny app (Dalgarno 2018) fit three different shape distributions by default: the log-normal, log-logistic and gamma.</p>
 <p>The three distributions are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ssdtools</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/bcgov/ssdtools">ssdtools</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">7</span>)
-<span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="fu"><a href="../reference/ssd_match_moments.html">ssd_match_moments</a></span>(<span class="kw">meanlog</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">sdlog</span> <span class="kw">=</span> <span class="fl">2</span>))</pre></body></html></div>
+<span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="fu"><a href="../reference/ssd_match_moments.html">ssd_match_moments</a></span>(meanlog = <span class="fl">2</span>, sdlog = <span class="fl">2</span>))
+</pre></div>
 <p><img src="distributions_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
 <div id="log-normal-distribution" class="section level3">
 <h3 class="hasAnchor">
@@ -152,13 +154,15 @@ However, if two or more similar models fit the data well then the support for th
 <h2 class="hasAnchor">
 <a href="#all-distributions" class="anchor"></a>All Distributions</h2>
 <p>For completeness the hazard concentrations for the other main distributions provided by <code>ssdtools</code> are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">7</span>)
-<span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="fu"><a href="../reference/ssd_match_moments.html">ssd_match_moments</a></span>(<span class="kw">dists</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-  <span class="st">"burrIII3"</span>, <span class="st">"gamma"</span>,
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">7</span>)
+<span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span>(<span class="fu"><a href="../reference/ssd_match_moments.html">ssd_match_moments</a></span>(dists = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+  <span class="st">"gamma"</span>,
   <span class="st">"gompertz"</span>, <span class="st">"lgumbel"</span>, <span class="st">"llogis"</span>,
   <span class="st">"lnorm"</span>, <span class="st">"weibull"</span>
-), <span class="kw">meanlog</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">sdlog</span> <span class="kw">=</span> <span class="fl">2</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"bottom"</span>)</pre></body></html></div>
+), meanlog = <span class="fl">2</span>, sdlog = <span class="fl">2</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position = <span class="st">"bottom"</span>)
+</pre></div>
 <p><img src="distributions_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 </div>
 <div id="references" class="section level2">

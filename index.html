@@ -23,7 +23,7 @@
   toxicity concentrations for different species as described by
   Posthuma et al.(2001) &lt;isbn:9781566705783&gt;.
   The ssdtools package uses Maximum Likelihood to fit distributions 
-  such as the log-normal, gamma, burr Type-III, log-logistic, 
+  such as the log-normal, gamma, log-logistic, 
   log-Gumbel, Gompertz and Weibull.
   The user can provide custom distributions.
   Multiple distributions can be averaged using Information Criteria.
@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9005</span>
       </span>
     </div>
 
@@ -122,17 +122,22 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>To install the latest version from <a href="https://CRAN.R-project.org/package=ssdtools">CRAN</a></p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ssdtools"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ssdtools"</span>)
+</pre></div>
 <p>To install the latest development version:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"bcgov/ssdtools"</span>)
+</pre></div>
 </div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p><code>ssdtools</code> provides a data set for several chemicals including Boron.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ssdtools</span>)
-<span class="no">boron_data</span>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/bcgov/ssdtools">ssdtools</a></span>)
+<span class="kw">boron_data</span>
 <span class="co">#&gt; # A tibble: 28 x 5</span>
 <span class="co">#&gt;    Chemical Species                  Conc Group        Units</span>
 <span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span>
@@ -146,38 +151,53 @@
 <span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span>
 <span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span>
 <span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span>
-<span class="co">#&gt; # … with 18 more rows</span></pre></div>
+<span class="co">#&gt; # … with 18 more rows</span>
+</pre></div>
 <p>Multiple distributions can be fit using <code><a href="reference/ssd_fit_dists.html">ssd_fit_dists()</a></code></p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="no">boron_dists</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(<span class="no">boron_data</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">boron_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(<span class="kw">boron_data</span>)
+</pre></div>
 <p>and plot using the <code>ggplot2</code> generic <code>autoplot</code></p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>())
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="no">boron_dists</span>)</pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="kw">boron_dists</span>)
+</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png"><!-- --></p>
 <p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="reference/ssd_gof.html">ssd_gof</a></span>(<span class="no">boron_dists</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="reference/ssd_gof.html">ssd_gof</a></span>(<span class="kw">boron_dists</span>)
 <span class="co">#&gt; # A tibble: 3 x 9</span>
 <span class="co">#&gt;   dist      ad     ks    cvm   aic  aicc   bic delta weight</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 llogis 0.487 0.0993 0.0595  241.  241.  244.  3.38  0.11 </span>
 <span class="co">#&gt; 2 gamma  0.440 0.117  0.0554  238.  238.  240.  0     0.595</span>
-<span class="co">#&gt; 3 lnorm  0.507 0.106  0.0703  239.  240.  242.  1.40  0.296</span></pre></div>
+<span class="co">#&gt; 3 lnorm  0.507 0.106  0.0703  239.  240.  242.  1.40  0.296</span>
+</pre></div>
 <p>and the model-averaged 5% hazard concentration estimated using <code>ssd_hc</code></p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
-<span class="no">boron_hc5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span>(<span class="no">boron_dists</span>, <span class="kw">ci</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">boron_hc5</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
+<span class="kw">boron_hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span>(<span class="kw">boron_dists</span>, ci = <span class="fl">TRUE</span>)
+</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">boron_hc5</span>)
 <span class="co">#&gt; # A tibble: 1 x 6</span>
 <span class="co">#&gt;   percent   est    se   lcl   ucl dist   </span>
 <span class="co">#&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  </span>
-<span class="co">#&gt; 1       5  1.31 0.808 0.527  3.57 average</span></pre></div>
+<span class="co">#&gt; 1       5  1.31 0.808 0.527  3.57 average</span>
+</pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
-<span class="no">boron_pred</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">boron_dists</span>, <span class="kw">ci</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
+<span class="kw">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="kw">boron_dists</span>, ci = <span class="fl">TRUE</span>)
+</pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="fu"><a href="reference/ssd_plot.html">ssd_plot</a></span>(<span class="no">boron_data</span>, <span class="no">boron_pred</span>,
-  <span class="kw">shape</span> <span class="kw">=</span> <span class="st">"Group"</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Group"</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="st">"Species"</span>,
-  <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Concentration (mg/L)"</span>, <span class="kw">ribbon</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">3000</span>)</pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="reference/ssd_plot.html">ssd_plot</a></span>(<span class="kw">boron_data</span>, <span class="kw">boron_pred</span>,
+  shape = <span class="st">"Group"</span>, color = <span class="st">"Group"</span>, label = <span class="st">"Species"</span>,
+  xlab = <span class="st">"Concentration (mg/L)"</span>, ribbon = <span class="fl">TRUE</span>
+) <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(x = <span class="fl">3000</span>)
+</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-10-1.png"><!-- --></p>
 </div>
 <div id="information" class="section level2">
