@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 test_that("dburrIII3 extremes", {
+  lifecycle::expect_deprecated(dburrIII3(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(dburrIII3(numeric(0)), numeric(0))
   expect_identical(dburrIII3(NA), NA_real_)
@@ -33,6 +34,7 @@ test_that("dburrIII3 extremes", {
 })
 
 test_that("pburrIII3 extremes", {
+  lifecycle::expect_deprecated(pburrIII3(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(pburrIII3(numeric(0)), numeric(0))
   expect_identical(pburrIII3(NA), NA_real_)
@@ -55,6 +57,7 @@ test_that("pburrIII3 extremes", {
 })
 
 test_that("qburrIII3 extremes", {
+  lifecycle::expect_deprecated(qburrIII3(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(qburrIII3(numeric(0)), numeric(0))
   expect_identical(qburrIII3(NA), NA_real_)
@@ -81,6 +84,7 @@ test_that("qburrIII3 extremes", {
 })
 
 test_that("rburrIII3 extremes", {
+  lifecycle::expect_deprecated(rburrIII3(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(rburrIII3(numeric(0)), numeric(0))
   expect_error(rburrIII3(NA))

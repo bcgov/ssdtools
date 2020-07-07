@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 test_that("dpareto", {
+  lifecycle::expect_deprecated(dpareto(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_equal(dpareto(numeric(0)), numeric(0))
   expect_equal(dpareto(c(0, 1, Inf, NaN, -1)), c(0, 1, 0, NA, 0))
@@ -65,6 +66,7 @@ test_that("fit pareto cis", {
 })
 
 test_that("ppareto", {
+  lifecycle::expect_deprecated(ppareto(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_equal(ppareto(1), 0)
   expect_equal(ppareto(2), 1 / 2)
@@ -75,12 +77,14 @@ test_that("ppareto", {
 })
 
 test_that("qpareto", {
+  lifecycle::expect_deprecated(qpareto(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_equal(qpareto(ppareto(2)), 2)
   expect_equal(qpareto(numeric(0)), numeric(0))
 })
 
 test_that("rpareto", {
+  lifecycle::expect_deprecated(rpareto(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   set.seed(1)
   expect_equal(rpareto(1), 3.7663554483147)
