@@ -197,7 +197,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class fitdists (a list of <code><a href='https://rdrr.io/pkg/fitdistrplus/man/fitdist.html'>fitdist</a></code> objects).</p>
+    <p>An object of class fitdists (a list of <code><a href='https://rdrr.io/pkg/fitdistrplus/man/fitdist.html'>fitdistrplus::fitdist()</a></code> objects).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>By default the 'llogis', 'gamma' and 'lnorm'
@@ -207,14 +207,14 @@ tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.</p>
 <p>If weight specifies a column in the data frame with positive integers,
 weighted estimation occurs.
 However, currently only the resultant parameter estimates are available (via coef).</p>
-<p>If the `right` argument is different to the `left` argument then the data are considered to be censored.</p>
-<p>The fits are performed using <code><a href='https://rdrr.io/pkg/fitdistrplus/man/fitdist.html'>fitdist</a></code>
-(and <code><a href='https://rdrr.io/pkg/fitdistrplus/man/fitdistcens.html'>fitdistcens</a></code> in the case of censored data).
+<p>If the <code>right</code> argument is different to the <code>left</code> argument then the data are considered to be censored.</p>
+<p>The fits are performed using <code><a href='https://rdrr.io/pkg/fitdistrplus/man/fitdist.html'>fitdistrplus::fitdist()</a></code>
+(and <code><a href='https://rdrr.io/pkg/fitdistrplus/man/fitdistcens.html'>fitdistrplus::fitdistcens()</a></code> in the case of censored data).
 The method used is "mle" (maximum likelihood estimation)
 which means that numerical optimization is carried out in
-<code><a href='https://rdrr.io/pkg/fitdistrplus/man/mledist.html'>mledist</a></code> using <code><a href='https://rdrr.io/r/stats/optim.html'>optim</a></code>
+<code><a href='https://rdrr.io/pkg/fitdistrplus/man/mledist.html'>fitdistrplus::mledist()</a></code> using <code><a href='https://rdrr.io/r/stats/optim.html'>stats::optim()</a></code>
 unless finite bounds are supplied in the (lower and upper) in which
-it is carried out using <code><a href='https://rdrr.io/r/stats/constrOptim.html'>constrOptim</a></code>.
+it is carried out using <code><a href='https://rdrr.io/r/stats/constrOptim.html'>stats::constrOptim()</a></code>.
 In both cases the "Nelder-Mead" method is used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
