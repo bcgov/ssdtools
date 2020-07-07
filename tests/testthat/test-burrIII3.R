@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 test_that("dburrIII3 extremes", {
+  lifecycle::expect_deprecated(dburrIII3(1))
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(dburrIII3(numeric(0)), numeric(0))
   expect_identical(dburrIII3(NA), NA_real_)
   expect_identical(dburrIII3(NaN), NaN)
@@ -32,6 +34,8 @@ test_that("dburrIII3 extremes", {
 })
 
 test_that("pburrIII3 extremes", {
+  lifecycle::expect_deprecated(pburrIII3(1))
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(pburrIII3(numeric(0)), numeric(0))
   expect_identical(pburrIII3(NA), NA_real_)
   expect_identical(pburrIII3(NaN), NaN)
@@ -53,6 +57,8 @@ test_that("pburrIII3 extremes", {
 })
 
 test_that("qburrIII3 extremes", {
+  lifecycle::expect_deprecated(qburrIII3(1))
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(qburrIII3(numeric(0)), numeric(0))
   expect_identical(qburrIII3(NA), NA_real_)
   expect_identical(qburrIII3(NaN), NaN)
@@ -78,6 +84,8 @@ test_that("qburrIII3 extremes", {
 })
 
 test_that("rburrIII3 extremes", {
+  lifecycle::expect_deprecated(rburrIII3(1))
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(rburrIII3(numeric(0)), numeric(0))
   expect_error(rburrIII3(NA))
   expect_identical(rburrIII3(0), numeric(0))
@@ -95,6 +103,7 @@ test_that("rburrIII3 extremes", {
 })
 
 test_that("dburrIII3", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(dburrIII3(numeric(0)), numeric(0))
   expect_equal(dburrIII3(NA), NA_real_) # equal for windows
   
@@ -109,6 +118,7 @@ test_that("dburrIII3", {
 })
 
 test_that("fit burrIII3", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
   
   dist <- ssd_fit_dist(data, dist = "burrIII3")
@@ -131,6 +141,7 @@ test_that("fit burrIII3", {
 })
 
 test_that("fit burrIII3 cis", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
   
   dist <- ssd_fit_dist(data, dist = "burrIII3")
@@ -143,6 +154,7 @@ test_that("fit burrIII3 cis", {
 })
 
 test_that("qburrIII3", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(qburrIII3(numeric(0)), numeric(0))
   expect_identical(qburrIII3(0), 0)
   expect_identical(qburrIII3(1), Inf)
@@ -152,6 +164,7 @@ test_that("qburrIII3", {
 })
 
 test_that("pburrIII3", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(pburrIII3(numeric(0)), numeric(0))
   expect_identical(pburrIII3(0), 0)
   expect_identical(pburrIII3(1, lscale = 0), 0.5)
@@ -164,6 +177,7 @@ test_that("pburrIII3", {
 })
 
 test_that("rburrIII3", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(rburrIII3(0), numeric(0))
   set.seed(101)
   expect_equal(

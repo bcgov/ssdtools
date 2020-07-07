@@ -16,7 +16,7 @@
 #'
 #' Density, distribution function, quantile function and random generation
 #' for the Burr Type III Three-Parameter distribution with 
-#' \code{lshape} and \code{lscale} parameters.
+#' `lshape` and `lscale` parameters.
 #' 
 #' The Burr 12 distribution from the actuar package is used as a base.
 #' The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
@@ -28,7 +28,7 @@
 #' dburrIII3 gives the density, pburrIII3 gives the distribution function,
 #' qburrIII3 gives the quantile function, and rburrIII3 generates random samples.
 #' @name burrIII3
-#' @seealso \code{\link[actuar]{dburr}}
+#' @seealso [actuar::dburr()]
 #' @examples
 #' x <- rburrIII3(1000)
 #' hist(x, freq = FALSE, col = "gray", border = "white")

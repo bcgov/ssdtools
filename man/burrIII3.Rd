@@ -46,7 +46,7 @@ sburrIII3(x)
 
 \item{p}{vector of probabilities.}
 
-\item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].}
+\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X <= x]},otherwise, \code{P[X > x]}.}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -60,7 +60,7 @@ qburrIII3 gives the quantile function, and rburrIII3 generates random samples.
 }
 \description{
 Density, distribution function, quantile function and random generation
-for the Burr Type III Three-Parameter distribution with 
+for the Burr Type III Three-Parameter distribution with
 \code{lshape} and \code{lscale} parameters.
 }
 \details{
@@ -75,5 +75,5 @@ hist(x, freq = FALSE, col = "gray", border = "white")
 curve(dburrIII3(x), add = TRUE, col = "red4", lwd = 2)
 }
 \seealso{
-\code{\link[actuar]{dburr}}
+\code{\link[actuar:Burr]{actuar::dburr()}}
 }

@@ -24,7 +24,7 @@
 #' @inheritParams params
 #' @return A numeric vector.
 #' @name pareto
-#' @seealso \code{\link[VGAM]{dpareto}}
+#' @seealso [VGAM::dpareto()]
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dpareto(x), type = "l")

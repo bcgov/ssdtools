@@ -22,7 +22,7 @@ Distributions (SSD).
 
 SSDs are cumulative probability distributions which are fitted to
 toxicity concentrations for different species as described by Posthuma
-et al. (2001). The ssdtools package uses Maximum Likelihood to fit
+et al. (2001). The ssdtools package uses Maximum Likelihood to fit
 distributions such as the log-normal, gamma, log-logistic, log-Gumbel,
 Gompertz and Weibull. The user can also provide custom distributions.
 Multiple distributions can be averaged using Information Criteria.
@@ -186,7 +186,7 @@ A BibTeX entry for LaTeX users is
 ## How to Contribute
 
 If you would like to contribute to the package, please see our
-[CONTRIBUTING](https://github.com/bcgov/ssdtools/blob/master/CONTRIBUTING.md)
+[CONTRIBUTING](https://github.com/bcgov/ssdtools/blob/master/.github/CONTRIBUTING.md)
 guidelines.
 
 ## Code of Conduct
@@ -212,15 +212,14 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an “AS IS” BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the
-License.
+limitations under the License.
 
 -----
 
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
-style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" data-property="dct:title">ssdtools</span>
+style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span>
 by
-<span xmlns:cc="http://creativecommons.org/ns#" data-property="cc:attributionName">the
+<span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the
 Province of British Columbia </span> is licensed under a
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 Creative Commons Attribution 4.0 International License</a>.

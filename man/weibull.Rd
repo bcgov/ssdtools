@@ -27,7 +27,7 @@ rweibull(n, shape = 1, scale = 1)
 
 \item{q}{vector of quantiles.}
 
-\item{lower.tail}{logical; if TRUE (default), probabilities are P[X <= x],otherwise, P[X > x].}
+\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X <= x]},otherwise, \code{P[X > x]}.}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -39,7 +39,7 @@ rweibull(n, shape = 1, scale = 1)
 A numeric vector.
 }
 \description{
-Density, distribution function, quantile function and random generation for 
+Density, distribution function, quantile function and random generation for
 the weibull distribution with parameters shape and scale.
 }
 \examples{
@@ -47,5 +47,5 @@ x <- seq(0.01, 5, by = 0.01)
 plot(x, dweibull(x), type = "l")
 }
 \seealso{
-\code{\link[stats]{dweibull}}
+\code{\link[stats:Weibull]{stats::dweibull()}}
 }

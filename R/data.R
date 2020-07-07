@@ -17,15 +17,16 @@
 #' Species Sensitivity Data from
 #' the Canadian Council of Ministers of the Environment.
 #'
-#' Additional information is available from \url{http://ceqg-rcqe.ccme.ca/download/en/324/}.
+#' Additional information is available from <http://ceqg-rcqe.ccme.ca/download/en/324/>.
+#' 
+#' The columns are as follows
 #'
-#' @format A tbl data frame:
 #' \describe{
-#'   \item{Chemical}{The chemical <chr>.}
-#'   \item{Species}{The species binomial name <chr>.}
-#'   \item{Concentration}{The chemical concentration <dbl>.}
-#'   \item{Units}{The units <chr>.}
-#'   \item{Group}{The taxonomic group <fctr>.}
+#'   \item{Chemical}{The chemical (chr).}
+#'   \item{Species}{The species binomial name (chr).}
+#'   \item{Concentration}{The chemical concentration (dbl).}
+#'   \item{Units}{The units (chr).}
+#'   \item{Group}{The taxonomic group (fctr).}
 #' }
 #' @seealso ccme_data
 #' @examples
@@ -54,31 +55,29 @@
 #'
 #' A data frame of the predictions based on 1,000 bootstrap iterations.
 #'
-#' @format A tbl data frame:
 #' \describe{
-#'   \item{percent}{The percent of species affected <int>.}
-#'   \item{est}{The estimated concentration <dbl>.}
-#'   \item{se}{The standard error of the estimate <dbl>.}
-#'   \item{lcl}{The lower confidence limit <dbl>.}
-#'   \item{se}{The upper confidence limit <dbl>.}
-#'   \item{dist}{The distribution <chr>.}
+#'   \item{percent}{The percent of species affected (int).}
+#'   \item{est}{The estimated concentration (dbl).}
+#'   \item{se}{The standard error of the estimate (dbl).}
+#'   \item{lcl}{The lower confidence limit (dbl).}
+#'   \item{se}{The upper confidence limit (dbl).}
+#'   \item{dist}{The distribution (chr).}
 #' }
 #' @examples
 #' head(boron_pred)
 "boron_pred"
 
-#' Model averaged 5\% hazard concentration for CCME Boron Data
+#' Model averaged 5 hazard concentration for CCME Boron Data
 #'
 #' A data frame of the predictions based on 10000 bootstrap.
 #'
-#' @format A tbl data frame:
 #' \describe{
-#'   \item{percent}{The percent of species affected <int>.}
-#'   \item{est}{The estimated concentration <dbl>.}
-#'   \item{se}{The standard error of the estimate <dbl>.}
-#'   \item{lcl}{The lower confidence limit <dbl>.}
-#'   \item{se}{The upper confidence limit <dbl>.}
-#'   \item{dist}{The distribution <chr>.}
+#'   \item{percent}{The percent of species affected (int).}
+#'   \item{est}{The estimated concentration (dbl).}
+#'   \item{se}{The standard error of the estimate (dbl).}
+#'   \item{lcl}{The lower confidence limit (dbl).}
+#'   \item{se}{The upper confidence limit (dbl).}
+#'   \item{dist}{The distribution (chr).}
 #' }
 #' @examples
 #' boron_hc5
@@ -94,22 +93,21 @@
 #' Additional information on each of the chemicals is available from the
 #' CCME website.
 #' \describe{
-#'   \item{Boron}{\url{http://ceqg-rcqe.ccme.ca/download/en/324/}}
-#'   \item{Cadmium}{\url{http://ceqg-rcqe.ccme.ca/download/en/148/}}
-#'   \item{Chloride}{\url{http://ceqg-rcqe.ccme.ca/download/en/337/}}
-#'   \item{Endosulfan}{\url{http://ceqg-rcqe.ccme.ca/download/en/327/}}
-#'   \item{Glyphosate}{\url{http://ceqg-rcqe.ccme.ca/download/en/182/}}
-#'   \item{Uranium}{\url{http://ceqg-rcqe.ccme.ca/download/en/328/}}
-#'   \item{Silver}{\url{http://ceqg-rcqe.ccme.ca/download/en/355/}}
+#'   \item{Boron}{<http://ceqg-rcqe.ccme.ca/download/en/324/>}
+#'   \item{Cadmium}{<http://ceqg-rcqe.ccme.ca/download/en/148/>}
+#'   \item{Chloride}{<http://ceqg-rcqe.ccme.ca/download/en/337/>}
+#'   \item{Endosulfan}{<http://ceqg-rcqe.ccme.ca/download/en/327/>}
+#'   \item{Glyphosate}{<http://ceqg-rcqe.ccme.ca/download/en/182/>}
+#'   \item{Uranium}{<http://ceqg-rcqe.ccme.ca/download/en/328/>}
+#'   \item{Silver}{<http://ceqg-rcqe.ccme.ca/download/en/355/>}
 #' }
 #'
-#' @format A tbl data frame:
 #' \describe{
-#'   \item{Chemical}{The chemical <chr>.}
-#'   \item{Species}{The species binomial name <chr>.}
-#'   \item{Conc}{The chemical concentration <dbl>.}
-#'   \item{Group}{The taxonomic group <fctr>.}
-#'   \item{Units}{The units <chr>.}
+#'   \item{Chemical}{The chemical (chr).}
+#'   \item{Species}{The species binomial name (chr).}
+#'   \item{Conc}{The chemical concentration (dbl).}
+#'   \item{Group}{The taxonomic group (fctr).}
+#'   \item{Units}{The units (chr).}
 #' }
 #' @examples
 #' head(ccme_data)
@@ -120,7 +118,7 @@
 #' A fitdists object for Species Sensitivity Data for
 #' Fluazinam.
 #'
-#' @seealso \code{\link[fitdistrplus]{fluazinam}}
+#' @seealso [fitdistrplus::fluazinam()]
 #' @examples
 #' fluazinam_dists
 "fluazinam_dists"
@@ -130,7 +128,7 @@
 #' A fitdist object for Species Sensitivity Data for
 #' Boron with the lnorm distribution.
 #'
-#' @seealso \code{\link[fitdistrplus]{fluazinam}}
+#' @seealso [fitdistrplus::fluazinam()]
 #' @examples
 #' fluazinam_lnorm
 "fluazinam_lnorm"
@@ -139,14 +137,13 @@
 #'
 #' A data frame of the predictions.
 #'
-#' @format A tbl data frame:
 #' \describe{
-#'   \item{percent}{The percent of species affected <int>.}
-#'   \item{est}{The estimated concentration <dbl>.}
-#'   \item{se}{The standard error of the estimate <dbl>.}
-#'   \item{lcl}{The lower confidence limit <dbl>.}
-#'   \item{se}{The upper confidence limit <dbl>.}
-#'   \item{dist}{The distribution <chr>.}
+#'   \item{percent}{The percent of species affected (int).}
+#'   \item{est}{The estimated concentration (dbl).}
+#'   \item{se}{The standard error of the estimate (dbl).}
+#'   \item{lcl}{The lower confidence limit (dbl).}
+#'   \item{se}{The upper confidence limit (dbl).}
+#'   \item{dist}{The distribution (chr).}
 #' }
 #' @examples
 #' head(fluazinam_pred)
@@ -156,10 +153,9 @@
 #'
 #' Data to test ssdtools.
 #'
-#' @format A tbl data frame:
 #' \describe{
-#'   \item{Chemical}{The chemical <chr>.}
-#'   \item{Conc}{The chemical concentration <dbl>.}
+#'   \item{Chemical}{The chemical (chr).}
+#'   \item{Conc}{The chemical concentration (dbl).}
 #' }
 #' @examples
 #' head(test_data)

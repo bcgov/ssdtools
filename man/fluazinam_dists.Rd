@@ -18,6 +18,6 @@ Fluazinam.
 fluazinam_dists
 }
 \seealso{
-\code{\link[fitdistrplus]{fluazinam}}
+\code{\link[fitdistrplus:fluazinam]{fitdistrplus::fluazinam()}}
 }
 \keyword{datasets}

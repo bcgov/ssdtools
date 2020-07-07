@@ -30,7 +30,7 @@ ssd_fit_dists(
 \item{silent}{A flag indicating whether fits should fail silently.}
 }
 \value{
-An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
+An object of class fitdists (a list of \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}} objects).
 }
 \description{
 Fits one or more distributions to species sensitivity data.
@@ -45,15 +45,15 @@ If weight specifies a column in the data frame with positive integers,
 weighted estimation occurs.
 However, currently only the resultant parameter estimates are available (via coef).
 
-If the `right` argument is different to the `left` argument then the data are considered to be censored.
+If the \code{right} argument is different to the \code{left} argument then the data are considered to be censored.
 
-The fits are performed using \code{\link[fitdistrplus]{fitdist}}
-(and \code{\link[fitdistrplus]{fitdistcens}} in the case of censored data).
+The fits are performed using \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}}
+(and \code{\link[fitdistrplus:fitdistcens]{fitdistrplus::fitdistcens()}} in the case of censored data).
 The method used is "mle" (maximum likelihood estimation)
 which means that numerical optimization is carried out in
-\code{\link[fitdistrplus]{mledist}} using \code{\link[stats]{optim}}
+\code{\link[fitdistrplus:mledist]{fitdistrplus::mledist()}} using \code{\link[stats:optim]{stats::optim()}}
 unless finite bounds are supplied in the (lower and upper) in which
-it is carried out using \code{\link[stats]{constrOptim}}.
+it is carried out using \code{\link[stats:constrOptim]{stats::constrOptim()}}.
 In both cases the "Nelder-Mead" method is used.
 }
 \examples{

@@ -20,7 +20,7 @@
 #' @inheritParams params
 #' @param x A numeric vector of values.
 #' @return A numeric vector.
-#' @seealso \code{\link[stats]{dweibull}}
+#' @seealso [stats::dweibull()]
 #' @name weibull
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)

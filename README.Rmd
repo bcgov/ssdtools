@@ -121,7 +121,7 @@ citation(package = "ssdtools")
 ## How to Contribute
 
 If you would like to contribute to the package, please see our 
-[CONTRIBUTING](https://github.com/bcgov/ssdtools/blob/master/CONTRIBUTING.md) guidelines.
+[CONTRIBUTING](https://github.com/bcgov/ssdtools/blob/master/.github/CONTRIBUTING.md) guidelines.
 
 ## Code of Conduct
 

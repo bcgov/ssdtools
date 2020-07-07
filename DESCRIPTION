@@ -70,3 +70,4 @@ VignetteBuilder:
 Language: en-US
 LinkingTo: 
     Rcpp
+Roxygen: list(markdown = TRUE)

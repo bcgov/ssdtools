@@ -5,14 +5,7 @@
 \alias{boron_data}
 \title{CCME Species Sensitivity Data for Boron}
 \format{
-A tbl data frame:
-\describe{
-  \item{Chemical}{The chemical <chr>.}
-  \item{Species}{The species binomial name <chr>.}
-  \item{Concentration}{The chemical concentration <dbl>.}
-  \item{Units}{The units <chr>.}
-  \item{Group}{The taxonomic group <fctr>.}
-}
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 28 rows and 5 columns.
 }
 \usage{
 boron_data
@@ -23,6 +16,16 @@ the Canadian Council of Ministers of the Environment.
 }
 \details{
 Additional information is available from \url{http://ceqg-rcqe.ccme.ca/download/en/324/}.
+
+The columns are as follows
+
+\describe{
+\item{Chemical}{The chemical (chr).}
+\item{Species}{The species binomial name (chr).}
+\item{Concentration}{The chemical concentration (dbl).}
+\item{Units}{The units (chr).}
+\item{Group}{The taxonomic group (fctr).}
+}
 }
 \examples{
 head(ccme_data)

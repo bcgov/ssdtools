@@ -21,7 +21,7 @@
 #' @inheritParams params
 #' @return A numeric vector.
 #' @name lnorm
-#' @seealso \code{\link[stats]{dlnorm}}
+#' @seealso [stats::dlnorm()]
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dlnorm(x), type = "l")

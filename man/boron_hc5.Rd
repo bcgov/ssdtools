@@ -3,23 +3,25 @@
 \docType{data}
 \name{boron_hc5}
 \alias{boron_hc5}
-\title{Model averaged 5\% hazard concentration for CCME Boron Data}
+\title{Model averaged 5 hazard concentration for CCME Boron Data}
 \format{
-A tbl data frame:
-\describe{
-  \item{percent}{The percent of species affected <int>.}
-  \item{est}{The estimated concentration <dbl>.}
-  \item{se}{The standard error of the estimate <dbl>.}
-  \item{lcl}{The lower confidence limit <dbl>.}
-  \item{se}{The upper confidence limit <dbl>.}
-  \item{dist}{The distribution <chr>.}
-}
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1 rows and 6 columns.
 }
 \usage{
 boron_hc5
 }
 \description{
 A data frame of the predictions based on 10000 bootstrap.
+}
+\details{
+\describe{
+\item{percent}{The percent of species affected (int).}
+\item{est}{The estimated concentration (dbl).}
+\item{se}{The standard error of the estimate (dbl).}
+\item{lcl}{The lower confidence limit (dbl).}
+\item{se}{The upper confidence limit (dbl).}
+\item{dist}{The distribution (chr).}
+}
 }
 \examples{
 boron_hc5
