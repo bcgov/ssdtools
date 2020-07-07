@@ -27,6 +27,11 @@ test_that("test_data", {
 })
 
 test_that("test_data Quinoline", {
+  
+  if (!capabilities("long.double")) {
+    skip("gamma computes standard errors with noLD")
+  }
+  
   quin <- test_data[test_data$Chemical == "Quinoline", ]
 
   expect_warning(
