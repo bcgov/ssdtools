@@ -38,6 +38,9 @@ NULL
 #' @rdname burrIII3
 #' @export
 dburrIII3 <- function(x, lshape1 = 0, lshape2 = 0, lscale = 0, log = FALSE) {
+  deprecate_soft("0.2.1", "dburrIII3()", id = "xburrIII3",
+                 details = "The 'burrIII3' distribution is under review.")
+  
   if(!length(x))return(numeric(0))
   fx <- actuar::dburr(1/x, shape1 = exp(lshape1), shape2 = exp(lshape2), 
                       scale = exp(lscale), log = FALSE)
@@ -49,6 +52,9 @@ dburrIII3 <- function(x, lshape1 = 0, lshape2 = 0, lscale = 0, log = FALSE) {
 #' @rdname burrIII3
 #' @export
 qburrIII3 <- function(p, lshape1 = 0, lshape2 = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
+  deprecate_soft("0.2.1", "qburrIII3()", id = "xburrIII3",
+                 details = "The 'burrIII3' distribution is under review.")
+  
   if(!length(q)) return(numeric(0))
   if(log.p) p <- exp(p)
   q <- suppressWarnings(actuar::qburr(1-p, shape1=exp(lshape1), shape2=exp(lshape2), scale=exp(lscale), 
@@ -59,6 +65,9 @@ qburrIII3 <- function(p, lshape1 = 0, lshape2 = 0, lscale = 0, lower.tail = TRUE
 #' @rdname burrIII3
 #' @export
 pburrIII3 <- function (q, lshape1 = 0, lshape2 = 0, lscale=0, lower.tail=TRUE, log.p=FALSE) {
+  deprecate_soft("0.2.1", "pburrIII3()", id = "xburrIII3",
+                 details = "The 'burrIII3' distribution is under review.")
+  
   if(!length(q)) return(numeric(0))
   actuar::pburr(1/q, shape1=exp(lshape1), shape2=exp(lshape2), scale=exp(lscale), 
                 lower.tail=!lower.tail, log.p=log.p)
@@ -67,6 +76,9 @@ pburrIII3 <- function (q, lshape1 = 0, lshape2 = 0, lscale=0, lower.tail=TRUE, l
 #' @rdname burrIII3
 #' @export
 rburrIII3 <- function(n, lshape1 = 0, lshape2 = 0, lscale=0) {
+  deprecate_soft("0.2.1", "rburrIII3()", id = "xburrIII3",
+                 details = "The 'burrIII3' distribution is under review.")
+  
   chk_scalar(lshape1)
   chk_scalar(lshape2)
   chk_scalar(lscale)
@@ -78,6 +90,8 @@ rburrIII3 <- function(n, lshape1 = 0, lshape2 = 0, lscale=0) {
 #' @rdname burrIII3
 #' @export
 sburrIII3 <- function(x) {
+  deprecate_soft("0.2.1", "sburrIII3()", id = "xburrIII3",
+                 details = "The 'burrIII3' distribution is under review.")
   list(start = list(lshape1 = 0, lshape2 = 0, lscale = 1))
 }
 

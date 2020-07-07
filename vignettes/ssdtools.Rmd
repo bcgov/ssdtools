@@ -84,7 +84,6 @@ print(boron_data)
 The function `ssd_fit_dists()` inputs a data frame and fits one or more distributions.
 The user can specify a subset of the 
 
-- Burr type-III 3-parameter (`burrIII3`),
 - [gamma](https://en.wikipedia.org/wiki/Gamma_distribution) (`gamma`), 
 - [Gompertz](https://en.wikipedia.org/wiki/Gompertz_distribution) (`gompertz`),
 - [log-Gumbel](https://en.wikipedia.org/wiki/Gumbel_distribution) (`lgumbel`),
