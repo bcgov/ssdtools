@@ -67,7 +67,7 @@ For completeness the hazard concentrations for the other main distributions prov
 ```{r,fig.height=5}
 set.seed(7)
 ssd_plot_cdf(ssd_match_moments(dists = c(
-  "burrIII3", "gamma",
+  "gamma",
   "gompertz", "lgumbel", "llogis",
   "lnorm", "weibull"
 ), meanlog = 2, sdlog = 2)) +

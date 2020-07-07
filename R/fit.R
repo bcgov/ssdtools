@@ -91,7 +91,7 @@ ssd_fit_dist <- function(
 #' distributions are fitted to the data.
 
 #' The ssd_fit_dists function has also been
-#' tested with the 'burrIII3', 'gompertz', 'lgumbel' and 'weibull' distributions.
+#' tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.
 #'
 #' If weight specifies a column in the data frame with positive integers,
 #' weighted estimation occurs.

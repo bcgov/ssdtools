@@ -16,19 +16,17 @@ test_that("match_moments all", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   set.seed(10)
   pars <- ssd_match_moments(dists = c(
-    "burrIII3", "gamma",
+    "gamma",
     "gompertz", "lgumbel", "llogis",
     "lnorm", "weibull"
   ))
   expect_equal(
     pars,
-    list(burrIII3 = c(lshape1 = 0.777777777777778, lshape2 = 0.318518518518519, 
-                      lscale = -0.851851851851852), gamma = c(shape = 1.4873062133789, 
-                                                              scale = 2.46362762451172), gompertz = c(llocation = -2.08669910430908, 
-                                                                                                      lshape = -1.28236985206604), lgumbel = c(locationlog = 0.534375, 
-                                                                                                                                               scalelog = 0.7625), llogis = c(locationlog = 0.96875, scalelog = 0.525
-                                                                                                                                               ), lnorm = c(meanlog = 0.98125, sdlog = 0.9515625), weibull = c(shape = 1.26367187500001, 
-                                                                                                                                                                                                               scale = 4.325390625))
+    list(gamma = c(shape = 1.63660278320313, scale = 2.30180053710938
+    ), gompertz = c(llocation = -2.2692977218617, lshape = -0.782647328752115
+    ), lgumbel = c(locationlog = 0.534375, scalelog = 0.7625), llogis = c(locationlog = 0.96875, 
+                                                                          scalelog = 0.525), lnorm = c(meanlog = 0.98125, sdlog = 0.9515625
+                                                                          ), weibull = c(shape = 1.26367187500001, scale = 4.325390625))
   )
 
   expect_is(ssd_plot_cdf(pars), "ggplot")

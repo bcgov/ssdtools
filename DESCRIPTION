@@ -1,12 +1,12 @@
 Package: ssdtools
-Version: 0.2.0.9003
+Version: 0.2.0.9005
 Title: Species Sensitivity Distributions
 Description: Species sensitivity distributions are 
   cumulative probability distributions which are fitted to 
   toxicity concentrations for different species as described by
   Posthuma et al.(2001) <isbn:9781566705783>.
   The ssdtools package uses Maximum Likelihood to fit distributions 
-  such as the log-normal, gamma, burr Type-III, log-logistic, 
+  such as the log-normal, gamma, log-logistic, 
   log-Gumbel, Gompertz and Weibull.
   The user can provide custom distributions.
   Multiple distributions can be averaged using Information Criteria.
@@ -38,6 +38,7 @@ Imports:
     chk,
     fitdistrplus,
     abind,
+    actuar,
     ggplot2,
     graphics,
     grid,
@@ -50,7 +51,6 @@ Imports:
 Suggests:
     covr,
     knitr,
-    actuar,
     rmarkdown,
     testthat,
     readr,
@@ -63,7 +63,7 @@ Suggests:
     reshape2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: 
   knitr,
   R.rsp
