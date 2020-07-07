@@ -1,23 +1,27 @@
-# ssdtools 0.2.0.9004
+# ssdtools 0.2.0.9005
 
-- Rolled back to original implementation of burrIII3
-- Reparamaterize burrIII2 in terms of locationlog and scalelog.
-- llogis distribution parameterised in terms of locationlog and scalelog
-- rdist() functions now use length of n if length(n) > 1.
-- Added slnorm() to get starting values for log-normal distribution.
-- Soft-deprecated pareto distribution as unsuitable for SSD data.
-- Switched d, p, q and r functions for gumbel distribution from VGAM::lgumbel to using C++ lgumbel.
-- Switched to C++ for dburrXII
+## Breaking Changes
 
+- Soft-deprecated 'burrIII3' distribution as poorly defined.
+- Soft-deprecated 'pareto' distribution as poor fit on SSD data.
 
-# ssdtools 0.2.0.9003
+## Major Changes
 
 - Reparameterized 'llogis' distribution in terms of locationlog and scalelog.
 - Reparameterized 'burrIII3' distribution in terms of lshape1, lshape2 and lscale.
 - Reparamaterized 'burrIII2' distribution in terms of locationlog and scalelog.
-- Soft-deprecated 'pareto' distribution as poor fit on SSD data.
-- Added slnorm() to get starting values for log-normal distribution.
-- rdist() functions now use length of n if length(n) > 1.
+- Reparamaterized 'lgumbel' distribution in terms of locationlog and scalelog.
+- Reparamaterized 'gompertz' distribution in terms of llocation and lshape.
+- Standardized handling of arguments for d,p,q,r and s functions for distributions.
+
+## Minor Changes
+
+- `rdist()` functions now use length of n if `length(n) > 1`.
+- Added `slnorm()` to get starting values for 'dlnorm' distribution.
+
+## Internal Changes
+
+- Switch to C++ implementation for distributions.
 
 # ssdtools 0.2.0
 
