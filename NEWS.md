@@ -1,3 +1,8 @@
+# ssdtools 0.3.0
+
+- Internal changes only.
+
+
 # ssdtools 0.2.0.9005
 
 ## Breaking Changes
