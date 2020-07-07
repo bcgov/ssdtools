@@ -5,21 +5,23 @@
 \alias{fluazinam_pred}
 \title{Model averaged predictions for fluazinam}
 \format{
-A tbl data frame:
-\describe{
-  \item{percent}{The percent of species affected <int>.}
-  \item{est}{The estimated concentration <dbl>.}
-  \item{se}{The standard error of the estimate <dbl>.}
-  \item{lcl}{The lower confidence limit <dbl>.}
-  \item{se}{The upper confidence limit <dbl>.}
-  \item{dist}{The distribution <chr>.}
-}
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 99 rows and 6 columns.
 }
 \usage{
 fluazinam_pred
 }
 \description{
 A data frame of the predictions.
+}
+\details{
+\describe{
+\item{percent}{The percent of species affected (int).}
+\item{est}{The estimated concentration (dbl).}
+\item{se}{The standard error of the estimate (dbl).}
+\item{lcl}{The lower confidence limit (dbl).}
+\item{se}{The upper confidence limit (dbl).}
+\item{dist}{The distribution (chr).}
+}
 }
 \examples{
 head(fluazinam_pred)

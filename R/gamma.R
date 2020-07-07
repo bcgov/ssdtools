@@ -21,7 +21,7 @@
 #' @inheritParams params
 #' @return A numeric vector.
 #' @name gamma
-#' @seealso \code{\link[stats]{dgamma}}
+#' @seealso [stats::dgamma()]
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dgamma(x), type = "l")

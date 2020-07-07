@@ -18,7 +18,7 @@
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
-#' @seealso \code{\link{geom_ssd}}
+#' @seealso [geom_ssd()]
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +

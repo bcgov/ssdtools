@@ -23,5 +23,5 @@ Comma and Significance Formatter
 comma_signif(1199)
 }
 \seealso{
-\code{\link[scales]{comma}}
+\code{\link[scales:label_number]{scales::comma()}}
 }

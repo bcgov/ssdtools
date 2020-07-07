@@ -31,5 +31,5 @@ Match Moments
 ssd_match_moments()
 }
 \seealso{
-\code{\link{ssd_plot_cdf}()}.
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}.
 }

@@ -99,17 +99,17 @@ ssd_fit_dist <- function(
 #'
 #' If the `right` argument is different to the `left` argument then the data are considered to be censored.
 #'
-#' The fits are performed using \code{\link[fitdistrplus]{fitdist}}
-#' (and \code{\link[fitdistrplus]{fitdistcens}} in the case of censored data).
+#' The fits are performed using [fitdistrplus::fitdist()]
+#' (and [fitdistrplus::fitdistcens()] in the case of censored data).
 #' The method used is "mle" (maximum likelihood estimation)
 #' which means that numerical optimization is carried out in
-#' \code{\link[fitdistrplus]{mledist}} using \code{\link[stats]{optim}}
+#' [fitdistrplus::mledist()] using [stats::optim()]
 #' unless finite bounds are supplied in the (lower and upper) in which
-#' it is carried out using \code{\link[stats]{constrOptim}}.
+#' it is carried out using [stats::constrOptim()].
 #' In both cases the "Nelder-Mead" method is used.
 #'
 #' @inheritParams params
-#' @return An object of class fitdists (a list of \code{\link[fitdistrplus]{fitdist}} objects).
+#' @return An object of class fitdists (a list of [fitdistrplus::fitdist()] objects).
 #'
 #' @export
 #' @examples

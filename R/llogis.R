@@ -23,7 +23,7 @@
 #' @inheritParams params
 #' @return A numeric vector.
 #' @name llogis
-#' @seealso \code{\link[stats]{dlogis}}
+#' @seealso [stats::dlogis()]
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dllogis(x), type = "l")

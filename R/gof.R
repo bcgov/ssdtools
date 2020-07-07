@@ -35,8 +35,8 @@
 #'   \item{delta}{The Information Criterion differences (dbl)}
 #'   \item{weight}{The Information Criterion weights (dbl)}
 #' }
-#' where \code{delta} and \code{weight} are based on \code{aic} for censored data
-#' and \code{aicc} for non-censored data.
+#' where `delta` and `weight` are based on `aic` for censored data
+#' and `aicc` for non-censored data.
 #'
 #' @inheritParams params
 #' @return A tbl data frame of the gof statistics.

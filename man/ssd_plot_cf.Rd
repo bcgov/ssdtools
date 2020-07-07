@@ -27,5 +27,5 @@ for non-censored data.
 ssd_plot_cf(boron_data)
 }
 \seealso{
-\code{\link[fitdistrplus]{descdist}}
+\code{\link[fitdistrplus:descdist]{fitdistrplus::descdist()}}
 }

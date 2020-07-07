@@ -41,7 +41,7 @@ min_discrepancy <- function(dist, meanlog, sdlog, nsim) {
 #'
 #' @return A named list of the parameter values that produce a distribution
 #' with moments closest to the meanlog and sdlog.
-#' @seealso \code{\link{ssd_plot_cdf}()}.
+#' @seealso [ssd_plot_cdf()].
 #' @export
 #'
 #' @examples

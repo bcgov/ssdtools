@@ -18,7 +18,7 @@
 #' for non-censored data.
 #'
 #' @inheritParams ssd_fit_dists
-#' @seealso \code{\link[fitdistrplus]{descdist}}
+#' @seealso [fitdistrplus::descdist()]
 #' @export
 #'
 #' @examples

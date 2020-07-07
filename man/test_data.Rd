@@ -5,17 +5,19 @@
 \alias{test_data}
 \title{Test Data}
 \format{
-A tbl data frame:
-\describe{
-  \item{Chemical}{The chemical <chr>.}
-  \item{Conc}{The chemical concentration <dbl>.}
-}
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 141 rows and 2 columns.
 }
 \usage{
 test_data
 }
 \description{
 Data to test ssdtools.
+}
+\details{
+\describe{
+\item{Chemical}{The chemical (chr).}
+\item{Conc}{The chemical concentration (dbl).}
+}
 }
 \examples{
 head(test_data)

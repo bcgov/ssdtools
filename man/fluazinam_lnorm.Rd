@@ -18,6 +18,6 @@ Boron with the lnorm distribution.
 fluazinam_lnorm
 }
 \seealso{
-\code{\link[fitdistrplus]{fluazinam}}
+\code{\link[fitdistrplus:fluazinam]{fitdistrplus::fluazinam()}}
 }
 \keyword{datasets}

@@ -12,6 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+roxygen2md::roxygen2md()
 styler::style_pkg(filetype = c("R", "Rmd"))
 lintr::lint_package()
 
@@ -21,4 +22,5 @@ devtools::document()
 rmarkdown::render("README.Rmd", output_format = "md_document")
 pkgdown::build_site()
 demo(ssdtools, ask = FALSE)
+
 devtools::check()

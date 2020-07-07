@@ -14,6 +14,6 @@
 Base ggproto classes for ggplot2
 }
 \seealso{
-\code{\link[ggplot2]{ggplot2-ggproto}}
+\code{\link[ggplot2:ggplot2-ggproto]{ggplot2::ggplot2-ggproto()}}
 }
 \keyword{datasets}

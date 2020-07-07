@@ -23,7 +23,7 @@
 #' @inheritParams params
 #' @return A numeric vector.
 #' @name burrIII2
-#' @seealso \code{\link{llogis}}
+#' @seealso [llogis()]
 #' @examples
 #' x <- seq(0.01, 5, by = 0.01)
 #' plot(x, dburrIII2(x), type = "l")

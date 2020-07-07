@@ -19,7 +19,7 @@ ggname <- function(prefix, grob) {
 
 #' Base ggproto classes for ggplot2
 #'
-#' @seealso \code{\link[ggplot2]{ggplot2-ggproto}}
+#' @seealso [ggplot2::ggplot2-ggproto()]
 #' @name ssdtools-ggproto
 NULL
 

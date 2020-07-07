@@ -18,7 +18,7 @@
 #' @inheritParams base::signif
 #'
 #' @return A function that returns a character vector.
-#' @seealso \code{\link[scales]{comma}}
+#' @seealso [scales::comma()]
 #' @export
 #'
 #' @examples
