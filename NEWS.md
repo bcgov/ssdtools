@@ -1,4 +1,4 @@
-# ssdtools 0.2.0.9005
+# ssdtools 0.3.0
 
 ## Breaking Changes
 
