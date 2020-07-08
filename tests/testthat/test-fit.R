@@ -16,6 +16,8 @@
 test_that("fit_dist", {
   dist <- ssd_fit_dist(ssdtools::boron_data)
   expect_true(is.fitdist(dist))
+  skip_if_not(capabilities("long.double"))
+  
   expect_equal(dist, boron_lnorm)
 })
 
@@ -59,6 +61,8 @@ test_that("burrIII2", {
 })
 
 test_that("fit_dist", {
+  skip_if_not(capabilities("long.double"))
+  
   expect_error(ssd_fit_dist(boron_data[1:5, ]), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$", c("chk_error", "rlang_error", "error", "condition"))
   dist <- ssd_fit_dist(boron_data)
   expect_true(is.fitdist(dist))
@@ -107,21 +111,21 @@ test_that("fit_dists computable", {
     15779, 20000, 31000, 40000, 105650
   ))
   
+  skip_if_not(capabilities("long.double"))
   
   expect_warning(fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]],
                  "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
-  expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189), tolerance = 0.0003) # for noLD
+  expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189))
   expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
   
   data$Conc <- data$Conc / 100
   fit <- ssd_fit_dists(data, dists = "gamma")[[1]]
-  expect_equal(fit$sd["scale"], c(scale = 673.801371511101), tolerance = 3e-01) # for noLD
-  expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086), tolerance = 3e-06) # for noLD
+  expect_equal(fit$sd["scale"], c(scale = 673.801371511101))
+  expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086))
   expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
 })
-    
-    test_that("fit_dists fail to converge when identical data", {
-      data <- data.frame(Conc = rep(6, 6))
-      expect_output(expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit.")))
-    })
-    
+
+test_that("fit_dists fail to converge when identical data", {
+  data <- data.frame(Conc = rep(6, 6))
+  expect_output(expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit.")))
+})

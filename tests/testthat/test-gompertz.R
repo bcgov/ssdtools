@@ -130,13 +130,13 @@ test_that("fit gompertz cis", {
 
   set.seed(77)
   expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-               structure(list(percent = 5, est = 1.29966505882091, se = 0.210602817456456, 
-                              lcl = 1.06020559352889, ucl = 1.6595940440259, dist = "gompertz"), row.names = c(NA, 
-                                                                                                               -1L), class = "data.frame"), tolerance = 1e-2)
+               data.frame(percent = 5, est = 1.29966505882091, se = 0.210602817456456, 
+                          lcl = 1.06020559352889, ucl = 1.6595940440259, dist = "gompertz",
+                          stringsAsFactors = FALSE), tolerance = 1e-2)
 
   set.seed(77)
   expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-               structure(list(conc = 2, est = 7.59756164161489, se = 1.14837721039132, 
-                              lcl = 6.00396142120025, ucl = 9.2258760434535, dist = "gompertz"), row.names = c(NA, 
-                                                                                                               -1L), class = "data.frame"))
+               data.frame(conc = 2, est = 7.59650778517608, se = 1.14891770368466, 
+                          lcl = 6.0020990844966, ucl = 9.22516202386345, dist = "gompertz",
+                          stringsAsFactors = FALSE), tolerance = 1e-2)
 })

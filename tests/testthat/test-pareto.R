@@ -39,6 +39,8 @@ test_that("fit pareto cis", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "pareto")
 
+  skip_if_not(capabilities("long.double"))
+  
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
@@ -48,9 +50,7 @@ test_that("fit pareto cis", {
     ), class = "data.frame", row.names = c(
       NA,
       -1L
-    )),
-    tolerance = 1e-07 # for noLD
-  )
+    )))
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
@@ -60,9 +60,7 @@ test_that("fit pareto cis", {
     ), class = "data.frame", row.names = c(
       NA,
       -1L
-    )),
-    tolerance = 1e-07 # for noLD
-  )
+    )))
 })
 
 test_that("ppareto", {
