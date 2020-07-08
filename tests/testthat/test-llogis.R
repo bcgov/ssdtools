@@ -13,8 +13,8 @@
 #    limitations under the License.
 
 test_that("dllogis", {
-  expect_equal(dllogis(exp(3), 1, 3), 0.003720046, tolerance = testthat_tolerance())
-  expect_equal(dllogis(exp(4), 1, 3), 0.001200358, tolerance = testthat_tolerance())
+  expect_equal(dllogis(exp(3), 1, 3), 0.003720046)
+  expect_equal(dllogis(exp(4), 1, 3), 0.001200358)
 })
 
 test_that("fit llogis", {
@@ -28,9 +28,9 @@ test_that("fit llogis", {
 })
 
 test_that("pqllogis", {
-  expect_equal(log(qllogis(0.5, 1, 1)), 1, tolerance = testthat_tolerance())
-  expect_equal(pllogis(exp(3), 1, 1), 0.880797077977882, tolerance = testthat_tolerance())
-  expect_equal(pllogis(exp(4), 1, 1), 0.952574126822433, tolerance = testthat_tolerance())
+  expect_equal(log(qllogis(0.5, 1, 1)), 1)
+  expect_equal(pllogis(exp(3), 1, 1), 0.880797077977882)
+  expect_equal(pllogis(exp(4), 1, 1), 0.952574126822433)
   expect_identical(pllogis(qllogis(0.5, 3, 1), 3, 1), 0.5)
 })
 
@@ -38,5 +38,5 @@ test_that("rllogis", {
   set.seed(99)
   r <- rllogis(100000, 1, 1)
   expect_identical(length(r), 100000L)
-  expect_equal(mean(log(r)), 0.99552614238909, tolerance = testthat_tolerance())
+  expect_equal(mean(log(r)), 0.99552614238909)
 })
