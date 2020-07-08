@@ -106,8 +106,8 @@ test_that("dlgumbel values", {
 })
 
 test_that("plgumbel values", {
-  expect_equal(plgumbel(exp(3), 3, 1), 0.3678794, tolerance = 0.0000001)
-  expect_equal(plgumbel(exp(4), 3, 1), 0.6922006, tolerance = 0.0000001)
+  expect_equal(plgumbel(exp(3), 3, 1), 0.367879441171442, tolerance = testthat_tolerance())
+  expect_equal(plgumbel(exp(4), 3, 1), 0.692200627555346, tolerance = testthat_tolerance())
   expect_identical(plgumbel(qlgumbel(0.5, 3, 1), 3, 1), 0.5)
 })
 

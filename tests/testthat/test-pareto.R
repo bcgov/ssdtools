@@ -49,7 +49,7 @@ test_that("fit pareto cis", {
       NA,
       -1L
     )),
-    tolerance = 1e-07 # for noLD
+    tolerance = testthat_tolerance()
   )
   set.seed(77)
   expect_equal(
@@ -60,8 +60,7 @@ test_that("fit pareto cis", {
     ), class = "data.frame", row.names = c(
       NA,
       -1L
-    )),
-    tolerance = 1e-07 # for noLD
+    )), tolerance = testthat_tolerance()
   )
 })
 

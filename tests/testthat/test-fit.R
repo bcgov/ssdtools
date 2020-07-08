@@ -16,7 +16,7 @@
 test_that("fit_dist", {
   dist <- ssd_fit_dist(ssdtools::boron_data)
   expect_true(is.fitdist(dist))
-  expect_equal(dist, boron_lnorm)
+  expect_equal(dist, boron_lnorm, tolerance = testthat_tolerance())
 })
 
 test_that("fit_dist tiny llogis", {
@@ -62,7 +62,7 @@ test_that("fit_dist", {
   expect_error(ssd_fit_dist(boron_data[1:5, ]), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$", c("chk_error", "rlang_error", "error", "condition"))
   dist <- ssd_fit_dist(boron_data)
   expect_true(is.fitdist(dist))
-  expect_equal(dist, boron_lnorm)
+  expect_equal(dist, boron_lnorm, tolerance = testthat_tolerance())
   expect_equal(coef(dist), c(meanlog = 2.56164375310683, sdlog = 1.24172540661694))
   
   boron_data2 <- boron_data[rev(order(boron_data$Conc)), ]
@@ -110,13 +110,13 @@ test_that("fit_dists computable", {
   
   expect_warning(fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]],
                  "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
-  expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189), tolerance = 0.0003) # for noLD
+  expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189), tolerance = testthat_tolerance())
   expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
   
   data$Conc <- data$Conc / 100
   fit <- ssd_fit_dists(data, dists = "gamma")[[1]]
-  expect_equal(fit$sd["scale"], c(scale = 673.801371511101), tolerance = 3e-01) # for noLD
-  expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086), tolerance = 3e-06) # for noLD
+  expect_equal(fit$sd["scale"], c(scale = 673.801371511101), tolerance = testthat_tolerance())
+  expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086), tolerance = testthat_tolerance())
   expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
 })
     
