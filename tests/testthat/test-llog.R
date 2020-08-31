@@ -1,7 +1,6 @@
 test_that("deprecated llog", {
   rlang::scoped_options(lifecycle_verbosity = "warning")
-  expect_warning(dist <- ssd_fit_dist(ssdtools::boron_data, dist = "llog"),
-                 "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
+  lifecycle::expect_deprecated(dist <- ssd_fit_dist(ssdtools::boron_data, dist = "llog"))
   
   expect_true(is.fitdist(dist))
   expect_equal(
@@ -10,8 +9,7 @@ test_that("deprecated llog", {
     )
   )
   set.seed(101)
-  expect_warning(pred <- predict(dist, percent = 1, ci = TRUE, nboot = 10L),
-                 "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
+  lifecycle::expect_deprecated(pred <- predict(dist, percent = 1, ci = TRUE, nboot = 10L))
   expect_equal(as.data.frame(pred), structure(list(
     percent = 1, est = 0.460388430679064, se = 0.305015200817155,
     lcl = 0.124204402582017, ucl = 1.04527103315379, dist = "llog"

@@ -63,7 +63,7 @@ test_that("burrIII2", {
 test_that("fit_dist", {
   skip_if_not(capabilities("long.double"))
   
-  expect_error(ssd_fit_dist(boron_data[1:5, ]), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$", c("chk_error", "rlang_error", "error", "condition"))
+  expect_error(ssd_fit_dist(boron_data[1:5, ]), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$", "chk_error")
   dist <- ssd_fit_dist(boron_data)
   expect_true(is.fitdist(dist))
   expect_equal(dist, boron_lnorm)
