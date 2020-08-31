@@ -17,7 +17,7 @@ test_that("dburrIII3 extremes", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(dburrIII3(numeric(0)), numeric(0))
   expect_identical(dburrIII3(NA), NA_real_)
-  expect_identical(dburrIII3(NaN), NaN)
+  expect_equal(dburrIII3(NaN), NaN)
   expect_identical(dburrIII3(0), 0)
   expect_equal(dburrIII3(2), 1/9) 
   expect_equal(dburrIII3(1), 0.25) 
