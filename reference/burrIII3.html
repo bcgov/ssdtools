@@ -82,7 +82,7 @@ lshape and lscale parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -156,9 +156,9 @@ for the Burr Type III Three-Parameter distribution with
 <code>lshape</code> and <code>lscale</code> parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>dburrIII3</a></span>(<span class='kw'>x</span>, lshape1 = <span class='fl'>0</span>, lshape2 = <span class='fl'>0</span>, lscale = <span class='fl'>0</span>, log = <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dburrIII3</span>(<span class='kw'>x</span>, lshape1 = <span class='fl'>0</span>, lshape2 = <span class='fl'>0</span>, lscale = <span class='fl'>0</span>, log = <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>qburrIII3</a></span>(
+<span class='fu'>qburrIII3</span>(
   <span class='kw'>p</span>,
   lshape1 = <span class='fl'>0</span>,
   lshape2 = <span class='fl'>0</span>,
@@ -167,7 +167,7 @@ for the Burr Type III Three-Parameter distribution with
   log.p = <span class='fl'>FALSE</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>pburrIII3</a></span>(
+<span class='fu'>pburrIII3</span>(
   <span class='kw'>q</span>,
   lshape1 = <span class='fl'>0</span>,
   lshape2 = <span class='fl'>0</span>,
@@ -176,9 +176,9 @@ for the Burr Type III Three-Parameter distribution with
   log.p = <span class='fl'>FALSE</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>rburrIII3</a></span>(<span class='kw'>n</span>, lshape1 = <span class='fl'>0</span>, lshape2 = <span class='fl'>0</span>, lscale = <span class='fl'>0</span>)
+<span class='fu'>rburrIII3</span>(<span class='kw'>n</span>, lshape1 = <span class='fl'>0</span>, lshape2 = <span class='fl'>0</span>, lscale = <span class='fl'>0</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>sburrIII3</a></span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>sburrIII3</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,10 +240,13 @@ The shape1, shape2, and scale paramters are on the log(scale) as these must be p
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/actuar/man/Burr.html'>actuar::dburr()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>rburrIII3</a></span>(<span class='fl'>1000</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `rburrIII3()` is deprecated as of lifecycle 0.2.1.</span>
+    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'>rburrIII3</span>(<span class='fl'>1000</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `rburrIII3()` is deprecated as of lifecycle 0.2.1.</span>
 #&gt; <span class='warning'>The 'burrIII3' distribution is under review.</span>
 #&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='kw'>x</span>, freq = <span class='fl'>FALSE</span>, col = <span class='st'>"gray"</span>, border = <span class='st'>"white"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/curve.html'>curve</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII3.html'>dburrIII3</a></span>(<span class='kw'>x</span>), add = <span class='fl'>TRUE</span>, col = <span class='st'>"red4"</span>, lwd = <span class='fl'>2</span>)</div><div class='img'><img src='burrIII3-1.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='kw'>x</span>, freq = <span class='fl'>FALSE</span>, col = <span class='st'>"gray"</span>, border = <span class='st'>"white"</span>)
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/curve.html'>curve</a></span>(<span class='fu'>dburrIII3</span>(<span class='kw'>x</span>), add = <span class='fl'>TRUE</span>, col = <span class='st'>"red4"</span>, lwd = <span class='fl'>2</span>)
+</div><div class='img'><img src='burrIII3-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

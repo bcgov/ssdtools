@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -152,19 +152,19 @@
     <p>Plots the cdf.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>ssd_plot_cdf</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for list</span>
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>x</span>, xlab = <span class='st'>"Concentration"</span>, ylab = <span class='st'>"Species Affected"</span>, <span class='kw'>...</span>)
+<span class='fu'>ssd_plot_cdf</span>(<span class='kw'>x</span>, xlab = <span class='st'>"Concentration"</span>, ylab = <span class='st'>"Species Affected"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for fitdist</span>
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>x</span>, xlab = <span class='st'>"Concentration"</span>, ylab = <span class='st'>"Species Affected"</span>, <span class='kw'>...</span>)
+<span class='fu'>ssd_plot_cdf</span>(<span class='kw'>x</span>, xlab = <span class='st'>"Concentration"</span>, ylab = <span class='st'>"Species Affected"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for fitdistcens</span>
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>x</span>, xlab = <span class='st'>"Concentration"</span>, ylab = <span class='st'>"Species Affected"</span>, <span class='kw'>...</span>)
+<span class='fu'>ssd_plot_cdf</span>(<span class='kw'>x</span>, xlab = <span class='st'>"Concentration"</span>, ylab = <span class='st'>"Species Affected"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for fitdists</span>
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>x</span>, xlab = <span class='st'>"Concentration"</span>, ylab = <span class='st'>"Species Affected"</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>ssd_plot_cdf</span>(<span class='kw'>x</span>, xlab = <span class='st'>"Concentration"</span>, ylab = <span class='st'>"Species Affected"</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,9 +198,13 @@
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>boron_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>boron_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>fluazinam_lnorm</span><span class='op'>$</span><span class='kw'>censdata</span><span class='op'>$</span><span class='kw'>right</span>[<span class='fl'>3</span>] <span class='op'>&lt;-</span> <span class='kw'>fluazinam_lnorm</span><span class='op'>$</span><span class='kw'>censdata</span><span class='op'>$</span><span class='kw'>left</span>[<span class='fl'>3</span>] <span class='op'>*</span> <span class='fl'>1.5</span>
+    <pre class="examples"><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='kw'>boron_lnorm</span>)
+</div><div class='img'><img src='ssd_plot_cdf-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='kw'>boron_lnorm</span>)
+</div><div class='img'><img src='ssd_plot_cdf-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>fluazinam_lnorm</span><span class='op'>$</span><span class='kw'>censdata</span><span class='op'>$</span><span class='kw'>right</span>[<span class='fl'>3</span>] <span class='op'>&lt;-</span> <span class='kw'>fluazinam_lnorm</span><span class='op'>$</span><span class='kw'>censdata</span><span class='op'>$</span><span class='kw'>left</span>[<span class='fl'>3</span>] <span class='op'>*</span> <span class='fl'>1.5</span>
 <span class='kw'>fluazinam_lnorm</span><span class='op'>$</span><span class='kw'>censdata</span><span class='op'>$</span><span class='kw'>left</span>[<span class='fl'>5</span>] <span class='op'>&lt;-</span> <span class='fl'>NA</span>
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>fluazinam_lnorm</span>)</div><div class='img'><img src='ssd_plot_cdf-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/ssd_plot_cdf.html'>ssd_plot_cdf</a></span>(<span class='kw'>boron_dists</span>)</div><div class='img'><img src='ssd_plot_cdf-4.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>ssd_plot_cdf</span>(<span class='kw'>fluazinam_lnorm</span>)
+</div><div class='img'><img src='ssd_plot_cdf-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ssd_plot_cdf</span>(<span class='kw'>boron_dists</span>)
+</div><div class='img'><img src='ssd_plot_cdf-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

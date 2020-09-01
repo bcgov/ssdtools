@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -104,7 +104,7 @@
       <h1 data-toc-skip>Get Started with ssdtools</h1>
                         <h4 class="author">ssdtools Team</h4>
             
-            <h4 class="date">2020-07-09</h4>
+            <h4 class="date">2020-09-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/ssdtools.Rmd"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools.Rmd</code></div>
@@ -159,13 +159,6 @@
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="kw">boron_data</span> <span class="op">&lt;-</span> <span class="kw">ssdtools</span>::<span class="kw"><a href="../reference/boron_data.html">boron_data</a></span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">boron_data</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 28 x 5</span>
 <span class="co">#&gt;    Chemical Species                  Conc Group        Units</span>
 <span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span>
@@ -244,13 +237,6 @@
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="kw">boron_gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(<span class="kw">boron_dists</span>)
 <span class="kw">boron_gof</span>[<span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span>(<span class="kw">boron_gof</span><span class="op">$</span><span class="kw">delta</span>), ]
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 3 x 9</span>
 <span class="co">#&gt;   dist      ad     ks    cvm   aic  aicc   bic delta weight</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span>
@@ -292,13 +278,6 @@
 <p>The resultant object is a data frame of the estimated concentration (<code>est</code>) with standard error (<code>se</code>) and lower (<code>lcl</code>) and upper (<code>ucl</code>) 95% confidence limits by percent of species affected (<code>percent</code>). The confidence limits are estimated using parametric bootstrapping.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="kw">boron_pred</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 99 x 6</span>
 <span class="co">#&gt;    percent   est    se   lcl   ucl dist   </span>
 <span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  </span>
@@ -341,13 +320,6 @@
 </pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">boron_hc5</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 1 x 6</span>
 <span class="co">#&gt;   percent   est    se   lcl   ucl dist   </span>
 <span class="co">#&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  </span>

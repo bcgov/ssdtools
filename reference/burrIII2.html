@@ -81,7 +81,7 @@ inverse cumulative distribution, random sample and starting values functions." /
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -154,13 +154,13 @@ inverse cumulative distribution, random sample and starting values functions." /
 inverse cumulative distribution, random sample and starting values functions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII2.html'>dburrIII2</a></span>(<span class='kw'>x</span>, locationlog = <span class='fl'>0</span>, scalelog = <span class='fl'>1</span>, log = <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dburrIII2</span>(<span class='kw'>x</span>, locationlog = <span class='fl'>0</span>, scalelog = <span class='fl'>1</span>, log = <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII2.html'>pburrIII2</a></span>(<span class='kw'>q</span>, locationlog = <span class='fl'>0</span>, scalelog = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
+<span class='fu'>pburrIII2</span>(<span class='kw'>q</span>, locationlog = <span class='fl'>0</span>, scalelog = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII2.html'>qburrIII2</a></span>(<span class='kw'>p</span>, locationlog = <span class='fl'>0</span>, scalelog = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
+<span class='fu'>qburrIII2</span>(<span class='kw'>p</span>, locationlog = <span class='fl'>0</span>, scalelog = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII2.html'>rburrIII2</a></span>(<span class='kw'>n</span>, locationlog = <span class='fl'>0</span>, scalelog = <span class='fl'>1</span>)</pre>
+<span class='fu'>rburrIII2</span>(<span class='kw'>n</span>, locationlog = <span class='fl'>0</span>, scalelog = <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,11 +211,12 @@ inverse cumulative distribution, random sample and starting values functions.</p
     <p>The burrIII2 distribution has been deprecated for the identical llogis distribution.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/ssdtools/man/llogis.html'>llogis()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='sburrIII2.html'>llogis()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, by = <span class='fl'>0.01</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/burrIII2.html'>dburrIII2</a></span>(<span class='kw'>x</span>), type = <span class='st'>"l"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `dburrIII2()` is deprecated as of lifecycle 0.1.2.</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='fu'>dburrIII2</span>(<span class='kw'>x</span>), type = <span class='st'>"l"</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `dburrIII2()` is deprecated as of lifecycle 0.1.2.</span>
 #&gt; <span class='warning'>Please use `dllogis()` instead.</span>
 #&gt; <span class='warning'>The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.</span>
 #&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>

@@ -81,7 +81,7 @@ inverse cumulative distribution, random sample and starting values functions." /
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -154,15 +154,15 @@ inverse cumulative distribution, random sample and starting values functions." /
 inverse cumulative distribution, random sample and starting values functions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/pareto.html'>dpareto</a></span>(<span class='kw'>x</span>, scale = <span class='fl'>1</span>, shape = <span class='fl'>1</span>, log = <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dpareto</span>(<span class='kw'>x</span>, scale = <span class='fl'>1</span>, shape = <span class='fl'>1</span>, log = <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/pareto.html'>qpareto</a></span>(<span class='kw'>p</span>, scale = <span class='fl'>1</span>, shape = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
+<span class='fu'>qpareto</span>(<span class='kw'>p</span>, scale = <span class='fl'>1</span>, shape = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/pareto.html'>ppareto</a></span>(<span class='kw'>q</span>, scale = <span class='fl'>1</span>, shape = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
+<span class='fu'>ppareto</span>(<span class='kw'>q</span>, scale = <span class='fl'>1</span>, shape = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/pareto.html'>rpareto</a></span>(<span class='kw'>n</span>, scale = <span class='fl'>1</span>, shape = <span class='fl'>1</span>)
+<span class='fu'>rpareto</span>(<span class='kw'>n</span>, scale = <span class='fl'>1</span>, shape = <span class='fl'>1</span>)
 
-<span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/pareto.html'>spareto</a></span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>spareto</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,7 +218,8 @@ The functions are wrappers on the equivalent VGAM functions.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, by = <span class='fl'>0.01</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='fu'><a href='https://rdrr.io/pkg/ssdtools/man/pareto.html'>dpareto</a></span>(<span class='kw'>x</span>), type = <span class='st'>"l"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `dpareto()` is deprecated as of lifecycle 0.2.1.</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='fu'>dpareto</span>(<span class='kw'>x</span>), type = <span class='st'>"l"</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `dpareto()` is deprecated as of lifecycle 0.2.1.</span>
 #&gt; <span class='warning'>The 'pareto' distribution is not suitable for SSD data.</span>
 #&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
 #&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='img'><img src='pareto-1.png' alt='' width='700' height='433' /></div></span></pre>
