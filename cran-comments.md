@@ -10,11 +10,25 @@ release 4.0.2
 
 ## Existing CRAN check Problems
 
-Fixed   
+Found the following (possibly) invalid URLs:
+   URL: http://doi.org/10.1006/eesa.1993.1006 (moved to https://doi.org/10.1006/eesa.1993.1006)
+     From: inst/doc/distributions.html
+     Status: 200
+     Message: OK
+   URL: http://doi.org/10.1007/b97636 (moved to https://doi.org/10.1007/b97636)
+     From: inst/doc/distributions.html
+     Status: 200
+     Message: OK
+   URL: https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md (moved to https://github.com/BCDevExchange/Our-Project-Docs/blob/master/discussion/projectstates.md)
+     From: README.md
+     Status: 200
+     Message: OK
+   URL: https://www.crcpress.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783 (moved to https://www.routledge.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783)
+     From: inst/doc/ssdtools.html
+     Status: 200
+     Message: OK
 
-    -- 1. Failure: dburrIII3 extremes (@test-burrIII3.R#20) -----------------------
-     dburrIII3(NaN) not identical to NaN.
-     Objects equal but not identical
+Fixed
 
 ## R CMD check results
 
@@ -29,4 +43,4 @@ Fixed
     Message: libcurl error code 35:
       	Unknown SSL protocol error in connection to bcgov-env.shinyapps.io:443
     
-The url is valid.
+The URL is valid.
