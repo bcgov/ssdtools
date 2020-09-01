@@ -10,7 +10,11 @@ release 4.0.2
 
 ## Existing CRAN check Problems
 
-Fixed 'noLD' additional issue.
+Fixed   
+
+    -- 1. Failure: dburrIII3 extremes (@test-burrIII3.R#20) -----------------------
+     dburrIII3(NaN) not identical to NaN.
+     Objects equal but not identical
 
 ## R CMD check results
 

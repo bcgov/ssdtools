@@ -35,6 +35,7 @@ dataplot
 dburrIII
 dburrXII
 dists
+dlnorm
 DOI
 dplyr
 Ecotoxicology
@@ -77,6 +78,7 @@ lgumbel
 llog
 llogis
 lnorm
+llocation
 locationlog
 lscale
 lshape
