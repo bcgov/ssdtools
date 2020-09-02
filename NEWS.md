@@ -1,3 +1,13 @@
+# ssdtools 0.3.2.9000
+
+- Same as previous version.
+
+
+# ssdtools 0.3.2
+
+- Fix moved URLs.
+
+
 # ssdtools 0.3.1
 
 - Internal changes only.

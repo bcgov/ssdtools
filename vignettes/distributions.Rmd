@@ -76,9 +76,9 @@ ssd_plot_cdf(ssd_match_moments(dists = c(
 
 ## References
 
-Aldenberg, T., and Slob, W. 1993. Confidence Limits for Hazardous Concentrations Based on Logistically Distributed NOEC Toxicity Data. Ecotoxicology and Environmental Safety 25(1): 48–63. http://doi.org/10.1006/eesa.1993.1006.
+Aldenberg, T., and Slob, W. 1993. Confidence Limits for Hazardous Concentrations Based on Logistically Distributed NOEC Toxicity Data. Ecotoxicology and Environmental Safety 25(1): 48–63. https://doi.org/10.1006/eesa.1993.1006.
 
-Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY.  http://doi.org/10.1007/b97636.
+Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY.  https://doi.org/10.1007/b97636.
 
 Burr, I. W. 1942. Cumulative frequency functions. Annals of Mathematical Statistics. 13:2, 215–232.
 
