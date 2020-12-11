@@ -87,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/ssdtools.html">Get started</a>
 </li>
 <li>
@@ -152,66 +146,66 @@
     <p>Gets concentrations that protect specified percentages of species.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ssd_hc</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>ssd_hc</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>ssd_hc</span>(<span class='kw'>x</span>, percent = <span class='fl'>5</span>, hc = <span class='fl'>5</span>, <span class='kw'>...</span>)
+<span class='fu'>ssd_hc</span><span class='op'>(</span><span class='va'>x</span>, percent <span class='op'>=</span> <span class='fl'>5</span>, hc <span class='op'>=</span> <span class='fl'>5</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for fitdist</span>
-<span class='fu'>ssd_hc</span>(
-  <span class='kw'>x</span>,
-  percent = <span class='fl'>5</span>,
-  hc = <span class='fl'>5</span>,
-  ci = <span class='fl'>FALSE</span>,
-  level = <span class='fl'>0.95</span>,
-  nboot = <span class='fl'>1000</span>,
-  parallel = <span class='kw'>NULL</span>,
-  ncpus = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>ssd_hc</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  percent <span class='op'>=</span> <span class='fl'>5</span>,
+  hc <span class='op'>=</span> <span class='fl'>5</span>,
+  ci <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  level <span class='op'>=</span> <span class='fl'>0.95</span>,
+  nboot <span class='op'>=</span> <span class='fl'>1000</span>,
+  parallel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncpus <span class='op'>=</span> <span class='fl'>1</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for fitdistcens</span>
-<span class='fu'>ssd_hc</span>(
-  <span class='kw'>x</span>,
-  percent = <span class='fl'>5</span>,
-  hc = <span class='fl'>5</span>,
-  ci = <span class='fl'>FALSE</span>,
-  level = <span class='fl'>0.95</span>,
-  nboot = <span class='fl'>1000</span>,
-  parallel = <span class='kw'>NULL</span>,
-  ncpus = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>ssd_hc</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  percent <span class='op'>=</span> <span class='fl'>5</span>,
+  hc <span class='op'>=</span> <span class='fl'>5</span>,
+  ci <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  level <span class='op'>=</span> <span class='fl'>0.95</span>,
+  nboot <span class='op'>=</span> <span class='fl'>1000</span>,
+  parallel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncpus <span class='op'>=</span> <span class='fl'>1</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for fitdists</span>
-<span class='fu'>ssd_hc</span>(
-  <span class='kw'>x</span>,
-  percent = <span class='fl'>5</span>,
-  hc = <span class='fl'>5</span>,
-  ci = <span class='fl'>FALSE</span>,
-  level = <span class='fl'>0.95</span>,
-  nboot = <span class='fl'>1000</span>,
-  parallel = <span class='kw'>NULL</span>,
-  ncpus = <span class='fl'>1</span>,
-  average = <span class='fl'>TRUE</span>,
-  ic = <span class='st'>"aicc"</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>ssd_hc</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  percent <span class='op'>=</span> <span class='fl'>5</span>,
+  hc <span class='op'>=</span> <span class='fl'>5</span>,
+  ci <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  level <span class='op'>=</span> <span class='fl'>0.95</span>,
+  nboot <span class='op'>=</span> <span class='fl'>1000</span>,
+  parallel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncpus <span class='op'>=</span> <span class='fl'>1</span>,
+  average <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ic <span class='op'>=</span> <span class='st'>"aicc"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for fitdistscens</span>
-<span class='fu'>ssd_hc</span>(
-  <span class='kw'>x</span>,
-  percent = <span class='fl'>5</span>,
-  hc = <span class='fl'>5</span>,
-  ci = <span class='fl'>FALSE</span>,
-  level = <span class='fl'>0.95</span>,
-  nboot = <span class='fl'>1000</span>,
-  parallel = <span class='kw'>NULL</span>,
-  ncpus = <span class='fl'>1</span>,
-  average = <span class='fl'>TRUE</span>,
-  ic = <span class='st'>"aic"</span>,
-  <span class='kw'>...</span>
-)</pre>
+<span class='fu'>ssd_hc</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  percent <span class='op'>=</span> <span class='fl'>5</span>,
+  hc <span class='op'>=</span> <span class='fl'>5</span>,
+  ci <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  level <span class='op'>=</span> <span class='fl'>0.95</span>,
+  nboot <span class='op'>=</span> <span class='fl'>1000</span>,
+  parallel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncpus <span class='op'>=</span> <span class='fl'>1</span>,
+  average <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ic <span class='op'>=</span> <span class='st'>"aic"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -277,36 +271,36 @@
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_hc</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"lnorm"</span> = <span class='kw'>NULL</span>))
+    <pre class="examples"><div class='input'><span class='fu'>ssd_hc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"lnorm"</span> <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 6</span><span>
 #&gt;   percent   est    se   lcl   ucl dist 
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>       5 0.193    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"lnorm"</span> = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(meanlog = <span class='fl'>2</span>, sdlog = <span class='fl'>1</span>)))
+#&gt; </span><span style='color: #555555;'>1</span><span>       5 0.193    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"lnorm"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>meanlog <span class='op'>=</span> <span class='fl'>2</span>, sdlog <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 6</span><span>
 #&gt;   percent   est    se   lcl   ucl dist 
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>       5  1.43    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span>(<span class='kw'>boron_lnorm</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))
+#&gt; </span><span style='color: #555555;'>1</span><span>       5  1.43    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span><span class='op'>(</span><span class='va'>boron_lnorm</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='cn'>Inf</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
 #&gt;   percent     est    se   lcl   ucl dist 
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>       0   0        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
 #&gt; </span><span style='color: #555555;'>2</span><span>       1   0.721    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
 #&gt; </span><span style='color: #555555;'>3</span><span>      30   6.76     </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
-#&gt; </span><span style='color: #555555;'>4</span><span>     </span><span style='color: #BB0000;'>Inf</span><span> </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span>(<span class='kw'>fluazinam_lnorm</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))
+#&gt; </span><span style='color: #555555;'>4</span><span>     </span><span style='color: #BB0000;'>Inf</span><span> </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span><span class='op'>(</span><span class='va'>fluazinam_lnorm</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='cn'>Inf</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
 #&gt;   percent     est    se   lcl   ucl dist 
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>       0   0        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
 #&gt; </span><span style='color: #555555;'>2</span><span>       1   0.280    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
 #&gt; </span><span style='color: #555555;'>3</span><span>      30  35.5      </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm
-#&gt; </span><span style='color: #555555;'>4</span><span>     </span><span style='color: #BB0000;'>Inf</span><span> </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span>(<span class='kw'>boron_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))
+#&gt; </span><span style='color: #555555;'>4</span><span>     </span><span style='color: #BB0000;'>Inf</span><span> </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> lnorm</div><div class='input'><span class='fu'>ssd_hc</span><span class='op'>(</span><span class='va'>boron_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='cn'>Inf</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
 #&gt;   percent     est    se   lcl   ucl dist   
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #555555;'>1</span><span>       0   0        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
 #&gt; </span><span style='color: #555555;'>2</span><span>       1   0.379    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
 #&gt; </span><span style='color: #555555;'>3</span><span>      30   7.65     </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average
-#&gt; </span><span style='color: #555555;'>4</span><span>     </span><span style='color: #BB0000;'>Inf</span><span> </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average</div><div class='input'><span class='fu'>ssd_hc</span>(<span class='kw'>fluazinam_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='fl'>Inf</span>))
+#&gt; </span><span style='color: #555555;'>4</span><span>     </span><span style='color: #BB0000;'>Inf</span><span> </span><span style='color: #BB0000;'>NaN</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> average</div><div class='input'><span class='fu'>ssd_hc</span><span class='op'>(</span><span class='va'>fluazinam_dists</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>30</span>, <span class='cn'>Inf</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 6</span><span>
 #&gt;   percent     est    se   lcl   ucl dist   
 #&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
@@ -329,7 +323,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

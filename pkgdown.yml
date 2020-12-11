@@ -1,6 +1,11 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1.9000
-pkgdown_sha: ecce89ed7fc0bfe4a2ec6e2fdc9285f238e13e7c
-articles: []
-last_built: 2020-09-02T14:23Z
+pkgdown: 1.6.1.9000
+pkgdown_sha: 6094ac3dd80a1f3f1d4e2f47d0ed4716d51362b0
+articles:
+  distributions: distributions.html
+  exposure-plots: exposure-plots.html
+  faqs: faqs.html
+  small-sample-bias-ref: small-sample-bias-ref.html
+  ssdtools: ssdtools.html
+last_built: 2020-12-11T23:42Z
 

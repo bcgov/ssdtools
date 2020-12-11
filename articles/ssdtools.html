@@ -45,12 +45,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/ssdtools.html">Get started</a>
 </li>
 <li>
@@ -104,7 +98,7 @@
       <h1 data-toc-skip>Get Started with ssdtools</h1>
                         <h4 class="author">ssdtools Team</h4>
             
-            <h4 class="date">2020-09-02</h4>
+            <h4 class="date">2020-12-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/ssdtools.Rmd"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools.Rmd</code></div>
@@ -130,16 +124,14 @@
 <a href="#installing" class="anchor"></a>Installing</h2>
 <p>In order to install R <span class="citation">(R Core Team 2018)</span> the appropriate binary for the users operating system should be downloaded from <a href="https://cran.r-project.org">CRAN</a> and then installed.</p>
 <p>Once R is installed, the <code>ssdtools</code> package can be installed (together with the tidyverse) by executing the following code at the R console</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ssdtools"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidyverse"</span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ssdtools"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></code></pre></div>
 <p>The <code>ssdtools</code> package (and key packages) can then be loaded into the current session using</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/bcgov/ssdtools">ssdtools</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://readr.tidyverse.org">readr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools">ssdtools</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="getting-help" class="section level2">
 <h2 class="hasAnchor">
@@ -152,13 +144,12 @@
 <h2 class="hasAnchor">
 <a href="#inputting-data" class="anchor"></a>Inputting Data</h2>
 <p>Once the <code>ssdtools</code> package has been loaded the next task is to input some data. An easy way to do this is to save the concentration data for a <em>single</em> chemical as a column called <code>Conc</code> in a comma separated file (<code>.csv</code>). Each row should be the sensitivity concentration for a separate species. If species and/or group information is available then this can be saved as <code>Species</code> and <code>Group</code> columns. The <code>.csv</code> file can then be read into R using the following</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(file = <span class="st">"path/to/file.csv"</span>)
-</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"path/to/file.csv"</span><span class="op">)</span></code></pre></div>
 <p>For the purposes of this manual we use the CCME dataset for boron which is provided with the <code>ssdtools</code> package.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">boron_data</span> <span class="op">&lt;-</span> <span class="kw">ssdtools</span>::<span class="kw"><a href="../reference/boron_data.html">boron_data</a></span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">boron_data</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boron_data</span> <span class="op">&lt;-</span> <span class="fu">ssdtools</span><span class="fu">::</span><span class="va"><a href="../reference/boron_data.html">boron_data</a></span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">boron_data</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 28 x 5</span>
 <span class="co">#&gt;    Chemical Species                  Conc Group        Units</span>
 <span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;fct&gt;        &lt;chr&gt;</span>
@@ -172,8 +163,7 @@
 <span class="co">#&gt;  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L </span>
 <span class="co">#&gt;  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span>
 <span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span>
-<span class="co">#&gt; # … with 18 more rows</span>
-</pre></div>
+<span class="co">#&gt; # … with 18 more rows</span></code></pre></div>
 </div>
 <div id="fitting-distributions" class="section level2">
 <h2 class="hasAnchor">
@@ -194,17 +184,16 @@
 <a href="https://en.wikipedia.org/wiki/Weibull_distribution">Weibull</a> (<code>weibull</code>)</li>
 </ul>
 <p>distributions using the <code>dists</code> argument.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">boron_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(<span class="kw">boron_data</span>, dists = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span>))
-</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boron_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">boron_data</span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The user can also specify one or more <a href="https://bcgov.github.io/ssdtools/articles/faqs.html#how-do-i-fit-a-custom-distribution">custom distributions</a>.</p>
 </div>
 <div id="coefficients" class="section level2">
 <h2 class="hasAnchor">
 <a href="#coefficients" class="anchor"></a>Coefficients</h2>
 <p>The coefficients can be extracted using the <code>coef</code> function. However, in and off themselves the coefficients are not that helpful.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span>(<span class="kw">boron_dists</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">boron_dists</span><span class="op">)</span>
 <span class="co">#&gt; $llogis</span>
 <span class="co">#&gt; locationlog    scalelog </span>
 <span class="co">#&gt;   2.6261249   0.7403092 </span>
@@ -215,35 +204,32 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $gamma</span>
 <span class="co">#&gt;      scale      shape </span>
-<span class="co">#&gt; 25.1263769  0.9500513</span>
-</pre></div>
+<span class="co">#&gt; 25.1263769  0.9500513</span></code></pre></div>
 </div>
 <div id="plots" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plots" class="anchor"></a>Plots</h2>
 <p>It is generally much more informative to plot the fits using the <code>autoplot</code> generic function. As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting (printing) to make it look prettier.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()) <span class="co"># set plot theme</span>
-<span class="kw">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span>(<span class="kw">boron_dists</span>)
-<span class="kw">gp</span> <span class="op">&lt;-</span> <span class="kw">gp</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Species Sensitivity Distributions for Boron"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">gp</span>)
-</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># set plot theme</span>
+<span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">boron_dists</span><span class="op">)</span>
+<span class="va">gp</span> <span class="op">&lt;-</span> <span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity Distributions for Boron"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">gp</span><span class="op">)</span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
 </div>
 <div id="selecting-one-distribution" class="section level2">
 <h2 class="hasAnchor">
 <a href="#selecting-one-distribution" class="anchor"></a>Selecting One Distribution</h2>
 <p>Given multiple distributions the user is faced with choosing the best fitting distribution (or as discussed below averaging the results weighted by the fit).</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">boron_gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(<span class="kw">boron_dists</span>)
-<span class="kw">boron_gof</span>[<span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span>(<span class="kw">boron_gof</span><span class="op">$</span><span class="kw">delta</span>), ]
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boron_gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">boron_dists</span><span class="op">)</span>
+<span class="va">boron_gof</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">boron_gof</span><span class="op">$</span><span class="va">delta</span><span class="op">)</span>, <span class="op">]</span>
 <span class="co">#&gt; # A tibble: 3 x 9</span>
 <span class="co">#&gt;   dist      ad     ks    cvm   aic  aicc   bic delta weight</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 gamma  0.440 0.117  0.0554  238.  238.  240.  0     0.595</span>
 <span class="co">#&gt; 2 lnorm  0.507 0.106  0.0703  239.  240.  242.  1.40  0.296</span>
-<span class="co">#&gt; 3 llogis 0.487 0.0993 0.0595  241.  241.  244.  3.38  0.11</span>
-</pre></div>
+<span class="co">#&gt; 3 llogis 0.487 0.0993 0.0595  241.  241.  244.  3.38  0.11</span></code></pre></div>
 <p>The <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code> function returns several goodness of fit measures that can be used to select the best distribution including three statistics</p>
 <ul>
 <li>
@@ -271,13 +257,12 @@
 <h2 class="hasAnchor">
 <a href="#estimating-the-fit" class="anchor"></a>Estimating the Fit</h2>
 <p>The <code>predict</code> function can be used to generate estimates model-averaged (or if <code>average = FALSE</code> individual) estimates. By default model averaging is based on <code>aicc</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
-<span class="kw">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="kw">boron_dists</span>, ci = <span class="fl">TRUE</span>)
-</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
+<span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">boron_dists</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>The resultant object is a data frame of the estimated concentration (<code>est</code>) with standard error (<code>se</code>) and lower (<code>lcl</code>) and upper (<code>ucl</code>) 95% confidence limits by percent of species affected (<code>percent</code>). The confidence limits are estimated using parametric bootstrapping.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="kw">boron_pred</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boron_pred</span>
 <span class="co">#&gt; # A tibble: 99 x 6</span>
 <span class="co">#&gt;    percent   est    se   lcl   ucl dist   </span>
 <span class="co">#&gt;      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  </span>
@@ -291,22 +276,20 @@
 <span class="co">#&gt;  8       8 1.98  1.03  0.862  4.83 average</span>
 <span class="co">#&gt;  9       9 2.21  1.10  0.990  5.23 average</span>
 <span class="co">#&gt; 10      10 2.44  1.17  1.12   5.63 average</span>
-<span class="co">#&gt; # … with 89 more rows</span>
-</pre></div>
+<span class="co">#&gt; # … with 89 more rows</span></code></pre></div>
 <p>The data frame of the estimates can then be plotted together with the original data using the <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> function to summarize an analysis. Once again the returned object is a <code>ggplot</code> object which can be customized prior to plotting.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(<span class="kw">boron_data</span>, <span class="kw">boron_pred</span>,
-  color = <span class="st">"Group"</span>, label = <span class="st">"Species"</span>,
-  xlab = <span class="st">"Concentration (mg/L)"</span>, ribbon = <span class="fl">TRUE</span>
-)
-<span class="kw">gp</span> <span class="op">&lt;-</span> <span class="kw">gp</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(x = <span class="fl">5000</span>) <span class="op">+</span> <span class="co"># to ensure the species labels fit</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span>(values = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
-    <span class="st">"Amphibian"</span> = <span class="st">"Black"</span>, <span class="st">"Fish"</span> = <span class="st">"Blue"</span>,
-    <span class="st">"Invertebrate"</span> = <span class="st">"Red"</span>, <span class="st">"Plant"</span> = <span class="st">"Brown"</span>
-  )) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Species Sensitivity for Boron"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">gp</span>)
-</pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">boron_data</span>, <span class="va">boron_pred</span>,
+  color <span class="op">=</span> <span class="st">"Group"</span>, label <span class="op">=</span> <span class="st">"Species"</span>,
+  xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ribbon <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span>
+<span class="va">gp</span> <span class="op">&lt;-</span> <span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> <span class="op">+</span> <span class="co"># to ensure the species labels fit</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    <span class="st">"Amphibian"</span> <span class="op">=</span> <span class="st">"Black"</span>, <span class="st">"Fish"</span> <span class="op">=</span> <span class="st">"Blue"</span>,
+    <span class="st">"Invertebrate"</span> <span class="op">=</span> <span class="st">"Red"</span>, <span class="st">"Plant"</span> <span class="op">=</span> <span class="st">"Brown"</span>
+  <span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity for Boron"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">gp</span><span class="op">)</span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
 <p>In the above plot the model-averaged 95% confidence interval is indicated by the shaded band and the model-averaged 5% Hazard Concentration (<span class="math inline">\(HC_5\)</span>) by the dotted line. Hazard concentrations are discussed below.</p>
 </div>
@@ -314,102 +297,90 @@
 <h2 class="hasAnchor">
 <a href="#hazard-concentrations" class="anchor"></a>Hazard Concentrations</h2>
 <p>The 5% hazard concentration (<span class="math inline">\(HC_5\)</span>) is the concentration that affects 5% of the species tested.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
-<span class="kw">boron_hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span>(<span class="kw">boron_dists</span>, ci = <span class="fl">TRUE</span>)
-</pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">boron_hc5</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
+<span class="va">boron_hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">boron_dists</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">boron_hc5</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 6</span>
 <span class="co">#&gt;   percent   est    se   lcl   ucl dist   </span>
 <span class="co">#&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  </span>
-<span class="co">#&gt; 1       5  1.31 0.808 0.527  3.57 average</span>
-</pre></div>
+<span class="co">#&gt; 1       5  1.31 0.808 0.527  3.57 average</span></code></pre></div>
 </div>
 <div id="plotting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting" class="anchor"></a>Plotting</h2>
 <p>The <code>ssdtools</code> package provides three ggplot geoms to allow you construct your own plots.</p>
 <p>The first is <code><a href="../reference/geom_ssd.html">geom_ssd()</a></code> which plots species sensitivity data</p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">boron_data</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_ssd.html">geom_ssd</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(x = <span class="st">"Conc"</span>))
-</pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">boron_data</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_ssd.html">geom_ssd</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-14-1.png" width="384"></p>
 <p>The second is <code><a href="../reference/geom_xribbon.html">geom_xribbon()</a></code> which plots species sensitivity confidence intervals</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">boron_pred</span>) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(xmin = <span class="st">"lcl"</span>, xmax = <span class="st">"ucl"</span>, y = <span class="st">"percent/100"</span>))
-</pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">boron_pred</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="st">"lcl"</span>, xmax <span class="op">=</span> <span class="st">"ucl"</span>, y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-15-1.png" width="384"></p>
 <p>And the third is <code><a href="../reference/geom_hcintersect.html">geom_hcintersect()</a></code> which plots hazard concentrations</p>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span>(xintercept = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), yintercept = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span>) <span class="op">/</span> <span class="fl">100</span>)
-</pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, yintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-16-1.png" width="384"></p>
 <p>They can be combined together as follows</p>
-<div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="kw">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">boron_pred</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(x = <span class="st">"est"</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(xmin = <span class="st">"lcl"</span>, xmax = <span class="st">"ucl"</span>, y = <span class="st">"percent/100"</span>), alpha = <span class="fl">0.2</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(y = <span class="st">"percent/100"</span>)) <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_ssd.html">geom_ssd</a></span>(data = <span class="kw">boron_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span>(x = <span class="st">"Conc"</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="st">"Species Affected (%)"</span>, labels = <span class="kw">scales</span>::<span class="kw"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span>(y = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">1</span>)) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Concentration (mg/L)"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">gp</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span>(xintercept = <span class="kw">boron_hc5</span><span class="op">$</span><span class="kw">est</span>, yintercept = <span class="fl">5</span> <span class="op">/</span> <span class="fl">100</span>))
-</pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">boron_pred</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"est"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="st">"lcl"</span>, xmax <span class="op">=</span> <span class="st">"ucl"</span>, y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/geom_ssd.html">geom_ssd</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">boron_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span><span class="st">"Species Affected (%)"</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Concentration (mg/L)"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">boron_hc5</span><span class="op">$</span><span class="va">est</span>, yintercept <span class="op">=</span> <span class="fl">5</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-17-1.png" width="384"></p>
 <p>To log the x-axis add the following code.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit">
-<span class="kw">gp</span> <span class="op">&lt;-</span> <span class="kw">gp</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_trans.html">coord_trans</a></span>(x = <span class="st">"log10"</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span>(
-    breaks = <span class="kw">scales</span>::<span class="fu"><a href="https://scales.r-lib.org//reference/trans_breaks.html">trans_breaks</a></span>(<span class="st">"log10"</span>, <span class="fu">function</span>(<span class="kw">x</span>) <span class="fl">10</span><span class="op">^</span><span class="kw">x</span>),
-    labels = <span class="kw">comma_signif</span>
-  )
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw">gp</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span>(xintercept = <span class="kw">boron_hc5</span><span class="op">$</span><span class="kw">est</span>, yintercept = <span class="fl">5</span> <span class="op">/</span> <span class="fl">100</span>))
-</pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_trans.html">coord_trans</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"log10"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>
+    breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org//reference/trans_breaks.html">trans_breaks</a></span><span class="op">(</span><span class="st">"log10"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">10</span><span class="op">^</span><span class="va">x</span><span class="op">)</span>,
+    labels <span class="op">=</span> <span class="va">comma_signif</span>
+  <span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">boron_hc5</span><span class="op">$</span><span class="va">est</span>, yintercept <span class="op">=</span> <span class="fl">5</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-18-1.png" width="384"></p>
 <p>The most recent plot can be saved as a file using <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>, which also allows the user to set the resolution.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span>(<span class="st">"file_name.png"</span>, dpi = <span class="fl">600</span>)
-</pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="st">"file_name.png"</span>, dpi <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></code></pre></div>
 <div id="censored-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#censored-data" class="anchor"></a>Censored Data</h3>
 <p>Censored data is that for which only a lower and/or upper limit is known for a particular species. If the <code>right</code> argument in <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> is different to the <code>left</code> argument then the data are considered to be censored. <code>fluazinam</code> is a censored data set from the <code>fitdistrplus</code> package.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">fluazinam</span>, package = <span class="st">"fitdistrplus"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">fluazinam</span>)
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">fluazinam</span>, package <span class="op">=</span> <span class="st">"fitdistrplus"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fluazinam</span><span class="op">)</span>
 <span class="co">#&gt;     left right</span>
 <span class="co">#&gt; 1    3.8   3.8</span>
 <span class="co">#&gt; 2   33.6  33.6</span>
 <span class="co">#&gt; 3   87.0  87.0</span>
 <span class="co">#&gt; 4 1700.0    NA</span>
 <span class="co">#&gt; 5  640.0 640.0</span>
-<span class="co">#&gt; 6 1155.0    NA</span>
-</pre></div>
+<span class="co">#&gt; 6 1155.0    NA</span></code></pre></div>
 <p>There are less goodness-of-fit statistics available for fits to censored data (currently just <code>aic</code> and <code>bic</code>). The <code>delta</code> values are calculated using <code>aic</code>.</p>
 <p>As the sample size <code>n</code> is undefined for censored data, <code>aicc</code> cannot be calculated. However, if all the models have the same number of parameters, the <code>aic</code> <code>delta</code> values are identical to those for <code>aicc</code>. For this reason, <code>ssdtools</code> only permits the analysis of censored data using two-parameter models.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="kw">fluazinam_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span>(<span class="kw">fluazinam</span>, left = <span class="st">"left"</span>, right = <span class="st">"right"</span>)
-<span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span>(<span class="kw">fluazinam_dists</span>)
-</pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fluazinam_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">fluazinam</span>, left <span class="op">=</span> <span class="st">"left"</span>, right <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">fluazinam_dists</span><span class="op">)</span></code></pre></div>
 <p>The model-averaged predictions (and hazard concentrations complete with 95% confidence limits) can be calculated using <code>aic</code></p>
-<div class="sourceCode" id="cb22"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">99</span>)
-<span class="kw">fluazinam_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="kw">fluazinam_dists</span>, ci = <span class="fl">TRUE</span>)
-</pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
+<span class="va">fluazinam_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fluazinam_dists</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>and the results plotted complete with arrows indicating the censorship.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit">
-<span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span>(<span class="kw">fluazinam</span>, <span class="kw">fluazinam_pred</span>,
-  left = <span class="st">"left"</span>, right = <span class="st">"right"</span>,
-  xlab = <span class="st">"Concentration (mg/L)"</span>
-)
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">fluazinam</span>, <span class="va">fluazinam_pred</span>,
+  left <span class="op">=</span> <span class="st">"left"</span>, right <span class="op">=</span> <span class="st">"right"</span>,
+  xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>
+<span class="op">)</span>
 <span class="co">#&gt; Warning: Removed 98 row(s) containing missing values (geom_path).</span>
 <span class="co">#&gt; geom_path: Each group consists of only one observation. Do you need to adjust</span>
-<span class="co">#&gt; the group aesthetic?</span>
-</pre></div>
+<span class="co">#&gt; the group aesthetic?</span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-22-1.png" width="384"></p>
 <hr>
 <p><a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia </span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"> Creative Commons Attribution 4.0 International License</a>.</p>
@@ -456,7 +427,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

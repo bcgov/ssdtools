@@ -87,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/ssdtools.html">Get started</a>
 </li>
 <li>
@@ -152,12 +146,12 @@
     <p>Match Moments</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ssd_match_moments</span>(
-  dists = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"llogis"</span>, <span class='st'>"gamma"</span>, <span class='st'>"lnorm"</span>),
-  meanlog = <span class='fl'>1</span>,
-  sdlog = <span class='fl'>1</span>,
-  nsim = <span class='fl'>1e+05</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ssd_match_moments</span><span class='op'>(</span>
+  dists <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"llogis"</span>, <span class='st'>"gamma"</span>, <span class='st'>"lnorm"</span><span class='op'>)</span>,
+  meanlog <span class='op'>=</span> <span class='fl'>1</span>,
+  sdlog <span class='op'>=</span> <span class='fl'>1</span>,
+  nsim <span class='op'>=</span> <span class='fl'>1e+05</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,7 +183,7 @@ with moments closest to the meanlog and sdlog.</p>
     <div class='dont-index'><p><code><a href='ssd_plot_cdf.html'>ssd_plot_cdf()</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_match_moments</span>()
+    <pre class="examples"><div class='input'><span class='fu'>ssd_match_moments</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $llogis
 #&gt; locationlog    scalelog 
 #&gt;     0.96875     0.52500 
@@ -217,7 +211,7 @@ with moments closest to the meanlog and sdlog.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

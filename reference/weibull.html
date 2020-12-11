@@ -88,12 +88,6 @@ the weibull distribution with parameters shape and scale." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/ssdtools.html">Get started</a>
 </li>
 <li>
@@ -154,13 +148,13 @@ the weibull distribution with parameters shape and scale." />
 the weibull distribution with parameters shape and scale.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dweibull</span>(<span class='kw'>x</span>, shape = <span class='fl'>1</span>, scale = <span class='fl'>1</span>, log = <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>dweibull</span><span class='op'>(</span><span class='va'>x</span>, shape <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, log <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>pweibull</span>(<span class='kw'>q</span>, shape = <span class='fl'>1</span>, scale = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
+<span class='fu'>pweibull</span><span class='op'>(</span><span class='va'>q</span>, shape <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, lower.tail <span class='op'>=</span> <span class='cn'>TRUE</span>, log.p <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>qweibull</span>(<span class='kw'>p</span>, shape = <span class='fl'>1</span>, scale = <span class='fl'>1</span>, lower.tail = <span class='fl'>TRUE</span>, log.p = <span class='fl'>FALSE</span>)
+<span class='fu'>qweibull</span><span class='op'>(</span><span class='va'>p</span>, shape <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, lower.tail <span class='op'>=</span> <span class='cn'>TRUE</span>, log.p <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>rweibull</span>(<span class='kw'>n</span>, shape = <span class='fl'>1</span>, scale = <span class='fl'>1</span>)</pre>
+<span class='fu'>rweibull</span><span class='op'>(</span><span class='va'>n</span>, shape <span class='op'>=</span> <span class='fl'>1</span>, scale <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,8 +205,8 @@ the weibull distribution with parameters shape and scale.</p>
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/Weibull.html'>stats::dweibull()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.01</span>, <span class='fl'>5</span>, by = <span class='fl'>0.01</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='fu'>dweibull</span>(<span class='kw'>x</span>), type = <span class='st'>"l"</span>)
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0.01</span>, <span class='fl'>5</span>, by <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'>dweibull</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"l"</span><span class='op'>)</span>
 </div><div class='img'><img src='weibull-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -229,7 +223,7 @@ the weibull distribution with parameters shape and scale.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
