@@ -57,10 +57,14 @@ test_that("test_data Quinoline", {
     ))
   )
   set.seed(99)
-  expect_equal(
-    as.data.frame(ssd_hc(dists, ci = TRUE, nboot = 10)),
-    structure(list(percent = 5, est = 134.853117244289, se = 171.585648187402, 
-                   lcl = 46.0424235514809, ucl = 517.999234124554, dist = "average"), row.names = c(NA, 
-                                                                                                    -1L), class = "data.frame")
-  )
+  hc <- ssd_hc(dists, ci = TRUE, nboot = 10)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 134.853117244289)
+  expect_equal(hc$se, 171.585648187402)
+  expect_equal(hc$lcl, 46.0424235514809)
+  expect_equal(hc$ucl, 517.999234124554)
+  expect_equal(hc$dist, "average")
+                                                                                              
 })

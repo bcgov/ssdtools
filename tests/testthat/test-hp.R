@@ -53,16 +53,26 @@ test_that("hp fitdist", {
 
 test_that("hp fitdist cis", {
   set.seed(10)
-  expect_equal(as.data.frame(ssd_hp(boron_lnorm, 1, ci = TRUE, nboot = 10)), 
-               structure(list(conc = 1, est = 1.95576822341687, se = 1.35723135295734, 
-                              lcl = 0.753437345701245, ucl = 4.40577139680561, dist = "lnorm"), row.names = c(NA, 
-                                                                                                              -1L), class = "data.frame"))
-  
+  hp <- ssd_hp(boron_lnorm, 1, ci = TRUE, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, 1)
+  expect_equal(hp$est, 1.95576822341687) 
+  expect_equal(hp$se, 1.35723135295734) 
+  expect_equal(hp$lcl, 0.753437345701245) 
+  expect_equal(hp$ucl, 4.40577139680561) 
+  expect_equal(hp$dist, "lnorm")
+                                                                                                          
   set.seed(10)
-  expect_equal(as.data.frame(ssd_hp(boron_lnorm, c(1, 30), ci = TRUE, nboot = 10)), structure(list(conc = c(1, 30), est = c(1.95576822341687, 75.0517322027199
-  ), se = c(1.35723135295734, 5.11980949460707), lcl = c(0.753437345701245, 
-                                                         71.4221297303002), ucl = c(4.40577139680561, 87.0508546669261
-                                                         ), dist = c("lnorm", "lnorm")), row.names = c(NA, -2L), class = "data.frame"))
+  hp <- ssd_hp(boron_lnorm, c(1, 30), ci = TRUE, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, c(1, 30))
+  expect_equal(hp$est, c(1.95576822341687, 75.0517322027199))
+  expect_equal(hp$se, c(1.35723135295734, 5.11980949460707))
+  expect_equal(hp$lcl, c(0.753437345701245, 71.4221297303002))
+  expect_equal(hp$ucl, c(4.40577139680561, 87.0508546669261))
+  expect_equal(hp$dist, c("lnorm", "lnorm"))
 })
 
 test_that("hp fitdists with no dists", {
@@ -86,47 +96,71 @@ test_that("hp fitdists with no dists", {
 })
 
 test_that("hp fitdists", {
-  expect_equal(as.data.frame(ssd_hp(boron_dists, 1)), structure(list(conc = 1, est = 3.66852412355664, se = NA_real_, 
-                                                                     lcl = NA_real_, ucl = NA_real_, dist = "average"), row.names = c(NA, 
-                                                                                                                                      -1L), class = "data.frame"))
-  expect_equal(as.data.frame(ssd_hp(boron_dists, c(0, 1, 30, Inf))), structure(list(conc = c(0, 1, 30, Inf), est = c(0, 3.66852412355664, 
-                                                                                                                     72.904934839041, 100), se = c(NA_real_, NA_real_, NA_real_, NA_real_
-                                                                                                                     ), lcl = c(NA_real_, NA_real_, NA_real_, NA_real_), ucl = c(NA_real_, 
-                                                                                                                                                                                 NA_real_, NA_real_, NA_real_), dist = c("average", "average", 
-                                                                                                                                                                                                                         "average", "average")), row.names = c(NA, -4L), class = "data.frame"))
+  hp <- ssd_hp(boron_dists, 1)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, 1)
+  expect_equal(hp$est, 3.66852412355664)
+  expect_equal(hp$se, NA_real_)
+  expect_equal(hp$lcl, NA_real_)
+  expect_equal(hp$ucl, NA_real_)
+  expect_equal(hp$dist, "average")
+                                                                                                                                      
+  hp <- ssd_hp(boron_dists, c(0, 1, 30, Inf))
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, c(0, 1, 30, Inf))
+  expect_equal(hp$est, c(0, 3.66852412355664,72.904934839041, 100))
+  expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$dist, c("average", "average", "average", "average")) 
 })
 
 test_that("hp fitdists cis", {
   set.seed(10)
-  expect_equal(as.data.frame(ssd_hp(boron_dists, 1, ci = TRUE, nboot = 10)), structure(list(conc = 1, est = 3.66852412355664, se = 2.45645877883578, 
-                                                                                            lcl = 0.570981644438492, ucl = 7.18380436625128, dist = "average"), row.names = c(NA, 
-                                                                                                                                                                              -1L), class = "data.frame"))
+  hp <- ssd_hp(boron_dists, 1, ci = TRUE, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, 1)
+  expect_equal(hp$est, 3.66852412355664)
+  expect_equal(hp$se, 2.45645877883578)
+  expect_equal(hp$lcl, 0.570981644438492)
+  expect_equal(hp$ucl, 7.18380436625128)
+  expect_equal(hp$dist, "average") 
   
   set.seed(10)
-  expect_equal(as.data.frame(ssd_hp(boron_dists, c(0, 1, 30, Inf), ci = TRUE, nboot = 10)), structure(list(conc = c(0, 1, 30, Inf), est = c(0, 3.66852412355664, 
-                                                                                                                                            72.904934839041, 100), se = c(0, 2.45645877883578, 7.71796383954152, 
-                                                                                                                                                                          0), lcl = c(0, 0.570981644438492, 59.8280826110273, 100), ucl = c(0, 
-                                                                                                                                                                                                                                            7.18380436625128, 82.4206257509066, 100), dist = c("average", 
-                                                                                                                                                                                                                                                                                               "average", "average", "average")), row.names = c(NA, -4L), class = "data.frame"))
+  hp <- ssd_hp(boron_dists, c(0, 1, 30, Inf), ci = TRUE, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, c(0, 1, 30, Inf))
+  expect_equal(hp$est, c(0, 3.66852412355664, 72.904934839041, 100))
+  expect_equal(hp$se, c(0, 2.45645877883578, 7.71796383954152, 0))
+  expect_equal(hp$lcl, c(0, 0.570981644438492, 59.8280826110273, 100))
+  expect_equal(hp$ucl, c(0, 7.18380436625128, 82.4206257509066, 100))
+  expect_equal(hp$dist, c("average",  "average", "average", "average"))
 })
 
 test_that("hp fitdistcens", {
-  expect_equal(
-    as.data.frame(ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))),
-    structure(list(conc = c(0, 1, 30, Inf), est = c(0, 3.20075104792886, 
-                                                    27.8754025505199, 100), se = c(NA_real_, NA_real_, NA_real_, 
-                                                                                   NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, NA_real_), ucl = c(NA_real_, 
-                                                                                                                                                       NA_real_, NA_real_, NA_real_), dist = c("lnorm", "lnorm", "lnorm", 
-                                                                                                                                                                                               "lnorm")), row.names = c(NA, -4L), class = "data.frame"))
+  hp <- ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, c(0, 1, 30, Inf))
+  expect_equal(hp$est, c(0, 3.20075104792886, 27.8754025505199, 100))
+  expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$dist, c("lnorm", "lnorm", "lnorm", "lnorm"))
 })
 
 test_that("hp fitdistscens", {
-  expect_equal(
-    as.data.frame(ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))),
-    structure(list(conc = c(0, 1, 30, Inf), est = c(0, 4.06545463384627, 
-                                                    27.3122236342922, 100), se = c(NA_real_, NA_real_, NA_real_, 
-                                                                                   NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, NA_real_), ucl = c(NA_real_, 
-                                                                                                                                                       NA_real_, NA_real_, NA_real_), dist = c("average", "average", 
-                                                                                                                                                                                               "average", "average")), row.names = c(NA, -4L), class = "data.frame")
-  )
+  hp <- ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, c(0, 1, 30, Inf))
+  expect_equal(hp$est, c(0, 4.06545463384627, 27.3122236342922, 100))
+  expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hp$dist, c("average", "average", "average", "average"))
 })
