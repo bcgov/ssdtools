@@ -140,12 +140,16 @@ test_that("fit dburrIII2 cis", {
   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
 
   set.seed(77)
-  expect_equal(
-    as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-    structure(list(percent = 5, est = 1.56256632555312, se = 0.533080817076427, 
-                   lcl = 1.02028787432084, ucl = 2.4100026087857, dist = "burrIII2"), row.names = c(NA, 
-                                                                                                    -1L), class = "data.frame")
-  )
+  hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 1.56256632555312)
+  expect_equal(hc$se, 0.533080817076427)
+  expect_equal(hc$lcl, 1.02028787432084)
+  expect_equal(hc$ucl, 2.4100026087857)
+  expect_equal(hc$dist, "burrIII2")
+  
   set.seed(77)
   expect_equal(
     as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
