@@ -151,12 +151,15 @@ test_that("fit dburrIII2 cis", {
   expect_equal(hc$dist, "burrIII2")
   
   set.seed(77)
-  expect_equal(
-    as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-    structure(list(conc = 2, est = 6.8431214411277, se = 2.53471375726922, 
-                   lcl = 3.73102816675466, ucl = 10.3929969316288, dist = "burrIII2"), row.names = c(NA, 
-                                                                                                     -1L), class = "data.frame")
-  )
+  hp <- ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_equal(hp$conc, 2)
+  expect_equal(hp$est, 6.8431214411277)
+  expect_equal(hp$se, 2.53471375726922)
+  expect_equal(hp$lcl, 3.73102816675466)
+  expect_equal(hp$ucl, 10.3929969316288)
+  expect_equal(hp$dist, "burrIII2")
 })
 
 test_that("burrIII2 and llogis identical", {
