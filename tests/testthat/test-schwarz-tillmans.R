@@ -18,13 +18,13 @@ test_that("manual", {
     "gamma", "gompertz", "lgumbel", "llogis", "lnorm", "weibull"
   ))
   expect_true(is.fitdists(dists))
-
+  
   expect_equal(
     ssd_hc(dists, average = FALSE)$est,
     c(1.07373870642628, 1.29945366523807, 1.76891782851293, 1.56256632555312, 
       1.68066107721146, 1.0871695998917)
   )
-
+  
   set.seed(99)
   hc <- ssd_hc(dists, ci = TRUE, nboot = 10)
   expect_is(hc, "tbl_df")
@@ -35,7 +35,7 @@ test_that("manual", {
   expect_equal(hc$lcl, 0.775249435219941)
   expect_equal(hc$ucl, 2.60353105288968)
   expect_equal(hc$dist, "average") 
-
+  
   dists <- ssd_gof(dists)
   expect_is(dists, "tbl_df")
   expect_identical(colnames(dists), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
@@ -49,9 +49,9 @@ test_that("manual", {
   expect_equal(dists$aic, c(237.630318352347, 237.61115441186, 244.185952512763, 
                             241.014872096207, 239.028432979095, 237.625291133194))
   expect_equal(dists$aicc, c(238.110318352347, 238.09115441186, 244.665952512763,
-                            241.494872096207, 239.508432979095, 238.105291133194), 
-               bic = c(240.294727372698, 240.275563432211, 246.850361533114, 
-                       243.679281116558, 241.692841999445, 240.289700153545))
+                             241.494872096207, 239.508432979095, 238.105291133194))
+  expect_equal(dists$bic, c(240.294727372698, 240.275563432211, 246.850361533114, 
+                             243.679281116558, 241.692841999445, 240.289700153545))
   expect_equal(dists$delta, c(0.019, 0, 6.575, 3.404, 1.417, 0.014))
   expect_equal(dists$weight, c(0.268, 0.271, 0.01, 0.049, 0.133, 0.269))
 })
