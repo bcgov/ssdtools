@@ -12,27 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("plot geoms", {
+test_that("autoplot", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())
-  data <- boron_data
-  data$yintercept <- 0.10
-  gp <- ggplot(boron_data, aes(x = Conc)) +
-    stat_ssd() +
-    geom_ssd() +
-    geom_hcintersect(xintercept = 1, yintercept = 0.05) +
-    geom_hcintersect(yintercept = 0.05) +
-    geom_xribbon(
-      data = boron_pred,
-      aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
-    )
-  expect_is(gp, "ggplot")
+  
+  expect_is(ggplot2::autoplot(boron_lnorm), "ggplot")
+  expect_is(ggplot2::autoplot(boron_dists), "ggplot")
+  expect_is(ggplot2::autoplot(fluazinam_lnorm), "ggplot")
 })
-
-test_that("plot", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
-
-  expect_silent(plot(boron_dists))
-})
-
