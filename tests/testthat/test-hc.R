@@ -15,168 +15,150 @@
 test_that("ssd_hc list", {
   expect_error(ssd_hc(list()), "^`x` must be named[.]$", class = "chk_error")
   
-  expect_identical(
-    ssd_hc(structure(list(), .Names = character(0))),
-    structure(list(
-      percent = numeric(0), est = numeric(0), se = numeric(0),
-      lcl = numeric(0), ucl = numeric(0), dist = character(0)
-    ), class = c(
-      "tbl_df",
-      "tbl", "data.frame"
-    ), row.names = integer(0))
-  )
+  hc <- ssd_hc(structure(list(), .Names = character(0)))
+  expect_is(hc, class = c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, numeric(0))
+  expect_equal(hc$est, numeric(0))
+  expect_equal(hc$se, numeric(0))
+  expect_equal(hc$lcl, numeric(0))
+  expect_equal(hc$ucl, numeric(0))
+  expect_equal(hc$dist, character(0))
   
   expect_error(ssd_hc(list("lnorm" = NULL, "lnorm" = NULL)), "^`names[(]x[)]` must be unique[.]$", class = "chk_error")
   
-  expect_equal(
-    as.data.frame(ssd_hc(list("lnorm" = NULL))),
-    structure(list(
-      percent = 5, est = 0.193040816698737, se = NA_real_,
-      lcl = NA_real_, ucl = NA_real_, dist = "lnorm"
-    ), row.names = c(
-      NA,
-      -1L
-    ), class = "data.frame")
-  )
-  expect_equal(
-    as.data.frame(ssd_hc(list("lnorm" = NULL), percent = c(1, 99))),
-    structure(list(percent = c(1, 99), est = c(
-      0.097651733070336,
-      10.2404736563121
-    ), se = c(NA_real_, NA_real_), lcl = c(
-      NA_real_,
-      NA_real_
-    ), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "lnorm")), row.names = c(NA, -2L), class = "data.frame")
-  )
+  hc <- ssd_hc(list("lnorm" = NULL))
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 0.193040816698737)
+  expect_equal(hc$se, NA_real_)
+  expect_equal(hc$lcl, NA_real_)
+  expect_equal(hc$ucl, NA_real_)
+  expect_equal(hc$dist, "lnorm")
   
-  expect_equal(
-    as.data.frame(ssd_hc(list("lnorm" = list(meanlog = 0, sdlog = 1)))),
-    structure(list(
-      percent = 5, est = 0.193040816698737, se = NA_real_,
-      lcl = NA_real_, ucl = NA_real_, dist = "lnorm"
-    ), row.names = c(
-      NA,
-      -1L
-    ), class = "data.frame")
-  )
+  hc <- ssd_hc(list("lnorm" = NULL), percent = c(1, 99))
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, c(1, 99))
+  expect_equal(hc$est, c(0.097651733070336, 10.2404736563121))
+  expect_equal(hc$se, c(NA_real_, NA_real_))
+  expect_equal(hc$lcl, c(NA_real_, NA_real_))
+  expect_equal(hc$ucl, c(NA_real_, NA_real_)) 
+  expect_equal(hc$dist, c("lnorm", "lnorm"))
   
-  expect_equal(
-    as.data.frame(ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 2)))),
-    structure(list(
-      percent = 5, est = 0.275351379333677, se = NA_real_,
-      lcl = NA_real_, ucl = NA_real_, dist = "lnorm"
-    ), row.names = c(
-      NA,
-      -1L
-    ), class = "data.frame")
-  )
+  hc <- ssd_hc(list("lnorm" = list(meanlog = 0, sdlog = 1)))
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 0.193040816698737)
+  expect_equal(hc$se, NA_real_)
+  expect_equal(hc$lcl, NA_real_)
+  expect_equal(hc$ucl, NA_real_)
+  expect_equal(hc$dist, "lnorm")
   
-  expect_equal(
-    as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL))),
-    structure(list(percent = c(5, 5), est = c(0.193040816698737, 
-                                              0.0526315789473684), se = c(NA_real_, NA_real_), lcl = c(NA_real_, 
-                                                                                                       NA_real_), ucl = c(NA_real_, NA_real_), dist = c("lnorm", "llogis"
-                                                                                                       )), row.names = c(NA, -2L), class = "data.frame")
-  )
+  hc <- ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 2)))
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 0.275351379333677)
+  expect_equal(hc$se, NA_real_)
+  expect_equal(hc$lcl, NA_real_)
+  expect_equal(hc$ucl, NA_real_)
+  expect_equal(hc$dist, "lnorm")
   
-  expect_equal(
-    as.data.frame(ssd_hc(list("lnorm" = NULL, "llogis" = NULL), percent = c(1, 99))),
-    structure(list(percent = c(1, 99, 1, 99), est = c(0.097651733070336, 
-                                                      10.2404736563121, 0.0101010101010101, 98.9999999999999), se = c(NA_real_, 
-                                                                                                                      NA_real_, NA_real_, NA_real_), lcl = c(NA_real_, NA_real_, NA_real_, 
-                                                                                                                                                             NA_real_), ucl = c(NA_real_, NA_real_, NA_real_, NA_real_), dist = c("lnorm", 
-                                                                                                                                                                                                                                  "lnorm", "llogis", "llogis")), row.names = c(NA, -4L), class = "data.frame")
-  )
+  hc <- ssd_hc(list("lnorm" = NULL, "llogis" = NULL))
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, c(5, 5))
+  expect_equal(hc$est, c(0.193040816698737, 0.0526315789473684))
+  expect_equal(hc$se, c(NA_real_, NA_real_)) 
+  expect_equal(hc$lcl, c(NA_real_, NA_real_))
+  expect_equal(hc$ucl, c(NA_real_, NA_real_))
+  expect_equal(hc$dist, c("lnorm", "llogis"))
+  
+  hc <- ssd_hc(list("lnorm" = NULL, "llogis" = NULL), percent = c(1, 99))
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, c(1, 99, 1, 99))
+  expect_equal(hc$est, c(0.097651733070336, 10.2404736563121, 0.0101010101010101, 98.9999999999999))
+  expect_equal(hc$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hc$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hc$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
+  expect_equal(hc$dist, c("lnorm", "lnorm", "llogis", "llogis"))
 })
 
 test_that("ssd_hc fitdist", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   expect_identical(ssd_hc(boron_lnorm, hc = 6), ssd_hc(boron_lnorm, percent = 6))
-  expect_equal(
-    as.data.frame(ssd_hc(boron_lnorm)),
-    structure(list(
-      percent = 5, est = 1.68066107721146, se = NA_real_,
-      lcl = NA_real_, ucl = NA_real_, dist = "lnorm"
-    ), class = "data.frame", row.names = c(
-      NA,
-      -1L
-    ))
-  )
+  
+  hc <- ssd_hc(boron_lnorm)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 1.68066107721146)
+  expect_equal(hc$se, NA_real_)
+  expect_equal(hc$lcl, NA_real_)
+  expect_equal(hc$ucl, NA_real_)
+  expect_equal(hc$dist, "lnorm")
 })
 
 test_that("ssd_hc fitdistcens", {
-  expect_equal(
-    as.data.frame(ssd_hc(fluazinam_lnorm)),
-    structure(list(
-      percent = 5, est = 1.74529360152777, se = NA_real_,
-      lcl = NA_real_, ucl = NA_real_, dist = "lnorm"
-    ), class = "data.frame", row.names = c(
-      NA,
-      -1L
-    ))
-  )
+  hc <- ssd_hc(fluazinam_lnorm)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 1.74529360152777)
+  expect_equal(hc$se, NA_real_)
+  expect_equal(hc$lcl, NA_real_)
+  expect_equal(hc$ucl, NA_real_)
+  expect_equal(hc$dist, "lnorm")
 })
 
 test_that("ssd_hc fitdists", {
-  expect_equal(
-    as.data.frame(ssd_hc(boron_dists)),
-    structure(list(
-      percent = 5, est = 1.30671324518567, se = NA_real_,
-      lcl = NA_real_, ucl = NA_real_, dist = "average"
-    ), class = "data.frame", row.names = c(
-      NA,
-      -1L
-    ))
-  )
+  hc <- ssd_hc(boron_dists)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 1.30671324518567)
+  expect_equal(hc$se, NA_real_)
+  expect_equal(hc$lcl, NA_real_)
+  expect_equal(hc$ucl, NA_real_)
+  expect_equal(hc$dist, "average")
 })
 
 test_that("ssd_hc fitdists not average", {
-  expect_equal(
-    as.data.frame(ssd_hc(boron_dists, average = FALSE)),
-    structure(list(
-      percent = c(5, 5, 5), 
-      est =  c(1.56256632555312, 1.07373870642628, 1.68066107721146), 
-      se = c(
-        NA_real_, NA_real_,
-        NA_real_
-      ), lcl = c(NA_real_, NA_real_, NA_real_), ucl = c(
-        NA_real_,
-        NA_real_, NA_real_
-      ), dist = c("llogis", "gamma", "lnorm")), row.names = c(
-        NA,
-        -3L
-      ), class = "data.frame")
-  )
+  hc <- (ssd_hc(boron_dists, average = FALSE))
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, c(5, 5, 5))
+  expect_equal(hc$est,  c(1.56256632555312, 1.07373870642628, 1.68066107721146))
+  expect_equal(hc$se, c(NA_real_, NA_real_,NA_real_))
+  expect_equal(hc$lcl, c(NA_real_, NA_real_, NA_real_))
+  expect_equal(hc$ucl, c(NA_real_,NA_real_, NA_real_))
+  expect_equal(hc$dist, c("llogis", "gamma", "lnorm")) 
 })
 
 test_that("ssd_hc fitdistscens", {
-  expect_equal(
-    as.data.frame(ssd_hc(fluazinam_dists)),
-    structure(list(
-      percent = 5, est = 1.42153606844833, se = NA_real_,
-      lcl = NA_real_, ucl = NA_real_, dist = "average"
-    ), class = "data.frame", row.names = c(
-      NA,
-      -1L
-    ))
-  )
+  hc <- ssd_hc(fluazinam_dists)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 1.42153606844833)
+  expect_equal(hc$se, NA_real_)
+  expect_equal(hc$lcl, NA_real_)
+  expect_equal(hc$ucl, NA_real_)
+  expect_equal(hc$dist, "average")
 })
 
 test_that("ssd_hc fitdistscens not average", {
-  expect_equal(
-    as.data.frame(ssd_hc(fluazinam_dists, average = FALSE)),
-    structure(list(
-      percent = c(5, 5, 5), 
-      est = c(1.30938169835089, 0.309067069393034, 1.74529360152777), 
-      se = c(
-        NA_real_, NA_real_,
-        NA_real_
-      ), lcl = c(NA_real_, NA_real_, NA_real_), ucl = c(
-        NA_real_,
-        NA_real_, NA_real_
-      ), dist = c("llogis", "gamma", "lnorm")), row.names = c(
-        NA,
-        -3L
-      ), class = "data.frame")
-  )
+  hc <- ssd_hc(fluazinam_dists, average = FALSE)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, c(5, 5, 5))
+  expect_equal(hc$est, c(1.30938169835089, 0.309067069393034, 1.74529360152777))
+  expect_equal(hc$se, c( NA_real_, NA_real_,NA_real_))
+  expect_equal(hc$lcl, c(NA_real_, NA_real_, NA_real_))
+  expect_equal(hc$ucl, c(NA_real_, NA_real_, NA_real_))
+  expect_equal(hc$dist, c("llogis", "gamma", "lnorm")) 
 })

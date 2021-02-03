@@ -129,14 +129,26 @@ test_that("fit gompertz cis", {
   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
 
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-               data.frame(percent = 5, est = 1.29966505882091, se = 0.210602817456456, 
-                          lcl = 1.06020559352889, ucl = 1.6595940440259, dist = "gompertz",
-                          stringsAsFactors = FALSE), tolerance = 1e-2)
+  hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 1.29966505882091, tolerance = 1e-2)
+  expect_equal(hc$se, 0.210602817456456, tolerance = 1e-2)
+  expect_equal(hc$lcl, 1.06020559352889, tolerance = 1e-2 )
+  expect_equal(hc$ucl, 1.6595940440259, tolerance = 1e-2)
+  expect_equal(hc$dist, "gompertz")
+  expect_error(stringsAsFactors = TRUE)
 
   set.seed(77)
-  expect_equal(as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-               data.frame(conc = 2, est = 7.59650778517608, se = 1.14891770368466, 
-                          lcl = 6.0020990844966, ucl = 9.22516202386345, dist = "gompertz",
-                          stringsAsFactors = FALSE), tolerance = 1e-2)
+  hp <- ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, 2)
+  expect_equal(hp$est, 7.59650778517608, tolerance = 1e-2)
+  expect_equal(hp$se, 1.14891770368466, tolerance = 1e-2) 
+  expect_equal(hp$lcl, 6.0020990844966, tolerance = 1e-2)
+  expect_equal(hp$ucl, 9.22516202386345, tolerance = 1e-2)
+  expect_equal(hp$dist, "gompertz")
+  expect_error(stringsAsFactors = TRUE)
 })

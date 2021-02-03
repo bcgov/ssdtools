@@ -42,25 +42,27 @@ test_that("fit pareto cis", {
   skip_if_not(capabilities("long.double"))
   
   set.seed(77)
-  expect_equal(
-    as.data.frame(ssd_hc(dist, ci = TRUE, nboot = 10)),
-    structure(list(
-      percent = 5, est = 1.14041839659127, se = 0.0212780854747505,
-      lcl = 1.11896006602472, ucl = 1.17955575595707, dist = "pareto"
-    ), class = "data.frame", row.names = c(
-      NA,
-      -1L
-    )))
+  hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 1.14041839659127) 
+  expect_equal(hc$se, 0.0212780854747505)
+  expect_equal(hc$lcl, 1.11896006602472)
+  expect_equal(hc$ucl, 1.17955575595707)
+  expect_equal(hc$dist, "pareto")
+  
   set.seed(77)
-  expect_equal(
-    as.data.frame(ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)),
-    structure(list(
-      conc = 2, est = 23.7068285156163, se = 2.7637435813203,
-      lcl = 19.3919509212197, ucl = 27.1171096778786, dist = "pareto"
-    ), class = "data.frame", row.names = c(
-      NA,
-      -1L
-    )))
+  hp <- ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, 2)
+  expect_equal(hp$est, 23.7068285156163)
+  expect_equal(hp$se, 2.7637435813203)
+  expect_equal(hp$lcl, 19.3919509212197)
+  expect_equal(hp$ucl, 27.1171096778786)
+  expect_equal(hp$dist, "pareto")
+  
 })
 
 test_that("ppareto", {
