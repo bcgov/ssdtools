@@ -47,6 +47,7 @@ Other contributors:
   \item Andy Teucher [contributor]
   \item Emilie Doussantousse [contributor]
   \item Stephanie Hazlitt [contributor]
+  \item Nadine Hussein [contributor]
   \item Nan-Hung Hsieh [contributor]
   \item Sergio Ibarra Espinosa [contributor]
   \item Province of British Columbia [copyright holder]
