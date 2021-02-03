@@ -13,41 +13,66 @@
 #    limitations under the License.
 
 test_that("hp fitdist", {
-  expect_equal(ssd_hp(boron_lnorm, numeric(0)), structure(list(
-    conc = numeric(0), est = numeric(0), se = numeric(0),
-    lcl = numeric(0), ucl = numeric(0), dist = character(0)
-  ), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = integer(0)))
+  hp <- ssd_hp(boron_lnorm, numeric(0)) 
+  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, numeric(0))
+  expect_equal(hp$est, numeric(0)) 
+  expect_equal(hp$se, numeric(0))
+  expect_equal(hp$lcl, numeric(0))
+  expect_equal(hp$ucl, numeric(0))
+  expect_equal(hp$dist, character(0))
   
-  expect_identical(ssd_hp(boron_lnorm, NA_real_), structure(list(
-    conc = NA_real_, est = NA_real_, se = NA_real_,
-    lcl = NA_real_, ucl = NA_real_, dist = "lnorm"
-  ), class = c(
-    "tbl_df", "tbl",
-    "data.frame"
-  ), row.names = c(NA, -1L)))
-  
+  hp <- ssd_hp(boron_lnorm, NA_real_)
+  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, NA_real_)
+  expect_equal(hp$est, NA_real_)
+  expect_equal(hp$se, NA_real_)
+  expect_equal(hp$lcl, NA_real_)
+  expect_equal(hp$ucl, NA_real_)
+  expect_equal(hp$dist, "lnorm")
   expect_equal(ssd_hp(boron_lnorm, 1)$est, 1.95576822341687)
   
-  expect_equal(ssd_hp(boron_lnorm, 0), structure(list(conc = 0, est = 0, se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = "lnorm"), class = c(
-    "tbl_df", "tbl",
-    "data.frame"
-  ), row.names = c(NA, -1L)))
+  hp <- ssd_hp(boron_lnorm, 0) 
+  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, 0) 
+  expect_equal(hp$est, 0)
+  expect_equal(hp$se, NA_real_)
+  expect_equal(hp$lcl, NA_real_)
+  expect_equal(hp$ucl, NA_real_)
+  expect_equal(hp$dist, "lnorm")
   
-  expect_equal(ssd_hp(boron_lnorm, -1), structure(list(conc = -1, est = 0, se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = "lnorm"), class = c(
-    "tbl_df", "tbl",
-    "data.frame"
-  ), row.names = c(NA, -1L)))
-  expect_equal(ssd_hp(boron_lnorm, -Inf), structure(list(conc = -Inf, est = 0, se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = "lnorm"), class = c(
-    "tbl_df", "tbl",
-    "data.frame"
-  ), row.names = c(NA, -1L)))
-  expect_equal(ssd_hp(boron_lnorm, Inf), structure(list(conc = Inf, est = 100, se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = "lnorm"), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = c(NA, -1L)))
+  hp <- ssd_hp(boron_lnorm, -1)
+  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, -1)
+  expect_equal(hp$est, 0)
+  expect_equal(hp$se, NA_real_)
+  expect_equal(hp$lcl, NA_real_) 
+  expect_equal(hp$ucl, NA_real_)
+  expect_equal(hp$dist, "lnorm")
+  
+  hp <- ssd_hp(boron_lnorm, -Inf)
+  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, -Inf)
+  expect_equal(hp$est, 0) 
+  expect_equal(hp$se, NA_real_)
+  expect_equal(hp$lcl, NA_real_)
+  expect_equal(hp$ucl, NA_real_)
+  expect_equal(hp$dist, "lnorm")
+  
+  hp <- ssd_hp(boron_lnorm, Inf)
+  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, Inf)
+  expect_equal(hp$est, 100)
+  expect_equal(hp$se, NA_real_)
+  expect_equal(hp$lcl, NA_real_)
+  expect_equal(hp$ucl, NA_real_)
+  expect_equal(hp$dist, "lnorm")
   expect_equal(ssd_hp(boron_lnorm, c(1, 30))$est, c(1.95576822341687, 75.0517322027199))
 })
 
@@ -78,21 +103,25 @@ test_that("hp fitdist cis", {
 test_that("hp fitdists with no dists", {
   x <- list()
   class(x) <- c("fitdists")
-  expect_identical(ssd_hp(x, numeric(0)), structure(list(
-    conc = numeric(0), est = numeric(0), se = numeric(0),
-    lcl = numeric(0), ucl = numeric(0), dist = character(0)
-  ), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = integer(0)))
+  hp <- ssd_hp(x, numeric(0))
+  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, numeric(0))
+  expect_equal(hp$est, numeric(0))
+  expect_equal(hp$se, numeric(0))
+  expect_equal(hp$lcl, numeric(0))
+  expect_equal(hp$ucl, numeric(0))
+  expect_equal(hp$dist, character(0))
   
-  expect_identical(ssd_hp(x, 2), structure(list(
-    conc = numeric(0), est = numeric(0), se = numeric(0),
-    lcl = numeric(0), ucl = numeric(0), dist = character(0)
-  ), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = integer(0)))
+  hp <- ssd_hp(x, 2)
+  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, numeric(0))
+  expect_equal(hp$est, numeric(0))
+  expect_equal(hp$se, numeric(0))
+  expect_equal(hp$lcl, numeric(0))
+  expect_equal(hp$ucl, numeric(0))
+  expect_equal(hp$dist, character(0))
 })
 
 test_that("hp fitdists", {
