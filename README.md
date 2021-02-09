@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R build
 status](https://github.com/bcgov/ssdtools/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/ssdtools/actions)
 [![Coverage
@@ -161,27 +161,25 @@ To report bugs/issues/feature requests, please file an
 
 ## Citation
 
-``` 
 
-To cite ssdtools in publications use:
+    To cite ssdtools in publications use:
 
-  Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
-  Species Sensitivity Distributions. Journal of Open Source Software,
-  3(31), 1082. https://doi.org/10.21105/joss.01082
+      Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
+      Species Sensitivity Distributions. Journal of Open Source Software,
+      3(31), 1082. https://doi.org/10.21105/joss.01082
 
-A BibTeX entry for LaTeX users is
+    A BibTeX entry for LaTeX users is
 
-  @Article{,
-    title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
-    author = {Joe Thorley and Carl Schwarz},
-    journal = {Journal of Open Source Software},
-    year = {2018},
-    volume = {3},
-    number = {31},
-    pages = {1082},
-    doi = {10.21105/joss.01082},
-  }
-```
+      @Article{,
+        title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
+        author = {Joe Thorley and Carl Schwarz},
+        journal = {Journal of Open Source Software},
+        year = {2018},
+        volume = {3},
+        number = {31},
+        pages = {1082},
+        doi = {10.21105/joss.01082},
+      }
 
 ## How to Contribute
 
@@ -214,12 +212,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
------
+------------------------------------------------------------------------
 
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
-style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span>
-by
-<span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the
-Province of British Columbia </span> is licensed under a
+style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
+xmlns:dct="http://purl.org/dc/terms/"
+property="dct:title">ssdtools</span> by <span
+xmlns:cc="http://creativecommons.org/ns#"
+property="cc:attributionName">the Province of British Columbia </span>
+is licensed under a
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 Creative Commons Attribution 4.0 International License</a>.

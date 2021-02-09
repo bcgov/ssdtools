@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # ssdtools <img src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R build status](https://github.com/bcgov/ssdtools/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/ssdtools/actions)
 [![Coverage Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
