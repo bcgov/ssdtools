@@ -30,7 +30,7 @@ However, if two or more similar models fit the data well then the support for th
 
 ## Default Distributions
 
-To avoid such model redundancy (Burnham and Anderson 2002), ssdtools and the accompanying Shiny app (Dalgarno 2018) fit three different shape distributions by default: the log-normal, log-logistic and gamma.
+To avoid such model redundancy (Burnham and Anderson 2002), ssdtools and the accompanying Shiny app (Dalgarno 2021) fit three different shape distributions by default: the log-normal, log-logistic and gamma.
 
 The three distributions are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.
 ```{r, message=FALSE}
@@ -82,7 +82,7 @@ Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference
 
 Burr, I. W. 1942. Cumulative frequency functions. Annals of Mathematical Statistics. 13:2, 215–232.
 
-Dalgarno, D. 2018. ssdtools: A shiny web app to analyse species sensitivity distributions. Prepared by Poisson Consulting for the Ministry of the Environment, British Columbia. https://bcgov-env.shinyapps.io/ssdtools
+Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species Sensitivity Distributions (SSDs). JOSS 6(57): 2848. https://joss.theoj.org/papers/10.21105/joss.02848.
 
 Schwarz, C.J. and A.R. Tillmanns. 2019.  Improving statistical methods to derive species sensitivity distributions.  Water Science Series, WSS2019-07, Province of British Columbia, Victoria.
 

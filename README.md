@@ -130,6 +130,30 @@ ssd_plot(boron_data, boron_pred,
 
 ![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
 
+## Citation
+
+``` 
+
+To cite ssdtools in publications use:
+
+  Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
+  Species Sensitivity Distributions. Journal of Open Source Software,
+  3(31), 1082. https://doi.org/10.21105/joss.01082
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
+    author = {Joe Thorley and Carl Schwarz},
+    journal = {Journal of Open Source Software},
+    year = {2018},
+    volume = {3},
+    number = {31},
+    pages = {1082},
+    doi = {10.21105/joss.01082},
+  }
+```
+
 ## Information
 
 Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
@@ -138,8 +162,12 @@ Distributions in Ecotoxicology. CRC Press.
 Get started with ssdtools at
 <https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
 
-A shiny webpage developed for non-R-users is available at
-<https://bcgov-env.shinyapps.io/ssdtools>.
+A shiny app to allow non-R users to interface with ssdtools is available
+at <https://github.com/bcgov/shinyssdtools>:
+
+Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species
+Sensitivity Distributions (SSDs). JOSS 6(57): 2848.
+<https://joss.theoj.org/papers/10.21105/joss.02848>.
 
 The ssdtools package was developed as a result of earlier drafts of:
 
@@ -164,30 +192,6 @@ folder for more information.
 
 To report bugs/issues/feature requests, please file an
 [issue](https://github.com/bcgov/ssdtools/issues/).
-
-## Citation
-
-``` 
-
-To cite ssdtools in publications use:
-
-  Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
-  Species Sensitivity Distributions. Journal of Open Source Software,
-  3(31), 1082. https://doi.org/10.21105/joss.01082
-
-A BibTeX entry for LaTeX users is
-
-  @Article{,
-    title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
-    author = {Joe Thorley and Carl Schwarz},
-    journal = {Journal of Open Source Software},
-    year = {2018},
-    volume = {3},
-    number = {31},
-    pages = {1082},
-    doi = {10.21105/joss.01082},
-  }
-```
 
 ## How to Contribute
 
