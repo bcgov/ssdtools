@@ -145,8 +145,14 @@ The ssdtools package was developed as a result of earlier drafts of:
 
 Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for
 Modeling Species Sensitivity Distributions. Province of British
-Columbia, Victoria, BC. Available from
-<http://a100.gov.bc.ca/appsdata/acat/documents/r57400/2_1568399094009_8398900200.pdf>.
+Columbia, Victoria, BC.
+
+For recent developments in SSD modeling including a review of existing
+software:
+
+Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity
+Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
+<https://onlinelibrary.wiley.com/doi/10.1002/etc.4925>.
 
 The CCME `data.csv` data file is derived from a factsheet prepared by
 the [Canadian Council of Ministers of the
