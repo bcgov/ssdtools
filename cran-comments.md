@@ -23,3 +23,10 @@ release 4.0.4
       	Unknown SSL protocol error in connection to bcgov-env.shinyapps.io:443
     
 The URL is valid.
+
+## revdepcheck results
+
+We checked 1 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
