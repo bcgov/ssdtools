@@ -1,12 +1,12 @@
-# ssdtools 0.3.2.9000
+# ssdtools 0.3.3
 
-- Same as previous version.
-
+- Increased requirement that R >= 3.5 due to VGAM.
+- Modified `comma_signif()` so that now rounds to 3 significant digits by default and only applies `scales::comma()` to values >= 1000.
+- Soft-deprecated the `...` argument to `comma_signif()`.
 
 # ssdtools 0.3.2
 
 - Fix moved URLs.
-
 
 # ssdtools 0.3.1
 
