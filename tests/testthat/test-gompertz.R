@@ -124,19 +124,30 @@ test_that("fit gompertz", {
   )
 })
 
+test_that("gompertz coefs", {
+  warning("gompertz poor convergence")
+  set.seed(77)
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+  expect_equal(coef(dist), c(llocation = -3.23385214013791, lshape = -5.94988038614341))
+
+  set.seed(85)
+  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+  expect_equal(coef(dist), c(llocation = -3.23372348939004, lshape = -5.95206320995978))
+})
+
+
 test_that("fit gompertz cis", {
-  warning("why difference depending on how run (tolerance only 1e-2)")
+  set.seed(77)
   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
 
-  set.seed(77)
   hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
   expect_is(hc, "tbl_df")
   expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
   expect_identical(hc$percent, 5)
-  expect_equal(hc$est, 1.29966505882091, tolerance = 1e-2)
-  expect_equal(hc$se, 0.210602817456456, tolerance = 1e-2)
-  expect_equal(hc$lcl, 1.06020559352889, tolerance = 1e-2 )
-  expect_equal(hc$ucl, 1.6595940440259, tolerance = 1e-2)
+  expect_equal(hc$est, 1.29947858260222)
+  expect_equal(hc$se, 0.234474369346749)
+  expect_equal(hc$lcl, 0.966156147429702)
+  expect_equal(hc$ucl, 1.58273480439059)
   expect_equal(hc$dist, "gompertz")
   expect_error(stringsAsFactors = TRUE)
 
