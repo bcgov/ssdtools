@@ -17,7 +17,7 @@ ggname <- function(prefix, grob) {
   grob
 }
 
-#' Base ggproto classes for ggplot2
+#' Base ggproto Classes for ggplot2
 #'
 #' @seealso [ggplot2::ggplot2-ggproto()]
 #' @name ssdtools-ggproto

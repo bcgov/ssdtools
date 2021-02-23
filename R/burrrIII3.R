@@ -28,7 +28,7 @@
 #' dburrIII3 gives the density, pburrIII3 gives the distribution function,
 #' qburrIII3 gives the quantile function, and rburrIII3 generates random samples.
 #' @name burrIII3
-#' @seealso [actuar::dburr()]
+#' @seealso [actuar::dburr()] 
 #' @examples
 #' x <- rburrIII3(1000)
 #' hist(x, freq = FALSE, col = "gray", border = "white")

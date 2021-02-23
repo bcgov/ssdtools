@@ -3,7 +3,7 @@
 \docType{data}
 \name{fluazinam_dists}
 \alias{fluazinam_dists}
-\title{fitdists for fitdistrplus fluazinam Data}
+\title{fitdists for fitdistrplus Fluazinam Data}
 \format{
 An object of class \code{fitdistscens} (inherits from \code{fitdists}) of length 3.
 }
@@ -19,5 +19,10 @@ fluazinam_dists
 }
 \seealso{
 \code{\link[fitdistrplus:fluazinam]{fitdistrplus::fluazinam()}}
+
+Other fluazinam: 
+\code{\link{fluazinam_lnorm}},
+\code{\link{fluazinam_pred}}
 }
+\concept{fluazinam}
 \keyword{datasets}

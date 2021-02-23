@@ -3,7 +3,7 @@
 \docType{data}
 \name{boron_hc5}
 \alias{boron_hc5}
-\title{Model averaged 5 hazard concentration for CCME Boron Data}
+\title{Model Averaged 5 Hazard Concentration for CCME Boron Data}
 \format{
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1 rows and 6 columns.
 }
@@ -26,4 +26,12 @@ A data frame of the predictions based on 10000 bootstrap.
 \examples{
 boron_hc5
 }
+\seealso{
+Other boron: 
+\code{\link{boron_data}},
+\code{\link{boron_dists}},
+\code{\link{boron_lnorm}},
+\code{\link{boron_pred}}
+}
+\concept{boron}
 \keyword{datasets}

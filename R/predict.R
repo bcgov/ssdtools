@@ -12,9 +12,15 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Predict fitdist
+#' Predict 
 #'
 #' @inheritParams params
+#' @export
+predict <- function(object, ...) {
+  UseMethod("predict")
+}
+
+#' @describeIn predict Predict fitdist
 #' @export
 #' @examples
 #' predict(boron_lnorm, percent = c(5L, 50L))
@@ -35,9 +41,7 @@ predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95,
   )
 }
 
-#' Predict censored fitdist
-#'
-#' @inheritParams params
+#' @describeIn predict Predict censored fitdist
 #' @export
 #' @examples
 #' predict(fluazinam_lnorm, percent = c(5L, 50L))
@@ -57,9 +61,7 @@ predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95
   )
 }
 
-#' Predict fitdists
-#'
-#' @inheritParams params
+#' @describeIn predict Predict fitdists
 #' @export
 #' @examples
 #' predict(boron_dists)
@@ -81,9 +83,7 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
   )
 }
 
-#' Predict censored fitdists
-#'
-#' @inheritParams params
+#' @describeIn predict Predict censored fitdists
 #' @export
 #' @examples
 #' predict(fluazinam_dists)

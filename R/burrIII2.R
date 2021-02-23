@@ -65,7 +65,7 @@ rburrIII2 <- function(n, locationlog = 0, scalelog = 1) {
   rllogis(n, locationlog = locationlog, scalelog = scalelog)
 }
 
-#' @rdname llogis
+#' @rdname burrIII2
 #' @export
 sburrIII2 <- function(x) {
   deprecate_soft("0.1.2", "sburrIII2()", "sllogis()", id = "xburrIII2",

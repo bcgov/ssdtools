@@ -31,6 +31,13 @@ The columns are as follows
 head(ccme_data)
 }
 \seealso{
-ccme_data
+\link{ccme_data}
+
+Other boron: 
+\code{\link{boron_dists}},
+\code{\link{boron_hc5}},
+\code{\link{boron_lnorm}},
+\code{\link{boron_pred}}
 }
+\concept{boron}
 \keyword{datasets}

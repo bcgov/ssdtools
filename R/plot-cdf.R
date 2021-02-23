@@ -14,7 +14,7 @@
 
 #' Plot Cumulative Distribution Function
 #'
-#' Plots the cdf.
+#' Plots the cumulative distribution function (cdf).
 #'
 #' @inheritParams params
 #' @export

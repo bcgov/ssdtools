@@ -30,6 +30,8 @@ plot_coord_scale <- function(data, xlab, ylab) {
 }
 
 #' SSD Plot
+#' 
+#' Plots species sensitivity data.
 #' @inheritParams params
 #' @export
 #' @examples

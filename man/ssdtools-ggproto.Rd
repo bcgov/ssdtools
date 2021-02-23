@@ -9,9 +9,9 @@
 \alias{GeomSsdcens}
 \alias{GeomHcintersect}
 \alias{GeomXribbon}
-\title{Base ggproto classes for ggplot2}
+\title{Base ggproto Classes for ggplot2}
 \description{
-Base ggproto classes for ggplot2
+Base ggproto Classes for ggplot2
 }
 \seealso{
 \code{\link[ggplot2:ggplot2-ggproto]{ggplot2::ggplot2-ggproto()}}

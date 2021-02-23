@@ -19,3 +19,10 @@ Tests whether an object is a censored fitdist.
 is.fitdistcens(boron_lnorm)
 is.fitdistcens(fluazinam_lnorm)
 }
+\seealso{
+Other is: 
+\code{\link{is.fitdistscens}()},
+\code{\link{is.fitdists}()},
+\code{\link{is.fitdist}()}
+}
+\concept{is}

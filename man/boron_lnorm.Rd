@@ -17,4 +17,12 @@ Boron with the lnorm distribution.
 \examples{
 boron_lnorm
 }
+\seealso{
+Other boron: 
+\code{\link{boron_data}},
+\code{\link{boron_dists}},
+\code{\link{boron_hc5}},
+\code{\link{boron_pred}}
+}
+\concept{boron}
 \keyword{datasets}

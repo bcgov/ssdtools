@@ -28,7 +28,8 @@
 #'   \item{Units}{The units (chr).}
 #'   \item{Group}{The taxonomic group (fctr).}
 #' }
-#' @seealso ccme_data
+#' @seealso [ccme_data]
+#' @family boron
 #' @examples
 #' head(ccme_data)
 "boron_data"
@@ -37,7 +38,7 @@
 #'
 #' A fitdists object for Species Sensitivity Data for
 #' Boron.
-#'
+#' @family boron
 #' @examples
 #' boron_dists
 "boron_dists"
@@ -46,12 +47,12 @@
 #'
 #' A fitdist object for Species Sensitivity Data for
 #' Boron with the lnorm distribution.
-#'
+#' @family boron
 #' @examples
 #' boron_lnorm
 "boron_lnorm"
 
-#' Model averaged predictions for CCME Boron Data
+#' Model Averaged Predictions for CCME Boron Data
 #'
 #' A data frame of the predictions based on 1,000 bootstrap iterations.
 #'
@@ -63,11 +64,12 @@
 #'   \item{se}{The upper confidence limit (dbl).}
 #'   \item{dist}{The distribution (chr).}
 #' }
+#' @family boron
 #' @examples
 #' head(boron_pred)
 "boron_pred"
 
-#' Model averaged 5 hazard concentration for CCME Boron Data
+#' Model Averaged 5 Hazard Concentration for CCME Boron Data
 #'
 #' A data frame of the predictions based on 10000 bootstrap.
 #'
@@ -79,6 +81,7 @@
 #'   \item{se}{The upper confidence limit (dbl).}
 #'   \item{dist}{The distribution (chr).}
 #' }
+#' @family boron
 #' @examples
 #' boron_hc5
 "boron_hc5"
@@ -113,27 +116,29 @@
 #' head(ccme_data)
 "ccme_data"
 
-#' fitdists for fitdistrplus fluazinam Data
+#' fitdists for fitdistrplus Fluazinam Data
 #'
 #' A fitdists object for Species Sensitivity Data for
 #' Fluazinam.
 #'
 #' @seealso [fitdistrplus::fluazinam()]
+#' @family fluazinam
 #' @examples
 #' fluazinam_dists
 "fluazinam_dists"
 
-#' fitdist for CCME Boron Data
+#' fitdist for CCME Fluazinam Data
 #'
 #' A fitdist object for Species Sensitivity Data for
 #' Boron with the lnorm distribution.
 #'
 #' @seealso [fitdistrplus::fluazinam()]
+#' @family fluazinam
 #' @examples
 #' fluazinam_lnorm
 "fluazinam_lnorm"
 
-#' Model averaged predictions for fluazinam
+#' Model Averaged Predictions for Fluazinam
 #'
 #' A data frame of the predictions.
 #'
@@ -145,6 +150,8 @@
 #'   \item{se}{The upper confidence limit (dbl).}
 #'   \item{dist}{The distribution (chr).}
 #' }
+#' @seealso [fitdistrplus::fluazinam()]
+#' @family fluazinam
 #' @examples
 #' head(fluazinam_pred)
 "fluazinam_pred"
