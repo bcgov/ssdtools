@@ -15,21 +15,23 @@
 plot_coord_scale <- function(data, xlab, ylab) {
   chk_string(xlab)
   chk_string(ylab)
-
+  
   list(
     coord_trans(x = "log10"),
     scale_x_continuous(xlab,
-      breaks = scales::trans_breaks("log10", function(x) 10^x),
-      labels = comma_signif
+                       breaks = scales::trans_breaks("log10", function(x) 10^x),
+                       labels = comma_signif
     ),
     scale_y_continuous(ylab,
-      labels = scales::percent, limits = c(0, 1),
-      breaks = seq(0, 1, by = 0.2), expand = c(0, 0)
+                       labels = scales::percent, limits = c(0, 1),
+                       breaks = seq(0, 1, by = 0.2), expand = c(0, 0)
     )
   )
 }
 
 #' SSD Plot
+#' 
+#' Plots species sensitivity data.
 #' @inheritParams params
 #' @export
 #' @examples
@@ -46,10 +48,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   chk_numeric(pred$est)
   chk_numeric(pred$lcl)
   chk_numeric(pred$ucl)
-
+  
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
-
+  
   chk_string(left)
   chk_string(right)
   if (!is.null(label)) chk_string(label)
@@ -62,11 +64,11 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_gt(length(hc))
     chk_subset(hc, pred$percent)
   }
-
+  
   chk_superset(colnames(data), c(left, right, label, shape))
-
+  
   gp <- ggplot(pred, aes_string(x = "est"))
-
+  
   if (ci) {
     if (ribbon) {
       gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2)
@@ -81,15 +83,15 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     data <- data[order(data[[label]]), ]
   }
   gp <- gp + geom_line(aes_string(y = "percent/100"), color = if (ribbon) "black" else "red")
-
-
+  
+  
   if (!is.null(hc)) {
     gp <- gp + geom_hcintersect(
       data = pred[pred$percent %in% hc, ],
       aes_string(xintercept = "est", yintercept = "percent/ 100")
     )
   }
-
+  
   if (left == right) {
     gp <- gp + geom_ssd(data = data, aes_string(
       x = left, shape = shape,
@@ -102,9 +104,9 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     data$arrowleft <- data$right / 2
     data$arrowright <- data$left * 2
     data$y <- ssd_ecd(data$xmean)
-
+    
     arrow <- arrow(length = unit(0.1, "inches"))
-
+    
     gp <- gp + geom_line(aes_string(y = "percent")) +
       geom_segment(
         data = data[data$xmin != data$xmax, ],
@@ -127,7 +129,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       )
   }
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab)
-
+  
   if (!is.null(label)) {
     data$percent <- ssd_ecd(data[[left]])
     data[[left]] <- data[[left]] * shift_x
@@ -136,6 +138,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       hjust = 0, size = size, fontface = "italic"
     )
   }
-
+  
   gp
 }
+

@@ -2,9 +2,12 @@
 % Please edit documentation in R/nobs.R
 \name{nobs.fitdist}
 \alias{nobs.fitdist}
+\alias{nobs.fitdistcens}
 \title{Number of Observations}
 \usage{
 \method{nobs}{fitdist}(object, ...)
+
+\method{nobs}{fitdistcens}(object, ...)
 }
 \arguments{
 \item{object}{The object.}
@@ -16,4 +19,8 @@ Number of Observations
 }
 \examples{
 stats::nobs(boron_lnorm)
+stats::nobs(fluazinam_lnorm)
+}
+\seealso{
+\code{\link[stats:nobs]{stats::nobs()}}
 }

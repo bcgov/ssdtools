@@ -2,7 +2,10 @@
 % Please edit documentation in R/predict.R
 \name{predict.fitdist}
 \alias{predict.fitdist}
-\title{Predict fitdist}
+\alias{predict.fitdistcens}
+\alias{predict.fitdists}
+\alias{predict.fitdistscens}
+\title{Predict}
 \usage{
 \method{predict}{fitdist}(
   object,
@@ -12,6 +15,43 @@
   nboot = 1000,
   parallel = NULL,
   ncpus = 1,
+  ...
+)
+
+\method{predict}{fitdistcens}(
+  object,
+  percent = 1:99,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
+
+\method{predict}{fitdists}(
+  object,
+  percent = 1:99,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  average = TRUE,
+  ic = "aicc",
+  ...
+)
+
+\method{predict}{fitdistscens}(
+  object,
+  percent = 1:99,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  average = TRUE,
+  ic = "aic",
   ...
 )
 }
@@ -31,10 +71,21 @@
 \item{ncpus}{A count of the number of parallel processes to use.}
 
 \item{...}{Unused.}
+
+\item{average}{A flag specifying whether to model average the estimates.}
+
+\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 }
 \description{
-Predict fitdist
+Predict
 }
 \examples{
 predict(boron_lnorm, percent = c(5L, 50L))
+predict(fluazinam_lnorm, percent = c(5L, 50L))
+predict(boron_dists)
+predict(fluazinam_dists)
 }
+\seealso{
+\code{\link[stats:predict]{stats::predict()}}
+}
+\concept{predict}

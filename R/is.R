@@ -18,6 +18,7 @@
 #' @inheritParams params
 #'
 #' @return A flag.
+#' @family is
 #' @export
 #'
 #' @examples
@@ -34,6 +35,7 @@ is.fitdist <- function(x) {
 #' @inheritParams params
 #'
 #' @return A flag.
+#' @family is
 #' @export
 #'
 #' @examples
@@ -49,6 +51,7 @@ is.fitdistcens <- function(x) {
 #' @inheritParams params
 #'
 #' @return A flag.
+#' @family is
 #' @export
 #'
 #' @examples
@@ -64,6 +67,7 @@ is.fitdists <- function(x) {
 #' @inheritParams params
 #'
 #' @return A flag.
+#' @family is
 #' @export
 #'
 #' @examples

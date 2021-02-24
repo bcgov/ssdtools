@@ -28,7 +28,7 @@ ssd_plot_cdf(x, ...)
 \item{ylab}{A string of the x-axis label.}
 }
 \description{
-Plots the cdf.
+Plots the cumulative distribution function (cdf).
 }
 \section{Methods (by class)}{
 \itemize{

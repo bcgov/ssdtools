@@ -65,3 +65,9 @@ to the paired geom/stat.}
 For each y value, \code{geom_xribbon} displays an x interval defined
 by \code{xmin} and \code{xmax}.
 }
+\seealso{
+Other gpplot: 
+\code{\link{geom_hcintersect}()},
+\code{\link{geom_ssd}()}
+}
+\concept{gpplot}

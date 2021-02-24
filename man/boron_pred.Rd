@@ -3,7 +3,7 @@
 \docType{data}
 \name{boron_pred}
 \alias{boron_pred}
-\title{Model averaged predictions for CCME Boron Data}
+\title{Model Averaged Predictions for CCME Boron Data}
 \format{
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 99 rows and 6 columns.
 }
@@ -26,4 +26,12 @@ A data frame of the predictions based on 1,000 bootstrap iterations.
 \examples{
 head(boron_pred)
 }
+\seealso{
+Other boron: 
+\code{\link{boron_data}},
+\code{\link{boron_dists}},
+\code{\link{boron_hc5}},
+\code{\link{boron_lnorm}}
+}
+\concept{boron}
 \keyword{datasets}

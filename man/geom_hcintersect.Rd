@@ -61,3 +61,9 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
   geom_ssd() +
   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
 }
+\seealso{
+Other gpplot: 
+\code{\link{geom_ssd}()},
+\code{\link{geom_xribbon}()}
+}
+\concept{gpplot}

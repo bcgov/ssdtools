@@ -1,0 +1,109 @@
+destination: docs
+
+reference:
+- title: CCME Data
+  desc: CCME Species Sensitivity Data for Boron and Fluazinam
+  contents:
+  - '`ccme_data`'
+  - '`boron_data`'
+  - '`boron_dists`'
+  - '`boron_hc5`'
+  - '`boron_lnorm`'
+  - '`boron_pred`'
+  - '`fluazinam_dists`'
+  - '`fluazinam_lnorm`'
+  - '`fluazinam_pred`'
+  - '`test_data`'
+- title: Calculate and Predict
+  desc: Calculate Values and Estimate Model Fit 
+  contents:
+  - '`predict.fitdist`'
+  - '`ssd_ecd`'
+  - '`ssd_exposure`'
+  - '`ssd_gof`'
+  - '`ssd_hc`'
+  - '`ssd_hp`'
+  - '`ssd_match_moments`'
+- title: Distributions
+  desc: Distribution Functions
+  contents: 
+  - '`dburrIII2`' 
+  - '`pburrIII2`' 
+  - '`qburrIII2`' 
+  - '`rburrIII2`'
+  - '`sburrIII2`'
+  - '`dburrIII3`' 
+  - '`pburrIII3`' 
+  - '`qburrIII3`' 
+  - '`rburrIII3`'
+  - '`sburrIII3`'
+  - '`dgamma`'
+  - '`pgamma`'
+  - '`qgamma`'
+  - '`rgamma`'
+  - '`sgamma`'
+  - '`dgompertz`'
+  - '`pgompertz`'
+  - '`qgompertz`'
+  - '`rgompertz`'
+  - '`sgompertz`'
+  - '`dlgumbel`'
+  - '`plgumbel`'
+  - '`qlgumbel`'
+  - '`rlgumbel`'
+  - '`slgumbel`'
+  - '`dllog`'
+  - '`pllog`'
+  - '`qllog`'
+  - '`rllog`'
+  - '`sllog`'
+  - '`dllogis`'
+  - '`pllogis`'
+  - '`qllogis`'
+  - '`rllogis`'
+  - '`sllogis`'
+  - '`dlnorm`'
+  - '`plnorm`'
+  - '`qlnorm`'
+  - '`rlnorm`'
+  - '`slnorm`'
+  - '`dpareto`'
+  - '`ppareto`'
+  - '`qpareto`'
+  - '`rpareto`'
+  - '`spareto`'
+  - '`dweibull`'
+  - '`pweibull`'
+  - '`qweibull`'
+  - '`rweibull`'
+  - '`ssd_fit_dists`'
+- title: Plots
+  desc: Functions to Generate Plots
+  contents:
+  - '`autoplot.fitdist`'
+  - '`geom_hcintersect`'
+  - '`geom_ssd`'
+  - '`geom_xribbon`'
+  - '`stat_sdd`'
+  - '`ssd_plot`'
+  - '`ssd_plot_cdf`'
+  - '`ssd_plot_cf`'
+  - '`ssd_cfplot`'
+  - '`ssdtools-ggproto`'
+- title: Query
+  desc: Query Parameters and Observations
+  contents:
+  - '`nobs.fitdist`'
+  - '`npars`'
+- title: Test 
+  desc: Test fitdist Objects
+  contents:
+  - '`is.fitdist`'
+  - '`is.fitdistcens`'
+  - '`is.fitdists`'
+  - '`is.fitdistscens`'
+- title: Miscellaneous
+  desc: Format and Subset Objects
+  contents:
+  - '`comma_signif`'
+  - '`subset.fitdists`'

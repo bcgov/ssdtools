@@ -12,12 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Autoplot fitdist
+#' Autoplot 
 #'
 #' Plots the cumulative distribution function (cdf) using the ggplot2
 #' generic.
 #'
 #' @inheritParams params
+#' @seealso [ggplot2::autoplot()] and [ssd_plot_cdf()] 
 #' @export
 #' @examples
 #' ggplot2::autoplot(boron_lnorm)
@@ -26,8 +27,7 @@ autoplot.fitdist <- function(object, ...) {
   ssd_plot_cdf(object)
 }
 
-#' @describeIn autoplot.fitdist Autoplot fitdists
-#'
+#' @rdname autoplot.fitdist
 #' @export
 #' @examples
 #' ggplot2::autoplot(boron_dists)
@@ -36,7 +36,7 @@ autoplot.fitdists <- function(object, ...) {
   ssd_plot_cdf(object)
 }
 
-#' @describeIn autoplot.fitdist Autoplot fitdistcens
+#' @rdname autoplot.fitdist 
 #' @export
 #' @examples
 #' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5

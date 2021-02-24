@@ -3,7 +3,7 @@
 \docType{data}
 \name{fluazinam_lnorm}
 \alias{fluazinam_lnorm}
-\title{fitdist for CCME Boron Data}
+\title{fitdist for CCME Fluazinam Data}
 \format{
 An object of class \code{fitdistcens} of length 17.
 }
@@ -19,5 +19,10 @@ fluazinam_lnorm
 }
 \seealso{
 \code{\link[fitdistrplus:fluazinam]{fitdistrplus::fluazinam()}}
+
+Other fluazinam: 
+\code{\link{fluazinam_dists}},
+\code{\link{fluazinam_pred}}
 }
+\concept{fluazinam}
 \keyword{datasets}

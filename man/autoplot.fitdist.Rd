@@ -4,7 +4,7 @@
 \alias{autoplot.fitdist}
 \alias{autoplot.fitdists}
 \alias{autoplot.fitdistcens}
-\title{Autoplot fitdist}
+\title{Autoplot}
 \usage{
 \method{autoplot}{fitdist}(object, ...)
 
@@ -21,17 +21,13 @@
 Plots the cumulative distribution function (cdf) using the ggplot2
 generic.
 }
-\section{Functions}{
-\itemize{
-\item \code{autoplot.fitdists}: Autoplot fitdists
-
-\item \code{autoplot.fitdistcens}: Autoplot fitdistcens
-}}
-
 \examples{
 ggplot2::autoplot(boron_lnorm)
 ggplot2::autoplot(boron_dists)
 fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
 fluazinam_lnorm$censdata$left[5] <- NA
 ggplot2::autoplot(fluazinam_lnorm)
+}
+\seealso{
+\code{\link[ggplot2:autoplot]{ggplot2::autoplot()}} and \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
 }

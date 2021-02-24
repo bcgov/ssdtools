@@ -5,7 +5,7 @@
 \alias{npars.fitdist}
 \alias{npars.fitdistcens}
 \alias{npars.fitdists}
-\title{Get the Number of Parameters}
+\title{Number of Parameters}
 \usage{
 npars(x, ...)
 
