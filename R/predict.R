@@ -15,12 +15,8 @@
 #' Predict 
 #'
 #' @inheritParams params
-#' @export
-predict <- function(object, ...) {
-  UseMethod("predict")
-}
-
-#' @describeIn predict Predict fitdist
+#' @seealso [stats::predict()]
+#' @family predict
 #' @export
 #' @examples
 #' predict(boron_lnorm, percent = c(5L, 50L))
@@ -28,11 +24,9 @@ predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95,
                             nboot = 1000, parallel = NULL, ncpus = 1,
                             ...) {
   chk_unused(...)
-  if (missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )",
-                   details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.",
-                   id = "predict"
-    )
+  if(missing(ci)) {
+    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
+                   id = "predict")
   }
   
   ssd_hc(object,
@@ -41,7 +35,7 @@ predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95,
   )
 }
 
-#' @describeIn predict Predict censored fitdist
+#' @rdname predict.fitdist
 #' @export
 #' @examples
 #' predict(fluazinam_lnorm, percent = c(5L, 50L))
@@ -49,11 +43,9 @@ predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95
                                 nboot = 1000, parallel = NULL, ncpus = 1,
                                 ...) {
   chk_unused(...)
-  if (missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )",
-                   details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.",
-                   id = "predict"
-    )
+  if(missing(ci)) {
+    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
+                   id = "predict")
   }
   ssd_hc(object,
          percent = percent, ci = ci, level = level,
@@ -61,7 +53,7 @@ predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95
   )
 }
 
-#' @describeIn predict Predict fitdists
+#' @rdname predict.fitdist 
 #' @export
 #' @examples
 #' predict(boron_dists)
@@ -70,11 +62,9 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              average = TRUE, ic = "aicc",
                              ...) {
   chk_unused(...)
-  if (missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )",
-                   details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.",
-                   id = "predict"
-    )
+  if(missing(ci)) {
+    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
+                   id = "predict")
   }
   ssd_hc(object,
          percent = percent, ci = ci, level = level,
@@ -83,7 +73,7 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
   )
 }
 
-#' @describeIn predict Predict censored fitdists
+#' @rdname predict.fitdist 
 #' @export
 #' @examples
 #' predict(fluazinam_dists)
@@ -91,11 +81,9 @@ predict.fitdistscens <- function(object, percent = 1:99, ci = FALSE,
                                  level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,
                                  average = TRUE, ic = "aic", ...) {
   chk_unused(...)
-  if (missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )",
-                   details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.",
-                   id = "predict"
-    )
+  if(missing(ci)) {
+    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
+                   id = "predict")
   }
   ssd_hc(object,
          percent = percent, ci = ci, level = level,

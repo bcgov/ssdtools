@@ -17,22 +17,16 @@
 #' @inheritParams params
 #' @seealso [stats::nobs()]
 #' @export
-nobs <- function(object, ...) {
-  UseMethod("nobs")
-}
-
-#' @describeIn nobs Number of Observations fitdist
-#' @export
 #' @examples
 #' stats::nobs(boron_lnorm)
 nobs.fitdist <- function(object, ...) object$n
 
-#' @describeIn nobs Number of Observations fitdistcens
+#' @rdname nobs.fitdist 
 #' @export
 #' @examples
 #' stats::nobs(fluazinam_lnorm)
 nobs.fitdistcens <- function(object, ...) NA_integer_
 
-#' @describeIn nobs Number of Observations fitdists
 #' @export
 nobs.fitdists <- function(object, ...) nobs(object[[1]])
+

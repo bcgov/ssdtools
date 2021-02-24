@@ -17,7 +17,7 @@ reference:
 - title: Calculate and Predict
   desc: Calculate Values and Estimate Model Fit 
   contents:
-  - '`predict`'
+  - '`predict.fitdist`'
   - '`ssd_ecd`'
   - '`ssd_exposure`'
   - '`ssd_gof`'
@@ -80,7 +80,7 @@ reference:
 - title: Plots
   desc: Functions to Generate Plots
   contents:
-  - '`autoplot`'
+  - '`autoplot.fitdist`'
   - '`geom_hcintersect`'
   - '`geom_ssd`'
   - '`geom_xribbon`'
@@ -93,7 +93,7 @@ reference:
 - title: Query
   desc: Query Parameters and Observations
   contents:
-  - '`nobs`'
+  - '`nobs.fitdist`'
   - '`npars`'
 - title: Test 
   desc: Test fitdist Objects

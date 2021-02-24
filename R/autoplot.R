@@ -18,13 +18,7 @@
 #' generic.
 #'
 #' @inheritParams params
-#' @seealso [ssd_plot_cdf()]
-#' @export
-autoplot <- function(object, ...) {
-  UseMethod("autoplot")
-}
-
-#' @describeIn autoplot Autoplot fitdist
+#' @seealso [ggplot2::autoplot()] and [ssd_plot_cdf()] 
 #' @export
 #' @examples
 #' ggplot2::autoplot(boron_lnorm)
@@ -33,7 +27,7 @@ autoplot.fitdist <- function(object, ...) {
   ssd_plot_cdf(object)
 }
 
-#' @describeIn autoplot Autoplot fitdists
+#' @rdname autoplot.fitdist
 #' @export
 #' @examples
 #' ggplot2::autoplot(boron_dists)
@@ -42,7 +36,7 @@ autoplot.fitdists <- function(object, ...) {
   ssd_plot_cdf(object)
 }
 
-#' @describeIn autoplot Autoplot fitdistcens
+#' @rdname autoplot.fitdist 
 #' @export
 #' @examples
 #' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
