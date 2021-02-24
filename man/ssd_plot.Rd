@@ -51,7 +51,7 @@ ssd_plot(
 \item{shift_x}{The value to multiply the label x values by.}
 }
 \description{
-SSD Plot
+Plots species sensitivity data.
 }
 \examples{
 ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")

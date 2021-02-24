@@ -44,7 +44,7 @@ plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p 
 #' @export
 qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gumbel", p = p,  location = locationlog, scale = scalelog,
-          lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
+        lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 #' @rdname lgumbel

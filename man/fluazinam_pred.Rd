@@ -3,7 +3,7 @@
 \docType{data}
 \name{fluazinam_pred}
 \alias{fluazinam_pred}
-\title{Model averaged predictions for fluazinam}
+\title{Model Averaged Predictions for Fluazinam}
 \format{
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 99 rows and 6 columns.
 }
@@ -26,4 +26,12 @@ A data frame of the predictions.
 \examples{
 head(fluazinam_pred)
 }
+\seealso{
+\code{\link[fitdistrplus:fluazinam]{fitdistrplus::fluazinam()}}
+
+Other fluazinam: 
+\code{\link{fluazinam_dists}},
+\code{\link{fluazinam_lnorm}}
+}
+\concept{fluazinam}
 \keyword{datasets}

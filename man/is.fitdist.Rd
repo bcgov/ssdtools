@@ -20,3 +20,10 @@ is.fitdist(boron_lnorm)
 is.fitdist(boron_dists)
 is.fitdist(boron_dists[["lnorm"]])
 }
+\seealso{
+Other is: 
+\code{\link{is.fitdistcens}()},
+\code{\link{is.fitdistscens}()},
+\code{\link{is.fitdists}()}
+}
+\concept{is}

@@ -20,3 +20,10 @@ is.fitdistscens(boron_dists)
 is.fitdistscens(fluazinam_lnorm)
 is.fitdistscens(fluazinam_dists)
 }
+\seealso{
+Other is: 
+\code{\link{is.fitdistcens}()},
+\code{\link{is.fitdists}()},
+\code{\link{is.fitdist}()}
+}
+\concept{is}

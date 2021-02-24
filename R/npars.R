@@ -1,6 +1,7 @@
 
-#' Get the Number of Parameters
+#' Number of Parameters
 #'
+#' Get the Number of Parameters
 #' @inheritParams params
 #'
 #' @return A count indicating the number of parameters.

@@ -28,7 +28,7 @@
 #' dburrIII3 gives the density, pburrIII3 gives the distribution function,
 #' qburrIII3 gives the quantile function, and rburrIII3 generates random samples.
 #' @name burrIII3
-#' @seealso [actuar::dburr()]
+#' @seealso [actuar::dburr()] 
 #' @examples
 #' x <- rburrIII3(1000)
 #' hist(x, freq = FALSE, col = "gray", border = "white")
@@ -58,7 +58,7 @@ qburrIII3 <- function(p, lshape1 = 0, lshape2 = 0, lscale = 0, lower.tail = TRUE
   if(!length(q)) return(numeric(0))
   if(log.p) p <- exp(p)
   q <- suppressWarnings(actuar::qburr(1-p, shape1=exp(lshape1), shape2=exp(lshape2), scale=exp(lscale), 
-                     lower.tail=lower.tail))
+                                      lower.tail=lower.tail))
   1/q
 }
 

@@ -68,5 +68,5 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
   stat_ssd()
 }
 \seealso{
-\code{\link[=geom_ssd]{geom_ssd()}}
+\code{\link[=geom_ssd]{geom_ssd()}} and \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
 }
