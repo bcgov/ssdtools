@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("test_data", {
-  expect_null(chk::check_data(
+  expect_error(chk::check_data(
     test_data,
     values = list(
       Chemical = "",
@@ -22,7 +22,7 @@ test_that("test_data", {
     exclusive = TRUE,
     order = TRUE,
     nrow = 141L
-  ))
+  ), NA)
   expect_is(test_data, "tbl")
 })
 
