@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("data", {
-  expect_null(chk::check_data(
+  expect_error(chk::check_data(
     ccme_data,
     values = list(
       Chemical = "",
@@ -23,10 +23,10 @@ test_that("data", {
       Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
     ),
     nrow = c(1L, 2147483647L)
-  ))
+  ), NA)
   expect_is(ccme_data, "tbl")
 
-  expect_null(chk::check_data(
+  expect_error(chk::check_data(
     boron_data,
     values = list(
       Chemical = c("Boron", "Boron"),
@@ -36,10 +36,10 @@ test_that("data", {
       Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
     ),
     nrow = 28
-  ))
+  ), NA)
   expect_is(boron_data, "tbl")
 
-  expect_null(chk::check_data(
+  expect_error(chk::check_data(
     boron_pred,
     values = list(
       percent = 1L,
@@ -49,13 +49,13 @@ test_that("data", {
       ucl = 1
     ),
     nrow = 99L
-  ))
+  ), NA)
   expect_is(boron_pred, "tbl")
 
   expect_is(boron_lnorm, "fitdist")
   expect_is(boron_dists, "fitdists")
 
-  expect_null(chk::check_data(
+  expect_error(chk::check_data(
     test_data,
     values = list(
       Chemical = "",
@@ -64,6 +64,6 @@ test_that("data", {
     exclusive = TRUE,
     order = TRUE,
     nrow = 141L
-  ))
+  ), NA)
   expect_is(test_data, "tbl")
 })
