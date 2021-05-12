@@ -2,7 +2,7 @@
 
 |field    |value                        |
 |:--------|:----------------------------|
-|version  |R version 4.0.3 (2020-10-10) |
+|version  |R version 4.0.5 (2021-03-31) |
 |os       |macOS Big Sur 10.16          |
 |system   |x86_64, darwin17.0           |
 |ui       |RStudio                      |
