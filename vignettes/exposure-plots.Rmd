@@ -31,7 +31,7 @@ fit.plot
 ```
 
 This graphic is a *ggplot* object and so can be saved and embellished in the usual way.
-For example, suppose we want to superimpose an evironmental concentration cumulative distribution and compute the exposure risk as outlined in Verdonck et al (2003).
+For example, suppose we want to superimpose an environmental concentration cumulative distribution and compute the exposure risk as outlined in Verdonck et al (2003).
 
 ```{r echo=FALSE}
 # what are the mean and sd on the log-scale for the envirionmental concentration
