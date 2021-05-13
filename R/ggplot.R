@@ -40,7 +40,7 @@ stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
-#' @family gpplot
+#' @family ggplot
 #' @export
 geom_xribbon <- function(mapping = NULL, data = NULL, stat = "identity",
                          position = "identity", na.rm = FALSE, show.legend = NA,
@@ -59,7 +59,7 @@ geom_xribbon <- function(mapping = NULL, data = NULL, stat = "identity",
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @seealso [ssd_plot_cdf()]
-#' @family gpplot
+#' @family ggplot
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
@@ -81,7 +81,7 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path
 #' @inheritParams params
-#' @family gpplot
+#' @family ggplot
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +

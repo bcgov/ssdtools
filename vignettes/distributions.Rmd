@@ -52,7 +52,7 @@ Additional distributions were selected to compensate for these deficiencies.
 
 ### Log-logistic distribution
 
-The [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) distribution is often used as a candidate SSD primarily because of its analytic tractability (Aldenderg and Slob 1993).
+The [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) distribution is often used as a candidate SSD primarily because of its analytic tractability (Aldenberg and Slob 1993).
 We included it because it has wider tails than the log-normal and because it is a specific case of the more general Burr family of distributions (Burr 1942, Shao 2000).
 
 ### Gamma distribution

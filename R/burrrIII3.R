@@ -21,7 +21,7 @@
 #' The Burr 12 distribution from the actuar package is used as a base.
 #' The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
 #' refer to https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm for details.
-#' The shape1, shape2, and scale paramters are on the log(scale) as these must be positive.
+#' The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
 #'
 #' @inheritParams params
 #' @return

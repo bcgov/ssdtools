@@ -71,8 +71,8 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 \seealso{
 \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
 
-Other gpplot: 
+Other ggplot: 
 \code{\link{geom_hcintersect}()},
 \code{\link{geom_xribbon}()}
 }
-\concept{gpplot}
+\concept{ggplot}

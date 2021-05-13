@@ -107,3 +107,4 @@ reference:
   contents:
   - '`comma_signif`'
   - '`subset.fitdists`'
+  - '`stat_ssd`'
