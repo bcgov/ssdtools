@@ -62,3 +62,12 @@ slnorm <- function(x) {
     sdlog = sd(log(x), na.rm = TRUE)
   ))
 }
+
+#' @rdname lnorm
+#' @export
+slnorm_tmb <- function(x) {
+  list(
+    meanlog = mean(log(x), na.rm = TRUE),
+    log_sdlog = log(sd(log(x), na.rm = TRUE))
+  )
+}
