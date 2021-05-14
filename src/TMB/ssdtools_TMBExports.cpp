@@ -5,6 +5,7 @@
 #include "GammaNLL.hpp"
 #include "NormalNLL.hpp"
 #include "ll_lnorm.hpp"
+#include "ll_llogis.hpp"
 
 template<class Type>
 Type objective_function<Type>::operator() () {
@@ -13,7 +14,9 @@ Type objective_function<Type>::operator() () {
     return GammaNLL(this);
   } else if(model == "ll_lnorm") {
     return ll_lnorm(this);
-  }  else if(model == "NormalNLL") {
+  } else if(model == "ll_llogis") {
+    return ll_llogis(this);
+  } else if(model == "NormalNLL") {
     return NormalNLL(this);
   } else {
     error("Unknown model.");

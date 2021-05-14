@@ -49,7 +49,8 @@ Imports:
     stats,
     VGAM,
     Rcpp,
-    TMB (>= 1.7.20)
+    TMB (>= 1.7.20),
+    utils
 Suggests:
     covr,
     knitr,
