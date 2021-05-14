@@ -37,7 +37,7 @@
 #define TMB_OBJECTIVE_PTR obj
 
 template<class Type>
-Type NormalNLL(objective_function<Type>* obj) {
+Type ll_lnorm(objective_function<Type>* obj) {
   // Data
   DATA_VECTOR( left  );  // left and right values
   DATA_VECTOR( right );

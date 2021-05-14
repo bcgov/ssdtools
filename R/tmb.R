@@ -15,7 +15,7 @@ tmb_parameters <- function(data, dist) {
 tmb_model <- function(data, left, right, weight, dist) {
   data <- data.frame(left = data[[left]], right = data[[right]], weight = data[[weight]])
   parameters <- tmb_parameters(data, dist)
-  tmb_fun(data, parameter, dist)
+  tmb_fun(data, parameters, dist)
 }
 
 fit_tmb <- function(data, left, right, weight, dist) {
