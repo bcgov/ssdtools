@@ -1,6 +1,6 @@
 # ssdtools 0.3.4
 
-- Internal changes only.
+- Internal changes only for chk package.
 
 # ssdtools 0.3.3
 
