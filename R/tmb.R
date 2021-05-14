@@ -1,13 +1,21 @@
+tmb_fun <- function(data, parameters, dist) {
+  model <- paste0("ll_", dist)
+  data <- c(model = model, data)
+  TMB::MakeADFun(data = data,
+                 parameters = parameters,
+                 DLL = "ssdtools_TMBExports", silent = TRUE)
+}
+
+tmb_parameters <- function(data, dist) {
+  x <- rowMeans(data[c("left", "right")], na.rm = TRUE)
+  fun <- paste0("s", dist, "_tmb")
+  do.call(fun, list(x = x))
+}
+
 tmb_model <- function(data, left, right, weight, dist) {
   data <- data.frame(left = data[[left]], right = data[[right]], weight = data[[weight]])
-  x <- rowMeans(data[c("left", "right")], na.rm = TRUE)
-  parameters <- do.call(paste0("s", dist, "_tmb"), list(x = x))
-  data <- as.list(data)
-  dll <- paste0("ll_", dist)
-  print(data)
-  print(parameters)
-  print(dll)
-  TMB::MakeADFun(data, parameters, DLL = dll)
+  parameters <- tmb_parameters(data, dist)
+  tmb_fun(data, parameter, dist)
 }
 
 fit_tmb <- function(data, left, right, weight, dist) {

@@ -11,7 +11,8 @@ ssd_fit_dists(
   weight = NULL,
   dists = c("llogis", "gamma", "lnorm"),
   computable = FALSE,
-  silent = FALSE
+  silent = FALSE,
+  tmb = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ ssd_fit_dists(
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
+
+\item{tmb}{A temporary flag specifying whether to use TMB.}
 }
 \value{
 An object of class fitdists (a list of \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}} objects).
