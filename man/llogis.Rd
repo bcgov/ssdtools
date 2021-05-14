@@ -12,6 +12,7 @@
 \alias{qllogis}
 \alias{rllogis}
 \alias{sllogis}
+\alias{sllogis_tmb}
 \title{Log-Logistic Distribution}
 \usage{
 dllog(x, locationlog = 0, scalelog = 1, log = FALSE)
@@ -33,6 +34,8 @@ qllogis(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 rllogis(n, locationlog = 0, scalelog = 1)
 
 sllogis(x)
+
+sllogis_tmb(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}

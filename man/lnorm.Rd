@@ -7,6 +7,7 @@
 \alias{qlnorm}
 \alias{rlnorm}
 \alias{slnorm}
+\alias{slnorm_tmb}
 \title{Log-Normal Distribution}
 \usage{
 dlnorm(x, meanlog = 0, sdlog = 1, log = FALSE)
@@ -18,6 +19,8 @@ qlnorm(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE)
 rlnorm(n, meanlog = 0, sdlog = 1)
 
 slnorm(x)
+
+slnorm_tmb(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
