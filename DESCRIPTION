@@ -48,7 +48,8 @@ Imports:
     scales,
     stats,
     VGAM,
-    Rcpp
+    Rcpp,
+    TMB (>= 1.7.20)
 Suggests:
     covr,
     knitr,
@@ -70,5 +71,6 @@ VignetteBuilder:
   R.rsp
 Language: en-US
 LinkingTo: 
+    TMB,
     Rcpp
 Roxygen: list(markdown = TRUE)
