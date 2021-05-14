@@ -66,9 +66,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -82,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -214,38 +223,40 @@ it is carried out using <code><a href='https://rdrr.io/r/stats/constrOptim.html'
 In both cases the "Nelder-Mead" method is used.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>ssd_fit_dists</span><span class='op'>(</span><span class='va'>boron_data</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Fitting of the distribution ' llogis ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;              estimate Std. Error
-#&gt; locationlog 2.6261249  0.2482332
-#&gt; scalelog    0.7403092  0.1143365
-#&gt; Fitting of the distribution ' gamma ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;         estimate Std. Error
-#&gt; scale 25.1263769  7.6375478
-#&gt; shape  0.9500513  0.2224988
-#&gt; Fitting of the distribution ' lnorm ' by maximum likelihood 
-#&gt; Parameters:
-#&gt;         estimate Std. Error
-#&gt; meanlog 2.561644  0.2346640
-#&gt; sdlog   1.241725  0.1659692</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>fluazinam</span>, package <span class='op'>=</span> <span class='st'>"fitdistrplus"</span><span class='op'>)</span>
-<span class='fu'>ssd_fit_dists</span><span class='op'>(</span><span class='va'>fluazinam</span>, left <span class='op'>=</span> <span class='st'>"left"</span>, right <span class='op'>=</span> <span class='st'>"right"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Fitting of the distribution ' llogis ' on censored data by maximum likelihood 
-#&gt; Parameters:
-#&gt;             estimate
-#&gt; locationlog 4.954683
-#&gt; scalelog    1.591178
-#&gt; Fitting of the distribution ' gamma ' on censored data by maximum likelihood 
-#&gt; Parameters:
-#&gt;           estimate
-#&gt; scale 2446.6063266
-#&gt; shape    0.3465141
-#&gt; Fitting of the distribution ' lnorm ' on censored data by maximum likelihood 
-#&gt; Parameters:
-#&gt;         estimate
-#&gt; meanlog 4.977584
-#&gt; sdlog   2.687571</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>ssd_fit_dists</span><span class='op'>(</span><span class='va'>boron_data</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fitting of the distribution ' llogis ' by maximum likelihood </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameters:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              estimate Std. Error</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> locationlog 2.6261249  0.2482332</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> scalelog    0.7403092  0.1143365</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fitting of the distribution ' gamma ' by maximum likelihood </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameters:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         estimate Std. Error</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> scale 25.1263769  7.6375478</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> shape  0.9500513  0.2224988</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fitting of the distribution ' lnorm ' by maximum likelihood </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameters:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         estimate Std. Error</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> meanlog 2.561644  0.2346640</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> sdlog   1.241725  0.1659692</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>fluazinam</span>, package <span class='op'>=</span> <span class='st'>"fitdistrplus"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>ssd_fit_dists</span><span class='op'>(</span><span class='va'>fluazinam</span>, left <span class='op'>=</span> <span class='st'>"left"</span>, right <span class='op'>=</span> <span class='st'>"right"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fitting of the distribution ' llogis ' on censored data by maximum likelihood </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameters:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             estimate</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> locationlog 4.954683</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> scalelog    1.591178</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fitting of the distribution ' gamma ' on censored data by maximum likelihood </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameters:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           estimate</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> scale 2446.6063266</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> shape    0.3465141</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Fitting of the distribution ' lnorm ' on censored data by maximum likelihood </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameters:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         estimate</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> meanlog 4.977584</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> sdlog   2.687571</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -257,11 +268,11 @@ In both cases the "Nelder-Mead" method is used.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joe Thorley, Carl Schwarz.</p>
+  <p><p>Developed by Joe Thorley, Carl Schwarz.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -269,6 +280,8 @@ In both cases the "Nelder-Mead" method is used.</p>
 
   
 
+
+  
 
   </body>
 </html>

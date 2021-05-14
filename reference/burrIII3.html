@@ -68,9 +68,18 @@ lshape and lscale parameters." />
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -84,7 +93,7 @@ lshape and lscale parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -230,19 +239,21 @@ qburrIII3 gives the quantile function, and rburrIII3 generates random samples.</
     <p>The Burr 12 distribution from the actuar package is used as a base.
 The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
 refer to https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm for details.
-The shape1, shape2, and scale paramters are on the log(scale) as these must be positive.</p>
+The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/actuar/man/Burr.html'>actuar::dburr()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>rburrIII3</span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: `rburrIII3()` is deprecated as of lifecycle 0.2.1.</span>
-#&gt; <span class='warning'>The 'burrIII3' distribution is under review.</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>x</span>, freq <span class='op'>=</span> <span class='cn'>FALSE</span>, col <span class='op'>=</span> <span class='st'>"gray"</span>, border <span class='op'>=</span> <span class='st'>"white"</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/curve.html'>curve</a></span><span class='op'>(</span><span class='fu'>dburrIII3</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, add <span class='op'>=</span> <span class='cn'>TRUE</span>, col <span class='op'>=</span> <span class='st'>"red4"</span>, lwd <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='img'><img src='burrIII3-1.png' alt='' width='700' height='433' /></div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>rburrIII3</span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>`rburrIII3()` was deprecated in ssdtools 0.2.1.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> The 'burrIII3' distribution is under review.</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>x</span>, freq <span class='op'>=</span> <span class='cn'>FALSE</span>, col <span class='op'>=</span> <span class='st'>"gray"</span>, border <span class='op'>=</span> <span class='st'>"white"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/curve.html'>curve</a></span><span class='op'>(</span><span class='fu'>dburrIII3</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, add <span class='op'>=</span> <span class='cn'>TRUE</span>, col <span class='op'>=</span> <span class='st'>"red4"</span>, lwd <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>`dburrIII3()` was deprecated in ssdtools 0.2.1.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> The 'burrIII3' distribution is under review.</span>
+<span class='r-plt'><img src='burrIII3-1.png' alt='' width='700' height='433' /></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -254,11 +265,11 @@ The shape1, shape2, and scale paramters are on the log(scale) as these must be p
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joe Thorley, Carl Schwarz.</p>
+  <p><p>Developed by Joe Thorley, Carl Schwarz.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -266,6 +277,8 @@ The shape1, shape2, and scale paramters are on the log(scale) as these must be p
 
   
 
+
+  
 
   </body>
 </html>

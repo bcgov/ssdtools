@@ -36,6 +36,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -48,7 +50,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -106,7 +108,7 @@
   <div class="contents col-md-9">
 <div id="ssdtools-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ssdtools-" class="anchor"></a>ssdtools <img src="reference/figures/logo.png" align="right">
+<a href="#ssdtools-" class="anchor" aria-hidden="true"></a>ssdtools <img src="reference/figures/logo.png" align="right">
 </h1></div>
 <!-- badges: start -->
 
@@ -114,21 +116,21 @@
 <p>SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al. (2001). The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, gamma, log-logistic, log-Gumbel, Gompertz and Weibull. The user can also provide custom distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>To install the latest version from <a href="https://CRAN.R-project.org/package=ssdtools">CRAN</a></p>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<p>To install the latest version from <a href="https://CRAN.R-project.org/package=ssdtools" class="external-link">CRAN</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ssdtools"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ssdtools"</span><span class="op">)</span></code></pre></div>
 <p>To install the latest development version:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"bcgov/ssdtools"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"bcgov/ssdtools"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h2>
 <p><code>ssdtools</code> provides a data set for several chemicals including Boron.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools">ssdtools</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span>
 <span class="va">boron_data</span>
 <span class="co">#&gt; # A tibble: 28 x 5</span>
 <span class="co">#&gt;    Chemical Species                  Conc Group        Units</span>
@@ -149,9 +151,9 @@
 <code class="sourceCode R"><span class="va">boron_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">boron_data</span><span class="op">)</span></code></pre></div>
 <p>and plot using the <code>ggplot2</code> generic <code>autoplot</code></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">boron_dists</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">boron_dists</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png"><!-- --></p>
 <p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -164,44 +166,29 @@
 <span class="co">#&gt; 3 lnorm  0.507 0.106  0.0703  239.  240.  242.  1.40  0.296</span></code></pre></div>
 <p>and the model-averaged 5% hazard concentration estimated using <code>ssd_hc</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
 <span class="va">boron_hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">boron_dists</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">boron_hc5</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">boron_hc5</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 6</span>
 <span class="co">#&gt;   percent   est    se   lcl   ucl dist   </span>
 <span class="co">#&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  </span>
 <span class="co">#&gt; 1       5  1.31 0.808 0.527  3.57 average</span></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can be produced using the <code>stats</code> generic <code>predict</code></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
-<span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">boron_dists</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
+<span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">boron_dists</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">boron_data</span>, <span class="va">boron_pred</span>,
   shape <span class="op">=</span> <span class="st">"Group"</span>, color <span class="op">=</span> <span class="st">"Group"</span>, label <span class="op">=</span> <span class="st">"Species"</span>,
   xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ribbon <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3000</span><span class="op">)</span></code></pre></div>
+<span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3000</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-10-1.png"><!-- --></p>
-</div>
-<div id="information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#information" class="anchor"></a>Information</h2>
-<p>Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.</p>
-<p>Get started with ssdtools at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="uri">https://bcgov.github.io/ssdtools/articles/ssdtools.html</a>.</p>
-<p>A shiny webpage developed for non-R-users is available at <a href="https://bcgov-env.shinyapps.io/ssdtools" class="uri">https://bcgov-env.shinyapps.io/ssdtools</a>.</p>
-<p>The ssdtools package was developed as a result of earlier drafts of:</p>
-<p>Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for Modeling Species Sensitivity Distributions. Province of British Columbia, Victoria, BC. Available from <a href="http://a100.gov.bc.ca/appsdata/acat/documents/r57400/2_1568399094009_8398900200.pdf" class="uri">http://a100.gov.bc.ca/appsdata/acat/documents/r57400/2_1568399094009_8398900200.pdf</a>.</p>
-<p>The CCME <code>data.csv</code> data file is derived from a factsheet prepared by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw"><code>data-raw</code></a> folder for more information.</p>
-</div>
-<div id="getting-help-or-reporting-an-issue" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-help-or-reporting-an-issue" class="anchor"></a>Getting Help or Reporting an Issue</h2>
-<p>To report bugs/issues/feature requests, please file an <a href="https://github.com/bcgov/ssdtools/issues/">issue</a>.</p>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h2>
+<a href="#citation" class="anchor" aria-hidden="true"></a>Citation</h2>
 <pre><code>
 To cite ssdtools in publications use:
 
@@ -222,33 +209,51 @@ A BibTeX entry for LaTeX users is
     doi = {10.21105/joss.01082},
   }</code></pre>
 </div>
+<div id="information" class="section level2">
+<h2 class="hasAnchor">
+<a href="#information" class="anchor" aria-hidden="true"></a>Information</h2>
+<p>Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.</p>
+<p>Get started with ssdtools at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="external-link uri">https://bcgov.github.io/ssdtools/articles/ssdtools.html</a>.</p>
+<p>A shiny app to allow non-R users to interface with ssdtools is available at <a href="https://github.com/bcgov/shinyssdtools" class="external-link uri">https://github.com/bcgov/shinyssdtools</a>:</p>
+<p>Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species Sensitivity Distributions (SSDs). JOSS 6(57): 2848. <a href="https://joss.theoj.org/papers/10.21105/joss.02848" class="external-link uri">https://joss.theoj.org/papers/10.21105/joss.02848</a>.</p>
+<p>The ssdtools package was developed as a result of earlier drafts of:</p>
+<p>Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for Modeling Species Sensitivity Distributions. Province of British Columbia, Victoria, BC.</p>
+<p>For recent developments in SSD modeling including a review of existing software:</p>
+<p>Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity Distribution Modeling. Environ Toxicol Chem 40(2): 293–308. <a href="https://onlinelibrary.wiley.com/doi/10.1002/etc.4925" class="external-link uri">https://onlinelibrary.wiley.com/doi/10.1002/etc.4925</a>.</p>
+<p>The CCME <code>data.csv</code> data file is derived from a factsheet prepared by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html" class="external-link">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw" class="external-link"><code>data-raw</code></a> folder for more information.</p>
+</div>
+<div id="getting-help-or-reporting-an-issue" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-help-or-reporting-an-issue" class="anchor" aria-hidden="true"></a>Getting Help or Reporting an Issue</h2>
+<p>To report bugs/issues/feature requests, please file an <a href="https://github.com/bcgov/ssdtools/issues/" class="external-link">issue</a>.</p>
+</div>
 <div id="how-to-contribute" class="section level2">
 <h2 class="hasAnchor">
-<a href="#how-to-contribute" class="anchor"></a>How to Contribute</h2>
-<p>If you would like to contribute to the package, please see our <a href="https://github.com/bcgov/ssdtools/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> guidelines.</p>
+<a href="#how-to-contribute" class="anchor" aria-hidden="true"></a>How to Contribute</h2>
+<p>If you would like to contribute to the package, please see our <a href="https://github.com/bcgov/ssdtools/blob/master/.github/CONTRIBUTING.md" class="external-link">CONTRIBUTING</a> guidelines.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
-<p>Please note that the ssdtools project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
+<p>Please note that the ssdtools project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+<a href="#license" class="anchor" aria-hidden="true"></a>License</h2>
 <p>The code is released under the Apache License 2.0</p>
 <p>Copyright 2015 Province of British Columbia</p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
-<p><a href="http://www.apache.org/licenses/LICENSE-2.0" class="uri">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0" class="external-link uri">http://www.apache.org/licenses/LICENSE-2.0</a></p>
 <p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
 <hr>
-<p><a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia </span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"> Creative Commons Attribution 4.0 International License</a>.</p>
+<p><a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="external-link"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia </span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="external-link"> Creative Commons Attribution 4.0 International License</a>.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=ssdtools">https://​cloud.r-project.org/​package=ssdtools</a>
 </li>
@@ -258,55 +263,62 @@ A BibTeX entry for LaTeX users is
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>Apache License (== 2.0) | file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html">Citing ssdtools</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Joe Thorley <br><small class="roles"> Author, maintainer, contractor </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Carl Schwarz <br><small class="roles"> Author, contractor </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md"><img src="https://img.shields.io/badge/Lifecycle-Experimental-339999" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://github.com/bcgov/ssdtools/actions"><img src="https://github.com/bcgov/ssdtools/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/github/bcgov/ssdtools?branch=master"><img src="https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg" alt="Coverage Status"></a></li>
-<li><a href="https://cran.r-project.org/package=ssdtools"><img src="https://www.r-pkg.org/badges/version/ssdtools" alt="CRAN status"></a></li>
-<li><a href="https://doi.org/10.21105/joss.01082"><img src="http://joss.theoj.org/papers/10.21105/joss.01082/status.svg" alt="DOI"></a></li>
+<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-Experimental-339999" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/bcgov/ssdtools/actions" class="external-link"><img src="https://github.com/bcgov/ssdtools/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/github/bcgov/ssdtools?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg" alt="Coverage Status"></a></li>
+<li><a href="https://cran.r-project.org/package=ssdtools" class="external-link"><img src="https://www.r-pkg.org/badges/version/ssdtools" alt="CRAN status"></a></li>
+<li><a href="https://doi.org/10.21105/joss.01082" class="external-link"><img src="http://joss.theoj.org/papers/10.21105/joss.01082/status.svg" alt="DOI"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Joe Thorley, Carl Schwarz.</p>
+  <p></p>
+<p>Developed by Joe Thorley, Carl Schwarz.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -314,6 +326,8 @@ A BibTeX entry for LaTeX users is
 
   
 
+
+  
 
   </body>
 </html>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Model averaged 5 hazard concentration for CCME Boron Data — boron_hc5 • ssdtools</title>
+<title>Model Averaged 5 Hazard Concentration for CCME Boron Data — boron_hc5 • ssdtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Model averaged 5 hazard concentration for CCME Boron Data — boron_hc5" />
+<meta property="og:title" content="Model Averaged 5 Hazard Concentration for CCME Boron Data — boron_hc5" />
 <meta property="og:description" content="A data frame of the predictions based on 10000 bootstrap." />
 <meta property="og:image" content="/logo.png" />
 
@@ -66,9 +66,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -82,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -139,7 +148,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Model averaged 5 hazard concentration for CCME Boron Data</h1>
+    <h1>Model Averaged 5 Hazard Concentration for CCME Boron Data</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/ssdtools/blob/master/R/data.R'><code>R/data.R</code></a></small>
     <div class="hidden name"><code>boron_hc5.Rd</code></div>
     </div>
@@ -167,13 +176,21 @@
 
 </dl>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other boron: 
+<code><a href='boron_data.html'>boron_data</a></code>,
+<code><a href='boron_dists.html'>boron_dists</a></code>,
+<code><a href='boron_lnorm.html'>boron_lnorm</a></code>,
+<code><a href='boron_pred.html'>boron_pred</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>boron_hc5</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 6</span><span>
-#&gt;   percent   est    se   lcl   ucl dist   
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'>1</span><span>       5  1.31 0.808 0.527  3.57 average</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>boron_hc5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 x 6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   percent   est    se   lcl   ucl dist   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>       5  1.31 0.808 0.527  3.57 average</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -185,11 +202,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joe Thorley, Carl Schwarz.</p>
+  <p><p>Developed by Joe Thorley, Carl Schwarz.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -197,6 +214,8 @@
 
   
 
+
+  
 
   </body>
 </html>
