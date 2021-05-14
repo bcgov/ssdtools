@@ -2,8 +2,8 @@ tmb_fun <- function(data, parameters, dist) {
   model <- paste0("ll_", dist)
   data <- c(model = model, data)
   TMB::MakeADFun(data = data,
-                 parameters = parameters,
-                 DLL = "ssdtools_TMBExports", silent = TRUE)
+                  parameters = parameters,
+                  DLL = "ssdtools_TMBExports", silent = TRUE)
 }
 
 tmb_parameters <- function(data, dist) {

@@ -4,13 +4,16 @@
 #include <TMB.hpp>
 #include "GammaNLL.hpp"
 #include "NormalNLL.hpp"
+#include "ll_lnorm.hpp"
 
 template<class Type>
 Type objective_function<Type>::operator() () {
   DATA_STRING(model);
   if(model == "GammaNLL") {
     return GammaNLL(this);
-  } else if(model == "NormalNLL") {
+  } else if(model == "ll_lnorm") {
+    return ll_lnorm(this);
+  }  else if(model == "NormalNLL") {
     return NormalNLL(this);
   } else {
     error("Unknown model.");
