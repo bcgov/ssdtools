@@ -1,6 +1,6 @@
 # ssdtools 0.3.4
 
-- Internal changes only for chk package.
+- Update Apache Licence url to https.
 
 # ssdtools 0.3.3
 
