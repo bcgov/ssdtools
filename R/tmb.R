@@ -23,7 +23,7 @@ fit_tmb <- function(data, dist) {
   capture.output(
     optim <- nlminb(model$par, model$fn, model$gr, model$he, control= control)
   )
-  fit <- list(dist = dist, model = model, optim = optim)
+  fit <- list(dist = dist, model = model, optim = optim, data = data)
   class(fit) <- "tmbfit"
   fit
 }
