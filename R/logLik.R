@@ -1,3 +1,7 @@
+#' @importFrom stats logLik
+#' @export
+stats::logLik
+
 #' @export
 logLik.tmbfit <- function(object, ...) {
   .objective_tmbfit(object) * -1

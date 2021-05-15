@@ -10,17 +10,34 @@ test_that("tidy.tmbfit", {
   expect_equal(logLik(fit), c(lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
   
+  glance <- glance(fit$lnorm)
+  expect_is(glance, "tbl_df")
+  expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc"))
+  expect_identical(glance$dist, "lnorm")
+  expect_equal(glance$aicc, 239.508432979094)
+  
+  glance <- glance(fit)
+  expect_is(glance, "tbl_df")
+  expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
+  expect_identical(glance$dist, "lnorm")
+  expect_equal(glance$delta, 0)
+  expect_equal(glance$weight, 1)
+  
   tidy <- tidy(fit$lnorm)
   expect_is(tidy, "tbl_df")
   expect_identical(colnames(tidy), c("dist", "term", "estimate", "se"))
   expect_identical(tidy$dist, rep("lnorm", 2))
   expect_identical(tidy$term, term::as_term(c("meanlog", "sdlog")))
   
+  expect_equal(tidy(fit), tidy)
+  
   tidy <- tidy(fit$lnorm, all = TRUE)
   expect_is(tidy, "tbl_df")
   expect_identical(colnames(tidy), c("dist", "term", "estimate", "se"))
   expect_identical(tidy$dist, rep("lnorm", 3))
   expect_identical(tidy$term, term::as_term(c("log_sdlog", "meanlog", "sdlog")))
+  
+  expect_equal(tidy(fit, all = TRUE), tidy)
 })
 
 test_that("combine", {
@@ -32,6 +49,13 @@ test_that("combine", {
   expect_equal(nobs(fit$lnorm), 28L)
   expect_equal(logLik(fit), c(llogis = -118.507435324581, lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
+  
+  glance <- glance(fit)
+  expect_is(glance, "tbl_df")
+  expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
+  expect_identical(glance$dist, c("llogis", "lnorm"))
+  expect_equal(glance$delta, c(1.98643767006848, 0))
+  expect_equal(glance$weight, c(0.270276766487089, 0.729723233512911))
   
   tidy <- tidy(fit)
   expect_is(tidy, "tbl_df")

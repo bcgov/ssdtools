@@ -14,6 +14,10 @@
 #    
 # 
 
+#' @importFrom stats nobs
+#' @export
+stats::nobs
+
 .nobs_data <- function(data) {
   if(is_censored_data(data)) return(NA_integer_)
   nrow(data)
