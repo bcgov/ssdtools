@@ -23,6 +23,7 @@ is.fitdistcens(fluazinam_lnorm)
 Other is: 
 \code{\link{is.fitdistscens}()},
 \code{\link{is.fitdists}()},
-\code{\link{is.fitdist}()}
+\code{\link{is.fitdist}()},
+\code{\link{is.tmbfit}()}
 }
 \concept{is}

@@ -12,6 +12,19 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+
+#' Is tmbfit
+#'
+#' Tests whether an object is a tmbfit object.
+#' @inheritParams params
+#'
+#' @return A flag.
+#' @family is
+#' @export
+is.tmbfit <- function(x) {
+  inherits(x, "tmbfit")
+}
+
 #' Is fitdist
 #'
 #' Tests whether an object is a fitdist.

@@ -26,8 +26,10 @@ fit_tmb <- function(data, left, right, weight, dist) {
   
   model <- tmb_model(data, left, right, weight, dist)
   control <- list(eval.max = 10000, iter.max = 1000)
-  capture.output(nlminb(model$par, model$fn, model$gr, model$he, control= control))
-  fit <- list(dist = dist, model = model)
+  capture.output(
+    optim <- nlminb(model$par, model$fn, model$gr, model$he, control= control)
+  )
+  fit <- list(dist = dist, model = model, optim = optim)
   class(fit) <- "tmbfit"
   fit
 }

@@ -24,6 +24,7 @@ is.fitdistscens(fluazinam_dists)
 Other is: 
 \code{\link{is.fitdistcens}()},
 \code{\link{is.fitdists}()},
-\code{\link{is.fitdist}()}
+\code{\link{is.fitdist}()},
+\code{\link{is.tmbfit}()}
 }
 \concept{is}
