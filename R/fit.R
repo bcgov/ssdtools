@@ -74,8 +74,12 @@ ssd_fit_dist <- function(
       fit <- fit_dist_censored(data, left, right, weight, dist)
     }
   } else {
-    
-    fit <- fit_tmb(data, left, right, weight, dist)
+    if(is.null(weight)) { # this should happen before
+      data$weight <- 1
+      weight <- "weight"
+    }
+    data <- data.frame(left = data[[left]], right = data[[right]], weight = data[[weight]])
+    fit <- fit_tmb(data, dist)
   }
   fit
 }

@@ -12,19 +12,13 @@ tmb_parameters <- function(data, dist) {
   do.call(fun, list(x = x))
 }
 
-tmb_model <- function(data, left, right, weight, dist) {
-  data <- data.frame(left = data[[left]], right = data[[right]], weight = data[[weight]])
+tmb_model <- function(data, dist) {
   parameters <- tmb_parameters(data, dist)
   tmb_fun(data, parameters, dist)
 }
 
-fit_tmb <- function(data, left, right, weight, dist) {
-  if(is.null(weight)) { # this should happen before
-    data$weight <- 1
-    weight <- "weight"
-  }
-  
-  model <- tmb_model(data, left, right, weight, dist)
+fit_tmb <- function(data, dist) {
+  model <- tmb_model(data, dist)
   control <- list(eval.max = 10000, iter.max = 1000)
   capture.output(
     optim <- nlminb(model$par, model$fn, model$gr, model$he, control= control)
