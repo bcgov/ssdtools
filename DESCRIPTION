@@ -55,6 +55,7 @@ Imports:
     VGAM,
     Rcpp,
     generics,
+    universals,
     TMB (>= 1.7.20),
     utils
 Suggests:

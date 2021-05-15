@@ -1,28 +1,19 @@
-
-#' Number of Parameters
-#'
-#' Get the Number of Parameters
-#' @inheritParams params
-#'
-#' @return A count indicating the number of parameters.
+#' @importFrom universals npars
 #' @export
-#' @examples
-#' npars(boron_lnorm)
-#' npars(boron_dists)
-#' npars(fluazinam_lnorm)
-#' npars(fluazinam_dists)
-npars <- function(x, ...) {
-  UseMethod("npars")
-}
+universals::npars
 
-#' @describeIn npars Get the Number of parameters
 #' @export
 npars.fitdist <- function(x, ...) length(x$estimate)
 
-#' @describeIn npars Get the Number of parameters
 #' @export
 npars.fitdistcens <- function(x, ...) length(x$estimate)
 
-#' @describeIn npars Get the Number of parameters
 #' @export
-npars.fitdists <- function(x, ...) vapply(x, npars, 1L)
+npars.fitdists <- function(x, ...) {
+  x <- vapply(x, npars, 1L)
+  x <- x[order(names(x))]
+  x
+}
+
+#' @export
+npars.tmbfit <- function(x, ...) length(x$model$par)

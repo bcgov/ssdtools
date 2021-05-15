@@ -3,12 +3,10 @@ on:
     branches:
       - main
       - master
-      - tmbtools
   pull_request:
     branches:
       - main
       - master
-      - tmbtools
   schedule:
     - cron:  '0 8 * * *'
 
