@@ -2,20 +2,13 @@
 #' @export
 generics::glance
 
-#' Construct a single row tibble::tibble() "glance" of a tmbfit model.
-#' 
-#' @param x A tmbfit object to be converted into a single row tibble::tibble.
-#' @param ... Unused.
-#'  
-#' @export
-glance.tmbfit <- function(x, ...) {
-  dist <- .dist_tmbfit(x)
+.glance <- function(x, dist) {
   nobs <- nobs(x)
   npars <- npars(x)
   log_lik <- logLik(x)
   aic <- 2 * npars - 2 * log_lik
   aicc <- aic + 2 * npars * (npars + 1) / (nobs - npars - 1)
-
+  
   tibble::tibble(
     dist = dist,
     npars = npars,
@@ -24,6 +17,28 @@ glance.tmbfit <- function(x, ...) {
     aic = aic,
     aicc = aicc
   )
+}
+
+#' Construct a single row tibble::tibble() "glance" of a tmbfit model.
+#' 
+#' @param x A tmbfit object to be converted into a single row tibble::tibble.
+#' @param ... Unused.
+#'  
+#' @export
+glance.tmbfit <- function(x, ...) {
+  dist <- .dist_tmbfit(x)
+  .glance(x, dist)
+}
+
+#' Construct a single row tibble::tibble() "glance" of a fitdist model.
+#' 
+#' @param x A tmbfit object to be converted into a single row tibble::tibble.
+#' @param ... Unused.
+#'  
+#' @export
+glance.fitdist <- function(x, ...) {
+  dist <- x$distname
+  .glance(x, dist)
 }
 
 #' Construct a tibble::tibble() with a single row "glance" for each tmbfit model.

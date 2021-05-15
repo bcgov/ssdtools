@@ -13,7 +13,14 @@
 #    limitations under the License.
 
 test_that("ssd_gof", {
+  glance <- glance(boron_lnorm)
+  expect_is(glance, "tbl_df")
+  expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc"))
+  expect_identical(glance$dist, "lnorm")
+  expect_equal(glance$aicc, 239.508432979094)
+  
   x <- ssd_gof(boron_lnorm)
+  
   expect_is(x, "tbl")
   expect_identical(colnames(x), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic"))
   expect_identical(x$dist, "lnorm")
@@ -23,6 +30,14 @@ test_that("ssd_gof", {
   expect_equal(x$aic, 239.028434223307)
   expect_equal(x$aicc, 239.508434223307)
   expect_equal(x$bic, 241.692843243657)
+  
+  
+  glance <- glance(boron_dists)
+  expect_is(glance, "tbl_df")
+  expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
+  expect_identical(glance$dist, c("gamma", "llogis", "lnorm"))
+  expect_equal(glance$delta, c(0, 3.38455374385978, 1.39811587095954))
+  expect_equal(glance$weight, c(0.594829782050604, 0.109508088280028, 0.295662129669368))
 
   xs <- ssd_gof(boron_dists)
   expect_is(xs, "tbl")
