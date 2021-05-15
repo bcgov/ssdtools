@@ -27,3 +27,16 @@ fit_tmb <- function(data, dist) {
   class(fit) <- "tmbfit"
   fit
 }
+
+.data_tmbfit <- function(x) {
+  x$data
+}
+
+.dist_tmbfit <- function(x) {
+  x$dist
+}
+
+.objective_tmbfit <- function(x) {
+  x$optim$objective
+}
+

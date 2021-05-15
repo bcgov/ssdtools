@@ -11,6 +11,13 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+#    
+# 
+
+.nobs_data <- function(data) {
+  if(is_censored_data(data)) return(NA_integer_)
+  nrow(data)
+}
 
 #' Number of Observations
 #'
@@ -21,6 +28,13 @@
 #' stats::nobs(boron_lnorm)
 nobs.fitdist <- function(object, ...) object$n
 
+#' Number of Observations
+#'
+#' @inheritParams params
+#' @seealso [stats::nobs()]
+#' @export
+nobs.tmbfit <- function(object, ...) .nobs_data(.data_tmbfit(object))
+
 #' @rdname nobs.fitdist 
 #' @export
 #' @examples
@@ -29,4 +43,3 @@ nobs.fitdistcens <- function(object, ...) NA_integer_
 
 #' @export
 nobs.fitdists <- function(object, ...) nobs(object[[1]])
-

@@ -12,6 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+is_censored_data <- function(data) {
+  any(data$left != data$right) || any(data$left == 0) || any(is.infinite(data$right))
+}
+
 probs <- function(level) {
   probs <- (1 - level) / 2
   c(probs, 1 - probs)

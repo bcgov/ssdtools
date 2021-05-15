@@ -1,6 +1,6 @@
 #' @export
 logLik.tmbfit <- function(object, ...) {
-  object$optim$objective
+  .objective_tmbfit(object) * -1
 }
 
 #' @export
