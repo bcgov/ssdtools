@@ -44,7 +44,7 @@ test_that("fit_dists", {
     "gamma", "gompertz", "lgumbel",
     "llogis", "lnorm", "pareto", "weibull"
   )
-  expect_error(expect_warning(ssd_fit_dists(boron_data[1:5, ], dists = dist_names)), "^All distributions failed to fit[.]$")
+  expect_error(expect_warning(ssd_fit_dists(boron_data[1:5, ], dists = dist_names)), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = dist_names)
   expect_true(is.fitdists(dists))
   expect_identical(names(dists), dist_names)
@@ -55,7 +55,6 @@ test_that("fit_dists", {
 test_that("fit_dist", {
   skip_if_not(capabilities("long.double"))
   
-  expect_error(ssd_fit_dist(boron_data[1:5, ]), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$", "chk_error")
   dist <- ssd_fit_dist(boron_data)
   expect_true(is.fitdist(dist))
   expect_equal(dist, boron_lnorm)

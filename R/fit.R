@@ -66,15 +66,6 @@ remove_errors <- function(dist_fit, name, computable, silent) {
 ssd_fit_dist <- function(
   data, left = "Conc", right = left, weight = NULL, dist = "lnorm",
   tmb = FALSE) {
-  chk_s3_class(data, "data.frame")
-  chk_gte(nrow(data), 6)
-  chk_string(left)
-  chk_string(right)
-  
-  if (!is.null(weight)) chk_string(weight)
-  
-  chk_superset(colnames(data), c(left, right, weight))
-  chk_string(dist)
   
   if(isFALSE(tmb)) {
     if (left == right) {
@@ -83,6 +74,7 @@ ssd_fit_dist <- function(
       fit <- fit_dist_censored(data, left, right, weight, dist)
     }
   } else {
+    
     fit <- fit_tmb(data, left, right, weight, dist)
   }
   fit
@@ -127,6 +119,7 @@ ssd_fit_dists <- function(
   dists = c("llogis", "gamma", "lnorm"),
   computable = FALSE,
   silent = FALSE, tmb = FALSE) {
+  
   chk_s3_class(dists, "character")
   chk_unique(dists)
   chk_gt(length(dists))
@@ -146,6 +139,15 @@ ssd_fit_dists <- function(
                    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
   }
   
+  chk_s3_class(data, "data.frame")
+  chk_gte(nrow(data), 6)
+  chk_string(left)
+  chk_string(right)
+  
+  if (!is.null(weight)) chk_string(weight)
+  
+  chk_superset(colnames(data), c(left, right, weight))
+
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
   dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight, tmb = tmb)
