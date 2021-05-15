@@ -13,14 +13,13 @@
 #    limitations under the License.
 
 #' @export
-print.fitdists <- function(x, ...) {
-  lapply(x, print)
+print.tmbfit <- function(x, ...) {
+  print(tidy(x))
   invisible(x)
 }
 
 #' @export
-print.tmbfit <- function(x, ...) {
-  print(x$dist)
-  print(tmb_sd(x))
+print.fitdists <- function(x, ...) {
+  lapply(x, print)
   invisible(x)
 }

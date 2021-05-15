@@ -31,8 +31,3 @@ fit_tmb <- function(data, left, right, weight, dist) {
   class(fit) <- "tmbfit"
   fit
 }
-
-tmb_sd <- function(fit) {
-  capture.output(sd <- TMB::sdreport(fit$model))
-  summary(sd)
-}

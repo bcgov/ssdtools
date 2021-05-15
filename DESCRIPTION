@@ -44,11 +44,17 @@ Imports:
     graphics,
     grid,
     lifecycle,
+    term,
     tibble,
     scales,
+    stringr,
+    dplyr,
+    magrittr,
+    purrr,
     stats,
     VGAM,
     Rcpp,
+    generics,
     TMB (>= 1.7.20),
     utils
 Suggests:

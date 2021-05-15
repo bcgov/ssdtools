@@ -19,4 +19,6 @@
 #' @importFrom tibble as_tibble
 #' @importFrom Rcpp sourceCpp
 #' @importFrom utils capture.output
+#' @importFrom dplyr .data
+#' @importFrom magrittr %<>% %>%
 NULL
