@@ -149,8 +149,8 @@ test_that("fit burrIII3 cis", {
   set.seed(77)
   hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
   
-  expect_equal(hc, tibble::tibble(percent = 5, est = 9.3654970353837, se = 12.1627650023649, 
-                                  lcl = 2.96137016375762, ucl = 38.498485438982, dist = "burrIII3"))
+  expect_equal(hc, tibble::tibble(dist = "burrIII3", percent = 5, est = 9.3654970353837, se = 12.1627650023649, 
+                                  lcl = 2.96137016375762, ucl = 38.498485438982,))
 })
 
 test_that("qburrIII3", {

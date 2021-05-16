@@ -26,12 +26,12 @@ ssd_hc <- function(x, ...) {
 
 no_ssd_hc <- function() {
   as_tibble(data.frame(
+    dist = character(0),
     percent = numeric(0),
     est = numeric(0),
     se = numeric(0),
     lcl = numeric(0),
     ucl = numeric(0),
-    dist = character(0),
     stringsAsFactors = FALSE
   ))
 }
@@ -46,8 +46,9 @@ no_ssd_hc <- function() {
   args <- c(as.list(x), args)
   est <- do.call(fun, args)
   data.frame(
+    dist = dist,
     percent = percent * 100, est = est,
-    se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = dist,
+    se = NA_real_, lcl = NA_real_, ucl = NA_real_, 
     stringsAsFactors = FALSE
   )
 }
@@ -69,16 +70,18 @@ no_ssd_hc <- function() {
   if (!ci) {
     na <- rep(NA_real_, length(percent))
     return(as_tibble(data.frame(
+      dist = rep(dist, length(percent)),
       percent = percent * 100, est = est,
-      se = na, lcl = na, ucl = na, dist = rep(dist, length(percent)),
+      se = na, lcl = na, ucl = na,
       stringsAsFactors = FALSE
     )))
   }
   samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
   cis <- cis(samples, p = FALSE, level = level, x = percent)
   as_tibble(data.frame(
+    dist = dist,
     percent = percent * 100, est = est,
-    se = cis$se, lcl = cis$lcl, ucl = cis$ucl, dist = dist,
+    se = cis$se, lcl = cis$lcl, ucl = cis$ucl, 
     stringsAsFactors = FALSE
   ))
 }
@@ -98,7 +101,7 @@ no_ssd_hc <- function() {
     row.names(hc) <- NULL
     return(as_tibble(hc))
   }
-  hc <- lapply(hc, function(x) x[1:5])
+  hc <- lapply(hc, function(x) x[c("percent", "est", "se", "lcl", "ucl")])
   hc <- lapply(hc, as.matrix)
   hc <- Reduce(function(x, y) {
     abind(x, y, along = 3)
@@ -106,9 +109,8 @@ no_ssd_hc <- function() {
   weight <- .ssd_gof_fitdists(x)$weight
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   hc <- as.data.frame(hc)
-  hc$percent <- percent
-  hc$dist <- "average"
-  as_tibble(hc)
+  tibble::tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 
+         lcl = hc$lcl, ucl = hc$ucl)
 }
 
 #' @describeIn ssd_hc Hazard Percent list of distributions

@@ -159,7 +159,7 @@ test_that("fit lgumbel cis", {
   set.seed(77)
   hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
   expect_is(hc, "tbl_df")
-  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_identical(hc$percent, 5)
   expect_equal(hc$est, 1.76891782851293) 
   expect_equal(hc$se, 0.370590354900628)

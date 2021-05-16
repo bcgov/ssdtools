@@ -142,7 +142,7 @@ test_that("fit gompertz cis", {
 
   hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
   expect_is(hc, "tbl_df")
-  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_identical(hc$percent, 5)
   expect_equal(hc$est, 1.29947858260222)
   expect_equal(hc$se, 0.234474369346749)

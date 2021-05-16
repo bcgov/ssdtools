@@ -59,7 +59,7 @@ test_that("test_data Quinoline", {
   set.seed(99)
   hc <- ssd_hc(dists, ci = TRUE, nboot = 10)
   expect_is(hc, "tbl_df")
-  expect_identical(colnames(hc), c("percent", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_identical(hc$percent, 5)
   expect_equal(hc$est, 134.853117244289)
   expect_equal(hc$se, 171.585648187402)
