@@ -3,6 +3,7 @@ on:
     branches:
       - main
       - master
+      - tmbtools
   pull_request:
     branches:
       - main
