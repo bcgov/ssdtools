@@ -18,9 +18,9 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   capture.output(x <- TMB::sdreport(x$model))
   x <- summary(x)
   term <- term::as_term(rownames(x))
-  estimate <- unname(x[,1])
+  est <- unname(x[,1])
   se <- unname(x[,2])
-  x <- tibble::tibble(dist = dist, term = term, estimate = estimate, se = se)
+  x <- tibble::tibble(dist = dist, term = term, est = est, se = se)
   if(!all)
     x <- x[!stringr::str_detect(x$term, "^log(istic){0,1}_"),]
   # following line causes problem with term

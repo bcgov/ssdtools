@@ -6,7 +6,7 @@ universals::estimates
 estimates.tmbfit <- function(x, all = FALSE, ...) {
   x <- tidy(x, all = all)
   names <- as.character(x$term)
-  x <- as.list(x$estimate)
+  x <- as.list(x$est)
   names(x) <- names
   x
 }
