@@ -71,9 +71,9 @@ jobs:
 
       - name: Install dependencies
         run: |
+          remotes::install_cran("TMB", type = "source", force = TRUE)
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
-          install.packages("TMB", type = "source")
         shell: Rscript {0}
 
       - name: Check
