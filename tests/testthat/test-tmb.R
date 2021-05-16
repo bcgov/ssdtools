@@ -9,6 +9,8 @@ test_that("tidy.tmbfit", {
   expect_equal(logLik(fit$lnorm), -117.514216489547)
   expect_equal(logLik(fit), c(lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
+
+#  augment <- augment(fit$lnorm) not sure why not working
   
   glance <- glance(fit$lnorm)
   expect_is(glance, "tbl_df")
