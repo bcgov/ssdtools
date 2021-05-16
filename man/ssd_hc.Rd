@@ -4,6 +4,7 @@
 \alias{ssd_hc}
 \alias{ssd_hc.list}
 \alias{ssd_hc.fitdist}
+\alias{ssd_hc.tmbfit}
 \alias{ssd_hc.fitdistcens}
 \alias{ssd_hc.fitdists}
 \alias{ssd_hc.fitdistscens}
@@ -14,6 +15,18 @@ ssd_hc(x, ...)
 \method{ssd_hc}{list}(x, percent = 5, hc = 5, ...)
 
 \method{ssd_hc}{fitdist}(
+  x,
+  percent = 5,
+  hc = 5,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
+
+\method{ssd_hc}{tmbfit}(
   x,
   percent = 5,
   hc = 5,
@@ -100,6 +113,8 @@ Gets concentrations that protect specified percentages of species.
 
 \item \code{fitdist}: Hazard Percent fitdist
 
+\item \code{tmbfit}: Hazard Percent fitdist
+
 \item \code{fitdistcens}: Hazard Percent fitdistcens
 
 \item \code{fitdists}: Hazard Percent fitdists
@@ -110,6 +125,7 @@ Gets concentrations that protect specified percentages of species.
 \examples{
 ssd_hc(list("lnorm" = NULL))
 ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
+ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
 ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
 ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
 ssd_hc(boron_dists, c(0, 1, 30, Inf))

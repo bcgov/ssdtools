@@ -9,7 +9,13 @@ test_that("tidy.tmbfit", {
   expect_equal(logLik(fit$lnorm), -117.514216489547)
   expect_equal(logLik(fit), c(lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
-
+  
+  hc <- ssd_hc(fit$lnorm)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_equal(hc$est, 1.681174837758)
+  expect_identical(hc$se, NA_real_)
+  
 #  augment <- augment(fit$lnorm) not sure why not working
   
   glance <- glance(fit$lnorm)
