@@ -52,6 +52,37 @@ ssd_hp <- function(x, ...) {
   ))
 }
 
+.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, parallel, ncpus) {
+  chk_vector(conc)
+  chk_numeric(conc)
+  chk_number(level)
+  chk_range(level)
+  
+  args <- estimates(x)
+  args$q <- conc
+  dist <- .dist_tmbfit(x)
+  what <- paste0("p", dist)
+  
+  est <- do.call(what, args)
+  if (!ci) {
+    na <- rep(NA_real_, length(conc))
+    return(as_tibble(data.frame(
+      conc = conc, est = est * 100,
+      se = na, lcl = na, ucl = na, dist = rep(dist, length(conc)),
+      stringsAsFactors = FALSE
+    )))
+  }
+  .NotYetImplemented()
+  samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
+  cis <- cis(samples, p = TRUE, level = level, x = conc)
+  as_tibble(data.frame(
+    conc = conc, est = est * 100,
+    se = cis$se * 100, lcl = cis$lcl * 100, ucl = cis$ucl * 100,
+    dist = dist, stringsAsFactors = FALSE
+  ))
+}
+
+
 .ssd_hp_fitdists <- function(x, conc, ci, level, nboot, parallel, ncpus,
                              average, ic) {
   if (!length(x) || !length(conc)) {
@@ -83,6 +114,18 @@ ssd_hp <- function(x, ...) {
   hp$conc <- conc
   hp$dist <- "average"
   as_tibble(hp)
+}
+
+#' @describeIn ssd_hp Hazard Percent tmbfit
+#' @export
+ssd_hp.tmbfit <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
+                           parallel = NULL, ncpus = 1, ...) {
+  chk_unused(...)
+  
+  .ssd_hp_tmbfit(x, conc,
+                  ci = ci, level = level, nboot = nboot,
+                  parallel = parallel, ncpus = ncpus
+  )
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdist

@@ -2,6 +2,7 @@
 % Please edit documentation in R/hp.R
 \name{ssd_hp}
 \alias{ssd_hp}
+\alias{ssd_hp.tmbfit}
 \alias{ssd_hp.fitdist}
 \alias{ssd_hp.fitdistcens}
 \alias{ssd_hp.fitdists}
@@ -9,6 +10,17 @@
 \title{Hazard Percent}
 \usage{
 ssd_hp(x, ...)
+
+\method{ssd_hp}{tmbfit}(
+  x,
+  conc,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  parallel = NULL,
+  ncpus = 1,
+  ...
+)
 
 \method{ssd_hp}{fitdist}(
   x,
@@ -87,6 +99,8 @@ Gets percent species protected at specified concentrations.
 }
 \section{Methods (by class)}{
 \itemize{
+\item \code{tmbfit}: Hazard Percent tmbfit
+
 \item \code{fitdist}: Hazard Percent fitdist
 
 \item \code{fitdistcens}: Hazard Percent fitdistcens

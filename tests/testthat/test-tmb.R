@@ -16,6 +16,16 @@ test_that("tidy.tmbfit", {
   expect_equal(hc$est, 1.681174837758)
   expect_identical(hc$se, NA_real_)
   
+  hp <- ssd_hp(fit$lnorm, 1, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, 1)
+  expect_equal(hp$est, 1.95430302556687) 
+  expect_equal(hp$se, NA_real_) 
+  expect_equal(hp$lcl, NA_real_) 
+  expect_equal(hp$ucl, NA_real_) 
+  expect_equal(hp$dist, "lnorm")
+  
 #  augment <- augment(fit$lnorm) not sure why not working
   
   glance <- glance(fit$lnorm)
@@ -57,6 +67,8 @@ test_that("combine", {
   expect_equal(nobs(fit$lnorm), 28L)
   expect_equal(logLik(fit), c(llogis = -118.507435324581, lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
+
+  # need ssd_hc and ssd_hp for multiple model
   
   glance <- glance(fit)
   expect_is(glance, "tbl_df")
