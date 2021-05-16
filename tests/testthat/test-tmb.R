@@ -10,6 +10,11 @@ test_that("tidy.tmbfit", {
   expect_equal(logLik(fit), c(lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
   
+  gof <- ssd_gof(fit$lnorm)
+  expect_is(gof, "tbl_df")
+  expect_identical(colnames(gof), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic"))
+  expect_equal(gof$bic, 241.692841999445)
+  
   hc <- ssd_hc(fit$lnorm)
   expect_is(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))

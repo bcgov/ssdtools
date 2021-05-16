@@ -80,6 +80,34 @@ ssd_gof.fitdist <- function(x, ...) {
   as_tibble(data)
 }
 
+#' @describeIn ssd_gof Goodness of Fit
+#' @export
+ssd_gof.tmbfit <- function(x, ...) {
+  chk_unused(...)
+  
+  glance <- glance(x)
+
+  dist <- glance$dist
+  aic <- glance$aic
+  aicc <- glance$aicc
+  bic <- - 2 * glance$log_lik + log(glance$nobs) * glance$npars
+
+  if (glance$nobs >= 8) {
+    ad <- NA_real_
+    ks <- NA_real_
+    cvm <- NA_real_
+  } else {
+    ad <- NA_real_
+    ks <- NA_real_
+    cvm <- NA_real_
+  }
+  data <- data.frame(
+    dist = dist, ad = ad, ks = ks, cvm = cvm,
+    aic = aic, aicc = aicc, bic = bic, stringsAsFactors = FALSE
+  )
+  as_tibble(data)
+}
+
 .ssd_gof_fitdists <- function(x) {
   x <- lapply(x, ssd_gof)
   x$stringsAsFactors <- FALSE

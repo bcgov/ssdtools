@@ -3,6 +3,7 @@
 \name{ssd_gof}
 \alias{ssd_gof}
 \alias{ssd_gof.fitdist}
+\alias{ssd_gof.tmbfit}
 \alias{ssd_gof.fitdists}
 \alias{ssd_gof.fitdistcens}
 \alias{ssd_gof.fitdistscens}
@@ -11,6 +12,8 @@
 ssd_gof(x, ...)
 
 \method{ssd_gof}{fitdist}(x, ...)
+
+\method{ssd_gof}{tmbfit}(x, ...)
 
 \method{ssd_gof}{fitdists}(x, ...)
 
@@ -54,6 +57,8 @@ and \code{aicc} for non-censored data.
 \section{Methods (by class)}{
 \itemize{
 \item \code{fitdist}: Goodness of Fit
+
+\item \code{tmbfit}: Goodness of Fit
 
 \item \code{fitdists}: Goodness of Fit
 
