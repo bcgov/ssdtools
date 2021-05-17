@@ -73,7 +73,27 @@ test_that("combine", {
   expect_equal(logLik(fit), c(llogis = -118.507435324581, lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
 
-  # need ssd_hc and ssd_hp for multiple model
+  gof <- ssd_gof(fit)
+  expect_is(gof, "tbl_df")
+  expect_identical(colnames(gof), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
+  expect_equal(gof$weight, c(0.73, 0.27))
+  
+  hc <- ssd_hc(fit)
+  expect_is(hc, "tbl_df")
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_equal(hc$dist, "average")
+  expect_equal(hc$est, 1.64903986707376)
+  expect_identical(hc$se, NA_real_)
+  
+  hp <- ssd_hp(fit, 1, nboot = 10)
+  expect_is(hp, "tbl_df")
+  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(hp$conc, 1)
+  expect_equal(hp$est, 2.18299178983614) 
+  expect_equal(hp$se, NA_real_) 
+  expect_equal(hp$lcl, NA_real_) 
+  expect_equal(hp$ucl, NA_real_) 
+  expect_equal(hp$dist, "average")
   
   glance <- glance(fit)
   expect_is(glance, "tbl_df")
