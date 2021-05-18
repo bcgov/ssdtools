@@ -27,6 +27,16 @@ test_that("fit llogis", {
   )
 })
 
+test_that("fit llogis tmb", {
+  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "llogis", tmb = TRUE)
+  
+  expect_true(is.tmbfit(dist$llogis))
+  expect_equal(
+    estimates(dist$llogis),
+    list(locationlog = 2.62627762517872, scalelog = 0.740423704979968)
+  )
+})
+
 test_that("pqllogis", {
   expect_equal(log(qllogis(0.5, 1, 1)), 1)
   expect_equal(pllogis(exp(3), 1, 1), 0.880797077977882)
