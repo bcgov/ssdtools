@@ -7,6 +7,7 @@
 \alias{qlgumbel}
 \alias{rlgumbel}
 \alias{slgumbel}
+\alias{slgumbel_tmb}
 \title{Log-Gumbel Distribution}
 \usage{
 dlgumbel(x, locationlog = 0, scalelog = 1, log = FALSE)
@@ -18,6 +19,8 @@ qlgumbel(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 rlgumbel(n, locationlog = 0, scalelog = 1)
 
 slgumbel(x)
+
+slgumbel_tmb(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}

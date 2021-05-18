@@ -61,3 +61,10 @@ slgumbel <- function(x) {
     scalelog = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
   ))
 }
+
+#' @rdname lgumbel
+slgumbel_tmb <- function(x) {
+  list(
+    locationlog = mean(log(x), na.rm = TRUE),
+    log_scalelog = log(pi * sd(log(x), na.rm = TRUE) / sqrt(6)))
+}

@@ -142,6 +142,16 @@ test_that("fit lgumbel", {
   )
 })
 
+test_that("fit lgumbel tmb", {
+  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "lgumbel", tmb = TRUE)
+  
+  expect_true(is.tmbfit(dist$lgumbel))
+  expect_equal(
+    estimates(dist$lgumbel),
+    list(locationlog = 1.92265804659899, scalelog = 1.23223771561773)
+  )
+})
+
 test_that("fit lgumbel Mn LT", {
   mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT", ]
   
