@@ -91,4 +91,7 @@ Type ll_invpareto(objective_function<Type>* obj) // normal with parameters mu an
   return nll;
 };  
   
-
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR this
+  
+#endif

@@ -35,7 +35,7 @@
 #define TMB_OBJECTIVE_PTR obj
 
 template<class Type>
-Type ll_weibull(objective_function<Type>* obj // normal with parameters mu and log(sigma)
+Type ll_weibull(objective_function<Type>* obj) // normal with parameters mu and log(sigma)
 {
   // Data
   DATA_VECTOR( left  );  // left and right values

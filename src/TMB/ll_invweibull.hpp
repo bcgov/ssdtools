@@ -79,5 +79,7 @@ Type ll_invweibull(objective_function<Type>* obj) // normal with parameters mu a
   return nll;
 };
   
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR this
   
-
+#endif
