@@ -64,3 +64,14 @@ sgamma <- function(x) {
     shape = mean^2 / var
   ))
 }
+
+#' @rdname gamma
+#' @export
+sgamma_tmb <- function(x) {
+  var <- var(x, na.rm = TRUE)
+  mean <- mean(x, na.rm = TRUE)
+  list(
+    log_scale = log(var / mean),
+    log_shape = log(mean^2 / var)
+  )
+}

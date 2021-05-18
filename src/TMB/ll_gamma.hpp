@@ -26,12 +26,15 @@
 // Refer to https://github.com/kaskr/adcomp/wiki/Development
 // on instructions for including TMB code in an R package
 
-#include <TMB.hpp>
+#ifndef ll_gamma_hpp
+#define ll_gamma_hpp
+
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR obj
 
 template<class Type>
-Type objective_function<Type>::operator() () // normal with parameters mu and log(sigma)
+Type ll_gamma(objective_function<Type>* obj) // normal with parameters mu and log(sigma)
 {
-
   // Data
   DATA_VECTOR( left  );  // left and right values
   DATA_VECTOR( right );
@@ -74,5 +77,9 @@ Type objective_function<Type>::operator() () // normal with parameters mu and lo
   
   return nll;
 };
-  
 
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR this
+  
+#endif
+  

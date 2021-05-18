@@ -7,6 +7,7 @@
 \alias{qgamma}
 \alias{rgamma}
 \alias{sgamma}
+\alias{sgamma_tmb}
 \title{Gamma Distribution}
 \usage{
 dgamma(x, shape = 1, scale = 1, log = FALSE)
@@ -18,6 +19,8 @@ qgamma(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 rgamma(n, shape = 1, scale = 1)
 
 sgamma(x)
+
+sgamma_tmb(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}

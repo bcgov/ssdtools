@@ -4,6 +4,7 @@
 #include <TMB.hpp>
 #include "ll_lnorm.hpp"
 #include "ll_llogis.hpp"
+#include "ll_gamma.hpp"
 
 template<class Type>
 Type objective_function<Type>::operator() () {
@@ -12,6 +13,8 @@ Type objective_function<Type>::operator() () {
     return ll_lnorm(this);
   } else if (model == "ll_llogis") {
     return ll_llogis(this);
+  } else if (model == "ll_gamma") {
+    return ll_gamma(this);
   } else {
     error("Unknown model.");
   }

@@ -107,3 +107,13 @@ test_that("fit gamma boron", {
     c(scale = 25.1263768579472, shape = 0.950051285831343)
   )
 })
+
+test_that("fit gamma boron tmb", {
+  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "gamma", tmb = TRUE)
+  expect_true(is.tmbfit(dist$gamma))
+  expect_equal(
+    estimates(dist$gamma),
+    list(scale = 25.1268322377578, shape = 0.950179464489889)
+  )
+})
+
