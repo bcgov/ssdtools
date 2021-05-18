@@ -83,10 +83,13 @@ Type objective_function<Type>::operator() () // normal with parameters mu and lo
   return nll;
 };
 
-
-
   // Probability of data conditional on parameter values for right censored data i.e. value > given valu
   //for( int i=0; i<n_data_rightcen; i++){
   //   jnll -= log(1-pweibull( y_rightcen(i), location, scale )); 
   //};
 
+  
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR this
+  
+#endif

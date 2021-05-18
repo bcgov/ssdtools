@@ -75,3 +75,8 @@ Type objective_function<Type>::operator() () // normal with parameters mu and lo
   
   return nll;
 };
+
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR this
+
+#endif

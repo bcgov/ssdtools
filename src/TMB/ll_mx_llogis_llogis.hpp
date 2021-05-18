@@ -92,3 +92,8 @@ Type objective_function<Type>::operator() () // normal with parameters mu and lo
   //REPORT( mynll);  //for debugging
   return nll;
 }
+
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR this
+
+#endif

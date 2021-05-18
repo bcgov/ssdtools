@@ -72,3 +72,7 @@ Type objective_function<Type>::operator() ()
   return nll;
 };
 
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR this
+
+#endif
