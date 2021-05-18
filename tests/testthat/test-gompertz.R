@@ -124,6 +124,17 @@ test_that("fit gompertz", {
   )
 })
 
+test_that("fit gompertz tmb", {
+  set.seed(9)
+  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "gompertz", tmb = TRUE)
+  
+  expect_true(is.tmbfit(dist$gompertz))
+  expect_equal(
+    estimates(dist$gompertz),
+    list(location = 0.0394072404080451, shape = 0.00260431228407771)
+  )
+})
+
 test_that("gompertz coefs", {
   warning("gompertz poor convergence")
   set.seed(77)
