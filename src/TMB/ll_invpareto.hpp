@@ -35,10 +35,14 @@
 // Refer to https://github.com/kaskr/adcomp/wiki/Development
 // on instructions for including TMB code in an R package
 
-#include <TMB.hpp>
+#ifndef ll_invpareto_hpp
+#define ll_invpareto_hpp
+
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR obj
 
 template<class Type>
-Type objective_function<Type>::operator() () // normal with parameters mu and log(sigma)
+Type ll_invpareto(objective_function<Type>* obj) // normal with parameters mu and log(sigma)
 {
   // Data
   DATA_VECTOR( left  );  // left and right values

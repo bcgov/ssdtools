@@ -28,10 +28,14 @@
 // Refer to https://github.com/kaskr/adcomp/wiki/Development
 // on instructions for including TMB code in an R package
 
-#include <TMB.hpp>
+#ifndef ll_norm_hpp
+#define ll_norm_hpp
+
+#undef TMB_OBJECTIVE_PTR
+#define TMB_OBJECTIVE_PTR obj
 
 template<class Type>
-Type objective_function<Type>::operator() ()
+Type ll_norm(objective_function<Type>* obj
 {
   // Data
   DATA_VECTOR( left  );  // left and right values
