@@ -53,3 +53,11 @@ qweibull <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) 
 rweibull <- function(n, shape = 1, scale = 1) {
   rdist("weibull", n = n, shape = shape, scale = scale)
 }
+
+# this needs better starting values
+sweibull_tmb <- function(x) {
+  list(
+    log_scale = log(mean(x, na.rm = TRUE)),
+    log_shape = log(sd(x, na.rm = TRUE))
+  )
+}

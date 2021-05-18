@@ -107,3 +107,12 @@ test_that("fit weibull boron", {
     c(shape = 0.966282452187714, scale = 23.5097477721338)
   )
 })
+
+test_that("fit weibull boron tmb", {
+  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "weibull", tmb = TRUE)
+  expect_true(is.tmbfit(dist$weibull))
+  expect_equal(
+    estimates(dist$weibull),
+    list(scale = 23.5139731632548, shape = 0.966099859069695)
+  )
+})

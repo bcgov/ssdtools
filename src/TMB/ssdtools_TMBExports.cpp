@@ -27,6 +27,8 @@ Type objective_function<Type>::operator() () {
     return ll_llogis(this);
   } else if(model == "ll_lnorm") {
     return ll_lnorm(this);
+  } else if(model == "ll_weibull") {
+    return ll_weibull(this);
   } else {
     error("Unknown model.");
   }
