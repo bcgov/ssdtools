@@ -41,7 +41,7 @@ test_that("fit_dist tiny llogis", {
 test_that("fit_dists", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   dist_names <- c(
-    "gamma", "gompertz", "lgumbel",
+    "gamma", "lgumbel",
     "llogis", "lnorm", "pareto", "weibull"
   )
   expect_error(expect_warning(ssd_fit_dists(boron_data[1:5, ], dists = dist_names)), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$")

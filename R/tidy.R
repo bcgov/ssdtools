@@ -22,9 +22,9 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   se <- unname(x[,2])
   x <- tibble::tibble(dist = dist, term = term, est = est, se = se)
   if(!all)
-    x <- x[!stringr::str_detect(x$term, "^log(istic){0,1}_"),]
+    x <- x[!stringr::str_detect(x$term, "^log(it){0,1}_"),]
   # following line causes problem with term
-#    x %<>% filter(!stringr::str_detect(.data$term, "^log(istic){0,1}_"))
+#    x %<>% filter(!stringr::str_detect(.data$term, "^log(it){0,1}_"))
   dplyr::arrange(x, stringr::str_order(.data$term))
 }
 

@@ -58,7 +58,7 @@ test_that("predict.fitdists", {
 
 test_that("predict.fitdists parallel", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "gompertz"))
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis"))
 
   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
   expect_is(pred, "tbl")
