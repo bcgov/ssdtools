@@ -7,6 +7,7 @@
 \alias{pburrIII3}
 \alias{rburrIII3}
 \alias{sburrIII3}
+\alias{sburrIII3_tmb}
 \title{Burr Type III Three-Parameter Distribution}
 \usage{
 dburrIII3(x, lshape1 = 0, lshape2 = 0, lscale = 0, log = FALSE)
@@ -32,6 +33,8 @@ pburrIII3(
 rburrIII3(n, lshape1 = 0, lshape2 = 0, lscale = 0)
 
 sburrIII3(x)
+
+sburrIII3_tmb(x)
 }
 \arguments{
 \item{x}{The object.}

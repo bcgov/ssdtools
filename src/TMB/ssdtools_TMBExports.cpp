@@ -19,7 +19,9 @@
 template<class Type>
 Type objective_function<Type>::operator() () {
   DATA_STRING(model);
-  if (model == "ll_gamma") {
+  if (model == "ll_burrIII3") {
+    return ll_burrIII3(this);
+  }  if (model == "ll_gamma") {
     return ll_gamma(this);
   } else if (model == "ll_gompertz") {
     return ll_gompertz(this);

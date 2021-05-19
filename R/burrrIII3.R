@@ -95,3 +95,8 @@ sburrIII3 <- function(x) {
   list(start = list(lshape1 = 0, lshape2 = 0, lscale = 1))
 }
 
+#' @rdname burrIII3
+#' @export
+sburrIII3_tmb <- function(x) {
+  list(start = list(log_scale = 1, log_shape1 = 0, log_shape2 = 0))
+}
