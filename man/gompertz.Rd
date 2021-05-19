@@ -6,28 +6,25 @@
 \alias{pgompertz}
 \alias{qgompertz}
 \alias{rgompertz}
-\alias{sgompertz}
 \alias{sgompertz_tmb}
 \title{Gompertz Distribution}
 \usage{
-dgompertz(x, llocation = 0, lshape = 0, log = FALSE)
+dgompertz(x, location = 1, shape = 1, log = FALSE)
 
-pgompertz(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE)
+pgompertz(q, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-qgompertz(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE)
+qgompertz(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-rgompertz(n, llocation = 0, lshape = 0)
-
-sgompertz(x)
+rgompertz(n, location = 1, shape = 1)
 
 sgompertz_tmb(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{llocation}{location parameter on the log scale.}
+\item{location}{location parameter.}
 
-\item{lshape}{shape parameter on the log scale.}
+\item{shape}{A string of the column in data for the shape aesthetic.}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 

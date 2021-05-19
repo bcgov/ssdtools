@@ -42,7 +42,7 @@ test_that("predict.fitdist parallel", {
 
 test_that("predict.fitdists", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-  dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("gamma", "gompertz"))
+  dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("gamma", "llogis"))
   pred <- predict(dists, nboot = 10L)
 
   expect_is(pred, "tbl")

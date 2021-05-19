@@ -29,38 +29,29 @@ NULL
 
 #' @rdname gompertz
 #' @export
-dgompertz <- function(x, llocation = 0, lshape = 0, log = FALSE) {
-  ddist("gompertz", x,  location = exp(llocation), shape = exp(lshape), 
+dgompertz <- function(x, location = 1, shape = 1, log = FALSE) {
+  ddist("gompertz", x,  location = location, shape = shape, 
         log = log)
 }
 
 #' @rdname gompertz
 #' @export
-pgompertz <- function(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
-  pdist("gompertz", q = q, location = exp(llocation), shape = exp(lshape), 
+pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+  pdist("gompertz", q = q, location = location, shape = shape, 
         lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
-  qdist("gompertz", p = p, location = exp(llocation), shape = exp(lshape), 
+qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+  qdist("gompertz", p = p, location = location, shape = shape, 
         lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @rdname gompertz
 #' @export
-rgompertz <- function(n, llocation = 0, lshape = 0) {
-  rdist("gompertz", n = n, location = exp(llocation), shape = exp(lshape))
-}
-
-#' @rdname gompertz
-#' @export
-sgompertz <- function(x) {
-  fit <- vglm(x ~ 1, VGAM::gompertz)
-  list(start = list(
-    llocation = unname(coef(fit)[2]), lshape = unname(coef(fit)[1])
-  ))
+rgompertz <- function(n, location = 1, shape = 1) {
+  rdist("gompertz", n = n, location = location, shape = shape)
 }
 
 #' @rdname gompertz
