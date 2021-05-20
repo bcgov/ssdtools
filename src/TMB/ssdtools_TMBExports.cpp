@@ -6,14 +6,12 @@
 #include "ll_burrIII3.hpp"
 #include "ll_gamma.hpp"
 #include "ll_gompertz.hpp"
-#include "ll_gumbel.hpp"
 #include "ll_invpareto.hpp"
 #include "ll_invweibull.hpp"
 #include "ll_lgumbel.hpp"
 #include "ll_llogis.hpp"
 #include "ll_lnorm.hpp"
 #include "ll_mx_llogis_llogis.hpp"
-#include "ll_norm.hpp"
 #include "ll_weibull.hpp"
 
 template<class Type>
