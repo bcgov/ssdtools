@@ -64,8 +64,7 @@ Type ll_invweibull(objective_function<Type>* obj) // normal with parameters mu a
      if(left(i) < right(i)){   // censored data
         pleft = 0;
         if(left(i)>0){ pleft=1-pweibull( 1/left(i), shape, scale );};  // need the other tail for the inverse
-        pright = 1;
-        if(isfinite(right(i))){ pright=1-pweibull( 1/right(i), shape, scale);};
+        pright = 1-pweibull( 1/right(i), shape, scale);
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };
      

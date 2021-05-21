@@ -63,8 +63,7 @@ Type ll_llogis(objective_function<Type>* obj) {
      if(left(i) < right(i)){    // censored values; no builtin function so we code the cdf directly
         pleft = 0;
         if(left(i)>0){ pleft=1/(1+exp(-(log(left(i))-locationlog)/scalelog));};
-        pright = 1;
-        if(isfinite(right(i))){ pright=1/(1+exp(-(log(right(i))-locationlog)/scalelog));};
+        pright =1/(1+exp(-(log(right(i))-locationlog)/scalelog));
         nll -= weight(i)*log(pright-pleft);
      };
      
