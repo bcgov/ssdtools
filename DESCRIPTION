@@ -87,10 +87,8 @@ Imports:
     VGAM
 Suggests:
     covr,
-    dplyr,
     knitr,
     mle.tools,
-    purrr,
     R.rsp,
     readr,
     reshape2,
