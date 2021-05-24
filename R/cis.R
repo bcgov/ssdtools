@@ -32,11 +32,11 @@ xcis <- function(x, samples, p, level, fun, args) {
   )
 }
 
-xcis_tmb <- function(percent, args, what, level) {
+xcis_tmb <- function(x, args, what, level) {
   if(stringr::str_detect(what, "^p")) {
-    args$q <- percent
+    args$q <- x
   } else {
-    args$p <- percent
+    args$p <- x
   }
   
   samples <- do.call(what, args)
@@ -47,10 +47,10 @@ xcis_tmb <- function(percent, args, what, level) {
   )
 }
 
-cis_tmb <- function(estimates, what, level, percent) {
+cis_tmb <- function(estimates, what, level, x) {
   args <- purrr::transpose(estimates)
   args <- purrr::map(args, as.double)
-  purrr::map_dfr(percent, xcis_tmb, args, what, level)
+  purrr::map_dfr(x, xcis_tmb, args, what, level)
 }
 
 cis <- function(samples, p, level, x) {

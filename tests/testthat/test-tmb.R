@@ -36,6 +36,11 @@ test_that("tidy.tmbfit", {
   expect_equal(hp$ucl, NA_real_) 
   expect_equal(hp$dist, "lnorm")
   
+  set.seed(101)
+  hp <- ssd_hp(fit$lnorm, 1, ci = TRUE, nboot = 10)
+  expect_equal(hp$est, 1.95430302556687)
+  expect_equal(hc$se, 0.670156954633317)
+  
 #  augment <- augment(fit$lnorm) not sure why not working
   
   glance <- glance(fit$lnorm)

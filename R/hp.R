@@ -72,13 +72,13 @@ ssd_hp <- function(x, ...) {
       stringsAsFactors = FALSE
     )))
   }
-  .NotYetImplemented()
-  samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
-  cis <- cis(samples, p = TRUE, level = level, x = conc)
+  estimates <- boot_tmbfit(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
+  cis <- cis_tmb(estimates, what, level = level, x = conc)
   as_tibble(data.frame(
+    dist = dist,
     conc = conc, est = est * 100,
-    se = cis$se * 100, lcl = cis$lcl * 100, ucl = cis$ucl * 100,
-    dist = dist, stringsAsFactors = FALSE
+    se = cis$se, lcl = cis$lcl, ucl = cis$ucl, 
+    stringsAsFactors = FALSE
   ))
 }
 

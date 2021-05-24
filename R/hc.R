@@ -110,7 +110,7 @@ no_ssd_hc <- function() {
     )))
   }
   estimates <- boot_tmbfit(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
-  cis <- cis_tmb(estimates, what, level = level, percent)
+  cis <- cis_tmb(estimates, what, level = level, x = percent)
   as_tibble(data.frame(
     dist = dist,
     percent = percent * 100, est = est,
