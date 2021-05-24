@@ -21,6 +21,11 @@ test_that("tidy.tmbfit", {
   expect_equal(hc$est, 1.681174837758)
   expect_identical(hc$se, NA_real_)
   
+  set.seed(101)
+  hc <- ssd_hc(fit$lnorm, ci = TRUE, nboot = 10)
+  expect_equal(hc$est, 1.681174837758)
+  expect_equal(hc$se, 0.670156954633317)
+  
   hp <- ssd_hp(fit$lnorm, 1, nboot = 10)
   expect_is(hp, "tbl_df")
   expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))

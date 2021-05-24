@@ -32,6 +32,27 @@ xcis <- function(x, samples, p, level, fun, args) {
   )
 }
 
+xcis_tmb <- function(percent, args, what, level) {
+  if(stringr::str_detect(what, "^p")) {
+    args$q <- percent
+  } else {
+    args$p <- percent
+  }
+  
+  samples <- do.call(what, args)
+  quantile <- quantile(samples, probs = probs(level))
+  data.frame(
+    se = sd(samples), lcl = quantile[1], ucl = quantile[2],
+    row.names = NULL
+  )
+}
+
+cis_tmb <- function(estimates, what, level, percent) {
+  args <- purrr::transpose(estimates)
+  args <- purrr::map(args, as.double)
+  purrr::map_dfr(percent, xcis_tmb, args, what, level)
+}
+
 cis <- function(samples, p, level, x) {
   fun <- if (p) "p" else "q"
   fun <- paste0(fun, samples$fitpart$distname)

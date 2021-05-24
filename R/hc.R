@@ -109,9 +109,8 @@ no_ssd_hc <- function() {
       stringsAsFactors = FALSE
     )))
   }
-  .NotYetImplemented()
-  samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
-  cis <- cis(samples, p = FALSE, level = level, x = percent)
+  estimates <- boot_tmbfit(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
+  cis <- cis_tmb(estimates, what, level = level, percent)
   as_tibble(data.frame(
     dist = dist,
     percent = percent * 100, est = est,
