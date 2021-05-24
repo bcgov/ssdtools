@@ -14,7 +14,7 @@
 
 #' @export
 print.tmbfit <- function(x, ...) {
-  print(tidy(x))
+  print(glance(x))
   invisible(x)
 }
 
