@@ -109,6 +109,7 @@ process_data <- function(data, left, right, weight, nrow, silent) {
       deprecate_warn("0.1.2", "xburrIII2()",
                      details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
     }
+    chk_subset(dists, ssd_dists())
     chk_flag(computable)
     chk_flag(silent)
     

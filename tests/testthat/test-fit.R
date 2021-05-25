@@ -19,6 +19,10 @@ test_that("fit_dist", {
   expect_equal(estimates(dists), estimates(boron_lnorm))
 })
 
+test_that("unrecognized dist", {
+  chk::expect_chk_error(ssd_fit_dists(ssdtools::boron_data, dists = "lnorm2"))
+})
+
 test_that("fit_dist tiny llogis", {
   data <- ssdtools::boron_data
   fit <- ssd_fit_dists(data, dists = "llogis")
