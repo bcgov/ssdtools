@@ -24,6 +24,9 @@
 #' @examples
 #' ssd_plot_cf(boron_data)
 ssd_plot_cf <- function(data, left = "Conc") {
+  deprecate_soft("0.3.5", "ssd_plot_cf()", "fitdistrplus::descdist()",
+                 details = "Please use fitdistrplus::descdist(data$Conc, boot = 100L).")
+  
   chk_s3_class(data, "data.frame")
   chk_string(left)
   chk_superset(colnames(data), left)
