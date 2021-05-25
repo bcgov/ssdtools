@@ -12,25 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("dlgumbel extremes", {
-  expect_identical(dlgumbel(numeric(0)), numeric(0))
-  expect_identical(dlgumbel(NA), NA_real_)
-  expect_identical(dlgumbel(NaN), NaN)
-  expect_identical(dlgumbel(0), 0)
-  expect_equal(dlgumbel(1), 0.367879441171442)
-  expect_equal(dlgumbel(1, log = TRUE), log(dlgumbel(1)))
-  expect_equal(dlgumbel(1, scalelog = -1), NaN)
-  expect_identical(dlgumbel(0), 0)
-  expect_identical(dlgumbel(-Inf), 0)
-  expect_identical(dlgumbel(Inf), 0)
-  expect_identical(dlgumbel(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(dlgumbel(NA), dlgumbel(NaN), dlgumbel(0), dlgumbel(Inf), dlgumbel(-Inf)))
-  expect_equal(dlgumbel(1:2, locationlog = 1:2, scalelog = 3:4), 
-               c(dlgumbel(1, 1, 3), dlgumbel(2, 2, 4)))
-  expect_equal(dlgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4), 
-               c(dlgumbel(1, 1, 3), NA))
-})
-
 test_that("plgumbel extremes", {
   expect_identical(plgumbel(numeric(0)), numeric(0))
   expect_identical(plgumbel(NA), NA_real_)
@@ -95,14 +76,6 @@ test_that("rlgumbel extremes", {
   expect_error(rlgumbel(1, scalelog = 1:2))
   expect_identical(rlgumbel(1, locationlog = NA), NA_real_)
   expect_identical(rlgumbel(1, scalelog = NA), NA_real_)
-})
-
-test_that("dlgumbel values", {
-  expect_equal(dlgumbel(1), 0.367879441171442)
-  expect_equal(dlgumbel(2), 0.151632664928158)
-  expect_equal(dlgumbel(c(1, 2)), c(0.367879441171442, 0.151632664928158))
-  expect_equal(dlgumbel(exp(3), 3, 1), 0.0183156388887342)
-  expect_equal(dlgumbel(exp(4), 3, 1), 0.00466401114120162)
 })
 
 test_that("plgumbel values", {

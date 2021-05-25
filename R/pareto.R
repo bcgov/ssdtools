@@ -12,38 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Pareto Distribution
-#'
-#' Probability density, cumulative distribution, 
-#' inverse cumulative distribution, random sample and starting values functions.
-#' 
-#' The pareto distribution has been deprecated as it is not suitable for SSD data.
-#' The functions are wrappers on the equivalent VGAM functions.
-#'
-#' @param x A numeric vector of values.
-#' @inheritParams params
-#' @return A numeric vector.
-#' @name pareto
-#' @seealso [VGAM::dpareto()]
-#' @examples
-#' x <- seq(0.01, 5, by = 0.01)
-#' plot(x, dpareto(x), type = "l")
-NULL
-
-#' @rdname pareto
-#' @export
-dpareto <- function(x, scale = 1, shape = 1, log = FALSE) {
-  deprecate_soft("0.2.1", "dpareto()", id = "xpareto",
-                 details = "The 'pareto' distribution is not suitable for SSD data.")
-  if (!length(x)) {
-    return(numeric(0))
-  }
-  x[!is.na(x)] <- VGAM::dpareto(x[!is.na(x)], scale = scale, shape = shape, log = log)
-  x
-}
-
-#' @rdname pareto
-#' @export
 qpareto <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   deprecate_soft("0.2.1", "qpareto()", id = "xpareto",
                  details = "The 'pareto' distribution is not suitable for SSD data.")
@@ -53,8 +21,6 @@ qpareto <- function(p, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   VGAM::qpareto(p, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname pareto
-#' @export
 ppareto <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   deprecate_soft("0.2.1", "ppareto()", id = "xpareto",
                  details = "The 'pareto' distribution is not suitable for SSD data.")
@@ -64,16 +30,12 @@ ppareto <- function(q, scale = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   VGAM::ppareto(q, scale = scale, shape = shape, lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname pareto
-#' @export
 rpareto <- function(n, scale = 1, shape = 1) {
   deprecate_soft("0.2.1", "rpareto()", id = "xpareto",
                  details = "The 'pareto' distribution is not suitable for SSD data.")
   VGAM::rpareto(n, scale = scale, shape = shape)
 }
 
-#' @rdname pareto
-#' @export
 spareto <- function(x) {
   deprecate_soft("0.2.1", "spareto()", id = "xpareto",
                  details = "The 'pareto' distribution is not suitable for SSD data.")

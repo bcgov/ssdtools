@@ -12,11 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("dllogis", {
-  expect_equal(dllogis(exp(3), 1, 3), 0.003720046)
-  expect_equal(dllogis(exp(4), 1, 3), 0.001200358)
-})
-
 test_that("fit llogis", {
   fit <- ssd_fit_dists(ssdtools::boron_data, dists = "llogis")
 

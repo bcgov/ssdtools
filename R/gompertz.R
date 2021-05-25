@@ -12,50 +12,20 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Gompertz Distribution
-#'
-#' Probability density, cumulative distribution, 
-#' inverse cumulative distribution, random sample and starting values functions.
-#'
-#' @param x A numeric vector of values.
-#' @inheritParams params
-#' @return A numeric vector.
-#' @name gompertz
-#' @seealso [stats::dgamma()]
-#' @examples
-#' x <- seq(0.01, 5, by = 0.01)
-#' plot(x, dgompertz(x), type = "l")
-NULL
-
-#' @rdname gompertz
-#' @export
-dgompertz <- function(x, location = 1, shape = 1, log = FALSE) {
-  ddist("gompertz", x,  location = location, shape = shape, 
-        log = log)
-}
-
-#' @rdname gompertz
-#' @export
 pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("gompertz", q = q, location = location, shape = shape, 
         lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname gompertz
-#' @export
 qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gompertz", p = p, location = location, shape = shape, 
         lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname gompertz
-#' @export
 rgompertz <- function(n, location = 1, shape = 1) {
   rdist("gompertz", n = n, location = location, shape = shape)
 }
 
-#' @rdname gompertz
-#' @export
 sgompertz <- function(x) {
   fit <- vglm(x ~ 1, VGAM::gompertz)
   list(

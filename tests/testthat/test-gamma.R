@@ -1,23 +1,3 @@
-test_that("dgamma extremes", {
-  expect_identical(dgamma(numeric(0)), numeric(0))
-  expect_identical(dgamma(NA), NA_real_)
-  expect_identical(dgamma(NaN), NaN)
-  expect_identical(dgamma(0), 1)
-  expect_equal(dgamma(1), 0.367879441171442)
-  expect_equal(dgamma(1, log = TRUE), log(dgamma(1)))
-  expect_equal(dgamma(1, shape = -1), NaN)
-  expect_equal(dgamma(1, scale = -1), NaN)
-  expect_identical(dgamma(0), 1)
-  expect_identical(dgamma(-Inf), 0)
-  expect_identical(dgamma(Inf), 0)
-  expect_identical(dgamma(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(dgamma(NA), dgamma(NaN), dgamma(0), dgamma(Inf), dgamma(-Inf)))
-  expect_equal(dgamma(1:2, shape = 1:2, scale = 3:4), 
-               c(dgamma(1, 1, 3), dgamma(2, 2, 4)))
-  expect_equal(dgamma(1:2, shape = c(1, NA), scale = 3:4), 
-               c(dgamma(1, 1, 3), NA))
-})
-
 test_that("pgamma extremes", {
   expect_identical(pgamma(numeric(0)), numeric(0))
   expect_identical(pgamma(NA), NA_real_)

@@ -12,18 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("dpareto", {
-  lifecycle::expect_deprecated(dpareto(1))
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  expect_equal(dpareto(numeric(0)), numeric(0))
-  expect_equal(dpareto(c(0, 1, Inf, NaN, -1)), c(0, 1, 0, NA, 0))
-  expect_equal(dpareto(2), 0.25)
-  expect_equal(dpareto(2, log = TRUE), log(dpareto(2)))
-  expect_equal(dpareto(1), 1)
-  expect_equal(dpareto(0.5), 0)
-  expect_equal(dpareto(1:3), c(1, 0.25, 0.111111111111111))
-})
-
 test_that("fit pareto", {
   # rlang::scoped_options(lifecycle_verbosity = "quiet")
   # dist <- ssd_fit_dist(ssdtools::boron_data, dist = "pareto")

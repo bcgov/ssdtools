@@ -41,8 +41,6 @@ test_that("tidy.tmbfit", {
   expect_equal(hp$est, 1.95430302556687)
   expect_equal(hc$se, 0.670156954633317)
   
-#  augment <- augment(fit$lnorm) not sure why not working
-  
   glance <- glance(fit$lnorm)
   expect_is(glance, "tbl_df")
   expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc"))
