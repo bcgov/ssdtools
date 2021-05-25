@@ -103,6 +103,8 @@
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
 
+\item{nrow}{A positive whole number of the minimum number of non-missing rows.}
+
 \item{nsim}{A positive whole number of the number of simulations to generate.}
 }
 \description{

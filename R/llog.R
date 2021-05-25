@@ -51,3 +51,11 @@ sllog <- function(x) {
                  details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.", )
   sllogis(x)
 }
+
+#' @rdname llogis
+#' @export
+sllog_tmb <- function(x) {
+  deprecate_soft("0.1.0", "sllog()", "sllogis()", id = "xllog",
+                 details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.", )
+  sllogis_tmb(x)
+}

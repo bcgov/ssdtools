@@ -53,39 +53,6 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_fitdist <- function(x, percent, ci, level, nboot, parallel, ncpus) {
-  chk_vector(percent)
-  chk_numeric(percent)
-  chk_number(level)
-  chk_range(level)
-
-  percent <- percent / 100
-
-  args <- as.list(x$estimate)
-  args$p <- percent
-  dist <- x$distname
-  what <- paste0("q", dist)
-
-  est <- do.call(what, args)
-  if (!ci) {
-    na <- rep(NA_real_, length(percent))
-    return(as_tibble(data.frame(
-      dist = rep(dist, length(percent)),
-      percent = percent * 100, est = est,
-      se = na, lcl = na, ucl = na,
-      stringsAsFactors = FALSE
-    )))
-  }
-  samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
-  cis <- cis(samples, p = FALSE, level = level, x = percent)
-  as_tibble(data.frame(
-    dist = dist,
-    percent = percent * 100, est = est,
-    se = cis$se, lcl = cis$lcl, ucl = cis$ucl, 
-    stringsAsFactors = FALSE
-  ))
-}
-
 .ssd_hc_tmbfit <- function(x, percent, ci, level, nboot, parallel, ncpus) {
   chk_vector(percent)
   chk_numeric(percent)
@@ -125,7 +92,7 @@ no_ssd_hc <- function() {
     return(no_ssd_hc())
   }
 
-  hc <- lapply(x, ssd_hc,
+  hc <- lapply(x, .ssd_hc_tmbfit,
     percent = percent, ci = ci, level = level, nboot = nboot,
     parallel = parallel, ncpus = ncpus
   )
@@ -173,60 +140,6 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   as_tibble(hc)
 }
 
-#' @describeIn ssd_hc Hazard Percent fitdist
-#' @export
-#' @examples
-#' ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hc.fitdist <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
-  chk_unused(...)
-
-  if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
-  }
-
-  .ssd_hc_fitdist(x, percent,
-    ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus
-  )
-}
-
-#' @describeIn ssd_hc Hazard Percent fitdist
-#' @export
-#' @examples
-#' ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hc.tmbfit <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
-  chk_unused(...)
-  
-  if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
-  }
-  
-  .ssd_hc_tmbfit(x, percent,
-                  ci = ci, level = level, nboot = nboot,
-                  parallel = parallel, ncpus = ncpus
-  )
-}
-
-#' @describeIn ssd_hc Hazard Percent fitdistcens
-#' @export
-#' @examples
-#' ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
-ssd_hc.fitdistcens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
-  chk_unused(...)
-
-  if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
-  }
-
-  .ssd_hc_fitdist(x, percent,
-    ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus
-  )
-}
-
 #' @describeIn ssd_hc Hazard Percent fitdists
 #' @export
 #' @examples
@@ -234,27 +147,6 @@ ssd_hc.fitdistcens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95,
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
-  chk_unused(...)
-
-  if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
-  }
-
-  .ssd_hc_fitdists(x, percent,
-    ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus,
-    average = average, ic = ic
-  )
-}
-
-#' @describeIn ssd_hc Hazard Percent fitdistcens
-#' @export
-#' @examples
-#' ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdistscens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aic", ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "bic"))
   chk_unused(...)
 
   if (!missing(hc)) {

@@ -5,7 +5,7 @@
 \alias{boron_lnorm}
 \title{fitdist for CCME Boron Data}
 \format{
-An object of class \code{fitdist} of length 17.
+An object of class \code{fitdists} of length 1.
 }
 \usage{
 boron_lnorm

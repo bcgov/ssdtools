@@ -13,17 +13,13 @@
 #    limitations under the License.
 
 test_that("utils", {
-  expect_true(is.fitdist(boron_lnorm))
+  expect_true(is.fitdists(boron_lnorm))
   expect_true(is.fitdists(boron_dists))
-  expect_true(is.fitdist(boron_dists[["lnorm"]]))
-  expect_true(is.fitdistcens(fluazinam_lnorm))
-  expect_true(is.fitdistscens(fluazinam_dists))
-  expect_true(is.fitdistcens(fluazinam_dists[[1]]))
-  
+
   expect_identical(nobs(boron_lnorm), 28L)
   expect_identical(nobs(boron_dists), nobs(boron_lnorm))
-  expect_identical(nobs(fluazinam_lnorm), NA_integer_)
-  expect_identical(nobs(fluazinam_dists), NA_integer_)
+#  expect_identical(nobs(fluazinam_lnorm), NA_integer_)
+#  expect_identical(nobs(fluazinam_dists), NA_integer_)
   
   expect_equal(ssd_ecd(1:10), seq(0.05, 0.95, by = 0.1))
 })

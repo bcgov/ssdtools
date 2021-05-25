@@ -18,21 +18,10 @@ test_that("dllogis", {
 })
 
 test_that("fit llogis", {
-  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "llogis")
 
-  expect_true(is.fitdist(dist))
   expect_equal(
-    coef(dist),
-    c(locationlog = 2.6261248978507, scalelog = 0.740309228071107)
-  )
-})
-
-test_that("fit llogis tmb", {
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "llogis", tmb = TRUE)
-  
-  expect_true(is.tmbfit(dist$llogis))
-  expect_equal(
-    estimates(dist$llogis),
+    estimates(fit$llogis),
     list(locationlog = 2.62627762517872, scalelog = 0.740423704979968)
   )
 })

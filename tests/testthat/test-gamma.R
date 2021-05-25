@@ -91,25 +91,23 @@ test_that("rgamma extremes", {
 test_that("fit gamma quinoline", {
   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
 
-  expect_warning(dist <- ssd_fit_dist(quin, dist = "gamma"))
-  expect_true(is.fitdist(dist))
+  fit <- ssd_fit_dists(quin, dists = "gamma")
   expect_equal(
-    coef(dist),
-    c(scale = 41276.5658303504, shape = 0.504923953282222)
+    estimates(fit$gamma),
+    list(scale = 41201.290365153, shape = 0.505323979309372)
   )
 })
 
 test_that("fit gamma boron", {
-  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gamma")
-  expect_true(is.fitdist(dist))
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "gamma")
   expect_equal(
-    coef(dist),
-    c(scale = 25.1263768579472, shape = 0.950051285831343)
+    estimates(fit$gamma),
+    list(scale = 25.1268322377578, shape = 0.950179464489889)
   )
 })
 
 test_that("fit gamma boron tmb", {
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "gamma", tmb = TRUE)
+  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "gamma")
   expect_true(is.tmbfit(dist$gamma))
   expect_equal(
     estimates(dist$gamma),

@@ -17,7 +17,7 @@ tmb_model <- function(data, dist) {
   tmb_fun(data, parameters, dist)
 }
 
-fit_tmb <- function(data, dist) {
+fit_tmb <- function(dist, data) {
   model <- tmb_model(data, dist)
   control <- list(eval.max = 10000, iter.max = 1000)
   capture.output(

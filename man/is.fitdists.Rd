@@ -19,11 +19,4 @@ Tests whether an object is a fitdists.
 is.fitdists(boron_lnorm)
 is.fitdists(boron_dists)
 }
-\seealso{
-Other is: 
-\code{\link{is.fitdistcens}()},
-\code{\link{is.fitdistscens}()},
-\code{\link{is.fitdist}()},
-\code{\link{is.tmbfit}()}
-}
 \concept{is}

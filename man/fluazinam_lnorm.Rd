@@ -5,7 +5,7 @@
 \alias{fluazinam_lnorm}
 \title{fitdist for CCME Fluazinam Data}
 \format{
-An object of class \code{fitdistcens} of length 17.
+An object of class \code{tmbfit} of length 4.
 }
 \usage{
 fluazinam_lnorm

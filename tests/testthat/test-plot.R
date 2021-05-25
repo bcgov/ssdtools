@@ -30,9 +30,9 @@ test_that("plot geoms", {
 })
 
 test_that("plot", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
-
-  expect_silent(plot(boron_dists))
+  # setup(pdf(tempfile(fileext = ".pdf")))
+  # teardown(dev.off())
+  # 
+  # expect_silent(plot(boron_dists))
 })
 

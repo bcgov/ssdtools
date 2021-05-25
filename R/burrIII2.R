@@ -72,3 +72,12 @@ sburrIII2 <- function(x) {
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   sllogis(x)
 }
+
+#' @rdname burrIII2
+#' @export
+sburrIII2_tmb <- function(x) {
+  deprecate_soft("0.1.2", "sburrIII2()", "sllogis()", id = "xburrIII2",
+                 details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
+  sllogis_tmb(x)
+}
+

@@ -52,7 +52,7 @@ test_that("data", {
   ), NA)
   expect_is(boron_pred, "tbl")
 
-  expect_is(boron_lnorm, "fitdist")
+  expect_is(boron_lnorm, "fitdists")
   expect_is(boron_dists, "fitdists")
 
   expect_error(chk::check_data(

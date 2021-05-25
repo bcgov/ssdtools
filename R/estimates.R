@@ -10,3 +10,11 @@ estimates.tmbfit <- function(x, all = FALSE, ...) {
   names(x) <- names
   x
 }
+
+#' @export
+estimates.fitdists <- function(x, all = FALSE, ...) {
+  y <- lapply(x, estimates, all = all)
+  names(y) <- names(x)
+  y
+}
+

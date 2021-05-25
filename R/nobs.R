@@ -23,27 +23,7 @@ stats::nobs
   nrow(data)
 }
 
-#' Number of Observations
-#'
-#' @inheritParams params
-#' @seealso [stats::nobs()]
-#' @export
-#' @examples
-#' stats::nobs(boron_lnorm)
-nobs.fitdist <- function(object, ...) object$n
-
-#' Number of Observations
-#'
-#' @inheritParams params
-#' @seealso [stats::nobs()]
-#' @export
 nobs.tmbfit <- function(object, ...) .nobs_data(.data_tmbfit(object))
-
-#' @rdname nobs.fitdist 
-#' @export
-#' @examples
-#' stats::nobs(fluazinam_lnorm)
-nobs.fitdistcens <- function(object, ...) NA_integer_
 
 #' @export
 nobs.fitdists <- function(object, ...) nobs(object[[1]])

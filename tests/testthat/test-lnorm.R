@@ -85,19 +85,17 @@ test_that("rlnorm extremes", {
 test_that("fit lnorm quinoline", {
   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
   
-  expect_warning(dist <- ssd_fit_dist(quin, dist = "lnorm"))
-  expect_true(is.fitdist(dist))
+  fit <- ssd_fit_dists(quin, dists = "lnorm")
   expect_equal(
-    coef(dist),
-    c(meanlog = 8.68875725361798, sdlog = 1.9908920631944)
+    estimates(fit$lnorm),
+    list(meanlog = 8.68875153351101, sdlog = 1.99119217337871)
   )
 })
 
 test_that("fit lnorm boron", {
-  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "lnorm")
-  expect_true(is.fitdist(dist))
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   expect_equal(
-    coef(dist),
-    c(meanlog = 2.56164375310683, sdlog = 1.24172540661694)
+    estimates(fit$lnorm),
+    list(meanlog = 2.56164496371788, sdlog = 1.24154032495908)
   )
 })

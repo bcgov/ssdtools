@@ -7,6 +7,7 @@
 \alias{qburrIII2}
 \alias{rburrIII2}
 \alias{sburrIII2}
+\alias{sburrIII2_tmb}
 \title{Burr Type III Two-Parameter Distribution}
 \usage{
 dburrIII2(x, locationlog = 0, scalelog = 1, log = FALSE)
@@ -18,6 +19,8 @@ qburrIII2(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 rburrIII2(n, locationlog = 0, scalelog = 1)
 
 sburrIII2(x)
+
+sburrIII2_tmb(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}

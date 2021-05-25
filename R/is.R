@@ -12,50 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
-#' Is tmbfit
-#'
-#' Tests whether an object is a tmbfit object.
-#' @inheritParams params
-#'
-#' @return A flag.
-#' @family is
-#' @export
 is.tmbfit <- function(x) {
   inherits(x, "tmbfit")
-}
-
-#' Is fitdist
-#'
-#' Tests whether an object is a fitdist.
-#' @inheritParams params
-#'
-#' @return A flag.
-#' @family is
-#' @export
-#'
-#' @examples
-#' is.fitdist(boron_lnorm)
-#' is.fitdist(boron_dists)
-#' is.fitdist(boron_dists[["lnorm"]])
-is.fitdist <- function(x) {
-  inherits(x, "fitdist")
-}
-
-#' Is censored fitdist
-#'
-#' Tests whether an object is a censored fitdist.
-#' @inheritParams params
-#'
-#' @return A flag.
-#' @family is
-#' @export
-#'
-#' @examples
-#' is.fitdistcens(boron_lnorm)
-#' is.fitdistcens(fluazinam_lnorm)
-is.fitdistcens <- function(x) {
-  inherits(x, "fitdistcens")
 }
 
 #' Is fitdists
@@ -71,22 +29,5 @@ is.fitdistcens <- function(x) {
 #' is.fitdists(boron_lnorm)
 #' is.fitdists(boron_dists)
 is.fitdists <- function(x) {
-  inherits(x, "fitdists") & !is.fitdistcens(x)
-}
-
-#' Is censored fitdists
-#'
-#' Tests whether an object is a censored fitdists.
-#' @inheritParams params
-#'
-#' @return A flag.
-#' @family is
-#' @export
-#'
-#' @examples
-#' is.fitdistscens(boron_dists)
-#' is.fitdistscens(fluazinam_lnorm)
-#' is.fitdistscens(fluazinam_dists)
-is.fitdistscens <- function(x) {
-  inherits(x, "fitdistscens")
+  inherits(x, "fitdists")
 }

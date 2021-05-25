@@ -3,52 +3,12 @@
 \name{ssd_hc}
 \alias{ssd_hc}
 \alias{ssd_hc.list}
-\alias{ssd_hc.fitdist}
-\alias{ssd_hc.tmbfit}
-\alias{ssd_hc.fitdistcens}
 \alias{ssd_hc.fitdists}
-\alias{ssd_hc.fitdistscens}
 \title{Hazard Concentration}
 \usage{
 ssd_hc(x, ...)
 
 \method{ssd_hc}{list}(x, percent = 5, hc = 5, ...)
-
-\method{ssd_hc}{fitdist}(
-  x,
-  percent = 5,
-  hc = 5,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  ...
-)
-
-\method{ssd_hc}{tmbfit}(
-  x,
-  percent = 5,
-  hc = 5,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  ...
-)
-
-\method{ssd_hc}{fitdistcens}(
-  x,
-  percent = 5,
-  hc = 5,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  ...
-)
 
 \method{ssd_hc}{fitdists}(
   x,
@@ -61,20 +21,6 @@ ssd_hc(x, ...)
   ncpus = 1,
   average = TRUE,
   ic = "aicc",
-  ...
-)
-
-\method{ssd_hc}{fitdistscens}(
-  x,
-  percent = 5,
-  hc = 5,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  average = TRUE,
-  ic = "aic",
   ...
 )
 }
@@ -111,23 +57,11 @@ Gets concentrations that protect specified percentages of species.
 \itemize{
 \item \code{list}: Hazard Percent list of distributions
 
-\item \code{fitdist}: Hazard Percent fitdist
-
-\item \code{tmbfit}: Hazard Percent fitdist
-
-\item \code{fitdistcens}: Hazard Percent fitdistcens
-
 \item \code{fitdists}: Hazard Percent fitdists
-
-\item \code{fitdistscens}: Hazard Percent fitdistcens
 }}
 
 \examples{
 ssd_hc(list("lnorm" = NULL))
 ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
-ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
 ssd_hc(boron_dists, c(0, 1, 30, Inf))
-ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
 }

@@ -18,5 +18,5 @@ test_that("autoplot", {
   
   expect_is(ggplot2::autoplot(boron_lnorm), "ggplot")
   expect_is(ggplot2::autoplot(boron_dists), "ggplot")
-  expect_is(ggplot2::autoplot(fluazinam_lnorm), "ggplot")
+#  expect_is(ggplot2::autoplot(fluazinam_lnorm), "ggplot")
 })

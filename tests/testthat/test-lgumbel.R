@@ -133,17 +133,15 @@ test_that("rlgumbel values", {
 })
 
 test_that("fit lgumbel", {
-  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
-  
-  expect_true(is.fitdist(dist))
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel")
   expect_equal(
-    coef(dist),
-    c(locationlog = 1.92249767793641, scalelog = 1.23235840307164)
+    estimates(fit$lgumbel),
+    list(locationlog = 1.92265804659899, scalelog = 1.23223771561773)
   )
 })
 
 test_that("fit lgumbel tmb", {
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "lgumbel", tmb = TRUE)
+  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "lgumbel")
   
   expect_true(is.tmbfit(dist$lgumbel))
   expect_equal(
@@ -155,37 +153,35 @@ test_that("fit lgumbel tmb", {
 test_that("fit lgumbel Mn LT", {
   mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT", ]
   
-  dist <- ssd_fit_dist(mn_lt, dist = "lgumbel")
-  expect_true(is.fitdist(dist))
+  fit <- ssd_fit_dists(mn_lt, dists = "lgumbel")
   expect_equal(
-    coef(dist),
-    c(locationlog = 7.31628089226769, scalelog = 1.00893875176455)
+    estimates(fit$lgumbel),
+    list(locationlog = 7.3166264896851, scalelog = 1.00907606435341)
   )
 })
 
 test_that("fit lgumbel cis", {
-  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "lgumbel")
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel")
   
   set.seed(77)
-  hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fit, ci = TRUE, nboot = 10)
   expect_is(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
-  expect_equal(hc$est, 1.76891782851293) 
-  expect_equal(hc$se, 0.370590354900628)
-  expect_equal(hc$lcl, 1.2300542477102)
-  expect_equal(hc$ucl, 2.26678393125552) 
-  expect_equal(hc$dist, "lgumbel")
+  expect_equal(hc$est, 1.76943581795966) 
+  expect_equal(hc$se, 0.370458382223677)
+  expect_equal(hc$lcl, 1.23093664447292)
+  expect_equal(hc$ucl, 2.26716561280753) 
   
   set.seed(77)
-  hp <- ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)
+  hp <- ssd_hp(fit, conc = 2, ci = TRUE, nboot = 10)
   expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 2)
-  expect_equal(hp$est, 6.6426765222485)
-  expect_equal(hp$se, 3.00359276728387)
-  expect_equal(hp$lcl, 3.43548429065931) 
-  expect_equal(hp$ucl, 12.0724651584046) 
-  expect_equal(hp$dist, "lgumbel")
-   
+  expect_equal(hp$est, 6.63857319639768)
+  expect_equal(hp$se, 3.00070697418861)
+  expect_equal(hp$lcl, 3.43349183105681) 
+  expect_equal(hp$ucl, 12.0607960812403) 
 })

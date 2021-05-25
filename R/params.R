@@ -65,6 +65,7 @@
 #' @param silent A flag indicating whether fits should fail silently.
 #' @param na.rm A flag specifying whether to silently remove missing values or
 #' remove them with a warning.
+#' @param nrow A positive whole number of the minimum number of non-missing rows.
 #' @param nsim A positive whole number of the number of simulations to generate.
 #' @keywords internal
 #' @name params

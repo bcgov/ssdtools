@@ -12,10 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-boot <- function(x, nboot, parallel, ncpus) {
-  UseMethod("boot")
-}
-
 censor_data <- function(new_data, data) {
   censored <- data$left != data$right | data$left == 0 | is.infinite(data$right)
   if(!any(censored)) return(new_data)
@@ -40,25 +36,11 @@ generate_new_data <- function(x) {
 sample_parameters <- function(n, x) {
   dist <- .dist_tmbfit(x)
   new_data <- generate_new_data(x)
-  fit <- ssd_fit_dist(new_data, left = "left", right = "right", dist = dist, tmb = TRUE)
+  fit <- fit_tmb(dist, new_data)
   estimates(fit)
 }
 
 boot_tmbfit <- function(x, nboot, parallel, ncpus) {
   # need to do parallel
   lapply(1:nboot, sample_parameters, x = x)
-}
-
-boot.fitdist <- function(x, nboot, parallel, ncpus) {
-  fitdistrplus::bootdist(x,
-    niter = nboot, parallel = parallel,
-    ncpus = ncpus
-  )
-}
-
-boot.fitdistcens <- function(x, nboot, parallel, ncpus) {
-  fitdistrplus::bootdistcens(x,
-    niter = nboot, parallel = parallel,
-    ncpus = ncpus
-  )
 }

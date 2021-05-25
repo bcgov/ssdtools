@@ -8,11 +8,6 @@ logLik.tmbfit <- function(object, ...) {
 }
 
 #' @export
-logLik.fitdist <- function(object, ...) {
-  object$loglik
-}
-
-#' @export
 logLik.fitdists <- function(object, ...) {
   object <- vapply(object, logLik, 1)
   object <- object[order(names(object))]

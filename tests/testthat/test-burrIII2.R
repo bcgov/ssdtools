@@ -120,52 +120,48 @@ test_that("fit dburrIII2", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
 
-  dist <- ssd_fit_dist(data, dist = "burrIII2")
+  fit <- ssd_fit_dists(data, dists = "burrIII2")
 
-  expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(locationlog = 4.07989187488155, scalelog = 0.937136717088929
-  ))
+  expect_equal(estimates(fit$burrIII2), list(locationlog = 4.08027209632232, scalelog = 0.937129583477883))
 
   data$Conc <- data$Conc / 1000
 
-  dist <- ssd_fit_dist(data, dist = "burrIII2")
+  fit <- ssd_fit_dists(data, dists = "burrIII2")
 
-  expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(locationlog = -2.82742464158491, scalelog = 0.937137287983746
-  ))
+  expect_equal(estimates(fit$burrIII2), list(locationlog = -2.82748318265981, scalelog = 0.937129583477883))
 })
 
 test_that("fit dburrIII2 cis", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-  dist <- ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "burrIII2")
 
   set.seed(77)
-  hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fit, ci = TRUE, nboot = 10, average = FALSE)
   expect_is(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  expect_identical(hc$percent, 5)
-  expect_equal(hc$est, 1.56256632555312)
-  expect_equal(hc$se, 0.533080817076427)
-  expect_equal(hc$lcl, 1.02028787432084)
-  expect_equal(hc$ucl, 2.4100026087857)
   expect_equal(hc$dist, "burrIII2")
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est, 1.56227830402365)
+  expect_equal(hc$se, 0.533327857148917)
+  expect_equal(hc$lcl, 1.01914927594415)
+  expect_equal(hc$ucl, 2.40989423258776)
   
   set.seed(77)
-  hp <- ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)
+  hp <- ssd_hp(fit, conc = 2, ci = TRUE, nboot = 10, average = FALSE)
   expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
-  expect_equal(hp$conc, 2)
-  expect_equal(hp$est, 6.8431214411277)
-  expect_equal(hp$se, 2.53471375726922)
-  expect_equal(hp$lcl, 3.73102816675466)
-  expect_equal(hp$ucl, 10.3929969316288)
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "burrIII2")
+  expect_equal(hp$conc, 2)
+  expect_equal(hp$est, 6.84438008721622)
+  expect_equal(hp$se, 2.53843414552631)
+  expect_equal(hp$lcl, 3.73141875018721)
+  expect_equal(hp$ucl, 10.4024102788529)
 })
 
 test_that("burrIII2 and llogis identical", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-  burr <- ssd_fit_dist(ssdtools::boron_data, dist = "burrIII2")
-  llogis <- ssd_fit_dist(ssdtools::boron_data, dist = "llogis")
+  burr <- ssd_fit_dists(ssdtools::boron_data, dists = "burrIII2")
+  llogis <- ssd_fit_dists(ssdtools::boron_data, dists = "llogis")
   expect_identical(ssd_hc(burr)$est, ssd_hc(llogis)$est)
 })
 
@@ -181,6 +177,5 @@ test_that("burrIII2", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("burrIII2", "gamma", "lnorm"))
   expect_identical(names(dists), c("burrIII2", "gamma", "lnorm"))
-  expect_equal(coef(dists$burrIII2), c(locationlog = 1.8357959974758, scalelog = 0.547213918037133
-  ))
+  expect_equal(estimates(dists$burrIII2), list(locationlog = 1.83598045830942, scalelog = 0.54713869965882))
 })

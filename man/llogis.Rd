@@ -6,6 +6,7 @@
 \alias{pllog}
 \alias{rllog}
 \alias{sllog}
+\alias{sllog_tmb}
 \alias{llogis}
 \alias{dllogis}
 \alias{pllogis}
@@ -24,6 +25,8 @@ pllog(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 rllog(n, locationlog = 0, scalelog = 1)
 
 sllog(x)
+
+sllog_tmb(x)
 
 dllogis(x, locationlog = 0, scalelog = 1, log = FALSE)
 

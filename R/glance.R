@@ -30,17 +30,6 @@ glance.tmbfit <- function(x, ...) {
   .glance(x, dist)
 }
 
-#' Construct a single row tibble::tibble() "glance" of a fitdist model.
-#' 
-#' @param x A tmbfit object to be converted into a single row tibble::tibble.
-#' @param ... Unused.
-#'  
-#' @export
-glance.fitdist <- function(x, ...) {
-  dist <- x$distname
-  .glance(x, dist)
-}
-
 #' Construct a tibble::tibble() with a single row "glance" for each tmbfit model.
 #'
 #' Turns a fitdists object into a glance tibble.
@@ -57,7 +46,6 @@ glance.fitdists <- function(x, ...) {
     tbl %<>% dplyr::mutate(delta = .data$aicc - min(.data$aicc))
   }
   tbl %<>% dplyr::mutate(
-    weight = exp(-.data$delta / 2) / sum(exp(-.data$delta / 2))) %>%
-    dplyr::arrange(stringr::str_order(.data$dist))
+    weight = exp(-.data$delta / 2) / sum(exp(-.data$delta / 2)))
   tbl
 }

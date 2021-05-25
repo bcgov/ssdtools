@@ -1,5 +1,5 @@
 test_that("tidy.tmbfit", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm", tmb = TRUE)
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   expect_is(fit, "fitdists")
   
   expect_identical(npars(fit), c(lnorm = 2L))
@@ -10,34 +10,34 @@ test_that("tidy.tmbfit", {
   expect_equal(logLik(fit), c(lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
   
-  gof <- ssd_gof(fit$lnorm)
+  gof <- ssd_gof(fit)
   expect_is(gof, "tbl_df")
-  expect_identical(colnames(gof), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic"))
+  expect_identical(colnames(gof), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
   expect_equal(gof$bic, 241.692841999445)
   
-  hc <- ssd_hc(fit$lnorm)
+  hc <- ssd_hc(fit)
   expect_is(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$est, 1.681174837758)
   expect_identical(hc$se, NA_real_)
   
   set.seed(101)
-  hc <- ssd_hc(fit$lnorm, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fit, ci = TRUE, nboot = 10)
   expect_equal(hc$est, 1.681174837758)
   expect_equal(hc$se, 0.670156954633317)
   
-  hp <- ssd_hp(fit$lnorm, 1, nboot = 10)
+  hp <- ssd_hp(fit, 1, nboot = 10)
   expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 1.95430302556687) 
   expect_equal(hp$se, NA_real_) 
   expect_equal(hp$lcl, NA_real_) 
   expect_equal(hp$ucl, NA_real_) 
-  expect_equal(hp$dist, "lnorm")
+  expect_equal(hp$dist, "average")
   
   set.seed(101)
-  hp <- ssd_hp(fit$lnorm, 1, ci = TRUE, nboot = 10)
+  hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 10)
   expect_equal(hp$est, 1.95430302556687)
   expect_equal(hc$se, 0.670156954633317)
   
@@ -74,7 +74,7 @@ test_that("tidy.tmbfit", {
 })
 
 test_that("combine", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"), tmb = TRUE)
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"))
   expect_is(fit, "fitdists")
   
   expect_identical(npars(fit), c(llogis = 2L, lnorm = 2L))
@@ -97,7 +97,7 @@ test_that("combine", {
   
   hp <- ssd_hp(fit, 1, nboot = 10)
   expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 2.18299178983614) 
   expect_equal(hp$se, NA_real_) 
@@ -108,9 +108,9 @@ test_that("combine", {
   glance <- glance(fit)
   expect_is(glance, "tbl_df")
   expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
-  expect_identical(glance$dist, c("llogis", "lnorm"))
-  expect_equal(glance$delta, c(1.98643767006848, 0))
-  expect_equal(glance$weight, c(0.270276766487089, 0.729723233512911))
+  expect_identical(glance$dist, c("lnorm", "llogis"))
+  expect_equal(glance$delta, c(0, 1.98643767006848))
+  expect_equal(glance$weight, c(0.729723233512911, 0.270276766487089))
   
   tidy <- tidy(fit)
   expect_is(tidy, "tbl_df")
