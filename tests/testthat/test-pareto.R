@@ -54,26 +54,13 @@ test_that("fit pareto cis", {
 })
 
 test_that("ppareto", {
-  lifecycle::expect_deprecated(ppareto(1))
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  expect_equal(ppareto(1), 0)
-  expect_equal(ppareto(2), 1 / 2)
-  expect_equal(ppareto(3), 2 / 3)
-  expect_equal(ppareto(3, log.p = TRUE), log(ppareto(3)))
-  expect_equal(ppareto(3, lower.tail = FALSE), 1 / 3)
-  expect_equal(ppareto(numeric(0)), numeric(0))
+  lifecycle::expect_defunct(ppareto(1))
 })
 
 test_that("qpareto", {
-  lifecycle::expect_deprecated(qpareto(1))
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  expect_equal(qpareto(ppareto(2)), 2)
-  expect_equal(qpareto(numeric(0)), numeric(0))
+  lifecycle::expect_defunct(qpareto(1))
 })
 
 test_that("rpareto", {
-  lifecycle::expect_deprecated(rpareto(1))
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  set.seed(1)
-  expect_equal(rpareto(1), 3.7663554483147)
+  lifecycle::expect_defunct(rpareto(1))
 })
