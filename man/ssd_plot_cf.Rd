@@ -18,14 +18,14 @@ ssd_cfplot(data, left = "Conc")
 Plots a Cullen and Frey graph of the skewness and kurtosis
 for non-censored data.
 }
+\details{
+Soft deprecated for direct call to \code{\link[fitdistrplus:descdist]{fitdistrplus::descdist()}}.
+}
 \section{Functions}{
 \itemize{
-\item \code{ssd_cfplot}: Deprecated Cullen and Frey Plot
+\item \code{ssd_cfplot}: Defunct Cullen and Frey Plot
 }}
 
 \examples{
 ssd_plot_cf(boron_data)
-}
-\seealso{
-\code{\link[fitdistrplus:descdist]{fitdistrplus::descdist()}}
 }

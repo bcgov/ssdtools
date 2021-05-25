@@ -16,17 +16,23 @@
 #'
 #' Plots a Cullen and Frey graph of the skewness and kurtosis
 #' for non-censored data.
+#' 
+#' Soft deprecated for direct call to [fitdistrplus::descdist()].
 #'
 #' @inheritParams ssd_fit_dists
-#' @seealso [fitdistrplus::descdist()]
 #' @export
 #'
 #' @examples
 #' ssd_plot_cf(boron_data)
 ssd_plot_cf <- function(data, left = "Conc") {
+  
+  if(!requireNamespace("fitdistrplus", quietly = TRUE)) {
+    err("Package 'fitdistrplus' is required to produce Cullen and Frey plots.")
+  }
+
   deprecate_soft("0.3.5", "ssd_plot_cf()", "fitdistrplus::descdist()",
                  details = "Please use fitdistrplus::descdist(data$Conc, boot = 100L).")
-  
+
   chk_s3_class(data, "data.frame")
   chk_string(left)
   chk_superset(colnames(data), left)
@@ -35,10 +41,9 @@ ssd_plot_cf <- function(data, left = "Conc") {
   invisible()
 }
 
-#' @describeIn ssd_plot_cf Deprecated Cullen and Frey Plot
+#' @describeIn ssd_plot_cf Defunct Cullen and Frey Plot
 #' @export
 ssd_cfplot <- function(data, left = "Conc") {
-  deprecate_warn("0.1.0", "ssd_cfplot()", "ssd_plot_cf()")
+  deprecate_stop("0.1.0", "ssd_cfplot()", "ssd_plot_cf()")
   ssd_plot_cf(data, left)
 }
-

@@ -13,8 +13,8 @@ Species sensitivity distributions are cumulative probability
     different species as described by Posthuma et al.(2001)
     <isbn:9781566705783>.  The ssdtools package uses Maximum Likelihood to
     fit distributions such as the log-normal, gamma, log-logistic,
-    log-Gumbel, Gompertz and Weibull.  The user can provide custom
-    distributions.  Multiple distributions can be averaged using
+    log-Gumbel, Gompertz and Weibull. 
+    Multiple distributions can be averaged using
     Information Criteria.  Confidence intervals on hazard concentrations
     and proportions are produced by parametric bootstrapping.
 }
