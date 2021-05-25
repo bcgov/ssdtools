@@ -19,9 +19,11 @@ tmb_model <- function(data, dist) {
 
 fit_tmb <- function(dist, data) {
   model <- tmb_model(data, dist)
+  bounds <- bdist(dist)
   control <- list(eval.max = 10000, iter.max = 1000)
   capture.output(
-    optim <- nlminb(model$par, model$fn, model$gr, model$he, control= control)
+    optim <- nlminb(model$par, model$fn, model$gr, model$he, control= control,
+                    lower = bounds$lower, upper = bounds$upper)
   )
   fit <- list(dist = dist, model = model, optim = optim, data = data)
   class(fit) <- "tmbfit"
