@@ -88,10 +88,11 @@ test_that("ssd_hc list", {
   expect_equal(hc$dist, c("lnorm", "lnorm", "llogis", "llogis"))
 })
 
+test_that("ssd_hc hc defunct", {
+  lifecycle::expect_defunct(ssd_hc(boron_lnorm, hc = 6))
+})  
+
 test_that("ssd_hc fitdist", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  expect_identical(ssd_hc(boron_lnorm, hc = 6), ssd_hc(boron_lnorm, percent = 6))
-  
   hc <- ssd_hc(boron_lnorm, average = FALSE)
   expect_is(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
