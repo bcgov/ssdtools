@@ -2,13 +2,6 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-double dweibull_ssd(double x, double shape, double scale) {
-  if(shape <= 0) return R_NaN;
-  if(scale <= 0) return R_NaN;
-  return R::dweibull(x, shape, scale, true);
-}
-
-// [[Rcpp::export]]
 double pweibull_ssd(double q, double shape, double scale) {
   if(shape <= 0) return R_NaN;
   if(scale <= 0) return R_NaN;

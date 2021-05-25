@@ -81,5 +81,5 @@ bdist <- function(dist) {
   fun <- paste0("b", dist)
   if(!exists(fun, mode = "function"))
     return(list(lower = -Inf, upper = Inf))
-  do.call(fun)
+  do.call(fun, list())
 }

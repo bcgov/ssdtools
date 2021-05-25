@@ -2,12 +2,6 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-double dlogis_ssd(double x, double location, double scale) {
-  if(scale <= 0) return R_NaN;
-  return R::dlogis(x, location, scale, true);
-}
-
-// [[Rcpp::export]]
 double plogis_ssd(double q, double location, double scale) {
   if(scale <= 0) return R_NaN;
   return R::plogis(q, location, scale, true, false);
