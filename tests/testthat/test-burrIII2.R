@@ -12,27 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("dburrIII2 extremes", {
-  lifecycle::expect_deprecated(dburrIII2(1))
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-
-  expect_identical(dburrIII2(numeric(0)), numeric(0))
-  expect_identical(dburrIII2(NA), NA_real_)
-  expect_identical(dburrIII2(NaN), NaN)
-  expect_identical(dburrIII2(0), 0)
-  expect_equal(dburrIII2(1), 0.25)
-  expect_equal(dburrIII2(1, log = TRUE), log(dburrIII2(1)))
-  expect_identical(dburrIII2(0), 0)
-  expect_identical(dburrIII2(-Inf), 0)
-  expect_identical(dburrIII2(Inf), 0)
-  expect_identical(dburrIII2(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(dburrIII2(NA), dburrIII2(NaN), dburrIII2(0), dburrIII2(Inf), dburrIII2(-Inf)))
-  expect_equal(dburrIII2(1:2, 1:2, 3:4), 
-               c(dburrIII2(1, 1, 3), dburrIII2(2, 2, 4)))
-  expect_equal(dburrIII2(1:2, c(1, NA), 3:4), 
-               c(dburrIII2(1, 1, 3), NA))
-})
-
 test_that("pburrIII2 extremes", {
   lifecycle::expect_deprecated(pburrIII2(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
@@ -101,19 +80,6 @@ test_that("rburrIII2 extremes", {
   expect_error(rburrIII2(1, shape1 = 1:2))
   expect_error(rburrIII2(1, shape2 = 1:2))
   expect_identical(rburrIII2(1, NA), NA_real_)
-})
-
-test_that("dburrIII2", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-
-  expect_equal(
-    dburrIII2(c(31, 15, 32, 32, 642, 778, 187, 12)),
-    c(
-      0.0009765625, 0.00390625, 0.000918273645546373, 0.000918273645546373,
-      2.41867799897932e-06, 1.64787810975198e-06, 2.82933454051607e-05,
-      0.00591715976331361
-    )
-  )
 })
 
 test_that("fit dburrIII2", {

@@ -65,7 +65,7 @@ Depends:
 Imports:
     abind,
     actuar,
-    chk,
+    chk (>= 0.5.1.9003),
     dplyr,
     fitdistrplus,
     generics,
@@ -96,6 +96,8 @@ Suggests:
     rmarkdown,
     testthat,
     tidyr
+Remotes:
+    poissonconsulting/chk
 LinkingTo: 
     Rcpp,
     TMB
