@@ -27,13 +27,6 @@ rlnorm <- function(n, meanlog = 0, sdlog = 1) {
 }
 
 slnorm <- function(x) {
-  list(start = list(
-    meanlog = mean(log(x), na.rm = TRUE),
-    sdlog = sd(log(x), na.rm = TRUE)
-  ))
-}
-
-slnorm_tmb <- function(x) {
   list(
     meanlog = mean(log(x), na.rm = TRUE),
     log_sdlog = log(sd(log(x), na.rm = TRUE))

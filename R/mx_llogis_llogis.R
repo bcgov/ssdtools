@@ -13,14 +13,14 @@
 #    limitations under the License.
 
 #' @rdname lgumbel
-smx_llogis_llogis_tmb <- function(x) {
+smx_llogis_llogis <- function(x) {
   x <- sort(x)
   n <- length(x)
   n2 <- floor(n / 2)
   x1 <- x[1:n2]
   x2 <- x[(n2+1):n]
-  s1 <- sllogis_tmb(x1)
-  s2 <- sllogis_tmb(x2)
+  s1 <- sllogis(x1)
+  s2 <- sllogis(x2)
   names(s1) <- paste0(names(s1), "1")
   names(s2) <- paste0(names(s2), "2")
   logit_pmix <- list(logit_pmix = 0)

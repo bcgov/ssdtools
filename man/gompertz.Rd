@@ -6,7 +6,7 @@
 \alias{pgompertz}
 \alias{qgompertz}
 \alias{rgompertz}
-\alias{sgompertz_tmb}
+\alias{sgompertz}
 \title{Gompertz Distribution}
 \usage{
 dgompertz(x, location = 1, shape = 1, log = FALSE)
@@ -17,7 +17,7 @@ qgompertz(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
 rgompertz(n, location = 1, shape = 1)
 
-sgompertz_tmb(x)
+sgompertz(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}

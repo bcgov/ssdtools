@@ -56,7 +56,7 @@ rgompertz <- function(n, location = 1, shape = 1) {
 
 #' @rdname gompertz
 #' @export
-sgompertz_tmb <- function(x) {
+sgompertz <- function(x) {
   fit <- vglm(x ~ 1, VGAM::gompertz)
   list(
     log_location = unname(coef(fit)[2]), log_shape = unname(coef(fit)[1])

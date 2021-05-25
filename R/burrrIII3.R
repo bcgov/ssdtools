@@ -45,11 +45,5 @@ rburrIII3 <- function(n, lshape1 = 0, lshape2 = 0, lscale=0) {
 }
 
 sburrIII3 <- function(x) {
-  deprecate_soft("0.2.1", "sburrIII3()", id = "xburrIII3",
-                 details = "The 'burrIII3' distribution is under review.")
-  list(start = list(lshape1 = 0, lshape2 = 0, lscale = 1))
-}
-
-sburrIII3_tmb <- function(x) {
   list(log_scale = 1, log_shape1 = 0, log_shape2 = 0)
 }

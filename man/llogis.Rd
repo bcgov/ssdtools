@@ -6,14 +6,12 @@
 \alias{pllog}
 \alias{rllog}
 \alias{sllog}
-\alias{sllog_tmb}
 \alias{llogis}
 \alias{dllogis}
 \alias{pllogis}
 \alias{qllogis}
 \alias{rllogis}
 \alias{sllogis}
-\alias{sllogis_tmb}
 \title{Log-Logistic Distribution}
 \usage{
 dllog(x, locationlog = 0, scalelog = 1, log = FALSE)
@@ -26,8 +24,6 @@ rllog(n, locationlog = 0, scalelog = 1)
 
 sllog(x)
 
-sllog_tmb(x)
-
 dllogis(x, locationlog = 0, scalelog = 1, log = FALSE)
 
 pllogis(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
@@ -37,8 +33,6 @@ qllogis(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 rllogis(n, locationlog = 0, scalelog = 1)
 
 sllogis(x)
-
-sllogis_tmb(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}

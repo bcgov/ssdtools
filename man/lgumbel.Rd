@@ -7,8 +7,7 @@
 \alias{qlgumbel}
 \alias{rlgumbel}
 \alias{slgumbel}
-\alias{slgumbel_tmb}
-\alias{smx_llogis_llogis_tmb}
+\alias{smx_llogis_llogis}
 \title{Log-Gumbel Distribution}
 \usage{
 dlgumbel(x, locationlog = 0, scalelog = 1, log = FALSE)
@@ -21,9 +20,7 @@ rlgumbel(n, locationlog = 0, scalelog = 1)
 
 slgumbel(x)
 
-slgumbel_tmb(x)
-
-smx_llogis_llogis_tmb(x)
+smx_llogis_llogis(x)
 }
 \arguments{
 \item{x}{A numeric vector of values.}

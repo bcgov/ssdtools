@@ -34,15 +34,6 @@ rgamma <- function(n, shape = 1, scale = 1) {
 sgamma <- function(x) {
   var <- var(x, na.rm = TRUE)
   mean <- mean(x, na.rm = TRUE)
-  list(start = list(
-    scale = var / mean,
-    shape = mean^2 / var
-  ))
-}
-
-sgamma_tmb <- function(x) {
-  var <- var(x, na.rm = TRUE)
-  mean <- mean(x, na.rm = TRUE)
   list(
     log_scale = log(var / mean),
     log_shape = log(mean^2 / var)

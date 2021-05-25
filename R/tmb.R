@@ -8,7 +8,7 @@ tmb_fun <- function(data, parameters, dist) {
 
 tmb_parameters <- function(data, dist) {
   x <- rowMeans(data[c("left", "right")], na.rm = TRUE)
-  fun <- paste0("s", dist, "_tmb")
+  fun <- paste0("s", dist)
   do.call(fun, list(x = x))
 }
 

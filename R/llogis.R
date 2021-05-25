@@ -59,15 +59,6 @@ rllogis <- function(n, locationlog = 0, scalelog = 1) {
 #' @rdname llogis
 #' @export
 sllogis <- function(x) {
-  list(start = list(
-    locationlog = mean(log(x), na.rm = TRUE),
-    scalelog = pi * sd(log(x), na.rm = TRUE) / sqrt(3)
-  ))
-}
-
-#' @rdname llogis
-#' @export
-sllogis_tmb <- function(x) {
   list(
     locationlog = mean(log(x), na.rm = TRUE),
     log_scalelog = log(pi * sd(log(x), na.rm = TRUE) / sqrt(3))
