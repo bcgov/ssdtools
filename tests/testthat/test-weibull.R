@@ -1,23 +1,3 @@
-test_that("dweibull extremes", {
-  expect_identical(dweibull(numeric(0)), numeric(0))
-  expect_identical(dweibull(NA), NA_real_)
-  expect_identical(dweibull(NaN), NaN)
-  expect_identical(dweibull(0), 1)
-  expect_equal(dweibull(1), 0.367879441171442)
-  expect_equal(dweibull(1, log = TRUE), log(dweibull(1)))
-  expect_equal(dweibull(1, shape = -1), NaN)
-  expect_equal(dweibull(1, scale = -1), NaN)
-  expect_identical(dweibull(0), 1)
-  expect_identical(dweibull(-Inf), 0)
-  expect_identical(dweibull(Inf), 0)
-  expect_identical(dweibull(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(dweibull(NA), dweibull(NaN), dweibull(0), dweibull(Inf), dweibull(-Inf)))
-  expect_equal(dweibull(1:2, shape = 1:2, scale = 3:4), 
-               c(dweibull(1, 1, 3), dweibull(2, 2, 4)))
-  expect_equal(dweibull(1:2, shape = c(1, NA), scale = 3:4), 
-               c(dweibull(1, 1, 3), NA))
-})
-
 test_that("pweibull extremes", {
   expect_identical(pweibull(numeric(0)), numeric(0))
   expect_identical(pweibull(NA), NA_real_)

@@ -1,21 +1,3 @@
-test_that("dlnorm extremes", {
-  expect_identical(dlnorm(numeric(0)), numeric(0))
-  expect_identical(dlnorm(NA), NA_real_)
-  expect_identical(dlnorm(NaN), NaN)
-  expect_identical(dlnorm(0), 0)
-  expect_equal(dlnorm(1), 0.398942280401433)
-  expect_equal(dlnorm(1, log = TRUE), log(dlnorm(1)))
-  expect_equal(dlnorm(1, sdlog = -1), NaN)
-  expect_identical(dlnorm(0), 0)
-  expect_identical(dlnorm(-Inf), 0)
-  expect_identical(dlnorm(Inf), 0)
-  expect_identical(dlnorm(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(dlnorm(NA), dlnorm(NaN), dlnorm(0), dlnorm(Inf), dlnorm(-Inf)))
-  expect_equal(dlnorm(1:2, meanlog = 1:2, sdlog = 3:4), 
-               c(dlnorm(1, 1, 3), dlnorm(2, 2, 4)))
-  expect_equal(dlnorm(1:2, meanlog = c(1, NA), sdlog = 3:4), 
-               c(dlnorm(1, 1, 3), NA))
-})
 
 test_that("plnorm extremes", {
   expect_identical(plnorm(numeric(0)), numeric(0))
