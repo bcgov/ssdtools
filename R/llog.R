@@ -13,25 +13,25 @@
 #    limitations under the License.
 
 qllog <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
-  deprecate_soft("0.1.0", "qllog()", "qllogis()", id = "xllog", 
+  deprecate_warn("0.1.0", "qllog()", "qllogis()", id = "xllog", 
                  details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.", )
   qllogis(p, locationlog = locationlog, scalelog = scalelog, lower.tail = lower.tail, log.p = log.p)
 }
 
 pllog <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
-  deprecate_soft("0.1.0", "pllog()", "pllogis()", id = "xllog", 
+  deprecate_warn("0.1.0", "pllog()", "pllogis()", id = "xllog", 
                  details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.", )
   pllogis(q, locationlog = locationlog, scalelog = scalelog, lower.tail = lower.tail, log.p = log.p)
 }
 
 rllog <- function(n, locationlog = 0, scalelog = 1) {
-  deprecate_soft("0.1.0", "rllog()", "rllogis()", id = "xllog", 
+  deprecate_warn("0.1.0", "rllog()", "rllogis()", id = "xllog", 
                  details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.", )
   rllogis(n, locationlog = locationlog, scalelog = scalelog)
 }
 
 sllog <- function(x) {
-  deprecate_soft("0.1.0", "sllog()", "sllogis()", id = "xllog",
+  deprecate_warn("0.1.0", "sllog()", "sllogis()", id = "xllog",
                  details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.", )
   sllogis(x)
 }

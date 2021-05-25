@@ -19,7 +19,7 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              ...) {
   chk_unused(...)
   if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
+    deprecate_warn("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
                    id = "predict")
   }
   ssd_hc(object,

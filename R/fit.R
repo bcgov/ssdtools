@@ -102,11 +102,11 @@ process_data <- function(data, left, right, weight, nrow, silent) {
     }
     
     if ("llog" %in% dists) {
-      deprecate_soft("0.1.0", "dllog()", "dllogis()", id = "xllog", 
+      deprecate_warn("0.1.0", "dllog()", "dllogis()", id = "xllog", 
                      details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
     }
     if ("burrIII2" %in% dists) {
-      deprecate_soft("0.1.2", "xburrIII2()",
+      deprecate_warn("0.1.2", "xburrIII2()",
                      details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
     }
     chk_flag(computable)

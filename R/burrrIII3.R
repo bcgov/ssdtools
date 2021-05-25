@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 qburrIII3 <- function(p, lshape1 = 0, lshape2 = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
-  deprecate_soft("0.2.1", "qburrIII3()", id = "xburrIII3",
+  deprecate_warn("0.2.1", "qburrIII3()", id = "xburrIII3",
                  details = "The 'burrIII3' distribution is under review.")
   
   if(!length(q)) return(numeric(0))
@@ -24,7 +24,7 @@ qburrIII3 <- function(p, lshape1 = 0, lshape2 = 0, lscale = 0, lower.tail = TRUE
 }
 
 pburrIII3 <- function (q, lshape1 = 0, lshape2 = 0, lscale=0, lower.tail=TRUE, log.p=FALSE) {
-  deprecate_soft("0.2.1", "pburrIII3()", id = "xburrIII3",
+  deprecate_warn("0.2.1", "pburrIII3()", id = "xburrIII3",
                  details = "The 'burrIII3' distribution is under review.")
   
   if(!length(q)) return(numeric(0))
@@ -33,7 +33,7 @@ pburrIII3 <- function (q, lshape1 = 0, lshape2 = 0, lscale=0, lower.tail=TRUE, l
 }
 
 rburrIII3 <- function(n, lshape1 = 0, lshape2 = 0, lscale=0) {
-  deprecate_soft("0.2.1", "rburrIII3()", id = "xburrIII3",
+  deprecate_warn("0.2.1", "rburrIII3()", id = "xburrIII3",
                  details = "The 'burrIII3' distribution is under review.")
   
   chk_scalar(lshape1)

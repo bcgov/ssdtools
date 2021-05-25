@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 pburrIII2 <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
-  deprecate_soft("0.1.2", "pburrIII2()", "pllogis()", id = "xburrIII2",
+  deprecate_warn("0.1.2", "pburrIII2()", "pllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   pllogis(q, locationlog = locationlog, scalelog = scalelog,
           lower.tail = lower.tail,
@@ -21,7 +21,7 @@ pburrIII2 <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p
 }
 
 qburrIII2 <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
-  deprecate_soft("0.1.2", "qburrIII2()", "qllogis()", id = "xburrIII2",
+  deprecate_warn("0.1.2", "qburrIII2()", "qllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   qllogis(p, locationlog = locationlog,scalelog = scalelog,
           lower.tail = lower.tail,
@@ -29,13 +29,13 @@ qburrIII2 <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p
 }
 
 rburrIII2 <- function(n, locationlog = 0, scalelog = 1) {
-  deprecate_soft("0.1.2", "rburrIII2()", "rllogis()", id = "xburrIII2",
+  deprecate_warn("0.1.2", "rburrIII2()", "rllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   rllogis(n, locationlog = locationlog, scalelog = scalelog)
 }
 
 sburrIII2 <- function(x) {
-  deprecate_soft("0.1.2", "sburrIII2()", "sllogis()", id = "xburrIII2",
+  deprecate_warn("0.1.2", "sburrIII2()", "sllogis()", id = "xburrIII2",
                  details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   sllogis(x)
 }
