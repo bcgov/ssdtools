@@ -12,19 +12,37 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-remove_errors <- function(dist_fit, name, computable, silent) {
-  if (!is.null(dist_fit$error)) {
-    if (!silent) wrn("Distribution ", name, " failed to fit: ", dist_fit$error)
+nullify_nonfits <- function(tmbfit, name, computable, silent) {
+  if (!is.null(tmbfit$error)) {
+    if (!silent) wrn("Distribution ", name, " failed to fit: ", tmbfit$error)
     return(NULL)
   }
-  sd <- dist_fit$result$sd
+  sd <- tmbfit$result$sd
   if (is.null(sd) || any(is.na(sd))) {
     if (computable) {
       if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).")
       return(NULL)
     }
   }
-  dist_fit$result
+  tmbfit$result
+}
+
+remove_nonfits <- function(fit, computable, silent) {
+  fit <- mapply(nullify_nonfits, fit, names(fit),
+                MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
+  )
+  fit <- fit[!vapply(fit, is.null, TRUE)]
+  fit
+}
+
+fit_dists <- function(data, dists, computable, silent) {
+  safe_fit_dist <- safely(fit_tmb)
+  names(dists) <- dists
+  fit <- lapply(dists, safe_fit_dist, data = data)
+  fit <- remove_nonfits(fit, computable, silent)
+  class(fit) <- "fitdists"
+  if (!length(fit)) err("All distributions failed to fit.")
+  fit
 }
 
 process_data <- function(data, left, right, weight, nrow, silent) {  
@@ -62,69 +80,59 @@ process_data <- function(data, left, right, weight, nrow, silent) {
   
   data
 }
+
+#' Fit Distributions
+#'
+#' Fits one or more distributions to species sensitivity data.
+#'
+#' By default the 'llogis', 'gamma' and 'lnorm'
+#' distributions are fitted to the data.
+#' The ssd_fit_dists function has also been
+#' tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.
+#'
+#' If weight specifies a column in the data frame with positive numbers,
+#' weighted estimation occurs.
+#' However, currently only the resultant parameter estimates are available (via coef).
+#'
+#' If the `right` argument is different to the `left` argument then the data are considered to be censored.
+#'
+#' @inheritParams params
+#' @return An object of class fitdists.
+#'
+#' @export
+#' @examples
+#' ssd_fit_dists(boron_data)
+ssd_fit_dists <- function(
+  data, left = "Conc", right = left, weight = NULL,
+  dists = c("gamma", "llogis", "lnorm"),
+  nrow = 6L,
+  computable = FALSE,
+  silent = FALSE) {
   
-  #' Fit Distributions
-  #'
-  #' Fits one or more distributions to species sensitivity data.
-  #'
-  #' By default the 'llogis', 'gamma' and 'lnorm'
-  #' distributions are fitted to the data.
-  #' The ssd_fit_dists function has also been
-  #' tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.
-  #'
-  #' If weight specifies a column in the data frame with positive numbers,
-  #' weighted estimation occurs.
-  #' However, currently only the resultant parameter estimates are available (via coef).
-  #'
-  #' If the `right` argument is different to the `left` argument then the data are considered to be censored.
-  #'
-  #' @inheritParams params
-  #' @return An object of class fitdists.
-  #'
-  #' @export
-  #' @examples
-  #' ssd_fit_dists(boron_data)
-  ssd_fit_dists <- function(
-    data, left = "Conc", right = left, weight = NULL,
-    dists = c("gamma", "llogis", "lnorm"),
-    nrow = 6L,
-    computable = FALSE,
-    silent = FALSE) {
-    
-    chk_character_or_factor(dists)
-    chk_vector(dists)
-    check_dim(dists, values = TRUE)
-    chk_not_any_na(dists)
-    chk_unique(dists)
-    
-    if (sum(c("llog", "burrIII2", "llogis") %in% dists) > 1) {
-      err("Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
-    }
-    
-    if ("llog" %in% dists) {
-      deprecate_warn("0.1.0", "dllog()", "dllogis()", id = "xllog", 
-                     details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
-    }
-    if ("burrIII2" %in% dists) {
-      deprecate_warn("0.1.2", "xburrIII2()",
-                     details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
-    }
-    chk_subset(dists, ssd_dists())
-    chk_flag(computable)
-    chk_flag(silent)
-    
-    data <- process_data(data, left = left, right = right, weight = weight, 
-                         nrow = nrow, silent = silent)
-    
-    safe_fit_dist <- safely(fit_tmb)
-    names(dists) <- dists
-    dists <- lapply(dists, safe_fit_dist, data = data)
-    dists <- mapply(remove_errors, dists, names(dists),
-                    MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
-    )
-    dists <- dists[!vapply(dists, is.null, TRUE)]
-    if (!length(dists)) err("All distributions failed to fit.")
-    class(dists) <- "fitdists"
-    dists
+  chk_character_or_factor(dists)
+  chk_vector(dists)
+  check_dim(dists, values = TRUE)
+  chk_not_any_na(dists)
+  chk_unique(dists)
+  
+  if (sum(c("llog", "burrIII2", "llogis") %in% dists) > 1) {
+    err("Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
   }
   
+  if ("llog" %in% dists) {
+    deprecate_warn("0.1.0", "dllog()", "dllogis()", id = "xllog", 
+                   details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
+  }
+  if ("burrIII2" %in% dists) {
+    deprecate_warn("0.1.2", "xburrIII2()",
+                   details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
+  }
+  chk_subset(dists, ssd_dists())
+  chk_flag(computable)
+  chk_flag(silent)
+  
+  data <- process_data(data, left = left, right = right, weight = weight, 
+                       nrow = nrow, silent = silent)
+  fit <- fit_dists(data, dists, computable, silent)
+  fit
+}
