@@ -11,41 +11,42 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+#    
 
-nullify_nonfits <- function(tmbfit, computable, silent) {
-  error <- tmbfit$error
-  tmbfit <- tmbfit$result
+nullify_nonfit <- function(fit, computable, silent) {
+  error <- fit$error
+  fit <- fit$result
   
   if (!is.null(error)) {
-    if (!silent) wrn("Distribution ", .dist_tmb(tmbfit), " failed to fit: ", error)
+    if (!silent) wrn("Distribution ", .dist_tmb(fit), " failed to fit: ", error)
     return(NULL)
   }
-  sd <- tmbfit$sd
+  sd <- fit$sd
   if (is.null(sd) || any(is.na(sd))) {
     if (computable) {
       if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).")
       return(NULL)
     }
   }
-  tmbfit
+  fit
 }
 
-remove_nonfits <- function(fit, computable, silent) {
-  fit <- mapply(nullify_nonfits, fit,
+remove_nonfits <- function(fits, computable, silent) {
+  fits <- mapply(nullify_nonfit, fits,
                 MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
   )
-  fit <- fit[!vapply(fit, is.null, TRUE)]
-  fit
+  fits <- fits[!vapply(fits, is.null, TRUE)]
+  fits
 }
 
 fit_dists <- function(data, dists, computable, silent) {
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
-  fit <- lapply(dists, safe_fit_dist, data = data)
-  fit <- remove_nonfits(fit, computable, silent)
-  class(fit) <- "fitdists"
-  if (!length(fit)) err("All distributions failed to fit.")
-  fit
+  fits <- lapply(dists, safe_fit_dist, data = data)
+  fits <- remove_nonfits(fits, computable, silent)
+  class(fits) <- "fitdists"
+  if (!length(fits)) err("All distributions failed to fit.")
+  fits
 }
 
 process_data <- function(data, left, right, weight, nrow, silent) {  
@@ -136,6 +137,6 @@ ssd_fit_dists <- function(
   
   data <- process_data(data, left = left, right = right, weight = weight, 
                        nrow = nrow, silent = silent)
-  fit <- fit_dists(data, dists, computable, silent)
-  fit
+  fits <- fit_dists(data, dists, computable, silent)
+  fits
 }
