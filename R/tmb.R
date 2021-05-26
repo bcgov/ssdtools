@@ -2,8 +2,8 @@ tmb_fun <- function(data, parameters, dist) {
   model <- paste0("ll_", dist)
   data <- c(model = model, data)
   TMB::MakeADFun(data = data,
-                  parameters = parameters,
-                  DLL = "ssdtools_TMBExports", silent = TRUE)
+                 parameters = parameters,
+                 DLL = "ssdtools_TMBExports", silent = TRUE)
 }
 
 tmb_parameters <- function(data, dist) {
@@ -20,10 +20,12 @@ tmb_model <- function(data, dist) {
 fit_tmb <- function(dist, data) {
   model <- tmb_model(data, dist)
   bounds <- bdist(dist)
-  control <- list(eval.max = 10000, iter.max = 1000)
+  control <- list()
   capture.output(
-    optim <- nlminb(model$par, model$fn, model$gr, model$he, control= control,
-                    lower = bounds$lower, upper = bounds$upper)
+    optim <- optim(model$par, model$fn, model$gr, 
+                   method = "L-BFGS-B",
+                   lower = bounds$lower, upper = bounds$upper,
+                   control= control, hessian = TRUE)
   )
   fit <- list(dist = dist, model = model, optim = optim, data = data)
   class(fit) <- "tmbfit"
@@ -39,6 +41,5 @@ fit_tmb <- function(dist, data) {
 }
 
 .objective_tmbfit <- function(x) {
-  x$optim$objective
+  x$optim$value
 }
-

@@ -74,7 +74,8 @@ test_that("fit gamma quinoline", {
   fit <- ssd_fit_dists(quin, dists = "gamma")
   expect_equal(
     estimates(fit$gamma),
-    list(scale = 41201.290365153, shape = 0.505323979309372)
+    list(scale = 41201.4269426879, shape = 0.505315645508966),
+    tolerance = 1e-05
   )
 })
 
@@ -82,16 +83,7 @@ test_that("fit gamma boron", {
   fit <- ssd_fit_dists(ssdtools::boron_data, dists = "gamma")
   expect_equal(
     estimates(fit$gamma),
-    list(scale = 25.1268322377578, shape = 0.950179464489889)
+    list(scale = 25.1268322377578, shape = 0.950179464489889),
+    tolerance = 1e-06
   )
 })
-
-test_that("fit gamma boron tmb", {
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "gamma")
-  expect_true(is.tmbfit(dist$gamma))
-  expect_equal(
-    estimates(dist$gamma),
-    list(scale = 25.1268322377578, shape = 0.950179464489889)
-  )
-})
-

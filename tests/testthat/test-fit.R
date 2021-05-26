@@ -28,14 +28,16 @@ test_that("fit_dist tiny llogis", {
   fit <- ssd_fit_dists(data, dists = "llogis")
   expect_equal(
     estimates(fit$llogis),
-    list(locationlog = 2.62627762517872, scalelog = 0.740423704979968)
+    list(locationlog = 2.62627762517872, scalelog = 0.740423704979968),
+    tolerance = 1e-05
   )
   
   data$Conc <- data$Conc / 100
   fit <- ssd_fit_dists(data, dists = "llogis")
   expect_equal(
     estimates(fit$llogis),
-    list(locationlog = -1.97889256080937, scalelog = 0.740423704979968)
+    list(locationlog = -1.97889256080937, scalelog = 0.740423704979968),
+    tolerance = 1e-05
     )
 })
 
@@ -63,7 +65,8 @@ test_that("fit_dist", {
   boron_data2$Weight <- 1:nrow(boron_data2)
   
   dists <- ssd_fit_dists(boron_data2, weight = "Weight", dists = "lnorm")
-  expect_equal(estimates(dists$lnorm), list(meanlog = 1.87970902859779, sdlog = 1.12770658163393))
+  expect_equal(estimates(dists$lnorm), list(meanlog = 1.87970902859779, sdlog = 1.12770658163393),
+               tolerance = 1e-06)
 })
 
 test_that("fluazinam", {

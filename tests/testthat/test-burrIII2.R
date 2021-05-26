@@ -15,7 +15,7 @@
 test_that("pburrIII2 extremes", {
   lifecycle::expect_deprecated(pburrIII2(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-
+  
   expect_identical(pburrIII2(numeric(0)), numeric(0))
   expect_identical(pburrIII2(NA), NA_real_)
   expect_identical(pburrIII2(NaN), NaN)
@@ -38,7 +38,7 @@ test_that("pburrIII2 extremes", {
 test_that("qburrIII2 extremes", {
   lifecycle::expect_deprecated(qburrIII2(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-
+  
   expect_identical(qburrIII2(numeric(0)), numeric(0))
   expect_identical(qburrIII2(NA), NA_real_)
   expect_identical(qburrIII2(NaN), NaN)
@@ -64,7 +64,7 @@ test_that("qburrIII2 extremes", {
 test_that("rburrIII2 extremes", {
   lifecycle::expect_deprecated(rburrIII2(1))
   rlang::scoped_options(lifecycle_verbosity = "quiet")
-
+  
   expect_identical(rburrIII2(numeric(0)), numeric(0))
   expect_error(rburrIII2(NA))
   expect_identical(rburrIII2(0), numeric(0))
@@ -85,32 +85,36 @@ test_that("rburrIII2 extremes", {
 test_that("fit dburrIII2", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
-
+  
   fit <- ssd_fit_dists(data, dists = "burrIII2")
-
-  expect_equal(estimates(fit$burrIII2), list(locationlog = 4.08027209632232, scalelog = 0.937129583477883))
-
+  
+  expect_equal(estimates(fit$burrIII2), 
+               list(locationlog = 4.08027209632232, scalelog = 0.937129583477883), 
+               tolerance = 1e-06)
+  
   data$Conc <- data$Conc / 1000
-
+  
   fit <- ssd_fit_dists(data, dists = "burrIII2")
-
-  expect_equal(estimates(fit$burrIII2), list(locationlog = -2.82748318265981, scalelog = 0.937129583477883))
+  
+  expect_equal(estimates(fit$burrIII2), 
+               list(locationlog = -2.82748318265981, scalelog = 0.937129583477883),
+               tolerance = 1e-06)
 })
 
 test_that("fit dburrIII2 cis", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   fit <- ssd_fit_dists(ssdtools::boron_data, dists = "burrIII2")
-
+  
   set.seed(77)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 10, average = FALSE)
   expect_is(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, "burrIII2")
   expect_identical(hc$percent, 5)
-  expect_equal(hc$est, 1.56227830402365)
-  expect_equal(hc$se, 0.533327857148917)
-  expect_equal(hc$lcl, 1.01914927594415)
-  expect_equal(hc$ucl, 2.40989423258776)
+  expect_equal(hc$est, 1.56227830402365, tolerance = 1e-05)
+  expect_equal(hc$se, 0.533322834101353, tolerance = 1e-05)
+  expect_equal(hc$lcl, 1.01914927594415, tolerance = 1e-05)
+  expect_equal(hc$ucl, 2.40989423258776, tolerance = 1e-05)
   
   set.seed(77)
   hp <- ssd_hp(fit, conc = 2, ci = TRUE, nboot = 10, average = FALSE)
@@ -118,10 +122,10 @@ test_that("fit dburrIII2 cis", {
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "burrIII2")
   expect_equal(hp$conc, 2)
-  expect_equal(hp$est, 6.84438008721622)
-  expect_equal(hp$se, 2.53843414552631)
-  expect_equal(hp$lcl, 3.73141875018721)
-  expect_equal(hp$ucl, 10.4024102788529)
+  expect_equal(hp$est, 6.84445191044785, tolerance = 1e-05)
+  expect_equal(hp$se, 2.53843414552631, tolerance = 1e-06)
+  expect_equal(hp$lcl, 3.73146842051635, tolerance = 1e-05)
+  expect_equal(hp$ucl, 10.4024102788529, tolerance = 1e-05)
 })
 
 test_that("burrIII2 and llogis identical", {

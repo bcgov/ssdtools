@@ -16,5 +16,5 @@ test_that("cfplot", {
   setup(pdf(tempfile(fileext = ".pdf")))
   teardown(dev.off())
   
-  expect_silent(ssd_plot_cf(boron_data))
+  expect_deprecated(ssd_plot_cf(boron_data))
 })

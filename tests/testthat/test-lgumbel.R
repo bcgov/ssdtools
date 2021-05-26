@@ -109,17 +109,8 @@ test_that("fit lgumbel", {
   fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel")
   expect_equal(
     estimates(fit$lgumbel),
-    list(locationlog = 1.92265804659899, scalelog = 1.23223771561773)
-  )
-})
-
-test_that("fit lgumbel tmb", {
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "lgumbel")
-  
-  expect_true(is.tmbfit(dist$lgumbel))
-  expect_equal(
-    estimates(dist$lgumbel),
-    list(locationlog = 1.92265804659899, scalelog = 1.23223771561773)
+    list(locationlog = 1.92263082409711, scalelog = 1.23223883525026),
+    tolerance = 1e-05
   )
 })
 
@@ -129,7 +120,8 @@ test_that("fit lgumbel Mn LT", {
   fit <- ssd_fit_dists(mn_lt, dists = "lgumbel")
   expect_equal(
     estimates(fit$lgumbel),
-    list(locationlog = 7.3166264896851, scalelog = 1.00907606435341)
+    list(locationlog = 7.3166264896851, scalelog = 1.00907606435341),
+    tolerance = 1e-05
   )
 })
 
@@ -142,10 +134,10 @@ test_that("fit lgumbel cis", {
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
-  expect_equal(hc$est, 1.76943581795966) 
-  expect_equal(hc$se, 0.370458382223677)
-  expect_equal(hc$lcl, 1.23093664447292)
-  expect_equal(hc$ucl, 2.26716561280753) 
+  expect_equal(hc$est, 1.76938547654574) 
+  expect_equal(hc$se, 0.370439536687029)
+  expect_equal(hc$lcl, 1.23090223946326)
+  expect_equal(hc$ucl, 2.26707831556875) 
   
   set.seed(77)
   hp <- ssd_hp(fit, conc = 2, ci = TRUE, nboot = 10)
@@ -153,8 +145,8 @@ test_that("fit lgumbel cis", {
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 2)
-  expect_equal(hp$est, 6.63857319639768)
-  expect_equal(hp$se, 3.00070697418861)
-  expect_equal(hp$lcl, 3.43349183105681) 
-  expect_equal(hp$ucl, 12.0607960812403) 
+  expect_equal(hp$est, 6.6389873070612)
+  expect_equal(hp$se, 3.00074489009046)
+  expect_equal(hp$lcl, 3.43391197427567) 
+  expect_equal(hp$ucl, 12.0612936951345) 
 })

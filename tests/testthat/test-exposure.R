@@ -23,7 +23,7 @@ test_that("exposure fitdist", {
 
 test_that("exposure fitdists", {
   set.seed(1)
-  expect_equal(ssd_exposure(boron_dists), 0.0645152145834621)
+  expect_equal(ssd_exposure(boron_dists), 0.0645152661450559)
 })
 
 test_that("exposure fitdistcens", {

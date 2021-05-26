@@ -17,8 +17,8 @@ test_that("fit llogis", {
 
   expect_equal(
     estimates(fit$llogis),
-    list(locationlog = 2.62627762517872, scalelog = 0.740423704979968)
-  )
+    list(locationlog = 2.62627762517872, scalelog = 0.740423704979968),
+    tolerance = 1e-05)
 })
 
 test_that("pqllogis", {
