@@ -1,3 +1,28 @@
+# ssdtools 0.3.4.9001
+
+- Switched to optim with TMB.
+- Make hc argument to `ssd_hc()` defunct.
+- Remove warning about ci being switched from TRUE to FALSE.
+- Made ssd_plot_cf() defunct and moved fitdistrplus to suggests.
+- Made pareto distributional functions defunct.
+- Added `ssd_dists()` which specifies permitted distributions.
+- All soft-deprecated functions and arguments pre v0.3.0 now warn unconditionally.
+- Soft-deprecate `ssd_plot_cf()` for `fitdistrplus::descdist()`.
+- No longer export lnorm and weibull distributional functions.
+- No longer export burrII2, burrIII3 and gamma distribution functions.
+- Switched from fitdistrplus to TMB.
+- Print tidy not glance.
+- Print log_lik, aic etc instead of parameter values.
+- readded burrIII3
+- gompertz llocation and lshape to location and shape
+- Switched gompertz from llocation and lshape to location and shape.
+- added gamma
+- move dist to first from last column for `sd_hc()` and `predict()`.
+- Added glance() and logLik()
+- Added logLik()
+- npars() now orders by distribution name.
+
+
 # ssdtools 0.3.4.9000
 
 - Internal changes only.
