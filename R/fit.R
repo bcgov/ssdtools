@@ -12,23 +12,26 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-nullify_nonfits <- function(tmbfit, name, computable, silent) {
-  if (!is.null(tmbfit$error)) {
-    if (!silent) wrn("Distribution ", name, " failed to fit: ", tmbfit$error)
+nullify_nonfits <- function(tmbfit, computable, silent) {
+  error <- tmbfit$error
+  tmbfit <- tmbfit$result
+  
+  if (!is.null(error)) {
+    if (!silent) wrn("Distribution ", .dist_tmb(tmbfit), " failed to fit: ", error)
     return(NULL)
   }
-  sd <- tmbfit$result$sd
+  sd <- tmbfit$sd
   if (is.null(sd) || any(is.na(sd))) {
     if (computable) {
       if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).")
       return(NULL)
     }
   }
-  tmbfit$result
+  tmbfit
 }
 
 remove_nonfits <- function(fit, computable, silent) {
-  fit <- mapply(nullify_nonfits, fit, names(fit),
+  fit <- mapply(nullify_nonfits, fit,
                 MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
   )
   fit <- fit[!vapply(fit, is.null, TRUE)]
