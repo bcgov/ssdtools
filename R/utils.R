@@ -52,3 +52,7 @@ ssd_ecd <- function(x, ties.method = "first") {
   (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }
 
+is_bounds <- function(dist) {
+  fun <- paste0("b", dist)
+  exists(fun, mode = "function")
+}

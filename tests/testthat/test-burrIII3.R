@@ -85,45 +85,7 @@ test_that("fit burrIII3", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
   data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
   
-  dist <- ssd_fit_dists(data, dists = "burrIII3")
-  
-  # expect_equal(
-  #   estimates(dist),
-  #   list(lshape1 = 3.59302197294215, lshape2 = -0.133674768538566, lscale = 0.568325580801304
-  #   )
-  # )
-  # 
-  # data$Conc <- data$Conc / 1000
-  # 
-  # dist <- ssd_fit_dist(data, dist = "burrIII3")
-  # expect_equal(
-  #   coef(dist),
-  #   c(lshape1 = 17.3403456134406, lshape2 = -0.148732959674022, lscale = 23.5089158967839
-  #   )
-  # )
-})
-
-test_that("fit burrIII3 tmb", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  data <- data.frame(Conc = c(31, 15, 32, 32, 642, 778, 187, 12))
-  
-  set.seed(90)
-  fit <- ssd_fit_dists(data, dists = "burrIII3")
-  
-  expect_true(is.tmbfit(fit$burrIII3))
-  # expect_equal(
-  #   estimates(dist$burrIII3),
-  #   list(shape2 = 0.861816158880704, scale = 68834206.6453725, shape1 = 118076992.424414)
-  # )
-  # 
-  # set.seed(100)
-  # data$Conc <- data$Conc / 1000
-  #  
-  # dist <- ssd_fit_dists(data, dist = "burrIII3")
-  # expect_equal(
-  #   estimates(dist$burrIII3),
-  #   list(shape2 = 0.861816032870679, scale = 69259446157.135, shape1 = 118705061.903761)
-  # )
+  expect_error(expect_warning(ssd_fit_dists(data, dists = "burrIII3")))
 })
 
 # test_that("fit burrIII3 cis", {

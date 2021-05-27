@@ -11,20 +11,35 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-#    
+
+is_at_boundary <- function(fit) {
+  dist <- .dist_tmbfit(fit)
+  if(!is_bounds(dist)) return(FALSE)
+  bounds <- bdist(dist)
+  pars <- .pars_tmbfit(fit)
+  
+  lower <- as.numeric(bounds$lower[names(pars)])
+  upper <- as.numeric(bounds$upper[names(pars)])
+  
+  any(pars == lower | pars == upper)
+}
 
 nullify_nonfit <- function(fit, computable, silent) {
   error <- fit$error
   fit <- fit$result
   
   if (!is.null(error)) {
-    if (!silent) wrn("Distribution ", .dist_tmb(fit), " failed to fit: ", error)
+    if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to fit: ", error)
+    return(NULL)
+  }
+  if(is_at_boundary(fit)) {
+    if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to fit: one or more parameters at boundary (try rescaling the data or increasing the sample size).")
     return(NULL)
   }
   sd <- fit$sd
   if (is.null(sd) || any(is.na(sd))) {
     if (computable) {
-      if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).")
+      if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to compute standard errors (try rescaling the data or increasing the sample size).")
       return(NULL)
     }
   }

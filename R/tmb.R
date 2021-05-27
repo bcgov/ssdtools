@@ -20,11 +20,14 @@ tmb_model <- function(data, dist) {
 fit_tmb <- function(dist, data) {
   model <- tmb_model(data, dist)
   bounds <- bdist(dist)
+  # required because model can switch order of parameters
+  lower <- bounds$lower[names(model$par)]
+  upper <- bounds$upper[names(model$par)]
   control <- list()
   capture.output(
     optim <- optim(model$par, model$fn, model$gr, 
                    method = "L-BFGS-B",
-                   lower = bounds$lower, upper = bounds$upper,
+                   lower = lower, upper = upper,
                    control= control, hessian = TRUE)
   )
   fit <- list(dist = dist, model = model, optim = optim, data = data)
@@ -42,4 +45,8 @@ fit_tmb <- function(dist, data) {
 
 .objective_tmbfit <- function(x) {
   x$optim$value
+}
+
+.pars_tmbfit <- function(x) {
+  x$optim$par
 }
