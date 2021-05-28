@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 ggname <- function(prefix, grob) {
-  grob$name <- grid::grobName(grob, prefix)
+  grob$name <- grobName(grob, prefix)
   grob
 }
 
@@ -131,11 +131,11 @@ GeomXribbon <- ggproto(
     )
     munched <- coord_munch(coord, positions, panel_params)
     
-    ggname("geom_ribbon", grid::polygonGrob(
+    ggname("geom_ribbon", polygonGrob(
       munched$x, munched$y,
       id = munched$id,
       default.units = "native",
-      gp = grid::gpar(
+      gp = gpar(
         fill = alpha(aes$fill, aes$alpha),
         col = aes$colour,
         lwd = aes$size * .pt,
