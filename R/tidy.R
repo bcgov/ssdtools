@@ -23,11 +23,8 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   x <- tibble::tibble(dist = dist, term = term, est = est, se = se)
   
   if(!all)
-    x <- x[!stringr::str_detect(x$term, "^log(it){0,1}_"),]
-  # following line causes problem with term
-#    x %<>% filter(!stringr::str_detect(.data$term, "^log(it){0,1}_"))
-  dplyr::arrange(x, stringr::str_order(.data$term))
-  
+    x <- x[!grepl("^log(it){0,1}_", x$term),]
+  dplyr::arrange(x, str_order(.data$term))
 }
 
 #' Turn a fitdists object into a tidy tibble
@@ -41,6 +38,6 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
 #' @export
 tidy.fitdists <- function(x, all = FALSE, ...) {
  x <- purrr::map_df(x, .f = tidy, all = all)
- x <- dplyr::arrange(x, stringr::str_order(.data$dist))
+ x <- dplyr::arrange(x, str_order(.data$dist))
  x
 }

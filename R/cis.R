@@ -33,7 +33,7 @@ xcis <- function(x, samples, p, level, fun, args) {
 }
 
 xcis_tmb <- function(x, args, what, level) {
-  if(stringr::str_detect(what, "^p")) {
+  if(grepl("^p", what, "^p")) {
     args$q <- x
   } else {
     args$p <- x
