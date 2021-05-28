@@ -13,12 +13,12 @@
 #    limitations under the License.
 
 #' @import stats chk ggplot2 lifecycle
-#' @import abind abind
+#' @importFrom abind abind
 #' @importFrom graphics plot
-#' @importFrom VGAM vglm
 #' @importFrom purrr transpose
-#' @importFrom tibble as_tibble tibble
 #' @importFrom Rcpp sourceCpp
-#' @importFrom utils capture.output
 #' @importFrom stringr str_order
+#' @importFrom tibble as_tibble tibble
+#' @importFrom utils capture.output
+#' @importFrom VGAM vglm
 NULL
