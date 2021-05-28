@@ -24,7 +24,8 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   
   if(!all)
     x <- x[!grepl("^log(it){0,1}_", x$term),]
-  dplyr::arrange(x, str_order(.data$term))
+  x <- x[str_order(x$term),]
+  x
 }
 
 #' Turn a fitdists object into a tidy tibble
@@ -38,6 +39,6 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
 #' @export
 tidy.fitdists <- function(x, all = FALSE, ...) {
  x <- purrr::map_df(x, .f = tidy, all = all)
- x <- dplyr::arrange(x, str_order(.data$dist))
+ x <- x[str_order(x$dist),]
  x
 }

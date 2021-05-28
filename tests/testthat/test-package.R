@@ -15,7 +15,7 @@ test_that("dists sorted character", {
          llogis = list(locationlog = 2.62627625930417, scalelog = 0.740426376456358), 
          lnorm = list(meanlog = 2.56164496371788, sdlog = 1.24154032419128), 
          mx_llogis_llogis = list(locationlog1 = 0.896785336771335, 
-                                 locationlog2 = 3.14917770255953, scalelog2 = 0.496708998267848, 
-                                 pmix = 0.255223497712533, scalelog1 = 0.317650881482978), 
+                                 locationlog2 = 3.14917770255953, pmix = 0.255223497712533, 
+                                 scalelog1 = 0.317650881482978, scalelog2 = 0.496708998267848), 
          weibull = list(scale = 23.5139783002509, shape = 0.966099901938021)))
 })

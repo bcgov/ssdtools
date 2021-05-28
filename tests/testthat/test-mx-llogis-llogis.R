@@ -19,7 +19,7 @@ test_that("fit mx_llogis_llogis tmb", {
   expect_equal(
     estimates(dist$mx_llogis_llogis),
     list(locationlog1 = 0.896785336771335, locationlog2 = 3.14917770255953, 
-         scalelog2 = 0.496708998267848, pmix = 0.255223497712533, 
-         scalelog1 = 0.317650881482978)
+         pmix = 0.255223497712533, scalelog1 = 0.317650881482978, 
+         scalelog2 = 0.496708998267848)
   )
 })
