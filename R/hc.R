@@ -95,9 +95,7 @@ no_ssd_hc <- function() {
     parallel = parallel, ncpus = ncpus
   )
   if (!average) {
-    hc <- do.call("rbind", hc)
-    row.names(hc) <- NULL
-    return(as_tibble(hc))
+    return(bind_rows(hc))
   }
   hc <- lapply(hc, function(x) x[c("percent", "est", "se", "lcl", "ucl")])
   hc <- lapply(hc, as.matrix)
@@ -134,8 +132,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
     MoreArgs = list(percent = percent),
     SIMPLIFY = FALSE
   )
-  hc <- do.call("rbind", hc)
-  as_tibble(hc)
+  bind_rows(hc)
 }
 
 #' @describeIn ssd_hc Hazard Percent fitdists

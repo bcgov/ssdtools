@@ -49,8 +49,9 @@ xcis_tmb <- function(x, args, what, level) {
 
 cis_tmb <- function(estimates, what, level, x) {
   args <- purrr::transpose(estimates)
-  args <- purrr::map(args, as.double)
-  purrr::map_dfr(x, xcis_tmb, args, what, level)
+  args <- lapply(args, as.double)
+  x <- lapply(x, xcis_tmb, args, what, level)
+  bind_rows(x)
 }
 
 cis <- function(samples, p, level, x) {
@@ -61,5 +62,5 @@ cis <- function(samples, p, level, x) {
     samples = samples, p = p, level = level,
     fun = fun, args = args
   )
-  do.call("rbind", samples)
+  bind_rows(samples)
 }

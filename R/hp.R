@@ -66,9 +66,7 @@ ssd_hp <- function(x, ...) {
     parallel = parallel, ncpus = ncpus
   )
   if (!average) {
-    hp <- do.call("rbind", hp)
-    row.names(hp) <- NULL
-    return(as_tibble(hp))
+    return(bind_rows(hp))
   }
   hp <- lapply(hp, function(x) x[2:6])
   hp <- lapply(hp, as.matrix)

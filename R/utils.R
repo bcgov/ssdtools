@@ -56,3 +56,8 @@ is_bounds <- function(dist) {
   fun <- paste0("b", dist)
   exists(fun, mode = "function")
 }
+
+bind_rows <- function(x) {
+  x <- do.call("rbind", x)
+  as_tibble(x)
+}

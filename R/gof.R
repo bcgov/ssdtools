@@ -75,8 +75,7 @@ ssd_gof <- function(x, ...) {
 
 .ssd_gof_fitdists <- function(x) {
   x <- lapply(x, .ssd_gof_tmbfit)
-  x$stringsAsFactors <- FALSE
-  x <- do.call("rbind", x)
+  x <- bind_rows(x)
   if ("aicc" %in% colnames(x)) {
     x$delta <- x$aicc - min(x$aicc)
   } else { # aicc not defined for censored data
