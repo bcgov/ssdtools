@@ -77,11 +77,10 @@ ssd_hp <- function(x, ...) {
   }, hp)
   weight <- .ssd_gof_fitdists(x)$weight
   suppressMessages(hp <- apply(hp, c(1, 2), weighted.mean, w = weight))
-  hp <- as.data.frame(hp)
+  hp <- as_tibble(hp)
   hp$conc <- conc
   hp$dist <- "average"
   hp <- hp[c("dist", "conc", "est", "se", "lcl", "ucl")]
-  as_tibble(hp)
 }
 
 #' @describeIn ssd_hp Hazard Percent fitdists
