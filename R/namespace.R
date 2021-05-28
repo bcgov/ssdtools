@@ -26,5 +26,5 @@
 #' @importFrom tibble as_tibble tibble
 #' @importFrom universals estimates npars
 #' @importFrom utils capture.output
-#' @importFrom VGAM vglm
+#' @importFrom VGAM gompertz vglm
 NULL
