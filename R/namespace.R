@@ -20,5 +20,5 @@
 #' @importFrom Rcpp sourceCpp
 #' @importFrom utils capture.output
 #' @importFrom dplyr .data
-#' @importFrom magrittr %<>% %>%
+#' @importFrom magrittr %>%
 NULL

@@ -43,9 +43,9 @@ glance.fitdists <- function(x, ...) {
     purrr::map_df(.f = glance) %>%
     dplyr::mutate(delta = .data$aicc - min(.data$aicc))
   if(is.na(tbl$delta[1]) && all(tbl$npars == tbl$npars[1])) {
-    tbl %<>% dplyr::mutate(delta = .data$aicc - min(.data$aicc))
+    tbl <- dplyr::mutate(tbl, delta = .data$aicc - min(.data$aicc))
   }
-  tbl %<>% dplyr::mutate(
+  tbl <- dplyr::mutate(tbl,
     weight = exp(-.data$delta / 2) / sum(exp(-.data$delta / 2)))
   tbl
 }
