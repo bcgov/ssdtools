@@ -12,6 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @importFrom stats coef
+#' @export
+stats::coef
+
 #' @export
 coef.fitdists <- function(object, ...) {
   tidy(object, ...)

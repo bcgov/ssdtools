@@ -12,6 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @importFrom ggplot2 autoplot
+#' @export
+ggplot2::autoplot
+
 #' @export
 autoplot.fitdists <- function(object, ...) {
   chk_unused(...)

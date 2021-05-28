@@ -12,6 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @importFrom stats predict
+#' @export
+stats::predict
+
 #' @export
 predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,

@@ -12,6 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @importFrom graphics plot
+#' @export
+graphics::plot
+
 plot_fitdist <- function(x, breaks = "default", ...) {
   graphics::par(oma = c(0, 0, 2, 0))
   graphics::plot(x, breaks = breaks, ...)
