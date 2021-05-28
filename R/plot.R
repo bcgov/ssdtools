@@ -16,9 +16,9 @@
 graphics::plot
 
 plot_fitdist <- function(x, breaks = "default", ...) {
-  graphics::par(oma = c(0, 0, 2, 0))
-  graphics::plot(x, breaks = breaks, ...)
-  graphics::title(paste("Distribution:", x$distname), outer = TRUE)
+  par(oma = c(0, 0, 2, 0))
+  plot(x, breaks = breaks, ...)
+  title(paste("Distribution:", x$distname), outer = TRUE)
 }
 
 #' @export

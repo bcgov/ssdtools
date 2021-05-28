@@ -16,7 +16,7 @@
 #' @importFrom abind abind
 #' @importFrom generics glance tidy
 #' @importFrom ggplot2 autoplot
-#' @importFrom graphics plot
+#' @importFrom graphics par plot title
 #' @importFrom grid gpar grobName polygonGrob
 #' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
 #' @importFrom plyr summarise
