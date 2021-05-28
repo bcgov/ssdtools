@@ -20,5 +20,4 @@
 #' @importFrom Rcpp sourceCpp
 #' @importFrom utils capture.output
 #' @importFrom stringr str_order
-#' @importFrom dplyr .data
 NULL

@@ -40,11 +40,10 @@ glance.tmbfit <- function(x, ...) {
 #' @export
 glance.fitdists <- function(x, ...) {
   tbl <- purrr::map_df(x, .f = glance)
-  tbl <- dplyr::mutate(tbl, delta = .data$aicc - min(.data$aicc))
+  tbl$delta <- tbl$aicc - min(tbl$aicc)
   if(is.na(tbl$delta[1]) && all(tbl$npars == tbl$npars[1])) {
-    tbl <- dplyr::mutate(tbl, delta = .data$aicc - min(.data$aicc))
+    tbl$delta <- tbl$aicc - min(tbl$aicc)
   }
-  tbl <- dplyr::mutate(tbl,
-    weight = exp(-.data$delta / 2) / sum(exp(-.data$delta / 2)))
+  tbl$weight <- exp(-tbl$delta / 2) / sum(exp(-tbl$delta / 2))
   tbl
 }
