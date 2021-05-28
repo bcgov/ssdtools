@@ -15,7 +15,7 @@
 #' Comma and Significance Formatter
 #' 
 #' By default the numeric vectors are first rounded to three significant figures.
-#' Then scales::commas is only applied to values greater than or equal to 1000
+#' Then scales::comma is only applied to values greater than or equal to 1000
 #' to ensure that labels are permitted to have different numbers of decimal places.
 #'
 #' @param x A numeric vector to format.
@@ -36,7 +36,7 @@ comma_signif <- function(x, digits = 3, ...) {
   x <- signif(x, digits = digits)
   y <- as.character(x)
   bol <- !is.na(x) & as.numeric(x) >= 1000
-  y[bol] <- scales::comma(x[bol], ...)
+  y[bol] <- comma(x[bol], ...)
   y
 }
 
