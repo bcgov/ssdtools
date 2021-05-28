@@ -16,6 +16,7 @@
 #' @import abind abind
 #' @importFrom graphics plot
 #' @importFrom VGAM vglm
+#' @importFrom purrr transpose
 #' @importFrom tibble as_tibble tibble
 #' @importFrom Rcpp sourceCpp
 #' @importFrom utils capture.output

@@ -39,7 +39,8 @@ glance.tmbfit <- function(x, ...) {
 #'  
 #' @export
 glance.fitdists <- function(x, ...) {
-  tbl <- purrr::map_df(x, .f = glance)
+  tbl <- lapply(x, glance)
+  tbl <- bind_rows(tbl)
   tbl$delta <- tbl$aicc - min(tbl$aicc)
   if(is.na(tbl$delta[1]) && all(tbl$npars == tbl$npars[1])) {
     tbl$delta <- tbl$aicc - min(tbl$aicc)

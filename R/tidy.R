@@ -38,7 +38,8 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
 #'  
 #' @export
 tidy.fitdists <- function(x, all = FALSE, ...) {
- x <- purrr::map_df(x, .f = tidy, all = all)
+ x <- lapply(x, tidy, all = all)
+ x <- bind_rows(x)
  x <- x[str_order(x$dist),]
  x
 }

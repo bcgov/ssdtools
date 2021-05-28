@@ -48,7 +48,7 @@ xcis_tmb <- function(x, args, what, level) {
 }
 
 cis_tmb <- function(estimates, what, level, x) {
-  args <- purrr::transpose(estimates)
+  args <- transpose(estimates)
   args <- lapply(args, as.double)
   x <- lapply(x, xcis_tmb, args, what, level)
   bind_rows(x)
