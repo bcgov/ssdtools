@@ -12,11 +12,12 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import stats chk ggplot2 lifecycle
+#' @import chk ggplot2 lifecycle
 #' @importFrom abind abind
 #' @importFrom graphics plot
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
+#' @importFrom stats optim sd setNames weighted.mean
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
 #' @importFrom utils capture.output
