@@ -64,7 +64,6 @@ Depends:
     R (>= 3.5)
 Imports:
     abind,
-    actuar,
     chk (>= 0.5.1.9003),
     generics,
     ggplot2,
