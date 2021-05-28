@@ -40,7 +40,7 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
 #'  
 #' @export
 tidy.fitdists <- function(x, all = FALSE, ...) {
- x %>% 
-   purrr::map_df(x, .f = tidy, all = all) %>%
-   dplyr::arrange(stringr::str_order(.data$dist))
+ x <- purrr::map_df(x, .f = tidy, all = all)
+ x <- dplyr::arrange(x, stringr::str_order(.data$dist))
+ x
 }
