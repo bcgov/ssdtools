@@ -71,6 +71,7 @@ Imports:
     graphics,
     grid,
     lifecycle,
+    plyr,
     purrr,
     Rcpp,
     scales,

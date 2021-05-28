@@ -112,7 +112,7 @@ GeomXribbon <- ggproto(
   },
   
   draw_group = function(data, panel_params, coord, na.rm = FALSE) {
-    if (na.rm) data <- data[stats::complete.cases(data[c("y", "xmin", "xmax")]), ]
+    if (na.rm) data <- data[complete.cases(data[c("y", "xmin", "xmax")]), ]
     data <- data[order(data$group, data$y), ]
     
     # Check that aesthetics are constant
@@ -122,11 +122,11 @@ GeomXribbon <- ggproto(
     }
     aes <- as.list(aes)
     
-    missing_pos <- !stats::complete.cases(data[c("y", "xmin", "xmax")])
+    missing_pos <- !complete.cases(data[c("y", "xmin", "xmax")])
     ids <- cumsum(missing_pos) + 1
     ids[missing_pos] <- NA
     
-    positions <- plyr::summarise(data,
+    positions <- summarise(data,
                                  y = c(y, rev(y)), x = c(xmax, rev(xmin)), id = c(ids, rev(ids))
     )
     munched <- coord_munch(coord, positions, panel_params)

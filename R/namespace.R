@@ -19,10 +19,11 @@
 #' @importFrom graphics plot
 #' @importFrom grid gpar grobName polygonGrob
 #' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
+#' @importFrom plyr summarise
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
 #' @importFrom scales comma percent trans_breaks
-#' @importFrom stats coef logLik nobs optim predict sd setNames weighted.mean
+#' @importFrom stats coef complete.cases logLik nobs optim predict sd setNames weighted.mean
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
 #' @importFrom universals estimates npars
