@@ -26,6 +26,7 @@
 #' @importFrom stats coef complete.cases logLik nobs optim predict sd setNames weighted.mean
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
+#' @importFrom TMB MakeADFun sdreport
 #' @importFrom universals estimates npars
 #' @importFrom utils capture.output
 #' @importFrom VGAM gompertz vglm

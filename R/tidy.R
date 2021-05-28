@@ -28,7 +28,7 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   chk_flag(all)
   
   dist <- x$dist
-  capture.output(x <- TMB::sdreport(x$model))
+  capture.output(x <- sdreport(x$model))
   x <- summary(x)
   term <- rownames(x)
   est <- unname(x[,1])
