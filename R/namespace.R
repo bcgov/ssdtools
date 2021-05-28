@@ -14,12 +14,15 @@
 
 #' @import chk ggplot2 lifecycle
 #' @importFrom abind abind
+#' @importFrom generics glance tidy
+#' @importFrom ggplot2 autoplot
 #' @importFrom graphics plot
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
-#' @importFrom stats optim sd setNames weighted.mean
+#' @importFrom stats coef logLik nobs optim predict sd setNames weighted.mean
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
+#' @importFrom universals estimates npars
 #' @importFrom utils capture.output
 #' @importFrom VGAM vglm
 NULL

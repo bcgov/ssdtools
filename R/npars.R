@@ -1,4 +1,3 @@
-#' @importFrom universals npars
 #' @export
 universals::npars
 

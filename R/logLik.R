@@ -1,4 +1,3 @@
-#' @importFrom stats logLik
 #' @export
 stats::logLik
 
