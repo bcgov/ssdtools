@@ -12,11 +12,12 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import chk ggplot2 lifecycle
+#' @import chk ggplot2
 #' @importFrom abind abind
 #' @importFrom generics glance tidy
 #' @importFrom ggplot2 autoplot
 #' @importFrom graphics plot
+#' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
 #' @importFrom stats coef logLik nobs optim predict sd setNames weighted.mean
