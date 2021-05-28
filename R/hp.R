@@ -37,31 +37,28 @@ ssd_hp <- function(x, ...) {
   est <- do.call(what, args)
   if (!ci) {
     na <- rep(NA_real_, length(conc))
-    return(as_tibble(data.frame(
+    return(tibble(
       dist = rep(dist, length(conc)), conc = conc, est = est * 100,
-      se = na, lcl = na, ucl = na,
-      stringsAsFactors = FALSE
-    )))
+      se = na, lcl = na, ucl = na    
+      ))
   }
   estimates <- boot_tmbfit(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
   cis <- cis_tmb(estimates, what, level = level, x = conc)
-  as_tibble(data.frame(
+  tibble(
     dist = dist,
     conc = conc, est = est * 100,
-    se = cis$se * 100, lcl = cis$lcl * 100, ucl = cis$ucl * 100, 
-    stringsAsFactors = FALSE
-  ))
+    se = cis$se * 100, lcl = cis$lcl * 100, ucl = cis$ucl * 100 
+  )
 }
 
 .ssd_hp_fitdists <- function(x, conc, ci, level, nboot, parallel, ncpus,
                              average, ic) {
   if (!length(x) || !length(conc)) {
     no <- numeric(0)
-    return(as_tibble(data.frame(
+    return(tibble(
       dist = character(0), conc = no, est = no, se = no,
       lcl = no, ucl = no,
-      stringsAsFactors = FALSE
-    )))
+    ))
   }
 
   hp <- lapply(x, .ssd_hp_tmbfit,

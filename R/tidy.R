@@ -20,7 +20,7 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   term <- rownames(x)
   est <- unname(x[,1])
   se <- unname(x[,2])
-  x <- tibble::tibble(dist = dist, term = term, est = est, se = se)
+  x <- tibble(dist = dist, term = term, est = est, se = se)
   
   if(!all)
     x <- x[!grepl("^log(it){0,1}_", x$term),]

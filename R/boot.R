@@ -27,7 +27,7 @@ generate_new_data <- function(x) {
   args <- list(n = n)
   args <- c(args, estimates(x))
   sample <- do.call(what, args)
-  new_data <- tibble::tibble(left = sample, right = sample)
+  new_data <- tibble(left = sample, right = sample)
   new_data$weight <- 1
   new_data <- censor_data(new_data, data)
   new_data

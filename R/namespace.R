@@ -16,7 +16,7 @@
 #' @import abind abind
 #' @importFrom graphics plot
 #' @importFrom VGAM vglm
-#' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble tibble
 #' @importFrom Rcpp sourceCpp
 #' @importFrom utils capture.output
 #' @importFrom stringr str_order

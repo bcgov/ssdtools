@@ -9,7 +9,7 @@ generics::glance
   aic <- 2 * npars - 2 * log_lik
   aicc <- aic + 2 * npars * (npars + 1) / (nobs - npars - 1)
   
-  tibble::tibble(
+  tibble(
     dist = dist,
     npars = npars,
     nobs = nobs,

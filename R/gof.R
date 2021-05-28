@@ -67,11 +67,10 @@ ssd_gof <- function(x, ...) {
     ks <- NA_real_
     cvm <- NA_real_
   }
-  data <- data.frame(
+  tibble(
     dist = dist, ad = ad, ks = ks, cvm = cvm,
-    aic = aic, aicc = aicc, bic = bic, stringsAsFactors = FALSE
+    aic = aic, aicc = aicc, bic = bic
   )
-  as_tibble(data)
 }
 
 .ssd_gof_fitdists <- function(x) {

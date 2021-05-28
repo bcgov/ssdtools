@@ -25,15 +25,14 @@ ssd_hc <- function(x, ...) {
 }
 
 no_ssd_hc <- function() {
-  as_tibble(data.frame(
+  tibble(
     dist = character(0),
     percent = numeric(0),
     est = numeric(0),
     se = numeric(0),
     lcl = numeric(0),
-    ucl = numeric(0),
-    stringsAsFactors = FALSE
-  ))
+    ucl = numeric(0)
+  )
 }
 
 .ssd_hc_dist <- function(x, dist, percent) {
@@ -45,11 +44,10 @@ no_ssd_hc <- function() {
   args <- list(p = percent)
   args <- c(as.list(x), args)
   est <- do.call(fun, args)
-  data.frame(
+  tibble(
     dist = dist,
     percent = percent * 100, est = est,
-    se = NA_real_, lcl = NA_real_, ucl = NA_real_, 
-    stringsAsFactors = FALSE
+    se = NA_real_, lcl = NA_real_, ucl = NA_real_
   )
 }
 
@@ -69,21 +67,21 @@ no_ssd_hc <- function() {
   est <- do.call(what, args)
   if (!ci) {
     na <- rep(NA_real_, length(percent))
-    return(as_tibble(data.frame(
+    return(tibble(
       dist = rep(dist, length(percent)),
-      percent = percent * 100, est = est,
-      se = na, lcl = na, ucl = na,
-      stringsAsFactors = FALSE
-    )))
+      percent = percent * 100, 
+      est = est,
+      se = na, 
+      lcl = na, 
+      ucl = na))
   }
   estimates <- boot_tmbfit(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
   cis <- cis_tmb(estimates, what, level = level, x = percent)
-  as_tibble(data.frame(
+  tibble(
     dist = dist,
     percent = percent * 100, est = est,
-    se = cis$se, lcl = cis$lcl, ucl = cis$ucl, 
-    stringsAsFactors = FALSE
-  ))
+    se = cis$se, lcl = cis$lcl, ucl = cis$ucl  
+  )
 }
 
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot, parallel, ncpus,
@@ -109,7 +107,7 @@ no_ssd_hc <- function() {
   weight <- .ssd_gof_fitdists(x)$weight
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   hc <- as.data.frame(hc)
-  tibble::tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 
+  tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 
          lcl = hc$lcl, ucl = hc$ucl)
 }
 
