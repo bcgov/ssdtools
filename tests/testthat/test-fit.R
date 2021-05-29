@@ -134,11 +134,6 @@ test_that("ssd_fit_dists gives correct chk error any right < left", {
                         "^`data\\$Other` must have values greater than or equal to `data\\$Conc`\\.$")
 })
 
-# test_that("ssd_fit_dists gives chk error if missing weight column", {
-#   data <- ssdtools::boron_data
-#   chk::expect_chk_error(ssd_fit_dists(data, weight = "Conc2"))
-# })
-
 
 test_that("fit_dist tiny llogis", {
   data <- ssdtools::boron_data
