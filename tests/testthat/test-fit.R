@@ -153,6 +153,17 @@ test_that("ssd_fit_dists gives correct chk error any right < left", {
                         "^`data\\$Other` must have values greater than or equal to `data\\$Conc`\\.$")
 })
 
+test_that("ssd_fit_dists warns to rescale data", {
+  data <- data.frame(Conc = rep(2, 6))
+  expect_condition(ssd_fit_dists(data, dist = "lnorm"), 
+                   regexp = "^Distribution 'lnorm' failed to fit \\(try rescaling data\\):")
+})
+
+test_that("ssd_fit_dists doesn't warns to rescale data", {
+  data <- data.frame(Conc = rep(2, 6))
+  expect_condition(ssd_fit_dists(data, rescale = TRUE, dist = "lnorm"), 
+                   regexp = "^Distribution 'lnorm' failed to fit:")
+})
 
 test_that("fit_dist tiny llogis", {
   data <- ssdtools::boron_data

@@ -24,54 +24,54 @@ is_at_boundary <- function(fit) {
   any(pars == lower | pars == upper)
 }
 
-nullify_nonfit <- function(fit, computable, silent) {
+# required to pass dist as not available for dists that didn't fit
+nullify_nonfit <- function(fit, dist, rescale, computable, silent) {
   error <- fit$error
   fit <- fit$result
   
+  rescale <- if(rescale == 1) " (try rescaling data)" else NULL
+  
   if (!is.null(error)) {
-    if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to fit: ", error,)
+    if (!silent) wrn("Distribution '", dist, "' failed to fit", 
+                     rescale, ": ", error)
     return(NULL)
   }
   if(is_at_boundary(fit)) {
-    if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to fit: one or more parameters at boundary.")
+    if (!silent) wrn("Distribution '", dist, "' failed to fit",
+                     rescale, ": one or more parameters at boundary.")
     return(NULL)
   }
   if (computable) {
     tidy <- tidy(fit)
     if (any(is.na(tidy$se))) {
-      if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to compute standard errors.")
+      if (!silent) wrn("Distribution '", dist, 
+                       "' failed to compute standard errors", rescale, ".")
       return(NULL)
     }
   }
   fit
 }
 
-remove_nonfits <- function(fits, computable, silent) {
-  fits <- mapply(nullify_nonfit, fits,
-                 MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
+remove_nonfits <- function(fits, rescale, computable, silent) {
+  fits <- mapply(nullify_nonfit, fits, names(fits),
+                 MoreArgs = list(rescale = rescale, computable = computable, silent = silent), SIMPLIFY = FALSE
   )
   fits <- fits[!vapply(fits, is.null, TRUE)]
   fits
 }
 
-fit_dists <- function(data, dists, computable, silent) {
+fit_dists <- function(data, dists, rescale, computable, silent) {
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
   fits <- lapply(dists, safe_fit_dist, data = data)
-  fits <- remove_nonfits(fits, computable, silent)
-  class(fits) <- "fitdists"
+  fits <- remove_nonfits(fits, rescale, computable, silent)
   if (!length(fits)) err("All distributions failed to fit.")
+  class(fits) <- "fitdists"
+  attr(fits, "rescale") <- rescale # need to have get and set function
   fits
 }
 
-chk_and_process_data <- function(data, left, right, weight, nrow, silent) {  
-  chk_string(left)
-  chk_string(right)
-  chk_null_or(weight, chk_string)
-  
-  chk_whole_number(nrow)
-  chk_gte(nrow, 4L)
-  
+chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silent) {  
   values <- setNames(list(c(0, Inf, NA)), left)
   if(left != right)
     values <- c(values, setNames(list(c(0, Inf, NA)), right))
@@ -116,7 +116,13 @@ chk_and_process_data <- function(data, left, right, weight, nrow, silent) {
   data$left[is.na(data$left)] <- 0
   data$right[is.na(data$right)] <- Inf
   
-  data
+  if(rescale) {
+    rescale <- c(data$left, data$right)
+    rescale <- max(rescale[rescale < Inf])
+  } else 
+    rescale <- 1
+  
+  list(data = data, rescale = rescale)
 }
 
 #' Fit Distributions
@@ -144,6 +150,7 @@ ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
   dists = c("gamma", "llogis", "lnorm"),
   nrow = 6L,
+  rescale = FALSE,
   computable = TRUE,
   silent = FALSE) {
   
@@ -161,12 +168,22 @@ ssd_fit_dists <- function(
     deprecate_stop("0.1.2", "xburrIII2()",
                    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   }
+  chk_string(left)
+  chk_string(right)
+  chk_null_or(weight, chk_string)
   chk_subset(dists, ssd_dists())
+  
+  chk_whole_number(nrow)
+  chk_gte(nrow, 4L)
+  
+  chk_flag(rescale)
   chk_flag(computable)
   chk_flag(silent)
   
-  data <- chk_and_process_data(data, left = left, right = right, weight = weight, 
-                               nrow = nrow, silent = silent)
-  fits <- fit_dists(data, dists, computable, silent)
+  x <- chk_and_process_data(data, left = left, right = right, weight = weight, 
+                               nrow = nrow, rescale = rescale, silent = silent)
+  data <- x$data
+  rescale <- x$rescale
+  fits <- fit_dists(data, dists, rescale, computable, silent)
   fits
 }

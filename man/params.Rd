@@ -74,6 +74,8 @@
 
 \item{select}{A character vector of the distributions to select.}
 
+\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
+
 \item{left}{A string of the column in data with the concentrations.}
 
 \item{right}{A string of the column in data with the right concentration values.}

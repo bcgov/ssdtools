@@ -11,6 +11,7 @@ ssd_fit_dists(
   weight = NULL,
   dists = c("gamma", "llogis", "lnorm"),
   nrow = 6L,
+  rescale = FALSE,
   computable = TRUE,
   silent = FALSE
 )
@@ -27,6 +28,8 @@ ssd_fit_dists(
 \item{dists}{A character vector of the distribution names.}
 
 \item{nrow}{A positive whole number of the minimum number of non-missing rows.}
+
+\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 

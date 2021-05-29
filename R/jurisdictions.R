@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 ssd_fit_dists_bc <- function(data, left = "Conc", silent = FALSE) {
-  ssd_fit_dists(data = data, left = left, silent = silent,
-                dists = c("gamma", "llogis", "lnorm"))
+  ssd_fit_dists(data = data, left = left, 
+                dists = c("gamma", "llogis", "lnorm"),
+                silent = silent)
 }
