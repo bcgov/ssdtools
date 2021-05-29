@@ -59,7 +59,7 @@ test_that("ssd_fit_dists gives correct chk error if zero weight", {
   data$Heavy <- rep(1, nrow(data))
   data$Heavy[2] <- 0
   chk::expect_chk_error(ssd_fit_dists(data, weight = "Heavy"),
-                        "^`data` has 1 row with zero weight in 'Heavy'[.]$")
+                        "^`data` has 1 row with zero weight in 'Heavy'\\.$")
 })
 
 test_that("ssd_fit_dists gives chk error if negative weights", {
@@ -80,7 +80,7 @@ test_that("ssd_fit_dists all distributions fail to fit if Inf weight", {
   data <- ssdtools::boron_data
   data$Mass <- rep(1, nrow(data))
   data$Mass[1] <- Inf
-  expect_error(expect_warning(ssd_fit_dists(data, weight = "Mass"), "^All distributions failed to fit[.]"))
+  expect_error(expect_warning(ssd_fit_dists(data, weight = "Mass"), "^All distributions failed to fit\\."))
 })
 
 test_that("ssd_fit_dists not affected if right values identical to left but in different column", {
@@ -95,7 +95,7 @@ test_that("ssd_fit_dists gives correct chk error if missing values in non-censor
   data <- ssdtools::boron_data
   data$Conc[2] <- NA 
   chk::expect_chk_error(ssd_fit_dists(data),
-                        "^`data` has 1 row with missing values in 'Conc'[.]$")
+                        "^`data` has 1 row with missing values in 'Conc'\\.$")
 })
 
 test_that("ssd_fit_dists gives correct chk error if missing values in censored data", {
@@ -105,7 +105,7 @@ test_that("ssd_fit_dists gives correct chk error if missing values in censored d
   data$Conc[2:3] <- NA
   data$Other[2:3] <- NA
   chk::expect_chk_error(ssd_fit_dists(data, right = "Other"),
-                        "^`data` has 2 rows with missing values in 'Conc' and 'Other'[.]$")
+                        "^`data` has 2 rows with missing values in 'Conc' and 'Other'\\.$")
 })
 
 test_that("ssd_fit_dists gives chk error if zero left ", {
@@ -123,10 +123,16 @@ test_that("ssd_fit_dists gives chk error if negative left ", {
 test_that("ssd_fit_dists all distributions fail to fit if Inf left", {
   data <- ssdtools::boron_data
   data$Conc[1] <- Inf
-  expect_error(expect_warning(ssd_fit_dists(data), "^All distributions failed to fit[.]"))
+  expect_error(expect_warning(ssd_fit_dists(data), "^All distributions failed to fit\\."))
 })
 
-
+test_that("ssd_fit_dists gives correct chk error any right < left", {
+  data <- ssdtools::boron_data
+  data$Other <- data$Conc
+  data$Other[2] <- data$Conc[1] / 2
+  chk::expect_chk_error(ssd_fit_dists(data, right = "Other"),
+                        "^`data\\$Other` must have values greater than or equal to `data\\$Conc`\\.$")
+})
 
 # test_that("ssd_fit_dists gives chk error if missing weight column", {
 #   data <- ssdtools::boron_data
@@ -158,7 +164,7 @@ test_that("fit_dists", {
     "gamma", "lgumbel",
     "llogis", "lnorm", "weibull"
   )
-  expect_error(expect_warning(ssd_fit_dists(boron_data[1:5, ], dists = dist_names)), "^`nrow[(]`data`[)]` must be between 6 and Inf, not 5[.]$")
+  expect_error(expect_warning(ssd_fit_dists(boron_data[1:5, ], dists = dist_names)), "^`nrow[(]`data`[)]` must be between 6 and Inf, not 5\\.$")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = dist_names)
   expect_true(is.fitdists(dists))
   expect_identical(names(dists), c("gamma", "lgumbel", "llogis", "lnorm", "weibull"))

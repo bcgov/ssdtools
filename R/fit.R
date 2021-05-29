@@ -88,7 +88,12 @@ chk_and_process_data <- function(data, left, right, weight, nrow, silent) {
   }
   check_data(data, values, nrow = c(nrow, Inf))
   chk_gt(data[[left]], x_name = paste0("data$", left))
-  
+  if(any(!is.na(data[[right]]) & !is.na(data[[left]]) & data[[right]] < data[[left]])) {
+    msg <- paste0("`data$", right, "` must have values greater than or equal to `data$",
+                  left, "`")
+    abort_chk(msg)
+  }
+
   if(is.null(weight)) {
     data$weight <- 1
     weight <- "weight"
