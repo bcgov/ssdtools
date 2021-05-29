@@ -76,8 +76,15 @@ chk_and_process_data <- function(data, left, right, weight, nrow, silent) {
   if(left != right)
     values <- c(values, setNames(list(c(0, Inf, NA)), right))
   if(!is.null(weight)) {
-    data[[weight]] <- as.numeric(data[[weight]])
-    values <- c(values, setNames(list(c(0, 1000)), weight))
+    values <- c(values, setNames(list(c(0, Inf)), weight))
+  }
+  
+  check_names(data, names = names(values))
+  if(is.null(weight)) {
+    data$weight <- 1
+    weight <- "weight"
+  } else if(is.integer(data[[weight]])) { # necessary to do transform before check_data
+    data[[weight]] <- as.double(data[[weight]])
   }
   check_data(data, values, nrow = c(nrow, Inf))
   
