@@ -91,8 +91,14 @@ chk_and_process_data <- function(data, left, right, weight, nrow, silent) {
   missing <- is.na(data$left) & is.na(data$right)
   
   if(any(missing)) {
-    err("data has %n row%s with missing values in '", left, "' and '", right, 
-        "'", n = length(missing))
+    msg <- paste0("`data` has %n row%s with missing values in '", left, "'")
+    if(right != left && any(data$left != data$right))
+      msg <- paste0(msg, " and '", right, "'")
+    abort_chk(msg, n = sum(missing))
+  }
+  zero_weight <- data$weight == 0
+  if(any(zero_weight)) {
+    abort_chk("`data` has %n row%s with zero weight in '", weight, "'", n = sum(zero_weight))
   }
   data$left[is.na(data$left)] <- 0
   data$right[is.na(data$right)] <- Inf

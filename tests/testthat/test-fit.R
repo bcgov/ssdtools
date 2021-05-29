@@ -12,15 +12,79 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
-test_that("fit_dist", {
-  dists <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+test_that("ssd_fit_dists gives same result as previously with boron_data and lnorm", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = "lnorm")
   skip_if_not(capabilities("long.double"))
-  expect_equal(estimates(dists), estimates(boron_lnorm))
+  expect_equal(estimates(fits), estimates(boron_lnorm))
 })
 
-test_that("unrecognized dist", {
+test_that("ssd_fit_dists not affected if left same values as right", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  data$Other <- data$Conc
+  fits_right <- ssd_fit_dists(data, right = "Other", dists = "lnorm")
+  expect_equal(estimates(fits_right), estimates(fits))
+})
+
+test_that("ssd_fit_dists not affected if all weight 1", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  data$Mass <- rep(1, nrow(data))
+  fits_right <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
+  expect_equal(estimates(fits_right), estimates(fits))
+})
+
+test_that("ssd_fit_dists not affected if all equal weight ", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  data$Mass <- rep(0.1, nrow(data))
+  fits_right <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
+  expect_equal(estimates(fits_right), estimates(fits))
+})
+
+test_that("ssd_fit_dists gives error with unrecognized dist", {
   chk::expect_chk_error(ssd_fit_dists(ssdtools::boron_data, dists = "lnorm2"))
+})
+
+test_that("ssd_fit_dists gives correct chk error if missing values in non-censored data", {
+  data <- ssdtools::boron_data
+  data$Conc[2] <- NA 
+  chk::expect_chk_error(ssd_fit_dists(data),
+                        "^`data` has 1 row with missing values in 'Conc'[.]$")
+})
+
+test_that("ssd_fit_dists gives correct chk error if missing values in censored data", {
+  data <- ssdtools::boron_data
+  data$Other <- data$Conc
+  data$Other[1] <- data$Conc[1] + 0.1 # to make censored
+  data$Conc[2:3] <- NA
+  data$Other[2:3] <- NA
+  chk::expect_chk_error(ssd_fit_dists(data, right = "Other"),
+                        "^`data` has 2 rows with missing values in 'Conc' and 'Other'[.]$")
+})
+
+test_that("ssd_fit_dists gives chk error if missing left column", {
+  data <- ssdtools::boron_data
+  chk::expect_chk_error(ssd_fit_dists(data, left = "Conc2"))
+})
+
+test_that("ssd_fit_dists gives chk error if missing right column", {
+  data <- ssdtools::boron_data
+  chk::expect_chk_error(ssd_fit_dists(data, right = "Conc2"))
+})
+
+# test_that("ssd_fit_dists gives chk error if missing weight column", {
+#   data <- ssdtools::boron_data
+#   chk::expect_chk_error(ssd_fit_dists(data, weight = "Conc2"))
+# })
+
+test_that("ssd_fit_dists gives correct chk error if zero weight", {
+  data <- ssdtools::boron_data
+  data$Heavy <- rep(1, nrow(data))
+  data$Heavy[2] <- 0
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Heavy"),
+                        "^`data` has 1 row with zero weight in 'Heavy'[.]$")
 })
 
 test_that("fit_dist tiny llogis", {
