@@ -87,6 +87,7 @@ chk_and_process_data <- function(data, left, right, weight, nrow, silent) {
     data[[weight]] <- as.double(data[[weight]])
   }
   check_data(data, values, nrow = c(nrow, Inf))
+  chk_gt(data[[left]], x_name = paste0("data$", left))
   
   if(is.null(weight)) {
     data$weight <- 1
