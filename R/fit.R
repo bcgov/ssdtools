@@ -29,17 +29,17 @@ nullify_nonfit <- function(fit, computable, silent) {
   fit <- fit$result
   
   if (!is.null(error)) {
-    if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to fit: ", error)
+    if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to fit: ", error,)
     return(NULL)
   }
   if(is_at_boundary(fit)) {
-    if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to fit: one or more parameters at boundary (try rescaling the data or increasing the sample size).")
+    if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to fit: one or more parameters at boundary.")
     return(NULL)
   }
-  sd <- fit$sd
-  if (is.null(sd) || any(is.na(sd))) {
-    if (computable) {
-      if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to compute standard errors (try rescaling the data or increasing the sample size).")
+  if (computable) {
+    tidy <- tidy(fit)
+    if (any(is.na(tidy$se))) {
+      if (!silent) wrn("Distribution ", .dist_tmbfit(fit), " failed to compute standard errors.")
       return(NULL)
     }
   }
@@ -48,7 +48,7 @@ nullify_nonfit <- function(fit, computable, silent) {
 
 remove_nonfits <- function(fits, computable, silent) {
   fits <- mapply(nullify_nonfit, fits,
-                MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
+                 MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
   )
   fits <- fits[!vapply(fits, is.null, TRUE)]
   fits
@@ -93,7 +93,7 @@ chk_and_process_data <- function(data, left, right, weight, nrow, silent) {
                   left, "`")
     abort_chk(msg)
   }
-
+  
   if(is.null(weight)) {
     data$weight <- 1
     weight <- "weight"
@@ -144,7 +144,7 @@ ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
   dists = c("gamma", "llogis", "lnorm"),
   nrow = 6L,
-  computable = FALSE,
+  computable = TRUE,
   silent = FALSE) {
   
   chk_character_or_factor(dists)
@@ -152,7 +152,7 @@ ssd_fit_dists <- function(
   check_dim(dists, values = TRUE)
   chk_not_any_na(dists)
   chk_unique(dists)
-
+  
   if ("llog" %in% dists) {
     deprecate_stop("0.1.0", "dllog()", "dllogis()",
                    details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
@@ -166,7 +166,7 @@ ssd_fit_dists <- function(
   chk_flag(silent)
   
   data <- chk_and_process_data(data, left = left, right = right, weight = weight, 
-                       nrow = nrow, silent = silent)
+                               nrow = nrow, silent = silent)
   fits <- fit_dists(data, dists, computable, silent)
   fits
 }

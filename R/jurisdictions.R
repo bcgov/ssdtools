@@ -14,6 +14,5 @@
 
 ssd_fit_dists_bc <- function(data, left = "Conc", silent = FALSE) {
   ssd_fit_dists(data = data, left = left, silent = silent,
-                dists = c("gamma", "llogis", "lnorm"),
-                nrow = 6L, computable = FALSE) # switch to computable
+                dists = c("gamma", "llogis", "lnorm"))
 }

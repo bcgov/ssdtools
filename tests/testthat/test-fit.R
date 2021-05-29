@@ -23,6 +23,25 @@ test_that("ssd_fit_dists gives error with unrecognized dist", {
   chk::expect_chk_error(ssd_fit_dists(ssdtools::boron_data, dists = "lnorm2"))
 })
 
+test_that("ssd_fit_dists gives chk error if insufficient data", {
+  data <- ssdtools::boron_data[1:5,]
+  chk::expect_chk_error(ssd_fit_dists(data))
+})
+
+test_that("ssd_fit_dists gives chk error if less than 6 rows of data", {
+  data <- ssdtools::boron_data[1:5,]
+  chk::expect_chk_error(ssd_fit_dists(data))
+})
+
+test_that("ssd_fit_dists gives chk error if less than required rows of data", {
+  data <- ssdtools::boron_data
+  chk::expect_chk_error(ssd_fit_dists(data, nrow = 29))
+})
+
+test_that("ssd_fit_dists gives error with unrecognized dist", {
+  chk::expect_chk_error(ssd_fit_dists(ssdtools::boron_data, dists = "lnorm2"))
+})
+
 test_that("ssd_fit_dists gives chk error if missing left column", {
   data <- ssdtools::boron_data
   chk::expect_chk_error(ssd_fit_dists(data, left = "Conc2"))
