@@ -77,7 +77,7 @@ chk_and_process_data <- function(data, left, right, weight, nrow, silent) {
     values <- c(values, setNames(list(c(0, Inf, NA)), right))
   if(!is.null(weight)) {
     data[[weight]] <- as.numeric(data[[weight]])
-    values <- c(values, setNames(list(c(0, Inf)), weight))
+    values <- c(values, setNames(list(c(0, 1000)), weight))
   }
   check_data(data, values, nrow = c(nrow, Inf))
   

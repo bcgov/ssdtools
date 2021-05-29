@@ -19,12 +19,18 @@ test_that("ssd_fit_dists gives same result as previously with boron_data and lno
   expect_equal(estimates(fits), estimates(boron_lnorm))
 })
 
-test_that("ssd_fit_dists not affected if left same values as right", {
+test_that("ssd_fit_dists gives error with unrecognized dist", {
+  chk::expect_chk_error(ssd_fit_dists(ssdtools::boron_data, dists = "lnorm2"))
+})
+
+test_that("ssd_fit_dists gives chk error if missing left column", {
   data <- ssdtools::boron_data
-  fits <- ssd_fit_dists(data, dists = "lnorm")
-  data$Other <- data$Conc
-  fits_right <- ssd_fit_dists(data, right = "Other", dists = "lnorm")
-  expect_equal(estimates(fits_right), estimates(fits))
+  chk::expect_chk_error(ssd_fit_dists(data, left = "Conc2"))
+})
+
+test_that("ssd_fit_dists gives chk error if missing right column", {
+  data <- ssdtools::boron_data
+  chk::expect_chk_error(ssd_fit_dists(data, right = "Conc2"))
 })
 
 test_that("ssd_fit_dists not affected if all weight 1", {
@@ -43,8 +49,41 @@ test_that("ssd_fit_dists not affected if all equal weight ", {
   expect_equal(estimates(fits_right), estimates(fits))
 })
 
-test_that("ssd_fit_dists gives error with unrecognized dist", {
-  chk::expect_chk_error(ssd_fit_dists(ssdtools::boron_data, dists = "lnorm2"))
+test_that("ssd_fit_dists gives correct chk error if zero weight", {
+  data <- ssdtools::boron_data
+  data$Heavy <- rep(1, nrow(data))
+  data$Heavy[2] <- 0
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Heavy"),
+                        "^`data` has 1 row with zero weight in 'Heavy'[.]$")
+})
+
+test_that("ssd_fit_dists gives chk error if negative weights", {
+  data <- ssdtools::boron_data
+  data$Mass <- rep(1, nrow(data))
+  data$Mass[1] <- -1
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass"))
+})
+
+test_that("ssd_fit_dists gives chk error if weight greater than 1", {
+  data <- ssdtools::boron_data
+  data$Mass <- rep(1, nrow(data))
+  data$Mass[1] <- Inf
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass"))
+})
+
+test_that("ssd_fit_dists gives chk error if missing weight values", {
+  data <- ssdtools::boron_data
+  data$Mass <- rep(1, nrow(data))
+  data$Mass[1] <- NA
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass"))
+})
+
+test_that("ssd_fit_dists not affected if right values identical to left but in different column", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  data$Other <- data$Conc
+  fits_right <- ssd_fit_dists(data, right = "Other", dists = "lnorm")
+  expect_equal(estimates(fits_right), estimates(fits))
 })
 
 test_that("ssd_fit_dists gives correct chk error if missing values in non-censored data", {
@@ -64,28 +103,11 @@ test_that("ssd_fit_dists gives correct chk error if missing values in censored d
                         "^`data` has 2 rows with missing values in 'Conc' and 'Other'[.]$")
 })
 
-test_that("ssd_fit_dists gives chk error if missing left column", {
-  data <- ssdtools::boron_data
-  chk::expect_chk_error(ssd_fit_dists(data, left = "Conc2"))
-})
-
-test_that("ssd_fit_dists gives chk error if missing right column", {
-  data <- ssdtools::boron_data
-  chk::expect_chk_error(ssd_fit_dists(data, right = "Conc2"))
-})
-
 # test_that("ssd_fit_dists gives chk error if missing weight column", {
 #   data <- ssdtools::boron_data
 #   chk::expect_chk_error(ssd_fit_dists(data, weight = "Conc2"))
 # })
 
-test_that("ssd_fit_dists gives correct chk error if zero weight", {
-  data <- ssdtools::boron_data
-  data$Heavy <- rep(1, nrow(data))
-  data$Heavy[2] <- 0
-  chk::expect_chk_error(ssd_fit_dists(data, weight = "Heavy"),
-                        "^`data` has 1 row with zero weight in 'Heavy'[.]$")
-})
 
 test_that("fit_dist tiny llogis", {
   data <- ssdtools::boron_data
@@ -121,13 +143,13 @@ test_that("fit_dists", {
 
 test_that("fit_dist", {
   skip_if_not(capabilities("long.double"))
-  
+
   dists <- ssd_fit_dists(boron_data, dists = "lnorm")
   expect_equal(estimates(dists), estimates(boron_lnorm))
 
   boron_data2 <- boron_data[rev(order(boron_data$Conc)), ]
   boron_data2$Weight <- 1:nrow(boron_data2)
-  
+
   dists <- ssd_fit_dists(boron_data2, weight = "Weight", dists = "lnorm")
   expect_equal(estimates(dists$lnorm), list(meanlog = 1.87970902859779, sdlog = 1.12770658163393),
                tolerance = 1e-06)

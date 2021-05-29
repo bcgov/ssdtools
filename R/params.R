@@ -59,7 +59,7 @@
 #' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param shift_x The value to multiply the label x values by.
 #' @param hc A count between 1 and 99 indicating the percent hazard concentration (or NULL).
-#' @param weight A string of the column in data with the weightings (or NULL)
+#' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
 #' @param dists A character vector of the distribution names.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
 #' @param silent A flag indicating whether fits should fail silently.

@@ -92,7 +92,7 @@
 
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 
-\item{weight}{A string of the column in data with the weightings (or NULL)}
+\item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
 \item{dists}{A character vector of the distribution names.}
 

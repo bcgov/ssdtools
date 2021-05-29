@@ -22,7 +22,7 @@ ssd_fit_dists(
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{weight}{A string of the column in data with the weightings (or NULL)}
+\item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
 \item{dists}{A character vector of the distribution names.}
 
