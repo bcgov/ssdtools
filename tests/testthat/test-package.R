@@ -1,6 +1,5 @@
 test_that("dists sorted character", {
   dists <- ssd_dists()
-  dists <- dists[!dists %in% c("llog", "burrIII2")]
   expect_warning(fit <- ssd_fit_dists(ssdtools::boron_data, dists = dists))
   dists <- dists[!dists %in% "burrIII3"]
   expect_identical(names(fit), dists)

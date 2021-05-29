@@ -64,7 +64,7 @@ fit_dists <- function(data, dists, computable, silent) {
   fits
 }
 
-process_data <- function(data, left, right, weight, nrow, silent) {  
+chk_and_process_data <- function(data, left, right, weight, nrow, silent) {  
   chk_string(left)
   chk_string(right)
   chk_null_or(weight, chk_string)
@@ -89,10 +89,10 @@ process_data <- function(data, left, right, weight, nrow, silent) {
   colnames(data) <- c("left", "right", "weight")
   
   missing <- is.na(data$left) & is.na(data$right)
+  
   if(any(missing)) {
-    if (!silent) msg("Deleting %n row%s with missing values in ", left, " and ", right, n = length(missing))
-    data <- data[!missing,]
-    check_dim(data, dim = nrow, values = c(nrow, Inf))
+    err("data has %n row%s with missing values in '", left, "' and '", right, 
+        "'", n = length(missing))
   }
   data$left[is.na(data$left)] <- 0
   data$right[is.na(data$right)] <- Inf
@@ -133,24 +133,20 @@ ssd_fit_dists <- function(
   check_dim(dists, values = TRUE)
   chk_not_any_na(dists)
   chk_unique(dists)
-  
-  if (sum(c("llog", "burrIII2", "llogis") %in% dists) > 1) {
-    err("Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
-  }
-  
+
   if ("llog" %in% dists) {
-    deprecate_warn("0.1.0", "dllog()", "dllogis()", id = "xllog", 
+    deprecate_stop("0.1.0", "dllog()", "dllogis()",
                    details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
   }
   if ("burrIII2" %in% dists) {
-    deprecate_warn("0.1.2", "xburrIII2()",
-                   details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
+    deprecate_stop("0.1.2", "xburrIII2()",
+                   details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   }
   chk_subset(dists, ssd_dists())
   chk_flag(computable)
   chk_flag(silent)
   
-  data <- process_data(data, left = left, right = right, weight = weight, 
+  data <- chk_and_process_data(data, left = left, right = right, weight = weight, 
                        nrow = nrow, silent = silent)
   fits <- fit_dists(data, dists, computable, silent)
   fits

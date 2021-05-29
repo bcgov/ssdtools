@@ -3,10 +3,3 @@ test_that("dists sorted character", {
   expect_type(dists, "character")
   expect_identical(dists, stringr::str_sort(dists))
 })
-
-test_that("dists sorted character", {
-  dists <- ssd_dists()
-  dists <- dists[!dists %in% c("llog", "burrIII2")]
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = dists)
-})
-

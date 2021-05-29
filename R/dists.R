@@ -22,6 +22,6 @@
 #' @examples
 #' ssd_dists()
 ssd_dists <- function() {
-  c("burrIII2", "burrIII3", "gamma", "gompertz", "lgumbel", 
-    "llog", "llogis", "lnorm", "mx_llogis_llogis", "weibull")
+  c("burrIII3", "gamma", "gompertz", "lgumbel", 
+    "llogis", "lnorm", "mx_llogis_llogis", "weibull")
 }
