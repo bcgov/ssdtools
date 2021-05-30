@@ -8,6 +8,8 @@
 
 \item{object}{The object.}
 
+\item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
+
 \item{data}{A data frame.}
 
 \item{pred}{A data frame of the predictions.}

@@ -13,6 +13,7 @@ ssd_fit_dists(
   nrow = 6L,
   rescale = FALSE,
   computable = TRUE,
+  control = list(),
   silent = FALSE
 )
 }
@@ -32,6 +33,8 @@ ssd_fit_dists(
 \item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
+
+\item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 }

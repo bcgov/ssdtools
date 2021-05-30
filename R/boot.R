@@ -33,14 +33,14 @@ generate_new_data <- function(x) {
   new_data
 }
 
-sample_parameters <- function(n, x) {
+sample_parameters <- function(n, x, control) {
   dist <- .dist_tmbfit(x)
   new_data <- generate_new_data(x)
-  fit <- fit_tmb(dist, new_data)
+  fit <- fit_tmb(dist, new_data, control = control)
   estimates(fit)
 }
 
-boot_tmbfit <- function(x, nboot, parallel, ncpus) {
+boot_tmbfit <- function(x, nboot, control, parallel, ncpus) {
   # need to do parallel
-  lapply(1:nboot, sample_parameters, x = x)
+  lapply(1:nboot, sample_parameters, x = x, control = control)
 }

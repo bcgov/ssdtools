@@ -41,6 +41,12 @@ nullify_nonfit <- function(fit, dist, rescale, computable, silent) {
                      rescale, ": one or more parameters at boundary.")
     return(NULL)
   }
+  if(!optimizer_converged(fit)) {
+    message <- optimizer_message(fit)
+    if (!silent) wrn("Distribution '", dist, "' failed to converge",
+                     rescale, ": ", message)
+    return(NULL)
+  }
   if (computable) {
     tidy <- tidy(fit)
     if (any(is.na(tidy$se))) {
@@ -60,14 +66,15 @@ remove_nonfits <- function(fits, rescale, computable, silent) {
   fits
 }
 
-fit_dists <- function(data, dists, rescale, computable, silent) {
+fit_dists <- function(data, dists, rescale, computable, control, silent) {
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
-  fits <- lapply(dists, safe_fit_dist, data = data)
+  fits <- lapply(dists, safe_fit_dist, data = data, control = control)
   fits <- remove_nonfits(fits, rescale, computable, silent)
   if (!length(fits)) err("All distributions failed to fit.")
   class(fits) <- "fitdists"
   attr(fits, "rescale") <- rescale # need to have get and set function
+  attr(control, "control") <- control # need to have get and set function
   fits
 }
 
@@ -152,6 +159,7 @@ ssd_fit_dists <- function(
   nrow = 6L,
   rescale = FALSE,
   computable = TRUE,
+  control = list(),
   silent = FALSE) {
   
   chk_character_or_factor(dists)
@@ -178,12 +186,13 @@ ssd_fit_dists <- function(
   
   chk_flag(rescale)
   chk_flag(computable)
+  chk_list(control)
   chk_flag(silent)
   
   x <- chk_and_process_data(data, left = left, right = right, weight = weight, 
                                nrow = nrow, rescale = rescale, silent = silent)
   data <- x$data
   rescale <- x$rescale
-  fits <- fit_dists(data, dists, rescale, computable, silent)
+  fits <- fit_dists(data, dists, rescale, computable, control, silent)
   fits
 }

@@ -159,11 +159,18 @@ test_that("ssd_fit_dists warns to rescale data", {
                    regexp = "^Distribution 'lnorm' failed to fit \\(try rescaling data\\):")
 })
 
-test_that("ssd_fit_dists doesn't warns to rescale data", {
+test_that("ssd_fit_dists doesn't warns to rescale data if already rescaled", {
   data <- data.frame(Conc = rep(2, 6))
   expect_condition(ssd_fit_dists(data, rescale = TRUE, dist = "lnorm"), 
                    regexp = "^Distribution 'lnorm' failed to fit:")
 })
+
+test_that("ssd_fit_dists warns of optimizer convergence code error", {
+  data <- ssdtools::boron_data
+  expect_condition(ssd_fit_dists(data, control = list(maxit = 1) , dist = "lnorm"), 
+                   regexp = "^Distribution 'lnorm' failed to converge \\(try rescaling data\\): Iteration limit maxit reach \\(try increasing the maximum number of iterations in control\\)\\.$")
+})
+
 
 test_that("fit_dist tiny llogis", {
   data <- ssdtools::boron_data

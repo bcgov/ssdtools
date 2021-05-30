@@ -51,7 +51,7 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_tmbfit <- function(x, percent, ci, level, nboot, parallel, ncpus) {
+.ssd_hc_tmbfit <- function(x, percent, ci, level, nboot, control, parallel, ncpus) {
   chk_vector(percent)
   chk_numeric(percent)
   chk_number(level)
@@ -75,7 +75,7 @@ no_ssd_hc <- function() {
       lcl = na, 
       ucl = na))
   }
-  estimates <- boot_tmbfit(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
+  estimates <- boot_tmbfit(x, nboot = nboot, control = control, parallel = parallel, ncpus = ncpus)
   cis <- cis_tmb(estimates, what, level = level, x = percent)
   tibble(
     dist = dist,
@@ -84,15 +84,18 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_fitdists <- function(x, percent, ci, level, nboot, parallel, ncpus,
+.ssd_hc_fitdists <- function(x, percent, ci, level, nboot, control, parallel, ncpus,
                              average, ic) {
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
+  
+  if(is.null(control))
+    control <- attr(x, "control")
 
   hc <- lapply(x, .ssd_hc_tmbfit,
     percent = percent, ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus
+    parallel = parallel, ncpus = ncpus, control = control
   )
   if (!average) {
     return(bind_rows(hc))
@@ -119,18 +122,18 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
-
+  
   if (!missing(hc)) {
     deprecate_stop("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
-
+  
   if (!length(x)) {
     return(no_ssd_hc())
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
-    MoreArgs = list(percent = percent),
-    SIMPLIFY = FALSE
+               MoreArgs = list(percent = percent),
+               SIMPLIFY = FALSE
   )
   bind_rows(hc)
 }
@@ -139,9 +142,12 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 #' @export
 #' @examples
 #' ssd_hc(boron_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
+ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, 
+                            control = NULL, 
+                            parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
+  chk_null_or(control, chk_list)
   chk_unused(...)
 
   if (!missing(hc)) {
@@ -150,7 +156,7 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   }
 
   .ssd_hc_fitdists(x, percent,
-    ci = ci, level = level, nboot = nboot,
+    ci = ci, level = level, nboot = nboot, control = control,
     parallel = parallel, ncpus = ncpus,
     average = average, ic = ic
   )

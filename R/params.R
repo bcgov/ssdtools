@@ -16,6 +16,7 @@
 #'
 #' @param x The object.
 #' @param object The object.
+#' @param control A list of control parameters passed to [stats::optim].
 #' @param data A data frame.
 #' @param pred A data frame of the predictions.
 #' @param xlab A string of the x-axis label.

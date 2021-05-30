@@ -13,6 +13,7 @@ ssd_hp(x, ...)
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
+  control = NULL,
   parallel = NULL,
   ncpus = 1,
   average = TRUE,
@@ -32,6 +33,8 @@ ssd_hp(x, ...)
 \item{level}{A number between 0 and 1 of the confidence level.}
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+
+\item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
 
 \item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
 

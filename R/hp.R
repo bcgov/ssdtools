@@ -23,7 +23,7 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, parallel, ncpus) {
+.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, control, parallel, ncpus) {
   chk_vector(conc)
   chk_numeric(conc)
   chk_number(level)
@@ -42,7 +42,7 @@ ssd_hp <- function(x, ...) {
       se = na, lcl = na, ucl = na    
       ))
   }
-  estimates <- boot_tmbfit(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
+  estimates <- boot_tmbfit(x, nboot = nboot, control = control, parallel = parallel, ncpus = ncpus)
   cis <- cis_tmb(estimates, what, level = level, x = conc)
   tibble(
     dist = dist,
@@ -51,7 +51,7 @@ ssd_hp <- function(x, ...) {
   )
 }
 
-.ssd_hp_fitdists <- function(x, conc, ci, level, nboot, parallel, ncpus,
+.ssd_hp_fitdists <- function(x, conc, ci, level, nboot, control, parallel, ncpus,
                              average, ic) {
   if (!length(x) || !length(conc)) {
     no <- numeric(0)
@@ -61,8 +61,11 @@ ssd_hp <- function(x, ...) {
     ))
   }
 
+  if(is.null(control))
+    control <- attr(x, "control")
+  
   hp <- lapply(x, .ssd_hp_tmbfit,
-    conc = conc, ci = ci, level = level, nboot = nboot,
+    conc = conc, ci = ci, level = level, nboot = nboot, control = control,
     parallel = parallel, ncpus = ncpus
   )
   if (!average) {
@@ -86,14 +89,16 @@ ssd_hp <- function(x, ...) {
 #' @examples
 #' ssd_hp(boron_dists, c(0, 1, 30, Inf))
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
+                            control = NULL,
                             parallel = NULL, ncpus = 1,
                             average = TRUE, ic = "aicc", ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
+  chk_null_or(control, chk_list)
   chk_unused(...)
 
   .ssd_hp_fitdists(x, conc,
-    ci = ci, level = level, nboot = nboot,
+    ci = ci, level = level, nboot = nboot, control = control,
     parallel = parallel, ncpus = ncpus,
     average = average, ic = ic
   )
