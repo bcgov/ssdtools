@@ -96,6 +96,7 @@ Suggests:
     rmarkdown,
     testthat,
     tidyr,
+    tidyverse,
     withr
 Remotes:
     poissonconsulting/chk
