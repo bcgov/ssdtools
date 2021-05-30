@@ -99,7 +99,11 @@ test_that("ssd_fit_dists all distributions fail to fit if Inf weight", {
   data <- ssdtools::boron_data
   data$Mass <- rep(1, nrow(data))
   data$Mass[1] <- Inf
-  expect_error(expect_warning(ssd_fit_dists(data, weight = "Mass"), "^All distributions failed to fit\\."))
+  expect_error(
+    expect_warning(
+      ssd_fit_dists(data, weight = "Mass", dists = "lnorm"), 
+      "^Distribution 'lnorm' failed to fit"), 
+    "^All distributions failed to fit\\.")
 })
 
 test_that("ssd_fit_dists not affected if right values identical to left but in different column", {
@@ -130,7 +134,7 @@ test_that("ssd_fit_dists gives correct chk error if missing values in censored d
 test_that("ssd_fit_dists gives chk error if zero left ", {
   data <- ssdtools::boron_data
   data$Conc[1] <- 0
-  chk::expect_chk_error(expect_warning(ssd_fit_dists(data)))
+  chk::expect_chk_error(ssd_fit_dists(data))
 })
 
 test_that("ssd_fit_dists gives chk error if negative left ", {
@@ -142,7 +146,11 @@ test_that("ssd_fit_dists gives chk error if negative left ", {
 test_that("ssd_fit_dists all distributions fail to fit if Inf left", {
   data <- ssdtools::boron_data
   data$Conc[1] <- Inf
-  expect_error(expect_warning(ssd_fit_dists(data), "^All distributions failed to fit\\."))
+  expect_error(
+    expect_warning(
+      ssd_fit_dists(data, dists = "lnorm"), 
+      "^Distribution 'lnorm' failed to fit"),
+    "^All distributions failed to fit\\.")
 })
 
 test_that("ssd_fit_dists gives correct chk error any right < left", {
@@ -155,20 +163,24 @@ test_that("ssd_fit_dists gives correct chk error any right < left", {
 
 test_that("ssd_fit_dists warns to rescale data", {
   data <- data.frame(Conc = rep(2, 6))
-  expect_condition(ssd_fit_dists(data, dist = "lnorm"), 
-                   regexp = "^Distribution 'lnorm' failed to fit \\(try rescaling data\\):")
+  expect_error(
+    expect_warning(ssd_fit_dists(data, dist = "lnorm"),
+                   "^Distribution 'lnorm' failed to fit \\(try rescaling data\\):")
+  )
 })
 
 test_that("ssd_fit_dists doesn't warns to rescale data if already rescaled", {
   data <- data.frame(Conc = rep(2, 6))
-  expect_condition(ssd_fit_dists(data, rescale = TRUE, dist = "lnorm"), 
-                   regexp = "^Distribution 'lnorm' failed to fit:")
+  expect_error(expect_warning(ssd_fit_dists(data, rescale = TRUE, dist = "lnorm"), 
+                              regexp = "^Distribution 'lnorm' failed to fit:"))
 })
 
 test_that("ssd_fit_dists warns of optimizer convergence code error", {
   data <- ssdtools::boron_data
-  expect_condition(ssd_fit_dists(data, control = list(maxit = 1) , dist = "lnorm"), 
+  expect_error(
+    expect_warning(ssd_fit_dists(data, control = list(maxit = 1) , dist = "lnorm"), 
                    regexp = "^Distribution 'lnorm' failed to converge \\(try rescaling data\\): Iteration limit maxit reach \\(try increasing the maximum number of iterations in control\\)\\.$")
+  )
 })
 
 
@@ -187,7 +199,7 @@ test_that("fit_dist tiny llogis", {
     estimates(fit$llogis),
     list(locationlog = -1.97889256080937, scalelog = 0.740423704979968),
     tolerance = 1e-05
-    )
+  )
 })
 
 test_that("fit_dists", {
@@ -196,7 +208,8 @@ test_that("fit_dists", {
     "gamma", "lgumbel",
     "llogis", "lnorm", "weibull"
   )
-  expect_error(expect_warning(ssd_fit_dists(boron_data[1:5, ], dists = dist_names)), "^`nrow[(]`data`[)]` must be between 6 and Inf, not 5\\.$")
+  expect_error(ssd_fit_dists(boron_data[1:5, ], dists = dist_names), 
+               "^`nrow[(]`data`[)]` must be between 6 and Inf, not 5\\.$")
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = dist_names)
   expect_true(is.fitdists(dists))
   expect_identical(names(dists), c("gamma", "lgumbel", "llogis", "lnorm", "weibull"))
@@ -206,13 +219,13 @@ test_that("fit_dists", {
 
 test_that("fit_dist", {
   skip_if_not(capabilities("long.double"))
-
+  
   dists <- ssd_fit_dists(boron_data, dists = "lnorm")
   expect_equal(estimates(dists), estimates(boron_lnorm))
-
+  
   boron_data2 <- boron_data[rev(order(boron_data$Conc)), ]
   boron_data2$Weight <- 1:nrow(boron_data2)
-
+  
   dists <- ssd_fit_dists(boron_data2, weight = "Weight", dists = "lnorm")
   expect_equal(estimates(dists$lnorm), list(meanlog = 1.87970902859779, sdlog = 1.12770658163393),
                tolerance = 1e-06)
@@ -221,13 +234,10 @@ test_that("fit_dist", {
 test_that("ssd_dists() errors with missing values in both left and right", {
   data <- data.frame(left = c(1:7), right = c(2:8))
   dists <- ssd_dists()
-  expect_warning(fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists))
-  dists <- dists[!dists %in% "burrIII3"]
+  dists <- dists[!dists %in% c("burrIII3", "gompertz")]
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists)
   expect_identical(names(fits), dists)
   
-  fits <- subset(fits, dists[!dists %in% c("gompertz")])
-  
-  set.seed(101) # for gompertz
   expect_equal(
     estimates(fits),
     list(gamma = list(scale = 25.1268319779061, shape = 0.950179460431249), 
@@ -240,15 +250,15 @@ test_that("ssd_dists() errors with missing values in both left and right", {
          weibull = list(scale = 23.5139783002509, shape = 0.966099901938021)))
 })
 
-test_that("fit_dists computable", {
-  data <- data.frame(Conc = c(
-    0.1, 0.12, 0.24, 0.42, 0.67,
-    0.78, 120, 2030, 9033, 15000,
-    15779, 20000, 31000, 40000, 105650
-  ))
-  
-  skip_if_not(capabilities("long.double"))
-  
+# test_that("fit_dists computable", {
+#   data <- data.frame(Conc = c(
+#     0.1, 0.12, 0.24, 0.42, 0.67,
+#     0.78, 120, 2030, 9033, 15000,
+#     15779, 20000, 31000, 40000, 105650
+#   ))
+#   
+#   skip_if_not(capabilities("long.double"))
+#   
   # expect_warning(fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]],
   #                "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
   # expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189))
@@ -259,7 +269,7 @@ test_that("fit_dists computable", {
   # expect_equal(fit$sd["scale"], c(scale = 673.801371511101))
   # expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086))
   # expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
-})
+#})
 
 # test_that("fit_dists fail to converge when identical data", {
 #   data <- data.frame(Conc = rep(6, 6))

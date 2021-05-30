@@ -153,7 +153,7 @@ test_that("fit gompertz tmb", {
 #   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
 # 
 #   hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
-#   expect_is(hc, "tbl_df")
+#   expect_s3_class(hc, "tbl_df")
 #   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
 #   expect_identical(hc$percent, 5)
 #   expect_equal(hc$est, 1.29947858260222)
@@ -165,7 +165,7 @@ test_that("fit gompertz tmb", {
 # 
 #   set.seed(77)
 #   hp <- ssd_hp(dist, conc = 2, ci = TRUE, nboot = 10)
-#   expect_is(hp, "tbl_df")
+#   expect_s3_class(hp, "tbl_df")
 #   expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
 #   expect_identical(hp$conc, 2)
 #   expect_equal(hp$est, 7.59650778517608, tolerance = 1e-2)

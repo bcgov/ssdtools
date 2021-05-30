@@ -13,9 +13,9 @@
 #    limitations under the License.
 
 test_that("ssd_plot_cdf", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
+  pdf(withr::local_file("withr.pdf"))
+  withr::defer(dev.off())
   
-  expect_is(ssd_plot_cdf(boron_lnorm), "ggplot")
-  expect_is(ssd_plot_cdf(boron_dists), "ggplot")
+  expect_s3_class(ssd_plot_cdf(boron_lnorm), "ggplot")
+  expect_s3_class(ssd_plot_cdf(boron_dists), "ggplot")
 })

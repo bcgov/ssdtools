@@ -130,7 +130,7 @@ test_that("fit lgumbel cis", {
   
   set.seed(77)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 10)
-  expect_is(hc, "tbl_df")
+  expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
@@ -141,7 +141,7 @@ test_that("fit lgumbel cis", {
   
   set.seed(77)
   hp <- ssd_hp(fit, conc = 2, ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 2)

@@ -24,7 +24,7 @@ test_that("data", {
     ),
     nrow = c(1L, 2147483647L)
   ), NA)
-  expect_is(ccme_data, "tbl")
+  expect_s3_class(ccme_data, "tbl")
 
   expect_error(chk::check_data(
     boron_data,
@@ -37,7 +37,7 @@ test_that("data", {
     ),
     nrow = 28
   ), NA)
-  expect_is(boron_data, "tbl")
+  expect_s3_class(boron_data, "tbl")
 
   expect_error(chk::check_data(
     boron_pred,
@@ -50,10 +50,10 @@ test_that("data", {
     ),
     nrow = 99L
   ), NA)
-  expect_is(boron_pred, "tbl")
+  expect_s3_class(boron_pred, "tbl")
 
-  expect_is(boron_lnorm, "fitdists")
-  expect_is(boron_dists, "fitdists")
+  expect_s3_class(boron_lnorm, "fitdists")
+  expect_s3_class(boron_dists, "fitdists")
 
   expect_error(chk::check_data(
     test_data,
@@ -65,5 +65,5 @@ test_that("data", {
     order = TRUE,
     nrow = 141L
   ), NA)
-  expect_is(test_data, "tbl")
+  expect_s3_class(test_data, "tbl")
 })

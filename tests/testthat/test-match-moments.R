@@ -29,5 +29,5 @@ test_that("match_moments all", {
                                                                           ), weibull = c(shape = 1.26367187500001, scale = 4.325390625))
   )
 
-  expect_is(ssd_plot_cdf(pars), "ggplot")
+  expect_s3_class(ssd_plot_cdf(pars), "ggplot")
 })

@@ -13,8 +13,9 @@
 #    limitations under the License.
 
 test_that("plot geoms", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
+  pdf(withr::local_file("withr.pdf"))
+  withr::defer(dev.off())
+  
   data <- boron_data
   data$yintercept <- 0.10
   gp <- ggplot(boron_data, aes(x = Conc)) +
@@ -26,13 +27,5 @@ test_that("plot geoms", {
       data = boron_pred,
       aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
     )
-  expect_is(gp, "ggplot")
+  expect_s3_class(gp, "ggplot")
 })
-
-test_that("plot", {
-  # setup(pdf(tempfile(fileext = ".pdf")))
-  # teardown(dev.off())
-  # 
-  # expect_silent(plot(boron_dists))
-})
-

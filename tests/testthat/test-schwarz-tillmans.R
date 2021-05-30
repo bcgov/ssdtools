@@ -27,7 +27,7 @@ test_that("manual tmb", {
   
   # set.seed(99)
   # hc <- ssd_hc(dists, ci = TRUE, nboot = 10)
-  # expect_is(hc, "tbl_df")
+  # expect_s3_class(hc, "tbl_df")
   # expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   # expect_identical(hc$percent, 5)
   # expect_equal(hc$est, 1.2504293469908)
@@ -37,7 +37,7 @@ test_that("manual tmb", {
   # expect_equal(hc$dist, "average") 
   # 
   dists <- ssd_gof(dists)
-  expect_is(dists, "tbl_df")
+  expect_s3_class(dists, "tbl_df")
   expect_identical(colnames(dists), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
   expect_identical(dists$dist, c("gamma", "gompertz", "lgumbel", "llogis", "lnorm", "weibull"))
   # expect_equal(dists$ad, c(0.440080783302818, 0.602165187357315, 0.828638954899656, 

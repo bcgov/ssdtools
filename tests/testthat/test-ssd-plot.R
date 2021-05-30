@@ -13,9 +13,9 @@
 #    limitations under the License.
 
 test_that("ssd_plot", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
+  pdf(withr::local_file("withr.pdf"))
+  withr::defer(dev.off())
   
-  expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
-  expect_is(ssd_plot(boron_data, boron_pred, ribbon = TRUE, label = "Species"), "ggplot")
+  expect_s3_class(ssd_plot(boron_data, boron_pred), "ggplot")
+  expect_s3_class(ssd_plot(boron_data, boron_pred, ribbon = TRUE, label = "Species"), "ggplot")
 })

@@ -68,16 +68,16 @@ test_that("rweibull extremes", {
   expect_identical(rweibull(1, shape = NA), NA_real_)
 })
 
-test_that("fit weibull quinoline", {
+# test_that("fit weibull quinoline", {
 #  quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
-  
+# 
 #  expect_warning(dist <- ssd_fit_dists(quin, dists = "weibull"))
-  # expect_true(is.tmbfit(dist))
-  # expect_equal(
-  #   coef(dist),
-  #   c(shape = 0.627542681172847, scale = 15343.492101029)
-  # )
-})
+# expect_true(is.tmbfit(dist))
+# expect_equal(
+#   coef(dist),
+#   c(shape = 0.627542681172847, scale = 15343.492101029)
+# )
+# })
 
 test_that("fit weibull boron", {
   fit <- ssd_fit_dists(ssdtools::boron_data, dists = "weibull")

@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("pburrIII3 extremes", {
+#test_that("pburrIII3 extremes", {
   # lifecycle::expect_deprecated(pburrIII3(1))
   # rlang::scoped_options(lifecycle_verbosity = "quiet")
   # expect_identical(pburrIII3(numeric(0)), numeric(0))
@@ -33,9 +33,9 @@ test_that("pburrIII3 extremes", {
   #              c(pburrIII3(1, 1, 3), pburrIII3(2, 2, 4)))
   # expect_equal(pburrIII3(1:2, lshape1 = c(1, NA), lshape2 = 3:4), 
   #              c(pburrIII3(1, 1, 3), NA))
-})
+#})
 
-test_that("qburrIII3 extremes", {
+#test_that("qburrIII3 extremes", {
   # lifecycle::expect_deprecated(qburrIII3(1))
   # rlang::scoped_options(lifecycle_verbosity = "quiet")
   # expect_identical(qburrIII3(numeric(0)), numeric(0))
@@ -60,9 +60,9 @@ test_that("qburrIII3 extremes", {
   # expect_equal(qburrIII3(1:2,  c(1, NA), 3:4), 
   #              c(qburrIII3(1, 1, 3), NA))
   # expect_equal(qburrIII3(pburrIII3(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
-})
+#})
 
-test_that("rburrIII3 extremes", {
+#test_that("rburrIII3 extremes", {
   # lifecycle::expect_deprecated(rburrIII3(1))
   # rlang::scoped_options(lifecycle_verbosity = "quiet")
   # expect_identical(rburrIII3(numeric(0)), numeric(0))
@@ -79,7 +79,7 @@ test_that("rburrIII3 extremes", {
   # expect_error(rburrIII3(1, 1:2))
   # expect_error(rburrIII3(1, 1:2, 1:2))
   # expect_equal(rburrIII3(1, NA), NA_real_) # should be NA_real_ not NaN
-})
+#})
 
 test_that("fit burrIII3", {
   rlang::scoped_options(lifecycle_verbosity = "quiet")
@@ -101,7 +101,7 @@ test_that("fit burrIII3", {
 #                                   lcl = 2.96137016375762, ucl = 38.498485438982,))
 # })
 
-test_that("qburrIII3", {
+#test_that("qburrIII3", {
   # rlang::scoped_options(lifecycle_verbosity = "quiet")
   # expect_identical(qburrIII3(numeric(0)), numeric(0))
   # expect_identical(qburrIII3(0), 0)
@@ -109,9 +109,9 @@ test_that("qburrIII3", {
   # expect_identical(qburrIII3(NA), NA_real_)
   # expect_identical(qburrIII3(0.5, lscale = 0), 1)
   # expect_equal(qburrIII3(c(0.1, 0.2), lscale = 0), c(1/9, 1/4))
-})
+#})
 
-test_that("pburrIII3", {
+#test_that("pburrIII3", {
   # rlang::scoped_options(lifecycle_verbosity = "quiet")
   # expect_identical(pburrIII3(numeric(0)), numeric(0))
   # expect_identical(pburrIII3(0), 0)
@@ -122,9 +122,9 @@ test_that("pburrIII3", {
   #   pburrIII3(qburrIII3(c(.001, .01, .05, .50, .99))),
   #   c(.001, .01, .05, .50, .99)
   # )
-})
+#})
 
-test_that("rburrIII3", {
+#test_that("rburrIII3", {
   # rlang::scoped_options(lifecycle_verbosity = "quiet")
   # expect_identical(rburrIII3(0), numeric(0))
   # set.seed(101)
@@ -136,4 +136,4 @@ test_that("rburrIII3", {
   #     1.6455863786175, 1.20181169357475
   #   )
   # )
-})
+#})

@@ -14,7 +14,7 @@
 
 test_that("hp fitdist", {
   hp <- ssd_hp(boron_lnorm, numeric(0)) 
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0)) 
@@ -24,7 +24,7 @@ test_that("hp fitdist", {
   expect_equal(hp$dist, character(0))
   
   hp <- ssd_hp(boron_lnorm, NA_real_, average = FALSE)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "lnorm")
   expect_identical(hp$conc, NA_real_)
@@ -35,7 +35,7 @@ test_that("hp fitdist", {
   expect_equal(ssd_hp(boron_lnorm, 1)$est, 1.95430302556687)
   
   hp <- ssd_hp(boron_lnorm, 0) 
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 0) 
@@ -45,7 +45,7 @@ test_that("hp fitdist", {
   expect_equal(hp$ucl, NA_real_)
   
   hp <- ssd_hp(boron_lnorm, -1, average = FALSE)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "lnorm")
   expect_identical(hp$conc, -1)
@@ -55,7 +55,7 @@ test_that("hp fitdist", {
   expect_equal(hp$ucl, NA_real_)
   
   hp <- ssd_hp(boron_lnorm, -Inf)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, -Inf)
@@ -65,7 +65,7 @@ test_that("hp fitdist", {
   expect_equal(hp$ucl, NA_real_)
   
   hp <- ssd_hp(boron_lnorm, Inf, average = FALSE)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "lnorm")
   expect_identical(hp$conc, Inf)
@@ -80,7 +80,7 @@ test_that("hp fitdist", {
 test_that("hp fitdist cis", {
   set.seed(10)
   hp <- ssd_hp(boron_lnorm, 1, ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 1.95430302556687) 
@@ -91,7 +91,7 @@ test_that("hp fitdist cis", {
                                                                                                           
   set.seed(10)
   hp <- ssd_hp(boron_lnorm, c(1, 30), ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, c(1, 30))
   expect_equal(hp$dist, c("average", "average"))
@@ -105,7 +105,7 @@ test_that("hp fitdists with no dists", {
   x <- list()
   class(x) <- c("fitdists")
   hp <- ssd_hp(x, numeric(0))
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0))
@@ -115,7 +115,7 @@ test_that("hp fitdists with no dists", {
   expect_equal(hp$dist, character(0))
   
   hp <- ssd_hp(x, 2)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0))
@@ -127,7 +127,7 @@ test_that("hp fitdists with no dists", {
 
 test_that("hp fitdists", {
   hp <- ssd_hp(boron_dists, 1)
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 3.66685732661861)
@@ -137,7 +137,7 @@ test_that("hp fitdists", {
   expect_equal(hp$dist, "average")
                                                                                                                                       
   hp <- ssd_hp(boron_dists, c(0, 1, 30, Inf))
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, c(0, 1, 30, Inf))
   expect_equal(hp$est, c(0, 3.66685732661861, 72.9017755369416, 100))
@@ -150,7 +150,7 @@ test_that("hp fitdists", {
 test_that("hp fitdists cis", {
   set.seed(10)
   hp <- ssd_hp(boron_dists, 1, ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 3.66685732661861)
@@ -161,7 +161,7 @@ test_that("hp fitdists cis", {
   
   set.seed(10)
   hp <- ssd_hp(boron_dists, c(0, 1, 30, Inf), ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, c(0, 1, 30, Inf))
   expect_equal(hp$est, c(0, 3.66685732661861, 72.9017755369416, 100))

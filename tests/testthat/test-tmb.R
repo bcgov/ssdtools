@@ -1,6 +1,6 @@
 test_that("tidy.tmbfit", {
   fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
-  expect_is(fit, "fitdists")
+  expect_s3_class(fit, "fitdists")
   
   expect_identical(npars(fit), c(lnorm = 2L))
   expect_identical(npars(fit$lnorm), 2L)
@@ -10,12 +10,12 @@ test_that("tidy.tmbfit", {
   expect_equal(logLik(fit$lnorm), -117.514216489547)
   
   gof <- ssd_gof(fit)
-  expect_is(gof, "tbl_df")
+  expect_s3_class(gof, "tbl_df")
   expect_identical(colnames(gof), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
   expect_equal(gof$bic, 241.692841999445)
   
   hc <- ssd_hc(fit)
-  expect_is(hc, "tbl_df")
+  expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$est, 1.681174837758)
   expect_identical(hc$se, NA_real_)
@@ -26,7 +26,7 @@ test_that("tidy.tmbfit", {
   expect_equal(hc$se, 0.670156954633317)
   
   hp <- ssd_hp(fit, 1, nboot = 10)
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 1.95430302556687) 
@@ -41,7 +41,7 @@ test_that("tidy.tmbfit", {
   expect_equal(hc$se, 0.670156954633317)
 
   glance <- glance(fit)
-  expect_is(glance, "tbl_df")
+  expect_s3_class(glance, "tbl_df")
   expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
   expect_identical(glance$dist, "lnorm")
   expect_equal(glance$aicc, 239.508432979094)
@@ -49,7 +49,7 @@ test_that("tidy.tmbfit", {
   expect_equal(glance$weight, 1)
   
   tidy <- tidy(fit$lnorm)
-  expect_is(tidy, "tbl_df")
+  expect_s3_class(tidy, "tbl_df")
   expect_identical(colnames(tidy), c("dist", "term", "est", "se"))
   expect_identical(tidy$dist, rep("lnorm", 2))
   expect_identical(tidy$term, c("meanlog", "sdlog"))
@@ -57,7 +57,7 @@ test_that("tidy.tmbfit", {
   expect_equal(tidy(fit), tidy)
   
   tidy <- tidy(fit$lnorm, all = TRUE)
-  expect_is(tidy, "tbl_df")
+  expect_s3_class(tidy, "tbl_df")
   expect_identical(colnames(tidy), c("dist", "term", "est", "se"))
   expect_identical(tidy$dist, rep("lnorm", 3))
   expect_identical(tidy$term, c("log_sdlog", "meanlog", "sdlog"))
@@ -67,7 +67,7 @@ test_that("tidy.tmbfit", {
 
 test_that("combine", {
   fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"))
-  expect_is(fit, "fitdists")
+  expect_s3_class(fit, "fitdists")
   
   expect_identical(npars(fit), c(llogis = 2L, lnorm = 2L))
   expect_equal(nobs(fit), 28L)
@@ -75,19 +75,19 @@ test_that("combine", {
   expect_equal(logLik(fit$lnorm), -117.514216489547)
 
   gof <- ssd_gof(fit)
-  expect_is(gof, "tbl_df")
+  expect_s3_class(gof, "tbl_df")
   expect_identical(colnames(gof), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
   expect_equal(gof$weight, c(0.73, 0.27))
   
   hc <- ssd_hc(fit)
-  expect_is(hc, "tbl_df")
+  expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, "average")
   expect_equal(hc$est, 1.64903597051184)
   expect_identical(hc$se, NA_real_)
   
   hp <- ssd_hp(fit, 1, nboot = 10)
-  expect_is(hp, "tbl_df")
+  expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 2.1830025577502) 
@@ -97,20 +97,20 @@ test_that("combine", {
   expect_equal(hp$dist, "average")
   
   glance <- glance(fit)
-  expect_is(glance, "tbl_df")
+  expect_s3_class(glance, "tbl_df")
   expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
   expect_identical(glance$dist, c("lnorm", "llogis"))
   expect_equal(glance$delta, c(0, 1.98643767006848))
   expect_equal(glance$weight, c(0.729723233512911, 0.270276766487089))
   
   tidy <- tidy(fit)
-  expect_is(tidy, "tbl_df")
+  expect_s3_class(tidy, "tbl_df")
   expect_identical(colnames(tidy), c("dist", "term", "est", "se"))
   expect_identical(tidy$dist, c(rep("llogis", 2), rep("lnorm", 2)))
   expect_identical(tidy$term, c("locationlog", "scalelog", "meanlog", "sdlog"))
   
   tidy <- tidy(fit, all = TRUE)
-  expect_is(tidy, "tbl_df")
+  expect_s3_class(tidy, "tbl_df")
   expect_identical(colnames(tidy), c("dist", "term", "est", "se"))
   expect_identical(tidy$dist, c(rep("llogis", 3), rep("lnorm", 3)))
   expect_identical(tidy$term, c("locationlog", "log_scalelog", "scalelog", "log_sdlog", "meanlog", "sdlog"))

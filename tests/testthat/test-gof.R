@@ -14,14 +14,14 @@
 
 test_that("ssd_gof", {
   glance <- glance(boron_lnorm)
-  expect_is(glance, "tbl_df")
+  expect_s3_class(glance, "tbl_df")
   expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
   expect_identical(glance$dist, "lnorm")
   expect_equal(glance$aicc, 239.508432979094)
   
   x <- ssd_gof(boron_lnorm)
   
-  expect_is(x, "tbl")
+  expect_s3_class(x, "tbl")
   expect_identical(colnames(x), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
   expect_identical(x$dist, "lnorm")
   # expect_equal(x$ad, 0.506765995104718)
@@ -33,21 +33,21 @@ test_that("ssd_gof", {
   
   
   glance <- glance(boron_dists)
-  expect_is(glance, "tbl_df")
+  expect_s3_class(glance, "tbl_df")
   expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
   expect_identical(glance$dist, c("gamma", "llogis", "lnorm"))
   expect_equal(glance$delta, c(0, 3.38455325148215, 1.39811558141363))
   expect_equal(glance$weight, c(0.594829740553168, 0.109508107600024, 0.295662151846809))
 
   xs <- ssd_gof(boron_dists)
-  expect_is(xs, "tbl")
+  expect_s3_class(xs, "tbl")
   expect_identical(colnames(xs), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
   expect_identical(xs$dist, names(boron_dists))
 
   dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("llogis", "gamma", "lnorm"))
   xx <- ssd_gof(dists)
 
-  expect_is(xx, "tbl")
+  expect_s3_class(xx, "tbl")
   expect_identical(colnames(xx), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
   expect_identical(xx$dist, c("llogis", "gamma", "lnorm"))
 })

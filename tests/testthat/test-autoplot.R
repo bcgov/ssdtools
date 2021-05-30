@@ -13,9 +13,9 @@
 #    limitations under the License.
 
 test_that("autoplot", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
+  pdf(withr::local_file("withr.pdf"))
+  withr::defer(dev.off())
   
-  expect_is(ggplot2::autoplot(boron_lnorm), "ggplot")
-  expect_is(ggplot2::autoplot(boron_dists), "ggplot")
+  expect_s3_class(ggplot2::autoplot(boron_lnorm), "ggplot")
+  expect_s3_class(ggplot2::autoplot(boron_dists), "ggplot")
 })
