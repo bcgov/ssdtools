@@ -16,6 +16,10 @@
   attr(fits, "data", exact = TRUE)
 }
 
+.org_data_fitdists <- function(fits) {
+  attr(fits, "org_data", exact = TRUE)
+}
+
 .rescale_fitdists <- function(fits) {
   attr(fits, "rescale", exact = TRUE)
 }
@@ -26,6 +30,11 @@
 
 `.data_fitdists<-` <- function(fits, value) {
   attr(fits, "data") <- value
+  fits
+}
+
+`.org_data_fitdists<-` <- function(fits, value) {
+  attr(fits, "org_data") <- value
   fits
 }
 
@@ -41,12 +50,13 @@
 
 .attrs_fitdists <- function(fits) {
   attrs <- attributes(fits)
-  attrs[c("control", "data", "rescale")]
+  attrs[c("control", "data", "org_data", "rescale")]
 }
 
 `.attrs_fitdists<-` <- function(fits, value) {
   .control_fitdists(fits) <- value$control
   .data_fitdists(fits) <- value$data
+  .org_data_fitdists(fits) <- value$org_data
   .rescale_fitdists(fits) <- value$rescale
   fits
 }
@@ -226,6 +236,8 @@ ssd_fit_dists <- function(
   
   x <- chk_and_process_data(data, left = left, right = right, weight = weight, 
                                nrow = nrow, rescale = rescale, silent = silent)
+  
+  org_data <- data
   data <- x$data
   rescale <- x$rescale
   
@@ -234,7 +246,8 @@ ssd_fit_dists <- function(
   if (!length(fits)) err("All distributions failed to fit.")
   class(fits) <- "fitdists"
   
-  attrs <- list(control = control, data = data, rescale = rescale)
+  attrs <- list(control = control, data = data, org_data = org_data,
+                rescale = rescale)
   .attrs_fitdists(fits) <- attrs
   fits
 }
