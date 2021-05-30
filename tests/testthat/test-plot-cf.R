@@ -13,8 +13,5 @@
 #    limitations under the License.
 
 test_that("cfplot", {
-  pdf(withr::local_file("withr.pdf"))
-  withr::defer(dev.off())
-  
-  expect_deprecated(ssd_plot_cf(boron_data))
+  expect_snapshot_plot(ssd_plot_cf(boron_data), "boron_data")
 })
