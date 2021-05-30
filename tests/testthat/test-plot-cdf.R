@@ -13,6 +13,6 @@
 #    limitations under the License.
 
 test_that("ssd_plot_cdf", {
-  expect_snapshot_file(save_png(print(ssd_plot_cdf(boron_lnorm))), "boron_lnorm.png")
-  expect_snapshot_file(save_png(print(ssd_plot_cdf(boron_dists))), "boron_dists.png")
+  expect_snapshot_plot(print(ssd_plot_cdf(boron_lnorm)), "boron_lnorm")
+  expect_snapshot_plot(print(ssd_plot_cdf(boron_dists)), "boron_dists")
 })
