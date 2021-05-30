@@ -12,14 +12,40 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+.print_parameter <- function(parameter, name) {
+  txt <- paste0("\n  ", name, " ", signif(parameter))
+  cat(txt)
+  invisible(parameter)
+}
+
 #' @export
-print.tmbfit <- function(x, ...) {
-  print(tidy(x))
+print.summary_tmbfit <- function(x, ...) {
+  txt <- paste0("Distribution '", x$dist, "'")
+  cat(txt)
+  mapply(.print_parameter, x$estimates, names(x$estimates))
   invisible(x)
 }
 
 #' @export
-print.fitdists <- function(x, ...) {
-  lapply(x, print)
+print.summary_fitdists <- function(x, ...) {
+  lapply(x$fits, print)
+  censored <- if(x$censored) "censored" else NULL
+  weighted <- if(x$weighted) "weighted" else NULL
+  rescaled <- if(x$rescaled) "recaled" else NULL
+  properties <- cc(c(censored, weighted, rescaled), conj = " and ")
+  if(length(properties)) properties <- paste0(properties, " ")
+  
+  txt <- paste0("\n\nParameters estimated from ", x$nrow, " rows of", properties, " data.")
+  cat(txt)
   invisible(x)
+}
+
+#' @export
+print.tmbfit <- function(x, ...) {
+  print(summary(x))
+}
+
+#' @export
+print.fitdists <- function(x, ...) {
+  print(summary(x))
 }

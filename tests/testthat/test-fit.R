@@ -218,33 +218,6 @@ test_that("fit_dist", {
                tolerance = 1e-06)
 })
 
-test_that("fluazinam", {
-  # data(fluazinam, package = "fitdistrplus")
-  # dist <- ssd_fit_dist(fluazinam, left = "left")
-  # expect_true(is.tmbfit(dist))
-  # expect_false(is.fitdistcens(dist))
-  # expect_equal(coef(dist), c(meanlog = 4.66057985615203, sdlog = 2.19746964708252))
-  # 
-  # dist <- ssd_fit_dist(fluazinam, left = "left", right = "right")
-  # expect_false(is.tmbfit(dist))
-  # expect_true(is.fitdistcens(dist))
-  # expect_equal(coef(dist), c(meanlog = 4.97758390559042, sdlog = 2.68757112403832))
-  # 
-  # fluazinam2 <- fluazinam[rev(order(fluazinam$left)), ]
-  # fluazinam2$Weight <- 1:nrow(fluazinam2)
-  # 
-  # expect_warning(dist <- ssd_fit_dists(fluazinam2,
-  #                                      weight = "Weight", left = "left", right = "right",
-  #                                      dist = "lnorm"
-  # ), "weights are not taken into account in the default initial values")
-  # expect_identical(class(dist), c("fitdistscens", "fitdists"))
-  # dist <- dist[[1]]
-  # expect_false(is.tmbfit(dist))
-  # expect_true(is.fitdistcens(dist))
-  # expect_equal(coef(dist), c(meanlog = 3.56609317317434, sdlog = 2.18316425603543))
-})
-
-
 test_that("ssd_dists() errors with missing values in both left and right", {
   data <- data.frame(left = c(1:7), right = c(2:8))
   dists <- ssd_dists()

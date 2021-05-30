@@ -65,26 +65,3 @@ test_that("predict.fitdists parallel", {
   expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(pred$percent, 1:99)
 })
-
-test_that("predict.fitdistscens", {
-  # rlang::scoped_options(lifecycle_verbosity = "quiet")
-  # pred <- predict(ssdtools::fluazinam_dists, percent = c(1, 99))
-  # expect_is(pred, "tbl")
-  # expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  # expect_identical(pred$percent, c(1, 99))
-  # expect_equal(pred$est, c(0.17492159186823, 126047.20928158))
-  # expect_equal(pred$se, c(NA_real_, NA_real_))
-  # expect_equal(pred$lcl, c(NA_real_, NA_real_))
-  # expect_equal(pred$ucl, c(NA_real_, NA_real_))
-  # expect_equal(pred$dist, c("average", "average"))
-})
-
-test_that("predict.fitdistscens cis", {
-  # set.seed(77)
-  # pred <- predict(ssdtools::fluazinam_dists, percent = c(1, 99), ci = TRUE, average = FALSE, nboot = 10)
-  # expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  # expect_identical(pred$percent, c(1, 99, 1, 99, 1, 99))
-  # expect_equal(pred$est, c(0.0947064911703993, 212423.73904855, 0.00297074136543809, 
-  #                          6884.80066910368, 0.279531171923962, 75343.2242506558))
-  # expect_identical(pred$dist, c("llogis", "llogis", "gamma", "gamma", "lnorm", "lnorm"))
-})

@@ -116,46 +116,6 @@
 #' head(ccme_data)
 "ccme_data"
 
-#' fitdists for fitdistrplus Fluazinam Data
-#'
-#' A fitdists object for Species Sensitivity Data for
-#' Fluazinam.
-#'
-#' @seealso [fitdistrplus::fluazinam()]
-#' @family fluazinam
-#' @examples
-#' fluazinam_dists
-"fluazinam_dists"
-
-#' fitdist for CCME Fluazinam Data
-#'
-#' A fitdist object for Species Sensitivity Data for
-#' Boron with the lnorm distribution.
-#'
-#' @seealso [fitdistrplus::fluazinam()]
-#' @family fluazinam
-#' @examples
-#' fluazinam_lnorm
-"fluazinam_lnorm"
-
-#' Model Averaged Predictions for Fluazinam
-#'
-#' A data frame of the predictions.
-#'
-#' \describe{
-#'   \item{percent}{The percent of species affected (int).}
-#'   \item{est}{The estimated concentration (dbl).}
-#'   \item{se}{The standard error of the estimate (dbl).}
-#'   \item{lcl}{The lower confidence limit (dbl).}
-#'   \item{se}{The upper confidence limit (dbl).}
-#'   \item{dist}{The distribution (chr).}
-#' }
-#' @seealso [fitdistrplus::fluazinam()]
-#' @family fluazinam
-#' @examples
-#' head(fluazinam_pred)
-"fluazinam_pred"
-
 #' Test Data
 #'
 #' Data to test ssdtools.

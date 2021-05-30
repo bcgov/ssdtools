@@ -170,27 +170,3 @@ test_that("hp fitdists cis", {
   expect_equal(hp$ucl, c(0, 6.15380996129333, 83.0798543477598, 100))
   expect_equal(hp$dist, c("average",  "average", "average", "average"))
 })
-
-test_that("hp fitdistcens", {
-  # hp <- ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
-  # expect_is(hp, "tbl_df")
-  # expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
-  # expect_identical(hp$conc, c(0, 1, 30, Inf))
-  # expect_equal(hp$est, c(0, 3.20075104792886, 27.8754025505199, 100))
-  # expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  # expect_equal(hp$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  # expect_equal(hp$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  # expect_equal(hp$dist, c("lnorm", "lnorm", "lnorm", "lnorm"))
-})
-
-test_that("hp fitdistscens", {
-  # hp <- ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))
-  # expect_is(hp, "tbl_df")
-  # expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist"))
-  # expect_identical(hp$conc, c(0, 1, 30, Inf))
-  # expect_equal(hp$est, c(0, 4.06545463384627, 27.3122236342922, 100))
-  # expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  # expect_equal(hp$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  # expect_equal(hp$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  # expect_equal(hp$dist, c("average", "average", "average", "average"))
-})

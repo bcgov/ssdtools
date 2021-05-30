@@ -12,10 +12,23 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("ssd_plot", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
-  
-  expect_is(ssd_plot(boron_data, boron_pred), "ggplot")
-  expect_is(ssd_plot(boron_data, boron_pred, ribbon = TRUE, label = "Species"), "ggplot")
-})
+#' @export
+summary.tmbfit <- function(object, ...) {
+  x <- list()
+  x$dist <- .dist_tmbfit(object)
+  x$estimates <- estimates(object)
+  class(x) <- "summary_tmbfit"
+  x
+}
+
+#' @export
+summary.fitdists <- function(object, ...) {
+  x <- list()
+  x$fits <- lapply(object, summary)
+  x$censored <- .censored_fitdists(object)
+  x$nrow <- nrow(.data_fitdists(object))
+  x$rescaled <- .rescale_fitdists(object) != 1
+  x$weighted <- .weighted_fitdists(object)
+  class(x) <- "summary_fitdists"
+  x
+}

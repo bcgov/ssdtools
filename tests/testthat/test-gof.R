@@ -51,11 +51,3 @@ test_that("ssd_gof", {
   expect_identical(colnames(xx), c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight"))
   expect_identical(xx$dist, c("llogis", "gamma", "lnorm"))
 })
-
-test_that("ssd_gof fitdistscens", {
-  # dists <- ssd_gof(fluazinam_dists)
-  # expect_is(dists, "tbl_df")
-  # expect_identical(colnames(dists), c("dist", "aic", "bic", "delta", "weight"))
-  # expect_equal(dists$aic, c(149.908903257135, 152.809136132656, 149.625327602334))
-  # expect_equal(dists$weight, c(0.419, 0.098, 0.483))
-})

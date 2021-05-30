@@ -25,13 +25,3 @@ test_that("exposure fitdists", {
   set.seed(1)
   expect_equal(ssd_exposure(boron_dists), 0.0645152661450559)
 })
-
-test_that("exposure fitdistcens", {
-  # set.seed(1)
-  # expect_equal(ssd_exposure(fluazinam_lnorm), 0.0346667579412116)
-})
-
-test_that("exposure fitdistscens", {
-  # set.seed(1)
-  # expect_equal(ssd_exposure(fluazinam_dists), 0.0490197455575992)
-})

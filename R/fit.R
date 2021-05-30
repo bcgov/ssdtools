@@ -32,6 +32,10 @@
   attr(fits, "rescale", exact = TRUE)
 }
 
+.weighted_fitdists <- function(fits) {
+  attr(fits, "weighted", exact = TRUE)
+}
+
 `.censored_fitdists<-` <- function(fits, value) {
   attr(fits, "censored") <- value
   fits
@@ -57,9 +61,14 @@
   fits
 }
 
+`.weighted_fitdists<-` <- function(fits, value) {
+  attr(fits, "weighted") <- value
+  fits
+}
+
 .attrs_fitdists <- function(fits) {
   attrs <- attributes(fits)
-  attrs[c("censored", "control", "data", "org_data", "rescale")]
+  attrs[c("censored", "control", "data", "org_data", "rescale", "weighted")]
 }
 
 `.attrs_fitdists<-` <- function(fits, value) {
@@ -68,6 +77,7 @@
   .data_fitdists(fits) <- value$data
   .org_data_fitdists(fits) <- value$org_data
   .rescale_fitdists(fits) <- value$rescale
+  .weighted_fitdists(fits) <- value$weighted
   fits
 }
 
@@ -156,10 +166,6 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
     abort_chk(msg)
   }
   
-  if(is.null(weight)) {
-    data$weight <- 1
-    weight <- "weight"
-  }
   data <- data[c(left, right, weight)]
   colnames(data) <- c("left", "right", "weight")
   
@@ -179,6 +185,7 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
 
   data$left[is.na(data$left)] <- 0
   data$right[is.na(data$right)] <- Inf
+#  data$weight <- data$weight / max(data$weight)
   
   if(rescale) {
     rescale <- c(data$left, data$right)
@@ -186,7 +193,9 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
   } else 
     rescale <- 1
   
-  list(censored = censored, data = data, rescale = rescale)
+  weighted <- any(data$weight != 1)
+  
+  list(censored = censored, data = data, rescale = rescale, weighted = weighted)
 }
 
 #' Fit Distributions

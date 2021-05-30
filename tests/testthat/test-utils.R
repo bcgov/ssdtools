@@ -18,9 +18,7 @@ test_that("utils", {
 
   expect_identical(nobs(boron_lnorm), 28L)
   expect_identical(nobs(boron_dists), nobs(boron_lnorm))
-#  expect_identical(nobs(fluazinam_lnorm), NA_integer_)
-#  expect_identical(nobs(fluazinam_dists), NA_integer_)
-  
+
   expect_equal(ssd_ecd(1:10), seq(0.05, 0.95, by = 0.1))
 })
 

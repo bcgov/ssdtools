@@ -166,18 +166,6 @@ test_that("ssd_hc fitdist", {
   expect_equal(hc$ucl, NA_real_)
 })
 
-test_that("ssd_hc fitdistcens", {
-  # hc <- ssd_hc(fluazinam_lnorm)
-  # expect_is(hc, "tbl_df")
-  # expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  # expect_identical(hc$percent, 5)
-  # expect_equal(hc$est, 1.74529360152777)
-  # expect_equal(hc$se, NA_real_)
-  # expect_equal(hc$lcl, NA_real_)
-  # expect_equal(hc$ucl, NA_real_)
-  # expect_equal(hc$dist, "lnorm")
-})
-
 test_that("ssd_hc fitdists", {
   hc <- ssd_hc(boron_dists)
   expect_is(hc, "tbl_df")
@@ -200,28 +188,4 @@ test_that("ssd_hc fitdists not average", {
   expect_equal(hc$lcl, c(NA_real_, NA_real_, NA_real_))
   expect_equal(hc$ucl, c(NA_real_,NA_real_, NA_real_))
   expect_equal(hc$dist, c("gamma", "llogis", "lnorm")) 
-})
-
-test_that("ssd_hc fitdistscens", {
-  # hc <- ssd_hc(fluazinam_dists)
-  # expect_is(hc, "tbl_df")
-  # expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  # expect_identical(hc$percent, 5)
-  # expect_equal(hc$est, 1.42153606844833)
-  # expect_equal(hc$se, NA_real_)
-  # expect_equal(hc$lcl, NA_real_)
-  # expect_equal(hc$ucl, NA_real_)
-  # expect_equal(hc$dist, "average")
-})
-
-test_that("ssd_hc fitdistscens not average", {
-  # hc <- ssd_hc(fluazinam_dists, average = FALSE)
-  # expect_is(hc, "tbl_df")
-  # expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  # expect_identical(hc$percent, c(5, 5, 5))
-  # expect_equal(hc$est, c(1.30938169835089, 0.309067069393034, 1.74529360152777))
-  # expect_equal(hc$se, c( NA_real_, NA_real_,NA_real_))
-  # expect_equal(hc$lcl, c(NA_real_, NA_real_, NA_real_))
-  # expect_equal(hc$ucl, c(NA_real_, NA_real_, NA_real_))
-  # expect_equal(hc$dist, c("llogis", "gamma", "lnorm")) 
 })
