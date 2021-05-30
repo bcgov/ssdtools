@@ -12,6 +12,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+.censored_fitdists <- function(fits) {
+  attr(fits, "censored", exact = TRUE)
+}
+
+.control_fitdists <- function(fits) {
+  attr(fits, "control", exact = TRUE)
+}
+
 .data_fitdists <- function(fits) {
   attr(fits, "data", exact = TRUE)
 }
@@ -24,8 +32,14 @@
   attr(fits, "rescale", exact = TRUE)
 }
 
-.control_fitdists <- function(fits) {
-  attr(fits, "control", exact = TRUE)
+`.censored_fitdists<-` <- function(fits, value) {
+  attr(fits, "censored") <- value
+  fits
+}
+
+`.control_fitdists<-` <- function(fits, value) {
+  attr(fits, "control") <- value
+  fits
 }
 
 `.data_fitdists<-` <- function(fits, value) {
@@ -43,17 +57,13 @@
   fits
 }
 
-`.control_fitdists<-` <- function(fits, value) {
-  attr(fits, "control") <- value
-  fits
-}
-
 .attrs_fitdists <- function(fits) {
   attrs <- attributes(fits)
-  attrs[c("control", "data", "org_data", "rescale")]
+  attrs[c("censored", "control", "data", "org_data", "rescale")]
 }
 
 `.attrs_fitdists<-` <- function(fits, value) {
+  .censored_fitdists(fits) <- value$censored
   .control_fitdists(fits) <- value$control
   .data_fitdists(fits) <- value$data
   .org_data_fitdists(fits) <- value$org_data
@@ -165,6 +175,8 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
   if(any(zero_weight)) {
     abort_chk("`data` has %n row%s with zero weight in '", weight, "'", n = sum(zero_weight))
   }
+  censored <- left != right && any(is.na(data$left) | is.na(data$right))
+
   data$left[is.na(data$left)] <- 0
   data$right[is.na(data$right)] <- Inf
   
@@ -174,7 +186,7 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
   } else 
     rescale <- 1
   
-  list(data = data, rescale = rescale)
+  list(censored = censored, data = data, rescale = rescale)
 }
 
 #' Fit Distributions
@@ -234,20 +246,17 @@ ssd_fit_dists <- function(
   chk_list(control)
   chk_flag(silent)
   
-  x <- chk_and_process_data(data, left = left, right = right, weight = weight, 
+  attrs <- chk_and_process_data(data, left = left, right = right, weight = weight, 
                                nrow = nrow, rescale = rescale, silent = silent)
   
-  org_data <- as_tibble(data)
-  data <- x$data
-  rescale <- x$rescale
-  
-  fits <- fit_dists(data, dists, rescale, computable, control, silent)
+  fits <- fit_dists(attrs$data, dists, attrs$rescale, computable, control, silent)
   
   if (!length(fits)) err("All distributions failed to fit.")
   class(fits) <- "fitdists"
   
-  attrs <- list(control = control, data = data, org_data = org_data,
-                rescale = rescale)
+  attrs$control <- control
+  attrs$org_data <- as_tibble(data)
+  
   .attrs_fitdists(fits) <- attrs
   fits
 }

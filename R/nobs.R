@@ -17,10 +17,9 @@
 #' @export
 stats::nobs
 
-.nobs_data <- function(data) {
-  if(is_censored_data(data)) return(NA_integer_)
-  nrow(data)
-}
-
 #' @export
-nobs.fitdists <- function(object, ...) .nobs_data(.data_fitdists(object))
+nobs.fitdists <- function(object, ...) {
+  if(.censored_fitdists(object))
+    return(NA_integer_)
+  nrow(.data_fitdists(object))
+}
