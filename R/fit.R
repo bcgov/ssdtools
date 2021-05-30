@@ -12,6 +12,45 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+.data_fitdists <- function(fits) {
+  attr(fits, "data", exact = TRUE)
+}
+
+.rescale_fitdists <- function(fits) {
+  attr(fits, "rescale", exact = TRUE)
+}
+
+.control_fitdists <- function(fits) {
+  attr(fits, "control", exact = TRUE)
+}
+
+`.data_fitdists<-` <- function(fits, value) {
+  attr(fits, "data") <- value
+  fits
+}
+
+`.rescale_fitdists<-` <- function(fits, value) {
+  attr(fits, "rescale") <- value
+  fits
+}
+
+`.control_fitdists<-` <- function(fits, value) {
+  attr(fits, "control") <- value
+  fits
+}
+
+.attrs_fitdists <- function(fits) {
+  attrs <- attributes(fits)
+  attrs[c("control", "data", "rescale")]
+}
+
+`.attrs_fitdists<-` <- function(fits, value) {
+  .control_fitdists(fits) <- value$control
+  .data_fitdists(fits) <- value$data
+  .rescale_fitdists(fits) <- value$rescale
+  fits
+}
+
 is_at_boundary <- function(fit) {
   dist <- .dist_tmbfit(fit)
   if(!is_bounds(dist)) return(FALSE)
@@ -195,9 +234,7 @@ ssd_fit_dists <- function(
   if (!length(fits)) err("All distributions failed to fit.")
   class(fits) <- "fitdists"
   
-  attr(fits, "data") <- data
-  attr(fits, "rescale") <- rescale # need to have get and set function
-  attr(fits, "control") <- control # need to have get and set function
-  
+  attrs <- list(control = control, data = data, rescale = rescale)
+  .attrs_fitdists(fits) <- attrs
   fits
 }
