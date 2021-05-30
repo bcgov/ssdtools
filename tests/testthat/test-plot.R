@@ -38,27 +38,21 @@ test_that("plot geom_hcintersect aes", {
   expect_snapshot_plot(gp, "geom_hcintersect_aes")
 })
 
-#  test_that("plot geom_xribbon", {
-#    gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
-#     geom_xribbon(
-#       data = boron_pred,
-#       ggplot2::aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
-#     )
-#   expect_snapshot_plot(gp, "geom_hcintersect_aes")
-# })
+test_that("plot geom_xribbon", {
+  gp <- ggplot2::ggplot(boron_pred) +
+    geom_xribbon(
+      ggplot2::aes(xmin = lcl, xmax = ucl, y = percent)
+    )
+  expect_snapshot_plot(gp, "geom_xribbon")
+})
 
 test_that("plot geoms", {
-  data <- boron_data
-  data$yintercept <- 0.10
-  gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc)) +
-    stat_ssd() +
-    geom_ssd() +
-    geom_hcintersect(xintercept = 1, yintercept = 0.05) +
-    geom_hcintersect(aes(xintercept = 1, yintercept = yintercept)) +
-    #    geom_xribbon(
-    #      data = boron_pred,
-    #      ggplot2::aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
-    #    ) +
-    NULL
+  gp <- ggplot2::ggplot(boron_pred) +
+    geom_ssd(data = boron_data, ggplot2::aes(x = Conc)) +
+    geom_hcintersect(xintercept = 100, yintercept = 0.5) +
+    geom_xribbon(
+      ggplot2::aes(xmin = lcl, xmax = ucl, y = percent/100),
+      alpha = 1/3
+    )
   expect_snapshot_plot(gp, "geoms_all")
 })
