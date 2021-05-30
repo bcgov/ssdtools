@@ -14,7 +14,7 @@
 
 #' @import chk ggplot2
 #' @importFrom abind abind
-#' @importFrom generics glance tidy
+#' @importFrom generics augment glance tidy
 #' @importFrom ggplot2 autoplot
 #' @importFrom graphics par plot title
 #' @importFrom grid gpar grobName polygonGrob

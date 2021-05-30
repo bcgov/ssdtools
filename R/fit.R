@@ -237,7 +237,7 @@ ssd_fit_dists <- function(
   x <- chk_and_process_data(data, left = left, right = right, weight = weight, 
                                nrow = nrow, rescale = rescale, silent = silent)
   
-  org_data <- data
+  org_data <- as_tibble(data)
   data <- x$data
   rescale <- x$rescale
   
