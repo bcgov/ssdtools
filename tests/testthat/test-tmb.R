@@ -5,7 +5,6 @@ test_that("tidy.tmbfit", {
   expect_identical(npars(fit), c(lnorm = 2L))
   expect_identical(npars(fit$lnorm), 2L)
   expect_equal(nobs(fit), 28L)
-  expect_equal(nobs(fit$lnorm), 28L)
   expect_equal(logLik(fit$lnorm), -117.514216489547)
   expect_equal(logLik(fit), c(lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
@@ -40,17 +39,12 @@ test_that("tidy.tmbfit", {
   hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 10)
   expect_equal(hp$est, 1.95430302556687)
   expect_equal(hc$se, 0.670156954633317)
-  
-  glance <- glance(fit$lnorm)
-  expect_is(glance, "tbl_df")
-  expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc"))
-  expect_identical(glance$dist, "lnorm")
-  expect_equal(glance$aicc, 239.508432979094)
-  
+
   glance <- glance(fit)
   expect_is(glance, "tbl_df")
   expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
   expect_identical(glance$dist, "lnorm")
+  expect_equal(glance$aicc, 239.508432979094)
   expect_equal(glance$delta, 0)
   expect_equal(glance$weight, 1)
   
@@ -77,7 +71,6 @@ test_that("combine", {
   
   expect_identical(npars(fit), c(llogis = 2L, lnorm = 2L))
   expect_equal(nobs(fit), 28L)
-  expect_equal(nobs(fit$lnorm), 28L)
   expect_equal(logLik(fit), c(llogis = -118.507435324581, lnorm = -117.514216489547))
   expect_equal(logLik(fit$lnorm), -117.514216489547)
 

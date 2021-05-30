@@ -71,10 +71,6 @@ fit_dists <- function(data, dists, rescale, computable, control, silent) {
   names(dists) <- dists
   fits <- lapply(dists, safe_fit_dist, data = data, control = control)
   fits <- remove_nonfits(fits, rescale, computable, silent)
-  if (!length(fits)) err("All distributions failed to fit.")
-  class(fits) <- "fitdists"
-  attr(fits, "rescale") <- rescale # need to have get and set function
-  attr(control, "control") <- control # need to have get and set function
   fits
 }
 
@@ -193,6 +189,15 @@ ssd_fit_dists <- function(
                                nrow = nrow, rescale = rescale, silent = silent)
   data <- x$data
   rescale <- x$rescale
+  
   fits <- fit_dists(data, dists, rescale, computable, control, silent)
+  
+  if (!length(fits)) err("All distributions failed to fit.")
+  class(fits) <- "fitdists"
+  
+  attr(fits, "data") <- data
+  attr(fits, "rescale") <- rescale # need to have get and set function
+  attr(fits, "control") <- control # need to have get and set function
+  
   fits
 }

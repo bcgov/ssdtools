@@ -48,15 +48,14 @@ ssd_gof <- function(x, ...) {
   UseMethod("ssd_gof")
 }
 
-.ssd_gof_tmbfit <- function(x, ...) {
-  chk_unused(...)
-  
-  glance <- glance(x)
+.ssd_gof_tmbfit <- function(x, data) {
+  nobs <- .nobs_data(data)
+  glance <- .glance_tmbfit(x, nobs)
 
   dist <- glance$dist
   aic <- glance$aic
   aicc <- glance$aicc
-  bic <- - 2 * glance$log_lik + log(glance$nobs) * glance$npars
+  bic <- - 2 * glance$log_lik + log(nobs) * glance$npars
 
   if (glance$nobs >= 8) {
     ad <- NA_real_
@@ -74,7 +73,8 @@ ssd_gof <- function(x, ...) {
 }
 
 .ssd_gof_fitdists <- function(x) {
-  x <- lapply(x, .ssd_gof_tmbfit)
+  data <- attr(x, "data")
+  x <- lapply(x, .ssd_gof_tmbfit, data = data)
   x <- bind_rows(x)
   if ("aicc" %in% colnames(x)) {
     x$delta <- x$aicc - min(x$aicc)
@@ -92,6 +92,7 @@ ssd_gof <- function(x, ...) {
 ssd_gof.fitdists <- function(x, ...) {
   chk_unused(...)
 
+  data <- attr(x, "data")
   x <- .ssd_gof_fitdists(x)
   x$weight <- round(x$weight, 3)
   x$delta <- round(x$delta, 3)

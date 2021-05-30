@@ -22,7 +22,5 @@ stats::nobs
   nrow(data)
 }
 
-nobs.tmbfit <- function(object, ...) .nobs_data(.data_tmbfit(object))
-
 #' @export
-nobs.fitdists <- function(object, ...) nobs(object[[1]])
+nobs.fitdists <- function(object, ...) .nobs_data(attr(object, "data"))

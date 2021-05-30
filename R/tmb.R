@@ -43,13 +43,9 @@ fit_tmb <- function(dist, data, control) {
                    lower = lower, upper = upper,
                    control= control, hessian = TRUE)
   )
-  fit <- list(dist = dist, model = model, optim = optim, data = data)
+  fit <- list(dist = dist, model = model, optim = optim)
   class(fit) <- "tmbfit"
   fit
-}
-
-.data_tmbfit <- function(x) {
-  x$data
 }
 
 .dist_tmbfit <- function(x) {

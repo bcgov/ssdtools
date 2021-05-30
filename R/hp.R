@@ -23,7 +23,7 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, control, parallel, ncpus) {
+.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, control, parallel, ncpus) {
   chk_vector(conc)
   chk_numeric(conc)
   chk_number(level)
@@ -42,7 +42,8 @@ ssd_hp <- function(x, ...) {
       se = na, lcl = na, ucl = na    
       ))
   }
-  estimates <- boot_tmbfit(x, nboot = nboot, control = control, parallel = parallel, ncpus = ncpus)
+  estimates <- boot_tmbfit(x, nboot = nboot, data = data, 
+                           control = control, parallel = parallel, ncpus = ncpus)
   cis <- cis_tmb(estimates, what, level = level, x = conc)
   tibble(
     dist = dist,
@@ -63,9 +64,11 @@ ssd_hp <- function(x, ...) {
 
   if(is.null(control))
     control <- attr(x, "control")
+  data <- attr(x, "data")
   
   hp <- lapply(x, .ssd_hp_tmbfit,
-    conc = conc, ci = ci, level = level, nboot = nboot, control = control,
+    conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
+    control = control,
     parallel = parallel, ncpus = ncpus
   )
   if (!average) {

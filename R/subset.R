@@ -27,8 +27,16 @@ subset.fitdists <- function(x, select = names(x), ...) {
 
   chk_unused(...)
 
+  data <- attr(x, "data")
+  rescale <- attr(x, "rescale") # need to have get and set function
+  control <- attr(x, "control")# need to have get and set function
+  
   class <- class(x)
   x <- x[names(x) %in% select]
   class(x) <- class
+  
+  attr(x, "data") <- data
+  attr(x, "rescale") <- rescale # need to have get and set function
+  attr(x, "control") <- control # need to have get and set function
   x
 }
