@@ -12,20 +12,53 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("plot geoms", {
-  pdf(withr::local_file("withr.pdf"))
-  withr::defer(dev.off())
-  
+test_that("plot stat_ssd", {
+  gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+    stat_ssd()
+  expect_snapshot_plot(gp, "stat_ssd")
+})
+
+test_that("plot geom_ssd", {
+  gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+    geom_ssd()
+  expect_snapshot_plot(gp, "geom_ssd")
+})
+
+test_that("plot geom_hcintersect", {
+  gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+    geom_hcintersect(xintercept = 1, yintercept = 0.05)
+  expect_snapshot_plot(gp, "geom_hcintersect")
+})
+
+test_that("plot geom_hcintersect aes", {
   data <- boron_data
   data$yintercept <- 0.10
-  gp <- ggplot(boron_data, aes(x = Conc)) +
+  gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc)) +
+    geom_hcintersect(aes(xintercept = 1, yintercept = yintercept))
+  expect_snapshot_plot(gp, "geom_hcintersect_aes")
+})
+
+#  test_that("plot geom_xribbon", {
+#    gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+#     geom_xribbon(
+#       data = boron_pred,
+#       ggplot2::aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
+#     )
+#   expect_snapshot_plot(gp, "geom_hcintersect_aes")
+# })
+
+test_that("plot geoms", {
+  data <- boron_data
+  data$yintercept <- 0.10
+  gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc)) +
     stat_ssd() +
     geom_ssd() +
     geom_hcintersect(xintercept = 1, yintercept = 0.05) +
-    geom_hcintersect(yintercept = 0.05) +
-    geom_xribbon(
-      data = boron_pred,
-      aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
-    )
-  expect_s3_class(gp, "ggplot")
+    geom_hcintersect(aes(xintercept = 1, yintercept = yintercept)) +
+    #    geom_xribbon(
+    #      data = boron_pred,
+    #      ggplot2::aes_string(xmin = "lcl", xmax = "ucl", y = "percent")
+    #    ) +
+    NULL
+  expect_snapshot_plot(gp, "geoms_all")
 })
