@@ -63,9 +63,9 @@ ssd_hp <- function(x, ...) {
   }
 
   if(is.null(control))
-    control <- attr(x, "control")
-  data <- attr(x, "data")
-  
+    control <- .control_fitdists(x)
+  data <- .data_fitdists(x)
+
   hp <- lapply(x, .ssd_hp_tmbfit,
     conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
     control = control,

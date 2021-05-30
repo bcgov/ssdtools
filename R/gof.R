@@ -73,7 +73,7 @@ ssd_gof <- function(x, ...) {
 }
 
 .ssd_gof_fitdists <- function(x) {
-  data <- attr(x, "data")
+  data <- .data_fitdists(x)
   x <- lapply(x, .ssd_gof_tmbfit, data = data)
   x <- bind_rows(x)
   if ("aicc" %in% colnames(x)) {
@@ -92,7 +92,7 @@ ssd_gof <- function(x, ...) {
 ssd_gof.fitdists <- function(x, ...) {
   chk_unused(...)
 
-  data <- attr(x, "data")
+  data <- .data_fitdists(x)
   x <- .ssd_gof_fitdists(x)
   x$weight <- round(x$weight, 3)
   x$delta <- round(x$delta, 3)

@@ -91,9 +91,9 @@ no_ssd_hc <- function() {
   }
   
   if(is.null(control))
-    control <- attr(x, "control")
-  
-  data <- attr(x, "data")
+    control <- .control_fitdists(x)
+
+  data <- .data_fitdists(x)
 
   hc <- lapply(x, .ssd_hc_tmbfit,
     percent = percent, ci = ci, level = level, nboot = nboot,

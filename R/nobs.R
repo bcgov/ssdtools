@@ -23,4 +23,4 @@ stats::nobs
 }
 
 #' @export
-nobs.fitdists <- function(object, ...) .nobs_data(attr(object, "data"))
+nobs.fitdists <- function(object, ...) .nobs_data(.data_fitdists(object))
