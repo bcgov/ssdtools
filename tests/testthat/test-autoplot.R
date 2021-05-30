@@ -13,6 +13,6 @@
 #    limitations under the License.
 
 test_that("autoplot", {
-  expect_snapshot_plot(print(autoplot(boron_lnorm)), "boron_lnorm")
-  expect_snapshot_plot(print(autoplot(boron_dists)), "boron_dists")
+  expect_snapshot_plot(autoplot(boron_lnorm), "boron_lnorm")
+  expect_snapshot_plot(autoplot(boron_dists), "boron_dists")
 })
