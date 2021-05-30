@@ -12,7 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("autoplot", {
-  expect_snapshot_file(save_png(print(autoplot(boron_lnorm))), "boron_lnorm.png")
-  expect_snapshot_file(save_png(print(autoplot(boron_dists))), "boron_dists.png")
-})
+save_png <- function(code, width = 400, height = 400) {
+  path <- tempfile(fileext = ".png")
+  grDevices::png(path, width = width, height = height)
+  on.exit(grDevices::dev.off())
+  code
+  
+  path
+}

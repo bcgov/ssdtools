@@ -96,7 +96,8 @@ ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Aff
   pred <- ssd_hc(x, average = FALSE, percent = 1:99)
   pred$Distribution <- pred$dist
   
-  data <- data.frame(x = x[[1]]$data)
+  # needs version for censored
+  data <- data.frame(x = .data_fitdists(x)$left)
   
   ggplot(pred, aes_string(x = "est")) +
     geom_line(aes_string(
