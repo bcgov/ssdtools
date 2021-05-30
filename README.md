@@ -13,20 +13,18 @@ Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](http
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
-[![DOI](http://joss.theoj.org/papers/10.21105/joss.01082/status.svg)](https://doi.org/10.21105/joss.01082)
 <!-- badges: end -->
 
-`ssdtools` is an R package to plot and fit Species Sensitivity
+`ssdtools` is an R package to fit and plot Species Sensitivity
 Distributions (SSD).
 
 SSDs are cumulative probability distributions which are fitted to
 toxicity concentrations for different species as described by Posthuma
 et al. (2001). The ssdtools package uses Maximum Likelihood to fit
-distributions such as the log-normal, gamma, log-logistic, log-Gumbel,
-Gompertz and Weibull. The user can also provide custom distributions.
-Multiple distributions can be averaged using Information Criteria.
-Confidence intervals on hazard concentrations and proportions are
-produced by parametric bootstrapping.
+distributions such as the gamma, log-normal, log-logistic, log-Gumbel
+and Weibull to censored and/or weighted data. Multiple distributions can
+be averaged using AICc. Confidence intervals on hazard concentrations
+and proportions are produced by parametric bootstrapping.
 
 ## Installation
 
@@ -67,13 +65,13 @@ boron_data
 #> # … with 18 more rows
 ```
 
-Multiple distributions can be fit using `ssd_fit_dists()`
+Distributions are fit using `ssd_fit_dists()`
 
 ``` r
 boron_dists <- ssd_fit_dists(boron_data)
 ```
 
-and plot using the `ggplot2` generic `autoplot`
+and can be quickly plotted using the `ggplot2` generic `autoplot`
 
 ``` r
 library(ggplot2)
@@ -87,15 +85,12 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(boron_dists)
-#> Registered S3 method overwritten by 'fitdistrplus':
-#>   method         from    
-#>   logLik.fitdist ssdtools
 #> # A tibble: 3 x 9
-#>   dist      ad     ks    cvm   aic  aicc   bic delta weight
-#>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 llogis 0.487 0.0993 0.0595  241.  241.  244.  3.38  0.11 
-#> 2 gamma  0.440 0.117  0.0554  238.  238.  240.  0     0.595
-#> 3 lnorm  0.507 0.106  0.0703  239.  240.  242.  1.40  0.296
+#>   dist      ad    ks   cvm   aic  aicc   bic delta weight
+#>   <chr>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 gamma     NA    NA    NA  238.  238.  240.  0     0.595
+#> 2 llogis    NA    NA    NA  241.  241.  244.  3.38  0.11 
+#> 3 lnorm     NA    NA    NA  239.  240.  242.  1.40  0.296
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
@@ -108,9 +103,9 @@ boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
 ``` r
 print(boron_hc5)
 #> # A tibble: 1 x 6
-#>   percent   est    se   lcl   ucl dist   
-#>     <dbl> <dbl> <dbl> <dbl> <dbl> <chr>  
-#> 1       5  1.31 0.808 0.527  3.57 average
+#>   dist    percent   est    se   lcl   ucl
+#>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1 average       5  1.31 0.821 0.504  3.62
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -131,6 +126,11 @@ ssd_plot(boron_data, boron_pred,
 ```
 
 ![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
+
+## References
+
+Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
+Distributions in Ecotoxicology. CRC Press.
 
 ## Citation
 
@@ -156,31 +156,28 @@ ssd_plot(boron_data, boron_pred,
 
 ## Information
 
-Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
-Distributions in Ecotoxicology. CRC Press.
-
 Get started with ssdtools at
 <https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
 
 A shiny app to allow non-R users to interface with ssdtools is available
 at <https://github.com/bcgov/shinyssdtools>:
 
-Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species
+*Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species
 Sensitivity Distributions (SSDs). JOSS 6(57): 2848.
-<https://joss.theoj.org/papers/10.21105/joss.02848>.
+<https://joss.theoj.org/papers/10.21105/joss.02848>.*
 
 The ssdtools package was developed as a result of earlier drafts of:
 
-Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for
+*Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for
 Modeling Species Sensitivity Distributions. Province of British
-Columbia, Victoria, BC.
+Columbia, Victoria, BC.*
 
 For recent developments in SSD modeling including a review of existing
 software:
 
-Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity
+*Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity
 Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
-<https://onlinelibrary.wiley.com/doi/10.1002/etc.4925>.
+<https://onlinelibrary.wiley.com/doi/10.1002/etc.4925>.*
 
 The CCME `data.csv` data file is derived from a factsheet prepared by
 the [Canadian Council of Ministers of the
