@@ -251,6 +251,28 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
                     weibull = list(scale = 1.01334187822578, shape = 94.0011367347638)))
 })
 
+test_that("ssd_fit_dists with slightly censored data gives pretty much the same answer", {
+  data <- ssdtools::boron_data
+  
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+
+  data$right <- data$Conc * 2
+  data$Conc <- data$Conc * 0.5
+
+  fits_censored <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  
+  tidy <- tidy(fits)
+  tcen <- tidy(fits_censored)
+  
+  tidy$term
+  
+  # this seems totally wrong
+  expect_equal(tidy$est, c(2.56164496371788, 1.24154032419128))
+  expect_equal(tcen$est, c(2.56052524750529, 1.17234562953404))
+  expect_equal(tidy$se, c(0.234629067176348, 0.165907749058664))
+  expect_equal(tcen$se, c(0.234063281091344, 0.175423555900586))
+})
+
 # test_that("fit_dist tiny llogis", {
 #   data <- ssdtools::boron_data
 #   fit <- ssd_fit_dists(data, dists = "llogis")
