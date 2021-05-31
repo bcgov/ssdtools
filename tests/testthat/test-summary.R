@@ -20,6 +20,18 @@ test_that("summary fitdists", {
   expect_identical(summary$weighted, FALSE)
 })
 
+test_that("summary fitdists with multiple dists", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = c("gamma", "llogis", "lnorm"))
+  summary <- summary(fits)
+  expect_s3_class(summary, "summary_fitdists")
+  expect_identical(names(summary), c("fits", "censored", "nrow", "rescaled", "weighted"))
+  expect_identical(summary$censored, FALSE)
+  expect_identical(summary$nrow, 28L)
+  expect_identical(summary$rescaled, FALSE)
+  expect_identical(summary$weighted, FALSE)
+})
+
 test_that("summary fitdists with censored, rescaled, weighted data", {
   data <- ssdtools::boron_data
   data$Mass <- 1:nrow(data)

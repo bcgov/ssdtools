@@ -23,6 +23,7 @@ print.summary_tmbfit <- function(x, ...) {
   txt <- paste0("Distribution '", x$dist, "'")
   cat(txt)
   mapply(.print_parameter, x$estimates, names(x$estimates))
+  cat("\n\n")
   invisible(x)
 }
 
@@ -35,7 +36,7 @@ print.summary_fitdists <- function(x, ...) {
   properties <- cc(c(censored, weighted, rescaled), conj = " and ")
   if(length(properties)) properties <- paste0(properties, " ")
   
-  txt <- paste0("\n\nParameters estimated from ", x$nrow, " rows of", properties, " data.")
+  txt <- paste0("Parameters estimated from ", x$nrow, " rows of", properties, " data.")
   cat(txt)
   invisible(x)
 }

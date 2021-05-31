@@ -184,11 +184,8 @@ test_that("ssd_fit_dists warns of optimizer convergence code error", {
 })
 
 test_that("ssd_fit_dists estimates for boron_data", {
-  data <- ssdtools::boron_data
-  dists <- ssd_dists()
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists)
-  expect_identical(names(fits), dists)
-  
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists())
+
   expect_equal(estimates(fits), 
     list(gamma = list(scale = 25.1268319779061, shape = 0.950179460431249),
          lgumbel = list(locationlog = 1.92263082409711, scalelog = 1.23223883525026),
@@ -196,6 +193,20 @@ test_that("ssd_fit_dists estimates for boron_data", {
          lnorm = list(meanlog = 2.56164496371788, sdlog = 1.24154032419128),
          weibull = list(scale = 23.5139783002509, shape = 0.966099901938021)))
 })
+
+test_that("ssd_fit_dists equal weights no effect", {
+  data <- ssdtools::boron_data
+  data$weight <- rep(2, nrow(data))
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = names(boron_dists))
+  
+  expect_equal(estimates(fits), estimates(boron_dists))
+})
+
+# test_that("ssd_fit_dists equal weights no effect", {
+#   fits <- ssd_fit_dists(ssdtools::boron_data)
+#   
+#   expect_equal(estimates(fits), estimates(boron_dists))
+# })
 
 test_that("fit_dist tiny llogis", {
   data <- ssdtools::boron_data
@@ -215,21 +226,6 @@ test_that("fit_dist tiny llogis", {
   )
 })
 
-test_that("fit_dists", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  dist_names <- c(
-    "gamma", "lgumbel",
-    "llogis", "lnorm", "weibull"
-  )
-  expect_error(ssd_fit_dists(boron_data[1:5, ], dists = dist_names), 
-               "^`nrow[(]`data`[)]` must be between 6 and Inf, not 5\\.$")
-  dists <- ssd_fit_dists(boron_data[1:6, ], dists = dist_names)
-  expect_true(is.fitdists(dists))
-  expect_identical(names(dists), c("gamma", "lgumbel", "llogis", "lnorm", "weibull"))
-  coef <- estimates(dists)
-  expect_identical(names(coef), c("gamma", "lgumbel", "llogis", "lnorm", "weibull"))
-})
-
 test_that("fit_dist", {
   skip_if_not(capabilities("long.double"))
   
@@ -242,19 +238,6 @@ test_that("fit_dist", {
   dists <- ssd_fit_dists(boron_data2, weight = "Weight", dists = "lnorm")
   expect_equal(estimates(dists$lnorm), list(meanlog = 1.87970902859779, sdlog = 1.12770658163393),
                tolerance = 1e-06)
-})
-
-test_that("ssd_dists() errors with missing values in both left and right", {
-  data <- data.frame(left = c(1:7), right = c(2:8))
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists())
-
-  expect_equal(
-    estimates(fits),
-    list(gamma = list(scale = 25.1268319779061, shape = 0.950179460431249), 
-         lgumbel = list(locationlog = 1.92263082409711, scalelog = 1.23223883525026), 
-         llogis = list(locationlog = 2.62627625930417, scalelog = 0.740426376456358), 
-         lnorm = list(meanlog = 2.56164496371788, sdlog = 1.24154032419128), 
-         weibull = list(scale = 23.5139783002509, shape = 0.966099901938021)))
 })
 
 # test_that("fit_dists computable", {
