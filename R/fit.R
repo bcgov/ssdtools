@@ -185,11 +185,13 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
 
   data$left[is.na(data$left)] <- 0
   data$right[is.na(data$right)] <- Inf
-#  data$weight <- data$weight / max(data$weight)
+  data$weight <- data$weight / max(data$weight)
   
   if(rescale) {
     rescale <- c(data$left, data$right)
     rescale <- max(rescale[rescale < Inf])
+    data$left <- data$left / rescale
+    data$righ <- data$right / rescale
   } else 
     rescale <- 1
   

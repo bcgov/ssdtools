@@ -183,7 +183,7 @@ test_that("ssd_fit_dists warns of optimizer convergence code error", {
   )
 })
 
-test_that("ssd_fit_dists estimates for boron_data", {
+test_that("ssd_fit_dists estimates for boron_data on stable dists", {
   fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists())
 
   expect_equal(estimates(fits), 
@@ -214,10 +214,21 @@ test_that("ssd_fit_dists weighting data equivalent to replicating on stable dist
   data <- ssdtools::boron_data
   data$Times <- rep(1, nrow(data)) 
   data$Times[1] <- 10
-  fits <- ssd_fit_dists(data, weight = "Times", dists = ssd_dists("stable"))
+  fits <- ssd_fit_dists(data, weight = "Times", dists = ssd_dists())
   data <- data[rep(1:nrow(data), data$Times),]
-  fits_times <- ssd_fit_dists(data, dists = ssd_dists("stable"))
+  fits_times <- ssd_fit_dists(data, dists = ssd_dists())
   expect_equal(estimates(fits_times), estimates(fits), tolerance = 1e-05)
+})
+
+test_that("ssd_fit_dists rescale fits on stable dists (except lgumbel!)", {
+  # currently doesn't work for lgumbel
+  data <- ssdtools::boron_data
+  fits_rescale <- ssd_fit_dists(data, rescale = TRUE, dists = c("gamma", "llogis", "lnorm", "weibull"))
+  expect_equal(estimates(fits_rescale),
+                   list(gamma = list(scale = 0.00118442292483518, shape = 864.297870042134), 
+                        llogis = list(locationlog = 0.0119926155600312, scalelog = 0.0109174998075489), 
+                        lnorm = list(meanlog = 0.0231418031697736, sdlog = 0.0343122482517211), 
+                        weibull = list(scale = 1.01334187822578, shape = 94.0011367347638)))
 })
 
 # test_that("fit_dist tiny llogis", {
@@ -258,8 +269,3 @@ test_that("ssd_fit_dists weighting data equivalent to replicating on stable dist
   # expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086))
   # expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
 #})
-
-# test_that("fit_dists fail to converge when identical data", {
-#   data <- data.frame(Conc = rep(6, 6))
-#   expect_output(expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit.")))
-# })
