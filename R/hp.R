@@ -23,14 +23,14 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, control, parallel, ncpus) {
+.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, control, parallel, ncpus) {
   chk_vector(conc)
   chk_numeric(conc)
   chk_number(level)
   chk_range(level)
   
   args <- estimates(x)
-  args$q <- conc
+  args$q <- conc / rescale
   dist <- .dist_tmbfit(x)
   what <- paste0("p", dist)
   
@@ -38,17 +38,24 @@ ssd_hp <- function(x, ...) {
   if (!ci) {
     na <- rep(NA_real_, length(conc))
     return(tibble(
-      dist = rep(dist, length(conc)), conc = conc, est = est * 100,
-      se = na, lcl = na, ucl = na    
+      dist = rep(dist, length(conc)), 
+      conc = conc, 
+      est = est * 100,
+      se = na, 
+      lcl = na, 
+      ucl = na    
       ))
   }
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, 
                            control = control, parallel = parallel, ncpus = ncpus)
-  cis <- cis_tmb(estimates, what, level = level, x = conc)
+  cis <- cis_tmb(estimates, what, level = level, x = conc / rescale)
   tibble(
     dist = dist,
-    conc = conc, est = est * 100,
-    se = cis$se * 100, lcl = cis$lcl * 100, ucl = cis$ucl * 100 
+    conc = conc, 
+    est = est * 100,
+    se = cis$se * 100, 
+    lcl = cis$lcl * 100, 
+    ucl = cis$ucl * 100 
   )
 }
 
@@ -65,9 +72,11 @@ ssd_hp <- function(x, ...) {
   if(is.null(control))
     control <- .control_fitdists(x)
   data <- .data_fitdists(x)
+  rescale <- .rescale_fitdists(x)
 
   hp <- lapply(x, .ssd_hp_tmbfit,
     conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
+    rescale = rescale,
     control = control,
     parallel = parallel, ncpus = ncpus
   )
