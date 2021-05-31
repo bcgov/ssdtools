@@ -12,16 +12,32 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Distributions
+#' Species Sensitivity Distributions
 #' 
-#' Implemented Distributions
+#' Gets a character vector of the names of implemented distributions.
 #'
-#' @return A character vector of the implemented distributions
+#' @param type A string specifying the distribution type.
+#' Possible values are 'all', 'stable' and 'unstable'.
+#' @return A unique, sorted character vector of the distributions.
 #' @export
 #'
 #' @examples
 #' ssd_dists()
-ssd_dists <- function() {
-  c("burrIII3", "gamma", "gompertz", "lgumbel", 
-    "llogis", "lnorm", "mx_llogis_llogis", "weibull")
+#' ssd_dists("all")
+ssd_dists <- function(type = "stable") {
+  chk_string(type)
+  chk_subset(type, c("all", "stable", "unstable"))
+
+  stable <- c("gamma", "lgumbel", 
+              "llogis", "lnorm", "weibull")
+  unstable <- c("burrIII3", "gompertz", "mx_llogis_llogis")
+  
+  dists <- switch(type, 
+         all = c(stable, unstable),
+         stable = stable,
+         unstable = unstable)
+  
+  dists <- unique(dists)
+  dists <- stringr::str_sort(dists)
+  dists
 }

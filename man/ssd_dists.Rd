@@ -2,16 +2,21 @@
 % Please edit documentation in R/dists.R
 \name{ssd_dists}
 \alias{ssd_dists}
-\title{Distributions}
+\title{Species Sensitivity Distributions}
 \usage{
-ssd_dists()
+ssd_dists(type = "stable")
+}
+\arguments{
+\item{type}{A string specifying the distribution type.
+Possible values are 'all', 'stable' and 'unstable'.}
 }
 \value{
-A character vector of the implemented distributions
+A unique, sorted character vector of the distributions.
 }
 \description{
-Implemented Distributions
+Gets a character vector of the names of implemented distributions.
 }
 \examples{
 ssd_dists()
+ssd_dists("all")
 }

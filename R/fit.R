@@ -245,7 +245,7 @@ ssd_fit_dists <- function(
   chk_string(left)
   chk_string(right)
   chk_null_or(weight, chk_string)
-  chk_subset(dists, ssd_dists())
+  chk_subset(dists, ssd_dists("all"))
   
   chk_whole_number(nrow)
   chk_gte(nrow, 4L)

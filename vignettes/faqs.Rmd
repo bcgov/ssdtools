@@ -1,0 +1,42 @@
+---
+title: "Frequently Asked Questions"
+author: "ssdtools Team"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Frequently Asked Questions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, message=FALSE}
+library(ssdtools)
+```
+
+## How do I fit distributions to multiple groups such taxa and/or chemicals?
+
+An elegant approach using some tidyverse packages is demonstrated below.
+
+```{r, message=FALSE}
+library(tidyverse)
+
+boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Units)) %>%
+  mutate(
+    Fit = map(data, ssd_fit_dists, dists = "lnorm"),
+    Prediction = map(Fit, predict)
+  ) %>%
+  unnest(Prediction)
+```
+
+The resultant data and predictions can then be plotted as follows.
+```{r, fig.width = 5, fig.height = 5}
+ssd_plot(boron_data, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
+  facet_wrap(~Group)
+```
