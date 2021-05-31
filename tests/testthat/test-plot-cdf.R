@@ -16,3 +16,8 @@ test_that("ssd_plot_cdf", {
   expect_snapshot_plot(ssd_plot_cdf(boron_lnorm), "boron_lnorm")
   expect_snapshot_plot(ssd_plot_cdf(boron_dists), "boron_dists")
 })
+
+test_that("autoplot deals with rescaled data", {
+  fits <- ssd_fit_dists(boron_data, rescale = TRUE)
+  expect_snapshot_plot(ssd_plot_cdf(fits), "boron_dists_rescale")
+})

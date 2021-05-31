@@ -15,14 +15,8 @@
 #' @export
 graphics::plot
 
-plot_fitdist <- function(x, breaks = "default", ...) {
-  par(oma = c(0, 0, 2, 0))
-  plot(x, breaks = breaks, ...)
-  title(paste("Distribution:", x$distname), outer = TRUE)
-}
-
 #' @export
-plot.fitdists <- function(x, breaks = "default", ...) {
-  lapply(x, plot_fitdist, breaks = breaks, ...)
-  invisible()
+plot.fitdists <- function(x, ...) {
+  lifecycle::deprecate_warn("0.3.4", "plot.fitdists()", "autoplot.fitdists()")
+  autoplot(x)
 }

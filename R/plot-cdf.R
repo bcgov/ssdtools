@@ -90,14 +90,13 @@ ssd_plot_cdf.list <- function(x,
 #' @describeIn ssd_plot_cdf Plot CDF fitdists
 #' @export
 ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
-  chk_string(xlab)
-  chk_string(ylab)
+  chk_null_or(xlab, chk_string)
+  chk_null_or(ylab, chk_string)
   
   pred <- ssd_hc(x, average = FALSE, percent = 1:99)
   pred$Distribution <- pred$dist
   
-  # needs version for censored
-  data <- data.frame(x = .data_fitdists(x)$left)
+  data <- data.frame(x = .data_fitdists(x)$left * .rescale_fitdists(x))
   
   ggplot(pred, aes_string(x = "est")) +
     geom_line(aes_string(
