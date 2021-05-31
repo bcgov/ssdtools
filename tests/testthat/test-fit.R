@@ -202,43 +202,41 @@ test_that("ssd_fit_dists equal weights no effect", {
   expect_equal(estimates(fits), estimates(boron_dists))
 })
 
-# test_that("ssd_fit_dists equal weights no effect", {
-#   fits <- ssd_fit_dists(ssdtools::boron_data)
-#   
-#   expect_equal(estimates(fits), estimates(boron_dists))
-# })
-
-test_that("fit_dist tiny llogis", {
+test_that("ssd_fit_dists doubling data little effect on estimates stable dists", {
   data <- ssdtools::boron_data
-  fit <- ssd_fit_dists(data, dists = "llogis")
-  expect_equal(
-    estimates(fit$llogis),
-    list(locationlog = 2.62627762517872, scalelog = 0.740423704979968),
-    tolerance = 1e-05
-  )
-  
-  data$Conc <- data$Conc / 100
-  fit <- ssd_fit_dists(data, dists = "llogis")
-  expect_equal(
-    estimates(fit$llogis),
-    list(locationlog = -1.97889256080937, scalelog = 0.740423704979968),
-    tolerance = 1e-05
-  )
+  fits <- ssd_fit_dists(data, dists = ssd_dists("stable"))
+  data2 <- rbind(data, data)
+  fits2 <- ssd_fit_dists(data2, dists = ssd_dists("stable"))
+  expect_equal(estimates(fits2), estimates(fits), tolerance = 1e-04)
 })
 
-test_that("fit_dist", {
-  skip_if_not(capabilities("long.double"))
-  
-  dists <- ssd_fit_dists(boron_data, dists = "lnorm")
-  expect_equal(estimates(dists), estimates(boron_lnorm))
-  
-  boron_data2 <- boron_data[rev(order(boron_data$Conc)), ]
-  boron_data2$Weight <- 1:nrow(boron_data2)
-  
-  dists <- ssd_fit_dists(boron_data2, weight = "Weight", dists = "lnorm")
-  expect_equal(estimates(dists$lnorm), list(meanlog = 1.87970902859779, sdlog = 1.12770658163393),
-               tolerance = 1e-06)
+test_that("ssd_fit_dists weighting data equivalent to replicating on stable dists", {
+  data <- ssdtools::boron_data
+  data$Times <- rep(1, nrow(data)) 
+  data$Times[1] <- 10
+  fits <- ssd_fit_dists(data, weight = "Times", dists = ssd_dists("stable"))
+  data <- data[rep(1:nrow(data), data$Times),]
+  fits_times <- ssd_fit_dists(data, dists = ssd_dists("stable"))
+  expect_equal(estimates(fits_times), estimates(fits), tolerance = 1e-05)
 })
+
+# test_that("fit_dist tiny llogis", {
+#   data <- ssdtools::boron_data
+#   fit <- ssd_fit_dists(data, dists = "llogis")
+#   expect_equal(
+#     estimates(fit$llogis),
+#     list(locationlog = 2.62627762517872, scalelog = 0.740423704979968),
+#     tolerance = 1e-05
+#   )
+#   
+#   data$Conc <- data$Conc / 100
+#   fit <- ssd_fit_dists(data, dists = "llogis")
+#   expect_equal(
+#     estimates(fit$llogis),
+#     list(locationlog = -1.97889256080937, scalelog = 0.740423704979968),
+#     tolerance = 1e-05
+#   )
+# })
 
 # test_that("fit_dists computable", {
 #   data <- data.frame(Conc = c(
