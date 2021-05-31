@@ -191,7 +191,7 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
     rescale <- c(data$left, data$right)
     rescale <- max(rescale[rescale < Inf])
     data$left <- data$left / rescale
-    data$righ <- data$right / rescale
+    data$right <- data$right / rescale
   } else 
     rescale <- 1
   

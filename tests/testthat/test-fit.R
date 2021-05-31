@@ -185,13 +185,24 @@ test_that("ssd_fit_dists warns of optimizer convergence code error", {
 
 test_that("ssd_fit_dists estimates for boron_data on stable dists", {
   fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists())
-
+  
   expect_equal(estimates(fits), 
-    list(gamma = list(scale = 25.1268319779061, shape = 0.950179460431249),
-         lgumbel = list(locationlog = 1.92263082409711, scalelog = 1.23223883525026),
-         llogis = list(locationlog = 2.62627625930417, scalelog = 0.740426376456358),
-         lnorm = list(meanlog = 2.56164496371788, sdlog = 1.24154032419128),
-         weibull = list(scale = 23.5139783002509, shape = 0.966099901938021)))
+               list(gamma = list(scale = 25.1268319779061, shape = 0.950179460431249),
+                    lgumbel = list(locationlog = 1.92263082409711, scalelog = 1.23223883525026),
+                    llogis = list(locationlog = 2.62627625930417, scalelog = 0.740426376456358),
+                    lnorm = list(meanlog = 2.56164496371788, sdlog = 1.24154032419128),
+                    weibull = list(scale = 23.5139783002509, shape = 0.966099901938021)))
+})
+
+test_that("ssd_fit_dists rescale fits on stable dists", {
+  fits <- ssd_fit_dists(ssdtools::boron_data, rescale = TRUE, dists = ssd_dists()) 
+  
+  expect_equal(estimates(fits),
+               list(gamma = list(scale = 0.355400735189619, shape = 0.950179460431249), 
+                    lgumbel = list(locationlog = -2.33578739461338, scalelog = 1.23223779732974), 
+                    llogis = list(locationlog = -1.63216798267858, scalelog = 0.740423688662679), 
+                    lnorm = list(meanlog = -1.69680060918465, sdlog = 1.24154032419128), 
+                    weibull = list(scale = 0.332587999922436, shape = 0.966099883646414)))
 })
 
 test_that("ssd_fit_dists equal weights no effect", {
@@ -220,15 +231,22 @@ test_that("ssd_fit_dists weighting data equivalent to replicating on stable dist
   expect_equal(estimates(fits_times), estimates(fits), tolerance = 1e-05)
 })
 
-test_that("ssd_fit_dists rescale fits on stable dists (except lgumbel!)", {
-  # currently doesn't work for lgumbel
+test_that("ssd_fit_dists computable = TRUE allows for fits without standard errors", {
   data <- ssdtools::boron_data
-  fits_rescale <- ssd_fit_dists(data, rescale = TRUE, dists = c("gamma", "llogis", "lnorm", "weibull"))
-  expect_equal(estimates(fits_rescale),
-                   list(gamma = list(scale = 0.00118442292483518, shape = 864.297870042134), 
-                        llogis = list(locationlog = 0.0119926155600312, scalelog = 0.0109174998075489), 
-                        lnorm = list(meanlog = 0.0231418031697736, sdlog = 0.0343122482517211), 
-                        weibull = list(scale = 1.01334187822578, shape = 94.0011367347638)))
+  data$Other <- data$Conc
+  data$Conc <- data$Conc / max(data$Conc)
+  
+  expect_warning(
+    ssd_fit_dists(data, right = "Other", dists = ssd_dists()),
+    "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$")
+  
+  fits <- ssd_fit_dists(data, right = "Other", dists = ssd_dists(), computable = FALSE)
+  expect_equal(estimates(fits), 
+               list(gamma = list(scale = 0.00118442292483518, shape = 864.297870042134), 
+                    lgumbel = list(locationlog = 0.0110209306139035, scalelog = 0.0337459419664264), 
+                    llogis = list(locationlog = 0.0119926155600312, scalelog = 0.0109174998075489), 
+                    lnorm = list(meanlog = 0.0231418031697736, sdlog = 0.0343122482517211), 
+                    weibull = list(scale = 1.01334187822578, shape = 94.0011367347638)))
 })
 
 # test_that("fit_dist tiny llogis", {
@@ -258,14 +276,14 @@ test_that("ssd_fit_dists rescale fits on stable dists (except lgumbel!)", {
 #   
 #   skip_if_not(capabilities("long.double"))
 #   
-  # expect_warning(fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]],
-  #                "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
-  # expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189))
-  # expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
-  # 
-  # data$Conc <- data$Conc / 100
-  # fit <- ssd_fit_dists(data, dists = "gamma")[[1]]
-  # expect_equal(fit$sd["scale"], c(scale = 673.801371511101))
-  # expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086))
-  # expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
+# expect_warning(fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]],
+#                "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
+# expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189))
+# expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
+# 
+# data$Conc <- data$Conc / 100
+# fit <- ssd_fit_dists(data, dists = "gamma")[[1]]
+# expect_equal(fit$sd["scale"], c(scale = 673.801371511101))
+# expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086))
+# expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
 #})

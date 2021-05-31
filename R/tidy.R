@@ -28,8 +28,8 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   chk_flag(all)
   
   dist <- x$dist
-  capture.output(x <- sdreport(x$model))
-  x <- summary(x)
+  suppressWarnings(capture.output(x <- sdreport(x$model)))
+  x <- suppressWarnings(summary(x))
   term <- rownames(x)
   est <- unname(x[,1])
   se <- unname(x[,2])
