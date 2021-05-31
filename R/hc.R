@@ -51,7 +51,7 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_tmbfit <- function(x, percent, ci, level, nboot, data, control, parallel, ncpus) {
+.ssd_hc_tmbfit <- function(x, percent, ci, level, nboot, data, rescale, control, parallel, ncpus) {
   chk_vector(percent)
   chk_numeric(percent)
   chk_number(level)
@@ -70,7 +70,7 @@ no_ssd_hc <- function() {
     return(tibble(
       dist = rep(dist, length(percent)),
       percent = percent * 100, 
-      est = est,
+      est = est * rescale,
       se = na, 
       lcl = na, 
       ucl = na))
@@ -79,8 +79,8 @@ no_ssd_hc <- function() {
   cis <- cis_tmb(estimates, what, level = level, x = percent)
   tibble(
     dist = dist,
-    percent = percent * 100, est = est,
-    se = cis$se, lcl = cis$lcl, ucl = cis$ucl  
+    percent = percent * 100, est = est * rescale,
+    se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale
   )
 }
 
@@ -94,10 +94,11 @@ no_ssd_hc <- function() {
     control <- .control_fitdists(x)
 
   data <- .data_fitdists(x)
+  rescale <- .rescale_fitdists(x)
 
   hc <- lapply(x, .ssd_hc_tmbfit,
     percent = percent, ci = ci, level = level, nboot = nboot,
-    data = data,
+    data = data, rescale = rescale,
     parallel = parallel, ncpus = ncpus, control = control
   )
   if (!average) {
