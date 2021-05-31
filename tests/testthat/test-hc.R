@@ -162,3 +162,22 @@ test_that("ssd_hc fitdists correct for rescaling", {
   hc_rescale <- ssd_hc(fits_rescale)
   expect_equal(hc_rescale, hc, tolerance = 1e-05)
 })
+
+test_that("ssd_hc fitdists cis", {
+  set.seed(102)
+  hc <- ssd_hc(boron_lnorm, ci = TRUE)
+  expect_s3_class(hc, "tbl_df")
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_equal(hc$dist, "average")
+  expect_identical(hc$percent, 5)
+  expect_equal(hc$est,  1.6811748398812)
+  expect_equal(hc$se, 0.69683656316552)
+  expect_equal(hc$lcl, 0.922643229425794)
+  expect_equal(hc$ucl, 3.59396430550223)
+})
+
+# test_that("ssd_hc fitdists cis", {
+#   fits <- ssd_fit_dists(boron_data, dists = ssd_dists())
+#   set.seed(101)
+#   hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+# })
