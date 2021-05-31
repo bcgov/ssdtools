@@ -122,7 +122,7 @@ test_that("ssd_hp fitdists correct for rescaling", {
   fits_rescale <- ssd_fit_dists(boron_data, dists = ssd_dists(), rescale = TRUE)
   hp <- ssd_hp(fits, 1)
   hp_rescale <- ssd_hp(fits_rescale, 1)
-  expect_equal(hc_rescale, hc, tolerance = 1e-05)
+  expect_equal(hp_rescale, hp, tolerance = 1e-05)
 })
 
 test_that("hp fitdists with no fitdists", {
