@@ -33,6 +33,27 @@ stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
   )
 }
 
+#' Plot Species Sensitivity Data
+#'
+#' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
+#'
+#' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::geom_point
+#' @seealso [geom_ssd()] and [ssd_plot_cdf()]
+#' @export
+#' @examples
+#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+#'   stat_ssd()
+stat_ssdcens <- function(mapping = NULL, data = NULL, geom = "ssdcens",
+                     position = "identity", na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE, ...) {
+  layer(
+    stat = StatSsdcens, data = data, mapping = mapping, geom = geom,
+    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
+    params = list(na.rm = na.rm, ...)
+  )
+}
+
 #' Ribbons Plot
 #'
 #' For each y value, `geom_xribbon` displays an x interval defined
@@ -71,6 +92,31 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
     geom = GeomSsd, data = data, mapping = mapping, stat = stat,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
+  )
+}
+
+#' Plot Censored Species Sensitivity Data
+#'
+#' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
+#'
+#' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::geom_segment
+#' @seealso [ssd_plot_cdf()]
+#' @family ggplot
+#' @export
+#' @examples
+#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+#'   geom_ssdcens()
+geom_ssdcens <- function(mapping = NULL, data = NULL, stat = "ssd",
+                     position = "identity", na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE, 
+                     arrow = NULL, arrow.fill = NULL, lineend = "butt", linejoin = "round", 
+                     ...) {
+  layer(
+    geom = GeomSsdcens, data = data, mapping = mapping, stat = stat,
+    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
+    params = list(arrow = arrow, arrow.fill = arrow.fill, 
+                  lineend = lineend, linejoin = linejoin, na.rm = na.rm, ...)
   )
 }
 

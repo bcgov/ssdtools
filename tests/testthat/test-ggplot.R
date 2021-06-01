@@ -18,10 +18,22 @@ test_that("plot stat_ssd", {
   expect_snapshot_plot(gp, "stat_ssd")
 })
 
+test_that("plot stat_ssdcens", {
+  gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+    stat_ssdcens()
+  expect_snapshot_plot(gp, "stat_ssdcens")
+})
+
 test_that("plot geom_ssd", {
   gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
     geom_ssd()
   expect_snapshot_plot(gp, "geom_ssd")
+})
+
+test_that("plot geom_ssdcens", {
+  gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+    geom_ssdcens()
+  expect_snapshot_plot(gp, "geom_ssdcens")
 })
 
 test_that("plot geom_hcintersect", {
@@ -49,6 +61,7 @@ test_that("plot geom_xribbon", {
 test_that("plot geoms", {
   gp <- ggplot2::ggplot(boron_pred) +
     geom_ssd(data = boron_data, ggplot2::aes(x = Conc)) +
+    geom_ssdcens(data = boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_hcintersect(xintercept = 100, yintercept = 0.5) +
     geom_xribbon(
       ggplot2::aes(xmin = lcl, xmax = ucl, y = percent/100),

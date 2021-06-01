@@ -61,3 +61,5 @@ bind_rows <- function(x) {
   x <- do.call("rbind", x)
   as_tibble(x)
 }
+
+`%||%` <- function(x, y) if (is.null(x) || length(x) == 0) y else x

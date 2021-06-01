@@ -98,35 +98,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       color = color
     ))
   } else {
-    data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
-    data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
-    data$xmean <- rowMeans(data[c("left", "right")], na.rm = TRUE)
-    data$arrowleft <- data$right / 2
-    data$arrowright <- data$left * 2
-    data$y <- ssd_ecd(data$xmean)
-    
-    arrow <- arrow(length = unit(0.1, "inches"))
-    
-    gp <- gp + geom_line(aes_string(y = "percent")) +
-      geom_segment(
-        data = data[data$xmin != data$xmax, ],
-        aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")
-      ) +
-      geom_segment(
-        data = data[is.na(data$left), ],
-        aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
-        arrow = arrow
-      ) +
-      geom_segment(
-        data = data[is.na(data$right), ],
-        aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
-        arrow = arrow
-      ) +
-      geom_point(data = data, aes_string(x = "xmin", y = "y")) +
-      geom_point(
-        data = data[data$xmin != data$xmax, ],
-        aes_string(x = "xmax", y = "y")
-      )
+    gp <- gp + geom_ssdcens(data = data, aes_string(
+      x = left, xend = right, shape = shape,
+      color = color
+    ))
   }
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab)
   

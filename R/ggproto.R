@@ -12,6 +12,25 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+is.waive <- function(x) inherits(x, "waiver")
+
+empty <- function (df) {
+  is.null(df) || nrow(df) == 0 || ncol(df) == 0 || is.waive(df)
+}
+
+rename <- function (x, replace) 
+{
+  current_names <- names(x)
+  old_names <- names(replace)
+  missing_names <- setdiff(old_names, current_names)
+  if (length(missing_names) > 0) {
+    replace <- replace[!old_names %in% missing_names]
+    old_names <- names(replace)
+  }
+  names(x)[match(old_names, current_names)] <- as.vector(replace)
+  x
+}
+
 ggname <- function(prefix, grob) {
   grob$name <- grobName(grob, prefix)
   grob
@@ -44,11 +63,11 @@ StatSsd <- ggproto(
 StatSsdcens <- ggproto(
   "StatSsdcens", Stat,
   compute_panel = function(data, scales) {
-    data$density <- ssd_ecd(rowMeans(data[c("xmin", "xmax")], na.rm = TRUE))
+    data$density <- ssd_ecd(rowMeans(data[c("x", "xend")], na.rm = TRUE))
     data
   },
   default_aes = aes(y = ..density..),
-  required_aes = c("xmin", "xmax")
+  required_aes = c("x", "xend")
 )
 
 #' @rdname ssdtools-ggproto
@@ -64,7 +83,50 @@ GeomSsd <- ggproto(
 #' @usage NULL
 #' @export
 GeomSsdcens <- ggproto(
-  "GeomSsdcens", GeomPoint
+  "GeomSsdcens", Geom,
+  default_aes = aes(
+    colour = NA, fill = "grey20", size = 0.5, linetype = 1,
+    alpha = NA
+  ),
+  required_aes = c("x", "xend"),
+  non_missing_aes = c("linetype", "size", "shape"),
+  default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
+  draw_key = draw_key_path,
+  draw_panel = function(data, panel_params, coord, arrow = NULL, arrow.fill = NULL,
+                        lineend = "butt", linejoin = "round", na.rm = FALSE) {
+    
+    data <- remove_missing(data, na.rm = na.rm,
+                           c("x", "xend", "linetype", "size", "shape"),
+                           name = "geom_ssdcens")
+    if (empty(data)) return(zeroGrob())
+    
+    if (coord$is_linear()) {
+      coord <- coord$transform(data, panel_params)
+      arrow.fill <- arrow.fill %||% coord$colour
+      return(segmentsGrob(coord$x, coord$y, coord$xend, coord$y,
+                          default.units = "native",
+                          gp = gpar(
+                            col = alpha(coord$colour, coord$alpha),
+                            fill = alpha(arrow.fill, coord$alpha),
+                            lwd = coord$size * .pt,
+                            lty = coord$linetype,
+                            lineend = lineend,
+                            linejoin = linejoin
+                          ),
+                          arrow = arrow
+      ))
+    }
+    
+    data$group <- 1:nrow(data)
+    starts <- subset(data, select = -xend)
+    ends <- rename(subset(data, select = -x), c("xend" = "x"))
+    
+    pieces <- rbind(starts, ends)
+    pieces <- pieces[order(pieces$group),]
+    
+    GeomPath$draw_panel(pieces, panel_params, coord, arrow = arrow,
+                        lineend = lineend)
+  }
 )
 
 #' @rdname ssdtools-ggproto

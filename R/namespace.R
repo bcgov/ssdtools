@@ -17,7 +17,7 @@
 #' @importFrom generics augment glance tidy
 #' @importFrom ggplot2 autoplot
 #' @importFrom graphics par plot title
-#' @importFrom grid gpar grobName polygonGrob
+#' @importFrom grid gpar grobName polygonGrob segmentsGrob
 #' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
 #' @importFrom plyr summarise
 #' @importFrom purrr transpose
