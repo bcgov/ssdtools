@@ -7,7 +7,7 @@
 geom_ssd(
   mapping = NULL,
   data = NULL,
-  stat = "ssd",
+  stat = "ssdpoint",
   position = "identity",
   na.rm = FALSE,
   show.legend = NA,

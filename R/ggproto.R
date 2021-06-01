@@ -46,8 +46,8 @@ NULL
 #' @format NULL
 #' @usage NULL
 #' @export
-StatSsd <- ggproto(
-  "StatSsd", Stat,
+StatSsdpoint <- ggproto(
+  "StatSsdpoint", Stat,
   compute_panel = function(data, scales) {
     data$density <- ssd_ecd(data$x)
     data
@@ -74,8 +74,8 @@ StatSsdsegment <- ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomSsd <- ggproto(
-  "GeomSsd", GeomPoint
+GeomSsdpoint <- ggproto(
+  "GeomSsdpoint", GeomPoint
 )
 
 #' @rdname ssdtools-ggproto

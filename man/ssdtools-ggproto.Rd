@@ -3,9 +3,9 @@
 \docType{data}
 \name{ssdtools-ggproto}
 \alias{ssdtools-ggproto}
-\alias{StatSsd}
+\alias{StatSsdpoint}
 \alias{StatSsdsegment}
-\alias{GeomSsd}
+\alias{GeomSsdpoint}
 \alias{GeomSsdsegment}
 \alias{GeomHcintersect}
 \alias{GeomXribbon}

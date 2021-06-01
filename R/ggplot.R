@@ -27,7 +27,7 @@ stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, ...) {
   layer(
-    stat = StatSsd, data = data, mapping = mapping, geom = geom,
+    stat = StatSsdpoint, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
@@ -64,11 +64,11 @@ geom_xribbon <- function(mapping = NULL, data = NULL, stat = "identity",
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssd()
-geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
+geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssdpoint",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, ...) {
   layer(
-    geom = GeomSsd, data = data, mapping = mapping, stat = stat,
+    geom = GeomSsdpoint, data = data, mapping = mapping, stat = stat,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
@@ -86,7 +86,7 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
 #'   geom_ssdsegment()
-geom_ssdsegment <- function(mapping = NULL, data = NULL, stat = "ssd",
+geom_ssdsegment <- function(mapping = NULL, data = NULL, stat = "ssdsegment",
                      position = "identity", ...,
                      arrow = NULL,
                      arrow.fill = NULL,
