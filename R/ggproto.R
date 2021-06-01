@@ -92,8 +92,12 @@ GeomSsdcens <- ggproto(
   non_missing_aes = c("linetype", "size", "shape"),
   default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
   draw_key = draw_key_path,
-  draw_panel = function(data, panel_params, coord, arrow = NULL, arrow.fill = NULL,
-                        lineend = "butt", linejoin = "round", na.rm = FALSE) {
+  draw_panel = function(data, panel_params, coord, 
+                        lineend = "butt", na.rm = FALSE) {
+    
+    arrow <- NULL
+    linejoin <- "round"
+    arrow.fill <- NULL
     
     data <- remove_missing(data, na.rm = na.rm,
                            c("x", "xend", "linetype", "size", "shape"),

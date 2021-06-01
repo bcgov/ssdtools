@@ -110,13 +110,12 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 geom_ssdcens <- function(mapping = NULL, data = NULL, stat = "ssdcens",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, 
-                     arrow = NULL, arrow.fill = NULL, lineend = "butt", linejoin = "round", 
+                     lineend = "butt",
                      ...) {
   layer(
     geom = GeomSsdcens, data = data, mapping = mapping, stat = stat,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(arrow = arrow, arrow.fill = arrow.fill, 
-                  lineend = lineend, linejoin = linejoin, na.rm = na.rm, ...)
+    params = list(lineend = lineend, na.rm = na.rm, ...)
   )
 }
 

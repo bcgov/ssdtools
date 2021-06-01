@@ -12,10 +12,7 @@ geom_ssdcens(
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE,
-  arrow = NULL,
-  arrow.fill = NULL,
   lineend = "butt",
-  linejoin = "round",
   ...
 )
 }
@@ -60,14 +57,7 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{arrow}{specification for arrow heads, as created by arrow().}
-
-\item{arrow.fill}{fill colour to use for the arrow head (if closed). \code{NULL}
-means use \code{colour} aesthetic.}
-
 \item{lineend}{Line end style (round, butt, square).}
-
-\item{linejoin}{Line join style (round, mitre, bevel).}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
