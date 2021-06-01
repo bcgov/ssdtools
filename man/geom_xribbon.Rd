@@ -68,6 +68,7 @@ by \code{xmin} and \code{xmax}.
 \seealso{
 Other ggplot: 
 \code{\link{geom_hcintersect}()},
+\code{\link{geom_ssdpoint}()},
 \code{\link{geom_ssdsegment}()},
 \code{\link{geom_ssd}()}
 }

@@ -12,16 +12,34 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+test_that("stat_ssd deprecated", {
+  lifecycle::expect_deprecated(ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+                                 stat_ssd())
+})
+
 test_that("plot stat_ssd", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
     stat_ssd()
   expect_snapshot_plot(gp, "stat_ssd")
 })
 
+test_that("geom_ssd deprecated", {
+  lifecycle::expect_deprecated(ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+                                 geom_ssd())
+})
+
 test_that("plot geom_ssd", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
     geom_ssd()
   expect_snapshot_plot(gp, "geom_ssd")
+})
+
+test_that("plot geom_ssdpoint", {
+  gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+    geom_ssdpoint()
+  expect_snapshot_plot(gp, "geom_ssdpoint")
 })
 
 test_that("plot geom_ssdsegment", {
@@ -66,7 +84,7 @@ test_that("plot geom_xribbon", {
 
 test_that("plot geoms", {
   gp <- ggplot2::ggplot(boron_pred) +
-    geom_ssd(data = boron_data, ggplot2::aes(x = Conc)) +
+    geom_ssdpoint(data = boron_data, ggplot2::aes(x = Conc)) +
     geom_ssdsegment(data = boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_hcintersect(xintercept = 100, yintercept = 0.5) +
     geom_xribbon(

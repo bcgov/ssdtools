@@ -58,11 +58,12 @@ For each xintercept and yintercept value, \code{geom_hcintersect()} plots the in
 }
 \examples{
 ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
-  geom_ssd() +
+  geom_ssdpoint() +
   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
 }
 \seealso{
 Other ggplot: 
+\code{\link{geom_ssdpoint}()},
 \code{\link{geom_ssdsegment}()},
 \code{\link{geom_ssd}()},
 \code{\link{geom_xribbon}()}

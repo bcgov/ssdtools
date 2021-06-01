@@ -59,6 +59,6 @@ ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Aff
       y = "percent/100", color = "Distribution",
       linetype = "Distribution"
     )) +
-    geom_ssd(data = data, aes_string(x = "x")) +
+    geom_ssdpoint(data = data, aes_string(x = "x")) +
     plot_coord_scale(data, xlab = xlab, ylab = ylab)
 }

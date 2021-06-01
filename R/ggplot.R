@@ -26,6 +26,7 @@
 stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, ...) {
+  lifecycle::deprecate_soft("0.3.5", "stat_ssd()")
   layer(
     stat = StatSsdpoint, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
@@ -63,8 +64,29 @@ geom_xribbon <- function(mapping = NULL, data = NULL, stat = "identity",
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
-#'   geom_ssd()
+#'   geom_ssdpoint()
 geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssdpoint",
+                     position = "identity", na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE, ...) {
+  lifecycle::deprecate_soft("0.3.5", "geom_ssd()", "geom_ssdpoint()")
+  geom_ssdpoint(mapping = mapping, data = data, stat = stat,
+                position = position, na.rm = na.rm, show.legend = show.legend,
+                inherit.aes = inherit.aes, ...)
+}
+
+#' Plot Species Sensitivity Data
+#'
+#' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
+#'
+#' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::geom_point
+#' @seealso [ssd_plot_cdf()]
+#' @family ggplot
+#' @export
+#' @examples
+#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+#'   geom_ssdpoint()
+geom_ssdpoint <- function(mapping = NULL, data = NULL, stat = "ssdpoint",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, ...) {
   layer(
@@ -112,7 +134,7 @@ geom_ssdsegment <- function(mapping = NULL, data = NULL, stat = "ssdsegment",
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
-#'   geom_ssd() +
+#'   geom_ssdpoint() +
 #'   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
 geom_hcintersect <- function(mapping = NULL, data = NULL, xintercept, yintercept,
                              na.rm = FALSE, show.legend = NA, ...) {

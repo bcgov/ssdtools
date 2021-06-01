@@ -93,7 +93,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   }
   
   if (left == right) {
-    gp <- gp + geom_ssd(data = data, aes_string(
+    gp <- gp + geom_ssdpoint(data = data, aes_string(
       x = left, shape = shape,
       color = color
     ))
