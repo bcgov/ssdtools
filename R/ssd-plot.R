@@ -98,7 +98,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       color = color
     ))
   } else {
-    gp <- gp + geom_ssdcens(data = data, aes_string(
+    gp <- gp + geom_ssdsegment(data = data, aes_string(
       x = left, xend = right, shape = shape,
       color = color
     ))

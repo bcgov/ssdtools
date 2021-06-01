@@ -73,7 +73,7 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 
 Other ggplot: 
 \code{\link{geom_hcintersect}()},
-\code{\link{geom_ssdcens}()},
+\code{\link{geom_ssdsegment}()},
 \code{\link{geom_xribbon}()}
 }
 \concept{ggplot}

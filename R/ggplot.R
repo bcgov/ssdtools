@@ -43,12 +43,12 @@ stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-#'   stat_ssd()
-stat_ssdcens <- function(mapping = NULL, data = NULL, geom = "ssdcens",
+#'   stat_ssdsegment()
+stat_ssdsegment <- function(mapping = NULL, data = NULL, geom = "segment",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, ...) {
   layer(
-    stat = StatSsdcens, data = data, mapping = mapping, geom = geom,
+    stat = StatSsdsegment, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
@@ -106,8 +106,8 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #' @export
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-#'   geom_ssdcens()
-geom_ssdcens <- function(mapping = NULL, data = NULL, stat = "ssdcens",
+#'   geom_ssdsegment()
+geom_ssdsegment <- function(mapping = NULL, data = NULL, stat = "ssdsegment",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, 
                      lineend = "butt",
@@ -121,7 +121,7 @@ geom_ssdcens <- function(mapping = NULL, data = NULL, stat = "ssdcens",
 
 #' Hazard Concentration Intersection
 #'
-#' For each x and y value, `geom_hcintersect()` plots the intersection.
+#' For each xintercept and yintercept value, `geom_hcintersect()` plots the intersection.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path

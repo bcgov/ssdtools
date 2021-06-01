@@ -4,7 +4,7 @@
 \name{ssdtools-ggproto}
 \alias{ssdtools-ggproto}
 \alias{StatSsd}
-\alias{StatSsdcens}
+\alias{StatSsdsegment}
 \alias{GeomSsd}
 \alias{GeomSsdcens}
 \alias{GeomHcintersect}

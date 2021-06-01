@@ -60,13 +60,13 @@ StatSsd <- ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatSsdcens <- ggproto(
-  "StatSsdcens", Stat,
+StatSsdsegment <- ggproto(
+  "StatSsdsegment", Stat,
   compute_panel = function(data, scales) {
     data$density <- ssd_ecd(rowMeans(data[c("x", "xend")], na.rm = TRUE))
     data
   },
-  default_aes = aes(y = ..density..),
+  default_aes = aes(y = ..density.., yend = ..density..),
   required_aes = c("x", "xend")
 )
 
@@ -101,7 +101,7 @@ GeomSsdcens <- ggproto(
     
     data <- remove_missing(data, na.rm = na.rm,
                            c("x", "xend", "linetype", "size", "shape"),
-                           name = "geom_ssdcens")
+                           name = "geom_ssdsegment")
     if (empty(data)) return(zeroGrob())
     
     data$group <- 1:nrow(data)
@@ -111,7 +111,7 @@ GeomSsdcens <- ggproto(
     pieces <- rbind(starts, ends)
     pieces <- pieces[order(pieces$group),]
     
-    ggname("geom_ssdcens",
+    ggname("geom_ssdsegment",
            gTree(children = gList(
              GeomPath$draw_panel(pieces, panel_params, coord, arrow = arrow,
                                  lineend = lineend)

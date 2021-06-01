@@ -18,10 +18,10 @@ test_that("plot stat_ssd", {
   expect_snapshot_plot(gp, "stat_ssd")
 })
 
-test_that("plot stat_ssdcens", {
+test_that("plot stat_ssdsegment", {
   gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-    stat_ssdcens()
-  expect_snapshot_plot(gp, "stat_ssdcens")
+    stat_ssdsegment()
+  expect_snapshot_plot(gp, "stat_ssdsegment")
 })
 
 test_that("plot geom_ssd", {
@@ -30,22 +30,22 @@ test_that("plot geom_ssd", {
   expect_snapshot_plot(gp, "geom_ssd")
 })
 
-test_that("plot geom_ssdcens", {
+test_that("plot geom_ssdsegment", {
   gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-    geom_ssdcens()
-  expect_snapshot_plot(gp, "geom_ssdcens")
+    geom_ssdsegment()
+  expect_snapshot_plot(gp, "geom_ssdsegment")
 })
 
-test_that("plot geom_ssdcens no arrows", {
+test_that("plot geom_ssdsegment no arrows", {
   expect_warning(gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-                   geom_ssdcens(arrow = grid::arrow()), "^Ignoring unknown parameters: arrow$")
-  expect_snapshot_plot(gp, "geom_ssdcens_noarrow")
+                   geom_ssdsegment(arrow = grid::arrow()), "^Ignoring unknown parameters: arrow$")
+  expect_snapshot_plot(gp, "geom_ssdsegment_noarrow")
 })
 
-test_that("plot geom_ssdcens no data", {
+test_that("plot geom_ssdsegment no data", {
   gp <- ggplot2::ggplot(boron_data[FALSE,], ggplot2::aes(x = Conc, xend = Conc * 2)) +
-    geom_ssdcens()
-  expect_snapshot_plot(gp, "geom_ssdcens_nodata")
+    geom_ssdsegment()
+  expect_snapshot_plot(gp, "geom_ssdsegment_nodata")
 })
 
 test_that("plot geom_hcintersect", {
@@ -73,7 +73,7 @@ test_that("plot geom_xribbon", {
 test_that("plot geoms", {
   gp <- ggplot2::ggplot(boron_pred) +
     geom_ssd(data = boron_data, ggplot2::aes(x = Conc)) +
-    geom_ssdcens(data = boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+    geom_ssdsegment(data = boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_hcintersect(xintercept = 100, yintercept = 0.5) +
     geom_xribbon(
       ggplot2::aes(xmin = lcl, xmax = ucl, y = percent/100),
