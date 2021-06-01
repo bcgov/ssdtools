@@ -104,23 +104,6 @@ GeomSsdcens <- ggproto(
                            name = "geom_ssdcens")
     if (empty(data)) return(zeroGrob())
     
-    if (coord$is_linear()) {
-      coord <- coord$transform(data, panel_params)
-      arrow.fill <- arrow.fill %||% coord$colour
-      return(segmentsGrob(coord$x, coord$y, coord$xend, coord$y,
-                          default.units = "native",
-                          gp = gpar(
-                            col = alpha(coord$colour, coord$alpha),
-                            fill = alpha(arrow.fill, coord$alpha),
-                            lwd = coord$size * .pt,
-                            lty = coord$linetype,
-                            lineend = lineend,
-                            linejoin = linejoin
-                          ),
-                          arrow = arrow
-      ))
-    }
-    
     data$group <- 1:nrow(data)
     starts <- subset(data, select = -xend)
     ends <- rename(subset(data, select = -x), c("xend" = "x"))
