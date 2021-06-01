@@ -2,16 +2,16 @@
 % Please edit documentation in R/ggplot.R
 \name{geom_hcintersect}
 \alias{geom_hcintersect}
-\title{Hazard Concentration Intersection}
+\title{Species Sensitivity Hazard Concentration Intersection}
 \usage{
 geom_hcintersect(
   mapping = NULL,
   data = NULL,
+  ...,
   xintercept,
   yintercept,
   na.rm = FALSE,
-  show.legend = NA,
-  ...
+  show.legend = NA
 )
 }
 \arguments{
@@ -35,6 +35,11 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
+\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+\code{colour = "red"} or \code{size = 3}. They may also be parameters
+to the paired geom/stat.}
+
 \item{xintercept}{The x-value for the intersect}
 
 \item{yintercept}{The y-value for the intersect.}
@@ -47,14 +52,9 @@ a warning. If \code{TRUE}, missing values are silently removed.}
 \code{FALSE} never includes, and \code{TRUE} always includes.
 It can also be a named logical vector to finely select the aesthetics to
 display.}
-
-\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
-often aesthetics, used to set an aesthetic to a fixed value, like
-\code{colour = "red"} or \code{size = 3}. They may also be parameters
-to the paired geom/stat.}
 }
 \description{
-For each xintercept and yintercept value, \code{geom_hcintersect()} plots the intersection.
+Plots the intersection between each xintercept and yintercept value.
 }
 \examples{
 ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +

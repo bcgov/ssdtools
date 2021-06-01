@@ -2,17 +2,17 @@
 % Please edit documentation in R/ggplot.R
 \name{geom_ssdpoint}
 \alias{geom_ssdpoint}
-\title{Plot Species Sensitivity Data}
+\title{Species Sensitivity Data Points}
 \usage{
 geom_ssdpoint(
   mapping = NULL,
   data = NULL,
   stat = "ssdpoint",
   position = "identity",
+  ...,
   na.rm = FALSE,
   show.legend = NA,
-  inherit.aes = TRUE,
-  ...
+  inherit.aes = TRUE
 )
 }
 \arguments{
@@ -42,6 +42,11 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
+\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+\code{colour = "red"} or \code{size = 3}. They may also be parameters
+to the paired geom/stat.}
+
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
 
@@ -55,14 +60,9 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
-
-\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
-often aesthetics, used to set an aesthetic to a fixed value, like
-\code{colour = "red"} or \code{size = 3}. They may also be parameters
-to the paired geom/stat.}
 }
 \description{
-Uses the empirical cumulative density/distribution to visualize species sensitivity data.
+Uses the empirical cumulative distribution to create scatterplot of points x.
 }
 \examples{
 ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
