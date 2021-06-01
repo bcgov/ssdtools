@@ -82,42 +82,31 @@ GeomSsd <- ggproto(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomSsdcens <- ggproto(
-  "GeomSsdcens", Geom,
-  default_aes = aes(
-    colour = NA, fill = "grey20", size = 0.5, linetype = 1, # shape = 19,
-    alpha = NA
-  ),
+GeomSsdsegment <- ggproto(
+  "GeomSsdsegment", Geom,
   required_aes = c("x", "xend"),
   non_missing_aes = c("linetype", "size", "shape"),
   default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
-  draw_key = draw_key_path, # should define draw_key_ssdcens
-  draw_panel = function(data, panel_params, coord, 
-                        lineend = "butt", na.rm = FALSE) {
-    
-    arrow <- NULL
-    linejoin <- "round"
-    arrow.fill <- NULL
-    
+  draw_panel = function(data, panel_params, coord, arrow = NULL, arrow.fill = NULL,
+                        lineend = "butt", linejoin = "round", na.rm = FALSE) {
+
     data <- remove_missing(data, na.rm = na.rm,
                            c("x", "xend", "linetype", "size", "shape"),
                            name = "geom_ssdsegment")
-    if (empty(data)) return(zeroGrob())
     
+    if (empty(data)) return(zeroGrob())
+ 
     data$group <- 1:nrow(data)
     starts <- subset(data, select = -xend)
     ends <- rename(subset(data, select = -x), c("xend" = "x"))
-    
+
     pieces <- rbind(starts, ends)
     pieces <- pieces[order(pieces$group),]
     
-    ggname("geom_ssdsegment",
-           gTree(children = gList(
-             GeomPath$draw_panel(pieces, panel_params, coord, arrow = arrow,
+    GeomPath$draw_panel(pieces, panel_params, coord, arrow = arrow,
                                  lineend = lineend)
-           ))
-    )
-  }
+  },
+  draw_key = draw_key_path
 )
 
 #' @rdname ssdtools-ggproto

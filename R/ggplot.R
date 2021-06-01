@@ -87,14 +87,17 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
 #'   geom_ssdsegment()
 geom_ssdsegment <- function(mapping = NULL, data = NULL, stat = "ssd",
-                     position = "identity", na.rm = FALSE, show.legend = NA,
-                     inherit.aes = TRUE, 
+                     position = "identity", ...,
+                     arrow = NULL,
+                     arrow.fill = NULL,
                      lineend = "butt",
-                     ...) {
+                     linejoin = "round",
+                     na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE) {
   layer(
-    geom = GeomSsdcens, data = data, mapping = mapping, stat = stat,
+    geom = GeomSsdsegment, data = data, mapping = mapping, stat = stat,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(lineend = lineend, na.rm = na.rm, ...)
+    params = list(arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, linejoin = linejoin, na.rm = na.rm, ...)
   )
 }
 

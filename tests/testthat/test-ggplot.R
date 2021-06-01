@@ -30,10 +30,10 @@ test_that("plot geom_ssdsegment", {
   expect_snapshot_plot(gp, "geom_ssdsegment")
 })
 
-test_that("plot geom_ssdsegment no arrows", {
-  expect_warning(gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-                   geom_ssdsegment(arrow = grid::arrow()), "^Ignoring unknown parameters: arrow$")
-  expect_snapshot_plot(gp, "geom_ssdsegment_noarrow")
+test_that("plot geom_ssdsegment arrow", {
+  gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+                   geom_ssdsegment(arrow = grid::arrow())
+  expect_snapshot_plot(gp, "geom_ssdsegment_arrow")
 })
 
 test_that("plot geom_ssdsegment no data", {

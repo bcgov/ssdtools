@@ -6,7 +6,7 @@
 \alias{StatSsd}
 \alias{StatSsdsegment}
 \alias{GeomSsd}
-\alias{GeomSsdcens}
+\alias{GeomSsdsegment}
 \alias{GeomHcintersect}
 \alias{GeomXribbon}
 \title{Base ggproto Classes for ggplot2}
