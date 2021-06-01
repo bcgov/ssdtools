@@ -2,9 +2,21 @@
 % Please edit documentation in R/ggplot.R
 \name{geom_ssdpoint}
 \alias{geom_ssdpoint}
+\alias{geom_ssd}
 \title{Species Sensitivity Data Points}
 \usage{
 geom_ssdpoint(
+  mapping = NULL,
+  data = NULL,
+  stat = "ssdpoint",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_ssd(
   mapping = NULL,
   data = NULL,
   stat = "ssdpoint",
@@ -62,11 +74,27 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
-Uses the empirical cumulative distribution to create scatterplot of points x.
+Uses the empirical cumulative distribution to create scatterplot of points \code{x}.
 }
+\details{
+\code{geom_ssd()} has been deprecated for \code{geom_ssdpoint()}.
+}
+\section{Functions}{
+\itemize{
+\item \code{geom_ssd}: Species Sensitivity Data Points
+
+Uses the empirical cumulative distribution to create scatterplot of points \code{x}.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+}}
+
 \examples{
 ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
   geom_ssdpoint()
+
+\dontrun{
+ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+  geom_ssd()
+ }
 }
 \seealso{
 \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
@@ -74,7 +102,6 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 Other ggplot: 
 \code{\link{geom_hcintersect}()},
 \code{\link{geom_ssdsegment}()},
-\code{\link{geom_ssd}()},
 \code{\link{geom_xribbon}()}
 }
 \concept{ggplot}

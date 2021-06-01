@@ -14,7 +14,9 @@
 
 #' Species Sensitivity Data Points
 #'
-#' Uses the empirical cumulative distribution to create scatterplot of points x.
+#' Uses the empirical cumulative distribution to create scatterplot of points `x`.
+#' 
+#' `geom_ssd()` has been deprecated for `geom_ssdpoint()`.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
@@ -39,9 +41,9 @@ geom_ssdpoint <- function(mapping = NULL,
   )
 }
 
-#' Species Sensitivity Line Segments
+#' Species Sensitivity Censored Segments
 #'
-#' Uses the empirical cumulative distribution to draw lines between points x and xend.
+#' Uses the empirical cumulative distribution to draw lines between points `x` and `xend`.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_segment
@@ -73,7 +75,7 @@ geom_ssdsegment <- function(mapping = NULL,
 
 #' Species Sensitivity Hazard Concentration Intersection
 #'
-#' Plots the intersection between each xintercept and yintercept value.
+#' Plots the intersection between each `xintercept` and `yintercept` value.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path
@@ -116,7 +118,7 @@ geom_hcintersect <- function(mapping = NULL,
   )
 }
 
-#' Ribbons Plot on X
+#' Ribbon on X-Axis
 #'
 #' Plots the `x` interval defined by `xmin` and `xmax`.
 #'
@@ -139,18 +141,17 @@ geom_xribbon <- function(mapping = NULL,
   )
 }
 
-#' Plot Species Sensitivity Data
-#'
-#' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
-#'
-#' @inheritParams ggplot2::layer
-#' @inheritParams ggplot2::geom_point
-#' @seealso [ssd_plot_cdf()]
-#' @family ggplot
+#' @describeIn geom_ssdpoint Species Sensitivity Data Points 
+#' 
+#' Uses the empirical cumulative distribution to create scatterplot of points `x`.
+#' `r lifecycle::badge('deprecated')`
 #' @export
 #' @examples
+#'
+#' \dontrun{
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
-#'   geom_ssdpoint()
+#'   geom_ssd()
+#'  }
 geom_ssd <- function(mapping = NULL, 
                      data = NULL, 
                      stat = "ssdpoint",
@@ -170,14 +171,17 @@ geom_ssd <- function(mapping = NULL,
 #' Plot Species Sensitivity Data
 #'
 #' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
+#' `r lifecycle::badge('deprecated')`
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
-#' @seealso [geom_ssd()] and [ssd_plot_cdf()]
+#' @seealso [geom_ssdpoint()]
 #' @export
 #' @examples
+#' \dontrun{
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 #'   stat_ssd()
+#'  }
 stat_ssd <- function(mapping = NULL, 
                      data = NULL, 
                      geom = "point",

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggplot.R
 \name{geom_ssdsegment}
 \alias{geom_ssdsegment}
-\title{Species Sensitivity Line Segments}
+\title{Species Sensitivity Censored Segments}
 \usage{
 geom_ssdsegment(
   mapping = NULL,
@@ -75,7 +75,7 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
-Uses the empirical cumulative distribution to draw lines between points x and xend.
+Uses the empirical cumulative distribution to draw lines between points \code{x} and \code{xend}.
 }
 \examples{
 ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
@@ -87,7 +87,6 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
 Other ggplot: 
 \code{\link{geom_hcintersect}()},
 \code{\link{geom_ssdpoint}()},
-\code{\link{geom_ssd}()},
 \code{\link{geom_xribbon}()}
 }
 \concept{ggplot}

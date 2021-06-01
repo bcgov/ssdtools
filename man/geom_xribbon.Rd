@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggplot.R
 \name{geom_xribbon}
 \alias{geom_xribbon}
-\title{Ribbons Plot on X}
+\title{Ribbon on X-Axis}
 \usage{
 geom_xribbon(
   mapping = NULL,
@@ -68,7 +68,6 @@ Plots the \code{x} interval defined by \code{xmin} and \code{xmax}.
 Other ggplot: 
 \code{\link{geom_hcintersect}()},
 \code{\link{geom_ssdpoint}()},
-\code{\link{geom_ssdsegment}()},
-\code{\link{geom_ssd}()}
+\code{\link{geom_ssdsegment}()}
 }
 \concept{ggplot}

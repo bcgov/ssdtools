@@ -54,7 +54,7 @@ It can also be a named logical vector to finely select the aesthetics to
 display.}
 }
 \description{
-Plots the intersection between each xintercept and yintercept value.
+Plots the intersection between each \code{xintercept} and \code{yintercept} value.
 }
 \examples{
 ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
@@ -65,7 +65,6 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 Other ggplot: 
 \code{\link{geom_ssdpoint}()},
 \code{\link{geom_ssdsegment}()},
-\code{\link{geom_ssd}()},
 \code{\link{geom_xribbon}()}
 }
 \concept{ggplot}
