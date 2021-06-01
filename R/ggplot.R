@@ -107,7 +107,7 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
 #'   geom_ssdcens()
-geom_ssdcens <- function(mapping = NULL, data = NULL, stat = "ssd",
+geom_ssdcens <- function(mapping = NULL, data = NULL, stat = "ssdcens",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, 
                      arrow = NULL, arrow.fill = NULL, lineend = "butt", linejoin = "round", 

@@ -7,7 +7,7 @@
 geom_ssdcens(
   mapping = NULL,
   data = NULL,
-  stat = "ssd",
+  stat = "ssdcens",
   position = "identity",
   na.rm = FALSE,
   show.legend = NA,
