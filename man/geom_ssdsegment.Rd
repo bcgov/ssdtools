@@ -7,7 +7,7 @@
 geom_ssdsegment(
   mapping = NULL,
   data = NULL,
-  stat = "ssdsegment",
+  stat = "ssd",
   position = "identity",
   na.rm = FALSE,
   show.legend = NA,

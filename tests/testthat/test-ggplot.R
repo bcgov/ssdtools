@@ -18,12 +18,6 @@ test_that("plot stat_ssd", {
   expect_snapshot_plot(gp, "stat_ssd")
 })
 
-test_that("plot stat_ssdsegment", {
-  gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-    stat_ssdsegment()
-  expect_snapshot_plot(gp, "stat_ssdsegment")
-})
-
 test_that("plot geom_ssd", {
   gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
     geom_ssd()

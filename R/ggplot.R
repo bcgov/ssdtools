@@ -33,27 +33,6 @@ stat_ssd <- function(mapping = NULL, data = NULL, geom = "point",
   )
 }
 
-#' Plot Species Sensitivity Data
-#'
-#' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
-#'
-#' @inheritParams ggplot2::layer
-#' @inheritParams ggplot2::geom_point
-#' @seealso [geom_ssd()] and [ssd_plot_cdf()]
-#' @export
-#' @examples
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-#'   stat_ssdsegment()
-stat_ssdsegment <- function(mapping = NULL, data = NULL, geom = "segment",
-                     position = "identity", na.rm = FALSE, show.legend = NA,
-                     inherit.aes = TRUE, ...) {
-  layer(
-    stat = StatSsdsegment, data = data, mapping = mapping, geom = geom,
-    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(na.rm = na.rm, ...)
-  )
-}
-
 #' Ribbons Plot
 #'
 #' For each y value, `geom_xribbon` displays an x interval defined
@@ -107,7 +86,7 @@ geom_ssd <- function(mapping = NULL, data = NULL, stat = "ssd",
 #' @examples
 #' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
 #'   geom_ssdsegment()
-geom_ssdsegment <- function(mapping = NULL, data = NULL, stat = "ssdsegment",
+geom_ssdsegment <- function(mapping = NULL, data = NULL, stat = "ssd",
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, 
                      lineend = "butt",

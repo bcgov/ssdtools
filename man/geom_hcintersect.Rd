@@ -54,7 +54,7 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.}
 }
 \description{
-For each x and y value, \code{geom_hcintersect()} plots the intersection.
+For each xintercept and yintercept value, \code{geom_hcintersect()} plots the intersection.
 }
 \examples{
 ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
