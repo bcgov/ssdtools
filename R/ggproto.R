@@ -85,13 +85,13 @@ GeomSsd <- ggproto(
 GeomSsdcens <- ggproto(
   "GeomSsdcens", Geom,
   default_aes = aes(
-    colour = NA, fill = "grey20", size = 0.5, linetype = 1,
+    colour = NA, fill = "grey20", size = 0.5, linetype = 1, # shape = 19,
     alpha = NA
   ),
   required_aes = c("x", "xend"),
   non_missing_aes = c("linetype", "size", "shape"),
   default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
-  draw_key = draw_key_path,
+  draw_key = draw_key_path, # should define draw_key_ssdcens
   draw_panel = function(data, panel_params, coord, 
                         lineend = "butt", na.rm = FALSE) {
     
@@ -128,8 +128,12 @@ GeomSsdcens <- ggproto(
     pieces <- rbind(starts, ends)
     pieces <- pieces[order(pieces$group),]
     
-    GeomPath$draw_panel(pieces, panel_params, coord, arrow = arrow,
-                        lineend = lineend)
+    ggname("geom_ssdcens",
+           gTree(children = gList(
+             GeomPath$draw_panel(pieces, panel_params, coord, arrow = arrow,
+                                 lineend = lineend)
+           ))
+    )
   }
 )
 
@@ -193,7 +197,7 @@ GeomXribbon <- ggproto(
     ids[missing_pos] <- NA
     
     positions <- summarise(data,
-                                 y = c(y, rev(y)), x = c(xmax, rev(xmin)), id = c(ids, rev(ids))
+                           y = c(y, rev(y)), x = c(xmax, rev(xmin)), id = c(ids, rev(ids))
     )
     munched <- coord_munch(coord, positions, panel_params)
     

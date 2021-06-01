@@ -38,8 +38,14 @@ test_that("plot geom_ssdcens", {
 
 test_that("plot geom_ssdcens no arrows", {
   expect_warning(gp <- ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-    geom_ssdcens(arrow = grid::arrow()), "^Ignoring unknown parameters: arrow$")
+                   geom_ssdcens(arrow = grid::arrow()), "^Ignoring unknown parameters: arrow$")
   expect_snapshot_plot(gp, "geom_ssdcens_noarrow")
+})
+
+test_that("plot geom_ssdcens no data", {
+  gp <- ggplot2::ggplot(boron_data[FALSE,], ggplot2::aes(x = Conc, xend = Conc * 2)) +
+    geom_ssdcens()
+  expect_snapshot_plot(gp, "geom_ssdcens_nodata")
 })
 
 test_that("plot geom_hcintersect", {
