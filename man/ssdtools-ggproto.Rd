@@ -9,11 +9,37 @@
 \alias{GeomSsdsegment}
 \alias{GeomHcintersect}
 \alias{GeomXribbon}
-\title{Base ggproto Classes for ggplot2}
+\title{ggproto Classes for Plotting Species Sensitivity Data and Distributions}
+\format{
+An object of class \code{StatSsdpoint} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 4.
+
+An object of class \code{StatSsdsegment} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 4.
+
+An object of class \code{GeomSsdpoint} (inherits from \code{GeomPoint}, \code{Geom}, \code{ggproto}, \code{gg}) of length 1.
+
+An object of class \code{GeomSsdsegment} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 1.
+
+An object of class \code{GeomHcintersect} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
+
+An object of class \code{GeomXribbon} (inherits from \code{Geom}, \code{ggproto}, \code{gg}) of length 6.
+}
+\usage{
+StatSsdpoint
+
+StatSsdsegment
+
+GeomSsdpoint
+
+GeomSsdsegment
+
+GeomHcintersect
+
+GeomXribbon
+}
 \description{
-Base ggproto Classes for ggplot2
+ggproto Classes for Plotting Species Sensitivity Data and Distributions
 }
 \seealso{
-\code{\link[ggplot2:ggplot2-ggproto]{ggplot2::ggplot2-ggproto()}}
+\code{\link[ggplot2:ggproto]{ggplot2::ggproto()}} and \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
 }
 \keyword{datasets}
