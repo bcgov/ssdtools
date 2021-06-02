@@ -17,8 +17,12 @@ test_that("autoplot", {
   expect_snapshot_plot(autoplot(boron_dists), "boron_dists")
 })
 
-
 test_that("autoplot deals with rescaled data", {
   fits <- ssd_fit_dists(boron_data, rescale = TRUE)
   expect_snapshot_plot(autoplot(fits), "boron_dists_rescale")
+})
+
+test_that("autoplot accepts additional arguments", {
+  fits <- ssd_fit_dists(boron_data, rescale = TRUE)
+  expect_snapshot_plot(autoplot(fits, xlab = "New"), "boron_dists_additional")
 })

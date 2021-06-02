@@ -73,3 +73,4 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
 \seealso{
 \code{\link[=geom_ssdpoint]{geom_ssdpoint()}}
 }
+\concept{ggplot2}

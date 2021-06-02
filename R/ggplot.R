@@ -80,6 +80,7 @@ geom_ssdsegment <- function(mapping = NULL,
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path
 #' @inheritParams params
+#' @seealso [ssd_plot_cdf()]
 #' @family ggplot
 #' @export
 #' @examples
@@ -124,8 +125,12 @@ geom_hcintersect <- function(mapping = NULL,
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
+#' @seealso [ssd_plot_cdf()]
 #' @family ggplot
 #' @export
+#' @examples
+#' gp <- ggplot2::ggplot(boron_pred) +
+#'   geom_xribbon(ggplot2::aes(xmin = lcl, xmax = ucl, y = percent))
 geom_xribbon <- function(mapping = NULL, 
                          data = NULL, 
                          stat = "identity",
@@ -176,6 +181,7 @@ geom_ssd <- function(mapping = NULL,
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @seealso [geom_ssdpoint()]
+#' @family ggplot2
 #' @export
 #' @examples
 #' \dontrun{

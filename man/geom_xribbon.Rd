@@ -64,7 +64,13 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 \description{
 Plots the \code{x} interval defined by \code{xmin} and \code{xmax}.
 }
+\examples{
+gp <- ggplot2::ggplot(boron_pred) +
+  geom_xribbon(ggplot2::aes(xmin = lcl, xmax = ucl, y = percent))
+}
 \seealso{
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
+
 Other ggplot: 
 \code{\link{geom_hcintersect}()},
 \code{\link{geom_ssdpoint}()},

@@ -17,6 +17,5 @@ ggplot2::autoplot
 
 #' @export
 autoplot.fitdists <- function(object, ...) {
-  chk_unused(...)
-  ssd_plot_cdf(object)
+  ssd_plot_cdf(object, ...)
 }

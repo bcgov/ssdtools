@@ -62,6 +62,8 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
 }
 \seealso{
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
+
 Other ggplot: 
 \code{\link{geom_ssdpoint}()},
 \code{\link{geom_ssdsegment}()},
