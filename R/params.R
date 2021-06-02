@@ -21,6 +21,11 @@
 #' @param pred A data frame of the predictions.
 #' @param xlab A string of the x-axis label.
 #' @param ylab A string of the x-axis label.
+#' @param xbreaks The x-axis breaks as one of:
+#'   - `NULL` for no breaks
+#'   - `waiver()` for the default breaks
+#'   - A numeric vector of positions
+#' @param breaks A character vector 
 #' @param conc A numeric vector of concentrations.
 #' @param percent A numeric vector of percentages.
 #' @param ic A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .

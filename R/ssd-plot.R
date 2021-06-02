@@ -12,14 +12,20 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-plot_coord_scale <- function(data, xlab, ylab) {
+#' @export
+ggplot2::waiver
+
+plot_coord_scale <- function(data, xlab, ylab, xbreaks = waiver()) {
   chk_string(xlab)
   chk_string(ylab)
+  
+  if(is.waive(xbreaks))
+    xbreaks <- trans_breaks("log10", function(x) 10^x)
   
   list(
     coord_trans(x = "log10"),
     scale_x_continuous(xlab,
-                       breaks = trans_breaks("log10", function(x) 10^x),
+                       breaks = xbreaks,
                        labels = comma_signif
     ),
     scale_y_continuous(ylab,
@@ -29,17 +35,20 @@ plot_coord_scale <- function(data, xlab, ylab) {
   )
 }
 
-#' SSD Plot
+#' Plot Species Sensitivity Data and Distributions
 #' 
-#' Plots species sensitivity data.
+#' Plots species sensitivity data and distributions.
+#' 
 #' @inheritParams params
+#' @seealso [ssd_plot_cdf()] and [geom_ssdpoint()]
 #' @export
 #' @examples
 #' ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
 ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
-                     ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3) {
+                     ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3,
+                     xbreaks = waiver()) {
   chk_s3_class(data, "data.frame")
   chk_s3_class(pred, "data.frame")
   chk_superset(colnames(pred), c("percent", "est", "lcl", "ucl"))
@@ -103,7 +112,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       color = color
     ))
   }
-  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab)
+  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
   
   if (!is.null(label)) {
     data$percent <- ssd_ecd(data[[left]])

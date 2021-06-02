@@ -18,6 +18,15 @@
 
 \item{ylab}{A string of the x-axis label.}
 
+\item{xbreaks}{The x-axis breaks as one of:
+\itemize{
+\item \code{NULL} for no breaks
+\item \code{waiver()} for the default breaks
+\item A numeric vector of positions
+}}
+
+\item{breaks}{A character vector}
+
 \item{conc}{A numeric vector of concentrations.}
 
 \item{percent}{A numeric vector of percentages.}

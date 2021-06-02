@@ -2,7 +2,7 @@
 % Please edit documentation in R/ssd-plot.R
 \name{ssd_plot}
 \alias{ssd_plot}
-\title{SSD Plot}
+\title{Plot Species Sensitivity Data and Distributions}
 \usage{
 ssd_plot(
   data,
@@ -18,7 +18,8 @@ ssd_plot(
   ci = TRUE,
   ribbon = FALSE,
   hc = 5L,
-  shift_x = 3
+  shift_x = 3,
+  xbreaks = waiver()
 )
 }
 \arguments{
@@ -49,10 +50,20 @@ ssd_plot(
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 
 \item{shift_x}{The value to multiply the label x values by.}
+
+\item{xbreaks}{The x-axis breaks as one of:
+\itemize{
+\item \code{NULL} for no breaks
+\item \code{waiver()} for the default breaks
+\item A numeric vector of positions
+}}
 }
 \description{
-Plots species sensitivity data.
+Plots species sensitivity data and distributions.
 }
 \examples{
 ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
+}
+\seealso{
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}} and \code{\link[=geom_ssdpoint]{geom_ssdpoint()}}
 }
