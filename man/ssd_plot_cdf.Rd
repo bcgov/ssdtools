@@ -2,15 +2,15 @@
 % Please edit documentation in R/plot-cdf.R
 \name{ssd_plot_cdf}
 \alias{ssd_plot_cdf}
-\alias{ssd_plot_cdf.list}
 \alias{ssd_plot_cdf.fitdists}
-\title{Plot Cumulative Distribution Function}
+\alias{ssd_plot_cdf.list}
+\title{Plot Cumulative Distribution Function (CDF)}
 \usage{
 ssd_plot_cdf(x, ...)
 
-\method{ssd_plot_cdf}{list}(x, xlab = "Concentration", ylab = "Species Affected", ...)
-
 \method{ssd_plot_cdf}{fitdists}(x, xlab = "Concentration", ylab = "Species Affected", ...)
+
+\method{ssd_plot_cdf}{list}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -22,12 +22,23 @@ ssd_plot_cdf(x, ...)
 \item{ylab}{A string of the x-axis label.}
 }
 \description{
-Plots the cumulative distribution function (cdf).
+Generic function to plots the cumulative distribution function (CDF).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{list}: Plot list
+\item \code{fitdists}: Plot CDF for fitdists object
 
-\item \code{fitdists}: Plot CDF fitdists
+\item \code{list}: Plot CDF for named list of distributional parameter values
 }}
 
+\examples{
+ssd_plot_cdf(boron_dists)
+
+ssd_plot_cdf(list(
+  llogis = c(locationlog = 2, scalelog = 1),
+  lnorm = c(meanlog = 2, sdlog = 2))
+)
+}
+\seealso{
+\code{\link[=ssd_plot]{ssd_plot()}}
+}

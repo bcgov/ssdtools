@@ -12,18 +12,49 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Plot Cumulative Distribution Function
+#' Plot Cumulative Distribution Function (CDF)
 #'
-#' Plots the cumulative distribution function (cdf).
+#' Generic function to plots the cumulative distribution function (CDF).
 #'
 #' @inheritParams params
+#' @seealso [ssd_plot()]
 #' @export
 ssd_plot_cdf <- function(x, ...) {
   UseMethod("ssd_plot_cdf")
 }
 
-#' @describeIn ssd_plot_cdf Plot list
+#' @describeIn ssd_plot_cdf Plot CDF for fitdists object
+#' @inheritParams params
 #' @export
+#'@examples
+#'ssd_plot_cdf(boron_dists)
+ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
+  chk_null_or(xlab, chk_string)
+  chk_null_or(ylab, chk_string)
+  chk_unused(...)
+  
+  pred <- ssd_hc(x, average = FALSE, percent = 1:99)
+  pred$Distribution <- pred$dist
+  
+  data <- data.frame(x = .data_fitdists(x)$left * .rescale_fitdists(x))
+  
+  ggplot(pred, aes_string(x = "est")) +
+    geom_line(aes_string(
+      y = "percent/100", color = "Distribution",
+      linetype = "Distribution"
+    )) +
+    geom_ssdpoint(data = data, aes_string(x = "x")) +
+    plot_coord_scale(data, xlab = xlab, ylab = ylab)
+}
+
+#' @describeIn ssd_plot_cdf Plot CDF for named list of distributional parameter values
+#' @export
+#' @examples
+#' 
+#' ssd_plot_cdf(list(
+#'   llogis = c(locationlog = 2, scalelog = 1),
+#'   lnorm = c(meanlog = 2, sdlog = 2))
+#' )
 ssd_plot_cdf.list <- function(x,
                               xlab = "Concentration", ylab = "Species Affected",
                               ...) {
@@ -41,24 +72,4 @@ ssd_plot_cdf.list <- function(x,
       linetype = "Distribution"
     )) +
     plot_coord_scale(pred, xlab = xlab, ylab = ylab)
-}
-
-#' @describeIn ssd_plot_cdf Plot CDF fitdists
-#' @export
-ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
-  chk_null_or(xlab, chk_string)
-  chk_null_or(ylab, chk_string)
-  
-  pred <- ssd_hc(x, average = FALSE, percent = 1:99)
-  pred$Distribution <- pred$dist
-  
-  data <- data.frame(x = .data_fitdists(x)$left * .rescale_fitdists(x))
-  
-  ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(
-      y = "percent/100", color = "Distribution",
-      linetype = "Distribution"
-    )) +
-    geom_ssdpoint(data = data, aes_string(x = "x")) +
-    plot_coord_scale(data, xlab = xlab, ylab = ylab)
 }

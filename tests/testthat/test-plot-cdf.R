@@ -21,3 +21,10 @@ test_that("autoplot deals with rescaled data", {
   fits <- ssd_fit_dists(boron_data, rescale = TRUE)
   expect_snapshot_plot(ssd_plot_cdf(fits), "boron_dists_rescale")
 })
+
+test_that("autoplot deals with named list", {
+  expect_snapshot_plot(ssd_plot_cdf(list(
+    llogis = c(locationlog = 2, scalelog = 1),
+    lnorm = c(meanlog = 2, sdlog = 2))),
+                       "list")
+})
