@@ -51,15 +51,3 @@ comma_signif <- function(x, digits = 3, ...) {
 ssd_ecd <- function(x, ties.method = "first") {
   (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }
-
-is_bounds <- function(dist) {
-  fun <- paste0("b", dist)
-  exists(fun, mode = "function")
-}
-
-bind_rows <- function(x) {
-  x <- do.call("rbind", x)
-  as_tibble(x)
-}
-
-`%||%` <- function(x, y) if (is.null(x) || length(x) == 0) y else x
