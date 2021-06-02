@@ -59,30 +59,7 @@ GeomSsdpoint <- ggproto(
 #' @usage NULL
 #' @export
 GeomSsdsegment <- ggproto(
-  "GeomSsdsegment", Geom,
-  required_aes = c("x", "xend"),
-  non_missing_aes = c("linetype", "size", "shape"),
-  default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
-  draw_panel = function(data, panel_params, coord, arrow = NULL, arrow.fill = NULL,
-                        lineend = "butt", linejoin = "round", na.rm = FALSE) {
-
-    data <- remove_missing(data, na.rm = na.rm,
-                           c("x", "xend", "linetype", "size", "shape"),
-                           name = "geom_ssdsegment")
-    
-    if (empty(data)) return(zeroGrob())
- 
-    data$group <- 1:nrow(data)
-    starts <- subset(data, select = -xend)
-    ends <- rename(subset(data, select = -x), c("xend" = "x"))
-
-    pieces <- rbind(starts, ends)
-    pieces <- pieces[order(pieces$group),]
-    
-    GeomPath$draw_panel(pieces, panel_params, coord, arrow = arrow,
-                                 lineend = lineend)
-  },
-  draw_key = draw_key_path
+  "GeomSsdsegment", GeomSegment
 )
 
 #' @rdname ssdtools-ggproto
