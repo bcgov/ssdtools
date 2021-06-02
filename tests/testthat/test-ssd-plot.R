@@ -29,3 +29,20 @@ test_that("ssd_plot censored data", {
 test_that("ssd_plot xbreaks", {
   expect_snapshot_plot(ssd_plot(boron_data, boron_pred, xbreaks = c(1,2)), "boron_breaks")
 })
+
+test_that("ssd_plot handles missing values all", {
+  withr::local_options(warn = -1)
+  data <- boron_data
+  data$Conc <- NA_real_
+  expect_snapshot_plot(ssd_plot(data, boron_pred), "missing_all")
+})
+
+test_that("ssd_plot fills in missing order", {
+  data <- boron_data
+  data <- data[order(data$Conc),]
+  data$Other <- data$Conc
+  data$Conc[1] <- NA
+  data$Other[nrow(data)] <- NA
+  expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", orders = c(right = 2)),
+                       "missing_order")
+})

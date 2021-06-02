@@ -27,6 +27,9 @@
 
 \item{breaks}{A character vector}
 
+\item{orders}{A named non-negative numeric vector of the order of magnitude
+to scale missing left and right values relative to the extremes of non-missing values.}
+
 \item{conc}{A numeric vector of concentrations.}
 
 \item{percent}{A numeric vector of percentages.}

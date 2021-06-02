@@ -48,6 +48,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
                      ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3,
+                     orders = c(left = 1, right = 1),
                      xbreaks = waiver()) {
   chk_s3_class(data, "data.frame")
   chk_s3_class(pred, "data.frame")
@@ -73,6 +74,11 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_gt(length(hc))
     chk_subset(hc, pred$percent)
   }
+  chk_numeric(orders)
+  chk_gte(orders)
+  chk_named(orders)
+  chk_subset(names(orders), c("left", "right"))
+  chk_unique(names(orders))
   
   chk_superset(colnames(data), c(left, right, label, shape))
   
@@ -101,17 +107,26 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     )
   }
   
+  data$left <- data[[left]]
+  data$right <- data[[right]]
+  
+  orders <- replace_missing(orders, c(left = 1, right = 1))
+  range <- measured_range(c(data$left, data$right))
+  
+  data$left[is.na(data$left)] <- range[1] / 10^orders["left"]
+  data$right[is.na(data$right)] <- range[2] * 10^orders["right"]
+  
   gp <- gp + 
     geom_ssdpoint(data = data, aes_string(
-      x = left, shape = shape,
+      x = "left", shape = shape,
       color = color
     )) + 
     geom_ssdpoint(data = data, aes_string(
-      x = right, shape = shape,
+      x = "right", shape = shape,
       color = color
     )) + 
     geom_ssdsegment(data = data, aes_string(
-      x = left, xend = right, shape = shape,
+      x = "left", xend = "right", shape = shape,
       color = color
     ))
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
@@ -120,7 +135,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     data$percent <- ssd_ecd(data[[left]])
     data[[left]] <- data[[left]] * shift_x
     gp <- gp + geom_text(
-      data = data, aes_string(x = left, y = "percent", label = label),
+      data = data, aes_string(x = "right", y = "percent", label = label),
       hjust = 0, size = size, fontface = "italic"
     )
   }

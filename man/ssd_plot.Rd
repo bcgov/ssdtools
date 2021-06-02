@@ -19,6 +19,7 @@ ssd_plot(
   ribbon = FALSE,
   hc = 5L,
   shift_x = 3,
+  orders = c(left = 1, right = 1),
   xbreaks = waiver()
 )
 }
@@ -50,6 +51,9 @@ ssd_plot(
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 
 \item{shift_x}{The value to multiply the label x values by.}
+
+\item{orders}{A named non-negative numeric vector of the order of magnitude
+to scale missing left and right values relative to the extremes of non-missing values.}
 
 \item{xbreaks}{The x-axis breaks as one of:
 \itemize{
