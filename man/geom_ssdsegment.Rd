@@ -87,6 +87,8 @@ ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
 Other ggplot: 
 \code{\link{geom_hcintersect}()},
 \code{\link{geom_ssdpoint}()},
-\code{\link{geom_xribbon}()}
+\code{\link{geom_xribbon}()},
+\code{\link{scale_colour_ssd}()},
+\code{\link{ssd_pal}()}
 }
 \concept{ggplot}

@@ -74,6 +74,8 @@ gp <- ggplot2::ggplot(boron_pred) +
 Other ggplot: 
 \code{\link{geom_hcintersect}()},
 \code{\link{geom_ssdpoint}()},
-\code{\link{geom_ssdsegment}()}
+\code{\link{geom_ssdsegment}()},
+\code{\link{scale_colour_ssd}()},
+\code{\link{ssd_pal}()}
 }
 \concept{ggplot}

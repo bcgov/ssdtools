@@ -59,8 +59,11 @@ boron_dists <- ssd_fit_dists(boron_data)
 and can be quickly plotted using the `ggplot2` generic `autoplot`
 ```{r, warning = FALSE}
 library(ggplot2)
+
 theme_set(theme_bw())
-autoplot(boron_dists)
+
+autoplot(boron_dists) + 
+  scale_colour_ssd()
 ```
 
 The goodness of fit can be assessed using `ssd_gof`
@@ -89,7 +92,9 @@ and plotted together with the original data using `ssd_plot`.
 ssd_plot(boron_data, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
-) + expand_limits(x = 3000)
+) + 
+  expand_limits(x = 3000) +
+  scale_colour_ssd()
 ```
 
 ## References

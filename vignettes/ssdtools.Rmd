@@ -83,7 +83,7 @@ The function `ssd_fit_dists()` inputs a data frame and fits one or more distribu
 The user can specify a subset of the following distributions
 
 ```{r}
-ssd_dists()
+ssd_dists(type = "all")
 ```
 
 distributions using the `dists` argument.
@@ -93,21 +93,22 @@ boron_dists <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
 
 ## Coefficients
 
-The parameter estimates can be extracted using the `estimates` function.
+The parameter estimates can be extracted using the tidyverse generic `tidy` function.
 However, in and off themselves the estimates are not that helpful.
 ```{r}
-estimates(boron_dists)
+tidy(boron_dists)
 ```
 
 ## Plots
 
 It is generally much more informative to plot the fits using the `autoplot` generic function.
-As `autoplot` returns a `ggplot` object it can be modified prior to plotting (printing).
+As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
 ```{r, fig.width = 5}
 theme_set(theme_bw()) # set plot theme
-gp <- autoplot(boron_dists)
-gp <- gp + ggtitle("Species Sensitivity Distributions for Boron")
-print(gp)
+
+autoplot(boron_dists) + 
+  ggtitle("Species Sensitivity Distributions for Boron") +
+  scale_colour_ssd()
 ```
 
 ## Selecting One Distribution
@@ -162,17 +163,12 @@ boron_pred
 The data frame of the estimates can then be plotted together with the original data using the `ssd_plot()` function to summarize an analysis.
 Once again the returned object is a `ggplot` object which can be customized prior to plotting.
 ```{r, fig.height = 5, fig.width = 6}
-gp <- ssd_plot(boron_data, boron_pred,
-  color = "Group", label = "Species",
-  xlab = "Concentration (mg/L)", ribbon = TRUE
-)
-gp <- gp + expand_limits(x = 5000) + # to ensure the species labels fit
-  scale_color_manual(values = c(
-    "Amphibian" = "Black", "Fish" = "Blue",
-    "Invertebrate" = "Red", "Plant" = "Brown"
-  )) +
-  ggtitle("Species Sensitivity for Boron")
-print(gp)
+ssd_plot(boron_data, boron_pred,
+         color = "Group", label = "Species",
+         xlab = "Concentration (mg/L)", ribbon = TRUE) + 
+  expand_limits(x = 5000) + # to ensure the species labels fit
+  ggtitle("Species Sensitivity for Boron") +
+  scale_colour_ssd()
 ```
 
 In the above plot the model-averaged 95% confidence interval is indicated by the shaded band and the model-averaged 5% Hazard Concentration ($HC_5$) by the dotted line.
@@ -193,21 +189,27 @@ print(boron_hc5)
 
 ## Plotting
 
-The `ssdtools` package provides three ggplot geoms to allow you construct your own plots.
+The `ssdtools` package provides four ggplot geoms to allow you construct your own plots.
 
-The first is `geom_ssd()` which plots species sensitivity data 
+The first is `geom_ssdpoint()` which plots species sensitivity data 
 ```{r}
 ggplot(boron_data) +
-  geom_ssd(aes_string(x = "Conc"))
+  geom_ssdpoint(aes_string(x = "Conc"))
 ``` 
 
-The second is `geom_xribbon()` which plots species sensitivity confidence intervals
+The second is `geom_ssdsegments()` which plots the range of censored species sensitivity data 
+```{r}
+ggplot(boron_data) +
+  geom_ssdsegment(aes_string(x = "Conc", xend = "Conc * 2"))
+``` 
+
+The third is `geom_xribbon()` which plots species sensitivity confidence intervals
 ```{r}
 ggplot(boron_pred) +
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"))
 ```  
 
-And the third is `geom_hcintersect()` which plots hazard concentrations
+And the fourth is `geom_hcintersect()` which plots hazard concentrations
 ```{r}
 ggplot() +
   geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(5, 10, 20) / 100)
@@ -218,7 +220,9 @@ They can be combined together as follows
 gp <- ggplot(boron_pred, aes_string(x = "est")) +
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2) +
   geom_line(aes_string(y = "percent/100")) +
-  geom_ssd(data = boron_data, aes_string(x = "Conc")) +
+  geom_ssdsegment(data = boron_data, aes_string(x = "Conc / 2", xend = "Conc * 2")) +
+  geom_ssdpoint(data = boron_data, aes_string(x = "Conc / 2")) +
+  geom_ssdpoint(data = boron_data, aes_string(x = "Conc * 2")) +
   scale_y_continuous("Species Affected (%)", labels = scales::percent) +
   expand_limits(y = c(0, 1)) +
   xlab("Concentration (mg/L)")
@@ -236,6 +240,7 @@ print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5 / 100))
 ```
 
 The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
+
 ```r
 ggsave("file_name.png", dpi = 600)
 ```

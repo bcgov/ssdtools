@@ -21,10 +21,10 @@ Distributions (SSD).
 SSDs are cumulative probability distributions which are fitted to
 toxicity concentrations for different species as described by Posthuma
 et al. (2001). The ssdtools package uses Maximum Likelihood to fit
-distributions such as the gamma, log-normal, log-logistic, log-Gumbel
-and Weibull to censored and/or weighted data. Multiple distributions can
-be averaged using AICc. Confidence intervals on hazard concentrations
-and proportions are produced by parametric bootstrapping.
+distributions such as the gamma, log-logistic, log-normal and Weibull to
+censored and/or weighted data. Multiple distributions can be averaged
+using Akaike Information Criteria. Confidence intervals on hazard
+concentrations and proportions are produced by parametric bootstrapping.
 
 ## Installation
 
@@ -75,8 +75,11 @@ and can be quickly plotted using the `ggplot2` generic `autoplot`
 
 ``` r
 library(ggplot2)
+
 theme_set(theme_bw())
-autoplot(boron_dists)
+
+autoplot(boron_dists) + 
+  scale_colour_ssd()
 ```
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
@@ -122,7 +125,10 @@ and plotted together with the original data using `ssd_plot`.
 ssd_plot(boron_data, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
-) + expand_limits(x = 3000)
+) + 
+  expand_limits(x = 3000) +
+  scale_colour_ssd()
+#> Warning: Ignoring unknown aesthetics: shape
 ```
 
 ![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->

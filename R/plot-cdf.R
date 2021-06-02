@@ -26,7 +26,7 @@ ssd_plot_cdf <- function(x, ...) {
 #' @describeIn ssd_plot_cdf Plot CDF for fitdists object
 #' @inheritParams params
 #' @export
-#'@examples
+#' @examples
 #'ssd_plot_cdf(boron_dists)
 ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
   chk_null_or(xlab, chk_string)

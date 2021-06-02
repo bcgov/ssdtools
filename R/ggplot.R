@@ -12,6 +12,39 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' Color-blind Palette for SSD Plots
+#' 
+#' @return A character vector of a color blind palette with 8 colors.
+#' @family ggplot
+#' @export
+#' @examples 
+#' ssd_pal()
+ssd_pal <- function() {
+  values <- c("#999999", "#E69F00", "#56B4E9", "#009E73", 
+               "#0072B2", "#D55E00", "#CC79A7", "#F0E442")
+  f <- manual_pal(values)
+  attr(f, "max_n") <- length(values)
+  f
+}
+
+#' Discrete color-blind scale for SSD Plots
+#' 
+#' @param ... Arguments passed to [ggplot2::discrete_scale()].
+#' @family ggplot
+#' @export
+#' @examples 
+#' ssd_plot(boron_data, boron_pred, shape = "Group") +
+#'   scale_colour_ssd()
+scale_colour_ssd <- function (...) {
+  discrete_scale("colour", "ssd", ssd_pal(), ...)
+}
+
+#' @describeIn scale_colour_ssd Discrete color-blind scale for SSD Plots
+#' @export
+scale_color_ssd <- function (...) {
+  discrete_scale("colour", "ssd", ssd_pal(), ...)
+}
+
 #' Species Sensitivity Data Points
 #'
 #' Uses the empirical cumulative distribution to create scatterplot of points `x`.

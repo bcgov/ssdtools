@@ -22,7 +22,7 @@
 #' @importFrom plyr summarise
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
-#' @importFrom scales comma percent trans_breaks
+#' @importFrom scales comma manual_pal percent trans_breaks
 #' @importFrom stats coef complete.cases logLik nobs optim predict sd setNames weighted.mean
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
