@@ -101,17 +101,19 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     )
   }
   
-  if (left == right) {
-    gp <- gp + geom_ssdpoint(data = data, aes_string(
+  gp <- gp + 
+    geom_ssdpoint(data = data, aes_string(
       x = left, shape = shape,
       color = color
-    ))
-  } else {
-    gp <- gp + geom_ssdsegment(data = data, aes_string(
+    )) + 
+    geom_ssdpoint(data = data, aes_string(
+      x = right, shape = shape,
+      color = color
+    )) + 
+    geom_ssdsegment(data = data, aes_string(
       x = left, xend = right, shape = shape,
       color = color
     ))
-  }
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
   
   if (!is.null(label)) {
