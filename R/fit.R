@@ -12,87 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.censored_fitdists <- function(fits) {
-  attr(fits, "censored", exact = TRUE)
-}
-
-.control_fitdists <- function(fits) {
-  attr(fits, "control", exact = TRUE)
-}
-
-.data_fitdists <- function(fits) {
-  attr(fits, "data", exact = TRUE)
-}
-
-.org_data_fitdists <- function(fits) {
-  attr(fits, "org_data", exact = TRUE)
-}
-
-.rescale_fitdists <- function(fits) {
-  attr(fits, "rescale", exact = TRUE)
-}
-
-.weighted_fitdists <- function(fits) {
-  attr(fits, "weighted", exact = TRUE)
-}
-
-`.censored_fitdists<-` <- function(fits, value) {
-  attr(fits, "censored") <- value
-  fits
-}
-
-`.control_fitdists<-` <- function(fits, value) {
-  attr(fits, "control") <- value
-  fits
-}
-
-`.data_fitdists<-` <- function(fits, value) {
-  attr(fits, "data") <- value
-  fits
-}
-
-`.org_data_fitdists<-` <- function(fits, value) {
-  attr(fits, "org_data") <- value
-  fits
-}
-
-`.rescale_fitdists<-` <- function(fits, value) {
-  attr(fits, "rescale") <- value
-  fits
-}
-
-`.weighted_fitdists<-` <- function(fits, value) {
-  attr(fits, "weighted") <- value
-  fits
-}
-
-.attrs_fitdists <- function(fits) {
-  attrs <- attributes(fits)
-  attrs[c("censored", "control", "data", "org_data", "rescale", "weighted")]
-}
-
-`.attrs_fitdists<-` <- function(fits, value) {
-  .censored_fitdists(fits) <- value$censored
-  .control_fitdists(fits) <- value$control
-  .data_fitdists(fits) <- value$data
-  .org_data_fitdists(fits) <- value$org_data
-  .rescale_fitdists(fits) <- value$rescale
-  .weighted_fitdists(fits) <- value$weighted
-  fits
-}
-
-is_at_boundary <- function(fit) {
-  dist <- .dist_tmbfit(fit)
-  if(!is_bounds(dist)) return(FALSE)
-  bounds <- bdist(dist)
-  pars <- .pars_tmbfit(fit)
-  
-  lower <- as.numeric(bounds$lower[names(pars)])
-  upper <- as.numeric(bounds$upper[names(pars)])
-  
-  any(pars == lower | pars == upper)
-}
-
 # required to pass dist as not available for dists that didn't fit
 nullify_nonfit <- function(fit, dist, rescale, computable, silent) {
   error <- fit$error
@@ -141,64 +60,6 @@ fit_dists <- function(data, dists, rescale, computable, control, silent) {
   fits <- lapply(dists, safe_fit_dist, data = data, control = control)
   fits <- remove_nonfits(fits, rescale, computable, silent)
   fits
-}
-
-chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silent) {  
-  values <- setNames(list(c(0, Inf, NA)), left)
-  if(left != right)
-    values <- c(values, setNames(list(c(0, Inf, NA)), right))
-  if(!is.null(weight)) {
-    values <- c(values, setNames(list(c(0, Inf)), weight))
-  }
-  
-  check_names(data, names = names(values))
-  if(is.null(weight)) {
-    data$weight <- 1
-    weight <- "weight"
-  } else if(is.integer(data[[weight]])) { # necessary to do transform before check_data
-    # need warning and FAQ about weights
-    data[[weight]] <- as.double(data[[weight]])
-  }
-  check_data(data, values, nrow = c(nrow, Inf))
-  if(any(!is.na(data[[right]]) & !is.na(data[[left]]) & data[[right]] < data[[left]])) {
-    msg <- paste0("`data$", right, "` must have values greater than or equal to `data$",
-                  left, "`")
-    abort_chk(msg)
-  }
-  
-  data <- data[c(left, right, weight)]
-  colnames(data) <- c("left", "right", "weight")
-  
-  missing <- is.na(data$left) & is.na(data$right)
-  
-  if(any(missing)) {
-    msg <- paste0("`data` has %n row%s with missing values in '", left, "'")
-    if(right != left && any(data$left != data$right))
-      msg <- paste0(msg, " and '", right, "'")
-    abort_chk(msg, n = sum(missing))
-  }
-  zero_weight <- data$weight == 0
-  if(any(zero_weight)) {
-    abort_chk("`data` has %n row%s with zero weight in '", weight, "'", n = sum(zero_weight))
-  }
-  censored <- left != right && any(is.na(data$left) | is.na(data$right))
-
-  data$left[is.na(data$left)] <- 0
-  data$right[is.na(data$right)] <- Inf
-  
-  if(rescale) {
-    rescale <- c(data$left, data$right)
-    rescale <- max(rescale[rescale < Inf])
-    data$left <- data$left / rescale
-    data$right <- data$right / rescale
-  } else 
-    rescale <- 1
-  
-  if(any(data$weight != 1))
-    data$weight <- data$weight / max(data$weight)
-  weighted <- any(data$weight != 1)
-  
-  list(censored = censored, data = data, rescale = rescale, weighted = weighted)
 }
 
 #' Fit Distributions
@@ -252,14 +113,16 @@ ssd_fit_dists <- function(
   
   chk_whole_number(nrow)
   chk_gte(nrow, 4L)
+  .chk_data(data, left, right, weight, nrow)
   
   chk_flag(rescale)
   chk_flag(computable)
   chk_list(control)
   chk_flag(silent)
   
-  attrs <- chk_and_process_data(data, left = left, right = right, weight = weight, 
-                               nrow = nrow, rescale = rescale, silent = silent)
+  org_data <- as_tibble(data)
+  data <- process_data(data, left, right, weight)
+  attrs <- rescale_data(data, rescale = rescale, silent = silent)
   
   fits <- fit_dists(attrs$data, dists, attrs$rescale, computable, control, silent)
   
@@ -267,7 +130,7 @@ ssd_fit_dists <- function(
   class(fits) <- "fitdists"
   
   attrs$control <- control
-  attrs$org_data <- as_tibble(data)
+  attrs$org_data <- org_data
   
   .attrs_fitdists(fits) <- attrs
   fits

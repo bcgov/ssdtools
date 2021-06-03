@@ -64,19 +64,14 @@ ssd_ecd <- function(x, ties.method = "first") {
 #' ssd_ecd_data(boron_data)
 ssd_ecd_data <- function(
   data, left = "Conc", right = left, orders = c(left = 1, right = 1)) {
-  chk_data(data)
-  chk_string(left)
-  chk_string(right)
+  .chk_data(data, left, right)
   .chk_orders(orders)
-
-  new_data <- chk_and_process_data(
-    data, left = left, right = right, weight = NULL, nrow = 0, 
-    rescale = FALSE, silent = TRUE)$data
-
+  
   if(!nrow(data)) return(double(0))
   
-  new_data <- rescale_data(new_data, orders)
-  x <- rowMeans(log(new_data[c("left", "right")]))
+  data <- process_data(data, left = left, right = right)
+  data <- bound_data(data, orders)
+  x <- rowMeans(log(data[c("left", "right")]))
   ssd_ecd(x)
 }
 

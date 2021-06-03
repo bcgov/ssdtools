@@ -106,7 +106,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   data$left <- data[[left]]
   data$right <- data[[right]]
   
-  data <- rescale_data(data, orders)
+  data <- bound_data(data, orders)
 
   gp <- gp + 
     geom_ssdpoint(data = data, aes_string(

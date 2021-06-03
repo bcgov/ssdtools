@@ -48,7 +48,7 @@ replace_missing <- function(x, y) {
   x
 }
 
-rescale_data <- function(data, orders) {
+bound_data <- function(data, orders) {
   orders <- replace_missing(orders, c(left = 1, right = 1))
   range <- measured_range(c(data$left, data$right))
   
@@ -59,3 +59,51 @@ rescale_data <- function(data, orders) {
   data$right[is.na(data$right) | !is.finite(data$right)] <- upper
   data
 }
+
+is_censored <- function(data) {
+  left <- any(is.na(data$left)) | any(data$left == 0)
+  right <- any(is.na(data$right)) | any(!is.finite(data$right))
+  left || right
+}
+
+process_data <- function(data, left, right, weight = NULL) {  
+  if(is.null(weight)) {
+    weight <- "weight"
+    data$weight <- 1
+  }
+  
+  data <- data[c(left, right, weight)]
+  colnames(data) <- c("left", "right", "weight")
+  
+  data$left[is.na(data$left)] <- 0
+  data$right[is.na(data$right)] <- Inf
+  data
+}
+
+is_at_boundary <- function(fit) {
+  dist <- .dist_tmbfit(fit)
+  if(!is_bounds(dist)) return(FALSE)
+  bounds <- bdist(dist)
+  pars <- .pars_tmbfit(fit)
+  
+  lower <- as.numeric(bounds$lower[names(pars)])
+  upper <- as.numeric(bounds$upper[names(pars)])
+  
+  any(pars == lower | pars == upper)
+}
+
+rescale_data <- function(data, rescale, silent) {
+  weighted <- any(data$weight != 1)
+  censored <- is_censored(data)
+  
+  if(rescale) {
+    rescale <- c(data$left, data$right)
+    rescale <- max(rescale[is.finite(rescale)])
+    data$left <- data$left / rescale
+    data$right <- data$right / rescale
+  } else 
+    rescale <- 1
+  
+  list(data = data, censored = censored, rescale = rescale, weighted = weighted)
+}
+
