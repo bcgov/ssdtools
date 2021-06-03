@@ -93,6 +93,7 @@ is_at_boundary <- function(fit) {
 }
 
 rescale_data <- function(data, rescale, silent) {
+  # need warning and FAQ about weights
   weighted <- any(data$weight != 1)
   censored <- is_censored(data)
   

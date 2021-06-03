@@ -106,9 +106,6 @@ ssd_fit_dists <- function(
     deprecate_stop("0.1.2", "xburrIII2()",
                    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   }
-  chk_string(left)
-  chk_string(right)
-  chk_null_or(weight, chk_string)
   chk_subset(dists, ssd_dists("all"))
   
   chk_whole_number(nrow)

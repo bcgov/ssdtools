@@ -1,4 +1,14 @@
 .chk_data <- function(data, left, right, weight = NULL, nrow = 0) {
+  chk_string(left)
+  chk_string(right)
+  chk_null_or(weight, chk_string)
+  
+  chk_not_subset(left, c("right", "weight"))
+  chk_not_subset(right, c("left", "weight"))
+  chk_null_or(weight, chk_not_subset, c("left", "right"))
+  
+  chk_whole_number(nrow)
+  
   org_data <- data
   values <- setNames(list(c(0, Inf, NA)), left)
   if(left != right)
@@ -11,8 +21,7 @@
   if(is.null(weight)) {
     data$weight <- 1
     weight <- "weight"
-  } else if(is.integer(data[[weight]])) { # necessary to do transform before check_data
-    # need warning and FAQ about weights
+  } else if(is.integer(data[[weight]])) {
     data[[weight]] <- as.double(data[[weight]])
   }
   check_data(data, values, nrow = c(nrow, Inf))

@@ -57,6 +57,31 @@ test_that("ssd_fit_dists gives chk error if missing weight column", {
   chk::expect_chk_error(ssd_fit_dists(data, weight = "Conc2"))
 })
 
+test_that("ssd_fit_dists gives chk error if right call left", {
+  data <- ssdtools::boron_data
+  data$left <- data$Conc
+  chk::expect_chk_error(ssd_fit_dists(data, right = "left"))
+})
+
+test_that("ssd_fit_dists gives chk error if left called right", {
+  data <- ssdtools::boron_data
+  data$right <- data$Conc
+  chk::expect_chk_error(ssd_fit_dists(data, left = "right"))
+})
+
+test_that("ssd_fit_dists not happy with left as left by default", {
+  data <- ssdtools::boron_data
+  data$left <- data$Conc
+  chk::expect_chk_error(ssd_fit_dists(data, left = "left"))
+})
+
+test_that("ssd_fit_dists happy with left as left but happy if right other", {
+  data <- ssdtools::boron_data
+  data$left <- data$Conc
+  data$right <- data$Conc
+  expect_s3_class(ssd_fit_dists(data, left = "left", right = "right"), "fitdists")
+})
+
 test_that("ssd_fit_dists not affected if all weight 1", {
   data <- ssdtools::boron_data
   fits <- ssd_fit_dists(data, dists = "lnorm")
