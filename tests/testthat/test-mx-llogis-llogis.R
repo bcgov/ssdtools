@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("fit mx_llogis_llogis tmb", {
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "mx_llogis_llogis")
+  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "mx_llogis_llogis", rescale = FALSE)
   
   expect_true(is.tmbfit(dist$mx_llogis_llogis))
   expect_equal(

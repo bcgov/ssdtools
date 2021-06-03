@@ -16,7 +16,7 @@ test_that("manual tmb", {
   set.seed(10)
   dists <- ssd_fit_dists(ssdtools::boron_data, dists = c(
     "gamma", "gompertz", "lgumbel", "llogis", "lnorm", "weibull"
-  ))
+  ), rescale = FALSE)
   expect_true(is.fitdists(dists))
   
   expect_equal(

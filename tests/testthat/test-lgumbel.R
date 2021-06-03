@@ -106,7 +106,7 @@ test_that("rlgumbel values", {
 })
 
 test_that("fit lgumbel", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel")
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel", rescale = FALSE)
   expect_equal(
     estimates(fit$lgumbel),
     list(locationlog = 1.92263082409711, scalelog = 1.23223883525026),
@@ -117,7 +117,7 @@ test_that("fit lgumbel", {
 test_that("fit lgumbel Mn LT", {
   mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT", ]
   
-  fit <- ssd_fit_dists(mn_lt, dists = "lgumbel")
+  fit <- ssd_fit_dists(mn_lt, dists = "lgumbel", rescale = FALSE)
   expect_equal(
     estimates(fit$lgumbel),
     list(locationlog = 7.3166264896851, scalelog = 1.00907606435341),
@@ -126,7 +126,7 @@ test_that("fit lgumbel Mn LT", {
 })
 
 test_that("fit lgumbel cis", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel")
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel", rescale = FALSE)
   
   set.seed(77)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 10)

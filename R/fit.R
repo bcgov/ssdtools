@@ -225,7 +225,7 @@ ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
   dists = c("gamma", "llogis", "lnorm"),
   nrow = 6L,
-  rescale = FALSE,
+  rescale = TRUE,
   computable = TRUE,
   control = list(),
   silent = FALSE) {

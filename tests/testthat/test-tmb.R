@@ -1,5 +1,5 @@
 test_that("tidy.tmbfit", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm", rescale = FALSE)
   expect_s3_class(fit, "fitdists")
   
   expect_identical(npars(fit), c(lnorm = 2L))
@@ -66,7 +66,8 @@ test_that("tidy.tmbfit", {
 })
 
 test_that("combine", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"))
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"),
+                       rescale = FALSE)
   expect_s3_class(fit, "fitdists")
   
   expect_identical(npars(fit), c(llogis = 2L, lnorm = 2L))

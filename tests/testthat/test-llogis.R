@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("fit llogis", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "llogis")
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "llogis", rescale = FALSE)
 
   expect_equal(
     estimates(fit$llogis),

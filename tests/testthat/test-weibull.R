@@ -80,7 +80,7 @@ test_that("rweibull extremes", {
 # })
 
 test_that("fit weibull boron", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "weibull")
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "weibull", rescale = FALSE)
   expect_equal(
     estimates(fit$weibull),
     list(scale = 23.5139731632547, shape = 0.966099859069694),

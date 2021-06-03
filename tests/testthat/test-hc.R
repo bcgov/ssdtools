@@ -139,7 +139,7 @@ test_that("ssd_hc fitdists averages", {
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
-  expect_equal(hc$est, 1.30715672034529)
+  expect_equal(hc$est, 1.30715830199415)
   expect_equal(hc$se, NA_real_)
   expect_equal(hc$lcl, NA_real_)
   expect_equal(hc$ucl, NA_real_)
@@ -151,7 +151,7 @@ test_that("ssd_hc fitdists not average", {
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, c("gamma", "llogis", "lnorm")) 
   expect_identical(hc$percent, c(5, 5, 5))
-  expect_equal(hc$est,  c(1.07428453014496, 1.56226388133415, 1.6811748398812))
+  expect_equal(hc$est, c(1.07428453014496, 1.56227832447464, 1.6811748398812))
   expect_equal(hc$se, c(NA_real_, NA_real_,NA_real_))
 })
 
