@@ -48,3 +48,28 @@ test_that("comma_signif", {
     c("0.556", "55,600")
   )
 })
+
+test_that("ssd_sort_data works conc", {
+  expect_identical(ssd_sort_data(boron_data), boron_data[order(boron_data$Conc),])
+})
+
+test_that("ssd_sort_data works no rows", {
+  data <- boron_data[FALSE,]
+  expect_identical(ssd_sort_data(data), data[order(data$Conc),])
+})
+
+test_that("ssd_sort_data works censored data", {
+  data <- boron_data
+  data$Other <- data$Conc * 2
+  data$Conc[1] <- NA
+  data$ID <- 1:nrow(data)
+  expect_identical(ssd_sort_data(data, right = "Other")$ID[1:5], 
+                   c(19L, 1L, 20L, 21L, 2L))
+})
+
+test_that("ssd_sort_data errors missing data", {
+  data <- boron_data
+  data$Conc[1] <- NA
+  chk::expect_chk_error(ssd_sort_data(data), 
+                        "`data` has 1 row with missing values in 'Conc'.")
+})

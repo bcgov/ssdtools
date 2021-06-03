@@ -52,12 +52,33 @@ ssd_ecd <- function(x, ties.method = "first") {
   (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }
 
-# 
-# ssd_arrange <- function(data, left = "Conc", right = left) {
-#   new_data <- chk_and_process_data(data, left = left, right = right,
-#                                    weight = NULL, nrow = 0, rescale = FALSE, silent = TRUE)
-#   if(!nrow(data)) return(data)
-#   
-#   density <- ssd_ecd(rowMeans(data[c("x", "xend")], na.rm = TRUE))
-#   data[order(density),]
-# }
+#' Sort Species Sensitivity Data
+#' 
+#' Sorts Species Sensitivity Data by empirical cumulative density (ECD).
+#' 
+#' Useful for sorting data before using [geom_ssdpoint()] and [geom_ssdsegment()]
+#' to construct plots for censored data with `stat = identity` to
+#' ensure order is the same for the various components.
+#'
+#' @inheritParams params
+#'
+#' @return data sorted by the empirical cumulative density.
+#' @seealso ssd_ecd()
+#' @export
+#'
+#' @examples
+#' ssd_sort_data(boron_data)
+ssd_sort_data <- function(data, left = "Conc", right = left) {
+  chk_data(data)
+  chk_string(left)
+  chk_string(right)
+
+  new_data <- chk_and_process_data(
+    data, left = left, right = right, weight = NULL, nrow = 0, 
+    rescale = FALSE, silent = TRUE)$data
+  
+  if(!nrow(data)) return(data)
+  
+  ecd <- ssd_ecd(rowMeans(new_data[c("left", "right")], na.rm = TRUE))
+  data[order(ecd),]
+}

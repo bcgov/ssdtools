@@ -185,7 +185,6 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
 
   data$left[is.na(data$left)] <- 0
   data$right[is.na(data$right)] <- Inf
-  data$weight <- data$weight / max(data$weight)
   
   if(rescale) {
     rescale <- c(data$left, data$right)
@@ -195,6 +194,8 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
   } else 
     rescale <- 1
   
+  if(any(data$weight != 1))
+    data$weight <- data$weight / max(data$weight)
   weighted <- any(data$weight != 1)
   
   list(censored = censored, data = data, rescale = rescale, weighted = weighted)
