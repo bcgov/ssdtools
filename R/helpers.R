@@ -48,12 +48,12 @@ replace_missing <- function(x, y) {
   x
 }
 
-bound_data <- function(data, orders) {
-  orders <- replace_missing(orders, c(left = 1, right = 1))
+bound_data <- function(data, bounds) {
+  bounds <- replace_missing(bounds, c(left = 1, right = 1))
   range <- measured_range(c(data$left, data$right))
   
-  lower <- range[1] / 10^orders["left"]
-  upper <- range[2] * 10^orders["right"]
+  lower <- range[1] / 10^bounds["left"]
+  upper <- range[2] * 10^bounds["right"]
   
   data$left[is.na(data$left) | data$left == 0] <- lower
   data$right[is.na(data$right) | !is.finite(data$right)] <- upper

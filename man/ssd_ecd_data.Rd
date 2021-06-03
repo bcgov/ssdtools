@@ -8,7 +8,7 @@ ssd_ecd_data(
   data,
   left = "Conc",
   right = left,
-  orders = c(left = 1, right = 1)
+  bounds = c(left = 1, right = 1)
 )
 }
 \arguments{
@@ -18,8 +18,9 @@ ssd_ecd_data(
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{orders}{A named non-negative numeric vector of the order of magnitude
-to scale missing left and right values relative to the extremes of non-missing values.}
+\item{bounds}{A named non-negative numeric vector of the left and right bounds for
+uncensored missing (0 and Inf) data in terms of the orders of magnitude
+relative to the extremes for non-missing values.}
 }
 \value{
 A numeric vector of the empirical cumulative density for the rows

@@ -40,12 +40,12 @@
   org_data
 }
 
-.chk_orders <- function(orders) {
-  chk_numeric(orders)
-  chk_gte(orders)
-  chk_named(orders)
-  chk_subset(names(orders), c("left", "right"))
-  chk_unique(names(orders))
-  invisible(orders)
+.chk_bounds <- function(bounds) {
+  chk_numeric(bounds)
+  chk_gte(bounds)
+  chk_named(bounds)
+  chk_subset(names(bounds), c("left", "right"))
+  chk_unique(names(bounds))
+  invisible(bounds)
 }
 

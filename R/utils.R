@@ -63,14 +63,14 @@ ssd_ecd <- function(x, ties.method = "first") {
 #' @examples
 #' ssd_ecd_data(boron_data)
 ssd_ecd_data <- function(
-  data, left = "Conc", right = left, orders = c(left = 1, right = 1)) {
+  data, left = "Conc", right = left, bounds = c(left = 1, right = 1)) {
   .chk_data(data, left, right)
-  .chk_orders(orders)
+  .chk_bounds(bounds)
   
   if(!nrow(data)) return(double(0))
   
   data <- process_data(data, left = left, right = right)
-  data <- bound_data(data, orders)
+  data <- bound_data(data, bounds)
   x <- rowMeans(log(data[c("left", "right")]))
   ssd_ecd(x)
 }

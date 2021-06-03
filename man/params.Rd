@@ -27,8 +27,9 @@
 
 \item{breaks}{A character vector}
 
-\item{orders}{A named non-negative numeric vector of the order of magnitude
-to scale missing left and right values relative to the extremes of non-missing values.}
+\item{bounds}{A named non-negative numeric vector of the left and right bounds for
+uncensored missing (0 and Inf) data in terms of the orders of magnitude
+relative to the extremes for non-missing values.}
 
 \item{conc}{A numeric vector of concentrations.}
 

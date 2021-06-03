@@ -43,6 +43,6 @@ test_that("ssd_plot fills in missing order", {
   data$Other <- data$Conc
   data$Conc[1] <- NA
   data$Other[nrow(data)] <- NA
-  expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", orders = c(right = 2)),
+  expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", bounds = c(right = 2)),
                        "missing_order")
 })

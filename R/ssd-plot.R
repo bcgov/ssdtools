@@ -48,7 +48,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
                      ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3,
-                     orders = c(left = 1, right = 1),
+                     bounds = c(left = 1, right = 1),
                      xbreaks = waiver()) {
   chk_s3_class(data, "data.frame")
   chk_s3_class(pred, "data.frame")
@@ -74,7 +74,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_gt(length(hc))
     chk_subset(hc, pred$percent)
   }
-  .chk_orders(orders)
+  .chk_bounds(bounds)
 
   chk_superset(colnames(data), c(left, right, label, shape))
   
@@ -106,7 +106,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   data$left <- data[[left]]
   data$right <- data[[right]]
   
-  data <- bound_data(data, orders)
+  data <- bound_data(data, bounds)
 
   gp <- gp + 
     geom_ssdpoint(data = data, aes_string(
