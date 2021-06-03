@@ -74,12 +74,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_gt(length(hc))
     chk_subset(hc, pred$percent)
   }
-  chk_numeric(orders)
-  chk_gte(orders)
-  chk_named(orders)
-  chk_subset(names(orders), c("left", "right"))
-  chk_unique(names(orders))
-  
+  .chk_orders(orders)
+
   chk_superset(colnames(data), c(left, right, label, shape))
   
   gp <- ggplot(pred, aes_string(x = "est"))
@@ -110,12 +106,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   data$left <- data[[left]]
   data$right <- data[[right]]
   
-  orders <- replace_missing(orders, c(left = 1, right = 1))
-  range <- measured_range(c(data$left, data$right))
-  
-  data$left[is.na(data$left)] <- range[1] / 10^orders["left"]
-  data$right[is.na(data$right)] <- range[2] * 10^orders["right"]
-  
+  data <- rescale_data(data, orders)
+
   gp <- gp + 
     geom_ssdpoint(data = data, aes_string(
       x = "left", shape = shape,

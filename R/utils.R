@@ -52,6 +52,34 @@ ssd_ecd <- function(x, ties.method = "first") {
   (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }
 
+#' Empirical Cumulative Density for Species Sensitivity Data
+#'
+#' @inheritParams params
+#' @return A numeric vector of the empirical cumulative density for the rows 
+#' in data.
+#' @seealso ssd_ecd()
+#' @export
+#'
+#' @examples
+#' ssd_ecd_data(boron_data)
+ssd_ecd_data <- function(
+  data, left = "Conc", right = left, orders = c(left = 1, right = 1)) {
+  chk_data(data)
+  chk_string(left)
+  chk_string(right)
+  .chk_orders(orders)
+
+  new_data <- chk_and_process_data(
+    data, left = left, right = right, weight = NULL, nrow = 0, 
+    rescale = FALSE, silent = TRUE)$data
+
+  if(!nrow(data)) return(double(0))
+  
+  new_data <- rescale_data(new_data, orders)
+  x <- rowMeans(log(new_data[c("left", "right")]))
+  ssd_ecd(x)
+}
+
 #' Sort Species Sensitivity Data
 #' 
 #' Sorts Species Sensitivity Data by empirical cumulative density (ECD).
@@ -63,22 +91,12 @@ ssd_ecd <- function(x, ties.method = "first") {
 #' @inheritParams params
 #'
 #' @return data sorted by the empirical cumulative density.
-#' @seealso ssd_ecd()
+#' @seealso ssd_ecd_data()
 #' @export
 #'
 #' @examples
 #' ssd_sort_data(boron_data)
 ssd_sort_data <- function(data, left = "Conc", right = left) {
-  chk_data(data)
-  chk_string(left)
-  chk_string(right)
-
-  new_data <- chk_and_process_data(
-    data, left = left, right = right, weight = NULL, nrow = 0, 
-    rescale = FALSE, silent = TRUE)$data
-  
-  if(!nrow(data)) return(data)
-  
-  ecd <- ssd_ecd(rowMeans(new_data[c("left", "right")], na.rm = TRUE))
-  data[order(ecd),]
+  ecd <- ssd_ecd_data(data, left = left, right = right)
+  data[order(ecd),,drop = FALSE]
 }

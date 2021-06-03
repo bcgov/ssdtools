@@ -28,5 +28,5 @@ ensure order is the same for the various components.
 ssd_sort_data(boron_data)
 }
 \seealso{
-ssd_ecd()
+ssd_ecd_data()
 }

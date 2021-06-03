@@ -64,7 +64,7 @@ test_that("ssd_sort_data works censored data", {
   data$Conc[1] <- NA
   data$ID <- 1:nrow(data)
   expect_identical(ssd_sort_data(data, right = "Other")$ID[1:5], 
-                   c(19L, 1L, 20L, 21L, 2L))
+                   c(1L, 19L, 20L, 21L, 2L))
 })
 
 test_that("ssd_sort_data errors missing data", {

@@ -47,3 +47,15 @@ replace_missing <- function(x, y) {
   x <- c(x, y)
   x
 }
+
+rescale_data <- function(data, orders) {
+  orders <- replace_missing(orders, c(left = 1, right = 1))
+  range <- measured_range(c(data$left, data$right))
+  
+  lower <- range[1] / 10^orders["left"]
+  upper <- range[2] * 10^orders["right"]
+  
+  data$left[is.na(data$left) | data$left == 0] <- lower
+  data$right[is.na(data$right) | !is.finite(data$right)] <- upper
+  data
+}
