@@ -15,7 +15,7 @@
 tmb_fun <- function(data, parameters, dist) {
   model <- paste0("ll_", dist)
   data <- c(model = model, data)
-  MakeADFun(data = data,
+  MakeADFun(data = data, 
                  parameters = parameters,
                  DLL = "ssdtools_TMBExports", silent = TRUE)
 }
@@ -41,7 +41,7 @@ fit_tmb <- function(dist, data, control) {
     optim <- optim(model$par, model$fn, model$gr, 
                    method = "L-BFGS-B",
                    lower = lower, upper = upper,
-                   control= control, hessian = TRUE)
+                   control= control, hessian = TRUE) # FALSE when bootstrap?
   )
   fit <- list(dist = dist, model = model, optim = optim)
   class(fit) <- "tmbfit"

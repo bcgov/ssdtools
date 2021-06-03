@@ -32,7 +32,7 @@ comma_signif <- function(x, digits = 3, ...) {
   if(vld_used(...)) {
     deprecate_soft("0.3.3", "comma_signif(...)")
   }
-
+  
   x <- signif(x, digits = digits)
   y <- as.character(x)
   bol <- !is.na(x) & as.numeric(x) >= 1000
@@ -51,3 +51,13 @@ comma_signif <- function(x, digits = 3, ...) {
 ssd_ecd <- function(x, ties.method = "first") {
   (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }
+
+# 
+# ssd_arrange <- function(data, left = "Conc", right = left) {
+#   new_data <- chk_and_process_data(data, left = left, right = right,
+#                                    weight = NULL, nrow = 0, rescale = FALSE, silent = TRUE)
+#   if(!nrow(data)) return(data)
+#   
+#   density <- ssd_ecd(rowMeans(data[c("x", "xend")], na.rm = TRUE))
+#   data[order(density),]
+# }
