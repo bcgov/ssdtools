@@ -27,7 +27,7 @@ summary.fitdists <- function(object, ...) {
   x$fits <- lapply(object, summary)
   x$censored <- .censored_fitdists(object)
   x$nrow <- nrow(.data_fitdists(object))
-  x$rescaled <- .rescale_fitdists(object) != 1
+  x$rescaled <- .rescale_fitdists(object)
   x$weighted <- .weighted_fitdists(object)
   class(x) <- "summary_fitdists"
   x

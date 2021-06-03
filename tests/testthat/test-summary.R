@@ -16,7 +16,7 @@ test_that("summary fitdists", {
   expect_identical(names(summary), c("fits", "censored", "nrow", "rescaled", "weighted"))
   expect_identical(summary$censored, FALSE)
   expect_identical(summary$nrow, 28L)
-  expect_identical(summary$rescaled, FALSE)
+  expect_identical(summary$rescaled, 1)
   expect_identical(summary$weighted, FALSE)
 })
 
@@ -28,7 +28,7 @@ test_that("summary fitdists with multiple dists", {
   expect_identical(names(summary), c("fits", "censored", "nrow", "rescaled", "weighted"))
   expect_identical(summary$censored, FALSE)
   expect_identical(summary$nrow, 28L)
-  expect_identical(summary$rescaled, FALSE)
+  expect_identical(summary$rescaled, 1)
   expect_identical(summary$weighted, FALSE)
 })
 
@@ -43,6 +43,6 @@ test_that("summary fitdists with censored, rescaled, weighted data", {
   expect_identical(names(summary), c("fits", "censored", "nrow", "rescaled", "weighted"))
   expect_identical(summary$censored, TRUE)
   expect_identical(summary$nrow, 28L)
-  expect_identical(summary$rescaled, TRUE)
+  expect_identical(summary$rescaled, 70.7)
   expect_identical(summary$weighted, TRUE)
 })

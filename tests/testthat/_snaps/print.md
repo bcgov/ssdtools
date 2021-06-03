@@ -19,7 +19,7 @@
       meanlog -1.50532
       sdlog 1.31089
     
-    Parameters estimated from 28 rows of'censored', 'weighted' and 'recaled'  data.
+    Parameters estimated from 28 rows of censored, weighted and rescaled (70.7) data.
 
 # print fitdists with multiple distributions
 

@@ -156,10 +156,10 @@ chk_and_process_data <- function(data, left, right, weight, nrow, rescale, silen
     data$weight <- 1
     weight <- "weight"
   } else if(is.integer(data[[weight]])) { # necessary to do transform before check_data
+    # need warning and FAQ about weights
     data[[weight]] <- as.double(data[[weight]])
   }
   check_data(data, values, nrow = c(nrow, Inf))
-  chk_gt(data[[left]], x_name = paste0("data$", left))
   if(any(!is.na(data[[right]]) & !is.na(data[[left]]) & data[[right]] < data[[left]])) {
     msg <- paste0("`data$", right, "` must have values greater than or equal to `data$",
                   left, "`")

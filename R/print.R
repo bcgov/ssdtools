@@ -32,9 +32,12 @@ print.summary_fitdists <- function(x, ...) {
   lapply(x$fits, print)
   censored <- if(x$censored) "censored" else NULL
   weighted <- if(x$weighted) "weighted" else NULL
-  rescaled <- if(x$rescaled) "recaled" else NULL
-  properties <- cc(c(censored, weighted, rescaled), conj = " and ")
-  if(length(properties)) properties <- paste0(properties, " ")
+  rescaled <- if(x$rescaled != 1) {
+    paste0("rescaled (", signif(x$rescaled, 4) ,")")
+  } else NULL
+  properties <- c(censored, weighted, rescaled)
+  properties <- cc(properties, conj = " and ", brac = "")
+  if(length(properties)) properties <- paste0(" ", properties)
   
   txt <- paste0("Parameters estimated from ", x$nrow, " rows of", properties, " data.")
   cat(txt)

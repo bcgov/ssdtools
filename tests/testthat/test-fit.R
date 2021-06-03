@@ -131,12 +131,6 @@ test_that("ssd_fit_dists gives correct chk error if missing values in censored d
                         "^`data` has 2 rows with missing values in 'Conc' and 'Other'\\.$")
 })
 
-test_that("ssd_fit_dists gives chk error if zero left ", {
-  data <- ssdtools::boron_data
-  data$Conc[1] <- 0
-  chk::expect_chk_error(ssd_fit_dists(data))
-})
-
 test_that("ssd_fit_dists gives chk error if negative left ", {
   data <- ssdtools::boron_data
   data$Conc[1] <- -1
@@ -252,26 +246,76 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
                     weibull = list(scale = 1.01334187822578, shape = 94.0011367347638)))
 })
 
-test_that("ssd_fit_dists with slightly censored data gives pretty much the same answer", {
+test_that("ssd_fit_dists works with slightly censored data", {
   data <- ssdtools::boron_data
   
-  fits <- ssd_fit_dists(data, dists = "lnorm")
-
   data$right <- data$Conc * 2
   data$Conc <- data$Conc * 0.5
 
-  fits_censored <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
   
   tidy <- tidy(fits)
-  tcen <- tidy(fits_censored)
   
-  tidy$term
+  expect_equal(tidy$est, c(2.56052524750529, 1.17234562953404))
+  expect_equal(tidy$se, c(0.234063281091344, 0.175423555900586))
+})
+
+test_that("ssd_fit_dists accepts 0 for left censored data", {
+  data <- ssdtools::boron_data
+
+  data$right <- data$Conc
+  data$Conc[1] <- 0
   
-  # this seems totally wrong
-  expect_equal(tidy$est, c(2.56164496371788, 1.24154032419128))
-  expect_equal(tcen$est, c(2.56052524750529, 1.17234562953404))
-  expect_equal(tidy$se, c(0.234629067176348, 0.165907749058664))
-  expect_equal(tcen$se, c(0.234063281091344, 0.175423555900586))
+  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  
+  tidy <- tidy(fits)
+
+  expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323))
+  expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761))
+})
+
+test_that("ssd_fit_dists gives same values with zero and missing left values", {
+  data <- ssdtools::boron_data
+
+  data$right <- data$Conc
+  data$Conc[1] <- 0
+  
+  fits0 <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  
+  data$Conc[1] <- NA
+  
+  fitsna <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  
+  expect_equal(tidy(fits0), tidy(fitsna))
+})
+
+test_that("ssd_fit_dists works with Inf", {
+  data <- ssdtools::boron_data
+  
+  data$right <- data$Conc
+  data$right[1] <- Inf
+  
+  # fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  # 
+  # tidy <- tidy(fits)
+  # 
+  # expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323))
+  # expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761))
+})
+
+test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
+  data <- ssdtools::boron_data
+  
+  data$right <- data$Conc
+  data$right[1] <- Inf
+  
+  # fits0 <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  # 
+  # data$right[1] <- NA
+  # 
+  # fitsna <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  # 
+  # expect_equal(tidy(fits0), tidy(fitsna))
 })
 
 # test_that("fit_dist tiny llogis", {
