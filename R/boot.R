@@ -18,20 +18,19 @@ censor_data <- function(new_data, data) {
   .NotYetImplemented()
 }
 
-generate_new_data <- function(estimates, data, dist) {
-  n <- nrow(data)
+generate_new_data <- function(estimates, n, dist) {
   what <- paste0("r", dist)
   args <- list(n = n)
   args <- c(args, estimates)
   sample <- do.call(what, args)
   new_data <- data.frame(left = sample, right = sample)
   new_data$weight <- 1
-  new_data <- censor_data(new_data, data)
+#  new_data <- censor_data(new_data, data)
   new_data
 }
 
-sample_parameters <- function(i, estimates, data, dist, control) {
-  new_data <- generate_new_data(estimates, data, dist)
+sample_parameters <- function(i, estimates, n, dist, control) {
+  new_data <- generate_new_data(estimates, n, dist)
   fit <- fit_tmb(dist, new_data, control = control)
   estimates(fit)
 }
@@ -40,5 +39,6 @@ boot_tmbfit <- function(x, nboot, data, control, parallel, ncpus) {
   # need to do parallel
   dist <- .dist_tmbfit(x)
   estimates <- estimates(x)
-  lapply(1:nboot, sample_parameters, estimates = estimates, data = data, dist = dist, control = control)
+  n <- nrow(data)
+  lapply(1:nboot, sample_parameters, estimates = estimates, n = n, dist = dist, control = control)
 }
