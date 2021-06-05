@@ -70,10 +70,9 @@ test_that("combine", {
                        rescale = FALSE)
   expect_s3_class(fit, "fitdists")
   
-  expect_identical(npars(fit), c(llogis = 2L, lnorm = 2L))
+  expect_identical(npars(fit), c(lnorm = 2L, llogis = 2L))
   expect_equal(nobs(fit), 28L)
-  expect_equal(logLik(fit), c(llogis = -118.507435324581, lnorm = -117.514216489547))
-  expect_equal(logLik(fit$lnorm), -117.514216489547)
+  expect_equal(logLik(fit), c(lnorm = -117.514216489547, llogis = -118.507435324581))
 
   gof <- ssd_gof(fit)
   expect_s3_class(gof, "tbl_df")
@@ -103,16 +102,4 @@ test_that("combine", {
   expect_identical(glance$dist, c("lnorm", "llogis"))
   expect_equal(glance$delta, c(0, 1.98643767006848))
   expect_equal(glance$weight, c(0.729723233512911, 0.270276766487089))
-  
-  tidy <- tidy(fit)
-  expect_s3_class(tidy, "tbl_df")
-  expect_identical(colnames(tidy), c("dist", "term", "est", "se"))
-  expect_identical(tidy$dist, c(rep("llogis", 2), rep("lnorm", 2)))
-  expect_identical(tidy$term, c("locationlog", "scalelog", "meanlog", "sdlog"))
-  
-  tidy <- tidy(fit, all = TRUE)
-  expect_s3_class(tidy, "tbl_df")
-  expect_identical(colnames(tidy), c("dist", "term", "est", "se"))
-  expect_identical(tidy$dist, c(rep("llogis", 3), rep("lnorm", 3)))
-  expect_identical(tidy$term, c("locationlog", "log_scalelog", "scalelog", "log_sdlog", "meanlog", "sdlog"))
-})
+ })

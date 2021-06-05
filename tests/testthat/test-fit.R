@@ -75,6 +75,12 @@ test_that("ssd_fit_dists not happy with left as left by default", {
   chk::expect_chk_error(ssd_fit_dists(data, left = "left"))
 })
 
+test_that("ssd_fit_dists returns object class fitdists", {
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"),
+                       rescale = FALSE)
+  expect_s3_class(fit, "fitdists")
+})
+
 test_that("ssd_fit_dists happy with left as left but happy if right other", {
   data <- ssdtools::boron_data
   data$left <- data$Conc
@@ -213,6 +219,15 @@ test_that("ssd_fit_dists estimates for boron_data on stable dists", {
                     weibull = list(scale = 0.332587999922436, shape = 0.966099883646414)))
 })
 
+test_that("ssd_fit_dists not reorder", {
+  fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"),
+                       rescale = FALSE)
+
+  expect_identical(npars(fit), c(lnorm = 2L, llogis = 2L))
+  expect_equal(nobs(fit), 28L)
+  expect_equal(logLik(fit), c(lnorm = -117.514216489547, llogis = -118.507435324581))
+})
+
 test_that("ssd_fit_dists rescale fits on stable dists", {
   fits <- ssd_fit_dists(ssdtools::boron_data, rescale = TRUE, dists = ssd_dists()) 
   
@@ -276,7 +291,7 @@ test_that("ssd_fit_dists works with slightly censored data", {
   
   data$right <- data$Conc * 2
   data$Conc <- data$Conc * 0.5
-
+  
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right", rescale = FALSE)
   
   tidy <- tidy(fits)
@@ -287,21 +302,21 @@ test_that("ssd_fit_dists works with slightly censored data", {
 
 test_that("ssd_fit_dists accepts 0 for left censored data", {
   data <- ssdtools::boron_data
-
+  
   data$right <- data$Conc
   data$Conc[1] <- 0
   
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right", rescale = FALSE)
   
   tidy <- tidy(fits)
-
+  
   expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323))
   expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761))
 })
 
 test_that("ssd_fit_dists gives same values with zero and missing left values", {
   data <- ssdtools::boron_data
-
+  
   data$right <- data$Conc
   data$Conc[1] <- 0
   
