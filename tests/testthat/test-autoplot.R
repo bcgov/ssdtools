@@ -12,14 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("autoplot", {
-  expect_snapshot_plot(autoplot(boron_lnorm), "boron_lnorm")
+test_that("autoplot is plot_cdf", {
   expect_snapshot_plot(autoplot(boron_dists), "boron_dists")
-})
-
-test_that("autoplot deals with rescaled data", {
-  fits <- ssd_fit_dists(boron_data, rescale = TRUE)
-  expect_snapshot_plot(autoplot(fits), "boron_dists_rescale")
 })
 
 test_that("autoplot accepts additional arguments", {

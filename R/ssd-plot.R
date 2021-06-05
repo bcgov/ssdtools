@@ -91,7 +91,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   
   if (ci) {
     if (ribbon) {
-      gp <- gp + geom_xribbon(data = pred, aes_string(x = "est", xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
+      gp <- gp + geom_xribbon(data = pred, aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
     } else {
       gp <- gp +
         geom_line(data = pred, aes_string(x = "lcl", y = "percent"), color = "darkgreen") +

@@ -38,7 +38,8 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, ...) {
   linecolor <- linetype
   pred$percent <- round(pred$percent) # not sure why needed
   ssd_plot(data = data, pred = pred, left = cols$left, right = cols$right,
-           ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...)
+           ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...) +
+    labs(linetype = "Distribution", color = "Distribution")
 }
 
 #' @describeIn ssd_plot_cdf Plot CDF for named list of distributional parameter values

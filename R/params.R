@@ -79,7 +79,7 @@
 #' @param nrow A positive whole number of the minimum number of non-missing rows.
 #' @param nsim A positive whole number of the number of simulations to generate.
 #' @param linetype A string of the column in pred to use for the linetype.
-#' @param linetype A string of the column in pred to use for the line color.
+#' @param linecolor A string of the column in pred to use for the line color.
 #' @keywords internal
 #' @name params
 NULL

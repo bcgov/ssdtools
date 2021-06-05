@@ -42,7 +42,9 @@ ssd_plot(
 
 \item{size}{A number for the size of the labels.}
 
-\item{linetype}{A string of the column in pred to use for the line color.}
+\item{linetype}{A string of the column in pred to use for the linetype.}
+
+\item{linecolor}{A string of the column in pred to use for the line color.}
 
 \item{xlab}{A string of the x-axis label.}
 

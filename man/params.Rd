@@ -126,7 +126,9 @@ remove them with a warning.}
 
 \item{nsim}{A positive whole number of the number of simulations to generate.}
 
-\item{linetype}{A string of the column in pred to use for the line color.}
+\item{linetype}{A string of the column in pred to use for the linetype.}
+
+\item{linecolor}{A string of the column in pred to use for the line color.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions
