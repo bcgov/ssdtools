@@ -13,6 +13,8 @@ ssd_plot(
   shape = NULL,
   color = NULL,
   size = 2.5,
+  linetype = NULL,
+  linecolor = NULL,
   xlab = "Concentration",
   ylab = "Percent of Species Affected",
   ci = TRUE,
@@ -39,6 +41,8 @@ ssd_plot(
 \item{color}{A string of the column in data for the color aesthetic.}
 
 \item{size}{A number for the size of the labels.}
+
+\item{linetype}{A string of the column in pred to use for the line color.}
 
 \item{xlab}{A string of the x-axis label.}
 

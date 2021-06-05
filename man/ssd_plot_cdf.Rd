@@ -8,7 +8,7 @@
 \usage{
 ssd_plot_cdf(x, ...)
 
-\method{ssd_plot_cdf}{fitdists}(x, xlab = "Concentration", ylab = "Species Affected", ...)
+\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, ...)
 
 \method{ssd_plot_cdf}{list}(x, xlab = "Concentration", ylab = "Species Affected", ...)
 }
@@ -16,6 +16,8 @@ ssd_plot_cdf(x, ...)
 \item{x}{The object.}
 
 \item{...}{Unused.}
+
+\item{average}{A flag specifying whether to model average the estimates.}
 
 \item{xlab}{A string of the x-axis label.}
 

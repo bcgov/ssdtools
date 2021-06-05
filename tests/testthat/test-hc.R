@@ -58,6 +58,7 @@ test_that("ssd_hc list works specified values", {
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_identical(hc$percent, 5)
+  expect_true(vld_whole_numeric(hc$percent))
   expect_equal(hc$dist, "lnorm")
   expect_equal(hc$est, 0.275351379333677)
   expect_equal(hc$se, NA_real_)
@@ -119,6 +120,7 @@ test_that("ssd_hc fitdists works 100 percent", {
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 100)
+  expect_true(vld_whole_numeric(hc$percent))
   expect_equal(hc$est, Inf)
   expect_equal(hc$se, NA_real_)
 })
@@ -129,6 +131,7 @@ test_that("ssd_hc fitdists works multiple percents", {
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, c("average", "average"))
   expect_identical(hc$percent, c(1, 99))
+  expect_true(vld_whole_numeric(hc$percent))
   expect_equal(hc$est, c(0.721365215300168, 232.734811528299))
   expect_equal(hc$se, c(NA_real_, NA_real_))
 })
@@ -139,10 +142,30 @@ test_that("ssd_hc fitdists averages", {
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
+  expect_true(vld_whole_numeric(hc$percent))
   expect_equal(hc$est, 1.30715672034529)
   expect_equal(hc$se, NA_real_)
   expect_equal(hc$lcl, NA_real_)
   expect_equal(hc$ucl, NA_real_)
+})
+
+test_that("ssd_hc fitdists averages single dist by multiple percent", {
+  hc <- ssd_hc(boron_lnorm, average = TRUE, percent = 1:99)
+  expect_s3_class(hc, "tbl_df")
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_equal(hc$dist, rep("average", 99))
+  expect_identical(hc$percent, 1:99)
+  expect_true(vld_whole_numeric(hc$percent))
+  expect_equal(hc$se, rep(NA_real_, 99))
+  expect_equal(hc$lcl, rep(NA_real_, 99))
+  expect_equal(hc$ucl, rep(NA_real_, 99))
+})
+
+test_that("ssd_hc fitdists not average single dist by multiple percent gives whole numeric", {
+  hc <- ssd_hc(boron_lnorm, average = FALSE, percent = 1:99)
+  expect_s3_class(hc, "tbl_df")
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+#  expect_true(vld_whole_numeric(hc$percent)) not sure why not true
 })
 
 test_that("ssd_hc fitdists not average", {

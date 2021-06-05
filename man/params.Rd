@@ -125,6 +125,8 @@ remove them with a warning.}
 \item{nrow}{A positive whole number of the minimum number of non-missing rows.}
 
 \item{nsim}{A positive whole number of the number of simulations to generate.}
+
+\item{linetype}{A string of the column in pred to use for the line color.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

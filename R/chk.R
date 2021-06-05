@@ -1,4 +1,4 @@
-.chk_data <- function(data, left, right, weight = NULL, nrow = 0) {
+.chk_data <- function(data, left, right, weight = NULL, nrow = 0, missing = FALSE) {
   chk_string(left)
   chk_string(right)
   chk_null_or(weight, chk_string)
@@ -34,7 +34,7 @@
   data <- data[c(left, right, weight)]
   colnames(data) <- c("left", "right", "weight")
   
-  missing <- is.na(data$left) & is.na(data$right)
+  missing <- !missing & is.na(data$left) & is.na(data$right)
   
   if(any(missing)) {
     msg <- paste0("`data` has %n row%s with missing values in '", left, "'")

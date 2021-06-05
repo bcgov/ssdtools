@@ -25,29 +25,25 @@ ssd_plot_cdf <- function(x, ...) {
 
 #' @describeIn ssd_plot_cdf Plot CDF for fitdists object
 #' @inheritParams params
+#' @param ... Additional arguments passed to [ssd_plot()].
 #' @export
 #' @examples
-#'ssd_plot_cdf(boron_dists)
-ssd_plot_cdf.fitdists <- function(x, xlab = "Concentration", ylab = "Species Affected", ...) {
-  chk_null_or(xlab, chk_string)
-  chk_null_or(ylab, chk_string)
-  chk_unused(...)
+#' ssd_plot_cdf(boron_dists)
+ssd_plot_cdf.fitdists <- function(x, average = FALSE, ...) {
+  data <- ssd_data(x)
+  pred <- ssd_hc(x, average = average, percent = 1:99)
+  cols <- .cols_fitdists(x)
   
-  pred <- ssd_hc(x, average = FALSE, percent = 1:99)
-  pred$Distribution <- pred$dist
-  
-  data <- data.frame(x = .data_fitdists(x)$left * .rescale_fitdists(x))
-  
-  ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(
-      y = "percent/100", color = "Distribution",
-      linetype = "Distribution"
-    )) +
-    geom_ssdpoint(data = data, aes_string(x = "x")) +
-    plot_coord_scale(data, xlab = xlab, ylab = ylab)
+  linetype <- if(length(unique(pred$dist)) > 1) "dist" else NULL
+  linecolor <- linetype
+  pred$percent <- round(pred$percent) # not sure why needed
+  ssd_plot(data = data, pred = pred, left = cols$left, right = cols$right,
+           ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...)
 }
 
 #' @describeIn ssd_plot_cdf Plot CDF for named list of distributional parameter values
+#' @inheritParams params
+#' @param ... Unused.
 #' @export
 #' @examples
 #' 

@@ -71,12 +71,26 @@ process_data <- function(data, left, right, weight = NULL) {
     weight <- "weight"
     data$weight <- 1
   }
-  
-  data <- data[c(left, right, weight)]
-  colnames(data) <- c("left", "right", "weight")
+  data <- rename_data(data, left, right, weight)
   
   data$left[is.na(data$left)] <- 0
   data$right[is.na(data$right)] <- Inf
+  data
+}
+
+rename_data <- function(data, left, right, weight) {
+  data$left <- data[[left]]
+  data$right <- data[[right]]
+  data$weight <- data[[weight]]
+  if(left != "left") {
+    data[[left]] <- NULL
+  } 
+  if(right != "right") {
+    data[[right]] <- NULL
+  } 
+  if(weight != "weight") {
+    data[[weight]] <- NULL
+  }
   data
 }
 

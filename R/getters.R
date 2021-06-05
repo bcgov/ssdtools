@@ -2,6 +2,10 @@
   attr(fits, "censored", exact = TRUE)
 }
 
+.cols_fitdists <- function(fits) {
+  attr(fits, "cols", exact = TRUE)
+}
+
 .control_fitdists <- function(fits) {
   attr(fits, "control", exact = TRUE)
 }
@@ -24,6 +28,11 @@
 
 `.censored_fitdists<-` <- function(fits, value) {
   attr(fits, "censored") <- value
+  fits
+}
+
+`.cols_fitdists<-` <- function(fits, value) {
+  attr(fits, "cols") <- value
   fits
 }
 
@@ -54,12 +63,13 @@
 
 .attrs_fitdists <- function(fits) {
   attrs <- attributes(fits)
-  attrs[c("censored", "control", "data", "org_data", "rescale", "weighted")]
+  attrs[c("censored", "cols", "control", "data", "org_data", "rescale", "weighted")]
 }
 
 `.attrs_fitdists<-` <- function(fits, value) {
   .censored_fitdists(fits) <- value$censored
   .control_fitdists(fits) <- value$control
+  .cols_fitdists(fits) <- value$cols
   .data_fitdists(fits) <- value$data
   .org_data_fitdists(fits) <- value$org_data
   .rescale_fitdists(fits) <- value$rescale

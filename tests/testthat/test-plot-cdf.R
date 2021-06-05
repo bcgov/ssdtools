@@ -15,6 +15,7 @@
 test_that("ssd_plot_cdf", {
   expect_snapshot_plot(ssd_plot_cdf(boron_lnorm), "boron_lnorm")
   expect_snapshot_plot(ssd_plot_cdf(boron_dists), "boron_dists")
+  expect_snapshot_plot(ssd_plot_cdf(boron_dists, average = TRUE), "boron_dists_average")
 })
 
 test_that("autoplot deals with rescaled data", {

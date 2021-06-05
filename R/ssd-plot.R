@@ -46,67 +46,73 @@ plot_coord_scale <- function(data, xlab, ylab, xbreaks = waiver()) {
 #' ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
 ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
+                     linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Percent of Species Affected",
                      ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3,
                      bounds = c(left = 1, right = 1),
                      xbreaks = waiver()) {
-  chk_s3_class(data, "data.frame")
-  chk_s3_class(pred, "data.frame")
-  chk_superset(colnames(pred), c("percent", "est", "lcl", "ucl"))
-  chk_numeric(pred$percent)
-  chk_range(pred$percent, c(1, 99))
-  chk_numeric(pred$est)
-  chk_numeric(pred$lcl)
-  chk_numeric(pred$ucl)
   
+  .chk_data(data, left, right, weight = NULL, missing = TRUE)
+  chk_null_or(label, chk_string)
+  chk_null_or(shape, chk_string)
+  chk_null_or(linetype, chk_string)
+  chk_null_or(linecolor, chk_string)
+  check_names(data, c(unique(c(left, right)), label, shape))
+
+  check_names(pred, c("percent", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
+  chk_whole_numeric(pred$percent)
+  chk_range(pred$percent, c(1,99))
+  check_data(pred, values = list(est = 1, lcl = c(1, NA), ucl = c(1, NA)))
+
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
   
-  chk_string(left)
-  chk_string(right)
-  if (!is.null(label)) chk_string(label)
-  if (!is.null(shape)) chk_string(shape)
   chk_flag(ci)
   chk_flag(ribbon)
+  
   if (!is.null(hc)) {
     chk_vector(hc)
-    chk_numeric(hc)
+    chk_whole_numeric(hc)
     chk_gt(length(hc))
     chk_subset(hc, pred$percent)
   }
   .chk_bounds(bounds)
 
-  chk_superset(colnames(data), c(left, right, label, shape))
+  pred$percent <- pred$percent / 100
+  
+  data <- process_data(data, left, right, weight = NULL)
+  data <- bound_data(data, bounds)
+  
+  if (!is.null(label)) {
+    data <- data[order(data[[label]]), ]
+  }
   
   gp <- ggplot(pred, aes_string(x = "est"))
   
   if (ci) {
     if (ribbon) {
-      gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2)
+      gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
     } else {
       gp <- gp +
-        geom_line(aes_string(x = "lcl", y = "percent/100"), color = "darkgreen") +
-        geom_line(aes_string(x = "ucl", y = "percent/100"), color = "darkgreen")
+        geom_line(aes_string(x = "lcl", y = "percent"), color = "darkgreen") +
+        geom_line(aes_string(x = "ucl", y = "percent"), color = "darkgreen")
     }
   }
-  if (!is.null(label)) {
-    chk_superset(colnames(data), label)
-    data <- data[order(data[[label]]), ]
+
+  if(!is.null(linecolor)) {
+    gp <- gp + geom_line(aes_string(y = "percent", linetype = linetype, color = linecolor))
+  } else if(ribbon) {
+    gp <- gp + geom_line(aes_string(y = "percent", linetype = linetype), color = "black")
+  } else {
+    gp <- gp + geom_line(aes_string(y = "percent", linetype = linetype), color = "red")
   }
-  gp <- gp + geom_line(aes_string(y = "percent/100"), color = if (ribbon) "black" else "red")
-  
-  
+
   if (!is.null(hc)) {
     gp <- gp + geom_hcintersect(
-      data = pred[pred$percent %in% hc, ],
-      aes_string(xintercept = "est", yintercept = "percent/ 100")
+      data = pred[round(pred$percent * 100) %in% hc, ],
+      aes_string(xintercept = "est", yintercept = "percent")
     )
   }
-  
-  data$left <- data[[left]]
-  data$right <- data[[right]]
-  
-  data <- bound_data(data, bounds)
 
   gp <- gp + 
     geom_ssdpoint(data = data, aes_string(
@@ -124,8 +130,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
   
   if (!is.null(label)) {
-    data$percent <- ssd_ecd(data[[left]])
-    data[[left]] <- data[[left]] * shift_x
+    data$percent <- ssd_ecd(data$left)
+    data$left <- data$left * shift_x
     gp <- gp + geom_text(
       data = data, aes_string(x = "right", y = "percent", label = label),
       hjust = 0, size = size, fontface = "italic"

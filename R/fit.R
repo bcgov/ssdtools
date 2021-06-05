@@ -55,6 +55,7 @@ remove_nonfits <- function(fits, rescale, computable, silent) {
 }
 
 fit_dists <- function(data, dists, rescale, computable, control, silent) {
+  data <- data[c("left", "right", "weight")]
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
   fits <- lapply(dists, safe_fit_dist, data = data, control = control)
@@ -128,9 +129,7 @@ ssd_fit_dists <- function(
   if (!length(fits)) err("All distributions failed to fit.")
   class(fits) <- "fitdists"
   
-  attrs$left <- left
-  attrs$right <- right
-  attrs$weight <- weight
+  attrs$cols <- list(left = left, right = right, weight = weight)
   attrs$control <- control
   attrs$org_data <- org_data
   
