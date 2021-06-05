@@ -58,12 +58,12 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   chk_null_or(linetype, chk_string)
   chk_null_or(linecolor, chk_string)
   check_names(data, c(unique(c(left, right)), label, shape))
-
+  
   check_names(pred, c("percent", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
   chk_whole_numeric(pred$percent)
   chk_range(pred$percent, c(1,99))
   check_data(pred, values = list(est = 1, lcl = c(1, NA), ucl = c(1, NA)))
-
+  
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
   
@@ -77,7 +77,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_subset(hc, pred$percent)
   }
   .chk_bounds(bounds)
-
+  
   pred$percent <- pred$percent / 100
   
   data <- process_data(data, left, right, weight = NULL)
@@ -98,7 +98,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
         geom_line(data = pred, aes_string(x = "ucl", y = "percent"), color = "darkgreen")
     }
   }
-
+  
   if(!is.null(linecolor)) {
     gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype, color = linecolor))
   } else if(ribbon) {
@@ -106,27 +106,38 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   } else {
     gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype), color = "red")
   }
-
+  
   if (!is.null(hc)) {
     gp <- gp + geom_hcintersect(
       data = pred[round(pred$percent * 100) %in% hc, ],
       aes_string(xintercept = "est", yintercept = "percent")
     )
   }
-
-  gp <- gp + 
-    geom_ssdpoint(data = data, aes_string(
-      x = "left", shape = shape,
-      color = color
-    )) + 
-    geom_ssdpoint(data = data, aes_string(
-      x = "right", shape = shape,
-      color = color
-    )) + 
-    geom_ssdsegment(data = data, aes_string(
-      x = "left", xend = "right", shape = shape,
-      color = color
-    ))
+  
+  # necessary to stop points appearing in line color legend
+  if(!is.null(color)) {
+    gp <- gp + 
+      geom_ssdpoint(data = data, aes_string(
+        x = "left", shape = shape,
+        color = color
+      )) +
+      geom_ssdpoint(data = data, aes_string(
+        x = "right", shape = shape,
+        color = color
+      )) 
+  } else {
+    gp <- gp + 
+      geom_ssdpoint(data = data, aes_string(
+        x = "left", shape = shape
+      )) +
+      geom_ssdpoint(data = data, aes_string(
+        x = "right", shape = shape
+      )) 
+  }
+  gp <- gp + geom_ssdsegment(data = data, aes_string(
+    x = "left", xend = "right", shape = shape,
+    color = color
+  ))
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
   
   if (!is.null(label)) {
