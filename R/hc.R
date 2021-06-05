@@ -35,51 +35,40 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_dist <- function(x, dist, percent) {
-  chk_vector(percent)
-  chk_numeric(percent)
-
-  percent <- percent / 100
+.ssd_hc_dist <- function(x, dist, proportion) {
   fun <- paste0("q", dist)
-  args <- list(p = percent)
+  args <- list(p = proportion)
   args <- c(as.list(x), args)
   est <- do.call(fun, args)
   tibble(
     dist = dist,
-    percent = percent * 100, est = est,
+    percent = proportion * 100, est = est,
     se = NA_real_, lcl = NA_real_, ucl = NA_real_
   )
 }
 
-.ssd_hc_tmbfit <- function(x, percent, ci, level, nboot, data, rescale, control, parallel, ncpus) {
-  chk_vector(percent)
-  chk_numeric(percent)
-  chk_number(level)
-  chk_range(level)
-  
-  percent <- percent / 100
-  
+.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, data, rescale, control, parallel, ncpus) {
   args <- estimates(x)
-  args$p <- percent
+  args$p <- proportion
   dist <- .dist_tmbfit(x)
   what <- paste0("q", dist)
   
   est <- do.call(what, args)
   if (!ci) {
-    na <- rep(NA_real_, length(percent))
+    na <- rep(NA_real_, length(proportion))
     return(tibble(
-      dist = rep(dist, length(percent)),
-      percent = percent * 100, 
+      dist = rep(dist, length(proportion)),
+      percent = proportion * 100, 
       est = est * rescale,
       se = na, 
       lcl = na, 
       ucl = na))
   }
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, control = control, parallel = parallel, ncpus = ncpus)
-  cis <- cis_tmb(estimates, what, level = level, x = percent)
+  cis <- cis_tmb(estimates, what, level = level, x = proportion)
   tibble(
     dist = dist,
-    percent = percent * 100, est = est * rescale,
+    percent = proportion * 100, est = est * rescale,
     se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale
   )
 }
@@ -97,7 +86,7 @@ no_ssd_hc <- function() {
   rescale <- .rescale_fitdists(x)
 
   hc <- lapply(x, .ssd_hc_tmbfit,
-    percent = percent, ci = ci, level = level, nboot = nboot,
+    proportion = percent / 100, ci = ci, level = level, nboot = nboot,
     data = data, rescale = rescale,
     parallel = parallel, ncpus = ncpus, control = control
   )
@@ -136,7 +125,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
     return(no_ssd_hc())
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
-               MoreArgs = list(percent = percent),
+               MoreArgs = list(proportion = percent / 100),
                SIMPLIFY = FALSE
   )
   bind_rows(hc)
