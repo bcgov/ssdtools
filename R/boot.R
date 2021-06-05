@@ -12,33 +12,32 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-censor_data <- function(new_data, data) {
-  censored <- data$left != data$right | data$left == 0 | is.infinite(data$right)
-  if(!any(censored)) return(new_data)
-  .NotYetImplemented()
-}
+# censor_data <- function(new_data, data) {
+#   censored <- data$left != data$right | data$left == 0 | is.infinite(data$right)
+#   if(!any(censored)) return(new_data)
+#   .NotYetImplemented()
+# }
 
-generate_new_data <- function(estimates, n, dist) {
+generate_new_data <- function(dist, args) {
   what <- paste0("r", dist)
-  args <- list(n = n)
-  args <- c(args, estimates)
   sample <- do.call(what, args)
-  new_data <- data.frame(left = sample, right = sample)
-  new_data$weight <- 1
-#  new_data <- censor_data(new_data, data)
-  new_data
+  data <- data.frame(left = sample, right = sample)
+  data$weight <- 1
+#  data <- censor_data(new_data, data)
+  data
 }
 
-sample_parameters <- function(i, estimates, n, dist, control) {
-  new_data <- generate_new_data(estimates, n, dist)
-  fit <- fit_tmb(dist, new_data, control = control)
-  estimates(fit)
+sample_parameters <- function(i, dist, args, control) {
+  new_data <- generate_new_data(dist, args)
+  fit <- fit_tmb(dist, new_data, control = control) # and this
+  estimates(fit) # this really needs speeding up
 }
 
 boot_tmbfit <- function(x, nboot, data, control, parallel, ncpus) {
   # need to do parallel
   dist <- .dist_tmbfit(x)
-  estimates <- estimates(x)
-  n <- nrow(data)
-  lapply(1:nboot, sample_parameters, estimates = estimates, n = n, dist = dist, control = control)
+  args <- list(n = nrow(data))
+  args <- c(args, estimates(x))
+  
+  lapply(1:nboot, sample_parameters, dist = dist, args = args, control = control)
 }
