@@ -23,7 +23,7 @@ test_that("tidy.tmbfit", {
   set.seed(101)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 10)
   expect_equal(hc$est, 1.681174837758)
-  expect_equal(hc$se, 0.670156954633317)
+  expect_equal(hc$se, 0.670156905807046)
   
   hp <- ssd_hp(fit, 1, nboot = 10)
   expect_s3_class(hp, "tbl_df")
@@ -38,7 +38,7 @@ test_that("tidy.tmbfit", {
   set.seed(101)
   hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 10)
   expect_equal(hp$est, 1.95430302556687)
-  expect_equal(hc$se, 0.670156954633317)
+  expect_equal(hp$se, 1.24223428274952)
 
   glance <- glance(fit)
   expect_s3_class(glance, "tbl_df")

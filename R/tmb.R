@@ -12,27 +12,27 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-tmb_fun <- function(data, parameters, dist) {
+tmb_fun <- function(data, pars, dist) {
   model <- paste0("ll_", dist)
   data <- c(model = model, data)
   MakeADFun(data = data, 
-                 parameters = parameters,
+                 parameters = pars,
                  DLL = "ssdtools_TMBExports", silent = TRUE)
 }
 
-tmb_parameters <- function(data, dist) {
+tmb_pars <- function(data, dist) {
   x <- rowMeans(data[c("left", "right")], na.rm = TRUE)
   fun <- paste0("s", dist)
   do.call(fun, list(x = x))
 }
 
-tmb_model <- function(data, dist, parameters) {
-  parameters <- parameters %||% tmb_parameters(data, dist)
-  tmb_fun(data, parameters, dist)
+tmb_model <- function(data, dist, pars) {
+  pars <- pars %||% tmb_pars(data, dist)
+  tmb_fun(data, pars, dist)
 }
 
-fit_tmb <- function(dist, data, control, parameters = NULL, hessian = TRUE) {
-  model <- tmb_model(data, dist, parameters = parameters)
+fit_tmb <- function(dist, data, control, pars = NULL, hessian = TRUE) {
+  model <- tmb_model(data, dist, pars = pars)
   bounds <- bdist(dist)
   # required because model can switch order of parameters
   lower <- bounds$lower[names(model$par)]

@@ -194,9 +194,9 @@ test_that("ssd_hc fitdists cis", {
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
   expect_equal(hc$est,  1.6811748398812)
-  expect_equal(hc$se, 0.69683656316552)
-  expect_equal(hc$lcl, 0.922643229425794)
-  expect_equal(hc$ucl, 3.59396430550223)
+  expect_equal(hc$se, 0.696836797492395)
+  expect_equal(hc$lcl, 0.922643546407928)
+  expect_equal(hc$ucl, 3.59396425682664)
 })
 
 # test_that("ssd_hc fitdists cis", {

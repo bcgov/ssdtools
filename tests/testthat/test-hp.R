@@ -92,9 +92,9 @@ test_that("hp fitdists works with cis", {
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 1.95430302556687) 
-  expect_equal(hp$se, 1.35655179053438) 
-  expect_equal(hp$lcl, 0.753456291493635) 
-  expect_equal(hp$ucl, 4.40213333315012) 
+  expect_equal(hp$se, 1.35655142717243) 
+  expect_equal(hp$lcl, 0.753456512320601) 
+  expect_equal(hp$ucl, 4.40213331349945) 
 })
 
 test_that("hp fitdists works with multiple dists", {

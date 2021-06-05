@@ -124,29 +124,3 @@ test_that("fit lgumbel Mn LT", {
     tolerance = 1e-05
   )
 })
-
-test_that("fit lgumbel cis", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel", rescale = FALSE)
-  
-  set.seed(77)
-  hc <- ssd_hc(fit, ci = TRUE, nboot = 10)
-  expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  expect_equal(hc$dist, "average")
-  expect_identical(hc$percent, 5)
-  expect_equal(hc$est, 1.76938547654574) 
-  expect_equal(hc$se, 0.370439536687029)
-  expect_equal(hc$lcl, 1.23090223946326)
-  expect_equal(hc$ucl, 2.26707831556875) 
-  
-  set.seed(77)
-  hp <- ssd_hp(fit, conc = 2, ci = TRUE, nboot = 10)
-  expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, 2)
-  expect_equal(hp$est, 6.6389873070612)
-  expect_equal(hp$se, 3.00074489009046)
-  expect_equal(hp$lcl, 3.43391197427567) 
-  expect_equal(hp$ucl, 12.0612936951345) 
-})

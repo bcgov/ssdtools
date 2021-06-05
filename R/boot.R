@@ -27,9 +27,9 @@ generate_data <- function(dist, args) {
   data
 }
 
-sample_parameters <- function(i, dist, args, control) {
+sample_parameters <- function(i, dist, args, pars, control) {
   new_data <- generate_data(dist, args)
-  fit <- fit_tmb(dist, new_data, control = control, parameters = NULL, hessian = FALSE) # and this
+  fit <- fit_tmb(dist, new_data, control = control, pars = pars, hessian = FALSE)
   estimates(fit) # this really needs speeding up
 }
 
@@ -38,6 +38,7 @@ boot_tmbfit <- function(x, nboot, data, control, parallel, ncpus) {
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
-  
-  lapply(1:nboot, sample_parameters, dist = dist, args = args, control = control)
+  pars <- .pars_tmbfit(x)
+
+  lapply(1:nboot, sample_parameters, dist = dist, args = args, pars = pars, control = control)
 }
