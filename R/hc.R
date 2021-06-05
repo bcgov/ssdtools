@@ -116,7 +116,7 @@ no_ssd_hc <- function() {
          lcl = hc$lcl, ucl = hc$ucl)
 }
 
-#' @describeIn ssd_hc Hazard Percent list of distributions
+#' @describeIn ssd_hc Hazard Concentration list of distributions
 #' @export
 #' @examples
 #' ssd_hc(list("lnorm" = NULL))
@@ -142,7 +142,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   bind_rows(hc)
 }
 
-#' @describeIn ssd_hc Hazard Percent fitdists
+#' @describeIn ssd_hc Hazard Concentration fitdists
 #' @export
 #' @examples
 #' ssd_hc(boron_dists, c(0, 1, 30, Inf))

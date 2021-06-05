@@ -26,16 +26,19 @@
 #' ssd_dists("all")
 ssd_dists <- function(type = "stable") {
   chk_string(type)
-  chk_subset(type, c("all", "stable", "unstable"))
+  chk_subset(type, c("all", "stable", "unstable", "bc"))
 
   stable <- c("gamma", "lgumbel", 
               "llogis", "lnorm", "weibull")
   unstable <- c("burrIII3", "gompertz", "mx_llogis_llogis")
+  bc <- c("gamma", "llogis", "lnorm")
   
   dists <- switch(type, 
          all = c(stable, unstable),
          stable = stable,
-         unstable = unstable)
+         unstable = unstable,
+         bc = bc,
+         stop())
   
   dists <- unique(dists)
   dists <- stringr::str_sort(dists)

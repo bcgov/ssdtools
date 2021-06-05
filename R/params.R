@@ -60,6 +60,7 @@
 #' @param yintercept The y-value for the intersect.
 #' @param select A character vector of the distributions to select.
 #' @param rescale A flag specifying whether to rescale concentration values by dividing by the largest finite value.
+#' @param reweight A flag specifying whether to reweight weights by dividing by the largest weight.
 #' @param left A string of the column in data with the concentrations.
 #' @param right A string of the column in data with the right concentration values.
 #' @param label A string of the column in data with the labels.

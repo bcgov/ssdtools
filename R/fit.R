@@ -88,6 +88,7 @@ ssd_fit_dists <- function(
   dists = c("gamma", "llogis", "lnorm"),
   nrow = 6L,
   rescale = FALSE,
+  reweight = FALSE,
   computable = TRUE,
   control = list(),
   silent = FALSE) {
@@ -113,13 +114,14 @@ ssd_fit_dists <- function(
   .chk_data(data, left, right, weight, nrow)
   
   chk_flag(rescale)
+  chk_flag(reweight)
   chk_flag(computable)
   chk_list(control)
   chk_flag(silent)
   
   org_data <- as_tibble(data)
   data <- process_data(data, left, right, weight)
-  attrs <- rescale_data(data, rescale = rescale, silent = silent)
+  attrs <- adjust_data(data, rescale = rescale, reweight = reweight, silent = silent)
   
   fits <- fit_dists(attrs$data, dists, attrs$rescale, computable, control, silent)
   

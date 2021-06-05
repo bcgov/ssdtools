@@ -91,6 +91,8 @@ relative to the extremes for non-missing values.}
 
 \item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
 
+\item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
+
 \item{left}{A string of the column in data with the concentrations.}
 
 \item{right}{A string of the column in data with the right concentration values.}

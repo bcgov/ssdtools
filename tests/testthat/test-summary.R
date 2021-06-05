@@ -47,3 +47,21 @@ test_that("summary fitdists with censored, rescaled, weighted data", {
   expect_identical(summary$rescaled, 70.7)
   expect_identical(summary$weighted, TRUE)
 })
+
+test_that("summary weighted if equal weights but not 1", {
+  data <- ssdtools::boron_data
+  data$Mass <- 2
+  fits <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
+  summary <- summary(fits)
+  expect_s3_class(summary, "summary_fitdists")
+  expect_identical(summary$weighted, TRUE)
+})
+
+test_that("summary not weighted if equal weights but not 1 and reweighted", {
+  data <- ssdtools::boron_data
+  data$Mass <- 2
+  fits <- ssd_fit_dists(data, weight = "Mass", reweight = TRUE, dists = "lnorm")
+  summary <- summary(fits)
+  expect_s3_class(summary, "summary_fitdists")
+  expect_identical(summary$weighted, FALSE)
+})

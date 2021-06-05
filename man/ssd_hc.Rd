@@ -58,9 +58,9 @@ Gets concentrations that protect specified percentages of species.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{list}: Hazard Percent list of distributions
+\item \code{list}: Hazard Concentration list of distributions
 
-\item \code{fitdists}: Hazard Percent fitdists
+\item \code{fitdists}: Hazard Concentration fitdists
 }}
 
 \examples{

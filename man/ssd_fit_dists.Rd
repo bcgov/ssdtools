@@ -12,6 +12,7 @@ ssd_fit_dists(
   dists = c("gamma", "llogis", "lnorm"),
   nrow = 6L,
   rescale = FALSE,
+  reweight = FALSE,
   computable = TRUE,
   control = list(),
   silent = FALSE
@@ -31,6 +32,8 @@ ssd_fit_dists(
 \item{nrow}{A positive whole number of the minimum number of non-missing rows.}
 
 \item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
+
+\item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 
