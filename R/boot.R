@@ -29,7 +29,7 @@ generate_data <- function(dist, args) {
 
 sample_parameters <- function(i, dist, args, control) {
   new_data <- generate_data(dist, args)
-  fit <- fit_tmb(dist, new_data, control = control, hessian = FALSE) # and this
+  fit <- fit_tmb(dist, new_data, control = control, parameters = NULL, hessian = FALSE) # and this
   estimates(fit) # this really needs speeding up
 }
 
