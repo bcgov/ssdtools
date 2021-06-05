@@ -30,7 +30,7 @@ generate_data <- function(dist, args) {
 sample_parameters <- function(i, dist, args, pars, control) {
   new_data <- generate_data(dist, args)
   fit <- fit_tmb(dist, new_data, control = control, pars = pars, hessian = FALSE)
-  estimates(fit) # this really needs speeding up
+  estimates(fit)
 }
 
 boot_tmbfit <- function(x, nboot, data, control, parallel, ncpus) {

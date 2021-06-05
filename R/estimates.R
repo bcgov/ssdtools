@@ -16,17 +16,21 @@
 universals::estimates
 
 #' @export
-estimates.tmbfit <- function(x, all = FALSE, ...) {
-  x <- tidy(x, all = all)
-  names <- x$term
-  x <- as.list(x$est)
-  names(x) <- names
-  x
+estimates.tmbfit <- function(x,...) {
+  pars <- .pars_tmbfit(x)
+  log <- grepl("^log_", names(pars))
+  pars[log] <- exp(pars[log])
+  logit <- grepl("^logit_", names(pars))
+  pars[logit] <- plogis(pars[logit])
+  
+  names(pars) <- sub("^log(it){0,1}_", "", names(pars))
+  pars <- pars[str_order(names(pars))]
+  as.list(pars)
 }
 
 #' @export
-estimates.fitdists <- function(x, all = FALSE, ...) {
-  y <- lapply(x, estimates, all = all)
+estimates.fitdists <- function(x, ...) {
+  y <- lapply(x, estimates)
   names(y) <- names(x)
   y
 }
