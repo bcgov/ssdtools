@@ -31,7 +31,7 @@ tmb_model <- function(data, dist) {
   tmb_fun(data, parameters, dist)
 }
 
-fit_tmb <- function(dist, data, control) {
+fit_tmb <- function(dist, data, control, hessian = TRUE) {
   model <- tmb_model(data, dist)
   bounds <- bdist(dist)
   # required because model can switch order of parameters
@@ -41,7 +41,7 @@ fit_tmb <- function(dist, data, control) {
     optim <- optim(model$par, model$fn, model$gr, 
                    method = "L-BFGS-B",
                    lower = lower, upper = upper,
-                   control= control, hessian = TRUE) # FALSE when bootstrap?
+                   control= control, hessian = hessian)
   )
   fit <- list(dist = dist, model = model, optim = optim)
   class(fit) <- "tmbfit"

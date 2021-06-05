@@ -18,7 +18,7 @@
 #   .NotYetImplemented()
 # }
 
-generate_new_data <- function(dist, args) {
+generate_data <- function(dist, args) {
   what <- paste0("r", dist)
   sample <- do.call(what, args)
   data <- data.frame(left = sample, right = sample)
@@ -28,8 +28,8 @@ generate_new_data <- function(dist, args) {
 }
 
 sample_parameters <- function(i, dist, args, control) {
-  new_data <- generate_new_data(dist, args)
-  fit <- fit_tmb(dist, new_data, control = control) # and this
+  new_data <- generate_data(dist, args)
+  fit <- fit_tmb(dist, new_data, control = control, hessian = FALSE) # and this
   estimates(fit) # this really needs speeding up
 }
 
