@@ -60,12 +60,6 @@ bound_data <- function(data, bounds) {
   data
 }
 
-is_censored <- function(data) {
-  left <- any(is.na(data$left)) | any(data$left == 0)
-  right <- any(is.na(data$right)) | any(!is.finite(data$right))
-  left || right
-}
-
 process_data <- function(data, left, right, weight = NULL) {  
   if(is.null(weight)) {
     weight <- "weight"

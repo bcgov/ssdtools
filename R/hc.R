@@ -147,7 +147,7 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
     deprecate_stop("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
-
+  
   .ssd_hc_fitdists(x, percent,
     ci = ci, level = level, nboot = nboot, control = control,
     parallel = parallel, ncpus = ncpus,

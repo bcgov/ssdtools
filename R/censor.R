@@ -1,0 +1,43 @@
+#    Copyright 2015 Province of British Columbia
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#       https://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
+is_censored <- function(data) {
+  (any(is.na(data$left)) | any(data$left == 0)) || (any(is.na(data$right)) | any(!is.finite(data$right)))
+}
+
+censor_data <- function(data, censoring) {
+  data$left[data$left < censoring[1]] <- 0
+  data$right[data$right > censoring[2]] <- Inf
+  data
+}
+
+censoring <- function(data) {
+  data <- data[data$left != data$right,]
+  
+  if(!nrow(data))
+    return(c(0, Inf))
+  
+  left <- data$left == 0
+  right <- !is.finite(data$right)
+  
+  if(any(!left & !right)) return(c(NA_real_, NA_real_))
+  
+  censoring[1] <- max(0, data$right[data$left == 0])
+  censoring[2] <- min(Inf, censoring[2], data$left[!is.finite(data$right)])
+  
+  if(censoring[1] >= censoring[2])
+    return(c(NA_real_, NA_real_))
+  
+  censoring
+}
