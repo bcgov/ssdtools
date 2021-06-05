@@ -11,7 +11,7 @@ ssd_fit_dists(
   weight = NULL,
   dists = c("gamma", "llogis", "lnorm"),
   nrow = 6L,
-  rescale = TRUE,
+  rescale = FALSE,
   computable = TRUE,
   control = list(),
   silent = FALSE

@@ -103,7 +103,7 @@ test_that("hp fitdists works with multiple dists", {
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 1)
-  expect_equal(hp$est, 3.66685295271487) 
+  expect_equal(hp$est, 3.66685732661861) 
   expect_equal(hp$se, NA_real_) 
 })
 
@@ -113,7 +113,7 @@ test_that("hp fitdists works not average multiple dists", {
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, c("gamma", "llogis", "lnorm"))
   expect_identical(hp$conc, c(1, 1, 1))
-  expect_equal(hp$est, c(4.67758994580286, 2.80043103155676, 1.9543030195088)) 
+  expect_equal(hp$est, c(4.67758994580286, 2.80047097268139, 1.9543030195088)) 
   expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_)) 
 })
 

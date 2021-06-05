@@ -10,13 +10,13 @@ test_that("summary tmbfit", {
 
 test_that("summary fitdists", {
   data <- ssdtools::boron_data
-  fits <- ssd_fit_dists(data, dists = "lnorm")
+  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = FALSE)
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
   expect_identical(names(summary), c("fits", "censored", "nrow", "rescaled", "weighted"))
   expect_identical(summary$censored, FALSE)
   expect_identical(summary$nrow, 28L)
-  expect_identical(summary$rescaled, 70.7)
+  expect_identical(summary$rescaled, 1)
   expect_identical(summary$weighted, FALSE)
 })
 

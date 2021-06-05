@@ -29,7 +29,7 @@ test_that("exposure different mean and log", {
 
 test_that("exposure multiple distributions", {
   set.seed(1)
-  expect_equal(ssd_exposure(boron_dists), 0.0645152154025056)
+  expect_equal(ssd_exposure(boron_dists), 0.0645152661450559)
 })
 
 test_that("exposure not sensitive to rescaling", {

@@ -198,12 +198,12 @@ test_that("ssd_fit_dists warns of optimizer convergence code error", {
   data <- ssdtools::boron_data
   expect_error(
     expect_warning(ssd_fit_dists(data, control = list(maxit = 1) , dist = "lnorm"), 
-                   regexp = "^Distribution 'lnorm' failed to converge: Iteration limit maxit reach \\(try increasing the maximum number of iterations in control\\)\\.$")
+                   regexp = "^Distribution 'lnorm' failed to converge \\(try rescaling data\\): Iteration limit maxit reach \\(try increasing the maximum number of iterations in control\\)\\.$")
   )
 })
 
 test_that("ssd_fit_dists estimates for boron_data on stable dists", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists())
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists(), rescale = TRUE)
   
   expect_equal(estimates(fits), 
                list(gamma = list(scale = 0.355400735189619, shape = 0.950179460431249), 

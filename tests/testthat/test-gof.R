@@ -17,7 +17,7 @@ test_that("ssd_gof", {
   expect_s3_class(glance, "tbl_df")
   expect_identical(colnames(glance), c("dist", "npars", "nobs", "log_lik", "aic", "aicc", "delta", "weight"))
   expect_identical(glance$dist, "lnorm")
-  expect_equal(glance$aicc, 1.03548089655296)
+  expect_equal(glance$aicc, 239.508432979094)
   
   x <- ssd_gof(boron_lnorm)
   
@@ -27,9 +27,9 @@ test_that("ssd_gof", {
   # expect_equal(x$ad, 0.506765995104718)
   # expect_equal(x$ks, 0.106478603062667)
   # expect_equal(x$cvm, 0.0702966462329144)
-  expect_equal(x$aic, 0.555480896552964)
-  expect_equal(x$aicc, 1.03548089655296)
-  expect_equal(x$bic, 3.21988991690337)
+  expect_equal(x$aic, 239.028432979094)
+  expect_equal(x$aicc, 239.508432979094)
+  expect_equal(x$bic, 241.692841999445)
   
   glance <- glance(boron_dists)
   expect_s3_class(glance, "tbl_df")
