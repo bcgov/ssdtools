@@ -16,7 +16,7 @@ ssd_plot(
   linetype = NULL,
   linecolor = NULL,
   xlab = "Concentration",
-  ylab = "Percent of Species Affected",
+  ylab = "Species Affected",
   ci = TRUE,
   ribbon = FALSE,
   hc = 5L,

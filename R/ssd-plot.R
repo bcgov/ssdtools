@@ -47,7 +47,7 @@ plot_coord_scale <- function(data, xlab, ylab, xbreaks = waiver()) {
 ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      linetype = NULL, linecolor = NULL,
-                     xlab = "Concentration", ylab = "Percent of Species Affected",
+                     xlab = "Concentration", ylab = "Species Affected",
                      ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3,
                      bounds = c(left = 1, right = 1),
                      xbreaks = waiver()) {
