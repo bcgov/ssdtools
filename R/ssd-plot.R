@@ -87,24 +87,24 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     data <- data[order(data[[label]]), ]
   }
   
-  gp <- ggplot(pred, aes_string(x = "est"))
+  gp <- ggplot(data)
   
   if (ci) {
     if (ribbon) {
-      gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
+      gp <- gp + geom_xribbon(data = pred, aes_string(x = "est", xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
     } else {
       gp <- gp +
-        geom_line(aes_string(x = "lcl", y = "percent"), color = "darkgreen") +
-        geom_line(aes_string(x = "ucl", y = "percent"), color = "darkgreen")
+        geom_line(data = pred, aes_string(x = "lcl", y = "percent"), color = "darkgreen") +
+        geom_line(data = pred, aes_string(x = "ucl", y = "percent"), color = "darkgreen")
     }
   }
 
   if(!is.null(linecolor)) {
-    gp <- gp + geom_line(aes_string(y = "percent", linetype = linetype, color = linecolor))
+    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype, color = linecolor))
   } else if(ribbon) {
-    gp <- gp + geom_line(aes_string(y = "percent", linetype = linetype), color = "black")
+    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype), color = "black")
   } else {
-    gp <- gp + geom_line(aes_string(y = "percent", linetype = linetype), color = "red")
+    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype), color = "red")
   }
 
   if (!is.null(hc)) {
