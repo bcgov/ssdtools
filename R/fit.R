@@ -128,6 +128,9 @@ ssd_fit_dists <- function(
   if (!length(fits)) err("All distributions failed to fit.")
   class(fits) <- "fitdists"
   
+  attrs$left <- left
+  attrs$right <- right
+  attrs$weight <- weight
   attrs$control <- control
   attrs$org_data <- org_data
   
