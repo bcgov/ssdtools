@@ -19,7 +19,7 @@
   
   check_names(data, names = names(values))
   if(is.null(weight)) {
-    data$weight <- 1
+    data$weight <- rep(1, nrow(data))
     weight <- "weight"
   } else if(is.integer(data[[weight]])) {
     data[[weight]] <- as.double(data[[weight]])

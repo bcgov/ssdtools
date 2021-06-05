@@ -10,7 +10,7 @@ ssd_plot_cdf(x, ...)
 
 \method{ssd_plot_cdf}{fitdists}(x, average = FALSE, ...)
 
-\method{ssd_plot_cdf}{list}(x, xlab = "Concentration", ylab = "Species Affected", ...)
+\method{ssd_plot_cdf}{list}(x, ...)
 }
 \arguments{
 \item{x}{The object.}
@@ -18,10 +18,6 @@ ssd_plot_cdf(x, ...)
 \item{...}{Unused.}
 
 \item{average}{A flag specifying whether to model average the estimates.}
-
-\item{xlab}{A string of the x-axis label.}
-
-\item{ylab}{A string of the x-axis label.}
 }
 \description{
 Generic function to plots the cumulative distribution function (CDF).

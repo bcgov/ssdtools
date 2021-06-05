@@ -114,7 +114,6 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     )
   }
   
-  # necessary to stop points appearing in line color legend
   if(!is.null(color)) {
     gp <- gp + 
       geom_ssdpoint(data = data, aes_string(
@@ -124,7 +123,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       geom_ssdpoint(data = data, aes_string(
         x = "right", shape = shape,
         color = color
-      )) 
+      )) + 
+      geom_ssdsegment(data = data, aes_string(
+        x = "left", xend = "right", shape = shape,
+        color = color)) 
   } else {
     gp <- gp + 
       geom_ssdpoint(data = data, aes_string(
@@ -132,12 +134,12 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       )) +
       geom_ssdpoint(data = data, aes_string(
         x = "right", shape = shape
+      )) +
+      geom_ssdsegment(data = data, aes_string(
+        x = "left", xend = "right", shape = shape,
       )) 
   }
-  gp <- gp + geom_ssdsegment(data = data, aes_string(
-    x = "left", xend = "right", shape = shape,
-    color = color
-  ))
+  
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
   
   if (!is.null(label)) {

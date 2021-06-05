@@ -69,7 +69,7 @@ is_censored <- function(data) {
 process_data <- function(data, left, right, weight = NULL) {  
   if(is.null(weight)) {
     weight <- "weight"
-    data$weight <- 1
+    data$weight <- rep(1, nrow(data))
   }
   data <- rename_data(data, left, right, weight)
   

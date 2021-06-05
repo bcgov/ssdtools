@@ -30,13 +30,14 @@ ssd_plot_cdf <- function(x, ...) {
 #' @examples
 #' ssd_plot_cdf(boron_dists)
 ssd_plot_cdf.fitdists <- function(x, average = FALSE, ...) {
+  pred <- ssd_hc(x, percent = 1:99, average = average)
   data <- ssd_data(x)
-  pred <- ssd_hc(x, average = average, percent = 1:99)
   cols <- .cols_fitdists(x)
   
   linetype <- if(length(unique(pred$dist)) > 1) "dist" else NULL
   linecolor <- linetype
   pred$percent <- round(pred$percent) # not sure why needed
+
   ssd_plot(data = data, pred = pred, left = cols$left, right = cols$right,
            ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...) +
     labs(linetype = "Distribution", color = "Distribution")
@@ -52,21 +53,15 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, ...) {
 #'   llogis = c(locationlog = 2, scalelog = 1),
 #'   lnorm = c(meanlog = 2, sdlog = 2))
 #' )
-ssd_plot_cdf.list <- function(x,
-                              xlab = "Concentration", ylab = "Species Affected",
-                              ...) {
-  chk_string(xlab)
-  chk_string(ylab)
-  chk_unused(...)
-  
+ssd_plot_cdf.list <- function(x, ...) {
   pred <- ssd_hc(x, percent = 1:99)
+  data <- data.frame(Conc = numeric(0))
+
+  linetype <- if(length(unique(pred$dist)) > 1) "dist" else NULL
+  linecolor <- linetype
+  pred$percent <- round(pred$percent) # not sure why needed
   
-  pred$Distribution <- pred$dist
-  
-  ggplot(pred, aes_string(x = "est")) +
-    geom_line(aes_string(
-      y = "percent/100", color = "Distribution",
-      linetype = "Distribution"
-    )) +
-    plot_coord_scale(pred, xlab = xlab, ylab = ylab)
+  ssd_plot(data = data, pred = pred,
+           ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...) +
+    labs(color = "Distribution", linetype = "Distribution")
 }
