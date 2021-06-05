@@ -141,7 +141,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
   
   if (!is.null(label)) {
-    data$right <- data$right# * shift_x
+    data$right <- data$right * shift_x
     gp <- gp + geom_text(
       data = data, aes_string(x = "right", y = "y", label = label),
       hjust = 0, size = size, fontface = "italic"
