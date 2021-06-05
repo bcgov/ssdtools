@@ -26,13 +26,13 @@ tmb_parameters <- function(data, dist) {
   do.call(fun, list(x = x))
 }
 
-tmb_model <- function(data, dist) {
-  parameters <- tmb_parameters(data, dist)
+tmb_model <- function(data, dist, parameters) {
+  parameters <- parameters %||% tmb_parameters(data, dist)
   tmb_fun(data, parameters, dist)
 }
 
-fit_tmb <- function(dist, data, control, hessian = TRUE) {
-  model <- tmb_model(data, dist)
+fit_tmb <- function(dist, data, control, parameters = NULL, hessian = TRUE) {
+  model <- tmb_model(data, dist, parameters = parameters)
   bounds <- bdist(dist)
   # required because model can switch order of parameters
   lower <- bounds$lower[names(model$par)]
