@@ -23,4 +23,4 @@ npars.fitdists <- function(x, ...) {
 }
 
 #' @export
-npars.tmbfit <- function(x, ...) length(estimates(x))
+npars.tmbfit <- function(x, ...) length(.pars_tmbfit(x))
