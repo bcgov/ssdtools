@@ -30,11 +30,10 @@ test_that("ssd_plot xbreaks", {
   expect_snapshot_plot(ssd_plot(boron_data, boron_pred, xbreaks = c(1,2)), "boron_breaks")
 })
 
-test_that("ssd_plot handles missing values all", {
-  withr::local_options(warn = -1)
+test_that("ssd_plot can't handles missing values all", {
   data <- boron_data
   data$Conc <- NA_real_
-  expect_snapshot_plot(ssd_plot(data, boron_pred), "missing_all")
+  expect_error(ssd_plot(data, boron_pred))
 })
 
 test_that("ssd_plot fills in missing order", {

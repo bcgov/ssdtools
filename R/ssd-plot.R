@@ -82,11 +82,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   
   data <- process_data(data, left, right, weight = NULL)
   data <- bound_data(data, bounds)
-  
-  if (!is.null(label)) {
-    data <- data[order(data[[label]]), ]
-  }
-  
+  data$y <- ssd_ecd_data(data, "left", "right", bounds = bounds)
+
   gp <- ggplot(data)
   
   if (ci) {
@@ -117,36 +114,36 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   if(!is.null(color)) {
     gp <- gp + 
       geom_ssdpoint(data = data, aes_string(
-        x = "left", shape = shape,
+        x = "left", y = "y", shape = shape,
         color = color
-      )) +
+      ), stat = "identity") +
       geom_ssdpoint(data = data, aes_string(
-        x = "right", shape = shape,
+        x = "right", y = "y", shape = shape,
         color = color
-      )) + 
+      ), stat = "identity") + 
       geom_ssdsegment(data = data, aes_string(
-        x = "left", xend = "right", shape = shape,
-        color = color)) 
+        x = "left", y = "y", xend = "right", yend = "y", shape = shape,
+        color = color), 
+        stat = "identity") 
   } else {
     gp <- gp + 
       geom_ssdpoint(data = data, aes_string(
-        x = "left", shape = shape
-      )) +
+        x = "left", y = "y", shape = shape), 
+        stat = "identity") +
       geom_ssdpoint(data = data, aes_string(
-        x = "right", shape = shape
-      )) +
+        x = "right", y = "y", shape = shape
+      ), stat = "identity") +
       geom_ssdsegment(data = data, aes_string(
-        x = "left", xend = "right", shape = shape,
-      )) 
+        x = "left", y = "y", xend = "right", yend = "y", shape = shape
+      ), stat = "identity") 
   }
   
   gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
   
   if (!is.null(label)) {
-    data$percent <- ssd_ecd(data$left)
-    data$left <- data$left * shift_x
+    data$right <- data$right# * shift_x
     gp <- gp + geom_text(
-      data = data, aes_string(x = "right", y = "percent", label = label),
+      data = data, aes_string(x = "right", y = "y", label = label),
       hjust = 0, size = size, fontface = "italic"
     )
   }
