@@ -18,6 +18,8 @@
 
 censoring_text <- function(x) {
   if(!.is_censored(x)) return(NULL)
+  if(identical(x, c(NA_real_, NA_real_)))
+    return("inconsistently censored")
   left <- if(x[1] == 0) NULL else paste0("left (", signif(x[1], 4), ")")
   right <- if(is.infinite(x[2])) NULL else paste0("right (", signif(x[2], 4), ")")
   censoring <- c(left, right)

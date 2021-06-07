@@ -17,6 +17,15 @@ test_that("summary fitdists with left censored, rescaled, weighted data", {
   expect_snapshot_output(print(fits))
 })
 
+test_that("summary fitdists with inconsistently censored data", {
+  data <- ssdtools::boron_data
+  data$Conc2 <- data$Conc
+  data$Conc[1] <- 1
+  data$Conc2[1] <- 2
+  fits <- ssd_fit_dists(data, right = "Conc2", dists = "lnorm")
+  expect_snapshot_output(print(fits))
+})
+
 test_that("summary fitdists with right censored, rescaled, weighted data", {
   data <- ssdtools::boron_data
   data$Mass <- 1:nrow(data)
