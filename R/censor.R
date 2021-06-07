@@ -12,8 +12,21 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-is_censored <- function(data) {
-  (any(is.na(data$left)) | any(data$left == 0)) || (any(is.na(data$right)) | any(!is.finite(data$right)))
+.is_censored <- function(x) {
+  !identical(x, c(0, Inf))
+}
+#' Is Censored
+#'
+#' @param x A fitdists object.
+#'
+#' @return A flag indicating if the data is censored.
+#' @export
+#'
+#' @examples
+#' is_censored(boron_dists)
+is_censored <- function(x) {
+  chk_s3_class(x, "fitdists")
+  .is_censored(.censoring_fitdists(x))
 }
 
 censor_data <- function(data, censoring) {
@@ -23,10 +36,11 @@ censor_data <- function(data, censoring) {
 }
 
 censoring <- function(data) {
+  censoring <- c(0, Inf)
   data <- data[data$left != data$right,]
   
   if(!nrow(data))
-    return(c(0, Inf))
+    return(censoring)
   
   left <- data$left == 0
   right <- !is.finite(data$right)

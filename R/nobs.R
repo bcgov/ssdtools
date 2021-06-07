@@ -19,7 +19,7 @@ stats::nobs
 
 #' @export
 nobs.fitdists <- function(object, ...) {
-  if(.censored_fitdists(object))
+  if(is_censored(object))
     return(NA_integer_)
   nrow(.data_fitdists(object))
 }

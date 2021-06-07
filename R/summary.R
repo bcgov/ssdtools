@@ -25,7 +25,7 @@ summary.tmbfit <- function(object, ...) {
 summary.fitdists <- function(object, ...) {
   x <- list()
   x$fits <- lapply(object, summary)
-  x$censored <- .censored_fitdists(object)
+  x$censoring <- .censoring_fitdists(object)
   x$nrow <- nrow(.data_fitdists(object))
   x$rescaled <- .rescale_fitdists(object)
   x$weighted <- .weighted_fitdists(object)

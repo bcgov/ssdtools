@@ -101,8 +101,6 @@ is_at_boundary <- function(fit) {
 }
 
 adjust_data <- function(data, rescale, reweight, silent) {
-  censored <- is_censored(data)
-  
   if(reweight) {
     data$weight <- data$weight / max(data$weight)
   }
@@ -117,5 +115,7 @@ adjust_data <- function(data, rescale, reweight, silent) {
   } else 
     rescale <- 1
   
-  list(data = data, censored = censored, rescale = rescale, weighted = weighted)
+  censoring <- censoring(data)
+  
+  list(data = data, censoring = censoring, rescale = rescale, weighted = weighted)
 }

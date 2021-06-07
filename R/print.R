@@ -30,7 +30,7 @@ print.summary_tmbfit <- function(x, ...) {
 #' @export
 print.summary_fitdists <- function(x, ...) {
   lapply(x$fits, print)
-  censored <- if(x$censored) "censored" else NULL
+  censored <- if(.is_censored(x$censoring)) "censored" else NULL
   weighted <- if(x$weighted) "weighted" else NULL
   rescaled <- if(x$rescaled != 1) {
     paste0("rescaled (", signif(x$rescaled, 4) ,")")
