@@ -15,6 +15,17 @@
 .is_censored <- function(x) {
   !identical(x, c(0, Inf))
 }
+
+censoring_text <- function(x) {
+  if(!.is_censored(x)) return(NULL)
+  left <- if(x[1] == 0) NULL else paste0("left (", signif(x[1], 4), ")")
+  right <- if(!is.finite(x[2])) NULL else paste0("right (", signif(x[2], 4), ")")
+  censoring <- c(left, right)
+  censoring <- cc(censoring, conj = " and ", brac = "")
+  censoring <- paste0(censoring, " censored")
+  censoring
+}
+
 #' Is Censored
 #'
 #' @param x A fitdists object.

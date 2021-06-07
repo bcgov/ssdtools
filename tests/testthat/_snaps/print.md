@@ -13,13 +13,13 @@
     
     Parameters estimated from 28 rows of data.
 
-# summary fitdists with censored, rescaled, weighted data
+# summary fitdists with left censored, rescaled, weighted data
 
     Distribution 'lnorm'
       meanlog -1.50532
       sdlog 1.31089
     
-    Parameters estimated from 28 rows of censored, weighted and rescaled (70.7) data.
+    Parameters estimated from 28 rows of left (0.03395) censored, weighted and rescaled (70.7) data.
 
 # print fitdists with multiple distributions
 

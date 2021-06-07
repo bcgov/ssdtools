@@ -30,12 +30,12 @@ print.summary_tmbfit <- function(x, ...) {
 #' @export
 print.summary_fitdists <- function(x, ...) {
   lapply(x$fits, print)
-  censored <- if(.is_censored(x$censoring)) "censored" else NULL
+  censoring <- censoring_text(x$censoring)
   weighted <- if(x$weighted) "weighted" else NULL
   rescaled <- if(x$rescaled != 1) {
     paste0("rescaled (", signif(x$rescaled, 4) ,")")
   } else NULL
-  properties <- c(censored, weighted, rescaled)
+  properties <- c(censoring, weighted, rescaled)
   properties <- cc(properties, conj = " and ", brac = "")
   if(length(properties)) properties <- paste0(" ", properties)
   
