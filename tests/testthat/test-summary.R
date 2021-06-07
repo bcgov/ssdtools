@@ -42,7 +42,7 @@ test_that("summary fitdists with censored, rescaled, weighted data", {
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
   expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted"))
-  expect_equal(summary$censoring, c(0.0339462517680339, Inf))
+  expect_equal(summary$censoring, c(2.4, Inf))
   expect_identical(summary$nrow, 28L)
   expect_identical(summary$rescaled, 70.7)
   expect_identical(summary$weighted, TRUE)
