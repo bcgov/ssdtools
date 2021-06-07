@@ -70,12 +70,18 @@ ssd_hp <- function(x, ...) {
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
+  weighted <- .weighted_fitdists(x)
   
   if(ci && identical(censoring, c(NA_real_, NA_real_))) {
     wrn("CIs cannot be calculated for inconsistently censored data.")
     ci <- FALSE
   }
   
+  if(ci && weighted) {
+    wrn("CIs cannot be calculated for unequally weighted data.")
+    ci <- FALSE
+  }
+
   hp <- lapply(x, .ssd_hp_tmbfit,
     conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
     rescale = rescale, censoring = censoring,

@@ -216,6 +216,16 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   expect_identical(hc$se, NA_real_)
 })
 
+test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
+  data <- boron_data
+  data$Weight <- rep(1, nrow(data))
+  data$Weight[1] <- 2
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+                 "^CIs cannot be calculated for unequally weighted data[.]$")
+  expect_identical(hc$se, NA_real_)
+})
+
 # test_that("ssd_hc fitdists cis", {
 #   fits <- ssd_fit_dists(boron_data, dists = ssd_dists())
 #   set.seed(101)
