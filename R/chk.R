@@ -34,13 +34,16 @@
   data <- data[c(left, right, weight)]
   colnames(data) <- c("left", "right", "weight")
   
-  missing <- !missing & is.na(data$left) & is.na(data$right)
-  
-  if(any(missing)) {
-    msg <- paste0("`data` has %n row%s with missing values in '", left, "'")
-    if(right != left && any(data$left != data$right))
-      msg <- paste0(msg, " and '", right, "'")
-    abort_chk(msg, n = sum(missing))
+  if(!missing) {
+    missing <- (is.na(data$left) | data$left == 0) & 
+      (is.na(data$right) | is.infinite(data$right))
+    
+    if(any(missing)) {
+      msg <- paste0("`data` has %n row%s with effectively missing values in '", left, "'")
+      if(right != left && any(data$left != data$right))
+        msg <- paste0(msg, " and '", right, "'")
+      abort_chk(msg, n = sum(missing))
+    }
   }
   zero_weight <- data$weight == 0
   if(any(zero_weight)) {

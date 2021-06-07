@@ -149,7 +149,7 @@ test_that("ssd_fit_dists gives correct chk error if missing values in non-censor
   data <- ssdtools::boron_data
   data$Conc[2] <- NA 
   chk::expect_chk_error(ssd_fit_dists(data),
-                        "^`data` has 1 row with missing values in 'Conc'\\.$")
+                        "^`data` has 1 row with effectively missing values in 'Conc'\\.$")
 })
 
 test_that("ssd_fit_dists gives correct chk error if missing values in censored data", {
@@ -159,7 +159,7 @@ test_that("ssd_fit_dists gives correct chk error if missing values in censored d
   data$Conc[2:3] <- NA
   data$Other[2:3] <- NA
   chk::expect_chk_error(ssd_fit_dists(data, right = "Other"),
-                        "^`data` has 2 rows with missing values in 'Conc' and 'Other'\\.$")
+                        "^`data` has 2 rows with effectively missing values in 'Conc' and 'Other'\\.$")
 })
 
 test_that("ssd_fit_dists gives chk error if negative left ", {
@@ -172,10 +172,8 @@ test_that("ssd_fit_dists all distributions fail to fit if Inf left", {
   data <- ssdtools::boron_data
   data$Conc[1] <- Inf
   expect_error(
-    expect_warning(
       ssd_fit_dists(data, dists = "lnorm"), 
-      "^Distribution 'lnorm' failed to fit"),
-    "^All distributions failed to fit\\.")
+    "^Distributions cannot currently be fitted to right censored data\\.")
 })
 
 test_that("ssd_fit_dists gives correct chk error any right < left", {
@@ -329,13 +327,15 @@ test_that("ssd_fit_dists gives same values with zero and missing left values", {
   expect_equal(tidy(fits0), tidy(fitsna))
 })
 
-test_that("ssd_fit_dists works with Inf", {
+test_that("ssd_fit_dists works with right censored data", {
   data <- ssdtools::boron_data
   
   data$right <- data$Conc
   data$right[1] <- Inf
   
-  # fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  expect_error(fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
+               "^Distributions cannot currently be fitted to right censored data\\.$")
+  
   # 
   # tidy <- tidy(fits)
   # 
@@ -348,6 +348,14 @@ test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
   
   data$right <- data$Conc
   data$right[1] <- Inf
+  
+  expect_error(fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
+               "^Distributions cannot currently be fitted to right censored data\\.$")
+  
+  data$right[1] <- NA
+  
+  expect_error(fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
+               "^Distributions cannot currently be fitted to right censored data\\.$")
   
   # fits0 <- ssd_fit_dists(data, dists = "lnorm", right = "right")
   # 

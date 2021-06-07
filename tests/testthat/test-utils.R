@@ -71,5 +71,5 @@ test_that("ssd_sort_data errors missing data", {
   data <- boron_data
   data$Conc[1] <- NA
   chk::expect_chk_error(ssd_sort_data(data), 
-                        "`data` has 1 row with missing values in 'Conc'.")
+                        "`data` has 1 row with effectively missing values in 'Conc'.")
 })
