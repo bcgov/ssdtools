@@ -26,13 +26,12 @@ sample_parameters <- function(i, dist, args, pars, censoring, control) {
   estimates(fit)
 }
 
-boot_tmbfit <- function(x, nboot, data, control, parallel, ncpus) {
+boot_tmbfit <- function(x, nboot, data, censoring, control, parallel, ncpus) {
   # need to do parallel
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
   pars <- .pars_tmbfit(x)
-  censoring <- censoring(data) # could bypass by checking censoring upstream
 
   lapply(1:nboot, sample_parameters, dist = dist, args = args, pars = pars, censoring = censoring, control = control)
 }

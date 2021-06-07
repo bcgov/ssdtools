@@ -41,6 +41,9 @@ is_censored <- function(x) {
 }
 
 censor_data <- function(data, censoring) {
+  if(!.is_censored(censoring)) return(data)
+  chk_not_any_na(censoring)
+  
   data$left[data$left < censoring[1]] <- 0
   data$right[data$right > censoring[2]] <- Inf
   data

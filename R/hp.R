@@ -23,12 +23,7 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, control, parallel, ncpus) {
-  chk_vector(conc)
-  chk_numeric(conc)
-  chk_number(level)
-  chk_range(level)
-  
+.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, censoring, control, parallel, ncpus) {
   args <- estimates(x)
   args$q <- conc / rescale
   dist <- .dist_tmbfit(x)
@@ -46,7 +41,8 @@ ssd_hp <- function(x, ...) {
       ucl = na    
       ))
   }
-  estimates <- boot_tmbfit(x, nboot = nboot, data = data, 
+  censoring <- censoring / rescale
+  estimates <- boot_tmbfit(x, nboot = nboot, data = data, censoring = censoring,
                            control = control, parallel = parallel, ncpus = ncpus)
   cis <- cis_tmb(estimates, what, level = level, x = conc / rescale)
   tibble(
@@ -73,10 +69,16 @@ ssd_hp <- function(x, ...) {
     control <- .control_fitdists(x)
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
-
+  censoring <- .censoring_fitdists(x)
+  
+  if(ci && identical(censoring, c(NA_real_, NA_real_))) {
+    wrn("CIs cannot be calculated for inconsistently censored data.")
+    ci <- FALSE
+  }
+  
   hp <- lapply(x, .ssd_hp_tmbfit,
     conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
-    rescale = rescale,
+    rescale = rescale, censoring = censoring,
     control = control,
     parallel = parallel, ncpus = ncpus
   )

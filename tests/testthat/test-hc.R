@@ -199,6 +199,23 @@ test_that("ssd_hc fitdists cis", {
   expect_equal(hc$ucl, 3.59396425682664)
 })
 
+test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
+  data <- boron_data
+  data$Conc2 <- data$Conc
+  data$Conc[1] <- 0.5
+  data$Conc2[1] <- 1.0
+  fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  expect_equal(hc$se, 0.570751804793226)
+  
+  fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
+  set.seed(10)
+  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+  "^CIs cannot be calculated for inconsistently censored data[.]$")
+  expect_identical(hc$se, NA_real_)
+})
+
 # test_that("ssd_hc fitdists cis", {
 #   fits <- ssd_fit_dists(boron_data, dists = ssd_dists())
 #   set.seed(101)
