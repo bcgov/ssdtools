@@ -126,6 +126,20 @@ test_that("ssd_fit_dists gives chk error if missing weight values", {
   chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass"))
 })
 
+test_that("ssd_fit_dists gives chk error if missing left values", {
+  data <- ssdtools::boron_data
+  data$Conc[1] <- NA
+  chk::expect_chk_error(ssd_fit_dists(data),
+                        "^`data` has 1 row with effectively missing values in 'Conc'\\.$")
+})
+
+test_that("ssd_fit_dists gives chk error if 0 left values", {
+  data <- ssdtools::boron_data
+  data$Conc[1] <- 0
+  chk::expect_chk_error(ssd_fit_dists(data),
+                        "^`data` has 1 row with effectively missing values in 'Conc'\\.$")
+})
+
 test_that("ssd_fit_dists all distributions fail to fit if Inf weight", {
   data <- ssdtools::boron_data
   data$Mass <- rep(1, nrow(data))
@@ -173,7 +187,7 @@ test_that("ssd_fit_dists all distributions fail to fit if Inf left", {
   data$Conc[1] <- Inf
   expect_error(
       ssd_fit_dists(data, dists = "lnorm"), 
-    "^Distributions cannot currently be fitted to right censored data\\.")
+    "^`data` has 1 row with effectively missing values in 'Conc'\\.")
 })
 
 test_that("ssd_fit_dists gives correct chk error any right < left", {

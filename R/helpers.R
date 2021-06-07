@@ -56,7 +56,7 @@ bound_data <- function(data, bounds) {
   upper <- range[2] * 10^bounds["right"]
   
   data$left[is.na(data$left) | data$left == 0] <- lower
-  data$right[is.na(data$right) | !is.finite(data$right)] <- upper
+  data$right[is.na(data$right) | is.infinite(data$right)] <- upper
   data
 }
 

@@ -19,7 +19,7 @@
 censoring_text <- function(x) {
   if(!.is_censored(x)) return(NULL)
   left <- if(x[1] == 0) NULL else paste0("left (", signif(x[1], 4), ")")
-  right <- if(!is.finite(x[2])) NULL else paste0("right (", signif(x[2], 4), ")")
+  right <- if(is.infinite(x[2])) NULL else paste0("right (", signif(x[2], 4), ")")
   censoring <- c(left, right)
   censoring <- cc(censoring, conj = " and ", brac = "")
   censoring <- paste0(censoring, " censored")
@@ -57,12 +57,12 @@ censoring <- function(data) {
     return(censoring)
   
   left <- data$left == 0
-  right <- !is.finite(data$right)
+  right <- is.infinite(data$right)
   
   if(any(!left & !right)) return(c(NA_real_, NA_real_))
   
   censoring[1] <- max(0, data$right[data$left == 0])
-  censoring[2] <- min(Inf, censoring[2], data$left[!is.finite(data$right)])
+  censoring[2] <- min(Inf, censoring[2], data$left[is.infinite(data$right)])
   
   if(censoring[1] >= censoring[2])
     return(c(NA_real_, NA_real_))

@@ -35,8 +35,8 @@
   colnames(data) <- c("left", "right", "weight")
   
   if(!missing) {
-    missing <- (is.na(data$left) | data$left == 0) & 
-      (is.na(data$right) | is.infinite(data$right))
+    missing <- (is.na(data$left) | data$left == 0 | is.infinite(data$left)) & 
+      (is.na(data$right) | data$right == 0 | is.infinite(data$right))
     
     if(any(missing)) {
       msg <- paste0("`data` has %n row%s with effectively missing values in '", left, "'")
