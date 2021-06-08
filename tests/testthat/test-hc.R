@@ -249,8 +249,31 @@ test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
   expect_identical(hc$se, NA_real_)
 })
 
-# test_that("ssd_hc fitdists cis", {
-#   fits <- ssd_fit_dists(boron_data, dists = ssd_dists())
-#   set.seed(101)
-#   hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
-# })
+test_that("ssd_hc no effect with higher weight one distribution", {
+  data <- boron_data
+  data$Weight <- rep(1, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  data$Weight <- rep(10, nrow(data))
+  fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  set.seed(10)
+  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
+  expect_equal(hc_10, hc)
+})
+
+test_that("ssd_hc effect with higher weight two distributions", {
+  data <- boron_data
+  data$Weight <- rep(1, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
+  data$Weight <- rep(10, nrow(data))
+  fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  set.seed(10)
+  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
+  expect_equal(hc$est, 1.64903597051184)
+  expect_equal(hc_10$est, 1.68116906283042)
+  expect_equal(hc$se, 0.598733415620557)
+  expect_equal(hc_10$se, 0.49852026648868)
+})

@@ -23,7 +23,7 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, censoring, control, parallel, ncpus) {
+.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, weighted, censoring, control, parallel, ncpus) {
   args <- estimates(x)
   args$q <- conc / rescale
   dist <- .dist_tmbfit(x)
@@ -42,7 +42,8 @@ ssd_hp <- function(x, ...) {
       ))
   }
   censoring <- censoring / rescale
-  estimates <- boot_tmbfit(x, nboot = nboot, data = data, censoring = censoring,
+  estimates <- boot_tmbfit(x, nboot = nboot, data = data, 
+                           weighted = weighted, censoring = censoring,
                            control = control, parallel = parallel, ncpus = ncpus)
   cis <- cis_tmb(estimates, what, level = level, x = conc / rescale)
   tibble(
@@ -70,6 +71,7 @@ ssd_hp <- function(x, ...) {
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
+  weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
   
   if(ci && identical(censoring, c(NA_real_, NA_real_))) {
@@ -84,7 +86,7 @@ ssd_hp <- function(x, ...) {
 
   hp <- lapply(x, .ssd_hp_tmbfit,
     conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
-    rescale = rescale, censoring = censoring,
+    rescale = rescale,  weighted = weighted, censoring = censoring,
     control = control,
     parallel = parallel, ncpus = ncpus
   )

@@ -64,7 +64,9 @@ process_data <- function(data, left, right, weight = NULL) {
   if(is.null(weight)) {
     weight <- "weight"
     data$weight <- rep(1, nrow(data))
-  }
+  } else
+    data[[weight]] <- as.numeric(data[[weight]])
+  
   data <- rename_data(data, left, right, weight)
   
   data$left[is.na(data$left)] <- 0
@@ -106,8 +108,7 @@ adjust_data <- function(data, rescale, reweight, silent) {
   if(reweight) {
     data$weight <- data$weight / max(data$weight)
   }
-  # need warning and FAQ about weights
-  weighted <- any(data$weight != 1)
+  weighted <- max(data$weight)
   unequal <- any(data$weight != data$weight[1])
   
   if(rescale) {

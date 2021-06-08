@@ -12,26 +12,27 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-generate_data <- function(dist, args, censoring) {
+generate_data <- function(dist, args, weighted, censoring) {
   what <- paste0("r", dist)
   sample <- do.call(what, args)
   data <- data.frame(left = sample, right = sample)
-  data$weight <- 1
+  data$weight <- weighted
   censor_data(data, censoring)
 }
 
-sample_parameters <- function(i, dist, args, pars, censoring, control) {
-  new_data <- generate_data(dist, args, censoring)
+sample_parameters <- function(i, dist, args, pars, weighted, censoring, control) {
+  new_data <- generate_data(dist, args, weighted, censoring)
   fit <- fit_tmb(dist, new_data, control = control, pars = pars, hessian = FALSE)
   estimates(fit)
 }
 
-boot_tmbfit <- function(x, nboot, data, censoring, control, parallel, ncpus) {
+boot_tmbfit <- function(x, nboot, data, weighted, censoring, control, parallel, ncpus) {
   # need to do parallel
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
   pars <- .pars_tmbfit(x)
 
-  lapply(1:nboot, sample_parameters, dist = dist, args = args, pars = pars, censoring = censoring, control = control)
+  lapply(1:nboot, sample_parameters, dist = dist, args = args, pars = pars, 
+         weighted = weighted, censoring = censoring, control = control)
 }

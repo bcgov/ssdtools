@@ -31,10 +31,12 @@ print.summary_tmbfit <- function(x, ...) {
 print.summary_fitdists <- function(x, ...) {
   lapply(x$fits, print)
   censoring <- censoring_text(x$censoring)
-  weighted <- if(x$weighted) "weighted" else NULL
   if(x$unequal) {
-    weighted <- paste("unequally", weighted)
-  }
+    weighted <- "unequally weighted"
+  } else if (x$weighted != 1) {
+    weighted <- "weighted"
+  } else
+    weighted <- NULL
   rescaled <- if(x$rescaled != 1) {
     paste0("rescaled (", signif(x$rescaled, 4) ,")")
   } else NULL

@@ -17,7 +17,7 @@ test_that("summary fitdists", {
   expect_identical(summary$censoring, c(0,Inf))
   expect_identical(summary$nrow, 28L)
   expect_identical(summary$rescaled, 1)
-  expect_identical(summary$weighted, FALSE)
+  expect_identical(summary$weighted, 1)
   expect_identical(summary$unequal, FALSE)
 })
 
@@ -31,7 +31,7 @@ test_that("summary fitdists with multiple dists", {
   expect_identical(summary$censoring, c(0, Inf))
   expect_identical(summary$nrow, 28L)
   expect_identical(summary$rescaled, 70.7)
-  expect_identical(summary$weighted, FALSE)
+  expect_identical(summary$weighted, 1)
   expect_identical(summary$unequal, FALSE)
 })
 
@@ -47,7 +47,7 @@ test_that("summary fitdists with censored, rescaled, unequally weighted data", {
   expect_equal(summary$censoring, c(2.4, Inf))
   expect_identical(summary$nrow, 28L)
   expect_identical(summary$rescaled, 70.7)
-  expect_identical(summary$weighted, TRUE)
+  expect_identical(summary$weighted, 28)
   expect_identical(summary$unequal, TRUE)
 })
 
@@ -57,7 +57,7 @@ test_that("summary weighted if equal weights but not 1", {
   fits <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
-  expect_identical(summary$weighted, TRUE)
+  expect_identical(summary$weighted, 2)
   expect_identical(summary$unequal, FALSE)
 })
 
@@ -67,6 +67,6 @@ test_that("summary not weighted if equal weights but not 1 and reweighted", {
   fits <- ssd_fit_dists(data, weight = "Mass", reweight = TRUE, dists = "lnorm")
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
-  expect_identical(summary$weighted, FALSE)
+  expect_identical(summary$weighted, 1)
   expect_identical(summary$unequal, FALSE)
 })
