@@ -108,6 +108,7 @@ adjust_data <- function(data, rescale, reweight, silent) {
   }
   # need warning and FAQ about weights
   weighted <- any(data$weight != 1)
+  unequal <- any(data$weight != data$weight[1])
   
   if(rescale) {
     rescale <- c(data$left, data$right)
@@ -117,5 +118,5 @@ adjust_data <- function(data, rescale, reweight, silent) {
   } else 
     rescale <- 1
   
-  list(data = data, censoring = censoring, rescale = rescale, weighted = weighted)
+  list(data = data, censoring = censoring, rescale = rescale, weighted = weighted, unequal = unequal)
 }

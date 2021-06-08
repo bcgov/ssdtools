@@ -19,7 +19,7 @@
       meanlog -1.50532
       sdlog 1.31089
     
-    Parameters estimated from 28 rows of left (2.4) censored, weighted and rescaled (70.7) data.
+    Parameters estimated from 28 rows of left (2.4) censored, unequally weighted and rescaled (70.7) data.
 
 # summary fitdists with inconsistently censored data
 

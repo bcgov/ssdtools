@@ -154,6 +154,29 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   expect_identical(hp$se, NA_real_)
 })
 
+test_that("ssd_hp same with equally weighted data", {
+  data <- boron_data
+  data$Weight <- rep(2, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+  
+  data$Weight <- rep(2, nrow(data))
+  fits2 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  hp2 <- ssd_hp(fits2, 1, ci = TRUE, nboot = 10)
+  expect_identical(hp2, hp)
+})
+
+test_that("ssd_hp calculates cis with equally weighted data", {
+  data <- boron_data
+  data$Weight <- rep(2, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+  expect_equal(hp$se, 1.35655142717243)
+})
+
 test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
   data <- boron_data
   data$Weight <- rep(1, nrow(data))

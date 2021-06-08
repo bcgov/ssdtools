@@ -26,6 +26,10 @@
   attr(fits, "weighted", exact = TRUE)
 }
 
+.unequal_fitdists <- function(fits) {
+  attr(fits, "unequal", exact = TRUE)
+}
+
 `.censoring_fitdists<-` <- function(fits, value) {
   attr(fits, "censoring") <- value
   fits
@@ -61,9 +65,14 @@
   fits
 }
 
+`.unequal_fitdists<-` <- function(fits, value) {
+  attr(fits, "unequal") <- value
+  fits
+}
+
 .attrs_fitdists <- function(fits) {
   attrs <- attributes(fits)
-  attrs[c("censoring", "cols", "control", "data", "org_data", "rescale", "weighted")]
+  attrs[c("censoring", "cols", "control", "data", "org_data", "rescale", "weighted", "unequal")]
 }
 
 `.attrs_fitdists<-` <- function(fits, value) {
@@ -74,5 +83,6 @@
   .org_data_fitdists(fits) <- value$org_data
   .rescale_fitdists(fits) <- value$rescale
   .weighted_fitdists(fits) <- value$weighted
+  .unequal_fitdists(fits) <- value$unequal
   fits
 }

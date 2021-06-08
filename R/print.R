@@ -32,6 +32,9 @@ print.summary_fitdists <- function(x, ...) {
   lapply(x$fits, print)
   censoring <- censoring_text(x$censoring)
   weighted <- if(x$weighted) "weighted" else NULL
+  if(x$unequal) {
+    weighted <- paste("unequally", weighted)
+  }
   rescaled <- if(x$rescaled != 1) {
     paste0("rescaled (", signif(x$rescaled, 4) ,")")
   } else NULL

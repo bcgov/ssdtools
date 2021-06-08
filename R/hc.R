@@ -87,14 +87,14 @@ no_ssd_hc <- function() {
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
-  weighted <- .weighted_fitdists(x)
+  unequal <- .unequal_fitdists(x)
   
   if(ci && identical(censoring, c(NA_real_, NA_real_))) {
     wrn("CIs cannot be calculated for inconsistently censored data.")
     ci <- FALSE
   }
   
-  if(ci && weighted) {
+  if(ci && unequal) {
     wrn("CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }

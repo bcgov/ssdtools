@@ -29,6 +29,7 @@ summary.fitdists <- function(object, ...) {
   x$nrow <- nrow(.data_fitdists(object))
   x$rescaled <- .rescale_fitdists(object)
   x$weighted <- .weighted_fitdists(object)
+  x$unequal <- .unequal_fitdists(object)
   class(x) <- "summary_fitdists"
   x
 }

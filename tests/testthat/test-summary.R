@@ -13,11 +13,12 @@ test_that("summary fitdists", {
   fits <- ssd_fit_dists(data, dists = "lnorm", rescale = FALSE)
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
-  expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted"))
+  expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted", "unequal"))
   expect_identical(summary$censoring, c(0,Inf))
   expect_identical(summary$nrow, 28L)
   expect_identical(summary$rescaled, 1)
   expect_identical(summary$weighted, FALSE)
+  expect_identical(summary$unequal, FALSE)
 })
 
 test_that("summary fitdists with multiple dists", {
@@ -26,14 +27,15 @@ test_that("summary fitdists with multiple dists", {
                         rescale = TRUE)
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
-  expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted"))
+  expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted", "unequal"))
   expect_identical(summary$censoring, c(0, Inf))
   expect_identical(summary$nrow, 28L)
   expect_identical(summary$rescaled, 70.7)
   expect_identical(summary$weighted, FALSE)
+  expect_identical(summary$unequal, FALSE)
 })
 
-test_that("summary fitdists with censored, rescaled, weighted data", {
+test_that("summary fitdists with censored, rescaled, unequally weighted data", {
   data <- ssdtools::boron_data
   data$Mass <- 1:nrow(data)
   data$Other <- data$Conc
@@ -41,11 +43,12 @@ test_that("summary fitdists with censored, rescaled, weighted data", {
   fits <- ssd_fit_dists(data, right = "Other", weight = "Mass", rescale = TRUE, dists = "lnorm")
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
-  expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted"))
+  expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted", "unequal"))
   expect_equal(summary$censoring, c(2.4, Inf))
   expect_identical(summary$nrow, 28L)
   expect_identical(summary$rescaled, 70.7)
   expect_identical(summary$weighted, TRUE)
+  expect_identical(summary$unequal, TRUE)
 })
 
 test_that("summary weighted if equal weights but not 1", {
@@ -55,6 +58,7 @@ test_that("summary weighted if equal weights but not 1", {
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
   expect_identical(summary$weighted, TRUE)
+  expect_identical(summary$unequal, FALSE)
 })
 
 test_that("summary not weighted if equal weights but not 1 and reweighted", {
@@ -64,4 +68,5 @@ test_that("summary not weighted if equal weights but not 1 and reweighted", {
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
   expect_identical(summary$weighted, FALSE)
+  expect_identical(summary$unequal, FALSE)
 })
