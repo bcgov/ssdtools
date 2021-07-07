@@ -32,3 +32,19 @@ slnorm <- function(x) {
     log_sdlog = log(sd(log(x), na.rm = TRUE))
   )
 }
+
+plnorm_ssd <- function(q, meanlog, sdlog) {
+  if(sdlog <= 0) return(NaN)
+  stats::plnorm(q, meanlog, sdlog);
+}
+
+qlnorm_ssd <- function(p, meanlog, sdlog) {
+  if(sdlog <= 0) return(NaN)
+  stats::qlnorm(p, meanlog, sdlog)
+}
+
+rlnorm_ssd <- function(n, meanlog, sdlog) {
+  if(sdlog <= 0) return(rep(NaN, n))
+  stats::rlnorm(n, meanlog, sdlog)
+}
+

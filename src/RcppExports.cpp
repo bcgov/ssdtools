@@ -5,45 +5,6 @@
 
 using namespace Rcpp;
 
-// plnorm_ssd
-double plnorm_ssd(double q, double meanlog, double sdlog);
-RcppExport SEXP _ssdtools_plnorm_ssd(SEXP qSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    Rcpp::traits::input_parameter< double >::type meanlog(meanlogSEXP);
-    Rcpp::traits::input_parameter< double >::type sdlog(sdlogSEXP);
-    rcpp_result_gen = Rcpp::wrap(plnorm_ssd(q, meanlog, sdlog));
-    return rcpp_result_gen;
-END_RCPP
-}
-// qlnorm_ssd
-double qlnorm_ssd(double p, double meanlog, double sdlog);
-RcppExport SEXP _ssdtools_qlnorm_ssd(SEXP pSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type meanlog(meanlogSEXP);
-    Rcpp::traits::input_parameter< double >::type sdlog(sdlogSEXP);
-    rcpp_result_gen = Rcpp::wrap(qlnorm_ssd(p, meanlog, sdlog));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rlnorm_ssd
-NumericVector rlnorm_ssd(int n, double meanlog, double sdlog);
-RcppExport SEXP _ssdtools_rlnorm_ssd(SEXP nSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< double >::type meanlog(meanlogSEXP);
-    Rcpp::traits::input_parameter< double >::type sdlog(sdlogSEXP);
-    rcpp_result_gen = Rcpp::wrap(rlnorm_ssd(n, meanlog, sdlog));
-    return rcpp_result_gen;
-END_RCPP
-}
 // plogis_ssd
 double plogis_ssd(double q, double location, double scale);
 RcppExport SEXP _ssdtools_plogis_ssd(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
@@ -124,9 +85,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ssdtools_plnorm_ssd", (DL_FUNC) &_ssdtools_plnorm_ssd, 3},
-    {"_ssdtools_qlnorm_ssd", (DL_FUNC) &_ssdtools_qlnorm_ssd, 3},
-    {"_ssdtools_rlnorm_ssd", (DL_FUNC) &_ssdtools_rlnorm_ssd, 3},
     {"_ssdtools_plogis_ssd", (DL_FUNC) &_ssdtools_plogis_ssd, 3},
     {"_ssdtools_qlogis_ssd", (DL_FUNC) &_ssdtools_qlogis_ssd, 3},
     {"_ssdtools_rlogis_ssd", (DL_FUNC) &_ssdtools_rlogis_ssd, 3},
