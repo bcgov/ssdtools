@@ -55,10 +55,19 @@ pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   p
 }
 
+.qd <- function(p, ..., fun) {
+  args <- c(p, list(...))
+  
+  if(any(vapply(args, length, 1L) != 1L)) stop()
+  if(any(is.na(unlist(args)))) return(NA_real_)
+  
+  do.call(fun, args = args)
+}
+
 .qdist <- function(dist, p, ...) {
   fun <- paste0("q", dist, "_ssd")
-  q <- mapply(fun, p, ...)
-  q[mapply(any_missing, p, ...)] <- NA_real_
+  q <- mapply(.qd, p, ..., MoreArgs = list(fun = fun))
+  q[mapply(any_missing, p, ...)] <- NA_real_ # remove once all out of cpp?
   q
 }
 

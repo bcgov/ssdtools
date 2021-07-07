@@ -39,8 +39,6 @@ pgompertz_ssd <- function(q, location, shape) {
 }
 
 qgompertz_ssd <- function(p, location, shape) {
-  stopifnot(length(q) == 1 && length(location) == 1 && length(shape) == 1)
-  if(is.na(p) || is.na(location) || is.na(shape)) return(NA_real_)
   if(location <= 0 || shape <= 0) return(NaN)
   log(1 - shape/location * log(1-p)) / shape
 }
