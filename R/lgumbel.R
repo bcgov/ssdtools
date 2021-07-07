@@ -31,3 +31,13 @@ slgumbel <- function(x) {
     locationlog = mean(log(x), na.rm = TRUE),
     log_scalelog = log(pi * sd(log(x), na.rm = TRUE) / sqrt(6)))
 }
+
+pgumbel_ssd <- function(q, location, scale) {
+  if(scale <= 0) return(NaN)
+  exp(-exp(-(q - location)/scale))
+}
+
+qgumbel_ssd <- function(p, location, scale) {
+  if(scale <= 0) return(NaN)
+  location - scale * log(-log(p));
+}

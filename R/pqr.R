@@ -93,11 +93,10 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
     args$n <- n
     return(do.call(fun, args))
   }
-  qfun <- paste0("q", dist)
+  qfun <- paste0("q", dist, "_ssd")
   q <- do.call(qfun, c(p = 0.5, args))
   if(is.nan(q)) return(rep(NaN, n))
   p <- runif(n)
-  qfun <- paste0("q", dist, "_ssd")
   do.call(qfun, c(p = list(p), args))
 }
 

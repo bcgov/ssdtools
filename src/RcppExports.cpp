@@ -5,45 +5,6 @@
 
 using namespace Rcpp;
 
-// pgumbel_ssd
-double pgumbel_ssd(double q, double location, double scale);
-RcppExport SEXP _ssdtools_pgumbel_ssd(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(pgumbel_ssd(q, location, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// qgumbel_ssd
-double qgumbel_ssd(double p, double location, double scale);
-RcppExport SEXP _ssdtools_qgumbel_ssd(SEXP pSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(qgumbel_ssd(p, location, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rgumbel_ssd
-NumericVector rgumbel_ssd(int n, double location, double scale);
-RcppExport SEXP _ssdtools_rgumbel_ssd(SEXP nSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(rgumbel_ssd(n, location, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
 // plnorm_ssd
 double plnorm_ssd(double q, double meanlog, double sdlog);
 RcppExport SEXP _ssdtools_plnorm_ssd(SEXP qSEXP, SEXP meanlogSEXP, SEXP sdlogSEXP) {
@@ -163,9 +124,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ssdtools_pgumbel_ssd", (DL_FUNC) &_ssdtools_pgumbel_ssd, 3},
-    {"_ssdtools_qgumbel_ssd", (DL_FUNC) &_ssdtools_qgumbel_ssd, 3},
-    {"_ssdtools_rgumbel_ssd", (DL_FUNC) &_ssdtools_rgumbel_ssd, 3},
     {"_ssdtools_plnorm_ssd", (DL_FUNC) &_ssdtools_plnorm_ssd, 3},
     {"_ssdtools_qlnorm_ssd", (DL_FUNC) &_ssdtools_qlnorm_ssd, 3},
     {"_ssdtools_rlnorm_ssd", (DL_FUNC) &_ssdtools_rlnorm_ssd, 3},
