@@ -17,13 +17,22 @@ any_missing <- function(...) {
   any(is.na(x) & !is.nan(x))
 }
 
+.pd <- function(q, ..., fun) {
+  args <- c(q, list(...))
+  
+  if(any(vapply(args, length, 1L) != 1L)) stop()
+  if(any(is.na(unlist(args)))) return(NA_real_)
+
+  do.call(fun, args = args)
+}
+
 .pdist <- function(dist, q, ..., lower.tail, log.p) {
   inf <- !is.na(q) & is.infinite(q)
   pos <- is.na(q) | q > 0
   q[inf] <- NA_real_
   fun <- paste0("p", dist, "_ssd")
-  p <- mapply(fun, q, ...)
-  p[mapply(any_missing, q, ...)] <- NA_real_
+  p <- mapply(.pd, q, ..., MoreArgs = list(fun = fun))
+  p[mapply(any_missing, q, ...)] <- NA_real_ # remove once all out of cpp?
   p[inf & pos] <- 1
   p[inf & !pos] <- 0
   if(!lower.tail) p <- 1 - p
