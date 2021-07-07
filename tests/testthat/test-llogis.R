@@ -12,6 +12,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+test_that("llogis", {
+  test_dist("llogis")
+  expect_equal(pllogis(1), 0.5)
+  expect_equal(qllogis(0.75), 3)
+  set.seed(42)
+  expect_equal(rllogis(2), c(10.7379218085407, 14.8920392236127))
+})
+
 test_that("fit llogis", {
   fit <- ssd_fit_dists(ssdtools::boron_data, dists = "llogis", rescale = FALSE)
 
@@ -19,18 +27,4 @@ test_that("fit llogis", {
     estimates(fit$llogis),
     list(locationlog = 2.62627762517872, scalelog = 0.740423704979968),
     tolerance = 1e-05)
-})
-
-test_that("pqllogis", {
-  expect_equal(log(qllogis(0.5, 1, 1)), 1)
-  expect_equal(pllogis(exp(3), 1, 1), 0.880797077977882)
-  expect_equal(pllogis(exp(4), 1, 1), 0.952574126822433)
-  expect_identical(pllogis(qllogis(0.5, 3, 1), 3, 1), 0.5)
-})
-
-test_that("rllogis", {
-  set.seed(99)
-  r <- rllogis(100000, 1, 1)
-  expect_identical(length(r), 100000L)
-  expect_equal(mean(log(r)), 0.99552614238909)
 })
