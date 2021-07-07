@@ -29,11 +29,3 @@ test_that("fit lnorm quinoline", {
     list(meanlog = 8.68875153351101, sdlog = 1.99119217337871)
   )
 })
-
-test_that("fit lnorm boron", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm", rescale= FALSE)
-  expect_equal(
-    estimates(fit$lnorm),
-    list(meanlog = 2.56164496371788, sdlog = 1.24154032495908)
-  )
-})

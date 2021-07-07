@@ -19,12 +19,3 @@ test_that("llogis", {
   set.seed(42)
   expect_equal(rllogis(2), c(10.7379218085407, 14.8920392236127))
 })
-
-test_that("fit llogis", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "llogis", rescale = FALSE)
-
-  expect_equal(
-    estimates(fit$llogis),
-    list(locationlog = 2.62627762517872, scalelog = 0.740423704979968),
-    tolerance = 1e-05)
-})

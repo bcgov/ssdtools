@@ -30,27 +30,6 @@ test_that("gompertz", {
 # 
 #   expect_error(dist <- ssd_fit_dist(quin, dist = "gompertz"))
 # })
-# 
-# test_that("fit gompertz boron", {
-#   set.seed(42)
-#   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
-#   expect_true(is.tmbfit(dist))
-#   expect_equal(
-#     coef(dist),
-#     c(llocation = -3.23372380148428, lshape = -5.95162275054023)
-#   )
-# })
-# 
-# test_that("fit gompertz", {
-#   set.seed(9)
-#   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
-# 
-#   expect_true(is.tmbfit(dist))
-#   expect_equal(
-#     coef(dist),
-#     c(llocation = -3.23394197210355, lshape = -5.94837894139464)
-#   )
-# })
 
 test_that("fit gompertz tmb", {
   dist <- ssd_fit_dists(ssdtools::boron_data, dist = "gompertz", rescale = TRUE)

@@ -20,15 +20,6 @@ test_that("lgumbel", {
   expect_equal(rlgumbel(2), c(11.2305025213646, 15.3866236451648))
 })
 
-test_that("fit lgumbel", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "lgumbel", rescale = FALSE)
-  expect_equal(
-    estimates(fit$lgumbel),
-    list(locationlog = 1.92263082409711, scalelog = 1.23223883525026),
-    tolerance = 1e-05
-  )
-})
-
 test_that("fit lgumbel Mn LT", {
   mn_lt <- ssdtools::test_data[ssdtools::test_data$Chemical == "Mn LT", ]
   

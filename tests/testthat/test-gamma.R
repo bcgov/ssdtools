@@ -30,12 +30,3 @@ test_that("fit gamma quinoline", {
     tolerance = 1e-05
   )
 })
-
-test_that("fit gamma boron", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = "gamma", rescale = FALSE)
-  expect_equal(
-    estimates(fit$gamma),
-    list(scale = 25.1268322377578, shape = 0.950179464489889),
-    tolerance = 1e-06
-  )
-})
