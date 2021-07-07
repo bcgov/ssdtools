@@ -97,6 +97,7 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   q <- do.call(qfun, c(p = 0.5, args))
   if(is.nan(q)) return(rep(NaN, n))
   p <- runif(n)
+  qfun <- paste0("q", dist, "_ssd")
   do.call(qfun, c(p = list(p), args))
 }
 
