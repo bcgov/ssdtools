@@ -42,10 +42,3 @@ qgompertz_ssd <- function(p, location, shape) {
   if(location <= 0 || shape <= 0) return(NaN)
   log(1 - shape/location * log(1-p)) / shape
 }
-
-rgompertz_ssd <- function(n, location, shape) {
-  q <- qgompertz(0.5, location, shape)
-  if(is.nan(q)) return(rep(NaN, n))
-  p <- runif(n)
-  qgompertz(p, location, shape)
-}

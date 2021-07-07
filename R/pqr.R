@@ -88,8 +88,16 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
 .rdist <- function(dist, n, ...) {
   fun <- paste0("r", dist, "_ssd")
   args <- list(...)
-  args$n <- n
-  do.call(fun, args)
+  
+  if(exists(fun, mode = "function")) {
+    args$n <- n
+    return(do.call(fun, args))
+  }
+  qfun <- paste0("q", dist)
+  q <- do.call(qfun, c(p = 0.5, args))
+  if(is.nan(q)) return(rep(NaN, n))
+  p <- runif(n)
+  do.call(qfun, c(p = list(p), args))
 }
 
 rdist <- function(dist, n, ..., .lgt = FALSE) {
