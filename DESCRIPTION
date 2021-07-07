@@ -85,6 +85,7 @@ Suggests:
     covr,
     dplyr,
     fitdistrplus,
+    glue,
     grDevices,
     knitr,
     magrittr,
