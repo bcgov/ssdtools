@@ -11,31 +11,11 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-# 
-# test_that("dgompertz extremes", {
-#   expect_identical(dgompertz(numeric(0)), numeric(0))
-#   expect_identical(dgompertz(NA), NA_real_)
-#   expect_identical(dgompertz(NaN), NaN)
-#   expect_identical(dgompertz(0), 1)
-#   expect_equal(dgompertz(1), 0.487589298719261)
-#   expect_equal(dgompertz(1, log = TRUE), log(dgompertz(1)))
-#   expect_identical(dgompertz(0), 1)
-#   expect_identical(dgompertz(-Inf), 0)
-#   expect_identical(dgompertz(Inf), 0)
-#   expect_identical(dgompertz(c(NA, NaN, 0, Inf, -Inf)), 
-#                    c(dgompertz(NA), dgompertz(NaN), dgompertz(0), dgompertz(Inf), dgompertz(-Inf)))
-#   expect_equal(dgompertz(1:2, llocation = 1:2, lshape = 3:4), 
-#                c(dgompertz(1, 1, 3), dgompertz(2, 2, 4)))
-#   expect_equal(dgompertz(1:2, llocation = c(1, NA), lshape = 3:4), 
-#                c(dgompertz(1, 1, 3), NA))
-# })
-# 
-# 
 
 test_that("gompertz", {
   test_dist("gompertz")
   expect_equal(pgompertz(1), 0.820625921265983)
-  expect_equal(qgompertz(0.75), 0.869741686191944)
+  expect_equal(qgompertz(1/3), 0.340368285804191)
   set.seed(42)
   expect_equal(rgompertz(2), c(1.24208466660006, 1.32596518320944))
 })
