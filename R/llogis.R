@@ -32,3 +32,19 @@ sllogis <- function(x) {
     log_scalelog = log(pi * sd(log(x), na.rm = TRUE) / sqrt(3))
   )
 }
+
+plogis_ssd <- function(q, location, scale) {
+  if(scale <= 0) return(NaN)
+  stats::plogis(q, location, scale)
+}
+
+qlogis_ssd <- function(p, location, scale) {
+  if(scale <= 0) return(NaN)
+  stats::qlogis(p, location, scale)
+}
+
+rlogis_ssd <- function(n, location, scale) {
+  if(scale <= 0) return(rep(NaN, n))
+  stats::rlogis(n, location, scale)
+}
+

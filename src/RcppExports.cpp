@@ -5,92 +5,22 @@
 
 using namespace Rcpp;
 
-// plogis_ssd
-double plogis_ssd(double q, double location, double scale);
-RcppExport SEXP _ssdtools_plogis_ssd(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+// plogis_dummy
+double plogis_dummy(double q, double location, double scale);
+RcppExport SEXP _ssdtools_plogis_dummy(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type q(qSEXP);
     Rcpp::traits::input_parameter< double >::type location(locationSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(plogis_ssd(q, location, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// qlogis_ssd
-double qlogis_ssd(double p, double location, double scale);
-RcppExport SEXP _ssdtools_qlogis_ssd(SEXP pSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(qlogis_ssd(p, location, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rlogis_ssd
-NumericVector rlogis_ssd(int n, double location, double scale);
-RcppExport SEXP _ssdtools_rlogis_ssd(SEXP nSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(rlogis_ssd(n, location, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pweibull_ssd
-double pweibull_ssd(double q, double shape, double scale);
-RcppExport SEXP _ssdtools_pweibull_ssd(SEXP qSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(pweibull_ssd(q, shape, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// qweibull_ssd
-double qweibull_ssd(double p, double shape, double scale);
-RcppExport SEXP _ssdtools_qweibull_ssd(SEXP pSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(qweibull_ssd(p, shape, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rweibull_ssd
-NumericVector rweibull_ssd(int n, double shape, double scale);
-RcppExport SEXP _ssdtools_rweibull_ssd(SEXP nSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(rweibull_ssd(n, shape, scale));
+    rcpp_result_gen = Rcpp::wrap(plogis_dummy(q, location, scale));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ssdtools_plogis_ssd", (DL_FUNC) &_ssdtools_plogis_ssd, 3},
-    {"_ssdtools_qlogis_ssd", (DL_FUNC) &_ssdtools_qlogis_ssd, 3},
-    {"_ssdtools_rlogis_ssd", (DL_FUNC) &_ssdtools_rlogis_ssd, 3},
-    {"_ssdtools_pweibull_ssd", (DL_FUNC) &_ssdtools_pweibull_ssd, 3},
-    {"_ssdtools_qweibull_ssd", (DL_FUNC) &_ssdtools_qweibull_ssd, 3},
-    {"_ssdtools_rweibull_ssd", (DL_FUNC) &_ssdtools_rweibull_ssd, 3},
+    {"_ssdtools_plogis_dummy", (DL_FUNC) &_ssdtools_plogis_dummy, 3},
     {NULL, NULL, 0}
 };
 

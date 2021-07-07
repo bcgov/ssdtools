@@ -32,3 +32,18 @@ sweibull <- function(x) {
     log_shape = log(sd(x, na.rm = TRUE))
   )
 }
+
+pweibull_ssd <- function(q, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(NaN)
+  stats::pweibull(q, shape, scale)
+}
+
+qweibull_ssd <- function(p, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(NaN)
+  stats::qweibull(p, shape, scale)
+}
+
+rweibull_ssd <- function(n, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(rep(NaN, n))
+  stats::rweibull(n, shape, scale)
+}
