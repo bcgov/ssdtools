@@ -5,45 +5,6 @@
 
 using namespace Rcpp;
 
-// pgamma_ssd
-double pgamma_ssd(double q, double shape, double scale);
-RcppExport SEXP _ssdtools_pgamma_ssd(SEXP qSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(pgamma_ssd(q, shape, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// qgamma_ssd
-double qgamma_ssd(double p, double shape, double scale);
-RcppExport SEXP _ssdtools_qgamma_ssd(SEXP pSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(qgamma_ssd(p, shape, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rgamma_ssd
-NumericVector rgamma_ssd(int n, double shape, double scale);
-RcppExport SEXP _ssdtools_rgamma_ssd(SEXP nSEXP, SEXP shapeSEXP, SEXP scaleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(rgamma_ssd(n, shape, scale));
-    return rcpp_result_gen;
-END_RCPP
-}
 // pgumbel_ssd
 double pgumbel_ssd(double q, double location, double scale);
 RcppExport SEXP _ssdtools_pgumbel_ssd(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
@@ -202,9 +163,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ssdtools_pgamma_ssd", (DL_FUNC) &_ssdtools_pgamma_ssd, 3},
-    {"_ssdtools_qgamma_ssd", (DL_FUNC) &_ssdtools_qgamma_ssd, 3},
-    {"_ssdtools_rgamma_ssd", (DL_FUNC) &_ssdtools_rgamma_ssd, 3},
     {"_ssdtools_pgumbel_ssd", (DL_FUNC) &_ssdtools_pgumbel_ssd, 3},
     {"_ssdtools_qgumbel_ssd", (DL_FUNC) &_ssdtools_qgumbel_ssd, 3},
     {"_ssdtools_rgumbel_ssd", (DL_FUNC) &_ssdtools_rgumbel_ssd, 3},

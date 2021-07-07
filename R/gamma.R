@@ -34,3 +34,18 @@ sgamma <- function(x) {
     log_shape = log(mean^2 / var)
   )
 }
+
+pgamma_ssd <- function(q, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(NaN)
+  stats::pgamma(q, shape = shape, scale = scale)
+}
+
+qgamma_ssd <- function(p, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(NaN)
+  stats::qgamma(p, shape = shape, scale = scale)
+}
+
+rgamma_ssd <- function(n, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(rep(NaN, n))
+  stats::rgamma(n, shape = shape, scale = scale)
+}
