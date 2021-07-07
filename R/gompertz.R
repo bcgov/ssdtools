@@ -46,9 +46,7 @@ qgompertz_ssd <- function(p, location, shape) {
 }
 
 rgompertz_ssd <- function(n, location, shape) {
-  stopifnot(length(n) == 1 && length(location) == 1 && length(shape) == 1)
-  if(is.na(n) || is.na(location) || is.na(shape)) return(NA_real_)
-  if(location <= 0 || shape <= 0) return(NaN)
+  if(location <= 0 || shape <= 0) return(rep(NaN, n))
   p <- runif(n)
   log(1 - shape/location * log(1-p)) / shape
 }

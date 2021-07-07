@@ -80,9 +80,7 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   fun <- paste0("r", dist, "_ssd")
   args <- list(...)
   args$n <- n
-  r <- do.call(fun, args)
-  if(any_missing(...)) return(NA_real_)
-  r
+  do.call(fun, args)
 }
 
 rdist <- function(dist, n, ..., .lgt = FALSE) {
@@ -91,10 +89,15 @@ rdist <- function(dist, n, ..., .lgt = FALSE) {
   if(length(n) > 1) {
     n <- length(n)
   }
+  chk_not_any_na(n)
   n <- floor(n)
-  if(n < 0) stop("invalid arguments")
+  chk_gte(n)
+  
   if(n == 0L) return(numeric(0))
-
+  
+  chk_all(list(...), check_dim, values = 1L, x_name = "...")
+  if(any_missing(...)) return(rep(NA_real_, n))
+  
   r <- .rdist(dist, n = n, ...)
   if(.lgt) r <- exp(r)
   r

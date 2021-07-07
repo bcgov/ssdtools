@@ -36,27 +36,10 @@ test_that("gompertz", {
   test_dist("gompertz")
   expect_equal(pgompertz(1), 0.820625921265983)
   expect_equal(qgompertz(0.75), 0.869741686191944)
-})
-
-test_that("rgompertz extremes", {
-  expect_identical(rgompertz(numeric(0)), numeric(0))
-  expect_error(rgompertz(NA))
-  expect_identical(rgompertz(0), numeric(0))
-  set.seed(42)
-  expect_equal(rgompertz(1), 1.24208466660006)
-  set.seed(42)
-  expect_equal(rgompertz(1.9), 1.24208466660006)
   set.seed(42)
   expect_equal(rgompertz(2), c(1.24208466660006, 1.32596518320944))
-  set.seed(42)
-  expect_equal(rgompertz(3:4), c(1.24208466660006, 1.32596518320944))
-  expect_equal(rgompertz(0, location = -1), numeric(0))
-  expect_equal(rgompertz(0, shape = -1), numeric(0))
-  expect_error(rgompertz(1, location = 1:2))
-  expect_error(rgompertz(1, shape = 1:2))
-  expect_identical(rgompertz(1, location = NA), NA_real_)
-  expect_identical(rgompertz(1, shape = NA), NA_real_)
 })
+
 # 
 # test_that("sgompertz", {
 #   warning("sgompertz errors")
