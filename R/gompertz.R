@@ -32,3 +32,25 @@ sgompertz <- function(x) {
     log_location = unname(coef(fit)[2]), log_shape = unname(coef(fit)[1])
   )
 }
+
+pgompertz_ssd <- function(q, location, shape) {
+  stopifnot(length(p) == 1 && length(location) == 1 && length(shape) == 1)
+  if(is.na(q) || is.na(location) || is.na(shape)) return(NA_real_)
+  if(location <= 0 || shape <= 0) return(NaN)
+  1 - exp(-location/shape * (exp(q * shape) - 1))
+}
+
+qgompertz_ssd <- function(p, location, shape) {
+  stopifnot(length(q) == 1 && length(location) == 1 && length(shape) == 1)
+  if(is.na(p) || is.na(location) || is.na(shape)) return(NA_real_)
+  if(location <= 0 || shape <= 0) return(NaN)
+  log(1 - shape/location * log(1-p)) / shape
+}
+
+rgompertz_ssd <- function(n, location, shape) {
+  stopifnot(length(n) == 1 && length(location) == 1 && length(shape) == 1)
+  if(is.na(n) || is.na(location) || is.na(shape)) return(NA_real_)
+  if(location <= 0 || shape <= 0) return(NaN)
+  p <- runif(n)
+  log(1 - shape/location * log(1-p)) / shape
+}

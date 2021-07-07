@@ -44,45 +44,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// pgompertz_ssd
-double pgompertz_ssd(double q, double location, double shape);
-RcppExport SEXP _ssdtools_pgompertz_ssd(SEXP qSEXP, SEXP locationSEXP, SEXP shapeSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    rcpp_result_gen = Rcpp::wrap(pgompertz_ssd(q, location, shape));
-    return rcpp_result_gen;
-END_RCPP
-}
-// qgompertz_ssd
-double qgompertz_ssd(double p, double location, double shape);
-RcppExport SEXP _ssdtools_qgompertz_ssd(SEXP pSEXP, SEXP locationSEXP, SEXP shapeSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    rcpp_result_gen = Rcpp::wrap(qgompertz_ssd(p, location, shape));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rgompertz_ssd
-NumericVector rgompertz_ssd(int n, double location, double shape);
-RcppExport SEXP _ssdtools_rgompertz_ssd(SEXP nSEXP, SEXP locationSEXP, SEXP shapeSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    rcpp_result_gen = Rcpp::wrap(rgompertz_ssd(n, location, shape));
-    return rcpp_result_gen;
-END_RCPP
-}
 // pgumbel_ssd
 double pgumbel_ssd(double q, double location, double scale);
 RcppExport SEXP _ssdtools_pgumbel_ssd(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
@@ -244,9 +205,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ssdtools_pgamma_ssd", (DL_FUNC) &_ssdtools_pgamma_ssd, 3},
     {"_ssdtools_qgamma_ssd", (DL_FUNC) &_ssdtools_qgamma_ssd, 3},
     {"_ssdtools_rgamma_ssd", (DL_FUNC) &_ssdtools_rgamma_ssd, 3},
-    {"_ssdtools_pgompertz_ssd", (DL_FUNC) &_ssdtools_pgompertz_ssd, 3},
-    {"_ssdtools_qgompertz_ssd", (DL_FUNC) &_ssdtools_qgompertz_ssd, 3},
-    {"_ssdtools_rgompertz_ssd", (DL_FUNC) &_ssdtools_rgompertz_ssd, 3},
     {"_ssdtools_pgumbel_ssd", (DL_FUNC) &_ssdtools_pgumbel_ssd, 3},
     {"_ssdtools_qgumbel_ssd", (DL_FUNC) &_ssdtools_qgumbel_ssd, 3},
     {"_ssdtools_rgumbel_ssd", (DL_FUNC) &_ssdtools_rgumbel_ssd, 3},

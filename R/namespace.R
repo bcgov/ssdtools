@@ -23,7 +23,7 @@
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
 #' @importFrom scales comma manual_pal percent trans_breaks
-#' @importFrom stats coef complete.cases logLik nobs optim plogis predict sd setNames weighted.mean
+#' @importFrom stats coef complete.cases logLik nobs optim plogis predict runif sd setNames weighted.mean
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
 #' @importFrom TMB MakeADFun sdreport
