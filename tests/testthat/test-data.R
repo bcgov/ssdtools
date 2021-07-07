@@ -54,16 +54,4 @@ test_that("data", {
 
   expect_s3_class(boron_lnorm, "fitdists")
   expect_s3_class(boron_dists, "fitdists")
-
-  expect_error(chk::check_data(
-    test_data,
-    values = list(
-      Chemical = "",
-      Conc = c(0.04, 76500)
-    ),
-    exclusive = TRUE,
-    order = TRUE,
-    nrow = 141L
-  ), NA)
-  expect_s3_class(test_data, "tbl")
 })

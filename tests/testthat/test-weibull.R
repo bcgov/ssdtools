@@ -19,14 +19,3 @@ test_that("weibull", {
   set.seed(42)
   expect_equal(rweibull(2), c(0.0890432104972705, 0.0649915162066272))
 })
-
-# test_that("fit weibull quinoline", {
-#  quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
-# 
-#  expect_warning(dist <- ssd_fit_dists(quin, dists = "weibull"))
-# expect_true(is.tmbfit(dist))
-# expect_equal(
-#   coef(dist),
-#   c(shape = 0.627542681172847, scale = 15343.492101029)
-# )
-# })

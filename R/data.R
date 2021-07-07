@@ -115,15 +115,3 @@
 #' @examples
 #' head(ccme_data)
 "ccme_data"
-
-#' Test Data
-#'
-#' Data to test ssdtools.
-#'
-#' \describe{
-#'   \item{Chemical}{The chemical (chr).}
-#'   \item{Conc}{The chemical concentration (dbl).}
-#' }
-#' @examples
-#' head(test_data)
-"test_data"

@@ -11,15 +11,3 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
-test_that("fit mx_llogis_llogis tmb", {
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "mx_llogis_llogis", rescale = FALSE)
-  
-  expect_true(is.tmbfit(dist$mx_llogis_llogis))
-  expect_equal(
-    estimates(dist$mx_llogis_llogis),
-    list(locationlog1 = 0.896785336771335, locationlog2 = 3.14917770255953, 
-         pmix = 0.255223497712533, scalelog1 = 0.317650881482978, 
-         scalelog2 = 0.496708998267848)
-  )
-})

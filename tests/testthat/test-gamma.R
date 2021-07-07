@@ -20,13 +20,3 @@ test_that("gamma", {
   expect_equal(rgamma(2), c(1.93929578065309, 0.180419099876704))
 })
 
-test_that("fit gamma quinoline", {
-  quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
-
-  fit <- ssd_fit_dists(quin, dists = "gamma", rescale = FALSE)
-  expect_equal(
-    estimates(fit$gamma),
-    list(scale = 41201.4269426879, shape = 0.505315645508966),
-    tolerance = 1e-05
-  )
-})

@@ -21,28 +21,6 @@ test_that("gompertz", {
 })
 
 # 
-# test_that("sgompertz", {
-#   warning("sgompertz errors")
-#   x <- c(160, 800, 840, 1500, 8200, 12800, 22000, 38000, 60900, 63000)
-#   expect_error(sgompertz(x))
-# 
-#   quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
-# 
-#   expect_error(dist <- ssd_fit_dist(quin, dist = "gompertz"))
-# })
-
-test_that("fit gompertz tmb", {
-  dist <- ssd_fit_dists(ssdtools::boron_data, dist = "gompertz", rescale = TRUE)
-  
-  # gompertz really poor convergence
-  expect_true(is.tmbfit(dist$gompertz))
-  expect_equal(
-    estimates(dist$gompertz),
-    list(location = 2.78606171689745, shape = 0.184157912539087),
-    tolerance = 1e-03
-  )
-})
-# 
 # test_that("gompertz coefs", {
 #   warning("gompertz poor convergence")
 #   set.seed(77)

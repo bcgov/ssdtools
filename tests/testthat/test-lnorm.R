@@ -19,13 +19,3 @@ test_that("lnorm", {
   set.seed(42)
   expect_equal(rlnorm(2), c(3.93912432924107, 0.568531719998709))
 })
-
-test_that("fit lnorm quinoline", {
-  quin <- ssdtools::test_data[ssdtools::test_data$Chemical == "Quinoline", ]
-  
-  fit <- ssd_fit_dists(quin, dists = "lnorm", rescale = FALSE)
-  expect_equal(
-    estimates(fit$lnorm),
-    list(meanlog = 8.68875153351101, sdlog = 1.99119217337871)
-  )
-})
