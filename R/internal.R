@@ -26,3 +26,5 @@ safely <- function(.f) {
     list(result = x, error = NULL)
   }
 }
+
+pow <- function(x, y) x^y

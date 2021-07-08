@@ -34,3 +34,13 @@ bburrIII3 <- function() {
   list(lower = list(log_scale = -Inf, log_shape1 = -3, log_shape2 = -3),
        upper = list(log_scale = Inf, log_shape1 = 3, log_shape2 = 3))
 }
+
+pburrIII3_ssd <- function(q, shape1, shape2, scale) {
+  if(shape1 <= 0 || shape2 <= 0 || scale <= 0) return(NaN)
+  1/pow(1+pow(1/(scale*q),shape2),shape1)
+}
+
+qburrIII3_ssd <- function(p, shape1, shape2, scale) {
+  if(shape1 <= 0 || shape2 <= 0 || scale <= 0) return(NaN)
+  (1/(pow(pow(1/p, 1/shape1) - 1,1/shape2)))/scale
+}

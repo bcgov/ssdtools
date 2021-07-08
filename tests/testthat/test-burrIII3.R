@@ -11,3 +11,11 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+
+test_that("burrIII3", {
+  test_dist("burrIII3")
+  expect_equal(pburrIII3(1), 0.5)
+  expect_equal(qburrIII3(0.75), 3)
+  set.seed(42)
+  expect_equal(rburrIII3(2), c(10.7379218085407, 14.8920392236127))
+})
