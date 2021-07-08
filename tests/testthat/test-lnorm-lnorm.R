@@ -12,10 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("llogis_llogis", {
-#  test_dist("llogis_llogis")
-  expect_equal(pllogis_llogis(1), 0.384470710684998)
-  expect_equal(qllogis_llogis(0.75), 5.26658959216075)
+test_that("lnorm_lnorm", {
+#  test_dist("lnorm_lnorm")
+  expect_equal(plnorm_lnorm(1), 0.329327626965729)
+  expect_equal(qlnorm_lnorm(0.75), 3.53332368340358)
   set.seed(42)
-  expect_equal(rllogis_llogis(2), c(0.400833984692937, 4.89788262355488))
+  expect_equal(rlnorm_lnorm(2), c(0.568531719998709, 1.43782047983794))
 })

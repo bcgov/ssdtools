@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
-                           meanlog2 = 0, sdlog2 = 1, pmix = 0.5, 
+                           meanlog2 = 1, sdlog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {
   pdist("lnorm_lnorm", q = q, meanlog1 = meanlog1, sdlog1 = sdlog1,
         meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix,
@@ -21,7 +21,7 @@ plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
 }
 
 qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
-                           meanlog2 = 0, sdlog2 = 1, pmix = 0.5, 
+                           meanlog2 = 1, sdlog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {
   qdist("lnorm_lnorm", p = p, meanlog1 = meanlog1, sdlog1 = sdlog1,
         meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix,
@@ -29,7 +29,7 @@ qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
 }
 
 rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
-                           meanlog2 = 0, sdlog2 = 1, pmix = 0.5) {
+                           meanlog2 = 1, sdlog2 = 1, pmix = 0.5) {
   rdist("lnorm_lnorm", n = n, meanlog1 = meanlog1, sdlog1 = sdlog1,
         meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix)
 }

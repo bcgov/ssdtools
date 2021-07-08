@@ -32,7 +32,6 @@ any_missing <- function(...) {
   q[inf] <- NA_real_
   fun <- paste0("p", dist, "_ssd")
   p <- mapply(.pd, q, ..., MoreArgs = list(fun = fun))
-  p[mapply(any_missing, q, ...)] <- NA_real_ # remove once all out of cpp?
   p[inf & pos] <- 1
   p[inf & !pos] <- 0
   if(!lower.tail) p <- 1 - p
@@ -61,13 +60,14 @@ pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   if(any(vapply(args, length, 1L) != 1L)) stop()
   if(any(is.na(unlist(args)))) return(NA_real_)
   
+#  if(p == 0) return(0)
+  
   do.call(fun, args = args)
 }
 
 .qdist <- function(dist, p, ...) {
   fun <- paste0("q", dist, "_ssd")
   q <- mapply(.qd, p, ..., MoreArgs = list(fun = fun))
-  q[mapply(any_missing, p, ...)] <- NA_real_ # remove once all out of cpp?
   q
 }
 
