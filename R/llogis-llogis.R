@@ -59,13 +59,10 @@ qlogis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
   if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
-  interval <- c(0+.Machine$double.eps, 10^10)
-  print(p)
-  
   f <- function(x) {
     plogis_logis_ssd(x, location1, scale1, location2, scale2, pmix) - p
   }
-  stats::uniroot(f, interval = interval)$root
+  stats::uniroot(f, lower = 0, upper = 10, extendInt = "yes")$root
 }
 
 rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {

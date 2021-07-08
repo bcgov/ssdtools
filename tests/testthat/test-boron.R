@@ -192,11 +192,11 @@ test_that("boron unstable", {
   expect_s3_class(hc, "tbl")
   expect_equal(as.data.frame(hc),
                structure(list(dist = c("gompertz", "llogis_llogis", "lnorm_lnorm"
-               ), percent = c(5, 5, 5), est = c(1.29933739007807, 1.52713324002167, 
-                                                1.54142041852745), se = c(0.314185080898331, 0.892013368821646, 
-                                                                          0.354218270704551), lcl = c(1.050240943796, 1.17918543773749, 
-                                                                                                      1.15679689158702), ucl = c(2.02658175520912, 3.7459472635116, 
-                                                                                                                                 2.13105438269726)), row.names = c(NA, -3L), class = "data.frame"))
+               ), percent = c(5, 5, 5), est = c(1.29933739007807, 1.52714974430068, 
+                                                1.54140976474124), se = c(0.314185080898331, 0.891974927962618, 
+                                                                          0.3542220029009), lcl = c(1.050240943796, 1.17919000640653, 1.15679277059857
+                                                                          ), ucl = c(2.02658175520912, 3.74585435706093, 2.13104749717484
+                                                                          )), row.names = c(NA, -3L), class = "data.frame"))
   
   set.seed(102)
   hp <- ssd_hp(fits, conc = 1, ci = TRUE, nboot = 10, average = FALSE)

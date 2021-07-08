@@ -59,12 +59,11 @@ qlnorm_lnorm_ssd <- function(p, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
   if(sdlog1 <= 0 || sdlog2 <= 0 || meanlog1 >= meanlog2 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
-  interval <- c(0+.Machine$double.eps, 10^10)
-  
+
   f <- function(x) {
     plnorm_lnorm_ssd(x, meanlog1, sdlog1, meanlog2, sdlog2, pmix) - p
   }
-  stats::uniroot(f, interval = interval)$root
+  stats::uniroot(f, lower = 0, upper = 10, extendInt = "yes")$root
 }
 
 rlnorm_lnorm_ssd <- function(n, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
