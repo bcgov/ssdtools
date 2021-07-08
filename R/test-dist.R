@@ -57,7 +57,7 @@ test_dist <- function(dist) {
   ep(glue::glue("expect_identical(q{dist}(c(0.25, 0.75), 1:2, 3:4), c(q{dist}(0.25, 1, 3), q{dist}(0.75, 2, 4)))"))
   ep(glue::glue("expect_identical(q{dist}(c(0.25, 0.75), c(1,NA), 3:4), c(q{dist}(0.25, 1, 3), NA_real_))"))
   
-  ep(glue::glue("expect_equal(q{dist}(p{dist}(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))"))
+  ep(glue::glue("expect_equal(q{dist}(p{dist}(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1), tolerance = 0.0001)")) # tolerance due to lnorm_lnorm
   
   ep(glue::glue("expect_identical(r{dist}(numeric(0)), numeric(0))"))
   ep(glue::glue("expect_identical(r{dist}(0), numeric(0))"))
