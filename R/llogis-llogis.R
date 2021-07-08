@@ -13,23 +13,23 @@
 #    limitations under the License.
 
 pllogis_llogis <- function(q, locationlog1 = 0, scalelog1 = 1,
-                              locationlog2 = 0, scalelog2 = 1, pmix = 0.5, 
-                              lower.tail = TRUE, log.p = FALSE) {
+                           locationlog2 = 0, scalelog2 = 1, pmix = 0.5, 
+                           lower.tail = TRUE, log.p = FALSE) {
   pdist("logis_logis", q = q, location1 = locationlog1, scale1 = scalelog1,
         location2 = locationlog2, scale2 = scalelog2, pmix = pmix,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 qllogis_llogis <- function(p, locationlog1 = 0, scalelog1 = 1,
-                              locationlog2 = 0, scalelog2 = 1, pmix = 0.5, 
-                              lower.tail = TRUE, log.p = FALSE) {
+                           locationlog2 = 0, scalelog2 = 1, pmix = 0.5, 
+                           lower.tail = TRUE, log.p = FALSE) {
   qdist("logis_logis", p = p, location1 = locationlog1, scale1 = scalelog1,
         location2 = locationlog2, scale2 = scalelog2, pmix = pmix,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
 rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
-                              locationlog2 = 0, scalelog2 = 1, pmix = 0.5) {
+                           locationlog2 = 0, scalelog2 = 1, pmix = 0.5) {
   rdist("logis_logis", n = n, location1 = locationlog1, scale1 = scalelog1,
         location2 = locationlog2, scale2 = scalelog2, pmix = pmix, .lgt = TRUE)
 }
@@ -59,7 +59,12 @@ qlogis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
   if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
-  .NotYetImplemented()
+  interval <- c(0+.Machine$double.eps, 10^10)
+  
+  f <- function(x) {
+    plogis_logis_ssd(x, location1, scale1, location2, scale2, pmix) - p
+  }
+  uniroot(f, interval = interval)$root
 }
 
 rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {

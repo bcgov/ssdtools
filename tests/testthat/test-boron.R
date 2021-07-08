@@ -190,28 +190,20 @@ test_that("boron unstable", {
   
   expect_identical(coef(fits), tidy)
   expect_identical(augment(fits), ssdtools::boron_data)
-  
-  # set.seed(102)
-  # 
-  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
-  # expect_s3_class(hc, "tbl")
-  # expect_equal(as.data.frame(hc), 
-  #              structure(list(
-  #                dist = c("gamma", "lgumbel", "llogis", "lnorm", 
-  #                         "weibull"), 
-  #                percent = c(5, 5, 5, 5, 5), 
-  #                est = c(1.07428453014496, 
-  #                        1.76938547654574, 1.56226388133415, 1.6811748398812, 1.08673385398691
-  #                ), 
-  #                se = c(0.943453446295525, 0.466289589831322, 0.513428900764099, 
-  #                       0.382521299435556, 0.504669632705483), 
-  #                lcl = c(0.382343631258803, 
-  #                        1.28866461383402, 1.41933606523229, 0.81398585656334, 0.774438807570494
-  #                ), 
-  #                ucl = c(3.16461333423632, 2.70033927362266, 2.89536573124329, 
-  #                        1.89834434365108, 2.11024170883212)), 
-  #                row.names = c(NA, -5L), class = "data.frame"))
-  # 
+
+  set.seed(102)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
+  expect_s3_class(hc, "tbl")
+  expect_equal(as.data.frame(hc),
+               structure(list(
+                 dist = c("gompertz", "llogis_llogis"), 
+                 percent = c(5, 5), 
+                 est = c(1.29933739007807, 1.52713324002167), 
+                 se = c(0.314185080898331, 0.892013368821646), 
+                 lcl = c(1.050240943796, 1.17918543773749), 
+                 ucl = c(2.02658175520912, 3.7459472635116)), 
+                 row.names = c(NA, -2L), class = c("data.frame")))
+
   set.seed(102)
   hp <- ssd_hp(fits, conc = 1, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hp, "tbl")
