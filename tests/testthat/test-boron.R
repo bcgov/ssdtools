@@ -133,56 +133,52 @@ test_that("boron unstable", {
                  "Distribution 'burrIII3' failed to fit")
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
-  expect_equal(as.data.frame(tidy), structure(list(
-    dist = c("gompertz", "gompertz", "llogis_llogis", 
-             "llogis_llogis", "llogis_llogis", "llogis_llogis", "llogis_llogis"
-    ), 
-    term = c("location", "shape", "locationlog1", "locationlog2", 
-             "pmix", "scalelog1", "scalelog2"), 
-    est = c(0.0394098186724785, 
-            0.00260152464540154, 0.896785336771335, 3.14917770255953, 0.255223497712533, 
-            0.317650881482978, 0.496708998267848), 
-    se = c(0.011983859348259, 
-           0.0099785211858212, 0.379712940033151, 0.288285822914499, 0.144350756347623, 
-           0.167981647634004, 0.135112373508756)), row.names = c(NA, -7L
-           ), class = "data.frame"))
+  expect_equal(as.data.frame(tidy), structure(list(dist = c("gompertz", "gompertz", "llogis_llogis", 
+                                                            "llogis_llogis", "llogis_llogis", "llogis_llogis", "llogis_llogis", 
+                                                            "lnorm_lnorm", "lnorm_lnorm", "lnorm_lnorm", "lnorm_lnorm", "lnorm_lnorm"
+  ), term = c("location", "shape", "locationlog1", "locationlog2", 
+              "pmix", "scalelog1", "scalelog2", "meanlog1", "meanlog2", "pmix", 
+              "sdlog1", "sdlog2"), 
+  est = c(0.0394098186724785, 0.00260152464540154, 
+          0.896785336771335, 3.14917770255953, 0.255223497712533, 0.317650881482978, 
+          0.496708998267848, 0.949539479144771, 3.20108809568136, 0.28398496113898, 
+          0.554545351960678, 0.768816241410576), 
+  se = c(0.011983859348259, 
+         0.0099785211858212, 0.379712940033151, 0.288285822914499, 0.144350756347623, 
+         0.167981647634004, 0.135112373508756, 0.318035505305533, 0.252925364241292, 
+         0.12340616869344, 0.212487556878953, 0.193735678128915)), 
+  row.names = c(NA, 
+                -12L), class = "data.frame"))
   
   glance <- glance(fits)
   expect_s3_class(glance, "tbl")
   expect_equal(as.data.frame(glance),
-               structure(list(
-                 dist = c("gompertz", "llogis_llogis"), 
-                 npars = c(2L, 
-                           5L), 
-                 nobs = c(28L, 28L), 
-                 log_lik = c(-116.805577237298, -115.894989612752
-                 ), 
-                 aic = c(237.611154474595, 241.789979225505), 
-                 aicc = c(238.091154474595, 
-                          244.517251952777), 
-                 delta = c(0, 6.42609747818196), 
-                 weight = c(0.96132238228674, 
-                            0.0386776177132603)), 
-                 row.names = c(NA, -2L), class = "data.frame")) 
+               structure(list(dist = c("gompertz", "llogis_llogis", "lnorm_lnorm"
+               ), 
+               npars = c(2L, 5L, 5L), 
+               nobs = c(28L, 28L, 28L), 
+               log_lik = c(-116.805577237298, 
+                           -115.894989612752, -115.179384580908), 
+               aic = c(237.611154474595, 
+                       241.789979225505, 240.358769161817), 
+               aicc = c(238.091154474595, 
+                        244.517251952777, 243.086041889089), 
+               delta = c(0, 6.42609747818196, 
+                         4.99488741449395), 
+               weight = c(0.890845689498932, 0.0358420750986615, 
+                          0.0733122354024064)), 
+               row.names = c(NA, -3L), class = "data.frame")) 
   
   gof <- ssd_gof(fits)
   expect_s3_class(gof, "tbl")
   expect_equal(as.data.frame(gof),
-               structure(list(dist = c("gompertz", "llogis_llogis"), 
-                              ad = c(NA_real_, 
-                                     NA_real_), 
-                              ks = c(NA_real_, NA_real_), 
-                              cvm = c(NA_real_, NA_real_
-                              ), 
-                              aic = c(237.611154474595, 241.789979225505), 
-                              aicc = c(238.091154474595, 
-                                       244.517251952777), 
-                              bic = c(240.275563494946, 248.451001776381
-                              ), 
-                              delta = c(0, 6.426), 
-                              weight = c(0.961, 0.039)), 
-                         row.names = c(NA, 
-                                       -2L), class = "data.frame")) 
+               structure(list(dist = c("gompertz", "llogis_llogis", "lnorm_lnorm"
+               ), ad = c(NA_real_, NA_real_, NA_real_), ks = c(NA_real_, NA_real_, 
+                                                               NA_real_), cvm = c(NA_real_, NA_real_, NA_real_), aic = c(237.611154474595, 
+                                                                                                                         241.789979225505, 240.358769161817), aicc = c(238.091154474595, 
+                                                                                                                                                                       244.517251952777, 243.086041889089), bic = c(240.275563494946, 
+                                                                                                                                                                                                                    248.451001776381, 247.019791712693), delta = c(0, 6.426, 4.995
+                                                                                                                                                                                                                    ), weight = c(0.891, 0.036, 0.073)), row.names = c(NA, -3L), class = "data.frame")) 
   
   estimates <- estimates(fits)
   expect_type(estimates, "list")
@@ -190,30 +186,26 @@ test_that("boron unstable", {
   
   expect_identical(coef(fits), tidy)
   expect_identical(augment(fits), ssdtools::boron_data)
-
+  
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hc, "tbl")
   expect_equal(as.data.frame(hc),
-               structure(list(
-                 dist = c("gompertz", "llogis_llogis"), 
-                 percent = c(5, 5), 
-                 est = c(1.29933739007807, 1.52713324002167), 
-                 se = c(0.314185080898331, 0.892013368821646), 
-                 lcl = c(1.050240943796, 1.17918543773749), 
-                 ucl = c(2.02658175520912, 3.7459472635116)), 
-                 row.names = c(NA, -2L), class = c("data.frame")))
-
+               structure(list(dist = c("gompertz", "llogis_llogis", "lnorm_lnorm"
+               ), percent = c(5, 5, 5), est = c(1.29933739007807, 1.52713324002167, 
+                                                1.54142041852745), se = c(0.314185080898331, 0.892013368821646, 
+                                                                          0.354218270704551), lcl = c(1.050240943796, 1.17918543773749, 
+                                                                                                      1.15679689158702), ucl = c(2.02658175520912, 3.7459472635116, 
+                                                                                                                                 2.13105438269726)), row.names = c(NA, -3L), class = "data.frame"))
+  
   set.seed(102)
   hp <- ssd_hp(fits, conc = 1, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hp, "tbl")
   expect_equal(as.data.frame(hp), 
-               structure(list(
-                 dist = c("gompertz", "llogis_llogis"), 
-                 conc = c(1, 1), 
-                 est = c(3.86926768388197, 1.56256400293298), 
-                 se = c(0.700718236698958, 1.31386184167695), 
-                 lcl = c(2.51238335587379, 0.178961042184077), 
-                 ucl = c(4.78629039008938, 3.61388745593962)), 
-                 row.names = c(NA, -2L), class = "data.frame"))
+               structure(list(dist = c("gompertz", "llogis_llogis", "lnorm_lnorm"
+               ), conc = c(1, 1, 1), est = c(3.86926768388197, 1.56256400293298, 
+                                             1.23424398878545), se = c(0.700718236698958, 1.31386184167695, 
+                                                                       1.3858798141651), lcl = c(2.51238335587379, 0.178961042184077, 
+                                                                                                 0.0992870764962363), ucl = c(4.78629039008938, 3.61388745593962, 
+                                                                                                                              3.66429890438483)), row.names = c(NA, -3L), class = "data.frame"))
 })

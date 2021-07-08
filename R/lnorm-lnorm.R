@@ -1,0 +1,80 @@
+#    Copyright 2015 Province of British Columbia
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#       https://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
+plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
+                           meanlog2 = 0, sdlog2 = 1, pmix = 0.5, 
+                           lower.tail = TRUE, log.p = FALSE) {
+  pdist("lnorm_lnorm", q = q, meanlog1 = meanlog1, sdlog1 = sdlog1,
+        meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix,
+        lower.tail = lower.tail, log.p = log.p)
+}
+
+qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
+                           meanlog2 = 0, sdlog2 = 1, pmix = 0.5, 
+                           lower.tail = TRUE, log.p = FALSE) {
+  qdist("lnorm_lnorm", p = p, meanlog1 = meanlog1, sdlog1 = sdlog1,
+        meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix,
+        lower.tail = lower.tail, log.p = log.p)
+}
+
+rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
+                           meanlog2 = 0, sdlog2 = 1, pmix = 0.5) {
+  rdist("lnorm_lnorm", n = n, meanlog1 = meanlog1, sdlog1 = sdlog1,
+        meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix)
+}
+
+slnorm_lnorm <- function(x) {
+  x <- sort(x)
+  n <- length(x)
+  n2 <- floor(n / 2)
+  x1 <- x[1:n2]
+  x2 <- x[(n2+1):n]
+  s1 <- slnorm(x1)
+  s2 <- slnorm(x2)
+  names(s1) <- paste0(names(s1), "1")
+  names(s2) <- paste0(names(s2), "2")
+  logit_pmix <- list(logit_pmix = 0)
+  c(s1, s2, logit_pmix)
+}
+
+plnorm_lnorm_ssd <- function(q, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
+  if(sdlog1 <= 0 || sdlog2 <= 0 || meanlog1 >= meanlog2 || pmix <= 0 || pmix >= 1) {
+    return(NaN)
+  }
+  pmix * plnorm_ssd(q, meanlog1, sdlog1) + (1 - pmix) * plnorm_ssd(q, meanlog2, sdlog2)
+}
+
+qlnorm_lnorm_ssd <- function(p, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
+  if(sdlog1 <= 0 || sdlog2 <= 0 || meanlog1 >= meanlog2 || pmix <= 0 || pmix >= 1) {
+    return(NaN)
+  }
+  interval <- c(0+.Machine$double.eps, 10^10)
+  
+  f <- function(x) {
+    plnorm_lnorm_ssd(x, meanlog1, sdlog1, meanlog2, sdlog2, pmix) - p
+  }
+  stats::uniroot(f, interval = interval)$root
+}
+
+rlnorm_lnorm_ssd <- function(n, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
+  if(sdlog1 <= 0 || sdlog2 <= 0 || meanlog1 >= meanlog2 || pmix <= 0 || pmix >= 1) {
+    return(rep(NaN, n))
+  }
+  dist <- stats::rbinom(n, 1, pmix)
+  dist <- as.logical(dist)
+  x <- rep(NA_real_, n)
+  x[dist] <- rlnorm_ssd(sum(dist), meanlog = meanlog1, sdlog = sdlog1)
+  x[!dist] <- rlnorm_ssd(sum(!dist), meanlog = meanlog2, sdlog = sdlog2)
+  x
+}
