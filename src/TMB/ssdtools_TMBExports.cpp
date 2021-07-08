@@ -11,7 +11,7 @@
 #include "ll_lgumbel.hpp"
 #include "ll_llogis.hpp"
 #include "ll_lnorm.hpp"
-#include "ll_mx_llogis_llogis.hpp"
+#include "ll_llogis_llogis.hpp"
 #include "ll_weibull.hpp"
 
 template<class Type>
@@ -27,8 +27,8 @@ Type objective_function<Type>::operator() () {
     return ll_lgumbel(this);
   } else if (model == "ll_llogis") {
     return ll_llogis(this);
-  } else if (model == "ll_mx_llogis_llogis") {
-    return ll_mx_llogis_llogis(this);
+  } else if (model == "ll_llogis_llogis") {
+    return ll_llogis_llogis(this);
   } else if(model == "ll_lnorm") {
     return ll_lnorm(this);
   } else if(model == "ll_weibull") {

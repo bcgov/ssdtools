@@ -134,8 +134,8 @@ test_that("boron unstable", {
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
   expect_equal(as.data.frame(tidy), structure(list(
-    dist = c("gompertz", "gompertz", "mx_llogis_llogis", 
-             "mx_llogis_llogis", "mx_llogis_llogis", "mx_llogis_llogis", "mx_llogis_llogis"
+    dist = c("gompertz", "gompertz", "llogis_llogis", 
+             "llogis_llogis", "llogis_llogis", "llogis_llogis", "llogis_llogis"
     ), 
     term = c("location", "shape", "locationlog1", "locationlog2", 
              "pmix", "scalelog1", "scalelog2"), 
@@ -151,7 +151,7 @@ test_that("boron unstable", {
   expect_s3_class(glance, "tbl")
   expect_equal(as.data.frame(glance),
                structure(list(
-                 dist = c("gompertz", "mx_llogis_llogis"), 
+                 dist = c("gompertz", "llogis_llogis"), 
                  npars = c(2L, 
                            5L), 
                  nobs = c(28L, 28L), 
@@ -168,7 +168,7 @@ test_that("boron unstable", {
   gof <- ssd_gof(fits)
   expect_s3_class(gof, "tbl")
   expect_equal(as.data.frame(gof),
-               structure(list(dist = c("gompertz", "mx_llogis_llogis"), 
+               structure(list(dist = c("gompertz", "llogis_llogis"), 
                               ad = c(NA_real_, 
                                      NA_real_), 
                               ks = c(NA_real_, NA_real_), 
@@ -217,7 +217,7 @@ test_that("boron unstable", {
   expect_s3_class(hp, "tbl")
   expect_equal(as.data.frame(hp), 
                structure(list(
-                 dist = c("gompertz", "mx_llogis_llogis"), 
+                 dist = c("gompertz", "llogis_llogis"), 
                  conc = c(1, 1), 
                  est = c(3.86926768388197, 1.56256400293298), 
                  se = c(0.700718236698958, 1.31386184167695), 
