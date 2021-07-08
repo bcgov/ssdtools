@@ -12,6 +12,28 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+pmx_llogis_llogis <- function(q, locationlog1 = 0, scalelog1 = 1,
+                              locationlog2 = 0, scalelog2 = 1, pmix = 0.5, 
+                              lower.tail = TRUE, log.p = FALSE) {
+  pdist("mx_logis_logis", q = q, location1 = locationlog1, scale1 = scalelog1,
+        location2 = locationlog2, scale2 = scalelog2, pmix = pmix,
+        lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
+}
+
+qmx_llogis_llogis <- function(p, locationlog1 = 0, scalelog1 = 1,
+                              locationlog2 = 0, scalelog2 = 1, pmix = 0.5, 
+                              lower.tail = TRUE, log.p = FALSE) {
+  qdist("mx_logis_logis", p = p, location1 = locationlog1, scale1 = scalelog1,
+        location2 = locationlog2, scale2 = scalelog2, pmix = pmix,
+        lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
+}
+
+rmx_llogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
+                              locationlog2 = 0, scalelog2 = 1, pmix = 0.5) {
+  rdist("mx_logis_logis", n = n, location1 = locationlog1, scale1 = scalelog1,
+        location2 = locationlog2, scale2 = scalelog2, pmix = pmix, .lgt = TRUE)
+}
+
 smx_llogis_llogis <- function(x) {
   x <- sort(x)
   n <- length(x)
@@ -24,4 +46,30 @@ smx_llogis_llogis <- function(x) {
   names(s2) <- paste0(names(s2), "2")
   logit_pmix <- list(logit_pmix = 0)
   c(s1, s2, logit_pmix)
+}
+
+pmx_logis_logis_ssd <- function(q, location1, scale1, location2, scale2, pmix) {
+  if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
+    return(NaN)
+  }
+  pmix * plogis_ssd(q, location1, scale1) + (1 - pmix) * plogis_ssd(q, location2, scale2)
+}
+
+qmx_logis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
+  if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
+    return(NaN)
+  }
+  .NotYetImplemented()
+}
+
+rmx_logis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {
+  if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
+    return(rep(NaN, n))
+  }
+  dist <- stats::rbinom(n, 1, pmix)
+  dist <- as.logical(dist)
+  x <- rep(NA_real_, n)
+  x[dist] <- rlogis_ssd(sum(dist), location = location1, scale = scale1)
+  x[!dist] <- rlogis_ssd(sum(!dist), location = location2, scale = scale2)
+  x
 }
