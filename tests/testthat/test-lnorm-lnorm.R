@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("lnorm_lnorm", {
-  test_dist("lnorm_lnorm")
+  test_dist("lnorm_lnorm", qroottolerance = 1e-04)
   expect_equal(plnorm_lnorm(1), 0.329327626965729)
   expect_equal(qlnorm_lnorm(0.75), 3.53332231582824)
   set.seed(42)

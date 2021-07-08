@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("llogis_llogis", {
-  test_dist("llogis_llogis")
+  test_dist("llogis_llogis", qroottolerance = 1e-04)
   expect_equal(pllogis_llogis(1), 0.384470710684998)
   expect_equal(qllogis_llogis(0.75), 5.2666469409969)
   set.seed(42)
