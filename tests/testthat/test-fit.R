@@ -219,12 +219,9 @@ test_that("ssd_fit_dists warns of optimizer convergence code error", {
 test_that("ssd_fit_dists estimates for boron_data on stable dists", {
   fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists(), rescale = TRUE)
   
-  expect_equal(estimates(fits), 
-               list(gamma = list(scale = 0.355400735189619, shape = 0.950179460431249), 
-                    lgumbel = list(locationlog = -2.33578739461338, scalelog = 1.23223779732974), 
-                    llogis = list(locationlog = -1.63216798267858, scalelog = 0.740423688662679), 
-                    lnorm = list(meanlog = -1.69680060918465, sdlog = 1.24154032419128), 
-                    weibull = list(scale = 0.332587999922436, shape = 0.966099883646414)))
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl")
+  expect_snapshot_data(tidy, "tidy_stable_rescale")
 })
 
 test_that("ssd_fit_dists not reorder", {
@@ -234,17 +231,6 @@ test_that("ssd_fit_dists not reorder", {
   expect_identical(npars(fit), c(lnorm = 2L, llogis = 2L))
   expect_equal(nobs(fit), 28L)
   expect_equal(logLik(fit), c(lnorm = -117.514216489547, llogis = -118.507435324581))
-})
-
-test_that("ssd_fit_dists rescale fits on stable dists", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, rescale = TRUE, dists = ssd_dists()) 
-  
-  expect_equal(estimates(fits),
-               list(gamma = list(scale = 0.355400735189619, shape = 0.950179460431249), 
-                    lgumbel = list(locationlog = -2.33578739461338, scalelog = 1.23223779732974), 
-                    llogis = list(locationlog = -1.63216798267858, scalelog = 0.740423688662679), 
-                    lnorm = list(meanlog = -1.69680060918465, sdlog = 1.24154032419128), 
-                    weibull = list(scale = 0.332587999922436, shape = 0.966099883646414)))
 })
 
 test_that("ssd_fit_dists equal weights no effect", {
@@ -279,19 +265,17 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   data$Other <- data$Conc
   data$Conc <- data$Conc / max(data$Conc)
   
-  expect_warning(
+  expect_warning(expect_warning(
     ssd_fit_dists(data, right = "Other", dists = ssd_dists(), rescale = FALSE),
-    "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$")
+    "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$"), "^Distribution 'invweibull' failed to compute standard errors")
   
   skip_on_os("windows") # not sure why gamma shape is 908 on GitHub actions windows
   skip_on_os("linux") # not sure why gamma shape is 841 on GitHub actions ubuntu
   fits <- ssd_fit_dists(data, right = "Other", dists = ssd_dists(), rescale = FALSE, computable = FALSE)
-  expect_equal(estimates(fits), 
-               list(gamma = list(scale = 0.00118442292483518, shape = 864.297870042134), 
-                    lgumbel = list(locationlog = 0.0110209306139035, scalelog = 0.0337459419664264), 
-                    llogis = list(locationlog = 0.0119926155600312, scalelog = 0.0109174998075489), 
-                    lnorm = list(meanlog = 0.0231418031697736, sdlog = 0.0343122482517211), 
-                    weibull = list(scale = 1.01334187822578, shape = 94.0011367347638)))
+  
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl")
+  expect_snapshot_data(tidy, "tidy_stable_computable")
 })
 
 test_that("ssd_fit_dists works with slightly censored data", {

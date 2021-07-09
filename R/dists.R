@@ -28,7 +28,7 @@ ssd_dists <- function(type = "stable") {
   chk_string(type)
   chk_subset(type, c("all", "stable", "unstable", "bc"))
 
-  stable <- c("gamma", "lgumbel", 
+  stable <- c("invweibull", "gamma", "lgumbel", 
               "llogis", "lnorm", "weibull")
   unstable <- c("burrIII3", "gompertz", "invpareto", "llogis_llogis", "lnorm_lnorm")
   bc <- c("gamma", "llogis", "lnorm")
