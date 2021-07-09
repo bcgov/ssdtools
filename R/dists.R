@@ -30,7 +30,7 @@ ssd_dists <- function(type = "stable") {
 
   stable <- c("gamma", "lgumbel", 
               "llogis", "lnorm", "weibull")
-  unstable <- c("burrIII3", "gompertz", "llogis_llogis", "lnorm_lnorm")
+  unstable <- c("burrIII3", "gompertz", "invpareto", "llogis_llogis", "lnorm_lnorm")
   bc <- c("gamma", "llogis", "lnorm")
   
   dists <- switch(type, 

@@ -49,8 +49,9 @@ test_that("boron stable", {
 test_that("boron unstable", {
   dists <- ssd_dists("unstable")
   set.seed(50)
-  expect_warning(fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists),
-                 "Distribution 'burrIII3' failed to fit")
+  expect_warning(expect_warning(fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists),
+                 "Distribution 'burrIII3' failed to fit"),
+                 "Distribution 'invpareto' failed to fit")
 
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
