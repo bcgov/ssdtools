@@ -26,6 +26,8 @@ Type objective_function<Type>::operator() () {
     return ll_gompertz(this);
   } else if (model == "ll_lgumbel") {
     return ll_lgumbel(this);
+  } else if (model == "ll_invpareto") {
+    return ll_invpareto(this);
   } else if (model == "ll_llogis") {
     return ll_llogis(this);
   } else if (model == "ll_llogis_llogis") {
