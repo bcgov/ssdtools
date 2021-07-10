@@ -12,10 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("gompertz", {
-  test_dist("gompertz")
-  expect_equal(pgompertz(1), 0.820625921265983)
-  expect_equal(qgompertz(0.75), 0.869741686191944)
-  set.seed(42)
-  expect_equal(rgompertz(2), c(1.24208466660006, 1.32596518320944))
+test_that("estimates", {
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis", "lnorm"))
+  
+  estimates <- estimates(fits)
+  expect_type(estimates, "list")
+  tidy <- tidy(fits)
+  expect_identical(unlist(estimates), setNames(tidy$est, paste(tidy$dist, tidy$term, sep = ".")))
 })

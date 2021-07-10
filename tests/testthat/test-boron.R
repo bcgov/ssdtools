@@ -19,18 +19,10 @@ test_that("boron stable", {
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
   expect_snapshot_data(tidy, "tidy_stable")
-  
-  glance <- glance(fits)
-  expect_s3_class(glance, "tbl")
-  expect_snapshot_data(glance, "glance_stable")
 
   gof <- ssd_gof(fits)
   expect_s3_class(gof, "tbl")
   expect_snapshot_data(gof, "gof_stable")
-
-  estimates <- estimates(fits)
-  expect_type(estimates, "list")
-  expect_identical(unlist(estimates), setNames(tidy$est, paste(tidy$dist, tidy$term, sep = ".")))
 
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
@@ -53,18 +45,10 @@ test_that("boron unstable", {
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
   expect_snapshot_data(tidy, "tidy_unstable")
-  
-  glance <- glance(fits)
-  expect_s3_class(glance, "tbl")
-  expect_snapshot_data(glance, "glance_unstable")
-  
+
   gof <- ssd_gof(fits)
   expect_s3_class(gof, "tbl")
   expect_snapshot_data(gof, "gof_unstable")
-  
-  estimates <- estimates(fits)
-  expect_type(estimates, "list")
-  expect_identical(unlist(estimates), setNames(tidy$est, paste(tidy$dist, tidy$term, sep = ".")))
 
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
