@@ -15,6 +15,7 @@
 test_that("estimates", {
   estimates <- estimates(boron_dists)
   expect_type(estimates, "list")
+  expect_snapshot_output(print(estimates))
   tidy <- tidy(boron_dists)
   expect_identical(unlist(estimates), setNames(tidy$est, paste(tidy$dist, tidy$term, sep = ".")))
 })

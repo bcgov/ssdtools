@@ -12,8 +12,12 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("utils", {
+test_that("ssd_ecd", {
   expect_equal(ssd_ecd(1:10), seq(0.05, 0.95, by = 0.1))
+})
+
+test_that("ssd_ecd_data", {
+  expect_snapshot_output(ssd_ecd_data(boron_data))
 })
 
 test_that("comma_signif", {

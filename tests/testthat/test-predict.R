@@ -12,56 +12,21 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("predict.fitdist", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data[1:6, ])
-  pred <- predict(boron_lnorm, nboot = 10L)
-
+test_that("predict", {
+  pred <- predict(boron_dists)
   expect_s3_class(pred, "tbl")
-  expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  expect_equal(pred$percent, 1:99)
-  pred2 <- predict(boron_lnorm, ci = TRUE, nboot = 10)
-  expect_identical(pred$est[1], pred2$est[1])
-
-  boron_data$Conc <- boron_data$Conc / 1000
-  boron_lnorm3 <- ssd_fit_dists(boron_data[1:6, ])
-  pred3 <- predict(boron_lnorm3, nboot = 10)
-  expect_equal(pred3$est[1], pred2$est[1] / 1000, tolerance = 1e-07)
+  expect_snapshot_data(pred, "pred_dists")
 })
 
-test_that("predict.fitdist parallel", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data)
-
-  pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
+test_that("predict cis", {
+  set.seed(10)
+  pred <- predict(boron_dists, ci = TRUE, nboot = 10L)
   expect_s3_class(pred, "tbl")
-  expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  expect_equal(pred$percent, 1:99)
+  expect_snapshot_data(pred, "pred_cis")
 })
 
-test_that("predict.fitdists", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  dists <- ssd_fit_dists(boron_data[1:6, ], dists = c("gamma", "llogis"))
-  pred <- predict(dists, nboot = 10L)
-
+test_that("predict not average", {
+  pred <- predict(boron_dists, average = FALSE)
   expect_s3_class(pred, "tbl")
-  expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  expect_equal(pred$percent, 1:99)
-
-  pred <- predict(dists, average = FALSE)
-  expect_s3_class(pred, "tbl")
-  expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  expect_identical(nrow(pred), 198L)
-  expect_output(print(dists))
-})
-
-test_that("predict.fitdists parallel", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis"))
-
-  pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
-  expect_s3_class(pred, "tbl")
-  expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  expect_equal(pred$percent, 1:99)
+  expect_snapshot_data(pred, "pred_notaverage")
 })
