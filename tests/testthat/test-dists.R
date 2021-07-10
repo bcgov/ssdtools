@@ -25,3 +25,7 @@ test_that("dists all = stable + unstable", {
   dists <- stringr::str_sort(dists)
   expect_identical(dists, ssd_dists("all"))
 })
+
+test_that("dists bc", {
+  expect_identical(ssd_dists(type = "bc"), c("gamma", "llogis", "lnorm"))
+})

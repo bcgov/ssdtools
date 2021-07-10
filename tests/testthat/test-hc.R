@@ -179,7 +179,7 @@ test_that("ssd_hc fitdists not average", {
   hc <- ssd_hc(boron_dists, average = FALSE)
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
-  expect_equal(hc$dist, c("gamma", "llogis", "lnorm")) 
+  expect_equal(hc$dist, ssd_dists("bc")) 
   expect_identical(hc$percent, c(5, 5, 5))
   expect_equal(hc$est, c(1.07428453014496, 1.56226388133415, 1.6811748398812))
   expect_equal(hc$se, c(NA_real_, NA_real_,NA_real_))

@@ -46,7 +46,7 @@ min_discrepancy <- function(dist, meanlog, sdlog, nsim) {
 #'
 #' @examples
 #' ssd_match_moments()
-ssd_match_moments <- function(dists = c("llogis", "gamma", "lnorm"), meanlog = 1, sdlog = 1,
+ssd_match_moments <- function(dists = ssd_dists("bc"), meanlog = 1, sdlog = 1,
                               nsim = 1e+05) {
   chk_vector(dists)
   chk_s3_class(dists, "character")

@@ -23,8 +23,7 @@ test_that("summary fitdists", {
 
 test_that("summary fitdists with multiple dists", {
   data <- ssdtools::boron_data
-  fits <- ssd_fit_dists(data, dists = c("gamma", "llogis", "lnorm"),
-                        rescale = TRUE)
+  fits <- ssd_fit_dists(data, rescale = TRUE)
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
   expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted", "unequal"))

@@ -86,7 +86,7 @@ fit_dists <- function(data, dists, rescale, computable, control, silent) {
 #' ssd_fit_dists(boron_data)
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
-  dists = c("gamma", "llogis", "lnorm"),
+  dists = ssd_dists("bc"),
   nrow = 6L,
   rescale = FALSE,
   reweight = FALSE,

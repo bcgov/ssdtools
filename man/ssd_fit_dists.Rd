@@ -9,7 +9,7 @@ ssd_fit_dists(
   left = "Conc",
   right = left,
   weight = NULL,
-  dists = c("gamma", "llogis", "lnorm"),
+  dists = ssd_dists("bc"),
   nrow = 6L,
   rescale = FALSE,
   reweight = FALSE,

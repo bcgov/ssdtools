@@ -118,7 +118,7 @@ test_that("hp fitdists works not average multiple dists", {
   hp <- ssd_hp(boron_dists, 1, average = FALSE)
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
-  expect_equal(hp$dist, c("gamma", "llogis", "lnorm"))
+  expect_equal(hp$dist, ssd_dists("bc"))
   expect_identical(hp$conc, c(1, 1, 1))
   expect_equal(hp$est, c(4.67758994580286, 2.80047097268139, 1.9543030195088)) 
   expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_)) 
