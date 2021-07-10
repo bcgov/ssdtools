@@ -5,7 +5,7 @@
 \title{Match Moments}
 \usage{
 ssd_match_moments(
-  dists = c("llogis", "gamma", "lnorm"),
+  dists = ssd_dists("bc"),
   meanlog = 1,
   sdlog = 1,
   nsim = 1e+05
