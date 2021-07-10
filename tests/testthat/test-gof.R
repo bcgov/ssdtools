@@ -12,10 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("boron stable", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis", "lnorm"))
-  
-  gof <- ssd_gof(fits)
+test_that("gof", {
+  gof <- ssd_gof(boron_dists)
   expect_s3_class(gof, "tbl")
   expect_snapshot_data(gof, "gof")
 })

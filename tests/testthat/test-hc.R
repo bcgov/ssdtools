@@ -13,10 +13,8 @@
 #    limitations under the License.
 
 test_that("hc", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "lnorm", "llogis"))
-  
   set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
+  hc <- ssd_hc(boron_dists, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
 })

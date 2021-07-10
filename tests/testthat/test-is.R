@@ -12,6 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("augment", {
-  expect_identical(augment(boron_lnorm), ssdtools::boron_data)
+test_that("is.fitdists", {
+  expect_true(is.fitdists(boron_lnorm))
+  expect_true(is.fitdists(boron_dists))
+  expect_false(is.fitdists(1))
 })

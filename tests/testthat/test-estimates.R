@@ -13,10 +13,8 @@
 #    limitations under the License.
 
 test_that("estimates", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis", "lnorm"))
-  
-  estimates <- estimates(fits)
+  estimates <- estimates(boron_dists)
   expect_type(estimates, "list")
-  tidy <- tidy(fits)
+  tidy <- tidy(boron_dists)
   expect_identical(unlist(estimates), setNames(tidy$est, paste(tidy$dist, tidy$term, sep = ".")))
 })

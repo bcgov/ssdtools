@@ -12,14 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
 test_that("boron stable", {
   dists <- ssd_dists("stable")
   fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists)
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
-  expect_snapshot_data(tidy, "tidy_stable")
+  expect_snapshot_data(tidy, "boron_stable")
 })
 
 test_that("boron unstable", {
@@ -31,7 +30,7 @@ test_that("boron unstable", {
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
-  expect_snapshot_data(tidy, "tidy_unstable")
+  expect_snapshot_data(tidy, "boron_unstable")
 })
 
 test_that("data", {

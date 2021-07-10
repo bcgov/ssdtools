@@ -1,7 +1,5 @@
 test_that("glance weights rescale log_lik", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis", "lnorm"))
-  
-  glance <- glance(fits)
+  glance <- glance(boron_dists)
   expect_s3_class(glance, "tbl")
   expect_snapshot_data(glance, "glance")
 })

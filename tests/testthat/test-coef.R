@@ -13,9 +13,8 @@
 #    limitations under the License.
 
 test_that("coef", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis", "lnorm"))
-  coef <- coef(fits)
+  coef <- coef(boron_dists)
   expect_s3_class(coef, "tbl")
+  expect_identical(coef, tidy(boron_dists))
   expect_snapshot_data(coef, "coef")
-  expect_identical(coef, tidy(fits))
 })

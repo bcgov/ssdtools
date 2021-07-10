@@ -13,9 +13,6 @@
 #    limitations under the License.
 
 test_that("utils", {
-  expect_true(is.fitdists(boron_lnorm))
-  expect_true(is.fitdists(boron_dists))
-
   expect_identical(nobs(boron_lnorm), 28L)
   expect_identical(nobs(boron_dists), nobs(boron_lnorm))
 

@@ -13,6 +13,14 @@
 #    limitations under the License.
 
 test_that("autoplot", {
-  fits <- ssd_fit_dists(boron_data, rescale = TRUE)
-  expect_snapshot_plot(autoplot(fits, xlab = "New"), "boron_dists_rescale_new")
+  expect_snapshot_plot(autoplot(boron_dists), "autoplot")
+})
+
+test_that("autoplot", {
+  expect_snapshot_plot(autoplot(boron_dists, xlab = "New"), "autoplot_new")
+})
+
+test_that("autoplot", {
+  fits <- ssd_fit_dists(boron_data, dists = c("gamma", "llogis", "lnorm"), rescale = TRUE)
+  expect_snapshot_plot(autoplot(fits, xlab = "New"), "autoplot_rescale")
 })

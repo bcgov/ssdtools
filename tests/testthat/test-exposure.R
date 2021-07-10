@@ -33,13 +33,12 @@ test_that("exposure multiple distributions", {
 })
 
 test_that("exposure not sensitive to rescaling", {
-  fits <- ssd_fit_dists(boron_data, dists = "lnorm")
   set.seed(10)
-  exposure <- ssd_exposure(fits)
+  exposure <- ssd_exposure(boron_lnorm)
   
-  fits_notrescale <- ssd_fit_dists(boron_data, dists = "lnorm", rescale = FALSE)
+  boron_lnorm_rescale <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm", rescale = TRUE)
   set.seed(10)
-  exposure_notrescale <- ssd_exposure(fits_notrescale)
+  exposure_rescale <- ssd_exposure(boron_lnorm_rescale)
   
-  expect_equal(exposure, exposure_notrescale)
+  expect_equal(exposure_rescale, exposure)
 })
