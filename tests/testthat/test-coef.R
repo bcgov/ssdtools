@@ -12,13 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("invpareto", {
-#  test_dist("invpareto") need to fix up inverse pareto 
-  expect_equal(pinvpareto(1), 1)
-  expect_equal(qinvpareto(0.75), 0.75)
-  set.seed(42)
-  expect_equal(rinvpareto(2), c(0.914806043496355, 0.937075413297862))
+test_that("coef", {
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis", "lnorm"))
+  coef <- coef(fits)
+  expect_s3_class(coef, "tbl")
+  expect_snapshot_data(coef, "coef")
+  expect_identical(coef, tidy(fits))
 })
-
-library(ssdtools)
-hist(ssdtools:::rinvpareto(1000, 1, 1), breaks = 100)

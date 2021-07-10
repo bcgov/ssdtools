@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("autoplot accepts additional arguments", {
+test_that("autoplot", {
   fits <- ssd_fit_dists(boron_data, rescale = TRUE)
   expect_snapshot_plot(autoplot(fits, xlab = "New"), "boron_dists_rescale_new")
 })

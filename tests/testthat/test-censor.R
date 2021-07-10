@@ -12,13 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("invpareto", {
-#  test_dist("invpareto") need to fix up inverse pareto 
-  expect_equal(pinvpareto(1), 1)
-  expect_equal(qinvpareto(0.75), 0.75)
-  set.seed(42)
-  expect_equal(rinvpareto(2), c(0.914806043496355, 0.937075413297862))
+test_that("censor", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(ssdtools::boron_data)
+  expect_false(is_censored(fits))
+  
+  data$Right <- data$Conc
+  data$Conc <- 0
+  fits <- ssd_fit_dists(data, right = "Right")
+  expect_true(is_censored(fits))
 })
-
-library(ssdtools)
-hist(ssdtools:::rinvpareto(1000, 1, 1), breaks = 100)

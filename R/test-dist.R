@@ -69,11 +69,20 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08) {
   ep(glue::glue("expect_identical(length(r{dist}(2)), 2L)"))
   ep(glue::glue("expect_identical(length(r{dist}(3:4)), 2L)"))
   ep(glue::glue("expect_identical(length(r{dist}(c(NA, 1))), 2L)"))
-  dist <- "lnorm"
+  
   data <- data.frame(Conc = ep(glue::glue("r{dist}(1000)")))
-  fits <- ep(glue::glue("ssd_fit_dists(data = data, dists = '{dist}', rescale = TRUE)"))
-  tidy <- ep(glue::glue("tidy(fits)"))
-  expect_s3_class(tidy, "tbl_df")
-  expect_identical(names(tidy), c("dist", "term", "est", "se"))
-  expect_identical(tidy$dist[1], dist)
+  fits <- ssd_fit_dists(data = data, dists = dist)
+  tidy <- tidy(fits)
+  testthat::expect_s3_class(tidy, "tbl_df")
+  testthat::expect_identical(names(tidy), c("dist", "term", "est", "se"))
+  testthat::expect_identical(tidy$dist[1], dist)
+  tidy$lower <- tidy$est - tidy$se * 3
+  tidy$upper <- tidy$est + tidy$se * 3
+  
+  default <- ep(glue::glue("formals(r{dist})"))
+  default$n <- NULL
+  default <- data.frame(term = names(default), default = unlist(default))
+  
+  tidy <- merge(tidy, default, by = "term", all = "TRUE")
+  testthat::expect_true(all(tidy$default > tidy$lower & tidy$default < tidy$upper))
 }

@@ -31,10 +31,7 @@ test_that("boron stable", {
   estimates <- estimates(fits)
   expect_type(estimates, "list")
   expect_identical(unlist(estimates), setNames(tidy$est, paste(tidy$dist, tidy$term, sep = ".")))
-  
-  expect_identical(coef(fits), tidy)
-  expect_identical(augment(fits), ssdtools::boron_data)
-  
+
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hc, "tbl")
@@ -68,10 +65,7 @@ test_that("boron unstable", {
   estimates <- estimates(fits)
   expect_type(estimates, "list")
   expect_identical(unlist(estimates), setNames(tidy$est, paste(tidy$dist, tidy$term, sep = ".")))
-  
-  expect_identical(coef(fits), tidy)
-  expect_identical(augment(fits), ssdtools::boron_data)
-  
+
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hc, "tbl")
