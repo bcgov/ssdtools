@@ -12,14 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @export
-universals::npars
-
-#' @export
-npars.tmbfit <- function(x, ...) length(.pars_tmbfit(x))
-
-#' @export
-npars.fitdists <- function(x, ...) {
-  x <- vapply(x, npars, 1L)
-  x
-}
+test_that("nobs", {
+  expect_identical(nobs(boron_lnorm), 28L)
+  expect_identical(nobs(boron_dists), 28L)
+})

@@ -12,14 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @export
-universals::npars
-
-#' @export
-npars.tmbfit <- function(x, ...) length(.pars_tmbfit(x))
-
-#' @export
-npars.fitdists <- function(x, ...) {
-  x <- vapply(x, npars, 1L)
-  x
-}
+test_that("logLik", {
+  expect_equal(logLik(boron_lnorm), c(lnorm = -117.514216489547))
+  expect_equal(logLik(boron_dists), c(gamma = -116.81515869884, llogis = -118.507435324864, lnorm = -117.514216489547
+  ))
+})

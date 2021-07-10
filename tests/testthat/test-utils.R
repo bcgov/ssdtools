@@ -13,9 +13,6 @@
 #    limitations under the License.
 
 test_that("utils", {
-  expect_identical(nobs(boron_lnorm), 28L)
-  expect_identical(nobs(boron_dists), nobs(boron_lnorm))
-
   expect_equal(ssd_ecd(1:10), seq(0.05, 0.95, by = 0.1))
 })
 

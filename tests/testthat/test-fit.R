@@ -229,7 +229,6 @@ test_that("ssd_fit_dists not reorder", {
                        rescale = FALSE)
 
   expect_identical(npars(fit), c(lnorm = 2L, llogis = 2L))
-  expect_equal(nobs(fit), 28L)
   expect_equal(logLik(fit), c(lnorm = -117.514216489547, llogis = -118.507435324581))
 })
 

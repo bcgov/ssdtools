@@ -12,14 +12,9 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @export
-universals::npars
-
-#' @export
-npars.tmbfit <- function(x, ...) length(.pars_tmbfit(x))
-
-#' @export
-npars.fitdists <- function(x, ...) {
-  x <- vapply(x, npars, 1L)
-  x
-}
+test_that("npars", {
+  expect_identical(npars(boron_lnorm), c(lnorm = 2L))
+  expect_identical(npars(boron_dists), c(gamma = 2L, llogis = 2L, lnorm = 2L))
+  dists <- ssd_fit_dists(ssdtools::boron_data, dists = c("llogis_llogis", "lnorm_lnorm", "lnorm"))
+  expect_identical(npars(dists), c(llogis_llogis = 5L, lnorm_lnorm = 5L, lnorm = 2L))
+})
