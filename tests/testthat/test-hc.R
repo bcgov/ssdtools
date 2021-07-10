@@ -12,6 +12,15 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+test_that("hc", {
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "lnorm", "llogis"))
+  
+  set.seed(102)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
+  expect_s3_class(hc, "tbl")
+  expect_snapshot_data(hc, "hc")
+})
+
 test_that("ssd_hc hc defunct", {
   lifecycle::expect_defunct(ssd_hc(boron_lnorm, hc = 6))
 })  

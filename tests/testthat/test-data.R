@@ -12,6 +12,28 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+
+test_that("boron stable", {
+  dists <- ssd_dists("stable")
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists)
+  
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl_df")
+  expect_snapshot_data(tidy, "tidy_stable")
+})
+
+test_that("boron unstable", {
+  dists <- ssd_dists("unstable")
+  set.seed(50)
+  expect_warning(expect_warning(fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists),
+                                "Distribution 'burrIII3' failed to fit"),
+                 "Distribution 'invpareto' failed to fit")
+  
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl_df")
+  expect_snapshot_data(tidy, "tidy_unstable")
+})
+
 test_that("data", {
   expect_error(chk::check_data(
     ccme_data,
