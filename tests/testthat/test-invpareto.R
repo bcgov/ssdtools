@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("invpareto", {
-#  test_dist("invpareto") need to fix up inverse pareto 
+  test_dist("invpareto")
   expect_equal(pinvpareto(1), 1)
   expect_equal(qinvpareto(0.75), 0.75)
   set.seed(42)

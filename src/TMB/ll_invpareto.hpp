@@ -67,17 +67,18 @@ Type ll_invpareto(objective_function<Type>* obj) // normal with parameters mu an
    // We apply a penalty if the values are larer than the scale parameter
   for( int i=0; i<n_data; i++){
      if(left(i) == right(i)){  // uncensored data
-        if(left(i) > scale)return(INFINITY);
+//        if(left(i) > scale)return(INFINITY); use bound
         y = left(i);
         //if(y > scale)y = scale +( scale-y);  // we reflect about the maximum to enable estimation of scale and shape using MLE without fixing scale. 
         nll -= weight(i)*(log(shape) - shape*log(scale) + (shape+1)*log(y) - 2*log(y));
      };
      if(left(i) < right(i)){   // censored data
         pleft = 0;
-        if(left(i)>scale)pleft=1;
-        if((left(i)>0) & (left(i)<=scale)){ pleft= pow((left(i)/scale),shape);};  // need the other tail for the inverse
-        pright = 1;
-        if(right(i)<=scale) { pright=pow((right(i)/scale),shape);};
+        if((left(i)>0)){ pleft= pow((left(i)/scale),shape);};  // need the other tail for the inverse
+        //        if(left(i)>scale)pleft=1; not possible
+//       pright = 1;
+//        if(right(i)<=scale) { pright=pow((right(i)/scale),shape);};
+       pright = pow((right(i)/scale),shape);
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };
      
