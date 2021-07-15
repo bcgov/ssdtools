@@ -77,10 +77,10 @@ rename_data <- function(data, left, right, weight) {
   data
 }
 
-is_at_boundary <- function(fit) {
+is_at_boundary <- function(fit, data) {
   dist <- .dist_tmbfit(fit)
   if(!is_bounds(dist)) return(FALSE)
-  bounds <- bdist(dist)
+  bounds <- bdist(dist, data)
   pars <- .pars_tmbfit(fit)
   
   lower <- as.numeric(bounds$lower[names(pars)])

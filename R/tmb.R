@@ -33,7 +33,7 @@ tmb_model <- function(data, dist, pars) {
 
 fit_tmb <- function(dist, data, control, pars = NULL, hessian = TRUE) {
   model <- tmb_model(data, dist, pars = pars)
-  bounds <- bdist(dist)
+  bounds <- bdist(dist, data)
   # required because model can switch order of parameters
   lower <- bounds$lower[names(model$par)]
   upper <- bounds$upper[names(model$par)]

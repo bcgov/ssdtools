@@ -125,9 +125,9 @@ rdist <- function(dist, n, ..., .lgt = FALSE) {
   r
 }
 
-bdist <- function(dist) {
+bdist <- function(dist, data) {
   fun <- paste0("b", dist)
   if(!exists(fun, mode = "function"))
     return(list(lower = -Inf, upper = Inf))
-  do.call(fun, list())
+  do.call(fun, list(data = data))
 }

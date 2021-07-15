@@ -30,7 +30,7 @@ sburrIII3 <- function(x) {
   list(log_scale = 1, log_shape1 = 0, log_shape2 = 0)
 }
 
-bburrIII3 <- function() {
+bburrIII3 <- function(x, data) {
   list(lower = list(log_scale = -Inf, log_shape1 = -3, log_shape2 = -3),
        upper = list(log_scale = Inf, log_shape1 = 3, log_shape2 = 3))
 }

@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 # required to pass dist as not available for dists that didn't fit
-nullify_nonfit <- function(fit, dist, rescale, computable, silent) {
+nullify_nonfit <- function(fit, dist, data, rescale, computable, silent) {
   error <- fit$error
   fit <- fit$result
   
@@ -24,7 +24,7 @@ nullify_nonfit <- function(fit, dist, rescale, computable, silent) {
                      rescale, ": ", error)
     return(NULL)
   }
-  if(is_at_boundary(fit)) {
+  if(is_at_boundary(fit, data)) {
     if (!silent) wrn("Distribution '", dist, "' failed to fit",
                      rescale, ": one or more parameters at boundary.")
     return(NULL)
@@ -46,9 +46,9 @@ nullify_nonfit <- function(fit, dist, rescale, computable, silent) {
   fit
 }
 
-remove_nonfits <- function(fits, rescale, computable, silent) {
+remove_nonfits <- function(fits, data, rescale, computable, silent) {
   fits <- mapply(nullify_nonfit, fits, names(fits),
-                 MoreArgs = list(rescale = rescale, computable = computable, silent = silent), SIMPLIFY = FALSE
+                 MoreArgs = list(data = data, rescale = rescale, computable = computable, silent = silent), SIMPLIFY = FALSE
   )
   fits <- fits[!vapply(fits, is.null, TRUE)]
   fits
@@ -59,7 +59,7 @@ fit_dists <- function(data, dists, rescale, computable, control, silent) {
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
   fits <- lapply(dists, safe_fit_dist, data = data, control = control)
-  fits <- remove_nonfits(fits, rescale, computable, silent)
+  fits <- remove_nonfits(fits, data = data, rescale = rescale, computable = computable, silent = silent)
   fits
 }
 
