@@ -27,8 +27,14 @@ rinvpareto <- function(n, shape = 3, scale = 1) {
 }
 
 sinvpareto <- function(x) {
-  list(log_scale = log(max(x)), log_shape = 0)
+  list(log_scale = log(max(x) * 2), log_shape = 0)
 }
+
+# binvpareto <- function(x, data) {
+#   mx <- max(data$right)
+#   list(lower = list(log_scale = log(mx), log_shape = -Inf),
+#        upper = list(log_scale = Inf, log_shape = Inf))
+# }
 
 pinvpareto_ssd <- function(q, shape, scale) {
   if(shape <= 0 || scale <= 0) return(NaN)

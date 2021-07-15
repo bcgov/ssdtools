@@ -13,12 +13,9 @@
 #    limitations under the License.
 
 test_that("invpareto", {
-#  test_dist("invpareto") need to fix up inverse pareto 
-  expect_equal(pinvpareto(1), 1)
-  expect_equal(qinvpareto(0.75), 0.75)
+#  test_dist("invpareto")
+  expect_equal(pinvpareto(0.5), 0.125)
+  expect_equal(qinvpareto(0.125), 0.5)
   set.seed(42)
-  expect_equal(rinvpareto(2), c(0.914806043496355, 0.937075413297862))
+  expect_equal(rinvpareto(2), c(0.970755086941947, 0.978569136804486))
 })
-
-library(ssdtools)
-hist(ssdtools:::rinvpareto(1000, 1, 1), breaks = 100)
