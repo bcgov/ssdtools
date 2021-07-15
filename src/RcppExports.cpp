@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // plogis_dummy
 double plogis_dummy(double q, double location, double scale);
 RcppExport SEXP _ssdtools_plogis_dummy(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {

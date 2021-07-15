@@ -14,11 +14,11 @@
     
     $invpareto
        shape    scale 
-    1.021545 7.170593 
+    1.086328 6.471484 
     
     $invweibull
     shape scale 
-      1.2   0.6 
+      1.3   0.6 
     
     $lgumbel
     locationlog    scalelog 
@@ -30,7 +30,7 @@
     
     $llogis_llogis
     locationlog1    scalelog1 locationlog2    scalelog2         pmix 
-       0.8235349    0.2451766    1.1308837    0.6243603    0.3082377 
+       0.6445149    0.4714457    1.3935275    0.5570246    0.5455203 
     
     $lnorm
       meanlog     sdlog 
