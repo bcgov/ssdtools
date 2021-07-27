@@ -264,9 +264,9 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   data$Other <- data$Conc
   data$Conc <- data$Conc / max(data$Conc)
   
-  expect_warning(expect_warning(
+  expect_warning(
     ssd_fit_dists(data, right = "Other", dists = ssd_dists(), rescale = FALSE),
-    "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$"), "^Distribution 'invweibull' failed to compute standard errors")
+    "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$")
   
   skip_on_os("windows") # not sure why gamma shape is 908 on GitHub actions windows
   skip_on_os("linux") # not sure why gamma shape is 841 on GitHub actions ubuntu
