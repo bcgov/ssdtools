@@ -48,7 +48,7 @@ ssd_gof <- function(x, ...) {
   UseMethod("ssd_gof")
 }
 
-.ssd_gof_tmbfit <- function(x, attrs) {
+.ssd_gof_tmbfit <- function(x, attrs, pvalue) {
   nobs <- nrow(attrs$data)
   glance <- .glance_tmbfit(x, nobs)
 
@@ -58,9 +58,9 @@ ssd_gof <- function(x, ...) {
   bic <- - 2 * glance$log_lik + log(nobs) * glance$npars
   
   if (glance$nobs >= 8) {
-    ad <- addist(dist, attrs$data, estimates(x))
-    ks <- ksdist(dist, attrs$data, estimates(x))
-    cvm <- cvmdist(dist, attrs$data, estimates(x))
+    ad <- addist(dist, attrs$data, estimates(x), pvalue = pvalue)
+    ks <- ksdist(dist, attrs$data, estimates(x), pvalue = pvalue)
+    cvm <- cvmdist(dist, attrs$data, estimates(x), pvalue = pvalue)
   } else {
     ad <- NA_real_
     ks <- NA_real_
@@ -72,9 +72,9 @@ ssd_gof <- function(x, ...) {
   )
 }
 
-.ssd_gof_fitdists <- function(x) {
+.ssd_gof_fitdists <- function(x, pvalue) {
   attrs <- .attrs_fitdists(x)
-  x <- lapply(x, .ssd_gof_tmbfit, attrs = attrs)
+  x <- lapply(x, .ssd_gof_tmbfit, attrs = attrs, pvalue = pvalue)
   x <- bind_rows(x)
   if ("aicc" %in% colnames(x)) {
     x$delta <- x$aicc - min(x$aicc)
@@ -89,10 +89,11 @@ ssd_gof <- function(x, ...) {
 #' @export
 #' @examples
 #' ssd_gof(boron_dists)
-ssd_gof.fitdists <- function(x, ...) {
+ssd_gof.fitdists <- function(x, pvalue = FALSE, ...) {
+  chk_flag(pvalue)
   chk_unused(...)
 
-  x <- .ssd_gof_fitdists(x)
+  x <- .ssd_gof_fitdists(x, pvalue = pvalue)
   x$weight <- round(x$weight, 3)
   x$delta <- round(x$delta, 3)
   x

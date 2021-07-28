@@ -35,6 +35,8 @@ relative to the extremes for non-missing values.}
 
 \item{percent}{A numeric vector of percentages.}
 
+\item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
+
 \item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 
 \item{average}{A flag specifying whether to model average the estimates.}

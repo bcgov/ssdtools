@@ -114,7 +114,7 @@ no_ssd_hc <- function() {
   hc <- Reduce(function(x, y) {
     abind(x, y, along = 3)
   }, hc)
-  weight <- .ssd_gof_fitdists(x)$weight
+  weight <- .ssd_gof_fitdists(x, pvalue = TRUE)$weight
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   hc <- as.data.frame(hc)
   tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 

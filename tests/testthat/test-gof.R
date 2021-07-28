@@ -13,7 +13,11 @@
 #    limitations under the License.
 
 test_that("gof", {
-  gof <- ssd_gof(boron_dists)
+  gof_statistic <- ssd_gof(boron_dists)
+  expect_s3_class(gof_statistic, "tbl")
+  expect_snapshot_data(gof_statistic, "gof_statistic")
+
+  gof <- ssd_gof(boron_dists, pvalue = TRUE)
   expect_s3_class(gof, "tbl")
   expect_snapshot_data(gof, "gof")
 })

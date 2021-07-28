@@ -144,32 +144,35 @@ mdist <- function(dist) {
   do.call(fun, args = list())
 }
 
-addist <- function(dist, data, pars) {
+addist <- function(dist, data, pars, pvalue) {
   x <- mean_weighted_values(data, weight = FALSE)
   fun <- paste0("p", dist)
   fun <- eval(parse(text = fun))
   args <- list(x = x, null = fun)
   args <- c(args, pars)
   ad <- do.call("ad.test", args)
-  ad$p.value
+  if(pvalue) return(ad$p.value)
+  unname(ad$statistic)
 }
 
-cvmdist <- function(dist, data, pars) {
+cvmdist <- function(dist, data, pars, pvalue) {
   x <- mean_weighted_values(data, weight = FALSE)
   fun <- paste0("p", dist)
   fun <- eval(parse(text = fun))
   args <- list(x = x, null = fun)
   args <- c(args, pars)
   cvm <- do.call("cvm.test", args)
-  cvm$p.value
+  if(pvalue) return(cvm$p.value)
+  unname(cvm$statistic)
 }
 
-ksdist <- function(dist, data, pars) {
+ksdist <- function(dist, data, pars, pvalue) {
   x <- mean_weighted_values(data, weight = FALSE)
   fun <- paste0("p", dist)
   fun <- eval(parse(text = fun))
   args <- list(x = x, y = fun)
   args <- c(args, pars)
   suppressWarnings(ks <- do.call("ks.test", args))
-  ks$p.value
+  if(pvalue) return(ks$p.value)
+  unname(ks$statistic)
 }

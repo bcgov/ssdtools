@@ -7,12 +7,14 @@
 \usage{
 ssd_gof(x, ...)
 
-\method{ssd_gof}{fitdists}(x, ...)
+\method{ssd_gof}{fitdists}(x, pvalue = FALSE, ...)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{...}{Unused.}
+
+\item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
 }
 \value{
 A tbl data frame of the gof statistics.

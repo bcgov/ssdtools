@@ -31,6 +31,7 @@
 #' relative to the extremes for non-missing values.
 #' @param conc A numeric vector of concentrations.
 #' @param percent A numeric vector of percentages.
+#' @param pvalue A flag specifying whether to return p-values or the statistics (default) for the various tests.
 #' @param ic A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .
 #' @param average A flag specifying whether to model average the estimates.
 #' @param ci A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).
