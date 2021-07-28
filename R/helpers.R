@@ -109,11 +109,10 @@ adjust_data <- function(data, rescale, reweight, silent) {
   list(data = data, censoring = censoring, rescale = rescale, weighted = weighted, unequal = unequal)
 }
 
-mean_weighted_values <- function(data) {
-  weight <- data$weight
-  data <- data[c("left", "right")]
-  data <- as.matrix(data)
+mean_weighted_values <- function(data, weight = TRUE) {
+  data <- as.matrix(data[c("left", "right")])
   x <- rowMeans(data, na.rm = TRUE)
+  if(!weight) return(x)
   x <- x[weight > 0]
   weight <- weight[weight > 0]
   weight <- weight / min(weight)

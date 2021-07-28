@@ -56,11 +56,11 @@ ssd_gof <- function(x, ...) {
   aic <- glance$aic
   aicc <- glance$aicc
   bic <- - 2 * glance$log_lik + log(nobs) * glance$npars
-
+  
   if (glance$nobs >= 8) {
-    ad <- NA_real_
-    ks <- NA_real_
-    cvm <- NA_real_
+    ad <- addist(dist, attrs$data, estimates(x))
+    ks <- ksdist(dist, attrs$data, estimates(x))
+    cvm <- cvmdist(dist, attrs$data, estimates(x))
   } else {
     ad <- NA_real_
     ks <- NA_real_

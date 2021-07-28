@@ -66,6 +66,7 @@ Imports:
     abind,
     chk (>= 0.5.1.9003),
     generics,
+    goftest,
     ggplot2,
     graphics,
     grid,

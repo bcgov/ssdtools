@@ -16,6 +16,7 @@
 #' @importFrom abind abind
 #' @importFrom generics augment glance tidy
 #' @importFrom ggplot2 autoplot
+#' @importFrom goftest ad.test cvm.test
 #' @importFrom graphics par plot title
 #' @importFrom grid gList gpar grobName gTree polygonGrob segmentsGrob
 #' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
@@ -23,7 +24,7 @@
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
 #' @importFrom scales comma manual_pal percent trans_breaks
-#' @importFrom stats coef complete.cases logLik nobs optim plogis predict runif sd setNames weighted.mean
+#' @importFrom stats coef complete.cases ks.test logLik nobs optim plogis predict runif sd setNames weighted.mean
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
 #' @importFrom TMB MakeADFun sdreport
