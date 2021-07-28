@@ -41,8 +41,8 @@ sllogis_llogis <- function(data) {
   n2 <- floor(n / 2)
   x1 <- x[1:n2]
   x2 <- x[(n2+1):n]
-  s1 <- sllogis(data.frame(left = x1, right = x1))
-  s2 <- sllogis(data.frame(left = x2, right = x2))
+  s1 <- sllogis(data.frame(left = x1, right = x1, weight = 1))
+  s2 <- sllogis(data.frame(left = x2, right = x2, weight = 1))
   names(s1) <- paste0(names(s1), "1")
   names(s2) <- paste0(names(s2), "2")
   logit_pmix <- list(logit_pmix = 0)

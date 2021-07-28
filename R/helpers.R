@@ -110,7 +110,13 @@ adjust_data <- function(data, rescale, reweight, silent) {
 }
 
 mean_values <- function(data) {
+  weight <- data$weight
   data <- data[c("left", "right")]
   data <- as.matrix(data)
-  rowMeans(data, na.rm = TRUE)
+  x <- rowMeans(data, na.rm = TRUE)
+  x <- x[weight > 0]
+  weight <- weight[weight > 0]
+  weight <- weight / min(weight)
+  weight <- round(weight)
+  rep(x, weight)
 }
