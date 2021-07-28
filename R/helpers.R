@@ -1,3 +1,8 @@
+any_missing <- function(...) {
+  x <- unlist(list(...))
+  any(is.na(x) & !is.nan(x))
+}
+
 is.waive <- function(x) inherits(x, "waiver")
 
 empty <- function (df) {

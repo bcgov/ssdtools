@@ -49,8 +49,10 @@ ssd_gof <- function(x, ...) {
 }
 
 .ssd_gof_tmbfit <- function(x, attrs, pvalue) {
-  nobs <- nrow(attrs$data)
+  data <- attrs$data
+  nobs <- nrow(data)
   glance <- .glance_tmbfit(x, nobs)
+  pars <- estimates(x)
 
   dist <- glance$dist
   aic <- glance$aic
@@ -58,9 +60,9 @@ ssd_gof <- function(x, ...) {
   bic <- - 2 * glance$log_lik + log(nobs) * glance$npars
   
   if (glance$nobs >= 8) {
-    ad <- addist(dist, attrs$data, estimates(x), pvalue = pvalue)
-    ks <- ksdist(dist, attrs$data, estimates(x), pvalue = pvalue)
-    cvm <- cvmdist(dist, attrs$data, estimates(x), pvalue = pvalue)
+    ad <- tdist(dist, data, pars, pvalue, "ad", y = "null")
+    ks <- tdist(dist, data, pars, pvalue)
+    cvm <- tdist(dist, data, pars, pvalue, "cvm", y = "null")
   } else {
     ad <- NA_real_
     ks <- NA_real_
