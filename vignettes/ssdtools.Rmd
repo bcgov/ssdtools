@@ -80,28 +80,27 @@ print(boron_data)
 ## Fitting Distributions
 
 The function `ssd_fit_dists()` inputs a data frame and fits one or more distributions.
-The user can specify a subset of the following distributions
+The user can specify a subset of the following `r length(ssd_dists(type = "all"))` distributions
 
 ```{r}
 ssd_dists(type = "all")
 ```
 
-distributions using the `dists` argument.
+using the `dists` argument.
 ```{r}
 boron_dists <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
 ```
 
 ## Coefficients
 
-The parameter estimates can be extracted using the tidyverse generic `tidy` function.
-However, in and off themselves the estimates are not that helpful.
+The parameter estimates can be extracted using the tidyverse generic `tidy` function (or the base R generic `coef` function).
 ```{r}
 tidy(boron_dists)
 ```
 
 ## Plots
 
-It is generally much more informative to plot the fits using the `autoplot` generic function.
+It is generally more informative to plot the fits using the `autoplot` generic function.
 As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
 ```{r, fig.width = 5}
 theme_set(theme_bw()) # set plot theme
@@ -113,14 +112,13 @@ autoplot(boron_dists) +
 
 ## Selecting One Distribution
 
-Given multiple distributions the user is faced with choosing the best fitting distribution (or as discussed below averaging the results weighted by the fit).
+Given multiple distributions the user is faced with choosing the "best" distribution (or as discussed below averaging the results weighted by the fit).
 
 ```{r}
-boron_gof <- ssd_gof(boron_dists)
-boron_gof[order(boron_gof$delta), ]
+ssd_gof(boron_dists)
 ```
 
-The `ssd_gof()` function returns several goodness of fit measures that can be used to select the best distribution including three statistics 
+The `ssd_gof()` function returns three test statistics that can be used to evaluate the fit of the various distributions to the data.
 
 - [Anderson-Darling](https://en.wikipedia.org/wiki/Anderson–Darling_test) (`ad`) statistic,
 - [Kolmogorov-Smirnov](https://en.wikipedia.org/wiki/Kolmogorov–Smirnov_test) (`ks`) statistic and
@@ -132,11 +130,14 @@ and three information criteria
 - Akaike's Information Criterion corrected for sample size (`aicc`) and
 - Bayesian Information Criterion (`bic`)
 
-Following @burnham_model_2002 we recommend the `aicc` for model selection.
-The best fitting model is that with the lowest `aicc` (indicated by the model with a `delta` value of 0.000 in the goodness of fit table).
-In the current example the best fitting model is the gamma distribution but the lnorm distribution has some support.
+Note if `ssd_gof()` is called with `pvalue = TRUE` then the p-values rather than the statistics are returned for the three tests.
 
-For further information on the advantages of an information theoretic approach in the context of selecting SSDs the reader is referred to @schwarz_improving_2019
+Following @burnham_model_2002 we recommend the `aicc` for model selection.
+The best predictive model is that with the lowest `aicc` (indicated by the model with a `delta` value of 0.000 in the goodness of fit table).
+In the current example the best predictive model is the gamma distribution but the lnorm distribution has some support.
+
+For further information on the advantages of an information theoretic approach in the context of selecting SSDs the reader is referred to @fox_recent_2021.
+
 
 ## Averaging Multiple Distributions
 
@@ -147,7 +148,7 @@ In the current example, the gamma and log-normal distributions have `delta` valu
 
 ## Estimating the Fit
 
-The `predict` function can be used to generate estimates model-averaged (or if `average = FALSE` individual) estimates.
+The `predict` function can be used to generate model-averaged (or if `average = FALSE` individual) estimates.
 By default model averaging is based on `aicc`.
 
 ```{r, eval = FALSE}
