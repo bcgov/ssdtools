@@ -27,7 +27,7 @@ rlnorm <- function(n, meanlog = 0, sdlog = 1) {
 }
 
 slnorm <- function(data) {
-  x <- mean_values(data)
+  x <- mean_weighted_values(data)
   
   list(
     meanlog = mean(log(x), na.rm = TRUE),

@@ -27,7 +27,7 @@ rgompertz <- function(n, location = 1, shape = 1) {
 }
 
 sgompertz <- function(data) {
-  x <- mean_values(data)
+  x <- mean_weighted_values(data)
 
   fit <- vglm(x ~ 1, gompertz)
   list(

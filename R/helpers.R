@@ -109,7 +109,7 @@ adjust_data <- function(data, rescale, reweight, silent) {
   list(data = data, censoring = censoring, rescale = rescale, weighted = weighted, unequal = unequal)
 }
 
-mean_values <- function(data) {
+mean_weighted_values <- function(data) {
   weight <- data$weight
   data <- data[c("left", "right")]
   data <- as.matrix(data)

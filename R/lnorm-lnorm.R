@@ -35,7 +35,7 @@ rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
 }
 
 slnorm_lnorm <- function(data) {
-  x <- mean_values(data)
+  x <- mean_weighted_values(data)
 
   x <- sort(x)
   n <- length(x)

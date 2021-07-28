@@ -27,7 +27,7 @@ rlgumbel <- function(n, locationlog = 0, scalelog = 1) {
 }
 
 slgumbel <- function(data) {
-  x <- mean_values(data)
+  x <- mean_weighted_values(data)
   
   list(
     locationlog = mean(log(x), na.rm = TRUE),

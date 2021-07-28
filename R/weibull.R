@@ -27,7 +27,7 @@ rweibull <- function(n, shape = 1, scale = 1) {
 }
 
 sweibull <- function(data) {
-  x <- mean_values(data)
+  x <- mean_weighted_values(data)
   
   list(
     log_scale = log(mean(x, na.rm = TRUE)),

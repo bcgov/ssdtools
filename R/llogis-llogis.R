@@ -35,7 +35,7 @@ rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
 }
 
 sllogis_llogis <- function(data) {
-  x <- mean_values(data)
+  x <- mean_weighted_values(data)
   x <- sort(x)
   n <- length(x)
   n2 <- floor(n / 2)
