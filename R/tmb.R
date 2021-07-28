@@ -15,10 +15,10 @@
 tmb_fun <- function(data, pars, dist) {
   model <- paste0("ll_", dist)
   data <- c(model = model, data)
-#  map <- mdist(dist)
+  map <- mdist(dist)
   MakeADFun(data = data, 
             parameters = pars,
-#            map = map,
+            map = map,
             DLL = "ssdtools_TMBExports", silent = TRUE)
 }
 
