@@ -38,8 +38,8 @@ install.packages("ssdtools")
 To install the latest development version:
 
 ``` r
-install.packages("remotes")
-remotes::install_github("bcgov/ssdtools")
+# install.packages("devtools")
+devtools::install_github("bcgov/ssdtools")
 ```
 
 ## Introduction
@@ -49,7 +49,7 @@ remotes::install_github("bcgov/ssdtools")
 ``` r
 library(ssdtools)
 boron_data
-#> # A tibble: 28 x 5
+#> # A tibble: 28 × 5
 #>    Chemical Species                  Conc Group        Units
 #>    <chr>    <chr>                   <dbl> <fct>        <chr>
 #>  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L 
@@ -88,12 +88,12 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(boron_dists)
-#> # A tibble: 3 x 9
-#>   dist      ad    ks   cvm   aic  aicc   bic delta weight
-#>   <chr>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 gamma     NA    NA    NA  238.  238.  240.  0     0.595
-#> 2 llogis    NA    NA    NA  241.  241.  244.  3.38  0.11 
-#> 3 lnorm     NA    NA    NA  239.  240.  242.  1.40  0.296
+#> # A tibble: 3 × 9
+#>   dist      ad     ks    cvm   aic  aicc   bic delta weight
+#>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 gamma  0.440 0.117  0.0554  238.  238.  240.  0     0.595
+#> 2 llogis 0.487 0.0994 0.0595  241.  241.  244.  3.38  0.11 
+#> 3 lnorm  0.507 0.107  0.0703  239.  240.  242.  1.40  0.296
 ```
 
 and the model-averaged 5% hazard concentration estimated using `ssd_hc`
@@ -105,7 +105,7 @@ boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
 
 ``` r
 print(boron_hc5)
-#> # A tibble: 1 x 6
+#> # A tibble: 1 × 6
 #>   dist    percent   est    se   lcl   ucl
 #>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl>
 #> 1 average       5  1.31 0.821 0.504  3.62
@@ -166,7 +166,9 @@ Get started with ssdtools at
 <https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
 
 A shiny app to allow non-R users to interface with ssdtools is available
-at <https://github.com/bcgov/shinyssdtools>:
+at <https://github.com/bcgov/shinyssdtools>.
+
+The citation for the shiny app:
 
 *Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species
 Sensitivity Distributions (SSDs). JOSS 6(57): 2848.
@@ -179,7 +181,7 @@ Modeling Species Sensitivity Distributions. Province of British
 Columbia, Victoria, BC.*
 
 For recent developments in SSD modeling including a review of existing
-software:
+software see:
 
 *Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity
 Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
