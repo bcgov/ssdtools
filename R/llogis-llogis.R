@@ -34,14 +34,15 @@ rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
         location2 = locationlog2, scale2 = scalelog2, pmix = pmix, .lgt = TRUE)
 }
 
-sllogis_llogis <- function(x) {
+sllogis_llogis <- function(data) {
+  x <- mean_values(data)
   x <- sort(x)
   n <- length(x)
   n2 <- floor(n / 2)
   x1 <- x[1:n2]
   x2 <- x[(n2+1):n]
-  s1 <- sllogis(x1)
-  s2 <- sllogis(x2)
+  s1 <- sllogis(data.frame(left = x1, right = x1))
+  s2 <- sllogis(data.frame(left = x2, right = x2))
   names(s1) <- paste0(names(s1), "1")
   names(s2) <- paste0(names(s2), "2")
   logit_pmix <- list(logit_pmix = 0)

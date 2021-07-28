@@ -34,14 +34,16 @@ rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
         meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix)
 }
 
-slnorm_lnorm <- function(x) {
+slnorm_lnorm <- function(data) {
+  x <- mean_values(data)
+
   x <- sort(x)
   n <- length(x)
   n2 <- floor(n / 2)
   x1 <- x[1:n2]
   x2 <- x[(n2+1):n]
-  s1 <- slnorm(x1)
-  s2 <- slnorm(x2)
+  s1 <- slnorm(data.frame(left = x1, right = x1))
+  s2 <- slnorm(data.frame(left = x2, right = x2))
   names(s1) <- paste0(names(s1), "1")
   names(s2) <- paste0(names(s2), "2")
   logit_pmix <- list(logit_pmix = 0)

@@ -26,7 +26,9 @@ rlnorm <- function(n, meanlog = 0, sdlog = 1) {
   rdist("lnorm", n = n, meanlog = meanlog, sdlog = sdlog)
 }
 
-slnorm <- function(x) {
+slnorm <- function(data) {
+  x <- mean_values(data)
+  
   list(
     meanlog = mean(log(x), na.rm = TRUE),
     log_sdlog = log(sd(log(x), na.rm = TRUE))

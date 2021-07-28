@@ -108,3 +108,9 @@ adjust_data <- function(data, rescale, reweight, silent) {
   
   list(data = data, censoring = censoring, rescale = rescale, weighted = weighted, unequal = unequal)
 }
+
+mean_values <- function(data) {
+  data <- data[c("left", "right")]
+  data <- as.matrix(data)
+  rowMeans(data, na.rm = TRUE)
+}

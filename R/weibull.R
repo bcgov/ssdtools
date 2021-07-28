@@ -26,7 +26,9 @@ rweibull <- function(n, shape = 1, scale = 1) {
   rdist("weibull", n = n, shape = shape, scale = scale)
 }
 
-sweibull <- function(x) {
+sweibull <- function(data) {
+  x <- mean_values(data)
+  
   list(
     log_scale = log(mean(x, na.rm = TRUE)),
     log_shape = log(sd(x, na.rm = TRUE))

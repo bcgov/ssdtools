@@ -26,7 +26,9 @@ rgompertz <- function(n, location = 1, shape = 1) {
   rdist("gompertz", n = n, location = location, shape = shape)
 }
 
-sgompertz <- function(x) {
+sgompertz <- function(data) {
+  x <- mean_values(data)
+
   fit <- vglm(x ~ 1, gompertz)
   list(
     log_location = unname(coef(fit)[2]), log_shape = unname(coef(fit)[1])

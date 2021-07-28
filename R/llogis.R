@@ -26,7 +26,9 @@ rllogis <- function(n, locationlog = 0, scalelog = 1) {
   rdist("logis", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE)
 }
 
-sllogis <- function(x) {
+sllogis <- function(data) {
+  x <- mean_values(data)
+  
   list(
     locationlog = mean(log(x), na.rm = TRUE),
     log_scalelog = log(pi * sd(log(x), na.rm = TRUE) / sqrt(3))

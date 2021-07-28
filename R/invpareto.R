@@ -26,15 +26,13 @@ rinvpareto <- function(n, shape = 3, scale = 1) {
   rdist("invpareto", n = n, shape = shape, scale = scale)
 }
 
-sinvpareto <- function(x) {
-  list(log_scale = log(max(x) * 2), log_shape = 0)
+sinvpareto <- function(data) {
+  list(log_scale = log(max(data$right)), log_shape = 0)
 }
 
-# binvpareto <- function(x, data) {
-#   mx <- max(data$right)
-#   list(lower = list(log_scale = log(mx), log_shape = -Inf),
-#        upper = list(log_scale = Inf, log_shape = Inf))
-# }
+minvpareto <- function(x) {
+  list(log_scale = NA)
+}
 
 pinvpareto_ssd <- function(q, shape, scale) {
   if(shape <= 0 || scale <= 0) return(NaN)

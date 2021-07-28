@@ -26,7 +26,7 @@ rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1) {
   rdist("burrIII3", n = n, shape1 = shape1, shape2 = shape2, scale = scale)
 }
 
-sburrIII3 <- function(x) {
+sburrIII3 <- function(data) {
   list(log_scale = 1, log_shape1 = 0, log_shape2 = 0)
 }
 

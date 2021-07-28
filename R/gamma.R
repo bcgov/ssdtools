@@ -26,7 +26,9 @@ rgamma <- function(n, shape = 1, scale = 1) {
   rdist("gamma", n = n, shape = shape, scale = scale)
 }
 
-sgamma <- function(x) {
+sgamma <- function(data) {
+  x <- mean_values(data)
+  
   var <- var(x, na.rm = TRUE)
   mean <- mean(x, na.rm = TRUE)
   list(

@@ -15,19 +15,15 @@
 tmb_fun <- function(data, pars, dist) {
   model <- paste0("ll_", dist)
   data <- c(model = model, data)
+#  map <- mdist(dist)
   MakeADFun(data = data, 
-                 parameters = pars,
-                 DLL = "ssdtools_TMBExports", silent = TRUE)
-}
-
-tmb_pars <- function(data, dist) {
-  x <- rowMeans(data[c("left", "right")], na.rm = TRUE)
-  fun <- paste0("s", dist)
-  do.call(fun, list(x = x))
+            parameters = pars,
+#            map = map,
+            DLL = "ssdtools_TMBExports", silent = TRUE)
 }
 
 tmb_model <- function(data, dist, pars) {
-  pars <- pars %||% tmb_pars(data, dist)
+  pars <- pars %||% sdist(dist, data)
   tmb_fun(data, pars, dist)
 }
 
