@@ -16,7 +16,7 @@ ep <- function(text) {
   invisible(eval(parse(text = text)))
 }
 
-test_dist <- function(dist, qroottolerance = 1.490116e-08) {
+test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0) {
   ep(glue::glue("expect_identical(p{dist}(numeric(0)), numeric(0))"))
   ep(glue::glue("expect_identical(p{dist}(NA), NA_real_)"))
   ep(glue::glue("expect_identical(p{dist}(NaN), NaN)"))
@@ -84,5 +84,6 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08) {
   default <- data.frame(term = names(default), default = unlist(default))
   
   tidy <- merge(tidy, default, by = "term", all = "TRUE")
-  testthat::expect_true(all(tidy$default > tidy$lower & tidy$default < tidy$upper))
+  testthat::expect_true(all(tidy$default > tidy$lower))
+  testthat::expect_true(all(tidy$default < tidy$upper + upadj))
 }

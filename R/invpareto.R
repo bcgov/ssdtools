@@ -27,11 +27,11 @@ rinvpareto <- function(n, shape = 3, scale = 1) {
 }
 
 sinvpareto <- function(data) {
-  list(log_scale = log(max(data$right)), log_shape = 0)
+  list(log_scale = log(max(data$right)), log_shape = 1)
 }
 
-minvpareto <- function(x) {
-  list(log_scale = NA)
+minvpareto <- function() {
+  list(log_scale = factor(NA))
 }
 
 pinvpareto_ssd <- function(q, shape, scale) {

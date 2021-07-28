@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("invpareto", {
-#  test_dist("invpareto")
+  test_dist("invpareto", upadj = 1e-02)
   expect_equal(pinvpareto(0.5), 0.125)
   expect_equal(qinvpareto(0.125), 0.5)
   set.seed(42)

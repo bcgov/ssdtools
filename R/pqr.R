@@ -141,5 +141,5 @@ mdist <- function(dist) {
   fun <- paste0("m", dist)
   if(!exists(fun, mode = "function"))
     return(list())
-  do.call(fun)
+  do.call(fun, args = list())
 }
