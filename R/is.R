@@ -26,8 +26,8 @@ is.tmbfit <- function(x) {
 #' @export
 #'
 #' @examples
-#' boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-#' is.fitdists(boron_dists)
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' is.fitdists(fits)
 is.fitdists <- function(x) {
   inherits(x, "fitdists")
 }

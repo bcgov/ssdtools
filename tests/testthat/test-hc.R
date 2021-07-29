@@ -13,9 +13,9 @@
 #    limitations under the License.
 
 test_that("hc", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   set.seed(102)
-  hc <- ssd_hc(boron_dists, ci = TRUE, nboot = 10, average = FALSE)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
 })
@@ -157,8 +157,8 @@ test_that("ssd_hc fitdists works multiple percents", {
 })
 
 test_that("ssd_hc fitdists averages", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-  hc <- ssd_hc(boron_dists)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
+  hc <- ssd_hc(fits)
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, "average")
@@ -194,8 +194,8 @@ test_that("ssd_hc fitdists not average single dist by multiple percent gives who
 })
 
 test_that("ssd_hc fitdists not average", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-  hc <- ssd_hc(boron_dists, average = FALSE)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
+  hc <- ssd_hc(fits, average = FALSE)
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
   expect_equal(hc$dist, ssd_dists("bc")) 

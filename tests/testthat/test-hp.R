@@ -13,10 +13,10 @@
 #    limitations under the License.
 
 test_that("hp", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   
   set.seed(102)
-  hp <- ssd_hp(boron_dists, conc = 1, ci = TRUE, nboot = 10, average = FALSE)
+  hp <- ssd_hp(fits, conc = 1, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hp, "tbl")
   expect_snapshot_data(hp, "hp")
 })
@@ -123,9 +123,9 @@ test_that("hp fitdists works with cis", {
 })
 
 test_that("hp fitdists works with multiple dists", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   
-  hp <- ssd_hp(boron_dists, 1)
+  hp <- ssd_hp(fits, 1)
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, "average")
@@ -135,9 +135,9 @@ test_that("hp fitdists works with multiple dists", {
 })
 
 test_that("hp fitdists works not average multiple dists", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   
-  hp <- ssd_hp(boron_dists, 1, average = FALSE)
+  hp <- ssd_hp(fits, 1, average = FALSE)
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
   expect_equal(hp$dist, ssd_dists("bc"))

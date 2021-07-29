@@ -16,6 +16,6 @@ A flag indicating if the data is censored.
 Is Censored
 }
 \examples{
-boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-is_censored(boron_dists)
+fits <- ssd_fit_dists(ssdtools::boron_data)
+is_censored(fits)
 }

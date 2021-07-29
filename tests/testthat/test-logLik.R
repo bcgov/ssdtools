@@ -14,9 +14,9 @@
 
 test_that("logLik", {
   boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   
   expect_equal(logLik(boron_lnorm), c(lnorm = -117.514216489547))
-  expect_equal(logLik(boron_dists), c(gamma = -116.81515869884, llogis = -118.507435324864, lnorm = -117.514216489547
+  expect_equal(logLik(fits), c(gamma = -116.81515869884, llogis = -118.507435324864, lnorm = -117.514216489547
   ))
 })

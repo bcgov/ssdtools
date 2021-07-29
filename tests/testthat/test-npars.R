@@ -14,10 +14,10 @@
 
 test_that("npars", {
   boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   
   expect_identical(npars(boron_lnorm), c(lnorm = 2L))
-  expect_identical(npars(boron_dists), c(gamma = 2L, llogis = 2L, lnorm = 2L))
+  expect_identical(npars(fits), c(gamma = 2L, llogis = 2L, lnorm = 2L))
   dists <- ssd_fit_dists(ssdtools::boron_data, dists = c("llogis_llogis", "lnorm_lnorm", "lnorm", "invpareto"))
   expect_identical(npars(dists), c(llogis_llogis = 5L, lnorm_lnorm = 5L, lnorm = 2L, invpareto = 2L))
 })

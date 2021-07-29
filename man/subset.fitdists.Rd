@@ -17,6 +17,6 @@
 Subset fitdists
 }
 \examples{
-boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-subset(boron_dists, c("gamma", "lnorm"))
+fits <- ssd_fit_dists(ssdtools::boron_data)
+subset(fits, c("gamma", "lnorm"))
 }

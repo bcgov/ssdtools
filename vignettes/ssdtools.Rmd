@@ -88,14 +88,14 @@ ssd_dists(type = "all")
 
 using the `dists` argument.
 ```{r}
-boron_dists <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
+fits <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
 ```
 
 ## Coefficients
 
 The parameter estimates can be extracted using the tidyverse generic `tidy` function (or the base R generic `coef` function).
 ```{r}
-tidy(boron_dists)
+tidy(fits)
 ```
 
 ## Plots
@@ -105,7 +105,7 @@ As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
 ```{r, fig.width = 5}
 theme_set(theme_bw()) # set plot theme
 
-autoplot(boron_dists) + 
+autoplot(fits) + 
   ggtitle("Species Sensitivity Distributions for Boron") +
   scale_colour_ssd()
 ```
@@ -115,7 +115,7 @@ autoplot(boron_dists) +
 Given multiple distributions the user is faced with choosing the "best" distribution (or as discussed below averaging the results weighted by the fit).
 
 ```{r}
-ssd_gof(boron_dists)
+ssd_gof(fits)
 ```
 
 The `ssd_gof()` function returns three test statistics that can be used to evaluate the fit of the various distributions to the data.
@@ -153,7 +153,7 @@ By default model averaging is based on `aicc`.
 
 ```{r, eval = FALSE}
 set.seed(99)
-boron_pred <- predict(boron_dists, ci = TRUE)
+boron_pred <- predict(fits, ci = TRUE)
 ```
 
 The resultant object is a data frame of the estimated concentration (`est`) with standard error (`se`) and lower (`lcl`) and upper (`ucl`) 95% confidence limits by percent of species affected (`percent`).
@@ -181,7 +181,7 @@ The 5% hazard concentration ($HC_5$) is the concentration that affects 5% of the
 
 ```{r}
 set.seed(99)
-boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
+boron_hc5 <- ssd_hc(fits, ci = TRUE)
 print(boron_hc5)
 ```
 
