@@ -13,42 +13,42 @@
 #    limitations under the License.
 
 test_that("exposure fitdist", {
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   set.seed(1)
-  expect_equal(ssd_exposure(boron_lnorm), 0.0554388690057964)
+  expect_equal(ssd_exposure(fits), 0.0554388690057964)
 })
 
 test_that("exposure different mean", {
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   set.seed(1)
-  expect_equal(ssd_exposure(boron_lnorm, 1), 0.165064610334353)
+  expect_equal(ssd_exposure(fits, 1), 0.165064610334353)
 })
 
 test_that("exposure different mean and log", {
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   set.seed(1)
-  expect_equal(ssd_exposure(boron_lnorm, 1, sdlog = 10), 0.433888512432359)
+  expect_equal(ssd_exposure(fits, 1, sdlog = 10), 0.433888512432359)
 })
 
 test_that("exposure multiple distributions", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   
   set.seed(1)
-  expect_equal(ssd_exposure(boron_dists), 0.0645152661450559)
+  expect_equal(ssd_exposure(fits), 0.0645152661450559)
 })
 
 test_that("exposure not sensitive to rescaling", {
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   set.seed(10)
-  exposure <- ssd_exposure(boron_lnorm)
+  exposure <- ssd_exposure(fits)
   
-  boron_lnorm_rescale <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm", rescale = TRUE)
+  fits_rescale <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm", rescale = TRUE)
   set.seed(10)
-  exposure_rescale <- ssd_exposure(boron_lnorm_rescale)
+  exposure_rescale <- ssd_exposure(fits_rescale)
   
   expect_equal(exposure_rescale, exposure)
 })

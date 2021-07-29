@@ -153,8 +153,8 @@ use_data(ccme_data, overwrite = TRUE)
 boron_data <- ccme_data[ccme_data$Chemical == "Boron", ]
 use_data(boron_data, overwrite = TRUE)
 
-boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssdtools::boron_data)
 
 set.seed(99)
-boron_pred <- predict(boron_dists, ci = TRUE)
+boron_pred <- predict(fits, ci = TRUE)
 use_data(boron_pred, overwrite = TRUE)

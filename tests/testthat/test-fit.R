@@ -226,12 +226,12 @@ test_that("ssd_fit_dists not reorder", {
 })
 
 test_that("ssd_fit_dists equal weights no effect", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   data <- ssdtools::boron_data
   data$weight <- rep(2, nrow(data))
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = names(boron_dists))
+  fits_weight <- ssd_fit_dists(data)
   
-  expect_equal(estimates(fits), estimates(boron_dists))
+  expect_equal(estimates(fits_weight), estimates(fits))
 })
 
 test_that("ssd_fit_dists doubling data little effect on estimates stable dists", {

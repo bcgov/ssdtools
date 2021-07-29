@@ -23,11 +23,11 @@
 #' @return A number of the proportion exposed.
 #' @export
 #' @examples
-#' boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+#' fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
 #' set.seed(10)
-#' ssd_exposure(boron_lnorm)
-#' ssd_exposure(boron_lnorm, meanlog = 1)
-#' ssd_exposure(boron_lnorm, meanlog = 1, sdlog = 1)
+#' ssd_exposure(fits)
+#' ssd_exposure(fits, meanlog = 1)
+#' ssd_exposure(fits, meanlog = 1, sdlog = 1)
 ssd_exposure <- function(x, meanlog = 0, sdlog = 1, nboot = 1000) {
   chk_number(meanlog)
   chk_number(sdlog)

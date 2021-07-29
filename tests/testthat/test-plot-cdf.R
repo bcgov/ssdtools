@@ -13,17 +13,17 @@
 #    limitations under the License.
 
 test_that("ssd_plot_cdf", {
-  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssdtools::boron_data)
   
-  expect_snapshot_plot(ssd_plot_cdf(boron_lnorm), "boron_lnorm")
-  expect_snapshot_plot(ssd_plot_cdf(boron_dists), "boron_dists")
-  expect_snapshot_plot(ssd_plot_cdf(boron_dists, average = TRUE), "boron_dists_average")
+  expect_snapshot_plot(ssd_plot_cdf(fits), "fits")
+  expect_snapshot_plot(ssd_plot_cdf(fits), "fits")
+  expect_snapshot_plot(ssd_plot_cdf(fits, average = TRUE), "fits_average")
 })
 
 test_that("autoplot deals with rescaled data", {
   fits <- ssd_fit_dists(ssdtools::boron_data, rescale = TRUE)
-  expect_snapshot_plot(ssd_plot_cdf(fits), "boron_dists_rescale")
+  expect_snapshot_plot(ssd_plot_cdf(fits), "fits_rescale")
 })
 
 test_that("autoplot deals with named list", {

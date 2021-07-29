@@ -42,8 +42,8 @@
 #' @return A tbl data frame of the gof statistics.
 #' @export
 #' @examples
-#' boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-#' ssd_gof(boron_dists)
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' ssd_gof(fits)
 ssd_gof <- function(x, ...) {
   UseMethod("ssd_gof")
 }
@@ -90,7 +90,7 @@ ssd_gof <- function(x, ...) {
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 #' @examples
-#' ssd_gof(boron_dists)
+#' ssd_gof(fits)
 ssd_gof.fitdists <- function(x, pvalue = FALSE, ...) {
   chk_flag(pvalue)
   chk_unused(...)

@@ -109,8 +109,8 @@ ssd_hp <- function(x, ...) {
 #' @describeIn ssd_hp Hazard Percent fitdists
 #' @export
 #' @examples
-#' boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-#' ssd_hp(boron_dists, c(0, 1, 30, Inf))
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' ssd_hp(fits, c(0, 1, 30, Inf))
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
                             control = NULL,
                             parallel = NULL, ncpus = 1,

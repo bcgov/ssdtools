@@ -14,9 +14,9 @@
 
 # test_that("predict.fitdist parallel", {
 #   rlang::scoped_options(lifecycle_verbosity = "quiet")
-#   boron_lnorm <- ssd_fit_dists(ssdtools::boron_data)
+#   fits <- ssd_fit_dists(ssdtools::boron_data)
 #   
-#   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
+#   pred <- predict(fits, nboot = 10L, parallel = "multicore", ncpus = 2)
 #   expect_s3_class(pred, "tbl")
 #   expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
 #   expect_equal(pred$percent, 1:99)
@@ -24,9 +24,9 @@
 # 
 # test_that("predict.fitdists parallel", {
 #   rlang::scoped_options(lifecycle_verbosity = "quiet")
-#   boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis"))
+#   fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis"))
 #   
-#   pred <- predict(boron_lnorm, nboot = 10L, parallel = "multicore", ncpus = 2)
+#   pred <- predict(fits, nboot = 10L, parallel = "multicore", ncpus = 2)
 #   expect_s3_class(pred, "tbl")
 #   expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
 #   expect_equal(pred$percent, 1:99)

@@ -13,13 +13,13 @@
 #    limitations under the License.
 
 test_that("autoplot", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-  expect_snapshot_plot(autoplot(boron_dists), "autoplot")
+  fits <- ssd_fit_dists(ssdtools::boron_data)
+  expect_snapshot_plot(autoplot(fits), "autoplot")
 })
 
 test_that("autoplot", {
-  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
-  expect_snapshot_plot(autoplot(boron_dists, xlab = "New"), "autoplot_new")
+  fits <- ssd_fit_dists(ssdtools::boron_data)
+  expect_snapshot_plot(autoplot(fits, xlab = "New"), "autoplot_new")
 })
 
 test_that("autoplot", {
