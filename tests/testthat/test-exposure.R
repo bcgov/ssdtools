@@ -13,16 +13,22 @@
 #    limitations under the License.
 
 test_that("exposure fitdist", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   set.seed(1)
   expect_equal(ssd_exposure(boron_lnorm), 0.0554388690057964)
 })
 
 test_that("exposure different mean", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   set.seed(1)
   expect_equal(ssd_exposure(boron_lnorm, 1), 0.165064610334353)
 })
 
 test_that("exposure different mean and log", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   set.seed(1)
   expect_equal(ssd_exposure(boron_lnorm, 1, sdlog = 10), 0.433888512432359)
 })
@@ -33,6 +39,8 @@ test_that("exposure multiple distributions", {
 })
 
 test_that("exposure not sensitive to rescaling", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   set.seed(10)
   exposure <- ssd_exposure(boron_lnorm)
   

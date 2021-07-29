@@ -22,6 +22,7 @@ A number of the proportion exposed.
 Calculates average proportion exposed based on log-normal distribution of concentrations.
 }
 \examples{
+boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
 set.seed(10)
 ssd_exposure(boron_lnorm)
 ssd_exposure(boron_lnorm, meanlog = 1)

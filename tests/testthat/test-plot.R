@@ -1,4 +1,6 @@
 test_that("plot fitdists deprecated to autoplot", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   lifecycle::expect_deprecated(plot(boron_lnorm))
 })
 

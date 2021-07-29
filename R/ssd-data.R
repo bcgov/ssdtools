@@ -20,6 +20,7 @@
 #' @export
 #'
 #' @examples
+#' boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
 #' ssd_data(boron_lnorm)
 ssd_data <- function(x) {
   .org_data_fitdists(x)

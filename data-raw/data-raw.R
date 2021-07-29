@@ -155,9 +155,6 @@ use_data(boron_data, overwrite = TRUE)
 
 write.csv(boron_data, "inst/extdata/boron_data.csv", row.names = FALSE)
 
-boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
-use_data(boron_lnorm, overwrite = TRUE)
-
 boron_dists <- ssd_fit_dists(boron_data)
 use_data(boron_dists, overwrite = TRUE)
 

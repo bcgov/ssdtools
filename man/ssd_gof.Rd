@@ -50,6 +50,7 @@ and \code{aicc} for non-censored data.
 }}
 
 \examples{
+boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
 ssd_gof(boron_lnorm)
 ssd_gof(boron_dists)
 ssd_gof(boron_dists)

@@ -20,6 +20,8 @@ test_that("hc", {
 })
 
 test_that("ssd_hc hc defunct", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   lifecycle::expect_defunct(ssd_hc(boron_lnorm, hc = 6))
 })  
 
@@ -92,6 +94,8 @@ test_that("ssd_hc list works multiple NULL distributions with multiple percent",
 })
 
 test_that("ssd_hc fitdists works zero length percent", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hc <- ssd_hc(boron_lnorm, numeric(0)) 
   expect_s3_class(hc, class = "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
@@ -102,6 +106,8 @@ test_that("ssd_hc fitdists works zero length percent", {
 })
 
 test_that("ssd_hc fitdists works NA percent", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hc <- ssd_hc(boron_lnorm, NA_real_)
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
@@ -112,6 +118,8 @@ test_that("ssd_hc fitdists works NA percent", {
 })
 
 test_that("ssd_hc fitdists works 0 percent", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hc <- ssd_hc(boron_lnorm, 0)
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
@@ -122,6 +130,8 @@ test_that("ssd_hc fitdists works 0 percent", {
 })
 
 test_that("ssd_hc fitdists works 100 percent", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hc <- ssd_hc(boron_lnorm, 100)
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
@@ -133,6 +143,8 @@ test_that("ssd_hc fitdists works 100 percent", {
 })
 
 test_that("ssd_hc fitdists works multiple percents", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hc <- ssd_hc(boron_lnorm, percent = c(1, 99))
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
@@ -157,6 +169,8 @@ test_that("ssd_hc fitdists averages", {
 })
 
 test_that("ssd_hc fitdists averages single dist by multiple percent", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hc <- ssd_hc(boron_lnorm, average = TRUE, percent = 1:99)
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
@@ -169,6 +183,8 @@ test_that("ssd_hc fitdists averages single dist by multiple percent", {
 })
 
 test_that("ssd_hc fitdists not average single dist by multiple percent gives whole numeric", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hc <- ssd_hc(boron_lnorm, average = FALSE, percent = 1:99)
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
@@ -194,6 +210,8 @@ test_that("ssd_hc fitdists correct for rescaling", {
 })
 
 test_that("ssd_hc fitdists cis", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   set.seed(102)
   hc <- ssd_hc(boron_lnorm, ci = TRUE)
   expect_s3_class(hc, "tbl_df")

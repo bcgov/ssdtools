@@ -43,15 +43,6 @@
 #' boron_dists
 "boron_dists"
 
-#' fitdist for CCME Boron Data
-#'
-#' A fitdist object for Species Sensitivity Data for
-#' Boron with the lnorm distribution.
-#' @family boron
-#' @examples
-#' boron_lnorm
-"boron_lnorm"
-
 #' Model Averaged Predictions for CCME Boron Data
 #'
 #' A data frame of the predictions based on 1,000 bootstrap iterations.

@@ -20,6 +20,8 @@ test_that("hp", {
 })
 
 test_that("hp fitdists works with zero length conc", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+
   hp <- ssd_hp(boron_lnorm, numeric(0)) 
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
@@ -30,6 +32,8 @@ test_that("hp fitdists works with zero length conc", {
 })
 
 test_that("hp fitdist works with missing conc", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hp <- ssd_hp(boron_lnorm, NA_real_)
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
@@ -40,6 +44,8 @@ test_that("hp fitdist works with missing conc", {
 })
 
 test_that("hp fitdist works with 0 conc", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hp <- ssd_hp(boron_lnorm, 0) 
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
@@ -50,6 +56,8 @@ test_that("hp fitdist works with 0 conc", {
 })
 
 test_that("hp fitdist works with negative conc", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hp <- ssd_hp(boron_lnorm, -1)
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
@@ -60,6 +68,8 @@ test_that("hp fitdist works with negative conc", {
 })
 
 test_that("hp fitdist works with -Inf conc", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hp <- ssd_hp(boron_lnorm, -Inf)
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
@@ -70,6 +80,8 @@ test_that("hp fitdist works with -Inf conc", {
 })
 
 test_that("hp fitdist works with Inf conc", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hp <- ssd_hp(boron_lnorm, Inf)
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
@@ -80,6 +92,8 @@ test_that("hp fitdist works with Inf conc", {
 })
 
 test_that("hp fitdists works reasonable conc", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   hp <- ssd_hp(boron_lnorm, 1)
   expect_s3_class(hp, "tbl_df")
   expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
@@ -92,6 +106,8 @@ test_that("hp fitdists works reasonable conc", {
 })
 
 test_that("hp fitdists works with cis", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   set.seed(10)
   hp <- ssd_hp(boron_lnorm, 1, ci = TRUE, nboot = 10)
   expect_s3_class(hp, "tbl_df")

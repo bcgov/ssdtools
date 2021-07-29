@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 test_that("ssd_plot_cdf", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   expect_snapshot_plot(ssd_plot_cdf(boron_lnorm), "boron_lnorm")
   expect_snapshot_plot(ssd_plot_cdf(boron_dists), "boron_dists")
   expect_snapshot_plot(ssd_plot_cdf(boron_dists, average = TRUE), "boron_dists_average")

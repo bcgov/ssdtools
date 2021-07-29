@@ -12,13 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("ssd_fit_dists gives same result as previously with boron_data and lnorm", {
-  data <- ssdtools::boron_data
-  fits <- ssd_fit_dists(data, dists = "lnorm")
-  skip_if_not(capabilities("long.double"))
-  expect_equal(estimates(fits), estimates(boron_lnorm))
-})
-
 test_that("ssd_fit_dists gives error with unrecognized dist", {
   chk::expect_chk_error(ssd_fit_dists(ssdtools::boron_data, dists = "lnorm2"))
 })

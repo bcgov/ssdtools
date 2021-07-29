@@ -30,7 +30,6 @@ boron_hc5
 Other boron: 
 \code{\link{boron_data}},
 \code{\link{boron_dists}},
-\code{\link{boron_lnorm}},
 \code{\link{boron_pred}}
 }
 \concept{boron}

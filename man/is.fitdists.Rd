@@ -16,6 +16,7 @@ A flag.
 Tests whether an object is a fitdists.
 }
 \examples{
+boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
 is.fitdists(boron_lnorm)
 is.fitdists(boron_dists)
 }

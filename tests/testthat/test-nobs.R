@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 test_that("nobs", {
+  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  
   expect_identical(nobs(boron_lnorm), 28L)
   expect_identical(nobs(boron_dists), 28L)
 })
