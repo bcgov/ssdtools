@@ -161,7 +161,3 @@ use_data(boron_dists, overwrite = TRUE)
 set.seed(99)
 boron_pred <- predict(boron_dists, ci = TRUE)
 use_data(boron_pred, overwrite = TRUE)
-
-set.seed(99)
-boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
-use_data(boron_hc5, overwrite = TRUE)

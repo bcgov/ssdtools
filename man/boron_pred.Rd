@@ -29,8 +29,7 @@ head(boron_pred)
 \seealso{
 Other boron: 
 \code{\link{boron_data}},
-\code{\link{boron_dists}},
-\code{\link{boron_hc5}}
+\code{\link{boron_dists}}
 }
 \concept{boron}
 \keyword{datasets}

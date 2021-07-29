@@ -60,23 +60,6 @@
 #' head(boron_pred)
 "boron_pred"
 
-#' Model Averaged 5 Hazard Concentration for CCME Boron Data
-#'
-#' A data frame of the predictions based on 10000 bootstrap.
-#'
-#' \describe{
-#'   \item{percent}{The percent of species affected (int).}
-#'   \item{est}{The estimated concentration (dbl).}
-#'   \item{se}{The standard error of the estimate (dbl).}
-#'   \item{lcl}{The lower confidence limit (dbl).}
-#'   \item{se}{The upper confidence limit (dbl).}
-#'   \item{dist}{The distribution (chr).}
-#' }
-#' @family boron
-#' @examples
-#' boron_hc5
-"boron_hc5"
-
 #' CCME Species Sensitivity Data
 #'
 #' Species Sensitivity Data from

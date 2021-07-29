@@ -20,7 +20,6 @@ boron_dists
 \seealso{
 Other boron: 
 \code{\link{boron_data}},
-\code{\link{boron_hc5}},
 \code{\link{boron_pred}}
 }
 \concept{boron}
