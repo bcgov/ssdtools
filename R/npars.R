@@ -16,7 +16,7 @@
 universals::npars
 
 #' @export
-npars.tmbfit <- function(x, ...) length(.pars_tmbfit(x))
+npars.tmbfit <- function(x, ...) length(.ests_tmbfit(x))
 
 #' @export
 npars.fitdists <- function(x, ...) {

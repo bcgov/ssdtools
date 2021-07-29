@@ -41,6 +41,9 @@ fit_tmb <- function(dist, data, control, pars = NULL, hessian = TRUE) {
   )
   fit <- list(dist = dist, model = model, optim = optim)
   class(fit) <- "tmbfit"
+  est <- tidy(fit)
+  est <- setNames(est$est, est$term)
+  fit$est <- est
   fit
 }
 
@@ -54,4 +57,8 @@ fit_tmb <- function(dist, data, control, pars = NULL, hessian = TRUE) {
 
 .pars_tmbfit <- function(x) {
   x$optim$par
+}
+
+.ests_tmbfit <- function(x) {
+  x$est
 }
