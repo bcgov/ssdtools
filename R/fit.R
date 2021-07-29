@@ -83,7 +83,7 @@ fit_dists <- function(data, dists, rescale, computable, control, silent) {
 #'
 #' @export
 #' @examples
-#' ssd_fit_dists(boron_data)
+#' ssd_fit_dists(ssdtools::boron_data)
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
   dists = ssd_dists("bc"),

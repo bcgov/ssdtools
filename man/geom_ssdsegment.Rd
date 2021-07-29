@@ -78,7 +78,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 Uses the empirical cumulative distribution to draw lines between points \code{x} and \code{xend}.
 }
 \examples{
-ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
   geom_ssdsegment()
 }
 \seealso{

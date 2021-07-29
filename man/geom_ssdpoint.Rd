@@ -88,11 +88,11 @@ Uses the empirical cumulative distribution to create scatterplot of points \code
 }}
 
 \examples{
-ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
   geom_ssdpoint()
 
 \dontrun{
-ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
   geom_ssd()
  }
 }

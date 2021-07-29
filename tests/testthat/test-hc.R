@@ -20,7 +20,7 @@ test_that("hc", {
 })
 
 test_that("ssd_hc hc defunct", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   lifecycle::expect_defunct(ssd_hc(boron_lnorm, hc = 6))
 })  
@@ -94,7 +94,7 @@ test_that("ssd_hc list works multiple NULL distributions with multiple percent",
 })
 
 test_that("ssd_hc fitdists works zero length percent", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   hc <- ssd_hc(boron_lnorm, numeric(0)) 
   expect_s3_class(hc, class = "tbl_df")
@@ -106,7 +106,7 @@ test_that("ssd_hc fitdists works zero length percent", {
 })
 
 test_that("ssd_hc fitdists works NA percent", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   hc <- ssd_hc(boron_lnorm, NA_real_)
   expect_s3_class(hc, "tbl_df")
@@ -118,7 +118,7 @@ test_that("ssd_hc fitdists works NA percent", {
 })
 
 test_that("ssd_hc fitdists works 0 percent", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   hc <- ssd_hc(boron_lnorm, 0)
   expect_s3_class(hc, "tbl_df")
@@ -130,7 +130,7 @@ test_that("ssd_hc fitdists works 0 percent", {
 })
 
 test_that("ssd_hc fitdists works 100 percent", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   hc <- ssd_hc(boron_lnorm, 100)
   expect_s3_class(hc, "tbl_df")
@@ -143,7 +143,7 @@ test_that("ssd_hc fitdists works 100 percent", {
 })
 
 test_that("ssd_hc fitdists works multiple percents", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   hc <- ssd_hc(boron_lnorm, percent = c(1, 99))
   expect_s3_class(hc, "tbl_df")
@@ -169,7 +169,7 @@ test_that("ssd_hc fitdists averages", {
 })
 
 test_that("ssd_hc fitdists averages single dist by multiple percent", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   hc <- ssd_hc(boron_lnorm, average = TRUE, percent = 1:99)
   expect_s3_class(hc, "tbl_df")
@@ -183,7 +183,7 @@ test_that("ssd_hc fitdists averages single dist by multiple percent", {
 })
 
 test_that("ssd_hc fitdists not average single dist by multiple percent gives whole numeric", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   hc <- ssd_hc(boron_lnorm, average = FALSE, percent = 1:99)
   expect_s3_class(hc, "tbl_df")
@@ -202,15 +202,15 @@ test_that("ssd_hc fitdists not average", {
 })
 
 test_that("ssd_hc fitdists correct for rescaling", {
-  fits <- ssd_fit_dists(boron_data, dists = ssd_dists())
-  fits_rescale <- ssd_fit_dists(boron_data, dists = ssd_dists(), rescale = TRUE)
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists())
+  fits_rescale <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists(), rescale = TRUE)
   hc <- ssd_hc(fits)
   hc_rescale <- ssd_hc(fits_rescale)
   expect_equal(hc_rescale, hc, tolerance = 1e-05)
 })
 
 test_that("ssd_hc fitdists cis", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   set.seed(102)
   hc <- ssd_hc(boron_lnorm, ci = TRUE)
@@ -225,7 +225,7 @@ test_that("ssd_hc fitdists cis", {
 })
 
 test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
-  data <- boron_data
+  data <- ssdtools::boron_data
   data$Conc2 <- data$Conc
   data$Conc[1] <- 0.5
   data$Conc2[1] <- 1.0
@@ -242,7 +242,7 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
 })
 
 test_that("ssd_hc same with equally weighted data", {
-  data <- boron_data
+  data <- ssdtools::boron_data
   data$Weight <- rep(2, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
@@ -256,7 +256,7 @@ test_that("ssd_hc same with equally weighted data", {
 })
 
 test_that("ssd_hc calculates cis with equally weighted data", {
-  data <- boron_data
+  data <- ssdtools::boron_data
   data$Weight <- rep(2, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
@@ -265,7 +265,7 @@ test_that("ssd_hc calculates cis with equally weighted data", {
 })
 
 test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
-  data <- boron_data
+  data <- ssdtools::boron_data
   data$Weight <- rep(1, nrow(data))
   data$Weight[1] <- 2
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
@@ -275,7 +275,7 @@ test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
 })
 
 test_that("ssd_hc no effect with higher weight one distribution", {
-  data <- boron_data
+  data <- ssdtools::boron_data
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   data$Weight <- rep(10, nrow(data))
@@ -288,7 +288,7 @@ test_that("ssd_hc no effect with higher weight one distribution", {
 })
 
 test_that("ssd_hc effect with higher weight two distributions", {
-  data <- boron_data
+  data <- ssdtools::boron_data
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
   data$Weight <- rep(10, nrow(data))

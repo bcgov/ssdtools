@@ -42,7 +42,7 @@
 #' @return A tbl data frame of the gof statistics.
 #' @export
 #' @examples
-#' boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+#' boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
 #' ssd_gof(boron_lnorm)
 #' ssd_gof(boron_dists)
 ssd_gof <- function(x, ...) {

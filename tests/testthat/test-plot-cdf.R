@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("ssd_plot_cdf", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   expect_snapshot_plot(ssd_plot_cdf(boron_lnorm), "boron_lnorm")
   expect_snapshot_plot(ssd_plot_cdf(boron_dists), "boron_dists")
@@ -21,7 +21,7 @@ test_that("ssd_plot_cdf", {
 })
 
 test_that("autoplot deals with rescaled data", {
-  fits <- ssd_fit_dists(boron_data, rescale = TRUE)
+  fits <- ssd_fit_dists(ssdtools::boron_data, rescale = TRUE)
   expect_snapshot_plot(ssd_plot_cdf(fits), "boron_dists_rescale")
 })
 

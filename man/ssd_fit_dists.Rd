@@ -60,5 +60,5 @@ However, currently only the resultant parameter estimates are available (via coe
 If the \code{right} argument is different to the \code{left} argument then the data are considered to be censored.
 }
 \examples{
-ssd_fit_dists(boron_data)
+ssd_fit_dists(ssdtools::boron_data)
 }

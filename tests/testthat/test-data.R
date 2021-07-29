@@ -47,7 +47,7 @@ test_that("data", {
   expect_s3_class(ccme_data, "tbl")
 
   expect_error(chk::check_data(
-    boron_data,
+    ssdtools::boron_data,
     values = list(
       Chemical = c("Boron", "Boron"),
       Species = "",
@@ -57,7 +57,7 @@ test_that("data", {
     ),
     nrow = 28
   ), NA)
-  expect_s3_class(boron_data, "tbl")
+  expect_s3_class(ssdtools::boron_data, "tbl")
 
   expect_error(chk::check_data(
     boron_pred,

@@ -1,10 +1,10 @@
 test_that("print tmbfit", {
-  fits <- ssd_fit_dists(boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   expect_snapshot_output(print(fits$lnorm))
 })
 
 test_that("print fitdists", {
-  fits <- ssd_fit_dists(boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   expect_snapshot_output(print(fits))
 })
 

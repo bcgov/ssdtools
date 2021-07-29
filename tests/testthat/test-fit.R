@@ -209,7 +209,7 @@ test_that("ssd_fit_dists warns of optimizer convergence code error", {
   )
 })
 
-test_that("ssd_fit_dists estimates for boron_data on stable dists", {
+test_that("ssd_fit_dists estimates for ssdtools::boron_data on stable dists", {
   fits <- ssd_fit_dists(ssdtools::boron_data, dists = ssd_dists(), rescale = TRUE)
   
   tidy <- tidy(fits)

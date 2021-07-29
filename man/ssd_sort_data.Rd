@@ -25,7 +25,7 @@ to construct plots for censored data with \code{stat = identity} to
 ensure order is the same for the various components.
 }
 \examples{
-ssd_sort_data(boron_data)
+ssd_sort_data(ssdtools::boron_data)
 }
 \seealso{
 ssd_ecd_data()

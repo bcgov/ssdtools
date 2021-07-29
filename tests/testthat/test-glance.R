@@ -5,8 +5,8 @@ test_that("glance weights rescale log_lik", {
 })
 
 test_that("glance weights independent of rescaling", {
-  fit <- ssd_fit_dists(boron_data, rescale = FALSE)
-  fit_rescale <- ssd_fit_dists(boron_data, rescale = TRUE)
+  fit <- ssd_fit_dists(ssdtools::boron_data, rescale = FALSE)
+  fit_rescale <- ssd_fit_dists(ssdtools::boron_data, rescale = TRUE)
   
   glance <- glance(fit)
   glance_rescale <- glance(fit_rescale)
@@ -14,7 +14,7 @@ test_that("glance weights independent of rescaling", {
 })
 
 test_that("glance weights rescale log_lik", {
-  data <- boron_data
+  data <- ssdtools::boron_data
   data$weight <- rep(1, nrow(data))
   fit <- ssd_fit_dists(data, weight = "weight")
   data$weight <- rep(2, nrow(data))
@@ -26,7 +26,7 @@ test_that("glance weights rescale log_lik", {
 })
 
 test_that("glance reweight same log_lik", {
-  data <- boron_data
+  data <- ssdtools::boron_data
   data$weight <- rep(1, nrow(data))
   fit <- ssd_fit_dists(data, weight = "weight")
   data$weight <- rep(2, nrow(data))

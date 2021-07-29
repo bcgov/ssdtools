@@ -14,5 +14,5 @@
 
 test_that("cfplot", {
   withr::local_options(lifecycle_verbosity = "quiet")
-  expect_snapshot_plot(ssd_plot_cf(boron_data), "boron_data")
+  expect_snapshot_plot(ssd_plot_cf(ssdtools::boron_data), "boron_data")
 })

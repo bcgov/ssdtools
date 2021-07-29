@@ -151,11 +151,11 @@ ccme_data %<>% as_tibble()
 use_data(ccme_data, overwrite = TRUE)
 
 boron_data <- ccme_data[ccme_data$Chemical == "Boron", ]
-use_data(boron_data, overwrite = TRUE)
+use_data(ssdtools::boron_data, overwrite = TRUE)
 
-write.csv(boron_data, "inst/extdata/boron_data.csv", row.names = FALSE)
+write.csv(ssdtools::boron_data, "inst/extdata/boron_data.csv", row.names = FALSE)
 
-boron_dists <- ssd_fit_dists(boron_data)
+boron_dists <- ssd_fit_dists(ssdtools::boron_data)
 use_data(boron_dists, overwrite = TRUE)
 
 set.seed(99)

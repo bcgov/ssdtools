@@ -30,7 +30,7 @@ in data.
 Empirical Cumulative Density for Species Sensitivity Data
 }
 \examples{
-ssd_ecd_data(boron_data)
+ssd_ecd_data(ssdtools::boron_data)
 }
 \seealso{
 ssd_ecd()

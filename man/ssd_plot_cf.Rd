@@ -27,5 +27,5 @@ Soft deprecated for direct call to \code{\link[fitdistrplus:descdist]{fitdistrpl
 }}
 
 \examples{
-ssd_plot_cf(boron_data)
+ssd_plot_cf(ssdtools::boron_data)
 }

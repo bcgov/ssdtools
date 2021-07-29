@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("augment", {
-  boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+  boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   
   expect_identical(augment(boron_lnorm), ssdtools::boron_data)
 })

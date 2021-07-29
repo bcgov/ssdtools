@@ -26,7 +26,7 @@ is.tmbfit <- function(x) {
 #' @export
 #'
 #' @examples
-#' boron_lnorm <- ssd_fit_dists(boron_data, dists = "lnorm")
+#' boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
 #' is.fitdists(boron_lnorm)
 #' is.fitdists(boron_dists)
 is.fitdists <- function(x) {

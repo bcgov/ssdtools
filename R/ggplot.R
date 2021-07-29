@@ -33,7 +33,7 @@ ssd_pal <- function() {
 #' @family ggplot
 #' @export
 #' @examples 
-#' ssd_plot(boron_data, boron_pred, shape = "Group") +
+#' ssd_plot(ssdtools::boron_data, boron_pred, shape = "Group") +
 #'   scale_colour_ssd()
 scale_colour_ssd <- function (...) {
   discrete_scale("colour", "ssd", ssd_pal(), ...)
@@ -57,7 +57,7 @@ scale_color_ssd <- function (...) {
 #' @family ggplot
 #' @export
 #' @examples
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+#' ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssdpoint()
 geom_ssdpoint <- function(mapping = NULL, 
                           data = NULL, 
@@ -84,7 +84,7 @@ geom_ssdpoint <- function(mapping = NULL,
 #' @family ggplot
 #' @export
 #' @examples
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+#' ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
 #'   geom_ssdsegment()
 geom_ssdsegment <- function(mapping = NULL, 
                             data = NULL, 
@@ -117,7 +117,7 @@ geom_ssdsegment <- function(mapping = NULL,
 #' @family ggplot
 #' @export
 #' @examples
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+#' ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssdpoint() +
 #'   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
 geom_hcintersect <- function(mapping = NULL, 
@@ -187,7 +187,7 @@ geom_xribbon <- function(mapping = NULL,
 #' @examples
 #'
 #' \dontrun{
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+#' ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
 #'   geom_ssd()
 #'  }
 geom_ssd <- function(mapping = NULL, 
@@ -218,7 +218,7 @@ geom_ssd <- function(mapping = NULL,
 #' @export
 #' @examples
 #' \dontrun{
-#' ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
+#' ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
 #'   stat_ssd()
 #'  }
 stat_ssd <- function(mapping = NULL, 

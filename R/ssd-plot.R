@@ -43,7 +43,7 @@ plot_coord_scale <- function(data, xlab, ylab, xbreaks = waiver()) {
 #' @seealso [ssd_plot_cdf()] and [geom_ssdpoint()]
 #' @export
 #' @examples
-#' ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
+#' ssd_plot(ssdtools::boron_data, boron_pred, label = "Species", shape = "Group")
 ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      linetype = NULL, linecolor = NULL,
