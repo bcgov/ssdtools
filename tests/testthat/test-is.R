@@ -13,10 +13,7 @@
 #    limitations under the License.
 
 test_that("is.fitdists", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   fits <- ssd_fit_dists(ssdtools::boron_data)
-  
-  expect_true(is.fitdists(fits))
   expect_true(is.fitdists(fits))
   expect_false(is.fitdists(1))
 })

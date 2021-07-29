@@ -17,7 +17,6 @@ test_that("ssd_plot_cdf", {
   fits <- ssd_fit_dists(ssdtools::boron_data)
   
   expect_snapshot_plot(ssd_plot_cdf(fits), "fits")
-  expect_snapshot_plot(ssd_plot_cdf(fits), "fits")
   expect_snapshot_plot(ssd_plot_cdf(fits, average = TRUE), "fits_average")
 })
 
