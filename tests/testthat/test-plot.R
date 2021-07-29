@@ -5,6 +5,7 @@ test_that("plot fitdists deprecated to autoplot", {
 })
 
 test_that("plot fitdists give ggplot2 object", {
+  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
   withr::local_options(lifecycle_verbosity = "quiet")
   expect_snapshot_plot(plot(boron_dists), "plot")
 })

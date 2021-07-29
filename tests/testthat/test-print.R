@@ -36,5 +36,6 @@ test_that("summary fitdists with right censored, rescaled, weighted data", {
 })
 
 test_that("print fitdists with multiple distributions", {
+  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
   expect_snapshot_output(print(boron_dists))
 })

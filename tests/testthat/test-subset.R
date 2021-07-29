@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 test_that("subset", {
+  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  
   expect_identical(subset(boron_dists), boron_dists)
   expect_identical(names(subset(boron_dists, c("lnorm", "gamma"))), c("gamma", "lnorm"))
 })

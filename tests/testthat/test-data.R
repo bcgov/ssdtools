@@ -71,6 +71,4 @@ test_that("data", {
     nrow = 99L
   ), NA)
   expect_s3_class(boron_pred, "tbl")
-
-  expect_s3_class(boron_dists, "fitdists")
 })

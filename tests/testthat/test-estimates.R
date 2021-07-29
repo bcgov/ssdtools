@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 test_that("estimates", {
+  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  
   estimates <- estimates(boron_dists)
   expect_type(estimates, "list")
   expect_snapshot_output(print(estimates))

@@ -17,6 +17,7 @@
 #' @inheritParams params
 #' @export
 #' @examples
+#' boron_dists <- ssd_fit_dists(ssdtools::boron_data)
 #' subset(boron_dists, c("gamma", "lnorm"))
 subset.fitdists <- function(x, select = names(x), ...) {
   chk_s3_class(select, "character")

@@ -34,15 +34,6 @@
 #' head(ccme_data)
 "boron_data"
 
-#' fitdists for CCME Boron Data
-#'
-#' A fitdists object for Species Sensitivity Data for
-#' Boron.
-#' @family boron
-#' @examples
-#' boron_dists
-"boron_dists"
-
 #' Model Averaged Predictions for CCME Boron Data
 #'
 #' A data frame of the predictions based on 1,000 bootstrap iterations.

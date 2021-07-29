@@ -14,6 +14,7 @@
 
 test_that("ssd_plot_cdf", {
   boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
   
   expect_snapshot_plot(ssd_plot_cdf(boron_lnorm), "boron_lnorm")
   expect_snapshot_plot(ssd_plot_cdf(boron_dists), "boron_dists")

@@ -34,6 +34,8 @@ test_that("exposure different mean and log", {
 })
 
 test_that("exposure multiple distributions", {
+  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  
   set.seed(1)
   expect_equal(ssd_exposure(boron_dists), 0.0645152661450559)
 })

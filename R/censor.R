@@ -36,6 +36,7 @@ censoring_text <- function(x) {
 #' @export
 #'
 #' @examples
+#' boron_dists <- ssd_fit_dists(ssdtools::boron_data)
 #' is_censored(boron_dists)
 is_censored <- function(x) {
   chk_s3_class(x, "fitdists")

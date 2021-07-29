@@ -179,12 +179,9 @@ Hazard concentrations are discussed below.
 
 The 5% hazard concentration ($HC_5$) is the concentration that affects 5% of the species tested.
 
-```{r, eval = FALSE}
+```{r}
 set.seed(99)
 boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
-```
-
-```{r}
 print(boron_hc5)
 ```
 

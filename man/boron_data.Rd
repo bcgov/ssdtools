@@ -34,7 +34,6 @@ head(ccme_data)
 \link{ccme_data}
 
 Other boron: 
-\code{\link{boron_dists}},
 \code{\link{boron_pred}}
 }
 \concept{boron}

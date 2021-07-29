@@ -14,6 +14,7 @@
 
 test_that("nobs", {
   boron_lnorm <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
   
   expect_identical(nobs(boron_lnorm), 28L)
   expect_identical(nobs(boron_dists), 28L)

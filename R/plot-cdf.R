@@ -28,6 +28,7 @@ ssd_plot_cdf <- function(x, ...) {
 #' @param ... Additional arguments passed to [ssd_plot()].
 #' @export
 #' @examples
+#' boron_dists <- ssd_fit_dists(ssdtools::boron_data)
 #' ssd_plot_cdf(boron_dists)
 ssd_plot_cdf.fitdists <- function(x, average = FALSE, ...) {
   pred <- ssd_hc(x, percent = 1:99, average = average)

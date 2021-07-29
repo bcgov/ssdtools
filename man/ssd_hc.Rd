@@ -66,5 +66,6 @@ Gets concentrations that protect specified percentages of species.
 \examples{
 ssd_hc(list("lnorm" = NULL))
 ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
+boron_dists <- ssd_fit_dists(ssdtools::boron_data)
 ssd_hc(boron_dists, c(0, 1, 30, Inf))
 }

@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 test_that("tidy", {
+  boron_dists <- ssd_fit_dists(ssdtools::boron_data)
+  
   tidy <- tidy(boron_dists)
   expect_s3_class(tidy, "tbl_df")
   expect_snapshot_data(tidy, "tidy")
