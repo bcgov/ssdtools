@@ -27,7 +27,9 @@ rinvpareto <- function(n, shape = 3, scale = 1) {
 }
 
 sinvpareto <- function(data) {
-  list(log_scale = log(max(data$right)), log_shape = 1)
+  scale <- max(data$right)
+  shape <- 1/mean(log(scale / data$right))
+  list(log_scale = log(scale), log_shape = log(shape))
 }
 
 minvpareto <- function() {
