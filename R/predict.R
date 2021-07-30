@@ -15,9 +15,16 @@
 #' @export
 stats::predict
 
-#' Predict fitdists
+#' Predict Hazard Concentrations of fitdists Object
+#' 
+#' A wrapper on [`ssd_hc()`] that by default calculates 
+#' all hazard concentrations from 1 to 99%.
+#' 
+#' It is useful for plotting purposes.
+#' 
 #' @inheritParams params
 #' @export
+#' @seealso [`ssd_hc()`] and [`ssd_plot()`]
 #' @examples 
 #' fits <- ssd_fit_dists(ssdtools::boron_data)
 #' predict(fits)

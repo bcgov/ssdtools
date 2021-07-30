@@ -1,6 +1,6 @@
 #  Solve for the parameter values for a function to match the mean and variance on the log-scale using BFI
 
-library(ggplot2)
+library(tidyverse)
 library(plyr)
 
 

@@ -56,9 +56,9 @@ Distributions are fit using `ssd_fit_dists()`
 fits <- ssd_fit_dists(ssdtools::boron_data)
 ```
 
-and can be quickly plotted using the `ggplot2` generic `autoplot`
-```{r, warning = FALSE}
-library(ggplot2)
+and can be quickly plotted using `autoplot`
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
 
 theme_set(theme_bw())
 

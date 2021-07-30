@@ -18,24 +18,24 @@ knitr::opts_chunk$set(
 )
 ```
 
-The *ssdtools* package produces a plot of the cumulative distributions for multiple distribution through the use of the *autoplot()* function. 
-For example, consider the boron data that ships with the *ssdtools* package.
+The `ssdtools` package produces a plot of the cumulative distributions for multiple distribution through the use of the `ssd_plot_cdf()` function. 
+For example, consider the boron data.
 
 ```{r echo=TRUE, warning=FALSE, message=FALSE}
-library(ggplot2)
+library(tidyverse)
 library(ssdtools)
 
-fit <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
-fit.plot <- autoplot(fit) + scale_color_ssd()
+fits <- ssd_fit_dists(ssdtools::boron_data)
+gp <- ssd_plot_cdf(fits) + scale_color_ssd()
 
-fit.plot
+print(gp)
 ```
 
 This graphic is a [ggplot](https://ggplot2.tidyverse.org) object and so can be saved and embellished in the usual way.
 For example, suppose we want to superimpose an environmental concentration cumulative distribution and compute the exposure risk as outlined in @verdonck_limitations_2003.
 
 ```{r echo=FALSE}
-# what are the mean and sd on the log-scale for the envirionmental concentration
+# what are the mean and sd on the log-scale for the environmental concentration
 ex.mean.log <- log(0.1)
 ex.sd.log <- 1
 ```
@@ -56,7 +56,7 @@ ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc,
 
 We now add this to the plot
 ```{r }
-fit.plot + 
+gp + 
   geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
   annotate("text",
     label = paste("Exposure distribution"),
@@ -64,17 +64,17 @@ fit.plot +
   )
 ```
 
-The *ssdtools* package contains a function *ssd_exposure* that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.
+The `ssdtools` package contains a function `ssd_exposure()` that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.
 
 ```{r echo=TRUE}
 set.seed(99)
-ex.risk <- ssd_exposure(fit, meanlog = ex.mean.log, sdlog = ex.sd.log)
+ex.risk <- ssd_exposure(fits, meanlog = ex.mean.log, sdlog = ex.sd.log)
 ex.risk
 ```
 The risk of `r round(ex.risk, 5)` can also be added to the plot in the usual way:
 
 ```{r echo=TRUE}
-fit.plot + 
+gp + 
   geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
   annotate("text",
     label = paste("Exposure distribution"),

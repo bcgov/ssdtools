@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 `ssdtools` is an R package to fit Species Sensitivity Distributions (SSDs) using Maximum Likelihood and model averaging.
 
 SSDs are cumulative probability distributions that are used to estimate the percent of species that are affected by a given concentration of a chemical.
-The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC).
+The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration ($HC_5$).
 For more information on SSDs the reader is referred to @posthuma_species_2001.
 
 In order to use `ssdtools` you need to install R (see below) or use the Shiny [app](https://github.com/bcgov/shinyssdtools).
@@ -35,7 +35,7 @@ This vignette is a user manual for the R package.
 
 `ssdtools` provides the key functionality required to fit SSDs using Maximum Likelihood and model averaging in R.
 It is intended to be used in conjunction with [tidyverse](https://www.tidyverse.org) packages such as `readr` to input data, `tidyr` and `dplyr` to group and manipulate data and `ggplot2` [@ggplot2] to plot data.
-As such it endeavours to fulfill the tidyverse [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html).
+As such it endeavors to fulfill the tidyverse [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html).
 
 ## Installing
 
@@ -71,7 +71,7 @@ The `.csv` file can then be read into R using the following
 ```{r, eval = FALSE}
 data <- read_csv(file = "path/to/file.csv")
 ```
-For the purposes of this manual we use the CCME dataset for boron which is provided with the `ssdtools` package.
+For the purposes of this manual we use the CCME dataset for boron.
 ```{r}
 boron_data <- ssdtools::boron_data
 print(boron_data)
@@ -93,14 +93,14 @@ fits <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
 
 ## Coefficients
 
-The parameter estimates can be extracted using the tidyverse generic `tidy` function (or the base R generic `coef` function).
+The estimates for the various terms can be extracted using the tidyverse generic `tidy` function (or the base R generic `coef` function).
 ```{r}
 tidy(fits)
 ```
 
 ## Plots
 
-It is generally more informative to plot the fits using the `autoplot` generic function.
+It is generally more informative to plot the fits using the `autoplot` generic function (a wrapper on `ssd_plot_cdf()`).
 As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
 ```{r, fig.width = 5}
 theme_set(theme_bw()) # set plot theme
@@ -130,14 +130,13 @@ and three information criteria
 - Akaike's Information Criterion corrected for sample size (`aicc`) and
 - Bayesian Information Criterion (`bic`)
 
-Note if `ssd_gof()` is called with `pvalue = TRUE` then the p-values rather than the statistics are returned for the three tests.
+Note if `ssd_gof()` is called with `pvalue = TRUE` then the p-values rather than the statistics are returned for the ad, ks and cvm tests.
 
 Following @burnham_model_2002 we recommend the `aicc` for model selection.
 The best predictive model is that with the lowest `aicc` (indicated by the model with a `delta` value of 0.000 in the goodness of fit table).
 In the current example the best predictive model is the gamma distribution but the lnorm distribution has some support.
 
 For further information on the advantages of an information theoretic approach in the context of selecting SSDs the reader is referred to @fox_recent_2021.
-
 
 ## Averaging Multiple Distributions
 

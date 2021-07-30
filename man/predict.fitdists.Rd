@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict.R
 \name{predict.fitdists}
 \alias{predict.fitdists}
-\title{Predict fitdists}
+\title{Predict Hazard Concentrations of fitdists Object}
 \usage{
 \method{predict}{fitdists}(
   object,
@@ -39,9 +39,16 @@
 \item{...}{Unused.}
 }
 \description{
-Predict fitdists
+A wrapper on \code{\link[=ssd_hc]{ssd_hc()}} that by default calculates
+all hazard concentrations from 1 to 99\%.
+}
+\details{
+It is useful for plotting purposes.
 }
 \examples{
 fits <- ssd_fit_dists(ssdtools::boron_data)
 predict(fits)
+}
+\seealso{
+\code{\link[=ssd_hc]{ssd_hc()}} and \code{\link[=ssd_plot]{ssd_plot()}}
 }

@@ -22,7 +22,7 @@
 #' @inheritParams params
 #' @param hc A whole numeric vector between 1 and 99 indicating the percent hazard concentrations (deprecated for percent).
 #' @return A tibble of corresponding hazard concentrations.
-#' @seealso [`ssd_hp()`].
+#' @seealso [`predict.fitdists()`] and [`ssd_hp()`].
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssdtools::boron_data)

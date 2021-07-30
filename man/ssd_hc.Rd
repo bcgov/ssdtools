@@ -74,5 +74,5 @@ ssd_hc(estimates(fits))
 ssd_hc(ssd_match_moments())
 }
 \seealso{
-\code{\link[=ssd_hp]{ssd_hp()}}.
+\code{\link[=predict.fitdists]{predict.fitdists()}} and \code{\link[=ssd_hp]{ssd_hp()}}.
 }
