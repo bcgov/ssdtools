@@ -2,20 +2,23 @@
 % Please edit documentation in R/ssd-data.R
 \name{ssd_data}
 \alias{ssd_data}
-\title{Species Sensitivity Data}
+\title{Data from fitdists Object}
 \usage{
 ssd_data(x)
 }
 \arguments{
-\item{x}{A fitdists object.}
+\item{x}{The object.}
 }
 \value{
-A tbl data frame of the data.
+A tibble of the original data.
 }
 \description{
-Species Sensitivity Data
+Get a tibble of the original data.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+fits <- ssd_fit_dists(ssdtools::boron_data)
 ssd_data(fits)
+}
+\seealso{
+\code{\link[=augment.fitdists]{augment.fitdists()}},  \code{\link[=ssd_ecd_data]{ssd_ecd_data()}} and \code{\link[=ssd_sort_data]{ssd_sort_data()}}
 }

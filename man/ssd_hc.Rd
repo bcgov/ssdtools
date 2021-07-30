@@ -58,20 +58,20 @@ Gets concentration(s) that protect specified percentage(s) of species.
 }
 \details{
 If \code{ci = TRUE} uses parameteric bootstrapping to get confidence intervals on the
-hazard concentrations(s)
+hazard concentrations(s).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{list}: Hazard Concentrations for list of distributions
+\item \code{list}: Hazard Concentrations for Distributional Estimates
 
 \item \code{fitdists}: Hazard Concentrations for fitdists Object
 }}
 
 \examples{
-ssd_hc(list("lnorm" = NULL))
-ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
 fits <- ssd_fit_dists(ssdtools::boron_data)
 ssd_hc(fits)
+ssd_hc(estimates(fits))
+ssd_hc(ssd_match_moments())
 }
 \seealso{
 \code{\link[=ssd_hp]{ssd_hp()}}.

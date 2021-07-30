@@ -17,13 +17,18 @@
 #' Gets concentration(s) that protect specified percentage(s) of species.
 #' 
 #' If `ci = TRUE` uses parameteric bootstrapping to get confidence intervals on the 
-#' hazard concentrations(s)
+#' hazard concentrations(s).
 #'
 #' @inheritParams params
 #' @param hc A whole numeric vector between 1 and 99 indicating the percent hazard concentrations (deprecated for percent).
 #' @return A tibble of corresponding hazard concentrations.
 #' @seealso [`ssd_hp()`].
 #' @export
+#' @examples
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' ssd_hc(fits)
+#' ssd_hc(estimates(fits))
+#' ssd_hc(ssd_match_moments())
 ssd_hc <- function(x, ...) {
   UseMethod("ssd_hc")
 }
@@ -125,11 +130,8 @@ no_ssd_hc <- function() {
          lcl = hc$lcl, ucl = hc$ucl)
 }
 
-#' @describeIn ssd_hc Hazard Concentrations for list of distributions
+#' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates
 #' @export
-#' @examples
-#' ssd_hc(list("lnorm" = NULL))
-#' ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
 ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   chk_list(x)
   chk_named(x)
@@ -152,9 +154,6 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 
 #' @describeIn ssd_hc Hazard Concentrations for fitdists Object
 #' @export
-#' @examples
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
-#' ssd_hc(fits)
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, 
                             control = NULL, 
                             parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {

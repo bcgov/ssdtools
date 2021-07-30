@@ -40,7 +40,7 @@ plot_coord_scale <- function(data, xlab, ylab, xbreaks = waiver()) {
 #' Plots species sensitivity data and distributions.
 #' 
 #' @inheritParams params
-#' @seealso [ssd_plot_cdf()] and [geom_ssdpoint()]
+#' @seealso [`ssd_plot_cdf()`] and [`geom_ssdpoint()`]
 #' @export
 #' @examples
 #' ssd_plot(ssdtools::boron_data, boron_pred, label = "Species", shape = "Group")

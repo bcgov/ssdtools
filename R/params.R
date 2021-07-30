@@ -31,6 +31,7 @@
 #' uncensored missing (0 and Inf) data in terms of the orders of magnitude 
 #' relative to the extremes for non-missing values.
 #' @param conc A numeric vector of concentrations.
+#' @param digits A whole number specifying the number of significant figures
 #' @param percent A numeric vector of percentages.
 #' @param pvalue A flag specifying whether to return p-values or the statistics (default) for the various tests.
 #' @param ic A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .

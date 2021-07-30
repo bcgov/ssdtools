@@ -2,7 +2,7 @@
 % Please edit documentation in R/augment.R
 \name{augment.fitdists}
 \alias{augment.fitdists}
-\title{fitdists Object's Data}
+\title{Augmented Data from fitdists Object}
 \usage{
 \method{augment}{fitdists}(x, ...)
 }
@@ -12,16 +12,18 @@
 \item{...}{Unused.}
 }
 \value{
-A tibble of a fitdist's object's data set.
+A tibble of the agumented data.
 }
 \description{
-Gets a tibble of fitdists object's data.
+Get a tibble of the original data with augmentation.
 }
 \examples{
 fits <- ssd_fit_dists(ssdtools::boron_data)
 augment(fits)
 }
 \seealso{
+\code{\link[=ssd_data]{ssd_data()}}
+
 Other generics: 
 \code{\link{glance.fitdists}()},
 \code{\link{tidy.fitdists}()}

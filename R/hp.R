@@ -14,11 +14,18 @@
 
 #' Hazard Percent
 #'
-#' Gets percent species protected at specified concentrations.
+#' Gets percent of species protected at specified concentration(s).
+#' 
+#' If `ci = TRUE` uses parameteric bootstrapping to get confidence intervals on the 
+#' hazard percent(s).
 #'
 #' @inheritParams params
-#' @return A data frame of the conc and percent.
+#' @return A tibble of corresponding hazard percents.
+#' @seealso [`ssd_hc()`]
 #' @export
+#' @examples 
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' ssd_hp(fits, conc = 1)
 ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
@@ -103,14 +110,11 @@ ssd_hp <- function(x, ...) {
   hp <- as_tibble(hp)
   hp$conc <- conc
   hp$dist <- "average"
-  hp <- hp[c("dist", "conc", "est", "se", "lcl", "ucl")]
+  hp[c("dist", "conc", "est", "se", "lcl", "ucl")]
 }
 
-#' @describeIn ssd_hp Hazard Percent fitdists
+#' @describeIn ssd_hp Hazard Percents for fitdists Object
 #' @export
-#' @examples
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
-#' ssd_hp(fits, c(0, 1, 30, Inf))
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
                             control = NULL,
                             parallel = NULL, ncpus = 1,

@@ -45,17 +45,24 @@ ssd_hp(x, ...)
 \item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 }
 \value{
-A data frame of the conc and percent.
+A tibble of corresponding hazard percents.
 }
 \description{
-Gets percent species protected at specified concentrations.
+Gets percent of species protected at specified concentration(s).
+}
+\details{
+If \code{ci = TRUE} uses parameteric bootstrapping to get confidence intervals on the
+hazard percent(s).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fitdists}: Hazard Percent fitdists
+\item \code{fitdists}: Hazard Percents for fitdists Object
 }}
 
 \examples{
 fits <- ssd_fit_dists(ssdtools::boron_data)
-ssd_hp(fits, c(0, 1, 30, Inf))
+ssd_hp(fits, conc = 1)
+}
+\seealso{
+\code{\link[=ssd_hc]{ssd_hc()}}
 }

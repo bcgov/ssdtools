@@ -34,18 +34,23 @@ min_discrepancy <- function(dist, meanlog, sdlog, nsim) {
 }
 
 #' Match Moments
+#' 
+#' Gets a named list of the values that produce 
+#' the moment values (meanlog and sdlog) by distribution and term.
 #'
 #' @inheritParams params
-#' @param meanlog A number of the mean on the log scale.
-#' @param sdlog A number of the standard deviation on the log scale.
+#' @param meanlog The mean on the log scale.
+#' @param sdlog The standard deviation on the log scale.
 #'
-#' @return A named list of the parameter values that produce a distribution
-#' with moments closest to the meanlog and sdlog.
-#' @seealso [ssd_plot_cdf()].
+#' @return a named list of the values that produce the moment values by distribution and term.
+#' @seealso [`estimates.fitdists()`], [`ssd_hc()`] and [`ssd_plot_cdf()`]
 #' @export
 #'
 #' @examples
-#' ssd_match_moments()
+#' moments <- ssd_match_moments()
+#' print(moments)
+#' ssd_hc(moments)
+#' ssd_plot_cdf(moments)
 ssd_match_moments <- function(dists = ssd_dists("bc"), meanlog = 1, sdlog = 1,
                               nsim = 1e+05) {
   chk_vector(dists)

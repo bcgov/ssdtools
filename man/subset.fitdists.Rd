@@ -2,7 +2,7 @@
 % Please edit documentation in R/subset.R
 \name{subset.fitdists}
 \alias{subset.fitdists}
-\title{Subset fitdists}
+\title{Subset fitdists Object}
 \usage{
 \method{subset}{fitdists}(x, select = names(x), ...)
 }
@@ -14,7 +14,7 @@
 \item{...}{Unused.}
 }
 \description{
-Subset fitdists
+Select a subset of distributions from a fitdists object.
 }
 \examples{
 fits <- ssd_fit_dists(ssdtools::boron_data)

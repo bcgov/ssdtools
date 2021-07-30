@@ -15,7 +15,7 @@ ssd_plot_cdf(x, ...)
 \arguments{
 \item{x}{The object.}
 
-\item{...}{Unused.}
+\item{...}{Additional arguments passed to \code{\link[=ssd_plot]{ssd_plot()}}.}
 
 \item{average}{A flag specifying whether to model average the estimates.}
 }
@@ -40,4 +40,6 @@ ssd_plot_cdf(list(
 }
 \seealso{
 \code{\link[=ssd_plot]{ssd_plot()}}
+
+\code{\link[=estimates.fitdists]{estimates.fitdists()}} and \code{\link[=ssd_match_moments]{ssd_match_moments()}}
 }

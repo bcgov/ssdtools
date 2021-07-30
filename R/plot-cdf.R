@@ -17,7 +17,7 @@
 #' Generic function to plots the cumulative distribution function (CDF).
 #'
 #' @inheritParams params
-#' @seealso [ssd_plot()]
+#' @seealso [`ssd_plot()`]
 #' @export
 ssd_plot_cdf <- function(x, ...) {
   UseMethod("ssd_plot_cdf")
@@ -46,8 +46,8 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, ...) {
 
 #' @describeIn ssd_plot_cdf Plot CDF for named list of distributional parameter values
 #' @inheritParams params
-#' @param ... Unused.
 #' @export
+#' @seealso [`estimates.fitdists()`] and [`ssd_match_moments()`]
 #' @examples
 #' 
 #' ssd_plot_cdf(list(

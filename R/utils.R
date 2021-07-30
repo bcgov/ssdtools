@@ -19,12 +19,10 @@
 #' to ensure that labels are permitted to have different numbers of decimal places.
 #'
 #' @param x A numeric vector to format.
-#' @param digits A whole number specifying the number of significant figures
 #' @param ... Additional arguments passed to [scales::comma].
-#'
+#' @inheritParams params
 #' @return A character vector.
 #' @export
-#'
 #' @examples
 #' comma_signif(c(0.1, 1, 10, 1000))
 #' scales::comma(c(0.1, 1, 10, 1000))
@@ -57,7 +55,7 @@ ssd_ecd <- function(x, ties.method = "first") {
 #' @inheritParams params
 #' @return A numeric vector of the empirical cumulative density for the rows 
 #' in data.
-#' @seealso ssd_ecd()
+#' @seealso [`ssd_ecd()`] and [`ssd_data()`]
 #' @export
 #'
 #' @examples
@@ -86,7 +84,7 @@ ssd_ecd_data <- function(
 #' @inheritParams params
 #'
 #' @return data sorted by the empirical cumulative density.
-#' @seealso ssd_ecd_data()
+#' @seealso [`ssd_ecd_data()`] and [`ssd_data()`]
 #' @export
 #'
 #' @examples

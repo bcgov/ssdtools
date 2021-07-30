@@ -12,16 +12,20 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Species Sensitivity Data
+#' Data from fitdists Object
 #'
-#' @param x A fitdists object.
+#' Get a tibble of the original data.
 #'
-#' @return A tbl data frame of the data.
+#' @inheritParams params
+#'
+#' @return A tibble of the original data.
+#' @seealso [`augment.fitdists()`],  [`ssd_ecd_data()`] and [`ssd_sort_data()`]
 #' @export
 #'
 #' @examples
-#' fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
 #' ssd_data(fits)
 ssd_data <- function(x) {
+  chk_s3_class(x, "fitdists")
   .org_data_fitdists(x)
 }

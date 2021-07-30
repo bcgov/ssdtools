@@ -14,7 +14,7 @@
 
 #' ggproto Classes for Plotting Species Sensitivity Data and Distributions
 #'
-#' @seealso [ggplot2::ggproto()] and [ssd_plot_cdf()]
+#' @seealso [`ggplot2::ggproto()`] and [`ssd_plot_cdf()`]
 #' @name ssdtools-ggproto
 NULL
 

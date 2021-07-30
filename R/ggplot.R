@@ -53,7 +53,7 @@ scale_color_ssd <- function (...) {
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
-#' @seealso [ssd_plot_cdf()]
+#' @seealso [`ssd_plot_cdf()`]
 #' @family ggplot
 #' @export
 #' @examples
@@ -80,7 +80,7 @@ geom_ssdpoint <- function(mapping = NULL,
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_segment
-#' @seealso [ssd_plot_cdf()]
+#' @seealso [`ssd_plot_cdf()`]
 #' @family ggplot
 #' @export
 #' @examples
@@ -113,7 +113,7 @@ geom_ssdsegment <- function(mapping = NULL,
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_path
 #' @inheritParams params
-#' @seealso [ssd_plot_cdf()]
+#' @seealso [`ssd_plot_cdf()`]
 #' @family ggplot
 #' @export
 #' @examples
@@ -158,7 +158,7 @@ geom_hcintersect <- function(mapping = NULL,
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
-#' @seealso [ssd_plot_cdf()]
+#' @seealso [`ssd_plot_cdf()`]
 #' @family ggplot
 #' @export
 #' @examples
@@ -213,7 +213,7 @@ geom_ssd <- function(mapping = NULL,
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
-#' @seealso [geom_ssdpoint()]
+#' @seealso [`geom_ssdpoint()`]
 #' @family ggplot2
 #' @export
 #' @examples

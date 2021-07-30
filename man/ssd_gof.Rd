@@ -55,5 +55,5 @@ ssd_gof(fits)
 ssd_gof(fits)
 }
 \seealso{
-\code{\link[=glance.fitdists]{glance.fitdists()}}.
+\code{\link[=glance.fitdists]{glance.fitdists()}}
 }

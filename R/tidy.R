@@ -33,7 +33,7 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   x
 }
 
-#' Turn a fitdists Object into a Tidy Tibble
+#' Turn a fitdists Object into a Tibble
 #'
 #' Turns a fitdists object into a tidy tibble of the
 #' estimates (est) and standard errors (se) by the 
@@ -42,6 +42,7 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
 #' @inheritParams params
 #' @return A tidy tibble of the estimates and standard errors.
 #' @family generics
+#' @seealso [`coef.fitdists()`]
 #' @export
 #' @examples 
 #' fits <- ssd_fit_dists(ssdtools::boron_data)

@@ -35,6 +35,8 @@ relative to the extremes for non-missing values.}
 
 \item{conc}{A numeric vector of concentrations.}
 
+\item{digits}{A whole number specifying the number of significant figures}
+
 \item{percent}{A numeric vector of percentages.}
 
 \item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}

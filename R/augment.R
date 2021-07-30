@@ -15,13 +15,14 @@
 #' @export
 generics::augment
 
-#' fitdists Object's Data
+#' Augmented Data from fitdists Object
 #' 
-#' Gets a tibble of fitdists object's data.
+#' Get a tibble of the original data with augmentation.
 #'
 #' @inheritParams params
-#' @return A tibble of a fitdist's object's data set.
+#' @return A tibble of the agumented data.
 #' @family generics
+#' @seealso [`ssd_data()`]
 #' @export
 #' @examples 
 #' fits <- ssd_fit_dists(ssdtools::boron_data)

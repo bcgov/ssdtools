@@ -28,7 +28,7 @@
 #'   \item{Units}{The units (chr).}
 #'   \item{Group}{The taxonomic group (fctr).}
 #' }
-#' @seealso [ccme_data]
+#' @seealso [`ccme_data()`]
 #' @family boron
 #' @examples
 #' head(ccme_data)

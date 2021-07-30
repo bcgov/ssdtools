@@ -31,7 +31,7 @@ The columns are as follows
 head(ccme_data)
 }
 \seealso{
-\link{ccme_data}
+\code{\link[=ccme_data]{ccme_data()}}
 
 Other boron: 
 \code{\link{boron_pred}}

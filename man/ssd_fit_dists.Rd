@@ -65,5 +65,5 @@ ssd_plot_cdf(fits)
 ssd_hc(fits)
 }
 \seealso{
-\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}} and \code{\link[=ssd_hc]{ssd_hc()}}.
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}} and \code{\link[=ssd_hc]{ssd_hc()}}
 }

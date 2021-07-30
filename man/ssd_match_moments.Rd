@@ -14,22 +14,25 @@ ssd_match_moments(
 \arguments{
 \item{dists}{A character vector of the distribution names.}
 
-\item{meanlog}{A number of the mean on the log scale.}
+\item{meanlog}{The mean on the log scale.}
 
-\item{sdlog}{A number of the standard deviation on the log scale.}
+\item{sdlog}{The standard deviation on the log scale.}
 
 \item{nsim}{A positive whole number of the number of simulations to generate.}
 }
 \value{
-A named list of the parameter values that produce a distribution
-with moments closest to the meanlog and sdlog.
+a named list of the values that produce the moment values by distribution and term.
 }
 \description{
-Match Moments
+Gets a named list of the values that produce
+the moment values (meanlog and sdlog) by distribution and term.
 }
 \examples{
-ssd_match_moments()
+moments <- ssd_match_moments()
+print(moments)
+ssd_hc(moments)
+ssd_plot_cdf(moments)
 }
 \seealso{
-\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}.
+\code{\link[=estimates.fitdists]{estimates.fitdists()}}, \code{\link[=ssd_hc]{ssd_hc()}} and \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
 }

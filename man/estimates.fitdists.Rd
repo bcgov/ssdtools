@@ -15,12 +15,15 @@
 A named list of the estimates.
 }
 \description{
-Gets a named list of the estimate values by term and distribution.
+Gets a named list of the estimated values by distribution and term.
 }
 \examples{
 fits <- ssd_fit_dists(ssdtools::boron_data)
-estimates(fits)
+estimates <- estimates(fits)
+print(estimates)
+ssd_hc(estimates)
+ssd_plot_cdf(estimates)
 }
 \seealso{
-\code{\link[=tidy.fitdists]{tidy.fitdists()}}
+\code{\link[=tidy.fitdists]{tidy.fitdists()}}, \code{\link[=ssd_match_moments]{ssd_match_moments()}}, \code{\link[=ssd_hc]{ssd_hc()}} and \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
 }

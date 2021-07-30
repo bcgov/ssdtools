@@ -2,7 +2,7 @@
 % Please edit documentation in R/tidy.R
 \name{tidy.fitdists}
 \alias{tidy.fitdists}
-\title{Turn a fitdists Object into a Tidy Tibble}
+\title{Turn a fitdists Object into a Tibble}
 \usage{
 \method{tidy}{fitdists}(x, all = FALSE, ...)
 }
@@ -27,6 +27,8 @@ tidy(fits)
 tidy(fits, all = TRUE)
 }
 \seealso{
+\code{\link[=coef.fitdists]{coef.fitdists()}}
+
 Other generics: 
 \code{\link{augment.fitdists}()},
 \code{\link{glance.fitdists}()}

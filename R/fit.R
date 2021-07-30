@@ -79,7 +79,7 @@ fit_dists <- function(data, dists, rescale, computable, control, silent) {
 #'
 #' @inheritParams params
 #' @return An object of class fitdists.
-#' @seealso [`ssd_plot_cdf()`] and [`ssd_hc()`].
+#' @seealso [`ssd_plot_cdf()`] and [`ssd_hc()`]
 #'
 #' @export
 #' @examples

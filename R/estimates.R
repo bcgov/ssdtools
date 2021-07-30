@@ -30,15 +30,18 @@ estimates.tmbfit <- function(x,...) {
 
 #' Estimates for fitdists Object
 #' 
-#' Gets a named list of the estimate values by term and distribution.
+#' Gets a named list of the estimated values by distribution and term.
 #' 
 #' @inheritParams params
 #' @return A named list of the estimates.
-#' @seealso [`tidy.fitdists()`]
+#' @seealso [`tidy.fitdists()`], [`ssd_match_moments()`], [`ssd_hc()`] and [`ssd_plot_cdf()`]
 #' @export
 #' @examples 
 #' fits <- ssd_fit_dists(ssdtools::boron_data)
-#' estimates(fits)
+#' estimates <- estimates(fits)
+#' print(estimates)
+#' ssd_hc(estimates)
+#' ssd_plot_cdf(estimates)
 estimates.fitdists <- function(x, ...) {
   y <- lapply(x, estimates)
   names(y) <- names(x)
