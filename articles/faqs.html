@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4.9002</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@
       <h1 data-toc-skip>Frequently Asked Questions</h1>
                         <h4 data-toc-skip class="author">ssdtools Team</h4>
             
-            <h4 data-toc-skip class="date">2021-05-14</h4>
+            <h4 data-toc-skip class="date">2021-07-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/faqs.Rmd" class="external-link"><code>vignettes/faqs.Rmd</code></a></small>
       <div class="hidden name"><code>faqs.Rmd</code></div>
@@ -138,7 +138,50 @@
     Fit <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">ssd_fit_dists</span>, dists <span class="op">=</span> <span class="st">"lnorm"</span><span class="op">)</span>,
     Prediction <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">Fit</span>, <span class="va">predict</span><span class="op">)</span>
   <span class="op">)</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">Prediction</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">Prediction</span><span class="op">)</span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$meanlog</span>
+<span class="co">#&gt; [1] 1.830858</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$sdlog</span>
+<span class="co">#&gt; [1] 0.9481578</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$meanlog</span>
+<span class="co">#&gt; [1] 2.564852</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$sdlog</span>
+<span class="co">#&gt; [1] 0.4602612</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$meanlog</span>
+<span class="co">#&gt; [1] 3.931086</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$sdlog</span>
+<span class="co">#&gt; [1] 0.4821499</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg</span>
+<span class="co">#&gt; $start.arg$meanlog</span>
+<span class="co">#&gt; [1] 2.176528</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $start.arg$sdlog</span>
+<span class="co">#&gt; [1] 1.509361</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fix.arg</span>
+<span class="co">#&gt; NULL</span></code></pre></div>
 <p>The resultant data and predictions can then be plotted as follows.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">boron_data</span>, <span class="va">boron_preds</span>, xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ci <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
