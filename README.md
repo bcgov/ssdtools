@@ -21,10 +21,11 @@ Distributions (SSD).
 SSDs are cumulative probability distributions which are fitted to
 toxicity concentrations for different species as described by Posthuma
 et al. (2001). The ssdtools package uses Maximum Likelihood to fit
-distributions such as the gamma, log-logistic, log-normal and Weibull to
-censored and/or weighted data. Multiple distributions can be averaged
-using Akaike Information Criteria. Confidence intervals on hazard
-concentrations and proportions are produced by parametric bootstrapping.
+distributions such as the gamma, log-Gumbel (identical to inverse
+Weibull), log-logistic, log-normal and Weibull to censored and/or
+weighted data. Multiple distributions can be averaged using Akaike
+Information Criteria. Confidence intervals on hazard concentrations and
+proportions are produced by parametric bootstrapping.
 
 ## Installation
 
@@ -48,7 +49,7 @@ devtools::install_github("bcgov/ssdtools")
 
 ``` r
 library(ssdtools)
-boron_data
+ssdtools::boron_data
 #> # A tibble: 28 × 5
 #>    Chemical Species                  Conc Group        Units
 #>    <chr>    <chr>                   <dbl> <fct>        <chr>
@@ -68,7 +69,7 @@ boron_data
 Distributions are fit using `ssd_fit_dists()`
 
 ``` r
-boron_dists <- ssd_fit_dists(boron_data)
+fits <- ssd_fit_dists(ssdtools::boron_data)
 ```
 
 and can be quickly plotted using the `ggplot2` generic `autoplot`
@@ -78,7 +79,7 @@ library(ggplot2)
 
 theme_set(theme_bw())
 
-autoplot(boron_dists) + 
+autoplot(fits) + 
   scale_colour_ssd()
 ```
 
@@ -87,7 +88,7 @@ autoplot(boron_dists) +
 The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
-ssd_gof(boron_dists)
+ssd_gof(fits)
 #> # A tibble: 3 × 9
 #>   dist      ad     ks    cvm   aic  aicc   bic delta weight
 #>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
@@ -96,19 +97,17 @@ ssd_gof(boron_dists)
 #> 3 lnorm  0.507 0.107  0.0703  239.  240.  242.  1.40  0.296
 ```
 
-and the model-averaged 5% hazard concentration estimated using `ssd_hc`
+and the model-averaged 5% hazard concentration estimated by parametric
+bootstrapping using `ssd_hc`
 
 ``` r
 set.seed(99)
-boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
-```
-
-``` r
-print(boron_hc5)
+hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100) # 100 bootstrap samples for speed
+print(hc5)
 #> # A tibble: 1 × 6
 #>   dist    percent   est    se   lcl   ucl
 #>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 average       5  1.31 0.821 0.504  3.62
+#> 1 average       5  1.31 0.881 0.569  3.63
 ```
 
 Model-averaged predictions complete with confidence intervals can be
@@ -116,13 +115,13 @@ produced using the `stats` generic `predict`
 
 ``` r
 set.seed(99)
-boron_pred <- predict(boron_dists, ci = TRUE)
+boron_pred <- predict(fits, ci = TRUE)
 ```
 
 and plotted together with the original data using `ssd_plot`.
 
 ``` r
-ssd_plot(boron_data, boron_pred,
+ssd_plot(ssdtools::boron_data, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
 ) + 
@@ -131,7 +130,7 @@ ssd_plot(boron_data, boron_pred,
 #> Warning: Ignoring unknown aesthetics: shape
 ```
 
-![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
 
 ## References
 

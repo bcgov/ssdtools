@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 `ssdtools` is an R package to fit and plot Species Sensitivity Distributions (SSD). 
 
 SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al. (2001).
-The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-logistic, log-normal and Weibull to censored and/or weighted data.
+The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-Gumbel (identical to inverse Weibull), log-logistic, log-normal and Weibull to censored and/or weighted data.
 Multiple distributions can be averaged using Akaike Information Criteria.
 Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.
 
@@ -48,12 +48,12 @@ devtools::install_github("bcgov/ssdtools")
 `ssdtools` provides a data set for several chemicals including Boron.
 ```{r, message=FALSE}
 library(ssdtools)
-boron_data
+ssdtools::boron_data
 ```
 
 Distributions are fit using `ssd_fit_dists()`
-```{r, eval = FALSE}
-boron_dists <- ssd_fit_dists(boron_data)
+```{r}
+fits <- ssd_fit_dists(ssdtools::boron_data)
 ```
 
 and can be quickly plotted using the `ggplot2` generic `autoplot`
@@ -62,34 +62,31 @@ library(ggplot2)
 
 theme_set(theme_bw())
 
-autoplot(boron_dists) + 
+autoplot(fits) + 
   scale_colour_ssd()
 ```
 
 The goodness of fit can be assessed using `ssd_gof`
-```{r, warning = FALSE}
-ssd_gof(boron_dists)
-```
-
-and the model-averaged 5% hazard concentration estimated using `ssd_hc`
-```{r, eval = FALSE}
-set.seed(99)
-boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
-```
-
 ```{r}
-print(boron_hc5)
+ssd_gof(fits)
+```
+
+and the model-averaged 5% hazard concentration estimated by parametric bootstrapping using `ssd_hc`
+```{r}
+set.seed(99)
+hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100) # 100 bootstrap samples for speed
+print(hc5)
 ```
 
 Model-averaged predictions complete with confidence intervals can be produced using the `stats` generic `predict`
 ```{r, eval=FALSE}
 set.seed(99)
-boron_pred <- predict(boron_dists, ci = TRUE)
+boron_pred <- predict(fits, ci = TRUE)
 ```
 
 and plotted together with the original data using `ssd_plot`.
 ```{r}
-ssd_plot(boron_data, boron_pred,
+ssd_plot(ssdtools::boron_data, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
 ) + 
