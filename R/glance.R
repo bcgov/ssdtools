@@ -32,14 +32,18 @@ generics::glance
   )
 }
 
-#' Construct a tibble::tibble() with a single row "glance" for each tmbfit model.
+#' Get a tibble summarizing each distribution
 #'
-#' Turns a fitdists object into a glance tibble.
+#' Gets a tibble with a single row for each distribution.
 #' 
-#' @param x A fitdists object to be converted into a tidy tibble::tibble().
-#' @param ... Must be unused.
-#'  
+#' @inheritParams params
+#' @return A tidy tibble of the distributions.
+#' @family generics
+#' @seealso [`ssd_gof()`]
 #' @export
+#' @examples 
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' glance(fits)
 glance.fitdists <- function(x, ...) {
   nobs <- nobs(x)
   tbl <- lapply(x, .glance_tmbfit, nobs = nobs)

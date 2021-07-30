@@ -15,12 +15,17 @@
 #' @export
 generics::augment
 
-#' Augment data with information from an object.
+#' fitdists Object's Data
+#' 
+#' Gets a tibble of fitdists object's data.
 #'
-#' @param x A fitdists object.
-#' @param ... Unused.
-#'  
+#' @inheritParams params
+#' @return A tibble of a fitdist's object's data set.
+#' @family generics
 #' @export
+#' @examples 
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' augment(fits)
 augment.fitdists <- function(x, ...) {
   .org_data_fitdists(x)
 }

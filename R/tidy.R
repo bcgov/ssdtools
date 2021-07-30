@@ -15,14 +15,6 @@
 #' @export
 generics::tidy
 
-#' Turn a tmbfit object into a tidy tibble
-#'
-#' Turns a tmbfit object into a tidy tibble.
-#' 
-#' @param x A tmbfit object to be converted into a tidy tibble::tibble().
-#' @param all A flag specifying whether to also return transformed parameters.
-#' @param ... Unused.
-#'  
 #' @export
 tidy.tmbfit <- function(x, all = FALSE, ...) {
   chk_flag(all)
@@ -41,15 +33,20 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   x
 }
 
-#' Turn a fitdists object into a tidy tibble
+#' Turn a fitdists Object into a Tidy Tibble
 #'
-#' Turns a fitdists object into a tidy tibble.
+#' Turns a fitdists object into a tidy tibble of the
+#' estimates (est) and standard errors (se) by the 
+#' terms (term) and distributions (dist).
 #' 
-#' @param x A fitdists object to be converted into a tidy tibble::tibble().
-#' @param all A flag specifying whether to also return transformed parameters.
-#' @param ... Must be unused.
-#'  
+#' @inheritParams params
+#' @return A tidy tibble of the estimates and standard errors.
+#' @family generics
 #' @export
+#' @examples 
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' tidy(fits)
+#' tidy(fits, all = TRUE)
 tidy.fitdists <- function(x, all = FALSE, ...) {
  x <- lapply(x, tidy, all = all)
  x <- bind_rows(x)

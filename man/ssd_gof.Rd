@@ -54,3 +54,6 @@ fits <- ssd_fit_dists(ssdtools::boron_data)
 ssd_gof(fits)
 ssd_gof(fits)
 }
+\seealso{
+\code{\link[=glance.fitdists]{glance.fitdists()}}.
+}

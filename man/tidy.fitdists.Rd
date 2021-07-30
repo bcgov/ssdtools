@@ -2,17 +2,33 @@
 % Please edit documentation in R/tidy.R
 \name{tidy.fitdists}
 \alias{tidy.fitdists}
-\title{Turn a fitdists object into a tidy tibble}
+\title{Turn a fitdists Object into a Tidy Tibble}
 \usage{
 \method{tidy}{fitdists}(x, all = FALSE, ...)
 }
 \arguments{
-\item{x}{A fitdists object to be converted into a tidy tibble::tibble().}
+\item{x}{The object.}
 
 \item{all}{A flag specifying whether to also return transformed parameters.}
 
-\item{...}{Must be unused.}
+\item{...}{Unused.}
+}
+\value{
+A tidy tibble of the estimates and standard errors.
 }
 \description{
-Turns a fitdists object into a tidy tibble.
+Turns a fitdists object into a tidy tibble of the
+estimates (est) and standard errors (se) by the
+terms (term) and distributions (dist).
 }
+\examples{
+fits <- ssd_fit_dists(ssdtools::boron_data)
+tidy(fits)
+tidy(fits, all = TRUE)
+}
+\seealso{
+Other generics: 
+\code{\link{augment.fitdists}()},
+\code{\link{glance.fitdists}()}
+}
+\concept{generics}

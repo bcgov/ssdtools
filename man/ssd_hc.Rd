@@ -4,7 +4,7 @@
 \alias{ssd_hc}
 \alias{ssd_hc.list}
 \alias{ssd_hc.fitdists}
-\title{Hazard Concentration}
+\title{Hazard Concentrations for Species Sensitivity Distributions}
 \usage{
 ssd_hc(x, ...)
 
@@ -32,7 +32,7 @@ ssd_hc(x, ...)
 
 \item{percent}{A numeric vector of percentages.}
 
-\item{hc}{A numeric vector of percentages.}
+\item{hc}{A whole numeric vector between 1 and 99 indicating the percent hazard concentrations (deprecated for percent).}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
@@ -51,21 +51,28 @@ ssd_hc(x, ...)
 \item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
 }
 \value{
-A data frame of the percent and concentrations.
+A tibble of corresponding hazard concentrations.
 }
 \description{
-Gets concentrations that protect specified percentages of species.
+Gets concentration(s) that protect specified percentage(s) of species.
+}
+\details{
+If \code{ci = TRUE} uses parameteric bootstrapping to get confidence intervals on the
+hazard concentrations(s)
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{list}: Hazard Concentration list of distributions
+\item \code{list}: Hazard Concentrations for list of distributions
 
-\item \code{fitdists}: Hazard Concentration fitdists
+\item \code{fitdists}: Hazard Concentrations for fitdists Object
 }}
 
 \examples{
 ssd_hc(list("lnorm" = NULL))
 ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
 fits <- ssd_fit_dists(ssdtools::boron_data)
-ssd_hc(fits, c(0, 1, 30, Inf))
+ssd_hc(fits)
+}
+\seealso{
+\code{\link[=ssd_hp]{ssd_hp()}}.
 }

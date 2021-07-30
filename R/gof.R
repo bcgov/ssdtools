@@ -40,6 +40,7 @@
 #'
 #' @inheritParams params
 #' @return A tbl data frame of the gof statistics.
+#' @seealso [`glance.fitdists()`].
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssdtools::boron_data)

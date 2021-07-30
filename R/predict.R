@@ -15,7 +15,12 @@
 #' @export
 stats::predict
 
+#' Predict fitdists
+#' @inheritParams params
 #' @export
+#' @examples 
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' predict(fits)
 predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,
                              average = TRUE, ic = "aicc",

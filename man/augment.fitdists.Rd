@@ -2,15 +2,28 @@
 % Please edit documentation in R/augment.R
 \name{augment.fitdists}
 \alias{augment.fitdists}
-\title{Augment data with information from an object.}
+\title{fitdists Object's Data}
 \usage{
 \method{augment}{fitdists}(x, ...)
 }
 \arguments{
-\item{x}{A fitdists object.}
+\item{x}{The object.}
 
 \item{...}{Unused.}
 }
-\description{
-Augment data with information from an object.
+\value{
+A tibble of a fitdist's object's data set.
 }
+\description{
+Gets a tibble of fitdists object's data.
+}
+\examples{
+fits <- ssd_fit_dists(ssdtools::boron_data)
+augment(fits)
+}
+\seealso{
+Other generics: 
+\code{\link{glance.fitdists}()},
+\code{\link{tidy.fitdists}()}
+}
+\concept{generics}

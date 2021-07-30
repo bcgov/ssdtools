@@ -17,6 +17,7 @@ A unique, sorted character vector of the distributions.
 Gets a character vector of the names of implemented distributions.
 }
 \examples{
-ssd_dists()
-ssd_dists("all")
+ssd_dists("stable")
+ssd_dists("unstable")
+ssd_dists("bc")
 }

@@ -28,7 +28,17 @@ estimates.tmbfit <- function(x,...) {
   as.list(pars)
 }
 
+#' Estimates for fitdists Object
+#' 
+#' Gets a named list of the estimate values by term and distribution.
+#' 
+#' @inheritParams params
+#' @return A named list of the estimates.
+#' @seealso [`tidy.fitdists()`]
 #' @export
+#' @examples 
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' estimates(fits)
 estimates.fitdists <- function(x, ...) {
   y <- lapply(x, estimates)
   names(y) <- names(x)

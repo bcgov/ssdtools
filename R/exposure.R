@@ -17,10 +17,10 @@
 #' Calculates average proportion exposed based on log-normal distribution of concentrations.
 #'
 #' @inheritParams params
-#' @param meanlog A number of the mean of the exposure concentrations on the log scale.
-#' @param sdlog A number of the standard deviation of the exposure concentrations on the log scale.
+#' @param meanlog The mean of the exposure concentrations on the log scale.
+#' @param sdlog The standard deviation of the exposure concentrations on the log scale.
 #' @param nboot The number of samples to use to calculate the exposure.
-#' @return A number of the proportion exposed.
+#' @return The proportion exposed.
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")

@@ -22,8 +22,9 @@
 #' @export
 #'
 #' @examples
-#' ssd_dists()
-#' ssd_dists("all")
+#' ssd_dists("stable")
+#' ssd_dists("unstable")
+#' ssd_dists("bc")
 ssd_dists <- function(type = "stable") {
   chk_string(type)
   chk_subset(type, c("all", "stable", "unstable", "bc"))

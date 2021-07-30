@@ -2,15 +2,30 @@
 % Please edit documentation in R/glance.R
 \name{glance.fitdists}
 \alias{glance.fitdists}
-\title{Construct a tibble::tibble() with a single row "glance" for each tmbfit model.}
+\title{Get a tibble summarizing each distribution}
 \usage{
 \method{glance}{fitdists}(x, ...)
 }
 \arguments{
-\item{x}{A fitdists object to be converted into a tidy tibble::tibble().}
+\item{x}{The object.}
 
-\item{...}{Must be unused.}
+\item{...}{Unused.}
+}
+\value{
+A tidy tibble of the distributions.
 }
 \description{
-Turns a fitdists object into a glance tibble.
+Gets a tibble with a single row for each distribution.
 }
+\examples{
+fits <- ssd_fit_dists(ssdtools::boron_data)
+glance(fits)
+}
+\seealso{
+\code{\link[=ssd_gof]{ssd_gof()}}
+
+Other generics: 
+\code{\link{augment.fitdists}()},
+\code{\link{tidy.fitdists}()}
+}
+\concept{generics}

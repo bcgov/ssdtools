@@ -50,15 +50,20 @@ Fits one or more distributions to species sensitivity data.
 \details{
 By default the 'llogis', 'gamma' and 'lnorm'
 distributions are fitted to the data.
-The ssd_fit_dists function has also been
-tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.
+For a complete list of the implemented distributions see \code{\link[=ssd_dists]{ssd_dists()}}.
 
 If weight specifies a column in the data frame with positive numbers,
 weighted estimation occurs.
-However, currently only the resultant parameter estimates are available (via coef).
+However, currently only the resultant parameter estimates are available.
 
 If the \code{right} argument is different to the \code{left} argument then the data are considered to be censored.
 }
 \examples{
-ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssdtools::boron_data)
+fits
+ssd_plot_cdf(fits)
+ssd_hc(fits)
+}
+\seealso{
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}} and \code{\link[=ssd_hc]{ssd_hc()}}.
 }

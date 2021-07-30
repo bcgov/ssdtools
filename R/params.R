@@ -14,6 +14,7 @@
 
 #' Parameter Descriptions for ssdtools Functions
 #'
+#' @param all A flag specifying whether to also return transformed parameters.
 #' @param x The object.
 #' @param object The object.
 #' @param control A list of control parameters passed to [stats::optim].

@@ -4,6 +4,8 @@
 \alias{params}
 \title{Parameter Descriptions for ssdtools Functions}
 \arguments{
+\item{all}{A flag specifying whether to also return transformed parameters.}
+
 \item{x}{The object.}
 
 \item{object}{The object.}

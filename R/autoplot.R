@@ -15,7 +15,17 @@
 #' @export
 ggplot2::autoplot
 
+#' Plot a fitdists Object
+#' 
+#' A wrapper on [`ssd_plot_cdf()`].
+#' 
+#' @inheritParams params
+#' @return A ggplot object.
+#' @seealso [`ssd_plot_cdf()`]
 #' @export
+#' @examples 
+#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' autoplot(fits)
 autoplot.fitdists <- function(object, ...) {
   ssd_plot_cdf(object, ...)
 }
