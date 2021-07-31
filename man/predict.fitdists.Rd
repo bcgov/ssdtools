@@ -11,7 +11,7 @@
   level = 0.95,
   nboot = 1000,
   average = TRUE,
-  delta_aic = 10,
+  delta = 10,
   parallel = NULL,
   ncpus = 1,
   ...
@@ -30,7 +30,7 @@
 
 \item{average}{A flag specifying whether to model average the estimates.}
 
-\item{delta_aic}{A non-negative number specifying the maximum absolute akaike information-theoretic criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded from consideration.}
+\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
 
 \item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
 
