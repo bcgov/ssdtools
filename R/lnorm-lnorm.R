@@ -51,7 +51,7 @@ slnorm_lnorm <- function(data) {
 }
 
 blnorm_lnorm <- function(x, data, min_pmix) {
-  list(lower = list(meanlog1 = -Inf, log_sdlog1 = -Inf, meanlog2 = -Inf, log_sdlog2 = -Inf, logit_pmix = logit(0)),
+  list(lower = list(meanlog1 = -Inf, log_sdlog1 = -Inf, meanlog2 = -Inf, log_sdlog2 = -Inf, logit_pmix = logit(min_pmix)),
        upper = list(meanlog1 = Inf, log_sdlog1 = Inf, meanlog2 = Inf, log_sdlog2 = Inf, logit_pmix = logit(1 - min_pmix)))
 }
 

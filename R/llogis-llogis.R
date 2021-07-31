@@ -50,7 +50,7 @@ sllogis_llogis <- function(data) {
 }
 
 bllogis_llogis <- function(x, data, min_pmix) {
-  list(lower = list(locationlog1 = -Inf, log_scalelog1 = -Inf, locationlog2 = -Inf, log_scalelog2 = -Inf, logit_pmix = logit(0)),
+  list(lower = list(locationlog1 = -Inf, log_scalelog1 = -Inf, locationlog2 = -Inf, log_scalelog2 = -Inf, logit_pmix = logit(min_pmix)),
        upper = list(locationlog1 = Inf, log_scalelog1 = Inf, locationlog2 = Inf, log_scalelog2 = Inf, logit_pmix = logit(1 - min_pmix)))
 }
 

@@ -352,3 +352,15 @@ test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
   # 
   # expect_equal(tidy(fits0), tidy(fitsna))
 })
+
+test_that("ssd_fit_dists min_pmix", {
+  set.seed(99)
+  conc <- rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.1)
+  data <- data.frame(Conc = conc)
+  fits <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.1)
+  tidy <- tidy(fits)
+  expect_snapshot_data(tidy, "min_pmix5")
+  expect_error(expect_warning(expect_warning(ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.11))),
+               "All distributions failed to fit.")
+})
+
