@@ -107,6 +107,20 @@ test_that("hp fitdists works reasonable conc", {
   expect_equal(hp$ucl, NA_real_) 
 })
 
+test_that("hp fitdists works with multiple concs", {
+  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  
+  hp <- ssd_hp(fits, c(2.5,1))
+  expect_s3_class(hp, "tbl_df")
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_equal(hp$dist, c("average", "average"))
+  expect_identical(hp$conc, c(2.5,1))
+  expect_equal(hp$est, c(9.25437337881004, 1.9543030195088)) 
+  expect_equal(hp$se, c(NA_real_, NA_real_)) 
+  expect_equal(hp$lcl, c(NA_real_, NA_real_)) 
+  expect_equal(hp$ucl, c(NA_real_, NA_real_)) 
+})
+
 test_that("hp fitdists works with cis", {
   fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
   

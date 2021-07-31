@@ -85,8 +85,8 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_fitdists <- function(x, percent, ci, level, nboot, control, parallel, ncpus,
-                             average, ic) {
+.ssd_hc_fitdists <- function(x, percent, ci, level, nboot,
+                             average, control, parallel, ncpus) {
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
@@ -155,11 +155,23 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 #' @describeIn ssd_hc Hazard Concentrations for fitdists Object
 #' @export
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, 
-                            average = TRUE, ic = "aicc",
+                            average = TRUE, delta_aic = 10,
                             control = NULL, 
                             parallel = NULL, ncpus = 1,  ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "aicc", "bic"))
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_range(percent, c(0,100))
+  chk_vector(hc)
+  chk_numeric(hc)
+  chk_range(hc, c(0,100))
+  chk_flag(ci)
+  chk_number(level)
+  chk_range(level)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  chk_flag(average)
+  chk_whole_number(delta_aic)
+  chk_gte(delta_aic)
   chk_null_or(control, chk_list)
   chk_unused(...)
 
@@ -170,6 +182,6 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   .ssd_hc_fitdists(x, percent,
     ci = ci, level = level, nboot = nboot, control = control,
     parallel = parallel, ncpus = ncpus,
-    average = average, ic = ic
+    average = average
   )
 }

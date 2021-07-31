@@ -64,7 +64,7 @@ ssd_hp <- function(x, ...) {
 }
 
 .ssd_hp_fitdists <- function(x, conc, ci, level, nboot, control, parallel, ncpus,
-                             average, ic) {
+                             average) {
   if (!length(x) || !length(conc)) {
     no <- numeric(0)
     return(tibble(
@@ -116,16 +116,26 @@ ssd_hp <- function(x, ...) {
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
 #' @export
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
-                            average = TRUE, ic = "aicc", control = NULL,
+                            average = TRUE, delta_aic = 10,
+                            control = NULL,
                             parallel = NULL, ncpus = 1, ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "aicc", "bic"))
+  chk_vector(conc)
+  chk_numeric(conc)
+  chk_flag(ci)
+  chk_number(level)
+  chk_range(level)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  chk_flag(average)
+  chk_whole_number(delta_aic)
+  chk_gte(delta_aic)
   chk_null_or(control, chk_list)
   chk_unused(...)
 
   .ssd_hp_fitdists(x, conc,
-    ci = ci, level = level, nboot = nboot, control = control,
-    parallel = parallel, ncpus = ncpus,
-    average = average, ic = ic
+    ci = ci, level = level, nboot = nboot, 
+    average = average, 
+    control = control,
+    parallel = parallel, ncpus = ncpus
   )
 }

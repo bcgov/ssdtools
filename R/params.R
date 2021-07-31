@@ -34,7 +34,7 @@
 #' @param digits A whole number specifying the number of significant figures
 #' @param percent A numeric vector of percentages.
 #' @param pvalue A flag specifying whether to return p-values or the statistics (default) for the various tests.
-#' @param ic A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .
+#' @param delta_aic A non-negative number specifying the maximum absolute akaike information-theoretic criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded from consideration.
 #' @param average A flag specifying whether to model average the estimates.
 #' @param ci A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).
 #' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
