@@ -50,6 +50,11 @@ slnorm_lnorm <- function(data) {
   c(s1, s2, logit_pmix)
 }
 
+blnorm_lnorm <- function(x, data, min_pmix) {
+  list(lower = list(meanlog1 = -Inf, log_sdlog1 = -Inf, meanlog2 = -Inf, log_sdlog2 = -Inf, logit_pmix = logit(0)),
+       upper = list(meanlog1 = Inf, log_sdlog1 = Inf, meanlog2 = Inf, log_sdlog2 = Inf, logit_pmix = logit(1 - min_pmix)))
+}
+
 plnorm_lnorm_ssd <- function(q, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
   if(sdlog1 <= 0 || sdlog2 <= 0 || meanlog1 >= meanlog2 || pmix <= 0 || pmix >= 1) {
     return(NaN)

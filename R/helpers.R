@@ -33,6 +33,11 @@ is_bounds <- function(dist) {
   exists(fun, mode = "function")
 }
 
+logit <- function (x) 
+{
+  stats::qlogis(x)
+}
+
 bind_rows <- function(x) {
   x <- do.call("rbind", x)
   as_tibble(x)
@@ -96,10 +101,10 @@ rename_data <- function(data, left, right, weight) {
   data
 }
 
-is_at_boundary <- function(fit, data) {
+is_at_boundary <- function(fit, data, min_pmix) {
   dist <- .dist_tmbfit(fit)
   if(!is_bounds(dist)) return(FALSE)
-  bounds <- bdist(dist, data)
+  bounds <- bdist(dist, data, min_pmix)
   pars <- .pars_tmbfit(fit)
   
   lower <- as.numeric(bounds$lower[names(pars)])

@@ -14,6 +14,7 @@ ssd_fit_dists(
   rescale = FALSE,
   reweight = FALSE,
   computable = TRUE,
+  min_pmix = 0.2,
   control = list(),
   silent = FALSE
 )
@@ -36,6 +37,8 @@ ssd_fit_dists(
 \item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
+
+\item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 
 \item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
 

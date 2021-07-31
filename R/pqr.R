@@ -126,11 +126,11 @@ sdist <- function(dist, data) {
   do.call(fun, list(data = data))
 }
 
-bdist <- function(dist, data) {
+bdist <- function(dist, data, min_pmix) {
   fun <- paste0("b", dist)
   if(!exists(fun, mode = "function"))
     return(list(lower = -Inf, upper = Inf))
-  do.call(fun, list(data = data))
+  do.call(fun, list(data = data, min_pmix = min_pmix))
 }
 
 mdist <- function(dist) {

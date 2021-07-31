@@ -49,6 +49,11 @@ sllogis_llogis <- function(data) {
   c(s1, s2, logit_pmix)
 }
 
+bllogis_llogis <- function(x, data, min_pmix) {
+  list(lower = list(locationlog1 = -Inf, log_scalelog1 = -Inf, locationlog2 = -Inf, log_scalelog2 = -Inf, logit_pmix = logit(0)),
+       upper = list(locationlog1 = Inf, log_scalelog1 = Inf, locationlog2 = Inf, log_scalelog2 = Inf, logit_pmix = logit(1 - min_pmix)))
+}
+
 plogis_logis_ssd <- function(q, location1, scale1, location2, scale2, pmix) {
   if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
     return(NaN)
