@@ -21,13 +21,13 @@ generate_data <- function(dist, args, weighted, censoring) {
   censor_data(data, censoring)
 }
 
-sample_parameters <- function(i, dist, args, pars, weighted, censoring, control) {
+sample_parameters <- function(i, dist, args, pars, weighted, censoring, min_pmix, control) {
   new_data <- generate_data(dist, args, weighted, censoring)
-  fit <- fit_tmb(dist, new_data, control = control, pars = pars, hessian = FALSE)
+  fit <- fit_tmb(dist, new_data, min_pmix, control = control, pars = pars, hessian = FALSE)
   estimates(fit)
 }
 
-boot_tmbfit <- function(x, nboot, data, weighted, censoring, control, parallel, ncpus) {
+boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control, parallel, ncpus) {
   # need to do parallel
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
@@ -35,5 +35,5 @@ boot_tmbfit <- function(x, nboot, data, weighted, censoring, control, parallel, 
   pars <- .pars_tmbfit(x)
 
   lapply(1:nboot, sample_parameters, dist = dist, args = args, pars = pars, 
-         weighted = weighted, censoring = censoring, control = control)
+         weighted = weighted, censoring = censoring, min_pmix = min_pmix, control = control)
 }

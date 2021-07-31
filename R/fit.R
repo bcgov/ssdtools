@@ -143,6 +143,7 @@ ssd_fit_dists <- function(
   attrs$cols <- list(left = left, right = right, weight = weight)
   attrs$control <- control
   attrs$org_data <- org_data
+  attrs$min_pmix <- min_pmix
   
   .attrs_fitdists(fits) <- attrs
   fits

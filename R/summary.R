@@ -30,6 +30,7 @@ summary.fitdists <- function(object, ...) {
   x$rescaled <- .rescale_fitdists(object)
   x$weighted <- .weighted_fitdists(object)
   x$unequal <- .unequal_fitdists(object)
+  x$min_pmix <- .min_pmix_fitdists(object)
   class(x) <- "summary_fitdists"
   x
 }
