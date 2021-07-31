@@ -116,9 +116,8 @@ ssd_hp <- function(x, ...) {
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
 #' @export
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
-                            control = NULL,
-                            parallel = NULL, ncpus = 1,
-                            average = TRUE, ic = "aicc", ...) {
+                            average = TRUE, ic = "aicc", control = NULL,
+                            parallel = NULL, ncpus = 1, ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
   chk_null_or(control, chk_list)

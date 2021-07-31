@@ -155,8 +155,9 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 #' @describeIn ssd_hc Hazard Concentrations for fitdists Object
 #' @export
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, 
+                            average = TRUE, ic = "aicc",
                             control = NULL, 
-                            parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
+                            parallel = NULL, ncpus = 1,  ...) {
   chk_string(ic)
   chk_subset(ic, c("aic", "aicc", "bic"))
   chk_null_or(control, chk_list)

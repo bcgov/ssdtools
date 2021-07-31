@@ -10,10 +10,10 @@
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
   average = TRUE,
   ic = "aicc",
+  parallel = NULL,
+  ncpus = 1,
   ...
 )
 }
@@ -28,13 +28,13 @@
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
 
-\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
-
-\item{ncpus}{A count of the number of parallel processes to use.}
-
 \item{average}{A flag specifying whether to model average the estimates.}
 
 \item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
+
+\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
+
+\item{ncpus}{A count of the number of parallel processes to use.}
 
 \item{...}{Unused.}
 }

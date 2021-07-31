@@ -29,8 +29,9 @@ stats::predict
 #' fits <- ssd_fit_dists(ssdtools::boron_data)
 #' predict(fits)
 predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
-                             level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,
-                             average = TRUE, ic = "aicc",
+                             level = 0.95, nboot = 1000, 
+                             average = TRUE, ic = "aicc", 
+                             parallel = NULL, ncpus = 1,
                              ...) {
   chk_unused(...)
   ssd_hc(object,
