@@ -22,8 +22,8 @@ qllogis <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p =
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
-rllogis <- function(n, locationlog = 0, scalelog = 1) {
-  rdist("logis", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE)
+rllogis <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
+  rdist("logis", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
 }
 
 sllogis <- function(data) {

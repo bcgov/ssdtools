@@ -22,8 +22,8 @@ qburrIII3 <- function(p, shape1 = 1, shape2 = 1, scale = 1, lower.tail = TRUE, l
         lower.tail = lower.tail, log.p = log.p)
 }
 
-rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1) {
-  rdist("burrIII3", n = n, shape1 = shape1, shape2 = shape2, scale = scale)
+rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE) {
+  rdist("burrIII3", n = n, shape1 = shape1, shape2 = shape2, scale = scale, chk = chk)
 }
 
 sburrIII3 <- function(data) {

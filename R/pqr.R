@@ -17,7 +17,7 @@
   
   if(any(vapply(args, length, 1L) != 1L)) stop()
   if(any(is.na(unlist(args)))) return(NA_real_)
-
+  
   do.call(fun, args = args)
 }
 
@@ -39,7 +39,7 @@ pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   
   if(!.lgt)
     return(.pdist(dist, q = q, ..., lower.tail = lower.tail, log.p = log.p))
-
+  
   lte <- !is.na(q) & q <= 0
   q[lte] <- NA_real_
   p <- .pdist(dist, q = log(q),  ..., lower.tail = TRUE, log.p = FALSE)
@@ -100,21 +100,22 @@ qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   do.call(qfun, c(p = list(p), args))
 }
 
-rdist <- function(dist, n, ..., .lgt = FALSE) {
-  if(!length(n)) return(numeric(0))
-  
-  if(length(n) > 1) {
-    n <- length(n)
+rdist <- function(dist, n, ..., .lgt = FALSE, chk) {
+  if(chk) {
+    if(!length(n)) return(numeric(0))
+    
+    if(length(n) > 1) {
+      n <- length(n)
+    }
+    chk_not_any_na(n)
+    n <- floor(n)
+    chk_gte(n)
+    
+    if(n == 0L) return(numeric(0))
+    
+    chk_all(list(...), check_dim, values = 1L, x_name = "...")
+    if(any_missing(...)) return(rep(NA_real_, n))
   }
-  chk_not_any_na(n)
-  n <- floor(n)
-  chk_gte(n)
-  
-  if(n == 0L) return(numeric(0))
-  
-  chk_all(list(...), check_dim, values = 1L, x_name = "...")
-  if(any_missing(...)) return(rep(NA_real_, n))
-  
   r <- .rdist(dist, n = n, ...)
   if(.lgt) r <- exp(r)
   r

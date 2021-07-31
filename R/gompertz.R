@@ -22,8 +22,8 @@ qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FAL
         lower.tail = lower.tail, log.p = log.p)
 }
 
-rgompertz <- function(n, location = 1, shape = 1) {
-  rdist("gompertz", n = n, location = location, shape = shape)
+rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
+  rdist("gompertz", n = n, location = location, shape = shape, chk = chk)
 }
 
 sgompertz <- function(data) {

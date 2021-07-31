@@ -14,6 +14,7 @@
 
 generate_data <- function(dist, args, weighted, censoring) {
   what <- paste0("r", dist)
+  args$chk <- FALSE
   sample <- do.call(what, args)
   data <- data.frame(left = sample, right = sample)
   data$weight <- weighted

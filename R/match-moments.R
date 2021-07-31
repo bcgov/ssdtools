@@ -24,7 +24,8 @@ discrepancy <- function(pars, fun, meanlog, sdlog, nsim) {
 min_discrepancy <- function(dist, meanlog, sdlog, nsim) {
   fun <- paste0("r", dist)
   pars <- formals(fun)
-  pars <- pars[names(pars) != "n"]
+  pars$n <- NULL
+  pars$chk <- NULL
 
   pars <- unlist(pars)
   optim(pars, discrepancy,

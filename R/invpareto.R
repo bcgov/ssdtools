@@ -22,8 +22,8 @@ qinvpareto <- function(p, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE
         lower.tail = lower.tail, log.p = log.p)
 }
 
-rinvpareto <- function(n, shape = 3, scale = 1) {
-  rdist("invpareto", n = n, shape = shape, scale = scale)
+rinvpareto <- function(n, shape = 3, scale = 1, chk = TRUE) {
+  rdist("invpareto", n = n, shape = shape, scale = scale, chk = chk)
 }
 
 sinvpareto <- function(data) {

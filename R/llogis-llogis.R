@@ -29,9 +29,9 @@ qllogis_llogis <- function(p, locationlog1 = 0, scalelog1 = 1,
 }
 
 rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
-                           locationlog2 = 1, scalelog2 = 1, pmix = 0.5) {
+                           locationlog2 = 1, scalelog2 = 1, pmix = 0.5, chk = TRUE) {
   rdist("logis_logis", n = n, location1 = locationlog1, scale1 = scalelog1,
-        location2 = locationlog2, scale2 = scalelog2, pmix = pmix, .lgt = TRUE)
+        location2 = locationlog2, scale2 = scalelog2, pmix = pmix, .lgt = TRUE, chk = chk)
 }
 
 sllogis_llogis <- function(data) {
