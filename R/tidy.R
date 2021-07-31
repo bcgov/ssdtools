@@ -15,6 +15,17 @@
 #' @export
 generics::tidy
 
+# optimized function for tmbfit
+.tidy_tmbfit_estimates <- function(x) {
+  dist <- x$dist
+  suppressWarnings(capture.output(x <- sdreport(x$model)))
+  x <- suppressWarnings(summary(x))
+  est <- unname(x[,1])
+  names(est) <- rownames(x)
+  est <- est[!grepl("^log(it){0,1}_", names(est))]
+  est[str_order(names(est))]
+}
+
 #' @export
 tidy.tmbfit <- function(x, all = FALSE, ...) {
   chk_flag(all)
@@ -25,7 +36,8 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   term <- rownames(x)
   est <- unname(x[,1])
   se <- unname(x[,2])
-  x <- tibble(dist = dist, term = term, est = est, se = se)
+  x <- tibble(dist = dist, term = term, est = est, se = se, 
+              .name_repair = "minimal")
   
   if(!all)
     x <- x[!grepl("^log(it){0,1}_", x$term),]
