@@ -17,15 +17,7 @@ universals::estimates
 
 #' @export
 estimates.tmbfit <- function(x,...) {
-  pars <- .pars_tmbfit(x)
-  log <- grepl("^log_", names(pars))
-  pars[log] <- exp(pars[log])
-  logit <- grepl("^logit_", names(pars))
-  pars[logit] <- plogis(pars[logit])
-  
-  names(pars) <- sub("^log(it){0,1}_", "", names(pars))
-  pars <- pars[str_order(names(pars))]
-  as.list(pars)
+  as.list(.ests_tmbfit(x))
 }
 
 #' Estimates for fitdists Object
