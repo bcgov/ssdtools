@@ -105,7 +105,7 @@ ssd_hp <- function(x, ...) {
   hp <- Reduce(function(x, y) {
     abind(x, y, along = 3)
   }, hp)
-  weight <- .ssd_gof_fitdists(x, pvalue = TRUE)$weight
+  weight <- glance(x)$weight
   suppressMessages(hp <- apply(hp, c(1, 2), weighted.mean, w = weight))
   hp <- as_tibble(hp)
   hp$conc <- conc

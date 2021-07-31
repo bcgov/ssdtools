@@ -45,12 +45,13 @@ generics::glance
 #' fits <- ssd_fit_dists(ssdtools::boron_data)
 #' glance(fits)
 glance.fitdists <- function(x, ...) {
+  chk_unused(...)
   nobs <- nobs(x)
   tbl <- lapply(x, .glance_tmbfit, nobs = nobs)
   tbl <- bind_rows(tbl)
   tbl$delta <- tbl$aicc - min(tbl$aicc)
   if(is.na(tbl$delta[1]) && all(tbl$npars == tbl$npars[1])) {
-    tbl$delta <- tbl$aicc - min(tbl$aicc)
+    tbl$delta <- tbl$aic - min(tbl$aic)
   }
   tbl$weight <- exp(-tbl$delta / 2) / sum(exp(-tbl$delta / 2))
   tbl

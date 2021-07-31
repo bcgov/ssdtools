@@ -38,3 +38,28 @@ test_that("glance reweight same log_lik", {
   glance_weight <- glance(fit_weight)
   expect_equal(glance_weight$log_lik, glance$log_lik)
 })
+
+test_that("glance reweight same log_lik", {
+  data <- ssdtools::boron_data
+  data$Upper <- data$Conc
+  data$Upper[1] <- data$Conc[1] * 1.0001
+  
+  fit <- ssd_fit_dists(data, dists = c("gamma", "llogis", "lnorm"))
+  fit_cens <- ssd_fit_dists(data, dists = c("gamma", "llogis", "lnorm"), right = "Upper")
+  fit_cens_n <- ssd_fit_dists(data, dists = c("gamma", "llogis", "lnorm_lnorm"), right = "Upper")
+  
+  glance <- glance(fit)
+  glance_cens <- glance(fit_cens)
+  glance_cens_n <- glance(fit_cens_n)
+  
+  expect_snapshot_data(glance, "fit")
+  expect_snapshot_data(glance_cens, "fit_cens")
+  expect_snapshot_data(glance_cens_n, "fit_cens_n")
+  expect_identical(glance$nobs, rep(28L, 3))
+  expect_identical(glance_cens$aicc, rep(NA_real_, 3))
+  expect_identical(glance_cens$nobs, rep(NA_integer_, 3))
+  expect_equal(glance_cens$weight, glance$weight, tolerance = 0.0001)
+  expect_identical(glance_cens_n$weight, rep(NA_real_, 3))
+})
+
+
