@@ -4,7 +4,7 @@
 \alias{subset.fitdists}
 \title{Subset fitdists Object}
 \usage{
-\method{subset}{fitdists}(x, select = names(x), delta = 10, ...)
+\method{subset}{fitdists}(x, select = names(x), delta = Inf, ...)
 }
 \arguments{
 \item{x}{The object.}

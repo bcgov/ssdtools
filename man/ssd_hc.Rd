@@ -18,7 +18,7 @@ ssd_hc(x, ...)
   level = 0.95,
   nboot = 1000,
   average = TRUE,
-  delta = 10,
+  delta = 7,
   min_pboot = 0.99,
   control = NULL,
   parallel = NULL,

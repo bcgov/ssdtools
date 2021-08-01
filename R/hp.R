@@ -138,7 +138,7 @@ no_ssd_hp <- function() {
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
 #' @export
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
-                            average = TRUE, delta = 10, min_pboot = 0.99,
+                            average = TRUE, delta = 7, min_pboot = 0.99,
                             control = NULL,
                             parallel = NULL, ncpus = 1, ...) {
   chk_vector(conc)

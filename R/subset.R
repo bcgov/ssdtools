@@ -23,7 +23,7 @@
 #' @examples
 #' fits <- ssd_fit_dists(ssdtools::boron_data)
 #' subset(fits, c("gamma", "lnorm"))
-subset.fitdists <- function(x, select = names(x), delta = 10, ...) {
+subset.fitdists <- function(x, select = names(x), delta = Inf, ...) {
   if(!length(x)) return(x)
   
   chk_s3_class(select, "character")
