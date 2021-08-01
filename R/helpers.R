@@ -101,11 +101,12 @@ rename_data <- function(data, left, right, weight) {
   data
 }
 
-is_at_boundary <- function(fit, data, min_pmix) {
+is_at_boundary <- function(fit, data, min_pmix = 0.5, regex = ".*") {
   dist <- .dist_tmbfit(fit)
   if(!is_bounds(dist)) return(FALSE)
   bounds <- bdist(dist, data, min_pmix)
   pars <- .pars_tmbfit(fit)
+  pars <- pars[grepl(regex, names(pars))]
   
   lower <- as.numeric(bounds$lower[names(pars)])
   upper <- as.numeric(bounds$upper[names(pars)])
