@@ -187,6 +187,8 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   chk_whole_number(nboot)
   chk_gt(nboot)
   chk_flag(average)
+  chk_number(delta)
+  chk_gte(delta)
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_null_or(control, chk_list)

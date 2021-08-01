@@ -30,6 +30,19 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
+no_ssd_hp <- function() {
+  tibble(
+    dist = character(0),
+    conc = numeric(0),
+    est = numeric(0),
+    se = numeric(0),
+    lcl = numeric(0),
+    ucl = numeric(0),
+    nboot = integer(0),
+    pboot = numeric(0)
+  )
+}
+
 .ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, weighted, censoring,
                            min_pmix, control, parallel, ncpus) {
   args <- estimates(x)
@@ -67,14 +80,10 @@ ssd_hp <- function(x, ...) {
   )
 }
 
-.ssd_hp_fitdists <- function(x, conc, ci, level, nboot, control, parallel, ncpus,
+.ssd_hp_fitdists <- function(x, conc, ci, level, nboot, min_pboot, control, parallel, ncpus,
                              average) {
   if (!length(x) || !length(conc)) {
-    no <- numeric(0)
-    return(tibble(
-      dist = character(0), conc = no, est = no, se = no,
-      lcl = no, ucl = no, nboot = integer(0), pboot = no
-    ))
+    return(no_ssd_hp())
   }
   
   if(is.null(control))
@@ -104,8 +113,13 @@ ssd_hp <- function(x, ...) {
                control = control,
                parallel = parallel, ncpus = ncpus
   )
+  ind <- bind_rows(hp)
+  if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
+    wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")
+    return(no_ssd_hp())
+  }
   if (!average) {
-    return(bind_rows(hp))
+    return(ind)
   }
   hp <- lapply(hp, function(x) x[c("est", "se", "lcl", "ucl", "pboot")])
   hp <- lapply(hp, as.matrix)
@@ -124,7 +138,7 @@ ssd_hp <- function(x, ...) {
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
 #' @export
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
-                            average = TRUE, delta = 10,
+                            average = TRUE, delta = 10, min_pboot = 0.99,
                             control = NULL,
                             parallel = NULL, ncpus = 1, ...) {
   chk_vector(conc)
@@ -137,13 +151,15 @@ ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
   chk_flag(average)
   chk_number(delta)
   chk_gte(delta)
+  chk_number(min_pboot)
+  chk_range(min_pboot)
   chk_null_or(control, chk_list)
   chk_unused(...)
   
   x <- subset(x, delta = delta)
   .ssd_hp_fitdists(x, conc,
                    ci = ci, level = level, nboot = nboot, 
-                   average = average, 
+                   average = average, min_pboot = min_pboot,
                    control = control,
                    parallel = parallel, ncpus = ncpus
   )
