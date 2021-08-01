@@ -28,7 +28,7 @@ qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
         lower.tail = lower.tail, log.p = log.p)
 }
 
-rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
+ssd_rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
                            meanlog2 = 1, sdlog2 = 1, pmix = 0.5, chk = TRUE) {
   rdist("lnorm_lnorm", n = n, meanlog1 = meanlog1, sdlog1 = sdlog1,
         meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix, chk = chk)

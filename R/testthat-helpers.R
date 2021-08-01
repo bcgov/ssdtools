@@ -87,19 +87,19 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0) {
   
   ep(glue::glue("expect_equal(q{dist}(p{dist}(c(0, 0.1, 0.5, 0.9, 0.99))), c(0, 0.1, 0.5, 0.9, 0.99), tolerance = {qroottolerance})"))
   
-  ep(glue::glue("expect_identical(r{dist}(numeric(0)), numeric(0))"))
-  ep(glue::glue("expect_identical(r{dist}(0), numeric(0))"))
-  ep(glue::glue("expect_error(r{dist}(NA))"))
-  ep(glue::glue("expect_error(r{dist}(-1))"))
-  ep(glue::glue("expect_identical(r{dist}(1, NA), NA_real_)"))
-  ep(glue::glue("expect_identical(r{dist}(2, NA), c(NA_real_, NA_real_))"))
-  ep(glue::glue("expect_error(r{dist}(1, 1:2))"))
-  ep(glue::glue("expect_identical(length(r{dist}(1)), 1L)"))
-  ep(glue::glue("expect_identical(length(r{dist}(2)), 2L)"))
-  ep(glue::glue("expect_identical(length(r{dist}(3:4)), 2L)"))
-  ep(glue::glue("expect_identical(length(r{dist}(c(NA, 1))), 2L)"))
+  ep(glue::glue("expect_identical(ssd_r{dist}(numeric(0)), numeric(0))"))
+  ep(glue::glue("expect_identical(ssd_r{dist}(0), numeric(0))"))
+  ep(glue::glue("expect_error(ssd_r{dist}(NA))"))
+  ep(glue::glue("expect_error(ssd_r{dist}(-1))"))
+  ep(glue::glue("expect_identical(ssd_r{dist}(1, NA), NA_real_)"))
+  ep(glue::glue("expect_identical(ssd_r{dist}(2, NA), c(NA_real_, NA_real_))"))
+  ep(glue::glue("expect_error(ssd_r{dist}(1, 1:2))"))
+  ep(glue::glue("expect_identical(length(ssd_r{dist}(1)), 1L)"))
+  ep(glue::glue("expect_identical(length(ssd_r{dist}(2)), 2L)"))
+  ep(glue::glue("expect_identical(length(ssd_r{dist}(3:4)), 2L)"))
+  ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1))), 2L)"))
   
-  data <- data.frame(Conc = ep(glue::glue("r{dist}(1000)")))
+  data <- data.frame(Conc = ep(glue::glue("ssd_r{dist}(1000)")))
   fits <- ssd_fit_dists(data = data, dists = dist)
   tidy <- tidy(fits)
   testthat::expect_s3_class(tidy, "tbl_df")
@@ -108,7 +108,8 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0) {
   tidy$lower <- tidy$est - tidy$se * 3
   tidy$upper <- tidy$est + tidy$se * 3
   
-  default <- ep(glue::glue("formals(r{dist})"))
+  set.seed(100)
+  default <- ep(glue::glue("formals(ssd_r{dist})"))
   default$n <- NULL
   default$chk <- NULL
   default <- data.frame(term = names(default), default = unlist(default))

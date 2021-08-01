@@ -22,7 +22,7 @@ discrepancy <- function(pars, fun, meanlog, sdlog, nsim) {
 }
 
 min_discrepancy <- function(dist, meanlog, sdlog, nsim) {
-  fun <- paste0("r", dist)
+  fun <- paste0("ssd_r", dist)
   pars <- formals(fun)
   pars$n <- NULL
   pars$chk <- NULL

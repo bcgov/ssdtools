@@ -22,7 +22,7 @@ qlnorm <- function(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE) 
         lower.tail = lower.tail, log.p = log.p)
 }
 
-rlnorm <- function(n, meanlog = 0, sdlog = 1, chk = TRUE) {
+ssd_rlnorm <- function(n, meanlog = 0, sdlog = 1, chk = TRUE) {
   rdist("lnorm", n = n, meanlog = meanlog, sdlog = sdlog, chk = chk)
 }
 

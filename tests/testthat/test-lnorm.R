@@ -17,5 +17,5 @@ test_that("lnorm", {
   expect_equal(plnorm(1), 0.5)
   expect_equal(qlnorm(0.75), 1.96303108415826)
   set.seed(42)
-  expect_equal(rlnorm(2), c(3.93912432924107, 0.568531719998709))
+  expect_equal(ssd_rlnorm(2), c(3.93912432924107, 0.568531719998709))
 })

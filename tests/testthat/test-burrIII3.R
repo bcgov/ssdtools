@@ -17,5 +17,5 @@ test_that("burrIII3", {
   expect_equal(pburrIII3(1), 0.5)
   expect_equal(qburrIII3(0.75), 3)
   set.seed(42)
-  expect_equal(rburrIII3(2), c(10.7379218085407, 14.8920392236127))
+  expect_equal(ssd_rburrIII3(2), c(10.7379218085407, 14.8920392236127))
 })

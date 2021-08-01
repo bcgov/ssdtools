@@ -17,6 +17,6 @@ test_that("gamma", {
   expect_equal(pgamma(1), 0.632120558828558)
   expect_equal(qgamma(0.75), 1.38629436111989)
   set.seed(42)
-  expect_equal(rgamma(2), c(1.93929578065309, 0.180419099876704))
+  expect_equal(ssd_rgamma(2), c(1.93929578065309, 0.180419099876704))
 })
 

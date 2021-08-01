@@ -28,7 +28,7 @@ qllogis_llogis <- function(p, locationlog1 = 0, scalelog1 = 1,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
-rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
+ssd_rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
                            locationlog2 = 1, scalelog2 = 1, pmix = 0.5, chk = TRUE) {
   rdist("logis_logis", n = n, location1 = locationlog1, scale1 = scalelog1,
         location2 = locationlog2, scale2 = scalelog2, pmix = pmix, .lgt = TRUE, chk = chk)

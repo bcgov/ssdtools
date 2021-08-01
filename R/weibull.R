@@ -22,7 +22,7 @@ qweibull <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) 
         lower.tail = lower.tail, log.p = log.p)
 }
 
-rweibull <- function(n, shape = 1, scale = 1, chk = TRUE) {
+ssd_rweibull <- function(n, shape = 1, scale = 1, chk = TRUE) {
   rdist("weibull", n = n, shape = shape, scale = scale, chk = chk)
 }
 

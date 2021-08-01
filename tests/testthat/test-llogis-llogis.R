@@ -17,5 +17,5 @@ test_that("llogis_llogis", {
   expect_equal(pllogis_llogis(1), 0.384470710684998)
   expect_equal(qllogis_llogis(0.75), 5.2666469409969)
   set.seed(42)
-  expect_equal(rllogis_llogis(2), c(0.400833984692937, 4.89788262355488))
+  expect_equal(ssd_rllogis_llogis(2), c(0.400833984692937, 4.89788262355488))
 })
