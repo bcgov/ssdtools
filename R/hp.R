@@ -46,8 +46,9 @@ ssd_hp <- function(x, ...) {
       est = est * 100,
       se = na, 
       lcl = na, 
-      ucl = na    
-      ))
+      ucl = na,
+      nboot = rep(0L, length(conc)),
+      pboot = na))
   }
   censoring <- censoring / rescale
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, 
@@ -61,7 +62,8 @@ ssd_hp <- function(x, ...) {
     est = est * 100,
     se = cis$se * 100, 
     lcl = cis$lcl * 100, 
-    ucl = cis$ucl * 100 
+    ucl = cis$ucl * 100,
+    nboot = nboot, pboot = length(estimates) / nboot
   )
 }
 
@@ -71,10 +73,10 @@ ssd_hp <- function(x, ...) {
     no <- numeric(0)
     return(tibble(
       dist = character(0), conc = no, est = no, se = no,
-      lcl = no, ucl = no,
+      lcl = no, ucl = no, nboot = integer(0), pboot = no
     ))
   }
-
+  
   if(is.null(control))
     control <- .control_fitdists(x)
   data <- .data_fitdists(x)
@@ -93,18 +95,19 @@ ssd_hp <- function(x, ...) {
     wrn("CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }
-
+  if(!ci) nboot <- 0L
+  
   hp <- lapply(x, .ssd_hp_tmbfit,
-    conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
-    rescale = rescale,  weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix,
-    control = control,
-    parallel = parallel, ncpus = ncpus
+               conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
+               rescale = rescale,  weighted = weighted, censoring = censoring,
+               min_pmix = min_pmix,
+               control = control,
+               parallel = parallel, ncpus = ncpus
   )
   if (!average) {
     return(bind_rows(hp))
   }
-  hp <- lapply(hp, function(x) x[2:6])
+  hp <- lapply(hp, function(x) x[c("est", "se", "lcl", "ucl", "pboot")])
   hp <- lapply(hp, as.matrix)
   hp <- Reduce(function(x, y) {
     abind(x, y, along = 3)
@@ -114,7 +117,8 @@ ssd_hp <- function(x, ...) {
   hp <- as_tibble(hp)
   hp$conc <- conc
   hp$dist <- "average"
-  hp[c("dist", "conc", "est", "se", "lcl", "ucl")]
+  hp$nboot <- nboot
+  hp[c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot")]
 }
 
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
@@ -135,12 +139,12 @@ ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
   chk_gte(delta)
   chk_null_or(control, chk_list)
   chk_unused(...)
-
+  
   x <- subset(x, delta = delta)
   .ssd_hp_fitdists(x, conc,
-    ci = ci, level = level, nboot = nboot, 
-    average = average, 
-    control = control,
-    parallel = parallel, ncpus = ncpus
+                   ci = ci, level = level, nboot = nboot, 
+                   average = average, 
+                   control = control,
+                   parallel = parallel, ncpus = ncpus
   )
 }

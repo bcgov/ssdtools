@@ -26,7 +26,7 @@ test_that("hp fitdists works with zero length conc", {
 
   hp <- ssd_hp(fits, numeric(0)) 
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, character(0))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0)) 
@@ -38,7 +38,7 @@ test_that("hp fitdist works with missing conc", {
   
   hp <- ssd_hp(fits, NA_real_)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, NA_real_)
   expect_equal(hp$est, NA_real_)
@@ -50,7 +50,7 @@ test_that("hp fitdist works with 0 conc", {
   
   hp <- ssd_hp(fits, 0) 
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 0) 
   expect_equal(hp$est, 0)
@@ -62,7 +62,7 @@ test_that("hp fitdist works with negative conc", {
   
   hp <- ssd_hp(fits, -1)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, -1)
   expect_equal(hp$est, 0)
@@ -74,7 +74,7 @@ test_that("hp fitdist works with -Inf conc", {
   
   hp <- ssd_hp(fits, -Inf)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, -Inf)
   expect_equal(hp$est, 0)
@@ -86,7 +86,7 @@ test_that("hp fitdist works with Inf conc", {
   
   hp <- ssd_hp(fits, Inf)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, Inf)
   expect_equal(hp$est, 100)
@@ -98,7 +98,7 @@ test_that("hp fitdists works reasonable conc", {
   
   hp <- ssd_hp(fits, 1)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 1.95430302556687) 
@@ -112,7 +112,7 @@ test_that("hp fitdists works with multiple concs", {
   
   hp <- ssd_hp(fits, c(2.5,1))
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, c("average", "average"))
   expect_identical(hp$conc, c(2.5,1))
   expect_equal(hp$est, c(9.25437337881004, 1.9543030195088)) 
@@ -127,7 +127,7 @@ test_that("hp fitdists works with cis", {
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 1.95430302556687) 
@@ -141,7 +141,7 @@ test_that("hp fitdists works with multiple dists", {
   
   hp <- ssd_hp(fits, 1)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, "average")
   expect_identical(hp$conc, 1)
   expect_equal(hp$est, 3.66685732661861) 
@@ -153,7 +153,7 @@ test_that("hp fitdists works not average multiple dists", {
   
   hp <- ssd_hp(fits, 1, average = FALSE)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, ssd_dists("bc"))
   expect_identical(hp$conc, c(1, 1, 1))
   expect_equal(hp$est, c(4.67758994580286, 2.80047097268139, 1.9543030195088)) 
@@ -173,7 +173,7 @@ test_that("hp fitdists with no fitdists", {
   class(x) <- c("fitdists")
   hp <- ssd_hp(x, 1)
   expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hp$dist, character(0))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0))
@@ -257,4 +257,29 @@ test_that("ssd_hp effect with higher weight two distributions", {
   expect_equal(hp_10$est, 11.9318338996079)
   expect_equal(hp$se, 4.79341906726597)
   expect_equal(hp_10$se, 4.42339687820595)
+})
+
+test_that("ssd_hp cis with non-convergence", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
+  expect_identical(attr(fit, "min_pmix"), 0.15)
+  hp15 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100)
+  attr(fit, "min_pmix") <- 0.3
+  expect_identical(attr(fit, "min_pmix"), 0.3)
+  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100)
+  expect_s3_class(hp30, "tbl")
+  expect_snapshot_data(hp30, "hp_30")
+})
+
+test_that("ssd_hp cis with error", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
+  expect_identical(attr(fit, "min_pmix"), 0.1)
+  hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100)
+  expect_s3_class(hp_err, "tbl")
+  expect_snapshot_data(hp_err, "hp_err")
 })

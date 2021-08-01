@@ -316,6 +316,8 @@ test_that("ssd_hc cis with non-convergence", {
   attr(fit, "min_pmix") <- 0.3
   expect_identical(attr(fit, "min_pmix"), 0.3)
   hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100)
+  expect_s3_class(hc30, "tbl")
+  expect_snapshot_data(hc30, "hc_30")
 })
 
 test_that("ssd_hc cis with error", {
