@@ -37,7 +37,7 @@ test_that("ssd_hc list names must be unique", {
 test_that("ssd_hc list handles zero length list", {
   hc <- ssd_hc(structure(list(), .Names = character(0)))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_identical(hc$dist, character(0))
   expect_identical(hc$percent, numeric(0))
   expect_identical(hc$se, numeric(0))
@@ -46,7 +46,7 @@ test_that("ssd_hc list handles zero length list", {
 test_that("ssd_hc list works null values handles zero length list", {
   hc <- ssd_hc(list("lnorm" = NULL))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, "lnorm")
   expect_identical(hc$percent, 5)
   expect_equal(hc$est, 0.193040816698737)
@@ -56,7 +56,7 @@ test_that("ssd_hc list works null values handles zero length list", {
 test_that("ssd_hc list works multiple percent values", {
   hc <- ssd_hc(list("lnorm" = NULL), percent = c(1, 99))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_identical(hc$percent, c(1, 99))
   expect_equal(hc$dist, c("lnorm", "lnorm"))
   expect_equal(hc$est, c(0.097651733070336, 10.2404736563121))
@@ -66,7 +66,7 @@ test_that("ssd_hc list works multiple percent values", {
 test_that("ssd_hc list works specified values", {
   hc <- ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 2)))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_identical(hc$percent, 5)
   expect_true(vld_whole_numeric(hc$percent))
   expect_equal(hc$dist, "lnorm")
@@ -77,7 +77,7 @@ test_that("ssd_hc list works specified values", {
 test_that("ssd_hc list works multiple NULL distributions", {
   hc <- ssd_hc(list("lnorm" = NULL, "llogis" = NULL))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_identical(hc$percent, c(5, 5))
   expect_equal(hc$dist, c("lnorm", "llogis"))
   expect_equal(hc$est, c(0.193040816698737, 0.0526315789473684))
@@ -87,7 +87,7 @@ test_that("ssd_hc list works multiple NULL distributions", {
 test_that("ssd_hc list works multiple NULL distributions with multiple percent", {
   hc <- ssd_hc(list("lnorm" = NULL, "llogis" = NULL), percent = c(1, 99))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, c("lnorm", "lnorm", "llogis", "llogis"))
   expect_identical(hc$percent, c(1, 99, 1, 99))
   expect_equal(hc$est, c(0.097651733070336, 10.2404736563121, 0.0101010101010101, 98.9999999999999))
@@ -99,7 +99,7 @@ test_that("ssd_hc fitdists works zero length percent", {
   
   hc <- ssd_hc(fits, numeric(0)) 
   expect_s3_class(hc, class = "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, character(0))
   expect_identical(hc$percent, numeric(0))
   expect_equal(hc$est, numeric(0))
@@ -111,7 +111,7 @@ test_that("ssd_hc fitdists works NA percent", {
   
   hc <- ssd_hc(fits, NA_real_)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, NA_real_)
   expect_equal(hc$est, NA_real_)
@@ -123,7 +123,7 @@ test_that("ssd_hc fitdists works 0 percent", {
   
   hc <- ssd_hc(fits, 0)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 0)
   expect_equal(hc$est, 0)
@@ -135,7 +135,7 @@ test_that("ssd_hc fitdists works 100 percent", {
   
   hc <- ssd_hc(fits, 100)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 100)
   expect_true(vld_whole_numeric(hc$percent))
@@ -148,7 +148,7 @@ test_that("ssd_hc fitdists works multiple percents", {
   
   hc <- ssd_hc(fits, percent = c(1, 99))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, c("average", "average"))
   expect_identical(hc$percent, c(1, 99))
   expect_true(vld_whole_numeric(hc$percent))
@@ -160,7 +160,7 @@ test_that("ssd_hc fitdists averages", {
   fits <- ssd_fit_dists(ssdtools::boron_data)
   hc <- ssd_hc(fits)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
   expect_true(vld_whole_numeric(hc$percent))
@@ -175,7 +175,7 @@ test_that("ssd_hc fitdists averages single dist by multiple percent", {
   
   hc <- ssd_hc(fits, average = TRUE, percent = 1:99)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, rep("average", 99))
   expect_identical(hc$percent, 1:99)
   expect_true(vld_whole_numeric(hc$percent))
@@ -189,7 +189,7 @@ test_that("ssd_hc fitdists not average single dist by multiple percent gives who
   
   hc <- ssd_hc(fits, average = FALSE, percent = 1:99)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
 #  expect_true(vld_whole_numeric(hc$percent)) not sure why not true
 })
 
@@ -197,7 +197,7 @@ test_that("ssd_hc fitdists not average", {
   fits <- ssd_fit_dists(ssdtools::boron_data)
   hc <- ssd_hc(fits, average = FALSE)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, ssd_dists("bc")) 
   expect_identical(hc$percent, c(5, 5, 5))
   expect_equal(hc$est, c(1.07428453014496, 1.56226388133415, 1.6811748398812))
@@ -218,7 +218,7 @@ test_that("ssd_hc fitdists cis", {
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl"))
+  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
   expect_equal(hc$est,  1.6811748398812)
@@ -304,4 +304,27 @@ test_that("ssd_hc effect with higher weight two distributions", {
   expect_equal(hc_10$est, 1.6811748398812)
   expect_equal(hc$se, 0.598733415620557)
   expect_equal(hc_10$se, 0.498502249658994)
+})
+
+test_that("ssd_hc cis with non-convergence", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
+  expect_identical(attr(fit, "min_pmix"), 0.15)
+  hc15 <- ssd_hc(fit, ci = TRUE, nboot = 100)
+  attr(fit, "min_pmix") <- 0.3
+  expect_identical(attr(fit, "min_pmix"), 0.3)
+  hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100)
+})
+
+test_that("ssd_hc cis with error", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
+  expect_identical(attr(fit, "min_pmix"), 0.1)
+  hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100)
+  expect_s3_class(hc_err, "tbl")
+  expect_snapshot_data(hc_err, "hc_err")
 })

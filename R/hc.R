@@ -40,7 +40,9 @@ no_ssd_hc <- function() {
     est = numeric(0),
     se = numeric(0),
     lcl = numeric(0),
-    ucl = numeric(0)
+    ucl = numeric(0),
+    nboot = integer(0),
+    pboot = numeric(0)
   )
 }
 
@@ -52,7 +54,8 @@ no_ssd_hc <- function() {
   tibble(
     dist = dist,
     percent = proportion * 100, est = est,
-    se = NA_real_, lcl = NA_real_, ucl = NA_real_
+    se = NA_real_, lcl = NA_real_, ucl = NA_real_,
+    nboot = 0L, pboot = NA_real_
   )
 }
 
@@ -71,7 +74,9 @@ no_ssd_hc <- function() {
       est = est * rescale,
       se = na, 
       lcl = na, 
-      ucl = na))
+      ucl = na,
+      nboot = rep(0L, length(proportion)),
+      pboot = NA_real_))
   }
   censoring <- censoring / rescale
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, weighted = weighted,
@@ -81,7 +86,8 @@ no_ssd_hc <- function() {
   tibble(
     dist = dist,
     percent = proportion * 100, est = est * rescale,
-    se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale
+    se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
+    nboot = nboot, pboot = length(estimates) / nboot
   )
 }
 
@@ -110,6 +116,9 @@ no_ssd_hc <- function() {
     wrn("CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }
+  if(!ci) {
+    nboot <- 0L
+  }
   
   hc <- lapply(x, .ssd_hc_tmbfit,
     proportion = percent / 100, ci = ci, level = level, nboot = nboot,
@@ -120,7 +129,7 @@ no_ssd_hc <- function() {
   if (!average) {
     return(bind_rows(hc))
   }
-  hc <- lapply(hc, function(x) x[c("percent", "est", "se", "lcl", "ucl")])
+  hc <- lapply(hc, function(x) x[c("percent", "est", "se", "lcl", "ucl", "pboot")])
   hc <- lapply(hc, as.matrix)
   hc <- Reduce(function(x, y) {
     abind(x, y, along = 3)
@@ -129,7 +138,7 @@ no_ssd_hc <- function() {
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   hc <- as.data.frame(hc)
   tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 
-         lcl = hc$lcl, ucl = hc$ucl)
+         lcl = hc$lcl, ucl = hc$ucl, nboot = nboot, pboot = hc$pboot)
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates

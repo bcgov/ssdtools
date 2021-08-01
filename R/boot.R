@@ -21,9 +21,10 @@ generate_data <- function(dist, args, weighted, censoring) {
   censor_data(data, censoring)
 }
 
-sample_parameters <- function(i, dist, args, pars, weighted, censoring, min_pmix, control) {
+sample_parameters <- function(i, dist, fun, args, pars, weighted, censoring, min_pmix, control) {
   new_data <- generate_data(dist, args, weighted, censoring)
-  fit <- fit_tmb(dist, new_data, min_pmix, control = control, pars = pars, hessian = FALSE)
+  fit <- fun(dist, new_data, min_pmix, control = control, pars = pars, hessian = FALSE)$result
+  if(is.null(fit)) return(NULL)
   estimates(fit)
 }
 
@@ -33,7 +34,10 @@ boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control, 
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
   pars <- .pars_tmbfit(x)
+  
+  safe_fit_dist <- safely(fit_tmb)
 
-  lapply(1:nboot, sample_parameters, dist = dist, args = args, pars = pars, 
+  estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = safe_fit_dist, args = args, pars = pars, 
          weighted = weighted, censoring = censoring, min_pmix = min_pmix, control = control)
+  estimates[!vapply(estimates, is.null, TRUE)]
 }

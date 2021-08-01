@@ -1,2 +1,2 @@
-dist,percent,est,se,lcl,ucl
-average,5,1.2505178891753266,NA,NA,NA
+dist,percent,est,se,lcl,ucl,nboot,pboot
+average,5,1.2505178891753266,NA,NA,NA,0,NA

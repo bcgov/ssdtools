@@ -19,12 +19,6 @@ xcis_tmb <- function(x, args, what, level) {
     args$p <- x
   }
   samples <- do.call(what, args)
-  # if (any(is.na(samples))) {
-  #   err(
-  #     "Distribution '", substr(fun, 2, nchar(fun)),
-  #     "' bootstraps include missing values."
-  #   )
-  # }
   quantile <- quantile(samples, probs = probs(level))
   data.frame(
     se = sd(samples), lcl = quantile[1], ucl = quantile[2],
