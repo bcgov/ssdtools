@@ -42,6 +42,8 @@
 #' @param average A flag specifying whether to model average the estimates.
 #' @param ci A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).
 #' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
+#' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully fit 
+#' in the sense of returning a likelihood.
 #' @param level A number between 0 and 1 of the confidence level.
 #' @param parallel A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').
 #' @param ncpus A count of the number of parallel processes to use.

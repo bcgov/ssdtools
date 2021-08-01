@@ -99,6 +99,7 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0) {
   ep(glue::glue("expect_identical(length(ssd_r{dist}(3:4)), 2L)"))
   ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1))), 2L)"))
   
+  set.seed(100)
   data <- data.frame(Conc = ep(glue::glue("ssd_r{dist}(1000)")))
   fits <- ssd_fit_dists(data = data, dists = dist)
   tidy <- tidy(fits)
@@ -108,7 +109,6 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0) {
   tidy$lower <- tidy$est - tidy$se * 3
   tidy$upper <- tidy$est + tidy$se * 3
   
-  set.seed(100)
   default <- ep(glue::glue("formals(ssd_r{dist})"))
   default$n <- NULL
   default$chk <- NULL

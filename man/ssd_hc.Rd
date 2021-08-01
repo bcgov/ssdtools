@@ -19,6 +19,7 @@ ssd_hc(x, ...)
   nboot = 1000,
   average = TRUE,
   delta = 10,
+  min_pboot = 0.99,
   control = NULL,
   parallel = NULL,
   ncpus = 1,
@@ -43,6 +44,9 @@ ssd_hc(x, ...)
 \item{average}{A flag specifying whether to model average the estimates.}
 
 \item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+
+\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
+in the sense of returning a likelihood.}
 
 \item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
 
