@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' Random Number Generation
+#' @inheritParams params
+#' @name ssd_r
+NULL
+
 .pd <- function(q, ..., fun) {
   args <- c(q, list(...))
   

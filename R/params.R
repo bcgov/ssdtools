@@ -18,6 +18,7 @@
 #' @param x The object.
 #' @param object The object.
 #' @param control A list of control parameters passed to [stats::optim].
+#' @param chk A flag specifying whether to check the arguments.
 #' @param data A data frame.
 #' @param pred A data frame of the predictions.
 #' @param xlab A string of the x-axis label.
@@ -53,9 +54,20 @@
 #' @param scale scale parameter.
 #' @param lscale scale parameter on the log scale.
 #' @param shape	shape parameter.
+#' @param shape1 shape1 parameter.
+#' @param shape2 shape2 parameter.
+#' @param locationlog1 locationlog1 parameter.
+#' @param scalelog1 scalelog1 parameter.
+#' @param locationlog2 locationlog2 parameter.
+#' @param scalelog2 scalelog2 parameter.
+#' @param pmix Proportion mixture parameter.
 #' @param meanlog mean on log scale parameter.
+#' @param meanlog1 mean on log scale parameter.
+#' @param meanlog2 mean on log scale parameter.
 #' @param locationlog location on log scale parameter.
 #' @param sdlog standard deviation on log scale parameter.
+#' @param sdlog1 standard deviation on log scale parameter.
+#' @param sdlog2 standard deviation on log scale parameter.
 #' @param scalelog scale on log scale parameter.
 #' @param lshape shape parameter on the log scale.
 #' @param lshape1 shape1 parameter on the log scale.

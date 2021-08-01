@@ -22,6 +22,12 @@ qgamma <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_r Random Generation for Gamma Distribution
+#' @export
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rgamma(10000), breaks = 1000)
 ssd_rgamma <- function(n, shape = 1, scale = 1, chk = TRUE) {
   rdist("gamma", n = n, shape = shape, scale = scale, chk = chk)
 }

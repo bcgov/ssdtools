@@ -28,6 +28,12 @@ qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_r Random Generation for Log-Normal/Log-Normal Mixture Distribution
+#' @export
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rlnorm_lnorm(10000), breaks = 1000)
 ssd_rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
                            meanlog2 = 1, sdlog2 = 1, pmix = 0.5, chk = TRUE) {
   rdist("lnorm_lnorm", n = n, meanlog1 = meanlog1, sdlog1 = sdlog1,

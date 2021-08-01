@@ -22,6 +22,12 @@ qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FAL
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_r Random Generation for Gompertz Distribution
+#' @export
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rgompertz(10000), breaks = 1000)
 ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
   rdist("gompertz", n = n, location = location, shape = shape, chk = chk)
 }

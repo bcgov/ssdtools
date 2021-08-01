@@ -22,6 +22,12 @@ qlnorm <- function(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE) 
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_r Random Generation for Log-Normal Distribution
+#' @export
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rlnorm(10000), breaks = 1000)
 ssd_rlnorm <- function(n, meanlog = 0, sdlog = 1, chk = TRUE) {
   rdist("lnorm", n = n, meanlog = meanlog, sdlog = sdlog, chk = chk)
 }

@@ -22,6 +22,12 @@ qweibull <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) 
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_r Random Generation for Weibull Distribution
+#' @export
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rweibull(10000), breaks = 1000)
 ssd_rweibull <- function(n, shape = 1, scale = 1, chk = TRUE) {
   rdist("weibull", n = n, shape = shape, scale = scale, chk = chk)
 }

@@ -12,6 +12,8 @@
 
 \item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
 
+\item{chk}{A flag specifying whether to check the arguments.}
+
 \item{data}{A data frame.}
 
 \item{pred}{A data frame of the predictions.}
@@ -77,11 +79,33 @@ relative to the extremes for non-missing values.}
 
 \item{lscale}{scale parameter on the log scale.}
 
+\item{shape1}{shape1 parameter.}
+
+\item{shape2}{shape2 parameter.}
+
+\item{locationlog1}{locationlog1 parameter.}
+
+\item{scalelog1}{scalelog1 parameter.}
+
+\item{locationlog2}{locationlog2 parameter.}
+
+\item{scalelog2}{scalelog2 parameter.}
+
+\item{pmix}{Proportion mixture parameter.}
+
 \item{meanlog}{mean on log scale parameter.}
+
+\item{meanlog1}{mean on log scale parameter.}
+
+\item{meanlog2}{mean on log scale parameter.}
 
 \item{locationlog}{location on log scale parameter.}
 
 \item{sdlog}{standard deviation on log scale parameter.}
+
+\item{sdlog1}{standard deviation on log scale parameter.}
+
+\item{sdlog2}{standard deviation on log scale parameter.}
 
 \item{scalelog}{scale on log scale parameter.}
 

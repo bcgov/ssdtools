@@ -28,6 +28,12 @@ qllogis_llogis <- function(p, locationlog1 = 0, scalelog1 = 1,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
+#' @describeIn ssd_r Random Generation for Log-Logistic/Log-Logistic Mixture Distribution
+#' @export
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rllogis_llogis(10000), breaks = 1000)
 ssd_rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
                            locationlog2 = 1, scalelog2 = 1, pmix = 0.5, chk = TRUE) {
   rdist("logis_logis", n = n, location1 = locationlog1, scale1 = scalelog1,
