@@ -364,3 +364,20 @@ test_that("ssd_fit_dists min_pmix", {
                "All distributions failed to fit.")
 })
 
+test_that("ssd_fit_dists min_pmix", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.1)
+  data <- data.frame(Conc = conc)
+  fits <- ssd_fit_dists(data, dists = c("lnorm_lnorm"), min_pmix = 0.11, at_boundary_ok = TRUE)
+  tidy <- tidy(fits)
+  expect_equal(tidy$est[tidy$term == "pmix"], 0.11)
+})
+
+test_that("ssd_fit_dists at_boundary_ok message", {
+  set.seed(99)
+  expect_warning(ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "burrIII3")),
+                 "one or more parameters at boundary[.]$")
+  expect_warning(ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "burrIII3"),
+                               at_boundary_ok = TRUE),
+                 "failed to compute standard errors \\(try rescaling data\\)\\.$")
+})

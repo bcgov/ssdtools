@@ -6,6 +6,9 @@
 \arguments{
 \item{all}{A flag specifying whether to also return transformed parameters.}
 
+\item{at_boundary_ok}{A flag specifying whether a model with one or more
+parameters at the boundary should be considered to have converged (default = FALSE).}
+
 \item{x}{The object.}
 
 \item{object}{The object.}

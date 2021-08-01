@@ -14,6 +14,7 @@ ssd_fit_dists(
   rescale = FALSE,
   reweight = FALSE,
   computable = TRUE,
+  at_boundary_ok = FALSE,
   min_pmix = 0.2,
   control = list(),
   silent = FALSE
@@ -37,6 +38,9 @@ ssd_fit_dists(
 \item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
+
+\item{at_boundary_ok}{A flag specifying whether a model with one or more
+parameters at the boundary should be considered to have converged (default = FALSE).}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 

@@ -15,6 +15,8 @@
 #' Parameter Descriptions for ssdtools Functions
 #'
 #' @param all A flag specifying whether to also return transformed parameters.
+#' @param at_boundary_ok A flag specifying whether a model with one or more
+#' parameters at the boundary should be considered to have converged (default = FALSE).
 #' @param x The object.
 #' @param object The object.
 #' @param control A list of control parameters passed to [stats::optim].
