@@ -234,9 +234,40 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+ expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
   "^CIs cannot be calculated for inconsistently censored data[.]$")
   expect_identical(hc$se, NA_real_)
+})
+
+test_that("ssd_hc works with fully left censored data", {
+  data <- ssdtools::boron_data
+  data$Conc2 <- data$Conc
+  data$Conc <- 0
+  fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  expect_equal(hc$se, 0.00143406862620477)
+})
+
+test_that("ssd_hc not work partially censored even if all same left", {
+  data <- ssdtools::boron_data
+  data$Conc2 <- data$Conc
+  data$Conc <- 0.1
+  fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
+  set.seed(10)
+  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+                 "^CIs cannot be calculated for inconsistently censored data[.]$")
+})
+
+test_that("ssd_hc doesn't works with inconsisently censored data", {
+  data <- ssdtools::boron_data
+  data$Conc2 <- data$Conc
+  data$Conc <- 0
+  data$Conc[1] <- data$Conc2[1] / 2
+  fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
+  set.seed(10)
+  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+                 "^CIs cannot be calculated for inconsistently censored data[.]$")
 })
 
 test_that("ssd_hc same with equally weighted data", {
