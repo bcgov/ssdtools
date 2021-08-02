@@ -59,7 +59,7 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, data, rescale,  weighted, censoring, min_pmix, control, parallel) {
+.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, data, rescale,  weighted, censoring, min_pmix, control) {
   args <- estimates(x)
   args$p <- proportion
   dist <- .dist_tmbfit(x)
@@ -81,7 +81,7 @@ no_ssd_hc <- function() {
   censoring <- censoring / rescale
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, weighted = weighted,
                            censoring = censoring, min_pmix = min_pmix,
-                           control = control, parallel = parallel)
+                           control = control)
   cis <- cis_tmb(estimates, what, level = level, x = proportion)
   tibble(
     dist = dist,
@@ -119,12 +119,11 @@ no_ssd_hc <- function() {
   if(!ci) {
     nboot <- 0L
   }
-  
-  hc <- lapply(x, .ssd_hc_tmbfit,
+  hc <- llply(x, .ssd_hc_tmbfit,
     proportion = percent / 100, ci = ci, level = level, nboot = nboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, control = control,
-    parallel = parallel)
+    .parallel = parallel)
   
   ind <- bind_rows(hc)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {

@@ -65,6 +65,7 @@ Depends:
 Imports:
     abind,
     chk (>= 0.5.1.9003),
+    doFuture,
     foreach,
     generics,
     goftest,

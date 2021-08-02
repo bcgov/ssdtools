@@ -220,6 +220,16 @@ test_that("ssd_hp calculates cis with equally weighted data", {
   expect_equal(hp$se, 1.35655142717243)
 })
 
+test_that("ssd_hp calculates cis with parallel and no backend", {
+  data <- ssdtools::boron_data
+  data$Weight <- rep(2, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  expect_warning(hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, parallel = TRUE),
+  "No parallel backend")
+  expect_equal(hp$se, 1.35655142717243)
+})
+
 test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
   data <- ssdtools::boron_data
   data$Weight <- rep(1, nrow(data))

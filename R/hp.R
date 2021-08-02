@@ -67,7 +67,7 @@ no_ssd_hp <- function() {
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, 
                            weighted = weighted, censoring = censoring,
                            min_pmix = min_pmix,
-                           control = control, parallel = parallel)
+                           control = control)
   cis <- cis_tmb(estimates, what, level = level, x = conc / rescale)
   tibble(
     dist = dist,
@@ -106,12 +106,12 @@ no_ssd_hp <- function() {
   }
   if(!ci) nboot <- 0L
   
-  hp <- lapply(x, .ssd_hp_tmbfit,
+  hp <- llply(x, .ssd_hp_tmbfit,
                conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
                rescale = rescale,  weighted = weighted, censoring = censoring,
                min_pmix = min_pmix,
                control = control,
-               parallel = parallel)
+               .parallel = parallel)
   ind <- bind_rows(hp)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
     wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")
