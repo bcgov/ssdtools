@@ -13,7 +13,6 @@
   average = TRUE,
   delta = 7,
   min_pboot = 0.99,
-  parallel = FALSE,
   ...
 )
 }
@@ -34,8 +33,6 @@
 
 \item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
 in the sense of returning a likelihood.}
-
-\item{parallel}{A flag specifying whether to bootstrap in parallel.}
 
 \item{...}{Unused.}
 }

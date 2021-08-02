@@ -61,8 +61,6 @@ in the sense of returning a likelihood.}
 
 \item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{parallel}{A flag specifying whether to bootstrap in parallel.}
-
 \item{...}{Unused.}
 
 \item{q}{vector of quantiles.}

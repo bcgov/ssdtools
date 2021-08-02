@@ -222,9 +222,9 @@ test_that("ssd_hc fitdists cis", {
   expect_equal(hc$dist, "average")
   expect_identical(hc$percent, 5)
   expect_equal(hc$est,  1.6811748398812)
-  expect_equal(hc$se, 0.696836797492395)
-  expect_equal(hc$lcl, 0.922643546407928)
-  expect_equal(hc$ucl, 3.59396425682664)
+  expect_equal(hc$se, 0.708092010839589)
+  expect_equal(hc$lcl, 0.863191065431798)
+  expect_equal(hc$ucl, 3.60235040001163)
 })
 
 test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
@@ -235,7 +235,7 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
-  expect_equal(hc$se, 0.570751804793226)
+  expect_equal(hc$se, 0.791173330603888)
   
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
@@ -246,7 +246,7 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
 
 test_that("ssd_hc same with equally weighted data", {
   data <- ssdtools::boron_data
-  data$Weight <- rep(2, nrow(data))
+  data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
@@ -255,7 +255,7 @@ test_that("ssd_hc same with equally weighted data", {
   fits2 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hc2 <- ssd_hc(fits2, ci = TRUE, nboot = 10)
-  expect_identical(hc2, hc)
+  expect_equal(hc2, hc)
 })
 
 test_that("ssd_hc calculates cis with equally weighted data", {
@@ -264,16 +264,33 @@ test_that("ssd_hc calculates cis with equally weighted data", {
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
-  expect_equal(hc$se, 0.498502249658994)
+  expect_equal(hc$se, 0.991276086371526)
 })
 
-test_that("ssd_hc calculates cis with equally weighted data in parallel but no backend", {
+test_that("ssd_hc calculates cis in parallel but one distribution", {
+  local_multisession()
   data <- ssdtools::boron_data
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10, parallel = TRUE),
-                 "No parallel backend")
-  expect_equal(hc$se, 0.498502249658994)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  expect_equal(hc$se, 0.991276086371526)
+})
+
+test_that("ssd_hc calculates cis with two distributions", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  expect_equal(hc$se, 0.900280898471509)
+})
+
+test_that("ssd_hc calculates cis in parallel with two distributions", {
+  local_multisession()
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  expect_equal(hc$se, 0.900280898471509)
 })
 
 test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
@@ -311,8 +328,8 @@ test_that("ssd_hc effect with higher weight two distributions", {
   hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
   expect_equal(hc$est, 1.64903597051184)
   expect_equal(hc_10$est, 1.6811748398812)
-  expect_equal(hc$se, 0.598733415620557)
-  expect_equal(hc_10$se, 0.498502249658994)
+  expect_equal(hc$se, 0.900280898471509)
+  expect_equal(hc_10$se, 0.991276086371526)
 })
 
 test_that("ssd_hc cis with non-convergence", {

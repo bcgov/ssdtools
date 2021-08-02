@@ -12,27 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-# test_that("predict.fitdist parallel", {
-#   rlang::scoped_options(lifecycle_verbosity = "quiet")
-#   fits <- ssd_fit_dists(ssdtools::boron_data)
-#   
-#   pred <- predict(fits, nboot = 10L, parallel = "multicore", ncpus = 2)
-#   expect_s3_class(pred, "tbl")
-#   expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-#   expect_equal(pred$percent, 1:99)
-# })
-# 
-# test_that("predict.fitdists parallel", {
-#   rlang::scoped_options(lifecycle_verbosity = "quiet")
-#   fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("gamma", "llogis"))
-#   
-#   pred <- predict(fits, nboot = 10L, parallel = "multicore", ncpus = 2)
-#   expect_s3_class(pred, "tbl")
-#   expect_identical(colnames(pred), c("dist", "percent", "est", "se", "lcl", "ucl"))
-#   expect_equal(pred$percent, 1:99)
-# })
-
-# 
 # test_that("gompertz coefs", {
 #   warning("gompertz poor convergence")
 #   set.seed(77)

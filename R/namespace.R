@@ -14,6 +14,7 @@
 
 #' @import chk ggplot2
 #' @importFrom abind abind
+#' @importFrom future.apply future_lapply
 #' @importFrom generics augment glance tidy
 #' @importFrom ggplot2 autoplot
 #' @importFrom goftest ad.test cvm.test

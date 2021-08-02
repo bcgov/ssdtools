@@ -44,7 +44,7 @@ no_ssd_hp <- function() {
 }
 
 .ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, weighted, censoring,
-                           min_pmix, control, parallel) {
+                           min_pmix, control) {
   args <- estimates(x)
   args$q <- conc / rescale
   dist <- .dist_tmbfit(x)
@@ -80,7 +80,7 @@ no_ssd_hp <- function() {
   )
 }
 
-.ssd_hp_fitdists <- function(x, conc, ci, level, nboot, min_pboot, control, parallel,
+.ssd_hp_fitdists <- function(x, conc, ci, level, nboot, min_pboot, control,
                              average) {
   if (!length(x) || !length(conc)) {
     return(no_ssd_hp())
@@ -106,12 +106,11 @@ no_ssd_hp <- function() {
   }
   if(!ci) nboot <- 0L
   
-  hp <- llply(x, .ssd_hp_tmbfit,
+  hp <- future_lapply(x, .ssd_hp_tmbfit,
                conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
                rescale = rescale,  weighted = weighted, censoring = censoring,
                min_pmix = min_pmix,
-               control = control,
-               .parallel = parallel)
+               control = control, future.seed = TRUE)
   ind <- bind_rows(hp)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
     wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")
@@ -139,7 +138,7 @@ no_ssd_hp <- function() {
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
                             average = TRUE, delta = 7, min_pboot = 0.99,
                             control = NULL,
-                            parallel = FALSE, ...) {
+                            ...) {
   chk_vector(conc)
   chk_numeric(conc)
   chk_flag(ci)
@@ -159,6 +158,5 @@ ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
   .ssd_hp_fitdists(x, conc,
                    ci = ci, level = level, nboot = nboot, 
                    average = average, min_pboot = min_pboot,
-                   control = control,
-                   parallel = parallel)
+                   control = control)
 }
