@@ -67,7 +67,7 @@ Imports:
     chk (>= 0.5.1.9003),
     doFuture,
     foreach,
-    future.apply,
+    furrr,
     generics,
     goftest,
     ggplot2,

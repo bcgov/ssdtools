@@ -106,11 +106,11 @@ no_ssd_hp <- function() {
   }
   if(!ci) nboot <- 0L
   
-  hp <- future_lapply(x, .ssd_hp_tmbfit,
+  hp <- future_map(x, .ssd_hp_tmbfit,
                conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
                rescale = rescale,  weighted = weighted, censoring = censoring,
                min_pmix = min_pmix,
-               control = control, future.seed = TRUE)
+               control = control, .options = furrr_options(seed = TRUE))
   ind <- bind_rows(hp)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
     wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")

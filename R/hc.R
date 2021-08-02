@@ -119,9 +119,9 @@ no_ssd_hc <- function() {
   if(!ci) {
     nboot <- 0L
   }
-  hc <- future_lapply(x, .ssd_hc_tmbfit, proportion = percent / 100, ci = ci, level = level, nboot = nboot,
+  hc <- future_map(x, .ssd_hc_tmbfit, proportion = percent / 100, ci = ci, level = level, nboot = nboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, control = control, future.seed = TRUE)
+      min_pmix = min_pmix, control = control, .options = furrr::furrr_options(seed = TRUE))
   
   ind <- bind_rows(hc)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
@@ -169,7 +169,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 #' @export
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, 
                             average = TRUE, delta = 7, min_pboot = 0.99,
-                            control = NULL, ...) {
+                            control = NULL,  ...) {
   chk_vector(percent)
   chk_numeric(percent)
   chk_range(percent, c(0,100))
