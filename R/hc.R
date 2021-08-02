@@ -119,9 +119,10 @@ no_ssd_hc <- function() {
   if(!ci) {
     nboot <- 0L
   }
+  seeds <- seed_streams(length(x))
   hc <- future_map(x, .ssd_hc_tmbfit, proportion = percent / 100, ci = ci, level = level, nboot = nboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, control = control, .options = furrr::furrr_options(seed = TRUE))
+      min_pmix = min_pmix, control = control, .options = furrr::furrr_options(seed = seeds))
   
   ind <- bind_rows(hc)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
