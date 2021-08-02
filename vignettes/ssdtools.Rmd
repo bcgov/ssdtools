@@ -147,16 +147,24 @@ In the current example, the gamma and log-normal distributions have `delta` valu
 
 ## Estimating the Fit
 
-The `predict` function can be used to generate model-averaged (or if `average = FALSE` individual) estimates.
-By default model averaging is based on `aicc`.
+The `predict` function can be used to generate model-averaged (or if `average = FALSE` individual) estimates by parametric bootstrapping. 
+Model averaging is based on `aicc` unless the data censored is which case `aicc` in undefined.
+In this situation model averaging is only possible if the distributions have the same number of parameters.
+Parametric bootstrapping is computationally intensive. 
+To bootstrap for each distribution in parallel register the future backend
+and then select the evaluation strategy.
 
 ```{r, eval = FALSE}
+doFuture::registerDoFuture()
+future::plan(future::multisession)
+
 set.seed(99)
 boron_pred <- predict(fits, ci = TRUE)
 ```
 
-The resultant object is a data frame of the estimated concentration (`est`) with standard error (`se`) and lower (`lcl`) and upper (`ucl`) 95% confidence limits by percent of species affected (`percent`).
-The confidence limits are estimated using parametric bootstrapping.
+The resultant object is a data frame of the estimated concentration (`est`) with standard error (`se`) and lower (`lcl`) and upper (`ucl`) 95% confidence limits (CLs) by percent of species affected (`percent`).
+The object includes the number of bootstraps (`nboot`) data sets generated as well as the proportion of the data sets that successfully fitted (`pboot`).
+There is no requirement for the bootstrap samples to converge.
 ```{r}
 boron_pred
 ```
