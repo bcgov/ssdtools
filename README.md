@@ -72,7 +72,7 @@ Distributions are fit using `ssd_fit_dists()`
 fits <- ssd_fit_dists(ssdtools::boron_data)
 ```
 
-and can be quickly plotted using `autplot`
+and can be quickly plotted using `autoplot`
 
 ``` r
 library(tidyverse)
@@ -101,19 +101,23 @@ and the model-averaged 5% hazard concentration estimated by parametric
 bootstrapping using `ssd_hc`
 
 ``` r
-set.seed(99)
 hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100) # 100 bootstrap samples for speed
 print(hc5)
-#> # A tibble: 1 × 6
-#>   dist    percent   est    se   lcl   ucl
-#>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 average       5  1.31 0.881 0.569  3.63
+#> # A tibble: 1 × 8
+#>   dist    percent   est    se   lcl   ucl nboot pboot
+#>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1 average       5  1.31 0.833 0.544  3.70   100     1
 ```
 
-Model-averaged predictions complete with confidence intervals can be
-produced using the `stats` generic `predict`
+Model-averaged predictions complete with confidence intervals can also
+be estimated by parametric bootstrapping using the `stats` generic
+`predict`. To perform bootstrapping for each distribution in parallel
+register the future backend and then select the evaluation strategy.
 
 ``` r
+doFuture::registerDoFuture()
+future::plan(future::multisession)
+
 set.seed(99)
 boron_pred <- predict(fits, ci = TRUE)
 ```

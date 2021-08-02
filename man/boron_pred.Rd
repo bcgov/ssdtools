@@ -5,7 +5,7 @@
 \alias{boron_pred}
 \title{Model Averaged Predictions for CCME Boron Data}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 99 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 99 rows and 8 columns.
 }
 \usage{
 boron_pred
