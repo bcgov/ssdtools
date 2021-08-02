@@ -267,6 +267,14 @@ test_that("ssd_hc calculates cis with equally weighted data", {
   expect_equal(hc$se, 0.498502249658994)
 })
 
+test_that("ssd_hc calculates cis with equally weighted data in parallel but no foreach", {
+  data <- ssdtools::boron_data
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, parallel = TRUE)
+  expect_equal(hc$se, 0.498502249658994)
+})
+
 test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
   data <- ssdtools::boron_data
   data$Weight <- rep(1, nrow(data))

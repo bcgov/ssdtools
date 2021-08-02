@@ -32,13 +32,13 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              level = 0.95, nboot = 1000, 
                              average = TRUE, delta = 7,
                              min_pboot = 0.99,
-                             parallel = NULL, ncpus = 1,
+                             parallel = FALSE,
                              ...) {
   chk_unused(...)
   ssd_hc(object,
          percent = percent, ci = ci, level = level,
          nboot = nboot, min_pboot = min_pboot,
-         parallel = parallel, ncpus = ncpus,
+         parallel = parallel,
          average = average, delta = delta,
   )
 }

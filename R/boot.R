@@ -28,8 +28,7 @@ sample_parameters <- function(i, dist, fun, args, pars, weighted, censoring, min
   estimates(fit)
 }
 
-boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control, parallel, ncpus) {
-  # need to do parallel
+boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control, parallel) {
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
@@ -37,7 +36,8 @@ boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control, 
   
   safe_fit_dist <- safely(fit_tmb)
 
-  estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = safe_fit_dist, args = args, pars = pars, 
-         weighted = weighted, censoring = censoring, min_pmix = min_pmix, control = control)
+  estimates <- llply(as.list(1:nboot), sample_parameters, dist = dist, fun = safe_fit_dist, args = args, pars = pars, 
+         weighted = weighted, censoring = censoring, min_pmix = min_pmix, control = control,
+         .parallel = FALSE)
   estimates[!vapply(estimates, is.null, TRUE)]
 }

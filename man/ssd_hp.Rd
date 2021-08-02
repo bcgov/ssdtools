@@ -17,8 +17,7 @@ ssd_hp(x, ...)
   delta = 7,
   min_pboot = 0.99,
   control = NULL,
-  parallel = NULL,
-  ncpus = 1,
+  parallel = FALSE,
   ...
 )
 }
@@ -44,9 +43,7 @@ in the sense of returning a likelihood.}
 
 \item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
 
-\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
-
-\item{ncpus}{A count of the number of parallel processes to use.}
+\item{parallel}{A flag specifying whether to bootstrap in parallel.}
 }
 \value{
 A tibble of corresponding hazard percents.

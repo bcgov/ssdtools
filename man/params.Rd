@@ -61,9 +61,7 @@ in the sense of returning a likelihood.}
 
 \item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
-
-\item{ncpus}{A count of the number of parallel processes to use.}
+\item{parallel}{A flag specifying whether to bootstrap in parallel.}
 
 \item{...}{Unused.}
 

@@ -13,8 +13,7 @@
   average = TRUE,
   delta = 7,
   min_pboot = 0.99,
-  parallel = NULL,
-  ncpus = 1,
+  parallel = FALSE,
   ...
 )
 }
@@ -36,9 +35,7 @@
 \item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
 in the sense of returning a likelihood.}
 
-\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
-
-\item{ncpus}{A count of the number of parallel processes to use.}
+\item{parallel}{A flag specifying whether to bootstrap in parallel.}
 
 \item{...}{Unused.}
 }

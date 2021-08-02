@@ -59,7 +59,7 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, data, rescale,  weighted, censoring, min_pmix, control, parallel, ncpus) {
+.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, data, rescale,  weighted, censoring, min_pmix, control, parallel) {
   args <- estimates(x)
   args$p <- proportion
   dist <- .dist_tmbfit(x)
@@ -81,7 +81,7 @@ no_ssd_hc <- function() {
   censoring <- censoring / rescale
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, weighted = weighted,
                            censoring = censoring, min_pmix = min_pmix,
-                           control = control, parallel = parallel, ncpus = ncpus)
+                           control = control, parallel = parallel)
   cis <- cis_tmb(estimates, what, level = level, x = proportion)
   tibble(
     dist = dist,
@@ -92,7 +92,7 @@ no_ssd_hc <- function() {
 }
 
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot,
-                             average, min_pboot, control, parallel, ncpus) {
+                             average, min_pboot, control, parallel) {
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
@@ -124,8 +124,7 @@ no_ssd_hc <- function() {
     proportion = percent / 100, ci = ci, level = level, nboot = nboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, control = control,
-    parallel = parallel, ncpus = ncpus 
-  )
+    parallel = parallel)
   
   ind <- bind_rows(hc)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
@@ -174,7 +173,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, 
                             average = TRUE, delta = 7, min_pboot = 0.99,
                             control = NULL, 
-                            parallel = NULL, ncpus = 1,  ...) {
+                            parallel = FALSE, ...) {
   chk_vector(percent)
   chk_numeric(percent)
   chk_range(percent, c(0,100))
@@ -201,7 +200,5 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   x <- subset(x, delta = delta)
   .ssd_hc_fitdists(x, percent,
     ci = ci, level = level, nboot = nboot, min_pboot = min_pboot, control = control,
-    parallel = parallel, ncpus = ncpus,
-    average = average
-  )
+    parallel = parallel, average = average)
 }

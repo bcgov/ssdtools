@@ -45,8 +45,7 @@
 #' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully fit 
 #' in the sense of returning a likelihood.
 #' @param level A number between 0 and 1 of the confidence level.
-#' @param parallel A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').
-#' @param ncpus A count of the number of parallel processes to use.
+#' @param parallel A flag specifying whether to bootstrap in parallel.
 #' @param ... Unused.
 #' @param q	vector of quantiles.
 #' @param p	vector of probabilities.
