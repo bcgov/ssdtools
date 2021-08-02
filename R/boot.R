@@ -28,6 +28,11 @@ sample_parameters <- function(i, dist, fun, args, pars, weighted, censoring, min
   estimates(fit)
 }
 
+samples_parameters <- function(is, dist, fun, args, pars, weighted, censoring, min_pmix, control) {
+  lapply(is, sample_parameters, dist = dist, fun = fun, args = args, pars = pars, 
+        weighted = weighted, censoring = censoring, min_pmix = min_pmix, control = control)
+}
+
 boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control, parallel) {
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
@@ -35,9 +40,16 @@ boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control, 
   pars <- .pars_tmbfit(x)
   
   safe_fit_dist <- safely(fit_tmb)
+  
+  nworkers <- foreach::getDoParWorkers()
+  
+  indices <- parallel::splitIndices(nboot, nworkers)
 
-  estimates <- llply(as.list(1:nboot), sample_parameters, dist = dist, fun = safe_fit_dist, args = args, pars = pars, 
+  estimates <- llply(indices, samples_parameters, dist = dist, fun = safe_fit_dist, args = args, pars = pars, 
          weighted = weighted, censoring = censoring, min_pmix = min_pmix, control = control,
-         .parallel = FALSE)
+         .parallel = parallel)
+  
+  estimates <- do.call("c", estimates)
+  
   estimates[!vapply(estimates, is.null, TRUE)]
 }
