@@ -22,6 +22,11 @@ ssd_pgamma <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE
              lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_q Quantile Function for Gamma Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_qgamma(0.5)
 ssd_qgamma <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gamma", p = p, shape = shape, scale = scale, 
         lower.tail = lower.tail, log.p = log.p)

@@ -25,6 +25,11 @@ ssd_plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_q Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_qlnorm_lnorm(0.5)
 ssd_qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
                            meanlog2 = 1, sdlog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {

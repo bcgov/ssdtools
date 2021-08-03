@@ -22,6 +22,11 @@ ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p =
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_q Quantile Function for Gompertz Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_qgompertz(0.5)
 ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gompertz", p = p, location = location, shape = shape, 
         lower.tail = lower.tail, log.p = log.p)

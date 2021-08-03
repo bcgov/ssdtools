@@ -159,5 +159,5 @@ ssd_plnorm(1)
 ssd_pweibull(1)
 }
 \seealso{
-\code{\link{ssd_r}}
+\code{\link{ssd_q}} and \code{\link{ssd_r}}
 }

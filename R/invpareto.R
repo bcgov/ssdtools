@@ -22,6 +22,11 @@ ssd_pinvpareto <- function(q, shape = 3, scale = 1, lower.tail = TRUE, log.p = F
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_q Quantile Function for Inverse Pareto Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_qinvpareto(0.5)
 ssd_qinvpareto <- function(p, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("invpareto", p = p, shape = shape, scale = scale,
         lower.tail = lower.tail, log.p = log.p)

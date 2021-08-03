@@ -22,6 +22,11 @@ ssd_plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, lo
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
+#' @describeIn ssd_q Quantile Function for Log-Gumbel Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_qlgumbel(0.5)
 ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gumbel", p = p,  location = locationlog, scale = scalelog,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)

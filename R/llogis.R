@@ -22,6 +22,11 @@ ssd_pllogis <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
+#' @describeIn ssd_q Cumulative Distribution Function for Log-Logistic Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_qllogis(0.5)
 ssd_qllogis <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("logis", p = p,  location = locationlog, scale = scalelog,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)

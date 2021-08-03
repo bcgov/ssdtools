@@ -14,13 +14,19 @@
 
 #' Cumulative Distribution Function
 #' @inheritParams params
-#' @seealso [`ssd_r`]
+#' @seealso [`ssd_q`] and [`ssd_r`]
 #' @name ssd_p
+NULL
+
+#' Quantile Function
+#' @inheritParams params
+#' @seealso [`ssd_p`] and [`ssd_r`]
+#' @name ssd_q
 NULL
 
 #' Random Number Generation
 #' @inheritParams params
-#' @seealso [`ssd_p`]
+#' @seealso [`ssd_p`] and [`ssd_q`]
 #' @name ssd_r
 NULL
 
