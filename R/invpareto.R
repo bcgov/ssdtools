@@ -17,7 +17,7 @@ pinvpareto <- function(q, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE
         lower.tail = lower.tail, log.p = log.p)
 }
 
-qinvpareto <- function(p, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE) {
+ssd_qinvpareto <- function(p, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("invpareto", p = p, shape = shape, scale = scale,
         lower.tail = lower.tail, log.p = log.p)
 }

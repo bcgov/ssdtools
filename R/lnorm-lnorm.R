@@ -20,7 +20,7 @@ plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
         lower.tail = lower.tail, log.p = log.p)
 }
 
-qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
+ssd_qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
                            meanlog2 = 1, sdlog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {
   qdist("lnorm_lnorm", p = p, meanlog1 = meanlog1, sdlog1 = sdlog1,

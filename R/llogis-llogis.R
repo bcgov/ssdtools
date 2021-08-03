@@ -20,7 +20,7 @@ pllogis_llogis <- function(q, locationlog1 = 0, scalelog1 = 1,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
-qllogis_llogis <- function(p, locationlog1 = 0, scalelog1 = 1,
+ssd_qllogis_llogis <- function(p, locationlog1 = 0, scalelog1 = 1,
                            locationlog2 = 1, scalelog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {
   qdist("logis_logis", p = p, location1 = locationlog1, scale1 = scalelog1,

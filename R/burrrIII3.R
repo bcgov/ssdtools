@@ -17,7 +17,7 @@ pburrIII3 <- function(q, shape1 = 1, shape2 = 1, scale = 1, lower.tail = TRUE, l
         lower.tail = lower.tail, log.p = log.p)
 }
 
-qburrIII3 <- function(p, shape1 = 1, shape2 = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
+ssd_qburrIII3 <- function(p, shape1 = 1, shape2 = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("burrIII3", p = p, shape1 = shape1, shape2 = shape2, scale = scale,
         lower.tail = lower.tail, log.p = log.p)
 }

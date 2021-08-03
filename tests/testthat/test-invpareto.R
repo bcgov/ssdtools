@@ -15,7 +15,7 @@
 test_that("invpareto", {
   test_dist("invpareto", upadj = 1e-02)
   expect_equal(pinvpareto(0.5), 0.125)
-  expect_equal(qinvpareto(0.125), 0.5)
+  expect_equal(ssd_qinvpareto(0.125), 0.5)
   set.seed(42)
   expect_equal(ssd_rinvpareto(2), c(0.970755086941947, 0.978569136804486))
 })

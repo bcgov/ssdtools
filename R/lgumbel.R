@@ -17,7 +17,7 @@ plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p 
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
-qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gumbel", p = p,  location = locationlog, scale = scalelog,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }

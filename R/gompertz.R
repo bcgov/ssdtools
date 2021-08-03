@@ -17,7 +17,7 @@ pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p = FAL
         lower.tail = lower.tail, log.p = log.p)
 }
 
-qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gompertz", p = p, location = location, shape = shape, 
         lower.tail = lower.tail, log.p = log.p)
 }

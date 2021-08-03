@@ -47,7 +47,7 @@ no_ssd_hc <- function() {
 }
 
 .ssd_hc_dist <- function(x, dist, proportion) {
-  fun <- paste0("q", dist)
+  fun <- paste0("ssd_q", dist)
   args <- list(p = proportion)
   args <- c(as.list(x), args)
   est <- do.call(fun, args)
@@ -63,7 +63,7 @@ no_ssd_hc <- function() {
   args <- estimates(x)
   args$p <- proportion
   dist <- .dist_tmbfit(x)
-  what <- paste0("q", dist)
+  what <- paste0("ssd_q", dist)
   
   est <- do.call(what, args)
   if (!ci) {
