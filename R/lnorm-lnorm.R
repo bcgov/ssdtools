@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
+ssd_plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
                            meanlog2 = 1, sdlog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {
   pdist("lnorm_lnorm", q = q, meanlog1 = meanlog1, sdlog1 = sdlog1,

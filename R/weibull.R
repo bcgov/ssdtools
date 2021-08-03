@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-pweibull <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
+ssd_pweibull <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("weibull", q = q, shape = shape, scale = scale, 
         lower.tail = lower.tail, log.p = log.p)
 }

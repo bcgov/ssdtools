@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+ssd_plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("gumbel", q = q,  location = locationlog, scale = scalelog, 
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }

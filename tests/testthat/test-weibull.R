@@ -14,7 +14,7 @@
 
 test_that("weibull", {
   test_dist("weibull")
-  expect_equal(pweibull(1), 0.632120558828558)
+  expect_equal(ssd_pweibull(1), 0.632120558828558)
   expect_equal(ssd_qweibull(0.75), 1.38629436111989)
   set.seed(42)
   expect_equal(ssd_rweibull(2), c(0.0890432104972705, 0.0649915162066272))

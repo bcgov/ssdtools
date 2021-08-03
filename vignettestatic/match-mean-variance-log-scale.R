@@ -76,7 +76,7 @@ res
 # Plot the cumulative distribution on the log(Concentration) scale
 plotdata <- plyr::ddply(res, "dist.base", function(x){
     logC <- seq(-3,7,.01)
-    cdf  <- do.call( paste0("p",x$dist.base), list(exp(logC), x$par.1., x$par.2.))
+    cdf  <- do.call( paste0("ssd_p",x$dist.base), list(exp(logC), x$par.1., x$par.2.))
     data.frame(logC=logC, cdf=cdf)
 })
 

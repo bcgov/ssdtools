@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
+ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("gompertz", q = q, location = location, shape = shape, 
         lower.tail = lower.tail, log.p = log.p)
 }

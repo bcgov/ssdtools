@@ -147,7 +147,7 @@ mdist <- function(dist) {
 
 tdist <- function(dist, data, pars, pvalue, test = "ks", y = "y") {
   x <- mean_weighted_values(data, weight = FALSE)
-  fun <- paste0("p", dist)
+  fun <- paste0("ssd_p", dist)
   fun <- eval(parse(text = fun))
   args <- list(x, fun)
   names(args) <- c("x", y)

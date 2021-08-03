@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 xcis_tmb <- function(x, args, what, level) {
-  if(grepl("^p", what)) {
+  if(grepl("^ssd_p", what)) {
     args$q <- x
   } else {
     args$p <- x

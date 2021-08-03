@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-pllogis_llogis <- function(q, locationlog1 = 0, scalelog1 = 1,
+ssd_pllogis_llogis <- function(q, locationlog1 = 0, scalelog1 = 1,
                            locationlog2 = 1, scalelog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {
   pdist("logis_logis", q = q, location1 = locationlog1, scale1 = scalelog1,

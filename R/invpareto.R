@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-pinvpareto <- function(q, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE) {
+ssd_pinvpareto <- function(q, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("invpareto", q = q, shape = shape, scale = scale, 
         lower.tail = lower.tail, log.p = log.p)
 }

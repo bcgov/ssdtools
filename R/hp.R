@@ -48,7 +48,7 @@ no_ssd_hp <- function() {
   args <- estimates(x)
   args$q <- conc / rescale
   dist <- .dist_tmbfit(x)
-  what <- paste0("p", dist)
+  what <- paste0("ssd_p", dist)
   
   est <- do.call(what, args)
   if (!ci) {
