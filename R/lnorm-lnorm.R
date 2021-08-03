@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @describeIn ssd_p Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_plnorm_lnorm(1)
 ssd_plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
                            meanlog2 = 1, sdlog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {

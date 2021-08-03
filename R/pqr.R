@@ -12,8 +12,15 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' Cumulative Distribution Function
+#' @inheritParams params
+#' @seealso [`ssd_r`]
+#' @name ssd_p
+NULL
+
 #' Random Number Generation
 #' @inheritParams params
+#' @seealso [`ssd_p`]
 #' @name ssd_r
 NULL
 

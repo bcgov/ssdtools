@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @describeIn ssd_p Cumulative Distribution Function for BurrIII Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_pburrIII3(1)
 ssd_pburrIII3 <- function(q, shape1 = 1, shape2 = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("burrIII3", q = q, shape1 = shape1, shape2 = shape2, scale = scale, 
         lower.tail = lower.tail, log.p = log.p)

@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @describeIn ssd_p Cumulative Distribution Function for Log-Logistic Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_pllogis(1)
 ssd_pllogis <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("logis", q = q,  location = locationlog, scale = scalelog, 
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)

@@ -151,3 +151,6 @@ hist(ssd_rlnorm(10000), breaks = 1000)
 set.seed(50)
 hist(ssd_rweibull(10000), breaks = 1000)
 }
+\seealso{
+\code{\link{ssd_p}}
+}

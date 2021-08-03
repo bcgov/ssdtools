@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @describeIn ssd_p Cumulative Distribution Function for Log-Gumbel Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_plgumbel(1)
 ssd_plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("gumbel", q = q,  location = locationlog, scale = scalelog, 
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)

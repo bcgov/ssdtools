@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @describeIn ssd_p Cumulative Distribution Function for Log-Normal Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_plnorm(1)
 ssd_plnorm <- function(q, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("lnorm", q = q, meanlog = meanlog, sdlog = sdlog, 
         lower.tail = lower.tail, log.p = log.p)

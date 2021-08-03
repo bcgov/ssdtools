@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @describeIn ssd_p Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_pllogis_llogis(1)
 ssd_pllogis_llogis <- function(q, locationlog1 = 0, scalelog1 = 1,
                            locationlog2 = 1, scalelog2 = 1, pmix = 0.5, 
                            lower.tail = TRUE, log.p = FALSE) {

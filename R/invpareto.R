@@ -12,6 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' @describeIn ssd_p Cumulative Distribution Function for Inverse Pareto Distribution
+#' @export
+#' @examples
+#' 
+#' ssd_pinvpareto(1)
 ssd_pinvpareto <- function(q, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("invpareto", q = q, shape = shape, scale = scale, 
         lower.tail = lower.tail, log.p = log.p)
