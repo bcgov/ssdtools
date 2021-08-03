@@ -38,5 +38,5 @@
 ssd_hc5_bc <- function(data, left = "Conc") {
   dists <- ssd_dists("bc")
   fits <- ssd_fit_dists(data, left = left, rescale = TRUE)
-  ssd_hc(fits, ci = TRUE, delta = 7)
+  ssd_hc(fits, ci = TRUE, delta = 7, nboot = 10000)
 }
