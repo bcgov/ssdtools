@@ -41,7 +41,7 @@
 #' @param delta A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.
 #' @param average A flag specifying whether to model average the estimates.
 #' @param ci A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).
-#' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits.
+#' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.
 #' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully fit 
 #' in the sense of returning a likelihood.
 #' @param level A number between 0 and 1 of the confidence level.

@@ -54,7 +54,7 @@ relative to the extremes for non-missing values.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
 
 \item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
 in the sense of returning a likelihood.}

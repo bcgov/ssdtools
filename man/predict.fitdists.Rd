@@ -25,7 +25,7 @@
 
 \item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
 
 \item{average}{A flag specifying whether to model average the estimates.}
 
