@@ -36,7 +36,7 @@ test_that("burrlioz with invpareto data gives invpareto", {
   expect_identical(names(fit), "invpareto")
 })
 
-test_that("burrlioz with lgumbel data gives lgumbel!", {
+test_that("burrlioz with lgumbel data gives lgumbel", {
   set.seed(99)
   conc <- ssd_rlgumbel(25)
   data <- data.frame(Conc = conc)
