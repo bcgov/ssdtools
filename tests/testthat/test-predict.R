@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("predict", {
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   pred <- predict(fits)
   expect_s3_class(pred, "tbl")
@@ -21,7 +21,7 @@ test_that("predict", {
 })
 
 test_that("predict cis", {
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   set.seed(10)
   pred <- predict(fits, ci = TRUE, nboot = 10L)
@@ -30,7 +30,7 @@ test_that("predict cis", {
 })
 
 test_that("predict not average", {
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   pred <- predict(fits, average = FALSE)
   expect_s3_class(pred, "tbl")

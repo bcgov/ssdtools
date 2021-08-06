@@ -91,7 +91,7 @@ fit_dists <- function(data, dists, rescale, computable, min_pmix, range_shape1, 
 #'
 #' @export
 #' @examples
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' fits
 #' ssd_plot_cdf(fits)
 #' ssd_hc(fits)

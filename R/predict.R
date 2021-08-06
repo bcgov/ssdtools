@@ -26,7 +26,7 @@ stats::predict
 #' @export
 #' @seealso [`ssd_hc()`] and [`ssd_plot()`]
 #' @examples 
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' predict(fits)
 predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              level = 0.95, nboot = 1000, 

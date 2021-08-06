@@ -73,7 +73,7 @@ relative to the extremes for non-missing values.}
 Plots species sensitivity data and distributions.
 }
 \examples{
-ssd_plot(ssdtools::boron_data, boron_pred, label = "Species", shape = "Group")
+ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species", shape = "Group")
 }
 \seealso{
 \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}} and \code{\link[=geom_ssdpoint]{geom_ssdpoint()}}

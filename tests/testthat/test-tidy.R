@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("tidy", {
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
@@ -21,7 +21,7 @@ test_that("tidy", {
 })
 
 test_that("tidy doesn't reorder dists (but does reorder pars)", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"))
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
   tidy <- tidy(fit)
   expect_s3_class(tidy, "tbl_df")
   expect_identical(colnames(tidy), c("dist", "term", "est", "se"))
@@ -30,7 +30,7 @@ test_that("tidy doesn't reorder dists (but does reorder pars)", {
 })
 
 test_that("tidy fit all with also doesn't reorder dists (but does reorder pars)", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "llogis"))
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
   
   tidy <- tidy(fit, all = TRUE)
   expect_identical(colnames(tidy), c("dist", "term", "est", "se"))

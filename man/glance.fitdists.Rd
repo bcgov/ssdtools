@@ -18,7 +18,7 @@ A tidy tibble of the distributions.
 Gets a tibble with a single row for each distribution.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 glance(fits)
 }
 \seealso{

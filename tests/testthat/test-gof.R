@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("gof", {
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   gof_statistic <- ssd_gof(fits)
   expect_s3_class(gof_statistic, "tbl")

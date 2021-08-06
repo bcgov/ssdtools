@@ -25,7 +25,7 @@ Else if shape2 parameter is at a boundary returns 'invpareto'.
 Otherwise returns 'burrIII3'
 }
 \examples{
-ssd_fit_burrlioz(ssdtools::boron_data)
+ssd_fit_burrlioz(ssddata::ccme_boron)
 }
 \seealso{
 \code{\link[=ssd_fit_dists]{ssd_fit_dists()}}

@@ -1,5 +1,5 @@
 test_that("glance weights rescale log_lik", {
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   glance <- glance(fits)
   expect_s3_class(glance, "tbl")
@@ -7,8 +7,8 @@ test_that("glance weights rescale log_lik", {
 })
 
 test_that("glance weights independent of rescaling", {
-  fit <- ssd_fit_dists(ssdtools::boron_data, rescale = FALSE)
-  fit_rescale <- ssd_fit_dists(ssdtools::boron_data, rescale = TRUE)
+  fit <- ssd_fit_dists(ssddata::ccme_boron, rescale = FALSE)
+  fit_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
   
   glance <- glance(fit)
   glance_rescale <- glance(fit_rescale)
@@ -16,7 +16,7 @@ test_that("glance weights independent of rescaling", {
 })
 
 test_that("glance weights rescale log_lik", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$weight <- rep(1, nrow(data))
   fit <- ssd_fit_dists(data, weight = "weight")
   data$weight <- rep(2, nrow(data))
@@ -28,7 +28,7 @@ test_that("glance weights rescale log_lik", {
 })
 
 test_that("glance reweight same log_lik", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$weight <- rep(1, nrow(data))
   fit <- ssd_fit_dists(data, weight = "weight")
   data$weight <- rep(2, nrow(data))
@@ -40,7 +40,7 @@ test_that("glance reweight same log_lik", {
 })
 
 test_that("glance reweight same log_lik", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$Upper <- data$Conc
   data$Upper[1] <- data$Conc[1] * 1.0001
   

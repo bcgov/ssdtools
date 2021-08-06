@@ -21,10 +21,11 @@ knitr::opts_chunk$set(
 An elegant approach using some tidyverse packages is demonstrated below.
 
 ```{r, message=FALSE}
+library(ssddata)
 library(ssdtools)
 library(tidyverse)
 
-boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Units)) %>%
+boron_preds <- nest(ccme_boron, data = c(Chemical, Species, Conc, Units)) %>%
   mutate(
     Fit = map(data, ssd_fit_dists, dists = "lnorm"),
     Prediction = map(Fit, predict)
@@ -34,7 +35,7 @@ boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Unit
 
 The resultant data and predictions can then be plotted as follows.
 ```{r, fig.width = 5, fig.height = 5}
-ssd_plot(boron_data, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
+ssd_plot(ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
   facet_wrap(~Group)
 ```
 

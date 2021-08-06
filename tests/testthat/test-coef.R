@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("coef", {
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   coef <- coef(fits)
   expect_s3_class(coef, "tbl")

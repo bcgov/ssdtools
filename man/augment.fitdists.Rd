@@ -18,7 +18,7 @@ A tibble of the agumented data.
 Get a tibble of the original data with augmentation.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 augment(fits)
 }
 \seealso{

@@ -17,7 +17,7 @@ test_that("subset", {
   class(x) <- c("fitdists")
   expect_identical(subset(x), x)
   
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   expect_identical(subset(fits), fits)
   expect_identical(names(subset(fits, c("lnorm", "gamma"))), c("gamma", "lnorm"))

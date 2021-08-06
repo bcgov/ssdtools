@@ -30,7 +30,7 @@ Generic function to plots the cumulative distribution function (CDF).
 }}
 
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_plot_cdf(fits)
 
 ssd_plot_cdf(list(

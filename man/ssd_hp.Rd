@@ -58,7 +58,7 @@ hazard percent(s).
 }}
 
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_hp(fits, conc = 1)
 }
 \seealso{

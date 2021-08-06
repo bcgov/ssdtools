@@ -23,7 +23,7 @@
 #' @export
 #'
 #' @examples
-#' ssd_plot_cf(ssdtools::boron_data)
+#' ssd_plot_cf(ssddata::ccme_boron)
 ssd_plot_cf <- function(data, left = "Conc") {
   
   if(!requireNamespace("fitdistrplus", quietly = TRUE)) {

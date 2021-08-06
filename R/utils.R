@@ -59,7 +59,7 @@ ssd_ecd <- function(x, ties.method = "first") {
 #' @export
 #'
 #' @examples
-#' ssd_ecd_data(ssdtools::boron_data)
+#' ssd_ecd_data(ssddata::ccme_boron)
 ssd_ecd_data <- function(
   data, left = "Conc", right = left, bounds = c(left = 1, right = 1)) {
   .chk_data(data, left, right)
@@ -88,7 +88,7 @@ ssd_ecd_data <- function(
 #' @export
 #'
 #' @examples
-#' ssd_sort_data(ssdtools::boron_data)
+#' ssd_sort_data(ssddata::ccme_boron)
 ssd_sort_data <- function(data, left = "Conc", right = left) {
   ecd <- ssd_ecd_data(data, left = left, right = right)
   data[order(ecd),,drop = FALSE]

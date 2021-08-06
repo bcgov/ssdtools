@@ -24,7 +24,7 @@ ggplot2::autoplot
 #' @seealso [`ssd_plot_cdf()`]
 #' @export
 #' @examples 
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' autoplot(fits)
 autoplot.fitdists <- function(object, ...) {
   ssd_plot_cdf(object, ...)

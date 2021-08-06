@@ -44,7 +44,7 @@ all hazard concentrations from 1 to 99\%.
 It is useful for plotting purposes.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 predict(fits)
 }
 \seealso{

@@ -25,7 +25,7 @@ For example, consider the boron data.
 library(tidyverse)
 library(ssdtools)
 
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 gp <- ssd_plot_cdf(fits) + scale_color_ssd()
 
 print(gp)

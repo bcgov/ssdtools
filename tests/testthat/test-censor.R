@@ -13,12 +13,12 @@
 #    limitations under the License.
 
 test_that("censor", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
   expect_false(is_censored(fits))
   
   # need to have example censored data
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$Right <- data$Conc
   data$Conc <- 0
   fits <- ssd_fit_dists(data, right = "Right")

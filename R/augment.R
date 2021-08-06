@@ -25,7 +25,7 @@ generics::augment
 #' @seealso [`ssd_data()`]
 #' @export
 #' @examples 
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' augment(fits)
 augment.fitdists <- function(x, ...) {
   .org_data_fitdists(x)

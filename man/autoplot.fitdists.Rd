@@ -18,7 +18,7 @@ A ggplot object.
 A wrapper on \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 autoplot(fits)
 }
 \seealso{

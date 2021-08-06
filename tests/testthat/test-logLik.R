@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("logLik", {
-  fits <- ssd_fit_dists(ssdtools::boron_data)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   expect_equal(logLik(fits), c(gamma = -116.81515869884, llogis = -118.507435324864, lnorm = -117.514216489547
   ))
 })

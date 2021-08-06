@@ -2,7 +2,7 @@
 library(ssdtools)
 library(ggplot2)
 
-dists <- ssd_fit_dists(ssdtools::boron_data)
+dists <- ssd_fit_dists(ssddata::ccme_boron)
 hc <- ssd_hc(dists)
 
 gp <- autoplot(dists) +

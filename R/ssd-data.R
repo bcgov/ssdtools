@@ -23,7 +23,7 @@
 #' @export
 #'
 #' @examples
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_data(fits)
 ssd_data <- function(x) {
   chk_s3_class(x, "fitdists")

@@ -16,6 +16,6 @@ A flag specifiying whether x is a fitdists Object.
 Tests whether x is a fitdists Object.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 is.fitdists(fits)
 }

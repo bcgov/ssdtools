@@ -29,7 +29,7 @@ estimates.tmbfit <- function(x,...) {
 #' @seealso [`tidy.fitdists()`], [`ssd_match_moments()`], [`ssd_hc()`] and [`ssd_plot_cdf()`]
 #' @export
 #' @examples 
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' estimates <- estimates(fits)
 #' print(estimates)
 #' ssd_hc(estimates)

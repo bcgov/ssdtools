@@ -72,7 +72,7 @@ However, currently only the resultant parameter estimates are available.
 If the \code{right} argument is different to the \code{left} argument then the data are considered to be censored.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 fits
 ssd_plot_cdf(fits)
 ssd_hc(fits)

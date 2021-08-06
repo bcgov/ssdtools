@@ -21,7 +21,7 @@
 #' @inheritParams params
 #' @export
 #' @examples
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' subset(fits, c("gamma", "lnorm"))
 subset.fitdists <- function(x, select = names(x), delta = Inf, ...) {
   if(!length(x)) return(x)

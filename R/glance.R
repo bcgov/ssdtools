@@ -42,7 +42,7 @@ generics::glance
 #' @seealso [`ssd_gof()`]
 #' @export
 #' @examples 
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' glance(fits)
 glance.fitdists <- function(x, ...) {
   chk_unused(...)

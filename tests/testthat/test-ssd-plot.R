@@ -13,15 +13,15 @@
 #    limitations under the License.
 
 test_that("ssd_plot", {
-  expect_snapshot_plot(ssd_plot(ssdtools::boron_data, boron_pred), "boron_pred")
-  expect_snapshot_plot(ssd_plot(ssdtools::boron_data, boron_pred, ribbon = TRUE), "boron_pred_ribbon")
-  expect_snapshot_plot(ssd_plot(ssdtools::boron_data, boron_pred, label = "Species"), "boron_pred_label")
-  expect_snapshot_plot(ssd_plot(ssdtools::boron_data, boron_pred, label = "Species",
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred), "boron_pred")
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, ribbon = TRUE), "boron_pred_ribbon")
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species"), "boron_pred_label")
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species",
                                 shift_x = 2), "boron_pred_shift_x")
 })
 
 test_that("ssd_plot censored data", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$Other <- data$Conc * 2
   expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other"), "boron_cens_pred")
   expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", ribbon = TRUE), "boron_cens_pred_ribbon")
@@ -29,17 +29,17 @@ test_that("ssd_plot censored data", {
 })
 
 test_that("ssd_plot xbreaks", {
-  expect_snapshot_plot(ssd_plot(ssdtools::boron_data, boron_pred, xbreaks = c(1,2)), "boron_breaks")
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, xbreaks = c(1,2)), "boron_breaks")
 })
 
 test_that("ssd_plot can't handles missing values all", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$Conc <- NA_real_
   expect_error(ssd_plot(data, boron_pred))
 })
 
 test_that("ssd_plot fills in missing order", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data <- data[order(data$Conc),]
   data$Other <- data$Conc
   data$Conc[1] <- NA

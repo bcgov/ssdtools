@@ -16,7 +16,7 @@ A tibble of the original data.
 Get a tibble of the original data.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_data(fits)
 }
 \seealso{

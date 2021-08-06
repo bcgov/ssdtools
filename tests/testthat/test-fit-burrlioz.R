@@ -12,8 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("burrlioz with boron_data gives invpareto", {
-  fit <- ssd_fit_burrlioz(ssdtools::boron_data)
+test_that("burrlioz with ccme_boron gives invpareto", {
+  fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   expect_s3_class(fit, "fitdists")
   expect_identical(names(fit), "invpareto")
 })

@@ -24,7 +24,7 @@
 #' @seealso [`ssd_hc()`]
 #' @export
 #' @examples 
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_hp(fits, conc = 1)
 ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")

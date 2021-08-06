@@ -79,6 +79,7 @@ Imports:
     purrr,
     Rcpp,
     scales,
+    ssddata,
     stats,
     stringr,
     tibble,
@@ -105,6 +106,8 @@ Suggests:
     tidyr,
     tidyverse,
     withr
+Remotes:
+    poissonconsulting/ssddata
 LinkingTo: 
     Rcpp,
     TMB

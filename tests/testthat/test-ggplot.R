@@ -13,37 +13,37 @@
 #    limitations under the License.
 
 test_that("stat_ssd deprecated", {
-  lifecycle::expect_deprecated(ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
+  lifecycle::expect_deprecated(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
                                  stat_ssd())
 })
 
 test_that("plot stat_ssd", {
   withr::local_options(lifecycle_verbosity = "quiet")
-  gp <- ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
+  gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
     stat_ssd()
   expect_snapshot_plot(gp, "stat_ssd")
 })
 
 test_that("geom_ssd deprecated", {
-  lifecycle::expect_deprecated(ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
+  lifecycle::expect_deprecated(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
                                  geom_ssd())
 })
 
 test_that("plot geom_ssd", {
   withr::local_options(lifecycle_verbosity = "quiet")
-  gp <- ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
+  gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
     geom_ssd()
   expect_snapshot_plot(gp, "geom_ssd")
 })
 
 test_that("plot geom_ssdpoint", {
-  gp <- ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
+  gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
     geom_ssdpoint()
   expect_snapshot_plot(gp, "geom_ssdpoint")
 })
 
 test_that("plot geom_ssdpoint identity stat", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$New <- (1:nrow(data) - 0.5) / nrow(data)
   gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc, y = New)) +
     geom_ssdpoint(stat = "identity")
@@ -51,13 +51,13 @@ test_that("plot geom_ssdpoint identity stat", {
 })
 
 test_that("plot geom_ssdsegment", {
-  gp <- ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+  gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_ssdsegment()
   expect_snapshot_plot(gp, "geom_ssdsegment")
 })
 
 test_that("plot geom_ssdsegment identity", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$New <- (1:nrow(data) - 0.5) / nrow(data)
   gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc, xend = Conc * 2,
                                                  y = New, yend = New)) +
@@ -66,25 +66,25 @@ test_that("plot geom_ssdsegment identity", {
 })
 
 test_that("plot geom_ssdsegment arrow", {
-  gp <- ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+  gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
                    geom_ssdsegment(arrow = grid::arrow())
   expect_snapshot_plot(gp, "geom_ssdsegment_arrow")
 })
 
 test_that("plot geom_ssdsegment no data", {
-  gp <- ggplot2::ggplot(ssdtools::boron_data[FALSE,], ggplot2::aes(x = Conc, xend = Conc * 2)) +
+  gp <- ggplot2::ggplot(ssddata::ccme_boron[FALSE,], ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_ssdsegment()
   expect_snapshot_plot(gp, "geom_ssdsegment_nodata")
 })
 
 test_that("plot geom_hcintersect", {
-  gp <- ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
+  gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
     geom_hcintersect(xintercept = 1, yintercept = 0.05)
   expect_snapshot_plot(gp, "geom_hcintersect")
 })
 
 test_that("plot geom_hcintersect aes", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$yintercept <- 0.10
   gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc)) +
     geom_hcintersect(aes(xintercept = 1, yintercept = yintercept))
@@ -101,8 +101,8 @@ test_that("plot geom_xribbon", {
 
 test_that("plot geoms", {
   gp <- ggplot2::ggplot(boron_pred) +
-    geom_ssdpoint(data = ssdtools::boron_data, ggplot2::aes(x = Conc)) +
-    geom_ssdsegment(data = ssdtools::boron_data, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+    geom_ssdpoint(data = ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
+    geom_ssdsegment(data = ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_hcintersect(xintercept = 100, yintercept = 0.5) +
     geom_xribbon(
       ggplot2::aes(xmin = lcl, xmax = ucl, y = percent/100),

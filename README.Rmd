@@ -48,12 +48,12 @@ devtools::install_github("bcgov/ssdtools")
 `ssdtools` provides a data set for several chemicals including Boron.
 ```{r, message=FALSE}
 library(ssdtools)
-ssdtools::boron_data
+ssddata::ccme_boron
 ```
 
 Distributions are fit using `ssd_fit_dists()`
 ```{r}
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 ```
 
 and can be quickly plotted using `autoplot`
@@ -91,7 +91,7 @@ boron_pred <- predict(fits, ci = TRUE)
 
 and plotted together with the original data using `ssd_plot`.
 ```{r}
-ssd_plot(ssdtools::boron_data, boron_pred,
+ssd_plot(ssddata::ccme_boron, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
 ) + 

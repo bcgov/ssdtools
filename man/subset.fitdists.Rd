@@ -21,6 +21,6 @@ The Akaike Information-theoretic Criterion differences are calculated after
 selecting the distributions named in select.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 subset(fits, c("gamma", "lnorm"))
 }

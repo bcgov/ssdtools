@@ -33,7 +33,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'  ssd_wqg_bc(ssdtools::boron_data)
+#'  ssd_wqg_bc(ssddata::ccme_boron)
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
   dists <- ssd_dists("bc")
@@ -60,7 +60,7 @@ ssd_wqg_bc <- function(data, left = "Conc") {
 #'
 #' @examples
 #' \dontrun{
-#'  ssd_wqg_burrlioz(ssdtools::boron_data)
+#'  ssd_wqg_burrlioz(ssddata::ccme_boron)
 #' }
 ssd_wqg_burrlioz <- function(data, left = "Conc") {
   fit <- ssd_fit_burrlioz(data, left = left)

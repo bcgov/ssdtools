@@ -18,7 +18,7 @@ A named list of the estimates.
 Gets a named list of the estimated values by distribution and term.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 estimates <- estimates(fits)
 print(estimates)
 ssd_hc(estimates)

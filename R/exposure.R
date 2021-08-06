@@ -23,7 +23,7 @@
 #' @return The proportion exposed.
 #' @export
 #' @examples
-#' fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+#' fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 #' set.seed(10)
 #' ssd_exposure(fits)
 #' ssd_exposure(fits, meanlog = 1)

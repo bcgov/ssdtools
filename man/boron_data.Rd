@@ -13,6 +13,7 @@ boron_data
 \description{
 Species Sensitivity Data from
 the Canadian Council of Ministers of the Environment.
+Please use \verb{[ssddata::ccme_data]} instead.
 }
 \details{
 Additional information is available from \url{http://ceqg-rcqe.ccme.ca/download/en/324/}.

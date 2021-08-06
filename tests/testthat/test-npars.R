@@ -13,6 +13,6 @@
 #    limitations under the License.
 
 test_that("npars", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = c("llogis_llogis", "lnorm_lnorm", "lnorm", "invpareto"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("llogis_llogis", "lnorm_lnorm", "lnorm", "invpareto"))
   expect_identical(npars(fits), c(llogis_llogis = 5L, lnorm_lnorm = 5L, lnorm = 2L, invpareto = 2L))
 })

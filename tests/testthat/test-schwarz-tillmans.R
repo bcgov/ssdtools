@@ -17,7 +17,7 @@ test_that("schwarz-tillmans", {
   dists <- c(
     "gompertz", "weibull", "gamma", "lnorm", "llogis", "lgumbel"
   )
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists)
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
   
   hc <- ssd_hc(fits, average = FALSE)
   expect_s3_class(hc, "tbl")

@@ -66,7 +66,7 @@ Uses the empirical cumulative density/distribution to visualize species sensitiv
 }
 \examples{
 \dontrun{
-ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
+ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
   stat_ssd()
  }
 }

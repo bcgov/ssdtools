@@ -23,7 +23,7 @@ stats::coef
 #' @seealso [`tidy.fitdists()`]
 #' @export
 #' @examples 
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' coef(fits)
 coef.fitdists <- function(object, ...) {
   tidy(object, ...)

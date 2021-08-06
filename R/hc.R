@@ -25,7 +25,7 @@
 #' @seealso [`predict.fitdists()`] and [`ssd_hp()`].
 #' @export
 #' @examples
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_hc(fits)
 #' ssd_hc(estimates(fits))
 #' ssd_hc(ssd_match_moments())

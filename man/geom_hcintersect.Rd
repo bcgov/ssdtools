@@ -57,7 +57,7 @@ display.}
 Plots the intersection between each \code{xintercept} and \code{yintercept} value.
 }
 \examples{
-ggplot2::ggplot(ssdtools::boron_data, ggplot2::aes(x = Conc)) +
+ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
   geom_ssdpoint() +
   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
 }

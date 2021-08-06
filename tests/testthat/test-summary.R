@@ -1,5 +1,5 @@
 test_that("summary tmbfit", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm", rescale = FALSE)
   summary <- summary(fits$lnorm)
   expect_s3_class(summary, "summary_tmbfit")
@@ -9,7 +9,7 @@ test_that("summary tmbfit", {
 })
 
 test_that("summary fitdists", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm", rescale = FALSE)
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
@@ -23,7 +23,7 @@ test_that("summary fitdists", {
 })
 
 test_that("summary fitdists with multiple dists", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, rescale = TRUE)
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
@@ -36,7 +36,7 @@ test_that("summary fitdists with multiple dists", {
 })
 
 test_that("summary fitdists with censored, rescaled, unequally weighted data", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$Mass <- 1:nrow(data)
   data$Other <- data$Conc
   data$Conc[2] <- NA
@@ -52,7 +52,7 @@ test_that("summary fitdists with censored, rescaled, unequally weighted data", {
 })
 
 test_that("summary weighted if equal weights but not 1", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$Mass <- 2
   fits <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
   summary <- summary(fits)
@@ -62,7 +62,7 @@ test_that("summary weighted if equal weights but not 1", {
 })
 
 test_that("summary not weighted if equal weights but not 1 and reweighted", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   data$Mass <- 2
   fits <- ssd_fit_dists(data, weight = "Mass", reweight = TRUE, dists = "lnorm")
   summary <- summary(fits)
@@ -72,7 +72,7 @@ test_that("summary not weighted if equal weights but not 1 and reweighted", {
 })
 
 test_that("summary min_pmix 0.1", {
-  data <- ssdtools::boron_data
+  data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm", min_pmix = 0.1)
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")

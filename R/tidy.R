@@ -57,7 +57,7 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
 #' @seealso [`coef.fitdists()`]
 #' @export
 #' @examples 
-#' fits <- ssd_fit_dists(ssdtools::boron_data)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' tidy(fits)
 #' tidy(fits, all = TRUE)
 tidy.fitdists <- function(x, all = FALSE, ...) {

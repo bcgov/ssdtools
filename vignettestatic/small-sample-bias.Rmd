@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = TRUE,
 library(tidyverse)
 library(mle.tools)
 library(reshape2)
+library(ssddata)
 library(ssdtools)
 
 nsim <- 1000 # number of simulations for effect of bias correction
@@ -33,8 +34,7 @@ not guarantee performance in small samples.
 For example, consider the CCME silver data that ships with *ssdtools*.
 
 ```{r warning=FALSE, message=FALSE}
-data(ccme_data)
-Ag <- ccme_data[ ccme_data$Chemical=="Silver",]
+Ag <- ssddata::ccme_data[ssddata::ccme_data$Chemical=="Silver",]
 Ag$ecdf <- (rank(Ag$Conc)+.25)/(nrow(Ag)+.5)
 Ag
 ```

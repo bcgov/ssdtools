@@ -15,18 +15,18 @@
 # test_that("gompertz coefs", {
 #   warning("gompertz poor convergence")
 #   set.seed(77)
-#   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+#   dist <- ssd_fit_dist(ssddata::ccme_boron, dist = "gompertz")
 #   expect_equal(coef(dist), c(llocation = -3.23385214013791, lshape = -5.94988038614341))
 # 
 #   set.seed(85)
-#   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+#   dist <- ssd_fit_dist(ssddata::ccme_boron, dist = "gompertz")
 #   expect_equal(coef(dist), c(llocation = -3.23372348939004, lshape = -5.95206320995978))
 # })
 # 
 # 
 # test_that("fit gompertz cis", {
 #   set.seed(77)
-#   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
+#   dist <- ssd_fit_dist(ssddata::ccme_boron, dist = "gompertz")
 # 
 #   hc <- ssd_hc(dist, ci = TRUE, nboot = 10)
 #   expect_s3_class(hc, "tbl_df")
@@ -53,7 +53,7 @@
 # })
 
 # test_that("fit_dist tiny llogis", {
-#   data <- ssdtools::boron_data
+#   data <- ssddata::ccme_boron
 #   fit <- ssd_fit_dists(data, dists = "llogis")
 #   expect_equal(
 #     estimates(fit$llogis),

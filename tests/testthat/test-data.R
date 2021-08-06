@@ -14,7 +14,7 @@
 
 test_that("boron stable", {
   dists <- ssd_dists("stable")
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists)
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
@@ -24,7 +24,7 @@ test_that("boron stable", {
 test_that("boron unstable", {
   dists <- ssd_dists("unstable")
   set.seed(50)
-  expect_warning(fits <- ssd_fit_dists(ssdtools::boron_data, dists = dists),
+  expect_warning(fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists),
                                 "Distribution 'burrIII3' failed to fit")
   
   tidy <- tidy(fits)
@@ -32,43 +32,12 @@ test_that("boron unstable", {
   expect_snapshot_data(tidy, "boron_unstable")
 })
 
-test_that("data", {
-  expect_error(chk::check_data(
-    ccme_data,
-    values = list(
-      Chemical = "",
-      Species = "",
-      Units = c("mg/L", "ug/L", "ng/L"),
-      Conc = c(0, Inf),
-      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
-    ),
-    nrow = c(1L, 2147483647L)
-  ), NA)
-  expect_s3_class(ccme_data, "tbl")
+test_that("ccme_data", {
+  expect_snapshot_data(ssdtools::ccme_data, "ccme_data")
+  expect_identical(ssdtools::ccme_data, ssddata::ccme_data)
+})
 
-  expect_error(chk::check_data(
-    ssdtools::boron_data,
-    values = list(
-      Chemical = c("Boron", "Boron"),
-      Species = "",
-      Units = c("mg/L", "mg/L"),
-      Conc = c(1.0, 70.7),
-      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
-    ),
-    nrow = 28
-  ), NA)
-  expect_s3_class(ssdtools::boron_data, "tbl")
-
-  expect_error(chk::check_data(
-    boron_pred,
-    values = list(
-      percent = 1L,
-      est = 1,
-      se = 1,
-      lcl = 1,
-      ucl = 1
-    ),
-    nrow = 99L
-  ), NA)
-  expect_s3_class(boron_pred, "tbl")
+test_that("ccme_boron", {
+  expect_snapshot_data(ssdtools::boron_data, "boron_data")
+  expect_identical(ssdtools::boron_data, ssddata::ccme_boron)
 })

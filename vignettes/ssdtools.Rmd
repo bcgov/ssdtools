@@ -73,8 +73,8 @@ data <- read_csv(file = "path/to/file.csv")
 ```
 For the purposes of this manual we use the CCME dataset for boron.
 ```{r}
-boron_data <- ssdtools::boron_data
-print(boron_data)
+ccme_boron <- ssddata::ccme_boron
+print(ccme_boron)
 ```
 
 ## Fitting Distributions
@@ -88,7 +88,7 @@ ssd_dists(type = "all")
 
 using the `dists` argument.
 ```{r}
-fits <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
+fits <- ssd_fit_dists(ccme_boron, dists = c("llogis", "lnorm", "gamma"))
 ```
 
 ## Coefficients
@@ -171,7 +171,7 @@ boron_pred
 The data frame of the estimates can then be plotted together with the original data using the `ssd_plot()` function to summarize an analysis.
 Once again the returned object is a `ggplot` object which can be customized prior to plotting.
 ```{r, fig.height = 5, fig.width = 6}
-ssd_plot(boron_data, boron_pred,
+ssd_plot(ccme_boron, boron_pred,
          color = "Group", label = "Species",
          xlab = "Concentration (mg/L)", ribbon = TRUE) + 
   expand_limits(x = 5000) + # to ensure the species labels fit
@@ -198,13 +198,13 @@ The `ssdtools` package provides four ggplot geoms to allow you construct your ow
 
 The first is `geom_ssdpoint()` which plots species sensitivity data 
 ```{r}
-ggplot(boron_data) +
+ggplot(ccme_boron) +
   geom_ssdpoint(aes_string(x = "Conc"))
 ``` 
 
 The second is `geom_ssdsegments()` which plots the range of censored species sensitivity data 
 ```{r}
-ggplot(boron_data) +
+ggplot(ccme_boron) +
   geom_ssdsegment(aes_string(x = "Conc", xend = "Conc * 2"))
 ``` 
 
@@ -225,9 +225,9 @@ They can be combined together as follows
 gp <- ggplot(boron_pred, aes_string(x = "est")) +
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2) +
   geom_line(aes_string(y = "percent/100")) +
-  geom_ssdsegment(data = boron_data, aes_string(x = "Conc / 2", xend = "Conc * 2")) +
-  geom_ssdpoint(data = boron_data, aes_string(x = "Conc / 2")) +
-  geom_ssdpoint(data = boron_data, aes_string(x = "Conc * 2")) +
+  geom_ssdsegment(data = ccme_boron, aes_string(x = "Conc / 2", xend = "Conc * 2")) +
+  geom_ssdpoint(data = ccme_boron, aes_string(x = "Conc / 2")) +
+  geom_ssdpoint(data = ccme_boron, aes_string(x = "Conc * 2")) +
   scale_y_continuous("Species Affected (%)", labels = scales::percent) +
   expand_limits(y = c(0, 1)) +
   xlab("Concentration (mg/L)")

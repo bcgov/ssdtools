@@ -15,7 +15,7 @@
 A wrapper on \code{\link[=tidy.fitdists]{tidy.fitdists()}}.
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 coef(fits)
 }
 \seealso{

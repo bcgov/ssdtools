@@ -22,7 +22,7 @@ estimates (est) and standard errors (se) by the
 terms (term) and distributions (dist).
 }
 \examples{
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 tidy(fits)
 tidy(fits, all = TRUE)
 }

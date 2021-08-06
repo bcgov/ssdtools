@@ -13,9 +13,9 @@
 #    limitations under the License.
 
 test_that("sdd_data gets original data", {
-  fits <- ssd_fit_dists(ssdtools::boron_data, dists = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
-  expect_identical(ssd_data(fits), ssdtools::boron_data)
+  expect_identical(ssd_data(fits), ssddata::ccme_boron)
 })
 
 test_that("sdd_data returns tbl data", {
