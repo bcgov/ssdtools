@@ -44,7 +44,7 @@ no_ssd_hp <- function() {
 }
 
 .ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, weighted, censoring,
-                           min_pmix, control) {
+                           min_pmix, range_shape1, range_shape2, control) {
   args <- estimates(x)
   args$q <- conc / rescale
   dist <- .dist_tmbfit(x)
@@ -67,6 +67,8 @@ no_ssd_hp <- function() {
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, 
                            weighted = weighted, censoring = censoring,
                            min_pmix = min_pmix,
+                           range_shape1 = range_shape1,
+                           range_shape2 = range_shape2,
                            control = control)
   cis <- cis_tmb(estimates, what, level = level, x = conc / rescale)
   tibble(
@@ -92,6 +94,8 @@ no_ssd_hp <- function() {
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
   min_pmix <- .min_pmix_fitdists(x)
+  range_shape1 <- .range_shape1_fitdists(x)
+  range_shape2 <- .range_shape2_fitdists(x)
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
   
@@ -111,7 +115,7 @@ no_ssd_hp <- function() {
   hp <- future_map(x, .ssd_hp_tmbfit,
                conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
                rescale = rescale,  weighted = weighted, censoring = censoring,
-               min_pmix = min_pmix,
+               min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                control = control, .options = furrr::furrr_options(seed = seeds))
   ind <- bind_rows(hp)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {

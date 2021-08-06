@@ -12,10 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("burrlioz with boron_data gives lgumbel", {
+test_that("burrlioz with boron_data gives invpareto", {
   fit <- ssd_fit_burrlioz(ssdtools::boron_data)
   expect_s3_class(fit, "fitdists")
-  expect_identical(names(fit), "lgumbel")
+  expect_identical(names(fit), "invpareto")
 })
 
 test_that("burrlioz with burrIII3 data gives burrIII3", {
@@ -29,16 +29,16 @@ test_that("burrlioz with burrIII3 data gives burrIII3", {
 
 test_that("burrlioz with invpareto data gives invpareto", {
   set.seed(99)
-  conc <- ssd_rinvpareto(20)
+  conc <- ssd_rinvpareto(30)
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_burrlioz(data)
   expect_s3_class(fit, "fitdists")
   expect_identical(names(fit), "invpareto")
 })
 
-test_that("burrlioz with lgumbel data doesn't give lgumbel!", {
+test_that("burrlioz with lgumbel data gives lgumbel!", {
   set.seed(99)
-  conc <- ssd_rlgumbel(20)
+  conc <- ssd_rlgumbel(25)
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_burrlioz(data)
   expect_s3_class(fit, "fitdists")

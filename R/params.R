@@ -58,6 +58,9 @@
 #' @param shape	shape parameter.
 #' @param shape1 shape1 parameter.
 #' @param shape2 shape2 parameter.
+#' @param range_shape1 A numeric vector of length two of the lower and upper bounds for the shape1 parameter.
+#' @param range_shape2 A numeric vector of length two of the lower and upper bounds for the shape2 parameter.
+#' @param range_shape2 shape2 parameter.
 #' @param locationlog1 locationlog1 parameter.
 #' @param scalelog1 scalelog1 parameter.
 #' @param locationlog2 locationlog2 parameter.

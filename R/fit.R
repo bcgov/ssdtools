@@ -14,7 +14,7 @@
 
 # required to pass dist as not available for dists that didn't fit
 nullify_nonfit <- function(fit, dist, data, rescale, computable, 
-                           min_pmix, at_boundary_ok, silent) {
+                           min_pmix, range_shape1, range_shape2, at_boundary_ok, silent) {
   error <- fit$error
   fit <- fit$result
   
@@ -25,7 +25,7 @@ nullify_nonfit <- function(fit, dist, data, rescale, computable,
                      rescale, ": ", error)
     return(NULL)
   }
-  if(!at_boundary_ok && is_at_boundary(fit, data, min_pmix)) {
+  if(!at_boundary_ok && is_at_boundary(fit, data, min_pmix, range_shape1, range_shape2)) {
     if (!silent) wrn("Distribution '", dist, "' failed to fit",
                      rescale, ": one or more parameters at boundary.")
     return(NULL)
@@ -47,22 +47,26 @@ nullify_nonfit <- function(fit, dist, data, rescale, computable,
   fit
 }
 
-remove_nonfits <- function(fits, data, rescale, computable, min_pmix, at_boundary_ok, silent) {
+remove_nonfits <- function(fits, data, rescale, computable, min_pmix, range_shape1, range_shape2, at_boundary_ok, silent) {
   fits <- mapply(nullify_nonfit, fits, names(fits),
                  MoreArgs = list(data = data, rescale = rescale, computable = computable, 
-                                 min_pmix = min_pmix, at_boundary_ok = at_boundary_ok, silent = silent), SIMPLIFY = FALSE
+                                 min_pmix = min_pmix, 
+                                 range_shape1 = range_shape1, range_shape2 = range_shape2, 
+                                 at_boundary_ok = at_boundary_ok, silent = silent), SIMPLIFY = FALSE
   )
   fits <- fits[!vapply(fits, is.null, TRUE)]
   fits
 }
 
-fit_dists <- function(data, dists, rescale, computable, min_pmix, at_boundary_ok, control, silent) {
+fit_dists <- function(data, dists, rescale, computable, min_pmix, range_shape1, range_shape2, at_boundary_ok, control, silent) {
   data <- data[c("left", "right", "weight")]
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
-  fits <- lapply(dists, safe_fit_dist, data = data, min_pmix = min_pmix, control = control)
+  fits <- lapply(dists, safe_fit_dist, data = data, min_pmix = min_pmix, 
+                 range_shape1 = range_shape1, range_shape2 = range_shape2, control = control)
   fits <- remove_nonfits(fits, data = data, rescale = rescale, 
                          computable = computable, min_pmix = min_pmix, 
+                         range_shape1 = range_shape1, range_shape2 = range_shape2, 
                          at_boundary_ok = at_boundary_ok, silent = silent)
   fits
 }
@@ -100,6 +104,8 @@ ssd_fit_dists <- function(
   computable = TRUE,
   at_boundary_ok = FALSE, 
   min_pmix = 0.2,
+  range_shape1 = c(0.05, 20),
+  range_shape2 = range_shape1,
   control = list(),
   silent = FALSE) {
   
@@ -129,6 +135,18 @@ ssd_fit_dists <- function(
   chk_flag(at_boundary_ok)
   chk_number(min_pmix)
   chk_range(min_pmix, c(0, 0.5))
+  chk_numeric(range_shape1)
+  chk_vector(range_shape1)
+  check_dim(range_shape1, values = 2)
+  chk_not_any_na(range_shape1)
+  chk_gte(range_shape1)
+  chk_sorted(range_shape1)
+  chk_numeric(range_shape2)
+  chk_vector(range_shape2)
+  check_dim(range_shape2, values = 2)
+  chk_not_any_na(range_shape2)
+  chk_gte(range_shape2)
+  chk_sorted(range_shape2)
   chk_list(control)
   chk_flag(silent)
   
@@ -140,7 +158,9 @@ ssd_fit_dists <- function(
     err("Distributions cannot currently be fitted to right censored data.")
   }
   fits <- fit_dists(attrs$data, dists, attrs$rescale, computable, 
-                    min_pmix = min_pmix, at_boundary_ok = at_boundary_ok, 
+                    min_pmix = min_pmix, range_shape1 = range_shape1,
+                    range_shape2 = range_shape2, 
+                    at_boundary_ok = at_boundary_ok, 
                     control = control, silent = silent)
   
   if (!length(fits)) err("All distributions failed to fit.")

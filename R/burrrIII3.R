@@ -46,9 +46,15 @@ sburrIII3 <- function(data) {
   list(log_scale = 1, log_shape1 = 0, log_shape2 = 0)
 }
 
-bburrIII3 <- function(x, data, min_pmix) {
-  list(lower = list(log_scale = -Inf, log_shape1 = -3, log_shape2 = -3),
-       upper = list(log_scale = Inf, log_shape1 = 3, log_shape2 = 3))
+bburrIII3 <- function(x, range_shape1, range_shape2, ...) {
+  log_range_shape1 <- log(range_shape1)
+  log_range_shape2 <- log(range_shape2)
+  list(lower = list(log_scale = -Inf, 
+                    log_shape1 = log_range_shape1[1], 
+                    log_shape2 = log_range_shape2[1]),
+       upper = list(log_scale = Inf, 
+                    log_shape1 = log_range_shape1[2], 
+                    log_shape2 = log_range_shape2[2]))
 }
 
 pburrIII3_ssd <- function(q, shape1, shape2, scale) {

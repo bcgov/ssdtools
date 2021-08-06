@@ -29,16 +29,24 @@
 ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE, 
                              silent = FALSE) {
   
+  range_shape1 <- c(0, 100)
+  range_shape2 <- c(0, 80)
+  
   fit <- ssd_fit_dists(data, left = left, dists = "burrIII3",
                         rescale = rescale, computable = FALSE,
-                        at_boundary_ok = TRUE, silent = TRUE)
+                        at_boundary_ok = TRUE, silent = TRUE,
+                       range_shape1 = range_shape1,
+                       range_shape2 = range_shape2)
 
   dist <- "burrIII3"
-  if(is_at_boundary(fit$burrIII3, data, regex = "shape1$")) {
+  if(is_at_boundary(fit$burrIII3, data, range_shape1 = range_shape1, 
+                    range_shape2 = range_shape2, regex = "shape2$")) {
+    dist <- "invpareto"
+  } else if(is_at_boundary(fit$burrIII3, data, range_shape1 = range_shape1, 
+                           range_shape2 = range_shape2, regex = "shape1$")) {
      dist <- "lgumbel"
-  } else if(is_at_boundary(fit$burrIII3, data, regex = "shape2$")) {
-     dist <- "invpareto"
   }
   ssd_fit_dists(data, left = left, dists = dist, 
-                 rescale = rescale, silent = silent)
+                 rescale = rescale, computable = FALSE,
+                silent = silent)
 }

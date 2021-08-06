@@ -16,6 +16,8 @@ ssd_fit_dists(
   computable = TRUE,
   at_boundary_ok = FALSE,
   min_pmix = 0.2,
+  range_shape1 = c(0.05, 20),
+  range_shape2 = range_shape1,
   control = list(),
   silent = FALSE
 )
@@ -43,6 +45,10 @@ ssd_fit_dists(
 parameters at the boundary should be considered to have converged (default = FALSE).}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
+
+\item{range_shape1}{A numeric vector of length two of the lower and upper bounds for the shape1 parameter.}
+
+\item{range_shape2}{shape2 parameter.}
 
 \item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
 

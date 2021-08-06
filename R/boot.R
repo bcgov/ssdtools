@@ -21,14 +21,15 @@ generate_data <- function(dist, args, weighted, censoring) {
   censor_data(data, censoring)
 }
 
-sample_parameters <- function(i, dist, fun, args, pars, weighted, censoring, min_pmix, control) {
+sample_parameters <- function(i, dist, fun, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, control) {
   new_data <- generate_data(dist, args, weighted, censoring)
-  fit <- fun(dist, new_data, min_pmix, control = control, pars = pars, hessian = FALSE)$result
+  fit <- fun(dist, new_data, min_pmix = min_pmix, range_shape1 = range_shape1,
+             range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE)$result
   if(is.null(fit)) return(NULL)
   estimates(fit)
 }
 
-boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control) {
+boot_tmbfit <- function(x, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, control) {
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
@@ -37,7 +38,8 @@ boot_tmbfit <- function(x, nboot, data, weighted, censoring, min_pmix, control) 
   safe_fit_dist <- safely(fit_tmb)
   
   estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = safe_fit_dist, args = args, pars = pars, 
-         weighted = weighted, censoring = censoring, min_pmix = min_pmix, control = control)
+         weighted = weighted, censoring = censoring, min_pmix = min_pmix, 
+         range_shape1 = range_shape1, range_shape2 = range_shape2, control = control)
 
   estimates[!vapply(estimates, is.null, TRUE)]
 }

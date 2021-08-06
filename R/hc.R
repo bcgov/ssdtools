@@ -59,7 +59,8 @@ no_ssd_hc <- function() {
   )
 }
 
-.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, data, rescale,  weighted, censoring, min_pmix, control) {
+.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, data, rescale, weighted, censoring, min_pmix, 
+                           range_shape1, range_shape2, control) {
   args <- estimates(x)
   args$p <- proportion
   dist <- .dist_tmbfit(x)
@@ -81,6 +82,8 @@ no_ssd_hc <- function() {
   censoring <- censoring / rescale
   estimates <- boot_tmbfit(x, nboot = nboot, data = data, weighted = weighted,
                            censoring = censoring, min_pmix = min_pmix,
+                           range_shape1 = range_shape1,
+                           range_shape2 = range_shape2,
                            control = control)
   cis <- cis_tmb(estimates, what, level = level, x = proportion)
   tibble(
@@ -104,6 +107,8 @@ no_ssd_hc <- function() {
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
   min_pmix <- .min_pmix_fitdists(x)
+  range_shape1 <- .range_shape1_fitdists(x)
+  range_shape2 <- .range_shape2_fitdists(x)
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
   
@@ -122,7 +127,8 @@ no_ssd_hc <- function() {
   seeds <- seed_streams(length(x))
   hc <- future_map(x, .ssd_hc_tmbfit, proportion = percent / 100, ci = ci, level = level, nboot = nboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, control = control, .options = furrr::furrr_options(seed = seeds))
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      control = control, .options = furrr::furrr_options(seed = seeds))
   
   ind <- bind_rows(hc)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {

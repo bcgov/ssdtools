@@ -36,6 +36,14 @@
   attr(fits, "min_pmix", exact = TRUE)
 }
 
+.range_shape1_fitdists <- function(fits) {
+  attr(fits, "range_shape1", exact = TRUE)
+}
+
+.range_shape2_fitdists <- function(fits) {
+  attr(fits, "range_shape2", exact = TRUE)
+}
+
 .rescale_fitdists <- function(fits) {
   attr(fits, "rescale", exact = TRUE)
 }
@@ -78,6 +86,16 @@
   fits
 }
 
+`.range_shape1_fitdists<-` <- function(fits, value) {
+  attr(fits, "range_shape1") <- value
+  fits
+}
+
+`.range_shape2_fitdists<-` <- function(fits, value) {
+  attr(fits, "range_shape2") <- value
+  fits
+}
+
 `.rescale_fitdists<-` <- function(fits, value) {
   attr(fits, "rescale") <- value
   fits
@@ -95,7 +113,8 @@
 
 .attrs_fitdists <- function(fits) {
   attrs <- attributes(fits)
-  attrs[c("censoring", "cols", "control", "data", "org_data", "min_pmix", "rescale", "weighted", "unequal")]
+  attrs[c("censoring", "cols", "control", "data", "org_data", "min_pmix", "range_shape1",
+          "range_shape2", "rescale", "weighted", "unequal")]
 }
 
 `.attrs_fitdists<-` <- function(fits, value) {
@@ -105,6 +124,8 @@
   .data_fitdists(fits) <- value$data
   .org_data_fitdists(fits) <- value$org_data
   .min_pmix_fitdists(fits) <- value$min_pmix
+  .range_shape1_fitdists(fits) <- value$range_shape1
+  .range_shape2_fitdists(fits) <- value$range_shape2
   .rescale_fitdists(fits) <- value$rescale
   .weighted_fitdists(fits) <- value$weighted
   .unequal_fitdists(fits) <- value$unequal

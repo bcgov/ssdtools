@@ -27,9 +27,10 @@ tmb_model <- function(data, dist, pars) {
   tmb_fun(data, pars, dist)
 }
 
-fit_tmb <- function(dist, data, min_pmix, control, pars = NULL, hessian = TRUE) {
+fit_tmb <- function(dist, data, min_pmix, range_shape1, range_shape2, 
+                    control, pars = NULL, hessian = TRUE) {
   model <- tmb_model(data, dist, pars = pars)
-  bounds <- bdist(dist, data, min_pmix)
+  bounds <- bdist(dist, data, min_pmix, range_shape1, range_shape2)
   # required because model can switch order of parameters
   lower <- bounds$lower[names(model$par)]
   upper <- bounds$upper[names(model$par)]

@@ -85,6 +85,10 @@ in the sense of returning a likelihood.}
 
 \item{shape2}{shape2 parameter.}
 
+\item{range_shape1}{A numeric vector of length two of the lower and upper bounds for the shape1 parameter.}
+
+\item{range_shape2}{shape2 parameter.}
+
 \item{locationlog1}{locationlog1 parameter.}
 
 \item{scalelog1}{scalelog1 parameter.}
