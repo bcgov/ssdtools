@@ -12,18 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("invpareto", {
-  test_dist("invpareto", upadj = 1e-02)
-  expect_equal(ssd_pinvpareto(0.5), 0.125)
-  expect_equal(ssd_qinvpareto(0.125), 0.5)
-  set.seed(42)
-  expect_equal(ssd_rinvpareto(2), c(0.970755086941947, 0.978569136804486))
+test_that("ssd_plot_data ccme_boron", {
+  expect_snapshot_plot(ssd_plot_data(ssddata::ccme_boron), "ccme_boron")
 })
-
-# test_that("invpareto with anon_a", {
-#   set.seed(99)
-#   fit <- ssd_fit_dists(ssddata::anon_a, dists = "invpareto", control = list(trace = 6))
-#   expect_s3_class(fit, "fitdists")
-#   expect_identical(names(fit), "lgumbel")
-# })
-
