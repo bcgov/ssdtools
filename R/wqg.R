@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' 5% Hazard Concentration for British Columbia
+#' Water Quality Guideline for British Columbia
 #' 
 #' Calculates the 5% Hazard Concentration for British Columbia
 #' after rescaling the data 
@@ -27,16 +27,42 @@
 #'
 #' @inheritParams params
 #'
-#' @return A tibble of the 5% hazard concentration with stand 95% confidence intervals.
+#' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @seealso [`ssd_fit_dists()`] and [`ssd_hc()`] 
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#'  ssd_hc5_bc(ssdtools::boron_data)
+#'  ssd_wqg_bc(ssdtools::boron_data)
 #' }
-ssd_hc5_bc <- function(data, left = "Conc") {
+ssd_wqg_bc <- function(data, left = "Conc") {
   dists <- ssd_dists("bc")
   fits <- ssd_fit_dists(data, left = left, rescale = TRUE)
   ssd_hc(fits, ci = TRUE, delta = 7, nboot = 10000)
+}
+
+#' Water Quality Guideline for Burrlioz
+#' 
+#' Calculates the 5% Hazard Concentration 
+#' based on either the BurrIII3, Inverse Pareto or Log-Gumbel distribution.
+#' 
+#' Returns a tibble the model averaged 5% hazard concentration with 
+#' standard errors, 95% lower and upper confidence limits
+#' and the number of bootstrap samples as well as the proportion of bootstrap
+#' samples that successfully returned a likelihood 
+#' (convergence of the bootstrap sample is not required).
+#'
+#' @inheritParams params
+#'
+#' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
+#' @seealso [`ssd_fit_dists()`] and [`ssd_hc()`] 
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  ssd_wqg_burrlioz(ssdtools::boron_data)
+#' }
+ssd_wqg_burrlioz <- function(data, left = "Conc") {
+  fit <- ssd_fit_burrlioz(data, left = left)
+  ssd_hc(fit, ci = TRUE, average = FALSE, nboot = 10000)
 }
