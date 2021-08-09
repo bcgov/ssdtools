@@ -19,7 +19,7 @@
 #' parameters at the boundary should be considered to have converged (default = FALSE).
 #' @param x The object.
 #' @param object The object.
-#' @param control A list of control parameters passed to [stats::optim].
+#' @param control A list of control parameters passed to [`stats::optim()`].
 #' @param chk A flag specifying whether to check the arguments.
 #' @param data A data frame.
 #' @param pred A data frame of the predictions.

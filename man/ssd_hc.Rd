@@ -46,7 +46,7 @@ ssd_hc(x, ...)
 \item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
 in the sense of returning a likelihood.}
 
-\item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 }
 \value{
 A tibble of corresponding hazard concentrations.

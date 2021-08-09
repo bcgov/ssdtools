@@ -50,7 +50,7 @@ parameters at the boundary should be considered to have converged (default = FAL
 
 \item{range_shape2}{shape2 parameter.}
 
-\item{control}{A list of control parameters passed to \link[stats:optim]{stats::optim}.}
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 }
