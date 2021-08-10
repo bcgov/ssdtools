@@ -20,10 +20,17 @@ test_that("invpareto", {
   expect_equal(ssd_rinvpareto(2), c(0.970755086941947, 0.978569136804486))
 })
 
-test_that("invpareto with anon_a", {
+test_that("invpareto fits with anon_a", {
   fit <- ssd_fit_dists(ssddata::anon_a, dists = "invpareto")
   expect_s3_class(fit, "fitdists")
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "anon_a")
 })
 
+# test_that("invpareto gives cis with ccme_boron", {
+#   library(ssdtools)
+#   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "invpareto")
+#   expect_s3_class(fit, "fitdists")
+#   set.seed(99)
+#   ssd_hc(fit, nboot = 5, ci = TRUE)
+# })
