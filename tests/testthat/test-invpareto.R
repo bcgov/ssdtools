@@ -20,10 +20,10 @@ test_that("invpareto", {
   expect_equal(ssd_rinvpareto(2), c(0.970755086941947, 0.978569136804486))
 })
 
-# test_that("invpareto with anon_a", {
-#   set.seed(99)
-#   fit <- ssd_fit_dists(ssddata::anon_a, dists = "invpareto", control = list(trace = 6))
-#   expect_s3_class(fit, "fitdists")
-#   expect_identical(names(fit), "lgumbel")
-# })
+test_that("invpareto with anon_a", {
+  fit <- ssd_fit_dists(ssddata::anon_a, dists = "invpareto")
+  expect_s3_class(fit, "fitdists")
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "anon_a")
+})
 
