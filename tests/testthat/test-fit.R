@@ -175,7 +175,7 @@ test_that("ssd_fit_dists all distributions fail to fit if Inf left", {
   data <- ssddata::ccme_boron
   data$Conc[1] <- Inf
   expect_error(
-      ssd_fit_dists(data, dists = "lnorm"), 
+    ssd_fit_dists(data, dists = "lnorm"), 
     "^`data` has 1 row with effectively missing values in 'Conc'\\.")
 })
 
@@ -220,7 +220,7 @@ test_that("ssd_fit_dists estimates for ssddata::ccme_boron on stable dists", {
 test_that("ssd_fit_dists not reorder", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"),
                        rescale = FALSE)
-
+  
   expect_identical(npars(fit), c(lnorm = 2L, llogis = 2L))
   expect_equal(logLik(fit), c(lnorm = -117.514216489547, llogis = -118.507435324581))
 })
@@ -380,4 +380,18 @@ test_that("ssd_fit_dists at_boundary_ok message", {
   expect_warning(ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "burrIII3"),
                                at_boundary_ok = TRUE),
                  "failed to compute standard errors \\(try rescaling data\\)\\.$")
+})
+
+test_that("ssd_fit_dists stable with anon_e", {
+  expect_warning(fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists("stable")),
+                 "weibull")  
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_stable_anon_e")
+})
+
+test_that("ssd_fit_dists unstable with anon_e", {
+  expect_warning(expect_warning(fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists("unstable")),
+                 "burrIII3"), "gompertz")
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_unstable_anon_e")
 })

@@ -63,9 +63,6 @@ test_that("burrlioz with ccme_uranium", {
   expect_identical(names(fit), "burrIII3")
 })
 
-# test_that("burrlioz fits with anon_e", {
-#   fit1 <- ssd_fit_burrlioz(ssddata::anon_e)
-# 
-#   expect_s3_class(fit, "fitdists")
-#   expect_identical(names(fit), "burrIII3")
-# })
+test_that("burrlioz fails with anon_e due to bounds being too wide (as works with burrIII3 at bounds with narrower bounds)", {
+  expect_error(fit1 <- ssd_fit_burrlioz(ssddata::anon_e))
+})
