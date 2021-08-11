@@ -42,7 +42,8 @@ ssd_rgamma <- function(n, shape = 1, scale = 1, chk = TRUE) {
   rdist("gamma", n = n, shape = shape, scale = scale, chk = chk)
 }
 
-sgamma <- function(data) {
+sgamma <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
   x <- mean_weighted_values(data)
   
   var <- var(x, na.rm = TRUE)

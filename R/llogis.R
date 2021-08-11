@@ -42,7 +42,9 @@ ssd_rllogis <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
   rdist("logis", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
 }
 
-sllogis <- function(data) {
+sllogis <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+  
   x <- mean_weighted_values(data)
   
   list(

@@ -139,9 +139,9 @@ rdist <- function(dist, n, ..., .lgt = FALSE, chk) {
   r
 }
 
-sdist <- function(dist, data) {
+sdist <- function(dist, data, pars) {
   fun <- paste0("s", dist)
-  do.call(fun, list(data = data))
+  do.call(fun, list(data = data, pars = pars))
 }
 
 bdist <- function(dist, data, min_pmix, range_shape1, range_shape2) {

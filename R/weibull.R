@@ -42,7 +42,9 @@ ssd_rweibull <- function(n, shape = 1, scale = 1, chk = TRUE) {
   rdist("weibull", n = n, shape = shape, scale = scale, chk = chk)
 }
 
-sweibull <- function(data) {
+sweibull <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+  
   x <- mean_weighted_values(data)
   
   list(

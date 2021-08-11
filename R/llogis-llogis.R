@@ -50,7 +50,9 @@ ssd_rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
         location2 = locationlog2, scale2 = scalelog2, pmix = pmix, .lgt = TRUE, chk = chk)
 }
 
-sllogis_llogis <- function(data) {
+sllogis_llogis <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+  
   x <- mean_weighted_values(data)
   x <- sort(x)
   n <- length(x)

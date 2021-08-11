@@ -42,7 +42,9 @@ ssd_rlgumbel <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
   rdist("gumbel", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
 }
 
-slgumbel <- function(data) {
+slgumbel <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+
   x <- mean_weighted_values(data)
   
   list(

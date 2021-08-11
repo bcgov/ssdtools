@@ -42,7 +42,8 @@ ssd_rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE) {
   rdist("burrIII3", n = n, shape1 = shape1, shape2 = shape2, scale = scale, chk = chk)
 }
 
-sburrIII3 <- function(data) {
+sburrIII3 <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
   list(log_scale = 1, log_shape1 = 0, log_shape2 = 0)
 }
 

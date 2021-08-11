@@ -42,10 +42,12 @@ ssd_rinvpareto <- function(n, shape = 3, scale = 1, chk = TRUE) {
   rdist("invpareto", n = n, shape = shape, scale = scale, chk = chk)
 }
 
-sinvpareto <- function(data) {
+sinvpareto <- function(data, pars = NULL) {
   scale <- max(data$right) *  (1 + 1e-10)
   shape <- 1/mean(log(scale / data$right))
-  list(log_scale = log(scale), log_shape = log(shape))
+
+  spars <- list(log_scale = log(scale), log_shape = log(shape))
+  c(pars, spars[!names(spars) %in% names(pars)])
 }
 
 minvpareto <- function() {

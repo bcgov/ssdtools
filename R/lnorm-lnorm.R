@@ -50,7 +50,9 @@ ssd_rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
         meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix, chk = chk)
 }
 
-slnorm_lnorm <- function(data) {
+slnorm_lnorm <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+  
   x <- mean_weighted_values(data)
 
   x <- sort(x)

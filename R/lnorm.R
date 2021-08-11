@@ -42,7 +42,9 @@ ssd_rlnorm <- function(n, meanlog = 0, sdlog = 1, chk = TRUE) {
   rdist("lnorm", n = n, meanlog = meanlog, sdlog = sdlog, chk = chk)
 }
 
-slnorm <- function(data) {
+slnorm <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+  
   x <- mean_weighted_values(data)
   
   list(

@@ -23,8 +23,7 @@ tmb_fun <- function(data, pars, dist) {
 }
 
 tmb_model <- function(data, dist, pars) {
-  spars <- sdist(dist, data)
-  pars <- c(pars, spars[!names(spars) %in% names(pars)])
+  pars <- sdist(dist, data, pars)
   tmb_fun(data, pars, dist)
 }
 

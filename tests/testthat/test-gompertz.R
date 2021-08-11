@@ -20,10 +20,21 @@ test_that("gompertz", {
   expect_equal(ssd_rgompertz(2), c(1.24208466660006, 1.32596518320944))
 })
 
-test_that("gompertz with problem data", {
+test_that("bootstrap gompertz with problem data", {
   data <- data.frame(Conc = c(0.12, 1.8, 0.26, 0.5, 0.35, 1.7, 4.3, 3.2))
   fit <- ssdtools::ssd_fit_dists(data, dists = 'gompertz')
   set.seed(99)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.8)
   expect_snapshot_data(hc, "hc_prob")
+})
+
+test_that("fit gompertz with problem bootstrap data", {
+  data <- data.frame(
+    Conc = 
+      c(1.57878861060696, 1.1540195927281, 1.85714027655063, 0.293912308964471, 
+        3.08208825276762, 0.711069057349639, 1.0570773946438, 2.59236028395207
+      ))
+  fit <- ssdtools::ssd_fit_dists(data, dists = 'gompertz')
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_prob_boot")
 })

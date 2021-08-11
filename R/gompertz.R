@@ -42,7 +42,8 @@ ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
   rdist("gompertz", n = n, location = location, shape = shape, chk = chk)
 }
 
-sgompertz <- function(data) {
+# intentionally ignores pars
+sgompertz <- function(data, pars = NULL) {
   x <- mean_weighted_values(data)
   
   fit <- suppressWarnings(vglm(x ~ 1, gompertz))
