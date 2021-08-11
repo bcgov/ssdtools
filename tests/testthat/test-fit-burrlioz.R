@@ -46,15 +46,20 @@ test_that("burrlioz with lgumbel data gives lgumbel", {
 })
 
 test_that("burrlioz with ccme_chloride gives burrIII3", {
-  set.seed(99)
   fit <- ssd_fit_burrlioz(ssddata::ccme_chloride)
   expect_s3_class(fit, "fitdists")
   expect_identical(names(fit), "burrIII3")
 })
 
 test_that("burrlioz with ccme_cadmium fits", {
-  set.seed(99)
   fit <- ssd_fit_burrlioz(ssddata::ccme_cadmium)
   expect_s3_class(fit, "fitdists")
   expect_identical(names(fit), "burrIII3")
 })
+
+# test_that("burrlioz fits with anon_e", {
+#   fit1 <- ssd_fit_burrlioz(ssddata::anon_e)
+# 
+#   expect_s3_class(fit, "fitdists")
+#   expect_identical(names(fit), "burrIII3")
+# })
