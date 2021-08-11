@@ -28,6 +28,14 @@ test_that("burrIII3 gives cis with ccme_chloride", {
   expect_snapshot_data(hc, "hc_chloride")
 })
 
+test_that("burrIII3 gives cis with ccme_uranium", {
+  fit <- ssd_fit_dists(ssddata::ccme_uranium, dists = "burrIII3")
+  expect_s3_class(fit, "fitdists")
+  set.seed(99)
+  hc <- ssd_hc(fit, nboot = 10, ci = TRUE)
+  expect_snapshot_data(hc, "hc_uranium")
+})
+
 test_that("burrIII3 fits anon_e but only at boundary ok", {
   set.seed(99)
   fit <- ssd_fit_dists(ssddata::anon_e, dists = "burrIII3", at_boundary_ok = TRUE)

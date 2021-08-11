@@ -57,6 +57,12 @@ test_that("burrlioz with ccme_cadmium fits", {
   expect_identical(names(fit), "burrIII3")
 })
 
+test_that("burrlioz with ccme_uranium", {
+  fit <- ssd_fit_burrlioz(ssddata::ccme_uranium)
+  expect_s3_class(fit, "fitdists")
+  expect_identical(names(fit), "burrIII3")
+})
+
 # test_that("burrlioz fits with anon_e", {
 #   fit1 <- ssd_fit_burrlioz(ssddata::anon_e)
 # 
