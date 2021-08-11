@@ -37,8 +37,9 @@ test_that("burrIII3 gives cis with ccme_uranium", {
 })
 
 test_that("burrIII3 fits anon_e but only at boundary ok", {
-  message("why does burrIII3 have to be at boundary to fit?")
-  set.seed(99)
   fit <- ssd_fit_dists(ssddata::anon_e, dists = "burrIII3", at_boundary_ok = TRUE)
-  expect_s3_class(fit, "fitdists")
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_anon_e")
+  expect_error(expect_warning(ssd_fit_dists(ssddata::anon_e, dists = "burrIII3"),
+               "at boundary"))
 })
