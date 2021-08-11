@@ -385,3 +385,10 @@ test_that("ssd_hc cis with error", {
   expect_s3_class(hc_err, "tbl")
   expect_snapshot_data(hc_err, "hc_err")
 })
+
+test_that("ssd_hc with 1 bootstrap", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  set.seed(10)
+  hc <- ssd_hc(fit, ci = TRUE, nboot = 1)
+  expect_snapshot_data(hc, "hc_1")
+})

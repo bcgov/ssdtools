@@ -19,3 +19,11 @@ test_that("burrIII3", {
   set.seed(42)
   expect_equal(ssd_rburrIII3(2), c(10.7379218085407, 14.8920392236127))
 })
+
+test_that("invpareto gives cis with ccme_chloride", {
+  fit <- ssd_fit_dists(ssddata::ccme_chloride, dists = "burrIII3")
+  expect_s3_class(fit, "fitdists")
+  set.seed(99)
+  hc <- ssd_hc(fit, nboot = 10, ci = TRUE)
+  expect_snapshot_data(hc, "hc_chloride")
+})

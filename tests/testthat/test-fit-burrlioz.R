@@ -44,3 +44,10 @@ test_that("burrlioz with lgumbel data gives lgumbel", {
   expect_s3_class(fit, "fitdists")
   expect_identical(names(fit), "lgumbel")
 })
+
+test_that("burrlioz with ccme_chloride gives burrIII3", {
+  set.seed(99)
+  fit <- ssd_fit_burrlioz(ssddata::ccme_chloride)
+  expect_s3_class(fit, "fitdists")
+  expect_identical(names(fit), "burrIII3")
+})

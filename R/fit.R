@@ -170,6 +170,8 @@ ssd_fit_dists <- function(
   attrs$control <- control
   attrs$org_data <- org_data
   attrs$min_pmix <- min_pmix
+  attrs$range_shape1 <- range_shape1
+  attrs$range_shape2 <- range_shape2
   
   .attrs_fitdists(fits) <- attrs
   fits
