@@ -43,7 +43,7 @@ ssd_rinvpareto <- function(n, shape = 3, scale = 1, chk = TRUE) {
 }
 
 sinvpareto <- function(data) {
-  scale <- max(data$right) *  (1 + .Machine$double.eps)
+  scale <- max(data$right) *  (1 + 1e-10)
   shape <- 1/mean(log(scale / data$right))
   list(log_scale = log(scale), log_shape = log(shape))
 }
