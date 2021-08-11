@@ -44,10 +44,18 @@ ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
 
 sgompertz <- function(data) {
   x <- mean_weighted_values(data)
-
-  fit <- vglm(x ~ 1, gompertz)
+  
+  fit <- suppressWarnings(try(vglm(x ~ 1, gompertz), silent = TRUE))
+  if(!inherits(fit, "try-error")) {
+    return(
+      list(
+        log_location = unname(coef(fit)[2]), 
+        log_shape = unname(coef(fit)[1])
+      ))
+  }
   list(
-    log_location = unname(coef(fit)[2]), log_shape = unname(coef(fit)[1])
+    log_location = 1, 
+    log_shape = 1
   )
 }
 

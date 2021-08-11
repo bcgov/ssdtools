@@ -24,6 +24,7 @@ test_that("gompertz with problem data", {
   data <- data.frame(Conc = c(0.12, 1.8, 0.26, 0.5, 0.35, 1.7, 4.3, 3.2))
   fit <- ssdtools::ssd_fit_dists(data, dists = 'gompertz')
   set.seed(99)
-  ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0)
+  message("why so many bootstrap samples failing?")
+  hc <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0)
+  expect_snapshot_data(hc, "hc_prob")
 })
-
