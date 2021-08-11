@@ -27,10 +27,10 @@ test_that("invpareto fits with anon_a", {
   expect_snapshot_data(tidy, "anon_a")
 })
 
-# test_that("invpareto gives cis with ccme_boron", {
-#   library(ssdtools)
-#   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "invpareto")
-#   expect_s3_class(fit, "fitdists")
-#   set.seed(99)
-#   ssd_hc(fit, nboot = 5, ci = TRUE)
-# })
+test_that("invpareto gives cis with ccme_boron", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "invpareto")
+  expect_s3_class(fit, "fitdists")
+  set.seed(99)
+  hc <- ssd_hc(fit, nboot = 3, ci = TRUE)
+  expect_snapshot_data(hc, "hc_boron")
+})

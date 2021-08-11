@@ -43,8 +43,6 @@ bind_rows <- function(x) {
   as_tibble(x)
 }
 
-`%||%` <- function(x, y) if (is.null(x) || length(x) == 0) y else x
-
 measured_range <- function(x) {
   x <- x[!is.na(x)]
   x <- x[is.finite(x)]
