@@ -42,11 +42,13 @@ ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
   rdist("gompertz", n = n, location = location, shape = shape, chk = chk)
 }
 
-# intentionally ignores pars
 sgompertz <- function(data, pars = NULL) {
   x <- mean_weighted_values(data)
   
-  fit <- suppressWarnings(vglm(x ~ 1, gompertz))
+  if(!is.null(pars))
+    pars <- rev(unlist(pars))
+
+  fit <- suppressWarnings(vglm(x ~ 1, gompertz, coefstart = pars))
   list(
     log_location = unname(coef(fit)[2]), 
     log_shape = unname(coef(fit)[1])

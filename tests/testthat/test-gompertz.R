@@ -24,11 +24,12 @@ test_that("bootstrap gompertz with problem data", {
   data <- data.frame(Conc = c(0.12, 1.8, 0.26, 0.5, 0.35, 1.7, 4.3, 3.2))
   fit <- ssdtools::ssd_fit_dists(data, dists = 'gompertz')
   set.seed(99)
-  hc <- ssd_hc(fit, ci = TRUE, nboot = 11, min_pboot = 0.9)
+  hc <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.8)
   expect_snapshot_data(hc, "hc_prob")
 })
 
 test_that("sgompertz completely unstable!", {
+  skip_on_ci() # as incredibly unstable
   x <- c(3.15284072848962, 1.77947821504531, 0.507778085984185, 1.650387414067, 
          1.00725113964435, 7.04244885481452, 1.32336941144339, 1.51533791792454
   )
@@ -42,3 +43,42 @@ test_that("sgompertz completely unstable!", {
   set.seed(100)
   expect_error(ssdtools:::sgompertz(data))
 })
+
+test_that("sgompertz with initial values still unstable!", {
+  skip_on_ci() # as incredibly unstable
+  x <- c(3.15284072848962, 1.77947821504531, 0.507778085984185, 1.650387414067, 
+         1.00725113964435, 7.04244885481452, 1.32336941144339, 1.51533791792454
+  )
+  data <- data.frame(Conc = x)
+  set.seed(11)
+  expect_error(expect_warning(fit <- ssd_fit_dists(data, dists = "gompertz"),
+  "Some elements in the working weights variable 'wz' are not finite"))
+  set.seed(21)
+  expect_error(expect_warning(fit <- ssd_fit_dists(data, dists = "gompertz"),
+                              "L-BFGS-B needs finite values of 'fn'"))
+  set.seed(10)
+  fit <- ssd_fit_dists(data, dists = "gompertz")
+
+  sdata <- data.frame(left = x, right = x, weight = 1)
+  pars <- estimates(fit$gompertz)  
+
+  set.seed(94)
+  expect_equal(ssdtools:::sgompertz(sdata),
+               list(log_location = -0.809751972284548, log_shape = -301.126320260922))
+  set.seed(94)
+  expect_equal(ssdtools:::sgompertz(sdata, pars),
+               list(log_location = 4.06999915669631, log_shape = -2936.08880499417))
+  set.seed(99)
+  expect_equal(ssdtools:::sgompertz(sdata),
+               list(log_location = -0.96528645818605, log_shape = -2.6047441710778))
+  set.seed(99)
+  expect_equal(ssdtools:::sgompertz(sdata, pars),
+               list(log_location = 3.42665325399873, log_shape = -102.775579919568)
+  )
+  set.seed(100)
+  expect_error(ssdtools:::sgompertz(sdata))
+  set.seed(100)
+  expect_equal(ssdtools:::sgompertz(sdata, pars),
+               list(log_location = 3.80715953030506, log_shape = -658.432910074053))
+})
+
