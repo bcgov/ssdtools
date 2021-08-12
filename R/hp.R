@@ -64,13 +64,14 @@ no_ssd_hp <- function() {
       pboot = na))
   }
   censoring <- censoring / rescale
-  estimates <- boot_tmbfit(x, nboot = nboot, data = data, 
-                           weighted = weighted, censoring = censoring,
-                           min_pmix = min_pmix,
-                           range_shape1 = range_shape1,
-                           range_shape2 = range_shape2,
-                           control = control)
-  cis <- cis_tmb(estimates, what, level = level, x = conc / rescale)
+  fun <- safely(fit_tmb)
+  estimates <- boot_estimates(x, fun = fun, nboot = nboot, data = data, 
+                              weighted = weighted, censoring = censoring,
+                              min_pmix = min_pmix,
+                              range_shape1 = range_shape1,
+                              range_shape2 = range_shape2,
+                              control = control)
+  cis <- cis_estimates(estimates, what, level = level, x = conc / rescale)
   tibble(
     dist = dist,
     conc = conc, 
@@ -113,10 +114,10 @@ no_ssd_hp <- function() {
   seeds <- seed_streams(length(x))
   
   hp <- future_map(x, .ssd_hp_tmbfit,
-               conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
-               rescale = rescale,  weighted = weighted, censoring = censoring,
-               min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-               control = control, .options = furrr::furrr_options(seed = seeds))
+                   conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
+                   rescale = rescale,  weighted = weighted, censoring = censoring,
+                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                   control = control, .options = furrr::furrr_options(seed = seeds))
   ind <- bind_rows(hp)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
     wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")

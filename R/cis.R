@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-xcis_tmb <- function(x, args, what, level) {
+xcis_estimates <- function(x, args, what, level) {
   if(grepl("^ssd_p", what)) {
     args$q <- x
   } else {
@@ -26,9 +26,9 @@ xcis_tmb <- function(x, args, what, level) {
   )
 }
 
-cis_tmb <- function(estimates, what, level, x) {
+cis_estimates <- function(estimates, what, level, x) {
   args <- transpose(estimates)
   args <- lapply(args, as.double)
-  x <- lapply(x, xcis_tmb, args, what, level)
+  x <- lapply(x, xcis_estimates, args, what, level)
   bind_rows(x)
 }

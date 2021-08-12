@@ -29,15 +29,13 @@ sample_parameters <- function(i, dist, fun, args, pars, weighted, censoring, min
   estimates(fit)
 }
 
-boot_tmbfit <- function(x, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, control) {
+boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, control) {
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
   pars <- .pars_tmbfit(x)
   
-  safe_fit_dist <- safely(fit_tmb)
-  
-  estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = safe_fit_dist, args = args, pars = pars, 
+  estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = fun, args = args, pars = pars, 
          weighted = weighted, censoring = censoring, min_pmix = min_pmix, 
          range_shape1 = range_shape1, range_shape2 = range_shape2, control = control)
 
