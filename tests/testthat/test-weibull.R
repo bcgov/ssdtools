@@ -19,3 +19,14 @@ test_that("weibull", {
   set.seed(42)
   expect_equal(ssd_rweibull(2), c(0.0890432104972705, 0.0649915162066272))
 })
+
+test_that("weibull", {
+  library(ssdtools)
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rweibull(1000, shape = 0.5, scale = 2))
+  fit <- ssd_fit_dists(data, dists = c("weibull", "lgumbel"))
+  tidy <- tidy(fit)
+  tidy
+  expect_snapshot_data(tidy, "tidy")
+})
+
