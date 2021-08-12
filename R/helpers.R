@@ -38,6 +38,11 @@ logit <- function (x)
   stats::qlogis(x)
 }
 
+strip_loglogit <- function (x) 
+{
+  sub("^log(it){0,1}_", "", x)
+}
+
 bind_rows <- function(x) {
   x <- do.call("rbind", x)
   as_tibble(x)

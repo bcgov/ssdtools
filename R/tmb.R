@@ -12,24 +12,20 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-tmb_fun <- function(dist, data, pars, map) {
+tmb_model <- function(dist, data, pars) {
   model <- paste0("ll_", dist)
   data <- c(model = model, data)
+  map <- mdist(dist)
   MakeADFun(data = data, 
             parameters = pars,
             map = map,
             DLL = "ssdtools_TMBExports", silent = TRUE)
 }
 
-tmb_model <- function(dist, data, pars, map) {
-  pars <- sdist(dist, data, pars)
-  tmb_fun(dist, data, pars = pars, map = map)
-}
-
 fit_tmb <- function(dist, data, min_pmix, range_shape1, range_shape2, 
                     control, pars = NULL, hessian = TRUE) {
-  map <- mdist(dist)
-  model <- tmb_model(dist, data, pars = pars, map = map)
+  pars <- sdist(dist, data, pars)
+  model <- tmb_model(dist, data, pars = pars)
   bounds <- bdist(dist, data, min_pmix, range_shape1, range_shape2)
   # required because model can switch order of parameters
   lower <- bounds$lower[names(model$par)]
@@ -43,7 +39,8 @@ fit_tmb <- function(dist, data, min_pmix, range_shape1, range_shape2,
   fit <- list(dist = dist, model = model, optim = optim)
   class(fit) <- "tmbfit"
   fit$est <- .tidy_tmbfit_estimates(fit)
-  # need to add fit pars
+  fit$pars <- replace_missing(fit$optim$par, pars)
+  fit$pars <- fit$pars[stringr::str_order(strip_loglogit(names(fit$pars)))]
   fit
 }
 
@@ -56,7 +53,7 @@ fit_tmb <- function(dist, data, min_pmix, range_shape1, range_shape2,
 }
 
 .pars_tmbfit <- function(x) {
-  x$optim$par
+  x$pars
 }
 
 .ests_tmbfit <- function(x) {
