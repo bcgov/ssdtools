@@ -46,6 +46,8 @@ relative to the extremes for non-missing values.}
 
 \item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
 
+\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 
 \item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}

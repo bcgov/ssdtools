@@ -191,7 +191,7 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
   expect_warning(hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
-                 "^CIs cannot be calculated for inconsistently censored data[.]$")
+                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
   expect_identical(hp$se, NA_real_)
 })
 
@@ -250,7 +250,7 @@ test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
   data$Weight[1] <- 2
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   expect_warning(hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
-                 "^CIs cannot be calculated for unequally weighted data[.]$")
+                 "^Parametric CIs cannot be calculated for unequally weighted data[.]$")
   expect_identical(hp$se, NA_real_)
 })
 
@@ -316,4 +316,16 @@ test_that("ssd_hp with 1 bootstrap", {
   set.seed(10)
   hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 1)
   expect_snapshot_data(hp, "hp_1")
+})
+
+test_that("ssd_hp comparable parametric and non-parametric big sample size", {
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
+  fit <- ssd_fit_dists(data, dists = "lnorm")
+  set.seed(10)
+  hp_para <- ssd_hp(fit, 1, ci = TRUE, nboot = 10)
+  expect_snapshot_data(hp_para, "hp_para")
+  set.seed(10)
+  hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE)
+  expect_snapshot_data(hp_nonpara, "hp_nonpara")
 })

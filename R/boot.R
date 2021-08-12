@@ -12,7 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-generate_data <- function(dist, args, weighted, censoring) {
+sample_nonparametric <- function(data) {
+  data[sample(nrow(data), replace = TRUE),]
+}
+
+sample_parametric <- function(dist, args = args, weighted = weighted, censoring = censoring) {
   what <- paste0("ssd_r", dist)
   args$chk <- FALSE
   sample <- do.call(what, args)
@@ -21,23 +25,32 @@ generate_data <- function(dist, args, weighted, censoring) {
   censor_data(data, censoring)
 }
 
-sample_parameters <- function(i, dist, fun, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, control) {
-  new_data <- generate_data(dist, args, weighted, censoring)
+generate_data <- function(dist, data, args, weighted, censoring, parametric) {
+  if(!parametric)
+    return(sample_nonparametric(data))
+  sample_parametric(dist, args = args, weighted = weighted, censoring = censoring)
+}
+
+sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, parametric, control) {
+  new_data <- generate_data(dist, data = data, args = args, weighted = weighted, censoring = censoring,
+                       parametric = parametric)
   fit <- fun(dist, new_data, min_pmix = min_pmix, range_shape1 = range_shape1,
              range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE)$result
   if(is.null(fit)) return(NULL)
   estimates(fit)
 }
 
-boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, control) {
+boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control) {
   dist <- .dist_tmbfit(x)
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
   pars <- .pars_tmbfit(x)
   
-  estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = fun, args = args, pars = pars, 
-         weighted = weighted, censoring = censoring, min_pmix = min_pmix, 
-         range_shape1 = range_shape1, range_shape2 = range_shape2, control = control)
-
+  estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = fun, 
+                      data = data, args = args, pars = pars, 
+                      weighted = weighted, censoring = censoring, min_pmix = min_pmix, 
+                      range_shape1 = range_shape1, range_shape2 = range_shape2, 
+                      parametric = parametric, control = control)
+  
   estimates[!vapply(estimates, is.null, TRUE)]
 }

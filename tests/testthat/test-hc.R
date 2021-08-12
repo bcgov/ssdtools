@@ -235,7 +235,7 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-  "^CIs cannot be calculated for inconsistently censored data[.]$")
+  "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
   expect_identical(hc$se, NA_real_)
 })
 
@@ -256,7 +256,7 @@ test_that("ssd_hc not work partially censored even if all same left", {
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
   expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-                 "^CIs cannot be calculated for inconsistently censored data[.]$")
+                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
 })
 
 test_that("ssd_hc doesn't works with inconsisently censored data", {
@@ -267,7 +267,7 @@ test_that("ssd_hc doesn't works with inconsisently censored data", {
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
   expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-                 "^CIs cannot be calculated for inconsistently censored data[.]$")
+                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
 })
 
 test_that("ssd_hc same with equally weighted data", {
@@ -325,7 +325,7 @@ test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
   data$Weight[1] <- 2
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-                 "^CIs cannot be calculated for unequally weighted data[.]$")
+                 "^Parametric CIs cannot be calculated for unequally weighted data[.]$")
   expect_identical(hc$se, NA_real_)
 })
 
@@ -391,4 +391,16 @@ test_that("ssd_hc with 1 bootstrap", {
   set.seed(10)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 1)
   expect_snapshot_data(hc, "hc_1")
+})
+
+test_that("ssd_hc comparable parametric and non-parametric big sample size", {
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
+  fit <- ssd_fit_dists(data, dists = "lnorm")
+  set.seed(10)
+  hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10)
+  expect_snapshot_data(hc_para, "hc_para")
+  set.seed(10)
+  hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE)
+  expect_snapshot_data(hc_nonpara, "hc_nonpara")
 })

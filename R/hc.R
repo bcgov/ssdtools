@@ -60,7 +60,7 @@ no_ssd_hc <- function() {
 }
 
 .ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, data, rescale, weighted, censoring, min_pmix, 
-                           range_shape1, range_shape2, control) {
+                           range_shape1, range_shape2, parametric, control) {
   args <- estimates(x)
   args$p <- proportion
   dist <- .dist_tmbfit(x)
@@ -85,6 +85,7 @@ no_ssd_hc <- function() {
                               censoring = censoring, min_pmix = min_pmix,
                               range_shape1 = range_shape1,
                               range_shape2 = range_shape2,
+                              parametric = parametric,
                               control = control)
   cis <- cis_estimates(estimates, what, level = level, x = proportion)
   tibble(
@@ -96,7 +97,7 @@ no_ssd_hc <- function() {
 }
 
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot,
-                             average, min_pboot, control) {
+                             average, min_pboot, parametric, control) {
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
@@ -113,13 +114,13 @@ no_ssd_hc <- function() {
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
   
-  if(ci && identical(censoring, c(NA_real_, NA_real_))) {
-    wrn("CIs cannot be calculated for inconsistently censored data.")
+  if(parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
+    wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
     ci <- FALSE
   }
   
-  if(ci && unequal) {
-    wrn("CIs cannot be calculated for unequally weighted data.")
+  if(parametric && ci && unequal) {
+    wrn("Parametric CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }
   if(!ci) {
@@ -129,7 +130,8 @@ no_ssd_hc <- function() {
   hc <- future_map(x, .ssd_hc_tmbfit, proportion = percent / 100, ci = ci, level = level, nboot = nboot,
                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                   control = control, .options = furrr::furrr_options(seed = seeds))
+                   parametric = parametric, control = control, 
+                   .options = furrr::furrr_options(seed = seeds))
   
   ind <- bind_rows(hc)
   if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
@@ -177,6 +179,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 #' @export
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, 
                             average = TRUE, delta = 7, min_pboot = 0.99,
+                            parametric = TRUE,
                             control = NULL,  ...) {
   chk_vector(percent)
   chk_numeric(percent)
@@ -194,6 +197,7 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   chk_gte(delta)
   chk_number(min_pboot)
   chk_range(min_pboot)
+  chk_flag(parametric)
   chk_null_or(control, chk_list)
   chk_unused(...)
   
@@ -204,5 +208,5 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   x <- subset(x, delta = delta)
   .ssd_hc_fitdists(x, percent,
                    ci = ci, level = level, nboot = nboot, min_pboot = min_pboot, control = control,
-                   average = average)
+                   average = average, parametric = parametric)
 }

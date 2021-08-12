@@ -13,6 +13,8 @@
   average = TRUE,
   delta = 7,
   min_pboot = 0.99,
+  parametric = TRUE,
+  control = NULL,
   ...
 )
 }
@@ -33,6 +35,10 @@
 
 \item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
 in the sense of returning a likelihood.}
+
+\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
 \item{...}{Unused.}
 }
