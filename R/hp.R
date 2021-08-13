@@ -133,11 +133,14 @@ no_ssd_hp <- function() {
     abind(x, y, along = 3)
   }, hp)
   weight <- glance(x)$weight
+  suppressMessages(min <- apply(hp, c(1, 2), min))
   suppressMessages(hp <- apply(hp, c(1, 2), weighted.mean, w = weight))
+  min <- as.data.frame(min)
   hp <- as_tibble(hp)
   hp$conc <- conc
   hp$dist <- "average"
   hp$nboot <- nboot
+  hp$pboot <- min$pboot
   hp[c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot")]
 }
 

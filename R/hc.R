@@ -146,10 +146,12 @@ no_ssd_hc <- function() {
     abind(x, y, along = 3)
   }, hc)
   weight <- glance(x)$weight
+  suppressMessages(min <- apply(hc, c(1, 2), min))
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
+  min <- as.data.frame(min)
   hc <- as.data.frame(hc)
   tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 
-         lcl = hc$lcl, ucl = hc$ucl, nboot = nboot, pboot = hc$pboot)
+         lcl = hc$lcl, ucl = hc$ucl, nboot = nboot, pboot = min$pboot)
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates

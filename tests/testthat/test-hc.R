@@ -387,6 +387,24 @@ test_that("ssd_hc cis with error", {
   expect_snapshot_data(hc_err, "hc_err")
 })
 
+test_that("ssd_hc cis with error and multiple dists", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = c("lnorm", "llogis_llogis"), min_pmix = 0.1)
+  expect_identical(attr(fit, "min_pmix"), 0.1)
+  set.seed(99)
+  expect_warning(hc_err_two <- ssd_hc(fit, ci = TRUE, nboot = 100, average = FALSE,
+                                  delta = 100), 
+                 "One or more pboot values less than 0.99 \\(decrease min_pboot with caution\\)\\.")
+  expect_snapshot_data(hc_err_two, "hc_err_two")
+  set.seed(99)
+  expect_warning(hc_err_avg <- ssd_hc(fit, ci = TRUE, nboot = 100,
+                                      delta = 100), 
+                 "One or more pboot values less than 0.99 \\(decrease min_pboot with caution\\)\\.")
+  expect_snapshot_data(hc_err_avg, "hc_err_avg")
+})
+
 test_that("ssd_hc with 1 bootstrap", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(10)
