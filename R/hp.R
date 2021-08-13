@@ -43,7 +43,8 @@ no_ssd_hp <- function() {
   )
 }
 
-.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, data, rescale, weighted, censoring,
+.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, min_pboot,
+                           data, rescale, weighted, censoring,
                            min_pmix, range_shape1, range_shape2, parametric, control) {
   args <- estimates(x)
   args$q <- conc / rescale
@@ -73,7 +74,7 @@ no_ssd_hp <- function() {
                               parametric = parametric,
                               control = control)
   cis <- cis_estimates(estimates, what, level = level, x = conc / rescale)
-  tibble(
+  hp <- tibble(
     dist = dist,
     conc = conc, 
     est = est * 100,
@@ -82,6 +83,7 @@ no_ssd_hp <- function() {
     ucl = cis$ucl * 100,
     nboot = nboot, pboot = length(estimates) / nboot
   )
+  replace_min_pboot_na(hp, min_pboot)
 }
 
 .ssd_hp_fitdists <- function(x, conc, ci, level, nboot, min_pboot, control,
@@ -115,18 +117,15 @@ no_ssd_hp <- function() {
   seeds <- seed_streams(length(x))
   
   hp <- future_map(x, .ssd_hp_tmbfit,
-                   conc = conc, ci = ci, level = level, nboot = nboot, data = data, 
+                   conc = conc, ci = ci, level = level, nboot = nboot, 
+                   min_pboot = min_pboot, data = data, 
                    rescale = rescale,  weighted = weighted, censoring = censoring,
                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                    parametric = parametric,
                    control = control, .options = furrr::furrr_options(seed = seeds))
-  ind <- bind_rows(hp)
-  if(any(!is.na(ind$pboot) & ind$pboot < min_pboot)) {
-    wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")
-    return(no_ssd_hp())
-  }
   if (!average) {
-    return(ind)
+    hp <- bind_rows(hp)
+    return(hp)
   }
   hp <- lapply(hp, function(x) x[c("est", "se", "lcl", "ucl", "pboot")])
   hp <- lapply(hp, as.matrix)
@@ -166,9 +165,10 @@ ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
   chk_unused(...)
   
   x <- subset(x, delta = delta)
-  .ssd_hp_fitdists(x, conc,
+  hp <- .ssd_hp_fitdists(x, conc,
                    ci = ci, level = level, nboot = nboot, 
                    average = average, min_pboot = min_pboot,
                    parametric = parametric,
                    control = control)
+  warn_min_pboot(hp, min_pboot)
 }

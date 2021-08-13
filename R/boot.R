@@ -12,6 +12,18 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+warn_min_pboot <- function(x, min_pboot) {
+  if(any(!is.na(x$pboot) & is.na(x$se) & x$nboot >= 2)) {
+    wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")
+  }
+  x
+}
+
+replace_min_pboot_na <- function(x, min_pboot) {
+  x[!is.na(x$pboot) & x$pboot < min_pboot, c("se", "lcl", "ucl")] <- NA_real_
+  x
+}
+
 sample_nonparametric <- function(data) {
   data[sample(nrow(data), replace = TRUE),]
 }
@@ -33,7 +45,7 @@ generate_data <- function(dist, data, args, weighted, censoring, parametric) {
 
 sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, parametric, control) {
   new_data <- generate_data(dist, data = data, args = args, weighted = weighted, censoring = censoring,
-                       parametric = parametric)
+                            parametric = parametric)
   fit <- fun(dist, new_data, min_pmix = min_pmix, range_shape1 = range_shape1,
              range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE)$result
   if(is.null(fit)) return(NULL)

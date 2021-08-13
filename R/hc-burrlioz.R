@@ -12,7 +12,8 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.ssd_hc_burrlioz_tmbfit <- function(x, proportion, level, nboot, data, rescale, weighted, censoring, min_pmix, 
+.ssd_hc_burrlioz_tmbfit <- function(x, proportion, level, nboot, min_pboot,
+                                    data, rescale, weighted, censoring, min_pmix, 
                                     range_shape1, range_shape2, control) {
   args <- estimates(x)
   args$p <- proportion
@@ -35,12 +36,13 @@
   
   cis <- cis_estimates(estimates, what = "ssd_qburrlioz", level = level, x = proportion,
                        .names = c("scale", "shape", "shape1", "shape2", "locationlog", "scalelog"))
-  tibble(
+  hc <- tibble(
     dist = "burrlioz",
     percent = proportion * 100, est = est * rescale,
     se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
     nboot = nboot, pboot = length(estimates) / nboot
   )
+  replace_min_pboot_na(hc, min_pboot)
 }
 
 .ssd_hc_burrlioz_fitdists <- function(x, percent, level, nboot, min_pboot) {
@@ -57,15 +59,10 @@
   
   seeds <- seed_streams(length(x))
   hc <- future_map(x, .ssd_hc_burrlioz_tmbfit, proportion = percent / 100,
-                   level = level, nboot = nboot,
+                   level = level, nboot = nboot,  min_pboot = min_pboot,
                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                    control = control, .options = furrr::furrr_options(seed = seeds))$burrIII3
-
-  if(any(!is.na(hc$pboot) & hc$pboot < min_pboot)) {
-    wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")
-    return(no_ssd_hc())
-  }
   hc
 }
 
@@ -110,6 +107,7 @@ ssd_hc_burrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 10
                   average = FALSE, parametric = FALSE))
   }
   
-  .ssd_hc_burrlioz_fitdists(x, percent = percent, level = level, nboot = nboot, 
+  hc <- .ssd_hc_burrlioz_fitdists(x, percent = percent, level = level, nboot = nboot, 
                             min_pboot = min_pboot)
+  warn_min_pboot(hc, min_pboot)
 }

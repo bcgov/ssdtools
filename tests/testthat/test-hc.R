@@ -378,9 +378,10 @@ test_that("ssd_hc cis with error", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
-  expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100), "pboot")
-  expect_identical(colnames(hc_err), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_identical(hc_err$dist, character(0))
+  expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100), 
+                 "One or more pboot values less than 0.99 \\(decrease min_pboot with caution\\)\\.")
+  expect_s3_class(hc_err, "tbl")
+  expect_snapshot_data(hc_err, "hc_err_na")
   hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92)
   expect_s3_class(hc_err, "tbl")
   expect_snapshot_data(hc_err, "hc_err")
