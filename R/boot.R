@@ -46,6 +46,8 @@ boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape
   args <- c(args, estimates(x))
   pars <- .pars_tmbfit(x)
   
+  data <- data[c("left", "right", "weight")]
+  
   estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = fun, 
                       data = data, args = args, pars = pars, 
                       weighted = weighted, censoring = censoring, min_pmix = min_pmix, 

@@ -404,3 +404,13 @@ test_that("ssd_hc comparable parametric and non-parametric big sample size", {
   hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE)
   expect_snapshot_data(hc_nonpara, "hc_nonpara")
 })
+
+test_that("ssd_hc parametric and non-parametric small sample size", {
+  fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
+  set.seed(47)
+  hc_para_small <- ssd_hc(fit, nboot = 10, ci = TRUE)
+  expect_snapshot_data(hc_para_small, "hc_para_small")
+  set.seed(47)
+  hc_nonpara_small <- ssd_hc(fit, nboot = 10, ci = TRUE, parametric = FALSE)
+  expect_snapshot_data(hc_para_small, "hc_para_small")
+})
