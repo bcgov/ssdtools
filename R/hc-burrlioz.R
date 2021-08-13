@@ -12,6 +12,63 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+.ssd_hc_burrlioz_tmbfit <- function(x, proportion, level, nboot, data, rescale, weighted, censoring, min_pmix, 
+                                    range_shape1, range_shape2, control) {
+  args <- estimates(x)
+  args$p <- proportion
+  dist <- .dist_tmbfit(x)
+  stopifnot(identical(dist, "burrIII3"))
+  
+  what <- paste0("ssd_q", dist)
+  
+  est <- do.call(what, args)
+  censoring <- censoring / rescale
+  
+  fun <- safely(fit_burrlioz)
+  
+  estimates <- boot_estimates(x, fun = fun, nboot = nboot, data = data, weighted = weighted,
+                              censoring = censoring, min_pmix = min_pmix,
+                              range_shape1 = range_shape1,
+                              range_shape2 = range_shape2,
+                              parametric = FALSE,
+                              control = control)
+  
+  cis <- cis_estimates(estimates, what = "ssd_qburrlioz", level = level, x = proportion,
+                       .names = c("scale", "shape", "shape1", "shape2", "locationlog", "scalelog"))
+  tibble(
+    dist = "burrlioz",
+    percent = proportion * 100, est = est * rescale,
+    se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
+    nboot = nboot, pboot = length(estimates) / nboot
+  )
+}
+
+.ssd_hc_burrlioz_fitdists <- function(x, percent, level, nboot, min_pboot) {
+  
+  control <- .control_fitdists(x)
+  data <- .data_fitdists(x)
+  rescale <- .rescale_fitdists(x)
+  censoring <- .censoring_fitdists(x)
+  min_pmix <- .min_pmix_fitdists(x)
+  range_shape1 <- .range_shape1_fitdists(x)
+  range_shape2 <- .range_shape2_fitdists(x)
+  weighted <- .weighted_fitdists(x)
+  unequal <- .unequal_fitdists(x)
+  
+  seeds <- seed_streams(length(x))
+  hc <- future_map(x, .ssd_hc_burrlioz_tmbfit, proportion = percent / 100,
+                   level = level, nboot = nboot,
+                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                   control = control, .options = furrr::furrr_options(seed = seeds))$burrIII3
+
+  if(any(!is.na(hc$pboot) & hc$pboot < min_pboot)) {
+    wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")
+    return(no_ssd_hc())
+  }
+  hc
+}
+
 #' Hazard Concentrations for Burrlioz Fit
 #'
 #' Gets concentration(s) that protect specified percentage(s) of species
@@ -52,6 +109,7 @@ ssd_hc_burrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 10
                   nboot = nboot, min_pboot = min_pboot, 
                   average = FALSE, parametric = FALSE))
   }
-
-  .NotYetImplemented()
+  
+  .ssd_hc_burrlioz_fitdists(x, percent = percent, level = level, nboot = nboot, 
+                            min_pboot = min_pboot)
 }
