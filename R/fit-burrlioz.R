@@ -29,15 +29,22 @@
 ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE, 
                              silent = FALSE) {
   
+  if(nrow(data) <= 8) {
+    return(ssd_fit_dists(data, left = left, dists = "llogis",
+                         computable = FALSE, nrow = 5L,
+                         rescale = rescale, silent = silent))
+  }
+  
   range_shape1 <- c(0.001, 100)
   range_shape2 <- c(0.001, 80)
   
   fit <- ssd_fit_dists(data, left = left, dists = "burrIII3",
                        rescale = rescale, computable = FALSE,
                        at_boundary_ok = TRUE, silent = TRUE,
+                       nrow = 9L,
                        range_shape1 = range_shape1,
                        range_shape2 = range_shape2)
-
+  
   control <- list()
   dist <- "burrIII3"
   if(is_at_boundary(fit$burrIII3, data, range_shape1 = range_shape1, 
@@ -52,6 +59,7 @@ ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE,
                 rescale = rescale, computable = FALSE,
                 control = control,
                 silent = silent,
+                nrow = 9L,
                 range_shape1 = range_shape1,
                 range_shape2 = range_shape2)
 }

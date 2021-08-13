@@ -18,6 +18,12 @@ test_that("burrlioz with ccme_boron gives invpareto", {
   expect_identical(names(fit), "invpareto")
 })
 
+test_that("burrlioz with eight or less samples gives llogis", {
+  fit <- ssd_fit_burrlioz(ssddata::ccme_boron[1:8,])
+  expect_s3_class(fit, "fitdists")
+  expect_identical(names(fit), "llogis")
+})
+
 test_that("burrlioz with burrIII3 data gives burrIII3", {
   set.seed(99)
   conc <- ssd_rburrIII3(30)
