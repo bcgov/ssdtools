@@ -40,6 +40,7 @@
     dist = "burrlioz",
     percent = proportion * 100, est = est * rescale,
     se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
+    method = "non-parametric",
     nboot = nboot, pboot = length(estimates) / nboot
   )
   replace_min_pboot_na(hc, min_pboot)

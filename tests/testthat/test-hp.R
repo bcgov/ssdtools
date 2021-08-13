@@ -38,11 +38,7 @@ test_that("hp fitdist works with missing conc", {
   
   hp <- ssd_hp(fits, NA_real_)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, NA_real_)
-  expect_equal(hp$est, NA_real_)
-  expect_equal(hp$se, NA_real_)
+  expect_snapshot_data(hp, "hp41")
 })
 
 test_that("hp fitdist works with 0 conc", {
@@ -50,11 +46,7 @@ test_that("hp fitdist works with 0 conc", {
   
   hp <- ssd_hp(fits, 0) 
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, 0) 
-  expect_equal(hp$est, 0)
-  expect_equal(hp$se, NA_real_)
+  expect_snapshot_data(hp, "hp49")
 })
 
 test_that("hp fitdist works with negative conc", {
@@ -62,11 +54,7 @@ test_that("hp fitdist works with negative conc", {
   
   hp <- ssd_hp(fits, -1)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, -1)
-  expect_equal(hp$est, 0)
-  expect_equal(hp$se, NA_real_)
+  expect_snapshot_data(hp, "hp57")
 })
 
 test_that("hp fitdist works with -Inf conc", {
@@ -74,11 +62,7 @@ test_that("hp fitdist works with -Inf conc", {
   
   hp <- ssd_hp(fits, -Inf)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, -Inf)
-  expect_equal(hp$est, 0)
-  expect_equal(hp$se, NA_real_)
+  expect_snapshot_data(hp, "hp65")
 })
 
 test_that("hp fitdist works with Inf conc", {
@@ -86,11 +70,7 @@ test_that("hp fitdist works with Inf conc", {
   
   hp <- ssd_hp(fits, Inf)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, Inf)
-  expect_equal(hp$est, 100)
-  expect_equal(hp$se, NA_real_)
+  expect_snapshot_data(hp, "hp73")
 })
 
 test_that("hp fitdists works reasonable conc", {
@@ -98,13 +78,7 @@ test_that("hp fitdists works reasonable conc", {
   
   hp <- ssd_hp(fits, 1)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, 1)
-  expect_equal(hp$est, 1.95430302556687) 
-  expect_equal(hp$se, NA_real_) 
-  expect_equal(hp$lcl, NA_real_) 
-  expect_equal(hp$ucl, NA_real_) 
+  expect_snapshot_data(hp, "hp81")
 })
 
 test_that("hp fitdists works with multiple concs", {
@@ -112,13 +86,7 @@ test_that("hp fitdists works with multiple concs", {
   
   hp <- ssd_hp(fits, c(2.5,1))
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, c("average", "average"))
-  expect_identical(hp$conc, c(2.5,1))
-  expect_equal(hp$est, c(9.25437337881004, 1.9543030195088)) 
-  expect_equal(hp$se, c(NA_real_, NA_real_)) 
-  expect_equal(hp$lcl, c(NA_real_, NA_real_)) 
-  expect_equal(hp$ucl, c(NA_real_, NA_real_)) 
+  expect_snapshot_data(hp, "hp89")
 })
 
 test_that("hp fitdists works with cis", {
@@ -127,11 +95,7 @@ test_that("hp fitdists works with cis", {
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, 1)
-  
-  expect_snapshot_data(hp, "hp_cis")
+  expect_snapshot_data(hp, "hp98")
 })
 
 test_that("hp fitdists works with multiple dists", {
@@ -139,11 +103,7 @@ test_that("hp fitdists works with multiple dists", {
   
   hp <- ssd_hp(fits, 1)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, "average")
-  expect_identical(hp$conc, 1)
-  expect_equal(hp$est, 3.66685732661861) 
-  expect_equal(hp$se, NA_real_) 
+  expect_snapshot_data(hp, "hp106")
 })
 
 test_that("hp fitdists works not average multiple dists", {
@@ -151,11 +111,7 @@ test_that("hp fitdists works not average multiple dists", {
   
   hp <- ssd_hp(fits, 1, average = FALSE)
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, ssd_dists("bc"))
-  expect_identical(hp$conc, c(1, 1, 1))
-  expect_equal(hp$est, c(4.67758994580286, 2.80047097268139, 1.9543030195088)) 
-  expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_)) 
+  expect_snapshot_data(hp, "hp114")
 })
 
 test_that("ssd_hp fitdists correct for rescaling", {
@@ -171,11 +127,7 @@ test_that("hp fitdists with no fitdists", {
   class(x) <- c("fitdists")
   hp <- ssd_hp(x, 1)
   expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hp$dist, character(0))
-  expect_identical(hp$conc, numeric(0))
-  expect_equal(hp$est, numeric(0))
-  expect_equal(hp$se, numeric(0))
+  expect_snapshot_data(hp, "hp130")
 })
 
 test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {

@@ -138,6 +138,8 @@ no_ssd_hc <- function() {
   
   if (!average) {
     hc <- bind_rows(hc)
+    hc$method <- if(parametric) "parametric" else "non-parametric"
+    hc <- hc[c("dist", "percent", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
     return(hc)
   }
   hc <- lapply(hc, function(x) x[c("percent", "est", "se", "lcl", "ucl", "pboot")])
@@ -150,8 +152,9 @@ no_ssd_hc <- function() {
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   min <- as.data.frame(min)
   hc <- as.data.frame(hc)
+  method <- if(parametric) "parametric" else "non-parametric"
   tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 
-         lcl = hc$lcl, ucl = hc$ucl, nboot = nboot, pboot = min$pboot)
+         lcl = hc$lcl, ucl = hc$ucl, method = method, nboot = nboot, pboot = min$pboot)
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates

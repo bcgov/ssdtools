@@ -111,11 +111,7 @@ test_that("ssd_hc fitdists works NA percent", {
   
   hc <- ssd_hc(fits, NA_real_)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hc$dist, "average")
-  expect_identical(hc$percent, NA_real_)
-  expect_equal(hc$est, NA_real_)
-  expect_equal(hc$se, NA_real_)
+  expect_snapshot_data(hc, "hc114")
 })
 
 test_that("ssd_hc fitdists works 0 percent", {
@@ -123,11 +119,7 @@ test_that("ssd_hc fitdists works 0 percent", {
   
   hc <- ssd_hc(fits, 0)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hc$dist, "average")
-  expect_identical(hc$percent, 0)
-  expect_equal(hc$est, 0)
-  expect_equal(hc$se, NA_real_)
+  expect_snapshot_data(hc, "hc122")
 })
 
 test_that("ssd_hc fitdists works 100 percent", {
@@ -135,12 +127,7 @@ test_that("ssd_hc fitdists works 100 percent", {
   
   hc <- ssd_hc(fits, 100)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hc$dist, "average")
-  expect_identical(hc$percent, 100)
-  expect_true(vld_whole_numeric(hc$percent))
-  expect_equal(hc$est, Inf)
-  expect_equal(hc$se, NA_real_)
+  expect_snapshot_data(hc, "hc130")
 })
 
 test_that("ssd_hc fitdists works multiple percents", {
@@ -148,26 +135,14 @@ test_that("ssd_hc fitdists works multiple percents", {
   
   hc <- ssd_hc(fits, percent = c(1, 99))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hc$dist, c("average", "average"))
-  expect_identical(hc$percent, c(1, 99))
-  expect_true(vld_whole_numeric(hc$percent))
-  expect_equal(hc$est, c(0.721365215300168, 232.734811528299))
-  expect_equal(hc$se, c(NA_real_, NA_real_))
+  expect_snapshot_data(hc, "hc138")
 })
 
 test_that("ssd_hc fitdists averages", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   hc <- ssd_hc(fits)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hc$dist, "average")
-  expect_identical(hc$percent, 5)
-  expect_true(vld_whole_numeric(hc$percent))
-  expect_equal(hc$est, 1.30715672034529)
-  expect_equal(hc$se, NA_real_)
-  expect_equal(hc$lcl, NA_real_)
-  expect_equal(hc$ucl, NA_real_)
+  expect_snapshot_data(hc, "hc145")
 })
 
 test_that("ssd_hc fitdists averages single dist by multiple percent", {
@@ -175,13 +150,7 @@ test_that("ssd_hc fitdists averages single dist by multiple percent", {
   
   hc <- ssd_hc(fits, average = TRUE, percent = 1:99)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hc$dist, rep("average", 99))
-  expect_identical(hc$percent, 1:99)
-  expect_true(vld_whole_numeric(hc$percent))
-  expect_equal(hc$se, rep(NA_real_, 99))
-  expect_equal(hc$lcl, rep(NA_real_, 99))
-  expect_equal(hc$ucl, rep(NA_real_, 99))
+  expect_snapshot_data(hc, "hc153")
 })
 
 test_that("ssd_hc fitdists not average single dist by multiple percent gives whole numeric", {
@@ -189,19 +158,14 @@ test_that("ssd_hc fitdists not average single dist by multiple percent gives who
   
   hc <- ssd_hc(fits, average = FALSE, percent = 1:99)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-#  expect_true(vld_whole_numeric(hc$percent)) not sure why not true
+  expect_snapshot_data(hc, "hc161")
 })
 
 test_that("ssd_hc fitdists not average", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   hc <- ssd_hc(fits, average = FALSE)
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "nboot", "pboot"))
-  expect_equal(hc$dist, ssd_dists("bc")) 
-  expect_identical(hc$percent, c(5, 5, 5))
-  expect_equal(hc$est, c(1.07428453014496, 1.56226388133415, 1.6811748398812))
-  expect_equal(hc$se, c(NA_real_, NA_real_,NA_real_))
+  expect_snapshot_data(hc, "hc168")
 })
 
 test_that("ssd_hc fitdists correct for rescaling", {

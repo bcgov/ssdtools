@@ -125,6 +125,8 @@ no_ssd_hp <- function() {
                    control = control, .options = furrr::furrr_options(seed = seeds))
   if (!average) {
     hp <- bind_rows(hp)
+    hp$method <- if(parametric) "parametric" else "non-parametric"
+    hp <- hp[c("dist", "conc", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
     return(hp)
   }
   hp <- lapply(hp, function(x) x[c("est", "se", "lcl", "ucl", "pboot")])
@@ -141,7 +143,8 @@ no_ssd_hp <- function() {
   hp$dist <- "average"
   hp$nboot <- nboot
   hp$pboot <- min$pboot
-  hp[c("dist", "conc", "est", "se", "lcl", "ucl", "nboot", "pboot")]
+  hp$method <- if(parametric) "parametric" else "non-parametric"
+  hp[c("dist", "conc", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
 }
 
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
