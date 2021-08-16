@@ -123,6 +123,6 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0) {
   default <- data.frame(term = names(default), default = unlist(default))
   
   tidy <- merge(tidy, default, by = "term", all = "TRUE")
-  testthat::expect_true(all(tidy$default > tidy$lower))
+  testthat::expect_true(all(tidy$default > tidy$lower - upadj))
   testthat::expect_true(all(tidy$default < tidy$upper + upadj))
 }

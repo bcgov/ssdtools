@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("invpareto", {
-  test_dist("invpareto", upadj = 1e-02)
+  test_dist("invpareto", upadj = 1e-03)
   expect_equal(ssd_pinvpareto(0.5), 0.125)
   expect_equal(ssd_qinvpareto(0.125), 0.5)
   set.seed(42)
@@ -33,4 +33,32 @@ test_that("invpareto gives cis with ccme_boron", {
   set.seed(99)
   hc <- ssd_hc(fit, nboot = 100, ci = TRUE)
   expect_snapshot_data(hc, "hc_boron")
+})
+
+test_that("invpareto unbiased estimators small n", {
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rinvpareto(6), weight = 1)
+  data$left <- data$Conc
+  data$right <- data$left
+  initial <- ssdtools:::sinvpareto(data)
+  expect_equal(lapply(initial, exp), list(log_scale = 1.03299515712949, log_shape = 4.14668077241))
+  fit <- ssd_fit_dists(data, dists = "invpareto")
+  expect_equal(estimates(fit), 
+               list(invpareto = list(scale = 1.03299515712949, shape = 4.14668077241)))
+})
+
+test_that("invpareto unbiased scale estimator small n", {
+  set.seed(99)
+  fun <- function(n) {
+    exp(ssdtools:::sinvpareto(data.frame(right = ssd_rinvpareto(n)))$log_scale)
+  }
+  expect_equal(mean(vapply(rep(6, 1000), fun, 1)), 0.992849622620409)
+})
+
+test_that("invpareto biased shape estimator small n", {
+  set.seed(99)
+  fun <- function(n) {
+    exp(ssdtools:::sinvpareto(data.frame(right = ssd_rinvpareto(n)))$log_shape)
+  }
+  expect_equal(mean(vapply(rep(6, 1000), fun, 1)), 3.8284232651135)
 })
