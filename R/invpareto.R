@@ -49,9 +49,13 @@ sinvpareto <- function(data, pars = NULL) {
   n <- length(data$right)
   scale <- scale * (shape * n) / (shape * n  - 1)
   shape <- 1/mean(log(scale / data$right))
-  
+
   spars <- list(log_scale = log(scale), log_shape = log(shape))
-  c(pars, spars[!names(spars) %in% names(pars)])
+  if(!is.null(pars)) { # use new bias corrected order statistic
+    pars$log_scale <- spars$log_scale
+    return(pars)
+  }
+  spars
 }
 
 minvpareto <- function() {
