@@ -53,10 +53,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      xbreaks = waiver()) {
   
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
-  chk_null_or(label, chk_string)
-  chk_null_or(shape, chk_string)
-  chk_null_or(linetype, chk_string)
-  chk_null_or(linecolor, chk_string)
+  chk_null_or(label, vld = vld_string)
+  chk_null_or(shape, vld = vld_string)
+  chk_null_or(linetype, vld = vld_string)
+  chk_null_or(linecolor, vld = vld_string)
   check_names(data, c(unique(c(left, right)), label, shape))
   
   check_names(pred, c("percent", "est", "lcl", "ucl", unique(c(linetype, linecolor))))

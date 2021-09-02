@@ -64,7 +64,7 @@ Depends:
     R (>= 3.5)
 Imports:
     abind,
-    chk,
+    chk (>= 0.7.0),
     doFuture,
     foreach,
     furrr,
@@ -107,7 +107,8 @@ Suggests:
     tidyverse,
     withr
 Remotes:
-    poissonconsulting/ssddata
+    poissonconsulting/chk,
+    open-AIMS/ssddata
 LinkingTo: 
     Rcpp,
     TMB

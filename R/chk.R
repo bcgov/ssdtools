@@ -15,11 +15,11 @@
 .chk_data <- function(data, left, right, weight = NULL, nrow = 0, missing = FALSE) {
   chk_string(left)
   chk_string(right)
-  chk_null_or(weight, chk_string)
+  chk_null_or(weight, vld = vld_string)
   
   chk_not_subset(left, c("right", "weight"))
   chk_not_subset(right, c("left", "weight"))
-  chk_null_or(weight, chk_not_subset, c("left", "right"))
+  chk_null_or(weight, vld = vld_not_subset, values = c("left", "right"))
   
   chk_whole_number(nrow)
   

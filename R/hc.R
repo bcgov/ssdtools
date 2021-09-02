@@ -202,7 +202,7 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_flag(parametric)
-  chk_null_or(control, chk_list)
+  chk_null_or(control, vld = vld_list)
   chk_unused(...)
   
   if (!missing(hc)) {

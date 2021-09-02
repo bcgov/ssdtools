@@ -167,7 +167,7 @@ ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_flag(parametric)
-  chk_null_or(control, chk_list)
+  chk_null_or(control, vld = vld_list)
   chk_unused(...)
   
   x <- subset(x, delta = delta)
