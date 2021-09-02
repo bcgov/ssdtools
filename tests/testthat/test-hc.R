@@ -186,6 +186,16 @@ test_that("ssd_hc fitdists cis", {
   expect_snapshot_data(hc, "hc_cis")
 })
 
+test_that("ssd_hc fitdists cis level = 0.8", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  set.seed(102)
+  hc <- ssd_hc(fits, ci = TRUE, level = 0.8)
+  expect_s3_class(hc, "tbl_df")
+  
+  expect_snapshot_data(hc, "hc_cis_level08")
+})
+
 test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   data <- ssddata::ccme_boron
   data$Conc2 <- data$Conc
