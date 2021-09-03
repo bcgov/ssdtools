@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 0.3.5.9000
+
+- Same as previous version.
+
+
 # ssdtools 0.3.5
 
 - Bump requirement to R >= 4.1 because of `actuar` package.
