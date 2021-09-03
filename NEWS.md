@@ -2,27 +2,11 @@
 
 # ssdtools 0.3.5
 
-- Bump requirement to R >= 4.1 because of actuar package.
-
-
-# ssdtools 0.3.4.9002
-
-- Same as previous version.
-
-
-# ssdtools 0.3.4.9001
-
-- Same as previous version.
-
-
-# ssdtools 0.3.4.9000
-
-- Internal changes only.
-
+- Bump requirement to R >= 4.1 because of `actuar` package.
 
 # ssdtools 0.3.4
 
-- Update Apache Licence url to https.
+- Update Apache License url to https.
 
 # ssdtools 0.3.3
 
