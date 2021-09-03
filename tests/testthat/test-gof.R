@@ -23,3 +23,15 @@ test_that("gof", {
   expect_s3_class(gof, "tbl")
   expect_snapshot_data(gof, "gof")
 })
+
+test_that("gof mixture", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "llogis_llogis")
+  
+  gof_statistic <- ssd_gof(fits)
+  expect_s3_class(gof_statistic, "tbl")
+  expect_snapshot_data(gof_statistic, "gof_statistic_mixture")
+  
+  gof <- ssd_gof(fits, pvalue = TRUE)
+  expect_s3_class(gof, "tbl")
+  expect_snapshot_data(gof, "gof_pvalue_mixture")
+})
