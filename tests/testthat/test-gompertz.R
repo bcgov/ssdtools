@@ -93,8 +93,7 @@ test_that("rgompertz extremes", {
   expect_identical(rgompertz(1, lshape = NA), NA_real_)
 })
 
-test_that("sgompertz", {
-  warning("sgompertz errors")
+test_that("sgompertz errors", {
   x <- c(160, 800, 840, 1500, 8200, 12800, 22000, 38000, 60900, 63000)
   expect_error(sgompertz(x))
 
@@ -124,8 +123,7 @@ test_that("fit gompertz", {
   )
 })
 
-test_that("gompertz coefs", {
-  warning("gompertz poor convergence")
+test_that("gompertz coefs poor coverage", {
   set.seed(77)
   dist <- ssd_fit_dist(ssdtools::boron_data, dist = "gompertz")
   expect_equal(coef(dist), c(llocation = -3.23385214013791, lshape = -5.94988038614341))

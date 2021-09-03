@@ -109,12 +109,6 @@ test_that("fit_dists computable", {
                  "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
   expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189))
   expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
-  
-  data$Conc <- data$Conc / 100
-  fit <- ssd_fit_dists(data, dists = "gamma")[[1]]
-  expect_equal(fit$sd["scale"], c(scale = 673.801371511101))
-  expect_equal(fit$sd["shape"], c(shape = 0.0454275860604086))
-  expect_equal(fit$estimate, c(scale = 969.283015870555, shape = 0.16422716021172))
 })
 
 test_that("fit_dists fail to converge when identical data", {
