@@ -73,14 +73,14 @@ bllogis_llogis <- function(x, min_pmix, ...) {
 }
 
 plogis_logis_ssd <- function(q, location1, scale1, location2, scale2, pmix) {
-  if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
+  if(scale1 <= 0 || scale2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
   pmix * plogis_ssd(q, location1, scale1) + (1 - pmix) * plogis_ssd(q, location2, scale2)
 }
 
 qlogis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
-  if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
+  if(scale1 <= 0 || scale2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
   f <- function(x) {
@@ -90,7 +90,7 @@ qlogis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
 }
 
 rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {
-  if(scale1 <= 0 || scale2 <= 0 || location1 >= location2 || pmix <= 0 || pmix >= 1) {
+  if(scale1 <= 0 || scale2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(rep(NaN, n))
   }
   dist <- stats::rbinom(n, 1, pmix)

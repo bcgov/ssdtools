@@ -74,14 +74,14 @@ blnorm_lnorm <- function(x, min_pmix, ...) {
 }
 
 plnorm_lnorm_ssd <- function(q, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
-  if(sdlog1 <= 0 || sdlog2 <= 0 || meanlog1 >= meanlog2 || pmix <= 0 || pmix >= 1) {
+  if(sdlog1 <= 0 || sdlog2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
   pmix * plnorm_ssd(q, meanlog1, sdlog1) + (1 - pmix) * plnorm_ssd(q, meanlog2, sdlog2)
 }
 
 qlnorm_lnorm_ssd <- function(p, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
-  if(sdlog1 <= 0 || sdlog2 <= 0 || meanlog1 >= meanlog2 || pmix <= 0 || pmix >= 1) {
+  if(sdlog1 <= 0 || sdlog2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
 
@@ -92,7 +92,7 @@ qlnorm_lnorm_ssd <- function(p, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
 }
 
 rlnorm_lnorm_ssd <- function(n, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
-  if(sdlog1 <= 0 || sdlog2 <= 0 || meanlog1 >= meanlog2 || pmix <= 0 || pmix >= 1) {
+  if(sdlog1 <= 0 || sdlog2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(rep(NaN, n))
   }
   dist <- stats::rbinom(n, 1, pmix)
