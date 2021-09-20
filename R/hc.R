@@ -32,6 +32,7 @@ no_ssd_hc <- function() {
     lcl = numeric(0),
     ucl = numeric(0),
     dist = character(0),
+    wt = numeric(0),
     stringsAsFactors = FALSE
   ))
 }
@@ -71,7 +72,7 @@ no_ssd_hc <- function() {
     return(as_tibble(data.frame(
       percent = percent * 100, est = est,
       se = na, lcl = na, ucl = na, dist = rep(dist, length(percent)),
-      stringsAsFactors = FALSE
+      wt =  rep(1, length(percent)), stringsAsFactors = FALSE
     )))
   }
   samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
@@ -79,7 +80,7 @@ no_ssd_hc <- function() {
   as_tibble(data.frame(
     percent = percent * 100, est = est,
     se = cis$se, lcl = cis$lcl, ucl = cis$ucl, dist = dist,
-    stringsAsFactors = FALSE
+    wt = 1, stringsAsFactors = FALSE
   ))
 }
 
@@ -93,7 +94,10 @@ no_ssd_hc <- function() {
     percent = percent, ci = ci, level = level, nboot = nboot,
     parallel = parallel, ncpus = ncpus
   )
+  weight <- .ssd_gof_fitdists(x)$weight
   if (!average) {
+    hc <- mapply(function(x, y) {x$wt <- y; x}, hc, weight, USE.NAMES = FALSE,
+                 SIMPLIFY = FALSE)
     hc <- do.call("rbind", hc)
     row.names(hc) <- NULL
     return(as_tibble(hc))
@@ -103,11 +107,11 @@ no_ssd_hc <- function() {
   hc <- Reduce(function(x, y) {
     abind(x, y, along = 3)
   }, hc)
-  weight <- .ssd_gof_fitdists(x)$weight
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   hc <- as.data.frame(hc)
   hc$percent <- percent
   hc$dist <- "average"
+  hc$wt <- 1
   as_tibble(hc)
 }
 
@@ -135,6 +139,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
     SIMPLIFY = FALSE
   )
   hc <- do.call("rbind", hc)
+  hc$wt <- rep(NA_real_, nrow(hc))
   as_tibble(hc)
 }
 
