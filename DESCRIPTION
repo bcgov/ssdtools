@@ -107,7 +107,6 @@ Suggests:
     tidyverse,
     withr
 Remotes:
-    poissonconsulting/chk,
     open-AIMS/ssddata
 LinkingTo: 
     Rcpp,
