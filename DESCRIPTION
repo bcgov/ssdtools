@@ -45,6 +45,7 @@ Imports:
     grid,
     lifecycle,
     tibble,
+    utils,
     scales,
     stats,
     VGAM,

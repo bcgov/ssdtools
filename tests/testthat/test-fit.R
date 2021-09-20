@@ -113,5 +113,5 @@ test_that("fit_dists computable", {
 
 test_that("fit_dists fail to converge when identical data", {
   data <- data.frame(Conc = rep(6, 6))
-  expect_output(expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit.")))
+  expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit."))
 })
