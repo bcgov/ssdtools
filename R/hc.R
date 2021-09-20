@@ -84,7 +84,7 @@ no_ssd_hc <- function() {
 }
 
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot, parallel, ncpus,
-                             average, ic) {
+                             average) {
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
@@ -179,19 +179,21 @@ ssd_hc.fitdistcens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95,
 #' @examples
 #' ssd_hc(boron_dists, c(0, 1, 30, Inf))
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
 
   if (!missing(hc)) {
     deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
+  if(!missing(ic)) {
+    deprecate_warn("0.3.6", "ssdtools::ssd_hc(ic = )",
+                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
+  }
 
   .ssd_hc_fitdists(x, percent,
     ci = ci, level = level, nboot = nboot,
     parallel = parallel, ncpus = ncpus,
-    average = average, ic = ic
+    average = average
   )
 }
 
@@ -200,18 +202,20 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
 #' @examples
 #' ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
 ssd_hc.fitdistscens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aic", ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "bic"))
   chk_unused(...)
 
   if (!missing(hc)) {
     deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
+  if(!missing(ic)) {
+    deprecate_warn("0.3.6", "ssdtools::ssd_hc(ic = )",
+                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
+  }
 
   .ssd_hc_fitdists(x, percent,
     ci = ci, level = level, nboot = nboot,
     parallel = parallel, ncpus = ncpus,
-    average = average, ic = ic
+    average = average
   )
 }

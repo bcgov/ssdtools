@@ -53,7 +53,7 @@ ssd_hp <- function(x, ...) {
 }
 
 .ssd_hp_fitdists <- function(x, conc, ci, level, nboot, parallel, ncpus,
-                             average, ic) {
+                             average) {
   if (!length(x) || !length(conc)) {
     no <- numeric(0)
     return(as_tibble(data.frame(
@@ -121,14 +121,17 @@ ssd_hp.fitdistcens <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
 ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
                             parallel = NULL, ncpus = 1,
                             average = TRUE, ic = "aicc", ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
+  
+  if(!missing(ic)) {
+    deprecate_warn("0.3.6", "ssdtools::ssd_hp(ic = )",
+                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
+  }
 
   .ssd_hp_fitdists(x, conc,
     ci = ci, level = level, nboot = nboot,
     parallel = parallel, ncpus = ncpus,
-    average = average, ic = ic
+    average = average
   )
 }
 
@@ -139,13 +142,15 @@ ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
 ssd_hp.fitdistscens <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
                                 parallel = NULL, ncpus = 1,
                                 average = TRUE, ic = "aic", ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "bic"))
   chk_unused(...)
+  
+  if(!missing(ic)) {
+    deprecate_warn("0.3.6", "ssdtools::ssd_hp(ic = )",
+                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
+  }
 
   .ssd_hp_fitdists(x, conc,
     ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus, average = average,
-    ic = ic
+    parallel = parallel, ncpus = ncpus, average = average
   )
 }
