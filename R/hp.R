@@ -38,6 +38,7 @@ no_ssd_hp <- function() {
     se = numeric(0),
     lcl = numeric(0),
     ucl = numeric(0),
+    wt = numeric(0),
     nboot = integer(0),
     pboot = numeric(0)
   )
@@ -61,6 +62,7 @@ no_ssd_hp <- function() {
       se = na, 
       lcl = na, 
       ucl = na,
+      wt = rep(1, length(conc)),
       nboot = rep(0L, length(conc)),
       pboot = na))
   }
@@ -81,6 +83,7 @@ no_ssd_hp <- function() {
     se = cis$se * 100, 
     lcl = cis$lcl * 100, 
     ucl = cis$ucl * 100,
+    wt = rep(1, length(conc)),
     nboot = nboot, pboot = length(estimates) / nboot
   )
   replace_min_pboot_na(hp, min_pboot)
@@ -123,7 +126,10 @@ no_ssd_hp <- function() {
                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                    parametric = parametric,
                    control = control, .options = furrr::furrr_options(seed = seeds))
+  weight <- glance(x)$weight
   if (!average) {
+    hp <- mapply(function(x,y) {x$wt <- y; x}, x = hp, y = weight,
+                 USE.NAMES = FALSE, SIMPLIFY = FALSE)
     hp <- bind_rows(hp)
     hp$method <- if(parametric) "parametric" else "non-parametric"
     hp <- hp[c("dist", "conc", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
@@ -134,17 +140,17 @@ no_ssd_hp <- function() {
   hp <- Reduce(function(x, y) {
     abind(x, y, along = 3)
   }, hp)
-  weight <- glance(x)$weight
   suppressMessages(min <- apply(hp, c(1, 2), min))
   suppressMessages(hp <- apply(hp, c(1, 2), weighted.mean, w = weight))
   min <- as.data.frame(min)
   hp <- as_tibble(hp)
   hp$conc <- conc
   hp$dist <- "average"
+  hp$wt <- 1
   hp$nboot <- nboot
   hp$pboot <- min$pboot
   hp$method <- if(parametric) "parametric" else "non-parametric"
-  hp[c("dist", "conc", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
+  hp[c("dist", "conc", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
 }
 
 #' @describeIn ssd_hp Hazard Percents for fitdists Object

@@ -41,6 +41,7 @@ no_ssd_hc <- function() {
     se = numeric(0),
     lcl = numeric(0),
     ucl = numeric(0),
+    wt = numeric(0),
     nboot = integer(0),
     pboot = numeric(0)
   )
@@ -55,6 +56,7 @@ no_ssd_hc <- function() {
     dist = dist,
     percent = proportion * 100, est = est,
     se = NA_real_, lcl = NA_real_, ucl = NA_real_,
+    wt = 1,
     nboot = 0L, pboot = NA_real_
   )
 }
@@ -77,8 +79,9 @@ no_ssd_hc <- function() {
       se = na, 
       lcl = na, 
       ucl = na,
+      wt = rep(1, length(proportion)),
       nboot = rep(0L, length(proportion)),
-      pboot = NA_real_))
+      pboot = na))
   }
   censoring <- censoring / rescale
   fun <- safely(fit_tmb)
@@ -93,6 +96,7 @@ no_ssd_hc <- function() {
     dist = dist,
     percent = proportion * 100, est = est * rescale,
     se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
+    wt = rep(1, length(proportion)),
     nboot = nboot, pboot = length(estimates) / nboot
   )
   replace_min_pboot_na(hc, min_pboot)
@@ -136,10 +140,13 @@ no_ssd_hc <- function() {
                    parametric = parametric, control = control, 
                    .options = furrr::furrr_options(seed = seeds))
   
+  weight <- glance(x)$weight
   if (!average) {
+    hc <- mapply(function(x,y) {x$wt <- y; x}, x = hc, y = weight,
+                 USE.NAMES = FALSE, SIMPLIFY = FALSE)
     hc <- bind_rows(hc)
     hc$method <- if(parametric) "parametric" else "non-parametric"
-    hc <- hc[c("dist", "percent", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
+    hc <- hc[c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
     return(hc)
   }
   hc <- lapply(hc, function(x) x[c("percent", "est", "se", "lcl", "ucl", "pboot")])
@@ -147,14 +154,14 @@ no_ssd_hc <- function() {
   hc <- Reduce(function(x, y) {
     abind(x, y, along = 3)
   }, hc)
-  weight <- glance(x)$weight
   suppressMessages(min <- apply(hc, c(1, 2), min))
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   min <- as.data.frame(min)
   hc <- as.data.frame(hc)
   method <- if(parametric) "parametric" else "non-parametric"
   tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 
-         lcl = hc$lcl, ucl = hc$ucl, method = method, nboot = nboot, pboot = min$pboot)
+         lcl = hc$lcl, ucl = hc$ucl, wt = rep(1, length(percent)), 
+         method = method, nboot = nboot, pboot = min$pboot)
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates
