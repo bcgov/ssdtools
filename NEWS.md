@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 0.3.5.9001
+
+- Added wt (Akaike weight) column to `predict()`, `ssd_hc()` and `ssd_hp()`
+- Deprecated argument `ic` to `predict()`, `ssd_hc()` and `ssd_hp()` because not used.
+- Captured output from `ssd_fit_dists()`.
+
+
 # ssdtools 0.3.5.9000
 
 - Same as previous version.
