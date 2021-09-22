@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@
       <h1 data-toc-skip>Get Started with ssdtools</h1>
                         <h4 data-toc-skip class="author">ssdtools Team</h4>
             
-            <h4 data-toc-skip class="date">2021-09-03</h4>
+            <h4 data-toc-skip class="date">2021-09-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools.Rmd</code></div>
@@ -187,39 +187,7 @@
 </ul>
 <p>distributions using the <code>dists</code> argument.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">boron_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">boron_data</span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; $start.arg</span>
-<span class="co">#&gt; $start.arg$locationlog</span>
-<span class="co">#&gt; [1] 2.561645</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $start.arg$scalelog</span>
-<span class="co">#&gt; [1] 2.293228</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $fix.arg</span>
-<span class="co">#&gt; NULL</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $start.arg</span>
-<span class="co">#&gt; $start.arg$meanlog</span>
-<span class="co">#&gt; [1] 2.561645</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $start.arg$sdlog</span>
-<span class="co">#&gt; [1] 1.264323</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $fix.arg</span>
-<span class="co">#&gt; NULL</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $start.arg</span>
-<span class="co">#&gt; $start.arg$scale</span>
-<span class="co">#&gt; [1] 22.85228</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $start.arg$shape</span>
-<span class="co">#&gt; [1] 1.044753</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $fix.arg</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<code class="sourceCode R"><span class="va">boron_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">boron_data</span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The user can also specify one or more <a href="https://bcgov.github.io/ssdtools/articles/faqs.html#how-do-i-fit-a-custom-distribution" class="external-link">custom distributions</a>.</p>
 </div>
 <div id="coefficients" class="section level2">
