@@ -1,108 +1,123 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-- Added wt (Akaike weight) column to data frame returned by `predict()`, `ssd_hc()` and `ssd_hp()`.
-- Allow mixture distribution functions to work with reversed modes.
-- Now estimate bias corrected order statistic for each bootstrap sample.
-- Correct bias in inverse Pareto scale order statistic.
-- No longer correct for order statistic in invpareto.
-- Added `method` column to HC and HP values to indicate whether CIs calculated using parametric or non-parametric bootstrap.
-- Added `ssd_wqg_burrlioz()`.
-- Added `ssd_hc_burrlioz()` to get hazard concentration for burrlioz approach.
-- ssd_fit_burrlioz() now fits llogis if less than 8 samples.
-- Added option for non-parametric bootstrap.
-- Back to glm to get gompertz starting values
-- gompertz now tries and then switches to default starting values.
+# ssdtools 1.0.0
+
+ssdtools is the first major release of ssdtools with some big improvements and breaking changes.
+
+## Fitting
+
+A major change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/aursiber/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) for increased control.
+
+As a result the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.
+
+### Distributions
+  
+Previously the density functions for the available distributions were exported as R functions to make them accessible to `fitdistrplus`. 
+This meant that `ssdtools` had to be loaded to fit distributions (or estimate uncertainty in hazard concentrations/protections).
+The density functions are now defined in C++ as TMB templates and no longer exported.
+
+The distribution, quantile and random generation functions are still exported but are now prefixed by `ssd_` to prevent clashes with existing functions in other packages.
+Thus for example `plnorm()`, `qlnorm()` and `rlnorm()` have been renamed `ssd_plnorm()`, `ssd_qlnorm()` and `ssd_rlnorm()`.
+
+The following distributions were added (or in the case of `burrIII3` readded)
+
+  - `burrIII3` - burrIII three parameter distribution
+  - `invpareto` - inverse pareto (with bias correction in scale order statistic)
+  - `lnorm_lnorm` log-normal/log-normal mixture distribution
+  - `llogis_llogis` log-logistic/log-logistic mixture distribution
+  
+The following arguments were added to `ssd_fit_dists()`
+  - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest finite value.
+  - `min_pmix` (by default 0.2) to specify the minimum proportion for a mixture distribution xx is it a bound.
+  - `at_boundary_ok` (by default `FALSE`) to specifying whether a distribution with one or more parameters at a boundary has converged.
+  - `range_shape1` (by default `c(0.05, 20)`) to specify the lower and uppper bounds for the shape1 parameter of the burrIII3 distribution.
+  - `range_shape2` (by default the same as `range_shape2`) to specify the lower and uppper bounds for the shape2 parameter of the burrIII3 distribution.
+  - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
+
+And
+
+  - the default value of the `computable` argument was switched from `FALSE` to `TRUE` to enforce stricter requirements on convergence.
+  
+In addition
+
+  - `ssd_dists()` was added to specify subsets of the available distributions using `type` argument.
+  - the `delta` argument (by default 7) was added to the `subset()` generic to only keep those distributions within the specified AIC difference of the best supported distribution.
+
+#### Burrlioz
+
+The function `ssd_fit_burrlioz()` (and `ssd_hc_burrlioz()`) was added to imitate the behavior of (Burrlioz)[https://research.csiro.au/software/burrlioz/].
+
+## Hazard Concentration/Protection Estimation
+
+Hazard concentration estimation is performed by `ssd_hc()` (which is called by `predict()`) and hazard protection estimation by `ssd_hp()`.
+Confidence intervals are estimated by parametric bootstrapping.
+
+To reduce the time required for bootstrapping, paralellization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
+
+- Added the following arguments
+  - `delta` (by default 7) to only keep those distributions within the specified AIC difference of the best supported distribution.
+  - `min_pboot` (by default 0.99) to specify minimum proportion of bootstrap samples that must successfully fit.
+  - `parametric` (by default `TRUE`) to allow non-parametric bootstrapping.
+  - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
+
+- Added following columns to output tibbles (and moved the `dist` column to the first position)
+  - `wt` to specify the Akaike weight.
+  - `method` to indicate whether parametric or non-parametric bootstrap was used.
+  - `nboot` to indicate how many bootstrap samples were used.
+  - `pboot` to indicate the proportion of bootstrap samples which fitted.
+  
+## Plotting
+
+- Added `scale_colour_ssd()` (and `scale_color_ssd()`) 8 color-blind scale.
 - Added `ssd_plot_data()` to just plot data.
-- Switching boron_data to ssddata::ccme_boron and switching to ssddata::ccme_data.
-- hc5 to wqg
-- Rename pxx() to ssd_pxx().
-- qxx() to ssd_qxx().
-- Added paralellization using futures.
-- Added min_pboot to ssd_hc() and predict.fitdists().
-- Added min_pboot to ssd_hc() to check for minimum proportion of bootstraps fitted.
-- Added `ssd_hc5_bc()`.
-- Added nboot and pboot to ssd_hp().
-- Added nboot and pboot to hazard concentration to give proportion of boot strap samples that fitted.
-- Added `ssd_fit_burrlioz()` to provide burrlioz functionality.
-- Added at_boundary_ok to specifying whether a distribution with one or more parameters at a boundary has converged (by default FALSE).
-- Used AIC for weights with censored data and same number of parameters.
-- Added `min_pmix` argument to `ssd_fit_dists()`.
-- Added delta to subset and implemented for ssd_hc, ssd_hp and predict.fitdist.
-- Remove ic argument and add delta_aic argument.
-- Removed demo, boron_lnorm, boron_dists data object and boron_data.csv.
-- Add pvalue argument to get pvalue instead of statistics for ssd_gof().
-- Added gof ad, cvm and ks p.values.
-- Implement invpareto distribution.
-- Removed invweibull distribution as identical to log-Gumbel.
-- Switch shape to 3
-- Added invweibull distribution.
-- Added inverse pareto
-- Added lnorm_lnorm mixture distribution.
-- Fully implemented `llogis_llogis` distribution.
-- Renamed mx_llogis_llogis to llogis_llogis.
-- Implementing llogis_llogis.
-- Update so not calculate CIs with unequally weighted data.
-- Not calculate CIs with unequally weighted data.
-- Distributions cannot currently be fitted to right censored data.
-- Not calculate CIs if inconsistently censored data.
-- Change `ssd_plot()` ylab from "Percent of Species Affected" to just "Species Affected".
-- Added `ssd_data()` to extract data from fitdists object.
-- Switch rescale = FALSE by default.
-- Added `ssd_ecd_data()` to get empirical cumulative density for data.
-- Added `ssd_sort_data()`.
-- Added `orders = c(left = 1, right = 1)` argument to `ssd_plot()` to control order of magnitude above and below minimum recorded value.
-- Added `scale_colour_ssd()` 8 color-blind scale.
-- Added `ssd_pal()` 8 color-blind palette.
-- `ssd_plot()` now plots all data using combination of two calls to `geom_ssdpoint()` for left and right and geom_ssdsegment() to allow for censoring. Alpha needs to be adjusted according.
+
+- Soft-deprecated `ssd_plot_cf()` for `fitdistrplus::descdist()`.
+- Deprecated `plot.fitdists()` for `autoplot.fitdists()`.
 - Soft deprecated `geom_ssd()` for `geom_ssdpoint()`.
 - Soft deprecated `stat_ssd()`.
+- Added `orders = c(left = 1, right = 1)` argument to `ssd_plot()` to control order of magnitude above and below minimum recorded value.
+- `ssd_plot()` now plots all data using combination of two calls to `geom_ssdpoint()` for left and right and `geom_ssdsegment()` to allow for censoring. Alpha needs to be adjusted according.
 - Rename StatSsd to StatSsdpoint and GeomSsd to GeomSsdpoint.
 - Rename GeomSSdcens to GeomSSdsegment and add arrows args.
 - Rename stat_ssdcens() and geom_ssdcens() to stat_ssdsegment() and geom_ssdsegment().
 - Added `stat_ssdcens()` and `geom_ssdcens()`.
-- Deprecated `plot.fitdists()` for `autoplot.fitdists()`.
-- Added type argument to `ssd_dists()`.
-- Added summary for fitdists and tmbfit classes.
-- Removed fluazinam.
-- Added augment() function to get original data plus.
-- data now attribute of fitdists.
-- Added control list to `ssd_fit_dists()` and hc and hp.
-- Added rescale argument to `ssd_fit_dists()`.
-- Switched computable function to TRUE by default.
-- Now checks that right is not less than left.
-- Now ensures data left are no positive.
-- Allow Inf weight but expect all models to fail to fit.
+- Change `ssd_plot()` ylab from "Percent of Species Affected" to just "Species Affected".
+- Added `ssd_data()` to extract data from fitdists object.
+
+## Goodness of Fit
+
+Added `pvalue` argument (by default `FALSE`) to `ssd_gof()` to specify whether to return p-values for the test statistics as opposed to the test statistics themselves.
+
+## Data
+
+The dataset `boron_data` was renamed `ccme_boron` and moved to the [ssddata](https://github.com/open-AIMS/ssddata) R package together with the other CCME datasets.
+
+## Miscellaneous
+
+- Implemented the following generics
+  - `glance()` to xx
+  - `augment()` to return original data set.
+  - `logLik()` to return the log-likelihood.
+  - `summary.fitdists()` to summarise fitdists objects.
+  
+- `npars()` now orders by distribution name.
+
+
+- All soft-deprecated functions and arguments pre v0.3.0 now warn unconditionally.
+
+- Used AIC for weights with censored data and same number of parameters.
+- Switch shape to 3
+- Update so not calculate CIs with unequally weighted data.
+- Not calculate CIs with unequally weighted data.
+- Distributions cannot currently be fitted to right censored data.
+- Not calculate CIs if inconsistently censored data.
+
+- Added `ssd_ecd_data()` to get empirical cumulative density for data.
+- Added `ssd_sort_data()`.
+
 - 0 < weight <= 1000
 - Checks for zero weight.
-- Removed llog and burrII2 distributions as identical to llogis.
 - ssd_fit_dists() errors if has one or more uninformative rows.
-- Switched to optim with TMB.
-- Make hc argument to `ssd_hc()` defunct.
-- Remove warning about ci being switched from TRUE to FALSE.
-- Made ssd_plot_cf() defunct and moved fitdistrplus to suggests.
-- Made pareto distributional functions defunct.
-- Added `ssd_dists()` which specifies permitted distributions.
-- All soft-deprecated functions and arguments pre v0.3.0 now warn unconditionally.
-- Soft-deprecate `ssd_plot_cf()` for `fitdistrplus::descdist()`.
-- No longer export lnorm and weibull distributional functions.
-- No longer export burrII2, burrIII3 and gamma distribution functions.
-- Switched from fitdistrplus to TMB.
-- Print tidy not glance.
-- Print log_lik, aic etc instead of parameter values.
-- readded burrIII3
-- gompertz llocation and lshape to location and shape
-- Switched gompertz from llocation and lshape to location and shape.
-- added gamma
-- move dist to first from last column for `sd_hc()` and `predict()`.
-- Added glance() and logLik()
-- Added logLik()
-- npars() now orders by distribution name.
-
-
-# ssdtools 0.3.4.9000
-
-- Internal changes only.
-
 
 # ssdtools 0.3.4
 
