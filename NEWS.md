@@ -10,6 +10,20 @@ A major change to the functionality of `ssd_fit_dists()` was to switch from mode
 
 As a result the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.
 
+### Convergence
+
+In the previous version of ssdtools by default a distribution was considered to have converged if the following two conditions were met
+
+1) model fitting doesn’t throw an error.
+2) `stats::optim()` returns a code of 0 (indicating successful completion).
+
+In the version of ssdtools by default an additional two conditions must also be met
+
+3) Bounded parameters are not at a boundary (this condition can be turned off by setting `at_boundary_ok = TRUE`)
+4) Standard errors are computable (this condition can be turned off by setting `computable = FALSE`)
+
+The user has also the ability to specify different boundaries.
+
 ### Distributions
   
 Previously the density functions for the available distributions were exported as R functions to make them accessible to `fitdistrplus`. 
@@ -90,7 +104,9 @@ Added `pvalue` argument (by default `FALSE`) to `ssd_gof()` to specify whether t
 
 ## Data
 
-The dataset `boron_data` was renamed `ccme_boron` and moved to the [ssddata](https://github.com/open-AIMS/ssddata) R package together with the other CCME datasets.
+The dataset `boron_data` was renamed `ccme_boron` and moved to the [`ssddata`](https://github.com/open-AIMS/ssddata) R package together with the other CCME datasets.
+
+The `ssddata` package provides a suite of datasets for testing and comparing species sensitivity distribution fitting software.
 
 ## Miscellaneous
 
@@ -118,6 +134,14 @@ The dataset `boron_data` was renamed `ccme_boron` and moved to the [ssddata](htt
 - 0 < weight <= 1000
 - Checks for zero weight.
 - ssd_fit_dists() errors if has one or more uninformative rows.
+ 
+Refine statistical mixture modelling (SMM) method and incorporate into R code if deemed acceptable (5 hours)
+Done. We have implemented a log-normal/log-normal and log-logistic/log-logistic mixture models.
+
+
+Add geom layer for censored data (10 hours)
+ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+geom_ssdsegment()
 
 # ssdtools 0.3.4
 
