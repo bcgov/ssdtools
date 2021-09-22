@@ -1,5 +1,81 @@
-# ssdtools 0.3.4.9001
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+- Added wt (Akaike weight) column to data frame returned by `predict()`, `ssd_hc()` and `ssd_hp()`.
+- Allow mixture distribution functions to work with reversed modes.
+- Now estimate bias corrected order statistic for each bootstrap sample.
+- Correct bias in inverse Pareto scale order statistic.
+- No longer correct for order statistic in invpareto.
+- Added `method` column to HC and HP values to indicate whether CIs calculated using parametric or non-parametric bootstrap.
+- Added `ssd_wqg_burrlioz()`.
+- Added `ssd_hc_burrlioz()` to get hazard concentration for burrlioz approach.
+- ssd_fit_burrlioz() now fits llogis if less than 8 samples.
+- Added option for non-parametric bootstrap.
+- Back to glm to get gompertz starting values
+- gompertz now tries and then switches to default starting values.
+- Added `ssd_plot_data()` to just plot data.
+- Switching boron_data to ssddata::ccme_boron and switching to ssddata::ccme_data.
+- hc5 to wqg
+- Rename pxx() to ssd_pxx().
+- qxx() to ssd_qxx().
+- Added paralellization using futures.
+- Added min_pboot to ssd_hc() and predict.fitdists().
+- Added min_pboot to ssd_hc() to check for minimum proportion of bootstraps fitted.
+- Added `ssd_hc5_bc()`.
+- Added nboot and pboot to ssd_hp().
+- Added nboot and pboot to hazard concentration to give proportion of boot strap samples that fitted.
+- Added `ssd_fit_burrlioz()` to provide burrlioz functionality.
+- Added at_boundary_ok to specifying whether a distribution with one or more parameters at a boundary has converged (by default FALSE).
+- Used AIC for weights with censored data and same number of parameters.
+- Added `min_pmix` argument to `ssd_fit_dists()`.
+- Added delta to subset and implemented for ssd_hc, ssd_hp and predict.fitdist.
+- Remove ic argument and add delta_aic argument.
+- Removed demo, boron_lnorm, boron_dists data object and boron_data.csv.
+- Add pvalue argument to get pvalue instead of statistics for ssd_gof().
+- Added gof ad, cvm and ks p.values.
+- Implement invpareto distribution.
+- Removed invweibull distribution as identical to log-Gumbel.
+- Switch shape to 3
+- Added invweibull distribution.
+- Added inverse pareto
+- Added lnorm_lnorm mixture distribution.
+- Fully implemented `llogis_llogis` distribution.
+- Renamed mx_llogis_llogis to llogis_llogis.
+- Implementing llogis_llogis.
+- Update so not calculate CIs with unequally weighted data.
+- Not calculate CIs with unequally weighted data.
+- Distributions cannot currently be fitted to right censored data.
+- Not calculate CIs if inconsistently censored data.
+- Change `ssd_plot()` ylab from "Percent of Species Affected" to just "Species Affected".
+- Added `ssd_data()` to extract data from fitdists object.
+- Switch rescale = FALSE by default.
+- Added `ssd_ecd_data()` to get empirical cumulative density for data.
+- Added `ssd_sort_data()`.
+- Added `orders = c(left = 1, right = 1)` argument to `ssd_plot()` to control order of magnitude above and below minimum recorded value.
+- Added `scale_colour_ssd()` 8 color-blind scale.
+- Added `ssd_pal()` 8 color-blind palette.
+- `ssd_plot()` now plots all data using combination of two calls to `geom_ssdpoint()` for left and right and geom_ssdsegment() to allow for censoring. Alpha needs to be adjusted according.
+- Soft deprecated `geom_ssd()` for `geom_ssdpoint()`.
+- Soft deprecated `stat_ssd()`.
+- Rename StatSsd to StatSsdpoint and GeomSsd to GeomSsdpoint.
+- Rename GeomSSdcens to GeomSSdsegment and add arrows args.
+- Rename stat_ssdcens() and geom_ssdcens() to stat_ssdsegment() and geom_ssdsegment().
+- Added `stat_ssdcens()` and `geom_ssdcens()`.
+- Deprecated `plot.fitdists()` for `autoplot.fitdists()`.
+- Added type argument to `ssd_dists()`.
+- Added summary for fitdists and tmbfit classes.
+- Removed fluazinam.
+- Added augment() function to get original data plus.
+- data now attribute of fitdists.
+- Added control list to `ssd_fit_dists()` and hc and hp.
+- Added rescale argument to `ssd_fit_dists()`.
+- Switched computable function to TRUE by default.
+- Now checks that right is not less than left.
+- Now ensures data left are no positive.
+- Allow Inf weight but expect all models to fail to fit.
+- 0 < weight <= 1000
+- Checks for zero weight.
+- Removed llog and burrII2 distributions as identical to llogis.
+- ssd_fit_dists() errors if has one or more uninformative rows.
 - Switched to optim with TMB.
 - Make hc argument to `ssd_hc()` defunct.
 - Remove warning about ci being switched from TRUE to FALSE.
