@@ -32,6 +32,7 @@ no_ssd_hc <- function() {
     lcl = numeric(0),
     ucl = numeric(0),
     dist = character(0),
+    wt = numeric(0),
     stringsAsFactors = FALSE
   ))
 }
@@ -71,7 +72,7 @@ no_ssd_hc <- function() {
     return(as_tibble(data.frame(
       percent = percent * 100, est = est,
       se = na, lcl = na, ucl = na, dist = rep(dist, length(percent)),
-      stringsAsFactors = FALSE
+      wt =  rep(1, length(percent)), stringsAsFactors = FALSE
     )))
   }
   samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
@@ -79,12 +80,12 @@ no_ssd_hc <- function() {
   as_tibble(data.frame(
     percent = percent * 100, est = est,
     se = cis$se, lcl = cis$lcl, ucl = cis$ucl, dist = dist,
-    stringsAsFactors = FALSE
+    wt = 1, stringsAsFactors = FALSE
   ))
 }
 
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot, parallel, ncpus,
-                             average, ic) {
+                             average) {
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
@@ -93,7 +94,10 @@ no_ssd_hc <- function() {
     percent = percent, ci = ci, level = level, nboot = nboot,
     parallel = parallel, ncpus = ncpus
   )
+  weight <- .ssd_gof_fitdists(x)$weight
   if (!average) {
+    hc <- mapply(function(x, y) {x$wt <- y; x}, hc, weight, USE.NAMES = FALSE,
+                 SIMPLIFY = FALSE)
     hc <- do.call("rbind", hc)
     row.names(hc) <- NULL
     return(as_tibble(hc))
@@ -103,11 +107,11 @@ no_ssd_hc <- function() {
   hc <- Reduce(function(x, y) {
     abind(x, y, along = 3)
   }, hc)
-  weight <- .ssd_gof_fitdists(x)$weight
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
   hc <- as.data.frame(hc)
   hc$percent <- percent
   hc$dist <- "average"
+  hc$wt <- 1
   as_tibble(hc)
 }
 
@@ -135,6 +139,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
     SIMPLIFY = FALSE
   )
   hc <- do.call("rbind", hc)
+  hc$wt <- rep(NA_real_, nrow(hc))
   as_tibble(hc)
 }
 
@@ -179,19 +184,21 @@ ssd_hc.fitdistcens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95,
 #' @examples
 #' ssd_hc(boron_dists, c(0, 1, 30, Inf))
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "aicc", "bic"))
   chk_unused(...)
 
   if (!missing(hc)) {
     deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
+  if(!missing(ic)) {
+    deprecate_warn("0.3.6", "ssdtools::ssd_hc(ic = )",
+                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
+  }
 
   .ssd_hc_fitdists(x, percent,
     ci = ci, level = level, nboot = nboot,
     parallel = parallel, ncpus = ncpus,
-    average = average, ic = ic
+    average = average
   )
 }
 
@@ -200,18 +207,20 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
 #' @examples
 #' ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
 ssd_hc.fitdistscens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aic", ...) {
-  chk_string(ic)
-  chk_subset(ic, c("aic", "bic"))
   chk_unused(...)
 
   if (!missing(hc)) {
     deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
     percent <- hc
   }
+  if(!missing(ic)) {
+    deprecate_warn("0.3.6", "ssdtools::ssd_hc(ic = )",
+                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
+  }
 
   .ssd_hc_fitdists(x, percent,
     ci = ci, level = level, nboot = nboot,
     parallel = parallel, ncpus = ncpus,
-    average = average, ic = ic
+    average = average
   )
 }

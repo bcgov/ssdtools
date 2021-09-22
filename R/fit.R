@@ -31,7 +31,8 @@ fit_dist_uncensored <- function(data, left, weight, dist) {
   }
 
   dist <- add_starting_values(dist, x)
-  do.call(fitdistrplus::fitdist, dist)
+  capture.output(x <- do.call(fitdistrplus::fitdist, dist))
+  x
 }
 
 fit_dist_censored <- function(data, left, right, weight, dist) {
@@ -45,7 +46,8 @@ fit_dist_censored <- function(data, left, right, weight, dist) {
   }
 
   dist <- add_starting_values(dist, x)
-  do.call(fitdistrplus::fitdistcens, dist)
+  capture.output(x <- do.call(fitdistrplus::fitdistcens, dist))
+  x
 }
 
 remove_errors <- function(dist_fit, name, computable, silent) {
@@ -143,10 +145,13 @@ ssd_fit_dists <- function(
   safe_fit_dist <- safely(ssd_fit_dist)
   names(dists) <- dists
   dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
+
   dists <- mapply(remove_errors, dists, names(dists),
     MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
   )
+
   dists <- dists[!vapply(dists, is.null, TRUE)]
+
   if (!length(dists)) err("All distributions failed to fit.")
   if (left == right) {
     class(dists) <- "fitdists"

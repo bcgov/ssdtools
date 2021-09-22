@@ -66,10 +66,14 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
     deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
                    id = "predict")
   }
+  if(!missing(ic)) {
+    deprecate_warn("0.3.6", "ssdtools::predict(ic = )",
+                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
+  }
   ssd_hc(object,
          percent = percent, ci = ci, level = level,
          nboot = nboot, parallel = parallel, ncpus = ncpus,
-         average = average, ic = ic
+         average = average
   )
 }
 
@@ -85,9 +89,13 @@ predict.fitdistscens <- function(object, percent = 1:99, ci = FALSE,
     deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
                    id = "predict")
   }
+  if(!missing(ic)) {
+    deprecate_warn("0.3.6", "ssdtools::predict(ic = )",
+                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
+  }
   ssd_hc(object,
          percent = percent, ci = ci, level = level,
          nboot = nboot, parallel = parallel, ncpus = ncpus,
-         average = average, ic = ic
+         average = average
   )
 }

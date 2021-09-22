@@ -1,5 +1,5 @@
 Package: ssdtools
-Version: 0.3.5.9000
+Version: 0.3.6
 Title: Species Sensitivity Distributions
 Description: Species sensitivity distributions are 
   cumulative probability distributions which are fitted to 
@@ -45,6 +45,7 @@ Imports:
     grid,
     lifecycle,
     tibble,
+    utils,
     scales,
     stats,
     VGAM,
@@ -64,7 +65,7 @@ Suggests:
     reshape2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 VignetteBuilder: 
   knitr,
   R.rsp
