@@ -85,7 +85,7 @@
 #' 
 #' @export
 ssd_hc_burrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, 
-                            min_pboot = 0.99, ...) {
+                            min_pboot = 0.99) {
   chk_s3_class(x, "fitdists")
   check_dim(x, values = 1L)
   chk_named(x)
@@ -100,7 +100,6 @@ ssd_hc_burrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 10
   chk_gt(nboot)
   chk_number(min_pboot)
   chk_range(min_pboot)
-  chk_unused(...)
   
   if(names(x) != "burrIII3" || !ci || !length(percent)) {
     return(ssd_hc(x, percent = percent, ci = ci, level = level,
