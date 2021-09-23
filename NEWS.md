@@ -6,31 +6,31 @@ ssdtools is the first major release of ssdtools with some big improvements and b
 
 ## Fitting
 
-A major change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/aursiber/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) for increased control.
+A important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/aursiber/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) for increased control.
 
 As a result of the change the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.
+`ssd_data()` has been added be used to extract the original data from `fitdists` object.
+
+It was hoped that model fitting would be faster - this is currently not the case although we are still hoping we can optimize the code further.
 
 ### Convergence
 
-In the previous version of `ssdtools`, by default, a distribution was considered to have converged if the following two conditions were met
+In the previous version of `ssdtools`, by default, a distribution was considered to have converged if the following condition was met
 
-1) model fitting doesn’t throw an error.
 2) `stats::optim()` returns a code of 0 (indicating successful completion).
 
 In the version of ssdtools, by default, an additional two conditions must also be met
 
-3) Bounded parameters are not at a boundary (this condition can be turned off by setting `at_boundary_ok = TRUE`)
-4) Standard errors are computable (this condition can be turned off by setting `computable = FALSE`)
-
-The user has the ability to specify different boundaries.
+2) Bounded parameters are not at a boundary (this condition can be turned off by setting `at_boundary_ok = TRUE` and the user can specify different boundary values - see below)
+3) Standard errors are computable (this condition can be turned off by setting `computable = FALSE`)
 
 ### Distributions
   
 Previously the density functions for the available distributions were exported as R functions to make them accessible to `fitdistrplus`. 
-This meant that `ssdtools` had to be loaded to fit distributions (or estimate uncertainty in hazard concentrations/protections).
+This meant that `ssdtools` had to be loaded to fit distributions.
 The density functions are now defined in C++ as TMB templates and no longer exported.
 
-The distribution, quantile and random generation functions are still exported but are now prefixed by `ssd_` to prevent clashes with existing functions in other packages.
+The distribution, quantile and random generation functions are generally useful and are still exported but are now prefixed by `ssd_` to prevent clashes with existing functions in other packages.
 Thus for example `plnorm()`, `qlnorm()` and `rlnorm()` have been renamed `ssd_plnorm()`, `ssd_qlnorm()` and `ssd_rlnorm()`.
 
 The following distributions were added (or in the case of `burrIII3` readded)
@@ -41,72 +41,79 @@ The following distributions were added (or in the case of `burrIII3` readded)
   - `llogis_llogis` log-logistic/log-logistic mixture distribution
   
 The following arguments were added to `ssd_fit_dists()`
-  - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest (finite) value.
+  - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest (finite) value. This alters the parameter estimates, which can help some distributions converge, but is taken into account when estimating hazard concentrations/protections.
   - `reweight` (by default `FALSE`) to specify whether to whether to reweight data point weights by dividing by the largest weight.
   - `at_boundary_ok` (by default `FALSE`) to specifying whether a distribution with one or more parameters at a boundary has converged.
   - `min_pmix` (by default 0.2) to specify the boundary for the minimum proportion for a mixture distribution.
-  - `range_shape1` (by default `c(0.05, 20)`) to specify the lower and uppper bounds for the shape1 parameter of the burrIII3 distribution.
-  - `range_shape2` (by default the same as `range_shape2`) to specify the lower and uppper bounds for the shape2 parameter of the burrIII3 distribution.
+  - `range_shape1` (by default `c(0.05, 20)`) to specify the lower and upper boundaries for the shape1 parameter of the burrIII3 distribution.
+  - `range_shape2` (by default the same as `range_shape2`) to specify the lower and upper boundaries for the shape2 parameter of the burrIII3 distribution.
   - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
 
-And
+It also worth noting that the default value of 
 
-  - the default value of the `computable` argument was switched from `FALSE` to `TRUE` to enforce stricter requirements on convergence.
-  
+  - `computable` argument was switched from `FALSE` to `TRUE` to enforce stricter requirements on convergence.
+
+#### Subsets of Distributions
+
 In addition
 
-  - `ssd_dists()` was added to specify subsets of the available distributions using `type` argument.
+  - the `ssd_dists()` function was added to specify subsets of the available distributions using `type` argument.
   - the `delta` argument (by default 7) was added to the `subset()` generic to only keep those distributions within the specified AIC difference of the best supported distribution.
-  
-##### Rescaling
 
-If `rescale = TRUE` concentration values are divided by the largest (finite) value before distribution.
-This alters the parameter estimates, which can help some distributions converge, but is taken into account when estimating hazard concentrations/protections.
+### Burrlioz
 
-#### Burrlioz
-
-The function `ssd_fit_burrlioz()` (and `ssd_hc_burrlioz()`) was added to imitate the behavior of (Burrlioz)[https://research.csiro.au/software/burrlioz/].
+The functions `ssd_fit_burrlioz()` (and `ssd_hc_burrlioz()`) was added to imitate the behavior of (Burrlioz)[https://research.csiro.au/software/burrlioz/].
 
 ## Hazard Concentration/Protection Estimation
 
 Hazard concentration estimation is performed by `ssd_hc()` (which is called by `predict()`) and hazard protection estimation by `ssd_hp()`.
-Confidence intervals are estimated by parametric bootstrapping.
+By default confidence intervals are estimated by parametric bootstrapping.
 
 To reduce the time required for bootstrapping, parallelization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
 
-- Added the following arguments
+The following arguments were added to `ssd_hc()` and `ssd_hp()`
+
   - `delta` (by default 7) to only keep those distributions within the specified AIC difference of the best supported distribution.
   - `min_pboot` (by default 0.99) to specify minimum proportion of bootstrap samples that must successfully fit.
   - `parametric` (by default `TRUE`) to allow non-parametric bootstrapping.
   - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
 
-- Added following columns to output data frames (and moved the `dist` column to the first position)
+while the following columns were added to the output data frame
+
   - `wt` to specify the Akaike weight.
   - `method` to indicate whether parametric or non-parametric bootstrap was used.
   - `nboot` to indicate how many bootstrap samples were used.
   - `pboot` to indicate the proportion of bootstrap samples which fitted.
   
-## Plotting
+It also worth noting that the 
 
-- Added `scale_colour_ssd()` (and `scale_color_ssd()`) 8 color-blind scale.
-- Added `ssd_plot_data()` to just plot data.
-
-- Soft-deprecated `ssd_plot_cf()` for `fitdistrplus::descdist()`.
-- Deprecated `plot.fitdists()` for `autoplot.fitdists()`.
-- Soft deprecated `geom_ssd()` for `geom_ssdpoint()`.
-- Soft deprecated `stat_ssd()`.
-- Added `orders = c(left = 1, right = 1)` argument to `ssd_plot()` to control order of magnitude above and below minimum recorded value.
-- `ssd_plot()` now plots all data using combination of two calls to `geom_ssdpoint()` for left and right and `geom_ssdsegment()` to allow for censoring. Alpha needs to be adjusted according.
-- Rename StatSsd to StatSsdpoint and GeomSsd to GeomSsdpoint.
-- Rename GeomSSdcens to GeomSSdsegment and add arrows args.
-- Rename stat_ssdcens() and geom_ssdcens() to stat_ssdsegment() and geom_ssdsegment().
-- Added `stat_ssdcens()` and `geom_ssdcens()`.
-- Change `ssd_plot()` ylab from "Percent of Species Affected" to just "Species Affected".
-- Added `ssd_data()` to extract data from fitdists object.
-
+  - `dist` column was moved from the last to the first position in the output data frame.
+  
 ## Goodness of Fit
 
-Added `pvalue` argument (by default `FALSE`) to `ssd_gof()` to specify whether to return p-values for the test statistics as opposed to the test statistics themselves.
+The `pvalue` argument (by default `FALSE`) was added to `ssd_gof()` to specify whether to return p-values for the test statistics as opposed to the test statistics themselves.
+
+## Plotting
+
+- Added `geom_ssdsegment()` to allow plotting of the range of a censored data point using a segment.
+
+- Added `scale_colour_ssd()` (and `scale_color_ssd()`) to provide an 8 color-blind scale.
+
+- Added (xx) `ssd_plot_data()` to plot all the points for (censored or uncensored) data using two calls to `geom_ssdpoint()` for the left and right column. If there is only a left column the points are plotted twice and the alpha parameter needs adjusting accordingly.
+
+- Change `ssd_plot()` ylab from "Percent of Species Affected" to just "Species Affected".
+
+- Added `orders = c(left = 1, right = 1)` argument to `ssd_plot()` to control order of magnitude above and below minimum recorded value.
+
+
+Renamed 
+  - `StatSsd` to `StatSsdpoint`
+  - `GeomSsd` to `GeomSsdpoint`.
+
+Soft-deprecated
+  - `stat_ssd()`.
+  - `geom_ssd()` for `geom_ssdpoint()`.
+  - `ssd_plot_cf()` for `fitdistrplus::descdist()`.
 
 ## Data
 
@@ -116,16 +123,17 @@ The `ssddata` package provides a suite of datasets for testing and comparing spe
 
 ## Miscellaneous
 
+- All functions and arguments that were soft-deprecated prior to v0.3.0 now warn unconditionally.
+- `npars()` now orders by distribution name.
+
+### Generics
+
 - Implemented the following generics
   - `glance()` to xx
   - `augment()` to return original data set.
   - `logLik()` to return the log-likelihood.
   - `summary.fitdists()` to summarise fitdists objects.
   
-- `npars()` now orders by distribution name.
-
-
-- All soft-deprecated functions and arguments pre v0.3.0 now warn unconditionally.
 
 - Used AIC for weights with censored data and same number of parameters.
 - Switch shape to 3
@@ -140,14 +148,7 @@ The `ssddata` package provides a suite of datasets for testing and comparing spe
 - 0 < weight <= 1000
 - Checks for zero weight.
 - ssd_fit_dists() errors if has one or more uninformative rows.
- 
-Refine statistical mixture modelling (SMM) method and incorporate into R code if deemed acceptable (5 hours)
-Done. We have implemented a log-normal/log-normal and log-logistic/log-logistic mixture models.
 
-
-Add geom layer for censored data (10 hours)
-ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-geom_ssdsegment()
 
 # ssdtools 0.3.4
 
