@@ -8,21 +8,21 @@ ssdtools is the first major release of ssdtools with some big improvements and b
 
 A major change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/aursiber/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) for increased control.
 
-As a result the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.
+As a result of the change the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.
 
 ### Convergence
 
-In the previous version of ssdtools by default a distribution was considered to have converged if the following two conditions were met
+In the previous version of `ssdtools`, by default, a distribution was considered to have converged if the following two conditions were met
 
 1) model fitting doesn’t throw an error.
 2) `stats::optim()` returns a code of 0 (indicating successful completion).
 
-In the version of ssdtools by default an additional two conditions must also be met
+In the version of ssdtools, by default, an additional two conditions must also be met
 
 3) Bounded parameters are not at a boundary (this condition can be turned off by setting `at_boundary_ok = TRUE`)
 4) Standard errors are computable (this condition can be turned off by setting `computable = FALSE`)
 
-The user has also the ability to specify different boundaries.
+The user has the ability to specify different boundaries.
 
 ### Distributions
   
@@ -41,9 +41,10 @@ The following distributions were added (or in the case of `burrIII3` readded)
   - `llogis_llogis` log-logistic/log-logistic mixture distribution
   
 The following arguments were added to `ssd_fit_dists()`
-  - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest finite value.
-  - `min_pmix` (by default 0.2) to specify the minimum proportion for a mixture distribution xx is it a bound.
+  - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest (finite) value.
+  - `reweight` (by default `FALSE`) to specify whether to whether to reweight data point weights by dividing by the largest weight.
   - `at_boundary_ok` (by default `FALSE`) to specifying whether a distribution with one or more parameters at a boundary has converged.
+  - `min_pmix` (by default 0.2) to specify the boundary for the minimum proportion for a mixture distribution.
   - `range_shape1` (by default `c(0.05, 20)`) to specify the lower and uppper bounds for the shape1 parameter of the burrIII3 distribution.
   - `range_shape2` (by default the same as `range_shape2`) to specify the lower and uppper bounds for the shape2 parameter of the burrIII3 distribution.
   - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
@@ -56,6 +57,11 @@ In addition
 
   - `ssd_dists()` was added to specify subsets of the available distributions using `type` argument.
   - the `delta` argument (by default 7) was added to the `subset()` generic to only keep those distributions within the specified AIC difference of the best supported distribution.
+  
+##### Rescaling
+
+If `rescale = TRUE` concentration values are divided by the largest (finite) value before distribution.
+This alters the parameter estimates, which can help some distributions converge, but is taken into account when estimating hazard concentrations/protections.
 
 #### Burrlioz
 
@@ -66,7 +72,7 @@ The function `ssd_fit_burrlioz()` (and `ssd_hc_burrlioz()`) was added to imitate
 Hazard concentration estimation is performed by `ssd_hc()` (which is called by `predict()`) and hazard protection estimation by `ssd_hp()`.
 Confidence intervals are estimated by parametric bootstrapping.
 
-To reduce the time required for bootstrapping, paralellization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
+To reduce the time required for bootstrapping, parallelization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
 
 - Added the following arguments
   - `delta` (by default 7) to only keep those distributions within the specified AIC difference of the best supported distribution.
@@ -74,7 +80,7 @@ To reduce the time required for bootstrapping, paralellization was implemented u
   - `parametric` (by default `TRUE`) to allow non-parametric bootstrapping.
   - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
 
-- Added following columns to output tibbles (and moved the `dist` column to the first position)
+- Added following columns to output data frames (and moved the `dist` column to the first position)
   - `wt` to specify the Akaike weight.
   - `method` to indicate whether parametric or non-parametric bootstrap was used.
   - `nboot` to indicate how many bootstrap samples were used.
