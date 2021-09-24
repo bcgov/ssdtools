@@ -116,7 +116,7 @@ Confidence intervals cannot be estimated for interval censored data.
 
 ### Weighted Data
 
-Confidence intervals are only estimated for equally weighted data.
+Confidence intervals cannot be estimated for unequally weighted data.
 
 ## Goodness of Fit
 
