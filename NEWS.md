@@ -2,38 +2,50 @@
 
 # ssdtools 1.0.0
 
-ssdtools is the first major release of ssdtools with some big improvements and breaking changes.
+ssdtools version 1.0.0 is the first major release of `ssdtools` with some important improvements and breaking changes.
 
 ## Fitting
 
-A important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/aursiber/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) for increased control.
+An important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/aursiber/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) which has resulted in improved handling of censored data.
+Although it was hoped that model fitting would be faster this is currently not the case.
 
 As a result of the change the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.
-`ssd_data()` has been added be used to extract the original data from `fitdists` object.
-
-It was hoped that model fitting would be faster - this is currently not the case although we are still hoping we can optimize the code further.
 
 ### Convergence
 
-In the previous version of `ssdtools`, by default, a distribution was considered to have converged if the following condition was met
+In the previous version of `ssdtools` a distribution was considered to have converged if the following condition was met
 
-2) `stats::optim()` returns a code of 0 (indicating successful completion).
+1) `stats::optim()` returns a code of 0 (indicating successful completion).
 
-In the version of ssdtools, by default, an additional two conditions must also be met
+In the new version an additional two conditions must also be met
 
-2) Bounded parameters are not at a boundary (this condition can be turned off by setting `at_boundary_ok = TRUE` and the user can specify different boundary values - see below)
-3) Standard errors are computable (this condition can be turned off by setting `computable = FALSE`)
+2) Bounded parameters are not at a boundary (this condition can be turned off by setting `at_boundary_ok = TRUE` or the user can specify different boundary values - see below)
+3) Standard errors are computable for all the parameter values (this condition can be turned off by setting `computable = FALSE`)
+
+### Censoring
+
+Censoring can now be specified by providing a data set with one or more rows that have
+
+- a finite value for the left column that is smaller than the finite value in the right column (interval censored)
+- a zero or missing value for the left column and a finite value for the right column (left censored)
+
+It is not possible to fit distributions that have
+
+- a infinite or missing value for the right column and a finite value for the left column (right censored)
+- a infinite or missing value for the right column and a finite value for the left column (right censored)
+
+
 
 ### Distributions
   
 Previously the density functions for the available distributions were exported as R functions to make them accessible to `fitdistrplus`. 
 This meant that `ssdtools` had to be loaded to fit distributions.
-The density functions are now defined in C++ as TMB templates and no longer exported.
+The density functions are now defined in C++ as TMB templates and are no longer exported.
 
-The distribution, quantile and random generation functions are generally useful and are still exported but are now prefixed by `ssd_` to prevent clashes with existing functions in other packages.
+The distribution, quantile and random generation functions are more generally useful and are still exported but are now prefixed by `ssd_` to prevent clashes with existing functions in other packages.
 Thus for example `plnorm()`, `qlnorm()` and `rlnorm()` have been renamed `ssd_plnorm()`, `ssd_qlnorm()` and `ssd_rlnorm()`.
 
-The following distributions were added (or in the case of `burrIII3` readded)
+The following distributions were added (or in the case of `burrIII3` readded) to the new version
 
   - `burrIII3` - burrIII three parameter distribution
   - `invpareto` - inverse pareto (with bias correction in scale order statistic)
@@ -41,8 +53,9 @@ The following distributions were added (or in the case of `burrIII3` readded)
   - `llogis_llogis` log-logistic/log-logistic mixture distribution
   
 The following arguments were added to `ssd_fit_dists()`
-  - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest (finite) value. This alters the parameter estimates, which can help some distributions converge, but is taken into account when estimating hazard concentrations/protections.
-  - `reweight` (by default `FALSE`) to specify whether to whether to reweight data point weights by dividing by the largest weight.
+
+  - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest (finite) value. This alters the parameter estimates, which can help some distributions converge, but not the estimates of the hazard concentrations/protections.
+  - `reweight` (by default `FALSE`) to specify whether to reweight data point by dividing by the largest weight.
   - `at_boundary_ok` (by default `FALSE`) to specifying whether a distribution with one or more parameters at a boundary has converged.
   - `min_pmix` (by default 0.2) to specify the boundary for the minimum proportion for a mixture distribution.
   - `range_shape1` (by default `c(0.05, 20)`) to specify the lower and upper boundaries for the shape1 parameter of the burrIII3 distribution.
@@ -51,25 +64,25 @@ The following arguments were added to `ssd_fit_dists()`
 
 It also worth noting that the default value of 
 
-  - `computable` argument was switched from `FALSE` to `TRUE` to enforce stricter requirements on convergence.
+  - `computable` argument was switched from `FALSE` to `TRUE` to enforce stricter requirements on convergence (see above).
 
 #### Subsets of Distributions
 
-In addition
+The following were added to handle multiple distributions
 
-  - the `ssd_dists()` function was added to specify subsets of the available distributions using `type` argument.
-  - the `delta` argument (by default 7) was added to the `subset()` generic to only keep those distributions within the specified AIC difference of the best supported distribution.
+  - `ssd_dists()` to specify subsets of the available distributions (using its `type` argument).
+  - `delta` argument (by default 7) to the `subset()` generic to only keep those distributions within the specified AIC difference of the best supported distribution.
 
 ### Burrlioz
 
-The functions `ssd_fit_burrlioz()` (and `ssd_hc_burrlioz()`) was added to imitate the behavior of (Burrlioz)[https://research.csiro.au/software/burrlioz/].
+The functions `ssd_fit_burrlioz()` (and `ssd_hc_burrlioz()`) were added to provide a (Burrlioz)[https://research.csiro.au/software/burrlioz/] clone.
 
 ## Hazard Concentration/Protection Estimation
 
-Hazard concentration estimation is performed by `ssd_hc()` (which is called by `predict()`) and hazard protection estimation by `ssd_hp()`.
+Hazard concentration estimation is performed by `ssd_hc()` (which is wrapped by `predict()`) and hazard protection estimation by `ssd_hp()`.
 By default confidence intervals are estimated by parametric bootstrapping.
 
-To reduce the time required for bootstrapping, parallelization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
+To reduce the time required for bootstrapping (which is unfortunately currently slower than in the previous version), parallelization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
 
 The following arguments were added to `ssd_hc()` and `ssd_hp()`
 
@@ -78,7 +91,7 @@ The following arguments were added to `ssd_hc()` and `ssd_hp()`
   - `parametric` (by default `TRUE`) to allow non-parametric bootstrapping.
   - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
 
-while the following columns were added to the output data frame
+and the following columns were added to the output data frame
 
   - `wt` to specify the Akaike weight.
   - `method` to indicate whether parametric or non-parametric bootstrap was used.
@@ -95,56 +108,64 @@ The `pvalue` argument (by default `FALSE`) was added to `ssd_gof()` to specify w
 
 ## Plotting
 
-- Added `geom_ssdsegment()` to allow plotting of the range of a censored data point using a segment.
+There have also been some substantive changes to the plotting functionality.
 
-- Added `scale_colour_ssd()` (and `scale_color_ssd()`) to provide an 8 color-blind scale.
+Added following functions
 
-- Added (xx) `ssd_plot_data()` to plot all the points for (censored or uncensored) data using two calls to `geom_ssdpoint()` for the left and right column. If there is only a left column the points are plotted twice and the alpha parameter needs adjusting accordingly.
+  - `ssd_plot_data()` to plot censored and uncensored data by calling `geom_ssdpoint()` for the left and for the right column (alpha parameter values should be adjusted accordingly)
+  - `geom_ssdsegment()` to allow plotting of the range of a censored data points using segments.
+  - `scale_colour_ssd()` (and `scale_color_ssd()`) to provide an 8 color-blind scale.
+  
+Made the following changes to `ssd_plot()`
 
-- Change `ssd_plot()` ylab from "Percent of Species Affected" to just "Species Affected".
-
-- Added `orders = c(left = 1, right = 1)` argument to `ssd_plot()` to control order of magnitude above and below minimum recorded value.
-
+  - added `bounds` (by default `c(left = 1, right = 1)`) argument specify how many orders of magnitude to extend the plot beyond the minimum and maximum (non-missing) values.
+  - added `linetype` (by default `NULL`) argument to specify line type.
+  - added `linecolor` (by default `NULL`) argument to specify line color.
+  - changed default value of `ylab` from "Percent of Species Affected" to "Species Affected".
 
 Renamed 
-  - `StatSsd` to `StatSsdpoint`
   - `GeomSsd` to `GeomSsdpoint`.
+  - `StatSsd` to `StatSsdpoint`
 
 Soft-deprecated
-  - `stat_ssd()`.
   - `geom_ssd()` for `geom_ssdpoint()`.
+  - `stat_ssd()`.
   - `ssd_plot_cf()` for `fitdistrplus::descdist()`.
 
 ## Data
+
+### `ssddata`
 
 The dataset `boron_data` was renamed `ccme_boron` and moved to the [`ssddata`](https://github.com/open-AIMS/ssddata) R package together with the other CCME datasets.
 
 The `ssddata` package provides a suite of datasets for testing and comparing species sensitivity distribution fitting software.
 
+### Data Handling Functions
+
+Added 
+
+- `ssd_data()` to return original data for a `fitdists` object.
+- `ssd_ecd_data()` to get empirical cumulative density for data.
+- `ssd_sort_data()` to sort data by empirical cumulative density.
+
 ## Miscellaneous
 
-- All functions and arguments that were soft-deprecated prior to v0.3.0 now warn unconditionally.
 - `npars()` now orders by distribution name.
+- All functions and arguments that were soft-deprecated prior to v0.3.0 now warn unconditionally.
 
 ### Generics
 
-- Implemented the following generics
-  - `glance()` to xx
+- Implemented the following generics for `fitdists` objects
+
+  - `glance()` to get the model likelihoods, information-theoretic criteria etc.
   - `augment()` to return original data set.
   - `logLik()` to return the log-likelihood.
-  - `summary.fitdists()` to summarise fitdists objects.
+  - `summary.fitdists()` to summarize.
   
-
 - Used AIC for weights with censored data and same number of parameters.
-- Switch shape to 3
 - Update so not calculate CIs with unequally weighted data.
 - Not calculate CIs with unequally weighted data.
-- Distributions cannot currently be fitted to right censored data.
 - Not calculate CIs if inconsistently censored data.
-
-- Added `ssd_ecd_data()` to get empirical cumulative density for data.
-- Added `ssd_sort_data()`.
-
 - 0 < weight <= 1000
 - Checks for zero weight.
 - ssd_fit_dists() errors if has one or more uninformative rows.
