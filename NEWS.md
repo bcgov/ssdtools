@@ -83,7 +83,7 @@ The following were added to handle multiple distributions
 
 ### Burrlioz
 
-The functions `ssd_fit_burrlioz()` (and `ssd_hc_burrlioz()`) were added to provide a (Burrlioz)[https://research.csiro.au/software/burrlioz/] clone.
+The functions `ssd_fit_burrlioz()` (and `ssd_hc_burrlioz()`) were added to provide a [Burrlioz](https://research.csiro.au/software/burrlioz/) clone.
 
 ## Hazard Concentration/Protection Estimation
 
