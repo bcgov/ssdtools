@@ -13,9 +13,12 @@ is_censored(x)
 A flag indicating if the data is censored.
 }
 \description{
-Is Censored
+Deprecated for \code{\link[=ssd_is_censored]{ssd_is_censored()}}.
 }
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 is_censored(fits)
+}
+\seealso{
+\code{\link[=ssd_is_censored]{ssd_is_censored()}}
 }

@@ -22,19 +22,27 @@ In the new version an additional two conditions must also be met
 2) Bounded parameters are not at a boundary (this condition can be turned off by setting `at_boundary_ok = TRUE` or the user can specify different boundary values - see below)
 3) Standard errors are computable for all the parameter values (this condition can be turned off by setting `computable = FALSE`)
 
-### Censoring
+### Censored Data
 
 Censoring can now be specified by providing a data set with one or more rows that have
 
 - a finite value for the left column that is smaller than the finite value in the right column (interval censored)
 - a zero or missing value for the left column and a finite value for the right column (left censored)
 
-It is not possible to fit distributions that have
+It is currently not possible to fit distributions to data sets that have
 
 - a infinite or missing value for the right column and a finite value for the left column (right censored)
-- a infinite or missing value for the right column and a finite value for the left column (right censored)
 
+Rows that have a zero or missing value for the left column and an infinite or missing value for the right column (fully censored) are uninformative and will result in an error.
 
+#### Akaike Weights
+
+For uncensored data, Akaike Weights are calculated using AICc (which corrects for small sample size).
+In the case of censored data, Akaike Weights are calculated using AIC (as the sample size cannot be estimated) but only if all the distributions have the same number of parameters (to ensure the weights are valid).
+
+### Weighted Data
+
+Weighting must be positive with values <= 1000.
 
 ### Distributions
   
@@ -55,7 +63,7 @@ The following distributions were added (or in the case of `burrIII3` readded) to
 The following arguments were added to `ssd_fit_dists()`
 
   - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest (finite) value. This alters the parameter estimates, which can help some distributions converge, but not the estimates of the hazard concentrations/protections.
-  - `reweight` (by default `FALSE`) to specify whether to reweight data point by dividing by the largest weight.
+  - `reweight` (by default `FALSE`) to specify whether to reweight data points by dividing by the largest weight.
   - `at_boundary_ok` (by default `FALSE`) to specifying whether a distribution with one or more parameters at a boundary has converged.
   - `min_pmix` (by default 0.2) to specify the boundary for the minimum proportion for a mixture distribution.
   - `range_shape1` (by default `c(0.05, 20)`) to specify the lower and upper boundaries for the shape1 parameter of the burrIII3 distribution.
@@ -71,7 +79,7 @@ It also worth noting that the default value of
 The following were added to handle multiple distributions
 
   - `ssd_dists()` to specify subsets of the available distributions (using its `type` argument).
-  - `delta` argument (by default 7) to the `subset()` generic to only keep those distributions within the specified AIC difference of the best supported distribution.
+  - `delta` argument (by default 7) to the `subset()` generic to only keep those distributions within the specified AIC(c) difference of the best supported distribution.
 
 ### Burrlioz
 
@@ -102,6 +110,14 @@ It also worth noting that the
 
   - `dist` column was moved from the last to the first position in the output data frame.
   
+### Censored Data
+
+Confidence intervals are only estimated for uncensored data or data that is consistently censored. xx
+
+### Weighted Data
+
+Confidence intervals are only estimated for equally weighted data.
+
 ## Goodness of Fit
 
 The `pvalue` argument (by default `FALSE`) was added to `ssd_gof()` to specify whether to return p-values for the test statistics as opposed to the test statistics themselves.
@@ -161,15 +177,6 @@ Added
   - `augment()` to return original data set.
   - `logLik()` to return the log-likelihood.
   - `summary.fitdists()` to summarize.
-  
-- Used AIC for weights with censored data and same number of parameters.
-- Update so not calculate CIs with unequally weighted data.
-- Not calculate CIs with unequally weighted data.
-- Not calculate CIs if inconsistently censored data.
-- 0 < weight <= 1000
-- Checks for zero weight.
-- ssd_fit_dists() errors if has one or more uninformative rows.
-
 
 # ssdtools 0.3.4
 

@@ -30,17 +30,21 @@ censoring_text <- function(x) {
 
 #' Is Censored
 #'
+#' Deprecated for [`ssd_is_censored()`].
+#' 
 #' @param x A fitdists object.
 #'
 #' @return A flag indicating if the data is censored.
 #' @export
+#' @seealso [`ssd_is_censored()`]
 #'
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' is_censored(fits)
 is_censored <- function(x) {
+  deprecate_soft("0.3.7", "is_censored()", "ssd_is_censored()")
   chk_s3_class(x, "fitdists")
-  .is_censored(.censoring_fitdists(x))
+  ssd_is_censored(x)
 }
 
 censor_data <- function(data, censoring) {

@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 test_that("censor", {
+  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
   expect_false(is_censored(fits))
