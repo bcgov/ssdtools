@@ -112,7 +112,7 @@ It also worth noting that the
   
 ### Censored Data
 
-Confidence intervals are only estimated for uncensored data or data that is consistently censored. xx
+Confidence intervals cannot be estimated for interval censored data.
 
 ### Weighted Data
 
