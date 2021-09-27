@@ -14,7 +14,7 @@
 
 .ssd_hc_burrlioz_tmbfit <- function(x, proportion, level, nboot, min_pboot,
                                     data, rescale, weighted, censoring, min_pmix, 
-                                    range_shape1, range_shape2, control) {
+                                    range_shape1, range_shape2, parametric, control) {
   args <- estimates(x)
   args$p <- proportion
   dist <- .dist_tmbfit(x)
@@ -31,22 +31,25 @@
                               censoring = censoring, min_pmix = min_pmix,
                               range_shape1 = range_shape1,
                               range_shape2 = range_shape2,
-                              parametric = FALSE,
+                              parametric = parametric,
                               control = control)
   
   cis <- cis_estimates(estimates, what = "ssd_qburrlioz", level = level, x = proportion,
                        .names = c("scale", "shape", "shape1", "shape2", "locationlog", "scalelog"))
+  
+  method <- if(parametric) "parametric" else "non-parametric"
+  
   hc <- tibble(
     dist = "burrlioz",
     percent = proportion * 100, est = est * rescale,
     se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
-    method = "non-parametric",
+    method = method,
     nboot = nboot, pboot = length(estimates) / nboot
   )
   replace_min_pboot_na(hc, min_pboot)
 }
 
-.ssd_hc_burrlioz_fitdists <- function(x, percent, level, nboot, min_pboot) {
+.ssd_hc_burrlioz_fitdists <- function(x, percent, level, nboot, min_pboot, parametric) {
   
   control <- .control_fitdists(x)
   data <- .data_fitdists(x)
@@ -58,11 +61,20 @@
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
   
+  if(parametric && identical(censoring, c(NA_real_, NA_real_))) {
+    err("Parametric CIs cannot be calculated for inconsistently censored data.")
+  }
+  
+  if(parametric && unequal) {
+    err("Parametric CIs cannot be calculated for unequally weighted data.")
+  }
+  
   seeds <- seed_streams(length(x))
   hc <- future_map(x, .ssd_hc_burrlioz_tmbfit, proportion = percent / 100,
                    level = level, nboot = nboot,  min_pboot = min_pboot,
                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                   parametric = parametric,
                    control = control, .options = furrr::furrr_options(seed = seeds))$burrIII3
   hc
 }
@@ -85,7 +97,7 @@
 #' 
 #' @export
 ssd_hc_burrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, 
-                            min_pboot = 0.99) {
+                            min_pboot = 0.99, parametric = FALSE) {
   chk_s3_class(x, "fitdists")
   check_dim(x, values = 1L)
   chk_named(x)
@@ -100,14 +112,15 @@ ssd_hc_burrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 10
   chk_gt(nboot)
   chk_number(min_pboot)
   chk_range(min_pboot)
+  chk_flag(parametric)
   
   if(names(x) != "burrIII3" || !ci || !length(percent)) {
     return(ssd_hc(x, percent = percent, ci = ci, level = level,
                   nboot = nboot, min_pboot = min_pboot, 
-                  average = FALSE, parametric = FALSE))
+                  average = FALSE, parametric = parametric))
   }
   
   hc <- .ssd_hc_burrlioz_fitdists(x, percent = percent, level = level, nboot = nboot, 
-                            min_pboot = min_pboot)
+                            min_pboot = min_pboot, parametric = parametric)
   warn_min_pboot(hc, min_pboot)
 }
