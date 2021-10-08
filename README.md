@@ -101,12 +101,13 @@ and the model-averaged 5% hazard concentration estimated by parametric
 bootstrapping using `ssd_hc`
 
 ``` r
+set.seed(99)
 hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100) # 100 bootstrap samples for speed
 print(hc5)
 #> # A tibble: 1 × 10
 #>   dist    percent   est    se   lcl   ucl    wt method     nboot pboot
 #>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-#> 1 average       5  1.31 0.834 0.506  3.58     1 parametric   100     1
+#> 1 average       5  1.31 0.780 0.543  3.58     1 parametric   100     1
 ```
 
 Model-averaged predictions complete with confidence intervals can also
@@ -230,7 +231,7 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an “AS IS” BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License
+limitations under the License.
 
 ------------------------------------------------------------------------
 
