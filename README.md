@@ -49,7 +49,7 @@ devtools::install_github("bcgov/ssdtools")
 
 ``` r
 library(ssdtools)
-ssdtools::boron_data
+ssddata::ccme_boron
 #> # A tibble: 28 × 5
 #>    Chemical Species                  Conc Group        Units
 #>    <chr>    <chr>                   <dbl> <fct>        <chr>
@@ -69,7 +69,7 @@ ssdtools::boron_data
 Distributions are fit using `ssd_fit_dists()`
 
 ``` r
-fits <- ssd_fit_dists(ssdtools::boron_data)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 ```
 
 and can be quickly plotted using `autoplot`
@@ -103,10 +103,10 @@ bootstrapping using `ssd_hc`
 ``` r
 hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100) # 100 bootstrap samples for speed
 print(hc5)
-#> # A tibble: 1 × 8
-#>   dist    percent   est    se   lcl   ucl nboot pboot
-#>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 average       5  1.31 0.833 0.544  3.70   100     1
+#> # A tibble: 1 × 10
+#>   dist    percent   est    se   lcl   ucl    wt method     nboot pboot
+#>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
+#> 1 average       5  1.31 0.834 0.506  3.58     1 parametric   100     1
 ```
 
 Model-averaged predictions complete with confidence intervals can also
@@ -125,7 +125,7 @@ boron_pred <- predict(fits, ci = TRUE)
 and plotted together with the original data using `ssd_plot`.
 
 ``` r
-ssd_plot(ssdtools::boron_data, boron_pred,
+ssd_plot(ssddata::ccme_boron, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
 ) + 
@@ -230,7 +230,7 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an “AS IS” BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License.
+limitations under the License
 
 ------------------------------------------------------------------------
 
