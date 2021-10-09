@@ -4,6 +4,7 @@
 \alias{ssd_hc}
 \alias{ssd_hc.list}
 \alias{ssd_hc.fitdists}
+\alias{ssd_hc.fitburrlioz}
 \title{Hazard Concentrations for Species Sensitivity Distributions}
 \usage{
 ssd_hc(x, ...)
@@ -22,6 +23,17 @@ ssd_hc(x, ...)
   min_pboot = 0.99,
   parametric = TRUE,
   control = NULL,
+  ...
+)
+
+\method{ssd_hc}{fitburrlioz}(
+  x,
+  percent = 5,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  min_pboot = 0.99,
+  parametric = FALSE,
   ...
 )
 }
@@ -66,6 +78,9 @@ hazard concentrations(s).
 \item \code{list}: Hazard Concentrations for Distributional Estimates
 
 \item \code{fitdists}: Hazard Concentrations for fitdists Object
+
+\item \code{fitburrlioz}: Hazard Concentrations for fitburrlioz Object
+'
 }}
 
 \examples{
@@ -73,6 +88,9 @@ fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_hc(fits)
 ssd_hc(estimates(fits))
 ssd_hc(ssd_match_moments())
+fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
+ssd_hc(fit)
+
 }
 \seealso{
 \code{\link[=predict.fitdists]{predict.fitdists()}} and \code{\link[=ssd_hp]{ssd_hp()}}.

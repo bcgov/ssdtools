@@ -222,3 +222,41 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
                    average = average, parametric = parametric)
   warn_min_pboot(hc, min_pboot)
 }
+
+#' @describeIn ssd_hc Hazard Concentrations for fitburrlioz Object
+#' '
+#' @export
+#' @examples
+#' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
+#' ssd_hc(fit)
+#' 
+#' @export
+ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, 
+                            min_pboot = 0.99, parametric = FALSE, ...) {
+  check_dim(x, values = 1L)
+  chk_named(x)
+  chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_range(percent, c(0,100))
+  chk_flag(ci)
+  chk_number(level)
+  chk_range(level)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  chk_number(min_pboot)
+  chk_range(min_pboot)
+  chk_flag(parametric)
+  chk_unused(...)
+  
+  if(names(x) != "burrIII3" || !ci || !length(percent)) {
+    class(x) <- class(x)[-1]
+    return(ssd_hc(x, percent = percent, ci = ci, level = level,
+                  nboot = nboot, min_pboot = min_pboot, 
+                  average = FALSE, parametric = parametric))
+  }
+  
+  hc <- .ssd_hc_burrlioz_fitdists(x, percent = percent, level = level, nboot = nboot, 
+                                  min_pboot = min_pboot, parametric = parametric)
+  warn_min_pboot(hc, min_pboot)
+}

@@ -43,3 +43,29 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
          control = control, parametric = parametric
   )
 }
+
+#' Predict Hazard Concentrations of fitburrlioz Object
+#' 
+#' A wrapper on [`ssd_hc()`] that by default calculates 
+#' all hazard concentrations from 1 to 99%.
+#' 
+#' It is useful for plotting purposes.
+#' 
+#' @inheritParams params
+#' @export
+#' @seealso [`ssd_hc()`] and [`ssd_plot()`]
+#' @examples 
+#' fits <- ssd_fit_burrlioz(ssddata::ccme_boron)
+#' predict(fits)
+predict.fitburrlioz <- function(object, percent = 1:99, ci = FALSE,
+                             level = 0.95, nboot = 1000, 
+                             min_pboot = 0.99,
+                             parametric = TRUE,
+                             ...) {
+  chk_unused(...)
+  ssd_hc(object,
+         percent = percent, ci = ci, level = level,
+         nboot = nboot, min_pboot = min_pboot,
+         parametric = parametric
+  )
+}

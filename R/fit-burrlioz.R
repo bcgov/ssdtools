@@ -64,9 +64,11 @@ ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE,
                            range_shape2 = range_shape2, regex = "shape1$")) {
     dist <- "lgumbel"
   }
-  ssd_fit_dists(data, left = left, dists = dist, 
+  fit <- ssd_fit_dists(data, left = left, dists = dist, 
                 rescale = rescale, computable = FALSE,
                 silent = silent,
                 range_shape1 = range_shape1,
                 range_shape2 = range_shape2)
+  class(fit) <- c("fitburrlioz", class(fit))
+  fit
 }

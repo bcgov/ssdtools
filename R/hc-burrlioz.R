@@ -81,15 +81,10 @@
 
 #' Hazard Concentrations for Burrlioz Fit
 #'
-#' Gets concentration(s) that protect specified percentage(s) of species
-#' based on the distribution.
-#' 
-#' If `ci = TRUE` uses non-parameteric bootstrapping to get confidence intervals on the 
-#' hazard concentrations(s).
+#' Deprecated for [`ssd_hc()`].
 #'
 #' @inheritParams params
 #' @return A tibble of corresponding hazard concentrations.
-#' @seealso [`ssd_hc()`]
 #' @export
 #' @examples
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
@@ -98,29 +93,9 @@
 #' @export
 ssd_hc_burrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, 
                             min_pboot = 0.99, parametric = FALSE) {
-  chk_s3_class(x, "fitdists")
-  check_dim(x, values = 1L)
-  chk_named(x)
-  chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
-  chk_vector(percent)
-  chk_numeric(percent)
-  chk_range(percent, c(0,100))
-  chk_flag(ci)
-  chk_number(level)
-  chk_range(level)
-  chk_whole_number(nboot)
-  chk_gt(nboot)
-  chk_number(min_pboot)
-  chk_range(min_pboot)
-  chk_flag(parametric)
+  lifecycle::deprecate_warn("0.3.5", "ssd_hc_burrlioz()", "ssd_hc()")
+  chk_s3_class(x, "fitburrlioz")
   
-  if(names(x) != "burrIII3" || !ci || !length(percent)) {
-    return(ssd_hc(x, percent = percent, ci = ci, level = level,
-                  nboot = nboot, min_pboot = min_pboot, 
-                  average = FALSE, parametric = parametric))
-  }
-  
-  hc <- .ssd_hc_burrlioz_fitdists(x, percent = percent, level = level, nboot = nboot, 
-                            min_pboot = min_pboot, parametric = parametric)
-  warn_min_pboot(hc, min_pboot)
+  ssd_hc(x, percent = percent, ci = ci, level = level,
+         nboot = nboot, min_pboot = min_pboot, parametric = parametric)
 }
