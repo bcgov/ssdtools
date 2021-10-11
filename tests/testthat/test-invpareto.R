@@ -107,10 +107,16 @@ test_that("invpareto with extreme data", {
                           2.48618482994608, 2.51794970929166, 2.49716394702713, 2.49218587262049))
   
   
-  fit90 <- ssd_fit_dists(data[1:90,,drop = FALSE], dists = "invpareto")
-  expect_equal(estimates(fit90), 
-               list(invpareto = list(scale = 2.60218050714239, shape = 29.3380717187846)))
+  fit98 <- ssd_fit_dists(data[1:98,,drop = FALSE], dists = "invpareto")
+  expect_equal(estimates(fit98), 
+               list(invpareto = list(scale = 2.61422908501617, shape = 26.0909009531098)))
   
-#  fit99 <- ssd_fit_dists(data, dists = "invpareto")
+  fit99r <- ssd_fit_dists(data, dists = "invpareto", rescale = TRUE)
+  expect_equal(estimates(fit99r), 
+               list(invpareto = list(scale = 1.00038435059807, shape = 26.0278618888664)))
+  skip("invpareto ABNORMAL_TERMINATION_IN_LNSRCH.")
+  fit99 <- ssd_fit_dists(data, dists = "invpareto")
+  expect_equal(estimates(fit99), 
+               list(invpareto = list(scale = 2.60218050714239, shape = 29.3380717187846)))
 })
   
