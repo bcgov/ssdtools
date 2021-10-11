@@ -30,9 +30,11 @@ ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE,
                              silent = FALSE) {
   
   if(nrow(data) <= 8) {
-    return(ssd_fit_dists(data, left = left, dists = "llogis",
+    fit <- ssd_fit_dists(data, left = left, dists = "llogis",
                          computable = FALSE, nrow = 5L,
-                         rescale = rescale, silent = silent))
+                         rescale = rescale, silent = silent)
+    class(fit) <- c("fitburrlioz", class(fit))
+    return(fit)
   }
   
   range_shape1 <- c(0.001, 100)

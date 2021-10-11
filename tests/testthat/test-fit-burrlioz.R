@@ -15,12 +15,14 @@
 test_that("burrlioz with ccme_boron gives invpareto", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "invpareto")
 })
 
 test_that("burrlioz with eight or less samples gives llogis", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron[1:8,])
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "llogis")
 })
 
@@ -30,6 +32,7 @@ test_that("burrlioz with burrIII3 data gives burrIII3", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_burrlioz(data)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "burrIII3")
 })
 
@@ -39,6 +42,7 @@ test_that("burrlioz with invpareto data gives invpareto", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_burrlioz(data)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "invpareto")
 })
 
@@ -48,35 +52,41 @@ test_that("burrlioz with lgumbel data gives lgumbel", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_burrlioz(data)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "lgumbel")
 })
 
 test_that("burrlioz with ccme_chloride gives burrIII3", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_chloride)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "burrIII3")
 })
 
 test_that("burrlioz with ccme_cadmium fits", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_cadmium)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "burrIII3")
 })
 
 test_that("burrlioz with ccme_uranium", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_uranium)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "burrIII3")
 })
 
 test_that("burrlioz with anon_a", {
   fit <- ssd_fit_burrlioz(ssddata::anon_a)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "lgumbel")
 })
 
 test_that("burrlioz with anon_e", {
   fit <- ssd_fit_burrlioz(ssddata::anon_e)
   expect_s3_class(fit, "fitdists")
+  expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "lgumbel")
 })
