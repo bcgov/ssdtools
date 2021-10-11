@@ -15,6 +15,7 @@
 # required to pass dist as not available for dists that didn't fit
 nullify_nonfit <- function(fit, dist, data, rescale, computable, 
                            min_pmix, range_shape1, range_shape2, at_boundary_ok, silent) {
+
   error <- fit$error
   fit <- fit$result
   
@@ -30,6 +31,7 @@ nullify_nonfit <- function(fit, dist, data, rescale, computable,
                      rescale, ": one or more parameters at boundary.")
     return(NULL)
   }
+  
   if(!optimizer_converged(fit)) {
     message <- optimizer_message(fit)
     if (!silent) wrn("Distribution '", dist, "' failed to converge",

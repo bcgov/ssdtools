@@ -17,7 +17,7 @@ optim_convergence <- function(fit) {
 }
 
 optim_message <- function(fit) {
-  fit$optim$convergence
+  fit$optim$message
 }
 
 optimizer_converged <- function(fit) {
@@ -26,7 +26,7 @@ optimizer_converged <- function(fit) {
 }
 
 optimizer_message <- function(fit) {
-  code <- optim_convergence(fit)
+  code <- as.character(optim_convergence(fit))
   switch(code,
     "1" =  "Iteration limit maxit reach (try increasing the maximum number of iterations in control).",
     "10" = "Degeneracy of Nelder-Mead simplex.",
