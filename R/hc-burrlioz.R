@@ -40,7 +40,7 @@
   method <- if(parametric) "parametric" else "non-parametric"
   
   hc <- tibble(
-    dist = "burrlioz",
+    dist = dist,
     percent = proportion * 100, est = est * rescale,
     se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
     method = method,
