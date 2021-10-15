@@ -219,7 +219,7 @@ By contributing to this project, you agree to abide by its terms.
 
 The code is released under the Apache License 2.0
 
-Copyright 2015 Province of British Columbia and Environment and Climate
+Copyright 2021 Province of British Columbia and Environment and Climate
 Change Canada
 
 Licensed under the Apache License, Version 2.0 (the “License”); you may
