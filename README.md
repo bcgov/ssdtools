@@ -219,7 +219,8 @@ By contributing to this project, you agree to abide by its terms.
 
 The code is released under the Apache License 2.0
 
-Copyright 2015 Province of British Columbia
+Copyright 2015 Province of British Columbia and Environment and Climate
+Change Canada
 
 Licensed under the Apache License, Version 2.0 (the “License”); you may
 not use this file except in compliance with the License. You may obtain
@@ -240,7 +241,7 @@ style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" />
 xmlns:dct="http://purl.org/dc/terms/"
 property="dct:title">ssdtools</span> by <span
 xmlns:cc="http://creativecommons.org/ns#"
-property="cc:attributionName">the Province of British Columbia </span>
-is licensed under a
+property="cc:attributionName">the Province of British Columbia and
+Environment and Climate Change Canada </span> is licensed under a
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 Creative Commons Attribution 4.0 International License</a>.

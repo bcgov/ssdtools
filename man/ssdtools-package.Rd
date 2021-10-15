@@ -28,10 +28,10 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Angeline Tillmanns [contributor]
-  \item Ali Azizishirazi [contributor]
   \item Rebecca Fisher [contributor]
   \item David Fox [contributor]
+  \item Angeline Tillmanns [contributor]
+  \item Ali Azizishirazi [contributor]
   \item Kathleen McTavish [contributor]
   \item Heather Thompson [contributor]
   \item Andy Teucher [contributor]
@@ -41,6 +41,7 @@ Other contributors:
   \item Nan-Hung Hsieh [contributor]
   \item Sergio Ibarra Espinosa [contributor]
   \item Province of British Columbia [copyright holder]
+  \item Environment and Climate Change Canada [copyright holder]
 }
 
 }
