@@ -4,12 +4,6 @@
 
 - fix unequal indentation of Rmd ```
 
-
-# ssdtools 0.3.6.9000
-
-- Same as previous version.
-
-
 # ssdtools 0.3.6
 
 - Added `wt` (Akaike weight) column to `predict()`, `ssd_hc()` and `ssd_hp()`
