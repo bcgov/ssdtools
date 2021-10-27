@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7.9000</span>
       </span>
     </div>
 
@@ -100,9 +100,9 @@
       <h1 data-toc-skip>Embellishing Plots with an Exposure Distribution</h1>
                         <h4 data-toc-skip class="author">ssdtools Team</h4>
             
-            <h4 data-toc-skip class="date">2021-09-22</h4>
+            <h4 data-toc-skip class="date">2021-10-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/exposure-plots.Rmd" class="external-link"><code>vignettes/exposure-plots.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/exposure-plots.Rmd" class="external-link"><code>vignettes/exposure-plots.Rmd</code></a></small>
       <div class="hidden name"><code>exposure-plots.Rmd</code></div>
 
     </div>
@@ -140,7 +140,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
 <span class="va">ex.risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_exposure.html">ssd_exposure</a></span><span class="op">(</span><span class="va">fit</span>, meanlog <span class="op">=</span> <span class="va">ex.mean.log</span>, sdlog <span class="op">=</span> <span class="va">ex.sd.log</span><span class="op">)</span>
 <span class="va">ex.risk</span></code></pre></div>
-<pre><code>## [1] 0.005595128</code></pre>
+<pre><code><span class="co">## [1] 0.005595128</span></code></pre>
 <p>The risk of 0.0056 can also be added to the plot in the usual way:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fit.plot</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">ex.cdf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Conc</span>, y <span class="op">=</span> <span class="va">ex.cdf</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
@@ -153,14 +153,14 @@
     x <span class="op">=</span> <span class="cn">Inf</span>, y <span class="op">=</span> <span class="fl">0</span>, hjust <span class="op">=</span> <span class="fl">1.1</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">.5</span>
   <span class="op">)</span></code></pre></div>
 <p><img src="exposure-plots_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
-<div id="other-embellishments" class="section level2">
-<h2 class="hasAnchor">
-<a href="#other-embellishments" class="anchor" aria-hidden="true"></a>Other embellishments</h2>
+<div class="section level2">
+<h2 id="other-embellishments">Other embellishments<a class="anchor" aria-label="anchor" href="#other-embellishments"></a>
+</h2>
 <p>Other embellishments can be added in a similar fashion using the features of <a href="https://ggplot2.tidyverse.org" class="external-link"><em>ggplot</em></a> and are not discussed here.</p>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <p>Verdonck, F. A., Aldenberg, T. , Jaworska, J. and Vanrolleghem, P. A. (2003), Limitations of current risk characterization methods in probabilistic environmental risk assessment. Environmental Toxicology and Chemistry, 22: 2209-2213. <a href="http://doi.wiley.com/10.1897/02-435" class="external-link uri">http://doi.wiley.com/10.1897/02-435</a>.</p>
 <hr>
 <p><a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="external-link"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia </span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="external-link"> Creative Commons Attribution 4.0 International License</a>.</p>
@@ -184,7 +184,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

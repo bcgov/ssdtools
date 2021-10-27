@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7.9000</span>
       </span>
     </div>
 
@@ -100,25 +100,25 @@
       <h1 data-toc-skip>Selecting Distributions</h1>
                         <h4 data-toc-skip class="author">ssdtools Team</h4>
             
-            <h4 data-toc-skip class="date">2021-09-22</h4>
+            <h4 data-toc-skip class="date">2021-10-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/distributions.Rmd" class="external-link"><code>vignettes/distributions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/distributions.Rmd" class="external-link"><code>vignettes/distributions.Rmd</code></a></small>
       <div class="hidden name"><code>distributions.Rmd</code></div>
 
     </div>
 
     
     
-<div id="model-selection" class="section level2">
-<h2 class="hasAnchor">
-<a href="#model-selection" class="anchor" aria-hidden="true"></a>Model selection</h2>
+<div class="section level2">
+<h2 id="model-selection">Model selection<a class="anchor" aria-label="anchor" href="#model-selection"></a>
+</h2>
 <p>It can be difficult to select a ‘best fitting’ distribution when modeling species sensitivity data with low sample sizes. In these situations, model averaging can be used to fit multiple distributions and calculate a weighted average HCx and confidence limits (Schwarz and Tillmanns 2009). Distributions selected to use in model averaging must be bounded by zero given that effect concentrations cannot be negative. Furthermore, the selected distributions should provide a variety of shapes to capture the diversity of shapes in empirical species sensitivity distributions.</p>
 <p>By default, the ssdtools uses Akaike Information Criterion corrected for small sample size (AICc) as a measure of relative quality of fit for different distributions and as the basis for calculating the model-averaged HCx.<br>
 However, if two or more similar models fit the data well then the support for this type of shape will be over-inflated (Burnham and Anderson 2002).</p>
 </div>
-<div id="default-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#default-distributions" class="anchor" aria-hidden="true"></a>Default Distributions</h2>
+<div class="section level2">
+<h2 id="default-distributions">Default Distributions<a class="anchor" aria-label="anchor" href="#default-distributions"></a>
+</h2>
 <p>To avoid such model redundancy (Burnham and Anderson 2002), ssdtools and the accompanying Shiny app (Dalgarno 2021) fit three different shape distributions by default: the log-normal, log-logistic and gamma.</p>
 <p>The three distributions are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -128,26 +128,26 @@ However, if two or more similar models fit the data well then the support for th
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="fu"><a href="../reference/ssd_match_moments.html">ssd_match_moments</a></span><span class="op">(</span>meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="distributions_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
-<div id="log-normal-distribution" class="section level3">
-<h3 class="hasAnchor">
-<a href="#log-normal-distribution" class="anchor" aria-hidden="true"></a>Log-normal distribution</h3>
+<div class="section level3">
+<h3 id="log-normal-distribution">Log-normal distribution<a class="anchor" aria-label="anchor" href="#log-normal-distribution"></a>
+</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Log-normal_distribution" class="external-link">log-normal</a> distribution was selected as the starting distribution given the data are for effect concentrations.</p>
 <p>The log-normal distribution does have a couple limitations to consider when fitting species sensitivity data. First, on the logarithmic scale, the normal distribution is symmetrical. Second, the log-normal distribution decays too quickly in the tails giving narrow tails which may not adequately fit the data. Additional distributions were selected to compensate for these deficiencies.</p>
 </div>
-<div id="log-logistic-distribution" class="section level3">
-<h3 class="hasAnchor">
-<a href="#log-logistic-distribution" class="anchor" aria-hidden="true"></a>Log-logistic distribution</h3>
+<div class="section level3">
+<h3 id="log-logistic-distribution">Log-logistic distribution<a class="anchor" aria-label="anchor" href="#log-logistic-distribution"></a>
+</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Log-logistic_distribution" class="external-link">log-logistic</a> distribution is often used as a candidate SSD primarily because of its analytic tractability (Aldenberg and Slob 1993). We included it because it has wider tails than the log-normal and because it is a specific case of the more general Burr family of distributions (Burr 1942, Shao 2000).</p>
 </div>
-<div id="gamma-distribution" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gamma-distribution" class="anchor" aria-hidden="true"></a>Gamma distribution</h3>
+<div class="section level3">
+<h3 id="gamma-distribution">Gamma distribution<a class="anchor" aria-label="anchor" href="#gamma-distribution"></a>
+</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Gamma_distribution" class="external-link">gamma</a> distribution is a two-parameter distribution commonly used to model failure times or time to events. For use in modeling species sensitivity data, the gamma distribution has two key features that provide additional flexibility relative to the log-normal distribution: 1) it is non-symmetrical on the logarithmic scale; and 2) it has wider tails. The Weibull distribution was considered as an alternative but the Gamma distribution is generally more flexible.</p>
 </div>
 </div>
-<div id="all-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#all-distributions" class="anchor" aria-hidden="true"></a>All Distributions</h2>
+<div class="section level2">
+<h2 id="all-distributions">All Distributions<a class="anchor" aria-label="anchor" href="#all-distributions"></a>
+</h2>
 <p>For completeness the hazard concentrations for the other main distributions provided by <code>ssdtools</code> are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span>
@@ -159,9 +159,9 @@ However, if two or more similar models fit the data well then the support for th
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></code></pre></div>
 <p><img src="distributions_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <p>Aldenberg, T., and Slob, W. 1993. Confidence Limits for Hazardous Concentrations Based on Logistically Distributed NOEC Toxicity Data. Ecotoxicology and Environmental Safety 25(1): 48–63. <a href="https://doi.org/10.1006/eesa.1993.1006" class="external-link uri">https://doi.org/10.1006/eesa.1993.1006</a>.</p>
 <p>Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY. <a href="https://doi.org/10.1007/b97636" class="external-link uri">https://doi.org/10.1007/b97636</a>.</p>
 <p>Burr, I. W. 1942. Cumulative frequency functions. Annals of Mathematical Statistics. 13:2, 215–232.</p>
@@ -190,7 +190,7 @@ However, if two or more similar models fit the data well then the support for th
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

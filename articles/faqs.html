@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7.9000</span>
       </span>
     </div>
 
@@ -100,9 +100,9 @@
       <h1 data-toc-skip>Frequently Asked Questions</h1>
                         <h4 data-toc-skip class="author">ssdtools Team</h4>
             
-            <h4 data-toc-skip class="date">2021-09-22</h4>
+            <h4 data-toc-skip class="date">2021-10-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/faqs.Rmd" class="external-link"><code>vignettes/faqs.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/faqs.Rmd" class="external-link"><code>vignettes/faqs.Rmd</code></a></small>
       <div class="hidden name"><code>faqs.Rmd</code></div>
 
     </div>
@@ -112,9 +112,9 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></code></pre></div>
-<div id="how-do-i-fit-a-custom-distribution" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-do-i-fit-a-custom-distribution" class="anchor" aria-hidden="true"></a>How do I fit a custom distribution?</h2>
+<div class="section level2">
+<h2 id="how-do-i-fit-a-custom-distribution">How do I fit a custom distribution?<a class="anchor" aria-label="anchor" href="#how-do-i-fit-a-custom-distribution"></a>
+</h2>
 <p>The user can also specify a custom distribution (called say <code>dist</code>) provided the following functions are defined:</p>
 <ul>
 <li>probability density (<code>ddist(x, par1, par2, log = FALSE)</code>)</li>
@@ -124,9 +124,9 @@
 <li>starting values (<code>sdist(x)</code>)</li>
 </ul>
 </div>
-<div id="how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals" class="anchor" aria-hidden="true"></a>How do I fit distributions to multiple groups such taxa and/or chemicals?</h2>
+<div class="section level2">
+<h2 id="how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals">How do I fit distributions to multiple groups such taxa and/or chemicals?<a class="anchor" aria-label="anchor" href="#how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals"></a>
+</h2>
 <p>An elegant approach using some tidyverse packages is demonstrated below.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org" class="external-link">purrr</a></span><span class="op">)</span>
@@ -144,9 +144,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">boron_data</span>, <span class="va">boron_preds</span>, xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ci <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">Group</span><span class="op">)</span></code></pre></div>
 <p><img src="faqs_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
-<div id="how-do-i-plot-a-cullen-frey-plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-do-i-plot-a-cullen-frey-plot" class="anchor" aria-hidden="true"></a>How do I plot a Cullen Frey plot?</h3>
+<div class="section level3">
+<h3 id="how-do-i-plot-a-cullen-frey-plot">How do I plot a Cullen Frey plot?<a class="anchor" aria-label="anchor" href="#how-do-i-plot-a-cullen-frey-plot"></a>
+</h3>
 <p>The data can be visualized using a Cullen Frey plot of the skewness and kurtosis.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
@@ -154,9 +154,9 @@
 <p><img src="faqs_files/figure-html/unnamed-chunk-5-1.png" width="480"></p>
 </div>
 </div>
-<div id="how-do-i-plot-model-diagnostics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-do-i-plot-model-diagnostics" class="anchor" aria-hidden="true"></a>How do I plot model diagnostics?</h2>
+<div class="section level2">
+<h2 id="how-do-i-plot-model-diagnostics">How do I plot model diagnostics?<a class="anchor" aria-label="anchor" href="#how-do-i-plot-model-diagnostics"></a>
+</h2>
 <p>A <code>fitdists</code> object can be plotted to display model diagnostics plots for each fit.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">boron_dists</span><span class="op">)</span></code></pre></div>
@@ -181,7 +181,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

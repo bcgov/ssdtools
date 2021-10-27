@@ -50,7 +50,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7.9000</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bcgov/ssdtools/">
+  <a href="https://github.com/bcgov/ssdtools/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,17 +106,16 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="ssdtools-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#ssdtools-" class="anchor" aria-hidden="true"></a>ssdtools <img src="reference/figures/logo.png" align="right">
+<div class="section level1">
+<div class="page-header"><h1 id="ssdtools-">ssdtools <img src="reference/figures/logo.png" align="right"><a class="anchor" aria-label="anchor" href="#ssdtools-"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p><code>ssdtools</code> is an R package to plot and fit Species Sensitivity Distributions (SSD).</p>
 <p>SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al. (2001). The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, gamma, log-logistic, log-Gumbel, Gompertz and Weibull. The user can also provide custom distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>To install the latest version from <a href="https://CRAN.R-project.org/package=ssdtools" class="external-link">CRAN</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ssdtools"</span><span class="op">)</span></code></pre></div>
@@ -125,9 +124,9 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"bcgov/ssdtools"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p><code>ssdtools</code> provides a data set for several chemicals including Boron.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span>
@@ -186,9 +185,9 @@
 <span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3000</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-10-1.png"><!-- --></p>
 </div>
-<div id="citation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation" class="anchor" aria-hidden="true"></a>Citation</h2>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>To cite ssdtools <span class="cf">in</span> publications use<span class="op">:</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="st">  </span>Thorley, J. and Schwarz C., (<span class="dv">2018</span>). ssdtools An R package to fit</span>
@@ -208,9 +207,9 @@
 <span id="cb11-17"><a href="#cb11-17"></a>    doi =<span class="st"> </span>{<span class="fl">10.21105</span><span class="op">/</span>joss<span class="fl">.01082</span>},</span>
 <span id="cb11-18"><a href="#cb11-18"></a>  }</span></code></pre></div>
 </div>
-<div id="information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#information" class="anchor" aria-hidden="true"></a>Information</h2>
+<div class="section level2">
+<h2 id="information">Information<a class="anchor" aria-label="anchor" href="#information"></a>
+</h2>
 <p>Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.</p>
 <p>Get started with ssdtools at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="external-link uri">https://bcgov.github.io/ssdtools/articles/ssdtools.html</a>.</p>
 <p>A shiny app to allow non-R users to interface with ssdtools is available at <a href="https://github.com/bcgov/shinyssdtools" class="external-link uri">https://github.com/bcgov/shinyssdtools</a>:</p>
@@ -221,24 +220,24 @@
 <p>Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity Distribution Modeling. Environ Toxicol Chem 40(2): 293–308. <a href="https://onlinelibrary.wiley.com/doi/10.1002/etc.4925" class="external-link uri">https://onlinelibrary.wiley.com/doi/10.1002/etc.4925</a>.</p>
 <p>The CCME <code>data.csv</code> data file is derived from a factsheet prepared by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html" class="external-link">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw" class="external-link"><code>data-raw</code></a> folder for more information.</p>
 </div>
-<div id="getting-help-or-reporting-an-issue" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-help-or-reporting-an-issue" class="anchor" aria-hidden="true"></a>Getting Help or Reporting an Issue</h2>
+<div class="section level2">
+<h2 id="getting-help-or-reporting-an-issue">Getting Help or Reporting an Issue<a class="anchor" aria-label="anchor" href="#getting-help-or-reporting-an-issue"></a>
+</h2>
 <p>To report bugs/issues/feature requests, please file an <a href="https://github.com/bcgov/ssdtools/issues/" class="external-link">issue</a>.</p>
 </div>
-<div id="how-to-contribute" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-contribute" class="anchor" aria-hidden="true"></a>How to Contribute</h2>
+<div class="section level2">
+<h2 id="how-to-contribute">How to Contribute<a class="anchor" aria-label="anchor" href="#how-to-contribute"></a>
+</h2>
 <p>If you would like to contribute to the package, please see our <a href="https://github.com/bcgov/ssdtools/blob/master/.github/CONTRIBUTING.md" class="external-link">CONTRIBUTING</a> guidelines.</p>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the ssdtools project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
-<div id="license" class="section level2">
-<h2 class="hasAnchor">
-<a href="#license" class="anchor" aria-hidden="true"></a>License</h2>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
 <p>The code is released under the Apache License 2.0</p>
 <p>Copyright 2015 Province of British Columbia</p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
@@ -254,12 +253,9 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=ssdtools">https://​cloud.r-project.org/​package=ssdtools</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/bcgov/ssdtools/">https://​github.com/​bcgov/​ssdtools/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/bcgov/ssdtools/issues">https://​github.com/​bcgov/​ssdtools/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=ssdtools" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/bcgov/ssdtools/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/bcgov/ssdtools/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -289,7 +285,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Joe Thorley <br><small class="roles"> Author, maintainer, contractor </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Joe Thorley <br><small class="roles"> Author, maintainer, contractor </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Carl Schwarz <br><small class="roles"> Author, contractor </small>  </li>
 <li><a href="authors.html">More on authors...</a></li>
 </ul>
@@ -317,7 +313,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>
