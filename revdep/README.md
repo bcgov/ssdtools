@@ -10,14 +10,16 @@
 |collate  |en_CA.UTF-8                  |
 |ctype    |en_CA.UTF-8                  |
 |tz       |America/Vancouver            |
-|date     |2021-09-22                   |
+|date     |2021-10-27                   |
 
 # Dependencies
 
 |package  |old   |new        |Δ  |
 |:--------|:-----|:----------|:--|
-|ssdtools |0.3.5 |0.3.6      |*  |
+|ssdtools |0.3.6 |0.3.7      |*  |
 |cli      |NA    |3.0.1.9000 |*  |
+|pillar   |NA    |1.6.4      |*  |
+|rlang    |NA    |0.4.12     |*  |
 
 # Revdeps
 
