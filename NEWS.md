@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 0.3.7.9000
+
+- Same as previous version.
+
+
 # ssdtools 0.3.7
 
 - fix unequal indentation of Rmd ```
