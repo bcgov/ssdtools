@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Environment and Climate Change Canada
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,39 +12,9 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.onLoad <- function(...) {
-  register_s3_method("stats", "nobs", "fitdist")
-  register_s3_method("stats", "nobs", "fitdists")
-  register_s3_method("stats", "nobs", "fitdistcens")
-  register_s3_method("stats", "coef", "fitdists")
-  register_s3_method("stats", "predict", "fitdists")
-  register_s3_method("graphics", "plot", "fitdists")
-  register_s3_method("ggplot2", "autoplot", "fitdist")
-  register_s3_method("ggplot2", "autoplot", "fitdists")
-  register_s3_method("ggplot2", "autoplot", "fitdistcens")
-  invisible()
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage(
+    "Please replace the following in your scripts:
+- `ssdtools::boron_data` with `ssddata::ccme_boron`
+- `ssdtools::ccme_data` with `ssddata::ccme_data`")
 }
-
-register_s3_method <- function(pkg, generic, class) {
-  stopifnot(is.character(pkg), length(pkg) == 1)
-  stopifnot(is.character(generic), length(generic) == 1)
-  stopifnot(is.character(class), length(class) == 1)
-
-  fun <- get(paste0(generic, ".", class), envir = parent.frame())
-
-  if (pkg %in% loadedNamespaces()) {
-    registerS3method(generic, class, fun, envir = asNamespace(pkg))
-  }
-
-  setHook(
-    packageEvent(pkg, "onLoad"),
-    function(...) {
-      registerS3method(generic, class, fun, envir = asNamespace(pkg))
-    }
-  )
-}
-
-.onUnload <- function (libpath) {
-  library.dynam.unload("ssdtools", libpath)
-}
-

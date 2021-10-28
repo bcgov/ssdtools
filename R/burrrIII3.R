@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,86 +12,58 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Burr Type III Three-Parameter Distribution
-#'
-#' Density, distribution function, quantile function and random generation
-#' for the Burr Type III Three-Parameter distribution with 
-#' `lshape` and `lscale` parameters.
-#' 
-#' The Burr 12 distribution from the actuar package is used as a base.
-#' The Burr III distribution is the distribution of 1/x where x has the Burr Type 12 distribution.
-#' refer to https://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/bu3pdf.htm for details.
-#' The shape1, shape2, and scale parameters are on the log(scale) as these must be positive.
-#'
-#' @inheritParams params
-#' @return
-#' dburrIII3 gives the density, pburrIII3 gives the distribution function,
-#' qburrIII3 gives the quantile function, and rburrIII3 generates random samples.
-#' @name burrIII3
-#' @seealso [actuar::dburr()] 
+#' @describeIn ssd_p Cumulative Distribution Function for BurrIII Distribution
+#' @export
 #' @examples
-#' x <- rburrIII3(1000)
-#' hist(x, freq = FALSE, col = "gray", border = "white")
-#' curve(dburrIII3(x), add = TRUE, col = "red4", lwd = 2)
-NULL
-
-#' @rdname burrIII3
-#' @export
-dburrIII3 <- function(x, lshape1 = 0, lshape2 = 0, lscale = 0, log = FALSE) {
-  deprecate_soft("0.2.1", "dburrIII3()", id = "xburrIII3",
-                 details = "The 'burrIII3' distribution is under review.")
-  
-  if(!length(x))return(numeric(0))
-  fx <- actuar::dburr(1/x, shape1 = exp(lshape1), shape2 = exp(lshape2), 
-                      scale = exp(lscale), log = FALSE)
-  fx <- fx / (x+(x==0))^2  # avoid dividing by 0. Can only occur if fx is 0.
-  if(log) return(log(fx))
-  fx
+#' 
+#' ssd_pburrIII3(1)
+ssd_pburrIII3 <- function(q, shape1 = 1, shape2 = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
+  pdist("burrIII3", q = q, shape1 = shape1, shape2 = shape2, scale = scale, 
+        lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname burrIII3
+#' @describeIn ssd_q Quantile Function for BurrIII Distribution
 #' @export
-qburrIII3 <- function(p, lshape1 = 0, lshape2 = 0, lscale = 0, lower.tail = TRUE, log.p = FALSE) {
-  deprecate_soft("0.2.1", "qburrIII3()", id = "xburrIII3",
-                 details = "The 'burrIII3' distribution is under review.")
-  
-  if(!length(q)) return(numeric(0))
-  if(log.p) p <- exp(p)
-  q <- suppressWarnings(actuar::qburr(1-p, shape1=exp(lshape1), shape2=exp(lshape2), scale=exp(lscale), 
-                                      lower.tail=lower.tail))
-  1/q
+#' @examples
+#' 
+#' ssd_qburrIII3(0.5)
+ssd_qburrIII3 <- function(p, shape1 = 1, shape2 = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
+  qdist("burrIII3", p = p, shape1 = shape1, shape2 = shape2, scale = scale,
+        lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname burrIII3
+#' @describeIn ssd_r Random Generation for BurrIII Distribution
 #' @export
-pburrIII3 <- function (q, lshape1 = 0, lshape2 = 0, lscale=0, lower.tail=TRUE, log.p=FALSE) {
-  deprecate_soft("0.2.1", "pburrIII3()", id = "xburrIII3",
-                 details = "The 'burrIII3' distribution is under review.")
-  
-  if(!length(q)) return(numeric(0))
-  actuar::pburr(1/q, shape1=exp(lshape1), shape2=exp(lshape2), scale=exp(lscale), 
-                lower.tail=!lower.tail, log.p=log.p)
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rburrIII3(10000), breaks = 1000)
+ssd_rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE) {
+  rdist("burrIII3", n = n, shape1 = shape1, shape2 = shape2, scale = scale, chk = chk)
 }
 
-#' @rdname burrIII3
-#' @export
-rburrIII3 <- function(n, lshape1 = 0, lshape2 = 0, lscale=0) {
-  deprecate_soft("0.2.1", "rburrIII3()", id = "xburrIII3",
-                 details = "The 'burrIII3' distribution is under review.")
-  
-  chk_scalar(lshape1)
-  chk_scalar(lshape2)
-  chk_scalar(lscale)
-  
-  r <- suppressWarnings(actuar::rburr(n, shape1=exp(lshape1), shape2=exp(lshape2), scale=exp(lscale)))
-  1/r
+sburrIII3 <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+  list(log_scale = 1, log_shape1 = 0, log_shape2 = 0)
 }
 
-#' @rdname burrIII3
-#' @export
-sburrIII3 <- function(x) {
-  deprecate_soft("0.2.1", "sburrIII3()", id = "xburrIII3",
-                 details = "The 'burrIII3' distribution is under review.")
-  list(start = list(lshape1 = 0, lshape2 = 0, lscale = 1))
+bburrIII3 <- function(x, range_shape1, range_shape2, ...) {
+  log_range_shape1 <- log(range_shape1)
+  log_range_shape2 <- log(range_shape2)
+  list(lower = list(log_scale = -Inf, 
+                    log_shape1 = log_range_shape1[1], 
+                    log_shape2 = log_range_shape2[1]),
+       upper = list(log_scale = Inf, 
+                    log_shape1 = log_range_shape1[2], 
+                    log_shape2 = log_range_shape2[2]))
 }
 
+pburrIII3_ssd <- function(q, shape1, shape2, scale) {
+  if(shape1 <= 0 || shape2 <= 0 || scale <= 0) return(NaN)
+  1/pow(1+pow(1/(scale*q),shape2),shape1)
+}
+
+qburrIII3_ssd <- function(p, shape1, shape2, scale) {
+  if(shape1 <= 0 || shape2 <= 0 || scale <= 0) return(NaN)
+  (1/(pow(pow(1/p, 1/shape1) - 1,1/shape2)))/scale
+}

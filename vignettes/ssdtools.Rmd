@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 `ssdtools` is an R package to fit Species Sensitivity Distributions (SSDs) using Maximum Likelihood and model averaging.
 
 SSDs are cumulative probability distributions that are used to estimate the percent of species that are affected by a given concentration of a chemical.
-The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (HC).
+The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration ($HC_5$).
 For more information on SSDs the reader is referred to @posthuma_species_2001.
 
 In order to use `ssdtools` you need to install R (see below) or use the Shiny [app](https://github.com/bcgov/shinyssdtools).
@@ -35,7 +35,7 @@ This vignette is a user manual for the R package.
 
 `ssdtools` provides the key functionality required to fit SSDs using Maximum Likelihood and model averaging in R.
 It is intended to be used in conjunction with [tidyverse](https://www.tidyverse.org) packages such as `readr` to input data, `tidyr` and `dplyr` to group and manipulate data and `ggplot2` [@ggplot2] to plot data.
-As such it endeavours to fulfill the tidyverse [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html).
+As such it endeavors to fulfill the tidyverse [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html).
 
 ## Installing
 
@@ -43,15 +43,13 @@ In order to install R [@r] the appropriate binary for the users operating system
 
 Once R is installed, the `ssdtools` package can be installed (together with the tidyverse) by executing the following code at the R console
 ```{r, eval = FALSE}
-install.packages("ssdtools")
-install.packages("tidyverse")
+install.packages(c("ssdtools", "tidyverse"))
 ```
 
 The `ssdtools` package (and key packages) can then be loaded into the current session using
 ```{r, message = FALSE}
 library(ssdtools)
-library(readr)
-library(ggplot2)
+library(tidyverse)
 ```
 
 ## Getting Help
@@ -73,60 +71,54 @@ The `.csv` file can then be read into R using the following
 ```{r, eval = FALSE}
 data <- read_csv(file = "path/to/file.csv")
 ```
-For the purposes of this manual we use the CCME dataset for boron which is provided with the `ssdtools` package.
+For the purposes of this manual we use the CCME dataset for boron.
 ```{r}
-boron_data <- ssdtools::boron_data
-print(boron_data)
+ccme_boron <- ssddata::ccme_boron
+print(ccme_boron)
 ```
 
 ## Fitting Distributions
 
 The function `ssd_fit_dists()` inputs a data frame and fits one or more distributions.
-The user can specify a subset of the 
+The user can specify a subset of the following `r length(ssd_dists(type = "all"))` distributions
 
-- [gamma](https://en.wikipedia.org/wiki/Gamma_distribution) (`gamma`), 
-- [Gompertz](https://en.wikipedia.org/wiki/Gompertz_distribution) (`gompertz`),
-- [log-Gumbel](https://en.wikipedia.org/wiki/Gumbel_distribution) (`lgumbel`),
-- [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) (`llog`),
-- [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) (`lnorm`) and
-- [Weibull](https://en.wikipedia.org/wiki/Weibull_distribution) (`weibull`) 
-
-distributions using the `dists` argument.
 ```{r}
-boron_dists <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
+ssd_dists(type = "all")
 ```
 
-The user can also specify one or more [custom distributions](https://bcgov.github.io/ssdtools/articles/faqs.html#how-do-i-fit-a-custom-distribution).
+using the `dists` argument.
+```{r}
+fits <- ssd_fit_dists(ccme_boron, dists = c("llogis", "lnorm", "gamma"))
+```
 
 ## Coefficients
 
-The coefficients can be extracted using the `coef` function.
-However, in and off themselves the coefficients are not that helpful.
+The estimates for the various terms can be extracted using the tidyverse generic `tidy` function (or the base R generic `coef` function).
 ```{r}
-coef(boron_dists)
+tidy(fits)
 ```
 
 ## Plots
 
-It is generally much more informative to plot the fits using the `autoplot` generic function.
-As `autoplot` returns a `ggplot` object it can be modified prior to plotting (printing) to make it look prettier.
+It is generally more informative to plot the fits using the `autoplot` generic function (a wrapper on `ssd_plot_cdf()`).
+As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
 ```{r, fig.width = 5}
 theme_set(theme_bw()) # set plot theme
-gp <- autoplot(boron_dists)
-gp <- gp + ggtitle("Species Sensitivity Distributions for Boron")
-print(gp)
+
+autoplot(fits) + 
+  ggtitle("Species Sensitivity Distributions for Boron") +
+  scale_colour_ssd()
 ```
 
 ## Selecting One Distribution
 
-Given multiple distributions the user is faced with choosing the best fitting distribution (or as discussed below averaging the results weighted by the fit).
+Given multiple distributions the user is faced with choosing the "best" distribution (or as discussed below averaging the results weighted by the fit).
 
 ```{r}
-boron_gof <- ssd_gof(boron_dists)
-boron_gof[order(boron_gof$delta), ]
+ssd_gof(fits)
 ```
 
-The `ssd_gof()` function returns several goodness of fit measures that can be used to select the best distribution including three statistics 
+The `ssd_gof()` function returns three test statistics that can be used to evaluate the fit of the various distributions to the data.
 
 - [Anderson-Darling](https://en.wikipedia.org/wiki/Anderson–Darling_test) (`ad`) statistic,
 - [Kolmogorov-Smirnov](https://en.wikipedia.org/wiki/Kolmogorov–Smirnov_test) (`ks`) statistic and
@@ -138,11 +130,13 @@ and three information criteria
 - Akaike's Information Criterion corrected for sample size (`aicc`) and
 - Bayesian Information Criterion (`bic`)
 
-Following @burnham_model_2002 we recommend the `aicc` for model selection.
-The best fitting model is that with the lowest `aicc` (indicated by the model with a `delta` value of 0.000 in the goodness of fit table).
-In the current example the best fitting model is the gamma distribution but the lnorm distribution has some support.
+Note if `ssd_gof()` is called with `pvalue = TRUE` then the p-values rather than the statistics are returned for the ad, ks and cvm tests.
 
-For further information on the advantages of an information theoretic approach in the context of selecting SSDs the reader is referred to @schwarz_improving_2019
+Following @burnham_model_2002 we recommend the `aicc` for model selection.
+The best predictive model is that with the lowest `aicc` (indicated by the model with a `delta` value of 0.000 in the goodness of fit table).
+In the current example the best predictive model is the gamma distribution but the lnorm distribution has some support.
+
+For further information on the advantages of an information theoretic approach in the context of selecting SSDs the reader is referred to @fox_recent_2021.
 
 ## Averaging Multiple Distributions
 
@@ -153,33 +147,36 @@ In the current example, the gamma and log-normal distributions have `delta` valu
 
 ## Estimating the Fit
 
-The `predict` function can be used to generate estimates model-averaged (or if `average = FALSE` individual) estimates.
-By default model averaging is based on `aicc`.
+The `predict` function can be used to generate model-averaged (or if `average = FALSE` individual) estimates by parametric bootstrapping. 
+Model averaging is based on `aicc` unless the data censored is which case `aicc` in undefined.
+In this situation model averaging is only possible if the distributions have the same number of parameters.
+Parametric bootstrapping is computationally intensive. 
+To bootstrap for each distribution in parallel register the future backend
+and then select the evaluation strategy.
 
 ```{r, eval = FALSE}
+doFuture::registerDoFuture()
+future::plan(future::multisession)
+
 set.seed(99)
-boron_pred <- predict(boron_dists, ci = TRUE)
+boron_pred <- predict(fits, ci = TRUE)
 ```
 
-The resultant object is a data frame of the estimated concentration (`est`) with standard error (`se`) and lower (`lcl`) and upper (`ucl`) 95% confidence limits by percent of species affected (`percent`).
-The confidence limits are estimated using parametric bootstrapping.
+The resultant object is a data frame of the estimated concentration (`est`) with standard error (`se`) and lower (`lcl`) and upper (`ucl`) 95% confidence limits (CLs) by percent of species affected (`percent`).
+The object includes the number of bootstraps (`nboot`) data sets generated as well as the proportion of the data sets that successfully fitted (`pboot`).
+There is no requirement for the bootstrap samples to converge.
 ```{r}
 boron_pred
 ```
 The data frame of the estimates can then be plotted together with the original data using the `ssd_plot()` function to summarize an analysis.
 Once again the returned object is a `ggplot` object which can be customized prior to plotting.
 ```{r, fig.height = 5, fig.width = 6}
-gp <- ssd_plot(boron_data, boron_pred,
-  color = "Group", label = "Species",
-  xlab = "Concentration (mg/L)", ribbon = TRUE
-)
-gp <- gp + expand_limits(x = 5000) + # to ensure the species labels fit
-  scale_color_manual(values = c(
-    "Amphibian" = "Black", "Fish" = "Blue",
-    "Invertebrate" = "Red", "Plant" = "Brown"
-  )) +
-  ggtitle("Species Sensitivity for Boron")
-print(gp)
+ssd_plot(ccme_boron, boron_pred,
+         color = "Group", label = "Species",
+         xlab = "Concentration (mg/L)", ribbon = TRUE) + 
+  expand_limits(x = 5000) + # to ensure the species labels fit
+  ggtitle("Species Sensitivity for Boron") +
+  scale_colour_ssd()
 ```
 
 In the above plot the model-averaged 95% confidence interval is indicated by the shaded band and the model-averaged 5% Hazard Concentration ($HC_5$) by the dotted line.
@@ -189,32 +186,35 @@ Hazard concentrations are discussed below.
 
 The 5% hazard concentration ($HC_5$) is the concentration that affects 5% of the species tested.
 
-```{r, eval = FALSE}
-set.seed(99)
-boron_hc5 <- ssd_hc(boron_dists, ci = TRUE)
-```
-
 ```{r}
+set.seed(99)
+boron_hc5 <- ssd_hc(fits, ci = TRUE)
 print(boron_hc5)
 ```
 
 ## Plotting
 
-The `ssdtools` package provides three ggplot geoms to allow you construct your own plots.
+The `ssdtools` package provides four ggplot geoms to allow you construct your own plots.
 
-The first is `geom_ssd()` which plots species sensitivity data 
+The first is `geom_ssdpoint()` which plots species sensitivity data 
 ```{r}
-ggplot(boron_data) +
-  geom_ssd(aes_string(x = "Conc"))
+ggplot(ccme_boron) +
+  geom_ssdpoint(aes_string(x = "Conc"))
 ``` 
 
-The second is `geom_xribbon()` which plots species sensitivity confidence intervals
+The second is `geom_ssdsegments()` which plots the range of censored species sensitivity data 
+```{r}
+ggplot(ccme_boron) +
+  geom_ssdsegment(aes_string(x = "Conc", xend = "Conc * 2"))
+``` 
+
+The third is `geom_xribbon()` which plots species sensitivity confidence intervals
 ```{r}
 ggplot(boron_pred) +
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"))
 ```  
 
-And the third is `geom_hcintersect()` which plots hazard concentrations
+And the fourth is `geom_hcintersect()` which plots hazard concentrations
 ```{r}
 ggplot() +
   geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(5, 10, 20) / 100)
@@ -225,7 +225,9 @@ They can be combined together as follows
 gp <- ggplot(boron_pred, aes_string(x = "est")) +
   geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2) +
   geom_line(aes_string(y = "percent/100")) +
-  geom_ssd(data = boron_data, aes_string(x = "Conc")) +
+  geom_ssdsegment(data = ccme_boron, aes_string(x = "Conc / 2", xend = "Conc * 2")) +
+  geom_ssdpoint(data = ccme_boron, aes_string(x = "Conc / 2")) +
+  geom_ssdpoint(data = ccme_boron, aes_string(x = "Conc * 2")) +
   scale_y_continuous("Species Affected (%)", labels = scales::percent) +
   expand_limits(y = c(0, 1)) +
   xlab("Concentration (mg/L)")
@@ -243,52 +245,53 @@ print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5 / 100))
 ```
 
 The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
+
 ```r
 ggsave("file_name.png", dpi = 600)
 ```
 
-### Censored Data
+<!-- ### Censored Data -->
 
-Censored data is that for which only a lower and/or upper limit is known for a particular species. 
-If the `right` argument in `ssd_fit_dists()` is different to the `left` argument then the data are considered to be censored. 
-`fluazinam` is a censored data set from the `fitdistrplus` package.
+<!-- Censored data is that for which only a lower and/or upper limit is known for a particular species.  -->
+<!-- If the `right` argument in `ssd_fit_dists()` is different to the `left` argument then the data are considered to be censored.  -->
+<!-- `fluazinam` is a censored data set from the `fitdistrplus` package. -->
 
-```{r}
-data(fluazinam, package = "fitdistrplus")
-head(fluazinam)
-```
+<!-- ```{r} -->
+<!-- data(fluazinam, package = "fitdistrplus") -->
+<!-- head(fluazinam) -->
+<!-- ``` -->
 
-There are less goodness-of-fit statistics available for
-fits to censored data (currently just `aic` and `bic`).
-The `delta` values are calculated using `aic`.
+<!-- There are less goodness-of-fit statistics available for -->
+<!-- fits to censored data (currently just `aic` and `bic`). -->
+<!-- The `delta` values are calculated using `aic`. -->
 
-As the sample size `n` is undefined for censored data, `aicc` cannot be calculated.
-However, if all the models have the same number of parameters, the `aic` `delta` values are identical to those for `aicc`.
-For this reason, `ssdtools` only permits the analysis of censored data using two-parameter models.
+<!-- As the sample size `n` is undefined for censored data, `aicc` cannot be calculated. -->
+<!-- However, if all the models have the same number of parameters, the `aic` `delta` values are identical to those for `aicc`. -->
+<!-- For this reason, `ssdtools` only permits the analysis of censored data using two-parameter models. -->
 
-```{r, eval = FALSE}
-fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right")
-ssd_gof(fluazinam_dists)
-```
-The model-averaged predictions (and hazard concentrations complete with 95% confidence limits) can be calculated using `aic`
-```{r, eval = FALSE}
-set.seed(99)
-fluazinam_pred <- predict(fluazinam_dists, ci = TRUE)
-```
-and the results plotted complete with arrows indicating the censorship.
-```{r}
-ssd_plot(fluazinam, fluazinam_pred,
-  left = "left", right = "right",
-  xlab = "Concentration (mg/L)"
-)
-```
+<!-- ```{r, eval = FALSE} -->
+<!-- fluazinam_dists <- ssd_fit_dists(fluazinam, left = "left", right = "right") -->
+<!-- ssd_gof(fluazinam_dists) -->
+<!-- ``` -->
+<!-- The model-averaged predictions (and hazard concentrations complete with 95% confidence limits) can be calculated using `aic` -->
+<!-- ```{r, eval = FALSE} -->
+<!-- set.seed(99) -->
+<!-- fluazinam_pred <- predict(fluazinam_dists, ci = TRUE) -->
+<!-- ``` -->
+<!-- and the results plotted complete with arrows indicating the censorship. -->
+<!-- ```{r} -->
+<!-- ssd_plot(fluazinam, fluazinam_pred, -->
+<!--   left = "left", right = "right", -->
+<!--   xlab = "Concentration (mg/L)" -->
+<!-- ) -->
+<!-- ``` -->
 
 -----
 
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
 style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
 xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span
-xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia
+xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia and Environment and Climate Change Canada
 </span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 Creative Commons Attribution 4.0 International License</a>.
 

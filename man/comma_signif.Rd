@@ -18,7 +18,7 @@ A character vector.
 }
 \description{
 By default the numeric vectors are first rounded to three significant figures.
-Then scales::commas is only applied to values greater than or equal to 1000
+Then scales::comma is only applied to values greater than or equal to 1000
 to ensure that labels are permitted to have different numbers of decimal places.
 }
 \examples{

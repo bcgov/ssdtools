@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,21 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Number of Observations
-#'
-#' @inheritParams params
-#' @seealso [stats::nobs()]
-#' @export
-#' @examples
-#' stats::nobs(boron_lnorm)
-nobs.fitdist <- function(object, ...) object$n
-
-#' @rdname nobs.fitdist 
-#' @export
-#' @examples
-#' stats::nobs(fluazinam_lnorm)
-nobs.fitdistcens <- function(object, ...) NA_integer_
 
 #' @export
-nobs.fitdists <- function(object, ...) nobs(object[[1]])
+stats::nobs
 
+#' @export
+nobs.fitdists <- function(object, ...) {
+  if(ssd_is_censored(object))
+    return(NA_integer_)
+  nrow(.data_fitdists(object))
+}

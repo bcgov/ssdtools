@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -15,16 +15,14 @@
 #' Comma and Significance Formatter
 #' 
 #' By default the numeric vectors are first rounded to three significant figures.
-#' Then scales::commas is only applied to values greater than or equal to 1000
+#' Then scales::comma is only applied to values greater than or equal to 1000
 #' to ensure that labels are permitted to have different numbers of decimal places.
 #'
 #' @param x A numeric vector to format.
-#' @param digits A whole number specifying the number of significant figures
 #' @param ... Additional arguments passed to [scales::comma].
-#'
+#' @inheritParams params
 #' @return A character vector.
 #' @export
-#'
 #' @examples
 #' comma_signif(c(0.1, 1, 10, 1000))
 #' scales::comma(c(0.1, 1, 10, 1000))
@@ -32,11 +30,11 @@ comma_signif <- function(x, digits = 3, ...) {
   if(vld_used(...)) {
     deprecate_soft("0.3.3", "comma_signif(...)")
   }
-
+  
   x <- signif(x, digits = digits)
   y <- as.character(x)
   bol <- !is.na(x) & as.numeric(x) >= 1000
-  y[bol] <- scales::comma(x[bol], ...)
+  y[bol] <- comma(x[bol], ...)
   y
 }
 
@@ -52,3 +50,46 @@ ssd_ecd <- function(x, ties.method = "first") {
   (rank(x, ties.method = ties.method) - 0.5) / length(x)
 }
 
+#' Empirical Cumulative Density for Species Sensitivity Data
+#'
+#' @inheritParams params
+#' @return A numeric vector of the empirical cumulative density for the rows 
+#' in data.
+#' @seealso [`ssd_ecd()`] and [`ssd_data()`]
+#' @export
+#'
+#' @examples
+#' ssd_ecd_data(ssddata::ccme_boron)
+ssd_ecd_data <- function(
+  data, left = "Conc", right = left, bounds = c(left = 1, right = 1)) {
+  .chk_data(data, left, right)
+  .chk_bounds(bounds)
+  
+  if(!nrow(data)) return(double(0))
+  
+  data <- process_data(data, left = left, right = right)
+  data <- bound_data(data, bounds)
+  x <- rowMeans(log(data[c("left", "right")]))
+  ssd_ecd(x)
+}
+
+#' Sort Species Sensitivity Data
+#' 
+#' Sorts Species Sensitivity Data by empirical cumulative density (ECD).
+#' 
+#' Useful for sorting data before using [geom_ssdpoint()] and [geom_ssdsegment()]
+#' to construct plots for censored data with `stat = identity` to
+#' ensure order is the same for the various components.
+#'
+#' @inheritParams params
+#'
+#' @return data sorted by the empirical cumulative density.
+#' @seealso [`ssd_ecd_data()`] and [`ssd_data()`]
+#' @export
+#'
+#' @examples
+#' ssd_sort_data(ssddata::ccme_boron)
+ssd_sort_data <- function(data, left = "Conc", right = left) {
+  ecd <- ssd_ecd_data(data, left = left, right = right)
+  data[order(ecd),,drop = FALSE]
+}

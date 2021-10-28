@@ -2,7 +2,7 @@
 % Please edit documentation in R/ssd-plot.R
 \name{ssd_plot}
 \alias{ssd_plot}
-\title{SSD Plot}
+\title{Plot Species Sensitivity Data and Distributions}
 \usage{
 ssd_plot(
   data,
@@ -13,12 +13,16 @@ ssd_plot(
   shape = NULL,
   color = NULL,
   size = 2.5,
+  linetype = NULL,
+  linecolor = NULL,
   xlab = "Concentration",
-  ylab = "Percent of Species Affected",
+  ylab = "Species Affected",
   ci = TRUE,
   ribbon = FALSE,
   hc = 5L,
-  shift_x = 3
+  shift_x = 3,
+  bounds = c(left = 1, right = 1),
+  xbreaks = waiver()
 )
 }
 \arguments{
@@ -38,6 +42,10 @@ ssd_plot(
 
 \item{size}{A number for the size of the labels.}
 
+\item{linetype}{A string of the column in pred to use for the linetype.}
+
+\item{linecolor}{A string of the column in pred to use for the line color.}
+
 \item{xlab}{A string of the x-axis label.}
 
 \item{ylab}{A string of the x-axis label.}
@@ -49,10 +57,24 @@ ssd_plot(
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 
 \item{shift_x}{The value to multiply the label x values by.}
+
+\item{bounds}{A named non-negative numeric vector of the left and right bounds for
+uncensored missing (0 and Inf) data in terms of the orders of magnitude
+relative to the extremes for non-missing values.}
+
+\item{xbreaks}{The x-axis breaks as one of:
+\itemize{
+\item \code{NULL} for no breaks
+\item \code{waiver()} for the default breaks
+\item A numeric vector of positions
+}}
 }
 \description{
-Plots species sensitivity data.
+Plots species sensitivity data and distributions.
 }
 \examples{
-ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
+ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species", shape = "Group")
+}
+\seealso{
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}} and \code{\link[=geom_ssdpoint]{geom_ssdpoint()}}
 }

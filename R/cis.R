@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,19 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-xcis <- function(x, samples, p, level, fun, args) {
-  if (p) {
+xcis_estimates <- function(x, args, what, level) {
+  if(grepl("^ssd_p", what)) {
     args$q <- x
   } else {
     args$p <- x
   }
-  samples <- do.call(fun, args)
-  if (any(is.na(samples))) {
-    err(
-      "Distribution '", substr(fun, 2, nchar(fun)),
-      "' bootstraps include missing values."
-    )
-  }
+  samples <- do.call(what, args)
   quantile <- quantile(samples, probs = probs(level))
   data.frame(
     se = sd(samples), lcl = quantile[1], ucl = quantile[2],
@@ -32,13 +26,10 @@ xcis <- function(x, samples, p, level, fun, args) {
   )
 }
 
-cis <- function(samples, p, level, x) {
-  fun <- if (p) "p" else "q"
-  fun <- paste0(fun, samples$fitpart$distname)
-  args <- as.list(samples$estim)
-  samples <- lapply(x, xcis,
-    samples = samples, p = p, level = level,
-    fun = fun, args = args
-  )
-  do.call("rbind", samples)
+cis_estimates <- function(estimates, what, level, x, .names = NULL) {
+  args <- transpose(estimates, .names = .names)
+  args <- purrr::map_depth(args, 2, function(x) {if(is.null(x)) NA_real_ else x})
+  args <- lapply(args, as.double)
+  x <- lapply(x, xcis_estimates, args, what, level)
+  bind_rows(x)
 }

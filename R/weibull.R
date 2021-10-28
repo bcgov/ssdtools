@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,44 +12,58 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Weibull Distribution
-#'
-#' Density, distribution function, quantile function and random generation for 
-#' the weibull distribution with parameters shape and scale.
-#'
-#' @inheritParams params
-#' @param x A numeric vector of values.
-#' @return A numeric vector.
-#' @seealso [stats::dweibull()]
-#' @name weibull
+#' @describeIn ssd_p Cumulative Distribution Function for Weibull Distribution
+#' @export
 #' @examples
-#' x <- seq(0.01, 5, by = 0.01)
-#' plot(x, dweibull(x), type = "l")
-NULL
-
-#' @rdname weibull
-#' @export
-dweibull <- function(x, shape = 1, scale = 1, log = FALSE) {
-  ddist("weibull", x,  shape = shape, scale = scale, 
-        log = log)
-}
-
-#' @rdname weibull
-#' @export
-pweibull <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
+#' 
+#' ssd_pweibull(1)
+ssd_pweibull <- function(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("weibull", q = q, shape = shape, scale = scale, 
         lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname weibull
+#' @describeIn ssd_q Cumulative Distribution Function for Weibull Distribution
 #' @export
-qweibull <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
+#' @examples
+#' 
+#' ssd_qweibull(0.5)
+ssd_qweibull <- function(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("weibull", p = p, shape = shape, scale = scale, 
         lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname weibull
+#' @describeIn ssd_r Random Generation for Weibull Distribution
 #' @export
-rweibull <- function(n, shape = 1, scale = 1) {
-  rdist("weibull", n = n, shape = shape, scale = scale)
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rweibull(10000), breaks = 1000)
+ssd_rweibull <- function(n, shape = 1, scale = 1, chk = TRUE) {
+  rdist("weibull", n = n, shape = shape, scale = scale, chk = chk)
+}
+
+sweibull <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+  
+  x <- mean_weighted_values(data)
+  
+  list(
+    log_scale = log(mean(x, na.rm = TRUE)),
+    log_shape = log(sd(x, na.rm = TRUE))
+  )
+}
+
+pweibull_ssd <- function(q, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(NaN)
+  stats::pweibull(q, shape, scale)
+}
+
+qweibull_ssd <- function(p, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(NaN)
+  stats::qweibull(p, shape, scale)
+}
+
+rweibull_ssd <- function(n, shape, scale) {
+  if(shape <= 0 || scale <= 0) return(rep(NaN, n))
+  stats::rweibull(n, shape, scale)
 }

@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,53 +12,59 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Log-Normal Distribution
-#'
-#' Probability density, cumulative distribution, 
-#' inverse cumulative distribution, random sample and starting values functions.
-#'
-#' @param x A numeric vector of values.
-#' @inheritParams params
-#' @return A numeric vector.
-#' @name lnorm
-#' @seealso [stats::dlnorm()]
+#' @describeIn ssd_p Cumulative Distribution Function for Log-Normal Distribution
+#' @export
 #' @examples
-#' x <- seq(0.01, 5, by = 0.01)
-#' plot(x, dlnorm(x), type = "l")
-NULL
-
-#' @rdname lnorm
-#' @export
-dlnorm <- function(x, meanlog = 0, sdlog = 1, log = FALSE) {
-  ddist("lnorm", x,  meanlog = meanlog, sdlog = sdlog, 
-        log = log)
-}
-
-#' @rdname lnorm
-#' @export
-plnorm <- function(q, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE) {
+#' 
+#' ssd_plnorm(1)
+ssd_plnorm <- function(q, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("lnorm", q = q, meanlog = meanlog, sdlog = sdlog, 
         lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname lnorm
+#' @describeIn ssd_q Cumulative Distribution Function for Log-Normal Distribution
 #' @export
-qlnorm <- function(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE) {
+#' @examples
+#' 
+#' ssd_qlnorm(0.5)
+ssd_qlnorm <- function(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("lnorm", p = p, meanlog = meanlog, sdlog = sdlog, 
         lower.tail = lower.tail, log.p = log.p)
 }
 
-#' @rdname lnorm
+#' @describeIn ssd_r Random Generation for Log-Normal Distribution
 #' @export
-rlnorm <- function(n, meanlog = 0, sdlog = 1) {
-  rdist("lnorm", n = n, meanlog = meanlog, sdlog = sdlog)
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rlnorm(10000), breaks = 1000)
+ssd_rlnorm <- function(n, meanlog = 0, sdlog = 1, chk = TRUE) {
+  rdist("lnorm", n = n, meanlog = meanlog, sdlog = sdlog, chk = chk)
 }
 
-#' @rdname lnorm
-#' @export
-slnorm <- function(x) {
-  list(start = list(
+slnorm <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+  
+  x <- mean_weighted_values(data)
+  
+  list(
     meanlog = mean(log(x), na.rm = TRUE),
-    sdlog = sd(log(x), na.rm = TRUE)
-  ))
+    log_sdlog = log(sd(log(x), na.rm = TRUE))
+  )
 }
+
+plnorm_ssd <- function(q, meanlog, sdlog) {
+  if(sdlog <= 0) return(NaN)
+  stats::plnorm(q, meanlog, sdlog);
+}
+
+qlnorm_ssd <- function(p, meanlog, sdlog) {
+  if(sdlog <= 0) return(NaN)
+  stats::qlnorm(p, meanlog, sdlog)
+}
+
+rlnorm_ssd <- function(n, meanlog, sdlog) {
+  if(sdlog <= 0) return(rep(NaN, n))
+  stats::rlnorm(n, meanlog, sdlog)
+}
+

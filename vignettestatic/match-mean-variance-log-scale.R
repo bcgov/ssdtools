@@ -1,6 +1,6 @@
 #  Solve for the parameter values for a function to match the mean and variance on the log-scale using BFI
 
-library(ggplot2)
+library(tidyverse)
 library(plyr)
 
 
@@ -12,7 +12,7 @@ match.moments.logscale <- function(mean.log, sd.log, dist.base, ival.log=c(1,0),
       # evalute the sum of squares of discrepancies between the mean and sd on log-scale for optimization 
       # random number generator for values on the concentration (i.e. anti-log scale)
       # we assume that the parameter estimates are on the log-scale so if using log-normal etc set the mean to 2 on the log-scale
-      rfunc <- paste("r", dist.base, sep="")
+      rfunc <- paste("ssd_r", dist.base, sep="")
       rv <- do.call(rfunc, list(nsim, exp(par[1]), exp(par[2])))
       omean.log <- mean(log(rv), na.rm=TRUE) # oberved mean and variance
       osd.log   <- sd  (log(rv), na.rm=TRUE)
@@ -66,7 +66,7 @@ res <- plyr::ldply(match, function(x, nsim=1000000){
    base.dist <- x$dist.base
    lpar <- x$fit$par
    par  <- exp(lpar)
-   rv <- do.call(paste0("r",base.dist), list(nsim, par[1], par[2]))
+   rv <- do.call(paste0("ssd_r",base.dist), list(nsim, par[1], par[2]))
    omean.log <- mean(log(rv), na.rm=TRUE)
    osd.log   <- sd  (log(rv), na.rm=TRUE)
    data.frame(base.dist,  lpar[1], lpar[2], par[1], par[2], omean.log, osd.log)
@@ -76,7 +76,7 @@ res
 # Plot the cumulative distribution on the log(Concentration) scale
 plotdata <- plyr::ddply(res, "dist.base", function(x){
     logC <- seq(-3,7,.01)
-    cdf  <- do.call( paste0("p",x$dist.base), list(exp(logC), x$par.1., x$par.2.))
+    cdf  <- do.call( paste0("ssd_p",x$dist.base), list(exp(logC), x$par.1., x$par.2.))
     data.frame(logC=logC, cdf=cdf)
 })
 

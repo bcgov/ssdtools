@@ -1,0 +1,2 @@
+dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot
+average,Inf,100,NA,NA,NA,1,parametric,0,NA

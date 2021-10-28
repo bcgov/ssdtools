@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -13,10 +13,16 @@
 #    limitations under the License.
 
 test_that("autoplot", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
-  
-  expect_is(ggplot2::autoplot(boron_lnorm), "ggplot")
-  expect_is(ggplot2::autoplot(boron_dists), "ggplot")
-  expect_is(ggplot2::autoplot(fluazinam_lnorm), "ggplot")
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  expect_snapshot_plot(autoplot(fits), "autoplot")
+})
+
+test_that("autoplot", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  expect_snapshot_plot(autoplot(fits, xlab = "New"), "autoplot_new")
+})
+
+test_that("autoplot", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
+  expect_snapshot_plot(autoplot(fits, xlab = "New"), "autoplot_rescale")
 })

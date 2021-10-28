@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,37 +12,20 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Autoplot 
-#'
-#' Plots the cumulative distribution function (cdf) using the ggplot2
-#' generic.
-#'
+#' @export
+ggplot2::autoplot
+
+#' Plot a fitdists Object
+#' 
+#' A wrapper on [`ssd_plot_cdf()`].
+#' 
 #' @inheritParams params
-#' @seealso [ggplot2::autoplot()] and [ssd_plot_cdf()] 
+#' @return A ggplot object.
+#' @seealso [`ssd_plot_cdf()`]
 #' @export
-#' @examples
-#' ggplot2::autoplot(boron_lnorm)
-autoplot.fitdist <- function(object, ...) {
-  chk_unused(...)
-  ssd_plot_cdf(object)
-}
-
-#' @rdname autoplot.fitdist
-#' @export
-#' @examples
-#' ggplot2::autoplot(boron_dists)
+#' @examples 
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' autoplot(fits)
 autoplot.fitdists <- function(object, ...) {
-  chk_unused(...)
-  ssd_plot_cdf(object)
-}
-
-#' @rdname autoplot.fitdist 
-#' @export
-#' @examples
-#' fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
-#' fluazinam_lnorm$censdata$left[5] <- NA
-#' ggplot2::autoplot(fluazinam_lnorm)
-autoplot.fitdistcens <- function(object, ...) {
-  chk_unused(...)
-  ssd_plot_cdf(object)
+  ssd_plot_cdf(object, ...)
 }

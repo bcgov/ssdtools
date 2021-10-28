@@ -16,31 +16,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, message=FALSE}
-library(ssdtools)
-library(ggplot2)
-```
-
-## How do I fit a custom distribution?
-
-The user can also specify a custom distribution (called say `dist`) provided the following functions are defined:
-
-- probability density (`ddist(x, par1, par2, log = FALSE)`)
-- cumulative distribution (`pdist(q, par1, par2, lower.tail = TRUE, log.p = FALSE)`)
-- inverse cumulative distribution (`qdist(p, par1, par2, lower.tail = TRUE, log.p = FALSE)`)
-- random samples (`rdist(n, par1, par2)`)
-- starting values (`sdist(x)`)
-
 ## How do I fit distributions to multiple groups such taxa and/or chemicals?
 
 An elegant approach using some tidyverse packages is demonstrated below.
 
 ```{r, message=FALSE}
-library(purrr)
-library(tidyr)
-library(dplyr)
+library(ssddata)
+library(ssdtools)
+library(tidyverse)
 
-boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Units)) %>%
+boron_preds <- nest(ccme_boron, data = c(Chemical, Species, Conc, Units)) %>%
   mutate(
     Fit = map(data, ssd_fit_dists, dists = "lnorm"),
     Prediction = map(Fit, predict)
@@ -50,22 +35,15 @@ boron_preds <- nest(ssdtools::boron_data, data = c(Chemical, Species, Conc, Unit
 
 The resultant data and predictions can then be plotted as follows.
 ```{r, fig.width = 5, fig.height = 5}
-ssd_plot(boron_data, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
+ssd_plot(ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
   facet_wrap(~Group)
 ```
 
-### How do I plot a Cullen Frey plot?
+-----
 
-The data can be visualized using a Cullen Frey plot of the skewness and kurtosis.
-
-```{r, fig.width = 5, fig.height = 5}
-set.seed(10)
-ssd_plot_cf(boron_data)
-```
-
-## How do I plot model diagnostics?
-
-A `fitdists` object can be plotted to display model diagnostics plots for each fit.
-```{r, fig.width=6, fig.height=6, fig.show='hold'}
-plot(boron_dists)
-```
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
+style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
+xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span
+xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia
+</span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+Creative Commons Attribution 4.0 International License</a>.

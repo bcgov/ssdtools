@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -17,17 +17,22 @@
 #' Calculates average proportion exposed based on log-normal distribution of concentrations.
 #'
 #' @inheritParams params
-#' @param meanlog A number of the mean of the exposure concentrations on the log scale.
-#' @param sdlog A number of the standard deviation of the exposure concentrations on the log scale.
+#' @param meanlog The mean of the exposure concentrations on the log scale.
+#' @param sdlog The standard deviation of the exposure concentrations on the log scale.
 #' @param nboot The number of samples to use to calculate the exposure.
-#' @return A number of the proportion exposed.
+#' @return The proportion exposed.
 #' @export
 #' @examples
+#' fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 #' set.seed(10)
-#' ssd_exposure(boron_lnorm)
-#' ssd_exposure(boron_lnorm, meanlog = 1)
-#' ssd_exposure(boron_lnorm, meanlog = 1, sdlog = 1)
+#' ssd_exposure(fits)
+#' ssd_exposure(fits, meanlog = 1)
+#' ssd_exposure(fits, meanlog = 1, sdlog = 1)
 ssd_exposure <- function(x, meanlog = 0, sdlog = 1, nboot = 1000) {
-  conc <- rlnorm(nboot, meanlog = meanlog, sdlog = sdlog)
+  chk_number(meanlog)
+  chk_number(sdlog)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  conc <- ssd_rlnorm(nboot, meanlog = meanlog, sdlog = sdlog)
   mean(ssd_hp(x, conc)$est) / 100
 }

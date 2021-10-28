@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,12 +12,25 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @import stats chk ggplot2 lifecycle
-#' @import abind abind
-#' @importFrom graphics plot
-#' @importFrom VGAM vglm
-#' @importFrom tibble as_tibble
-#' @importFrom utils capture.output
+#' @import chk ggplot2
+#' @importFrom abind abind
+#' @importFrom furrr future_map furrr_options
+#' @importFrom generics augment glance tidy
+#' @importFrom ggplot2 autoplot
+#' @importFrom goftest ad.test cvm.test
+#' @importFrom graphics par plot title
+#' @importFrom grid gList gpar grobName gTree polygonGrob segmentsGrob
+#' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
+#' @importFrom parallel nextRNGStream nextRNGSubStream
+#' @importFrom plyr summarise llply
+#' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
-#' @useDynLib ssdtools
+#' @importFrom scales comma manual_pal percent trans_breaks
+#' @importFrom stats coef complete.cases ks.test logLik nobs optim plogis predict runif sd setNames weighted.mean
+#' @importFrom stringr str_order
+#' @importFrom tibble as_tibble tibble
+#' @importFrom TMB MakeADFun sdreport
+#' @importFrom universals estimates npars
+#' @importFrom utils capture.output
+#' @importFrom VGAM gompertz vglm
 NULL

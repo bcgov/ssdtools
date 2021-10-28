@@ -1,7 +1,8 @@
 ---
 title: "Selecting Distributions"
 author: "ssdtools Team"
-date: '`r format(Sys.time(), "%Y-%m-%d")`'
+date: "`r Sys.Date()`"
+bibliography: references.bib
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Selecting Distributions}
@@ -21,24 +22,27 @@ knitr::opts_chunk$set(
 ## Model selection
 
 It can be difficult to select a 'best fitting' distribution when modeling species sensitivity data with low sample sizes.
-In these situations, model averaging can be used to fit multiple distributions and calculate a weighted average HCx and confidence limits (Schwarz and Tillmanns 2009).
+In these situations, model averaging can be used to fit multiple distributions and calculate a weighted average HCx and confidence limits [@schwarz_improving_2019].
 Distributions selected to use in model averaging must be bounded by zero given that effect concentrations cannot be negative.
 Furthermore, the selected distributions should provide a variety of shapes to capture the diversity of shapes in empirical species sensitivity distributions.
 
 By default, the ssdtools uses Akaike Information Criterion corrected for small sample size (AICc) as a measure of relative quality of fit for different distributions and as the basis for calculating the model-averaged HCx.  
-However, if two or more similar models fit the data well then the support for this type of shape will be over-inflated (Burnham and Anderson 2002).  
+However, if two or more similar models fit the data well then the support for this type of shape will be over-inflated [@burnham_model_2002].  
 
 ## Default Distributions
 
-To avoid such model redundancy (Burnham and Anderson 2002), ssdtools and the accompanying Shiny app (Dalgarno 2021) fit three different shape distributions by default: the log-normal, log-logistic and gamma.
+To avoid such model redundancy [@burnham_model_2002], ssdtools and the accompanying Shiny app [@dalgarno_shinyssdtools_2021] fit three different shape distributions by default: the log-normal, log-logistic and gamma.
 
 The three distributions are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.
 ```{r, message=FALSE}
 library(ssdtools)
-library(ggplot2)
+library(tidyverse)
+
+theme_set(theme_bw())
 
 set.seed(7)
-ssd_plot_cdf(ssd_match_moments(meanlog = 2, sdlog = 2))
+ssd_plot_cdf(ssd_match_moments(meanlog = 2, sdlog = 2)) + 
+  scale_color_ssd()
 ```
 
 ### Log-normal distribution
@@ -52,8 +56,8 @@ Additional distributions were selected to compensate for these deficiencies.
 
 ### Log-logistic distribution
 
-The [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) distribution is often used as a candidate SSD primarily because of its analytic tractability (Aldenberg and Slob 1993).
-We included it because it has wider tails than the log-normal and because it is a specific case of the more general Burr family of distributions (Burr 1942, Shao 2000).
+The [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) distribution is often used as a candidate SSD primarily because of its analytic tractability [@aldenberg_confidence_1993].
+We included it because it has wider tails than the log-normal and because it is a specific case of the more general Burr family of distributions [@shao_estimation_2000, @burr_cumulative_1942].
 
 ### Gamma distribution
 
@@ -63,30 +67,13 @@ The Weibull distribution was considered as an alternative but the Gamma distribu
 
 ## All Distributions
 
-For completeness the hazard concentrations for the other main distributions provided by `ssdtools` are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.
+For completeness the hazard concentrations for the other stable distributions provided by `ssdtools` are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale.
 ```{r,fig.height=5}
 set.seed(7)
-ssd_plot_cdf(ssd_match_moments(dists = c(
-  "gamma",
-  "gompertz", "lgumbel", "llogis",
-  "lnorm", "weibull"
-), meanlog = 2, sdlog = 2)) +
-  theme(legend.position = "bottom")
+ssd_plot_cdf(ssd_match_moments(dists = ssd_dists("stable"), meanlog = 2, sdlog = 2)) +
+  theme(legend.position = "bottom") + 
+  scale_color_ssd()
 ```
-
-## References
-
-Aldenberg, T., and Slob, W. 1993. Confidence Limits for Hazardous Concentrations Based on Logistically Distributed NOEC Toxicity Data. Ecotoxicology and Environmental Safety 25(1): 48–63. https://doi.org/10.1006/eesa.1993.1006.
-
-Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY.  https://doi.org/10.1007/b97636.
-
-Burr, I. W. 1942. Cumulative frequency functions. Annals of Mathematical Statistics. 13:2, 215–232.
-
-Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species Sensitivity Distributions (SSDs). JOSS 6(57): 2848. https://joss.theoj.org/papers/10.21105/joss.02848.
-
-Schwarz, C.J. and A.R. Tillmanns. 2019.  Improving statistical methods to derive species sensitivity distributions.  Water Science Series, WSS2019-07, Province of British Columbia, Victoria.
-
-Shao, Q. 2000. Estimation for hazardous concentrations based on NOEC toxicity data: an alternative approach. : 13.
 
 -----
 
@@ -96,3 +83,5 @@ xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <s
 xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia
 </span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 Creative Commons Attribution 4.0 International License</a>.
+
+## References

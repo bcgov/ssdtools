@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,14 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-plot_fitdist <- function(x, breaks = "default", ...) {
-  graphics::par(oma = c(0, 0, 2, 0))
-  graphics::plot(x, breaks = breaks, ...)
-  graphics::title(paste("Distribution:", x$distname), outer = TRUE)
-}
+#' @export
+graphics::plot
 
 #' @export
-plot.fitdists <- function(x, breaks = "default", ...) {
-  lapply(x, plot_fitdist, breaks = breaks, ...)
-  invisible()
+plot.fitdists <- function(x, ...) {
+  lifecycle::deprecate_warn("0.3.4", "plot.fitdists()", "autoplot.fitdists()")
+  autoplot(x)
 }

@@ -2,35 +2,10 @@
 % Please edit documentation in R/hp.R
 \name{ssd_hp}
 \alias{ssd_hp}
-\alias{ssd_hp.fitdist}
-\alias{ssd_hp.fitdistcens}
 \alias{ssd_hp.fitdists}
-\alias{ssd_hp.fitdistscens}
 \title{Hazard Percent}
 \usage{
 ssd_hp(x, ...)
-
-\method{ssd_hp}{fitdist}(
-  x,
-  conc,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  ...
-)
-
-\method{ssd_hp}{fitdistcens}(
-  x,
-  conc,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  ...
-)
 
 \method{ssd_hp}{fitdists}(
   x,
@@ -38,23 +13,11 @@ ssd_hp(x, ...)
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
   average = TRUE,
-  ic = "aicc",
-  ...
-)
-
-\method{ssd_hp}{fitdistscens}(
-  x,
-  conc,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  average = TRUE,
-  ic = "aic",
+  delta = 7,
+  min_pboot = 0.99,
+  parametric = TRUE,
+  control = NULL,
   ...
 )
 }
@@ -69,36 +32,38 @@ ssd_hp(x, ...)
 
 \item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
-
-\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
-
-\item{ncpus}{A count of the number of parallel processes to use.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
 
 \item{average}{A flag specifying whether to model average the estimates.}
 
-\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
+\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+
+\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
+in the sense of returning a likelihood.}
+
+\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 }
 \value{
-A data frame of the conc and percent.
+A tibble of corresponding hazard percents.
 }
 \description{
-Gets percent species protected at specified concentrations.
+Gets percent of species protected at specified concentration(s).
+}
+\details{
+If \code{ci = TRUE} uses parameteric bootstrapping to get confidence intervals on the
+hazard percent(s).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fitdist}: Hazard Percent fitdist
-
-\item \code{fitdistcens}: Hazard Percent fitdistcens
-
-\item \code{fitdists}: Hazard Percent fitdists
-
-\item \code{fitdistscens}: Hazard Percent fitdistcens
+\item \code{fitdists}: Hazard Percents for fitdists Object
 }}
 
 \examples{
-ssd_hp(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
-ssd_hp(boron_dists, c(0, 1, 30, Inf))
-ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_hp(fits, conc = 1)
+}
+\seealso{
+\code{\link[=ssd_hc]{ssd_hc()}}
 }

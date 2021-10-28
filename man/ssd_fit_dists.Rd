@@ -9,8 +9,16 @@ ssd_fit_dists(
   left = "Conc",
   right = left,
   weight = NULL,
-  dists = c("llogis", "gamma", "lnorm"),
-  computable = FALSE,
+  dists = ssd_dists("bc"),
+  nrow = 6L,
+  rescale = FALSE,
+  reweight = FALSE,
+  computable = TRUE,
+  at_boundary_ok = FALSE,
+  min_pmix = 0.2,
+  range_shape1 = c(0.05, 20),
+  range_shape2 = range_shape1,
+  control = list(),
   silent = FALSE
 )
 }
@@ -21,16 +29,33 @@ ssd_fit_dists(
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{weight}{A string of the column in data with the weightings (or NULL)}
+\item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
 \item{dists}{A character vector of the distribution names.}
 
+\item{nrow}{A positive whole number of the minimum number of non-missing rows.}
+
+\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
+
+\item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
+
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
+
+\item{at_boundary_ok}{A flag specifying whether a model with one or more
+parameters at the boundary should be considered to have converged (default = FALSE).}
+
+\item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
+
+\item{range_shape1}{A numeric vector of length two of the lower and upper bounds for the shape1 parameter.}
+
+\item{range_shape2}{shape2 parameter.}
+
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 }
 \value{
-An object of class fitdists (a list of \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}} objects).
+An object of class fitdists.
 }
 \description{
 Fits one or more distributions to species sensitivity data.
@@ -38,26 +63,20 @@ Fits one or more distributions to species sensitivity data.
 \details{
 By default the 'llogis', 'gamma' and 'lnorm'
 distributions are fitted to the data.
-The ssd_fit_dists function has also been
-tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.
+For a complete list of the implemented distributions see \code{\link[=ssd_dists]{ssd_dists()}}.
 
-If weight specifies a column in the data frame with positive integers,
+If weight specifies a column in the data frame with positive numbers,
 weighted estimation occurs.
-However, currently only the resultant parameter estimates are available (via coef).
+However, currently only the resultant parameter estimates are available.
 
 If the \code{right} argument is different to the \code{left} argument then the data are considered to be censored.
-
-The fits are performed using \code{\link[fitdistrplus:fitdist]{fitdistrplus::fitdist()}}
-(and \code{\link[fitdistrplus:fitdistcens]{fitdistrplus::fitdistcens()}} in the case of censored data).
-The method used is "mle" (maximum likelihood estimation)
-which means that numerical optimization is carried out in
-\code{\link[fitdistrplus:mledist]{fitdistrplus::mledist()}} using \code{\link[stats:optim]{stats::optim()}}
-unless finite bounds are supplied in the (lower and upper) in which
-it is carried out using \code{\link[stats:constrOptim]{stats::constrOptim()}}.
-In both cases the "Nelder-Mead" method is used.
 }
 \examples{
-ssd_fit_dists(boron_data)
-data(fluazinam, package = "fitdistrplus")
-ssd_fit_dists(fluazinam, left = "left", right = "right")
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+fits
+ssd_plot_cdf(fits)
+ssd_hc(fits)
+}
+\seealso{
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}} and \code{\link[=ssd_hc]{ssd_hc()}}
 }
