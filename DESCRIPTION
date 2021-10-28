@@ -1,6 +1,6 @@
 Package: ssdtools
 Title: Species Sensitivity Distributions
-Version: 0.3.4.9001
+Version: 0.3.7.9901
 Authors@R: 
     c(person(given = "Joe",
              family = "Thorley",
@@ -63,7 +63,7 @@ License: Apache License (== 2.0) | file LICENSE
 URL: https://github.com/bcgov/ssdtools
 BugReports: https://github.com/bcgov/ssdtools/issues
 Depends:
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     abind,
     chk (>= 0.7.0),

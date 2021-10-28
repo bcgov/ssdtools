@@ -177,10 +177,32 @@ Added
   - `augment()` to return original data set.
   - `logLik()` to return the log-likelihood.
   - `summary.fitdists()` to summarize.
+  
+# ssdtools 0.3.7.9000
+
+- Same as previous version.
+
+
+# ssdtools 0.3.7
+
+- fix unequal indentation of Rmd ```
+
+
+# ssdtools 0.3.6
+
+- Added `wt` (Akaike weight) column to `predict()`, `ssd_hc()` and `ssd_hp()`
+- Deprecated argument `ic` to `predict()`, `ssd_hc()` and `ssd_hp()` because unused.
+- Silenced output from `ssd_fit_dists()`.
+
+
+# ssdtools 0.3.5
+
+- Bump requirement to R >= 4.1 because of `actuar` package.
+
 
 # ssdtools 0.3.4
 
-- Update Apache Licence url to https.
+- Update Apache License url to https.
 
 # ssdtools 0.3.3
 

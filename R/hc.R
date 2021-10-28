@@ -255,7 +255,6 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
                   nboot = nboot, min_pboot = min_pboot, 
                   average = FALSE, parametric = parametric))
   }
-  
   hc <- .ssd_hc_burrlioz_fitdists(x, percent = percent, level = level, nboot = nboot, 
                                   min_pboot = min_pboot, parametric = parametric)
   warn_min_pboot(hc, min_pboot)

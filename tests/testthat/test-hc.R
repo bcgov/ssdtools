@@ -435,3 +435,4 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
                                  parametric = TRUE)
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
 })
+

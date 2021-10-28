@@ -82,4 +82,3 @@ test_that("sgompertz with initial values still unstable!", {
   expect_equal(ssdtools:::sgompertz(sdata, pars),
                list(log_location = 3.80715953030506, log_shape = -658.432910074053))
 })
-
