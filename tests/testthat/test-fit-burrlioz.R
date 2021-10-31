@@ -81,7 +81,7 @@ test_that("burrlioz with anon_a", {
   fit <- ssd_fit_burrlioz(ssddata::anon_a)
   expect_s3_class(fit, "fitdists")
   expect_s3_class(fit, "fitburrlioz")
-  expect_identical(names(fit), "lgumbel")
+  expect_identical(names(fit), "invpareto")
 })
 
 test_that("burrlioz with anon_e", {

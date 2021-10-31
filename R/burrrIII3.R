@@ -44,7 +44,7 @@ ssd_rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE) {
 
 sburrIII3 <- function(data, pars = NULL) {
   if(!is.null(pars)) return(pars)
-  list(log_scale = -1, log_shape1 = 0, log_shape2 = 0)
+  list(log_scale = 0, log_shape1 = 0, log_shape2 = 0)
 }
 
 bburrIII3 <- function(x, range_shape1, range_shape2, ...) {
