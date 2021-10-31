@@ -44,7 +44,7 @@ ssd_rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE) {
 
 sburrIII3 <- function(data, pars = NULL) {
   if(!is.null(pars)) return(pars)
-  list(log_scale = 1, log_shape1 = 0, log_shape2 = 0)
+  list(log_scale = 0, log_shape1 = 0, log_shape2 = 0)
 }
 
 bburrIII3 <- function(x, range_shape1, range_shape2, ...) {
@@ -60,10 +60,10 @@ bburrIII3 <- function(x, range_shape1, range_shape2, ...) {
 
 pburrIII3_ssd <- function(q, shape1, shape2, scale) {
   if(shape1 <= 0 || shape2 <= 0 || scale <= 0) return(NaN)
-  1/pow(1+pow(1/(scale*q),shape2),shape1)
+  1/pow(1+pow(scale/q,shape2),shape1)
 }
 
 qburrIII3_ssd <- function(p, shape1, shape2, scale) {
   if(shape1 <= 0 || shape2 <= 0 || scale <= 0) return(NaN)
-  (1/(pow(pow(1/p, 1/shape1) - 1,1/shape2)))/scale
+  scale/(pow(pow(1/p, 1/shape1) - 1,1/shape2))
 }
