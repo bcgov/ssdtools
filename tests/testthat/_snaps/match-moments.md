@@ -1,20 +1,20 @@
 # match_moments all
 
     $burrIII3
-      shape1   shape2    scale 
-    1.188889 1.688889 0.400000 
+    shape1 shape2  scale 
+       2.1    1.5    1.3 
     
     $gamma
        shape    scale 
-    1.546765 2.517249 
+    1.487306 2.463628 
     
     $gompertz
      location     shape 
-    0.1194794 0.2283287 
+    0.1041903 0.2743789 
     
     $invpareto
        shape    scale 
-    1.086328 6.471484 
+    1.017114 7.156812 
     
     $lgumbel
     locationlog    scalelog 
@@ -26,15 +26,15 @@
     
     $llogis_llogis
     locationlog1    scalelog1 locationlog2    scalelog2         pmix 
-       0.5487772    0.5011361    1.2939879    0.5558022    0.4524088 
+       0.6445149    0.4714457    1.3935275    0.5570246    0.5455203 
     
     $lnorm
-     meanlog    sdlog 
-    1.091455 1.004492 
+      meanlog     sdlog 
+    0.9812500 0.9515625 
     
     $lnorm_lnorm
      meanlog1    sdlog1  meanlog2    sdlog2      pmix 
-    0.1409856 1.0659456 1.1849856 0.9799296 0.1487680 
+    0.2077798 1.0783014 1.1693798 1.0027238 0.1202752 
     
     $weibull
        shape    scale 
