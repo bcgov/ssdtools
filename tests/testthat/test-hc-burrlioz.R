@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("ssd_hc_burrlioz gets estimates with invpareto", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  rlang::local_options(lifecycle_verbosity = "quiet")
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
   hc_boron <- ssd_hc_burrlioz(fit, nboot = 10, ci = TRUE, min_pboot = 0)
@@ -21,7 +21,7 @@ test_that("ssd_hc_burrlioz gets estimates with invpareto", {
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  rlang::local_options(lifecycle_verbosity = "quiet")
   set.seed(99)
   data <- data.frame(Conc = ssd_rburrIII3(30))
   fit <- ssd_fit_burrlioz(data)
@@ -32,7 +32,7 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  rlang::local_options(lifecycle_verbosity = "quiet")
   set.seed(99)
   data <- data.frame(Conc = ssd_rburrIII3(30))
   fit <- ssd_fit_burrlioz(data)

@@ -20,6 +20,17 @@ test_that("hc", {
   expect_snapshot_data(hc, "hc")
 })
 
+test_that("ssd_hc failing boots ccme_chloride lnorm_lnorm", {
+  fits <- ssd_fit_dists(ssddata::ccme_chloride, 
+                        min_pmix = 0, at_boundary_ok = TRUE,
+                        dists = c("lnorm", "lnorm_lnorm"))
+  
+  set.seed(102)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 2)
+  expect_s3_class(hc, "tbl_df")
+  expect_snapshot_data(hc, "hc_cis_chloride50")
+})
+
 test_that("ssd_hc hc defunct", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
