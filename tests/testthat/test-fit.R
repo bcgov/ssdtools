@@ -395,3 +395,10 @@ test_that("ssd_fit_dists unstable with anon_e", {
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_unstable_anon_e")
 })
+
+test_that("ssd_fit_dists works min_pmix = 0.5 and at_boundary_ok = TRUE and computable = FALSE", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lnorm_lnorm"), min_pmix = 0.5,
+                       at_boundary_ok = TRUE, computable = FALSE)
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "min_pmix_05")
+})

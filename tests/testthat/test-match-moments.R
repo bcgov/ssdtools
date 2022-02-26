@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("match_moments all", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  rlang::local_options(lifecycle_verbosity = "quiet")
   set.seed(10)
   pars <- ssd_match_moments(dists = ssd_dists("all"))
   expect_snapshot_output(print(pars))

@@ -91,6 +91,7 @@ no_ssd_hc <- function() {
                               range_shape2 = range_shape2,
                               parametric = parametric,
                               control = control)
+
   cis <- cis_estimates(estimates, what, level = level, x = proportion)
   hc <- tibble(
     dist = dist,

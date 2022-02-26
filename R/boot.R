@@ -46,8 +46,14 @@ generate_data <- function(dist, data, args, weighted, censoring, parametric) {
 sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, parametric, control) {
   new_data <- generate_data(dist, data = data, args = args, weighted = weighted, censoring = censoring,
                             parametric = parametric)
+  
+  if(dist == "lnorm_lnorm") {
+    pars <- slnorm_lnorm(new_data)
+  }
+  
   fit <- fun(dist, new_data, min_pmix = min_pmix, range_shape1 = range_shape1,
              range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE)$result
+  
   if(is.null(fit)) return(NULL)
   estimates(fit)
 }
