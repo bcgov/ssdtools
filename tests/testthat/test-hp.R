@@ -242,10 +242,10 @@ test_that("ssd_hp cis with non-convergence", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
   expect_identical(attr(fit, "min_pmix"), 0.15)
-  hp15 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100)
+  hp15 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.98)
   attr(fit, "min_pmix") <- 0.3
   expect_identical(attr(fit, "min_pmix"), 0.3)
-  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100)
+  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.96)
   expect_s3_class(hp30, "tbl")
   expect_snapshot_data(hp30, "hp_30")
 })

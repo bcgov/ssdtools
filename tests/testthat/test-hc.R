@@ -20,17 +20,6 @@ test_that("hc", {
   expect_snapshot_data(hc, "hc")
 })
 
-test_that("ssd_hc failing boots ccme_chloride lnorm_lnorm", {
-  fits <- ssd_fit_dists(ssddata::ccme_chloride, 
-                        min_pmix = 0, at_boundary_ok = TRUE,
-                        dists = c("lnorm", "lnorm_lnorm"))
-  
-  set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 2)
-  expect_s3_class(hc, "tbl_df")
-  expect_snapshot_data(hc, "hc_cis_chloride50")
-})
-
 test_that("ssd_hc hc defunct", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
@@ -349,10 +338,10 @@ test_that("ssd_hc cis with non-convergence", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
   expect_identical(attr(fit, "min_pmix"), 0.15)
-  hc15 <- ssd_hc(fit, ci = TRUE, nboot = 100)
+  hc15 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.98)
   attr(fit, "min_pmix") <- 0.3
   expect_identical(attr(fit, "min_pmix"), 0.3)
-  hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100)
+  hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.96)
   expect_s3_class(hc30, "tbl")
   expect_snapshot_data(hc30, "hc_30")
 })
@@ -447,3 +436,13 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
 })
 
+test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
+  fits <- ssd_fit_dists(ssddata::ccme_chloride, 
+                        min_pmix = 0, at_boundary_ok = TRUE,
+                        dists = c("lnorm", "lnorm_lnorm"))
+  
+  set.seed(102)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 2)
+  expect_s3_class(hc, "tbl_df")
+  expect_snapshot_data(hc, "hc_cis_chloride50")
+})
