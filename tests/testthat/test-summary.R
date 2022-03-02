@@ -16,7 +16,7 @@ test_that("summary fitdists", {
   expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted", "unequal", "min_pmix"))
   expect_identical(summary$censoring, c(0,Inf))
   expect_identical(summary$nrow, 28L)
-  expect_identical(summary$min_pmix, 0.2)
+  expect_identical(summary$min_pmix, 0.01)
   expect_identical(summary$rescaled, 1)
   expect_identical(summary$weighted, 1)
   expect_identical(summary$unequal, FALSE)

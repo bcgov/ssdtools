@@ -68,8 +68,8 @@ sllogis_llogis <- function(data, pars = NULL) {
 }
 
 bllogis_llogis <- function(x, min_pmix, ...) {
-  list(lower = list(locationlog1 = -Inf, log_scalelog1 = -Inf, locationlog2 = -Inf, log_scalelog2 = -Inf, logit_pmix = logit(min_pmix)),
-       upper = list(locationlog1 = Inf, log_scalelog1 = Inf, locationlog2 = Inf, log_scalelog2 = Inf, logit_pmix = logit(1 - min_pmix)))
+  list(lower = list(locationlog1 = -Inf, log_scalelog1 = -Inf, locationlog2 = -Inf, log_scalelog2 = -Inf, logit_pmix = max(-10, qlogis(min_pmix))),
+       upper = list(locationlog1 = Inf, log_scalelog1 = Inf, locationlog2 = Inf, log_scalelog2 = Inf, logit_pmix = 10))
 }
 
 plogis_logis_ssd <- function(q, location1, scale1, location2, scale2, pmix) {
