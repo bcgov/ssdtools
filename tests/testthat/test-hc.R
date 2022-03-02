@@ -208,8 +208,8 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
- expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-  "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
+  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
   expect_identical(hc$se, NA_real_)
 })
 
@@ -369,7 +369,7 @@ test_that("ssd_hc cis with error and multiple dists", {
   expect_identical(attr(fit, "min_pmix"), 0.1)
   set.seed(99)
   expect_warning(hc_err_two <- ssd_hc(fit, ci = TRUE, nboot = 100, average = FALSE,
-                                  delta = 100), 
+                                      delta = 100), 
                  "One or more pboot values less than 0.99 \\(decrease min_pboot with caution\\)\\.")
   expect_snapshot_data(hc_err_two, "hc_err_two")
   set.seed(99)
@@ -432,7 +432,7 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
   hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0,
-                                 parametric = TRUE)
+                        parametric = TRUE)
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
 })
 
@@ -445,4 +445,25 @@ test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
   hc <- ssd_hc(fits, ci = TRUE, nboot = 2)
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_data(hc, "hc_cis_chloride50")
+})
+
+test_that("ssd_hc error ccme_chloride lnorm_lnorm", {
+  data <- data.frame(
+    Conc = c(540.867092472239, 7476.91556265967, 855.903713759111, 852.698706652517, 
+             36.793297861237, 929.316281029341, 484.10852047549, 3890.55728117846, 
+             950.117413882592, 3016.09633686003, 2767.66624658929, 1701.75209398647, 
+             677.095899119392, 1571.75040519216, 253.040297220538, 241.900809068365, 
+             4876.29740716167, 1418.0149525675, 262.053012887673, 4666.57523382448, 
+             2408.03105784541, 638.329933045672, 671.825657256822, 415.604954521696, 
+             3574.07382694119, 2909.20631385821, 1252.77724182236, 633.382148434876))
+  fit <- ssd_fit_dists(data, min_pmix = 0.1, at_boundary_ok = TRUE,
+                       dists = c("lnorm", "lnorm_lnorm"))
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_chloride_boot01")
+  
+  skip("should be fitting")
+  fit <- ssd_fit_dists(data, min_pmix = 0, at_boundary_ok = TRUE,
+                       dists = c("lnorm", "lnorm_lnorm"))
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_chloride_boot00")
 })
