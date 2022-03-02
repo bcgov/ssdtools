@@ -469,6 +469,6 @@ test_that("ssd_hc error ccme_chloride lnorm_lnorm", {
   ssd_fit_dists(data, min_pmix = plogis(-10), at_boundary_ok = TRUE,
                 dists = c("lnorm", "lnorm_lnorm"))
   ssd_fit_dists(data, min_pmix = 0, at_boundary_ok = TRUE,
-                dists = c("lnorm", "lnorm_lnorm"))
+                dists = "lnorm_lnorm", control = list(trace = 6L))
 
 })
