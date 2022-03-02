@@ -462,8 +462,13 @@ test_that("ssd_hc error ccme_chloride lnorm_lnorm", {
   expect_snapshot_data(tidy, "tidy_chloride_boot01")
   
   skip("should be fitting")
-  fit <- ssd_fit_dists(data, min_pmix = 0, at_boundary_ok = TRUE,
+  ssd_fit_dists(data, min_pmix = 0.1, at_boundary_ok = TRUE,
+                dists = c("lnorm", "lnorm_lnorm"))
+  ssd_fit_dists(data, min_pmix = 0.05, at_boundary_ok = TRUE,
                        dists = c("lnorm", "lnorm_lnorm"))
-  tidy <- tidy(fit)
-  expect_snapshot_data(tidy, "tidy_chloride_boot00")
+  ssd_fit_dists(data, min_pmix = plogis(-10), at_boundary_ok = TRUE,
+                dists = c("lnorm", "lnorm_lnorm"))
+  ssd_fit_dists(data, min_pmix = 0, at_boundary_ok = TRUE,
+                dists = c("lnorm", "lnorm_lnorm"))
+
 })
