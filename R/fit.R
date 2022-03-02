@@ -136,7 +136,7 @@ ssd_fit_dists <- function(
   chk_flag(computable)
   chk_flag(at_boundary_ok)
   chk_number(min_pmix)
-  chk_range(min_pmix, c(0, 0.5))
+  chk_range(min_pmix, plogis(c(-10, 0)))
   chk_numeric(range_shape1)
   chk_vector(range_shape1)
   check_dim(range_shape1, values = 2)
