@@ -401,3 +401,11 @@ test_that("ssd_fit_dists works min_pmix = 0.5 and at_boundary_ok = TRUE and comp
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "min_pmix_05")
 })
+
+test_that("ssd_fit_dists min_pmix 0", {
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 2, pmix = 0.01))
+  fit <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0)
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_pmix0")
+})
