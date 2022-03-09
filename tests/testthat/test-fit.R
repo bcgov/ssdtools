@@ -383,8 +383,7 @@ test_that("ssd_fit_dists at_boundary_ok message", {
 })
 
 test_that("ssd_fit_dists stable with anon_e", {
-  expect_warning(fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists("stable")),
-                 "weibull")  
+  fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists("stable"))
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_stable_anon_e")
 })
