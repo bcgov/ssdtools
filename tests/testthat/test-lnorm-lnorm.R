@@ -42,3 +42,14 @@ test_that("ssd_rlnorm_lnorm allows reversed distributions", {
   r2 <- ssd_rlnorm_lnorm(1, meanlog1 = 1, meanlog2 = 0, pmix = 0.9)
   expect_equal(r1, r2)
 })
+
+test_that("lnorm_lnorm fits anonb", {
+  set.seed(99)
+  data <- ssddata::anon_b
+  fit <- ssd_fit_dists(data, dists = c("lnorm_lnorm"), 
+                       at_boundary_ok = FALSE, min_pmix = 0.05)
+  
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_anonb")
+  expect_snapshot_plot(ssd_plot(data, predict(fit), ci = FALSE), "plot_anonb")
+})

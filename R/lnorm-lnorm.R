@@ -70,7 +70,7 @@ slnorm_lnorm <- function(data, pars = NULL) {
 
 blnorm_lnorm <- function(x, min_pmix, ...) {
   list(lower = list(meanlog1 = -Inf, log_sdlog1 = -10, meanlog2 = -Inf, log_sdlog2 = -10, logit_pmix = max(-10, qlogis(min_pmix))),
-       upper = list(meanlog1 = Inf, log_sdlog1 = Inf, meanlog2 = Inf, log_sdlog2 = Inf, logit_pmix = 10))
+       upper = list(meanlog1 = Inf, log_sdlog1 = Inf, meanlog2 = Inf, log_sdlog2 = Inf, logit_pmix = min(10, qlogis(1-min_pmix))))
 }
 
 plnorm_lnorm_ssd <- function(q, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
