@@ -46,10 +46,15 @@ sweibull <- function(data, pars = NULL) {
   if(!is.null(pars)) return(pars)
   
   x <- mean_weighted_values(data)
+  n <- length(x)
+  p <-(1:n-0.3) / (n + 0.4)
+  m <- stats::lm(log(-log(1-p)) ~ log(sort(x)))
   
+  shape <- m$coefficients[2]
+  log_scale <- -m$coefficients[1]/shape
   list(
-    log_scale = log(mean(x, na.rm = TRUE)),
-    log_shape = log(sd(x, na.rm = TRUE))
+    log_scale = log_scale,
+    log_shape = log(shape)
   )
 }
 

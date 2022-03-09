@@ -21,12 +21,23 @@ test_that("weibull", {
 })
 
 test_that("weibull", {
-  library(ssdtools)
   set.seed(99)
   data <- data.frame(Conc = ssd_rweibull(1000, shape = 0.5, scale = 2))
   fit <- ssd_fit_dists(data, dists = c("weibull", "lgumbel"))
   tidy <- tidy(fit)
-  tidy
   expect_snapshot_data(tidy, "tidy")
 })
 
+test_that("weibull works anona", {
+  set.seed(99)
+  fit <- ssd_fit_dists(ssddata::anon_a, dists = c("weibull", "lgumbel"))
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_anona")
+})
+
+test_that("weibull bootstraps anona", {
+  set.seed(99)
+  fit <- ssd_fit_dists(ssddata::anon_a, dists = "weibull")
+  hc <- ssd_hc(fit, nboot = 1000, ci = TRUE)
+  expect_snapshot_data(hc, "hc_anona")
+})

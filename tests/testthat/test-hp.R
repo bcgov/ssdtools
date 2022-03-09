@@ -271,14 +271,12 @@ test_that("ssd_hp cis with error and multiple dists", {
   fit <- ssd_fit_dists(data, dists = c("lnorm", "llogis_llogis"), min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
   set.seed(99)
-  expect_warning(hp_err_two <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, average = FALSE,
-                                      delta = 100), 
-                 "One or more pboot values less than 0.99 \\(decrease min_pboot with caution\\)\\.")
+  hp_err_two <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, average = FALSE,
+                                      delta = 100)
   expect_snapshot_data(hp_err_two, "hp_err_two")
   set.seed(99)
-  expect_warning(hp_err_avg <- ssd_hp(fit, conc = 1,  ci = TRUE, nboot = 100,
-                                      delta = 100), 
-                 "One or more pboot values less than 0.99 \\(decrease min_pboot with caution\\)\\.")
+  hp_err_avg <- ssd_hp(fit, conc = 1,  ci = TRUE, nboot = 100,
+                                      delta = 100)
   expect_snapshot_data(hp_err_avg, "hp_err_avg")
 })
 
