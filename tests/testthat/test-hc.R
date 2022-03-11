@@ -352,7 +352,7 @@ test_that("ssd_hc cis with error", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
-  hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100)
+  expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100))
   expect_s3_class(hc_err, "tbl")
   expect_snapshot_data(hc_err, "hc_err_na")
   hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92)
@@ -367,11 +367,11 @@ test_that("ssd_hc cis with error and multiple dists", {
   fit <- ssd_fit_dists(data, dists = c("lnorm", "llogis_llogis"), min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
   set.seed(99)
-  hc_err_two <- ssd_hc(fit, ci = TRUE, nboot = 100, average = FALSE, delta = 100)
+  expect_warning(hc_err_two <- ssd_hc(fit, ci = TRUE, nboot = 100, average = FALSE, delta = 100))
   expect_snapshot_data(hc_err_two, "hc_err_two")
   set.seed(99)
-  hc_err_avg <- ssd_hc(fit, ci = TRUE, nboot = 100,
-                                      delta = 100)
+  expect_warning(hc_err_avg <- ssd_hc(fit, ci = TRUE, nboot = 100,
+                                      delta = 100))
   expect_snapshot_data(hc_err_avg, "hc_err_avg")
 })
 
@@ -438,7 +438,7 @@ test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
                         dists = c("lnorm_lnorm", "llogis_llogis"))
   
   set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE)
+  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE))
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_data(hc, "hc_cis_chloride50")
 })
