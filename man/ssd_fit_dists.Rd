@@ -15,7 +15,7 @@ ssd_fit_dists(
   reweight = FALSE,
   computable = TRUE,
   at_boundary_ok = FALSE,
-  min_pmix = 0.01,
+  min_pmix = 0,
   range_shape1 = c(0.05, 20),
   range_shape2 = range_shape1,
   control = list(),
