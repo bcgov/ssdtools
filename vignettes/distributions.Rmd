@@ -70,7 +70,7 @@ The Weibull distribution was considered as an alternative but the Gamma distribu
 For completeness the hazard concentrations for the other stable distributions provided by `ssdtools` are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale.
 ```{r,fig.height=5}
 set.seed(7)
-ssd_plot_cdf(ssd_match_moments(dists = ssd_dists("stable"), meanlog = 2, sdlog = 2)) +
+ssd_plot_cdf(ssd_match_moments(dists = ssd_dists_all(), meanlog = 2, sdlog = 2)) +
   theme(legend.position = "bottom") + 
   scale_color_ssd()
 ```

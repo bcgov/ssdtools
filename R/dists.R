@@ -14,34 +14,50 @@
 
 #' Species Sensitivity Distributions
 #' 
-#' Gets a character vector of the names of implemented distributions.
+#' Gets a character vector of the names of the available distributions.
 #'
-#' @param type A string specifying the distribution type.
-#' Possible values are 'all', 'stable' and 'unstable'.
+#' @param bcanz A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.
+#' @param tails A flag or NULL specifying whether to only include distributions with both tails.
+#' @param npars A whole numeric vector specifying which distributions to include based on the number of parameters.
 #' @return A unique, sorted character vector of the distributions.
+#' @family dists
 #' @export
 #'
 #' @examples
-#' ssd_dists("stable")
-#' ssd_dists("unstable")
-#' ssd_dists("bc")
-ssd_dists <- function(type = "stable") {
-  chk_string(type)
-  chk_subset(type, c("all", "stable", "unstable", "bc"))
+#' ssd_dists()
+#' ssd_dists(bcanz = TRUE)
+#' ssd_dists(tails = FALSE)
+#' ssd_dists(npars = 5)
+ssd_dists <- function(bcanz = NULL, tails = NULL, npars = 2:5) {
+  chk_null_or(bcanz, vld = vld_flag)
+  chk_null_or(tails, vld = vld_flag)
+  
+  chk_whole_numeric(npars)
+  chk_not_any_na(npars)
+  chk_range(npars, c(2L, 5L))
 
-  stable <- c("gamma", "lgumbel", 
-              "llogis", "lnorm", "weibull")
-  unstable <- c("burrIII3", "gompertz", "invpareto", "llogis_llogis", "lnorm_lnorm")
-  bc <- c("gamma", "llogis", "lnorm")
+  dists <- ssdtools::dist_data
+  if(!is.null(bcanz)) {
+    dists <- dists[dists$bcanz == bcanz,]
+  }
+  if(!is.null(tails)) {
+    dists <- dists[dists$tails == tails,]
+  }
+  dists <- dists[dists$npars %in% npars,]
   
-  dists <- switch(type, 
-         all = c(stable, unstable),
-         stable = stable,
-         unstable = unstable,
-         bc = bc,
-         stop())
-  
-  dists <- unique(dists)
-  dists <- stringr::str_sort(dists)
-  dists
+  dists$dist
+}
+
+#' All Species Sensitivity Distributions
+#' 
+#' Gets a character vector of the names of all the available distributions.
+#'
+#' @return A unique, sorted character vector of the distributions.
+#' @family dists
+#' @export
+#'
+#' @examples
+#' ssd_dists_all()
+ssd_dists_all <- function() {
+  ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5)
 }

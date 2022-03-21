@@ -11,6 +11,18 @@ Although it was hoped that model fitting would be faster this is currently not t
 
 As a result of the change the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.
 
+## BCANZ
+
+As a result of an international collaboration British Columbia and Canada and Australia and New Zealand selected a set of recommended distributions for model averaging and settings when generating final guidelines.
+
+The distributions are
+```{r}
+> ssd_dists_bcanz()
+[1] "gamma"       "lgumbel"     "llogis"      "lnorm"       "lnorm_lnorm" "weibull" 
+```
+
+The `ssd_fit_bcanz()` and `ssd_hc_bcanz()` functions were added to the package to facilitate the fitting of these distributions and estimation of hazard concentrations using the recommended settings.
+
 ### Convergence
 
 In the previous version of `ssdtools` a distribution was considered to have converged if the following condition was met
@@ -65,7 +77,7 @@ The following arguments were added to `ssd_fit_dists()`
   - `rescale` (by default `FALSE`) to specify whether to rescale concentrations values by dividing by the largest (finite) value. This alters the parameter estimates, which can help some distributions converge, but not the estimates of the hazard concentrations/protections.
   - `reweight` (by default `FALSE`) to specify whether to reweight data points by dividing by the largest weight.
   - `at_boundary_ok` (by default `FALSE`) to specifying whether a distribution with one or more parameters at a boundary has converged.
-  - `min_pmix` (by default 0.2) to specify the boundary for the minimum proportion for a mixture distribution.
+  - `min_pmix` (by default 0) to specify the boundary for the minimum proportion for a mixture distribution.
   - `range_shape1` (by default `c(0.05, 20)`) to specify the lower and upper boundaries for the shape1 parameter of the burrIII3 distribution.
   - `range_shape2` (by default the same as `range_shape2`) to specify the lower and upper boundaries for the shape2 parameter of the burrIII3 distribution.
   - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
@@ -78,7 +90,7 @@ It also worth noting that the default value of
 
 The following were added to handle multiple distributions
 
-  - `ssd_dists()` to specify subsets of the available distributions (using its `type` argument).
+  - `ssd_dists()` to specify subsets of the available distributions.
   - `delta` argument (by default 7) to the `subset()` generic to only keep those distributions within the specified AIC(c) difference of the best supported distribution.
 
 ### Burrlioz
@@ -90,12 +102,12 @@ The function `ssd_fit_burrlioz()` was added to approximate the behaviour of [Bur
 Hazard concentration estimation is performed by `ssd_hc()` (which is wrapped by `predict()`) and hazard protection estimation by `ssd_hp()`.
 By default confidence intervals are estimated by parametric bootstrapping.
 
-To reduce the time required for bootstrapping (which is unfortunately currently slower than in the previous version), parallelization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
+To reduce the time required for bootstrapping, parallelization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
 
 The following arguments were added to `ssd_hc()` and `ssd_hp()`
 
   - `delta` (by default 7) to only keep those distributions within the specified AIC difference of the best supported distribution.
-  - `min_pboot` (by default 0.99) to specify minimum proportion of bootstrap samples that must successfully fit.
+  - `min_pboot` (by default 0.90) to specify minimum proportion of bootstrap samples that must successfully fit.
   - `parametric` (by default `TRUE`) to allow non-parametric bootstrapping.
   - `control` (by default an empty list) to pass a list of control parameters to `stats::optim()`.
 

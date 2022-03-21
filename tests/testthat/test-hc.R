@@ -169,8 +169,8 @@ test_that("ssd_hc fitdists not average", {
 })
 
 test_that("ssd_hc fitdists correct for rescaling", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = ssd_dists())
-  fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, dists = ssd_dists(), rescale = TRUE)
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
   hc <- ssd_hc(fits)
   hc_rescale <- ssd_hc(fits_rescale)
   expect_equal(hc_rescale, hc, tolerance = 1e-05)

@@ -209,8 +209,8 @@ test_that("ssd_fit_dists warns of optimizer convergence code error", {
   )
 })
 
-test_that("ssd_fit_dists estimates for ssddata::ccme_boron on stable dists", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = ssd_dists(), rescale = TRUE)
+test_that("ssd_fit_dists estimates for ssddata::ccme_boron on bcanz dists", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
@@ -234,37 +234,19 @@ test_that("ssd_fit_dists equal weights no effect", {
   expect_equal(estimates(fits_weight), estimates(fits))
 })
 
-test_that("ssd_fit_dists doubling data little effect on estimates stable dists", {
-  data <- ssddata::ccme_boron
-  fits <- ssd_fit_dists(data, dists = ssd_dists("stable"))
-  data2 <- rbind(data, data)
-  fits2 <- ssd_fit_dists(data2, dists = ssd_dists("stable"))
-  expect_equal(estimates(fits2), estimates(fits), tolerance = 1e-04)
-})
-
-test_that("ssd_fit_dists weighting data equivalent to replicating on stable dists", {
-  data <- ssddata::ccme_boron
-  data$Times <- rep(1, nrow(data)) 
-  data$Times[1] <- 10
-  fits <- ssd_fit_dists(data, weight = "Times", dists = ssd_dists())
-  data <- data[rep(1:nrow(data), data$Times),]
-  fits_times <- ssd_fit_dists(data, dists = ssd_dists())
-  skip_on_ci() # not sure why gamma shape not working on windows and linux on github actions
-  expect_equal(estimates(fits_times), estimates(fits), tolerance = 1e-05)
-})
-
 test_that("ssd_fit_dists computable = TRUE allows for fits without standard errors", {
   data <- ssddata::ccme_boron
   data$Other <- data$Conc
   data$Conc <- data$Conc / max(data$Conc)
   
-  expect_warning(
-    ssd_fit_dists(data, right = "Other", dists = ssd_dists(), rescale = FALSE),
+  expect_warning(expect_warning(
+    ssd_fit_dists(data, right = "Other", rescale = FALSE),
+    "^Distribution 'lnorm_lnorm' failed to compute standard errors \\(try rescaling data\\)\\.$"),
     "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$")
   
   skip_on_os("windows") # not sure why gamma shape is 908 on GitHub actions windows
   skip_on_os("linux") # not sure why gamma shape is 841 on GitHub actions ubuntu
-  fits <- ssd_fit_dists(data, right = "Other", dists = ssd_dists(), rescale = FALSE, computable = FALSE)
+  fits <- ssd_fit_dists(data, right = "Other", rescale = FALSE, computable = FALSE)
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
@@ -382,14 +364,14 @@ test_that("ssd_fit_dists at_boundary_ok message", {
                  "failed to compute standard errors \\(try rescaling data\\)\\.$")
 })
 
-test_that("ssd_fit_dists stable with anon_e", {
-  fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists("stable"))
+test_that("ssd_fit_dists bcanz with anon_e", {
+  fit <- ssd_fit_dists(ssddata::anon_e)
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_stable_anon_e")
 })
 
 test_that("ssd_fit_dists unstable with anon_e", {
-  expect_warning(expect_warning(fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists("unstable")),
+  expect_warning(expect_warning(fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists(bcanz = FALSE)),
                  "burrIII3"), "gompertz")
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_unstable_anon_e")

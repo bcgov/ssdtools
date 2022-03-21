@@ -37,7 +37,7 @@ test_that("exposure multiple distributions", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   set.seed(1)
-  expect_equal(ssd_exposure(fits), 0.0645152661450559)
+  expect_equal(ssd_exposure(fits), 0.0663586716105648)
 })
 
 test_that("exposure not sensitive to rescaling", {

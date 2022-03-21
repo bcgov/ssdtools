@@ -5,7 +5,7 @@
 \title{Match Moments}
 \usage{
 ssd_match_moments(
-  dists = ssd_dists("bc"),
+  dists = ssd_dists_bcanz(),
   meanlog = 1,
   sdlog = 1,
   nsim = 1e+05

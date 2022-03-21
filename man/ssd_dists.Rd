@@ -4,20 +4,30 @@
 \alias{ssd_dists}
 \title{Species Sensitivity Distributions}
 \usage{
-ssd_dists(type = "stable")
+ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5)
 }
 \arguments{
-\item{type}{A string specifying the distribution type.
-Possible values are 'all', 'stable' and 'unstable'.}
+\item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
+
+\item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
+
+\item{npars}{A whole numeric vector specifying which distributions to include based on the number of parameters.}
 }
 \value{
 A unique, sorted character vector of the distributions.
 }
 \description{
-Gets a character vector of the names of implemented distributions.
+Gets a character vector of the names of the available distributions.
 }
 \examples{
-ssd_dists("stable")
-ssd_dists("unstable")
-ssd_dists("bc")
+ssd_dists()
+ssd_dists(bcanz = TRUE)
+ssd_dists(tails = FALSE)
+ssd_dists(npars = 5)
 }
+\seealso{
+Other dists: 
+\code{\link{dist_data}},
+\code{\link{ssd_dists_all}()}
+}
+\concept{dists}

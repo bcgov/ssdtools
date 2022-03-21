@@ -82,3 +82,19 @@
 #' @examples
 #' head(boron_pred)
 "boron_pred"
+
+#' Distribution Data
+#'
+#' A data frame of information on the implemented distributions.
+#'
+#' \describe{
+#'   \item{dist}{The distribution (chr).}
+#'   \item{npars}{The number of parameters (int).}
+#'   \item{tails}{Whether the distribution has both tails (flag).}
+#'   \item{stable}{Whether the distribution is numerically stable (flag).}
+#'   \item{bcanz}{Whether the distribution belongs to the set of distributions approved by BC, Canada, Australia and New Zealand for official guidelines (flag).}
+#' }
+#' @family dists
+#' @examples
+#' dist
+"dist_data"
