@@ -9,7 +9,7 @@ ssd_fit_dists(
   left = "Conc",
   right = left,
   weight = NULL,
-  dists = ssd_dists("bc"),
+  dists = ssd_dists_bcanz(),
   nrow = 6L,
   rescale = FALSE,
   reweight = FALSE,
@@ -63,7 +63,7 @@ Fits one or more distributions to species sensitivity data.
 \details{
 By default the 'llogis', 'gamma' and 'lnorm'
 distributions are fitted to the data.
-For a complete list of the implemented distributions see \code{\link[=ssd_dists]{ssd_dists()}}.
+For a complete list of the implemented distributions see \code{\link[=ssd_dists_all]{ssd_dists_all()}}.
 
 If weight specifies a column in the data frame with positive numbers,
 weighted estimation occurs.

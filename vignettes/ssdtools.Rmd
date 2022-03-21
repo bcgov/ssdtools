@@ -80,10 +80,10 @@ print(ccme_boron)
 ## Fitting Distributions
 
 The function `ssd_fit_dists()` inputs a data frame and fits one or more distributions.
-The user can specify a subset of the following `r length(ssd_dists(type = "all"))` distributions
+The user can specify a subset of the following `r length(ssd_dists_all())` distributions
 
 ```{r}
-ssd_dists(type = "all")
+ssd_dists_all()
 ```
 
 using the `dists` argument.

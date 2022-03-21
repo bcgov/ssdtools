@@ -12,20 +12,24 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("dists sorted character", {
-  dists <- ssd_dists()
-  expect_type(dists, "character")
-  expect_identical(dists, stringr::str_sort(dists))
+test_that("dists all", {
+  expect_identical(ssd_dists_all(),
+                   c("burrIII3", "gamma", "gompertz", "invpareto", "lgumbel", "llogis", 
+                     "llogis_llogis", "lnorm", "lnorm_lnorm", "weibull"))
 })
 
-test_that("dists all = stable + unstable", {
-  stable <- ssd_dists(type = "stable")
-  unstable <- ssd_dists(type = "unstable")
-  dists <- c(stable, unstable)
-  dists <- stringr::str_sort(dists)
-  expect_identical(dists, ssd_dists("all"))
+test_that("dists all", {
+  expect_identical(ssd_dists(), ssd_dists_all())
 })
 
-test_that("dists bc", {
-  expect_identical(ssd_dists(type = "bc"), c("gamma", "llogis", "lnorm"))
+test_that("dists can select none", {
+  expect_identical(ssd_dists(npars = 4L), character(0))
+})
+
+test_that("dists without tails", {
+  expect_identical(ssd_dists(tails = FALSE), "invpareto")
+})
+
+test_that("dists 5 pars", {
+  expect_identical(ssd_dists(npars = 5L), c("llogis_llogis", "lnorm_lnorm"))
 })

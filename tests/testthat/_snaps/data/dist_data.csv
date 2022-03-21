@@ -1,0 +1,11 @@
+dist,bcanz,tails,npars
+burrIII3,FALSE,TRUE,3
+gamma,TRUE,TRUE,2
+gompertz,FALSE,TRUE,2
+invpareto,FALSE,FALSE,2
+lgumbel,TRUE,TRUE,2
+llogis,TRUE,TRUE,2
+llogis_llogis,FALSE,TRUE,5
+lnorm,TRUE,TRUE,2
+lnorm_lnorm,TRUE,TRUE,5
+weibull,TRUE,TRUE,2

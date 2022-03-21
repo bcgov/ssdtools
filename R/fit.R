@@ -79,7 +79,7 @@ fit_dists <- function(data, dists, rescale, computable, min_pmix, range_shape1, 
 #'
 #' By default the 'llogis', 'gamma' and 'lnorm'
 #' distributions are fitted to the data.
-#' For a complete list of the implemented distributions see [`ssd_dists()`].
+#' For a complete list of the implemented distributions see [`ssd_dists_all()`].
 #'
 #' If weight specifies a column in the data frame with positive numbers,
 #' weighted estimation occurs.
@@ -99,7 +99,7 @@ fit_dists <- function(data, dists, rescale, computable, min_pmix, range_shape1, 
 #' ssd_hc(fits)
 ssd_fit_dists <- function(
   data, left = "Conc", right = left, weight = NULL,
-  dists = ssd_dists("bc"),
+  dists = ssd_dists_bcanz(),
   nrow = 6L,
   rescale = FALSE,
   reweight = FALSE,
@@ -125,8 +125,8 @@ ssd_fit_dists <- function(
     deprecate_stop("0.1.2", "xburrIII2()",
                    details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   }
-  chk_subset(dists, ssd_dists("all"))
-  
+  chk_subset(dists, ssd_dists_all())
+
   chk_whole_number(nrow)
   chk_gte(nrow, 4L)
   .chk_data(data, left, right, weight, nrow)

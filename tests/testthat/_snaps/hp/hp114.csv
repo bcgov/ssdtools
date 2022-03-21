@@ -1,4 +1,7 @@
 dist,conc,est,se,lcl,ucl,method,nboot,pboot
 gamma,1,4.677589945802862,NA,NA,NA,parametric,0,NA
+lgumbel,1,0.8564515739913277,NA,NA,NA,parametric,0,NA
 llogis,1,2.800470972681389,NA,NA,NA,parametric,0,NA
 lnorm,1,1.9543030195088014,NA,NA,NA,parametric,0,NA
+lnorm_lnorm,1,1.2342439887854517,NA,NA,NA,parametric,0,NA
+weibull,1,4.623009144255065,NA,NA,NA,parametric,0,NA

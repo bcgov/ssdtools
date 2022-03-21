@@ -23,6 +23,6 @@ test_that("censor", {
   data <- ssddata::ccme_boron
   data$Right <- data$Conc
   data$Conc <- 0
-  fits <- ssd_fit_dists(data, right = "Right")
+  fits <- ssd_fit_dists(data, right = "Right", dists = c("gamma", "llogis", "lnorm"))
   expect_true(is_censored(fits))
 })

@@ -13,8 +13,7 @@
 #    limitations under the License.
 
 test_that("boron stable", {
-  dists <- ssd_dists("stable")
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = ssd_dists(bcanz = TRUE))
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl_df")
@@ -22,7 +21,7 @@ test_that("boron stable", {
 })
 
 test_that("boron unstable", {
-  dists <- ssd_dists("unstable")
+  dists <- ssd_dists(bcanz = FALSE)
   set.seed(50)
   expect_warning(fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists),
                                 "Distribution 'burrIII3' failed to fit")
@@ -41,3 +40,8 @@ test_that("ccme_boron", {
   expect_snapshot_data(ssdtools::boron_data, "boron_data")
   expect_identical(ssdtools::boron_data, ssddata::ccme_boron)
 })
+
+test_that("dist_data", {
+  expect_snapshot_data(ssdtools::dist_data, "dist_data")
+})
+
