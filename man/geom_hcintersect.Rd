@@ -2,16 +2,16 @@
 % Please edit documentation in R/ggplot.R
 \name{geom_hcintersect}
 \alias{geom_hcintersect}
-\title{Hazard Concentration Intersection}
+\title{Species Sensitivity Hazard Concentration Intersection}
 \usage{
 geom_hcintersect(
   mapping = NULL,
   data = NULL,
+  ...,
   xintercept,
   yintercept,
   na.rm = FALSE,
-  show.legend = NA,
-  ...
+  show.legend = NA
 )
 }
 \arguments{
@@ -35,6 +35,11 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
+\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+\code{colour = "red"} or \code{size = 3}. They may also be parameters
+to the paired geom/stat.}
+
 \item{xintercept}{The x-value for the intersect}
 
 \item{yintercept}{The y-value for the intersect.}
@@ -47,23 +52,23 @@ a warning. If \code{TRUE}, missing values are silently removed.}
 \code{FALSE} never includes, and \code{TRUE} always includes.
 It can also be a named logical vector to finely select the aesthetics to
 display.}
-
-\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
-often aesthetics, used to set an aesthetic to a fixed value, like
-\code{colour = "red"} or \code{size = 3}. They may also be parameters
-to the paired geom/stat.}
 }
 \description{
-For each x and y value, \code{geom_hcintersect()} plots the intersection.
+Plots the intersection between each \code{xintercept} and \code{yintercept} value.
 }
 \examples{
-ggplot2::ggplot(boron_data, ggplot2::aes(x = Conc)) +
-  geom_ssd() +
+ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
+  geom_ssdpoint() +
   geom_hcintersect(xintercept = 1.5, yintercept = 0.05)
 }
 \seealso{
+\code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
+
 Other ggplot: 
-\code{\link{geom_ssd}()},
-\code{\link{geom_xribbon}()}
+\code{\link{geom_ssdpoint}()},
+\code{\link{geom_ssdsegment}()},
+\code{\link{geom_xribbon}()},
+\code{\link{scale_colour_ssd}()},
+\code{\link{ssd_pal}()}
 }
 \concept{ggplot}

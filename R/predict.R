@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,90 +12,60 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Predict 
-#'
+#' @export
+stats::predict
+
+#' Predict Hazard Concentrations of fitdists Object
+#' 
+#' A wrapper on [`ssd_hc()`] that by default calculates 
+#' all hazard concentrations from 1 to 99%.
+#' 
+#' It is useful for plotting purposes.
+#' 
 #' @inheritParams params
-#' @seealso [stats::predict()]
-#' @family predict
 #' @export
-#' @examples
-#' predict(boron_lnorm, percent = c(5L, 50L))
-predict.fitdist <- function(object, percent = 1:99, ci = FALSE, level = 0.95,
-                            nboot = 1000, parallel = NULL, ncpus = 1,
-                            ...) {
-  chk_unused(...)
-  if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
-                   id = "predict")
-  }
-  
-  ssd_hc(object,
-         percent = percent, ci = ci, level = level,
-         nboot = nboot, parallel = parallel, ncpus = ncpus
-  )
-}
-
-#' @rdname predict.fitdist
-#' @export
-#' @examples
-#' predict(fluazinam_lnorm, percent = c(5L, 50L))
-predict.fitdistcens <- function(object, percent = 1:99, ci = FALSE, level = 0.95,
-                                nboot = 1000, parallel = NULL, ncpus = 1,
-                                ...) {
-  chk_unused(...)
-  if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
-                   id = "predict")
-  }
-  ssd_hc(object,
-         percent = percent, ci = ci, level = level,
-         nboot = nboot, parallel = parallel, ncpus = ncpus
-  )
-}
-
-#' @rdname predict.fitdist 
-#' @export
-#' @examples
-#' predict(boron_dists)
+#' @seealso [`ssd_hc()`] and [`ssd_plot()`]
+#' @examples 
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' predict(fits)
 predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
-                             level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,
-                             average = TRUE, ic = "aicc",
+                             level = 0.95, nboot = 1000, 
+                             average = TRUE, delta = 7,
+                             min_pboot = 0.99,
+                             parametric = TRUE,
+                             control = NULL,
                              ...) {
   chk_unused(...)
-  if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
-                   id = "predict")
-  }
-  if(!missing(ic)) {
-    deprecate_warn("0.3.6", "ssdtools::predict(ic = )",
-                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
-  }
   ssd_hc(object,
          percent = percent, ci = ci, level = level,
-         nboot = nboot, parallel = parallel, ncpus = ncpus,
-         average = average
+         nboot = nboot, min_pboot = min_pboot,
+         average = average, delta = delta, 
+         control = control, parametric = parametric
   )
 }
 
-#' @rdname predict.fitdist 
+#' Predict Hazard Concentrations of fitburrlioz Object
+#' 
+#' A wrapper on [`ssd_hc()`] that by default calculates 
+#' all hazard concentrations from 1 to 99%.
+#' 
+#' It is useful for plotting purposes.
+#' 
+#' @inheritParams params
 #' @export
-#' @examples
-#' predict(fluazinam_dists)
-predict.fitdistscens <- function(object, percent = 1:99, ci = FALSE,
-                                 level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1,
-                                 average = TRUE, ic = "aic", ...) {
+#' @seealso [`ssd_hc()`] and [`ssd_plot()`]
+#' @examples 
+#' fits <- ssd_fit_burrlioz(ssddata::ccme_boron)
+#' predict(fits)
+predict.fitburrlioz <- function(object, percent = 1:99, ci = FALSE,
+                             level = 0.95, nboot = 1000, 
+                             min_pboot = 0.99,
+                             parametric = TRUE,
+                             ...) {
   chk_unused(...)
-  if(missing(ci)) {
-    deprecate_soft("0.1.0", "ssdtools::predict(ci = )", details = "In particular, the `ci` has been switched from TRUE to FALSE. To retain the previous behaviour of calculating confidence intervals set `ci = TRUE`.", 
-                   id = "predict")
-  }
-  if(!missing(ic)) {
-    deprecate_warn("0.3.6", "ssdtools::predict(ic = )",
-                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
-  }
   ssd_hc(object,
          percent = percent, ci = ci, level = level,
-         nboot = nboot, parallel = parallel, ncpus = ncpus,
-         average = average
+         nboot = nboot, min_pboot = min_pboot,
+         parametric = parametric
   )
 }

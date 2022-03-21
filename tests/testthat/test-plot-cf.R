@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -13,8 +13,6 @@
 #    limitations under the License.
 
 test_that("cfplot", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
-  
-  expect_silent(ssd_plot_cf(boron_data))
+  withr::local_options(lifecycle_verbosity = "quiet")
+  expect_snapshot_plot(ssd_plot_cf(ssddata::ccme_boron), "ccme_boron")
 })

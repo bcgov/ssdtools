@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,77 +12,65 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-add_starting_values <- function(dist, x) {
-  if (!exists(paste0("s", dist$distr))) {
-    return(dist)
-  }
+# required to pass dist as not available for dists that didn't fit
+nullify_nonfit <- function(fit, dist, data, rescale, computable, 
+                           min_pmix, range_shape1, range_shape2, at_boundary_ok, silent) {
 
-  start <- do.call(paste0("s", dist$distr), list(x = x))
-  c(dist, start)
-}
-
-fit_dist_uncensored <- function(data, left, weight, dist) {
-  x <- data[[left]]
-
-  dist <- list(data = x, distr = dist, method = "mle")
-
-  if (!is.null(weight)) {
-    dist$weights <- data[[weight]]
-  }
-
-  dist <- add_starting_values(dist, x)
-  capture.output(x <- do.call(fitdistrplus::fitdist, dist))
-  x
-}
-
-fit_dist_censored <- function(data, left, right, weight, dist) {
-  x <- rowMeans(data[c(left, right)], na.rm = TRUE)
-
-  censdata <- data.frame(left = data[[left]], right = data[[right]])
-  dist <- list(censdata = censdata, distr = dist)
-
-  if (!is.null(weight)) {
-    dist$weights <- data[[weight]]
-  }
-
-  dist <- add_starting_values(dist, x)
-  capture.output(x <- do.call(fitdistrplus::fitdistcens, dist))
-  x
-}
-
-remove_errors <- function(dist_fit, name, computable, silent) {
-  if (!is.null(dist_fit$error)) {
-    if (!silent) wrn("Distribution ", name, " failed to fit: ", dist_fit$error)
+  error <- fit$error
+  fit <- fit$result
+  
+  rescale <- if(rescale == 1) " (try rescaling data)" else NULL
+  
+  if (!is.null(error)) {
+    if (!silent) wrn("Distribution '", dist, "' failed to fit", 
+                     rescale, ": ", error)
     return(NULL)
   }
-  sd <- dist_fit$result$sd
-  if (is.null(sd) || any(is.na(sd))) {
-    if (computable) {
-      if (!silent) wrn("Distribution ", name, " failed to compute standard errors (try rescaling the data or increasing the sample size).")
+  if(!at_boundary_ok && is_at_boundary(fit, data, min_pmix, range_shape1, range_shape2)) {
+    if (!silent) wrn("Distribution '", dist, "' failed to fit",
+                     rescale, ": one or more parameters at boundary.")
+    return(NULL)
+  }
+  
+  if(!optimizer_converged(fit)) {
+    message <- optimizer_message(fit)
+    if (!silent) wrn("Distribution '", dist, "' failed to converge",
+                     rescale, ": ", message)
+    return(NULL)
+  }
+  if (computable) {
+    tidy <- tidy(fit)
+    if (any(is.na(tidy$se))) {
+      if (!silent) wrn("Distribution '", dist, 
+                       "' failed to compute standard errors", rescale, ".")
       return(NULL)
     }
   }
-  dist_fit$result
+  fit
 }
 
-ssd_fit_dist <- function(
-                         data, left = "Conc", right = left, weight = NULL, dist = "lnorm") {
-  chk_s3_class(data, "data.frame")
-  chk_gte(nrow(data), 6)
-  chk_string(left)
-  chk_string(right)
+remove_nonfits <- function(fits, data, rescale, computable, min_pmix, range_shape1, range_shape2, at_boundary_ok, silent) {
+  fits <- mapply(nullify_nonfit, fits, names(fits),
+                 MoreArgs = list(data = data, rescale = rescale, computable = computable, 
+                                 min_pmix = min_pmix, 
+                                 range_shape1 = range_shape1, range_shape2 = range_shape2, 
+                                 at_boundary_ok = at_boundary_ok, silent = silent), SIMPLIFY = FALSE
+  )
+  fits <- fits[!vapply(fits, is.null, TRUE)]
+  fits
+}
 
-  if (!is.null(weight)) chk_string(weight)
-
-  chk_superset(colnames(data), c(left, right, weight))
-  chk_string(dist)
-
-  if (left == right) {
-    fit <- fit_dist_uncensored(data, left, weight, dist)
-  } else {
-    fit <- fit_dist_censored(data, left, right, weight, dist)
-  }
-  fit
+fit_dists <- function(data, dists, rescale, computable, min_pmix, range_shape1, range_shape2, at_boundary_ok, control, silent) {
+  data <- data[c("left", "right", "weight")]
+  safe_fit_dist <- safely(fit_tmb)
+  names(dists) <- dists
+  fits <- lapply(dists, safe_fit_dist, data = data, min_pmix = min_pmix, 
+                 range_shape1 = range_shape1, range_shape2 = range_shape2, control = control)
+  fits <- remove_nonfits(fits, data = data, rescale = rescale, 
+                         computable = computable, min_pmix = min_pmix, 
+                         range_shape1 = range_shape1, range_shape2 = range_shape2, 
+                         at_boundary_ok = at_boundary_ok, silent = silent)
+  fits
 }
 
 #' Fit Distributions
@@ -91,72 +79,102 @@ ssd_fit_dist <- function(
 #'
 #' By default the 'llogis', 'gamma' and 'lnorm'
 #' distributions are fitted to the data.
-
-#' The ssd_fit_dists function has also been
-#' tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.
+#' For a complete list of the implemented distributions see [`ssd_dists_all()`].
 #'
-#' If weight specifies a column in the data frame with positive integers,
+#' If weight specifies a column in the data frame with positive numbers,
 #' weighted estimation occurs.
-#' However, currently only the resultant parameter estimates are available (via coef).
+#' However, currently only the resultant parameter estimates are available.
 #'
 #' If the `right` argument is different to the `left` argument then the data are considered to be censored.
 #'
-#' The fits are performed using [fitdistrplus::fitdist()]
-#' (and [fitdistrplus::fitdistcens()] in the case of censored data).
-#' The method used is "mle" (maximum likelihood estimation)
-#' which means that numerical optimization is carried out in
-#' [fitdistrplus::mledist()] using [stats::optim()]
-#' unless finite bounds are supplied in the (lower and upper) in which
-#' it is carried out using [stats::constrOptim()].
-#' In both cases the "Nelder-Mead" method is used.
-#'
 #' @inheritParams params
-#' @return An object of class fitdists (a list of [fitdistrplus::fitdist()] objects).
+#' @return An object of class fitdists.
+#' @seealso [`ssd_plot_cdf()`] and [`ssd_hc()`]
 #'
 #' @export
 #' @examples
-#' ssd_fit_dists(boron_data)
-#' data(fluazinam, package = "fitdistrplus")
-#' ssd_fit_dists(fluazinam, left = "left", right = "right")
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' fits
+#' ssd_plot_cdf(fits)
+#' ssd_hc(fits)
 ssd_fit_dists <- function(
-                          data, left = "Conc", right = left, weight = NULL,
-                          dists = c("llogis", "gamma", "lnorm"),
-                          computable = FALSE,
-                          silent = FALSE) {
-  chk_s3_class(dists, "character")
+  data, left = "Conc", right = left, weight = NULL,
+  dists = ssd_dists_bcanz(),
+  nrow = 6L,
+  rescale = FALSE,
+  reweight = FALSE,
+  computable = TRUE,
+  at_boundary_ok = FALSE, 
+  min_pmix = 0,
+  range_shape1 = c(0.05, 20),
+  range_shape2 = range_shape1,
+  control = list(),
+  silent = FALSE) {
+  
+  chk_character_or_factor(dists)
+  chk_vector(dists)
+  check_dim(dists, values = TRUE)
+  chk_not_any_na(dists)
   chk_unique(dists)
-  chk_gt(length(dists))
-  chk_flag(computable)
-  chk_flag(silent)
-
-  if (sum(c("llog", "burrIII2", "llogis") %in% dists) > 1) {
-    err("Distributions 'llog', 'burrIII2' and 'llogis' are identical. Please just use 'llogis'.")
-  }
-
+  
   if ("llog" %in% dists) {
-    deprecate_soft("0.1.0", "dllog()", "dllogis()", id = "xllog", 
+    deprecate_stop("0.1.0", "dllog()", "dllogis()",
                    details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution.")
   }
   if ("burrIII2" %in% dists) {
-    deprecate_soft("0.1.2", "xburrIII2()",
-                   details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.", id = "xburrIII2")
+    deprecate_stop("0.1.2", "xburrIII2()",
+                   details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution.")
   }
+  chk_subset(dists, ssd_dists_all())
 
-  safe_fit_dist <- safely(ssd_fit_dist)
-  names(dists) <- dists
-  dists <- lapply(dists, safe_fit_dist, data = data, left = left, right = right, weight = weight)
-
-  dists <- mapply(remove_errors, dists, names(dists),
-    MoreArgs = list(computable = computable, silent = silent), SIMPLIFY = FALSE
-  )
-
-  dists <- dists[!vapply(dists, is.null, TRUE)]
-
-  if (!length(dists)) err("All distributions failed to fit.")
-  if (left == right) {
-    class(dists) <- "fitdists"
-  } else {
-    class(dists) <- c("fitdistscens", "fitdists")
+  chk_whole_number(nrow)
+  chk_gte(nrow, 4L)
+  .chk_data(data, left, right, weight, nrow)
+  
+  chk_flag(rescale)
+  chk_flag(reweight)
+  chk_flag(computable)
+  chk_flag(at_boundary_ok)
+  chk_number(min_pmix)
+  chk_range(min_pmix, c(0, 0.5))
+  chk_numeric(range_shape1)
+  chk_vector(range_shape1)
+  check_dim(range_shape1, values = 2)
+  chk_not_any_na(range_shape1)
+  chk_gte(range_shape1)
+  chk_sorted(range_shape1)
+  chk_numeric(range_shape2)
+  chk_vector(range_shape2)
+  check_dim(range_shape2, values = 2)
+  chk_not_any_na(range_shape2)
+  chk_gte(range_shape2)
+  chk_sorted(range_shape2)
+  chk_list(control)
+  chk_flag(silent)
+  
+  org_data <- as_tibble(data)
+  data <- process_data(data, left, right, weight)
+  attrs <- adjust_data(data, rescale = rescale, reweight = reweight, silent = silent)
+  
+  if(any(is.infinite(attrs$data$right))) {
+    err("Distributions cannot currently be fitted to right censored data.")
   }
-  dists
+  fits <- fit_dists(attrs$data, dists, attrs$rescale, computable, 
+                    min_pmix = min_pmix, range_shape1 = range_shape1,
+                    range_shape2 = range_shape2, 
+                    at_boundary_ok = at_boundary_ok, 
+                    control = control, silent = silent)
+  
+  if (!length(fits)) err("All distributions failed to fit.")
+  class(fits) <- "fitdists"
+  
+  attrs$cols <- list(left = left, right = right, weight = weight)
+  attrs$control <- control
+  attrs$org_data <- org_data
+  attrs$min_pmix <- min_pmix
+  attrs$range_shape1 <- range_shape1
+  attrs$range_shape2 <- range_shape2
+  
+  .attrs_fitdists(fits) <- attrs
+  fits
 }

@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,58 +12,36 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("data", {
-  expect_error(chk::check_data(
-    ccme_data,
-    values = list(
-      Chemical = "",
-      Species = "",
-      Units = c("mg/L", "ug/L", "ng/L"),
-      Conc = c(0, Inf),
-      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
-    ),
-    nrow = c(1L, 2147483647L)
-  ), NA)
-  expect_is(ccme_data, "tbl")
-
-  expect_error(chk::check_data(
-    boron_data,
-    values = list(
-      Chemical = c("Boron", "Boron"),
-      Species = "",
-      Units = c("mg/L", "mg/L"),
-      Conc = c(1.0, 70.7),
-      Group = factor(c("Amphibian", "Fish", "Invertebrate", "Plant"))
-    ),
-    nrow = 28
-  ), NA)
-  expect_is(boron_data, "tbl")
-
-  expect_error(chk::check_data(
-    boron_pred,
-    values = list(
-      percent = 1L,
-      est = 1,
-      se = 1,
-      lcl = 1,
-      ucl = 1
-    ),
-    nrow = 99L
-  ), NA)
-  expect_is(boron_pred, "tbl")
-
-  expect_is(boron_lnorm, "fitdist")
-  expect_is(boron_dists, "fitdists")
-
-  expect_error(chk::check_data(
-    test_data,
-    values = list(
-      Chemical = "",
-      Conc = c(0.04, 76500)
-    ),
-    exclusive = TRUE,
-    order = TRUE,
-    nrow = 141L
-  ), NA)
-  expect_is(test_data, "tbl")
+test_that("boron stable", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = ssd_dists(bcanz = TRUE))
+  
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl_df")
+  expect_snapshot_data(tidy, "boron_stable")
 })
+
+test_that("boron unstable", {
+  dists <- ssd_dists(bcanz = FALSE)
+  set.seed(50)
+  expect_warning(fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists),
+                                "Distribution 'burrIII3' failed to fit")
+  
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl_df")
+  expect_snapshot_data(tidy, "boron_unstable")
+})
+
+test_that("ccme_data", {
+  expect_snapshot_data(ssdtools::ccme_data, "ccme_data")
+  expect_identical(ssdtools::ccme_data, ssddata::ccme_data)
+})
+
+test_that("ccme_boron", {
+  expect_snapshot_data(ssdtools::boron_data, "boron_data")
+  expect_identical(ssdtools::boron_data, ssddata::ccme_boron)
+})
+
+test_that("dist_data", {
+  expect_snapshot_data(ssdtools::dist_data, "dist_data")
+})
+

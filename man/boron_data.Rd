@@ -13,6 +13,7 @@ boron_data
 \description{
 Species Sensitivity Data from
 the Canadian Council of Ministers of the Environment.
+Please use \verb{[ssddata::ccme_data]} instead.
 }
 \details{
 Additional information is available from \url{http://ceqg-rcqe.ccme.ca/download/en/324/}.
@@ -31,12 +32,9 @@ The columns are as follows
 head(ccme_data)
 }
 \seealso{
-\link{ccme_data}
+\code{\link[=ccme_data]{ccme_data()}}
 
 Other boron: 
-\code{\link{boron_dists}},
-\code{\link{boron_hc5}},
-\code{\link{boron_lnorm}},
 \code{\link{boron_pred}}
 }
 \concept{boron}

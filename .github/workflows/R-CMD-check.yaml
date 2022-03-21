@@ -3,10 +3,12 @@ on:
     branches:
       - main
       - master
+      - dev
   pull_request:
     branches:
       - main
       - master
+      - dev
   schedule:
     - cron:  '0 8 * * *'
 
@@ -67,15 +69,9 @@ jobs:
 
       - name: Install dependencies
         run: |
+          remotes::install_cran("TMB", type = "source", force = TRUE)
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
-        shell: Rscript {0}
-
-      - name: Session info
-        run: |
-          options(width = 100)
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
       - name: Check
@@ -83,11 +79,6 @@ jobs:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
-
-      - name: Show testthat output
-        if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash
 
       - name: Upload check results
         if: failure()
@@ -103,5 +94,5 @@ jobs:
         uses: 8398a7/action-slack@v3.0.0
         with:
           status: ${{ job.status }}
-          author_name: "github action: R-CMD-check"
-          fields: repo, workflow, commit, message, author, action
+          author_name: "github action: ${{github.workflow}}"
+          fields: repo, ref, commit, author, message

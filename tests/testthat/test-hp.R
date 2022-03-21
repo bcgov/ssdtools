@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,213 +12,289 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hp fitdist", {
-  hp <- ssd_hp(boron_lnorm, numeric(0)) 
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
+test_that("hp", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  
+  set.seed(102)
+  hp <- ssd_hp(fits, conc = 1, ci = TRUE, nboot = 10, average = FALSE)
+  expect_s3_class(hp, "tbl")
+  expect_snapshot_data(hp, "hp")
+})
+
+test_that("hp fitdists works with zero length conc", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+
+  hp <- ssd_hp(fits, numeric(0)) 
+  expect_s3_class(hp, "tbl_df")
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot"))
+  expect_equal(hp$dist, character(0))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0)) 
   expect_equal(hp$se, numeric(0))
-  expect_equal(hp$lcl, numeric(0))
-  expect_equal(hp$ucl, numeric(0))
-  expect_equal(hp$dist, character(0))
-  expect_equal(hp$wt, numeric(0))
-  
-  hp <- ssd_hp(boron_lnorm, NA_real_)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, NA_real_)
-  expect_equal(hp$est, NA_real_)
-  expect_equal(hp$se, NA_real_)
-  expect_equal(hp$lcl, NA_real_)
-  expect_equal(hp$ucl, NA_real_)
-  expect_equal(hp$dist, "lnorm")
-  expect_equal(ssd_hp(boron_lnorm, 1)$est, 1.95576822341687)
-  expect_equal(hp$wt, 1)
-  
-  hp <- ssd_hp(boron_lnorm, 0) 
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, 0) 
-  expect_equal(hp$est, 0)
-  expect_equal(hp$se, NA_real_)
-  expect_equal(hp$lcl, NA_real_)
-  expect_equal(hp$ucl, NA_real_)
-  expect_equal(hp$dist, "lnorm")
-  expect_equal(hp$wt, 1)
-  
-  hp <- ssd_hp(boron_lnorm, -1)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, -1)
-  expect_equal(hp$est, 0)
-  expect_equal(hp$se, NA_real_)
-  expect_equal(hp$lcl, NA_real_) 
-  expect_equal(hp$ucl, NA_real_)
-  expect_equal(hp$dist, "lnorm")
-  expect_equal(hp$wt, 1)
-  
-  hp <- ssd_hp(boron_lnorm, -Inf)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, -Inf)
-  expect_equal(hp$est, 0) 
-  expect_equal(hp$se, NA_real_)
-  expect_equal(hp$lcl, NA_real_)
-  expect_equal(hp$ucl, NA_real_)
-  expect_equal(hp$dist, "lnorm")
-  expect_equal(hp$wt, 1)
-  
-  hp <- ssd_hp(boron_lnorm, Inf)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, Inf)
-  expect_equal(hp$est, 100)
-  expect_equal(hp$se, NA_real_)
-  expect_equal(hp$lcl, NA_real_)
-  expect_equal(hp$ucl, NA_real_)
-  expect_equal(hp$dist, "lnorm")
-  expect_equal(hp$wt, 1)
-  expect_equal(ssd_hp(boron_lnorm, c(1, 30))$est, c(1.95576822341687, 75.0517322027199))
+  expect_equal(hp$wt, numeric(0)) 
 })
 
-test_that("hp fitdist cis", {
-  set.seed(10)
-  hp <- ssd_hp(boron_lnorm, 1, ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, 1)
-  expect_equal(hp$est, 1.95576822341687) 
-  expect_equal(hp$se, 1.35723135295734) 
-  expect_equal(hp$lcl, 0.753437345701245) 
-  expect_equal(hp$ucl, 4.40577139680561) 
-  expect_equal(hp$dist, "lnorm")
-  expect_equal(hp$wt, 1) 
+test_that("hp fitdist works with missing conc", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
-  set.seed(10)
-  hp <- ssd_hp(boron_lnorm, c(1, 30), ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, c(1, 30))
-  expect_equal(hp$est, c(1.95576822341687, 75.0517322027199))
-  expect_equal(hp$se, c(1.35723135295734, 5.11980949460707))
-  expect_equal(hp$lcl, c(0.753437345701245, 71.4221297303002))
-  expect_equal(hp$ucl, c(4.40577139680561, 87.0508546669261))
-  expect_equal(hp$dist, c("lnorm", "lnorm"))
-  expect_equal(hp$wt, c(1, 1))
+  hp <- ssd_hp(fits, NA_real_)
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp41")
 })
 
-test_that("hp fitdists with no dists", {
+test_that("hp fitdist works with 0 conc", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  hp <- ssd_hp(fits, 0) 
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp49")
+})
+
+test_that("hp fitdist works with negative conc", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  hp <- ssd_hp(fits, -1)
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp57")
+})
+
+test_that("hp fitdist works with -Inf conc", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  hp <- ssd_hp(fits, -Inf)
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp65")
+})
+
+test_that("hp fitdist works with Inf conc", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  hp <- ssd_hp(fits, Inf)
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp73")
+})
+
+test_that("hp fitdists works reasonable conc", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  hp <- ssd_hp(fits, 1)
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp81")
+})
+
+test_that("hp fitdists works with multiple concs", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  hp <- ssd_hp(fits, c(2.5,1))
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp89")
+})
+
+test_that("hp fitdists works with cis", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  set.seed(10)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp98")
+})
+
+test_that("hp fitdists works with multiple dists", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  
+  hp <- ssd_hp(fits, 1)
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp106")
+})
+
+test_that("hp fitdists works not average multiple dists", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  
+  hp <- ssd_hp(fits, 1, average = FALSE)
+  expect_s3_class(hp, "tbl_df")
+  expect_snapshot_data(hp, "hp114")
+})
+
+test_that("ssd_hp fitdists correct for rescaling", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
+  hp <- ssd_hp(fits, 1)
+  hp_rescale <- ssd_hp(fits_rescale, 1)
+  expect_equal(hp_rescale, hp, tolerance = 1e-05)
+})
+
+test_that("hp fitdists with no fitdists", {
   x <- list()
   class(x) <- c("fitdists")
-  hp <- ssd_hp(x, numeric(0))
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, numeric(0))
-  expect_equal(hp$est, numeric(0))
-  expect_equal(hp$se, numeric(0))
-  expect_equal(hp$lcl, numeric(0))
-  expect_equal(hp$ucl, numeric(0))
-  expect_equal(hp$dist, character(0))
-  expect_equal(hp$wt, numeric(0))
-  
-  hp <- ssd_hp(x, 2)
-  expect_is(hp, c("tbl_df", "tbl", "data.frame"))
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, numeric(0))
-  expect_equal(hp$est, numeric(0))
-  expect_equal(hp$se, numeric(0))
-  expect_equal(hp$lcl, numeric(0))
-  expect_equal(hp$ucl, numeric(0))
-  expect_equal(hp$dist, character(0))
-  expect_equal(hp$wt, numeric(0))
+  hp <- ssd_hp(x, 1)
+  expect_s3_class(hp, c("tbl_df", "tbl", "data.frame"))
+  expect_snapshot_data(hp, "hp130")
 })
 
-test_that("hp fitdists not average", {
-  hp <- ssd_hp(boron_dists, 1, average  = FALSE)
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, rep(1, 3))
-  expect_equal(hp$est, c(2.79949984091552, 4.67984242511552, 1.95576822341687))
-  expect_equal(hp$se, rep(NA_real_,3))
-  expect_equal(hp$lcl, rep(NA_real_,3))
-  expect_equal(hp$ucl, rep(NA_real_,3))
-  expect_equal(hp$dist, c("llogis", "gamma", "lnorm"))
-  expect_equal(hp$wt, c(0.109508088280028, 0.594829782050604, 0.295662129669368))
-})
-
-test_that("hp fitdists", {
-  hp <- ssd_hp(boron_dists, 1)
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, 1)
-  expect_equal(hp$est, 3.66852412355664)
-  expect_equal(hp$se, NA_real_)
-  expect_equal(hp$lcl, NA_real_)
-  expect_equal(hp$ucl, NA_real_)
-  expect_equal(hp$dist, "average")
-  expect_equal(hp$wt, 1)
-  
-  hp <- ssd_hp(boron_dists, c(0, 1, 30, Inf))
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, c(0, 1, 30, Inf))
-  expect_equal(hp$est, c(0, 3.66852412355664,72.904934839041, 100))
-  expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$dist, c("average", "average", "average", "average")) 
-  expect_equal(hp$wt, c(1,1,1,1))
-})
-
-test_that("hp fitdists cis", {
+test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
+  data <- ssddata::ccme_boron
+  data$Conc2 <- data$Conc
+  data$Conc[1] <- 0.5
+  data$Conc2[1] <- 1.0
+  fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
-  hp <- ssd_hp(boron_dists, 1, ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, 1)
-  expect_equal(hp$est, 3.66852412355664)
-  expect_equal(hp$se, 2.45645877883578)
-  expect_equal(hp$lcl, 0.570981644438492)
-  expect_equal(hp$ucl, 7.18380436625128)
-  expect_equal(hp$dist, "average") 
-  expect_equal(hp$wt, 1)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+  expect_equal(hp$se, 2.33001443428834)
   
+  fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  hp <- ssd_hp(boron_dists, c(0, 1, 30, Inf), ci = TRUE, nboot = 10)
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, c(0, 1, 30, Inf))
-  expect_equal(hp$est, c(0, 3.66852412355664, 72.904934839041, 100))
-  expect_equal(hp$se, c(0, 2.45645877883578, 7.71796383954152, 0))
-  expect_equal(hp$lcl, c(0, 0.570981644438492, 59.8280826110273, 100))
-  expect_equal(hp$ucl, c(0, 7.18380436625128, 82.4206257509066, 100))
-  expect_equal(hp$dist, c("average",  "average", "average", "average"))
-  expect_equal(hp$wt, c(1,1,1,1))
+  expect_warning(hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
+                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
+  expect_identical(hp$se, NA_real_)
 })
 
-test_that("hp fitdistcens", {
-  hp <- ssd_hp(fluazinam_lnorm, c(0, 1, 30, Inf))
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, c(0, 1, 30, Inf))
-  expect_equal(hp$est, c(0, 3.20075104792886, 27.8754025505199, 100))
-  expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$dist, c("lnorm", "lnorm", "lnorm", "lnorm"))
-  expect_equal(hp$wt, c(1,1,1,1))
+test_that("ssd_hp same with equally weighted data", {
+  data <- ssddata::ccme_boron
+  data$Weight <- rep(1, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+
+  data$Weight <- rep(2, nrow(data))
+  fits2 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  hp2 <- ssd_hp(fits2, 1, ci = TRUE, nboot = 10)
+  expect_equal(hp2, hp)
 })
 
-test_that("hp fitdistscens", {
-  hp <- ssd_hp(fluazinam_dists, c(0, 1, 30, Inf))
-  expect_is(hp, "tbl_df")
-  expect_identical(colnames(hp), c("conc", "est", "se", "lcl", "ucl", "dist", "wt"))
-  expect_identical(hp$conc, c(0, 1, 30, Inf))
-  expect_equal(hp$est, c(0, 4.06545463384627, 27.3122236342922, 100))
-  expect_equal(hp$se, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$lcl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$ucl, c(NA_real_, NA_real_, NA_real_, NA_real_))
-  expect_equal(hp$dist, c("average", "average", "average", "average"))
-  expect_equal(hp$wt, c(1,1,1,1))
+test_that("ssd_hp calculates cis with equally weighted data", {
+  data <- ssddata::ccme_boron
+  data$Weight <- rep(2, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+  expect_equal(hp$se, 1.76599243917916)
+})
+
+test_that("ssd_hp calculates cis with two distributions", {
+  data <- ssddata::ccme_boron
+  fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+  expect_equal(hp$se, 1.77625311677508)
+})
+
+test_that("ssd_hp calculates cis in parallel but one distribution", {
+  local_multisession()
+  data <- ssddata::ccme_boron
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  set.seed(10)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+  expect_equal(hp$se, 1.76599243917916)
+})
+
+test_that("ssd_hp calculates cis in parallel with two distributions", {
+  local_multisession()
+  data <- ssddata::ccme_boron
+  fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
+  expect_equal(hp$se, 1.77625311677508)
+})
+
+test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
+  data <- ssddata::ccme_boron
+  data$Weight <- rep(1, nrow(data))
+  data$Weight[1] <- 2
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  expect_warning(hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
+                 "^Parametric CIs cannot be calculated for unequally weighted data[.]$")
+  expect_identical(hp$se, NA_real_)
+})
+
+test_that("ssd_hp no effect with higher weight one distribution", {
+  data <- ssddata::ccme_boron
+  data$Weight <- rep(1, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  data$Weight <- rep(10, nrow(data))
+  fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  set.seed(10)
+  hp <- ssd_hp(fits, 3, ci = TRUE, nboot = 10)
+  set.seed(10)
+  hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10)
+  expect_equal(hp_10, hp)
+})
+
+test_that("ssd_hp effect with higher weight two distributions", {
+  data <- ssddata::ccme_boron
+  data$Weight <- rep(1, nrow(data))
+  fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
+  data$Weight <- rep(10, nrow(data))
+  fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hp <- ssd_hp(fits, 3, ci = TRUE, nboot = 10)
+  set.seed(10)
+  hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10)
+  expect_equal(hp$est, 11.7535819824013)
+  expect_equal(hp_10$est, 11.9318338996079)
+  expect_equal(hp$se, 5.90337387777387)
+  expect_equal(hp_10$se, 6.1723994362764)
+})
+
+test_that("ssd_hp cis with non-convergence", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
+  expect_identical(attr(fit, "min_pmix"), 0.15)
+  hp15 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.98)
+  attr(fit, "min_pmix") <- 0.3
+  expect_identical(attr(fit, "min_pmix"), 0.3)
+  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.96)
+  expect_s3_class(hp30, "tbl")
+  expect_snapshot_data(hp30, "hp_30")
+})
+
+test_that("ssd_hp cis with error", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
+  expect_identical(attr(fit, "min_pmix"), 0.1)
+  expect_warning(hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100))
+  expect_s3_class(hp_err, "tbl")
+  expect_snapshot_data(hp_err, "hp_err_na")
+  hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.92)
+  expect_s3_class(hp_err, "tbl")
+  expect_snapshot_data(hp_err, "hp_err")
+})
+
+test_that("ssd_hp cis with error and multiple dists", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = c("lnorm", "llogis_llogis"), min_pmix = 0.1)
+  expect_identical(attr(fit, "min_pmix"), 0.1)
+  set.seed(99)
+  expect_warning(hp_err_two <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, average = FALSE,
+                                      delta = 100))
+  expect_snapshot_data(hp_err_two, "hp_err_two")
+  set.seed(99)
+  expect_warning(hp_err_avg <- ssd_hp(fit, conc = 1,  ci = TRUE, nboot = 100,
+                                      delta = 100))
+  expect_snapshot_data(hp_err_avg, "hp_err_avg")
+})
+
+test_that("ssd_hp with 1 bootstrap", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  set.seed(10)
+  hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 1)
+  expect_snapshot_data(hp, "hp_1")
+})
+
+test_that("ssd_hp comparable parametric and non-parametric big sample size", {
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
+  fit <- ssd_fit_dists(data, dists = "lnorm")
+  set.seed(10)
+  hp_para <- ssd_hp(fit, 1, ci = TRUE, nboot = 10)
+  expect_snapshot_data(hp_para, "hp_para")
+  set.seed(10)
+  hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE)
+  expect_snapshot_data(hp_nonpara, "hp_nonpara")
 })

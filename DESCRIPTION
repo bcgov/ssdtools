@@ -1,75 +1,122 @@
 Package: ssdtools
-Version: 0.3.7.9000
 Title: Species Sensitivity Distributions
-Description: Species sensitivity distributions are 
-  cumulative probability distributions which are fitted to 
-  toxicity concentrations for different species as described by
-  Posthuma et al.(2001) <isbn:9781566705783>.
-  The ssdtools package uses Maximum Likelihood to fit distributions 
-  such as the log-normal, gamma, log-logistic, 
-  log-Gumbel, Gompertz and Weibull.
-  The user can provide custom distributions.
-  Multiple distributions can be averaged using Information Criteria.
-  Confidence intervals on hazard concentrations and proportions are produced by 
-  parametric bootstrapping.
-Authors@R: c(
-  person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre", "ctr"), 
-    comment = c(ORCID = "0000-0002-7683-4592")),
-  person("Carl", "Schwarz", role = c("aut", "ctr")),
-  person("Angeline", "Tillmanns", role = "ctb"),
-  person("Ali", "Azizishirazi", role = "ctb"),
-  person("Rebecca", "Fisher", role = "ctb"),
-  person("David", "Fox", role = "ctb"),
-  person("Kathleen", "McTavish", role = "ctb"),
-  person("Heather", "Thompson", role = "ctb"),
-  person("Andy", "Teucher", role = "ctb"),
-  person("Emilie", "Doussantousse", role = "ctb"),
-  person("Stephanie", "Hazlitt", role = "ctb"),
-  person("Nadine", "Hussein", role = "ctb"),
-  person("Nan-Hung", "Hsieh", role = "ctb"),
-  person("Sergio", "Ibarra Espinosa", role = "ctb"),
-  person("Province of British Columbia", role = "cph")
-  )
+Version: 0.3.7.9901
+Authors@R: 
+    c(person(given = "Joe",
+             family = "Thorley",
+             role = c("aut", "cre", "ctr"),
+             email = "joe@poissonconsulting.ca",
+             comment = c(ORCID = "0000-0002-7683-4592")),
+      person(given = "Carl",
+             family = "Schwarz",
+             role = c("aut", "ctr")),
+      person(given = "Rebecca",
+             family = "Fisher",
+             role = "ctb"),
+      person(given = "David",
+             family = "Fox",
+             role = "ctb"),
+      person(given = "Angeline",
+             family = "Tillmanns",
+             role = "ctb"),
+      person(given = "Ali",
+             family = "Azizishirazi",
+             role = "ctb"),
+      person(given = "Kathleen",
+             family = "McTavish",
+             role = "ctb"),
+      person(given = "Heather",
+             family = "Thompson",
+             role = "ctb"),
+      person(given = "Andy",
+             family = "Teucher",
+             role = "ctb"),
+      person(given = "Emilie",
+             family = "Doussantousse",
+             role = "ctb"),
+      person(given = "Stephanie",
+             family = "Hazlitt",
+             role = "ctb"),
+      person(given = "Nadine",
+             family = "Hussein",
+             role = "ctb"),
+      person(given = "Nan-Hung",
+             family = "Hsieh",
+             role = "ctb"),
+      person(given = "Sergio",
+             family = "Ibarra Espinosa",
+             role = "ctb"),
+      person(given = "Province of British Columbia",
+             role = "cph"),
+      person(given = "Environment and Climate Change Canada",
+             role = "cph"))
+Description: Species sensitivity distributions are cumulative probability
+    distributions which are fitted to toxicity concentrations for
+    different species as described by Posthuma et al.(2001)
+    <isbn:9781566705783>.  The ssdtools package uses Maximum Likelihood to
+    fit distributions such as the gamma, log-logistic, log-normal and
+    Weibull to censored and/or weighted data.  Multiple distributions can
+    be averaged using Akaike Information Criteria.  Confidence intervals
+    on hazard concentrations and proportions are produced by parametric
+    bootstrapping.
+License: Apache License (== 2.0) | file LICENSE
 URL: https://github.com/bcgov/ssdtools
 BugReports: https://github.com/bcgov/ssdtools/issues
-License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 4.1)
 Imports:
-    chk,
-    fitdistrplus,
     abind,
-    actuar,
+    chk (>= 0.7.0),
+    doFuture,
+    foreach,
+    furrr,
+    generics,
     ggplot2,
+    goftest,
     graphics,
     grid,
     lifecycle,
-    tibble,
-    utils,
+    parallel,
+    plyr,
+    purrr,
+    Rcpp,
     scales,
+    ssddata,
     stats,
-    VGAM,
-    Rcpp
+    stringr,
+    tibble,
+    TMB (>= 1.7.20),
+    universals,
+    utils,
+    VGAM
 Suggests:
     covr,
+    dplyr,
+    fitdistrplus,
+    future,
+    glue,
+    grDevices,
     knitr,
+    magrittr,
+    mle.tools,
+    R.rsp,
+    readr,
+    reshape2,
+    rlang,
     rmarkdown,
     testthat,
-    readr,
-    rlang,
-    purrr,
     tidyr,
-    dplyr,
-    R.rsp,
-    mle.tools,
-    reshape2
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.2
-VignetteBuilder: 
-  knitr,
-  R.rsp
-Language: en-US
+    tidyverse,
+    withr
 LinkingTo: 
-    Rcpp
+    Rcpp,
+    TMB
+VignetteBuilder: 
+    knitr,
+    R.rsp
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: true
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2

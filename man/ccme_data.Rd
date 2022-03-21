@@ -15,6 +15,7 @@ Species Sensitivity Data from
 the Canadian Council of Ministers of the Environment.
 The taxonomic groups are Amphibian, Fish, Invertebrate and Plant.
 Plants includes freshwater algae.
+Please use \verb{[ssddata::ccme_data]} instead.
 }
 \details{
 Additional information on each of the chemicals is available from the

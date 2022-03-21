@@ -1,0 +1,40 @@
+#    Copyright 2021 Environment and Climate Change Canada
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#       https://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
+# --- TMB-specific Makevars file ---
+#
+# In principle, TMB model compilation is a completely separate process from
+# that of the remainder of 'src'.
+# Therefore, other Makevars flags can be added here, e.g.,
+#
+## CXX_STD = CXX14 # uncomment this line to enable C++14 support
+#
+# Flags specifically for the TMB compilation can also be set
+# through the 'TMB_FLAGS' argument below, e.g.,
+#
+## TMB_FLAGS = -I"../../inst/include" # add include directory inst/include
+#
+# --- TMB-specific compiling directives below ---
+
+.PHONY: all tmblib
+
+all: $(SHLIB)
+$(SHLIB): tmblib
+
+tmblib: 
+	(cd TMB; $(R_HOME)/bin$(R_ARCH_BIN)/Rscript \
+	--no-save --no-restore compile.R '$(TMB_FLAGS)')
+
+clean:
+	rm -rf *.so *.o TMB/*.so TMB/*.o

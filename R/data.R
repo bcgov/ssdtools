@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,86 +12,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' CCME Species Sensitivity Data for Boron
-#'
-#' Species Sensitivity Data from
-#' the Canadian Council of Ministers of the Environment.
-#'
-#' Additional information is available from <http://ceqg-rcqe.ccme.ca/download/en/324/>.
-#' 
-#' The columns are as follows
-#'
-#' \describe{
-#'   \item{Chemical}{The chemical (chr).}
-#'   \item{Species}{The species binomial name (chr).}
-#'   \item{Concentration}{The chemical concentration (dbl).}
-#'   \item{Units}{The units (chr).}
-#'   \item{Group}{The taxonomic group (fctr).}
-#' }
-#' @seealso [ccme_data]
-#' @family boron
-#' @examples
-#' head(ccme_data)
-"boron_data"
-
-#' fitdists for CCME Boron Data
-#'
-#' A fitdists object for Species Sensitivity Data for
-#' Boron.
-#' @family boron
-#' @examples
-#' boron_dists
-"boron_dists"
-
-#' fitdist for CCME Boron Data
-#'
-#' A fitdist object for Species Sensitivity Data for
-#' Boron with the lnorm distribution.
-#' @family boron
-#' @examples
-#' boron_lnorm
-"boron_lnorm"
-
-#' Model Averaged Predictions for CCME Boron Data
-#'
-#' A data frame of the predictions based on 1,000 bootstrap iterations.
-#'
-#' \describe{
-#'   \item{percent}{The percent of species affected (int).}
-#'   \item{est}{The estimated concentration (dbl).}
-#'   \item{se}{The standard error of the estimate (dbl).}
-#'   \item{lcl}{The lower confidence limit (dbl).}
-#'   \item{se}{The upper confidence limit (dbl).}
-#'   \item{dist}{The distribution (chr).}
-#' }
-#' @family boron
-#' @examples
-#' head(boron_pred)
-"boron_pred"
-
-#' Model Averaged 5 Hazard Concentration for CCME Boron Data
-#'
-#' A data frame of the predictions based on 10000 bootstrap.
-#'
-#' \describe{
-#'   \item{percent}{The percent of species affected (int).}
-#'   \item{est}{The estimated concentration (dbl).}
-#'   \item{se}{The standard error of the estimate (dbl).}
-#'   \item{lcl}{The lower confidence limit (dbl).}
-#'   \item{se}{The upper confidence limit (dbl).}
-#'   \item{dist}{The distribution (chr).}
-#' }
-#' @family boron
-#' @examples
-#' boron_hc5
-"boron_hc5"
-
 #' CCME Species Sensitivity Data
 #'
 #' Species Sensitivity Data from
 #' the Canadian Council of Ministers of the Environment.
 #' The taxonomic groups are Amphibian, Fish, Invertebrate and Plant.
 #' Plants includes freshwater algae.
+#' Please use `[ssddata::ccme_data]` instead.
 #'
 #' Additional information on each of the chemicals is available from the
 #' CCME website.
@@ -116,31 +43,32 @@
 #' head(ccme_data)
 "ccme_data"
 
-#' fitdists for fitdistrplus Fluazinam Data
+#' CCME Species Sensitivity Data for Boron
 #'
-#' A fitdists object for Species Sensitivity Data for
-#' Fluazinam.
+#' Species Sensitivity Data from
+#' the Canadian Council of Ministers of the Environment.
+#' Please use `[ssddata::ccme_data]` instead.
+#' 
+#' Additional information is available from <http://ceqg-rcqe.ccme.ca/download/en/324/>.
+#' 
+#' The columns are as follows
 #'
-#' @seealso [fitdistrplus::fluazinam()]
-#' @family fluazinam
+#' \describe{
+#'   \item{Chemical}{The chemical (chr).}
+#'   \item{Species}{The species binomial name (chr).}
+#'   \item{Concentration}{The chemical concentration (dbl).}
+#'   \item{Units}{The units (chr).}
+#'   \item{Group}{The taxonomic group (fctr).}
+#' }
+#' @seealso [`ccme_data()`]
+#' @family boron
 #' @examples
-#' fluazinam_dists
-"fluazinam_dists"
+#' head(ccme_data)
+"boron_data"
 
-#' fitdist for CCME Fluazinam Data
+#' Model Averaged Predictions for CCME Boron Data
 #'
-#' A fitdist object for Species Sensitivity Data for
-#' Boron with the lnorm distribution.
-#'
-#' @seealso [fitdistrplus::fluazinam()]
-#' @family fluazinam
-#' @examples
-#' fluazinam_lnorm
-"fluazinam_lnorm"
-
-#' Model Averaged Predictions for Fluazinam
-#'
-#' A data frame of the predictions.
+#' A data frame of the predictions based on 1,000 bootstrap iterations.
 #'
 #' \describe{
 #'   \item{percent}{The percent of species affected (int).}
@@ -150,20 +78,23 @@
 #'   \item{se}{The upper confidence limit (dbl).}
 #'   \item{dist}{The distribution (chr).}
 #' }
-#' @seealso [fitdistrplus::fluazinam()]
-#' @family fluazinam
+#' @family boron
 #' @examples
-#' head(fluazinam_pred)
-"fluazinam_pred"
+#' head(boron_pred)
+"boron_pred"
 
-#' Test Data
+#' Distribution Data
 #'
-#' Data to test ssdtools.
+#' A data frame of information on the implemented distributions.
 #'
 #' \describe{
-#'   \item{Chemical}{The chemical (chr).}
-#'   \item{Conc}{The chemical concentration (dbl).}
+#'   \item{dist}{The distribution (chr).}
+#'   \item{npars}{The number of parameters (int).}
+#'   \item{tails}{Whether the distribution has both tails (flag).}
+#'   \item{stable}{Whether the distribution is numerically stable (flag).}
+#'   \item{bcanz}{Whether the distribution belongs to the set of distributions approved by BC, Canada, Australia and New Zealand for official guidelines (flag).}
 #' }
+#' @family dists
 #' @examples
-#' head(test_data)
-"test_data"
+#' dist
+"dist_data"

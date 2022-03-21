@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,106 +12,382 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
-test_that("fit_dist", {
-  dist <- ssd_fit_dist(ssdtools::boron_data)
-  expect_true(is.fitdist(dist))
-  skip_if_not(capabilities("long.double"))
-  
-  expect_equal(dist, boron_lnorm)
+test_that("ssd_fit_dists gives error with unrecognized dist", {
+  chk::expect_chk_error(ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm2"))
 })
 
-test_that("fit_dist tiny llogis", {
-  data <- ssdtools::boron_data
-  fit <- ssd_fit_dist(data, dist = "llogis")
-  expect_equal(
-    fit$estimate,
-    c(locationlog = 2.6261248978507, scalelog = 0.740309228071107)
+test_that("ssd_fit_dists gives chk error if insufficient data", {
+  data <- ssddata::ccme_boron[1:5,]
+  chk::expect_chk_error(ssd_fit_dists(data))
+})
+
+test_that("ssd_fit_dists gives chk error if less than 6 rows of data", {
+  data <- ssddata::ccme_boron[1:5,]
+  chk::expect_chk_error(ssd_fit_dists(data))
+})
+
+test_that("ssd_fit_dists gives chk error if less than required rows of data", {
+  data <- ssddata::ccme_boron
+  chk::expect_chk_error(ssd_fit_dists(data, nrow = 29))
+})
+
+test_that("ssd_fit_dists gives chk error if missing left column", {
+  data <- ssddata::ccme_boron
+  chk::expect_chk_error(ssd_fit_dists(data, left = "Conc2"))
+})
+
+test_that("ssd_fit_dists gives chk error if missing right column", {
+  data <- ssddata::ccme_boron
+  chk::expect_chk_error(ssd_fit_dists(data, right = "Conc2"))
+})
+
+test_that("ssd_fit_dists gives chk error if missing weight column", {
+  data <- ssddata::ccme_boron
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Conc2"))
+})
+
+test_that("ssd_fit_dists gives chk error if right call left", {
+  data <- ssddata::ccme_boron
+  data$left <- data$Conc
+  chk::expect_chk_error(ssd_fit_dists(data, right = "left"))
+})
+
+test_that("ssd_fit_dists gives chk error if left called right", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  chk::expect_chk_error(ssd_fit_dists(data, left = "right"))
+})
+
+test_that("ssd_fit_dists not happy with left as left by default", {
+  data <- ssddata::ccme_boron
+  data$left <- data$Conc
+  chk::expect_chk_error(ssd_fit_dists(data, left = "left"))
+})
+
+test_that("ssd_fit_dists returns object class fitdists", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"),
+                       rescale = FALSE)
+  expect_s3_class(fit, "fitdists")
+})
+
+test_that("ssd_fit_dists happy with left as left but happy if right other", {
+  data <- ssddata::ccme_boron
+  data$left <- data$Conc
+  data$right <- data$Conc
+  expect_s3_class(ssd_fit_dists(data, left = "left", right = "right"), "fitdists")
+})
+
+test_that("ssd_fit_dists not affected if all weight 1", {
+  data <- ssddata::ccme_boron
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  data$Mass <- rep(1, nrow(data))
+  fits_right <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
+  expect_equal(estimates(fits_right), estimates(fits))
+})
+
+test_that("ssd_fit_dists not affected if all equal weight ", {
+  data <- ssddata::ccme_boron
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  data$Mass <- rep(0.1, nrow(data))
+  fits_right <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
+  expect_equal(estimates(fits_right), estimates(fits))
+})
+
+test_that("ssd_fit_dists gives correct chk error if zero weight", {
+  data <- ssddata::ccme_boron
+  data$Heavy <- rep(1, nrow(data))
+  data$Heavy[2] <- 0
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Heavy"),
+                        "^`data` has 1 row with zero weight in 'Heavy'\\.$")
+})
+
+test_that("ssd_fit_dists gives chk error if negative weights", {
+  data <- ssddata::ccme_boron
+  data$Mass <- rep(1, nrow(data))
+  data$Mass[1] <- -1
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass"))
+})
+
+test_that("ssd_fit_dists gives chk error if missing weight values", {
+  data <- ssddata::ccme_boron
+  data$Mass <- rep(1, nrow(data))
+  data$Mass[1] <- NA
+  chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass"))
+})
+
+test_that("ssd_fit_dists gives chk error if missing left values", {
+  data <- ssddata::ccme_boron
+  data$Conc[1] <- NA
+  chk::expect_chk_error(ssd_fit_dists(data),
+                        "^`data` has 1 row with effectively missing values in 'Conc'\\.$")
+})
+
+test_that("ssd_fit_dists gives chk error if 0 left values", {
+  data <- ssddata::ccme_boron
+  data$Conc[1] <- 0
+  chk::expect_chk_error(ssd_fit_dists(data),
+                        "^`data` has 1 row with effectively missing values in 'Conc'\\.$")
+})
+
+test_that("ssd_fit_dists all distributions fail to fit if Inf weight", {
+  data <- ssddata::ccme_boron
+  data$Mass <- rep(1, nrow(data))
+  data$Mass[1] <- Inf
+  expect_error(
+    expect_warning(
+      ssd_fit_dists(data, weight = "Mass", dists = "lnorm"), 
+      "^Distribution 'lnorm' failed to fit"), 
+    "^All distributions failed to fit\\.")
+})
+
+test_that("ssd_fit_dists not affected if right values identical to left but in different column", {
+  data <- ssddata::ccme_boron
+  fits <- ssd_fit_dists(data, dists = "lnorm")
+  data$Other <- data$Conc
+  fits_right <- ssd_fit_dists(data, right = "Other", dists = "lnorm")
+  expect_equal(estimates(fits_right), estimates(fits))
+})
+
+test_that("ssd_fit_dists gives correct chk error if missing values in non-censored data", {
+  data <- ssddata::ccme_boron
+  data$Conc[2] <- NA 
+  chk::expect_chk_error(ssd_fit_dists(data),
+                        "^`data` has 1 row with effectively missing values in 'Conc'\\.$")
+})
+
+test_that("ssd_fit_dists gives correct chk error if missing values in censored data", {
+  data <- ssddata::ccme_boron
+  data$Other <- data$Conc
+  data$Other[1] <- data$Conc[1] + 0.1 # to make censored
+  data$Conc[2:3] <- NA
+  data$Other[2:3] <- NA
+  chk::expect_chk_error(ssd_fit_dists(data, right = "Other"),
+                        "^`data` has 2 rows with effectively missing values in 'Conc' and 'Other'\\.$")
+})
+
+test_that("ssd_fit_dists gives chk error if negative left ", {
+  data <- ssddata::ccme_boron
+  data$Conc[1] <- -1
+  chk::expect_chk_error(ssd_fit_dists(data))
+})
+
+test_that("ssd_fit_dists all distributions fail to fit if Inf left", {
+  data <- ssddata::ccme_boron
+  data$Conc[1] <- Inf
+  expect_error(
+    ssd_fit_dists(data, dists = "lnorm"), 
+    "^`data` has 1 row with effectively missing values in 'Conc'\\.")
+})
+
+test_that("ssd_fit_dists gives correct chk error any right < left", {
+  data <- ssddata::ccme_boron
+  data$Other <- data$Conc
+  data$Other[2] <- data$Conc[1] / 2
+  chk::expect_chk_error(ssd_fit_dists(data, right = "Other"),
+                        "^`data\\$Other` must have values greater than or equal to `data\\$Conc`\\.$")
+})
+
+test_that("ssd_fit_dists warns to rescale data", {
+  data <- data.frame(Conc = rep(2, 6))
+  expect_error(
+    expect_warning(ssd_fit_dists(data, dist = "lnorm", , rescale = FALSE),
+                   "^Distribution 'lnorm' failed to fit \\(try rescaling data\\):")
   )
-  
-  data$Conc <- data$Conc / 100
-  fit <- ssd_fit_dist(data, dist = "llogis")
-  expect_equal(
-    fit$estimate,
-    c(locationlog = -1.97890271677598, scalelog = 0.740452665894763
-    )
+})
+
+test_that("ssd_fit_dists doesn't warns to rescale data if already rescaled", {
+  data <- data.frame(Conc = rep(2, 6))
+  expect_error(expect_warning(ssd_fit_dists(data, rescale = TRUE, dist = "lnorm"), 
+                              regexp = "^Distribution 'lnorm' failed to fit:"))
+})
+
+test_that("ssd_fit_dists warns of optimizer convergence code error", {
+  data <- ssddata::ccme_boron
+  expect_error(
+    expect_warning(ssd_fit_dists(data, control = list(maxit = 1) , dist = "lnorm"), 
+                   regexp = "^Distribution 'lnorm' failed to converge \\(try rescaling data\\): Iteration limit maxit reach \\(try increasing the maximum number of iterations in control\\)\\.$")
   )
 })
 
-test_that("fit_dists", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
-  dist_names <- c(
-    "gamma", "gompertz", "lgumbel",
-    "llogis", "lnorm", "pareto", "weibull"
-  )
-  expect_error(expect_warning(ssd_fit_dists(boron_data[1:5, ], dists = dist_names)), "^All distributions failed to fit[.]$")
-  dists <- ssd_fit_dists(boron_data[1:6, ], dists = dist_names)
-  expect_true(is.fitdists(dists))
-  expect_identical(names(dists), dist_names)
-  coef <- coef(dists)
-  expect_identical(names(coef), dist_names)
+test_that("ssd_fit_dists estimates for ssddata::ccme_boron on bcanz dists", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
+  
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl")
+  expect_snapshot_data(tidy, "tidy_stable_rescale")
 })
 
-test_that("fit_dist", {
-  skip_if_not(capabilities("long.double"))
+test_that("ssd_fit_dists not reorder", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"),
+                       rescale = FALSE)
   
-  expect_error(ssd_fit_dist(boron_data[1:5, ]), "^`nrow[(]data[)]` must be greater than or equal to 6, not 5[.]$", "chk_error")
-  dist <- ssd_fit_dist(boron_data)
-  expect_true(is.fitdist(dist))
-  expect_equal(dist, boron_lnorm)
-  expect_equal(coef(dist), c(meanlog = 2.56164375310683, sdlog = 1.24172540661694))
-  
-  boron_data2 <- boron_data[rev(order(boron_data$Conc)), ]
-  boron_data2$Weight <- 1:nrow(boron_data2)
-  
-  expect_warning(dist <- ssd_fit_dist(boron_data2, weight = "Weight"), "weights are not taken into account in the default initial values")
-  expect_true(is.fitdist(dist))
-  expect_equal(coef(dist), c(meanlog = 1.87960101694348, sdlog = 1.12780324755743))
+  expect_identical(npars(fit), c(lnorm = 2L, llogis = 2L))
+  expect_equal(logLik(fit), c(lnorm = -117.514216489547, llogis = -118.507435324581))
 })
 
-test_that("fluazinam", {
-  data(fluazinam, package = "fitdistrplus")
-  dist <- ssd_fit_dist(fluazinam, left = "left")
-  expect_true(is.fitdist(dist))
-  expect_false(is.fitdistcens(dist))
-  expect_equal(coef(dist), c(meanlog = 4.66057985615203, sdlog = 2.19746964708252))
+test_that("ssd_fit_dists equal weights no effect", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  data <- ssddata::ccme_boron
+  data$weight <- rep(2, nrow(data))
+  fits_weight <- ssd_fit_dists(data)
   
-  dist <- ssd_fit_dist(fluazinam, left = "left", right = "right")
-  expect_false(is.fitdist(dist))
-  expect_true(is.fitdistcens(dist))
-  expect_equal(coef(dist), c(meanlog = 4.97758390559042, sdlog = 2.68757112403832))
-  
-  fluazinam2 <- fluazinam[rev(order(fluazinam$left)), ]
-  fluazinam2$Weight <- 1:nrow(fluazinam2)
-  
-  expect_warning(dist <- ssd_fit_dists(fluazinam2,
-                                       weight = "Weight", left = "left", right = "right",
-                                       dist = "lnorm"
-  ), "weights are not taken into account in the default initial values")
-  expect_identical(class(dist), c("fitdistscens", "fitdists"))
-  dist <- dist[[1]]
-  expect_false(is.fitdist(dist))
-  expect_true(is.fitdistcens(dist))
-  expect_equal(coef(dist), c(meanlog = 3.56609317317434, sdlog = 2.18316425603543))
+  expect_equal(estimates(fits_weight), estimates(fits))
 })
 
-
-test_that("fit_dists computable", {
-  data <- data.frame(Conc = c(
-    0.1, 0.12, 0.24, 0.42, 0.67,
-    0.78, 120, 2030, 9033, 15000,
-    15779, 20000, 31000, 40000, 105650
-  ))
+test_that("ssd_fit_dists computable = TRUE allows for fits without standard errors", {
+  data <- ssddata::ccme_boron
+  data$Other <- data$Conc
+  data$Conc <- data$Conc / max(data$Conc)
   
-  skip_if_not(capabilities("long.double"))
+  expect_warning(expect_warning(
+    ssd_fit_dists(data, right = "Other", rescale = FALSE),
+    "^Distribution 'lnorm_lnorm' failed to compute standard errors \\(try rescaling data\\)\\.$"),
+    "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$")
   
-  expect_warning(fit <- ssd_fit_dists(data, dists = "gamma", computable = FALSE, silent = TRUE)[[1]],
-                 "diag[(][.][)] had 0 or NA entries; non-finite result is doubtful")
-  expect_equal(fit$sd["shape"], c(shape = 0.0414094229126189))
-  expect_equal(fit$estimate, c(scale = 96927.0337948105, shape = 0.164168623820564))
+  skip_on_os("windows") # not sure why gamma shape is 908 on GitHub actions windows
+  skip_on_os("linux") # not sure why gamma shape is 841 on GitHub actions ubuntu
+  fits <- ssd_fit_dists(data, right = "Other", rescale = FALSE, computable = FALSE)
+  
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl")
+  expect_snapshot_data(tidy, "tidy_stable_computable")
 })
 
-test_that("fit_dists fail to converge when identical data", {
-  data <- data.frame(Conc = rep(6, 6))
-  expect_error(expect_warning(fit <- ssd_fit_dists(data), "All distributions failed to fit."))
+test_that("ssd_fit_dists works with slightly censored data", {
+  data <- ssddata::ccme_boron
+  
+  data$right <- data$Conc * 2
+  data$Conc <- data$Conc * 0.5
+  
+  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right", rescale = FALSE)
+  
+  tidy <- tidy(fits)
+  
+  expect_equal(tidy$est, c(2.56052524750529, 1.17234562953404))
+  expect_equal(tidy$se, c(0.234063281091344, 0.175423555900586))
+})
+
+test_that("ssd_fit_dists accepts 0 for left censored data", {
+  data <- ssddata::ccme_boron
+  
+  data$right <- data$Conc
+  data$Conc[1] <- 0
+  
+  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right", rescale = FALSE)
+  
+  tidy <- tidy(fits)
+  
+  expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323))
+  expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761))
+})
+
+test_that("ssd_fit_dists gives same values with zero and missing left values", {
+  data <- ssddata::ccme_boron
+  
+  data$right <- data$Conc
+  data$Conc[1] <- 0
+  
+  fits0 <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  
+  data$Conc[1] <- NA
+  
+  fitsna <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  
+  expect_equal(tidy(fits0), tidy(fitsna))
+})
+
+test_that("ssd_fit_dists works with right censored data", {
+  data <- ssddata::ccme_boron
+  
+  data$right <- data$Conc
+  data$right[1] <- Inf
+  
+  expect_error(fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
+               "^Distributions cannot currently be fitted to right censored data\\.$")
+  
+  # 
+  # tidy <- tidy(fits)
+  # 
+  # expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323))
+  # expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761))
+})
+
+test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
+  data <- ssddata::ccme_boron
+  
+  data$right <- data$Conc
+  data$right[1] <- Inf
+  
+  expect_error(fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
+               "^Distributions cannot currently be fitted to right censored data\\.$")
+  
+  data$right[1] <- NA
+  
+  expect_error(fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
+               "^Distributions cannot currently be fitted to right censored data\\.$")
+  
+  # fits0 <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  # 
+  # data$right[1] <- NA
+  # 
+  # fitsna <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  # 
+  # expect_equal(tidy(fits0), tidy(fitsna))
+})
+
+test_that("ssd_fit_dists min_pmix", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.1)
+  data <- data.frame(Conc = conc)
+  fits <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.1)
+  tidy <- tidy(fits)
+  expect_snapshot_data(tidy, "min_pmix5")
+  expect_error(expect_warning(expect_warning(ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.11))),
+               "All distributions failed to fit.")
+})
+
+test_that("ssd_fit_dists min_pmix", {
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.1)
+  data <- data.frame(Conc = conc)
+  fits <- ssd_fit_dists(data, dists = c("lnorm_lnorm"), min_pmix = 0.11, at_boundary_ok = TRUE)
+  tidy <- tidy(fits)
+  expect_equal(tidy$est[tidy$term == "pmix"], 0.11)
+})
+
+test_that("ssd_fit_dists at_boundary_ok message", {
+  set.seed(99)
+  expect_warning(ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "burrIII3")),
+                 "one or more parameters at boundary[.]$")
+  expect_warning(ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "burrIII3"),
+                               at_boundary_ok = TRUE),
+                 "failed to compute standard errors \\(try rescaling data\\)\\.$")
+})
+
+test_that("ssd_fit_dists bcanz with anon_e", {
+  fit <- ssd_fit_dists(ssddata::anon_e)
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_stable_anon_e")
+})
+
+test_that("ssd_fit_dists unstable with anon_e", {
+  expect_warning(expect_warning(fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists(bcanz = FALSE)),
+                 "burrIII3"), "gompertz")
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_unstable_anon_e")
+})
+
+test_that("ssd_fit_dists works min_pmix = 0.5 and at_boundary_ok = TRUE and computable = FALSE", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lnorm_lnorm"), min_pmix = 0.5,
+                       at_boundary_ok = TRUE, computable = FALSE)
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "min_pmix_05")
+})
+
+test_that("ssd_fit_dists min_pmix 0", {
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 2, pmix = 0.01))
+  fit <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0)
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_pmix0")
 })

@@ -18,32 +18,33 @@ knitr::opts_chunk$set(
 )
 ```
 
-The *ssdtools* package produces a plot of the cumulative distributions for several distribution through the use of the *autoplot()* function. 
-For example, consider the boron data that ships with the *ssdtools* package.
+The `ssdtools` package produces a plot of the cumulative distributions for multiple distribution through the use of the `ssd_plot_cdf()` function. 
+For example, consider the boron data.
 
 ```{r echo=TRUE, warning=FALSE, message=FALSE}
-library(ggplot2)
+library(tidyverse)
 library(ssdtools)
-data(boron_data)
-fit <- ssd_fit_dists(boron_data, dists = c("llogis", "lnorm", "gamma"))
-fit.plot <- autoplot(fit)
-fit.plot
+
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+gp <- ssd_plot_cdf(fits) + scale_color_ssd()
+
+print(gp)
 ```
 
-This graphic is a *ggplot* object and so can be saved and embellished in the usual way.
-For example, suppose we want to superimpose an environmental concentration cumulative distribution and compute the exposure risk as outlined in Verdonck et al (2003).
+This graphic is a [ggplot](https://ggplot2.tidyverse.org) object and so can be saved and embellished in the usual way.
+For example, suppose we want to superimpose an environmental concentration cumulative distribution and compute the exposure risk as outlined in @verdonck_limitations_2003.
 
 ```{r echo=FALSE}
-# what are the mean and sd on the log-scale for the envirionmental concentration
+# what are the mean and sd on the log-scale for the environmental concentration
 ex.mean.log <- log(0.1)
 ex.sd.log <- 1
 ```
 
 Finding a suitable probability distribution to describe the exposure concentration is beyond the scope of this document -- we will assume that this has been done elsewhere.
-In particular, suppose that the exposure concentration follows a log-normal distribution with a mean of `r ex.mean.log` and a standard deviation of `r ex.sd.log` on the logarithmic scale. 
+In particular, suppose that the exposure concentration follows a log-normal distribution with a mean of `r signif(ex.mean.log, 3)` and a standard deviation of `r ex.sd.log` on the logarithmic scale. 
 From the exposure distribution, we construct a data frame with the concentration values and the cumulative probability of seeing this exposure or less in the environment.
 
-Notice that some care is needed because the plot for *ssdtools* in on the logarithmic base 10 scale and not the natural logarithm base $e$ scale.
+Notice that some care is needed because the ssdtools plot is on the logarithmic base 10 scale and not the natural logarithm base $e$ scale.
 
 ```{r }
 ex.cdf <- data.frame(Conc = exp(seq(log(.01), log(10), .1))) # generate a grid of concentrations
@@ -55,24 +56,26 @@ ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc,
 
 We now add this to the plot
 ```{r }
-fit.plot + geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
+gp + 
+  geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
   annotate("text",
     label = paste("Exposure distribution"),
     x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
   )
 ```
 
-The *ssdtools* package contains a function *ssd_exposure* that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.
+The `ssdtools` package contains a function `ssd_exposure()` that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.
 
 ```{r echo=TRUE}
 set.seed(99)
-ex.risk <- ssd_exposure(fit, meanlog = ex.mean.log, sdlog = ex.sd.log)
+ex.risk <- ssd_exposure(fits, meanlog = ex.mean.log, sdlog = ex.sd.log)
 ex.risk
 ```
 The risk of `r round(ex.risk, 5)` can also be added to the plot in the usual way:
 
 ```{r echo=TRUE}
-fit.plot + geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
+gp + 
+  geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
   annotate("text",
     label = paste("Exposure distribution"),
     x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
@@ -87,10 +90,6 @@ fit.plot + geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", siz
 
 Other embellishments can be added in a similar fashion using the features of [*ggplot*](https://ggplot2.tidyverse.org) and are not discussed here.
 
-## References
-
-Verdonck, F. A., Aldenberg, T. , Jaworska, J. and Vanrolleghem, P. A. (2003), Limitations of current risk characterization methods in probabilistic environmental risk assessment. Environmental Toxicology and Chemistry, 22: 2209-2213. http://doi.wiley.com/10.1897/02-435.
-
 -----
 
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
@@ -99,3 +98,7 @@ xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <s
 xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia
 </span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 Creative Commons Attribution 4.0 International License</a>.
+
+## References
+
+Verdonck, F. A., Aldenberg, T. , Jaworska, J. and Vanrolleghem, P. A. (2003), Limitations of current risk characterization methods in probabilistic environmental risk assessment. Environmental Toxicology and Chemistry, 22: 2209-2213. http://doi.wiley.com/10.1897/02-435.

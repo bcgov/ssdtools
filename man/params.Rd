@@ -4,9 +4,18 @@
 \alias{params}
 \title{Parameter Descriptions for ssdtools Functions}
 \arguments{
+\item{all}{A flag specifying whether to also return transformed parameters.}
+
+\item{at_boundary_ok}{A flag specifying whether a model with one or more
+parameters at the boundary should be considered to have converged (default = FALSE).}
+
 \item{x}{The object.}
 
 \item{object}{The object.}
+
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
+
+\item{chk}{A flag specifying whether to check the arguments.}
 
 \item{data}{A data frame.}
 
@@ -16,23 +25,43 @@
 
 \item{ylab}{A string of the x-axis label.}
 
+\item{xbreaks}{The x-axis breaks as one of:
+\itemize{
+\item \code{NULL} for no breaks
+\item \code{waiver()} for the default breaks
+\item A numeric vector of positions
+}}
+
+\item{breaks}{A character vector}
+
+\item{bounds}{A named non-negative numeric vector of the left and right bounds for
+uncensored missing (0 and Inf) data in terms of the orders of magnitude
+relative to the extremes for non-missing values.}
+
 \item{conc}{A numeric vector of concentrations.}
+
+\item{digits}{A whole number specifying the number of significant figures}
 
 \item{percent}{A numeric vector of percentages.}
 
-\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
+\item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
+
+\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+
+\item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
+
+\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
 
 \item{average}{A flag specifying whether to model average the estimates.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
+
+\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
+in the sense of returning a likelihood.}
 
 \item{level}{A number between 0 and 1 of the confidence level.}
-
-\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
-
-\item{ncpus}{A count of the number of parallel processes to use.}
 
 \item{...}{Unused.}
 
@@ -54,11 +83,37 @@
 
 \item{lscale}{scale parameter on the log scale.}
 
+\item{shape1}{shape1 parameter.}
+
+\item{shape2}{shape2 parameter.}
+
+\item{range_shape1}{A numeric vector of length two of the lower and upper bounds for the shape1 parameter.}
+
+\item{range_shape2}{shape2 parameter.}
+
+\item{locationlog1}{locationlog1 parameter.}
+
+\item{scalelog1}{scalelog1 parameter.}
+
+\item{locationlog2}{locationlog2 parameter.}
+
+\item{scalelog2}{scalelog2 parameter.}
+
+\item{pmix}{Proportion mixture parameter.}
+
 \item{meanlog}{mean on log scale parameter.}
+
+\item{meanlog1}{mean on log scale parameter.}
+
+\item{meanlog2}{mean on log scale parameter.}
 
 \item{locationlog}{location on log scale parameter.}
 
 \item{sdlog}{standard deviation on log scale parameter.}
+
+\item{sdlog1}{standard deviation on log scale parameter.}
+
+\item{sdlog2}{standard deviation on log scale parameter.}
 
 \item{scalelog}{scale on log scale parameter.}
 
@@ -73,6 +128,10 @@
 \item{yintercept}{The y-value for the intersect.}
 
 \item{select}{A character vector of the distributions to select.}
+
+\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
+
+\item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 
 \item{left}{A string of the column in data with the concentrations.}
 
@@ -92,7 +151,7 @@
 
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 
-\item{weight}{A string of the column in data with the weightings (or NULL)}
+\item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
 \item{dists}{A character vector of the distribution names.}
 
@@ -103,7 +162,13 @@
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
 
+\item{nrow}{A positive whole number of the minimum number of non-missing rows.}
+
 \item{nsim}{A positive whole number of the number of simulations to generate.}
+
+\item{linetype}{A string of the column in pred to use for the linetype.}
+
+\item{linecolor}{A string of the column in pred to use for the line color.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

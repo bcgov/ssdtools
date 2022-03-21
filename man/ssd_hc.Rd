@@ -3,39 +3,13 @@
 \name{ssd_hc}
 \alias{ssd_hc}
 \alias{ssd_hc.list}
-\alias{ssd_hc.fitdist}
-\alias{ssd_hc.fitdistcens}
 \alias{ssd_hc.fitdists}
-\alias{ssd_hc.fitdistscens}
-\title{Hazard Concentration}
+\alias{ssd_hc.fitburrlioz}
+\title{Hazard Concentrations for Species Sensitivity Distributions}
 \usage{
 ssd_hc(x, ...)
 
 \method{ssd_hc}{list}(x, percent = 5, hc = 5, ...)
-
-\method{ssd_hc}{fitdist}(
-  x,
-  percent = 5,
-  hc = 5,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  ...
-)
-
-\method{ssd_hc}{fitdistcens}(
-  x,
-  percent = 5,
-  hc = 5,
-  ci = FALSE,
-  level = 0.95,
-  nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  ...
-)
 
 \method{ssd_hc}{fitdists}(
   x,
@@ -44,24 +18,22 @@ ssd_hc(x, ...)
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
   average = TRUE,
-  ic = "aicc",
+  delta = 7,
+  min_pboot = 0.99,
+  parametric = TRUE,
+  control = NULL,
   ...
 )
 
-\method{ssd_hc}{fitdistscens}(
+\method{ssd_hc}{fitburrlioz}(
   x,
   percent = 5,
-  hc = 5,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  parallel = NULL,
-  ncpus = 1,
-  average = TRUE,
-  ic = "aic",
+  min_pboot = 0.99,
+  parametric = FALSE,
   ...
 )
 }
@@ -72,46 +44,54 @@ ssd_hc(x, ...)
 
 \item{percent}{A numeric vector of percentages.}
 
-\item{hc}{A numeric vector of percentages.}
+\item{hc}{A whole numeric vector between 1 and 99 indicating the percent hazard concentrations (deprecated for percent).}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
 
 \item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits.}
-
-\item{parallel}{A string specifying the type of parallel operation to be used ('no', 'snow' or 'multicore').}
-
-\item{ncpus}{A count of the number of parallel processes to use.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
 
 \item{average}{A flag specifying whether to model average the estimates.}
 
-\item{ic}{A string specifying which information-theoretic criterion ('aic', 'aicc' or 'bic') to use for model averaging .}
+\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+
+\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
+in the sense of returning a likelihood.}
+
+\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 }
 \value{
-A data frame of the percent and concentrations.
+A tibble of corresponding hazard concentrations.
 }
 \description{
-Gets concentrations that protect specified percentages of species.
+Gets concentration(s) that protect specified percentage(s) of species.
+}
+\details{
+If \code{ci = TRUE} uses parameteric bootstrapping to get confidence intervals on the
+hazard concentrations(s).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{list}: Hazard Percent list of distributions
+\item \code{list}: Hazard Concentrations for Distributional Estimates
 
-\item \code{fitdist}: Hazard Percent fitdist
+\item \code{fitdists}: Hazard Concentrations for fitdists Object
 
-\item \code{fitdistcens}: Hazard Percent fitdistcens
-
-\item \code{fitdists}: Hazard Percent fitdists
-
-\item \code{fitdistscens}: Hazard Percent fitdistcens
+\item \code{fitburrlioz}: Hazard Concentrations for fitburrlioz Object
+'
 }}
 
 \examples{
-ssd_hc(list("lnorm" = NULL))
-ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
-ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
-ssd_hc(boron_dists, c(0, 1, 30, Inf))
-ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_hc(fits)
+ssd_hc(estimates(fits))
+ssd_hc(ssd_match_moments())
+fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
+ssd_hc(fit)
+
+}
+\seealso{
+\code{\link[=predict.fitdists]{predict.fitdists()}} and \code{\link[=ssd_hp]{ssd_hp()}}.
 }

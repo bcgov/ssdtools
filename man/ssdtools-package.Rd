@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al.(2001) <isbn:9781566705783>. The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, gamma, log-logistic, log-Gumbel, Gompertz and Weibull. The user can provide custom distributions. Multiple distributions can be averaged using Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.
+Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al.(2001) <isbn:9781566705783>. The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-logistic, log-normal and Weibull to censored and/or weighted data. Multiple distributions can be averaged using Akaike Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.
 }
 \seealso{
 Useful links:
@@ -28,10 +28,10 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Angeline Tillmanns [contributor]
-  \item Ali Azizishirazi [contributor]
   \item Rebecca Fisher [contributor]
   \item David Fox [contributor]
+  \item Angeline Tillmanns [contributor]
+  \item Ali Azizishirazi [contributor]
   \item Kathleen McTavish [contributor]
   \item Heather Thompson [contributor]
   \item Andy Teucher [contributor]
@@ -41,6 +41,7 @@ Other contributors:
   \item Nan-Hung Hsieh [contributor]
   \item Sergio Ibarra Espinosa [contributor]
   \item Province of British Columbia [copyright holder]
+  \item Environment and Climate Change Canada [copyright holder]
 }
 
 }

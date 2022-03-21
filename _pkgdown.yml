@@ -6,9 +6,6 @@ reference:
   contents:
   - '`ccme_data`'
   - '`boron_data`'
-  - '`boron_dists`'
-  - '`boron_hc5`'
-  - '`boron_lnorm`'
   - '`boron_pred`'
   - '`fluazinam_dists`'
   - '`fluazinam_lnorm`'

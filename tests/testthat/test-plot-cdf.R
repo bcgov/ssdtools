@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -13,13 +13,21 @@
 #    limitations under the License.
 
 test_that("ssd_plot_cdf", {
-  setup(pdf(tempfile(fileext = ".pdf")))
-  teardown(dev.off())
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   
-  expect_is(ssd_plot_cdf(boron_lnorm), "ggplot")
-  expect_is(ssd_plot_cdf(boron_dists), "ggplot")
-  fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
-  fluazinam_lnorm$censdata$left[5] <- NA
-  expect_is(ssd_plot_cdf(fluazinam_lnorm), "ggplot")
-  expect_is(ssd_plot_cdf(fluazinam_dists), "ggplot")
+  expect_snapshot_plot(ssd_plot_cdf(fits), "fits")
+  expect_snapshot_plot(ssd_plot_cdf(fits, average = TRUE), "fits_average")
+})
+
+test_that("autoplot deals with rescaled data", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
+  expect_snapshot_plot(ssd_plot_cdf(fits), "fits_rescale")
+})
+
+test_that("autoplot deals with named list", {
+  expect_snapshot_plot(ssd_plot_cdf(list(
+    llogis = c(locationlog = 2, scalelog = 1),
+    lnorm = c(meanlog = 2, sdlog = 2))),
+                       "list")
 })

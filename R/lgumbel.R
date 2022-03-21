@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,52 +12,52 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Log-Gumbel Distribution
-#'
-#' Probability density, cumulative distribution, 
-#' inverse cumulative distribution, random sample and starting values functions.
-#'
-#' @param x A numeric vector of values.
-#' @inheritParams params
-#' @return A numeric vector.
-#' @name lgumbel
+#' @describeIn ssd_p Cumulative Distribution Function for Log-Gumbel Distribution
+#' @export
 #' @examples
-#' x <- seq(0.01, 5, by = 0.01)
-#' plot(x, dlgumbel(x), type = "l")
-NULL
-
-#' @rdname lgumbel
-#' @export
-dlgumbel <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
-  ddist("gumbel", x = x,  location = locationlog, scale = scalelog, 
-        log = log, .lgt = TRUE)
-}
-
-#' @rdname lgumbel
-#' @export
-plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+#' 
+#' ssd_plgumbel(1)
+ssd_plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("gumbel", q = q,  location = locationlog, scale = scalelog, 
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
-#' @rdname lgumbel
+#' @describeIn ssd_q Quantile Function for Log-Gumbel Distribution
 #' @export
-qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+#' @examples
+#' 
+#' ssd_qlgumbel(0.5)
+ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gumbel", p = p,  location = locationlog, scale = scalelog,
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
-#' @rdname lgumbel
+#' @describeIn ssd_r Random Generation for log-Gumbel Distribution
 #' @export
-rlgumbel <- function(n, locationlog = 0, scalelog = 1) {
-  rdist("gumbel", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE)
+#' @examples
+#' 
+#' set.seed(50)
+#' hist(ssd_rlgumbel(10000), breaks = 1000)
+ssd_rlgumbel <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
+  rdist("gumbel", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
 }
 
-#' @rdname lgumbel
-#' @export
-slgumbel <- function(x) {
-  list(start = list(
+slgumbel <- function(data, pars = NULL) {
+  if(!is.null(pars)) return(pars)
+
+  x <- mean_weighted_values(data)
+  
+  list(
     locationlog = mean(log(x), na.rm = TRUE),
-    scalelog = pi * sd(log(x), na.rm = TRUE) / sqrt(6)
-  ))
+    log_scalelog = log(pi * sd(log(x), na.rm = TRUE) / sqrt(6)))
+}
+
+pgumbel_ssd <- function(q, location, scale) {
+  if(scale <= 0) return(NaN)
+  exp(-exp(-(q - location)/scale))
+}
+
+qgumbel_ssd <- function(p, location, scale) {
+  if(scale <= 0) return(NaN)
+  location - scale * log(-log(p));
 }

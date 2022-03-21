@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -13,25 +13,42 @@
 #    limitations under the License.
 
 test_that("exposure fitdist", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
   set.seed(1)
-  expect_equal(ssd_exposure(boron_lnorm), 0.0554547384157672)
-  set.seed(1)
-  expect_equal(ssd_exposure(boron_lnorm, 1), 0.165086129822829)
-  set.seed(1)
-  expect_equal(ssd_exposure(boron_lnorm, 1, sdlog = 10), 0.433888818786343)
+  expect_equal(ssd_exposure(fits), 0.0554388690057964)
 })
 
-test_that("exposure fitdists", {
+test_that("exposure different mean", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
   set.seed(1)
-  expect_equal(ssd_exposure(boron_dists), 0.0645345700344277)
+  expect_equal(ssd_exposure(fits, 1), 0.165064610334353)
 })
 
-test_that("exposure fitdistcens", {
+test_that("exposure different mean and log", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
   set.seed(1)
-  expect_equal(ssd_exposure(fluazinam_lnorm), 0.041559102462777)
+  expect_equal(ssd_exposure(fits, 1, sdlog = 10), 0.433888512432359)
 })
 
-test_that("exposure fitdistscens", {
+test_that("exposure multiple distributions", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  
   set.seed(1)
-  expect_equal(ssd_exposure(fluazinam_dists), 0.0490197455575992)
+  expect_equal(ssd_exposure(fits), 0.0663586716105648)
+})
+
+test_that("exposure not sensitive to rescaling", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  
+  set.seed(10)
+  exposure <- ssd_exposure(fits)
+  
+  fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm", rescale = TRUE)
+  set.seed(10)
+  exposure_rescale <- ssd_exposure(fits_rescale)
+  
+  expect_equal(exposure_rescale, exposure)
 })

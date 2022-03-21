@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,27 +12,12 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("utils", {
-  expect_true(is.fitdist(boron_lnorm))
-  expect_true(is.fitdists(boron_dists))
-  expect_true(is.fitdist(boron_dists[["lnorm"]]))
-  expect_true(is.fitdistcens(fluazinam_lnorm))
-  expect_true(is.fitdistscens(fluazinam_dists))
-  expect_true(is.fitdistcens(fluazinam_dists[[1]]))
-  
-  expect_identical(nobs(boron_lnorm), 28L)
-  expect_identical(nobs(boron_dists), nobs(boron_lnorm))
-  expect_identical(nobs(fluazinam_lnorm), NA_integer_)
-  expect_identical(nobs(fluazinam_dists), NA_integer_)
-  
-  expect_identical(npars(boron_lnorm), 2L)
-  expect_identical(npars(boron_dists), c(
-    llogis = 2L, gamma = 2L, lnorm = 2L
-  ))
-  expect_identical(npars(fluazinam_lnorm), 2L)
-  expect_identical(npars(fluazinam_dists), c(llogis = 2L, gamma = 2L, lnorm = 2L))
-  
+test_that("ssd_ecd", {
   expect_equal(ssd_ecd(1:10), seq(0.05, 0.95, by = 0.1))
+})
+
+test_that("ssd_ecd_data", {
+  expect_snapshot_output(ssd_ecd_data(ssddata::ccme_boron))
 })
 
 test_that("comma_signif", {
@@ -60,4 +45,29 @@ test_that("comma_signif", {
     comma_signif(c(0.55555, 55555)),
     c("0.556", "55,600")
   )
+})
+
+test_that("ssd_sort_data works conc", {
+  expect_identical(ssd_sort_data(ssddata::ccme_boron), ssddata::ccme_boron[order(ssddata::ccme_boron$Conc),])
+})
+
+test_that("ssd_sort_data works no rows", {
+  data <- ssddata::ccme_boron[FALSE,]
+  expect_identical(ssd_sort_data(data), data[order(data$Conc),])
+})
+
+test_that("ssd_sort_data works censored data", {
+  data <- ssddata::ccme_boron
+  data$Other <- data$Conc * 2
+  data$Conc[1] <- NA
+  data$ID <- 1:nrow(data)
+  expect_identical(ssd_sort_data(data, right = "Other")$ID[1:5], 
+                   c(1L, 19L, 20L, 21L, 2L))
+})
+
+test_that("ssd_sort_data errors missing data", {
+  data <- ssddata::ccme_boron
+  data$Conc[1] <- NA
+  chk::expect_chk_error(ssd_sort_data(data), 
+                        "`data` has 1 row with effectively missing values in 'Conc'.")
 })

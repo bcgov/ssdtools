@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -13,6 +13,16 @@
 #    limitations under the License.
 
 test_that("subset", {
-  expect_identical(subset(boron_dists), boron_dists)
-  expect_identical(names(subset(boron_dists, c("lnorm", "gamma"))), c("gamma", "lnorm"))
+  x <- list()
+  class(x) <- c("fitdists")
+  expect_identical(subset(x), x)
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  
+  expect_identical(subset(fits), fits)
+  expect_identical(names(subset(fits, c("lnorm", "gamma"))), c("gamma", "lnorm"))
+  expect_identical(subset(fits, delta = 10), fits)
+  expect_identical(names(subset(fits, delta = 0)), "weibull")
+  expect_identical(names(subset(fits, delta = 0.01)), c("gamma", "weibull"))
+  expect_identical(names(subset(fits, c("gamma", "lnorm"), delta = 1.5)), c("gamma", "lnorm"))
 })

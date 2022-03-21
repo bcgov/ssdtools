@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,68 +12,21 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Is fitdist
-#'
-#' Tests whether an object is a fitdist.
-#' @inheritParams params
-#'
-#' @return A flag.
-#' @family is
-#' @export
-#'
-#' @examples
-#' is.fitdist(boron_lnorm)
-#' is.fitdist(boron_dists)
-#' is.fitdist(boron_dists[["lnorm"]])
-is.fitdist <- function(x) {
-  inherits(x, "fitdist")
+is.tmbfit <- function(x) {
+  inherits(x, "tmbfit")
 }
 
-#' Is censored fitdist
+#' Is fitdists Object
 #'
-#' Tests whether an object is a censored fitdist.
+#' Tests whether x is a fitdists Object.
 #' @inheritParams params
 #'
-#' @return A flag.
-#' @family is
+#' @return A flag specifiying whether x is a fitdists Object.
 #' @export
 #'
 #' @examples
-#' is.fitdistcens(boron_lnorm)
-#' is.fitdistcens(fluazinam_lnorm)
-is.fitdistcens <- function(x) {
-  inherits(x, "fitdistcens")
-}
-
-#' Is fitdists
-#'
-#' Tests whether an object is a fitdists.
-#' @inheritParams params
-#'
-#' @return A flag.
-#' @family is
-#' @export
-#'
-#' @examples
-#' is.fitdists(boron_lnorm)
-#' is.fitdists(boron_dists)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' is.fitdists(fits)
 is.fitdists <- function(x) {
-  inherits(x, "fitdists") & !is.fitdistcens(x)
-}
-
-#' Is censored fitdists
-#'
-#' Tests whether an object is a censored fitdists.
-#' @inheritParams params
-#'
-#' @return A flag.
-#' @family is
-#' @export
-#'
-#' @examples
-#' is.fitdistscens(boron_dists)
-#' is.fitdistscens(fluazinam_lnorm)
-#' is.fitdistscens(fluazinam_dists)
-is.fitdistscens <- function(x) {
-  inherits(x, "fitdistscens")
+  inherits(x, "fitdists")
 }

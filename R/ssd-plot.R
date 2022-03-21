@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,129 +12,138 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-plot_coord_scale <- function(data, xlab, ylab) {
+#' @export
+ggplot2::waiver
+
+plot_coord_scale <- function(data, xlab, ylab, xbreaks = waiver()) {
   chk_string(xlab)
   chk_string(ylab)
+  
+  if(is.waive(xbreaks))
+    xbreaks <- trans_breaks("log10", function(x) 10^x)
   
   list(
     coord_trans(x = "log10"),
     scale_x_continuous(xlab,
-                       breaks = scales::trans_breaks("log10", function(x) 10^x),
+                       breaks = xbreaks,
                        labels = comma_signif
     ),
     scale_y_continuous(ylab,
-                       labels = scales::percent, limits = c(0, 1),
+                       labels = percent, limits = c(0, 1),
                        breaks = seq(0, 1, by = 0.2), expand = c(0, 0)
     )
   )
 }
 
-#' SSD Plot
+#' Plot Species Sensitivity Data and Distributions
 #' 
-#' Plots species sensitivity data.
+#' Plots species sensitivity data and distributions.
+#' 
 #' @inheritParams params
+#' @seealso [`ssd_plot_cdf()`] and [`geom_ssdpoint()`]
 #' @export
 #' @examples
-#' ssd_plot(boron_data, boron_pred, label = "Species", shape = "Group")
+#' ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species", shape = "Group")
 ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
-                     xlab = "Concentration", ylab = "Percent of Species Affected",
-                     ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3) {
-  chk_s3_class(data, "data.frame")
-  chk_s3_class(pred, "data.frame")
-  chk_superset(colnames(pred), c("percent", "est", "lcl", "ucl"))
-  chk_numeric(pred$percent)
-  chk_range(pred$percent, c(1, 99))
-  chk_numeric(pred$est)
-  chk_numeric(pred$lcl)
-  chk_numeric(pred$ucl)
+                     linetype = NULL, linecolor = NULL,
+                     xlab = "Concentration", ylab = "Species Affected",
+                     ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3,
+                     bounds = c(left = 1, right = 1),
+                     xbreaks = waiver()) {
+  
+  .chk_data(data, left, right, weight = NULL, missing = TRUE)
+  chk_null_or(label, vld = vld_string)
+  chk_null_or(shape, vld = vld_string)
+  chk_null_or(linetype, vld = vld_string)
+  chk_null_or(linecolor, vld = vld_string)
+  check_names(data, c(unique(c(left, right)), label, shape))
+  
+  check_names(pred, c("percent", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
+  chk_whole_numeric(pred$percent)
+  chk_range(pred$percent, c(1,99))
+  check_data(pred, values = list(est = 1, lcl = c(1, NA), ucl = c(1, NA)))
   
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
   
-  chk_string(left)
-  chk_string(right)
-  if (!is.null(label)) chk_string(label)
-  if (!is.null(shape)) chk_string(shape)
   chk_flag(ci)
   chk_flag(ribbon)
+  
   if (!is.null(hc)) {
     chk_vector(hc)
-    chk_numeric(hc)
+    chk_whole_numeric(hc)
     chk_gt(length(hc))
     chk_subset(hc, pred$percent)
   }
+  .chk_bounds(bounds)
   
-  chk_superset(colnames(data), c(left, right, label, shape))
+  pred$percent <- pred$percent / 100
   
-  gp <- ggplot(pred, aes_string(x = "est"))
+  data <- process_data(data, left, right, weight = NULL)
+  data <- bound_data(data, bounds)
+  data$y <- ssd_ecd_data(data, "left", "right", bounds = bounds)
+
+  gp <- ggplot(data)
   
   if (ci) {
     if (ribbon) {
-      gp <- gp + geom_xribbon(aes_string(xmin = "lcl", xmax = "ucl", y = "percent/100"), alpha = 0.2)
+      gp <- gp + geom_xribbon(data = pred, aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
     } else {
       gp <- gp +
-        geom_line(aes_string(x = "lcl", y = "percent/100"), color = "darkgreen") +
-        geom_line(aes_string(x = "ucl", y = "percent/100"), color = "darkgreen")
+        geom_line(data = pred, aes_string(x = "lcl", y = "percent"), color = "darkgreen") +
+        geom_line(data = pred, aes_string(x = "ucl", y = "percent"), color = "darkgreen")
     }
   }
-  if (!is.null(label)) {
-    chk_superset(colnames(data), label)
-    data <- data[order(data[[label]]), ]
-  }
-  gp <- gp + geom_line(aes_string(y = "percent/100"), color = if (ribbon) "black" else "red")
   
+  if(!is.null(linecolor)) {
+    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype, color = linecolor))
+  } else if(ribbon) {
+    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype), color = "black")
+  } else {
+    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype), color = "red")
+  }
   
   if (!is.null(hc)) {
     gp <- gp + geom_hcintersect(
-      data = pred[pred$percent %in% hc, ],
-      aes_string(xintercept = "est", yintercept = "percent/ 100")
+      data = pred[round(pred$percent * 100) %in% hc, ],
+      aes_string(xintercept = "est", yintercept = "percent")
     )
   }
   
-  if (left == right) {
-    gp <- gp + geom_ssd(data = data, aes_string(
-      x = left, shape = shape,
-      color = color
-    ))
+  if(!is.null(color)) {
+    gp <- gp + 
+      geom_ssdpoint(data = data, aes_string(
+        x = "left", y = "y", shape = shape,
+        color = color
+      ), stat = "identity") +
+      geom_ssdpoint(data = data, aes_string(
+        x = "right", y = "y", shape = shape,
+        color = color
+      ), stat = "identity") + 
+      geom_ssdsegment(data = data, aes_string(
+        x = "left", y = "y", xend = "right", yend = "y", shape = shape,
+        color = color), 
+        stat = "identity") 
   } else {
-    data$xmin <- pmin(data$left, data$right, na.rm = TRUE)
-    data$xmax <- pmax(data$left, data$right, na.rm = TRUE)
-    data$xmean <- rowMeans(data[c("left", "right")], na.rm = TRUE)
-    data$arrowleft <- data$right / 2
-    data$arrowright <- data$left * 2
-    data$y <- ssd_ecd(data$xmean)
-    
-    arrow <- arrow(length = unit(0.1, "inches"))
-    
-    gp <- gp + geom_line(aes_string(y = "percent")) +
-      geom_segment(
-        data = data[data$xmin != data$xmax, ],
-        aes_string(x = "xmin", xend = "xmax", y = "y", yend = "y")
-      ) +
-      geom_segment(
-        data = data[is.na(data$left), ],
-        aes_string(x = "right", xend = "arrowleft", y = "y", yend = "y"),
-        arrow = arrow
-      ) +
-      geom_segment(
-        data = data[is.na(data$right), ],
-        aes_string(x = "left", xend = "arrowright", y = "y", yend = "y"),
-        arrow = arrow
-      ) +
-      geom_point(data = data, aes_string(x = "xmin", y = "y")) +
-      geom_point(
-        data = data[data$xmin != data$xmax, ],
-        aes_string(x = "xmax", y = "y")
-      )
+    gp <- gp + 
+      geom_ssdpoint(data = data, aes_string(
+        x = "left", y = "y", shape = shape), 
+        stat = "identity") +
+      geom_ssdpoint(data = data, aes_string(
+        x = "right", y = "y", shape = shape
+      ), stat = "identity") +
+      geom_ssdsegment(data = data, aes_string(
+        x = "left", y = "y", xend = "right", yend = "y", shape = shape
+      ), stat = "identity") 
   }
-  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab)
+  
+  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
   
   if (!is.null(label)) {
-    data$percent <- ssd_ecd(data[[left]])
-    data[[left]] <- data[[left]] * shift_x
+    data$right <- data$right * shift_x
     gp <- gp + geom_text(
-      data = data, aes_string(x = left, y = "percent", label = label),
+      data = data, aes_string(x = "right", y = "y", label = label),
       hjust = 0, size = size, fontface = "italic"
     )
   }

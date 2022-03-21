@@ -9,21 +9,22 @@ ssd_exposure(x, meanlog = 0, sdlog = 1, nboot = 1000)
 \arguments{
 \item{x}{The object.}
 
-\item{meanlog}{A number of the mean of the exposure concentrations on the log scale.}
+\item{meanlog}{The mean of the exposure concentrations on the log scale.}
 
-\item{sdlog}{A number of the standard deviation of the exposure concentrations on the log scale.}
+\item{sdlog}{The standard deviation of the exposure concentrations on the log scale.}
 
 \item{nboot}{The number of samples to use to calculate the exposure.}
 }
 \value{
-A number of the proportion exposed.
+The proportion exposed.
 }
 \description{
 Calculates average proportion exposed based on log-normal distribution of concentrations.
 }
 \examples{
+fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 set.seed(10)
-ssd_exposure(boron_lnorm)
-ssd_exposure(boron_lnorm, meanlog = 1)
-ssd_exposure(boron_lnorm, meanlog = 1, sdlog = 1)
+ssd_exposure(fits)
+ssd_exposure(fits, meanlog = 1)
+ssd_exposure(fits, meanlog = 1, sdlog = 1)
 }

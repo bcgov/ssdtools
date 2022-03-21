@@ -2,20 +2,25 @@
 % Please edit documentation in R/subset.R
 \name{subset.fitdists}
 \alias{subset.fitdists}
-\title{Subset fitdists}
+\title{Subset fitdists Object}
 \usage{
-\method{subset}{fitdists}(x, select = names(x), ...)
+\method{subset}{fitdists}(x, select = names(x), delta = Inf, ...)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{select}{A character vector of the distributions to select.}
 
+\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+
 \item{...}{Unused.}
 }
 \description{
-Subset fitdists
+Select a subset of distributions from a fitdists object.
+The Akaike Information-theoretic Criterion differences are calculated after
+selecting the distributions named in select.
 }
 \examples{
-subset(boron_dists, c("gamma", "lnorm"))
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+subset(fits, c("gamma", "lnorm"))
 }

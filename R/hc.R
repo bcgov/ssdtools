@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,215 +12,251 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Hazard Concentration
+#' Hazard Concentrations for Species Sensitivity Distributions
 #'
-#' Gets concentrations that protect specified percentages of species.
+#' Gets concentration(s) that protect specified percentage(s) of species.
+#' 
+#' If `ci = TRUE` uses parameteric bootstrapping to get confidence intervals on the 
+#' hazard concentrations(s).
 #'
 #' @inheritParams params
-#' @param hc A numeric vector of percentages.
-#' @return A data frame of the percent and concentrations.
+#' @param hc A whole numeric vector between 1 and 99 indicating the percent hazard concentrations (deprecated for percent).
+#' @return A tibble of corresponding hazard concentrations.
+#' @seealso [`predict.fitdists()`] and [`ssd_hp()`].
 #' @export
+#' @examples
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' ssd_hc(fits)
+#' ssd_hc(estimates(fits))
+#' ssd_hc(ssd_match_moments())
 ssd_hc <- function(x, ...) {
   UseMethod("ssd_hc")
 }
 
 no_ssd_hc <- function() {
-  as_tibble(data.frame(
+  tibble(
+    dist = character(0),
     percent = numeric(0),
     est = numeric(0),
     se = numeric(0),
     lcl = numeric(0),
     ucl = numeric(0),
-    dist = character(0),
     wt = numeric(0),
-    stringsAsFactors = FALSE
-  ))
-}
-
-.ssd_hc_dist <- function(x, dist, percent) {
-  chk_vector(percent)
-  chk_numeric(percent)
-
-  percent <- percent / 100
-  fun <- paste0("q", dist)
-  args <- list(p = percent)
-  args <- c(as.list(x), args)
-  est <- do.call(fun, args)
-  data.frame(
-    percent = percent * 100, est = est,
-    se = NA_real_, lcl = NA_real_, ucl = NA_real_, dist = dist,
-    stringsAsFactors = FALSE
+    nboot = integer(0),
+    pboot = numeric(0)
   )
 }
 
-.ssd_hc_fitdist <- function(x, percent, ci, level, nboot, parallel, ncpus) {
-  chk_vector(percent)
-  chk_numeric(percent)
-  chk_number(level)
-  chk_range(level)
-
-  percent <- percent / 100
-
-  args <- as.list(x$estimate)
-  args$p <- percent
-  dist <- x$distname
-  what <- paste0("q", dist)
-
-  est <- do.call(what, args)
-  if (!ci) {
-    na <- rep(NA_real_, length(percent))
-    return(as_tibble(data.frame(
-      percent = percent * 100, est = est,
-      se = na, lcl = na, ucl = na, dist = rep(dist, length(percent)),
-      wt =  rep(1, length(percent)), stringsAsFactors = FALSE
-    )))
-  }
-  samples <- boot(x, nboot = nboot, parallel = parallel, ncpus = ncpus)
-  cis <- cis(samples, p = FALSE, level = level, x = percent)
-  as_tibble(data.frame(
-    percent = percent * 100, est = est,
-    se = cis$se, lcl = cis$lcl, ucl = cis$ucl, dist = dist,
-    wt = 1, stringsAsFactors = FALSE
-  ))
+.ssd_hc_dist <- function(x, dist, proportion) {
+  fun <- paste0("ssd_q", dist)
+  args <- list(p = proportion)
+  args <- c(as.list(x), args)
+  est <- do.call(fun, args)
+  tibble(
+    dist = dist,
+    percent = proportion * 100, est = est,
+    se = NA_real_, lcl = NA_real_, ucl = NA_real_,
+    wt = 1,
+    nboot = 0L, pboot = NA_real_
+  )
 }
 
-.ssd_hc_fitdists <- function(x, percent, ci, level, nboot, parallel, ncpus,
-                             average) {
+.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, min_pboot, 
+                           data, rescale, weighted, censoring, min_pmix, 
+                           range_shape1, range_shape2, parametric, control) {
+  args <- estimates(x)
+  args$p <- proportion
+  dist <- .dist_tmbfit(x)
+  what <- paste0("ssd_q", dist)
+  
+  est <- do.call(what, args)
+  if (!ci) {
+    na <- rep(NA_real_, length(proportion))
+    return(tibble(
+      dist = rep(dist, length(proportion)),
+      percent = proportion * 100, 
+      est = est * rescale,
+      se = na, 
+      lcl = na, 
+      ucl = na,
+      wt = rep(1, length(proportion)),
+      nboot = rep(0L, length(proportion)),
+      pboot = na))
+  }
+  censoring <- censoring / rescale
+  fun <- safely(fit_tmb)
+  estimates <- boot_estimates(x, fun = fun, nboot = nboot, data = data, weighted = weighted,
+                              censoring = censoring, min_pmix = min_pmix,
+                              range_shape1 = range_shape1,
+                              range_shape2 = range_shape2,
+                              parametric = parametric,
+                              control = control)
+
+  cis <- cis_estimates(estimates, what, level = level, x = proportion)
+  hc <- tibble(
+    dist = dist,
+    percent = proportion * 100, est = est * rescale,
+    se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
+    wt = rep(1, length(proportion)),
+    nboot = nboot, pboot = length(estimates) / nboot
+  )
+  replace_min_pboot_na(hc, min_pboot)
+}
+
+.ssd_hc_fitdists <- function(x, percent, ci, level, nboot,
+                             average, min_pboot, parametric, control) {
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
-
-  hc <- lapply(x, ssd_hc,
-    percent = percent, ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus
-  )
-  weight <- .ssd_gof_fitdists(x)$weight
-  if (!average) {
-    hc <- mapply(function(x, y) {x$wt <- y; x}, hc, weight, USE.NAMES = FALSE,
-                 SIMPLIFY = FALSE)
-    hc <- do.call("rbind", hc)
-    row.names(hc) <- NULL
-    return(as_tibble(hc))
+  
+  if(is.null(control))
+    control <- .control_fitdists(x)
+  
+  data <- .data_fitdists(x)
+  rescale <- .rescale_fitdists(x)
+  censoring <- .censoring_fitdists(x)
+  min_pmix <- .min_pmix_fitdists(x)
+  range_shape1 <- .range_shape1_fitdists(x)
+  range_shape2 <- .range_shape2_fitdists(x)
+  weighted <- .weighted_fitdists(x)
+  unequal <- .unequal_fitdists(x)
+  
+  if(parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
+    wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
+    ci <- FALSE
   }
-  hc <- lapply(hc, function(x) x[1:5])
+  
+  if(parametric && ci && unequal) {
+    wrn("Parametric CIs cannot be calculated for unequally weighted data.")
+    ci <- FALSE
+  }
+  if(!ci) {
+    nboot <- 0L
+  }
+  seeds <- seed_streams(length(x))
+  hc <- future_map(x, .ssd_hc_tmbfit, proportion = percent / 100, ci = ci, level = level, nboot = nboot,
+                   min_pboot = min_pboot,
+                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                   parametric = parametric, control = control, 
+                   .options = furrr::furrr_options(seed = seeds))
+  
+  weight <- glance(x)$weight
+  if (!average) {
+    hc <- mapply(function(x,y) {x$wt <- y; x}, x = hc, y = weight,
+                 USE.NAMES = FALSE, SIMPLIFY = FALSE)
+    hc <- bind_rows(hc)
+    hc$method <- if(parametric) "parametric" else "non-parametric"
+    hc <- hc[c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
+    return(hc)
+  }
+  hc <- lapply(hc, function(x) x[c("percent", "est", "se", "lcl", "ucl", "pboot")])
   hc <- lapply(hc, as.matrix)
   hc <- Reduce(function(x, y) {
     abind(x, y, along = 3)
   }, hc)
+  suppressMessages(min <- apply(hc, c(1, 2), min))
   suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
+  min <- as.data.frame(min)
   hc <- as.data.frame(hc)
-  hc$percent <- percent
-  hc$dist <- "average"
-  hc$wt <- 1
-  as_tibble(hc)
+  method <- if(parametric) "parametric" else "non-parametric"
+  tibble(dist = "average", percent = percent, est = hc$est, se = hc$se, 
+         lcl = hc$lcl, ucl = hc$ucl, wt = rep(1, length(percent)), 
+         method = method, nboot = nboot, pboot = min$pboot)
 }
 
-#' @describeIn ssd_hc Hazard Percent list of distributions
+#' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates
 #' @export
-#' @examples
-#' ssd_hc(list("lnorm" = NULL))
-#' ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 1)))
 ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   chk_list(x)
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
-
+  
   if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
+    deprecate_stop("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
   }
-
+  
   if (!length(x)) {
     return(no_ssd_hc())
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
-    MoreArgs = list(percent = percent),
-    SIMPLIFY = FALSE
+               MoreArgs = list(proportion = percent / 100),
+               SIMPLIFY = FALSE
   )
-  hc <- do.call("rbind", hc)
-  hc$wt <- rep(NA_real_, nrow(hc))
-  as_tibble(hc)
+  bind_rows(hc)
 }
 
-#' @describeIn ssd_hc Hazard Percent fitdist
+#' @describeIn ssd_hc Hazard Concentrations for fitdists Object
 #' @export
-#' @examples
-#' ssd_hc(boron_lnorm, c(0, 1, 30, Inf))
-ssd_hc.fitdist <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
+ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, 
+                            average = TRUE, delta = 7, min_pboot = 0.99,
+                            parametric = TRUE,
+                            control = NULL,  ...) {
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_range(percent, c(0,100))
+  chk_vector(hc)
+  chk_numeric(hc)
+  chk_range(hc, c(0,100))
+  chk_flag(ci)
+  chk_number(level)
+  chk_range(level)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  chk_flag(average)
+  chk_number(delta)
+  chk_gte(delta)
+  chk_number(min_pboot)
+  chk_range(min_pboot)
+  chk_flag(parametric)
+  chk_null_or(control, vld = vld_list)
   chk_unused(...)
-
+  
   if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
+    deprecate_stop("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
   }
-
-  .ssd_hc_fitdist(x, percent,
-    ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus
-  )
+  
+  x <- subset(x, delta = delta)
+  hc <- .ssd_hc_fitdists(x, percent,
+                   ci = ci, level = level, nboot = nboot, min_pboot = min_pboot, control = control,
+                   average = average, parametric = parametric)
+  warn_min_pboot(hc, min_pboot)
 }
 
-#' @describeIn ssd_hc Hazard Percent fitdistcens
+#' @describeIn ssd_hc Hazard Concentrations for fitburrlioz Object
+#' '
 #' @export
 #' @examples
-#' ssd_hc(fluazinam_lnorm, c(0, 1, 30, Inf))
-ssd_hc.fitdistcens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, ...) {
-  chk_unused(...)
-
-  if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
-  }
-
-  .ssd_hc_fitdist(x, percent,
-    ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus
-  )
-}
-
-#' @describeIn ssd_hc Hazard Percent fitdists
+#' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
+#' ssd_hc(fit)
+#' 
 #' @export
-#' @examples
-#' ssd_hc(boron_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aicc", ...) {
+ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000, 
+                            min_pboot = 0.99, parametric = FALSE, ...) {
+  check_dim(x, values = 1L)
+  chk_named(x)
+  chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
+  chk_vector(percent)
+  chk_numeric(percent)
+  chk_range(percent, c(0,100))
+  chk_flag(ci)
+  chk_number(level)
+  chk_range(level)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  chk_number(min_pboot)
+  chk_range(min_pboot)
+  chk_flag(parametric)
   chk_unused(...)
-
-  if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
+  
+  if(names(x) != "burrIII3" || !ci || !length(percent)) {
+    class(x) <- class(x)[-1]
+    return(ssd_hc(x, percent = percent, ci = ci, level = level,
+                  nboot = nboot, min_pboot = min_pboot, 
+                  average = FALSE, parametric = parametric))
   }
-  if(!missing(ic)) {
-    deprecate_warn("0.3.6", "ssdtools::ssd_hc(ic = )",
-                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
-  }
-
-  .ssd_hc_fitdists(x, percent,
-    ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus,
-    average = average
-  )
-}
-
-#' @describeIn ssd_hc Hazard Percent fitdistcens
-#' @export
-#' @examples
-#' ssd_hc(fluazinam_dists, c(0, 1, 30, Inf))
-ssd_hc.fitdistscens <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000, parallel = NULL, ncpus = 1, average = TRUE, ic = "aic", ...) {
-  chk_unused(...)
-
-  if (!missing(hc)) {
-    deprecate_soft("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-    percent <- hc
-  }
-  if(!missing(ic)) {
-    deprecate_warn("0.3.6", "ssdtools::ssd_hc(ic = )",
-                   details = "AICc is used for model averaging unless the data are censored in which case AIC is used.")
-  }
-
-  .ssd_hc_fitdists(x, percent,
-    ci = ci, level = level, nboot = nboot,
-    parallel = parallel, ncpus = ncpus,
-    average = average
-  )
+  hc <- .ssd_hc_burrlioz_fitdists(x, percent = percent, level = level, nboot = nboot, 
+                                  min_pboot = min_pboot, parametric = parametric)
+  warn_min_pboot(hc, min_pboot)
 }

@@ -9,14 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       fig.width = 6,
                       fig.height = 6)
 
-library(ggplot2)
+library(tidyverse)
 library(mle.tools)
 library(reshape2)
+library(ssddata)
 library(ssdtools)
 
 nsim <- 1000 # number of simulations for effect of bias correction
@@ -33,8 +34,7 @@ not guarantee performance in small samples.
 For example, consider the CCME silver data that ships with *ssdtools*.
 
 ```{r warning=FALSE, message=FALSE}
-data(ccme_data)
-Ag <- ccme_data[ ccme_data$Chemical=="Silver",]
+Ag <- ssddata::ccme_data[ssddata::ccme_data$Chemical=="Silver",]
 Ag$ecdf <- (rank(Ag$Conc)+.25)/(nrow(Ag)+.5)
 Ag
 ```
@@ -495,20 +495,20 @@ ggplot(data=plotdata, aes(x=logConc, y=density))+
 
 ```{r echo=FALSE}
 # compute the HC5 from the two fit
-MLE.gamma.HC5.log <- log(qgamma(.05, 
+MLE.gamma.HC5.log <- log(ssd_qgamma(.05, 
                            shape=fit.gamma$gamma$estimate["shape"],
                            scale=fit.gamma$gamma$estimate["scale"]))
 MLE.gamma.HC5     <- exp(MLE.gamma.HC5.log)
-REG.gamma.HC5.log <- log(qgamma(.05,
+REG.gamma.HC5.log <- log(ssd_qgamma(.05,
                            shape=bias.correct.gamma$mle.bc["shape"],
                            scale=bias.correct.gamma$mle.bc["scale"]))
 REG.gamma.HC5     <- exp(REG.gamma.HC5.log)
 
-MLE.gamma.HC1.log <- log(qgamma(.01, 
+MLE.gamma.HC1.log <- log(ssd_qgamma(.01, 
                            shape=fit.gamma$gamma$estimate["shape"],
                            scale=fit.gamma$gamma$estimate["scale"]))
 MLE.gamma.HC1     <- exp(MLE.gamma.HC1.log)
-REG.gamma.HC1.log <- log(qgamma(.01,
+REG.gamma.HC1.log <- log(ssd_qgamma(.01,
                            shape=bias.correct.gamma$mle.bc["shape"],
                            scale=bias.correct.gamma$mle.bc["scale"]))
 REG.gamma.HC1     <- exp(REG.gamma.HC1.log)
@@ -595,19 +595,19 @@ res <- plyr::ldply(sample.sizes, function(n, shape, scale, nsim=1000){
    
      # find the hc5 and hc1 using the MLE and bias corrected values
      # compute the HC5 from the two fit
-     actual.HC5.log <- log(qgamma(.05, shape=shape, scale=scale))
-     actual.HC1.log <- log(qgamma(.01, shape=shape, scale=scale))
+     actual.HC5.log <- log(ssd_qgamma(.05, shape=shape, scale=scale))
+     actual.HC1.log <- log(ssd_qgamma(.01, shape=shape, scale=scale))
      actual.HC5     <- exp(actual.HC5.log)
      actual.HC1     <- exp(actual.HC1.log)
-     MLE.HC5.log <- log(qgamma(.05,shape=fit$gamma$estimate["shape"], scale=fit$gamma$estimate["scale"]))
+     MLE.HC5.log <- log(ssd_qgamma(.05,shape=fit$gamma$estimate["shape"], scale=fit$gamma$estimate["scale"]))
      MLE.HC5     <- exp(MLE.HC5.log)
-     BC.HC5.log  <- log(qgamma(.05,shape = bias.correct$mle.bc["shape"], 
+     BC.HC5.log  <- log(ssd_qgamma(.05,shape = bias.correct$mle.bc["shape"], 
                                    scale = bias.correct$mle.bc["scale"] ))
      BC.HC5      <- exp(BC.HC5.log)
 
-     MLE.HC1.log <- log(qgamma(.01, shape=fit$gamma$estimate["shape"], scale=  fit$gamma$estimate["scale"]))
+     MLE.HC1.log <- log(ssd_qgamma(.01, shape=fit$gamma$estimate["shape"], scale=  fit$gamma$estimate["scale"]))
      MLE.HC1     <- exp(MLE.HC1.log)
-     BC.HC1.log  <- log(qgamma(.01,shape=bias.correct$mle.bc["shape"], 
+     BC.HC1.log  <- log(ssd_qgamma(.01,shape=bias.correct$mle.bc["shape"], 
                                    scale=bias.correct$mle.bc["scale"] ))
      BC.HC1      <- exp(BC.HC1.log)
 
@@ -740,8 +740,8 @@ true.parms <- data.frame(parameter=c("Shape",
                                     "actual HC",
                                     'actual HC'),
                          value=c(shape,scale,
-                                 log(qgamma(.05, shape=shape, scale=scale)), log(qgamma(.01, shape=shape, scale=scale)), 
-                                 qgamma(.05, shape=shape, scale=scale), qgamma(.01, shape=shape, scale=scale)),
+                                 log(ssd_qgamma(.05, shape=shape, scale=scale)), log(ssd_qgamma(.01, shape=shape, scale=scale)), 
+                                 ssd_qgamma(.05, shape=shape, scale=scale), ssd_qgamma(.01, shape=shape, scale=scale)),
                          linetype=c("solid","solid","dashed","solid","dashed","solid"), stringsAsFactors=FALSE)
 true.parms
 

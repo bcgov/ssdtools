@@ -2,50 +2,44 @@
 % Please edit documentation in R/plot-cdf.R
 \name{ssd_plot_cdf}
 \alias{ssd_plot_cdf}
-\alias{ssd_plot_cdf.list}
-\alias{ssd_plot_cdf.fitdist}
-\alias{ssd_plot_cdf.fitdistcens}
 \alias{ssd_plot_cdf.fitdists}
-\title{Plot Cumulative Distribution Function}
+\alias{ssd_plot_cdf.list}
+\title{Plot Cumulative Distribution Function (CDF)}
 \usage{
 ssd_plot_cdf(x, ...)
 
-\method{ssd_plot_cdf}{list}(x, xlab = "Concentration", ylab = "Species Affected", ...)
+\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, ...)
 
-\method{ssd_plot_cdf}{fitdist}(x, xlab = "Concentration", ylab = "Species Affected", ...)
-
-\method{ssd_plot_cdf}{fitdistcens}(x, xlab = "Concentration", ylab = "Species Affected", ...)
-
-\method{ssd_plot_cdf}{fitdists}(x, xlab = "Concentration", ylab = "Species Affected", ...)
+\method{ssd_plot_cdf}{list}(x, ...)
 }
 \arguments{
 \item{x}{The object.}
 
-\item{...}{Unused.}
+\item{...}{Additional arguments passed to \code{\link[=ssd_plot]{ssd_plot()}}.}
 
-\item{xlab}{A string of the x-axis label.}
-
-\item{ylab}{A string of the x-axis label.}
+\item{average}{A flag specifying whether to model average the estimates.}
 }
 \description{
-Plots the cumulative distribution function (cdf).
+Generic function to plots the cumulative distribution function (CDF).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{list}: Plot list
+\item \code{fitdists}: Plot CDF for fitdists object
 
-\item \code{fitdist}: Plot CDF fitdist
-
-\item \code{fitdistcens}: Plot CDF fitdistcens
-
-\item \code{fitdists}: Plot CDF fitdists
+\item \code{list}: Plot CDF for named list of distributional parameter values
 }}
 
 \examples{
-ssd_plot_cdf(boron_lnorm)
-ssd_plot_cdf(boron_lnorm)
-fluazinam_lnorm$censdata$right[3] <- fluazinam_lnorm$censdata$left[3] * 1.5
-fluazinam_lnorm$censdata$left[5] <- NA
-ssd_plot_cdf(fluazinam_lnorm)
-ssd_plot_cdf(boron_dists)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_plot_cdf(fits)
+
+ssd_plot_cdf(list(
+  llogis = c(locationlog = 2, scalelog = 1),
+  lnorm = c(meanlog = 2, sdlog = 2))
+)
+}
+\seealso{
+\code{\link[=ssd_plot]{ssd_plot()}}
+
+\code{\link[=estimates.fitdists]{estimates.fitdists()}} and \code{\link[=ssd_match_moments]{ssd_match_moments()}}
 }

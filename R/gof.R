@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Environment and Climate Change Canada
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -40,95 +40,49 @@
 #'
 #' @inheritParams params
 #' @return A tbl data frame of the gof statistics.
+#' @seealso [`glance.fitdists()`]
 #' @export
 #' @examples
-#' ssd_gof(boron_lnorm)
-#' ssd_gof(boron_dists)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' ssd_gof(fits)
 ssd_gof <- function(x, ...) {
   UseMethod("ssd_gof")
 }
 
+.tests_tmbfit <- function(x, data, pvalue) {
+  dist <- .dist_tmbfit(x)
+  pars <- estimates(x)
+  
+  ad <- tdist(dist, data, pars, pvalue, "ad", y = "null")
+  ks <- tdist(dist, data, pars, pvalue)
+  cvm <- tdist(dist, data, pars, pvalue, "cvm", y = "null")
+  
+  tibble(ad = ad, ks = ks, cvm = cvm)
+}
+
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 #' @examples
-#' ssd_gof(boron_lnorm)
-ssd_gof.fitdist <- function(x, ...) {
+#' ssd_gof(fits)
+ssd_gof.fitdists <- function(x, pvalue = FALSE, ...) {
+  chk_flag(pvalue)
   chk_unused(...)
-
-  dist <- x$distname
-  n <- nobs(x)
-  k <- npars(x)
-
-  aic <- x$aic
-  aicc <- aic + 2 * k * (k + 1) / (n - k - 1)
-  bic <- x$bic
-
-  if (n >= 8) {
-    x <- fitdistrplus::gofstat(x)
-    ad <- x$ad
-    ks <- x$ks
-    cvm <- x$cvm
+  
+  glance <- glance(x)
+  glance$bic <- - 2 * glance$log_lik + log(glance$nobs) * glance$npars
+  
+  if(glance$nobs[1] < 8) {
+    glance$ad <- NA_real_
+    glance$ks <- NA_real_
+    glance$cvm <- NA_real_
   } else {
-    ad <- NA_real_
-    ks <- NA_real_
-    cvm <- NA_real_
+    data <- .data_fitdists(x)
+    tests <- lapply(x, .tests_tmbfit, data = data, pvalue = pvalue)
+    tests <- bind_rows(tests)
+    glance <- cbind(glance, tests)
+    glance <- as_tibble(glance)
   }
-  data <- data.frame(
-    dist = dist, ad = ad, ks = ks, cvm = cvm,
-    aic = aic, aicc = aicc, bic = bic, stringsAsFactors = FALSE
-  )
-  as_tibble(data)
-}
-
-.ssd_gof_fitdists <- function(x) {
-  x <- lapply(x, ssd_gof)
-  x$stringsAsFactors <- FALSE
-  x <- do.call("rbind", x)
-  if ("aicc" %in% colnames(x)) {
-    x$delta <- x$aicc - min(x$aicc)
-  } else { # aicc not defined for censored data
-    x$delta <- x$aic - min(x$aic)
-  }
-  x$weight <- exp(-x$delta / 2) / sum(exp(-x$delta / 2))
-  x
-}
-
-#' @describeIn ssd_gof Goodness of Fit
-#' @export
-#' @examples
-#' ssd_gof(boron_dists)
-ssd_gof.fitdists <- function(x, ...) {
-  chk_unused(...)
-
-  x <- .ssd_gof_fitdists(x)
-  x$weight <- round(x$weight, 3)
-  x$delta <- round(x$delta, 3)
-  x
-}
-
-#' @describeIn ssd_gof Goodness of Fit
-#' @export
-#' @examples
-#' ssd_gof(fluazinam_lnorm)
-ssd_gof.fitdistcens <- function(x, ...) {
-  chk_unused(...)
-
-  data <- data.frame(
-    dist = x$distname, aic = x$aic, bic = x$bic,
-    stringsAsFactors = FALSE
-  )
-  as_tibble(data)
-}
-
-#' @describeIn ssd_gof Goodness of Fit
-#' @export
-#' @examples
-#' ssd_gof(fluazinam_lnorm)
-ssd_gof.fitdistscens <- function(x, ...) {
-  chk_unused(...)
-
-  x <- .ssd_gof_fitdists(x)
-  x$weight <- round(x$weight, 3)
-  x$delta <- round(x$delta, 3)
-  x
+  glance$weight <- round(glance$weight, 3)
+  glance$delta <- round(glance$delta, 3)
+  glance[c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight")]
 }

@@ -2,26 +2,19 @@
 % Please edit documentation in R/gof.R
 \name{ssd_gof}
 \alias{ssd_gof}
-\alias{ssd_gof.fitdist}
 \alias{ssd_gof.fitdists}
-\alias{ssd_gof.fitdistcens}
-\alias{ssd_gof.fitdistscens}
 \title{Goodness of Fit}
 \usage{
 ssd_gof(x, ...)
 
-\method{ssd_gof}{fitdist}(x, ...)
-
-\method{ssd_gof}{fitdists}(x, ...)
-
-\method{ssd_gof}{fitdistcens}(x, ...)
-
-\method{ssd_gof}{fitdistscens}(x, ...)
+\method{ssd_gof}{fitdists}(x, pvalue = FALSE, ...)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{...}{Unused.}
+
+\item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
 }
 \value{
 A tbl data frame of the gof statistics.
@@ -53,20 +46,14 @@ and \code{aicc} for non-censored data.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fitdist}: Goodness of Fit
-
 \item \code{fitdists}: Goodness of Fit
-
-\item \code{fitdistcens}: Goodness of Fit
-
-\item \code{fitdistscens}: Goodness of Fit
 }}
 
 \examples{
-ssd_gof(boron_lnorm)
-ssd_gof(boron_dists)
-ssd_gof(boron_lnorm)
-ssd_gof(boron_dists)
-ssd_gof(fluazinam_lnorm)
-ssd_gof(fluazinam_lnorm)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_gof(fits)
+ssd_gof(fits)
+}
+\seealso{
+\code{\link[=glance.fitdists]{glance.fitdists()}}
 }

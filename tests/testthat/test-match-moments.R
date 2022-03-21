@@ -1,4 +1,4 @@
-#    Copyright 2015 Province of British Columbia
+#    Copyright 2021 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -13,21 +13,9 @@
 #    limitations under the License.
 
 test_that("match_moments all", {
-  rlang::scoped_options(lifecycle_verbosity = "quiet")
+  rlang::local_options(lifecycle_verbosity = "quiet")
   set.seed(10)
-  pars <- ssd_match_moments(dists = c(
-    "gamma",
-    "gompertz", "lgumbel", "llogis",
-    "lnorm", "weibull"
-  ))
-  expect_equal(
-    pars,
-    list(gamma = c(shape = 1.63660278320313, scale = 2.30180053710938
-    ), gompertz = c(llocation = -2.2692977218617, lshape = -0.782647328752115
-    ), lgumbel = c(locationlog = 0.534375, scalelog = 0.7625), llogis = c(locationlog = 0.96875, 
-                                                                          scalelog = 0.525), lnorm = c(meanlog = 0.98125, sdlog = 0.9515625
-                                                                          ), weibull = c(shape = 1.26367187500001, scale = 4.325390625))
-  )
-
-  expect_is(ssd_plot_cdf(pars), "ggplot")
+  pars <- ssd_match_moments(dists = ssd_dists_all())
+  expect_snapshot_output(print(pars))
+  expect_snapshot_plot(ssd_plot_cdf(pars), "cdf")
 })

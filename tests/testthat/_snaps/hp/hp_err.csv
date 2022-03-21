@@ -1,0 +1,2 @@
+dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot
+average,1,9.182355650573134,5.011255443807042,4.702158611633197e-22,19.52961496587981,1,parametric,100,0.96

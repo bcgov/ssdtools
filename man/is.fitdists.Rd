@@ -2,7 +2,7 @@
 % Please edit documentation in R/is.R
 \name{is.fitdists}
 \alias{is.fitdists}
-\title{Is fitdists}
+\title{Is fitdists Object}
 \usage{
 is.fitdists(x)
 }
@@ -10,19 +10,12 @@ is.fitdists(x)
 \item{x}{The object.}
 }
 \value{
-A flag.
+A flag specifiying whether x is a fitdists Object.
 }
 \description{
-Tests whether an object is a fitdists.
+Tests whether x is a fitdists Object.
 }
 \examples{
-is.fitdists(boron_lnorm)
-is.fitdists(boron_dists)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+is.fitdists(fits)
 }
-\seealso{
-Other is: 
-\code{\link{is.fitdistcens}()},
-\code{\link{is.fitdistscens}()},
-\code{\link{is.fitdist}()}
-}
-\concept{is}
