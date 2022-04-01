@@ -12,6 +12,20 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' Log-Gumbel (Inverse Weibull) Probability Density
+#' 
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' @param x A numeric vector of values.
+#' @inheritParams params
+#' @return A numeric vector.
+#' @export
+dlgumbel <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
+  lifecycle::deprecate_soft("1.0.0", "dlgumbel()")
+  ddist("gumbel", x = x,  location = locationlog, scale = scalelog, 
+        log = log, .lgt = TRUE)
+}
+
 #' @describeIn ssd_p Cumulative Distribution Function for Log-Gumbel Distribution
 #' @export
 #' @examples
@@ -20,6 +34,15 @@
 ssd_plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   pdist("gumbel", q = q,  location = locationlog, scale = scalelog, 
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
+}
+
+#' @describeIn ssd_p Cumulative Distribution Function for Log-Gumbel Distribution
+#' `r lifecycle::badge("deprecated")`
+#' @export
+plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+  lifecycle::deprecate_soft("1.0.0", "plgumbel()", "ssd_plgumbel()")
+  ssd_plgumbel(q, locationlog = locationlog, scalelog = scalelog,
+               lower.tail = lower.tail, log.p = log.p)
 }
 
 #' @describeIn ssd_q Quantile Function for Log-Gumbel Distribution
@@ -32,6 +55,15 @@ ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, lo
         lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
 }
 
+#' @describeIn ssd_q Quantile Function for Log-Gumbel Distribution
+#' `r lifecycle::badge("deprecated")`
+#' @export
+qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
+  lifecycle::deprecate_soft("1.0.0", "qlgumbel()", "ssd_qlgumbel()")
+  ssd_qlgumbel(p, locationlog = locationlog, scalelog = scalelog,
+               lower.tail = lower.tail, log.p = log.p)
+}
+
 #' @describeIn ssd_r Random Generation for log-Gumbel Distribution
 #' @export
 #' @examples
@@ -40,6 +72,14 @@ ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, lo
 #' hist(ssd_rlgumbel(10000), breaks = 1000)
 ssd_rlgumbel <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
   rdist("gumbel", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
+}
+
+#' @describeIn ssd_r Random Generation for log-Gumbel Distribution
+#' `r lifecycle::badge("deprecated")`
+#' @export
+rlgumbel <- function(n, locationlog = 0, scalelog = 1) {
+  lifecycle::deprecate_soft("1.0.0", "rlgumbel()", "ssd_rlgumbel()")
+  ssd_rlgumbel(n, locationlog = locationlog, scalelog = scalelog)
 }
 
 slgumbel <- function(data, pars = NULL) {

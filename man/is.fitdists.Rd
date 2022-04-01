@@ -10,7 +10,7 @@ is.fitdists(x)
 \item{x}{The object.}
 }
 \value{
-A flag specifiying whether x is a fitdists Object.
+A flag specifying whether x is a fitdists Object.
 }
 \description{
 Tests whether x is a fitdists Object.

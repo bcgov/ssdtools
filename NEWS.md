@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 1.0.0.9000
+
+- Same as previous version.
+
+
 # ssdtools 1.0.0
 
 ssdtools version 1.0.0 is the first major release of `ssdtools` with some important improvements and breaking changes.

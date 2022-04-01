@@ -1,6 +1,6 @@
 ## Test environments
 
-release 4.1.1
+release 4.1.3
 
 * OSX (local) - release
 * OSX (actions) - release
@@ -10,7 +10,39 @@ release 4.1.1
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Joe Thorley <joe@poissonconsulting.ca>'
+
+Possibly misspelled words in DESCRIPTION:
+  Akaike (59:23)
+  
+This word is spelt correctly.
+
+Found the following (possibly) invalid URLs:
+  URL: https://doi.org/10.1002/etc.4925
+    From: inst/doc/ssdtools.html
+    Status: 503
+    Message: Service Unavailable
+  URL: https://doi.org/10.1897/02-435
+    From: inst/doc/exposure-plots.html
+    Status: 503
+    Message: Service Unavailable
+  URL: https://setac.onlinelibrary.wiley.com/doi/10.1002/etc.4925
+    From: README.md
+    Status: 503
+    Message: Service Unavailable
+  URL: https://setac.onlinelibrary.wiley.com/doi/abs/10.1897/02-435
+    From: inst/doc/exposure-plots.html
+    Status: 503
+    Message: Service Unavailable
+  URL: https://www.jstor.org/stable/2235756
+    From: inst/doc/distributions.html
+    Status: 403
+    Message: Forbidden
+    
+These URLs are valid.
 
 ## revdepcheck results
 

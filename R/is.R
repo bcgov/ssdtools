@@ -21,7 +21,7 @@ is.tmbfit <- function(x) {
 #' Tests whether x is a fitdists Object.
 #' @inheritParams params
 #'
-#' @return A flag specifiying whether x is a fitdists Object.
+#' @return A flag specifying whether x is a fitdists Object.
 #' @export
 #'
 #' @examples

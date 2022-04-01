@@ -10,22 +10,36 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// plogis_dummy
-double plogis_dummy(double q, double location, double scale);
-RcppExport SEXP _ssdtools_plogis_dummy(SEXP qSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+// dgompertz_ssd
+double dgompertz_ssd(double x, double location, double shape);
+RcppExport SEXP _ssdtools_dgompertz_ssd(SEXP xSEXP, SEXP locationSEXP, SEXP shapeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type location(locationSEXP);
+    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
+    rcpp_result_gen = Rcpp::wrap(dgompertz_ssd(x, location, shape));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dgumbel_ssd
+double dgumbel_ssd(double x, double location, double scale);
+RcppExport SEXP _ssdtools_dgumbel_ssd(SEXP xSEXP, SEXP locationSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type location(locationSEXP);
     Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(plogis_dummy(q, location, scale));
+    rcpp_result_gen = Rcpp::wrap(dgumbel_ssd(x, location, scale));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ssdtools_plogis_dummy", (DL_FUNC) &_ssdtools_plogis_dummy, 3},
+    {"_ssdtools_dgompertz_ssd", (DL_FUNC) &_ssdtools_dgompertz_ssd, 3},
+    {"_ssdtools_dgumbel_ssd", (DL_FUNC) &_ssdtools_dgumbel_ssd, 3},
     {NULL, NULL, 0}
 };
 
