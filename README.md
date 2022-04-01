@@ -89,12 +89,15 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(fits)
-#> # A tibble: 3 × 9
-#>   dist      ad     ks    cvm   aic  aicc   bic delta weight
-#>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 gamma  0.440 0.117  0.0554  238.  238.  240.  0     0.595
-#> 2 llogis 0.487 0.0994 0.0595  241.  241.  244.  3.38  0.11 
-#> 3 lnorm  0.507 0.107  0.0703  239.  240.  242.  1.40  0.296
+#> # A tibble: 6 × 9
+#>   dist           ad     ks    cvm   aic  aicc   bic delta weight
+#>   <chr>       <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 gamma       0.440 0.117  0.0554  238.  238.  240. 0.005  0.357
+#> 2 lgumbel     0.829 0.158  0.134   244.  245.  247. 6.56   0.013
+#> 3 llogis      0.487 0.0994 0.0595  241.  241.  244. 3.39   0.066
+#> 4 lnorm       0.507 0.107  0.0703  239.  240.  242. 1.40   0.177
+#> 5 lnorm_lnorm 0.320 0.116  0.0414  240.  243.  247. 4.98   0.03 
+#> 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357
 ```
 
 and the model-averaged 5% hazard concentration estimated by parametric
@@ -107,7 +110,7 @@ print(hc5)
 #> # A tibble: 1 × 10
 #>   dist    percent   est    se   lcl   ucl    wt method     nboot pboot
 #>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-#> 1 average       5  1.31 0.780 0.543  3.58     1 parametric   100     1
+#> 1 average       5  1.24 0.741 0.510  3.35     1 parametric   100     1
 ```
 
 Model-averaged predictions complete with confidence intervals can also
@@ -189,7 +192,7 @@ software see:
 
 *Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity
 Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
-<https://onlinelibrary.wiley.com/doi/10.1002/etc.4925>.*
+<https://setac.onlinelibrary.wiley.com/doi/10.1002/etc.4925>.*
 
 The CCME `data.csv` data file is derived from a factsheet prepared by
 the [Canadian Council of Ministers of the
