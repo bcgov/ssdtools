@@ -26,9 +26,3 @@
 
 # Revdeps
 
-## New problems (1)
-
-|package                          |version |error |warning |note |
-|:--------------------------------|:-------|:-----|:-------|:----|
-|[GenHMM1d](problems.md#genhmm1d) |0.1.0   |      |__+1__  |1    |
-

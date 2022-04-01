@@ -12,6 +12,20 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' Gompertz Probability Density
+#' 
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' @param x A numeric vector of values.
+#' @inheritParams params
+#' @return A numeric vector.
+#' @export
+dgompertz <- function(x, llocation = 0, lshape = 0, log = FALSE) {
+  lifecycle::deprecate_soft("1.0.0", "dgompertz()")
+  ddist("gompertz", x,  location = exp(llocation), shape = exp(lshape), 
+        log = log)
+}
+
 #' @describeIn ssd_p Cumulative Distribution Function for Gompertz Distribution
 #' @export
 #' @examples

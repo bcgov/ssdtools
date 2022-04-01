@@ -12,6 +12,20 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+#' Log-Gumbel (Inverse Weibull) Probability Density
+#' 
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' @param x A numeric vector of values.
+#' @inheritParams params
+#' @return A numeric vector.
+#' @export
+dlgumbel <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
+  lifecycle::deprecate_soft("1.0.0", "dlgumbel()")
+  ddist("gumbel", x = x,  location = locationlog, scale = scalelog, 
+        log = log, .lgt = TRUE)
+}
+
 #' @describeIn ssd_p Cumulative Distribution Function for Log-Gumbel Distribution
 #' @export
 #' @examples

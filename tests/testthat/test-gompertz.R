@@ -31,6 +31,7 @@ test_that("bootstrap gompertz with problem data", {
 
 test_that("sgompertz completely unstable!", {
   skip_on_ci() # as incredibly unstable
+  skip_on_cran()
   x <- c(3.15284072848962, 1.77947821504531, 0.507778085984185, 1.650387414067, 
          1.00725113964435, 7.04244885481452, 1.32336941144339, 1.51533791792454
   )
@@ -47,6 +48,7 @@ test_that("sgompertz completely unstable!", {
 
 test_that("sgompertz with initial values still unstable!", {
   skip_on_ci() # as incredibly unstable
+  skip_on_cran()
   x <- c(3.15284072848962, 1.77947821504531, 0.507778085984185, 1.650387414067, 
          1.00725113964435, 7.04244885481452, 1.32336941144339, 1.51533791792454
   )
