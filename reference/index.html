@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -69,65 +69,133 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="ccme-data">CCME Data <a href="#ccme-data" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>CCME Species Sensitivity Data for Boron and Fluazinam</p>
+          <h2 id="all-functions">All functions <a href="#all-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="ccme_data.html">ccme_data</a></code> </p>
+          <p><code><a href="augment.fitdists.html">augment(<i>&lt;fitdists&gt;</i>)</a></code> </p>
         </td>
-        <td><p>CCME Species Sensitivity Data</p></td>
+        <td><p>Augmented Data from fitdists Object</p></td>
+      </tr><tr><td>
+          <p><code><a href="autoplot.fitdists.html">autoplot(<i>&lt;fitdists&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot a fitdists Object</p></td>
       </tr><tr><td>
           <p><code><a href="boron_data.html">boron_data</a></code> </p>
         </td>
         <td><p>CCME Species Sensitivity Data for Boron</p></td>
       </tr><tr><td>
-          <p><code><a href="boron_dists.html">boron_dists</a></code> </p>
-        </td>
-        <td><p>fitdists for CCME Boron Data</p></td>
-      </tr><tr><td>
-          <p><code><a href="boron_hc5.html">boron_hc5</a></code> </p>
-        </td>
-        <td><p>Model Averaged 5 Hazard Concentration for CCME Boron Data</p></td>
-      </tr><tr><td>
-          <p><code><a href="boron_lnorm.html">boron_lnorm</a></code> </p>
-        </td>
-        <td><p>fitdist for CCME Boron Data</p></td>
-      </tr><tr><td>
           <p><code><a href="boron_pred.html">boron_pred</a></code> </p>
         </td>
         <td><p>Model Averaged Predictions for CCME Boron Data</p></td>
       </tr><tr><td>
-          <p><code><a href="fluazinam_dists.html">fluazinam_dists</a></code> </p>
+          <p><code><a href="ccme_data.html">ccme_data</a></code> </p>
         </td>
-        <td><p>fitdists for fitdistrplus Fluazinam Data</p></td>
+        <td><p>CCME Species Sensitivity Data</p></td>
       </tr><tr><td>
-          <p><code><a href="fluazinam_lnorm.html">fluazinam_lnorm</a></code> </p>
+          <p><code><a href="coef.fitdists.html">coef(<i>&lt;fitdists&gt;</i>)</a></code> </p>
         </td>
-        <td><p>fitdist for CCME Fluazinam Data</p></td>
+        <td><p>Turn a fitdists Object into a Tidy Tibble</p></td>
       </tr><tr><td>
-          <p><code><a href="fluazinam_pred.html">fluazinam_pred</a></code> </p>
+          <p><code><a href="comma_signif.html">comma_signif()</a></code> </p>
         </td>
-        <td><p>Model Averaged Predictions for Fluazinam</p></td>
+        <td><p>Comma and Significance Formatter</p></td>
       </tr><tr><td>
-          <p><code><a href="test_data.html">test_data</a></code> </p>
+          <p><code><a href="dgompertz.html">dgompertz()</a></code> </p>
         </td>
-        <td><p>Test Data</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="calculate-and-predict">Calculate and Predict <a href="#calculate-and-predict" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Calculate Values and Estimate Model Fit</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="predict.fitdist.html">predict(<i>&lt;fitdist&gt;</i>)</a></code> <code><a href="predict.fitdist.html">predict(<i>&lt;fitdistcens&gt;</i>)</a></code> <code><a href="predict.fitdist.html">predict(<i>&lt;fitdists&gt;</i>)</a></code> <code><a href="predict.fitdist.html">predict(<i>&lt;fitdistscens&gt;</i>)</a></code> </p>
+        <td><p>Gompertz Probability Density</p></td>
+      </tr><tr><td>
+          <p><code><a href="dist_data.html">dist_data</a></code> </p>
         </td>
-        <td><p>Predict</p></td>
+        <td><p>Distribution Data</p></td>
+      </tr><tr><td>
+          <p><code><a href="dlgumbel.html">dlgumbel()</a></code> </p>
+        </td>
+        <td><p>Log-Gumbel (Inverse Weibull) Probability Density</p></td>
+      </tr><tr><td>
+          <p><code><a href="estimates.fitdists.html">estimates(<i>&lt;fitdists&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Estimates for fitdists Object</p></td>
+      </tr><tr><td>
+          <p><code><a href="geom_hcintersect.html">geom_hcintersect()</a></code> </p>
+        </td>
+        <td><p>Species Sensitivity Hazard Concentration Intersection</p></td>
+      </tr><tr><td>
+          <p><code><a href="geom_ssdpoint.html">geom_ssdpoint()</a></code> <code><a href="geom_ssdpoint.html">geom_ssd()</a></code> </p>
+        </td>
+        <td><p>Species Sensitivity Data Points</p></td>
+      </tr><tr><td>
+          <p><code><a href="geom_ssdsegment.html">geom_ssdsegment()</a></code> </p>
+        </td>
+        <td><p>Species Sensitivity Censored Segments</p></td>
+      </tr><tr><td>
+          <p><code><a href="geom_xribbon.html">geom_xribbon()</a></code> </p>
+        </td>
+        <td><p>Ribbon on X-Axis</p></td>
+      </tr><tr><td>
+          <p><code><a href="glance.fitdists.html">glance(<i>&lt;fitdists&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Get a tibble summarizing each distribution</p></td>
+      </tr><tr><td>
+          <p><code><a href="is.fitdists.html">is.fitdists()</a></code> </p>
+        </td>
+        <td><p>Is fitdists Object</p></td>
+      </tr><tr><td>
+          <p><code><a href="is_censored.html">is_censored()</a></code> </p>
+        </td>
+        <td><p>Is Censored</p></td>
+      </tr><tr><td>
+          <p><code><a href="predict.fitburrlioz.html">predict(<i>&lt;fitburrlioz&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Predict Hazard Concentrations of fitburrlioz Object</p></td>
+      </tr><tr><td>
+          <p><code><a href="predict.fitdists.html">predict(<i>&lt;fitdists&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Predict Hazard Concentrations of fitdists Object</p></td>
+      </tr><tr><td>
+          <p><code><a href="scale_colour_ssd.html">scale_colour_ssd()</a></code> <code><a href="scale_colour_ssd.html">scale_color_ssd()</a></code> </p>
+        </td>
+        <td><p>Discrete color-blind scale for SSD Plots</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_data.html">ssd_data()</a></code> </p>
+        </td>
+        <td><p>Data from fitdists Object</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_dists.html">ssd_dists()</a></code> </p>
+        </td>
+        <td><p>Species Sensitivity Distributions</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_dists_all.html">ssd_dists_all()</a></code> </p>
+        </td>
+        <td><p>All Species Sensitivity Distributions</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_dists_bcanz.html">ssd_dists_bcanz()</a></code> </p>
+        </td>
+        <td><p>BCANZ Distributions</p></td>
       </tr><tr><td>
           <p><code><a href="ssd_ecd.html">ssd_ecd()</a></code> </p>
         </td>
         <td><p>Empirical Cumulative Density</p></td>
       </tr><tr><td>
+          <p><code><a href="ssd_ecd_data.html">ssd_ecd_data()</a></code> </p>
+        </td>
+        <td><p>Empirical Cumulative Density for Species Sensitivity Data</p></td>
+      </tr><tr><td>
           <p><code><a href="ssd_exposure.html">ssd_exposure()</a></code> </p>
         </td>
         <td><p>Percent Exposure</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> </p>
+        </td>
+        <td><p>Fit BCANZ Distributions</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_fit_burrlioz.html">ssd_fit_burrlioz()</a></code> </p>
+        </td>
+        <td><p>Fit Burrlioz Distributions</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_fit_dists.html">ssd_fit_dists()</a></code> </p>
+        </td>
+        <td><p>Fit Distributions</p></td>
       </tr><tr><td>
           <p><code><a href="ssd_gof.html">ssd_gof()</a></code> </p>
         </td>
@@ -135,307 +203,87 @@
       </tr><tr><td>
           <p><code><a href="ssd_hc.html">ssd_hc()</a></code> </p>
         </td>
-        <td><p>Hazard Concentration</p></td>
+        <td><p>Hazard Concentrations for Species Sensitivity Distributions</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_hc_bcanz.html">ssd_hc_bcanz()</a></code> </p>
+        </td>
+        <td><p>BCANZ Hazard Concentrations</p></td>
+      </tr><tr><td>
+          <p><code><a href="ssd_hc_burrlioz.html">ssd_hc_burrlioz()</a></code> </p>
+        </td>
+        <td><p>Hazard Concentrations for Burrlioz Fit</p></td>
       </tr><tr><td>
           <p><code><a href="ssd_hp.html">ssd_hp()</a></code> </p>
         </td>
         <td><p>Hazard Percent</p></td>
       </tr><tr><td>
+          <p><code><a href="ssd_is_censored.html">ssd_is_censored()</a></code> </p>
+        </td>
+        <td><p>Is Censored</p></td>
+      </tr><tr><td>
           <p><code><a href="ssd_match_moments.html">ssd_match_moments()</a></code> </p>
         </td>
         <td><p>Match Moments</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="distributions">Distributions <a href="#distributions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Distribution Functions</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="burrIII2.html">dburrIII2()</a></code> <code><a href="burrIII2.html">pburrIII2()</a></code> <code><a href="burrIII2.html">qburrIII2()</a></code> <code><a href="burrIII2.html">rburrIII2()</a></code> <code><a href="burrIII2.html">sburrIII2()</a></code> </p>
-        </td>
-        <td><p>Burr Type III Two-Parameter Distribution</p></td>
       </tr><tr><td>
-          <p><code><a href="burrIII2.html">dburrIII2()</a></code> <code><a href="burrIII2.html">pburrIII2()</a></code> <code><a href="burrIII2.html">qburrIII2()</a></code> <code><a href="burrIII2.html">rburrIII2()</a></code> <code><a href="burrIII2.html">sburrIII2()</a></code> </p>
+          <p><code><a href="ssd_p.html">ssd_pburrIII3()</a></code> <code><a href="ssd_p.html">ssd_pgamma()</a></code> <code><a href="ssd_p.html">ssd_pgompertz()</a></code> <code><a href="ssd_p.html">pgompertz()</a></code> <code><a href="ssd_p.html">ssd_pinvpareto()</a></code> <code><a href="ssd_p.html">ssd_plgumbel()</a></code> <code><a href="ssd_p.html">plgumbel()</a></code> <code><a href="ssd_p.html">ssd_pllogis_llogis()</a></code> <code><a href="ssd_p.html">ssd_pllogis()</a></code> <code><a href="ssd_p.html">ssd_plnorm_lnorm()</a></code> <code><a href="ssd_p.html">ssd_plnorm()</a></code> <code><a href="ssd_p.html">ssd_pweibull()</a></code> </p>
         </td>
-        <td><p>Burr Type III Two-Parameter Distribution</p></td>
+        <td><p>Cumulative Distribution Function</p></td>
       </tr><tr><td>
-          <p><code><a href="burrIII2.html">dburrIII2()</a></code> <code><a href="burrIII2.html">pburrIII2()</a></code> <code><a href="burrIII2.html">qburrIII2()</a></code> <code><a href="burrIII2.html">rburrIII2()</a></code> <code><a href="burrIII2.html">sburrIII2()</a></code> </p>
+          <p><code><a href="ssd_pal.html">ssd_pal()</a></code> </p>
         </td>
-        <td><p>Burr Type III Two-Parameter Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="burrIII2.html">dburrIII2()</a></code> <code><a href="burrIII2.html">pburrIII2()</a></code> <code><a href="burrIII2.html">qburrIII2()</a></code> <code><a href="burrIII2.html">rburrIII2()</a></code> <code><a href="burrIII2.html">sburrIII2()</a></code> </p>
-        </td>
-        <td><p>Burr Type III Two-Parameter Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="burrIII2.html">dburrIII2()</a></code> <code><a href="burrIII2.html">pburrIII2()</a></code> <code><a href="burrIII2.html">qburrIII2()</a></code> <code><a href="burrIII2.html">rburrIII2()</a></code> <code><a href="burrIII2.html">sburrIII2()</a></code> </p>
-        </td>
-        <td><p>Burr Type III Two-Parameter Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="burrIII3.html">dburrIII3()</a></code> <code><a href="burrIII3.html">qburrIII3()</a></code> <code><a href="burrIII3.html">pburrIII3()</a></code> <code><a href="burrIII3.html">rburrIII3()</a></code> <code><a href="burrIII3.html">sburrIII3()</a></code> </p>
-        </td>
-        <td><p>Burr Type III Three-Parameter Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="burrIII3.html">dburrIII3()</a></code> <code><a href="burrIII3.html">qburrIII3()</a></code> <code><a href="burrIII3.html">pburrIII3()</a></code> <code><a href="burrIII3.html">rburrIII3()</a></code> <code><a href="burrIII3.html">sburrIII3()</a></code> </p>
-        </td>
-        <td><p>Burr Type III Three-Parameter Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="burrIII3.html">dburrIII3()</a></code> <code><a href="burrIII3.html">qburrIII3()</a></code> <code><a href="burrIII3.html">pburrIII3()</a></code> <code><a href="burrIII3.html">rburrIII3()</a></code> <code><a href="burrIII3.html">sburrIII3()</a></code> </p>
-        </td>
-        <td><p>Burr Type III Three-Parameter Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="burrIII3.html">dburrIII3()</a></code> <code><a href="burrIII3.html">qburrIII3()</a></code> <code><a href="burrIII3.html">pburrIII3()</a></code> <code><a href="burrIII3.html">rburrIII3()</a></code> <code><a href="burrIII3.html">sburrIII3()</a></code> </p>
-        </td>
-        <td><p>Burr Type III Three-Parameter Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="burrIII3.html">dburrIII3()</a></code> <code><a href="burrIII3.html">qburrIII3()</a></code> <code><a href="burrIII3.html">pburrIII3()</a></code> <code><a href="burrIII3.html">rburrIII3()</a></code> <code><a href="burrIII3.html">sburrIII3()</a></code> </p>
-        </td>
-        <td><p>Burr Type III Three-Parameter Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gamma.html">dgamma()</a></code> <code><a href="gamma.html">pgamma()</a></code> <code><a href="gamma.html">qgamma()</a></code> <code><a href="gamma.html">rgamma()</a></code> <code><a href="gamma.html">sgamma()</a></code> </p>
-        </td>
-        <td><p>Gamma Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gamma.html">dgamma()</a></code> <code><a href="gamma.html">pgamma()</a></code> <code><a href="gamma.html">qgamma()</a></code> <code><a href="gamma.html">rgamma()</a></code> <code><a href="gamma.html">sgamma()</a></code> </p>
-        </td>
-        <td><p>Gamma Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gamma.html">dgamma()</a></code> <code><a href="gamma.html">pgamma()</a></code> <code><a href="gamma.html">qgamma()</a></code> <code><a href="gamma.html">rgamma()</a></code> <code><a href="gamma.html">sgamma()</a></code> </p>
-        </td>
-        <td><p>Gamma Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gamma.html">dgamma()</a></code> <code><a href="gamma.html">pgamma()</a></code> <code><a href="gamma.html">qgamma()</a></code> <code><a href="gamma.html">rgamma()</a></code> <code><a href="gamma.html">sgamma()</a></code> </p>
-        </td>
-        <td><p>Gamma Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gamma.html">dgamma()</a></code> <code><a href="gamma.html">pgamma()</a></code> <code><a href="gamma.html">qgamma()</a></code> <code><a href="gamma.html">rgamma()</a></code> <code><a href="gamma.html">sgamma()</a></code> </p>
-        </td>
-        <td><p>Gamma Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gompertz.html">dgompertz()</a></code> <code><a href="gompertz.html">pgompertz()</a></code> <code><a href="gompertz.html">qgompertz()</a></code> <code><a href="gompertz.html">rgompertz()</a></code> <code><a href="gompertz.html">sgompertz()</a></code> </p>
-        </td>
-        <td><p>Gompertz Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gompertz.html">dgompertz()</a></code> <code><a href="gompertz.html">pgompertz()</a></code> <code><a href="gompertz.html">qgompertz()</a></code> <code><a href="gompertz.html">rgompertz()</a></code> <code><a href="gompertz.html">sgompertz()</a></code> </p>
-        </td>
-        <td><p>Gompertz Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gompertz.html">dgompertz()</a></code> <code><a href="gompertz.html">pgompertz()</a></code> <code><a href="gompertz.html">qgompertz()</a></code> <code><a href="gompertz.html">rgompertz()</a></code> <code><a href="gompertz.html">sgompertz()</a></code> </p>
-        </td>
-        <td><p>Gompertz Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gompertz.html">dgompertz()</a></code> <code><a href="gompertz.html">pgompertz()</a></code> <code><a href="gompertz.html">qgompertz()</a></code> <code><a href="gompertz.html">rgompertz()</a></code> <code><a href="gompertz.html">sgompertz()</a></code> </p>
-        </td>
-        <td><p>Gompertz Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="gompertz.html">dgompertz()</a></code> <code><a href="gompertz.html">pgompertz()</a></code> <code><a href="gompertz.html">qgompertz()</a></code> <code><a href="gompertz.html">rgompertz()</a></code> <code><a href="gompertz.html">sgompertz()</a></code> </p>
-        </td>
-        <td><p>Gompertz Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lgumbel.html">dlgumbel()</a></code> <code><a href="lgumbel.html">plgumbel()</a></code> <code><a href="lgumbel.html">qlgumbel()</a></code> <code><a href="lgumbel.html">rlgumbel()</a></code> <code><a href="lgumbel.html">slgumbel()</a></code> </p>
-        </td>
-        <td><p>Log-Gumbel Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lgumbel.html">dlgumbel()</a></code> <code><a href="lgumbel.html">plgumbel()</a></code> <code><a href="lgumbel.html">qlgumbel()</a></code> <code><a href="lgumbel.html">rlgumbel()</a></code> <code><a href="lgumbel.html">slgumbel()</a></code> </p>
-        </td>
-        <td><p>Log-Gumbel Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lgumbel.html">dlgumbel()</a></code> <code><a href="lgumbel.html">plgumbel()</a></code> <code><a href="lgumbel.html">qlgumbel()</a></code> <code><a href="lgumbel.html">rlgumbel()</a></code> <code><a href="lgumbel.html">slgumbel()</a></code> </p>
-        </td>
-        <td><p>Log-Gumbel Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lgumbel.html">dlgumbel()</a></code> <code><a href="lgumbel.html">plgumbel()</a></code> <code><a href="lgumbel.html">qlgumbel()</a></code> <code><a href="lgumbel.html">rlgumbel()</a></code> <code><a href="lgumbel.html">slgumbel()</a></code> </p>
-        </td>
-        <td><p>Log-Gumbel Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lgumbel.html">dlgumbel()</a></code> <code><a href="lgumbel.html">plgumbel()</a></code> <code><a href="lgumbel.html">qlgumbel()</a></code> <code><a href="lgumbel.html">rlgumbel()</a></code> <code><a href="lgumbel.html">slgumbel()</a></code> </p>
-        </td>
-        <td><p>Log-Gumbel Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="llogis.html">dllog()</a></code> <code><a href="llogis.html">qllog()</a></code> <code><a href="llogis.html">pllog()</a></code> <code><a href="llogis.html">rllog()</a></code> <code><a href="llogis.html">sllog()</a></code> <code><a href="llogis.html">dllogis()</a></code> <code><a href="llogis.html">pllogis()</a></code> <code><a href="llogis.html">qllogis()</a></code> <code><a href="llogis.html">rllogis()</a></code> <code><a href="llogis.html">sllogis()</a></code> </p>
-        </td>
-        <td><p>Log-Logistic Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lnorm.html">dlnorm()</a></code> <code><a href="lnorm.html">plnorm()</a></code> <code><a href="lnorm.html">qlnorm()</a></code> <code><a href="lnorm.html">rlnorm()</a></code> <code><a href="lnorm.html">slnorm()</a></code> </p>
-        </td>
-        <td><p>Log-Normal Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lnorm.html">dlnorm()</a></code> <code><a href="lnorm.html">plnorm()</a></code> <code><a href="lnorm.html">qlnorm()</a></code> <code><a href="lnorm.html">rlnorm()</a></code> <code><a href="lnorm.html">slnorm()</a></code> </p>
-        </td>
-        <td><p>Log-Normal Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lnorm.html">dlnorm()</a></code> <code><a href="lnorm.html">plnorm()</a></code> <code><a href="lnorm.html">qlnorm()</a></code> <code><a href="lnorm.html">rlnorm()</a></code> <code><a href="lnorm.html">slnorm()</a></code> </p>
-        </td>
-        <td><p>Log-Normal Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lnorm.html">dlnorm()</a></code> <code><a href="lnorm.html">plnorm()</a></code> <code><a href="lnorm.html">qlnorm()</a></code> <code><a href="lnorm.html">rlnorm()</a></code> <code><a href="lnorm.html">slnorm()</a></code> </p>
-        </td>
-        <td><p>Log-Normal Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="lnorm.html">dlnorm()</a></code> <code><a href="lnorm.html">plnorm()</a></code> <code><a href="lnorm.html">qlnorm()</a></code> <code><a href="lnorm.html">rlnorm()</a></code> <code><a href="lnorm.html">slnorm()</a></code> </p>
-        </td>
-        <td><p>Log-Normal Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="pareto.html">dpareto()</a></code> <code><a href="pareto.html">qpareto()</a></code> <code><a href="pareto.html">ppareto()</a></code> <code><a href="pareto.html">rpareto()</a></code> <code><a href="pareto.html">spareto()</a></code> </p>
-        </td>
-        <td><p>Pareto Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="pareto.html">dpareto()</a></code> <code><a href="pareto.html">qpareto()</a></code> <code><a href="pareto.html">ppareto()</a></code> <code><a href="pareto.html">rpareto()</a></code> <code><a href="pareto.html">spareto()</a></code> </p>
-        </td>
-        <td><p>Pareto Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="pareto.html">dpareto()</a></code> <code><a href="pareto.html">qpareto()</a></code> <code><a href="pareto.html">ppareto()</a></code> <code><a href="pareto.html">rpareto()</a></code> <code><a href="pareto.html">spareto()</a></code> </p>
-        </td>
-        <td><p>Pareto Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="pareto.html">dpareto()</a></code> <code><a href="pareto.html">qpareto()</a></code> <code><a href="pareto.html">ppareto()</a></code> <code><a href="pareto.html">rpareto()</a></code> <code><a href="pareto.html">spareto()</a></code> </p>
-        </td>
-        <td><p>Pareto Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="pareto.html">dpareto()</a></code> <code><a href="pareto.html">qpareto()</a></code> <code><a href="pareto.html">ppareto()</a></code> <code><a href="pareto.html">rpareto()</a></code> <code><a href="pareto.html">spareto()</a></code> </p>
-        </td>
-        <td><p>Pareto Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="weibull.html">dweibull()</a></code> <code><a href="weibull.html">pweibull()</a></code> <code><a href="weibull.html">qweibull()</a></code> <code><a href="weibull.html">rweibull()</a></code> </p>
-        </td>
-        <td><p>Weibull Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="weibull.html">dweibull()</a></code> <code><a href="weibull.html">pweibull()</a></code> <code><a href="weibull.html">qweibull()</a></code> <code><a href="weibull.html">rweibull()</a></code> </p>
-        </td>
-        <td><p>Weibull Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="weibull.html">dweibull()</a></code> <code><a href="weibull.html">pweibull()</a></code> <code><a href="weibull.html">qweibull()</a></code> <code><a href="weibull.html">rweibull()</a></code> </p>
-        </td>
-        <td><p>Weibull Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="weibull.html">dweibull()</a></code> <code><a href="weibull.html">pweibull()</a></code> <code><a href="weibull.html">qweibull()</a></code> <code><a href="weibull.html">rweibull()</a></code> </p>
-        </td>
-        <td><p>Weibull Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="ssd_fit_dists.html">ssd_fit_dists()</a></code> </p>
-        </td>
-        <td><p>Fit Distributions</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="plots">Plots <a href="#plots" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions to Generate Plots</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="autoplot.fitdist.html">autoplot(<i>&lt;fitdist&gt;</i>)</a></code> <code><a href="autoplot.fitdist.html">autoplot(<i>&lt;fitdists&gt;</i>)</a></code> <code><a href="autoplot.fitdist.html">autoplot(<i>&lt;fitdistcens&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Autoplot</p></td>
-      </tr><tr><td>
-          <p><code><a href="geom_hcintersect.html">geom_hcintersect()</a></code> </p>
-        </td>
-        <td><p>Hazard Concentration Intersection</p></td>
-      </tr><tr><td>
-          <p><code><a href="geom_ssd.html">geom_ssd()</a></code> </p>
-        </td>
-        <td><p>Plot Species Sensitivity Data</p></td>
-      </tr><tr><td>
-          <p><code><a href="geom_xribbon.html">geom_xribbon()</a></code> </p>
-        </td>
-        <td><p>Ribbons Plot</p></td>
+        <td><p>Color-blind Palette for SSD Plots</p></td>
       </tr><tr><td>
           <p><code><a href="ssd_plot.html">ssd_plot()</a></code> </p>
         </td>
-        <td><p>SSD Plot</p></td>
+        <td><p>Plot Species Sensitivity Data and Distributions</p></td>
       </tr><tr><td>
           <p><code><a href="ssd_plot_cdf.html">ssd_plot_cdf()</a></code> </p>
         </td>
-        <td><p>Plot Cumulative Distribution Function</p></td>
+        <td><p>Plot Cumulative Distribution Function (CDF)</p></td>
       </tr><tr><td>
           <p><code><a href="ssd_plot_cf.html">ssd_plot_cf()</a></code> <code><a href="ssd_plot_cf.html">ssd_cfplot()</a></code> </p>
         </td>
         <td><p>Cullen and Frey Plot</p></td>
       </tr><tr><td>
-          <p><code><a href="ssd_plot_cf.html">ssd_plot_cf()</a></code> <code><a href="ssd_plot_cf.html">ssd_cfplot()</a></code> </p>
+          <p><code><a href="ssd_plot_data.html">ssd_plot_data()</a></code> </p>
         </td>
-        <td><p>Cullen and Frey Plot</p></td>
+        <td><p>Plot Species Sensitivity Data</p></td>
       </tr><tr><td>
-          <p><code><a href="ssdtools-ggproto.html">ssdtools-ggproto</a></code> </p>
+          <p><code><a href="ssd_q.html">ssd_qburrIII3()</a></code> <code><a href="ssd_q.html">ssd_qgamma()</a></code> <code><a href="ssd_q.html">ssd_qgompertz()</a></code> <code><a href="ssd_q.html">qgompertz()</a></code> <code><a href="ssd_q.html">ssd_qinvpareto()</a></code> <code><a href="ssd_q.html">ssd_qlgumbel()</a></code> <code><a href="ssd_q.html">qlgumbel()</a></code> <code><a href="ssd_q.html">ssd_qllogis_llogis()</a></code> <code><a href="ssd_q.html">ssd_qllogis()</a></code> <code><a href="ssd_q.html">ssd_qlnorm_lnorm()</a></code> <code><a href="ssd_q.html">ssd_qlnorm()</a></code> <code><a href="ssd_q.html">ssd_qweibull()</a></code> </p>
         </td>
-        <td><p>Base ggproto Classes for ggplot2</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="query">Query <a href="#query" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Query Parameters and Observations</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="nobs.fitdist.html">nobs(<i>&lt;fitdist&gt;</i>)</a></code> <code><a href="nobs.fitdist.html">nobs(<i>&lt;fitdistcens&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Number of Observations</p></td>
+        <td><p>Quantile Function</p></td>
       </tr><tr><td>
-          <p><code><a href="npars.html">npars()</a></code> </p>
+          <p><code><a href="ssd_r.html">ssd_rburrIII3()</a></code> <code><a href="ssd_r.html">ssd_rgamma()</a></code> <code><a href="ssd_r.html">ssd_rgompertz()</a></code> <code><a href="ssd_r.html">rgompertz()</a></code> <code><a href="ssd_r.html">ssd_rinvpareto()</a></code> <code><a href="ssd_r.html">ssd_rlgumbel()</a></code> <code><a href="ssd_r.html">rlgumbel()</a></code> <code><a href="ssd_r.html">ssd_rllogis_llogis()</a></code> <code><a href="ssd_r.html">ssd_rllogis()</a></code> <code><a href="ssd_r.html">ssd_rlnorm_lnorm()</a></code> <code><a href="ssd_r.html">ssd_rlnorm()</a></code> <code><a href="ssd_r.html">ssd_rweibull()</a></code> </p>
         </td>
-        <td><p>Number of Parameters</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="test">Test <a href="#test" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Test fitdist Objects</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="is.fitdist.html">is.fitdist()</a></code> </p>
-        </td>
-        <td><p>Is fitdist</p></td>
+        <td><p>Random Number Generation</p></td>
       </tr><tr><td>
-          <p><code><a href="is.fitdistcens.html">is.fitdistcens()</a></code> </p>
+          <p><code><a href="ssd_sort_data.html">ssd_sort_data()</a></code> </p>
         </td>
-        <td><p>Is censored fitdist</p></td>
+        <td><p>Sort Species Sensitivity Data</p></td>
       </tr><tr><td>
-          <p><code><a href="is.fitdists.html">is.fitdists()</a></code> </p>
+          <p><code><a href="ssd_wqg_bc.html">ssd_wqg_bc()</a></code> </p>
         </td>
-        <td><p>Is fitdists</p></td>
+        <td><p>Water Quality Guideline for British Columbia</p></td>
       </tr><tr><td>
-          <p><code><a href="is.fitdistscens.html">is.fitdistscens()</a></code> </p>
+          <p><code><a href="ssd_wqg_burrlioz.html">ssd_wqg_burrlioz()</a></code> </p>
         </td>
-        <td><p>Is censored fitdists</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="miscellaneous">Miscellaneous <a href="#miscellaneous" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Format and Subset Objects</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="comma_signif.html">comma_signif()</a></code> </p>
-        </td>
-        <td><p>Comma and Significance Formatter</p></td>
+        <td><p>Water Quality Guideline for Burrlioz</p></td>
       </tr><tr><td>
-          <p><code><a href="subset.fitdists.html">subset(<i>&lt;fitdists&gt;</i>)</a></code> </p>
+          <p><code><a href="ssdtools-ggproto.html">StatSsdpoint</a></code> <code><a href="ssdtools-ggproto.html">StatSsdsegment</a></code> <code><a href="ssdtools-ggproto.html">GeomSsdpoint</a></code> <code><a href="ssdtools-ggproto.html">GeomSsdsegment</a></code> <code><a href="ssdtools-ggproto.html">GeomHcintersect</a></code> <code><a href="ssdtools-ggproto.html">GeomXribbon</a></code> </p>
         </td>
-        <td><p>Subset fitdists</p></td>
+        <td><p>ggproto Classes for Plotting Species Sensitivity Data and Distributions</p></td>
       </tr><tr><td>
           <p><code><a href="stat_ssd.html">stat_ssd()</a></code> </p>
         </td>
         <td><p>Plot Species Sensitivity Data</p></td>
+      </tr><tr><td>
+          <p><code><a href="subset.fitdists.html">subset(<i>&lt;fitdists&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Subset fitdists Object</p></td>
+      </tr><tr><td>
+          <p><code><a href="tidy.fitdists.html">tidy(<i>&lt;fitdists&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Turn a fitdists Object into a Tibble</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -449,7 +297,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer></div>

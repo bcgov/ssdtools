@@ -46,103 +46,103 @@
     <loc>/pull_request_template.html</loc>
   </url>
   <url>
-    <loc>/reference/autoplot.fitdist.html</loc>
+    <loc>/reference/augment.fitdists.html</loc>
+  </url>
+  <url>
+    <loc>/reference/autoplot.fitdists.html</loc>
   </url>
   <url>
     <loc>/reference/boron_data.html</loc>
   </url>
   <url>
-    <loc>/reference/boron_dists.html</loc>
-  </url>
-  <url>
-    <loc>/reference/boron_hc5.html</loc>
-  </url>
-  <url>
-    <loc>/reference/boron_lnorm.html</loc>
-  </url>
-  <url>
     <loc>/reference/boron_pred.html</loc>
-  </url>
-  <url>
-    <loc>/reference/burrIII2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/burrIII3.html</loc>
   </url>
   <url>
     <loc>/reference/ccme_data.html</loc>
   </url>
   <url>
+    <loc>/reference/coef.fitdists.html</loc>
+  </url>
+  <url>
     <loc>/reference/comma_signif.html</loc>
   </url>
   <url>
-    <loc>/reference/fluazinam_dists.html</loc>
+    <loc>/reference/dgompertz.html</loc>
   </url>
   <url>
-    <loc>/reference/fluazinam_lnorm.html</loc>
+    <loc>/reference/dist_data.html</loc>
   </url>
   <url>
-    <loc>/reference/fluazinam_pred.html</loc>
+    <loc>/reference/dlgumbel.html</loc>
   </url>
   <url>
-    <loc>/reference/gamma.html</loc>
+    <loc>/reference/estimates.fitdists.html</loc>
   </url>
   <url>
     <loc>/reference/geom_hcintersect.html</loc>
   </url>
   <url>
-    <loc>/reference/geom_ssd.html</loc>
+    <loc>/reference/geom_ssdpoint.html</loc>
+  </url>
+  <url>
+    <loc>/reference/geom_ssdsegment.html</loc>
   </url>
   <url>
     <loc>/reference/geom_xribbon.html</loc>
   </url>
   <url>
-    <loc>/reference/gompertz.html</loc>
+    <loc>/reference/glance.fitdists.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/is.fitdist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is.fitdistcens.html</loc>
-  </url>
-  <url>
     <loc>/reference/is.fitdists.html</loc>
   </url>
   <url>
-    <loc>/reference/is.fitdistscens.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lgumbel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/llogis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lnorm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nobs.fitdist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/npars.html</loc>
+    <loc>/reference/is_censored.html</loc>
   </url>
   <url>
     <loc>/reference/params.html</loc>
   </url>
   <url>
-    <loc>/reference/pareto.html</loc>
+    <loc>/reference/predict.fitburrlioz.html</loc>
   </url>
   <url>
-    <loc>/reference/predict.fitdist.html</loc>
+    <loc>/reference/predict.fitdists.html</loc>
+  </url>
+  <url>
+    <loc>/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>/reference/scale_colour_ssd.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_dists.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_dists_all.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_dists_bcanz.html</loc>
   </url>
   <url>
     <loc>/reference/ssd_ecd.html</loc>
   </url>
   <url>
+    <loc>/reference/ssd_ecd_data.html</loc>
+  </url>
+  <url>
     <loc>/reference/ssd_exposure.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_fit_bcanz.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_fit_burrlioz.html</loc>
   </url>
   <url>
     <loc>/reference/ssd_fit_dists.html</loc>
@@ -154,10 +154,25 @@
     <loc>/reference/ssd_hc.html</loc>
   </url>
   <url>
+    <loc>/reference/ssd_hc_bcanz.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_hc_burrlioz.html</loc>
+  </url>
+  <url>
     <loc>/reference/ssd_hp.html</loc>
   </url>
   <url>
+    <loc>/reference/ssd_is_censored.html</loc>
+  </url>
+  <url>
     <loc>/reference/ssd_match_moments.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_p.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_pal.html</loc>
   </url>
   <url>
     <loc>/reference/ssd_plot.html</loc>
@@ -167,6 +182,24 @@
   </url>
   <url>
     <loc>/reference/ssd_plot_cf.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_plot_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_q.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_r.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_sort_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_wqg_bc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_wqg_burrlioz.html</loc>
   </url>
   <url>
     <loc>/reference/ssdtools-ggproto.html</loc>
@@ -181,9 +214,6 @@
     <loc>/reference/subset.fitdists.html</loc>
   </url>
   <url>
-    <loc>/reference/test_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/weibull.html</loc>
+    <loc>/reference/tidy.fitdists.html</loc>
   </url>
 </urlset>

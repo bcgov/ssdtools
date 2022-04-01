@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -70,11 +70,196 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0.9000" id="ssdtools-1009000">ssdtools 1.0.0.9000<a class="anchor" aria-label="anchor" href="#ssdtools-1009000"></a></h2>
+<ul><li>Same as previous version.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0" id="ssdtools-100">ssdtools 1.0.0<small>2022-04-01</small><a class="anchor" aria-label="anchor" href="#ssdtools-100"></a></h2>
+<p>ssdtools version 1.0.0 is the first major release of <code>ssdtools</code> with some important improvements and breaking changes.</p>
+<div class="section level3">
+<h3 id="fitting-1-0-0">Fitting<a class="anchor" aria-label="anchor" href="#fitting-1-0-0"></a></h3>
+<p>An important change to the functionality of <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> was to switch from model fitting using <a href="https://github.com/aursiber/fitdistrplus" class="external-link"><code>fitdistrplus</code></a> to <a href="https://github.com/kaskr/adcomp" class="external-link"><code>TMB</code></a> which has resulted in improved handling of censored data. Although it was hoped that model fitting would be faster this is currently not the case.</p>
+<p>As a result of the change the <code>fitdists</code> objects returned by <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> from previous versions of <code>ssdtools</code> are not compatible with the major release and should be regenerated.</p>
+</div>
+<div class="section level3">
+<h3 id="bcanz-1-0-0">BCANZ<a class="anchor" aria-label="anchor" href="#bcanz-1-0-0"></a></h3>
+<p>As a result of an international collaboration British Columbia and Canada and Australia and New Zealand selected a set of recommended distributions for model averaging and settings when generating final guidelines.</p>
+<p>The distributions are</p>
+<pre class="{r}"><code>&gt; ssd_dists_bcanz()
+[1] "gamma"       "lgumbel"     "llogis"      "lnorm"       "lnorm_lnorm" "weibull" </code></pre>
+<p>The <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> and <code><a href="../reference/ssd_hc_bcanz.html">ssd_hc_bcanz()</a></code> functions were added to the package to facilitate the fitting of these distributions and estimation of hazard concentrations using the recommended settings.</p>
+<div class="section level4">
+<h4 id="convergence-1-0-0">Convergence<a class="anchor" aria-label="anchor" href="#convergence-1-0-0"></a></h4>
+<p>In the previous version of <code>ssdtools</code> a distribution was considered to have converged if the following condition was met</p>
+<ol style="list-style-type: decimal"><li>
+<code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code> returns a code of 0 (indicating successful completion).</li>
+</ol><p>In the new version an additional two conditions must also be met</p>
+<ol start="2" style="list-style-type: decimal"><li>Bounded parameters are not at a boundary (this condition can be turned off by setting <code>at_boundary_ok = TRUE</code> or the user can specify different boundary values - see below)</li>
+<li>Standard errors are computable for all the parameter values (this condition can be turned off by setting <code>computable = FALSE</code>)</li>
+</ol></div>
+<div class="section level4">
+<h4 id="censored-data-1-0-0">Censored Data<a class="anchor" aria-label="anchor" href="#censored-data-1-0-0"></a></h4>
+<p>Censoring can now be specified by providing a data set with one or more rows that have</p>
+<ul><li>a finite value for the left column that is smaller than the finite value in the right column (interval censored)</li>
+<li>a zero or missing value for the left column and a finite value for the right column (left censored)</li>
+</ul><p>It is currently not possible to fit distributions to data sets that have</p>
+<ul><li>a infinite or missing value for the right column and a finite value for the left column (right censored)</li>
+</ul><p>Rows that have a zero or missing value for the left column and an infinite or missing value for the right column (fully censored) are uninformative and will result in an error.</p>
+<div class="section level5">
+<h5 id="akaike-weights-1-0-0">Akaike Weights<a class="anchor" aria-label="anchor" href="#akaike-weights-1-0-0"></a></h5>
+<p>For uncensored data, Akaike Weights are calculated using AICc (which corrects for small sample size). In the case of censored data, Akaike Weights are calculated using AIC (as the sample size cannot be estimated) but only if all the distributions have the same number of parameters (to ensure the weights are valid).</p>
+</div>
+</div>
+<div class="section level4">
+<h4 id="weighted-data-1-0-0">Weighted Data<a class="anchor" aria-label="anchor" href="#weighted-data-1-0-0"></a></h4>
+<p>Weighting must be positive with values &lt;= 1000.</p>
+</div>
+<div class="section level4">
+<h4 id="distributions-1-0-0">Distributions<a class="anchor" aria-label="anchor" href="#distributions-1-0-0"></a></h4>
+<p>Previously the density functions for the available distributions were exported as R functions to make them accessible to <code>fitdistrplus</code>. This meant that <code>ssdtools</code> had to be loaded to fit distributions. The density functions are now defined in C++ as TMB templates and are no longer exported.</p>
+<p>The distribution, quantile and random generation functions are more generally useful and are still exported but are now prefixed by <code>ssd_</code> to prevent clashes with existing functions in other packages. Thus for example <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">plnorm()</a></code>, <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">qlnorm()</a></code> and <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm()</a></code> have been renamed <code><a href="../reference/ssd_p.html">ssd_plnorm()</a></code>, <code><a href="../reference/ssd_q.html">ssd_qlnorm()</a></code> and <code><a href="../reference/ssd_r.html">ssd_rlnorm()</a></code>.</p>
+<p>The following distributions were added (or in the case of <code>burrIII3</code> readded) to the new version</p>
+<ul><li>
+<code>burrIII3</code> - burrIII three parameter distribution</li>
+<li>
+<code>invpareto</code> - inverse pareto (with bias correction in scale order statistic)</li>
+<li>
+<code>lnorm_lnorm</code> log-normal/log-normal mixture distribution</li>
+<li>
+<code>llogis_llogis</code> log-logistic/log-logistic mixture distribution</li>
+</ul><p>The following arguments were added to <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code></p>
+<ul><li>
+<code>rescale</code> (by default <code>FALSE</code>) to specify whether to rescale concentrations values by dividing by the largest (finite) value. This alters the parameter estimates, which can help some distributions converge, but not the estimates of the hazard concentrations/protections.</li>
+<li>
+<code>reweight</code> (by default <code>FALSE</code>) to specify whether to reweight data points by dividing by the largest weight.</li>
+<li>
+<code>at_boundary_ok</code> (by default <code>FALSE</code>) to specifying whether a distribution with one or more parameters at a boundary has converged.</li>
+<li>
+<code>min_pmix</code> (by default 0) to specify the boundary for the minimum proportion for a mixture distribution.</li>
+<li>
+<code>range_shape1</code> (by default <code>c(0.05, 20)</code>) to specify the lower and upper boundaries for the shape1 parameter of the burrIII3 distribution.</li>
+<li>
+<code>range_shape2</code> (by default the same as <code>range_shape2</code>) to specify the lower and upper boundaries for the shape2 parameter of the burrIII3 distribution.</li>
+<li>
+<code>control</code> (by default an empty list) to pass a list of control parameters to <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>.</li>
+</ul><p>It also worth noting that the default value of</p>
+<ul><li>
+<code>computable</code> argument was switched from <code>FALSE</code> to <code>TRUE</code> to enforce stricter requirements on convergence (see above).</li>
+</ul><div class="section level5">
+<h5 id="subsets-of-distributions-1-0-0">Subsets of Distributions<a class="anchor" aria-label="anchor" href="#subsets-of-distributions-1-0-0"></a></h5>
+<p>The following were added to handle multiple distributions</p>
+<ul><li>
+<code><a href="../reference/ssd_dists.html">ssd_dists()</a></code> to specify subsets of the available distributions.</li>
+<li>
+<code>delta</code> argument (by default 7) to the <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> generic to only keep those distributions within the specified AIC(c) difference of the best supported distribution.</li>
+</ul></div>
+</div>
+<div class="section level4">
+<h4 id="burrlioz-1-0-0">Burrlioz<a class="anchor" aria-label="anchor" href="#burrlioz-1-0-0"></a></h4>
+<p>The function <code><a href="../reference/ssd_fit_burrlioz.html">ssd_fit_burrlioz()</a></code> was added to approximate the behaviour of <a href="https://research.csiro.au/software/burrlioz/" class="external-link">Burrlioz</a>.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="hazard-concentrationprotection-estimation-1-0-0">Hazard Concentration/Protection Estimation<a class="anchor" aria-label="anchor" href="#hazard-concentrationprotection-estimation-1-0-0"></a></h3>
+<p>Hazard concentration estimation is performed by <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> (which is wrapped by <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>) and hazard protection estimation by <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code>. By default confidence intervals are estimated by parametric bootstrapping.</p>
+<p>To reduce the time required for bootstrapping, parallelization was implemented using the <a href="https://github.com/HenrikBengtsson/future" class="external-link">future</a> package.</p>
+<p>The following arguments were added to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code></p>
+<ul><li>
+<code>delta</code> (by default 7) to only keep those distributions within the specified AIC difference of the best supported distribution.</li>
+<li>
+<code>min_pboot</code> (by default 0.90) to specify minimum proportion of bootstrap samples that must successfully fit.</li>
+<li>
+<code>parametric</code> (by default <code>TRUE</code>) to allow non-parametric bootstrapping.</li>
+<li>
+<code>control</code> (by default an empty list) to pass a list of control parameters to <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>.</li>
+</ul><p>and the following columns were added to the output data frame</p>
+<ul><li>
+<code>wt</code> to specify the Akaike weight.</li>
+<li>
+<code>method</code> to indicate whether parametric or non-parametric bootstrap was used.</li>
+<li>
+<code>nboot</code> to indicate how many bootstrap samples were used.</li>
+<li>
+<code>pboot</code> to indicate the proportion of bootstrap samples which fitted.</li>
+</ul><p>It also worth noting that the</p>
+<ul><li>
+<code>dist</code> column was moved from the last to the first position in the output data frame.</li>
+</ul><div class="section level4">
+<h4 id="censored-data-1-0-0-1">Censored Data<a class="anchor" aria-label="anchor" href="#censored-data-1-0-0-1"></a></h4>
+<p>Confidence intervals cannot be estimated for interval censored data.</p>
+</div>
+<div class="section level4">
+<h4 id="weighted-data-1-0-0-1">Weighted Data<a class="anchor" aria-label="anchor" href="#weighted-data-1-0-0-1"></a></h4>
+<p>Confidence intervals cannot be estimated for unequally weighted data.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="goodness-of-fit-1-0-0">Goodness of Fit<a class="anchor" aria-label="anchor" href="#goodness-of-fit-1-0-0"></a></h3>
+<p>The <code>pvalue</code> argument (by default <code>FALSE</code>) was added to <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code> to specify whether to return p-values for the test statistics as opposed to the test statistics themselves.</p>
+</div>
+<div class="section level3">
+<h3 id="plotting-1-0-0">Plotting<a class="anchor" aria-label="anchor" href="#plotting-1-0-0"></a></h3>
+<p>There have also been some substantive changes to the plotting functionality.</p>
+<p>Added following functions</p>
+<ul><li>
+<code><a href="../reference/ssd_plot_data.html">ssd_plot_data()</a></code> to plot censored and uncensored data by calling <code><a href="../reference/geom_ssdpoint.html">geom_ssdpoint()</a></code> for the left and for the right column (alpha parameter values should be adjusted accordingly)</li>
+<li>
+<code><a href="../reference/geom_ssdsegment.html">geom_ssdsegment()</a></code> to allow plotting of the range of a censored data points using segments.</li>
+<li>
+<code><a href="../reference/scale_colour_ssd.html">scale_colour_ssd()</a></code> (and <code><a href="../reference/scale_colour_ssd.html">scale_color_ssd()</a></code>) to provide an 8 color-blind scale.</li>
+</ul><p>Made the following changes to <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code></p>
+<ul><li>added <code>bounds</code> (by default <code>c(left = 1, right = 1)</code>) argument specify how many orders of magnitude to extend the plot beyond the minimum and maximum (non-missing) values.</li>
+<li>added <code>linetype</code> (by default <code>NULL</code>) argument to specify line type.</li>
+<li>added <code>linecolor</code> (by default <code>NULL</code>) argument to specify line color.</li>
+<li>changed default value of <code>ylab</code> from “Percent of Species Affected” to “Species Affected”.</li>
+</ul><p>Renamed - <code>GeomSsd</code> to <code>GeomSsdpoint</code>. - <code>StatSsd</code> to <code>StatSsdpoint</code></p>
+<p>Soft-deprecated - <code><a href="../reference/geom_ssdpoint.html">geom_ssd()</a></code> for <code><a href="../reference/geom_ssdpoint.html">geom_ssdpoint()</a></code>. - <code><a href="../reference/stat_ssd.html">stat_ssd()</a></code>. - <code><a href="../reference/ssd_plot_cf.html">ssd_plot_cf()</a></code> for <code><a href="https://rdrr.io/pkg/fitdistrplus/man/descdist.html" class="external-link">fitdistrplus::descdist()</a></code>.</p>
+</div>
+<div class="section level3">
+<h3 id="data-1-0-0">Data<a class="anchor" aria-label="anchor" href="#data-1-0-0"></a></h3>
+<div class="section level4">
+<h4 id="ssddata-1-0-0"><code>ssddata</code><a class="anchor" aria-label="anchor" href="#ssddata-1-0-0"></a></h4>
+<p>The dataset <code>boron_data</code> was renamed <code>ccme_boron</code> and moved to the <a href="https://github.com/open-AIMS/ssddata" class="external-link"><code>ssddata</code></a> R package together with the other CCME datasets.</p>
+<p>The <code>ssddata</code> package provides a suite of datasets for testing and comparing species sensitivity distribution fitting software.</p>
+</div>
+<div class="section level4">
+<h4 id="data-handling-functions-1-0-0">Data Handling Functions<a class="anchor" aria-label="anchor" href="#data-handling-functions-1-0-0"></a></h4>
+<p>Added</p>
+<ul><li>
+<code><a href="../reference/ssd_data.html">ssd_data()</a></code> to return original data for a <code>fitdists</code> object.</li>
+<li>
+<code><a href="../reference/ssd_ecd_data.html">ssd_ecd_data()</a></code> to get empirical cumulative density for data.</li>
+<li>
+<code><a href="../reference/ssd_sort_data.html">ssd_sort_data()</a></code> to sort data by empirical cumulative density.</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="miscellaneous-1-0-0">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-1-0-0"></a></h3>
+<ul><li>
+<code><a href="https://poissonconsulting.github.io/universals/reference/npars.html" class="external-link">npars()</a></code> now orders by distribution name.</li>
+<li>All functions and arguments that were soft-deprecated prior to v0.3.0 now warn unconditionally.</li>
+</ul><div class="section level4">
+<h4 id="generics-1-0-0">Generics<a class="anchor" aria-label="anchor" href="#generics-1-0-0"></a></h4>
+<ul><li>
+<p>Implemented the following generics for <code>fitdists</code> objects</p>
+<ul><li>
+<code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> to get the model likelihoods, information-theoretic criteria etc.</li>
+<li>
+<code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code> to return original data set.</li>
+<li>
+<code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik()</a></code> to return the log-likelihood.</li>
+<li>
+<code>summary.fitdists()</code> to summarize.</li>
+</ul></li>
+</ul></div>
+</div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.7.9000" id="ssdtools-0379000">ssdtools 0.3.7.9000<a class="anchor" aria-label="anchor" href="#ssdtools-0379000"></a></h2>
 <ul><li>Same as previous version.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.7" id="ssdtools-037">ssdtools 0.3.7<a class="anchor" aria-label="anchor" href="#ssdtools-037"></a></h2>
+<h2 class="page-header" data-toc-text="0.3.7" id="ssdtools-037">ssdtools 0.3.7<small>2021-10-27</small><a class="anchor" aria-label="anchor" href="#ssdtools-037"></a></h2>
 <ul><li>fix unequal indentation of Rmd ```</li>
 </ul></div>
     <div class="section level2">
@@ -126,7 +311,7 @@
 <h3 id="minor-changes-0-3-0">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-3-0"></a></h3>
 <ul><li>
 <code>rdist()</code> functions now use length of n if <code>length(n) &gt; 1</code>.</li>
-<li>Added <code><a href="../reference/lnorm.html">slnorm()</a></code> to get starting values for ‘dlnorm’ distribution.</li>
+<li>Added <code>slnorm()</code> to get starting values for ‘dlnorm’ distribution.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="internal-changes-0-3-0">Internal Changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-3-0"></a></h3>
@@ -144,7 +329,7 @@
 <h3 id="major-changes-0-2-0">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-0-2-0"></a></h3>
 <ul><li>Deprecated ‘burrIII2’ for ‘llogis’ as identical.</li>
 <li>Replaced ‘burrIII2’ for (identical) ‘llogis’ in default set.</li>
-<li>Fixed bug in <code><a href="../reference/llogis.html">rllog()</a></code> that was causing error.</li>
+<li>Fixed bug in <code>rllog()</code> that was causing error.</li>
 <li>Fixed parameterisation of ‘lgumbel’ that was causing it to fail to fit with some data.</li>
 </ul></div>
 <div class="section level3">
@@ -166,7 +351,7 @@
 <ul><li>Default distributions changed to ‘burrIII2’, ‘gamma’ and ‘lnorm’ from ‘gamma’, ‘gompertz’, ‘lgumbel’, ‘llog’, ‘lnorm’ and ‘weibull’.</li>
 <li>Changed implicit behaviour of <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> where <code>ci = TRUE</code> to explicit <code>ssd_hc(ci = FALSE)</code> and <code>predict(ci = FALSE)</code>.</li>
 <li>Replaced <code>shape</code> and <code>scale</code> arguments to <code>llog()</code> with <code>lshape</code> and <code>lscale</code>.</li>
-<li>Replaced <code>location</code> and <code>scale</code> arguments to <code><a href="../reference/lgumbel.html">lgumbel()</a></code> with <code>llocation</code> and <code>lscale</code>.</li>
+<li>Replaced <code>location</code> and <code>scale</code> arguments to <code>lgumbel()</code> with <code>llocation</code> and <code>lscale</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="major-features-0-1-0">Major Features<a class="anchor" aria-label="anchor" href="#major-features-0-1-0"></a></h3>
@@ -190,7 +375,7 @@
 <div class="section level3">
 <h3 id="deprecated-0-1-0">Deprecated<a class="anchor" aria-label="anchor" href="#deprecated-0-1-0"></a></h3>
 <ul><li>Deprecated <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> argument <code>hc = 5L</code> for <code>percent = 5L</code>.</li>
-<li>Deprecated <code><a href="../reference/llogis.html">dllog()</a></code> etc for <code><a href="../reference/llogis.html">dllogis()</a></code>.</li>
+<li>Deprecated <code>dllog()</code> etc for <code>dllogis()</code>.</li>
 <li>Deprecated <code><a href="../reference/ssd_plot_cf.html">ssd_cfplot()</a></code> for <code><a href="../reference/ssd_plot_cf.html">ssd_plot_cf()</a></code>.</li>
 </ul></div>
 <div class="section level3">
@@ -236,7 +421,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer></div>

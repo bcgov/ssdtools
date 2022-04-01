@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,17 +74,26 @@
     <p>Fits one or more distributions to species sensitivity data.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_fit_dists</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_fit_dists</span><span class="op">(</span>
   <span class="va">data</span>,
   left <span class="op">=</span> <span class="st">"Conc"</span>,
   right <span class="op">=</span> <span class="va">left</span>,
   weight <span class="op">=</span> <span class="cn">NULL</span>,
-  dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"gamma"</span>, <span class="st">"lnorm"</span><span class="op">)</span>,
-  computable <span class="op">=</span> <span class="cn">FALSE</span>,
+  dists <span class="op">=</span> <span class="fu"><a href="ssd_dists_bcanz.html">ssd_dists_bcanz</a></span><span class="op">(</span><span class="op">)</span>,
+  nrow <span class="op">=</span> <span class="fl">6L</span>,
+  rescale <span class="op">=</span> <span class="cn">FALSE</span>,
+  reweight <span class="op">=</span> <span class="cn">FALSE</span>,
+  computable <span class="op">=</span> <span class="cn">TRUE</span>,
+  at_boundary_ok <span class="op">=</span> <span class="cn">FALSE</span>,
+  min_pmix <span class="op">=</span> <span class="fl">0</span>,
+  range_shape1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">20</span><span class="op">)</span>,
+  range_shape2 <span class="op">=</span> <span class="va">range_shape1</span>,
+  control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
   silent <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
@@ -94,74 +103,89 @@
 <dt>right</dt>
 <dd><p>A string of the column in data with the right concentration values.</p></dd>
 <dt>weight</dt>
-<dd><p>A string of the column in data with the weightings (or NULL)</p></dd>
+<dd><p>A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.</p></dd>
 <dt>dists</dt>
 <dd><p>A character vector of the distribution names.</p></dd>
+<dt>nrow</dt>
+<dd><p>A positive whole number of the minimum number of non-missing rows.</p></dd>
+<dt>rescale</dt>
+<dd><p>A flag specifying whether to rescale concentration values by dividing by the largest finite value.</p></dd>
+<dt>reweight</dt>
+<dd><p>A flag specifying whether to reweight weights by dividing by the largest weight.</p></dd>
 <dt>computable</dt>
 <dd><p>A flag specifying whether to only return fits with numerically computable standard errors.</p></dd>
+<dt>at_boundary_ok</dt>
+<dd><p>A flag specifying whether a model with one or more
+parameters at the boundary should be considered to have converged (default = FALSE).</p></dd>
+<dt>min_pmix</dt>
+<dd><p>A number between 0 and 0.5 specifying the minimum proportion in mixture models.</p></dd>
+<dt>range_shape1</dt>
+<dd><p>A numeric vector of length two of the lower and upper bounds for the shape1 parameter.</p></dd>
+<dt>range_shape2</dt>
+<dd><p>shape2 parameter.</p></dd>
+<dt>control</dt>
+<dd><p>A list of control parameters passed to <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>.</p></dd>
 <dt>silent</dt>
 <dd><p>A flag indicating whether fits should fail silently.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class fitdists (a list of <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdistrplus::fitdist()</a></code> objects).</p>
+    <p>An object of class fitdists.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>By default the 'llogis', 'gamma' and 'lnorm'
 distributions are fitted to the data.
-The ssd_fit_dists function has also been
-tested with the 'gompertz', 'lgumbel' and 'weibull' distributions.</p>
-<p>If weight specifies a column in the data frame with positive integers,
+For a complete list of the implemented distributions see <code><a href="ssd_dists_all.html">ssd_dists_all()</a></code>.</p>
+<p>If weight specifies a column in the data frame with positive numbers,
 weighted estimation occurs.
-However, currently only the resultant parameter estimates are available (via coef).</p>
+However, currently only the resultant parameter estimates are available.</p>
 <p>If the <code>right</code> argument is different to the <code>left</code> argument then the data are considered to be censored.</p>
-<p>The fits are performed using <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdist.html" class="external-link">fitdistrplus::fitdist()</a></code>
-(and <code><a href="https://rdrr.io/pkg/fitdistrplus/man/fitdistcens.html" class="external-link">fitdistrplus::fitdistcens()</a></code> in the case of censored data).
-The method used is "mle" (maximum likelihood estimation)
-which means that numerical optimization is carried out in
-<code><a href="https://rdrr.io/pkg/fitdistrplus/man/mledist.html" class="external-link">fitdistrplus::mledist()</a></code> using <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>
-unless finite bounds are supplied in the (lower and upper) in which
-it is carried out using <code><a href="https://rdrr.io/r/stats/constrOptim.html" class="external-link">stats::constrOptim()</a></code>.
-In both cases the "Nelder-Mead" method is used.</p>
     </div>
+    <div id="see-also">
+    <h2>See also</h2>
+    <div class="dont-index"><p><code><a href="ssd_plot_cdf.html">ssd_plot_cdf()</a></code> and <code><a href="ssd_hc.html">ssd_hc()</a></code></p></div>
     </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ssd_fit_dists</span><span class="op">(</span><span class="va">boron_data</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fitting of the distribution ' llogis ' by maximum likelihood </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              estimate Std. Error</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> locationlog 2.6261249  0.2482332</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scalelog    0.7403092  0.1143365</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fitting of the distribution ' gamma ' by maximum likelihood </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         estimate Std. Error</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale 25.1263769  7.6375478</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape  0.9500513  0.2224988</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fitting of the distribution ' lnorm ' by maximum likelihood </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         estimate Std. Error</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> meanlog 2.561644  0.2346640</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sdlog   1.241725  0.1659692</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fluazinam</span>, package <span class="op">=</span> <span class="st">"fitdistrplus"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ssd_fit_dists</span><span class="op">(</span><span class="va">fluazinam</span>, left <span class="op">=</span> <span class="st">"left"</span>, right <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fitting of the distribution ' llogis ' on censored data by maximum likelihood </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> locationlog 4.954683</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scalelog    1.591178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fitting of the distribution ' gamma ' on censored data by maximum likelihood </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scale 2446.6063266</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> shape    0.3465141</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fitting of the distribution ' lnorm ' on censored data by maximum likelihood </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> meanlog 4.977584</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sdlog   2.687571</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu">ssd_fit_dists</span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="va">fits</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Distribution 'gamma'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   scale 25.1268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   shape 0.950179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Distribution 'lgumbel'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   locationlog 1.92263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   scalelog 1.23224</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Distribution 'llogis'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   locationlog 2.62628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   scalelog 0.740426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Distribution 'lnorm'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   meanlog 2.56164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sdlog 1.24154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Distribution 'lnorm_lnorm'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   meanlog1 0.949539</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   meanlog2 3.20109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   pmix 0.283985</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sdlog1 0.554545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sdlog2 0.768816</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Distribution 'weibull'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   scale 23.514</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   shape 0.9661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameters estimated from 28 rows of data.</span>
+<span class="r-in"><span class="fu"><a href="ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="ssd_fit_dists-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span class="fu"><a href="ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dist    percent   est    se   lcl   ucl    wt method     nboot pboot</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> average       5  1.24    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -176,7 +200,7 @@ In both cases the "Nelder-Mead" method is used.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer></div>
