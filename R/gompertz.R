@@ -22,6 +22,15 @@ ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p =
         lower.tail = lower.tail, log.p = log.p)
 }
 
+#' @describeIn ssd_p Cumulative Distribution Function for Gompertz Distribution
+#' `r lifecycle::badge("deprecated")`
+#' @export
+pgompertz <- function(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
+  lifecycle::deprecate_soft("1.0.0", "pgompertz()", "ssd_pgompertz()")
+  ssd_pgompertz (q, location = exp(llocation), shape = exp(lshape), 
+        lower.tail = lower.tail, log.p = log.p)
+}
+
 #' @describeIn ssd_q Quantile Function for Gompertz Distribution
 #' @export
 #' @examples
@@ -29,6 +38,15 @@ ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p =
 #' ssd_qgompertz(0.5)
 ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE) {
   qdist("gompertz", p = p, location = location, shape = shape, 
+        lower.tail = lower.tail, log.p = log.p)
+}
+
+#' @describeIn ssd_q Quantile Function for Gompertz Distribution
+#' `r lifecycle::badge("deprecated")`
+#' @export
+qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
+  lifecycle::deprecate_soft("1.0.0", "qgompertz()", "ssd_qgompertz()")
+  ssd_qgompertz(p = p, location = exp(llocation), shape = exp(lshape), 
         lower.tail = lower.tail, log.p = log.p)
 }
 
@@ -40,6 +58,14 @@ ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p =
 #' hist(ssd_rgompertz(10000), breaks = 1000)
 ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
   rdist("gompertz", n = n, location = location, shape = shape, chk = chk)
+}
+
+#' @describeIn ssd_r Random Generation for Gompertz Distribution
+#' `r lifecycle::badge("deprecated")`
+#' @export
+rgompertz <- function(n, llocation = 0, lshape = 0) {
+  lifecycle::deprecate_soft("1.0.0", "rgompertz()", "ssd_rgompertz()")
+  ssd_rgompertz(n = n, location = exp(llocation), shape = exp(lshape))
 }
 
 sgompertz <- function(data, pars = NULL) {

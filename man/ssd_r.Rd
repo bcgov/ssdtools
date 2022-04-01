@@ -6,8 +6,10 @@
 \alias{ssd_rburrIII3}
 \alias{ssd_rgamma}
 \alias{ssd_rgompertz}
+\alias{rgompertz}
 \alias{ssd_rinvpareto}
 \alias{ssd_rlgumbel}
+\alias{rlgumbel}
 \alias{ssd_rllogis_llogis}
 \alias{ssd_rllogis}
 \alias{ssd_rlnorm_lnorm}
@@ -22,9 +24,13 @@ ssd_rgamma(n, shape = 1, scale = 1, chk = TRUE)
 
 ssd_rgompertz(n, location = 1, shape = 1, chk = TRUE)
 
+rgompertz(n, llocation = 0, lshape = 0)
+
 ssd_rinvpareto(n, shape = 3, scale = 1, chk = TRUE)
 
 ssd_rlgumbel(n, locationlog = 0, scalelog = 1, chk = TRUE)
+
+rlgumbel(n, locationlog = 0, scalelog = 1)
 
 ssd_rllogis_llogis(
   n,
@@ -67,6 +73,10 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 
 \item{location}{location parameter.}
 
+\item{llocation}{location parameter on the log scale.}
+
+\item{lshape}{shape parameter on the log scale.}
+
 \item{locationlog}{location on log scale parameter.}
 
 \item{scalelog}{scale on log scale parameter.}
@@ -104,9 +114,15 @@ Random Number Generation
 
 \item \code{ssd_rgompertz}: Random Generation for Gompertz Distribution
 
+\item \code{rgompertz}: Random Generation for Gompertz Distribution
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 \item \code{ssd_rinvpareto}: Random Generation for Inverse Pareto Distribution
 
 \item \code{ssd_rlgumbel}: Random Generation for log-Gumbel Distribution
+
+\item \code{rlgumbel}: Random Generation for log-Gumbel Distribution
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \item \code{ssd_rllogis_llogis}: Random Generation for Log-Logistic/Log-Logistic Mixture Distribution
 
