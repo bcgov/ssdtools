@@ -19,3 +19,4 @@
 ^vignettestatic$
 
 ^COMPLIANCE\.yaml$
+^CRAN-SUBMISSION$
