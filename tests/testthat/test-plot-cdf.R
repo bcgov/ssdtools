@@ -31,3 +31,9 @@ test_that("autoplot deals with named list", {
     lnorm = c(meanlog = 2, sdlog = 2))),
                        "list")
 })
+
+test_that("autoplot deals with delta", {
+  dists <- ssd_dists_all()
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists, at_boundary_ok = TRUE, computable = FALSE)
+  expect_snapshot_plot(ssd_plot_cdf(fits, delta = Inf), "fits_delta")
+})

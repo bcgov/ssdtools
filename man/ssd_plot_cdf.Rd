@@ -8,7 +8,7 @@
 \usage{
 ssd_plot_cdf(x, ...)
 
-\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, ...)
+\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, delta = 7, ...)
 
 \method{ssd_plot_cdf}{list}(x, ...)
 }
@@ -18,6 +18,8 @@ ssd_plot_cdf(x, ...)
 \item{...}{Additional arguments passed to \code{\link[=ssd_plot]{ssd_plot()}}.}
 
 \item{average}{A flag specifying whether to model average the estimates.}
+
+\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
 }
 \description{
 Generic function to plots the cumulative distribution function (CDF).
