@@ -78,7 +78,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S3 method for fitdists</span>
-<span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">x</span>, average <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">x</span>, average <span class="op">=</span> <span class="cn">FALSE</span>, delta <span class="op">=</span> <span class="fl">7</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S3 method for list</span>
 <span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
@@ -92,6 +92,8 @@
 <dd><p>Additional arguments passed to <code><a href="ssd_plot.html">ssd_plot()</a></code>.</p></dd>
 <dt>average</dt>
 <dd><p>A flag specifying whether to model average the estimates.</p></dd>
+<dt>delta</dt>
+<dd><p>A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.</p></dd>
 </dl></div>
     <div id="methods-by-class-">
     <h2>Methods (by class)</h2>
