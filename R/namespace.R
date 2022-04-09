@@ -26,6 +26,7 @@
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
 #' @importFrom scales comma manual_pal percent trans_breaks
+#' @importFrom ssddata gm_mean
 #' @importFrom stats coef complete.cases ks.test logLik nobs optim plogis predict qlogis runif sd setNames weighted.mean
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
