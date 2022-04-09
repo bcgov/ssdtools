@@ -14,9 +14,9 @@
 
 local_multisession <- function(.local_envir = parent.frame()) {
   oldDoPar <- doFuture::registerDoFuture()
-  withr::defer(future::plan("future::sequential"))
   withr::defer(with(oldDoPar, foreach::setDoPar(fun=fun, data=data, info=info)))
-  future::plan("future::multisession")
+  oldPlan <- future::plan("future::multisession")
+  withr::defer(future::plan(oldPlan))
   invisible(oldDoPar)
 }
 
