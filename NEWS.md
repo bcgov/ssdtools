@@ -2,17 +2,7 @@
 
 # ssdtools 1.0.1
 
-- Same as previous version.
-
-
-# ssdtools 1.0.0.9001
-
-- Same as previous version.
-
-
-# ssdtools 1.0.0.9000
-
-- Same as previous version.
+- Added `delta = 7` argument to `ssd_plot_cdf()`.
 
 
 # ssdtools 1.0.0
