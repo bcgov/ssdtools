@@ -1,8 +1,8 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# ssdtools 1.0.0.9000
+# ssdtools 1.0.1
 
-- Same as previous version.
+- Added `delta = 7` argument to `ssd_plot_cdf()`.
 
 
 # ssdtools 1.0.0
