@@ -31,6 +31,8 @@ Authors@R:
       person(given = "Andy",
              family = "Teucher",
              role = "ctb"),
+    person("Seb", "Dalgarno", , "seb@poissonconsulting.ca", role = "ctb",
+           comment = c(ORCID = "0000-0002-3658-4517")),
       person(given = "Emilie",
              family = "Doussantousse",
              role = "ctb"),
