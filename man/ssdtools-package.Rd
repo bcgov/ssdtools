@@ -35,6 +35,7 @@ Other contributors:
   \item Kathleen McTavish [contributor]
   \item Heather Thompson [contributor]
   \item Andy Teucher [contributor]
+  \item Seb Dalgarno \email{seb@poissonconsulting.ca} (\href{https://orcid.org/0000-0002-3658-4517}{ORCID}) [contributor]
   \item Emilie Doussantousse [contributor]
   \item Stephanie Hazlitt [contributor]
   \item Nadine Hussein [contributor]

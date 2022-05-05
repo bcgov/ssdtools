@@ -18,7 +18,7 @@ test_that("llogis_llogis test_dist", {
 
 test_that("llogis_llogis custom checks", {
   expect_equal(ssd_pllogis_llogis(1), 0.384470710684998)
-  expect_equal(ssd_qllogis_llogis(0.75), 5.2666469409969)
+  expect_equal(ssd_qllogis_llogis(0.75), 5.26666940630986)
   set.seed(42)
   expect_equal(ssd_rllogis_llogis(2), c(0.400833984692937, 4.89788262355488))
 })
