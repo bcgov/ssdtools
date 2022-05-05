@@ -86,7 +86,7 @@ qlogis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
   f <- function(x) {
     plogis_logis_ssd(x, location1, scale1, location2, scale2, pmix) - p
   }
-  stats::uniroot(f, lower = 0, upper = 10, extendInt = "yes")$root
+  stats::uniroot(f, lower = 0, upper = 10, extendInt = "yes", tol=.Machine$double.eps)$root
 }
 
 rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {

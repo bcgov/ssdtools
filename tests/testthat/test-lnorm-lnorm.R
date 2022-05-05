@@ -16,7 +16,7 @@ test_that("lnorm_lnorm", {
   
   test_dist("lnorm_lnorm", qroottolerance = 1e-04)
   expect_equal(ssd_plnorm_lnorm(1), 0.329327626965729)
-  expect_equal(ssd_qlnorm_lnorm(0.75), 3.53332231582824)
+  expect_equal(ssd_qlnorm_lnorm(0.75), 3.53332370752762)
   set.seed(42)
   expect_equal(ssd_rlnorm_lnorm(2), c(0.568531719998709, 1.43782047983794))
 })
@@ -52,4 +52,9 @@ test_that("lnorm_lnorm fits anonb", {
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_anonb")
   expect_snapshot_plot(ssd_plot(data, predict(fit), ci = FALSE), "plot_anonb")
+})
+
+test_that("lnorm_lnorm positive q with extreme distribution", {
+  expect_equal(qlnorm_lnorm_ssd(0.05, meanlog1 = -10.39362, sdlog1 = 0.399835,
+                                meanlog2 = -4.76721, sdlog2 = 2.583824, pmix = 0.1308133), 2.49076867209839e-05)
 })

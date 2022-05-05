@@ -11,7 +11,7 @@ comma_signif(x, digits = 3, ...)
 
 \item{digits}{A whole number specifying the number of significant figures}
 
-\item{...}{Additional arguments passed to \link[scales:label_number]{scales::comma}.}
+\item{...}{Additional arguments passed to \link[scales:comma]{scales::comma}.}
 }
 \value{
 A character vector.
