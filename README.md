@@ -192,7 +192,7 @@ software see:
 
 *Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity
 Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
-<https://setac.onlinelibrary.wiley.com/doi/10.1002/etc.4925>.*
+<https://doi.org/10.1002/etc.4925>.*
 
 The CCME `data.csv` data file is derived from a factsheet prepared by
 the [Canadian Council of Ministers of the

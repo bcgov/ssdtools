@@ -101,4 +101,4 @@ Creative Commons Attribution 4.0 International License</a>.
 
 ## References
 
-Verdonck, F. A., Aldenberg, T. , Jaworska, J. and Vanrolleghem, P. A. (2003), Limitations of current risk characterization methods in probabilistic environmental risk assessment. Environmental Toxicology and Chemistry, 22: 2209-2213. https://setac.onlinelibrary.wiley.com/doi/abs/10.1897/02-435
+Verdonck, F. A., Aldenberg, T. , Jaworska, J. and Vanrolleghem, P. A. (2003), Limitations of current risk characterization methods in probabilistic environmental risk assessment. Environmental Toxicology and Chemistry, 22: 2209-2213. https://doi.org/10.1897/02-435

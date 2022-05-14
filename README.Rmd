@@ -125,7 +125,7 @@ The ssdtools package was developed as a result of earlier drafts of:
 
 For recent developments in SSD modeling including a review of existing software see:
 
-*Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity Distribution Modeling. Environ Toxicol Chem 40(2): 293–308. <https://setac.onlinelibrary.wiley.com/doi/10.1002/etc.4925>.*
+*Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity Distribution Modeling. Environ Toxicol Chem 40(2): 293–308. <https://doi.org/10.1002/etc.4925>.*
 
 The CCME `data.csv` data file is derived from a factsheet prepared by the [Canadian Council of Ministers of the Environment](http://ceqg-rcqe.ccme.ca/en/index.html). 
 See the [`data-raw`](https://github.com/bcgov/ssdtools/tree/master/data-raw) folder for more information.
