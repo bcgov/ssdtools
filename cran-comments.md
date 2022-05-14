@@ -24,6 +24,7 @@ The large size of these subdirectories is necessary.
 > Found the following (possibly) invalid URLs:
 >  URL: https://doi.org/10.1002/etc.4925
 >    From: inst/doc/ssdtools.html
+>          README.md
 >    Status: 503
 >    Message: Service Unavailable
 >  URL: https://doi.org/10.1897/02-435
