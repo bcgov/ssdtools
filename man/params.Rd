@@ -71,7 +71,9 @@ in the sense of returning a likelihood.}
 
 \item{n}{number of observations.}
 
-\item{log, log.p}{logical; if TRUE, probabilities p are given as log(p).}
+\item{log}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
 \item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X <= x]},otherwise, \code{P[X > x]}.}
 
