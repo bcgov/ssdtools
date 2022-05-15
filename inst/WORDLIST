@@ -1,4 +1,3 @@
-Akaike
 AICc
 Aldenberg
 BCANZ
@@ -9,7 +8,6 @@ CLs
 CMD
 CRC
 Cramer
-Dalgarno
 ECD
 Ecotoxicology
 Environ
@@ -97,11 +95,13 @@ purrr
 readded
 reprex
 rescale
+rescaled
 rescaling
 reweight
 scalelog
 sdlog
 se
+setac
 shinyssdtools
 ssd
 tbl
