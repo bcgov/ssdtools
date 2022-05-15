@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 1.0.2.9000
+
+- Same as previous version.
+
+
 # ssdtools 1.0.2
 
 - Fixed bug that was producing estimates of 0 for lower HCx values for log-normal mixture model with rescaled data spanning many orders of magnitude.
