@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2.9001</span>
       </span>
     </div>
 
@@ -77,173 +77,86 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>all</dt>
-<dd><p>A flag specifying whether to also return transformed parameters.</p></dd>
-<dt>at_boundary_ok</dt>
-<dd><p>A flag specifying whether a model with one or more
-parameters at the boundary should be considered to have converged (default = FALSE).</p></dd>
-<dt>x</dt>
-<dd><p>The object.</p></dd>
-<dt>object</dt>
-<dd><p>The object.</p></dd>
-<dt>control</dt>
-<dd><p>A list of control parameters passed to <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>.</p></dd>
-<dt>chk</dt>
-<dd><p>A flag specifying whether to check the arguments.</p></dd>
-<dt>data</dt>
-<dd><p>A data frame.</p></dd>
-<dt>pred</dt>
-<dd><p>A data frame of the predictions.</p></dd>
-<dt>xlab</dt>
-<dd><p>A string of the x-axis label.</p></dd>
-<dt>ylab</dt>
-<dd><p>A string of the x-axis label.</p></dd>
-<dt>xbreaks</dt>
-<dd><p>The x-axis breaks as one of:</p><ul><li><p><code>NULL</code> for no breaks</p></li>
-<li><p><code><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">waiver()</a></code> for the default breaks</p></li>
-<li><p>A numeric vector of positions</p></li>
-</ul></dd>
-<dt>breaks</dt>
-<dd><p>A character vector</p></dd>
-<dt>bounds</dt>
-<dd><p>A named non-negative numeric vector of the left and right bounds for
-uncensored missing (0 and Inf) data in terms of the orders of magnitude
-relative to the extremes for non-missing values.</p></dd>
-<dt>conc</dt>
-<dd><p>A numeric vector of concentrations.</p></dd>
-<dt>digits</dt>
-<dd><p>A whole number specifying the number of significant figures</p></dd>
-<dt>percent</dt>
-<dd><p>A numeric vector of percentages.</p></dd>
-<dt>pvalue</dt>
-<dd><p>A flag specifying whether to return p-values or the statistics (default) for the various tests.</p></dd>
-<dt>parametric</dt>
-<dd><p>A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.</p></dd>
-<dt>min_pmix</dt>
-<dd><p>A number between 0 and 0.5 specifying the minimum proportion in mixture models.</p></dd>
-<dt>delta</dt>
-<dd><p>A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.</p></dd>
-<dt>average</dt>
-<dd><p>A flag specifying whether to model average the estimates.</p></dd>
-<dt>ci</dt>
-<dd><p>A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).</p></dd>
-<dt>nboot</dt>
-<dd><p>A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.</p></dd>
-<dt>min_pboot</dt>
-<dd><p>A number of the minimum proportion of bootstrap samples that must successfully fit
-in the sense of returning a likelihood.</p></dd>
-<dt>level</dt>
-<dd><p>A number between 0 and 1 of the confidence level.</p></dd>
-<dt>...</dt>
-<dd><p>Unused.</p></dd>
-<dt>q</dt>
-<dd><p>vector of quantiles.</p></dd>
-<dt>p</dt>
-<dd><p>vector of probabilities.</p></dd>
-<dt>n</dt>
-<dd><p>number of observations.</p></dd>
-<dt>log</dt>
-<dd><p>logical; if TRUE, probabilities p are given as log(p).</p></dd>
-<dt>log.p</dt>
-<dd><p>logical; if TRUE, probabilities p are given as log(p).</p></dd>
-<dt>lower.tail</dt>
-<dd><p>logical; if TRUE (default), probabilities are <code>P[X &lt;= x]</code>,otherwise, <code>P[X &gt; x]</code>.</p></dd>
-<dt>location</dt>
-<dd><p>location parameter.</p></dd>
-<dt>llocation</dt>
-<dd><p>location parameter on the log scale.</p></dd>
-<dt>scale</dt>
-<dd><p>scale parameter.</p></dd>
-<dt>lscale</dt>
-<dd><p>scale parameter on the log scale.</p></dd>
-<dt>shape1</dt>
-<dd><p>shape1 parameter.</p></dd>
-<dt>shape2</dt>
-<dd><p>shape2 parameter.</p></dd>
-<dt>range_shape1</dt>
-<dd><p>A numeric vector of length two of the lower and upper bounds for the shape1 parameter.</p></dd>
-<dt>range_shape2</dt>
-<dd><p>shape2 parameter.</p></dd>
-<dt>locationlog1</dt>
-<dd><p>locationlog1 parameter.</p></dd>
-<dt>scalelog1</dt>
-<dd><p>scalelog1 parameter.</p></dd>
-<dt>locationlog2</dt>
-<dd><p>locationlog2 parameter.</p></dd>
-<dt>scalelog2</dt>
-<dd><p>scalelog2 parameter.</p></dd>
-<dt>pmix</dt>
-<dd><p>Proportion mixture parameter.</p></dd>
-<dt>meanlog</dt>
-<dd><p>mean on log scale parameter.</p></dd>
-<dt>meanlog1</dt>
-<dd><p>mean on log scale parameter.</p></dd>
-<dt>meanlog2</dt>
-<dd><p>mean on log scale parameter.</p></dd>
-<dt>locationlog</dt>
-<dd><p>location on log scale parameter.</p></dd>
-<dt>sdlog</dt>
-<dd><p>standard deviation on log scale parameter.</p></dd>
-<dt>sdlog1</dt>
-<dd><p>standard deviation on log scale parameter.</p></dd>
-<dt>sdlog2</dt>
-<dd><p>standard deviation on log scale parameter.</p></dd>
-<dt>scalelog</dt>
-<dd><p>scale on log scale parameter.</p></dd>
-<dt>lshape</dt>
-<dd><p>shape parameter on the log scale.</p></dd>
-<dt>lshape1</dt>
-<dd><p>shape1 parameter on the log scale.</p></dd>
-<dt>lshape2</dt>
-<dd><p>shape2 parameter on the log scale.</p></dd>
-<dt>xintercept</dt>
-<dd><p>The x-value for the intersect</p></dd>
-<dt>yintercept</dt>
-<dd><p>The y-value for the intersect.</p></dd>
-<dt>select</dt>
-<dd><p>A character vector of the distributions to select.</p></dd>
-<dt>rescale</dt>
-<dd><p>A flag specifying whether to rescale concentration values by dividing by the largest finite value.</p></dd>
-<dt>reweight</dt>
-<dd><p>A flag specifying whether to reweight weights by dividing by the largest weight.</p></dd>
-<dt>left</dt>
-<dd><p>A string of the column in data with the concentrations.</p></dd>
-<dt>right</dt>
-<dd><p>A string of the column in data with the right concentration values.</p></dd>
-<dt>label</dt>
-<dd><p>A string of the column in data with the labels.</p></dd>
-<dt>shape</dt>
-<dd><p>A string of the column in data for the shape aesthetic.</p></dd>
-<dt>color</dt>
-<dd><p>A string of the column in data for the color aesthetic.</p></dd>
-<dt>size</dt>
-<dd><p>A number for the size of the labels.</p></dd>
-<dt>ribbon</dt>
-<dd><p>A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.</p></dd>
-<dt>shift_x</dt>
-<dd><p>The value to multiply the label x values by.</p></dd>
-<dt>hc</dt>
-<dd><p>A count between 1 and 99 indicating the percent hazard concentration (or NULL).</p></dd>
-<dt>weight</dt>
-<dd><p>A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.</p></dd>
-<dt>dists</dt>
-<dd><p>A character vector of the distribution names.</p></dd>
-<dt>computable</dt>
-<dd><p>A flag specifying whether to only return fits with numerically computable standard errors.</p></dd>
-<dt>silent</dt>
-<dd><p>A flag indicating whether fits should fail silently.</p></dd>
-<dt>na.rm</dt>
-<dd><p>A flag specifying whether to silently remove missing values or
-remove them with a warning.</p></dd>
-<dt>nrow</dt>
-<dd><p>A positive whole number of the minimum number of non-missing rows.</p></dd>
-<dt>nsim</dt>
-<dd><p>A positive whole number of the number of simulations to generate.</p></dd>
-<dt>linetype</dt>
-<dd><p>A string of the column in pred to use for the linetype.</p></dd>
-<dt>linecolor</dt>
-<dd><p>A string of the column in pred to use for the line color.</p></dd>
-</dl></div>
+    <p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
