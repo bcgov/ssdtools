@@ -14,7 +14,7 @@
 
 #' Hazard Percent
 #'
-#' Gets percent of species protected at specified concentration(s).
+#' Gets percent of species affected at specified concentration(s).
 #' 
 #' If `ci = TRUE` uses parameteric bootstrapping to get confidence intervals on the 
 #' hazard percent(s).

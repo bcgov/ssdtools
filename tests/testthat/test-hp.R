@@ -115,6 +115,22 @@ test_that("hp fitdists works not average multiple dists", {
   expect_snapshot_data(hp, "hp114")
 })
 
+test_that("hp fitdists gives different answer with model averaging as hc not same for either", {
+  library(ssdtools)
+  library(ssddata)
+  library(testthat)
+    data <- ssddata::aims_molybdenum_marine
+  
+  fits_lgumbel <- ssd_fit_dists(data, dists = "lgumbel")
+  expect_equal(ssd_hp(fits_lgumbel, ssd_hc(fits_lgumbel, percent = 5)$est)$est, 5)
+  
+  fits_lnorm_lnorm <- ssd_fit_dists(data, dists = "lnorm_lnorm")
+  expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, percent = 5)$est)$est, 5)
+  
+  fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"))
+  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, percent = 5)$est)$est, 4.59188450624579)
+})
+
 test_that("ssd_hp fitdists correct for rescaling", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)

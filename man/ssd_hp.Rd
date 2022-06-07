@@ -49,7 +49,7 @@ in the sense of returning a likelihood.}
 A tibble of corresponding hazard percents.
 }
 \description{
-Gets percent of species protected at specified concentration(s).
+Gets percent of species affected at specified concentration(s).
 }
 \details{
 If \code{ci = TRUE} uses parameteric bootstrapping to get confidence intervals on the
