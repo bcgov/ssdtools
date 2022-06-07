@@ -145,6 +145,18 @@ test_that("ssd_hc fitdists averages", {
   expect_snapshot_data(hc, "hc145")
 })
 
+test_that("ssd_hc fitdists correctly averages", {
+  library(ssdtools)
+  library(ssddata)
+  library(testthat)
+  fits <- ssd_fit_dists(ssddata::aims_molybdenum_marine, dists = c("lgumbel", "lnorm_lnorm"))
+  hc <- ssd_hc(fits, average = FALSE)
+  expect_equal(hc$est, c(3881.17238083968, 5540.68414532741))
+  expect_equal(hc$wt, c(0.0968427088339105, 0.90315729116609))
+  hc_avg <- ssd_hc(fits)
+  expect_equal(hc_avg$est, sum(hc$est * hc$wt))
+})
+
 test_that("ssd_hc fitdists averages single dist by multiple percent", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
