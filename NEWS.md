@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 1.0.2.9001
+
+- Fixed description of `ssd_hp()` to be percent affected rather than percent protected.
+
 # ssdtools 1.0.2.9000
 
 - Same as previous version.
