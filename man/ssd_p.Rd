@@ -125,33 +125,33 @@ Cumulative Distribution Function
 }
 \section{Functions}{
 \itemize{
-\item \code{ssd_pburrIII3}: Cumulative Distribution Function for BurrIII Distribution
+\item \code{ssd_pburrIII3()}: Cumulative Distribution Function for BurrIII Distribution
 
-\item \code{ssd_pgamma}: Cumulative Distribution Function for Gamma Distribution
+\item \code{ssd_pgamma()}: Cumulative Distribution Function for Gamma Distribution
 
-\item \code{ssd_pgompertz}: Cumulative Distribution Function for Gompertz Distribution
+\item \code{ssd_pgompertz()}: Cumulative Distribution Function for Gompertz Distribution
 
-\item \code{pgompertz}: Cumulative Distribution Function for Gompertz Distribution
+\item \code{pgompertz()}: Cumulative Distribution Function for Gompertz Distribution
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\item \code{ssd_pinvpareto}: Cumulative Distribution Function for Inverse Pareto Distribution
+\item \code{ssd_pinvpareto()}: Cumulative Distribution Function for Inverse Pareto Distribution
 
-\item \code{ssd_plgumbel}: Cumulative Distribution Function for Log-Gumbel Distribution
+\item \code{ssd_plgumbel()}: Cumulative Distribution Function for Log-Gumbel Distribution
 
-\item \code{plgumbel}: Cumulative Distribution Function for Log-Gumbel Distribution
+\item \code{plgumbel()}: Cumulative Distribution Function for Log-Gumbel Distribution
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\item \code{ssd_pllogis_llogis}: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution
+\item \code{ssd_pllogis_llogis()}: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution
 
-\item \code{ssd_pllogis}: Cumulative Distribution Function for Log-Logistic Distribution
+\item \code{ssd_pllogis()}: Cumulative Distribution Function for Log-Logistic Distribution
 
-\item \code{ssd_plnorm_lnorm}: Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution
+\item \code{ssd_plnorm_lnorm()}: Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution
 
-\item \code{ssd_plnorm}: Cumulative Distribution Function for Log-Normal Distribution
+\item \code{ssd_plnorm()}: Cumulative Distribution Function for Log-Normal Distribution
 
-\item \code{ssd_pweibull}: Cumulative Distribution Function for Weibull Distribution
+\item \code{ssd_pweibull()}: Cumulative Distribution Function for Weibull Distribution
+
 }}
-
 \examples{
 
 ssd_pburrIII3(1)

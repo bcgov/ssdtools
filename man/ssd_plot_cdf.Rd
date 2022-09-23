@@ -26,11 +26,11 @@ Generic function to plots the cumulative distribution function (CDF).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fitdists}: Plot CDF for fitdists object
+\item \code{ssd_plot_cdf(fitdists)}: Plot CDF for fitdists object
 
-\item \code{list}: Plot CDF for named list of distributional parameter values
+\item \code{ssd_plot_cdf(list)}: Plot CDF for named list of distributional parameter values
+
 }}
-
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_plot_cdf(fits)

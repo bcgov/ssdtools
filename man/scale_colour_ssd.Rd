@@ -17,9 +17,9 @@ Discrete color-blind scale for SSD Plots
 }
 \section{Functions}{
 \itemize{
-\item \code{scale_color_ssd}: Discrete color-blind scale for SSD Plots
-}}
+\item \code{scale_color_ssd()}: Discrete color-blind scale for SSD Plots
 
+}}
 \examples{
 ssd_plot(ssddata::ccme_boron, boron_pred, shape = "Group") +
   scale_colour_ssd()

@@ -108,33 +108,33 @@ Random Number Generation
 }
 \section{Functions}{
 \itemize{
-\item \code{ssd_rburrIII3}: Random Generation for BurrIII Distribution
+\item \code{ssd_rburrIII3()}: Random Generation for BurrIII Distribution
 
-\item \code{ssd_rgamma}: Random Generation for Gamma Distribution
+\item \code{ssd_rgamma()}: Random Generation for Gamma Distribution
 
-\item \code{ssd_rgompertz}: Random Generation for Gompertz Distribution
+\item \code{ssd_rgompertz()}: Random Generation for Gompertz Distribution
 
-\item \code{rgompertz}: Random Generation for Gompertz Distribution
+\item \code{rgompertz()}: Random Generation for Gompertz Distribution
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\item \code{ssd_rinvpareto}: Random Generation for Inverse Pareto Distribution
+\item \code{ssd_rinvpareto()}: Random Generation for Inverse Pareto Distribution
 
-\item \code{ssd_rlgumbel}: Random Generation for log-Gumbel Distribution
+\item \code{ssd_rlgumbel()}: Random Generation for log-Gumbel Distribution
 
-\item \code{rlgumbel}: Random Generation for log-Gumbel Distribution
+\item \code{rlgumbel()}: Random Generation for log-Gumbel Distribution
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\item \code{ssd_rllogis_llogis}: Random Generation for Log-Logistic/Log-Logistic Mixture Distribution
+\item \code{ssd_rllogis_llogis()}: Random Generation for Log-Logistic/Log-Logistic Mixture Distribution
 
-\item \code{ssd_rllogis}: Random Generation for Log-Logistic Distribution
+\item \code{ssd_rllogis()}: Random Generation for Log-Logistic Distribution
 
-\item \code{ssd_rlnorm_lnorm}: Random Generation for Log-Normal/Log-Normal Mixture Distribution
+\item \code{ssd_rlnorm_lnorm()}: Random Generation for Log-Normal/Log-Normal Mixture Distribution
 
-\item \code{ssd_rlnorm}: Random Generation for Log-Normal Distribution
+\item \code{ssd_rlnorm()}: Random Generation for Log-Normal Distribution
 
-\item \code{ssd_rweibull}: Random Generation for Weibull Distribution
+\item \code{ssd_rweibull()}: Random Generation for Weibull Distribution
+
 }}
-
 \examples{
 
 set.seed(50)

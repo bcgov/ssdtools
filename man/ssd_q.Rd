@@ -125,33 +125,33 @@ Quantile Function
 }
 \section{Functions}{
 \itemize{
-\item \code{ssd_qburrIII3}: Quantile Function for BurrIII Distribution
+\item \code{ssd_qburrIII3()}: Quantile Function for BurrIII Distribution
 
-\item \code{ssd_qgamma}: Quantile Function for Gamma Distribution
+\item \code{ssd_qgamma()}: Quantile Function for Gamma Distribution
 
-\item \code{ssd_qgompertz}: Quantile Function for Gompertz Distribution
+\item \code{ssd_qgompertz()}: Quantile Function for Gompertz Distribution
 
-\item \code{qgompertz}: Quantile Function for Gompertz Distribution
+\item \code{qgompertz()}: Quantile Function for Gompertz Distribution
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\item \code{ssd_qinvpareto}: Quantile Function for Inverse Pareto Distribution
+\item \code{ssd_qinvpareto()}: Quantile Function for Inverse Pareto Distribution
 
-\item \code{ssd_qlgumbel}: Quantile Function for Log-Gumbel Distribution
+\item \code{ssd_qlgumbel()}: Quantile Function for Log-Gumbel Distribution
 
-\item \code{qlgumbel}: Quantile Function for Log-Gumbel Distribution
+\item \code{qlgumbel()}: Quantile Function for Log-Gumbel Distribution
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\item \code{ssd_qllogis_llogis}: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution
+\item \code{ssd_qllogis_llogis()}: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution
 
-\item \code{ssd_qllogis}: Cumulative Distribution Function for Log-Logistic Distribution
+\item \code{ssd_qllogis()}: Cumulative Distribution Function for Log-Logistic Distribution
 
-\item \code{ssd_qlnorm_lnorm}: Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution
+\item \code{ssd_qlnorm_lnorm()}: Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution
 
-\item \code{ssd_qlnorm}: Cumulative Distribution Function for Log-Normal Distribution
+\item \code{ssd_qlnorm()}: Cumulative Distribution Function for Log-Normal Distribution
 
-\item \code{ssd_qweibull}: Cumulative Distribution Function for Weibull Distribution
+\item \code{ssd_qweibull()}: Cumulative Distribution Function for Weibull Distribution
+
 }}
-
 \examples{
 
 ssd_qburrIII3(0.5)

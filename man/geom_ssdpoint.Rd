@@ -81,12 +81,12 @@ Uses the empirical cumulative distribution to create scatterplot of points \code
 }
 \section{Functions}{
 \itemize{
-\item \code{geom_ssd}: Species Sensitivity Data Points
+\item \code{geom_ssd()}: Species Sensitivity Data Points
 
 Uses the empirical cumulative distribution to create scatterplot of points \code{x}.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-}}
 
+}}
 \examples{
 ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
   geom_ssdpoint()
