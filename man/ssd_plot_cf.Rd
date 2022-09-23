@@ -23,9 +23,9 @@ Soft deprecated for direct call to \code{\link[fitdistrplus:descdist]{fitdistrpl
 }
 \section{Functions}{
 \itemize{
-\item \code{ssd_cfplot}: Defunct Cullen and Frey Plot
-}}
+\item \code{ssd_cfplot()}: Defunct Cullen and Frey Plot
 
+}}
 \examples{
 ssd_plot_cf(ssddata::ccme_boron)
 }

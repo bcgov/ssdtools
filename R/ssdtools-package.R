@@ -14,3 +14,5 @@
 #' @rawNamespace useDynLib(ssdtools, .registration=TRUE); useDynLib(ssdtools_TMBExports)
 #' @keywords internal
 "_PACKAGE"
+
+utils::globalVariables("where")

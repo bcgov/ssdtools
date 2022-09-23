@@ -46,9 +46,9 @@ and \code{aicc} for non-censored data.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fitdists}: Goodness of Fit
-}}
+\item \code{ssd_gof(fitdists)}: Goodness of Fit
 
+}}
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_gof(fits)

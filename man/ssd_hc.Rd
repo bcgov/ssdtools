@@ -75,14 +75,14 @@ hazard concentrations(s).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{list}: Hazard Concentrations for Distributional Estimates
+\item \code{ssd_hc(list)}: Hazard Concentrations for Distributional Estimates
 
-\item \code{fitdists}: Hazard Concentrations for fitdists Object
+\item \code{ssd_hc(fitdists)}: Hazard Concentrations for fitdists Object
 
-\item \code{fitburrlioz}: Hazard Concentrations for fitburrlioz Object
+\item \code{ssd_hc(fitburrlioz)}: Hazard Concentrations for fitburrlioz Object
 '
-}}
 
+}}
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_hc(fits)

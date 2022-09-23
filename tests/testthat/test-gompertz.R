@@ -38,7 +38,7 @@ test_that("sgompertz completely unstable!", {
   data <- data.frame(left = x, right = x, weight = 1)
   set.seed(94)
   expect_equal(ssdtools:::sgompertz(data),
-  list(log_location = -0.809751972284548, log_shape = -301.126320260922))
+  list(log_location = -0.8097519, log_shape = -301.126), tolerance = 1e-06)
   set.seed(99)
   expect_equal(ssdtools:::sgompertz(data),
                list(log_location = -0.96528645818605, log_shape = -2.6047441710778))
@@ -67,7 +67,7 @@ test_that("sgompertz with initial values still unstable!", {
 
   set.seed(94)
   expect_equal(ssdtools:::sgompertz(sdata),
-               list(log_location = -0.809751972284548, log_shape = -301.126320260922))
+               list(log_location = -0.809751972284548, log_shape = -301.126), tolerance = 1e-06)
   set.seed(94)
   expect_equal(ssdtools:::sgompertz(sdata, pars),
                list(log_location = 4.06999915669631, log_shape = -2936.08880499417))
