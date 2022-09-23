@@ -52,6 +52,7 @@ Imports:
     plyr,
     purrr,
     Rcpp,
+    RcppEigen,
     scales,
     ssddata,
     stats,
@@ -83,6 +84,7 @@ Suggests:
     withr
 LinkingTo: 
     Rcpp,
+    RcppEigen,
     TMB
 VignetteBuilder: 
     knitr,
