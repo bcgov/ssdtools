@@ -77,16 +77,21 @@ for non-censored data.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_plot_cf</span><span class="op">(</span><span class="va">data</span>, left <span class="op">=</span> <span class="st">"Conc"</span><span class="op">)</span>
-
-<span class="fu">ssd_cfplot</span><span class="op">(</span><span class="va">data</span>, left <span class="op">=</span> <span class="st">"Conc"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_plot_cf</span><span class="op">(</span><span class="va">data</span>, left <span class="op">=</span> <span class="st">"Conc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_cfplot</span><span class="op">(</span><span class="va">data</span>, left <span class="op">=</span> <span class="st">"Conc"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <p></p>
-<p></p>
-    </div>
+    <dl><dt>data</dt>
+<dd><p>A data frame.</p></dd>
+
+
+<dt>left</dt>
+<dd><p>A string of the column in data with the concentrations.</p></dd>
+
+</dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>Soft deprecated for direct call to <code><a href="https://rdrr.io/pkg/fitdistrplus/man/descdist.html" class="external-link">fitdistrplus::descdist()</a></code>.</p>
@@ -94,12 +99,12 @@ for non-censored data.</p>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>ssd_cfplot</code>: Defunct Cullen and Frey Plot</p></li>
+<ul><li><p><code>ssd_cfplot()</code>: Defunct Cullen and Frey Plot</p></li>
 </ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ssd_plot_cf</span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ssd_plot_cf</span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`ssd_plot_cf()` was deprecated in ssdtools 0.3.5.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Please use `fitdistrplus::descdist()` instead.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Please use fitdistrplus::descdist(data$Conc, boot = 100L).</span>
@@ -118,7 +123,7 @@ for non-censored data.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

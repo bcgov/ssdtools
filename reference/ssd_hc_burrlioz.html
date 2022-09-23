@@ -75,27 +75,48 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_hc_burrlioz</span><span class="op">(</span>
-  <span class="va">x</span>,
-  percent <span class="op">=</span> <span class="fl">5</span>,
-  ci <span class="op">=</span> <span class="cn">FALSE</span>,
-  level <span class="op">=</span> <span class="fl">0.95</span>,
-  nboot <span class="op">=</span> <span class="fl">1000</span>,
-  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,
-  parametric <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_hc_burrlioz</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  percent <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,</span>
+<span>  parametric <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-    </div>
+    <dl><dt>x</dt>
+<dd><p>The object.</p></dd>
+
+
+<dt>percent</dt>
+<dd><p>A numeric vector of percentages.</p></dd>
+
+
+<dt>ci</dt>
+<dd><p>A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).</p></dd>
+
+
+<dt>level</dt>
+<dd><p>A number between 0 and 1 of the confidence level.</p></dd>
+
+
+<dt>nboot</dt>
+<dd><p>A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.</p></dd>
+
+
+<dt>min_pboot</dt>
+<dd><p>A number of the minimum proportion of bootstrap samples that must successfully fit
+in the sense of returning a likelihood.</p></dd>
+
+
+<dt>parametric</dt>
+<dd><p>A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.</p></dd>
+
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     
@@ -105,15 +126,15 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_burrlioz.html">ssd_fit_burrlioz</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ssd_hc_burrlioz</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_burrlioz.html">ssd_fit_burrlioz</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ssd_hc_burrlioz</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`ssd_hc_burrlioz()` was deprecated in ssdtools 0.3.5.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Please use `ssd_hc()` instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dist      percent   est    se   lcl   ucl    wt method         nboot pboot</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> invpareto       5 0.387    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 non-parametric     0    <span style="color: #BB0000;">NA</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -128,7 +149,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

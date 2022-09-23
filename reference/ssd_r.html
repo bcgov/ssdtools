@@ -75,89 +75,154 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_rburrIII3</span><span class="op">(</span><span class="va">n</span>, shape1 <span class="op">=</span> <span class="fl">1</span>, shape2 <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">ssd_rgamma</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">ssd_rgompertz</span><span class="op">(</span><span class="va">n</span>, location <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">rgompertz</span><span class="op">(</span><span class="va">n</span>, llocation <span class="op">=</span> <span class="fl">0</span>, lshape <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-
-<span class="fu">ssd_rinvpareto</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="fl">3</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">ssd_rlgumbel</span><span class="op">(</span><span class="va">n</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">rlgumbel</span><span class="op">(</span><span class="va">n</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="fu">ssd_rllogis_llogis</span><span class="op">(</span>
-  <span class="va">n</span>,
-  locationlog1 <span class="op">=</span> <span class="fl">0</span>,
-  scalelog1 <span class="op">=</span> <span class="fl">1</span>,
-  locationlog2 <span class="op">=</span> <span class="fl">1</span>,
-  scalelog2 <span class="op">=</span> <span class="fl">1</span>,
-  pmix <span class="op">=</span> <span class="fl">0.5</span>,
-  chk <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="fu">ssd_rllogis</span><span class="op">(</span><span class="va">n</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">ssd_rlnorm_lnorm</span><span class="op">(</span>
-  <span class="va">n</span>,
-  meanlog1 <span class="op">=</span> <span class="fl">0</span>,
-  sdlog1 <span class="op">=</span> <span class="fl">1</span>,
-  meanlog2 <span class="op">=</span> <span class="fl">1</span>,
-  sdlog2 <span class="op">=</span> <span class="fl">1</span>,
-  pmix <span class="op">=</span> <span class="fl">0.5</span>,
-  chk <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="fu">ssd_rlnorm</span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">0</span>, sdlog <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">ssd_rweibull</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_rburrIII3</span><span class="op">(</span><span class="va">n</span>, shape1 <span class="op">=</span> <span class="fl">1</span>, shape2 <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rgamma</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rgompertz</span><span class="op">(</span><span class="va">n</span>, location <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">rgompertz</span><span class="op">(</span><span class="va">n</span>, llocation <span class="op">=</span> <span class="fl">0</span>, lshape <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rinvpareto</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="fl">3</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rlgumbel</span><span class="op">(</span><span class="va">n</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">rlgumbel</span><span class="op">(</span><span class="va">n</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rllogis_llogis</span><span class="op">(</span></span>
+<span>  <span class="va">n</span>,</span>
+<span>  locationlog1 <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  scalelog1 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  locationlog2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  scalelog2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pmix <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  chk <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rllogis</span><span class="op">(</span><span class="va">n</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rlnorm_lnorm</span><span class="op">(</span></span>
+<span>  <span class="va">n</span>,</span>
+<span>  meanlog1 <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  sdlog1 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  meanlog2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  sdlog2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pmix <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  chk <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rlnorm</span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">0</span>, sdlog <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_rweibull</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-    </div>
+    <dl><dt>n</dt>
+<dd><p>number of observations.</p></dd>
+
+
+<dt>shape1</dt>
+<dd><p>shape1 parameter.</p></dd>
+
+
+<dt>shape2</dt>
+<dd><p>shape2 parameter.</p></dd>
+
+
+<dt>scale</dt>
+<dd><p>scale parameter.</p></dd>
+
+
+<dt>chk</dt>
+<dd><p>A flag specifying whether to check the arguments.</p></dd>
+
+
+<dt>shape</dt>
+<dd><p>A string of the column in data for the shape aesthetic.</p></dd>
+
+
+<dt>location</dt>
+<dd><p>location parameter.</p></dd>
+
+
+<dt>llocation</dt>
+<dd><p>location parameter on the log scale.</p></dd>
+
+
+<dt>lshape</dt>
+<dd><p>shape parameter on the log scale.</p></dd>
+
+
+<dt>locationlog</dt>
+<dd><p>location on log scale parameter.</p></dd>
+
+
+<dt>scalelog</dt>
+<dd><p>scale on log scale parameter.</p></dd>
+
+
+<dt>locationlog1</dt>
+<dd><p>locationlog1 parameter.</p></dd>
+
+
+<dt>scalelog1</dt>
+<dd><p>scalelog1 parameter.</p></dd>
+
+
+<dt>locationlog2</dt>
+<dd><p>locationlog2 parameter.</p></dd>
+
+
+<dt>scalelog2</dt>
+<dd><p>scalelog2 parameter.</p></dd>
+
+
+<dt>pmix</dt>
+<dd><p>Proportion mixture parameter.</p></dd>
+
+
+<dt>meanlog1</dt>
+<dd><p>mean on log scale parameter.</p></dd>
+
+
+<dt>sdlog1</dt>
+<dd><p>standard deviation on log scale parameter.</p></dd>
+
+
+<dt>meanlog2</dt>
+<dd><p>mean on log scale parameter.</p></dd>
+
+
+<dt>sdlog2</dt>
+<dd><p>standard deviation on log scale parameter.</p></dd>
+
+
+<dt>meanlog</dt>
+<dd><p>mean on log scale parameter.</p></dd>
+
+
+<dt>sdlog</dt>
+<dd><p>standard deviation on log scale parameter.</p></dd>
+
+</dl></div>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>ssd_rburrIII3</code>: Random Generation for BurrIII Distribution</p></li>
-<li><p><code>ssd_rgamma</code>: Random Generation for Gamma Distribution</p></li>
-<li><p><code>ssd_rgompertz</code>: Random Generation for Gompertz Distribution</p></li>
-<li><p><code>rgompertz</code>: Random Generation for Gompertz Distribution
+<ul><li><p><code>ssd_rburrIII3()</code>: Random Generation for BurrIII Distribution</p></li>
+<li><p><code>ssd_rgamma()</code>: Random Generation for Gamma Distribution</p></li>
+<li><p><code>ssd_rgompertz()</code>: Random Generation for Gompertz Distribution</p></li>
+<li><p><code>rgompertz()</code>: Random Generation for Gompertz Distribution
 <a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></li>
-<li><p><code>ssd_rinvpareto</code>: Random Generation for Inverse Pareto Distribution</p></li>
-<li><p><code>ssd_rlgumbel</code>: Random Generation for log-Gumbel Distribution</p></li>
-<li><p><code>rlgumbel</code>: Random Generation for log-Gumbel Distribution
+<li><p><code>ssd_rinvpareto()</code>: Random Generation for Inverse Pareto Distribution</p></li>
+<li><p><code>ssd_rlgumbel()</code>: Random Generation for log-Gumbel Distribution</p></li>
+<li><p><code>rlgumbel()</code>: Random Generation for log-Gumbel Distribution
 <a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></li>
-<li><p><code>ssd_rllogis_llogis</code>: Random Generation for Log-Logistic/Log-Logistic Mixture Distribution</p></li>
-<li><p><code>ssd_rllogis</code>: Random Generation for Log-Logistic Distribution</p></li>
-<li><p><code>ssd_rlnorm_lnorm</code>: Random Generation for Log-Normal/Log-Normal Mixture Distribution</p></li>
-<li><p><code>ssd_rlnorm</code>: Random Generation for Log-Normal Distribution</p></li>
-<li><p><code>ssd_rweibull</code>: Random Generation for Weibull Distribution</p></li>
+<li><p><code>ssd_rllogis_llogis()</code>: Random Generation for Log-Logistic/Log-Logistic Mixture Distribution</p></li>
+<li><p><code>ssd_rllogis()</code>: Random Generation for Log-Logistic Distribution</p></li>
+<li><p><code>ssd_rlnorm_lnorm()</code>: Random Generation for Log-Normal/Log-Normal Mixture Distribution</p></li>
+<li><p><code>ssd_rlnorm()</code>: Random Generation for Log-Normal Distribution</p></li>
+<li><p><code>ssd_rweibull()</code>: Random Generation for Weibull Distribution</p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -166,45 +231,45 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rburrIII3</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rburrIII3</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rgamma</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rgamma</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rgompertz</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rgompertz</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rinvpareto</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rinvpareto</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rlgumbel</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rlgumbel</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rllogis_llogis</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rllogis_llogis</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-6.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rllogis</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rllogis</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-7.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rlnorm_lnorm</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rlnorm_lnorm</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-8.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rlnorm</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rlnorm</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-9.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rweibull</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rweibull</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-10.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -220,7 +285,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

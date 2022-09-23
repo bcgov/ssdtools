@@ -100,7 +100,7 @@
       <h1 data-toc-skip>Get Started with ssdtools</h1>
                         <h4 data-toc-skip class="author">ssdtools Team</h4>
             
-            <h4 data-toc-skip class="date">2022-06-07</h4>
+            <h4 data-toc-skip class="date">2022-09-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools.Rmd</code></div>
@@ -127,11 +127,11 @@
 <p>In order to install R <span class="citation">(R Core Team 2018)</span> the appropriate binary for the users operating system should be downloaded from <a href="https://cran.r-project.org" class="external-link">CRAN</a> and then installed.</p>
 <p>Once R is installed, the <code>ssdtools</code> package can be installed (together with the tidyverse) by executing the following code at the R console</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ssdtools"</span>, <span class="st">"tidyverse"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ssdtools"</span>, <span class="st">"tidyverse"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>ssdtools</code> package (and key packages) can then be loaded into the current session using</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="getting-help">Getting Help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
@@ -145,65 +145,65 @@
 </h2>
 <p>Once the <code>ssdtools</code> package has been loaded the next task is to input some data. An easy way to do this is to save the concentration data for a <em>single</em> chemical as a column called <code>Conc</code> in a comma separated file (<code>.csv</code>). Each row should be the sensitivity concentration for a separate species. If species and/or group information is available then this can be saved as <code>Species</code> and <code>Group</code> columns. The <code>.csv</code> file can then be read into R using the following</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"path/to/file.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"path/to/file.csv"</span><span class="op">)</span></span></code></pre></div>
 <p>For the purposes of this manual we use the CCME dataset for boron.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ccme_boron</span> <span class="op">&lt;-</span> <span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ccme_boron</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 28 × 5</span></span>
-<span class="co">#&gt;    Chemical Species                  Conc Group        Units</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Boron    Oncorhynchus mykiss       2.1 Fish         mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Boron    Ictalurus punctatus       2.4 Fish         mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Boron    Micropterus salmoides     4.1 Fish         mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Boron    Brachydanio rerio        10   Fish         mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Boron    Carassius auratus        15.6 Fish         mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Boron    Pimephales promelas      18.3 Fish         mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Boron    Daphnia magna             6   Invertebrate mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Boron    Opercularia bimarginata  10   Invertebrate mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 18 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ccme_boron</span> <span class="op">&lt;-</span> <span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ccme_boron</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 28 × 5</span></span></span>
+<span><span class="co">#&gt;    Chemical Species                  Conc Group        Units</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Boron    Oncorhynchus mykiss       2.1 Fish         mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Boron    Ictalurus punctatus       2.4 Fish         mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Boron    Micropterus salmoides     4.1 Fish         mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Boron    Brachydanio rerio        10   Fish         mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Boron    Carassius auratus        15.6 Fish         mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Boron    Pimephales promelas      18.3 Fish         mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Boron    Daphnia magna             6   Invertebrate mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Boron    Opercularia bimarginata  10   Invertebrate mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 18 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="fitting-distributions">Fitting Distributions<a class="anchor" aria-label="anchor" href="#fitting-distributions"></a>
 </h2>
 <p>The function <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> inputs a data frame and fits one or more distributions. The user can specify a subset of the following 10 distributions</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ssd_dists_all.html">ssd_dists_all</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "burrIII3"      "gamma"         "gompertz"      "invpareto"    </span>
-<span class="co">#&gt;  [5] "lgumbel"       "llogis"        "llogis_llogis" "lnorm"        </span>
-<span class="co">#&gt;  [9] "lnorm_lnorm"   "weibull"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_dists_all.html">ssd_dists_all</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "burrIII3"      "gamma"         "gompertz"      "invpareto"    </span></span>
+<span><span class="co">#&gt;  [5] "lgumbel"       "llogis"        "llogis_llogis" "lnorm"        </span></span>
+<span><span class="co">#&gt;  [9] "lnorm_lnorm"   "weibull"</span></span></code></pre></div>
 <p>using the <code>dists</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">ccme_boron</span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">ccme_boron</span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="coefficients">Coefficients<a class="anchor" aria-label="anchor" href="#coefficients"></a>
 </h2>
 <p>The estimates for the various terms can be extracted using the tidyverse generic <code>tidy</code> function (or the base R generic <code>coef</code> function).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="co">#&gt;   dist   term           est    se</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> llogis locationlog  2.63  0.248</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> llogis scalelog     0.740 0.114</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> lnorm  meanlog      2.56  0.235</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> lnorm  sdlog        1.24  0.166</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gamma  scale       25.1   7.64 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> gamma  shape        0.950 0.223</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
+<span><span class="co">#&gt;   dist   term           est    se</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> llogis locationlog  2.63  0.248</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> llogis scalelog     0.740 0.114</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> lnorm  meanlog      2.56  0.235</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> lnorm  sdlog        1.24  0.166</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> gamma  scale       25.1   7.64 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> gamma  shape        0.950 0.223</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="plots">Plots<a class="anchor" aria-label="anchor" href="#plots"></a>
 </h2>
 <p>It is generally more informative to plot the fits using the <code>autoplot</code> generic function (a wrapper on <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code>). As <code>autoplot</code> returns a <code>ggplot</code> object it can be modified prior to plotting.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># set plot theme</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity Distributions for Boron"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># set plot theme</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity Distributions for Boron"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-8-1.png" width="480"></p>
 </div>
 <div class="section level2">
@@ -211,13 +211,13 @@
 </h2>
 <p>Given multiple distributions the user is faced with choosing the “best” distribution (or as discussed below averaging the results weighted by the fit).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 9</span></span>
-<span class="co">#&gt;   dist      ad     ks    cvm   aic  aicc   bic delta weight</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> llogis 0.487 0.099<span style="text-decoration: underline;">4</span> 0.059<span style="text-decoration: underline;">5</span>  241.  241.  244.  3.38  0.11 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lnorm  0.507 0.107  0.070<span style="text-decoration: underline;">3</span>  239.  240.  242.  1.40  0.296</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> gamma  0.440 0.117  0.055<span style="text-decoration: underline;">4</span>  238.  238.  240.  0     0.595</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 9</span></span></span>
+<span><span class="co">#&gt;   dist      ad     ks    cvm   aic  aicc   bic delta weight</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> llogis 0.487 0.099<span style="text-decoration: underline;">4</span> 0.059<span style="text-decoration: underline;">5</span>  241.  241.  244.  3.38  0.11 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lnorm  0.507 0.107  0.070<span style="text-decoration: underline;">3</span>  239.  240.  242.  1.40  0.296</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> gamma  0.440 0.117  0.055<span style="text-decoration: underline;">4</span>  238.  238.  240.  0     0.595</span></span></code></pre></div>
 <p>The <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code> function returns three test statistics that can be used to evaluate the fit of the various distributions to the data.</p>
 <ul>
 <li>
@@ -247,36 +247,36 @@
 </h2>
 <p>The <code>predict</code> function can be used to generate model-averaged (or if <code>average = FALSE</code> individual) estimates by parametric bootstrapping. Model averaging is based on <code>aicc</code> unless the data censored is which case <code>aicc</code> in undefined. In this situation model averaging is only possible if the distributions have the same number of parameters. Parametric bootstrapping is computationally intensive. To bootstrap for each distribution in parallel register the future backend and then select the evaluation strategy.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">doFuture</span><span class="fu">::</span><span class="fu"><a href="https://doFuture.futureverse.org/reference/registerDoFuture.html" class="external-link">registerDoFuture</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="fu">future</span><span class="fu">::</span><span class="va"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
-<span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">doFuture</span><span class="fu">::</span><span class="fu"><a href="https://doFuture.futureverse.org/reference/registerDoFuture.html" class="external-link">registerDoFuture</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="fu">future</span><span class="fu">::</span><span class="va"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
+<span><span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The resultant object is a data frame of the estimated concentration (<code>est</code>) with standard error (<code>se</code>) and lower (<code>lcl</code>) and upper (<code>ucl</code>) 95% confidence limits (CLs) by percent of species affected (<code>percent</code>). The object includes the number of bootstraps (<code>nboot</code>) data sets generated as well as the proportion of the data sets that successfully fitted (<code>pboot</code>). There is no requirement for the bootstrap samples to converge.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">boron_pred</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 8</span></span>
-<span class="co">#&gt;    dist    percent   est    se   lcl   ucl nboot pboot</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> average       1 0.379 0.391 0.122  1.58  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> average       2 0.624 0.540 0.213  2.25  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> average       3 0.856 0.656 0.305  2.78  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> average       4 1.08  0.756 0.405  3.27  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> average       5 1.31  0.845 0.509  3.74  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> average       6 1.53  0.926 0.617  4.17  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> average       7 1.76  1.00  0.730  4.55  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> average       8 1.98  1.07  0.852  4.92  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> average       9 2.21  1.14  0.972  5.30  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> average      10 2.44  1.20  1.09   5.66  <span style="text-decoration: underline;">1</span>000     1</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 89 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">boron_pred</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 8</span></span></span>
+<span><span class="co">#&gt;    dist    percent   est    se   lcl   ucl nboot pboot</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> average       1 0.379 0.391 0.122  1.58  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> average       2 0.624 0.540 0.213  2.25  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> average       3 0.856 0.656 0.305  2.78  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> average       4 1.08  0.756 0.405  3.27  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> average       5 1.31  0.845 0.509  3.74  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> average       6 1.53  0.926 0.617  4.17  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> average       7 1.76  1.00  0.730  4.55  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> average       8 1.98  1.07  0.852  4.92  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> average       9 2.21  1.14  0.972  5.30  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> average      10 2.44  1.20  1.09   5.66  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 89 more rows</span></span></span></code></pre></div>
 <p>The data frame of the estimates can then be plotted together with the original data using the <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> function to summarize an analysis. Once again the returned object is a <code>ggplot</code> object which can be customized prior to plotting.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">ccme_boron</span>, <span class="va">boron_pred</span>,
-         color <span class="op">=</span> <span class="st">"Group"</span>, label <span class="op">=</span> <span class="st">"Species"</span>,
-         xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ribbon <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> <span class="op">+</span> <span class="co"># to ensure the species labels fit</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity for Boron"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">ccme_boron</span>, <span class="va">boron_pred</span>,</span>
+<span>         color <span class="op">=</span> <span class="st">"Group"</span>, label <span class="op">=</span> <span class="st">"Species"</span>,</span>
+<span>         xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ribbon <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> <span class="op">+</span> <span class="co"># to ensure the species labels fit</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity for Boron"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
 <p>In the above plot the model-averaged 95% confidence interval is indicated by the shaded band and the model-averaged 5% Hazard Concentration (<span class="math inline">\(HC_5\)</span>) by the dotted line. Hazard concentrations are discussed below.</p>
 </div>
@@ -285,13 +285,13 @@
 </h2>
 <p>The 5% hazard concentration (<span class="math inline">\(HC_5\)</span>) is the concentration that affects 5% of the species tested.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span>
-<span class="va">boron_hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">boron_hc5</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 10</span></span>
-<span class="co">#&gt;   dist    percent   est    se   lcl   ucl    wt method     nboot pboot</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> average       5  1.31 0.797 0.505  3.53     1 parametric  <span style="text-decoration: underline;">1</span>000     1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
+<span><span class="va">boron_hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">boron_hc5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 10</span></span></span>
+<span><span class="co">#&gt;   dist    percent   est    se   lcl   ucl    wt method     nboot pboot</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> average       5  1.31 0.797 0.505  3.53     1 parametric  <span style="text-decoration: underline;">1</span>000     1</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="plotting">Plotting<a class="anchor" aria-label="anchor" href="#plotting"></a>
@@ -299,49 +299,49 @@
 <p>The <code>ssdtools</code> package provides four ggplot geoms to allow you construct your own plots.</p>
 <p>The first is <code><a href="../reference/geom_ssdpoint.html">geom_ssdpoint()</a></code> which plots species sensitivity data</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ccme_boron</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_ssdpoint.html">geom_ssdpoint</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ccme_boron</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_ssdpoint.html">geom_ssdpoint</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-14-1.png" width="384"></p>
 <p>The second is <code>geom_ssdsegments()</code> which plots the range of censored species sensitivity data</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ccme_boron</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_ssdsegment.html">geom_ssdsegment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc"</span>, xend <span class="op">=</span> <span class="st">"Conc * 2"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ccme_boron</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_ssdsegment.html">geom_ssdsegment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc"</span>, xend <span class="op">=</span> <span class="st">"Conc * 2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-15-1.png" width="384"></p>
 <p>The third is <code><a href="../reference/geom_xribbon.html">geom_xribbon()</a></code> which plots species sensitivity confidence intervals</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">boron_pred</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="st">"lcl"</span>, xmax <span class="op">=</span> <span class="st">"ucl"</span>, y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">boron_pred</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="st">"lcl"</span>, xmax <span class="op">=</span> <span class="st">"ucl"</span>, y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-16-1.png" width="384"></p>
 <p>And the fourth is <code><a href="../reference/geom_hcintersect.html">geom_hcintersect()</a></code> which plots hazard concentrations</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, yintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, yintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-17-1.png" width="384"></p>
 <p>They can be combined together as follows</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">boron_pred</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"est"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="st">"lcl"</span>, xmax <span class="op">=</span> <span class="st">"ucl"</span>, y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_ssdsegment.html">geom_ssdsegment</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ccme_boron</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc / 2"</span>, xend <span class="op">=</span> <span class="st">"Conc * 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_ssdpoint.html">geom_ssdpoint</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ccme_boron</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc / 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_ssdpoint.html">geom_ssdpoint</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ccme_boron</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc * 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span><span class="st">"Species Affected (%)"</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Concentration (mg/L)"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">boron_hc5</span><span class="op">$</span><span class="va">est</span>, yintercept <span class="op">=</span> <span class="fl">5</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">boron_pred</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"est"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_xribbon.html">geom_xribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="st">"lcl"</span>, xmax <span class="op">=</span> <span class="st">"ucl"</span>, y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"percent/100"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_ssdsegment.html">geom_ssdsegment</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ccme_boron</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc / 2"</span>, xend <span class="op">=</span> <span class="st">"Conc * 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_ssdpoint.html">geom_ssdpoint</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ccme_boron</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc / 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_ssdpoint.html">geom_ssdpoint</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ccme_boron</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Conc * 2"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span><span class="st">"Species Affected (%)"</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Concentration (mg/L)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">boron_hc5</span><span class="op">$</span><span class="va">est</span>, yintercept <span class="op">=</span> <span class="fl">5</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-18-1.png" width="384"></p>
 <p>To log the x-axis add the following code.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_trans.html" class="external-link">coord_trans</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"log10"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>
-    breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/trans_breaks.html" class="external-link">trans_breaks</a></span><span class="op">(</span><span class="st">"log10"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">10</span><span class="op">^</span><span class="va">x</span><span class="op">)</span>,
-    labels <span class="op">=</span> <span class="va">comma_signif</span>
-  <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">boron_hc5</span><span class="op">$</span><span class="va">est</span>, yintercept <span class="op">=</span> <span class="fl">5</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">gp</span> <span class="op">&lt;-</span> <span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_trans.html" class="external-link">coord_trans</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"log10"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span></span>
+<span>    breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/trans_breaks.html" class="external-link">trans_breaks</a></span><span class="op">(</span><span class="st">"log10"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fl">10</span><span class="op">^</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>    labels <span class="op">=</span> <span class="va">comma_signif</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">gp</span> <span class="op">+</span> <span class="fu"><a href="../reference/geom_hcintersect.html">geom_hcintersect</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">boron_hc5</span><span class="op">$</span><span class="va">est</span>, yintercept <span class="op">=</span> <span class="fl">5</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ssdtools_files/figure-html/unnamed-chunk-19-1.png" width="384"></p>
 <p>The most recent plot can be saved as a file using <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave()</a></code>, which also allows the user to set the resolution.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"file_name.png"</span>, dpi <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"file_name.png"</span>, dpi <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></code></pre></div>
 <!-- ### Censored Data -->
 <!-- Censored data is that for which only a lower and/or upper limit is known for a particular species.  -->
 <!-- If the `right` argument in `ssd_fit_dists()` is different to the `left` argument then the data are considered to be censored.  -->
@@ -418,7 +418,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

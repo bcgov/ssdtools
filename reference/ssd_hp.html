@@ -75,38 +75,71 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_hp</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for fitdists</span>
-<span class="fu">ssd_hp</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">conc</span>,
-  ci <span class="op">=</span> <span class="cn">FALSE</span>,
-  level <span class="op">=</span> <span class="fl">0.95</span>,
-  nboot <span class="op">=</span> <span class="fl">1000</span>,
-  average <span class="op">=</span> <span class="cn">TRUE</span>,
-  delta <span class="op">=</span> <span class="fl">7</span>,
-  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,
-  parametric <span class="op">=</span> <span class="cn">TRUE</span>,
-  control <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_hp</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for fitdists</span></span>
+<span><span class="fu">ssd_hp</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">conc</span>,</span>
+<span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  average <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  delta <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,</span>
+<span>  parametric <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-    </div>
+    <dl><dt>x</dt>
+<dd><p>The object.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Unused.</p></dd>
+
+
+<dt>conc</dt>
+<dd><p>A numeric vector of concentrations.</p></dd>
+
+
+<dt>ci</dt>
+<dd><p>A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).</p></dd>
+
+
+<dt>level</dt>
+<dd><p>A number between 0 and 1 of the confidence level.</p></dd>
+
+
+<dt>nboot</dt>
+<dd><p>A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.</p></dd>
+
+
+<dt>average</dt>
+<dd><p>A flag specifying whether to model average the estimates.</p></dd>
+
+
+<dt>delta</dt>
+<dd><p>A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.</p></dd>
+
+
+<dt>min_pboot</dt>
+<dd><p>A number of the minimum proportion of bootstrap samples that must successfully fit
+in the sense of returning a likelihood.</p></dd>
+
+
+<dt>parametric</dt>
+<dd><p>A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.</p></dd>
+
+
+<dt>control</dt>
+<dd><p>A list of control parameters passed to <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>.</p></dd>
+
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     
@@ -121,7 +154,7 @@ hazard percent(s).</p>
     <div id="methods-by-class-">
     <h2>Methods (by class)</h2>
     
-<ul><li><p><code>fitdists</code>: Hazard Percents for fitdists Object</p></li>
+<ul><li><p><code>ssd_hp(fitdists)</code>: Hazard Percents for fitdists Object</p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -130,8 +163,8 @@ hazard percent(s).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ssd_hp</span><span class="op">(</span><span class="va">fits</span>, conc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ssd_hp</span><span class="op">(</span><span class="va">fits</span>, conc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dist     conc   est    se   lcl   ucl    wt method     nboot pboot</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -150,7 +183,7 @@ hazard percent(s).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

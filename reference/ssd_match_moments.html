@@ -77,21 +77,32 @@ the moment values (meanlog and sdlog) by distribution and term.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_match_moments</span><span class="op">(</span>
-  dists <span class="op">=</span> <span class="fu"><a href="ssd_dists_bcanz.html">ssd_dists_bcanz</a></span><span class="op">(</span><span class="op">)</span>,
-  meanlog <span class="op">=</span> <span class="fl">1</span>,
-  sdlog <span class="op">=</span> <span class="fl">1</span>,
-  nsim <span class="op">=</span> <span class="fl">1e+05</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_match_moments</span><span class="op">(</span></span>
+<span>  dists <span class="op">=</span> <span class="fu"><a href="ssd_dists_bcanz.html">ssd_dists_bcanz</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  meanlog <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  sdlog <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  nsim <span class="op">=</span> <span class="fl">1e+05</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <p></p>
-<p></p>
-<p></p>
-<p></p>
-    </div>
+    <dl><dt>dists</dt>
+<dd><p>A character vector of the distribution names.</p></dd>
+
+
+<dt>meanlog</dt>
+<dd><p>The mean on the log scale.</p></dd>
+
+
+<dt>sdlog</dt>
+<dd><p>The standard deviation on the log scale.</p></dd>
+
+
+<dt>nsim</dt>
+<dd><p>A positive whole number of the number of simulations to generate.</p></dd>
+
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     
@@ -105,8 +116,8 @@ the moment values (meanlog and sdlog) by distribution and term.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">moments</span> <span class="op">&lt;-</span> <span class="fu">ssd_match_moments</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">moments</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">moments</span> <span class="op">&lt;-</span> <span class="fu">ssd_match_moments</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">moments</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $gamma</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    shape    scale </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.479687 2.589063 </span>
@@ -131,7 +142,7 @@ the moment values (meanlog and sdlog) by distribution and term.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    shape    scale </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.352319 4.502075 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">moments</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">moments</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dist        percent   est    se   lcl   ucl    wt nboot pboot</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -141,7 +152,7 @@ the moment values (meanlog and sdlog) by distribution and term.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> lnorm             5 0.519    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1     0    <span style="color: #BB0000;">NA</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> lnorm_lnorm       5 0.489    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1     0    <span style="color: #BB0000;">NA</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> weibull           5 0.501    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1     0    <span style="color: #BB0000;">NA</span></span>
-<span class="r-in"><span class="fu"><a href="ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="va">moments</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="va">moments</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_match_moments-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -157,7 +168,7 @@ the moment values (meanlog and sdlog) by distribution and term.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

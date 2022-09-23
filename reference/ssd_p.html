@@ -75,105 +75,173 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_pburrIII3</span><span class="op">(</span>
-  <span class="va">q</span>,
-  shape1 <span class="op">=</span> <span class="fl">1</span>,
-  shape2 <span class="op">=</span> <span class="fl">1</span>,
-  scale <span class="op">=</span> <span class="fl">1</span>,
-  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,
-  log.p <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">ssd_pgamma</span><span class="op">(</span><span class="va">q</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">ssd_pgompertz</span><span class="op">(</span><span class="va">q</span>, location <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">pgompertz</span><span class="op">(</span><span class="va">q</span>, llocation <span class="op">=</span> <span class="fl">0</span>, lshape <span class="op">=</span> <span class="fl">0</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">ssd_pinvpareto</span><span class="op">(</span><span class="va">q</span>, shape <span class="op">=</span> <span class="fl">3</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">ssd_plgumbel</span><span class="op">(</span>
-  <span class="va">q</span>,
-  locationlog <span class="op">=</span> <span class="fl">0</span>,
-  scalelog <span class="op">=</span> <span class="fl">1</span>,
-  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,
-  log.p <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">plgumbel</span><span class="op">(</span><span class="va">q</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">ssd_pllogis_llogis</span><span class="op">(</span>
-  <span class="va">q</span>,
-  locationlog1 <span class="op">=</span> <span class="fl">0</span>,
-  scalelog1 <span class="op">=</span> <span class="fl">1</span>,
-  locationlog2 <span class="op">=</span> <span class="fl">1</span>,
-  scalelog2 <span class="op">=</span> <span class="fl">1</span>,
-  pmix <span class="op">=</span> <span class="fl">0.5</span>,
-  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,
-  log.p <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">ssd_pllogis</span><span class="op">(</span><span class="va">q</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">ssd_plnorm_lnorm</span><span class="op">(</span>
-  <span class="va">q</span>,
-  meanlog1 <span class="op">=</span> <span class="fl">0</span>,
-  sdlog1 <span class="op">=</span> <span class="fl">1</span>,
-  meanlog2 <span class="op">=</span> <span class="fl">1</span>,
-  sdlog2 <span class="op">=</span> <span class="fl">1</span>,
-  pmix <span class="op">=</span> <span class="fl">0.5</span>,
-  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,
-  log.p <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">ssd_plnorm</span><span class="op">(</span><span class="va">q</span>, meanlog <span class="op">=</span> <span class="fl">0</span>, sdlog <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">ssd_pweibull</span><span class="op">(</span><span class="va">q</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_pburrIII3</span><span class="op">(</span></span>
+<span>  <span class="va">q</span>,</span>
+<span>  shape1 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  shape2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  scale <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  log.p <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_pgamma</span><span class="op">(</span><span class="va">q</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_pgompertz</span><span class="op">(</span><span class="va">q</span>, location <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pgompertz</span><span class="op">(</span><span class="va">q</span>, llocation <span class="op">=</span> <span class="fl">0</span>, lshape <span class="op">=</span> <span class="fl">0</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_pinvpareto</span><span class="op">(</span><span class="va">q</span>, shape <span class="op">=</span> <span class="fl">3</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_plgumbel</span><span class="op">(</span></span>
+<span>  <span class="va">q</span>,</span>
+<span>  locationlog <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  scalelog <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  log.p <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">plgumbel</span><span class="op">(</span><span class="va">q</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_pllogis_llogis</span><span class="op">(</span></span>
+<span>  <span class="va">q</span>,</span>
+<span>  locationlog1 <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  scalelog1 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  locationlog2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  scalelog2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pmix <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  log.p <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_pllogis</span><span class="op">(</span><span class="va">q</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_plnorm_lnorm</span><span class="op">(</span></span>
+<span>  <span class="va">q</span>,</span>
+<span>  meanlog1 <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  sdlog1 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  meanlog2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  sdlog2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pmix <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  log.p <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_plnorm</span><span class="op">(</span><span class="va">q</span>, meanlog <span class="op">=</span> <span class="fl">0</span>, sdlog <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_pweibull</span><span class="op">(</span><span class="va">q</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-    </div>
+    <dl><dt>q</dt>
+<dd><p>vector of quantiles.</p></dd>
+
+
+<dt>shape1</dt>
+<dd><p>shape1 parameter.</p></dd>
+
+
+<dt>shape2</dt>
+<dd><p>shape2 parameter.</p></dd>
+
+
+<dt>scale</dt>
+<dd><p>scale parameter.</p></dd>
+
+
+<dt>lower.tail</dt>
+<dd><p>logical; if TRUE (default), probabilities are <code>P[X &lt;= x]</code>,otherwise, <code>P[X &gt; x]</code>.</p></dd>
+
+
+<dt>log.p</dt>
+<dd><p>logical; if TRUE, probabilities p are given as log(p).</p></dd>
+
+
+<dt>shape</dt>
+<dd><p>A string of the column in data for the shape aesthetic.</p></dd>
+
+
+<dt>location</dt>
+<dd><p>location parameter.</p></dd>
+
+
+<dt>llocation</dt>
+<dd><p>location parameter on the log scale.</p></dd>
+
+
+<dt>lshape</dt>
+<dd><p>shape parameter on the log scale.</p></dd>
+
+
+<dt>locationlog</dt>
+<dd><p>location on log scale parameter.</p></dd>
+
+
+<dt>scalelog</dt>
+<dd><p>scale on log scale parameter.</p></dd>
+
+
+<dt>locationlog1</dt>
+<dd><p>locationlog1 parameter.</p></dd>
+
+
+<dt>scalelog1</dt>
+<dd><p>scalelog1 parameter.</p></dd>
+
+
+<dt>locationlog2</dt>
+<dd><p>locationlog2 parameter.</p></dd>
+
+
+<dt>scalelog2</dt>
+<dd><p>scalelog2 parameter.</p></dd>
+
+
+<dt>pmix</dt>
+<dd><p>Proportion mixture parameter.</p></dd>
+
+
+<dt>meanlog1</dt>
+<dd><p>mean on log scale parameter.</p></dd>
+
+
+<dt>sdlog1</dt>
+<dd><p>standard deviation on log scale parameter.</p></dd>
+
+
+<dt>meanlog2</dt>
+<dd><p>mean on log scale parameter.</p></dd>
+
+
+<dt>sdlog2</dt>
+<dd><p>standard deviation on log scale parameter.</p></dd>
+
+
+<dt>meanlog</dt>
+<dd><p>mean on log scale parameter.</p></dd>
+
+
+<dt>sdlog</dt>
+<dd><p>standard deviation on log scale parameter.</p></dd>
+
+</dl></div>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>ssd_pburrIII3</code>: Cumulative Distribution Function for BurrIII Distribution</p></li>
-<li><p><code>ssd_pgamma</code>: Cumulative Distribution Function for Gamma Distribution</p></li>
-<li><p><code>ssd_pgompertz</code>: Cumulative Distribution Function for Gompertz Distribution</p></li>
-<li><p><code>pgompertz</code>: Cumulative Distribution Function for Gompertz Distribution
+<ul><li><p><code>ssd_pburrIII3()</code>: Cumulative Distribution Function for BurrIII Distribution</p></li>
+<li><p><code>ssd_pgamma()</code>: Cumulative Distribution Function for Gamma Distribution</p></li>
+<li><p><code>ssd_pgompertz()</code>: Cumulative Distribution Function for Gompertz Distribution</p></li>
+<li><p><code>pgompertz()</code>: Cumulative Distribution Function for Gompertz Distribution
 <a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></li>
-<li><p><code>ssd_pinvpareto</code>: Cumulative Distribution Function for Inverse Pareto Distribution</p></li>
-<li><p><code>ssd_plgumbel</code>: Cumulative Distribution Function for Log-Gumbel Distribution</p></li>
-<li><p><code>plgumbel</code>: Cumulative Distribution Function for Log-Gumbel Distribution
+<li><p><code>ssd_pinvpareto()</code>: Cumulative Distribution Function for Inverse Pareto Distribution</p></li>
+<li><p><code>ssd_plgumbel()</code>: Cumulative Distribution Function for Log-Gumbel Distribution</p></li>
+<li><p><code>plgumbel()</code>: Cumulative Distribution Function for Log-Gumbel Distribution
 <a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></li>
-<li><p><code>ssd_pllogis_llogis</code>: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution</p></li>
-<li><p><code>ssd_pllogis</code>: Cumulative Distribution Function for Log-Logistic Distribution</p></li>
-<li><p><code>ssd_plnorm_lnorm</code>: Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution</p></li>
-<li><p><code>ssd_plnorm</code>: Cumulative Distribution Function for Log-Normal Distribution</p></li>
-<li><p><code>ssd_pweibull</code>: Cumulative Distribution Function for Weibull Distribution</p></li>
+<li><p><code>ssd_pllogis_llogis()</code>: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution</p></li>
+<li><p><code>ssd_pllogis()</code>: Cumulative Distribution Function for Log-Logistic Distribution</p></li>
+<li><p><code>ssd_plnorm_lnorm()</code>: Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution</p></li>
+<li><p><code>ssd_plnorm()</code>: Cumulative Distribution Function for Log-Normal Distribution</p></li>
+<li><p><code>ssd_pweibull()</code>: Cumulative Distribution Function for Weibull Distribution</p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -182,35 +250,35 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_pburrIII3</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_pburrIII3</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_pgamma</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_pgamma</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6321206</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_pgompertz</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_pgompertz</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8206259</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_pinvpareto</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_pinvpareto</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_plgumbel</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_plgumbel</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3678794</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_pllogis_llogis</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_pllogis_llogis</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3844707</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_pllogis</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_pllogis</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_plnorm_lnorm</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_plnorm_lnorm</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3293276</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_plnorm</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_plnorm</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">ssd_pweibull</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">ssd_pweibull</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6321206</span>
 </code></pre></div>
     </div>
@@ -226,7 +294,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

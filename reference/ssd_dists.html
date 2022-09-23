@@ -75,15 +75,23 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ssd_dists</span><span class="op">(</span>bcanz <span class="op">=</span> <span class="cn">NULL</span>, tails <span class="op">=</span> <span class="cn">NULL</span>, npars <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_dists</span><span class="op">(</span>bcanz <span class="op">=</span> <span class="cn">NULL</span>, tails <span class="op">=</span> <span class="cn">NULL</span>, npars <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <p></p>
-<p></p>
-<p></p>
-    </div>
+    <dl><dt>bcanz</dt>
+<dd><p>A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.</p></dd>
+
+
+<dt>tails</dt>
+<dd><p>A flag or NULL specifying whether to only include distributions with both tails.</p></dd>
+
+
+<dt>npars</dt>
+<dd><p>A whole numeric vector specifying which distributions to include based on the number of parameters.</p></dd>
+
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     
@@ -99,16 +107,16 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">ssd_dists</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ssd_dists</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "burrIII3"      "gamma"         "gompertz"      "invpareto"    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "lgumbel"       "llogis"        "llogis_llogis" "lnorm"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "lnorm_lnorm"   "weibull"      </span>
-<span class="r-in"><span class="fu">ssd_dists</span><span class="op">(</span>bcanz <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ssd_dists</span><span class="op">(</span>bcanz <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gamma"       "lgumbel"     "llogis"      "lnorm"       "lnorm_lnorm"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] "weibull"    </span>
-<span class="r-in"><span class="fu">ssd_dists</span><span class="op">(</span>tails <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ssd_dists</span><span class="op">(</span>tails <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "invpareto"</span>
-<span class="r-in"><span class="fu">ssd_dists</span><span class="op">(</span>npars <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ssd_dists</span><span class="op">(</span>npars <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "llogis_llogis" "lnorm_lnorm"  </span>
 </code></pre></div>
     </div>
@@ -124,7 +132,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>
