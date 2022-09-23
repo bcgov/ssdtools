@@ -52,7 +52,6 @@ Imports:
     plyr,
     purrr,
     Rcpp,
-    RcppEigen,
     scales,
     ssddata,
     stats,
