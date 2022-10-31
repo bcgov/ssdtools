@@ -71,16 +71,20 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.2.9001" id="ssdtools-1029001">ssdtools 1.0.2.9001<a class="anchor" aria-label="anchor" href="#ssdtools-1029001"></a></h2>
-<ul><li>Fixed description of <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> to be percent affected rather than percent protected.</li></ul></div>
+<ul><li>Fixed description of <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> to be percent affected rather than percent protected.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.2.9000" id="ssdtools-1029000">ssdtools 1.0.2.9000<a class="anchor" aria-label="anchor" href="#ssdtools-1029000"></a></h2>
-<ul><li>Same as previous version.</li></ul></div>
+<ul><li>Same as previous version.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.2" id="ssdtools-102">ssdtools 1.0.2<small>2022-05-14</small><a class="anchor" aria-label="anchor" href="#ssdtools-102"></a></h2>
-<ul><li>Fixed bug that was producing estimates of 0 for lower HCx values for log-normal mixture model with rescaled data spanning many orders of magnitude.</li></ul></div>
+<ul><li>Fixed bug that was producing estimates of 0 for lower HCx values for log-normal mixture model with rescaled data spanning many orders of magnitude.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.1" id="ssdtools-101">ssdtools 1.0.1<small>2022-04-10</small><a class="anchor" aria-label="anchor" href="#ssdtools-101"></a></h2>
-<ul><li>Added <code>delta = 7</code> argument to <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code>.</li></ul></div>
+<ul><li>Added <code>delta = 7</code> argument to <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code>.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0" id="ssdtools-100">ssdtools 1.0.0<small>2022-04-01</small><a class="anchor" aria-label="anchor" href="#ssdtools-100"></a></h2>
 <p>ssdtools version 1.0.0 is the first major release of <code>ssdtools</code> with some important improvements and breaking changes.</p>
@@ -100,7 +104,8 @@
 <h4 id="convergence-1-0-0">Convergence<a class="anchor" aria-label="anchor" href="#convergence-1-0-0"></a></h4>
 <p>In the previous version of <code>ssdtools</code> a distribution was considered to have converged if the following condition was met</p>
 <ol style="list-style-type: decimal"><li>
-<code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code> returns a code of 0 (indicating successful completion).</li></ol><p>In the new version an additional two conditions must also be met</p>
+<code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code> returns a code of 0 (indicating successful completion).</li>
+</ol><p>In the new version an additional two conditions must also be met</p>
 <ol start="2" style="list-style-type: decimal"><li>Bounded parameters are not at a boundary (this condition can be turned off by setting <code>at_boundary_ok = TRUE</code> or the user can specify different boundary values - see below)</li>
 <li>Standard errors are computable for all the parameter values (this condition can be turned off by setting <code>computable = FALSE</code>)</li>
 </ol></div>
@@ -110,7 +115,8 @@
 <ul><li>a finite value for the left column that is smaller than the finite value in the right column (interval censored)</li>
 <li>a zero or missing value for the left column and a finite value for the right column (left censored)</li>
 </ul><p>It is currently not possible to fit distributions to data sets that have</p>
-<ul><li>a infinite or missing value for the right column and a finite value for the left column (right censored)</li></ul><p>Rows that have a zero or missing value for the left column and an infinite or missing value for the right column (fully censored) are uninformative and will result in an error.</p>
+<ul><li>a infinite or missing value for the right column and a finite value for the left column (right censored)</li>
+</ul><p>Rows that have a zero or missing value for the left column and an infinite or missing value for the right column (fully censored) are uninformative and will result in an error.</p>
 <div class="section level5">
 <h5 id="akaike-weights-1-0-0">Akaike Weights<a class="anchor" aria-label="anchor" href="#akaike-weights-1-0-0"></a></h5>
 <p>For uncensored data, Akaike Weights are calculated using AICc (which corrects for small sample size). In the case of censored data, Akaike Weights are calculated using AIC (as the sample size cannot be estimated) but only if all the distributions have the same number of parameters (to ensure the weights are valid).</p>
@@ -150,7 +156,8 @@
 <code>control</code> (by default an empty list) to pass a list of control parameters to <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>.</li>
 </ul><p>It also worth noting that the default value of</p>
 <ul><li>
-<code>computable</code> argument was switched from <code>FALSE</code> to <code>TRUE</code> to enforce stricter requirements on convergence (see above).</li></ul><div class="section level5">
+<code>computable</code> argument was switched from <code>FALSE</code> to <code>TRUE</code> to enforce stricter requirements on convergence (see above).</li>
+</ul><div class="section level5">
 <h5 id="subsets-of-distributions-1-0-0">Subsets of Distributions<a class="anchor" aria-label="anchor" href="#subsets-of-distributions-1-0-0"></a></h5>
 <p>The following were added to handle multiple distributions</p>
 <ul><li>
@@ -188,7 +195,8 @@
 <code>pboot</code> to indicate the proportion of bootstrap samples which fitted.</li>
 </ul><p>It also worth noting that the</p>
 <ul><li>
-<code>dist</code> column was moved from the last to the first position in the output data frame.</li></ul><div class="section level4">
+<code>dist</code> column was moved from the last to the first position in the output data frame.</li>
+</ul><div class="section level4">
 <h4 id="censored-data-1-0-0-1">Censored Data<a class="anchor" aria-label="anchor" href="#censored-data-1-0-0-1"></a></h4>
 <p>Confidence intervals cannot be estimated for interval censored data.</p>
 </div>
@@ -254,15 +262,18 @@
 <code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik()</a></code> to return the log-likelihood.</li>
 <li>
 <code>summary.fitdists()</code> to summarize.</li>
-</ul></li></ul></div>
+</ul></li>
+</ul></div>
 </div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.7.9000" id="ssdtools-0379000">ssdtools 0.3.7.9000<a class="anchor" aria-label="anchor" href="#ssdtools-0379000"></a></h2>
-<ul><li>Same as previous version.</li></ul></div>
+<ul><li>Same as previous version.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.7" id="ssdtools-037">ssdtools 0.3.7<small>2021-10-27</small><a class="anchor" aria-label="anchor" href="#ssdtools-037"></a></h2>
-<ul><li>fix unequal indentation of Rmd ```</li></ul></div>
+<ul><li>fix unequal indentation of Rmd ```</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.6" id="ssdtools-036">ssdtools 0.3.6<small>2021-09-22</small><a class="anchor" aria-label="anchor" href="#ssdtools-036"></a></h2>
 <ul><li>Added <code>wt</code> (Akaike weight) column to <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>, <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code>
@@ -272,10 +283,12 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.5" id="ssdtools-035">ssdtools 0.3.5<small>2021-09-03</small><a class="anchor" aria-label="anchor" href="#ssdtools-035"></a></h2>
-<ul><li>Bump requirement to R &gt;= 4.1 because of <code>actuar</code> package.</li></ul></div>
+<ul><li>Bump requirement to R &gt;= 4.1 because of <code>actuar</code> package.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.4" id="ssdtools-034">ssdtools 0.3.4<small>2021-05-14</small><a class="anchor" aria-label="anchor" href="#ssdtools-034"></a></h2>
-<ul><li>Update Apache License url to https.</li></ul></div>
+<ul><li>Update Apache License url to https.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.3" id="ssdtools-033">ssdtools 0.3.3<small>2021-02-19</small><a class="anchor" aria-label="anchor" href="#ssdtools-033"></a></h2>
 <ul><li>Increased requirement that R &gt;= 3.5 due to VGAM.</li>
@@ -284,10 +297,12 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.2" id="ssdtools-032">ssdtools 0.3.2<small>2020-09-02</small><a class="anchor" aria-label="anchor" href="#ssdtools-032"></a></h2>
-<ul><li>Fix moved URLs.</li></ul></div>
+<ul><li>Fix moved URLs.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.1" id="ssdtools-031">ssdtools 0.3.1<small>2020-09-01</small><a class="anchor" aria-label="anchor" href="#ssdtools-031"></a></h2>
-<ul><li>Internal changes only.</li></ul></div>
+<ul><li>Internal changes only.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="ssdtools-030">ssdtools 0.3.0<small>2020-07-09</small><a class="anchor" aria-label="anchor" href="#ssdtools-030"></a></h2>
 <div class="section level3">
@@ -312,7 +327,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="internal-changes-0-3-0">Internal Changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-3-0"></a></h3>
-<ul><li>Switch to C++ implementation for distributions.</li></ul></div>
+<ul><li>Switch to C++ implementation for distributions.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.0" id="ssdtools-020">ssdtools 0.2.0<small>2020-04-15</small><a class="anchor" aria-label="anchor" href="#ssdtools-020"></a></h2>
@@ -338,7 +354,8 @@
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.1" id="ssdtools-011">ssdtools 0.1.1<small>2020-01-24</small><a class="anchor" aria-label="anchor" href="#ssdtools-011"></a></h2>
-<ul><li>Fix test for CRAN R 3.5</li></ul></div>
+<ul><li>Fix test for CRAN R 3.5</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="ssdtools-010">ssdtools 0.1.0<small>2020-01-13</small><a class="anchor" aria-label="anchor" href="#ssdtools-010"></a></h2>
 <div class="section level3">
@@ -400,7 +417,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.1" id="ssdtools-001">ssdtools 0.0.1<a class="anchor" aria-label="anchor" href="#ssdtools-001"></a></h2>
-<ul><li>Initial Release</li></ul></div>
+<ul><li>Initial Release</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -415,7 +433,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
