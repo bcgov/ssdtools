@@ -57,7 +57,7 @@ ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc,
 We now add this to the plot
 ```{r }
 gp + 
-  geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
+  geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", linewidth = 2) +
   annotate("text",
     label = paste("Exposure distribution"),
     x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
@@ -75,7 +75,7 @@ The risk of `r round(ex.risk, 5)` can also be added to the plot in the usual way
 
 ```{r echo=TRUE}
 gp + 
-  geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", size = 2) +
+  geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", linewidth = 2) +
   annotate("text",
     label = paste("Exposure distribution"),
     x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
