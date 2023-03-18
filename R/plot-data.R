@@ -55,7 +55,7 @@ ssd_plot_data <- function(data, left = "Conc", right = left,
         color = color
       ), stat = "identity") + 
       geom_ssdsegment(data = data, aes_string(
-        x = "left", y = "y", xend = "right", yend = "y", shape = shape,
+        x = "left", y = "y", xend = "right", yend = "y",
         color = color), 
         stat = "identity") 
   } else {
@@ -67,7 +67,7 @@ ssd_plot_data <- function(data, left = "Conc", right = left,
         x = "right", y = "y", shape = shape
       ), stat = "identity") +
       geom_ssdsegment(data = data, aes_string(
-        x = "left", y = "y", xend = "right", yend = "y", shape = shape
+        x = "left", y = "y", xend = "right", yend = "y"
       ), stat = "identity") 
   }
   
