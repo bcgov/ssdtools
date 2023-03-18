@@ -59,7 +59,7 @@ GeomSsdsegment <- ggproto(
 GeomHcintersect <- ggproto(
   "GeomHcintersect", Geom,
   required_aes = c("xintercept", "yintercept"),
-  default_aes = aes(colour = "black", size = 0.5, linetype = "dotted", alpha = NA),
+  default_aes = aes(colour = "black", linewidth = 0.5, linetype = "dotted", alpha = NA),
   draw_key = draw_key_path,
   draw_panel = function(data, panel_params, coord) {
     data$group <- 1:nrow(data)
@@ -81,7 +81,7 @@ GeomXribbon <- ggproto(
   "GeomXribbon", Geom,
   required_aes = c("y", "xmin", "xmax"),
   default_aes = aes(
-    colour = NA, fill = "grey20", size = 0.5, linetype = 1,alpha = NA),
+    colour = NA, fill = "grey20", linewidth = 0.5, linetype = 1,alpha = NA),
   draw_key = draw_key_polygon,
   handle_na = function(data, params) {
     data
@@ -91,7 +91,7 @@ GeomXribbon <- ggproto(
     data <- data[order(data$group, data$y), ]
     
     # Check that aesthetics are constant
-    aes <- unique(data[c("colour", "fill", "size", "linetype", "alpha")])
+    aes <- unique(data[c("colour", "fill", "linewidth", "linetype", "alpha")])
     if (nrow(aes) > 1) {
       err("Aesthetics can not vary with a ribbon.")
     }
@@ -113,7 +113,7 @@ GeomXribbon <- ggproto(
       gp = gpar(
         fill = alpha(aes$fill, aes$alpha),
         col = aes$colour,
-        lwd = aes$size * .pt,
+        lwd = aes$linewidth * .pt,
         lty = aes$linetype
       )
     ))
