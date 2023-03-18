@@ -1,3 +1,3 @@
 dist,conc,est,se,lcl,ucl,method,nboot,pboot
 lnorm,1,0.937534000048,0.885584577149,0.0253763487815,3.21816500664,parametric,100,1
-llogis_llogis,1,8.715028469,NA,NA,NA,parametric,100,0.96
+llogis_llogis,1,8.71502846887,NA,NA,NA,parametric,100,0.96
