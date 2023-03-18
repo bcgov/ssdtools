@@ -46,10 +46,10 @@ Once R is installed, the `ssdtools` package can be installed (together with the 
 install.packages(c("ssdtools", "tidyverse"))
 ```
 
-The `ssdtools` package (and key packages) can then be loaded into the current session using
+The `ssdtools` package (and ggplot2 package) can then be loaded into the current session using
 ```{r, message = FALSE}
 library(ssdtools)
-library(tidyverse)
+library(ggplot2)
 ```
 
 ## Getting Help
