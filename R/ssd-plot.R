@@ -127,8 +127,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
         stat = "identity") 
   } else {
     gp <- gp + 
-      geom_ssdpoint(data = data, aes_string(
-        x = "left", y = "y", shape = shape), 
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), shape = shape), 
         stat = "identity") +
       geom_ssdpoint(data = data, aes_string(
         x = "right", y = "y", shape = shape
