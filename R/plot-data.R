@@ -42,32 +42,36 @@ ssd_plot_data <- function(data, left = "Conc", right = left,
   data <- bound_data(data, bounds)
   data$y <- ssd_ecd_data(data, "left", "right", bounds = bounds)
   
+  label <- if(!is.null(label)) sym(label) else label
+  shape <- if(!is.null(shape)) sym(shape) else shape
+  color <- if(!is.null(color)) sym(color) else color
+  
   gp <- ggplot(data)
   
   if(!is.null(color)) {
     gp <- gp + 
-      geom_ssdpoint(data = data, aes_string(
-        x = "left", y = "y", shape = shape,
-        color = color
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), shape = !!shape,
+        color = !!color
       ), stat = "identity") +
-      geom_ssdpoint(data = data, aes_string(
-        x = "right", y = "y", shape = shape,
-        color = color
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("right"), y = !!sym("y"), shape = !!shape,
+        color = !!color
       ), stat = "identity") + 
-      geom_ssdsegment(data = data, aes_string(
-        x = "left", y = "y", xend = "right", yend = "y", shape = shape,
-        color = color), 
+      geom_ssdsegment(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), xend = !!sym("right"), yend = !!sym("y"),
+        color = !!color), 
         stat = "identity") 
   } else {
     gp <- gp + 
-      geom_ssdpoint(data = data, aes_string(
-        x = "left", y = "y", shape = shape), 
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), shape = !!shape), 
         stat = "identity") +
-      geom_ssdpoint(data = data, aes_string(
-        x = "right", y = "y", shape = shape
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("right"), y = !!sym("y"), shape = !!shape
       ), stat = "identity") +
-      geom_ssdsegment(data = data, aes_string(
-        x = "left", y = "y", xend = "right", yend = "y", shape = shape
+      geom_ssdsegment(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), xend = !!sym("right"), yend = !!sym("y")
       ), stat = "identity") 
   }
   
@@ -76,7 +80,7 @@ ssd_plot_data <- function(data, left = "Conc", right = left,
   if (!is.null(label)) {
     data$right <- data$right * shift_x
     gp <- gp + geom_text(
-      data = data, aes_string(x = "right", y = "y", label = label),
+      data = data, aes(x = !!sym("right"), y = !!sym("y"), label = !!label),
       hjust = 0, size = size, fontface = "italic"
     )
   }

@@ -16,7 +16,7 @@
 #' @importFrom abind abind
 #' @importFrom furrr future_map furrr_options
 #' @importFrom generics augment glance tidy
-#' @importFrom ggplot2 autoplot
+#' @importFrom ggplot2 autoplot sym
 #' @importFrom goftest ad.test cvm.test
 #' @importFrom graphics par plot title
 #' @importFrom grid gList gpar grobName gTree polygonGrob segmentsGrob

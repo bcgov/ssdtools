@@ -83,58 +83,63 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   data <- process_data(data, left, right, weight = NULL)
   data <- bound_data(data, bounds)
   data$y <- ssd_ecd_data(data, "left", "right", bounds = bounds)
+  
+  label <- if(!is.null(label)) sym(label) else label
+  shape <- if(!is.null(shape)) sym(shape) else shape
+  linetype <- if(!is.null(linetype)) sym(linetype) else linetype
+  linecolor <- if(!is.null(linecolor)) sym(linecolor) else linecolor
 
   gp <- ggplot(data)
   
   if (ci) {
     if (ribbon) {
-      gp <- gp + geom_xribbon(data = pred, aes_string(xmin = "lcl", xmax = "ucl", y = "percent"), alpha = 0.2)
+      gp <- gp + geom_xribbon(data = pred, aes(xmin = !!sym("lcl"), xmax = !!sym("ucl"), y = !!sym("percent")), alpha = 0.2)
     } else {
       gp <- gp +
-        geom_line(data = pred, aes_string(x = "lcl", y = "percent"), color = "darkgreen") +
-        geom_line(data = pred, aes_string(x = "ucl", y = "percent"), color = "darkgreen")
+        geom_line(data = pred, aes(x = !!sym("lcl"), y = !!sym("percent")), color = "darkgreen") +
+        geom_line(data = pred, aes(x = !!sym("ucl"), y = !!sym("percent")), color = "darkgreen")
     }
   }
   
   if(!is.null(linecolor)) {
-    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype, color = linecolor))
+    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("percent"), linetype = !!linetype, color = !!linecolor))
   } else if(ribbon) {
-    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype), color = "black")
+    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("percent"), linetype = !!linetype), color = "black")
   } else {
-    gp <- gp + geom_line(data = pred, aes_string(x = "est", y = "percent", linetype = linetype), color = "red")
+    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("percent"), linetype = !!linetype), color = "red")
   }
   
   if (!is.null(hc)) {
     gp <- gp + geom_hcintersect(
       data = pred[round(pred$percent * 100) %in% hc, ],
-      aes_string(xintercept = "est", yintercept = "percent")
+      aes(xintercept = !!sym("est"), yintercept = !!sym("percent"))
     )
   }
   
   if(!is.null(color)) {
     gp <- gp + 
-      geom_ssdpoint(data = data, aes_string(
-        x = "left", y = "y", shape = shape,
-        color = color
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), shape = !!shape,
+        color = !!color
       ), stat = "identity") +
-      geom_ssdpoint(data = data, aes_string(
-        x = "right", y = "y", shape = shape,
-        color = color
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("right"), y = !!sym("y"), shape = !!shape,
+        color = !!color
       ), stat = "identity") + 
-      geom_ssdsegment(data = data, aes_string(
-        x = "left", y = "y", xend = "right", yend = "y", shape = shape,
-        color = color), 
+      geom_ssdsegment(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), xend = !!sym("right"), yend = !!sym("y"),
+        color = !!color), 
         stat = "identity") 
   } else {
     gp <- gp + 
-      geom_ssdpoint(data = data, aes_string(
-        x = "left", y = "y", shape = shape), 
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), shape = !!shape), 
         stat = "identity") +
-      geom_ssdpoint(data = data, aes_string(
-        x = "right", y = "y", shape = shape
+      geom_ssdpoint(data = data, aes(
+        x = !!sym("right"), y = !!sym("y"), shape = !!shape
       ), stat = "identity") +
-      geom_ssdsegment(data = data, aes_string(
-        x = "left", y = "y", xend = "right", yend = "y", shape = shape
+      geom_ssdsegment(data = data, aes(
+        x = !!sym("left"), y = !!sym("y"), xend = !!sym("right"), yend = !!sym("y")
       ), stat = "identity") 
   }
   
@@ -143,7 +148,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   if (!is.null(label)) {
     data$right <- data$right * shift_x
     gp <- gp + geom_text(
-      data = data, aes_string(x = "right", y = "y", label = label),
+      data = data, aes(x = !!sym("right"), y = !!sym("y"), label = !!label),
       hjust = 0, size = size, fontface = "italic"
     )
   }
