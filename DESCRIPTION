@@ -79,7 +79,6 @@ Suggests:
     testthat,
     tidyr,
     tidyselect,
-    tidyverse,
     withr
 LinkingTo: 
     Rcpp,

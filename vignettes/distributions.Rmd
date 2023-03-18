@@ -36,7 +36,7 @@ To avoid such model redundancy [@burnham_model_2002], ssdtools and the accompany
 The three distributions are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.
 ```{r, message=FALSE}
 library(ssdtools)
-library(tidyverse)
+library(ggplot2)
 
 theme_set(theme_bw())
 

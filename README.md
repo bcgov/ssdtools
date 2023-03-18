@@ -74,7 +74,7 @@ fits <- ssd_fit_dists(ssddata::ccme_boron)
 and can be quickly plotted using `autoplot`
 
 ``` r
-library(tidyverse)
+library(ggplot2)
 
 theme_set(theme_bw())
 
@@ -134,7 +134,8 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
 ) + 
   expand_limits(x = 3000) +
   scale_colour_ssd()
-#> Warning: Ignoring unknown aesthetics: shape
+#> Warning in geom_ssdsegment(data = data, aes_string(x = "left", y = "y", :
+#> Ignoring unknown aesthetics: shape
 ```
 
 ![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->

@@ -22,7 +22,7 @@ The `ssdtools` package produces a plot of the cumulative distributions for multi
 For example, consider the boron data.
 
 ```{r echo=TRUE, warning=FALSE, message=FALSE}
-library(tidyverse)
+library(ggplot2)
 library(ssdtools)
 
 fits <- ssd_fit_dists(ssddata::ccme_boron)
