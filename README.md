@@ -134,8 +134,6 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
 ) + 
   expand_limits(x = 3000) +
   scale_colour_ssd()
-#> Warning in geom_ssdsegment(data = data, aes_string(x = "left", y = "y", :
-#> Ignoring unknown aesthetics: shape
 ```
 
 ![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
