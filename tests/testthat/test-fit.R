@@ -246,6 +246,7 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   
   skip_on_os("windows") # not sure why gamma shape is 908 on GitHub actions windows
   skip_on_os("linux") # not sure why gamma shape is 841 on GitHub actions ubuntu
+  # gamma shape change from 913 to 868 on most recent version
   fits <- ssd_fit_dists(data, right = "Other", rescale = FALSE, computable = FALSE)
   
   tidy <- tidy(fits)
