@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 1.0.2.9002
+
+- Replaced `size = 0.5` with `linewidth = 0.5` in `geom_hcintersect()` and `geom_xribbon()`.
+- Replaced `aes_string()` with `aes()` in examples (and internally)
+- Removed use of tidyverse package.
+- Now test values to 12 significant digits.
+
 # ssdtools 1.0.2.9001
 
 - Fixed description of `ssd_hp()` to be percent affected rather than percent protected.
