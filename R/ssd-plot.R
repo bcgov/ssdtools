@@ -55,6 +55,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
   chk_null_or(label, vld = vld_string)
   chk_null_or(shape, vld = vld_string)
+  chk_null_or(color, vld = vld_string)
   chk_null_or(linetype, vld = vld_string)
   chk_null_or(linecolor, vld = vld_string)
   check_names(data, c(unique(c(left, right)), label, shape))
@@ -86,6 +87,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   
   label <- if(!is.null(label)) sym(label) else label
   shape <- if(!is.null(shape)) sym(shape) else shape
+  color <- if(!is.null(color)) sym(color) else color
   linetype <- if(!is.null(linetype)) sym(linetype) else linetype
   linecolor <- if(!is.null(linecolor)) sym(linecolor) else linecolor
 
