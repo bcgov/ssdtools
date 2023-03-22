@@ -28,6 +28,12 @@ test_that("ssd_plot censored data", {
   expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", label = "Species"), "boron_cens_pred_species")
 })
 
+test_that("ssd_plot aes", {
+  data <- ssddata::ccme_boron
+  expect_snapshot_plot(ssd_plot(data, boron_pred, color = "Group"), "boron_color")
+  expect_snapshot_plot(ssd_plot(data, boron_pred, shape = "Group"), "boron_shape")
+})
+
 test_that("ssd_plot xbreaks", {
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, xbreaks = c(1,2)), "boron_breaks")
 })
