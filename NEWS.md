@@ -1,4 +1,11 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# ssdtools 1.0.2.9003
+
+- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/290 (#290).
+
+- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/289 (#289).
+
 
 # ssdtools 1.0.2.9002
 
@@ -216,6 +223,7 @@ Added
   - `logLik()` to return the log-likelihood.
   - `summary.fitdists()` to summarize.
   
+
 # ssdtools 0.3.7.9000
 
 - Same as previous version.
