@@ -38,7 +38,7 @@ Depends:
     R (>= 4.1)
 Imports:
     abind,
-    chk (>= 0.7.0),
+    chk,
     doFuture,
     foreach,
     furrr,
@@ -57,7 +57,7 @@ Imports:
     stats,
     stringr,
     tibble,
-    TMB (>= 1.7.20),
+    TMB,
     universals,
     utils,
     VGAM
