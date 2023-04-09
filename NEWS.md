@@ -1,31 +1,13 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+
 # ssdtools 1.0.3
 
-- Same as previous version.
-
-
-# ssdtools 1.0.2.9003
-
-- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/290 (#290).
-
-- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/289 (#289).
-
-
-# ssdtools 1.0.2.9002
-
 - Replaced `size = 0.5` with `linewidth = 0.5` in `geom_hcintersect()` and `geom_xribbon()`.
-- Replaced `aes_string()` with `aes()` in examples (and internally)
-- Removed use of tidyverse package.
-- Now test values to 12 significant digits.
-
-# ssdtools 1.0.2.9001
-
+- Replaced `aes_string()` with `aes()` in examples (and internally).
+- Removed use of `tidyverse` package.
+- Now tests values to 12 significant digits.
 - Fixed description of `ssd_hp()` to be percent affected rather than percent protected.
-
-# ssdtools 1.0.2.9000
-
-- Same as previous version.
 
 
 # ssdtools 1.0.2
