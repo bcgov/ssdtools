@@ -1,19 +1,11 @@
-citHeader("To cite ssdtools in publications use:")
-
-citEntry(entry = "Article",
-  title        = "{ssdtools}: An R package to fit Species Sensitivity Distributions",
-  author       = personList(as.person("Joe Thorley"),
-                   as.person("Carl Schwarz")),
-  journal      = "Journal of Open Source Software",
-  year         = "2018",
-  volume       = "3",
-  number       = "31",
-  pages        = "1082",
-  doi          = "10.21105/joss.01082",
-
-  textVersion  =
-  paste("Thorley, J. and Schwarz C., (2018).",
-        "ssdtools An R package to fit Species Sensitivity Distributions.",
-        "Journal of Open Source Software, 3(31), 1082.",
-        "https://doi.org/10.21105/joss.01082")
+bibentry(
+  bibtype  = "Article",
+  title    = "ssdtools: {An} {R} package to fit {Species} {Sensitivity} {Distributions}",
+  author   = "Joe Thorley, Carl Schwarz",
+  journal  = "Journal of Open Source Software",
+  year     = 2018,
+  volume   = 3,
+  number   = 31,
+  pages    = 1082,
+  doi      = "10.21105/joss.01082"
 )
