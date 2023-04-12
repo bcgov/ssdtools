@@ -1,6 +1,5 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-
 # ssdtools 1.0.3
 
 - Replaced `size = 0.5` with `linewidth = 0.5` in `geom_hcintersect()` and `geom_xribbon()`.
