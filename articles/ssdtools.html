@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ssdtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3.9000</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2023-03-22</h4>
+            <h4 data-toc-skip class="date">2023-04-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="hidden name"><code>ssdtools.Rmd</code></div>
@@ -153,6 +153,10 @@ at the R console</p>
 loaded into the current session using</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in checkMatrixPackageVersion(): Package version inconsistency detected.</span></span>
+<span><span class="co">#&gt; TMB was built with Matrix version 1.5.4</span></span>
+<span><span class="co">#&gt; Current Matrix version is 1.5.3</span></span>
+<span><span class="co">#&gt; Please re-install 'TMB' from source using install.packages('TMB', type = 'source') or ask CRAN for a binary version of 'TMB' matching CRAN's 'Matrix' package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -198,7 +202,7 @@ boron.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Boron    Opercularia bimarginata  10   Invertebrate mg/L </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 18 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="fitting-distributions">Fitting Distributions<a class="anchor" aria-label="anchor" href="#fitting-distributions"></a>
@@ -349,7 +353,7 @@ samples to converge.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> average       8 1.98  1.07  0.852  4.92  <span style="text-decoration: underline;">1</span>000     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> average       9 2.21  1.14  0.972  5.30  <span style="text-decoration: underline;">1</span>000     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> average      10 2.44  1.20  1.09   5.66  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 89 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 89 more rows</span></span></span></code></pre></div>
 <p>The data frame of the estimates can then be plotted together with the
 original data using the <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> function to summarize an
 analysis. Once again the returned object is a <code>ggplot</code> object
