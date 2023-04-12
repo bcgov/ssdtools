@@ -1,19 +1,17 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.2.9002
-
-- Replaced `size = 0.5` with `linewidth = 0.5` in `geom_hcintersect()` and `geom_xribbon()`.
-- Replaced `aes_string()` with `aes()` in examples (and internally)
-- Removed use of tidyverse package.
-- Now test values to 12 significant digits.
-
-# ssdtools 1.0.2.9001
-
-- Fixed description of `ssd_hp()` to be percent affected rather than percent protected.
-
-# ssdtools 1.0.2.9000
+# ssdtools 1.0.3.9000
 
 - Same as previous version.
+
+
+# ssdtools 1.0.3
+
+- Replaced `size = 0.5` with `linewidth = 0.5` in `geom_hcintersect()` and `geom_xribbon()`.
+- Replaced `aes_string()` with `aes()` in examples (and internally).
+- Removed use of `tidyverse` package.
+- Now tests values to 12 significant digits.
+- Fixed description of `ssd_hp()` to be percent affected rather than percent protected.
 
 
 # ssdtools 1.0.2
@@ -216,6 +214,7 @@ Added
   - `logLik()` to return the log-likelihood.
   - `summary.fitdists()` to summarize.
   
+
 # ssdtools 0.3.7.9000
 
 - Same as previous version.

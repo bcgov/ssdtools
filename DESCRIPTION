@@ -1,6 +1,6 @@
 Package: ssdtools
 Title: Species Sensitivity Distributions
-Version: 1.0.2.9002
+Version: 1.0.3.9000
 Authors@R: c(
     person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre", "ctr"),
            comment = c(ORCID = "0000-0002-7683-4592")),
@@ -38,7 +38,7 @@ Depends:
     R (>= 4.1)
 Imports:
     abind,
-    chk (>= 0.7.0),
+    chk,
     doFuture,
     foreach,
     furrr,
@@ -57,7 +57,7 @@ Imports:
     stats,
     stringr,
     tibble,
-    TMB (>= 1.7.20),
+    TMB,
     universals,
     utils,
     VGAM
