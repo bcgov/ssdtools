@@ -35,7 +35,7 @@ test_that("pgompertz extremes", {
   withr::local_options(lifecycle_verbosity = "quiet")
   expect_identical(pgompertz(numeric(0)), numeric(0))
   expect_identical(pgompertz(NA), NA_real_)
-  expect_identical(pgompertz(NaN), NaN)
+  expect_identical(pgompertz(NaN), NA_real_)
   expect_identical(pgompertz(0), 0)
   expect_equal(pgompertz(1), 0.820625921265983)
   expect_equal(pgompertz(1, log.p = TRUE), log(pgompertz(1)))
@@ -56,7 +56,7 @@ test_that("qgompertz extremes", {
   withr::local_options(lifecycle_verbosity = "quiet")
   expect_identical(qgompertz(numeric(0)), numeric(0))
   expect_identical(qgompertz(NA), NA_real_)
-  expect_identical(qgompertz(NaN), NaN)
+  expect_identical(qgompertz(NaN), NA_real_)
   expect_identical(qgompertz(0), 0)
   expect_identical(qgompertz(1), Inf)
   expect_equal(qgompertz(0.75), 0.869741686191944)
@@ -71,8 +71,7 @@ test_that("qgompertz extremes", {
                    c(qgompertz(NA), qgompertz(NaN), qgompertz(0), qgompertz(Inf), qgompertz(-Inf)))
   expect_equal(qgompertz(1:2, llocation = 1:2, lshape = 3:4), 
                c(qgompertz(1, 1, 3), qgompertz(2, 2, 4)))
-  expect_equal(qgompertz(1:2, llocation = c(1, NA), lshape = 3:4), 
-               c(qgompertz(1, 1, 3), NA))
+  expect_equal(qgompertz(1:2, llocation = c(1, NA), lshape = 3:4), c(Inf, NaN))
   expect_equal(qgompertz(pgompertz(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
 })
 
