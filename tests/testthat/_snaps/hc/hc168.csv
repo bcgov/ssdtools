@@ -1,7 +1,7 @@
 dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot
-gamma,5,1.07428453014,NA,NA,NA,0.356573713321,parametric,0,NA
-lgumbel,5,1.76938547655,NA,NA,NA,0.0134465706932,parametric,0,NA
-llogis,5,1.56226388133,NA,NA,NA,0.0656451920483,parametric,0,NA
-lnorm,5,1.68117483988,NA,NA,NA,0.177236180683,parametric,0,NA
-lnorm_lnorm,5,1.54141054518,NA,NA,NA,0.0296267817842,parametric,0,NA
-weibull,5,1.08673276628,NA,NA,NA,0.35747156147,parametric,0,NA
+gamma,5,1.07428453,NA,NA,NA,0.3565737133,parametric,0,NA
+lgumbel,5,1.769385477,NA,NA,NA,0.01344657069,parametric,0,NA
+llogis,5,1.562263881,NA,NA,NA,0.06564519205,parametric,0,NA
+lnorm,5,1.68117484,NA,NA,NA,0.1772361807,parametric,0,NA
+lnorm_lnorm,5,1.541410545,NA,NA,NA,0.02962678178,parametric,0,NA
+weibull,5,1.086732766,NA,NA,NA,0.3574715615,parametric,0,NA
