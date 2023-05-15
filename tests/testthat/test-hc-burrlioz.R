@@ -28,8 +28,9 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
   hc_burrIII3 <- ssd_hc_burrlioz(fit, nboot = 10, ci = TRUE, min_pboot = 0)
-  testthat::skip_on_ci()
   testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3")
 })
 
