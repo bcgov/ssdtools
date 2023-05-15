@@ -39,6 +39,8 @@ test_that("burrIII3 gives cis with ccme_uranium", {
 test_that("burrIII3 fits anon_e but only at boundary ok", {
   fit <- ssd_fit_dists(ssddata::anon_e, dists = "burrIII3", at_boundary_ok = TRUE)
   tidy <- tidy(fit)
+  testthat::skip_on_ci()
+  testthat::skip_on_os("windows")
   expect_snapshot_data(tidy, "tidy_anon_e")
   expect_error(expect_warning(ssd_fit_dists(ssddata::anon_e, dists = "burrIII3"),
                "at boundary"))

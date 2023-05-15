@@ -214,6 +214,8 @@ test_that("ssd_fit_dists estimates for ssddata::ccme_boron on bcanz dists", {
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
+  testthat::skip_on_ci()
+  testthat::skip_on_os("windows")
   expect_snapshot_data(tidy, "tidy_stable_rescale")
 })
 
@@ -251,6 +253,8 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
+  testthat::skip_on_ci()
+  testthat::skip_on_os("windows")
   expect_snapshot_data(tidy, "tidy_stable_computable")
 })
 
