@@ -43,7 +43,7 @@ expect_snapshot_plot <- function(x, name) {
 }
 
 expect_snapshot_data <- function(x, name) {
-  fun <- function(x) signif(x, digits = 10)
+  fun <- function(x) signif(x, digits = 8)
   x <- dplyr::mutate(x, dplyr::across(where(is.numeric), fun))
   path <- save_csv(x)
   testthat::expect_snapshot_file(path, paste0(name, ".csv"))

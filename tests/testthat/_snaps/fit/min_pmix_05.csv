@@ -1,8 +1,8 @@
 dist,term,est,se
-lnorm,meanlog,2.561644964,0.2346290672
-lnorm,sdlog,1.241540324,0.1659077491
-lnorm_lnorm,meanlog1,1.597247917,NA
-lnorm_lnorm,meanlog2,3.479024634,NA
+lnorm,meanlog,2.561645,0.23462907
+lnorm,sdlog,1.2415403,0.16590775
+lnorm_lnorm,meanlog1,1.5972479,NA
+lnorm_lnorm,meanlog2,3.4790246,NA
 lnorm_lnorm,pmix,0.5,NA
-lnorm_lnorm,sdlog1,0.9555107902,NA
-lnorm_lnorm,sdlog2,0.6425810576,0.0284527649
+lnorm_lnorm,sdlog1,0.95551079,NA
+lnorm_lnorm,sdlog2,0.64258106,0.028452765

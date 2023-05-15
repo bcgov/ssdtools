@@ -1,2 +1,2 @@
 dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot
-average,5,1.68117484,0.6843093788,1.142570394,2.755035248,1,parametric,1000,1
+average,5,1.6811748,0.68430938,1.1425704,2.7550352,1,parametric,1000,1

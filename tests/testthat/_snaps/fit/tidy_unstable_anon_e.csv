@@ -1,8 +1,8 @@
 dist,term,est,se
-invpareto,scale,38106.18032,0
-invpareto,shape,0.2319368725,0.05625294966
-llogis_llogis,locationlog1,2.267147815,0.5577503787
-llogis_llogis,locationlog2,9.143240356,0.2573347652
-llogis_llogis,pmix,0.4159874464,0.1210124254
-llogis_llogis,scalelog1,0.8396231269,0.297035533
-llogis_llogis,scalelog2,0.461790693,0.1293310764
+invpareto,scale,38106.18,0
+invpareto,shape,0.23193687,0.05625295
+llogis_llogis,locationlog1,2.2671478,0.55775038
+llogis_llogis,locationlog2,9.1432404,0.25733477
+llogis_llogis,pmix,0.41598745,0.12101243
+llogis_llogis,scalelog1,0.83962313,0.29703553
+llogis_llogis,scalelog2,0.46179069,0.12933108
