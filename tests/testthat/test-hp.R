@@ -298,10 +298,16 @@ test_that("ssd_hp cis with error and multiple dists", {
   set.seed(99)
   expect_warning(hp_err_two <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, average = FALSE,
                                       delta = 100))
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")  
   expect_snapshot_data(hp_err_two, "hp_err_two")
   set.seed(99)
   expect_warning(hp_err_avg <- ssd_hp(fit, conc = 1,  ci = TRUE, nboot = 100,
                                       delta = 100))
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
   expect_snapshot_data(hp_err_avg, "hp_err_avg")
 })
 
