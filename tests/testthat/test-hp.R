@@ -266,7 +266,7 @@ test_that("ssd_hp cis with non-convergence", {
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
-  expect_snapshot_data(hp30, "hp_30")
+  expect_snapshot_boot_data(hp30, "hp_30")
 })
 
 test_that("ssd_hp cis with error", {
@@ -280,13 +280,13 @@ test_that("ssd_hp cis with error", {
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
-  expect_snapshot_data(hp_err, "hp_err_na")
+  expect_snapshot_boot_data(hp_err, "hp_err_na")
   hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.92)
   expect_s3_class(hp_err, "tbl")
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
-  expect_snapshot_data(hp_err, "hp_err")
+  expect_snapshot_boot_data(hp_err, "hp_err")
 })
 
 test_that("ssd_hp cis with error and multiple dists", {
@@ -301,14 +301,14 @@ test_that("ssd_hp cis with error and multiple dists", {
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")  
-  expect_snapshot_data(hp_err_two, "hp_err_two")
+  expect_snapshot_boot_data(hp_err_two, "hp_err_two")
   set.seed(99)
   expect_warning(hp_err_avg <- ssd_hp(fit, conc = 1,  ci = TRUE, nboot = 100,
                                       delta = 100))
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
-  expect_snapshot_data(hp_err_avg, "hp_err_avg")
+  expect_snapshot_boot_data(hp_err_avg, "hp_err_avg")
 })
 
 test_that("ssd_hp with 1 bootstrap", {
@@ -327,11 +327,11 @@ test_that("ssd_hp comparable parametric and non-parametric big sample size", {
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
-  expect_snapshot_data(hp_para, "hp_para")
+  expect_snapshot_boot_data(hp_para, "hp_para")
   set.seed(10)
   hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE)
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
-  expect_snapshot_data(hp_nonpara, "hp_nonpara")
+  expect_snapshot_boot_data(hp_nonpara, "hp_nonpara")
 })

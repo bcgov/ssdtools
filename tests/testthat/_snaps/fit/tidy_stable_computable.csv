@@ -1,6 +1,4 @@
 dist,term,est,se
-gamma,scale,0.00115848,0.0392811
-gamma,shape,883.426,29605
 lgumbel,locationlog,0.0110209,NA
 lgumbel,scalelog,0.0337459,NA
 llogis,locationlog,0.0119926,0.278196

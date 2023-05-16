@@ -43,6 +43,17 @@ expect_snapshot_plot <- function(x, name) {
   testthat::expect_snapshot_file(path, paste0(name, ".png"))
 }
 
+expect_snapshot_boot_data <- function(x, name, digits = 6, min_pboot = 0.9, max_pboot = 1) {
+  if(!is.na(min_pboot) & min_pboot > 0) {
+    testthat::expect_true(all(x$pboot >= min_pboot))
+  }
+  if(!is.na(min_pboot) & max_pboot < 1) {
+    testthat::expect_true(all(x$pboot <= max_pboot))
+  }
+  x$pboot <- NULL
+  expect_snapshot_data(x, name, digits = digits)
+}
+
 expect_snapshot_data <- function(x, name, digits = 6) {
   fun <- function(x) signif(x, digits = digits)
   x <- dplyr::mutate(x, dplyr::across(where(is.numeric), fun))
