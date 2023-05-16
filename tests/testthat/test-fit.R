@@ -244,15 +244,14 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
     "^Distribution 'lnorm_lnorm' failed to compute standard errors \\(try rescaling data\\)\\.$"),
     "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$")
   
-  skip_on_os("windows") # not sure why gamma shape is 908 on GitHub actions windows
-  skip_on_os("linux") # not sure why gamma shape is 841 on GitHub actions ubuntu
   # gamma shape change from 913 to 868 on most recent version
+  set.seed(102)
   fits <- ssd_fit_dists(data, right = "Other", rescale = FALSE, computable = FALSE)
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
-  testthat::skip_on_os("windows")
-  testthat::skip_on_os("linux")
+  testthat::skip_on_os("windows") # not sure why gamma shape is 908 on GitHub actions windows
+  testthat::skip_on_os("linux") # not sure why gamma shape is 841 on GitHub actions ubuntu
   testthat::skip_on_os("solaris")
   expect_snapshot_data(tidy, "tidy_stable_computable")
 })

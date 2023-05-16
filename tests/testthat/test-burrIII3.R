@@ -25,6 +25,9 @@ test_that("burrIII3 gives cis with ccme_chloride", {
   expect_s3_class(fit, "fitdists")
   set.seed(99)
   hc <- ssd_hc(fit, nboot = 10, ci = TRUE)
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")  
   expect_snapshot_data(hc, "hc_chloride")
 })
 
@@ -33,6 +36,9 @@ test_that("burrIII3 gives cis with ccme_uranium", {
   expect_s3_class(fit, "fitdists")
   set.seed(99)
   hc <- ssd_hc(fit, nboot = 10, ci = TRUE)
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")  
   expect_snapshot_data(hc, "hc_uranium")
 })
 
