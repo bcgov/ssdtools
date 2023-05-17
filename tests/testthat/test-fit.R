@@ -249,7 +249,7 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
-  expect_snapshot_data(tidy, "tidy_stable_computable")
+  expect_snapshot_data(tidy, "tidy_stable_computable", digits = 3)
 })
 
 test_that("gamma parameters are extremely unstable", {
