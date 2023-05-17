@@ -2,17 +2,9 @@
 
 # ssdtools 1.0.4
 
-- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/297 (#297).
-
-- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/294 (#294).
-
-- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/293 (#293).
-
-
-# ssdtools 1.0.3.9000
-
-- Same as previous version.
-
+- Added contributors.
+- Now tests table values to 6 significant figures.
+- Fixed bug that was not preserving NaN (returning NA_real_) for cumulative distribution and quantile functions.
 
 # ssdtools 1.0.3
 
