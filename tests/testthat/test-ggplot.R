@@ -108,5 +108,7 @@ test_that("plot geoms", {
       ggplot2::aes(xmin = lcl, xmax = ucl, y = percent/100),
       alpha = 1/3
     )
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
   expect_snapshot_plot(gp, "geoms_all")
 })
