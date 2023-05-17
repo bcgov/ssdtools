@@ -6,6 +6,7 @@
 - Now tests table values to 6 significant figures.
 - Fixed bug that was not preserving NaN (returning NA_real_) for cumulative distribution and quantile functions.
 
+
 # ssdtools 1.0.3
 
 - Replaced `size = 0.5` with `linewidth = 0.5` in `geom_hcintersect()` and `geom_xribbon()`.
