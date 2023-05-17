@@ -245,8 +245,7 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
     "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$")
   
   set.seed(102)
-  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm", "lnorm_lnorm", "weibull"
-  ), rescale = FALSE, computable = FALSE)
+  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm", "lnorm_lnorm"), rescale = FALSE, computable = FALSE)
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")

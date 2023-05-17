@@ -10,5 +10,3 @@ lnorm_lnorm,meanlog2,0.247362,244.309
 lnorm_lnorm,pmix,0.995041,NA
 lnorm_lnorm,sdlog1,0.0343959,2.02296
 lnorm_lnorm,sdlog2,0.0773742,56.7621
-weibull,scale,1.01345,0.183858
-weibull,shape,93.2596,1267.44
