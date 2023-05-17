@@ -1,6 +1,6 @@
 ## Test environments
 
-release 4.2.2
+release 4.3.0
 
 * OSX (local) - release
 * OSX (actions) - release
@@ -23,8 +23,4 @@ The large size of these subdirectories is necessary.
 
 ## CRAN Package Check Results for Package
 
-### Additional issues
-
-#### M1mac
-
-Fixed
+Fixed outstanding errors.
