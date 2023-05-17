@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 1.0.4
+
+- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/297 (#297).
+
+- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/294 (#294).
+
+- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/293 (#293).
+
+
 # ssdtools 1.0.3.9000
 
 - Same as previous version.
