@@ -8,7 +8,7 @@
 [![Lifecycle:Maturing](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://codecov.io/github/bcgov/ssdtools?branch=master)
+Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://app.codecov.io/github/bcgov/ssdtools?branch=main)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
@@ -62,7 +62,7 @@ ssddata::ccme_boron
 #>  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L 
 #>  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L 
 #> 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L 
-#> # … with 18 more rows
+#> # ℹ 18 more rows
 ```
 
 Distributions are fit using `ssd_fit_dists()`
@@ -145,17 +145,17 @@ Distributions in Ecotoxicology. CRC Press.
 
 ## Citation
 
+    To cite package 'ssdtools' in publications use:
 
-    To cite ssdtools in publications use:
-
-      Thorley, J. and Schwarz C., (2018). ssdtools An R package to fit
-      Species Sensitivity Distributions. Journal of Open Source Software,
-      3(31), 1082. https://doi.org/10.21105/joss.01082
+      Thorley J, Schwarz C (2018). "ssdtools: An R package to fit Species
+      Sensitivity Distributions." _Journal of Open Source Software_,
+      *3*(31), 1082. doi:10.21105/joss.01082
+      <https://doi.org/10.21105/joss.01082>.
 
     A BibTeX entry for LaTeX users is
 
       @Article{,
-        title = {{ssdtools}: An R package to fit Species Sensitivity Distributions},
+        title = {ssdtools: {An} {R} package to fit {Species} {Sensitivity} {Distributions}},
         author = {Joe Thorley and Carl Schwarz},
         journal = {Journal of Open Source Software},
         year = {2018},

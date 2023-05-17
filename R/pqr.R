@@ -34,6 +34,7 @@ NULL
   args <- c(q, list(...))
   
   if(any(vapply(args, length, 1L) != 1L)) stop()
+  if(is.nan(q)) return (NaN)
   if(any(is.na(unlist(args)))) return(NA_real_)
   
   do.call(fun, args = args)
@@ -71,6 +72,7 @@ pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
   args <- c(p, list(...))
   
   if(any(vapply(args, length, 1L) != 1L)) stop()
+  if(is.nan(p)) return (NaN)
   if(any(is.na(unlist(args)))) return(NA_real_)
   
   if(p == 0) {

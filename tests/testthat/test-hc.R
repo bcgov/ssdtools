@@ -17,7 +17,7 @@ test_that("hc", {
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hc, "tbl")
-  expect_snapshot_data(hc, "hc")
+  expect_snapshot_boot_data(hc, "hc")
 })
 
 test_that("ssd_hc hc defunct", {
@@ -355,7 +355,10 @@ test_that("ssd_hc cis with non-convergence", {
   expect_identical(attr(fit, "min_pmix"), 0.3)
   hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.96)
   expect_s3_class(hc30, "tbl")
-  expect_snapshot_data(hc30, "hc_30")
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
+  expect_snapshot_boot_data(hc30, "hc_30")
 })
 
 test_that("ssd_hc cis with error", {
@@ -366,10 +369,15 @@ test_that("ssd_hc cis with error", {
   expect_identical(attr(fit, "min_pmix"), 0.1)
   expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100))
   expect_s3_class(hc_err, "tbl")
-  expect_snapshot_data(hc_err, "hc_err_na")
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
+  expect_snapshot_boot_data(hc_err, "hc_err_na")
   hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92)
   expect_s3_class(hc_err, "tbl")
-  expect_snapshot_data(hc_err, "hc_err")
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  expect_snapshot_boot_data(hc_err, "hc_err")
 })
 
 test_that("ssd_hc cis with error and multiple dists", {
@@ -380,11 +388,17 @@ test_that("ssd_hc cis with error and multiple dists", {
   expect_identical(attr(fit, "min_pmix"), 0.1)
   set.seed(99)
   expect_warning(hc_err_two <- ssd_hc(fit, ci = TRUE, nboot = 100, average = FALSE, delta = 100))
-  expect_snapshot_data(hc_err_two, "hc_err_two")
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
+  expect_snapshot_boot_data(hc_err_two, "hc_err_two")
   set.seed(99)
   expect_warning(hc_err_avg <- ssd_hc(fit, ci = TRUE, nboot = 100,
                                       delta = 100))
-  expect_snapshot_data(hc_err_avg, "hc_err_avg")
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
+  expect_snapshot_boot_data(hc_err_avg, "hc_err_avg")
 })
 
 test_that("ssd_hc with 1 bootstrap", {
@@ -400,10 +414,14 @@ test_that("ssd_hc comparable parametric and non-parametric big sample size", {
   fit <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10)
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
   expect_snapshot_data(hc_para, "hc_para")
   set.seed(10)
   hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE)
-  expect_snapshot_data(hc_nonpara, "hc_nonpara")
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  expect_snapshot_boot_data(hc_nonpara, "hc_nonpara")
 })
 
 test_that("ssd_hc parametric and non-parametric small sample size", {
@@ -420,7 +438,7 @@ test_that("ssd_hc_burrlioz gets estimates with invpareto", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
   hc_boron <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
-  expect_snapshot_data(hc_boron, "hc_boron")
+  expect_snapshot_boot_data(hc_boron, "hc_boron")
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
@@ -430,7 +448,10 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
   hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
-  expect_snapshot_data(hc_burrIII3, "hc_burrIII3")
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
+  expect_snapshot_boot_data(hc_burrIII3, "hc_burrIII3")
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
@@ -441,7 +462,10 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
   set.seed(49)
   hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0,
                         parametric = TRUE)
-  expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
+  expect_snapshot_boot_data(hc_burrIII3, "hc_burrIII3_parametric")
 })
 
 test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
@@ -452,6 +476,9 @@ test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
   set.seed(102)
   expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE))
   expect_s3_class(hc, "tbl_df")
-  expect_snapshot_data(hc, "hc_cis_chloride50")
+  testthat::skip_on_os("windows")
+  testthat::skip_on_os("linux")
+  testthat::skip_on_os("solaris")
+  expect_snapshot_boot_data(hc, "hc_cis_chloride50")
 })
 

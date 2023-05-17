@@ -1,5 +1,5 @@
 dist,term,est,se
-weibull,scale,1225.67845286,538.683971311
-weibull,shape,0.565653521667,0.106584670377
-lgumbel,locationlog,4.96186400025,0.558968627611
-lgumbel,scalelog,2.23117103076,0.381444310517
+weibull,scale,1225.68,538.684
+weibull,shape,0.565654,0.106585
+lgumbel,locationlog,4.96186,0.558969
+lgumbel,scalelog,2.23117,0.381444

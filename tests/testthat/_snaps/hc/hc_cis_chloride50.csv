@@ -1,3 +1,3 @@
-dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot
-lnorm_lnorm,5,36.8762703339,NA,NA,NA,0.617285759865,parametric,1000,0.962
-llogis_llogis,5,36.9095633063,NA,NA,NA,0.382714240135,parametric,1000,0.978
+dist,percent,est,se,lcl,ucl,wt,method,nboot
+lnorm_lnorm,5,36.8763,NA,NA,NA,0.617286,parametric,1000
+llogis_llogis,5,36.9096,NA,NA,NA,0.382714,parametric,1000

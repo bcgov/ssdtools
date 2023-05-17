@@ -1,6 +1,6 @@
 dist,term,est,se
-lnorm_lnorm,meanlog1,2.07723106196,0.38797365932
-lnorm_lnorm,meanlog2,4.78232010106,0.032987481178
-lnorm_lnorm,pmix,0.802563749266,0.126960423628
-lnorm_lnorm,sdlog1,1.08774222484,0.277607395795
-lnorm_lnorm,sdlog2,0.0460547072274,0.0231744502112
+lnorm_lnorm,meanlog1,2.07723,0.387974
+lnorm_lnorm,meanlog2,4.78232,0.0329875
+lnorm_lnorm,pmix,0.802564,0.12696
+lnorm_lnorm,sdlog1,1.08774,0.277607
+lnorm_lnorm,sdlog2,0.0460547,0.0231745

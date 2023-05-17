@@ -1,4 +1,4 @@
 dist,npars,nobs,log_lik,aic,aicc,delta,weight
-gamma,2,NA,-125.283568396,254.567136792,NA,NA,NA
-llogis,2,NA,-126.975830651,257.951661303,NA,NA,NA
-lnorm_lnorm,5,NA,-123.647801845,257.29560369,NA,NA,NA
+gamma,2,NA,-125.284,254.567,NA,NA,NA
+llogis,2,NA,-126.976,257.952,NA,NA,NA
+lnorm_lnorm,5,NA,-123.648,257.296,NA,NA,NA
