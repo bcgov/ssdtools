@@ -412,3 +412,4 @@ test_that("ssd_fit_dists min_pmix 0", {
   testthat::skip_on_os("solaris")
   expect_snapshot_data(tidy, "tidy_pmix0")
 })
+
