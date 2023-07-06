@@ -1,8 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.3.9000
+# ssdtools 1.0.4
 
-- Same as previous version.
+- Added contributors.
+- Now tests table values to 6 significant figures.
+- Fixed bug that was not preserving NaN (returning NA_real_) for cumulative distribution and quantile functions.
 
 
 # ssdtools 1.0.3
