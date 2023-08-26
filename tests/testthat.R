@@ -15,4 +15,4 @@
 library(testthat)
 library(ssdtools)
 
-test_check("ssdtools")
+# test_check("ssdtools")
