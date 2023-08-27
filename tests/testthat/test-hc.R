@@ -26,7 +26,7 @@ test_that("ssd_hc hc defunct", {
 
   lifecycle::expect_defunct(ssd_hc(fits, hc = 6))
 })
-# 
+# FIXME
 # test_that("ssd_hc list must be named", {
 #   chk::expect_chk_error(ssd_hc(list()))
 # })
