@@ -28,15 +28,15 @@ test_that("predict cis", {
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_cis")
 })
-# 
-# test_that("predict not average", {
-#   fits <- ssd_fit_dists(ssddata::ccme_boron)
-#   
-#   pred <- predict(fits, average = FALSE)
-#   expect_s3_class(pred, "tbl")
-#   expect_snapshot_data(pred, "pred_notaverage")
-# })
-# 
+
+test_that("predict not average", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+
+  pred <- predict(fits, average = FALSE)
+  expect_s3_class(pred, "tbl")
+  expect_snapshot_data(pred, "pred_notaverage")
+})
+
 # test_that("predict cis fitburrlioz", {
 #   fits <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #   
