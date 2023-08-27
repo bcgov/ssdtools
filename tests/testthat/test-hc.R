@@ -14,8 +14,8 @@
 
 test_that("hc", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
+  skip_on_os("linux") # FIXME
   set.seed(102)
-  skip_on_os("linux")
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hc, "tbl")
   expect_snapshot_boot_data(hc, "hc")
