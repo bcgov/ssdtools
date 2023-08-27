@@ -19,15 +19,15 @@ test_that("predict", {
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_dists")
 })
-# 
-# test_that("predict cis", {
-#   fits <- ssd_fit_dists(ssddata::ccme_boron)
-#   
-#   set.seed(10)
-#   pred <- predict(fits, ci = TRUE, nboot = 10L)
-#   expect_s3_class(pred, "tbl")
-#   expect_snapshot_data(pred, "pred_cis")
-# })
+
+test_that("predict cis", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+
+  set.seed(10)
+  pred <- predict(fits, ci = TRUE, nboot = 10L)
+  expect_s3_class(pred, "tbl")
+  expect_snapshot_data(pred, "pred_cis")
+})
 # 
 # test_that("predict not average", {
 #   fits <- ssd_fit_dists(ssddata::ccme_boron)
