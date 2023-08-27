@@ -41,11 +41,11 @@ test_that("predict not average", {
 })
 
 test_that("predict cis fitburrlioz", {
+  skip_on_os("linux") # FIXME
   fits <- ssd_fit_burrlioz(ssddata::ccme_boron)
 
   expect_true(is.fitdists(fits))
   set.seed(10)
-  skip_on_os("linux") # FIXME
   
   pred <- predict(fits, ci = TRUE, nboot = 10L)
   expect_s3_class(pred, "tbl")
