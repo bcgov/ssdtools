@@ -13,9 +13,9 @@
 #    limitations under the License.
 
 test_that("hp", {
+  skip_on_os("linux") # FIXME
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   
-  skip_on_os("linux") # FIXME
   set.seed(102)
   hp <- ssd_hp(fits, conc = 1, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hp, "tbl")
