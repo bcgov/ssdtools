@@ -26,15 +26,16 @@ test_that("ssd_hc hc defunct", {
 
   lifecycle::expect_defunct(ssd_hc(fits, hc = 6))
 })
+
+test_that("ssd_hc list must be named", {
+  chk::expect_chk_error(ssd_hc(list()))
+})
+
+test_that("ssd_hc list names must be unique", {
+  chk::expect_chk_error(ssd_hc(list("lnorm" = NULL, "lnorm" = NULL)))
+})
+
 # FIXME
-# test_that("ssd_hc list must be named", {
-#   chk::expect_chk_error(ssd_hc(list()))
-# })
-# 
-# test_that("ssd_hc list names must be unique", {
-#   chk::expect_chk_error(ssd_hc(list("lnorm" = NULL, "lnorm" = NULL)))
-# })
-# 
 # test_that("ssd_hc list handles zero length list", {
 #   hc <- ssd_hc(structure(list(), .Names = character(0)))
 #   expect_s3_class(hc, "tbl_df")
