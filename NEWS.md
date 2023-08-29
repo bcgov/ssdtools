@@ -2,15 +2,8 @@
 
 # ssdtools 1.0.5
 
-- Same as previous version.
+- Stopped predict and hc/hp test errors on linux.
 
-
-# ssdtools 1.0.4.9000
-
-- Same as previous version.
-
-
-<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
 # ssdtools 1.0.4
 
