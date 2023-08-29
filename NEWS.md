@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 1.0.5
+
+- Same as previous version.
+
+
 # ssdtools 1.0.4.9000
 
 - Same as previous version.
