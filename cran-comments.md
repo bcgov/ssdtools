@@ -1,8 +1,9 @@
 ## Test environments
 
-release 4.3.0
+release 4.3.1
 
 * OSX (local) - release
+* OSX (macbuilder) - release
 * OSX (actions) - release
 * Ubuntu (actions) - oldrel, release and devel
 * Windows (actions) - release
