@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# ssdtools 1.0.6
+
+- Fix CRAN ATLAS error
+
+
 # ssdtools 1.0.5.9000
 
 - Same as previous version.
