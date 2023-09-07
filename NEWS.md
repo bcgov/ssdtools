@@ -5,11 +5,6 @@
 - Fix CRAN ATLAS error
 
 
-# ssdtools 1.0.5.9000
-
-- Same as previous version.
-
-
 # ssdtools 1.0.5
 
 - Stopped predict and hc/hp test errors on linux.

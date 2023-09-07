@@ -24,4 +24,4 @@ The large size of these subdirectories is necessary.
 
 ## CRAN Package Check Results for Package
 
-Fixed outstanding errors.
+Fixed ATLAS issue.
