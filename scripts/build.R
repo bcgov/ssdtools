@@ -24,3 +24,4 @@ pkgdown::build_site()
 demo(ssdtools, ask = FALSE)
 
 devtools::check()
+

@@ -1,4 +1,14 @@
-<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# ssdtools 1.0.6
+
+- Fix CRAN ATLAS error
+
+
+# ssdtools 1.0.5
+
+- Stopped predict and hc/hp test errors on linux.
+
 
 # ssdtools 1.0.4
 

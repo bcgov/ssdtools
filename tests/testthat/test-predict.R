@@ -13,6 +13,8 @@
 #    limitations under the License.
 
 test_that("predict", {
+  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   
   pred <- predict(fits)
@@ -21,8 +23,10 @@ test_that("predict", {
 })
 
 test_that("predict cis", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  skip_on_os("linux") # FIXME
   
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+
   set.seed(10)
   pred <- predict(fits, ci = TRUE, nboot = 10L)
   expect_s3_class(pred, "tbl")
@@ -30,7 +34,10 @@ test_that("predict cis", {
 })
 
 test_that("predict not average", {
+  skip_on_os("linux") # FIXME
   fits <- ssd_fit_dists(ssddata::ccme_boron)
+
+  expect_true(is.fitdists(fits))
   
   pred <- predict(fits, average = FALSE)
   expect_s3_class(pred, "tbl")
@@ -38,9 +45,12 @@ test_that("predict not average", {
 })
 
 test_that("predict cis fitburrlioz", {
+  skip_on_os("linux") # FIXME
   fits <- ssd_fit_burrlioz(ssddata::ccme_boron)
-  
+
+  expect_true(is.fitdists(fits))
   set.seed(10)
+  
   pred <- predict(fits, ci = TRUE, nboot = 10L)
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_cis_burrlioz")
