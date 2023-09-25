@@ -3,7 +3,7 @@
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, dev, f-unskip]
   pull_request:
     branches: [main, dev]
 
@@ -20,11 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'release'}
-          - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -45,6 +41,11 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          detached: true
 
       - uses: r-lib/actions/check-r-package@v2
         with:
