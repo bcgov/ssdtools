@@ -36,7 +36,6 @@ save_csv <- function(x) {
 }
 
 expect_snapshot_plot <- function(x, name) {
-  testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
   path <- save_png(x)
@@ -55,7 +54,6 @@ expect_snapshot_boot_data <- function(x, name, digits = 6, min_pboot = 0.9, max_
 }
 
 expect_snapshot_data <- function(x, name, digits = 6) {
-  testthat::skip_on_os("windows")
   testthat::skip_on_os("solaris")
   
   fun <- function(x) signif(x, digits = digits)

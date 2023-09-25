@@ -50,7 +50,6 @@ test_that("lnorm_lnorm fits anonb", {
                        at_boundary_ok = FALSE, min_pmix = 0.05)
   
   tidy <- tidy(fit)
-  testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
   expect_snapshot_data(tidy, "tidy_anonb")
