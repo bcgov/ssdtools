@@ -17,7 +17,6 @@ test_that("ssd_plot", {
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species"), "boron_pred_label")
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species",
                                 shift_x = 2), "boron_pred_shift_x")
-  testthat::skip_on_ci()
   testthat::skip_on_cran()
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, ribbon = TRUE), "boron_pred_ribbon")
 })
@@ -27,7 +26,6 @@ test_that("ssd_plot censored data", {
   data$Other <- data$Conc * 2
   expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other"), "boron_cens_pred")
   expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", label = "Species"), "boron_cens_pred_species")
-  testthat::skip_on_ci()
   testthat::skip_on_cran()
   expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", ribbon = TRUE), "boron_cens_pred_ribbon")
 })

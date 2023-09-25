@@ -263,7 +263,6 @@ test_that("gamma parameters are extremely unstable", {
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
-  testthat::skip_on_ci() # not sure why gamma shape is 908 on GitHub actions windows and 841 on GitHub actions ubuntu
   testthat::skip_on_cran()
   expect_snapshot_data(tidy, "tidy_gamma_unstable", digits = 1)
 })
@@ -412,4 +411,3 @@ test_that("ssd_fit_dists min_pmix 0", {
   testthat::skip_on_os("solaris")
   expect_snapshot_data(tidy, "tidy_pmix0")
 })
-
