@@ -41,6 +41,11 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          
+      - name: Install TMB from source
+        run: |
+          install.packages("TMB", type = "source")
+        shell: Rscript {0}
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
