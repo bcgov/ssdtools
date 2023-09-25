@@ -41,11 +41,16 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
-          
+
       - name: Install TMB from source
         run: |
-          install.packages("TMB", type = "source")
+          install.packages("TMB", repos = "https://cloud.r-project.org/", type = "source")
         shell: Rscript {0}
+
+      - name: Install package
+        run: |
+          R CMD INSTALL .
+        shell: bash
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
