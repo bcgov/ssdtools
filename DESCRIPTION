@@ -20,11 +20,13 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-3658-4517")),
     person("Emilie", "Doussantousse", role = "ctb"),
     person("Stephanie", "Hazlitt", role = "ctb"),
-    person("Nadine", "Hussein", role = "ctb"),
+    person("Nadine", "Hussein", , "nadine@poissonconsulting.ca", role = "ctb",
+           comment = c(ORCID = "0000-0003-4470-8361")),
     person("Nan-Hung", "Hsieh", role = "ctb"),
     person("Sergio", "Ibarra Espinosa", role = "ctb"),
-    person("Province of British Columbia", role = "cph"),
-    person("Environment and Climate Change Canada", role = "cph")
+    person("Province of British Columbia", role = c("fnd", "cph")),
+    person("Environment and Climate Change Canada", role = c("fnd", "cph")),
+    person("Australian Government Department of Climate Change, Energy, the Environment and Water", role = c("fnd", "cph"))
   )
 Description: Species sensitivity distributions are cumulative probability
     distributions which are fitted to toxicity concentrations for
