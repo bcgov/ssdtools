@@ -14,6 +14,7 @@ Species sensitivity distributions are cumulative probability distributions which
 Useful links:
 \itemize{
   \item \url{https://github.com/bcgov/ssdtools}
+  \item \url{https://bcgov.github.io/ssdtools/}
   \item Report bugs at \url{https://github.com/bcgov/ssdtools/issues}
 }
 
