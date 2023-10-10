@@ -28,8 +28,8 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Rebecca Fisher [contributor]
-  \item David Fox [contributor]
+  \item Rebecca Fisher \email{R.Fisher@aims.gov.au} [contributor]
+  \item David Fox \email{david.fox@environmetrics.net.au} [contributor]
   \item Angeline Tillmanns [contributor]
   \item Ali Azizishirazi [contributor]
   \item Kathleen McTavish [contributor]
@@ -45,6 +45,7 @@ Other contributors:
   \item Nadine Hussein \email{nadine@poissonconsulting.ca} (\href{https://orcid.org/0000-0003-4470-8361}{ORCID}) [contributor]
   \item Nan-Hung Hsieh [contributor]
   \item Sergio Ibarra Espinosa [contributor]
+  \item Hadley Wickham [contributor]
   \item Province of British Columbia [funder, copyright holder]
   \item Environment and Climate Change Canada [funder, copyright holder]
   \item Australian Government Department of Climate Change, Energy, the Environment and Water [funder, copyright holder]
