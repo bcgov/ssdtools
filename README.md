@@ -35,11 +35,12 @@ To install the latest version from
 install.packages("ssdtools")
 ```
 
-To install the latest development version:
+To install the latest development version from
+[GitHub](https://github.com/bcgov/ssdtools)
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("bcgov/ssdtools")
+# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+pak::pak("bcgov/ssdtools")
 ```
 
 ## Introduction
@@ -213,7 +214,7 @@ guidelines.
 
 Please note that the ssdtools project is released with a [Contributor
 Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
 
 ## License
@@ -238,10 +239,9 @@ limitations under the License.
 ------------------------------------------------------------------------
 
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
-style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
-xmlns:dct="http://purl.org/dc/terms/"
-property="dct:title">ssdtools</span> by <span
-xmlns:cc="http://creativecommons.org/ns#"
+style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/"
+property="dct:title">ssdtools</span> by
+<span xmlns:cc="http://creativecommons.org/ns#"
 property="cc:attributionName">the Province of British Columbia and
 Environment and Climate Change Canada </span> is licensed under a
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
