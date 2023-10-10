@@ -24,7 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Carl Schwarz [contractor]
+  \item Carl Schwarz
 }
 
 Other contributors:
