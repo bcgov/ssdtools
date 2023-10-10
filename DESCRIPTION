@@ -2,7 +2,7 @@ Package: ssdtools
 Title: Species Sensitivity Distributions
 Version: 1.0.6.9000
 Authors@R: c(
-    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre", "ctr"),
+    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7683-4592")),
     person("Carl", "Schwarz", role = c("aut", "ctr")),
     person("Rebecca", "Fisher", , "R.Fisher@aims.gov.au", role = "ctb"),
