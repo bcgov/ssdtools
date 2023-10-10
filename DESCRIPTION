@@ -24,6 +24,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-4470-8361")),
     person("Nan-Hung", "Hsieh", role = "ctb"),
     person("Sergio", "Ibarra Espinosa", role = "ctb"),
+    person("Hadley", "Wickham", role = "ctb"),
     person("Province of British Columbia", role = c("fnd", "cph")),
     person("Environment and Climate Change Canada", role = c("fnd", "cph")),
     person("Australian Government Department of Climate Change, Energy, the Environment and Water", role = c("fnd", "cph"))
