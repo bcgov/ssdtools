@@ -25,12 +25,12 @@ Useful links:
 Authors:
 \itemize{
   \item Carl Schwarz
+  \item Rebecca Fisher \email{R.Fisher@aims.gov.au}
+  \item David Fox \email{david.fox@environmetrics.net.au}
 }
 
 Other contributors:
 \itemize{
-  \item Rebecca Fisher \email{R.Fisher@aims.gov.au} [contributor]
-  \item David Fox \email{david.fox@environmetrics.net.au} [contributor]
   \item Angeline Tillmanns [contributor]
   \item Ali Azizishirazi [contributor]
   \item Kathleen McTavish [contributor]
