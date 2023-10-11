@@ -1,4 +1,9 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# ssdtools 1.0.6.9001
+
+- Added David Fox and Rebecca Fisher as co-authors.
+
 
 # ssdtools 1.0.6.9000
 
