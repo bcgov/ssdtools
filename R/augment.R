@@ -16,7 +16,7 @@
 generics::augment
 
 #' Augmented Data from fitdists Object
-#' 
+#'
 #' Get a tibble of the original data with augmentation.
 #'
 #' @inheritParams params
@@ -24,7 +24,7 @@ generics::augment
 #' @family generics
 #' @seealso [`ssd_data()`]
 #' @export
-#' @examples 
+#' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' augment(fits)
 augment.fitdists <- function(x, ...) {

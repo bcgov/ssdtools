@@ -34,13 +34,15 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 7, ...) {
   pred <- ssd_hc(x, percent = 1:99, average = average, delta = delta)
   data <- ssd_data(x)
   cols <- .cols_fitdists(x)
-  
-  linetype <- if(length(unique(pred$dist)) > 1) "dist" else NULL
+
+  linetype <- if (length(unique(pred$dist)) > 1) "dist" else NULL
   linecolor <- linetype
   pred$percent <- round(pred$percent) # not sure why needed
 
-  ssd_plot(data = data, pred = pred, left = cols$left, right = cols$right,
-           ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...) +
+  ssd_plot(
+    data = data, pred = pred, left = cols$left, right = cols$right,
+    ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...
+  ) +
     labs(linetype = "Distribution", color = "Distribution")
 }
 
@@ -49,20 +51,22 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 7, ...) {
 #' @export
 #' @seealso [`estimates.fitdists()`] and [`ssd_match_moments()`]
 #' @examples
-#' 
+#'
 #' ssd_plot_cdf(list(
 #'   llogis = c(locationlog = 2, scalelog = 1),
-#'   lnorm = c(meanlog = 2, sdlog = 2))
-#' )
+#'   lnorm = c(meanlog = 2, sdlog = 2)
+#' ))
 ssd_plot_cdf.list <- function(x, ...) {
   pred <- ssd_hc(x, percent = 1:99)
   data <- data.frame(Conc = numeric(0))
 
-  linetype <- if(length(unique(pred$dist)) > 1) "dist" else NULL
+  linetype <- if (length(unique(pred$dist)) > 1) "dist" else NULL
   linecolor <- linetype
   pred$percent <- round(pred$percent) # not sure why needed
-  
-  ssd_plot(data = data, pred = pred,
-           ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...) +
+
+  ssd_plot(
+    data = data, pred = pred,
+    ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...
+  ) +
     labs(color = "Distribution", linetype = "Distribution")
 }

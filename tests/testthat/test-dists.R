@@ -13,9 +13,13 @@
 #    limitations under the License.
 
 test_that("dists all", {
-  expect_identical(ssd_dists_all(),
-                   c("burrIII3", "gamma", "gompertz", "invpareto", "lgumbel", "llogis", 
-                     "llogis_llogis", "lnorm", "lnorm_lnorm", "weibull"))
+  expect_identical(
+    ssd_dists_all(),
+    c(
+      "burrIII3", "gamma", "gompertz", "invpareto", "lgumbel", "llogis",
+      "llogis_llogis", "lnorm", "lnorm_lnorm", "weibull"
+    )
+  )
 })
 
 test_that("dists all", {

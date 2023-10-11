@@ -10,12 +10,14 @@ test_that("summary tmbfit", {
 
 test_that("summary fitdists", {
   data <- ssddata::ccme_boron
-  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = FALSE,
-                        min_pmix = 0.01)
+  fits <- ssd_fit_dists(data,
+    dists = "lnorm", rescale = FALSE,
+    min_pmix = 0.01
+  )
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
   expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted", "unequal", "min_pmix"))
-  expect_identical(summary$censoring, c(0,Inf))
+  expect_identical(summary$censoring, c(0, Inf))
   expect_identical(summary$nrow, 28L)
   expect_identical(summary$min_pmix, 0.01)
   expect_identical(summary$rescaled, 1)

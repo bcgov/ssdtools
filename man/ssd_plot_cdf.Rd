@@ -37,8 +37,8 @@ ssd_plot_cdf(fits)
 
 ssd_plot_cdf(list(
   llogis = c(locationlog = 2, scalelog = 1),
-  lnorm = c(meanlog = 2, sdlog = 2))
-)
+  lnorm = c(meanlog = 2, sdlog = 2)
+))
 }
 \seealso{
 \code{\link[=ssd_plot]{ssd_plot()}}

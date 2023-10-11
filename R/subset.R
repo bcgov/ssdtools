@@ -17,15 +17,17 @@
 #' Select a subset of distributions from a fitdists object.
 #' The Akaike Information-theoretic Criterion differences are calculated after
 #' selecting the distributions named in select.
-#' 
+#'
 #' @inheritParams params
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' subset(fits, c("gamma", "lnorm"))
 subset.fitdists <- function(x, select = names(x), delta = Inf, ...) {
-  if(!length(x)) return(x)
-  
+  if (!length(x)) {
+    return(x)
+  }
+
   chk_s3_class(select, "character")
   chk_vector(select)
   chk_unique(select)
@@ -40,17 +42,19 @@ subset.fitdists <- function(x, select = names(x), delta = Inf, ...) {
 
   class <- class(x)
   x <- x[names(x) %in% select]
-  
+
   class(x) <- class
   .attrs_fitdists(x) <- attrs
-  
-  if(!length(x)) return(x)
-  
+
+  if (!length(x)) {
+    return(x)
+  }
+
   d <- glance(x)$delta
   x <- x[is.na(d) | abs(d) <= delta]
-  
+
   class(x) <- class
   .attrs_fitdists(x) <- attrs
-  
+
   x
 }

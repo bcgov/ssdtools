@@ -19,4 +19,3 @@ test_that("gamma", {
   set.seed(42)
   expect_equal(ssd_rgamma(2), c(1.93929578065309, 0.180419099876704))
 })
-

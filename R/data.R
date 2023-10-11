@@ -48,9 +48,9 @@
 #' Species Sensitivity Data from
 #' the Canadian Council of Ministers of the Environment.
 #' Please use `[ssddata::ccme_data]` instead.
-#' 
+#'
 #' Additional information is available from <http://ceqg-rcqe.ccme.ca/download/en/324/>.
-#' 
+#'
 #' The columns are as follows
 #'
 #' \describe{

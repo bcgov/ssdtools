@@ -48,12 +48,12 @@ test_that("comma_signif", {
 })
 
 test_that("ssd_sort_data works conc", {
-  expect_identical(ssd_sort_data(ssddata::ccme_boron), ssddata::ccme_boron[order(ssddata::ccme_boron$Conc),])
+  expect_identical(ssd_sort_data(ssddata::ccme_boron), ssddata::ccme_boron[order(ssddata::ccme_boron$Conc), ])
 })
 
 test_that("ssd_sort_data works no rows", {
-  data <- ssddata::ccme_boron[FALSE,]
-  expect_identical(ssd_sort_data(data), data[order(data$Conc),])
+  data <- ssddata::ccme_boron[FALSE, ]
+  expect_identical(ssd_sort_data(data), data[order(data$Conc), ])
 })
 
 test_that("ssd_sort_data works censored data", {
@@ -61,13 +61,17 @@ test_that("ssd_sort_data works censored data", {
   data$Other <- data$Conc * 2
   data$Conc[1] <- NA
   data$ID <- 1:nrow(data)
-  expect_identical(ssd_sort_data(data, right = "Other")$ID[1:5], 
-                   c(1L, 19L, 20L, 21L, 2L))
+  expect_identical(
+    ssd_sort_data(data, right = "Other")$ID[1:5],
+    c(1L, 19L, 20L, 21L, 2L)
+  )
 })
 
 test_that("ssd_sort_data errors missing data", {
   data <- ssddata::ccme_boron
   data$Conc[1] <- NA
-  chk::expect_chk_error(ssd_sort_data(data), 
-                        "`data` has 1 row with effectively missing values in 'Conc'.")
+  chk::expect_chk_error(
+    ssd_sort_data(data),
+    "`data` has 1 row with effectively missing values in 'Conc'."
+  )
 })

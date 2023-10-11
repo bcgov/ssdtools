@@ -32,11 +32,15 @@ NULL
 
 .pd <- function(q, ..., fun) {
   args <- c(q, list(...))
-  
-  if(any(vapply(args, length, 1L) != 1L)) stop()
-  if(is.nan(q)) return (NaN)
-  if(any(is.na(unlist(args)))) return(NA_real_)
-  
+
+  if (any(vapply(args, length, 1L) != 1L)) stop()
+  if (is.nan(q)) {
+    return(NaN)
+  }
+  if (any(is.na(unlist(args)))) {
+    return(NA_real_)
+  }
+
   do.call(fun, args = args)
 }
 
@@ -48,38 +52,47 @@ NULL
   p <- mapply(.pd, q, ..., MoreArgs = list(fun = fun))
   p[inf & pos] <- 1
   p[inf & !pos] <- 0
-  if(!lower.tail) p <- 1 - p
-  if(log.p) p <- log(p)
+  if (!lower.tail) p <- 1 - p
+  if (log.p) p <- log(p)
   p
 }
 
 pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) {
-  if(!length(q)) return(numeric(0))
-  
-  if(!.lgt)
+  if (!length(q)) {
+    return(numeric(0))
+  }
+
+  if (!.lgt) {
     return(.pdist(dist, q = q, ..., lower.tail = lower.tail, log.p = log.p))
-  
+  }
+
   lte <- !is.na(q) & q <= 0
   q[lte] <- NA_real_
-  p <- .pdist(dist, q = log(q),  ..., lower.tail = TRUE, log.p = FALSE)
+  p <- .pdist(dist, q = log(q), ..., lower.tail = TRUE, log.p = FALSE)
   p[lte] <- 0
-  if(!lower.tail) p <- 1 - p
-  if(log.p) p <- log(p)
+  if (!lower.tail) p <- 1 - p
+  if (log.p) p <- log(p)
   p
 }
 
 .qd <- function(p, ..., fun, .lgt) {
   args <- c(p, list(...))
-  
-  if(any(vapply(args, length, 1L) != 1L)) stop()
-  if(is.nan(p)) return (NaN)
-  if(any(is.na(unlist(args)))) return(NA_real_)
-  
-  if(p == 0) {
-    if(!.lgt) return(0)
+
+  if (any(vapply(args, length, 1L) != 1L)) stop()
+  if (is.nan(p)) {
+    return(NaN)
+  }
+  if (any(is.na(unlist(args)))) {
+    return(NA_real_)
+  }
+
+  if (p == 0) {
+    if (!.lgt) {
+      return(0)
+    }
     return(-Inf)
   }
-  if(p == 1) {
+  if (p == 1) {
     return(Inf)
   }
   do.call(fun, args = args)
@@ -92,52 +105,62 @@ pdist <- function(dist, q, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) 
 }
 
 qdist <- function(dist, p, ..., lower.tail = TRUE, log.p = FALSE, .lgt = FALSE) {
-  if(!length(p)) return(numeric(0))
-  
+  if (!length(p)) {
+    return(numeric(0))
+  }
+
   if (log.p) p <- exp(p)
   if (!lower.tail) p <- 1 - p
-  
+
   nvld <- !is.na(p) & !(p >= 0 & p <= 1)
   p[nvld] <- NA_real_
   q <- .qdist(dist, p = p, ..., .lgt = .lgt)
   q[nvld] <- NaN
-  if(.lgt) q <- exp(q)
+  if (.lgt) q <- exp(q)
   q
 }
 
 .rdist <- function(dist, n, ...) {
   fun <- paste0("r", dist, "_ssd")
   args <- list(...)
-  
-  if(exists(fun, mode = "function")) {
+
+  if (exists(fun, mode = "function")) {
     args$n <- n
     return(do.call(fun, args))
   }
   qfun <- paste0("q", dist, "_ssd")
   q <- do.call(qfun, c(p = 0.5, args))
-  if(is.nan(q)) return(rep(NaN, n))
+  if (is.nan(q)) {
+    return(rep(NaN, n))
+  }
   p <- runif(n)
   do.call(qfun, c(p = list(p), args))
 }
 
 rdist <- function(dist, n, ..., .lgt = FALSE, chk) {
-  if(chk) {
-    if(!length(n)) return(numeric(0))
-    
-    if(length(n) > 1) {
+  if (chk) {
+    if (!length(n)) {
+      return(numeric(0))
+    }
+
+    if (length(n) > 1) {
       n <- length(n)
     }
     chk_not_any_na(n)
     n <- floor(n)
     chk_gte(n)
-    
-    if(n == 0L) return(numeric(0))
-    
+
+    if (n == 0L) {
+      return(numeric(0))
+    }
+
     chk_all(list(...), check_dim, values = 1L, x_name = "...")
-    if(any_missing(...)) return(rep(NA_real_, n))
+    if (any_missing(...)) {
+      return(rep(NA_real_, n))
+    }
   }
   r <- .rdist(dist, n = n, ...)
-  if(.lgt) r <- exp(r)
+  if (.lgt) r <- exp(r)
   r
 }
 
@@ -148,16 +171,20 @@ sdist <- function(dist, data, pars) {
 
 bdist <- function(dist, data, min_pmix, range_shape1, range_shape2) {
   fun <- paste0("b", dist)
-  if(!exists(fun, mode = "function"))
+  if (!exists(fun, mode = "function")) {
     return(list(lower = -Inf, upper = Inf))
-  do.call(fun, list(data = data, min_pmix = min_pmix,
-                    range_shape1 = range_shape1, range_shape2 = range_shape2))
+  }
+  do.call(fun, list(
+    data = data, min_pmix = min_pmix,
+    range_shape1 = range_shape1, range_shape2 = range_shape2
+  ))
 }
 
 mdist <- function(dist) {
   fun <- paste0("m", dist)
-  if(!exists(fun, mode = "function"))
+  if (!exists(fun, mode = "function")) {
     return(list())
+  }
   do.call(fun, args = list())
 }
 
@@ -170,6 +197,8 @@ tdist <- function(dist, data, pars, pvalue, test = "ks", y = "y") {
   args <- c(args, pars)
   test <- paste0(test, ".test")
   suppressWarnings(test <- do.call(test, args))
-  if(pvalue) return(test$p.value)
+  if (pvalue) {
+    return(test$p.value)
+  }
   unname(test$statistic)
 }

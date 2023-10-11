@@ -41,7 +41,9 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
-  hc_burrIII3 <- ssd_hc_burrlioz(fit, nboot = 10, ci = TRUE, min_pboot = 0,
-                                 parametric = TRUE)
+  hc_burrIII3 <- ssd_hc_burrlioz(fit,
+    nboot = 10, ci = TRUE, min_pboot = 0,
+    parametric = TRUE
+  )
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
 })

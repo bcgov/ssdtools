@@ -14,7 +14,8 @@
 
 test_that("logLik", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  expect_equal(logLik(fits), c(gamma = -116.81515869884, lgumbel = -120.092975580318, llogis = -118.507435324864, 
-                               lnorm = -117.514216489547, lnorm_lnorm = -115.179384580908, weibull = -116.81264387617
+  expect_equal(logLik(fits), c(
+    gamma = -116.81515869884, lgumbel = -120.092975580318, llogis = -118.507435324864,
+    lnorm = -117.514216489547, lnorm_lnorm = -115.179384580908, weibull = -116.81264387617
   ))
 })

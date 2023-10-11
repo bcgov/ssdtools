@@ -20,7 +20,7 @@ test_that("burrlioz with ccme_boron gives invpareto", {
 })
 
 test_that("burrlioz with eight or less samples gives llogis", {
-  fit <- ssd_fit_burrlioz(ssddata::ccme_boron[1:8,])
+  fit <- ssd_fit_burrlioz(ssddata::ccme_boron[1:8, ])
   expect_s3_class(fit, "fitdists")
   expect_s3_class(fit, "fitburrlioz")
   expect_identical(names(fit), "llogis")

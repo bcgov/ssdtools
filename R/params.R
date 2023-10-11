@@ -29,9 +29,9 @@
 #'   - `NULL` for no breaks
 #'   - `waiver()` for the default breaks
 #'   - A numeric vector of positions
-#' @param breaks A character vector 
+#' @param breaks A character vector
 #' @param bounds A named non-negative numeric vector of the left and right bounds for
-#' uncensored missing (0 and Inf) data in terms of the orders of magnitude 
+#' uncensored missing (0 and Inf) data in terms of the orders of magnitude
 #' relative to the extremes for non-missing values.
 #' @param conc A numeric vector of concentrations.
 #' @param digits A whole number specifying the number of significant figures
@@ -43,7 +43,7 @@
 #' @param average A flag specifying whether to model average the estimates.
 #' @param ci A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).
 #' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.
-#' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully fit 
+#' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully fit
 #' in the sense of returning a likelihood.
 #' @param level A number between 0 and 1 of the confidence level.
 #' @param ... Unused.

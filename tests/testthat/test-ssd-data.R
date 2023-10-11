@@ -14,12 +14,12 @@
 
 test_that("sdd_data gets original data", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  
+
   expect_identical(ssd_data(fits), ssddata::ccme_boron)
 })
 
 test_that("sdd_data returns tbl data", {
-  data <- data.frame(Conc = seq(1,6,by = 1))
+  data <- data.frame(Conc = seq(1, 6, by = 1))
   fits <- ssd_fit_dists(data, dists = "lnorm")
   expect_identical(ssd_data(fits), tibble::as_tibble(data))
 })

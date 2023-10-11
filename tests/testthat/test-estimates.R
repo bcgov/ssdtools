@@ -14,7 +14,7 @@
 
 test_that("estimates", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   estimates <- estimates(fits)
   expect_type(estimates, "list")
   expect_snapshot_output(print(estimates))

@@ -23,7 +23,9 @@ test_that("autoplot", {
 })
 
 test_that("autoplot", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE,
-                        dists = c("gamma", "llogis", "lnorm"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron,
+    rescale = TRUE,
+    dists = c("gamma", "llogis", "lnorm")
+  )
   expect_snapshot_plot(autoplot(fits, xlab = "New"), "autoplot_rescale")
 })

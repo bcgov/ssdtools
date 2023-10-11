@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 warn_min_pboot <- function(x, min_pboot) {
-  if(any(!is.na(x$pboot) & is.na(x$se) & x$nboot >= 2)) {
+  if (any(!is.na(x$pboot) & is.na(x$se) & x$nboot >= 2)) {
     wrn("One or more pboot values less than ", min_pboot, " (decrease min_pboot with caution).")
   }
   x
@@ -25,7 +25,7 @@ replace_min_pboot_na <- function(x, min_pboot) {
 }
 
 sample_nonparametric <- function(data) {
-  data[sample(nrow(data), replace = TRUE),]
+  data[sample(nrow(data), replace = TRUE), ]
 }
 
 sample_parametric <- function(dist, args = args, weighted = weighted, censoring = censoring) {
@@ -38,23 +38,30 @@ sample_parametric <- function(dist, args = args, weighted = weighted, censoring 
 }
 
 generate_data <- function(dist, data, args, weighted, censoring, parametric) {
-  if(!parametric)
+  if (!parametric) {
     return(sample_nonparametric(data))
+  }
   sample_parametric(dist, args = args, weighted = weighted, censoring = censoring)
 }
 
 sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, parametric, control) {
-  new_data <- generate_data(dist, data = data, args = args, weighted = weighted, censoring = censoring,
-                            parametric = parametric)
-  
-  if(dist == "lnorm_lnorm") {
+  new_data <- generate_data(dist,
+    data = data, args = args, weighted = weighted, censoring = censoring,
+    parametric = parametric
+  )
+
+  if (dist == "lnorm_lnorm") {
     pars <- slnorm_lnorm(new_data)
   }
-  
-  fit <- fun(dist, new_data, min_pmix = min_pmix, range_shape1 = range_shape1,
-             range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE)$result
-  
-  if(is.null(fit)) return(NULL)
+
+  fit <- fun(dist, new_data,
+    min_pmix = min_pmix, range_shape1 = range_shape1,
+    range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE
+  )$result
+
+  if (is.null(fit)) {
+    return(NULL)
+  }
   estimates(fit)
 }
 
@@ -63,14 +70,16 @@ boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
   pars <- .pars_tmbfit(x)
-  
+
   data <- data[c("left", "right", "weight")]
-  
-  estimates <- lapply(1:nboot, sample_parameters, dist = dist, fun = fun, 
-                      data = data, args = args, pars = pars, 
-                      weighted = weighted, censoring = censoring, min_pmix = min_pmix, 
-                      range_shape1 = range_shape1, range_shape2 = range_shape2, 
-                      parametric = parametric, control = control)
-  
+
+  estimates <- lapply(1:nboot, sample_parameters,
+    dist = dist, fun = fun,
+    data = data, args = args, pars = pars,
+    weighted = weighted, censoring = censoring, min_pmix = min_pmix,
+    range_shape1 = range_shape1, range_shape2 = range_shape2,
+    parametric = parametric, control = control
+  )
+
   estimates[!vapply(estimates, is.null, TRUE)]
 }

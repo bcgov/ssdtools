@@ -13,28 +13,28 @@
 #    limitations under the License.
 
 #' Water Quality Guideline for British Columbia
-#' 
+#'
 #' Calculates the 5% Hazard Concentration for British Columbia
-#' after rescaling the data 
-#' based on the log-logistic, log-normal and gamma distributions 
+#' after rescaling the data
+#' based on the log-logistic, log-normal and gamma distributions
 #' using the parametric bootstrap and AICc model averaging.
-#' 
-#' Returns a tibble the model averaged 5% hazard concentration with 
+#'
+#' Returns a tibble the model averaged 5% hazard concentration with
 #' standard errors, 95% lower and upper confidence limits
 #' and the number of bootstrap samples as well as the proportion of bootstrap
-#' samples that successfully returned a likelihood 
+#' samples that successfully returned a likelihood
 #' (convergence of the bootstrap sample is not required).
 #'
 #' @inheritParams params
 #'
 #' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @family wqg
-#' @seealso [`ssd_fit_dists()`] and [`ssd_hc()`] 
+#' @seealso [`ssd_fit_dists()`] and [`ssd_hc()`]
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#'  ssd_wqg_bc(ssddata::ccme_boron)
+#' ssd_wqg_bc(ssddata::ccme_boron)
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
   fits <- ssd_fit_dists(data, left = left, rescale = TRUE)
@@ -43,27 +43,27 @@ ssd_wqg_bc <- function(data, left = "Conc") {
 
 
 #' Water Quality Guideline for Burrlioz
-#' 
-#' Calculates the 5% Hazard Concentration (after rescaling the data) 
+#'
+#' Calculates the 5% Hazard Concentration (after rescaling the data)
 #' using the same approach as Burrlioz based on 10,000 non-parametric bootstrap
 #' samples.
-#' 
-#' Returns a tibble the model averaged 5% hazard concentration with 
+#'
+#' Returns a tibble the model averaged 5% hazard concentration with
 #' standard errors, 95% lower and upper confidence limits
 #' and the number of bootstrap samples as well as the proportion of bootstrap
-#' samples that successfully returned a likelihood 
+#' samples that successfully returned a likelihood
 #' (convergence of the bootstrap sample is not required).
 #'
 #' @inheritParams params
 #'
 #' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @family wqg
-#' @seealso [`ssd_fit_burrlioz()`] and [`ssd_hc_burrlioz()`] 
+#' @seealso [`ssd_fit_burrlioz()`] and [`ssd_hc_burrlioz()`]
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#'  ssd_wqg_burrlioz(ssddata::ccme_boron)
+#' ssd_wqg_burrlioz(ssddata::ccme_boron)
 #' }
 ssd_wqg_burrlioz <- function(data, left = "Conc") {
   fit <- ssd_fit_burrlioz(data, left = left, rescale = TRUE)
