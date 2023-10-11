@@ -36,11 +36,10 @@ To install the latest version from [CRAN](https://CRAN.R-project.org/package=ssd
 install.packages("ssdtools")
 ```
 
-To install the latest development version:
-
+To install the latest development version from [GitHub](https://github.com/bcgov/ssdtools)
 ```{r, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("bcgov/ssdtools")
+# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+pak::pak("bcgov/ssdtools")
 ```
 
 ## Introduction
@@ -141,8 +140,7 @@ If you would like to contribute to the package, please see our
 
 ## Code of Conduct
 
-Please note that the ssdtools project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Please note that the ssdtools project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 ## License
 

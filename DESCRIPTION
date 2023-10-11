@@ -2,11 +2,11 @@ Package: ssdtools
 Title: Species Sensitivity Distributions
 Version: 1.0.6.9000
 Authors@R: c(
-    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre", "ctr"),
+    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7683-4592")),
-    person("Carl", "Schwarz", role = c("aut", "ctr")),
-    person("Rebecca", "Fisher", role = "ctb"),
-    person("David", "Fox", role = "ctb"),
+    person("Carl", "Schwarz", role = "aut"),
+    person("Rebecca", "Fisher", , "R.Fisher@aims.gov.au", role = "aut"),
+    person("David", "Fox", , "david.fox@environmetrics.net.au", role = "aut"),
     person("Angeline", "Tillmanns", role = "ctb"),
     person("Ali", "Azizishirazi", role = "ctb"),
     person("Kathleen", "McTavish", role = "ctb"),
@@ -20,11 +20,14 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-3658-4517")),
     person("Emilie", "Doussantousse", role = "ctb"),
     person("Stephanie", "Hazlitt", role = "ctb"),
-    person("Nadine", "Hussein", role = "ctb"),
+    person("Nadine", "Hussein", , "nadine@poissonconsulting.ca", role = "ctb",
+           comment = c(ORCID = "0000-0003-4470-8361")),
     person("Nan-Hung", "Hsieh", role = "ctb"),
     person("Sergio", "Ibarra Espinosa", role = "ctb"),
-    person("Province of British Columbia", role = "cph"),
-    person("Environment and Climate Change Canada", role = "cph")
+    person("Hadley", "Wickham", role = "ctb"),
+    person("Province of British Columbia", role = c("fnd", "cph")),
+    person("Environment and Climate Change Canada", role = c("fnd", "cph")),
+    person("Australian Government Department of Climate Change, Energy, the Environment and Water", role = c("fnd", "cph"))
   )
 Description: Species sensitivity distributions are cumulative probability
     distributions which are fitted to toxicity concentrations for
@@ -36,7 +39,7 @@ Description: Species sensitivity distributions are cumulative probability
     on hazard concentrations and proportions are produced by parametric
     bootstrapping.
 License: Apache License (== 2.0) | file LICENSE
-URL: https://github.com/bcgov/ssdtools
+URL: https://github.com/bcgov/ssdtools, https://bcgov.github.io/ssdtools/
 BugReports: https://github.com/bcgov/ssdtools/issues
 Depends:
     R (>= 4.1)
