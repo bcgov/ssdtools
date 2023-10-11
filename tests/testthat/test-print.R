@@ -10,7 +10,7 @@ test_that("print fitdists", {
 
 test_that("summary fitdists with left censored, rescaled, weighted data", {
   data <- ssddata::ccme_boron
-  data$Mass <- 1:nrow(data)
+  data$Mass <- seq_len(nrow(data))
   data$Other <- data$Conc
   data$Conc[2] <- NA
   fits <- ssd_fit_dists(data, right = "Other", weight = "Mass", rescale = TRUE, dists = "lnorm")
@@ -28,7 +28,7 @@ test_that("summary fitdists with inconsistently censored data", {
 
 test_that("summary fitdists with right censored, rescaled, weighted data", {
   data <- ssddata::ccme_boron
-  data$Mass <- 1:nrow(data)
+  data$Mass <- seq_len(nrow(data))
   data$Other <- data$Conc
   data$Other[1] <- Inf
   expect_error(fits <- ssd_fit_dists(data, right = "Other", weight = "Mass", rescale = TRUE, dists = "lnorm"))

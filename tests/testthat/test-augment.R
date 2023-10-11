@@ -14,6 +14,6 @@
 
 test_that("augment", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  
+
   expect_identical(augment(fits), ssddata::ccme_boron)
 })

@@ -28,7 +28,7 @@ samples that successfully returned a likelihood
 }
 \examples{
 \dontrun{
- ssd_wqg_burrlioz(ssddata::ccme_boron)
+ssd_wqg_burrlioz(ssddata::ccme_boron)
 }
 }
 \seealso{

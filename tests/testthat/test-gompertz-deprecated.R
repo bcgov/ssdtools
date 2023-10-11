@@ -23,12 +23,18 @@ test_that("dgompertz extremes", {
   expect_identical(dgompertz(0), 1)
   expect_identical(dgompertz(-Inf), 0)
   expect_identical(dgompertz(Inf), 0)
-  expect_identical(dgompertz(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(dgompertz(NA), dgompertz(NaN), dgompertz(0), dgompertz(Inf), dgompertz(-Inf)))
-  expect_equal(dgompertz(1:2, llocation = 1:2, lshape = 3:4), 
-               c(dgompertz(1, 1, 3), dgompertz(2, 2, 4)))
-  expect_equal(dgompertz(1:2, llocation = c(1, NA), lshape = 3:4), 
-               c(dgompertz(1, 1, 3), NA))
+  expect_identical(
+    dgompertz(c(NA, NaN, 0, Inf, -Inf)),
+    c(dgompertz(NA), dgompertz(NaN), dgompertz(0), dgompertz(Inf), dgompertz(-Inf))
+  )
+  expect_equal(
+    dgompertz(1:2, llocation = 1:2, lshape = 3:4),
+    c(dgompertz(1, 1, 3), dgompertz(2, 2, 4))
+  )
+  expect_equal(
+    dgompertz(1:2, llocation = c(1, NA), lshape = 3:4),
+    c(dgompertz(1, 1, 3), NA)
+  )
 })
 
 test_that("pgompertz extremes", {
@@ -44,12 +50,18 @@ test_that("pgompertz extremes", {
   expect_identical(pgompertz(0), 0)
   expect_identical(pgompertz(-Inf), 0)
   expect_identical(pgompertz(Inf), 1)
-  expect_identical(pgompertz(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(pgompertz(NA), pgompertz(NaN), pgompertz(0), pgompertz(Inf), pgompertz(-Inf)))
-  expect_equal(pgompertz(1:2, llocation = 1:2, lshape = 3:4), 
-               c(pgompertz(1, 1, 3), pgompertz(2, 2, 4)))
-  expect_equal(pgompertz(1:2, llocation = c(1, NA), lshape = 3:4), 
-               c(pgompertz(1, 1, 3), NA))
+  expect_identical(
+    pgompertz(c(NA, NaN, 0, Inf, -Inf)),
+    c(pgompertz(NA), pgompertz(NaN), pgompertz(0), pgompertz(Inf), pgompertz(-Inf))
+  )
+  expect_equal(
+    pgompertz(1:2, llocation = 1:2, lshape = 3:4),
+    c(pgompertz(1, 1, 3), pgompertz(2, 2, 4))
+  )
+  expect_equal(
+    pgompertz(1:2, llocation = c(1, NA), lshape = 3:4),
+    c(pgompertz(1, 1, 3), NA)
+  )
 })
 
 test_that("qgompertz extremes", {
@@ -67,10 +79,14 @@ test_that("qgompertz extremes", {
   expect_identical(qgompertz(0), 0)
   expect_identical(qgompertz(-Inf), NaN)
   expect_identical(qgompertz(Inf), NaN)
-  expect_identical(qgompertz(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(qgompertz(NA), qgompertz(NaN), qgompertz(0), qgompertz(Inf), qgompertz(-Inf)))
-  expect_equal(qgompertz(1:2, llocation = 1:2, lshape = 3:4), 
-               c(qgompertz(1, 1, 3), qgompertz(2, 2, 4)))
+  expect_identical(
+    qgompertz(c(NA, NaN, 0, Inf, -Inf)),
+    c(qgompertz(NA), qgompertz(NaN), qgompertz(0), qgompertz(Inf), qgompertz(-Inf))
+  )
+  expect_equal(
+    qgompertz(1:2, llocation = 1:2, lshape = 3:4),
+    c(qgompertz(1, 1, 3), qgompertz(2, 2, 4))
+  )
   expect_equal(qgompertz(1:2, llocation = c(1, NA), lshape = 3:4), c(Inf, NaN))
   expect_equal(qgompertz(pgompertz(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
 })

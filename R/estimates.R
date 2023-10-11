@@ -16,19 +16,19 @@
 universals::estimates
 
 #' @export
-estimates.tmbfit <- function(x,...) {
+estimates.tmbfit <- function(x, ...) {
   as.list(.ests_tmbfit(x))
 }
 
 #' Estimates for fitdists Object
-#' 
+#'
 #' Gets a named list of the estimated values by distribution and term.
-#' 
+#'
 #' @inheritParams params
 #' @return A named list of the estimates.
 #' @seealso [`tidy.fitdists()`], [`ssd_match_moments()`], [`ssd_hc()`] and [`ssd_plot_cdf()`]
 #' @export
-#' @examples 
+#' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' estimates <- estimates(fits)
 #' print(estimates)
@@ -39,4 +39,3 @@ estimates.fitdists <- function(x, ...) {
   names(y) <- names(x)
   y
 }
-

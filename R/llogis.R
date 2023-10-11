@@ -15,38 +15,44 @@
 #' @describeIn ssd_p Cumulative Distribution Function for Log-Logistic Distribution
 #' @export
 #' @examples
-#' 
+#'
 #' ssd_pllogis(1)
 ssd_pllogis <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
-  pdist("logis", q = q,  location = locationlog, scale = scalelog, 
-        lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
+  pdist("logis",
+    q = q, location = locationlog, scale = scalelog,
+    lower.tail = lower.tail, log.p = log.p, .lgt = TRUE
+  )
 }
 
 #' @describeIn ssd_q Cumulative Distribution Function for Log-Logistic Distribution
 #' @export
 #' @examples
-#' 
+#'
 #' ssd_qllogis(0.5)
 ssd_qllogis <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
-  qdist("logis", p = p,  location = locationlog, scale = scalelog,
-        lower.tail = lower.tail, log.p = log.p, .lgt = TRUE)
+  qdist("logis",
+    p = p, location = locationlog, scale = scalelog,
+    lower.tail = lower.tail, log.p = log.p, .lgt = TRUE
+  )
 }
 
 #' @describeIn ssd_r Random Generation for Log-Logistic Distribution
 #' @export
 #' @examples
-#' 
+#'
 #' set.seed(50)
 #' hist(ssd_rllogis(10000), breaks = 1000)
 ssd_rllogis <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
-  rdist("logis", n = n,  location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
+  rdist("logis", n = n, location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
 }
 
 sllogis <- function(data, pars = NULL) {
-  if(!is.null(pars)) return(pars)
-  
+  if (!is.null(pars)) {
+    return(pars)
+  }
+
   x <- mean_weighted_values(data)
-  
+
   list(
     locationlog = mean(log(x), na.rm = TRUE),
     log_scalelog = log(pi * sd(log(x), na.rm = TRUE) / sqrt(3))
@@ -54,17 +60,22 @@ sllogis <- function(data, pars = NULL) {
 }
 
 plogis_ssd <- function(q, location, scale) {
-  if(scale <= 0) return(NaN)
+  if (scale <= 0) {
+    return(NaN)
+  }
   stats::plogis(q, location, scale)
 }
 
 qlogis_ssd <- function(p, location, scale) {
-  if(scale <= 0) return(NaN)
+  if (scale <= 0) {
+    return(NaN)
+  }
   stats::qlogis(p, location, scale)
 }
 
 rlogis_ssd <- function(n, location, scale) {
-  if(scale <= 0) return(rep(NaN, n))
+  if (scale <= 0) {
+    return(rep(NaN, n))
+  }
   stats::rlogis(n, location, scale)
 }
-

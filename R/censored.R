@@ -11,7 +11,7 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-#    
+#
 #' Is Censored
 #'
 #' Tests if an object has censored data.
@@ -27,15 +27,17 @@ ssd_is_censored <- function(x, ...) {
 #' @inheritParams params
 #' @rdname ssd_is_censored
 #' @export
-#' @examples 
-#' 
+#' @examples
+#'
 #' ssd_is_censored(ssddata::ccme_boron)
 #' ssd_is_censored(data.frame(Conc = 1, right = 2), right = "right")
 ssd_is_censored.data.frame <- function(x, left = "Conc", right = left, ...) {
   chk_unused(...)
   .chk_data(x, left, right, weight = NULL, nrow = 0L)
-  
-  if(!nrow(x)) return(NA)
+
+  if (!nrow(x)) {
+    return(NA)
+  }
   data <- process_data(x, left, right, weight = NULL)
   .is_censored(censoring(data))
 }
@@ -44,8 +46,8 @@ ssd_is_censored.data.frame <- function(x, left = "Conc", right = left, ...) {
 #' @inheritParams params
 #' @rdname ssd_is_censored
 #' @export
-#' @examples 
-#' 
+#' @examples
+#'
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_is_censored(fits)
 ssd_is_censored.fitdists <- function(x, ...) {

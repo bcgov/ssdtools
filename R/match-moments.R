@@ -35,8 +35,8 @@ min_discrepancy <- function(dist, meanlog, sdlog, nsim) {
 }
 
 #' Match Moments
-#' 
-#' Gets a named list of the values that produce 
+#'
+#' Gets a named list of the values that produce
 #' the moment values (meanlog and sdlog) by distribution and term.
 #'
 #' @inheritParams params

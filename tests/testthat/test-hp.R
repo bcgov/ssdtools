@@ -15,7 +15,7 @@
 test_that("hp", {
   skip_on_os("linux") # FIXME
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   set.seed(102)
   hp <- ssd_hp(fits, conc = 1, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hp, "tbl")
@@ -94,7 +94,7 @@ test_that("hp fitdists works with multiple concs", {
   skip_on_os("linux") # FIXME
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
-  hp <- ssd_hp(fits, c(2.5,1))
+  hp <- ssd_hp(fits, c(2.5, 1))
   expect_s3_class(hp, "tbl_df")
   expect_snapshot_data(hp, "hp89")
 })
@@ -132,7 +132,7 @@ test_that("hp fitdists gives different answer with model averaging as hc not sam
   library(ssdtools)
   library(ssddata)
   library(testthat)
-    data <- ssddata::aims_molybdenum_marine
+  data <- ssddata::aims_molybdenum_marine
 
   fits_lgumbel <- ssd_fit_dists(data, dists = "lgumbel")
   expect_equal(ssd_hp(fits_lgumbel, ssd_hc(fits_lgumbel, percent = 5)$est)$est, 5)
@@ -175,8 +175,10 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
 
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  expect_warning(hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
-                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
+  expect_warning(
+    hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
+    "^Parametric CIs cannot be calculated for inconsistently censored data[.]$"
+  )
   expect_identical(hp$se, NA_real_)
 })
 
@@ -240,8 +242,10 @@ test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
   data$Weight <- rep(1, nrow(data))
   data$Weight[1] <- 2
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  expect_warning(hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
-                 "^Parametric CIs cannot be calculated for unequally weighted data[.]$")
+  expect_warning(
+    hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
+    "^Parametric CIs cannot be calculated for unequally weighted data[.]$"
+  )
   expect_identical(hp$se, NA_real_)
 })
 
@@ -279,7 +283,7 @@ test_that("ssd_hp effect with higher weight two distributions", {
 test_that("ssd_hp cis with non-convergence", {
   skip_on_os("linux") # FIXME
   set.seed(99)
-  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
   expect_identical(attr(fit, "min_pmix"), 0.15)
@@ -297,7 +301,7 @@ test_that("ssd_hp cis with non-convergence", {
 test_that("ssd_hp cis with error", {
   skip_on_os("linux") # FIXME
   set.seed(99)
-  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
@@ -317,20 +321,24 @@ test_that("ssd_hp cis with error", {
 test_that("ssd_hp cis with error and multiple dists", {
   skip_on_os("linux") # FIXME
   set.seed(99)
-  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = c("lnorm", "llogis_llogis"), min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
   set.seed(99)
-  expect_warning(hp_err_two <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, average = FALSE,
-                                      delta = 100))
+  expect_warning(hp_err_two <- ssd_hp(fit,
+    conc = 1, ci = TRUE, nboot = 100, average = FALSE,
+    delta = 100
+  ))
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
   expect_snapshot_boot_data(hp_err_two, "hp_err_two")
   set.seed(99)
-  expect_warning(hp_err_avg <- ssd_hp(fit, conc = 1,  ci = TRUE, nboot = 100,
-                                      delta = 100))
+  expect_warning(hp_err_avg <- ssd_hp(fit,
+    conc = 1, ci = TRUE, nboot = 100,
+    delta = 100
+  ))
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")

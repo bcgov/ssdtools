@@ -27,7 +27,7 @@ test_that("burrIII3 gives cis with ccme_chloride", {
   hc <- ssd_hc(fit, nboot = 10, ci = TRUE)
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
-  testthat::skip_on_os("solaris")  
+  testthat::skip_on_os("solaris")
   expect_snapshot_data(hc, "hc_chloride")
 })
 
@@ -38,7 +38,7 @@ test_that("burrIII3 gives cis with ccme_uranium", {
   hc <- ssd_hc(fit, nboot = 10, ci = TRUE)
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
-  testthat::skip_on_os("solaris")  
+  testthat::skip_on_os("solaris")
   expect_snapshot_data(hc, "hc_uranium")
 })
 
@@ -49,6 +49,8 @@ test_that("burrIII3 fits anon_e but only at boundary ok", {
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
   expect_snapshot_data(tidy, "tidy_anon_e")
-  expect_error(expect_warning(ssd_fit_dists(ssddata::anon_e, dists = "burrIII3"),
-               "at boundary"))
+  expect_error(expect_warning(
+    ssd_fit_dists(ssddata::anon_e, dists = "burrIII3"),
+    "at boundary"
+  ))
 })

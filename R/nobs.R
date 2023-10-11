@@ -18,7 +18,8 @@ stats::nobs
 
 #' @export
 nobs.fitdists <- function(object, ...) {
-  if(ssd_is_censored(object))
+  if (ssd_is_censored(object)) {
     return(NA_integer_)
+  }
   nrow(.data_fitdists(object))
 }

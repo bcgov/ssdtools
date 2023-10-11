@@ -79,7 +79,7 @@ library(ggplot2)
 
 theme_set(theme_bw())
 
-autoplot(fits) + 
+autoplot(fits) +
   scale_colour_ssd()
 ```
 
@@ -132,7 +132,7 @@ and plotted together with the original data using `ssd_plot`.
 ssd_plot(ssddata::ccme_boron, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
-) + 
+) +
   expand_limits(x = 3000) +
   scale_colour_ssd()
 ```
@@ -143,28 +143,6 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
 
 Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
 Distributions in Ecotoxicology. CRC Press.
-
-## Citation
-
-    To cite package 'ssdtools' in publications use:
-
-      Thorley J, Schwarz C (2018). "ssdtools: An R package to fit Species
-      Sensitivity Distributions." _Journal of Open Source Software_,
-      *3*(31), 1082. doi:10.21105/joss.01082
-      <https://doi.org/10.21105/joss.01082>.
-
-    A BibTeX entry for LaTeX users is
-
-      @Article{,
-        title = {ssdtools: {An} {R} package to fit {Species} {Sensitivity} {Distributions}},
-        author = {Joe Thorley and Carl Schwarz},
-        journal = {Journal of Open Source Software},
-        year = {2018},
-        volume = {3},
-        number = {31},
-        pages = {1082},
-        doi = {10.21105/joss.01082},
-      }
 
 ## Information
 

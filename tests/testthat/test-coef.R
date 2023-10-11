@@ -14,7 +14,7 @@
 
 test_that("coef", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   coef <- coef(fits)
   expect_s3_class(coef, "tbl")
   expect_identical(coef, tidy(fits))

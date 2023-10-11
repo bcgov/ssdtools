@@ -14,7 +14,7 @@
 
 test_that("stat_ssd deprecated", {
   lifecycle::expect_deprecated(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-                                 stat_ssd())
+    stat_ssd())
 })
 
 test_that("plot stat_ssd", {
@@ -26,7 +26,7 @@ test_that("plot stat_ssd", {
 
 test_that("geom_ssd deprecated", {
   lifecycle::expect_deprecated(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-                                 geom_ssd())
+    geom_ssd())
 })
 
 test_that("plot geom_ssd", {
@@ -59,20 +59,22 @@ test_that("plot geom_ssdsegment", {
 test_that("plot geom_ssdsegment identity", {
   data <- ssddata::ccme_boron
   data$New <- (1:nrow(data) - 0.5) / nrow(data)
-  gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc, xend = Conc * 2,
-                                                 y = New, yend = New)) +
+  gp <- ggplot2::ggplot(data, ggplot2::aes(
+    x = Conc, xend = Conc * 2,
+    y = New, yend = New
+  )) +
     geom_ssdsegment(stat = "identity")
   expect_snapshot_plot(gp, "geom_ssdsegment_identity")
 })
 
 test_that("plot geom_ssdsegment arrow", {
   gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-                   geom_ssdsegment(arrow = grid::arrow())
+    geom_ssdsegment(arrow = grid::arrow())
   expect_snapshot_plot(gp, "geom_ssdsegment_arrow")
 })
 
 test_that("plot geom_ssdsegment no data", {
-  gp <- ggplot2::ggplot(ssddata::ccme_boron[FALSE,], ggplot2::aes(x = Conc, xend = Conc * 2)) +
+  gp <- ggplot2::ggplot(ssddata::ccme_boron[FALSE, ], ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_ssdsegment()
   expect_snapshot_plot(gp, "geom_ssdsegment_nodata")
 })
@@ -105,8 +107,8 @@ test_that("plot geoms", {
     geom_ssdsegment(data = ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_hcintersect(xintercept = 100, yintercept = 0.5) +
     geom_xribbon(
-      ggplot2::aes(xmin = lcl, xmax = ucl, y = percent/100),
-      alpha = 1/3
+      ggplot2::aes(xmin = lcl, xmax = ucl, y = percent / 100),
+      alpha = 1 / 3
     )
   testthat::skip_on_ci()
   testthat::skip_on_cran()

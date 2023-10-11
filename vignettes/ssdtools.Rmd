@@ -105,7 +105,7 @@ As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
 ```{r, fig.width = 5}
 theme_set(theme_bw()) # set plot theme
 
-autoplot(fits) + 
+autoplot(fits) +
   ggtitle("Species Sensitivity Distributions for Boron") +
   scale_colour_ssd()
 ```
@@ -172,8 +172,9 @@ The data frame of the estimates can then be plotted together with the original d
 Once again the returned object is a `ggplot` object which can be customized prior to plotting.
 ```{r, fig.height = 5, fig.width = 6}
 ssd_plot(ccme_boron, boron_pred,
-         color = "Group", label = "Species",
-         xlab = "Concentration (mg/L)", ribbon = TRUE) + 
+  color = "Group", label = "Species",
+  xlab = "Concentration (mg/L)", ribbon = TRUE
+) +
   expand_limits(x = 5000) + # to ensure the species labels fit
   ggtitle("Species Sensitivity for Boron") +
   scale_colour_ssd()
@@ -211,7 +212,7 @@ ggplot(ccme_boron) +
 The third is `geom_xribbon()` which plots species sensitivity confidence intervals
 ```{r}
 ggplot(boron_pred) +
-  geom_xribbon(aes(xmin = lcl, xmax = ucl, y = percent/100))
+  geom_xribbon(aes(xmin = lcl, xmax = ucl, y = percent / 100))
 ```  
 
 And the fourth is `geom_hcintersect()` which plots hazard concentrations
@@ -223,8 +224,8 @@ ggplot() +
 They can be combined together as follows
 ```{r}
 gp <- ggplot(boron_pred, aes(x = est)) +
-  geom_xribbon(aes(xmin = lcl, xmax = ucl, y = percent/100), alpha = 0.2) +
-  geom_line(aes(y = percent/100)) +
+  geom_xribbon(aes(xmin = lcl, xmax = ucl, y = percent / 100), alpha = 0.2) +
+  geom_line(aes(y = percent / 100)) +
   geom_ssdsegment(data = ccme_boron, aes(x = Conc / 2, xend = Conc * 2)) +
   geom_ssdpoint(data = ccme_boron, aes(x = Conc / 2)) +
   geom_ssdpoint(data = ccme_boron, aes(x = Conc * 2)) +

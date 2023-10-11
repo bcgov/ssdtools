@@ -94,11 +94,10 @@ Uses the empirical cumulative distribution to create scatterplot of points \code
 \examples{
 ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
   geom_ssdpoint()
-
 \dontrun{
 ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
   geom_ssd()
- }
+}
 }
 \seealso{
 \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}

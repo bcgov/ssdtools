@@ -31,19 +31,22 @@ print.summary_tmbfit <- function(x, ...) {
 print.summary_fitdists <- function(x, ...) {
   lapply(x$fits, print)
   censoring <- censoring_text(x$censoring)
-  if(x$unequal) {
+  if (x$unequal) {
     weighted <- "unequally weighted"
   } else if (x$weighted != 1) {
     weighted <- "weighted"
-  } else
+  } else {
     weighted <- NULL
-  rescaled <- if(x$rescaled != 1) {
-    paste0("rescaled (", signif(x$rescaled, 4) ,")")
-  } else NULL
+  }
+  rescaled <- if (x$rescaled != 1) {
+    paste0("rescaled (", signif(x$rescaled, 4), ")")
+  } else {
+    NULL
+  }
   properties <- c(censoring, weighted, rescaled)
   properties <- cc(properties, conj = " and ", brac = "")
-  if(length(properties)) properties <- paste0(" ", properties)
-  
+  if (length(properties)) properties <- paste0(" ", properties)
+
   txt <- paste0("Parameters estimated from ", x$nrow, " rows of", properties, " data.")
   cat(txt)
   invisible(x)

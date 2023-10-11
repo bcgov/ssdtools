@@ -25,14 +25,14 @@ test_that("llogis_llogis custom checks", {
 
 test_that("ssd_qllogis_llogis allows reversed distributions", {
   expect_equal(
-    ssd_qllogis_llogis(0.05, locationlog1 = 0, locationlog2 = 1, pmix = 0.1), 
+    ssd_qllogis_llogis(0.05, locationlog1 = 0, locationlog2 = 1, pmix = 0.1),
     ssd_qllogis_llogis(0.05, locationlog1 = 1, locationlog2 = 0, pmix = 0.9)
   )
 })
 
 test_that("ssd_pllogis_llogis allows reversed distributions", {
   expect_equal(
-    ssd_pllogis_llogis(1, locationlog1 = 0, locationlog2 = 1, pmix = 0.1), 
+    ssd_pllogis_llogis(1, locationlog1 = 0, locationlog2 = 1, pmix = 0.1),
     ssd_pllogis_llogis(1, locationlog1 = 1, locationlog2 = 0, pmix = 0.9)
   )
 })

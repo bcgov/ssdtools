@@ -52,11 +52,11 @@ ssd_gof <- function(x, ...) {
 .tests_tmbfit <- function(x, data, pvalue) {
   dist <- .dist_tmbfit(x)
   pars <- estimates(x)
-  
+
   ad <- tdist(dist, data, pars, pvalue, "ad", y = "null")
   ks <- tdist(dist, data, pars, pvalue)
   cvm <- tdist(dist, data, pars, pvalue, "cvm", y = "null")
-  
+
   tibble(ad = ad, ks = ks, cvm = cvm)
 }
 
@@ -67,11 +67,11 @@ ssd_gof <- function(x, ...) {
 ssd_gof.fitdists <- function(x, pvalue = FALSE, ...) {
   chk_flag(pvalue)
   chk_unused(...)
-  
+
   glance <- glance(x)
-  glance$bic <- - 2 * glance$log_lik + log(glance$nobs) * glance$npars
-  
-  if(glance$nobs[1] < 8) {
+  glance$bic <- -2 * glance$log_lik + log(glance$nobs) * glance$npars
+
+  if (glance$nobs[1] < 8) {
     glance$ad <- NA_real_
     glance$ks <- NA_real_
     glance$cvm <- NA_real_

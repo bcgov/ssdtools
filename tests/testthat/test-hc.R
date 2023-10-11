@@ -244,8 +244,10 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
 
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
+  expect_warning(
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+    "^Parametric CIs cannot be calculated for inconsistently censored data[.]$"
+  )
   expect_identical(hc$se, NA_real_)
 })
 
@@ -267,8 +269,10 @@ test_that("ssd_hc not work partially censored even if all same left", {
   data$Conc <- 0.1
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
+  expect_warning(
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+    "^Parametric CIs cannot be calculated for inconsistently censored data[.]$"
+  )
 })
 
 test_that("ssd_hc doesn't works with inconsisently censored data", {
@@ -279,8 +283,10 @@ test_that("ssd_hc doesn't works with inconsisently censored data", {
   data$Conc[1] <- data$Conc2[1] / 2
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-                 "^Parametric CIs cannot be calculated for inconsistently censored data[.]$")
+  expect_warning(
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+    "^Parametric CIs cannot be calculated for inconsistently censored data[.]$"
+  )
 })
 
 test_that("ssd_hc same with equally weighted data", {
@@ -343,8 +349,10 @@ test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
   data$Weight <- rep(1, nrow(data))
   data$Weight[1] <- 2
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-                 "^Parametric CIs cannot be calculated for unequally weighted data[.]$")
+  expect_warning(
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+    "^Parametric CIs cannot be calculated for unequally weighted data[.]$"
+  )
   expect_identical(hc$se, NA_real_)
 })
 
@@ -382,7 +390,7 @@ test_that("ssd_hc effect with higher weight two distributions", {
 test_that("ssd_hc cis with non-convergence", {
   skip_on_os("linux") # FIXME
   set.seed(99)
-  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
   expect_identical(attr(fit, "min_pmix"), 0.15)
@@ -400,7 +408,7 @@ test_that("ssd_hc cis with non-convergence", {
 test_that("ssd_hc cis with error", {
   skip_on_os("linux") # FIXME
   set.seed(99)
-  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
@@ -420,7 +428,7 @@ test_that("ssd_hc cis with error", {
 test_that("ssd_hc cis with error and multiple dists", {
   skip_on_os("linux") # FIXME
   set.seed(99)
-  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1/10, sdlog2 = 1/10, pmix = 0.2)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = c("lnorm", "llogis_llogis"), min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
@@ -431,8 +439,10 @@ test_that("ssd_hc cis with error and multiple dists", {
   testthat::skip_on_os("solaris")
   expect_snapshot_boot_data(hc_err_two, "hc_err_two")
   set.seed(99)
-  expect_warning(hc_err_avg <- ssd_hc(fit, ci = TRUE, nboot = 100,
-                                      delta = 100))
+  expect_warning(hc_err_avg <- ssd_hc(fit,
+    ci = TRUE, nboot = 100,
+    delta = 100
+  ))
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
@@ -504,8 +514,10 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
-  hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0,
-                        parametric = TRUE)
+  hc_burrIII3 <- ssd_hc(fit,
+    nboot = 10, ci = TRUE, min_pboot = 0,
+    parametric = TRUE
+  )
   testthat::skip_on_os("windows")
   testthat::skip_on_os("linux")
   testthat::skip_on_os("solaris")
@@ -515,8 +527,9 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
 test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
   skip_on_os("linux") # FIXME
   fits <- ssd_fit_dists(ssddata::ccme_chloride,
-                        min_pmix = 0.0001, at_boundary_ok = TRUE,
-                        dists = c("lnorm_lnorm", "llogis_llogis"))
+    min_pmix = 0.0001, at_boundary_ok = TRUE,
+    dists = c("lnorm_lnorm", "llogis_llogis")
+  )
 
   set.seed(102)
   expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE))

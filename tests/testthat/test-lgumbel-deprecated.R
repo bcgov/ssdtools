@@ -24,12 +24,18 @@ test_that("dlgumbel extremes", {
   expect_identical(dlgumbel(0), 0)
   expect_identical(dlgumbel(-Inf), 0)
   expect_identical(dlgumbel(Inf), 0)
-  expect_identical(dlgumbel(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(dlgumbel(NA), dlgumbel(NaN), dlgumbel(0), dlgumbel(Inf), dlgumbel(-Inf)))
-  expect_equal(dlgumbel(1:2, locationlog = 1:2, scalelog = 3:4), 
-               c(dlgumbel(1, 1, 3), dlgumbel(2, 2, 4)))
-  expect_equal(dlgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4), 
-               c(dlgumbel(1, 1, 3), NA))
+  expect_identical(
+    dlgumbel(c(NA, NaN, 0, Inf, -Inf)),
+    c(dlgumbel(NA), dlgumbel(NaN), dlgumbel(0), dlgumbel(Inf), dlgumbel(-Inf))
+  )
+  expect_equal(
+    dlgumbel(1:2, locationlog = 1:2, scalelog = 3:4),
+    c(dlgumbel(1, 1, 3), dlgumbel(2, 2, 4))
+  )
+  expect_equal(
+    dlgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4),
+    c(dlgumbel(1, 1, 3), NA)
+  )
 })
 
 test_that("plgumbel extremes", {
@@ -46,12 +52,18 @@ test_that("plgumbel extremes", {
   expect_identical(plgumbel(0), 0)
   expect_identical(plgumbel(-Inf), 0)
   expect_identical(plgumbel(Inf), 1)
-  expect_identical(plgumbel(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(plgumbel(NA), plgumbel(NaN), plgumbel(0), plgumbel(Inf), plgumbel(-Inf)))
-  expect_equal(plgumbel(1:2, locationlog = 1:2, scalelog = 3:4), 
-               c(plgumbel(1, 1, 3), plgumbel(2, 2, 4)))
-  expect_equal(plgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4), 
-               c(plgumbel(1, 1, 3), NA))
+  expect_identical(
+    plgumbel(c(NA, NaN, 0, Inf, -Inf)),
+    c(plgumbel(NA), plgumbel(NaN), plgumbel(0), plgumbel(Inf), plgumbel(-Inf))
+  )
+  expect_equal(
+    plgumbel(1:2, locationlog = 1:2, scalelog = 3:4),
+    c(plgumbel(1, 1, 3), plgumbel(2, 2, 4))
+  )
+  expect_equal(
+    plgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4),
+    c(plgumbel(1, 1, 3), NA)
+  )
 })
 
 test_that("qlgumbel extremes", {
@@ -70,10 +82,14 @@ test_that("qlgumbel extremes", {
   expect_identical(qlgumbel(0), 0)
   expect_identical(qlgumbel(-Inf), NaN)
   expect_identical(qlgumbel(Inf), NaN)
-  expect_identical(qlgumbel(c(NA, NaN, 0, Inf, -Inf)), 
-                   c(qlgumbel(NA), qlgumbel(NaN), qlgumbel(0), qlgumbel(Inf), qlgumbel(-Inf)))
-  expect_equal(qlgumbel(1:2, locationlog = 1:2, scalelog = 3:4), 
-               c(qlgumbel(1, 1, 3), qlgumbel(2, 2, 4)))
+  expect_identical(
+    qlgumbel(c(NA, NaN, 0, Inf, -Inf)),
+    c(qlgumbel(NA), qlgumbel(NaN), qlgumbel(0), qlgumbel(Inf), qlgumbel(-Inf))
+  )
+  expect_equal(
+    qlgumbel(1:2, locationlog = 1:2, scalelog = 3:4),
+    c(qlgumbel(1, 1, 3), qlgumbel(2, 2, 4))
+  )
   expect_equal(qlgumbel(1:2, locationlog = c(1, NA), scalelog = 3:4), c(Inf, NaN))
   expect_equal(qlgumbel(plgumbel(c(0, 0.1, 0.5, 0.9, 1))), c(0, 0.1, 0.5, 0.9, 1))
 })
@@ -119,12 +135,14 @@ test_that("plgumbel values", {
 test_that("qlgumbel values", {
   withr::local_options(lifecycle_verbosity = "quiet")
   expect_equal(qlgumbel(0.5), 1.44269504088896)
-  expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1)), 
-               c(2.52411500467289, 3.36651292058166, 5.25036732731245))
+  expect_equal(
+    log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1)),
+    c(2.52411500467289, 3.36651292058166, 5.25036732731245)
+  )
   expect_equal(log(qlgumbel(c(0.2, 0.5, 0.9), 3, 1,
-                            lower.tail = FALSE
+    lower.tail = FALSE
   )), c(4.49993998675952, 3.36651292058166, 2.16596755475204))
-  
+
   expect_identical(
     log(qlgumbel(-1, log.p = TRUE)),
     log(qlgumbel(exp(-1)))

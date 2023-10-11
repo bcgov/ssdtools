@@ -18,15 +18,15 @@ test_that("schwarz-tillmans", {
     "gompertz", "weibull", "gamma", "lnorm", "llogis", "lgumbel"
   )
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
-  
+
   hc <- ssd_hc(fits, average = FALSE)
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
-  
+
   hc_avg <- ssd_hc(fits, average = TRUE)
   expect_s3_class(hc_avg, "tbl")
   expect_snapshot_data(hc_avg, "hc_avg")
-  
+
   gof <- ssd_gof(fits, pvalue = FALSE)
   expect_s3_class(gof, "tbl_df")
   expect_snapshot_data(gof, "gof")

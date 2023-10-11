@@ -16,13 +16,13 @@
 stats::coef
 
 #' Turn a fitdists Object into a Tidy Tibble
-#' 
+#'
 #' A wrapper on [`tidy.fitdists()`].
-#' 
+#'
 #' @inheritParams params
 #' @seealso [`tidy.fitdists()`]
 #' @export
-#' @examples 
+#' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' coef(fits)
 coef.fitdists <- function(object, ...) {

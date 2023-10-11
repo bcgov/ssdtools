@@ -16,51 +16,55 @@
   chk_string(left)
   chk_string(right)
   chk_null_or(weight, vld = vld_string)
-  
+
   chk_not_subset(left, c("right", "weight"))
   chk_not_subset(right, c("left", "weight"))
   chk_null_or(weight, vld = vld_not_subset, values = c("left", "right"))
-  
+
   chk_whole_number(nrow)
-  
+
   org_data <- data
   values <- setNames(list(c(0, Inf, NA)), left)
-  if(left != right)
+  if (left != right) {
     values <- c(values, setNames(list(c(0, Inf, NA)), right))
-  if(!is.null(weight)) {
+  }
+  if (!is.null(weight)) {
     values <- c(values, setNames(list(c(0, Inf)), weight))
   }
-  
+
   check_names(data, names = names(values))
-  if(is.null(weight)) {
+  if (is.null(weight)) {
     data$weight <- rep(1, nrow(data))
     weight <- "weight"
-  } else if(is.integer(data[[weight]])) {
+  } else if (is.integer(data[[weight]])) {
     data[[weight]] <- as.double(data[[weight]])
   }
   check_data(data, values, nrow = c(nrow, Inf))
-  if(any(!is.na(data[[right]]) & !is.na(data[[left]]) & data[[right]] < data[[left]])) {
-    msg <- paste0("`data$", right, "` must have values greater than or equal to `data$",
-                  left, "`")
+  if (any(!is.na(data[[right]]) & !is.na(data[[left]]) & data[[right]] < data[[left]])) {
+    msg <- paste0(
+      "`data$", right, "` must have values greater than or equal to `data$",
+      left, "`"
+    )
     abort_chk(msg)
   }
-  
+
   data <- data[c(left, right, weight)]
   colnames(data) <- c("left", "right", "weight")
-  
-  if(!missing) {
-    missing <- (is.na(data$left) | data$left == 0 | is.infinite(data$left)) & 
+
+  if (!missing) {
+    missing <- (is.na(data$left) | data$left == 0 | is.infinite(data$left)) &
       (is.na(data$right) | data$right == 0 | is.infinite(data$right))
-    
-    if(any(missing)) {
+
+    if (any(missing)) {
       msg <- paste0("`data` has %n row%s with effectively missing values in '", left, "'")
-      if(right != left && any(data$left != data$right))
+      if (right != left && any(data$left != data$right)) {
         msg <- paste0(msg, " and '", right, "'")
+      }
       abort_chk(msg, n = sum(missing))
     }
   }
   zero_weight <- data$weight == 0
-  if(any(zero_weight)) {
+  if (any(zero_weight)) {
     abort_chk("`data` has %n row%s with zero weight in '", weight, "'", n = sum(zero_weight))
   }
   org_data
@@ -74,4 +78,3 @@
   chk_unique(names(bounds))
   invisible(bounds)
 }
-

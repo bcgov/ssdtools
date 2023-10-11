@@ -16,14 +16,14 @@
 ggplot2::autoplot
 
 #' Plot a fitdists Object
-#' 
+#'
 #' A wrapper on [`ssd_plot_cdf()`].
-#' 
+#'
 #' @inheritParams params
 #' @return A ggplot object.
 #' @seealso [`ssd_plot_cdf()`]
 #' @export
-#' @examples 
+#' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' autoplot(fits)
 autoplot.fitdists <- function(object, ...) {

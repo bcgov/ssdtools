@@ -16,5 +16,6 @@
   packageStartupMessage(
     "Please replace the following in your scripts:
 - `ssdtools::boron_data` with `ssddata::ccme_boron`
-- `ssdtools::ccme_data` with `ssddata::ccme_data`")
+- `ssdtools::ccme_data` with `ssddata::ccme_data`"
+  )
 }

@@ -15,7 +15,7 @@
 test_that("ssd_plot_cdf", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   expect_snapshot_plot(ssd_plot_cdf(fits), "fits")
   expect_snapshot_plot(ssd_plot_cdf(fits, average = TRUE), "fits_average")
 })
@@ -26,10 +26,13 @@ test_that("autoplot deals with rescaled data", {
 })
 
 test_that("autoplot deals with named list", {
-  expect_snapshot_plot(ssd_plot_cdf(list(
-    llogis = c(locationlog = 2, scalelog = 1),
-    lnorm = c(meanlog = 2, sdlog = 2))),
-                       "list")
+  expect_snapshot_plot(
+    ssd_plot_cdf(list(
+      llogis = c(locationlog = 2, scalelog = 1),
+      lnorm = c(meanlog = 2, sdlog = 2)
+    )),
+    "list"
+  )
 })
 
 test_that("autoplot deals with delta", {

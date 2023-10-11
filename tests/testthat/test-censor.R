@@ -14,11 +14,11 @@
 
 test_that("censor", {
   rlang::local_options(lifecycle_verbosity = "quiet")
-  
+
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  
+
   expect_false(is_censored(fits))
-  
+
   # need to have example censored data
   data <- ssddata::ccme_boron
   data$Right <- data$Conc

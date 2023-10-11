@@ -1,6 +1,6 @@
 test_that("plot fitdists deprecated to autoplot", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  
+
   lifecycle::expect_deprecated(plot(fits))
 })
 

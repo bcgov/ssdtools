@@ -13,8 +13,8 @@
 #    limitations under the License.
 
 #' Fit Burrlioz Distributions
-#' 
-#' Fits 'burrIII3' distribution. 
+#'
+#' Fits 'burrIII3' distribution.
 #' If shape1 parameter is at boundary returns 'lgumbel' (which is equivalent to inverse Weibull).
 #' Else if shape2 parameter is at a boundary returns 'invpareto'.
 #' Otherwise returns 'burrIII3'
@@ -26,51 +26,64 @@
 #' @export
 #' @examples
 #' ssd_fit_burrlioz(ssddata::ccme_boron)
-ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE, 
+ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE,
                              silent = FALSE) {
-  
-  if(nrow(data) <= 8) {
-    fit <- ssd_fit_dists(data, left = left, dists = "llogis",
-                         computable = FALSE, nrow = 5L,
-                         rescale = rescale, silent = silent)
+  if (nrow(data) <= 8) {
+    fit <- ssd_fit_dists(data,
+      left = left, dists = "llogis",
+      computable = FALSE, nrow = 5L,
+      rescale = rescale, silent = silent
+    )
     class(fit) <- c("fitburrlioz", class(fit))
     return(fit)
   }
-  
+
   range_shape1 <- c(0.001, 100)
   range_shape2 <- c(0.001, 80)
-  
-  fit <- try(ssd_fit_dists(data, left = left, dists = "burrIII3",
-                           rescale = rescale, computable = FALSE,
-                           at_boundary_ok = TRUE, silent = TRUE,
-                           range_shape1 = range_shape1,
-                           range_shape2 = range_shape2),
-            silent = TRUE)
-  
-  if(inherits(fit, "try-error")) {
+
+  fit <- try(
+    ssd_fit_dists(data,
+      left = left, dists = "burrIII3",
+      rescale = rescale, computable = FALSE,
+      at_boundary_ok = TRUE, silent = TRUE,
+      range_shape1 = range_shape1,
+      range_shape2 = range_shape2
+    ),
+    silent = TRUE
+  )
+
+  if (inherits(fit, "try-error")) {
     range_shape1 <- c(0.05, 20)
     range_shape2 <- c(0.05, 20)
-    
-    fit <- ssd_fit_dists(data, left = left, dists = "burrIII3",
-                         rescale = rescale, computable = FALSE,
-                         at_boundary_ok = TRUE, silent = TRUE,
-                         range_shape1 = range_shape1,
-                         range_shape2 = range_shape2)
+
+    fit <- ssd_fit_dists(data,
+      left = left, dists = "burrIII3",
+      rescale = rescale, computable = FALSE,
+      at_boundary_ok = TRUE, silent = TRUE,
+      range_shape1 = range_shape1,
+      range_shape2 = range_shape2
+    )
   }
-  
+
   dist <- "burrIII3"
-  if(is_at_boundary(fit$burrIII3, data, range_shape1 = range_shape1, 
-                    range_shape2 = range_shape2, regex = "shape2$")) {
+  if (is_at_boundary(fit$burrIII3, data,
+    range_shape1 = range_shape1,
+    range_shape2 = range_shape2, regex = "shape2$"
+  )) {
     dist <- "invpareto"
-  } else if(is_at_boundary(fit$burrIII3, data, range_shape1 = range_shape1, 
-                           range_shape2 = range_shape2, regex = "shape1$")) {
+  } else if (is_at_boundary(fit$burrIII3, data,
+    range_shape1 = range_shape1,
+    range_shape2 = range_shape2, regex = "shape1$"
+  )) {
     dist <- "lgumbel"
   }
-  fit <- ssd_fit_dists(data, left = left, dists = dist, 
-                rescale = rescale, computable = FALSE,
-                silent = silent,
-                range_shape1 = range_shape1,
-                range_shape2 = range_shape2)
+  fit <- ssd_fit_dists(data,
+    left = left, dists = dist,
+    rescale = rescale, computable = FALSE,
+    silent = silent,
+    range_shape1 = range_shape1,
+    range_shape2 = range_shape2
+  )
   class(fit) <- c("fitburrlioz", class(fit))
   fit
 }
