@@ -60,7 +60,7 @@ test_that("ssd_sort_data works censored data", {
   data <- ssddata::ccme_boron
   data$Other <- data$Conc * 2
   data$Conc[1] <- NA
-  data$ID <- 1:nrow(data)
+  data$ID <- seq_len(nrow(data))
   expect_identical(
     ssd_sort_data(data, right = "Other")$ID[1:5],
     c(1L, 19L, 20L, 21L, 2L)

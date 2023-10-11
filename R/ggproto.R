@@ -62,7 +62,7 @@ GeomHcintersect <- ggproto(
   default_aes = aes(colour = "black", linewidth = 0.5, linetype = "dotted", alpha = NA),
   draw_key = draw_key_path,
   draw_panel = function(data, panel_params, coord) {
-    data$group <- 1:nrow(data)
+    data$group <- seq_len(nrow(data))
     data$x <- data$xintercept
     data$y <- data$yintercept
     start <- data

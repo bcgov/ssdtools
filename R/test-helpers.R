@@ -44,10 +44,10 @@ expect_snapshot_plot <- function(x, name) {
 }
 
 expect_snapshot_boot_data <- function(x, name, digits = 6, min_pboot = 0.9, max_pboot = 1) {
-  if (!is.na(min_pboot) & min_pboot > 0) {
+  if (!is.na(min_pboot) && min_pboot > 0) {
     testthat::expect_true(all(x$pboot >= min_pboot))
   }
-  if (!is.na(min_pboot) & max_pboot < 1) {
+  if (!is.na(min_pboot) && max_pboot < 1) {
     testthat::expect_true(all(x$pboot <= max_pboot))
   }
   x$pboot <- NULL

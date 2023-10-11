@@ -40,7 +40,7 @@ test_that("summary fitdists with multiple dists", {
 
 test_that("summary fitdists with censored, rescaled, unequally weighted data", {
   data <- ssddata::ccme_boron
-  data$Mass <- 1:nrow(data)
+  data$Mass <- seq_len(nrow(data))
   data$Other <- data$Conc
   data$Conc[2] <- NA
   fits <- ssd_fit_dists(data, right = "Other", weight = "Mass", rescale = TRUE, dists = "lnorm")
