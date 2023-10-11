@@ -1,1 +1,19 @@
-destination: docs
+template:
+  bootstrap: 5
+authors:
+  Joe Thorley:
+    href: "https://github.com/joethorley"
+  Carl Schwarz:
+    href: "https://www.sfu.ca/stat-actsci/department/profiles/carl-schwarz.html"
+  David Fox:
+    href: "https://training.ecotox.science/who-we-are/"
+  Rebecca Fisher:
+    href: "https://www.aims.gov.au/about/our-people/dr-rebecca-fisher"
+  Angeline Tillmans:
+    href: "https://www.linkedin.com/in/angeline-tillmanns-5b7999a/"
+  Province of British Columbia:
+    href: "https://www2.gov.bc.ca/"
+  Environment and Climate Change Canada:
+    href: "https://www.canada.ca/en/environment-climate-change.html"
+  Australian Government Department of Climate Change, Energy, the Environment and Water:
+    href: "https://www.dcceew.gov.au/"
