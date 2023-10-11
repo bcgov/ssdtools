@@ -13,7 +13,10 @@
 #    limitations under the License.
 
 roxygen2md::roxygen2md()
-styler::style_pkg(filetype = c("R", "Rmd"))
+styler::style_pkg(
+  scope = "line_breaks",
+  filetype = c("R", "Rmd")
+)
 lintr::lint_package()
 
 devtools::test()
