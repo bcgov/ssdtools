@@ -171,6 +171,8 @@ remove them with a warning.}
 \item{linetype}{A string of the column in pred to use for the linetype.}
 
 \item{linecolor}{A string of the column in pred to use for the line color.}
+
+\item{root}{A flag specifying whether to calculate the value by finding the root.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

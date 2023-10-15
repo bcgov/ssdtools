@@ -68,7 +68,7 @@ no_ssd_hc <- function() {
   args$p <- proportion
   dist <- .dist_tmbfit(x)
   what <- paste0("ssd_q", dist)
-
+  
   est <- do.call(what, args)
   if (!ci) {
     na <- rep(NA_real_, length(proportion))
@@ -87,14 +87,14 @@ no_ssd_hc <- function() {
   censoring <- censoring / rescale
   fun <- safely(fit_tmb)
   estimates <- boot_estimates(x,
-    fun = fun, nboot = nboot, data = data, weighted = weighted,
-    censoring = censoring, min_pmix = min_pmix,
-    range_shape1 = range_shape1,
-    range_shape2 = range_shape2,
-    parametric = parametric,
-    control = control
+                              fun = fun, nboot = nboot, data = data, weighted = weighted,
+                              censoring = censoring, min_pmix = min_pmix,
+                              range_shape1 = range_shape1,
+                              range_shape2 = range_shape2,
+                              parametric = parametric,
+                              control = control
   )
-
+  
   cis <- cis_estimates(estimates, what, level = level, x = proportion)
   hc <- tibble(
     dist = dist,
@@ -106,16 +106,24 @@ no_ssd_hc <- function() {
   replace_min_pboot_na(hc, min_pboot)
 }
 
+.ssd_hc_root <- function(proportion, x, ci, level, nboot, min_pboot,
+                         data, rescale, weighted, censoring, min_pmix,
+                         range_shape1, range_shape2, parametric, control) {
+  .NotYetImplemented()
+  # 1 proportion , multiple distributions, rest all 1
+  # need tidy eval and/or function factor to construct function.
+}
+
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot,
-                             average, min_pboot, parametric, control) {
+                             average, min_pboot, parametric, root, control) {
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
-
+  
   if (is.null(control)) {
     control <- .control_fitdists(x)
   }
-
+  
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
@@ -124,12 +132,12 @@ no_ssd_hc <- function() {
   range_shape2 <- .range_shape2_fitdists(x)
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
-
+  
   if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
     wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
     ci <- FALSE
   }
-
+  
   if (parametric && ci && unequal) {
     wrn("Parametric CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
@@ -138,15 +146,37 @@ no_ssd_hc <- function() {
     nboot <- 0L
   }
   seeds <- seed_streams(length(x))
+  
+  if(root && average) {
+    hc <- future_map(
+      percent / 100, .ssd_hc_root, 
+      x, ci = ci, level = level, nboot = nboot,
+      min_pboot = min_pboot,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control,
+      .options = furrr::furrr_options(seed = seeds))
+    
+    method <- if (parametric) "parametric" else "non-parametric"
+    
+    return(
+      tibble(
+        dist = "average", percent = percent, est = hc$est, se = hc$se,
+        lcl = hc$lcl, ucl = hc$ucl, wt = rep(1, length(percent)),
+        method = method, nboot = nboot, pboot = hc$pboot
+      )
+    )
+  }
+  
   hc <- future_map(x, .ssd_hc_tmbfit,
-    proportion = percent / 100, ci = ci, level = level, nboot = nboot,
-    min_pboot = min_pboot,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control,
-    .options = furrr::furrr_options(seed = seeds)
+                   proportion = percent / 100, ci = ci, level = level, nboot = nboot,
+                   min_pboot = min_pboot,
+                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                   parametric = parametric, control = control,
+                   .options = furrr::furrr_options(seed = seeds)
   )
-
+  
   weight <- glance(x)$weight
   if (!average) {
     hc <- mapply(
@@ -186,17 +216,17 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
-
+  
   if (!missing(hc)) {
     deprecate_stop("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
   }
-
+  
   if (!length(x)) {
     return(no_ssd_hc())
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
-    MoreArgs = list(proportion = percent / 100),
-    SIMPLIFY = FALSE
+               MoreArgs = list(proportion = percent / 100),
+               SIMPLIFY = FALSE
   )
   bind_rows(hc)
 }
@@ -205,7 +235,7 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 #' @export
 ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000,
                             average = TRUE, delta = 7, min_pboot = 0.99,
-                            parametric = TRUE,
+                            parametric = TRUE, root = FALSE,
                             control = NULL, ...) {
   chk_vector(percent)
   chk_numeric(percent)
@@ -224,23 +254,23 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_flag(parametric)
+  chk_flag(root)
   chk_null_or(control, vld = vld_list)
   chk_unused(...)
-
+  
   if (!missing(hc)) {
     deprecate_stop("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
   }
-
+  
   x <- subset(x, delta = delta)
   hc <- .ssd_hc_fitdists(x, percent,
-    ci = ci, level = level, nboot = nboot, min_pboot = min_pboot, control = control,
-    average = average, parametric = parametric
+                         ci = ci, level = level, nboot = nboot, min_pboot = min_pboot, control = control,
+                         average = average, parametric = parametric, root = root
   )
   warn_min_pboot(hc, min_pboot)
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for fitburrlioz Object
-#' '
 #' @export
 #' @examples
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
@@ -264,18 +294,18 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
   chk_range(min_pboot)
   chk_flag(parametric)
   chk_unused(...)
-
+  
   if (names(x) != "burrIII3" || !ci || !length(percent)) {
     class(x) <- class(x)[-1]
     return(ssd_hc(x,
-      percent = percent, ci = ci, level = level,
-      nboot = nboot, min_pboot = min_pboot,
-      average = FALSE, parametric = parametric
+                  percent = percent, ci = ci, level = level,
+                  nboot = nboot, min_pboot = min_pboot,
+                  average = FALSE, parametric = parametric
     ))
   }
   hc <- .ssd_hc_burrlioz_fitdists(x,
-    percent = percent, level = level, nboot = nboot,
-    min_pboot = min_pboot, parametric = parametric
+                                  percent = percent, level = level, nboot = nboot,
+                                  min_pboot = min_pboot, parametric = parametric
   )
   warn_min_pboot(hc, min_pboot)
 }

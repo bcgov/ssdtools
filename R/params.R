@@ -103,6 +103,7 @@
 #' @param nsim A positive whole number of the number of simulations to generate.
 #' @param linetype A string of the column in pred to use for the linetype.
 #' @param linecolor A string of the column in pred to use for the line color.
+#' @param root A flag specifying whether to calculate the value by finding the root.
 #' @keywords internal
 #' @name params
 NULL
