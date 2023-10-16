@@ -17,6 +17,7 @@
 #' Plots species sensitivity data.
 #'
 #' @inheritParams params
+#' @param shape A string of the column in data for the shape aesthetic.
 #' @seealso [`ssd_plot()`] and [`geom_ssdpoint()`]
 #' @export
 #' @examples
