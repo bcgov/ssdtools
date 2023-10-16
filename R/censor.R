@@ -45,7 +45,7 @@ censoring_text <- function(x) {
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' is_censored(fits)
 is_censored <- function(x) {
-  deprecate_soft("0.3.7", "is_censored()", "ssd_is_censored()")
+  lifecycle::deprecate_warn("0.3.7", "is_censored()", "ssd_is_censored()")
   chk_s3_class(x, "fitdists")
   ssd_is_censored(x)
 }
