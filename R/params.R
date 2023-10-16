@@ -84,7 +84,6 @@
 #' @param sdlog1 standard deviation on log scale parameter.
 #' @param sdlog2 standard deviation on log scale parameter.
 #' @param select A character vector of the distributions to select.
-#' @param shape A string of the column in data for the shape aesthetic.
 #' @param shape	shape parameter.
 #' @param shape1 shape1 parameter.
 #' @param shape2 shape2 parameter.
