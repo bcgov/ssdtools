@@ -137,16 +137,6 @@ ssd_fit_dists <- function(
   chk_not_any_na(dists)
   chk_unique(dists)
 
-  if ("llog" %in% dists) {
-    deprecate_stop("0.1.0", "dllog()", "dllogis()",
-      details = "The 'llog' distribution has been deprecated for the identical 'llogis' distribution."
-    )
-  }
-  if ("burrIII2" %in% dists) {
-    deprecate_stop("0.1.2", "xburrIII2()",
-      details = "The 'burrIII2' distribution has been deprecated for the identical 'llogis' distribution."
-    )
-  }
   chk_subset(dists, ssd_dists_all())
 
   chk_whole_number(nrow)
