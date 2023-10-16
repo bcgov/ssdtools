@@ -23,7 +23,7 @@ generics::tidy
   est <- unname(x[, 1])
   names(est) <- rownames(x)
   est <- est[!grepl("^log(it){0,1}_", names(est))]
-  est[str_order(names(est))]
+  est[stringr::str_order(names(est))]
 }
 
 #' @export
@@ -44,7 +44,7 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
   if (!all) {
     x <- x[!grepl("^log(it){0,1}_", x$term), ]
   }
-  x <- x[str_order(x$term), ]
+  x <- x[stringr::str_order(x$term), ]
   x
 }
 
