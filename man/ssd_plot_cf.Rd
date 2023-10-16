@@ -2,12 +2,9 @@
 % Please edit documentation in R/plot-cf.R
 \name{ssd_plot_cf}
 \alias{ssd_plot_cf}
-\alias{ssd_cfplot}
 \title{Cullen and Frey Plot}
 \usage{
 ssd_plot_cf(data, left = "Conc")
-
-ssd_cfplot(data, left = "Conc")
 }
 \arguments{
 \item{data}{A data frame.}
@@ -21,11 +18,6 @@ for non-censored data.
 \details{
 Soft deprecated for direct call to \code{\link[fitdistrplus:descdist]{fitdistrplus::descdist()}}.
 }
-\section{Functions}{
-\itemize{
-\item \code{ssd_cfplot()}: Defunct Cullen and Frey Plot
-
-}}
 \examples{
 ssd_plot_cf(ssddata::ccme_boron)
 }

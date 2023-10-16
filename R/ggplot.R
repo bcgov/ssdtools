@@ -200,7 +200,7 @@ geom_ssd <- function(mapping = NULL,
                      na.rm = FALSE,
                      show.legend = NA,
                      inherit.aes = TRUE) {
-  lifecycle::deprecate_soft("0.3.5", "geom_ssd()", "geom_ssdpoint()")
+  lifecycle::deprecate_warn("0.3.5", "geom_ssd()", "geom_ssdpoint()")
 
   geom_ssdpoint(
     mapping = mapping, data = data, stat = stat,
@@ -232,7 +232,7 @@ stat_ssd <- function(mapping = NULL,
                      na.rm = FALSE,
                      show.legend = NA,
                      inherit.aes = TRUE) {
-  lifecycle::deprecate_soft("0.3.5", "stat_ssd()")
+  lifecycle::deprecate_warn("0.3.5", "stat_ssd()")
 
   layer(
     stat = StatSsdpoint, data = data, mapping = mapping, geom = geom,

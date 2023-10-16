@@ -20,7 +20,6 @@
 #' hazard concentrations(s).
 #'
 #' @inheritParams params
-#' @param hc A whole numeric vector between 1 and 99 indicating the percent hazard concentrations (deprecated for percent).
 #' @return A tibble of corresponding hazard concentrations.
 #' @seealso [`predict.fitdists()`] and [`ssd_hp()`].
 #' @export
@@ -211,16 +210,12 @@ no_ssd_hc <- function() {
 
 #' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates
 #' @export
-ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
+ssd_hc.list <- function(x, percent = 5, ...) {
   chk_list(x)
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
-  
-  if (!missing(hc)) {
-    deprecate_stop("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-  }
-  
+
   if (!length(x)) {
     return(no_ssd_hc())
   }
@@ -233,16 +228,13 @@ ssd_hc.list <- function(x, percent = 5, hc = 5, ...) {
 
 #' @describeIn ssd_hc Hazard Concentrations for fitdists Object
 #' @export
-ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nboot = 1000,
+ssd_hc.fitdists <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000,
                             average = TRUE, delta = 7, min_pboot = 0.99,
                             parametric = TRUE, root = FALSE,
                             control = NULL, ...) {
   chk_vector(percent)
   chk_numeric(percent)
   chk_range(percent, c(0, 100))
-  chk_vector(hc)
-  chk_numeric(hc)
-  chk_range(hc, c(0, 100))
   chk_flag(ci)
   chk_number(level)
   chk_range(level)
@@ -257,11 +249,7 @@ ssd_hc.fitdists <- function(x, percent = 5, hc = 5, ci = FALSE, level = 0.95, nb
   chk_flag(root)
   chk_null_or(control, vld = vld_list)
   chk_unused(...)
-  
-  if (!missing(hc)) {
-    deprecate_stop("0.1.0", "ssd_hc(hc = )", "ssd_hc(percent = )")
-  }
-  
+
   x <- subset(x, delta = delta)
   hc <- .ssd_hc_fitdists(x, percent,
                          ci = ci, level = level, nboot = nboot, min_pboot = min_pboot, control = control,

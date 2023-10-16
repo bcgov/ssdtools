@@ -28,7 +28,7 @@
 #' scales::comma(c(0.1, 1, 10, 1000))
 comma_signif <- function(x, digits = 3, ...) {
   if (vld_used(...)) {
-    deprecate_soft("0.3.3", "comma_signif(...)")
+    lifecycle::deprecate_warn("0.3.3", "comma_signif(...)")
   }
 
   x <- signif(x, digits = digits)

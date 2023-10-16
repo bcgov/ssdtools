@@ -98,7 +98,7 @@
 #' @export
 ssd_hc_burrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000,
                             min_pboot = 0.99, parametric = FALSE) {
-  lifecycle::deprecate_soft("0.3.5", "ssd_hc_burrlioz()", "ssd_hc()")
+  lifecycle::deprecate_warn("0.3.5", "ssd_hc_burrlioz()", "ssd_hc()")
   chk_s3_class(x, "fitburrlioz")
 
   ssd_hc(x,

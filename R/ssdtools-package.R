@@ -16,3 +16,29 @@
 "_PACKAGE"
 
 utils::globalVariables("where")
+
+## usethis namespace: start
+#' @import chk ggplot2
+#' @importFrom abind abind
+#' @importFrom furrr future_map furrr_options
+#' @importFrom generics augment glance tidy
+#' @importFrom ggplot2 autoplot sym
+#' @importFrom goftest ad.test cvm.test
+#' @importFrom graphics par plot title
+#' @importFrom grid gList gpar grobName gTree polygonGrob segmentsGrob
+#' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
+#' @importFrom parallel nextRNGStream nextRNGSubStream
+#' @importFrom plyr summarise
+#' @importFrom purrr transpose
+#' @importFrom Rcpp sourceCpp
+#' @importFrom scales comma manual_pal percent trans_breaks
+#' @importFrom ssddata gm_mean
+#' @importFrom stats coef complete.cases ks.test logLik nobs optim plogis predict qlogis runif sd setNames weighted.mean
+#' @importFrom stringr str_order
+#' @importFrom tibble as_tibble tibble
+#' @importFrom TMB MakeADFun sdreport
+#' @importFrom universals estimates npars
+#' @importFrom utils capture.output
+#' @importFrom VGAM gompertz vglm
+## usethis namespace: end
+NULL
