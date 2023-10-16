@@ -28,7 +28,7 @@ utils::globalVariables("where")
 #' @importFrom grid gList gpar grobName gTree polygonGrob segmentsGrob
 #' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
 #' @importFrom parallel nextRNGStream nextRNGSubStream
-#' @importFrom plyr summarise llply
+#' @importFrom plyr summarise
 #' @importFrom purrr transpose
 #' @importFrom Rcpp sourceCpp
 #' @importFrom scales comma manual_pal percent trans_breaks
