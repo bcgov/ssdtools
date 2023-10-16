@@ -21,7 +21,7 @@
 #' @return A numeric vector.
 #' @export
 dgompertz <- function(x, llocation = 0, lshape = 0, log = FALSE) {
-  lifecycle::deprecate_soft("1.0.0", "dgompertz()")
+  lifecycle::deprecate_warn("1.0.0", "dgompertz()")
   ddist("gompertz", x,
     location = exp(llocation), shape = exp(lshape),
     log = log
@@ -44,7 +44,7 @@ ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p =
 #' `r lifecycle::badge("deprecated")`
 #' @export
 pgompertz <- function(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
-  lifecycle::deprecate_soft("1.0.0", "pgompertz()", "ssd_pgompertz()")
+  lifecycle::deprecate_warn("1.0.0", "pgompertz()", "ssd_pgompertz()")
   ssd_pgompertz(q,
     location = exp(llocation), shape = exp(lshape),
     lower.tail = lower.tail, log.p = log.p
@@ -67,7 +67,7 @@ ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p =
 #' `r lifecycle::badge("deprecated")`
 #' @export
 qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
-  lifecycle::deprecate_soft("1.0.0", "qgompertz()", "ssd_qgompertz()")
+  lifecycle::deprecate_warn("1.0.0", "qgompertz()", "ssd_qgompertz()")
   ssd_qgompertz(
     p = p, location = exp(llocation), shape = exp(lshape),
     lower.tail = lower.tail, log.p = log.p
@@ -88,7 +88,7 @@ ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
 #' `r lifecycle::badge("deprecated")`
 #' @export
 rgompertz <- function(n, llocation = 0, lshape = 0) {
-  lifecycle::deprecate_soft("1.0.0", "rgompertz()", "ssd_rgompertz()")
+  lifecycle::deprecate_warn("1.0.0", "rgompertz()", "ssd_rgompertz()")
   ssd_rgompertz(n = n, location = exp(llocation), shape = exp(lshape))
 }
 

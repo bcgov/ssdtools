@@ -21,13 +21,6 @@ test_that("hc", {
   expect_snapshot_boot_data(hc, "hc")
 })
 
-test_that("ssd_hc hc defunct", {
-  skip_on_os("linux") # FIXME
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-
-  lifecycle::expect_defunct(ssd_hc(fits, hc = 6))
-})
-
 test_that("ssd_hc list must be named", {
   skip_on_os("linux") # FIXME
   chk::expect_chk_error(ssd_hc(list()))

@@ -46,8 +46,6 @@ Depends:
 Imports:
     abind,
     chk,
-    doFuture,
-    foreach,
     furrr,
     generics,
     ggplot2,
@@ -70,8 +68,10 @@ Imports:
     VGAM
 Suggests:
     covr,
+    doFuture,
     dplyr,
     fitdistrplus,
+    foreach,
     future,
     glue,
     grDevices,

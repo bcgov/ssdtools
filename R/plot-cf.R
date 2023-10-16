@@ -29,7 +29,7 @@ ssd_plot_cf <- function(data, left = "Conc") {
     err("Package 'fitdistrplus' is required to produce Cullen and Frey plots.")
   }
 
-  deprecate_soft("0.3.5", "ssd_plot_cf()", "fitdistrplus::descdist()",
+  lifecycle::deprecate_warn("0.3.5", "ssd_plot_cf()", "fitdistrplus::descdist()",
     details = "Please use fitdistrplus::descdist(data$Conc, boot = 100L)."
   )
 
@@ -39,11 +39,4 @@ ssd_plot_cf <- function(data, left = "Conc") {
 
   fitdistrplus::descdist(data[[left]], boot = 100L)
   invisible()
-}
-
-#' @describeIn ssd_plot_cf Defunct Cullen and Frey Plot
-#' @export
-ssd_cfplot <- function(data, left = "Conc") {
-  deprecate_stop("0.1.0", "ssd_cfplot()", "ssd_plot_cf()")
-  ssd_plot_cf(data, left)
 }
