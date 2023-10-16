@@ -33,12 +33,6 @@ dist_data <- tibble::tribble(
 
 use_data(dist_data, overwrite = TRUE)
 
-boron_data <- ssddata::ccme_boron
-use_data(boron_data, overwrite = TRUE)
-
-ccme_data <- ssddata::ccme_data
-use_data(ccme_data, overwrite = TRUE)
-
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 
 set.seed(99)

@@ -33,16 +33,6 @@ test_that("boron unstable", {
   expect_snapshot_data(tidy, "boron_unstable")
 })
 
-test_that("ccme_data", {
-  expect_snapshot_data(ssdtools::ccme_data, "ccme_data")
-  expect_identical(ssdtools::ccme_data, ssddata::ccme_data)
-})
-
-test_that("ccme_boron", {
-  expect_snapshot_data(ssdtools::boron_data, "boron_data")
-  expect_identical(ssdtools::boron_data, ssddata::ccme_boron)
-})
-
 test_that("dist_data", {
   expect_snapshot_data(ssdtools::dist_data, "dist_data")
 })
