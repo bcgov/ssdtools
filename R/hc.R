@@ -105,14 +105,6 @@ no_ssd_hc <- function() {
   replace_min_pboot_na(hc, min_pboot)
 }
 
-.ssd_hc_root <- function(proportion, x, ci, level, nboot, min_pboot,
-                         data, rescale, weighted, censoring, min_pmix,
-                         range_shape1, range_shape2, parametric, control) {
-  .NotYetImplemented()
-  # 1 proportion , multiple distributions, rest all 1
-  # need tidy eval and/or function factor to construct function.
-}
-
 .ssd_hc_fitdists <- function(x, percent, ci, level, nboot,
                              average, min_pboot, parametric, root, control) {
   if (!length(x) || !length(percent)) {
