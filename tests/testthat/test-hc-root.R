@@ -27,9 +27,17 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hc", {
+test_that("hc root lnorm", {
   skip_on_os("linux") # FIXME
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  set.seed(102)
+  expect_error(hc <- ssd_hc(fits, average = TRUE, root = TRUE))
+})
+
+
+test_that("hc root lnorm llogis", {
+  skip_on_os("linux") # FIXME
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
   set.seed(102)
   expect_error(hc <- ssd_hc(fits, average = TRUE, root = TRUE))
 })

@@ -123,6 +123,8 @@ no_ssd_hc <- function() {
   range_shape2 <- .range_shape2_fitdists(x)
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
+  glance <- glance(x)
+  tidy <- tidy(x)
   
   if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
     wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
@@ -141,7 +143,7 @@ no_ssd_hc <- function() {
   if(root && average) {
     hc <- future_map(
       percent / 100, .ssd_hc_root, 
-      x, ci = ci, level = level, nboot = nboot,
+      glance = glance, tidy = tidy, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -168,7 +170,7 @@ no_ssd_hc <- function() {
                    .options = furrr::furrr_options(seed = seeds)
   )
   
-  weight <- glance(x)$weight
+  weight <- glance$weight
   if (!average) {
     hc <- mapply(
       function(x, y) {

@@ -13,9 +13,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.ssd_hc_root <- function(proportion, x, ci, level, nboot, min_pboot,
+.ssd_hc_root <- function(proportion, glance, tidy, ci, level, nboot, min_pboot,
                          data, rescale, weighted, censoring, min_pmix,
                          range_shape1, range_shape2, parametric, control) {
+  browser()
   .NotYetImplemented()
   # 1 proportion , multiple distributions, rest all 1
   # need tidy eval and/or function factor to construct function.
