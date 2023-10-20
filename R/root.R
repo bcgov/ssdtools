@@ -23,20 +23,25 @@ wt_est_nest <- function(x) {
   dplyr::inner_join(wt, est_nest, by = "dist")
 }
 
-ma_cdf <- function(glance, tidy) {
-  wt_est <- wt_est_nest(glance, tidy)
-  
-  funs <- paste0("ssd_p", wt$dist)
-  wts <- wt_est$weight
-#  args <- map(wts$data, 
-  
+est_args <- function(x) {
+  paste(x$term, "=", x$est, collapse = ", ")
 }
 
-.ssd_hc_root <- function(proportion, glance, tidy, ci, level, nboot, min_pboot,
+ma_fun <- function(wt_est_nest, fun = "p") {
+  funs <- paste0("ssd_", fun, wt_est_nest$dist)
+  wts <- wt_est_nest$weight
+  args <- purrr::map_chr(wt_est_nest$data, est_args)
+  fun_args <- paste0(wts, " * ", funs, "(x, ", args, ")", collapse = " + ")
+  
+  func <- paste0("function(x, ", fun ,") {(", fun_args, ") - ", fun, "}")
+  eval(parse(text = func))
+}
+
+.ssd_hc_root <- function(proportion, wt_est_nest, ci, level, nboot, min_pboot,
                          data, rescale, weighted, censoring, min_pmix,
                          range_shape1, range_shape2, parametric, control) {
-  browser()
-  .NotYetImplemented()
-  # 1 proportion , multiple distributions, rest all 1
-  # need tidy eval and/or function factor to construct function.
+  
+  f <- ma_fun(wt_est_nest)
+  root <- uniroot(f = f, p = proportion, lower = 0, upper = 100)$root
+  root
 }
