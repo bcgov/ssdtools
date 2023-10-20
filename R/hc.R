@@ -105,8 +105,18 @@ no_ssd_hc <- function() {
   replace_min_pboot_na(hc, min_pboot)
 }
 
-.ssd_hc_fitdists <- function(x, percent, ci, level, nboot,
-                             average, min_pboot, parametric, root, control) {
+.ssd_hc_fitdists <- function(
+    x, 
+    percent, 
+    ci, 
+    level, 
+    nboot,
+    average, 
+    min_pboot, 
+    parametric, 
+    root, 
+    control) {
+
   if (!length(x) || !length(percent)) {
     return(no_ssd_hc())
   }
@@ -134,6 +144,7 @@ no_ssd_hc <- function() {
     wrn("Parametric CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }
+
   if (!ci) {
     nboot <- 0L
   }
@@ -148,8 +159,9 @@ no_ssd_hc <- function() {
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control,
       .options = furrr::furrr_options(seed = seeds))
-    hc <- dplyr::bind_rows(hcs)
 
+    hc <- dplyr::bind_rows(hcs)
+    
     method <- if (parametric) "parametric" else "non-parametric"
     
     return(
@@ -211,7 +223,7 @@ ssd_hc.list <- function(x, percent = 5, ...) {
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
-
+  
   if (!length(x)) {
     return(no_ssd_hc())
   }
@@ -224,10 +236,20 @@ ssd_hc.list <- function(x, percent = 5, ...) {
 
 #' @describeIn ssd_hc Hazard Concentrations for fitdists Object
 #' @export
-ssd_hc.fitdists <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000,
-                            average = TRUE, delta = 7, min_pboot = 0.99,
-                            parametric = TRUE, root = FALSE,
-                            control = NULL, ...) {
+ssd_hc.fitdists <- function(
+    x, 
+    percent = 5, 
+    ci = FALSE, 
+    level = 0.95, 
+    nboot = 1000,
+    average = TRUE, 
+    delta = 7, 
+    min_pboot = 0.99,
+    parametric = TRUE, 
+    root = FALSE,
+    control = NULL, 
+    ...) {
+  
   chk_vector(percent)
   chk_numeric(percent)
   chk_range(percent, c(0, 100))
@@ -245,11 +267,19 @@ ssd_hc.fitdists <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 10
   chk_flag(root)
   chk_null_or(control, vld = vld_list)
   chk_unused(...)
-
+  
   x <- subset(x, delta = delta)
-  hc <- .ssd_hc_fitdists(x, percent,
-                         ci = ci, level = level, nboot = nboot, min_pboot = min_pboot, control = control,
-                         average = average, parametric = parametric, root = root
+  hc <- .ssd_hc_fitdists(
+    x, 
+    percent,
+    ci = ci, 
+    level = level, 
+    nboot = nboot,
+    average = average, 
+    min_pboot = min_pboot,
+    parametric = parametric,
+    root = root,
+    control = control
   )
   warn_min_pboot(hc, min_pboot)
 }

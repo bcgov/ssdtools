@@ -37,11 +37,28 @@ ma_fun <- function(wt_est_nest, fun = "p") {
   eval(parse(text = func))
 }
 
-hc_interval <- function(p, data) {
+hc_upper <- function(p, data) {
   right <- data$right[is.finite(data$right)]
-  left <- data$left[data$left > 0]
-  # TODO: improve bounds?
-  c(min(left) / 10, max(right) * 10)
+  # TODO: ensure safe upper bound - use p as well?
+  max(right) * 10
+}
+
+.ssd_hp_root <- function(conc, wt_est_nest, ci, level, nboot, min_pboot,
+                         data, rescale, weighted, censoring, min_pmix,
+                         range_shape1, range_shape2, parametric, control) {
+  
+  q <- conc/rescale
+  
+  f <- ma_fun(wt_est_nest, fun = "q")
+  root <- uniroot(f = f, q = q, lower = 0, upper = 1)$root
+  
+  tibble(
+    est = root * 100,
+    se = NA_real_,
+    lcl = NA_real_,
+    ucl = NA_real_,
+    pboot = NA_real_
+  )
 }
 
 .ssd_hc_root <- function(proportion, wt_est_nest, ci, level, nboot, min_pboot,
@@ -49,8 +66,8 @@ hc_interval <- function(p, data) {
                          range_shape1, range_shape2, parametric, control) {
   
   f <- ma_fun(wt_est_nest, fun = "p")
-  hc_interval <- hc_interval(proportion, data)
-  hc <- uniroot(f = f, p = proportion, interval = hc_interval)$root
+  hc_upper <- hc_upper(proportion, data)
+  hc <- uniroot(f = f, p = proportion, lower = 0, upper = hc_upper)$root
   
   tibble(
     est = hc * rescale,
