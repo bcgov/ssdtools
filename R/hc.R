@@ -138,9 +138,9 @@ no_ssd_hc <- function() {
   if (!ci) {
     nboot <- 0L
   }
-  seeds <- seed_streams(length(x))
   
   if(root && average) {
+    seeds <- seed_streams(length(percent))
     hc <- future_map(
       percent / 100, .ssd_hc_root, 
       glance = glance, tidy = tidy, ci = ci, level = level, nboot = nboot,
@@ -160,6 +160,8 @@ no_ssd_hc <- function() {
       )
     )
   }
+  
+  seeds <- seed_streams(length(x))
   
   hc <- future_map(x, .ssd_hc_tmbfit,
                    proportion = percent / 100, ci = ci, level = level, nboot = nboot,
