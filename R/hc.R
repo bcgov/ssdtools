@@ -140,7 +140,7 @@ no_ssd_hc <- function() {
   
   if(root && average) {
     seeds <- seed_streams(length(percent))
-    hc <- future_map(
+    hcs <- future_map(
       percent / 100, .ssd_hc_root, 
       wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot,
@@ -148,7 +148,8 @@ no_ssd_hc <- function() {
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control,
       .options = furrr::furrr_options(seed = seeds))
-    
+    hc <- dplyr::bind_rows(hcs)
+
     method <- if (parametric) "parametric" else "non-parametric"
     
     return(

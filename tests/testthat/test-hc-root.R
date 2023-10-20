@@ -31,13 +31,28 @@ test_that("hc root lnorm", {
   skip_on_os("linux") # FIXME
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  expect_error(hc <- ssd_hc(fits, average = TRUE, root = TRUE))
+  hc_dist <- ssd_hc(fits, average = FALSE)
+  hc_average <- ssd_hc(fits, average = TRUE)
+  hc_root <- ssd_hc(fits, average = TRUE, root = TRUE)
+  expect_identical(hc_average$est, hc_dist$est)
+  expect_equal(hc_root, hc_average, tolerance = 1e-6)
+  expect_equal(hc_average$est, 1.6811748398812, tolerance = 1e-6)
+  expect_equal(hc_root$est, 1.68117469404437, tolerance = 1e-6)
+  
+  testthat::expect_snapshot({
+    hc_root
+  })
 })
 
-
-test_that("hc root lnorm llogis", {
-  skip_on_os("linux") # FIXME
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
+test_that("hc root all", {
+  skip_on_os("linux") 
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  expect_error(hc <- ssd_hc(fits, average = TRUE, root = TRUE))
+  hc_average <- ssd_hc(fits, average = TRUE)
+  hc_root <- ssd_hc(fits, average = TRUE, root = TRUE)
+  expect_equal(hc_root, hc_average, tolerance = 1e-1)
+  expect_equal(hc_root$est, 1.25677616485866, tolerance = 1e-6)
+  testthat::expect_snapshot({
+    hc_root
+  })
 })
