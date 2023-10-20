@@ -13,6 +13,25 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+wt_est_nest <- function(x) {
+  glance <- glance(x)
+  tidy <- tidy(x)
+  
+  wt <- dplyr::select(glance, "dist", "weight")
+  est <- dplyr::select(tidy, "dist", "term", "est", "se")
+  est_nest <- tidyr::nest(est, .by = "dist")
+  dplyr::inner_join(wt, est_nest, by = "dist")
+}
+
+ma_cdf <- function(glance, tidy) {
+  wt_est <- wt_est_nest(glance, tidy)
+  
+  funs <- paste0("ssd_p", wt$dist)
+  wts <- wt_est$weight
+#  args <- map(wts$data, 
+  
+}
+
 .ssd_hc_root <- function(proportion, glance, tidy, ci, level, nboot, min_pboot,
                          data, rescale, weighted, censoring, min_pmix,
                          range_shape1, range_shape2, parametric, control) {
