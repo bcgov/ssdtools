@@ -21,6 +21,7 @@ ssd_hc(x, ...)
   delta = 7,
   min_pboot = 0.99,
   parametric = TRUE,
+  root = FALSE,
   control = NULL,
   ...
 )
@@ -58,6 +59,8 @@ in the sense of returning a likelihood.}
 
 \item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
 
+\item{root}{A flag specifying whether to calculate the value by finding the root.}
+
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 }
 \value{
@@ -77,7 +80,6 @@ hazard concentrations(s).
 \item \code{ssd_hc(fitdists)}: Hazard Concentrations for fitdists Object
 
 \item \code{ssd_hc(fitburrlioz)}: Hazard Concentrations for fitburrlioz Object
-'
 
 }}
 \examples{

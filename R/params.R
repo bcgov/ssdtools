@@ -76,6 +76,7 @@
 #' @param rescale A flag specifying whether to rescale concentration values by dividing by the largest finite value.
 #' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param right A string of the column in data with the right concentration values.
+#' @param root A flag specifying whether to calculate the value by finding the root.
 #' @param scale scale parameter.
 #' @param scalelog1 scalelog1 parameter.
 #' @param scalelog2 scalelog2 parameter.
@@ -101,6 +102,7 @@
 #' @param yintercept The y-value for the intersect.
 #' @param ylab A string of the x-axis label.
 #' @param ... Unused.
+
 #' @keywords internal
 #' @name params
 NULL
