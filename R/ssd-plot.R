@@ -41,6 +41,7 @@ plot_coord_scale <- function(data, xlab, ylab, xbreaks = waiver()) {
 #' Plots species sensitivity data and distributions.
 #'
 #' @inheritParams params
+#' @param shape A string of the column in data for the shape aesthetic.
 #' @seealso [`ssd_plot_cdf()`] and [`geom_ssdpoint()`]
 #' @export
 #' @examples
