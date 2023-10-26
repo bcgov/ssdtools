@@ -82,11 +82,11 @@ ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 \item{scale}{scale parameter.}
 
-\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X <= x]},otherwise, \code{P[X > x]}.}
+\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X <= x]}, otherwise, \code{P[X > x]}.}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
-\item{shape}{A string of the column in data for the shape aesthetic.}
+\item{shape}{shape parameter.}
 
 \item{location}{location parameter.}
 
@@ -94,7 +94,7 @@ ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 \item{lshape}{shape parameter on the log scale.}
 
-\item{locationlog}{location on log scale parameter.}
+\item{locationlog}{location on the log scale parameter.}
 
 \item{scalelog}{scale on log scale parameter.}
 

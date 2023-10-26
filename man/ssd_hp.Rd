@@ -39,8 +39,8 @@ ssd_hp(x, ...)
 
 \item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
 
-\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
-in the sense of returning a likelihood.}
+\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
+fit in the sense of returning a likelihood.}
 
 \item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
 
