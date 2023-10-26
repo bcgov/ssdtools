@@ -11,8 +11,6 @@ scale_color_ssd(...)
 }
 \arguments{
 \item{...}{Arguments passed to \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}.}
-
-\item{shape}{A string of the column in data for the shape aesthetic.}
 }
 \description{
 Discrete color-blind scale for SSD Plots

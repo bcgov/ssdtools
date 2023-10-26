@@ -32,7 +32,6 @@ ssd_pal <- function() {
 #' Discrete color-blind scale for SSD Plots
 #'
 #' @param ... Arguments passed to [ggplot2::discrete_scale()].
-#' @param shape A string of the column in data for the shape aesthetic.
 #' @family ggplot
 #' @export
 #' @examples
