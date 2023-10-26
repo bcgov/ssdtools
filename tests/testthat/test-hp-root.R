@@ -73,6 +73,8 @@ test_that("hp is hc", {
   expect_equal(hc_root$est, conc, tolerance = 1e-2)
 })
 
+# FIXME: move to root tests
+# FIXME: also test actual values as seem deterministic
 test_that("hp is hc 10", {
   skip_on_os("linux") 
   fits <- ssd_fit_dists(ssddata::ccme_boron)
