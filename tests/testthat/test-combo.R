@@ -10,7 +10,9 @@ test_that("ssd_pcombo", {
   expect_equal(ssd_pcombo(numeric(0), wt_est), numeric(0))
   expect_equal(ssd_pcombo(1, wt_est), 0.0391103597328257)
   expect_equal(ssd_pcombo(c(1,2), wt_est), c(0.0391103597328257, 0.0837556041052211))
+  expect_equal(ssd_pcombo(1, wt_est, lower.tail = FALSE),  1-0.0391103597328257)
   expect_equal(ssd_pcombo(1, wt_est, log.p = TRUE), log(0.0391103597328257))
+  expect_equal(ssd_pcombo(1, wt_est, lower.tail = FALSE, log.p = TRUE),  log(1-0.0391103597328257))
 })
 
 test_that("ssd_qcombo", {
@@ -19,7 +21,9 @@ test_that("ssd_qcombo", {
   expect_equal(ssd_qcombo(numeric(0), wt_est), numeric(0))
   expect_equal(ssd_qcombo(0.5, wt_est, upper_q = 100), 15.3258287163047)
   expect_equal(ssd_qcombo(c(0.5, 0.75), wt_est, upper_q = 100), c(15.3258287163047, 32.4740417139284))
-  expect_equal(ssd_qcombo(log(0.5), wt_est, upper_q = 100, log.p = TRUE), 15.3258287163047)
+  expect_equal(ssd_qcombo(0.25, wt_est, upper_q = 100, lower.tail = FALSE), 32.4740417139284)
+  expect_equal(ssd_qcombo(log(0.75), wt_est, upper_q = 100, log.p = TRUE), 32.4740417139284)
+  expect_equal(ssd_qcombo(log(0.25), wt_est, upper_q = 100, lower.tail = FALSE, log.p = TRUE), 32.4740417139284)
 })
 
 test_that("ssd_rcombo", {

@@ -39,6 +39,9 @@ ssd_pcombo <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   for(i in seq_along(p)) {
     p[i] <- uniroot(f = f, q = q[i], lower = 0, upper = 1)$root
   }
+  if(!lower.tail) {
+    p <- 1 - p
+  }
   if(log.p) {
     p <- log(p)
   }
@@ -70,6 +73,9 @@ ssd_qcombo <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1)
 
   if(log.p) {
     p <- exp(p)
+  }
+  if(!lower.tail) {
+    p <- 1 - p
   }
 
   f <- ma_fun(wt_est, fun = "p")
