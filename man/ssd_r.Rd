@@ -153,6 +153,12 @@ Weighted Combination of Distributions
 set.seed(50)
 hist(ssd_rburrIII3(10000), breaks = 1000)
 
+# combo 
+fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+wt_est <- ssd_wt_est(fit)
+set.seed(50)
+hist(ssd_rcombo(1000, wt_est, upper_q = 1000), breaks = 100)
+
 set.seed(50)
 hist(ssd_rgamma(10000), breaks = 1000)
 

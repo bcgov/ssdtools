@@ -166,6 +166,11 @@ Weighted Combination of Distributions
 
 ssd_pburrIII3(1)
 
+# combo 
+fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+wt_est <- ssd_wt_est(fit)
+ssd_pcombo(1, wt_est)
+
 ssd_pgamma(1)
 
 ssd_pgompertz(1)

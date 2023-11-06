@@ -9,6 +9,7 @@ test_that("ssd_pcombo", {
   wt_est <- wt_est_nest(fit)
   expect_equal(ssd_pcombo(numeric(0), wt_est), numeric(0))
   expect_equal(ssd_pcombo(1, wt_est), 0.0391103597328257)
+  expect_equal(ssd_pcombo(c(1,2), wt_est), c(0.0391103597328257, 0.0837556041052211))
 })
 
 test_that("ssd_qcombo", {
@@ -16,6 +17,7 @@ test_that("ssd_qcombo", {
   wt_est <- wt_est_nest(fit)
   expect_equal(ssd_qcombo(numeric(0), wt_est), numeric(0))
   expect_equal(ssd_qcombo(0.5, wt_est, upper_q = 100), 15.3258287163047)
+  expect_equal(ssd_qcombo(c(0.5, 0.75), wt_est, upper_q = 100), c(15.3258287163047, 32.4740417139284))
 })
 
 test_that("ssd_rcombo", {
@@ -24,4 +26,14 @@ test_that("ssd_rcombo", {
   expect_equal(ssd_rcombo(0, wt_est), numeric(0))
   set.seed(99)
   expect_equal(ssd_rcombo(1, wt_est, upper_q = 100), 19.7526836610501)
+  set.seed(99)
+  expect_equal(ssd_rcombo(1, wt_est, upper_q = 100), 19.7526836610501)
+  set.seed(99)
+  expect_equal(ssd_rcombo(2, wt_est, upper_q = 100), c(19.7526836610501, 2.69562395185803))
+  set.seed(99)
+  n100 <- ssd_rcombo(100, wt_est, upper_q = 1000)
+  expect_identical(length(n100), 100L)
+  expect_equal(min(n100), 0.0295957274619929)
+  expect_equal(max(n100), 168.790818444479)
+  expect_equal(mean(n100), 23.4076753984188)
 })

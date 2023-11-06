@@ -16,6 +16,12 @@
 #' @describeIn ssd_p Cumulative Distribution Function for 
 #' Weighted Combination of Distributions
 #' @export
+#' @examples
+#' 
+#' # combo 
+#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+#' wt_est <- ssd_wt_est(fit)
+#' ssd_pcombo(1, wt_est)
 ssd_pcombo <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   chk_numeric(q)
   chk_vector(q)
@@ -29,13 +35,22 @@ ssd_pcombo <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   }
 
   f <- ma_fun(wt_est, fun = "q")
-  root <- uniroot(f = f, q = q, lower = 0, upper = 1)$root
-  root
+  p <- rep(NA_real_, length(q))
+  for(i in seq_along(p)) {
+    p[i] <- uniroot(f = f, q = q[i], lower = 0, upper = 1)$root
+  }
+  p
 }
 
 #' @describeIn ssd_q Quantile Function for 
 #' Weighted Combination of Distributions
 #' @export
+#' @examples
+#' 
+#' # combo 
+#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+#' wt_est <- ssd_wt_est(fit)
+#' ssd_qcombo(0.5, wt_est, upper_q = 100)
 ssd_qcombo <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1) {
   chk_numeric(p)
   chk_vector(p)
@@ -44,18 +59,30 @@ ssd_qcombo <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1)
   chk_flag(lower.tail)
   chk_flag(log.p)
   
+  chk_number(upper_q)
+  
   if (!length(p)) {
     return(numeric(0))
   }
 
   f <- ma_fun(wt_est, fun = "p")
-  root <- uniroot(f = f, p = p, lower = 0, upper = upper_q)$root
-  root
+  q <- rep(NA_real_, length(p))
+  for(i in seq_along(p)) {
+    q[i] <- uniroot(f = f, p = p[i], lower = 0, upper = upper_q)$root
+  }
+  q
 }
 
 #' @describeIn ssd_r Random Generation for 
 #' Weighted Combination of Distributions
 #' @export
+#' @examples
+#' 
+#' # combo 
+#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+#' wt_est <- ssd_wt_est(fit)
+#' set.seed(50)
+#' hist(ssd_rcombo(1000, wt_est, upper_q = 1000), breaks = 100)
 ssd_rcombo <- function(n, wt_est, upper_q = 1) {
   chk_count(n)
   if(n == 0L) return(numeric(0))
