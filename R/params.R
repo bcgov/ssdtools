@@ -104,6 +104,9 @@
 #' @param linetype A string of the column in pred to use for the linetype.
 #' @param linecolor A string of the column in pred to use for the line color.
 #' @param root A flag specifying whether to calculate the value by finding the root.
+#' @param wt_est A data frame with dist, wt, and est columns specifying the
+#' distributions, weights and a list column of estimate data frames with 
+#' term and est columns specifying the estimated value for each parameter.
 #' @keywords internal
 #' @name params
 NULL

@@ -173,6 +173,10 @@ remove them with a warning.}
 \item{linecolor}{A string of the column in pred to use for the line color.}
 
 \item{root}{A flag specifying whether to calculate the value by finding the root.}
+
+\item{wt_est}{A data frame with dist, wt, and est columns specifying the
+distributions, weights and a list column of estimate data frames with
+term and est columns specifying the estimated value for each parameter.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

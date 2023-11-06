@@ -48,12 +48,10 @@ hc_upper <- function(p, data) {
                          range_shape1, range_shape2, parametric, control) {
   
   q <- conc/rescale
-  
-  f <- ma_fun(wt_est_nest, fun = "q")
-  root <- uniroot(f = f, q = q, lower = 0, upper = 1)$root
-  
+  p <- ssd_pcombo(q, wt_est_nest)
+
   tibble(
-    est = root * 100,
+    est = p * 100,
     se = NA_real_,
     lcl = NA_real_,
     ucl = NA_real_,
@@ -65,12 +63,11 @@ hc_upper <- function(p, data) {
                          data, rescale, weighted, censoring, min_pmix,
                          range_shape1, range_shape2, parametric, control) {
   
-  f <- ma_fun(wt_est_nest, fun = "p")
   hc_upper <- hc_upper(proportion, data)
-  hc <- uniroot(f = f, p = proportion, lower = 0, upper = hc_upper)$root
-  
+  q <- ssd_qcombo(proportion, wt_est_nest, upper_q = hc_upper)  
+
   tibble(
-    est = hc * rescale,
+    est = q * rescale,
     se = NA_real_,
     lcl = NA_real_,
     ucl = NA_real_,
