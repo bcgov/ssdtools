@@ -177,6 +177,9 @@ remove them with a warning.}
 \item{wt_est}{A data frame with dist, wt, and est columns specifying the
 distributions, weights and a list column of estimate data frames with
 term and est columns specifying the estimated value for each parameter.}
+
+\item{upper_q}{A number specifying the possible upper limit of the cumulative
+distribution.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

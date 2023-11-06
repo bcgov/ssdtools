@@ -16,7 +16,6 @@
 #' @describeIn ssd_p Cumulative Distribution Function for 
 #' Weighted Combination of Distributions
 #' @export
-# FIXME: needs example
 ssd_pcombo <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   chk_numeric(q)
   chk_vector(q)
@@ -36,10 +35,7 @@ ssd_pcombo <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
 
 #' @describeIn ssd_q Quantile Function for 
 #' Weighted Combination of Distributions
-#' @param upper_q A number specifying the possible upper limit of the cumulative
-#' distribution.
 #' @export
-# FIXME: needs example
 ssd_qcombo <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1) {
   chk_numeric(p)
   chk_vector(p)
@@ -55,4 +51,14 @@ ssd_qcombo <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1)
   f <- ma_fun(wt_est, fun = "p")
   root <- uniroot(f = f, p = p, lower = 0, upper = upper_q)$root
   root
+}
+
+#' @describeIn ssd_r Random Generation for 
+#' Weighted Combination of Distributions
+#' @export
+ssd_rcombo <- function(n, wt_est, upper_q = 1) {
+  chk_count(n)
+  if(n == 0L) return(numeric(0))
+  p <- runif(n)
+  ssd_qcombo(p, wt_est, upper_q = upper_q)
 }

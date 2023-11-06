@@ -21,7 +21,7 @@
 \usage{
 ssd_rburrIII3(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE)
 
-ssd_rcombo(n, wt_est, chk = TRUE)
+ssd_rcombo(n, wt_est, upper_q = 1)
 
 ssd_rgamma(n, shape = 1, scale = 1, chk = TRUE)
 
@@ -75,6 +75,9 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 \item{wt_est}{A data frame with dist, wt, and est columns specifying the
 distributions, weights and a list column of estimate data frames with
 term and est columns specifying the estimated value for each parameter.}
+
+\item{upper_q}{A number specifying the possible upper limit of the cumulative
+distribution.}
 
 \item{shape}{A string of the column in data for the shape aesthetic.}
 
