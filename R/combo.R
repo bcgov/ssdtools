@@ -36,6 +36,8 @@ ssd_pcombo <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
 
   f <- ma_fun(wt_est, fun = "q")
   p <- rep(NA_real_, length(q))
+  # FIXME: vectorize
+  # FIXME: deal with edge cases of negative and infinite q
   for(i in seq_along(p)) {
     p[i] <- uniroot(f = f, q = q[i], lower = 0, upper = 1)$root
   }
@@ -80,6 +82,8 @@ ssd_qcombo <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1)
 
   f <- ma_fun(wt_est, fun = "p")
   q <- rep(NA_real_, length(p))
+  # FIXME: vectorize  
+  # FIXME: deal with edge cases of negative and q >= 1
   for(i in seq_along(p)) {
     q[i] <- uniroot(f = f, p = p[i], lower = 0, upper = upper_q)$root
   }
