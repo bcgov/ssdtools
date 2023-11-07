@@ -48,7 +48,7 @@ hc_upper <- function(p, data) {
                          range_shape1, range_shape2, parametric, control) {
   
   q <- conc/rescale
-  p <- ssd_pcombo(q, wt_est_nest)
+  p <- ssd_pmulti(q, wt_est_nest)
 
   tibble(
     est = p * 100,
@@ -64,7 +64,7 @@ hc_upper <- function(p, data) {
                          range_shape1, range_shape2, parametric, control) {
   
   hc_upper <- hc_upper(proportion, data)
-  q <- ssd_qcombo(proportion, wt_est_nest, upper_q = hc_upper)  
+  q <- ssd_qmulti(proportion, wt_est_nest, upper_q = hc_upper)  
 
   tibble(
     est = q * rescale,

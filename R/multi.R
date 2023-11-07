@@ -18,11 +18,11 @@
 #' @export
 #' @examples
 #' 
-#' # combo 
+#' # multi 
 #' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
 #' wt_est <- ssd_wt_est(fit)
-#' ssd_pcombo(1, wt_est)
-ssd_pcombo <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
+#' ssd_pmulti(1, wt_est)
+ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   chk_numeric(q)
   chk_vector(q)
 
@@ -55,11 +55,11 @@ ssd_pcombo <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
 #' @export
 #' @examples
 #' 
-#' # combo 
+#' # multi 
 #' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
 #' wt_est <- ssd_wt_est(fit)
-#' ssd_qcombo(0.5, wt_est, upper_q = 100)
-ssd_qcombo <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1) {
+#' ssd_qmulti(0.5, wt_est, upper_q = 100)
+ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1) {
   chk_numeric(p)
   chk_vector(p)
 
@@ -95,14 +95,14 @@ ssd_qcombo <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1)
 #' @export
 #' @examples
 #' 
-#' # combo 
+#' # multi 
 #' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
 #' wt_est <- ssd_wt_est(fit)
 #' set.seed(50)
-#' hist(ssd_rcombo(1000, wt_est, upper_q = 1000), breaks = 100)
-ssd_rcombo <- function(n, wt_est, upper_q = 1) {
+#' hist(ssd_rmulti(1000, wt_est, upper_q = 1000), breaks = 100)
+ssd_rmulti <- function(n, wt_est, upper_q = 1) {
   chk_count(n)
   if(n == 0L) return(numeric(0))
   p <- runif(n)
-  ssd_qcombo(p, wt_est, upper_q = upper_q)
+  ssd_qmulti(p, wt_est, upper_q = upper_q)
 }
