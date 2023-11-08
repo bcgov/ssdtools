@@ -9,7 +9,7 @@ ssd_hp(x, ...)
 
 \method{ssd_hp}{fitdists}(
   x,
-  conc,
+  conc = 1,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
@@ -17,6 +17,7 @@ ssd_hp(x, ...)
   delta = 7,
   min_pboot = 0.99,
   parametric = TRUE,
+  root = FALSE,
   control = NULL,
   ...
 )
@@ -38,10 +39,12 @@ ssd_hp(x, ...)
 
 \item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
 
-\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
-in the sense of returning a likelihood.}
+\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
+fit in the sense of returning a likelihood.}
 
 \item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+
+\item{root}{A flag specifying whether to calculate the value by finding the root.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 }

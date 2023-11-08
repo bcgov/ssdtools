@@ -9,7 +9,7 @@ comma_signif(x, digits = 3, ...)
 \arguments{
 \item{x}{A numeric vector to format.}
 
-\item{digits}{A whole number specifying the number of significant figures}
+\item{digits}{A whole number specifying the number of significant figures.}
 
 \item{...}{Additional arguments passed to \link[scales:comma]{scales::comma}.}
 }

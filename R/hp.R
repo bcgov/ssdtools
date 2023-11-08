@@ -47,7 +47,7 @@ no_ssd_hp <- function() {
 .ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, min_pboot,
                            data, rescale, weighted, censoring,
                            min_pmix, range_shape1, range_shape2, parametric, control) {
-  args <- estimates(x)
+  args <- estimates(x) #TODO: checkout estimates
   args$q <- conc / rescale
   dist <- .dist_tmbfit(x)
   what <- paste0("ssd_p", dist)
@@ -92,8 +92,18 @@ no_ssd_hp <- function() {
   replace_min_pboot_na(hp, min_pboot)
 }
 
-.ssd_hp_fitdists <- function(x, conc, ci, level, nboot, min_pboot, control,
-                             parametric, average) {
+.ssd_hp_fitdists <- function(
+    x, 
+    conc, 
+    ci, 
+    level, 
+    nboot,
+    average, 
+    min_pboot, 
+    parametric, 
+    root, 
+    control) {
+
   if (!length(x) || !length(conc)) {
     return(no_ssd_hp())
   }
@@ -101,6 +111,7 @@ no_ssd_hp <- function() {
   if (is.null(control)) {
     control <- .control_fitdists(x)
   }
+
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
@@ -109,18 +120,45 @@ no_ssd_hp <- function() {
   range_shape2 <- .range_shape2_fitdists(x)
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
-
+  wt_est_nest <- wt_est_nest(x)
+  
   if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
     wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
     ci <- FALSE
   }
 
-  if (ci && unequal) {
+  if (parametric && ci && unequal) {
     wrn("Parametric CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }
-  if (!ci) nboot <- 0L
+  if (!ci) {
+    nboot <- 0L
+  }
+  
+  if(root && average) {
+    seeds <- seed_streams(length(conc))
+    hps <- future_map(
+      conc, .ssd_hp_root, 
+      wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
+      min_pboot = min_pboot,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control,
+      .options = furrr::furrr_options(seed = seeds))
 
+    hp <- dplyr::bind_rows(hps)
+    
+    method <- if (parametric) "parametric" else "non-parametric"
+    
+    return(
+      tibble(
+        dist = "average", conc = conc, est = hp$est, se = hp$se,
+        lcl = hp$lcl, ucl = hp$ucl, wt = rep(1, length(conc)),
+        method = method, nboot = nboot, pboot = hp$pboot
+      )
+    )
+  }
+  
   seeds <- seed_streams(length(x))
 
   hp <- future_map(x, .ssd_hp_tmbfit,
@@ -131,7 +169,8 @@ no_ssd_hp <- function() {
     parametric = parametric,
     control = control, .options = furrr::furrr_options(seed = seeds)
   )
-  weight <- glance(x)$weight
+  
+  weight <- wt_est_nest$weight
   if (!average) {
     hp <- mapply(
       function(x, y) {
@@ -166,11 +205,20 @@ no_ssd_hp <- function() {
 
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
 #' @export
-ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
-                            average = TRUE, delta = 7, min_pboot = 0.99,
-                            parametric = TRUE,
-                            control = NULL,
-                            ...) {
+ssd_hp.fitdists <- function(
+    x, 
+    conc = 1, 
+    ci = FALSE, 
+    level = 0.95, 
+    nboot = 1000,
+    average = TRUE, 
+    delta = 7, 
+    min_pboot = 0.99,
+    parametric = TRUE,
+    root = FALSE,
+    control = NULL,
+    ...) {
+
   chk_vector(conc)
   chk_numeric(conc)
   chk_flag(ci)
@@ -184,14 +232,21 @@ ssd_hp.fitdists <- function(x, conc, ci = FALSE, level = 0.95, nboot = 1000,
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_flag(parametric)
+  chk_flag(root)
   chk_null_or(control, vld = vld_list)
   chk_unused(...)
 
   x <- subset(x, delta = delta)
-  hp <- .ssd_hp_fitdists(x, conc,
-    ci = ci, level = level, nboot = nboot,
-    average = average, min_pboot = min_pboot,
+  hp <- .ssd_hp_fitdists(
+    x, 
+    conc,
+    ci = ci, 
+    level = level, 
+    nboot = nboot,
+    average = average, 
+    min_pboot = min_pboot,
     parametric = parametric,
+    root = root,
     control = control
   )
   warn_min_pboot(hp, min_pboot)

@@ -34,6 +34,7 @@ utils::globalVariables("where")
 #' @importFrom scales comma manual_pal percent trans_breaks
 #' @importFrom ssddata gm_mean
 #' @importFrom stats coef complete.cases ks.test logLik nobs optim plogis predict qlogis runif sd setNames weighted.mean
+#' @importFrom stats uniroot
 #' @importFrom stringr str_order
 #' @importFrom tibble as_tibble tibble
 #' @importFrom TMB MakeADFun sdreport
