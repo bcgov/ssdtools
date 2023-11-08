@@ -22,6 +22,20 @@ test_that("ssd_pmulti", {
   expect_equal(ssd_pmulti(1, wt_est, lower.tail = FALSE, log.p = TRUE),  log(1-0.0391155639855389))
 })
 
+test_that("ssd_pmulti weights", {
+  fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+  wt_est <- ssd_wt_est(fit)
+  expect_equal(ssd_pmulti(1, wt_est), 0.0391155639855389)
+  wt_est$weight[wt_est$dist != "lnorm"] <- 0
+  expect_equal(ssd_pmulti(1, wt_est), 0.0195438776703809)
+  wt_est$weight[wt_est$dist == "lnorm"] <- 0
+  expect_error(ssd_pmulti(1, wt_est), "must be greater than 0")
+  wt_est$weight[wt_est$dist == "lnorm"] <- 1.1
+  expect_error(ssd_pmulti(1, wt_est), "must have values between 0 and 1")
+  wt_est$weight[wt_est$dist == "lnorm"] <- 1
+  expect_equal(ssd_pmulti(1, wt_est), 0.0195438776703809)
+})
+  
 test_that("ssd_qmulti", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   wt_est <- ssd_wt_est(fit)
@@ -37,6 +51,20 @@ test_that("ssd_qmulti", {
   expect_equal(ssd_qmulti(0.25, wt_est, lower.tail = FALSE), 32.4740714551225)
   expect_equal(ssd_qmulti(log(0.75), wt_est, log.p = TRUE), 32.4740714551225)
   expect_equal(ssd_qmulti(log(0.25), wt_est, lower.tail = FALSE, log.p = TRUE), 32.4740714551225)
+})
+
+test_that("ssd_qmulti weights", {
+  fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+  wt_est <- ssd_wt_est(fit)
+  expect_equal(ssd_qmulti(0.25, wt_est), 6.1824250029426)
+  wt_est$weight[wt_est$dist != "lnorm"] <- 0
+  expect_equal(ssd_qmulti(0.25, wt_est), 5.60825026439554)
+  wt_est$weight[wt_est$dist == "lnorm"] <- 0
+  expect_error(ssd_qmulti(0.25, wt_est), "must be greater than 0")
+  wt_est$weight[wt_est$dist == "lnorm"] <- 1.1
+  expect_error(ssd_qmulti(0.25, wt_est), "must have values between 0 and 1")
+  wt_est$weight[wt_est$dist == "lnorm"] <- 1
+  expect_equal(ssd_qmulti(0.25, wt_est), 5.60825026439554)
 })
 
 test_that("ssd_rmulti", {

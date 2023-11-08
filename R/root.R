@@ -29,7 +29,7 @@ est_args <- function(x) {
 
 ma_fun <- function(wt_est_nest, fun = "p") {
   funs <- paste0("ssd_", fun, wt_est_nest$dist)
-  wts <- wt_est_nest$weight
+  wts <- wt_est_nest$weight / sum(wt_est_nest$weight)
   args <- purrr::map_chr(wt_est_nest$data, est_args)
   fun_args <- paste0(wts, " * ", funs, "(x, ", args, ")", collapse = " + ")
   

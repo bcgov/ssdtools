@@ -59,6 +59,7 @@ check_wt_est <- function(x, x_name = NULL) {
   chk_numeric(x$weight)
   chk_not_any_na(x$weight)
   chk_range(x$weight, c(0,1))
+  chk_gt(sum(x$weight), 0)
   
   chk_list(x$data)
   chk_all(x$data, chk_fun = check_est)
