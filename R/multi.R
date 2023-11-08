@@ -38,9 +38,6 @@ ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   lower <- ranges$lower
   upper <- ranges$upper
 
-  lower <- plogis(qlogis(lower) - 1)
-  upper <- plogis(qlogis(upper) + 1)
-
   f <- ma_fun(wt_est, fun = "q")
   p <- rep(NA_real_, length(q))
   for(i in seq_along(p)) {
@@ -90,9 +87,6 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   ranges <- range_fun(p, wt_est, fun = "q")
   lower <- ranges$lower
   upper <- ranges$upper
-  
-  lower <- exp(log(lower) - 1)
-  upper <- exp(log(upper) + 1)
 
   f <- ma_fun(wt_est, fun = "p")
   q <- rep(NA_real_, length(p))

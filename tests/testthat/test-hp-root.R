@@ -21,9 +21,9 @@ test_that("hp root lnorm", {
   hp_average <- ssd_hp(fits, average = TRUE)
   hp_root <- ssd_hp(fits, average = TRUE, root = TRUE)
   expect_identical(hp_average$est, hp_dist$est)
-  expect_equal(hp_root, hp_average, tolerance = 1e-3)
-  expect_equal(hp_average$est, 1.9543030195088, tolerance = 1e-6)
-  expect_equal(hp_root$est, 1.95449372351602, tolerance = 1e-6)
+  expect_identical(hp_root, hp_average, tolerance = 1e-10)
+  expect_equal(hp_average$est, 1.9543030195088, tolerance = 1e-10)
+  expect_equal(hp_root$est, 1.95430301950878, tolerance = 1e-6)
   
   testthat::expect_snapshot({
     hp_root
@@ -38,7 +38,7 @@ test_that("hp root all", {
   hp_root <- ssd_hp(fits, average = TRUE, root = TRUE)
   expect_equal(hp_root, hp_average, tolerance = 1e-2)
   expect_equal(hp_average$est, 3.89879358571718, tolerance = 1e-6)
-  expect_equal(hp_root$est, 3.9138070998897, tolerance = 1e-6)
+  expect_equal(hp_root$est, 3.91155639855389, tolerance = 1e-6)
   testthat::expect_snapshot({
     hp_root
   })
@@ -56,6 +56,5 @@ test_that("hp is hc", {
     hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = TRUE)
     hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
   }
-  skip("uniroot is biased...")
-  expect_equal(hc_root$est, conc, tolerance = 1e-2)
+  expect_gt(hc_root$est, 2.3)
 })

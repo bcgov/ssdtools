@@ -21,9 +21,9 @@ test_that("hc root lnorm", {
   hc_average <- ssd_hc(fits, average = TRUE)
   hc_root <- ssd_hc(fits, average = TRUE, root = TRUE)
   expect_identical(hc_average$est, hc_dist$est)
-  expect_equal(hc_root, hc_average, tolerance = 1e-5)
-  expect_equal(hc_average$est, 1.6811748398812, tolerance = 1e-6)
-  expect_equal(hc_root$est, 1.68117261431233, tolerance = 1e-6)
+  expect_identical(hc_average$est, hc_dist$est)
+  expect_identical(hc_root, hc_average, tolerance = 1e-10)
+  expect_equal(hc_root$est, 1.68117483988121, tolerance = 1e-6)
   
   testthat::expect_snapshot({
     hc_root
@@ -37,8 +37,8 @@ test_that("hc root all", {
   hc_average <- ssd_hc(fits, average = TRUE)
   hc_root <- ssd_hc(fits, average = TRUE, root = TRUE)
   expect_equal(hc_root, hc_average, tolerance = 1e-1)
-  expect_equal(hc_average$est, 1.24151700389853, tolerance = 1e-6)
-  expect_equal(hc_root$est, 1.25677299940713, tolerance = 1e-6)
+  expect_identical(hc_average$est, 1.24151700389853, tolerance = 1e-10)
+  expect_equal(hc_root$est, 1.25678623624403, tolerance = 1e-10)
   testthat::expect_snapshot({
     hc_root
   })
