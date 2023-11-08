@@ -37,10 +37,17 @@ ma_fun <- function(wt_est_nest, fun = "p") {
   eval(parse(text = func))
 }
 
-hc_upper <- function(p, data) {
-  right <- data$right[is.finite(data$right)]
-  # TODO: ensure safe upper bound - use p as well?
-  max(right) * 10
+range_fun <- function(x, wt_est_nest, fun = "p") {
+  funs <- paste0("ssd_", fun, wt_est_nest$dist)
+  args <- purrr::map_chr(wt_est_nest$data, est_args)
+  fun_args <- paste0(funs, "(x, ", args, ")", collapse = ", ")
+  func <- paste0("list(", fun_args, ")", collapse = "")
+  list <- eval(parse(text = func))
+  tlist <- purrr::transpose(list)
+  tlist <- purrr::map(tlist, unlist)
+  min <- purrr::map_dbl(tlist, min)
+  max <- purrr::map_dbl(tlist, max)
+  list(lower = min, upper = max)
 }
 
 .ssd_hp_root <- function(conc, wt_est_nest, ci, level, nboot, min_pboot,
@@ -63,8 +70,7 @@ hc_upper <- function(p, data) {
                          data, rescale, weighted, censoring, min_pmix,
                          range_shape1, range_shape2, parametric, control) {
   
-  hc_upper <- hc_upper(proportion, data)
-  q <- ssd_qmulti(proportion, wt_est_nest, upper_q = hc_upper)  
+  q <- ssd_qmulti(proportion, wt_est_nest)  
 
   tibble(
     est = q * rescale,

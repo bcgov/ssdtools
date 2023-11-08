@@ -57,7 +57,7 @@ ssd_rlnorm_lnorm(
 
 ssd_rlnorm(n, meanlog = 0, sdlog = 1, chk = TRUE)
 
-ssd_rmulti(n, wt_est, upper_q = 1)
+ssd_rmulti(n, wt_est)
 
 ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 }
@@ -109,9 +109,6 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 \item{wt_est}{A data frame with dist, wt, and est columns specifying the
 distributions, weights and a list column of estimate data frames with
 term and est columns specifying the estimated value for each parameter.}
-
-\item{upper_q}{A number specifying the possible upper limit of the cumulative
-distribution.}
 }
 \description{
 Random Number Generation
@@ -181,7 +178,7 @@ hist(ssd_rlnorm(10000), breaks = 1000)
 fit <- ssd_fit_dists(data = ssddata::ccme_boron)
 wt_est <- ssd_wt_est(fit)
 set.seed(50)
-hist(ssd_rmulti(1000, wt_est, upper_q = 1000), breaks = 100)
+hist(ssd_rmulti(1000, wt_est), breaks = 100)
 
 set.seed(50)
 hist(ssd_rweibull(10000), breaks = 1000)

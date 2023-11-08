@@ -34,12 +34,23 @@ ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
     return(numeric(0))
   }
 
+  ranges <- range_fun(q, wt_est, fun = "p")
+  lower <- ranges$lower
+  upper <- ranges$upper
+
+  lower <- plogis(qlogis(lower) - 1)
+  upper <- plogis(qlogis(upper) + 1)
+
   f <- ma_fun(wt_est, fun = "q")
   p <- rep(NA_real_, length(q))
   # FIXME: vectorize
   # FIXME: deal with edge cases of negative and infinite q
   for(i in seq_along(p)) {
-    p[i] <- uniroot(f = f, q = q[i], lower = 0, upper = 1)$root
+    if(lower[i] == upper[i]) {
+      p[i] <- lower[i]
+    } else {
+      p[i] <- uniroot(f = f, q = q[i], lower = lower[i], upper = upper[i])$root
+    }
   }
   if(!lower.tail) {
     p <- 1 - p
@@ -58,16 +69,14 @@ ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
 #' # multi 
 #' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
 #' wt_est <- ssd_wt_est(fit)
-#' ssd_qmulti(0.5, wt_est, upper_q = 100)
-ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1) {
+#' ssd_qmulti(0.5, wt_est)
+ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   chk_numeric(p)
   chk_vector(p)
 
   check_wt_est(wt_est)
   chk_flag(lower.tail)
   chk_flag(log.p)
-  
-  chk_number(upper_q)
   
   if (!length(p)) {
     return(numeric(0))
@@ -79,13 +88,24 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1)
   if(!lower.tail) {
     p <- 1 - p
   }
+  
+  ranges <- range_fun(p, wt_est, fun = "q")
+  lower <- ranges$lower
+  upper <- ranges$upper
+  
+  lower <- exp(log(lower) - 1)
+  upper <- exp(log(upper) + 1)
 
   f <- ma_fun(wt_est, fun = "p")
   q <- rep(NA_real_, length(p))
   # FIXME: vectorize  
   # FIXME: deal with edge cases of negative and q >= 1
   for(i in seq_along(p)) {
-    q[i] <- uniroot(f = f, p = p[i], lower = 0, upper = upper_q)$root
+    if(lower[i] == upper[i]) {
+      q[i] <- lower[i]
+    } else {
+      q[i] <- uniroot(f = f, p = p[i], lower = lower[i], upper = upper[i])$root
+    }
   }
   q
 }
@@ -99,10 +119,10 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1)
 #' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
 #' wt_est <- ssd_wt_est(fit)
 #' set.seed(50)
-#' hist(ssd_rmulti(1000, wt_est, upper_q = 1000), breaks = 100)
-ssd_rmulti <- function(n, wt_est, upper_q = 1) {
+#' hist(ssd_rmulti(1000, wt_est), breaks = 100)
+ssd_rmulti <- function(n, wt_est) {
   chk_count(n)
   if(n == 0L) return(numeric(0))
   p <- runif(n)
-  ssd_qmulti(p, wt_est, upper_q = upper_q)
+  ssd_qmulti(p, wt_est)
 }

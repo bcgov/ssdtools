@@ -72,7 +72,7 @@ ssd_qlnorm_lnorm(
 
 ssd_qlnorm(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE)
 
-ssd_qmulti(p, wt_est, lower.tail = TRUE, log.p = FALSE, upper_q = 1)
+ssd_qmulti(p, wt_est, lower.tail = TRUE, log.p = FALSE)
 
 ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 }
@@ -126,9 +126,6 @@ ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 \item{wt_est}{A data frame with dist, wt, and est columns specifying the
 distributions, weights and a list column of estimate data frames with
 term and est columns specifying the estimated value for each parameter.}
-
-\item{upper_q}{A number specifying the possible upper limit of the cumulative
-distribution.}
 }
 \description{
 Quantile Function
@@ -188,7 +185,7 @@ ssd_qlnorm(0.5)
 # multi 
 fit <- ssd_fit_dists(data = ssddata::ccme_boron)
 wt_est <- ssd_wt_est(fit)
-ssd_qmulti(0.5, wt_est, upper_q = 100)
+ssd_qmulti(0.5, wt_est)
 
 ssd_qweibull(0.5)
 }

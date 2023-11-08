@@ -107,8 +107,6 @@
 #' @param wt_est A data frame with dist, wt, and est columns specifying the
 #' distributions, weights and a list column of estimate data frames with 
 #' term and est columns specifying the estimated value for each parameter.
-#' @param upper_q A number specifying the possible upper limit of the cumulative
-#' distribution.
 #' @keywords internal
 #' @name params
 NULL

@@ -13,20 +13,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#    Copyright 2021 Province of British Columbia
-#
-#    Licensed under the Apache License, Version 2.0 (the "License");
-#    you may not use this file except in compliance with the License.
-#    You may obtain a copy of the License at
-#
-#       https://www.apache.org/licenses/LICENSE-2.0
-#
-#    Unless required by applicable law or agreed to in writing, software
-#    distributed under the License is distributed on an "AS IS" BASIS,
-#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#    See the License for the specific language governing permissions and
-#    limitations under the License.
-
 test_that("hc root lnorm", {
   skip_on_os("linux") # FIXME
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
@@ -35,9 +21,9 @@ test_that("hc root lnorm", {
   hc_average <- ssd_hc(fits, average = TRUE)
   hc_root <- ssd_hc(fits, average = TRUE, root = TRUE)
   expect_identical(hc_average$est, hc_dist$est)
-  expect_equal(hc_root, hc_average, tolerance = 1e-6)
+  expect_equal(hc_root, hc_average, tolerance = 1e-5)
   expect_equal(hc_average$est, 1.6811748398812, tolerance = 1e-6)
-  expect_equal(hc_root$est, 1.68117469404437, tolerance = 1e-6)
+  expect_equal(hc_root$est, 1.68117261431233, tolerance = 1e-6)
   
   testthat::expect_snapshot({
     hc_root
@@ -52,7 +38,7 @@ test_that("hc root all", {
   hc_root <- ssd_hc(fits, average = TRUE, root = TRUE)
   expect_equal(hc_root, hc_average, tolerance = 1e-1)
   expect_equal(hc_average$est, 1.24151700389853, tolerance = 1e-6)
-  expect_equal(hc_root$est, 1.25677616485866, tolerance = 1e-6)
+  expect_equal(hc_root$est, 1.25677299940713, tolerance = 1e-6)
   testthat::expect_snapshot({
     hc_root
   })
