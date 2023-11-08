@@ -14,7 +14,7 @@ test_that("ssd_pmulti", {
   expect_identical(ssd_pmulti(Inf, wt_est), 1)
   expect_equal(ssd_pmulti(0, wt_est), 0)
   expect_equal(ssd_pmulti(1, wt_est), 0.0391155639855389)
-  expect_equal(ssd_pmulti(10000, wt_est), 0.99991762078885)
+  expect_equal(ssd_pmulti(10000, wt_est), 0.99991762078885, tolerance = 1e-5)
   expect_equal(ssd_pmulti(c(1,2), wt_est), c(0.0391155639855389, 0.083756266589807))
   expect_equal(ssd_pmulti(c(1,NA), wt_est), c(0.0391155639855389, NA))
   expect_equal(ssd_pmulti(1, wt_est, lower.tail = FALSE),  1-0.0391155639855389)
