@@ -52,7 +52,6 @@ scale_color_ssd <- function(...) {
 #' Uses the empirical cumulative distribution to create scatterplot of points `x`.
 #'
 #' `geom_ssd()` has been deprecated for `geom_ssdpoint()`.
-#'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @seealso [`ssd_plot_cdf()`]

@@ -9,7 +9,7 @@ dlgumbel(x, locationlog = 0, scalelog = 1, log = FALSE)
 \arguments{
 \item{x}{A numeric vector of values.}
 
-\item{locationlog}{location on log scale parameter.}
+\item{locationlog}{location on the log scale parameter.}
 
 \item{scalelog}{scale on log scale parameter.}
 

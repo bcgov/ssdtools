@@ -9,21 +9,153 @@
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).}
 
-\item{x}{The object.}
+\item{average}{A flag specifying whether to model average the estimates.}
 
-\item{object}{The object.}
+\item{breaks}{A character vector}
 
-\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
+\item{bounds}{A named non-negative numeric vector of the left and right bounds for
+uncensored missing (0 and Inf) data in terms of the orders of magnitude
+relative to the extremes for non-missing values.}
 
 \item{chk}{A flag specifying whether to check the arguments.}
 
+\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
+
+\item{color}{A string of the column in data for the color aesthetic.}
+
+\item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
+
+\item{conc}{A numeric vector of concentrations.}
+
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
+
 \item{data}{A data frame.}
+
+\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+
+\item{digits}{A whole number specifying the number of significant figures.}
+
+\item{dists}{A character vector of the distribution names.}
+
+\item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
+
+\item{label}{A string of the column in data with the labels.}
+
+\item{left}{A string of the column in data with the concentrations.}
+
+\item{level}{A number between 0 and 1 of the confidence level.}
+
+\item{linecolor}{A string of the column in pred to use for the line color.}
+
+\item{linetype}{A string of the column in pred to use for the linetype.}
+
+\item{llocation}{location parameter on the log scale.}
+
+\item{location}{location parameter.}
+
+\item{locationlog}{location on the log scale parameter.}
+
+\item{locationlog1}{locationlog1 parameter.}
+
+\item{locationlog2}{locationlog2 parameter.}
+
+\item{log}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{lscale}{scale parameter on the log scale.}
+
+\item{lshape}{shape parameter on the log scale.}
+
+\item{lshape1}{shape1 parameter on the log scale.}
+
+\item{lshape2}{shape2 parameter on the log scale.}
+
+\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X <= x]}, otherwise, \code{P[X > x]}.}
+
+\item{meanlog}{mean on log scale parameter.}
+
+\item{meanlog1}{mean on log scale parameter.}
+
+\item{meanlog2}{mean on log scale parameter.}
+
+\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
+fit in the sense of returning a likelihood.}
+
+\item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
+
+\item{na.rm}{A flag specifying whether to silently remove missing values or
+remove them with a warning.}
+
+\item{n}{positive number of observations.}
+
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
+
+\item{nrow}{A positive whole number of the minimum number of non-missing rows.}
+
+\item{nsim}{A positive whole number of the number of simulations to generate.}
+
+\item{object}{The object.}
+
+\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+
+\item{p}{vector of probabilities.}
+
+\item{percent}{A numeric vector of percentages.}
+
+\item{pmix}{Proportion mixture parameter.}
+
+\item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
 
 \item{pred}{A data frame of the predictions.}
 
-\item{xlab}{A string of the x-axis label.}
+\item{q}{vector of quantiles.}
 
-\item{ylab}{A string of the x-axis label.}
+\item{range_shape1}{A numeric vector of length two of the lower and upper bounds for the shape1 parameter.}
+
+\item{range_shape2}{shape2 parameter.}
+
+\item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
+
+\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
+
+\item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
+
+\item{right}{A string of the column in data with the right concentration values.}
+
+\item{root}{A flag specifying whether to calculate the value by finding the root.}
+
+\item{scale}{scale parameter.}
+
+\item{scalelog1}{scalelog1 parameter.}
+
+\item{scalelog2}{scalelog2 parameter.}
+
+\item{scalelog}{scale on log scale parameter.}
+
+\item{sdlog}{standard deviation on log scale parameter.}
+
+\item{sdlog1}{standard deviation on log scale parameter.}
+
+\item{sdlog2}{standard deviation on log scale parameter.}
+
+\item{select}{A character vector of the distributions to select.}
+
+\item{shape}{shape parameter.}
+
+\item{shape1}{shape1 parameter.}
+
+\item{shape2}{shape2 parameter.}
+
+\item{shift_x}{The value to multiply the label x values by.}
+
+\item{silent}{A flag indicating whether fits should fail silently.}
+
+\item{size}{A number for the size of the labels.}
+
+\item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
+
+\item{x}{The object.}
 
 \item{xbreaks}{The x-axis breaks as one of:
 \itemize{
@@ -32,151 +164,19 @@ parameters at the boundary should be considered to have converged (default = FAL
 \item A numeric vector of positions
 }}
 
-\item{breaks}{A character vector}
-
-\item{bounds}{A named non-negative numeric vector of the left and right bounds for
-uncensored missing (0 and Inf) data in terms of the orders of magnitude
-relative to the extremes for non-missing values.}
-
-\item{conc}{A numeric vector of concentrations.}
-
-\item{digits}{A whole number specifying the number of significant figures}
-
-\item{percent}{A numeric vector of percentages.}
-
-\item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
-
-\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
-
-\item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
-
-\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
-
-\item{average}{A flag specifying whether to model average the estimates.}
-
-\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
-
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
-
-\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
-in the sense of returning a likelihood.}
-
-\item{level}{A number between 0 and 1 of the confidence level.}
-
-\item{...}{Unused.}
-
-\item{q}{vector of quantiles.}
-
-\item{p}{vector of probabilities.}
-
-\item{n}{number of observations.}
-
-\item{log}{logical; if TRUE, probabilities p are given as log(p).}
-
-\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
-
-\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X <= x]},otherwise, \code{P[X > x]}.}
-
-\item{location}{location parameter.}
-
-\item{llocation}{location parameter on the log scale.}
-
-\item{scale}{scale parameter.}
-
-\item{lscale}{scale parameter on the log scale.}
-
-\item{shape1}{shape1 parameter.}
-
-\item{shape2}{shape2 parameter.}
-
-\item{range_shape1}{A numeric vector of length two of the lower and upper bounds for the shape1 parameter.}
-
-\item{range_shape2}{shape2 parameter.}
-
-\item{locationlog1}{locationlog1 parameter.}
-
-\item{scalelog1}{scalelog1 parameter.}
-
-\item{locationlog2}{locationlog2 parameter.}
-
-\item{scalelog2}{scalelog2 parameter.}
-
-\item{pmix}{Proportion mixture parameter.}
-
-\item{meanlog}{mean on log scale parameter.}
-
-\item{meanlog1}{mean on log scale parameter.}
-
-\item{meanlog2}{mean on log scale parameter.}
-
-\item{locationlog}{location on log scale parameter.}
-
-\item{sdlog}{standard deviation on log scale parameter.}
-
-\item{sdlog1}{standard deviation on log scale parameter.}
-
-\item{sdlog2}{standard deviation on log scale parameter.}
-
-\item{scalelog}{scale on log scale parameter.}
-
-\item{lshape}{shape parameter on the log scale.}
-
-\item{lshape1}{shape1 parameter on the log scale.}
-
-\item{lshape2}{shape2 parameter on the log scale.}
-
 \item{xintercept}{The x-value for the intersect}
+
+\item{xlab}{A string of the x-axis label.}
 
 \item{yintercept}{The y-value for the intersect.}
 
-\item{select}{A character vector of the distributions to select.}
-
-\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
-
-\item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
-
-\item{left}{A string of the column in data with the concentrations.}
-
-\item{right}{A string of the column in data with the right concentration values.}
-
-\item{label}{A string of the column in data with the labels.}
-
-\item{shape}{A string of the column in data for the shape aesthetic.}
-
-\item{color}{A string of the column in data for the color aesthetic.}
-
-\item{size}{A number for the size of the labels.}
-
-\item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
-
-\item{shift_x}{The value to multiply the label x values by.}
-
-\item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
-
-\item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
-
-\item{dists}{A character vector of the distribution names.}
-
-\item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
-
-\item{silent}{A flag indicating whether fits should fail silently.}
-
-\item{na.rm}{A flag specifying whether to silently remove missing values or
-remove them with a warning.}
-
-\item{nrow}{A positive whole number of the minimum number of non-missing rows.}
-
-\item{nsim}{A positive whole number of the number of simulations to generate.}
-
-\item{linetype}{A string of the column in pred to use for the linetype.}
-
-\item{linecolor}{A string of the column in pred to use for the line color.}
-
-\item{root}{A flag specifying whether to calculate the value by finding the root.}
+\item{ylab}{A string of the x-axis label.}
 
 \item{wt_est}{A data frame with dist, wt, and est columns specifying the
 distributions, weights and a list column of estimate data frames with
 term and est columns specifying the estimated value for each parameter.}
+
+\item{...}{Unused.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions

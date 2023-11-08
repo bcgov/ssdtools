@@ -62,7 +62,7 @@ ssd_rmulti(n, wt_est)
 ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 }
 \arguments{
-\item{n}{number of observations.}
+\item{n}{positive number of observations.}
 
 \item{shape1}{shape1 parameter.}
 
@@ -72,7 +72,7 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 
 \item{chk}{A flag specifying whether to check the arguments.}
 
-\item{shape}{A string of the column in data for the shape aesthetic.}
+\item{shape}{shape parameter.}
 
 \item{location}{location parameter.}
 
@@ -80,7 +80,7 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 
 \item{lshape}{shape parameter on the log scale.}
 
-\item{locationlog}{location on log scale parameter.}
+\item{locationlog}{location on the log scale parameter.}
 
 \item{scalelog}{scale on log scale parameter.}
 

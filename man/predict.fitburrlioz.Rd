@@ -26,8 +26,8 @@
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
 
-\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully fit
-in the sense of returning a likelihood.}
+\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
+fit in the sense of returning a likelihood.}
 
 \item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
 
