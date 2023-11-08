@@ -58,6 +58,6 @@ test_that("glance reweight same log_lik", {
   expect_identical(glance$nobs, rep(28L, 3))
   expect_identical(glance_cens$aicc, rep(NA_real_, 3))
   expect_identical(glance_cens$nobs, rep(NA_integer_, 3))
-  expect_equal(glance_cens$weight, glance$weight, tolerance = 0.0001)
+  expect_equal(glance_cens$weight, glance$weight, tolerance = 1e-04)
   expect_identical(glance_cens_n$weight, rep(NA_real_, 3))
 })
