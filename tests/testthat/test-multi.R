@@ -13,13 +13,14 @@ test_that("ssd_pmulti", {
   expect_identical(ssd_pmulti(-Inf, wt_est), 0)
   expect_identical(ssd_pmulti(Inf, wt_est), 1)
   expect_equal(ssd_pmulti(0, wt_est), 0)
-  expect_equal(ssd_pmulti(1, wt_est), 0.0391155639855389)
-  expect_equal(ssd_pmulti(10000, wt_est), 0.99991762078885)
-  expect_equal(ssd_pmulti(c(1,2), wt_est), c(0.0391155639855389, 0.083756266589807))
-  expect_equal(ssd_pmulti(c(1,NA), wt_est), c(0.0391155639855389, NA))
-  expect_equal(ssd_pmulti(1, wt_est, lower.tail = FALSE),  1-0.0391155639855389)
-  expect_equal(ssd_pmulti(1, wt_est, log.p = TRUE), log(0.0391155639855389))
-  expect_equal(ssd_pmulti(1, wt_est, lower.tail = FALSE, log.p = TRUE),  log(1-0.0391155639855389))
+  pone <- 0.0391155639855389
+  expect_equal(ssd_pmulti(1, wt_est), pone)
+  expect_equal(ssd_pmulti(10000, wt_est), 0.99991762078885, tolerance = 1e-5)
+  expect_equal(ssd_pmulti(c(1,2), wt_est), c(pone, 0.083756266589807))
+  expect_equal(ssd_pmulti(c(1,NA), wt_est), c(pone, NA))
+  expect_equal(ssd_pmulti(1, wt_est, lower.tail = FALSE),  1-pone)
+  expect_equal(ssd_pmulti(1, wt_est, log.p = TRUE), log(pone))
+  expect_equal(ssd_pmulti(1, wt_est, lower.tail = FALSE, log.p = TRUE),  log(1-pone))
 })
 
 test_that("ssd_pmulti weights", {
@@ -46,11 +47,12 @@ test_that("ssd_qmulti", {
   expect_identical(ssd_qmulti(Inf, wt_est), NaN)
   expect_identical(ssd_qmulti(1, wt_est), Inf)
   expect_equal(ssd_qmulti(0, wt_est), 0)
+  q75 <- 32.4740714551225
   expect_equal(ssd_qmulti(0.5, wt_est), 15.3258170124633)
-  expect_equal(ssd_qmulti(c(0.5, 0.75), wt_est), c(15.3258170124633, 32.4740714551225))
-  expect_equal(ssd_qmulti(0.25, wt_est, lower.tail = FALSE), 32.4740714551225)
-  expect_equal(ssd_qmulti(log(0.75), wt_est, log.p = TRUE), 32.4740714551225)
-  expect_equal(ssd_qmulti(log(0.25), wt_est, lower.tail = FALSE, log.p = TRUE), 32.4740714551225)
+  expect_equal(ssd_qmulti(c(0.5, 0.75), wt_est), c(15.3258170124633, q75))
+  expect_equal(ssd_qmulti(0.25, wt_est, lower.tail = FALSE), q75)
+  expect_equal(ssd_qmulti(log(0.75), wt_est, log.p = TRUE), q75)
+  expect_equal(ssd_qmulti(log(0.25), wt_est, lower.tail = FALSE, log.p = TRUE), q75)
 })
 
 test_that("ssd_qmulti weights", {

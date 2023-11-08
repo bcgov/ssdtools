@@ -108,6 +108,8 @@ Get started with ssdtools at <https://bcgov.github.io/ssdtools/articles/ssdtools
 
 A shiny app to allow non-R users to interface with ssdtools is available at <https://github.com/bcgov/shinyssdtools>.
 
+For the latest changes visit [NEWS](https://bcgov.github.io/ssdtools/news).
+
 The citation for the shiny app:
 
 *Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species Sensitivity Distributions (SSDs). JOSS 6(57): 2848. https://joss.theoj.org/papers/10.21105/joss.02848.*

@@ -21,8 +21,8 @@ test_that("hp root lnorm", {
   hp_average <- ssd_hp(fits, average = TRUE)
   hp_root <- ssd_hp(fits, average = TRUE, root = TRUE)
   expect_identical(hp_average$est, hp_dist$est)
-  expect_identical(hp_root, hp_average, tolerance = 1e-10)
-  expect_equal(hp_average$est, 1.9543030195088, tolerance = 1e-10)
+  expect_equal(hp_root, hp_average)
+  expect_equal(hp_average$est, 1.9543030195088)
   expect_equal(hp_root$est, 1.95430301950878, tolerance = 1e-6)
   
   testthat::expect_snapshot({

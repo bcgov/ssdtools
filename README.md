@@ -152,6 +152,9 @@ Get started with ssdtools at
 A shiny app to allow non-R users to interface with ssdtools is available
 at <https://github.com/bcgov/shinyssdtools>.
 
+For the latest changes visit
+[NEWS](https://bcgov.github.io/ssdtools/news).
+
 The citation for the shiny app:
 
 *Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species
