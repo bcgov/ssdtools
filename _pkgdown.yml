@@ -21,12 +21,11 @@ authors:
 destination: docs
 
 reference:
-- title: CCME Data
-  desc: CCME Species Sensitivity Data for Boron and Fluazinam
+- title: Tables
+  desc: Information as Data Frames
   contents:
   - '`boron_pred`'
   - '`dist_data`'
-
 - title: Calculate and Predict
   desc: Calculate Values and Estimate Model Fit 
   contents:
@@ -39,7 +38,6 @@ reference:
   - '`ssd_gof`'
   - '`ssd_hc`'
   - '`ssd_hc_bcanz`'
-  - '`ssd_hc_burrlioz`'
   - '`ssd_hp`'
   - '`ssd_match_moments`'
   - '`ssd_wt_est`'
@@ -48,14 +46,6 @@ reference:
 - title: Distributions
   desc: Distribution Functions
   contents: 
-  - '`dgompertz`'
-  - '`pgompertz`'
-  - '`qgompertz`'
-  - '`rgompertz`'
-  - '`dlgumbel`'
-  - '`plgumbel`'
-  - '`qlgumbel`'
-  - '`rlgumbel`'
   - '`ssd_dists`'
   - '`ssd_dists_all`'
   - '`ssd_dists_bcanz`'
@@ -67,14 +57,13 @@ reference:
   contents:
   - '`autoplot.fitdists`'
   - '`geom_hcintersect`'
-  - '`geom_ssd`'
+  - '`geom_ssdpoint`'
   - '`geom_ssdsegment`'
   - '`geom_xribbon`'
   - '`scale_colour_ssd`'
   - '`ssd_pal`'
   - '`ssd_plot`'
   - '`ssd_plot_cdf`'
-  - '`ssd_plot_cf`'
   - '`ssd_plot_data`'
   - '`ssdtools-ggproto`'
 - title: Query
@@ -85,8 +74,6 @@ reference:
 - title: Test 
   desc: Test fitdist Objects
   contents:
-  - '`glance.fitdists`'
-  - '`is_censored`'
   - '`is.fitdists`'
 - title: Miscellaneous
   desc: Format and Subset Objects
@@ -94,9 +81,25 @@ reference:
   - '`augment.fitdists`'
   - '`coef.fitdists`'
   - '`comma_signif`'
+  - '`glance.fitdists`'
   - '`licensing_md`'
   - '`ssd_data`'
   - '`ssd_sort_data`'
-  - '`stat_ssd`'
   - '`subset.fitdists`'
   - '`tidy.fitdists`'
+- title: Deprecated
+  desc: Format and Subset Objects
+  contents:
+  - '`dgompertz`'
+  - '`pgompertz`'
+  - '`qgompertz`'
+  - '`rgompertz`'
+  - '`dlgumbel`'
+  - '`plgumbel`'
+  - '`qlgumbel`'
+  - '`rlgumbel`'
+  - '`geom_ssd`'
+  - '`is_censored`'
+  - '`ssd_hc_burrlioz`'
+  - '`ssd_plot_cf`'
+  - '`stat_ssd`'
