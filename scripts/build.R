@@ -29,6 +29,6 @@ devtools::test()
 devtools::document()
 
 pkgdown::build_home()
-pkgdown::build_site()
+pkgdown::build_reference()
 
 devtools::check()
