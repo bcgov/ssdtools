@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("predict", {
-  skip_on_os("linux") # FIXME
+  
 
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
@@ -23,7 +23,7 @@ test_that("predict", {
 })
 
 test_that("predict cis", {
-  skip_on_os("linux") # FIXME
+  
 
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
@@ -34,7 +34,7 @@ test_that("predict cis", {
 })
 
 test_that("predict not average", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   expect_true(is.fitdists(fits))
@@ -45,7 +45,7 @@ test_that("predict not average", {
 })
 
 test_that("predict cis fitburrlioz", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_burrlioz(ssddata::ccme_boron)
 
   expect_true(is.fitdists(fits))

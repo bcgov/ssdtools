@@ -14,7 +14,7 @@
 #    limitations under the License.
 
 test_that("hp root lnorm", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hp_dist <- ssd_hp(fits, average = FALSE)
