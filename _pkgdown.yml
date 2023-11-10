@@ -17,3 +17,86 @@ authors:
     href: "https://www.canada.ca/en/environment-climate-change.html"
   Australian Government Department of Climate Change, Energy, the Environment and Water:
     href: "https://www.dcceew.gov.au/"
+
+destination: docs
+
+reference:
+- title: CCME Data
+  desc: CCME Species Sensitivity Data for Boron and Fluazinam
+  contents:
+  - '`boron_pred`'
+  - '`dist_data`'
+
+- title: Calculate and Predict
+  desc: Calculate Values and Estimate Model Fit 
+  contents:
+  - '`estimates.fitdists`'
+  - '`predict.fitburrlioz`'
+  - '`predict.fitdists`'
+  - '`ssd_ecd`'
+  - '`ssd_ecd_data`'
+  - '`ssd_exposure`'
+  - '`ssd_gof`'
+  - '`ssd_hc`'
+  - '`ssd_hc_bcanz`'
+  - '`ssd_hc_burrlioz`'
+  - '`ssd_hp`'
+  - '`ssd_match_moments`'
+  - '`ssd_wt_est`'
+  - '`ssd_wqg_bc`'
+  - '`ssd_wqg_burrlioz`'
+- title: Distributions
+  desc: Distribution Functions
+  contents: 
+  - '`dgompertz`'
+  - '`pgompertz`'
+  - '`qgompertz`'
+  - '`rgompertz`'
+  - '`dlgumbel`'
+  - '`plgumbel`'
+  - '`qlgumbel`'
+  - '`rlgumbel`'
+  - '`ssd_dists`'
+  - '`ssd_dists_all`'
+  - '`ssd_dists_bcanz`'
+  - '`ssd_fit_bcanz`'
+  - '`ssd_fit_burrlioz`'
+  - '`ssd_fit_dists`'
+- title: Plots
+  desc: Functions to Generate Plots
+  contents:
+  - '`autoplot.fitdists`'
+  - '`geom_hcintersect`'
+  - '`geom_ssd`'
+  - '`geom_ssdsegment`'
+  - '`geom_xribbon`'
+  - '`scale_colour_ssd`'
+  - '`ssd_pal`'
+  - '`ssd_plot`'
+  - '`ssd_plot_cdf`'
+  - '`ssd_plot_cf`'
+  - '`ssd_plot_data`'
+  - '`ssdtools-ggproto`'
+- title: Query
+  desc: Query Parameters and Observations
+  contents:
+  - '`npars`'
+  - '`ssd_is_censored`'
+- title: Test 
+  desc: Test fitdist Objects
+  contents:
+  - '`glance.fitdists`'
+  - '`is_censored`'
+  - '`is.fitdists`'
+- title: Miscellaneous
+  desc: Format and Subset Objects
+  contents:
+  - '`augment.fitdists`'
+  - '`coef.fitdists`'
+  - '`comma_signif`'
+  - '`licensing_md`'
+  - '`ssd_data`'
+  - '`ssd_sort_data`'
+  - '`stat_ssd`'
+  - '`subset.fitdists`'
+  - '`tidy.fitdists`'
