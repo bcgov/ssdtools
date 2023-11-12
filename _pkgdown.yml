@@ -17,3 +17,89 @@ authors:
     href: "https://www.canada.ca/en/environment-climate-change.html"
   Australian Government Department of Climate Change, Energy, the Environment and Water:
     href: "https://www.dcceew.gov.au/"
+
+destination: docs
+
+reference:
+- title: Tables
+  desc: Information as Data Frames
+  contents:
+  - '`boron_pred`'
+  - '`dist_data`'
+- title: Calculate and Predict
+  desc: Calculate Values and Estimate Model Fit 
+  contents:
+  - '`estimates.fitdists`'
+  - '`predict.fitburrlioz`'
+  - '`predict.fitdists`'
+  - '`ssd_ecd`'
+  - '`ssd_ecd_data`'
+  - '`ssd_exposure`'
+  - '`ssd_gof`'
+  - '`ssd_hc`'
+  - '`ssd_hc_bcanz`'
+  - '`ssd_hp`'
+  - '`ssd_match_moments`'
+  - '`ssd_wt_est`'
+  - '`ssd_wqg_bc`'
+  - '`ssd_wqg_burrlioz`'
+- title: Distributions
+  desc: Distribution Functions
+  contents: 
+  - '`ssd_dists`'
+  - '`ssd_dists_all`'
+  - '`ssd_dists_bcanz`'
+  - '`ssd_fit_bcanz`'
+  - '`ssd_fit_burrlioz`'
+  - '`ssd_fit_dists`'
+- title: Plots
+  desc: Functions to Generate Plots
+  contents:
+  - '`autoplot.fitdists`'
+  - '`geom_hcintersect`'
+  - '`geom_ssdpoint`'
+  - '`geom_ssdsegment`'
+  - '`geom_xribbon`'
+  - '`scale_colour_ssd`'
+  - '`ssd_pal`'
+  - '`ssd_plot`'
+  - '`ssd_plot_cdf`'
+  - '`ssd_plot_data`'
+  - '`ssdtools-ggproto`'
+- title: Query
+  desc: Query Parameters and Observations
+  contents:
+  - '`npars`'
+  - '`ssd_is_censored`'
+- title: Test 
+  desc: Test fitdist Objects
+  contents:
+  - '`is.fitdists`'
+- title: Miscellaneous
+  desc: Format and Subset Objects
+  contents:
+  - '`augment.fitdists`'
+  - '`coef.fitdists`'
+  - '`comma_signif`'
+  - '`glance.fitdists`'
+  - '`licensing_md`'
+  - '`ssd_data`'
+  - '`ssd_sort_data`'
+  - '`subset.fitdists`'
+  - '`tidy.fitdists`'
+- title: Deprecated
+  desc: Format and Subset Objects
+  contents:
+  - '`dgompertz`'
+  - '`pgompertz`'
+  - '`qgompertz`'
+  - '`rgompertz`'
+  - '`dlgumbel`'
+  - '`plgumbel`'
+  - '`qlgumbel`'
+  - '`rlgumbel`'
+  - '`geom_ssd`'
+  - '`is_censored`'
+  - '`ssd_hc_burrlioz`'
+  - '`ssd_plot_cf`'
+  - '`stat_ssd`'

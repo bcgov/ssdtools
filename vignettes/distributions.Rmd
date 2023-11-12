@@ -75,13 +75,10 @@ ssd_plot_cdf(ssd_match_moments(dists = ssd_dists_all(), meanlog = 2, sdlog = 2))
   scale_color_ssd()
 ```
 
------
-
-<a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
-style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
-xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span
-xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia
-</span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-Creative Commons Attribution 4.0 International License</a>.
-
 ## References
+
+<div id="refs"></div>
+
+```{r, results = "asis", echo = FALSE}
+cat(licensing_md())
+```

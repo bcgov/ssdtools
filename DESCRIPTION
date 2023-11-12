@@ -68,6 +68,7 @@ Imports:
     VGAM
 Suggests:
     covr,
+    car,
     doFuture,
     dplyr,
     fitdistrplus,

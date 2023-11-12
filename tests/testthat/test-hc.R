@@ -1,4 +1,4 @@
-#    Copyright 2021 Province of British Columbia
+# Copyright 2023 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 test_that("hc", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
@@ -22,17 +22,17 @@ test_that("hc", {
 })
 
 test_that("ssd_hc list must be named", {
-  skip_on_os("linux") # FIXME
+  
   chk::expect_chk_error(ssd_hc(list()))
 })
 
 test_that("ssd_hc list names must be unique", {
-  skip_on_os("linux") # FIXME
+  
   chk::expect_chk_error(ssd_hc(list("lnorm" = NULL, "lnorm" = NULL)))
 })
 
 test_that("ssd_hc list handles zero length list", {
-  skip_on_os("linux") # FIXME
+  
   hc <- ssd_hc(structure(list(), .Names = character(0)))
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot"))
@@ -42,7 +42,7 @@ test_that("ssd_hc list handles zero length list", {
 })
 
 test_that("ssd_hc list works null values handles zero length list", {
-  skip_on_os("linux") # FIXME
+  
   hc <- ssd_hc(list("lnorm" = NULL))
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot"))
@@ -53,7 +53,7 @@ test_that("ssd_hc list works null values handles zero length list", {
 })
 
 test_that("ssd_hc list works multiple percent values", {
-  skip_on_os("linux") # FIXME
+  
   hc <- ssd_hc(list("lnorm" = NULL), percent = c(1, 99))
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot"))
@@ -64,7 +64,7 @@ test_that("ssd_hc list works multiple percent values", {
 })
 
 test_that("ssd_hc list works specified values", {
-  skip_on_os("linux") # FIXME
+  
   hc <- ssd_hc(list("lnorm" = list(meanlog = 2, sdlog = 2)))
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot"))
@@ -76,7 +76,7 @@ test_that("ssd_hc list works specified values", {
 })
 
 test_that("ssd_hc list works multiple NULL distributions", {
-  skip_on_os("linux") # FIXME
+  
   hc <- ssd_hc(list("lnorm" = NULL, "llogis" = NULL))
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot"))
@@ -87,7 +87,7 @@ test_that("ssd_hc list works multiple NULL distributions", {
 })
 
 test_that("ssd_hc list works multiple NULL distributions with multiple percent", {
-  skip_on_os("linux") # FIXME
+  
   hc <- ssd_hc(list("lnorm" = NULL, "llogis" = NULL), percent = c(1, 99))
   expect_s3_class(hc, "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot"))
@@ -98,7 +98,7 @@ test_that("ssd_hc list works multiple NULL distributions with multiple percent",
 })
 
 test_that("ssd_hc fitdists works zero length percent", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hc <- ssd_hc(fits, numeric(0))
@@ -111,7 +111,7 @@ test_that("ssd_hc fitdists works zero length percent", {
 })
 
 test_that("ssd_hc fitdists works NA percent", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hc <- ssd_hc(fits, NA_real_)
@@ -120,7 +120,7 @@ test_that("ssd_hc fitdists works NA percent", {
 })
 
 test_that("ssd_hc fitdists works 0 percent", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hc <- ssd_hc(fits, 0)
@@ -129,7 +129,7 @@ test_that("ssd_hc fitdists works 0 percent", {
 })
 
 test_that("ssd_hc fitdists works 100 percent", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hc <- ssd_hc(fits, 100)
@@ -138,7 +138,7 @@ test_that("ssd_hc fitdists works 100 percent", {
 })
 
 test_that("ssd_hc fitdists works multiple percents", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hc <- ssd_hc(fits, percent = c(1, 99))
@@ -147,7 +147,7 @@ test_that("ssd_hc fitdists works multiple percents", {
 })
 
 test_that("ssd_hc fitdists averages", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   hc <- ssd_hc(fits)
   expect_s3_class(hc, "tbl_df")
@@ -155,7 +155,7 @@ test_that("ssd_hc fitdists averages", {
 })
 
 test_that("ssd_hc fitdists correctly averages", {
-  skip_on_os("linux") # FIXME
+  
   library(ssdtools)
   library(ssddata)
   library(testthat)
@@ -168,7 +168,7 @@ test_that("ssd_hc fitdists correctly averages", {
 })
 
 test_that("ssd_hc fitdists averages single dist by multiple percent", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hc <- ssd_hc(fits, average = TRUE, percent = 1:99)
@@ -177,7 +177,7 @@ test_that("ssd_hc fitdists averages single dist by multiple percent", {
 })
 
 test_that("ssd_hc fitdists not average single dist by multiple percent gives whole numeric", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hc <- ssd_hc(fits, average = FALSE, percent = 1:99)
@@ -186,7 +186,7 @@ test_that("ssd_hc fitdists not average single dist by multiple percent gives who
 })
 
 test_that("ssd_hc fitdists not average", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   hc <- ssd_hc(fits, average = FALSE)
   expect_s3_class(hc, "tbl_df")
@@ -194,7 +194,7 @@ test_that("ssd_hc fitdists not average", {
 })
 
 test_that("ssd_hc fitdists correct for rescaling", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
   hc <- ssd_hc(fits)
@@ -203,7 +203,7 @@ test_that("ssd_hc fitdists correct for rescaling", {
 })
 
 test_that("ssd_hc fitdists cis", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(102)
@@ -214,7 +214,7 @@ test_that("ssd_hc fitdists cis", {
 })
 
 test_that("ssd_hc fitdists cis level = 0.8", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(102)
@@ -225,7 +225,7 @@ test_that("ssd_hc fitdists cis level = 0.8", {
 })
 
 test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Conc2 <- data$Conc
   data$Conc[1] <- 0.5
@@ -245,7 +245,7 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
 })
 
 test_that("ssd_hc works with fully left censored data", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Conc2 <- data$Conc
   data$Conc <- 0
@@ -256,7 +256,7 @@ test_that("ssd_hc works with fully left censored data", {
 })
 
 test_that("ssd_hc not work partially censored even if all same left", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Conc2 <- data$Conc
   data$Conc <- 0.1
@@ -269,7 +269,7 @@ test_that("ssd_hc not work partially censored even if all same left", {
 })
 
 test_that("ssd_hc doesn't works with inconsisently censored data", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Conc2 <- data$Conc
   data$Conc <- 0
@@ -283,7 +283,7 @@ test_that("ssd_hc doesn't works with inconsisently censored data", {
 })
 
 test_that("ssd_hc same with equally weighted data", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
@@ -298,7 +298,7 @@ test_that("ssd_hc same with equally weighted data", {
 })
 
 test_that("ssd_hc calculates cis with equally weighted data", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Weight <- rep(2, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
@@ -308,7 +308,7 @@ test_that("ssd_hc calculates cis with equally weighted data", {
 })
 
 test_that("ssd_hc calculates cis in parallel but one distribution", {
-  skip_on_os("linux") # FIXME
+  
   local_multisession()
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm")
@@ -318,7 +318,7 @@ test_that("ssd_hc calculates cis in parallel but one distribution", {
 })
 
 test_that("ssd_hc calculates cis with two distributions", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
@@ -327,7 +327,7 @@ test_that("ssd_hc calculates cis with two distributions", {
 })
 
 test_that("ssd_hc calculates cis in parallel with two distributions", {
-  skip_on_os("linux") # FIXME
+  
   local_multisession()
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
@@ -337,7 +337,7 @@ test_that("ssd_hc calculates cis in parallel with two distributions", {
 })
 
 test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   data$Weight[1] <- 2
@@ -350,7 +350,7 @@ test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
 })
 
 test_that("ssd_hc no effect with higher weight one distribution", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
@@ -364,7 +364,7 @@ test_that("ssd_hc no effect with higher weight one distribution", {
 })
 
 test_that("ssd_hc effect with higher weight two distributions", {
-  skip_on_os("linux") # FIXME
+  
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
@@ -381,7 +381,7 @@ test_that("ssd_hc effect with higher weight two distributions", {
 })
 
 test_that("ssd_hc cis with non-convergence", {
-  skip_on_os("linux") # FIXME
+  
   set.seed(99)
   conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
@@ -399,7 +399,7 @@ test_that("ssd_hc cis with non-convergence", {
 })
 
 test_that("ssd_hc cis with error", {
-  skip_on_os("linux") # FIXME
+  
   set.seed(99)
   conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
@@ -419,7 +419,7 @@ test_that("ssd_hc cis with error", {
 })
 
 test_that("ssd_hc cis with error and multiple dists", {
-  skip_on_os("linux") # FIXME
+  
   set.seed(99)
   conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
@@ -443,7 +443,7 @@ test_that("ssd_hc cis with error and multiple dists", {
 })
 
 test_that("ssd_hc with 1 bootstrap", {
-  skip_on_os("linux") # FIXME
+  
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(10)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 1)
@@ -451,7 +451,7 @@ test_that("ssd_hc with 1 bootstrap", {
 })
 
 test_that("ssd_hc comparable parametric and non-parametric big sample size", {
-  skip_on_os("linux") # FIXME
+  
   set.seed(99)
   data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
   fit <- ssd_fit_dists(data, dists = "lnorm")
@@ -468,7 +468,7 @@ test_that("ssd_hc comparable parametric and non-parametric big sample size", {
 })
 
 test_that("ssd_hc parametric and non-parametric small sample size", {
-  skip_on_os("linux") # FIXME
+  
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
   hc_para_small <- ssd_hc(fit, nboot = 10, ci = TRUE)
@@ -479,7 +479,7 @@ test_that("ssd_hc parametric and non-parametric small sample size", {
 })
 
 test_that("ssd_hc_burrlioz gets estimates with invpareto", {
-  skip_on_os("linux") # FIXME
+  
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
   hc_boron <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
@@ -487,7 +487,7 @@ test_that("ssd_hc_burrlioz gets estimates with invpareto", {
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
-  skip_on_os("linux") # FIXME
+  
   set.seed(99)
   data <- data.frame(Conc = ssd_rburrIII3(30))
   fit <- ssd_fit_burrlioz(data)
@@ -501,7 +501,7 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
-  skip_on_os("linux") # FIXME
+  
   set.seed(99)
   data <- data.frame(Conc = ssd_rburrIII3(30))
   fit <- ssd_fit_burrlioz(data)
@@ -518,7 +518,7 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
 })
 
 test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
-  skip_on_os("linux") # FIXME
+  
   fits <- ssd_fit_dists(ssddata::ccme_chloride,
     min_pmix = 0.0001, at_boundary_ok = TRUE,
     dists = c("lnorm_lnorm", "llogis_llogis")
