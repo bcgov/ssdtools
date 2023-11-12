@@ -46,6 +46,15 @@ ssd_rinvpareto <- function(n, shape = 3, scale = 1, chk = TRUE) {
   rdist("invpareto", n = n, shape = shape, scale = scale, chk = chk)
 }
 
+#' @describeIn ssd_e Default Parameter Values for Inverse Pareto Distribution
+#' @export
+#' @examples
+#'
+#' ssd_einvpareto()
+ssd_einvpareto <- function() {
+  c(shape = 3, scale = 1)
+}
+
 sinvpareto <- function(data, pars = NULL) {
   scale <- max(data$right)
   shape <- 1 / mean(log(scale / data$right))

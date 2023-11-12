@@ -46,6 +46,15 @@ ssd_rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE) {
   rdist("burrIII3", n = n, shape1 = shape1, shape2 = shape2, scale = scale, chk = chk)
 }
 
+#' @describeIn ssd_e Default Parameter Values for BurrIII Distribution
+#' @export
+#' @examples
+#'
+#' ssd_eburrIII3()
+ssd_eburrIII3 <- function() {
+  c(shape1 = 1, shape2 = 1, scale = 1)
+}
+
 sburrIII3 <- function(data, pars = NULL) {
   if (!is.null(pars)) {
     return(pars)

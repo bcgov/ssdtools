@@ -40,8 +40,9 @@ ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p =
   )
 }
 
-#' @describeIn ssd_p Cumulative Distribution Function for Gompertz Distribution
+#' Cumulative Distribution Function for Gompertz Distribution
 #' `r lifecycle::badge("deprecated")`
+#' @inheritParams params
 #' @export
 pgompertz <- function(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_warn("1.0.0", "pgompertz()", "ssd_pgompertz()")
@@ -63,8 +64,9 @@ ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p =
   )
 }
 
-#' @describeIn ssd_q Quantile Function for Gompertz Distribution
+#' Quantile Function for Gompertz Distribution
 #' `r lifecycle::badge("deprecated")`
+#' @inheritParams params
 #' @export
 qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_warn("1.0.0", "qgompertz()", "ssd_qgompertz()")
@@ -84,8 +86,18 @@ ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
   rdist("gompertz", n = n, location = location, shape = shape, chk = chk)
 }
 
-#' @describeIn ssd_r Random Generation for Gompertz Distribution
+#' @describeIn ssd_e Default Parameter Values for Gompertz Distribution
+#' @export
+#' @examples
+#'
+#' ssd_egompertz()
+ssd_egompertz <- function() {
+  c(location = 1, shape = 1)
+}
+
+#' Random Generation for Gompertz Distribution
 #' `r lifecycle::badge("deprecated")`
+#' @inheritParams params
 #' @export
 rgompertz <- function(n, llocation = 0, lshape = 0) {
   lifecycle::deprecate_warn("1.0.0", "rgompertz()", "ssd_rgompertz()")

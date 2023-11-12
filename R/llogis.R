@@ -46,6 +46,15 @@ ssd_rllogis <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
   rdist("logis", n = n, location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
 }
 
+#' @describeIn ssd_e Default Parameter Values for Log-Logistic Distribution
+#' @export
+#' @examples
+#'
+#' ssd_ellogis()
+ssd_ellogis <- function() {
+  c(locationlog = 0, scalelog = 1)
+}
+
 sllogis <- function(data, pars = NULL) {
   if (!is.null(pars)) {
     return(pars)
