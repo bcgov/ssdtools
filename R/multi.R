@@ -18,11 +18,11 @@
 #' @examples
 #' 
 #' # multi 
-#' ssd_pmulti(1, wt_est = ssd_emulti())
-ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
-  chk_numeric(q)
+#' ssd_pmulti(1)
+ssd_pmulti <- function(q, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALSE) {
+  chk_atomic(q)
   chk_vector(q)
-
+  
   check_wt_est(wt_est)
   chk_flag(lower.tail)
   chk_flag(log.p)
@@ -30,11 +30,13 @@ ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   if (!length(q)) {
     return(numeric(0))
   }
-
+  
+  q <- as.numeric(q)
+  
   ranges <- range_fun(q, wt_est, fun = "p")
   lower <- ranges$lower
   upper <- ranges$upper
-
+  
   f <- ma_fun(wt_est, fun = "q")
   p <- rep(NA_real_, length(q))
   for(i in seq_along(p)) {
@@ -58,11 +60,11 @@ ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
 #' @examples
 #' 
 #' # multi 
-#' ssd_qmulti(0.5, wt_est = ssd_emulti())
-ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
-  chk_numeric(p)
+#' ssd_qmulti(0.5)
+ssd_qmulti <- function(p, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALSE) {
+  chk_atomic(p)
   chk_vector(p)
-
+  
   check_wt_est(wt_est)
   chk_flag(lower.tail)
   chk_flag(log.p)
@@ -70,7 +72,9 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   if (!length(p)) {
     return(numeric(0))
   }
-
+  
+  p <- as.numeric(p)
+  
   if(log.p) {
     p <- exp(p)
   }
@@ -81,7 +85,7 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   ranges <- range_fun(p, wt_est, fun = "q")
   lower <- ranges$lower
   upper <- ranges$upper
-
+  
   f <- ma_fun(wt_est, fun = "p")
   q <- rep(NA_real_, length(p))
   for(i in seq_along(p)) {
@@ -100,8 +104,15 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
 #' 
 #' # multi 
 #' set.seed(50)
-#' hist(ssd_rmulti(1000, ssd_emulti()), breaks = 100)
+#' hist(ssd_rmulti(1000), breaks = 100)
 ssd_rmulti <- function(n, wt_est = ssd_emulti()) {
+  chk_vector(n)
+  if(!length(n)) {
+    return(numeric(0))
+  }
+  if(length(n) > 1) {
+    n <- length(n)
+  }
   chk_count(n)
   if(n == 0L) return(numeric(0))
   p <- runif(n)
@@ -119,7 +130,7 @@ ssd_emulti <- function(dists = ssd_dists(bcanz = TRUE)) {
   chk_not_any_na(dists)
   chk_subset(dists, ssd_dists())
   check_dim(dists)
-
+  
   edists <- paste0("ssd_e", dists, ("()"))
   es <- purrr::map(edists, function(x) eval(parse(text = x)))
   names(es) <- dists

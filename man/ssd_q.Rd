@@ -66,7 +66,7 @@ ssd_qlnorm_lnorm(
 
 ssd_qlnorm(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE)
 
-ssd_qmulti(p, wt_est, lower.tail = TRUE, log.p = FALSE)
+ssd_qmulti(p, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALSE)
 
 ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 }
@@ -166,7 +166,7 @@ ssd_qlnorm_lnorm(0.5)
 ssd_qlnorm(0.5)
 
 # multi 
-ssd_qmulti(0.5, wt_est = ssd_emulti())
+ssd_qmulti(0.5)
 
 ssd_qweibull(0.5)
 }

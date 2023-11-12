@@ -159,7 +159,7 @@ hist(ssd_rlnorm(10000), breaks = 1000)
 
 # multi 
 set.seed(50)
-hist(ssd_rmulti(1000, ssd_emulti()), breaks = 100)
+hist(ssd_rmulti(1000), breaks = 100)
 
 set.seed(50)
 hist(ssd_rweibull(10000), breaks = 1000)

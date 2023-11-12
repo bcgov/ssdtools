@@ -1,3 +1,36 @@
+#    Copyright 2023 Australian Government Department of 
+#    Climate Change, Energy, the Environment and Water
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#       https://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
+test_that("multi", {
+  test_dist("multi", multi = TRUE)
+  expect_equal(ssd_pmulti(1), 0.474353122919864)
+  expect_equal(ssd_qmulti(0.75), 2.21920049918256)
+  set.seed(42)
+  expect_equal(ssd_rmulti(2), c(5.53133427815926, 7.11054891201997))
+  
+  #FIXME: this is quite off
+  expect_equal(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99))), 
+               c(0, 0.0386791154549625, 0.471087211387115, 0.853375863576664, 
+                 0.936579190900471))
+  
+  #FIXME: this is less off
+  expect_equal(ssd_pmulti(ssd_qmulti(c(0, 0.1, 0.5, 0.9, 0.99))), 
+               c(0, 0.0726829198002702, 0.480573743497238, 0.881269256832833, 
+                 0.988151256271902))
+})
+
 test_that("wt_est_nest works", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   wt_est <- ssd_wt_est(fit)
@@ -36,7 +69,7 @@ test_that("ssd_pmulti weights", {
   wt_est$weight[wt_est$dist == "lnorm"] <- 1
   expect_equal(ssd_pmulti(1, wt_est), 0.0195438776703809)
 })
-  
+
 test_that("ssd_qmulti", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   wt_est <- ssd_wt_est(fit)
