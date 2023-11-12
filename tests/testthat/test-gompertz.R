@@ -26,9 +26,6 @@ test_that("bootstrap gompertz with problem data", {
   fit <- ssdtools::ssd_fit_dists(data, dists = "gompertz")
   set.seed(99)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.8)
-  testthat::skip_on_os("windows")
-  testthat::skip_on_os("linux")
-  testthat::skip_on_os("solaris")
   expect_snapshot_data(hc, "hc_prob")
 })
 

@@ -31,7 +31,6 @@ test_that("hp root lnorm", {
 })
 
 test_that("hp root all", {
-  skip_on_os("linux") 
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hp_average <- ssd_hp(fits, average = TRUE)
@@ -45,7 +44,6 @@ test_that("hp root all", {
 })
 
 test_that("hp is hc", {
-  skip_on_os("linux") 
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   conc <- 1
   hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = TRUE)
@@ -62,7 +60,6 @@ test_that("hp is hc", {
 # FIXME: move to root tests
 # FIXME: also test actual values as seem deterministic
 test_that("hp is hc 10", {
-  skip_on_os("linux") 
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   conc <- 10
   hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = TRUE)

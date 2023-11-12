@@ -51,9 +51,6 @@ test_that("lnorm_lnorm fits anonb", {
   )
 
   tidy <- tidy(fit)
-  testthat::skip_on_os("windows")
-  testthat::skip_on_os("linux")
-  testthat::skip_on_os("solaris")
   expect_snapshot_data(tidy, "tidy_anonb")
   expect_snapshot_plot(ssd_plot(data, predict(fit), ci = FALSE), "plot_anonb")
 })

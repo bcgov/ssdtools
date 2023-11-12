@@ -392,9 +392,6 @@ test_that("ssd_fit_dists min_pmix", {
     expect_warning(expect_warning(ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.11))),
     "All distributions failed to fit."
   )
-  testthat::skip_on_os("windows")
-  testthat::skip_on_os("linux")
-  testthat::skip_on_os("solaris")
   expect_snapshot_data(tidy, "min_pmix5")
 })
 
@@ -451,8 +448,5 @@ test_that("ssd_fit_dists min_pmix 0", {
   data <- data.frame(Conc = ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 2, pmix = 0.01))
   fit <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0)
   tidy <- tidy(fit)
-  testthat::skip_on_os("windows")
-  testthat::skip_on_os("linux")
-  testthat::skip_on_os("solaris")
   expect_snapshot_data(tidy, "tidy_pmix0")
 })
