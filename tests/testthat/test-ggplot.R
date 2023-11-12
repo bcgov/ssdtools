@@ -12,6 +12,19 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+
+test_that("ssd_pal is function", {
+  expect_true(chk::vld_function(ssd_pal()))
+})
+
+test_that("scale_colour_ssd is ggproto", {
+  expect_true(ggplot2::is.ggproto(scale_colour_ssd()))
+})
+
+test_that("scale_color_ssd is ggproto", {
+  expect_identical(scale_color_ssd(), scale_colour_ssd())
+})
+
 test_that("stat_ssd deprecated", {
   lifecycle::expect_deprecated(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
     stat_ssd())

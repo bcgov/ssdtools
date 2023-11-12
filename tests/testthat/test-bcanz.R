@@ -9,5 +9,8 @@ test_that("ssd_dists_bcanz works", {
 })
 
 test_that("ssd_dists_bcanz works", {
-  expect_identical(ssd_dists_bcanz(), ssd_dists(bcanz = TRUE))
+  fit <- ssd_fit_bcanz(data = ssddata::ccme_boron)
+  set.seed(10)
+  hc <- ssd_hc_bcanz(fit, nboot = 10)
+  expect_snapshot_data(hc, "hc_chloride")
 })
