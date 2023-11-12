@@ -46,6 +46,15 @@ ssd_rlnorm <- function(n, meanlog = 0, sdlog = 1, chk = TRUE) {
   rdist("lnorm", n = n, meanlog = meanlog, sdlog = sdlog, chk = chk)
 }
 
+#' @describeIn ssd_e Default Parameter Values for Log-Normal Distribution
+#' @export
+#' @examples
+#'
+#' ssd_elnorm()
+ssd_elnorm <- function() {
+  c(meanlog = 0, sdlog = 1)
+}
+
 slnorm <- function(data, pars = NULL) {
   if (!is.null(pars)) {
     return(pars)

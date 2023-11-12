@@ -46,6 +46,15 @@ ssd_rgamma <- function(n, shape = 1, scale = 1, chk = TRUE) {
   rdist("gamma", n = n, shape = shape, scale = scale, chk = chk)
 }
 
+#' @describeIn ssd_e Default Parameter Values for Gamma Distribution
+#' @export
+#' @examples
+#'
+#' ssd_egamma()
+ssd_egamma <- function() {
+  c(shape = 1, scale = 1)
+}
+
 sgamma <- function(data, pars = NULL) {
   if (!is.null(pars)) {
     return(pars)

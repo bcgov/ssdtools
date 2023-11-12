@@ -6,10 +6,8 @@
 \alias{ssd_pburrIII3}
 \alias{ssd_pgamma}
 \alias{ssd_pgompertz}
-\alias{pgompertz}
 \alias{ssd_pinvpareto}
 \alias{ssd_plgumbel}
-\alias{plgumbel}
 \alias{ssd_pllogis_llogis}
 \alias{ssd_pllogis}
 \alias{ssd_plnorm_lnorm}
@@ -32,8 +30,6 @@ ssd_pgamma(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 ssd_pgompertz(q, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-pgompertz(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE)
-
 ssd_pinvpareto(q, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 ssd_plgumbel(
@@ -43,8 +39,6 @@ ssd_plgumbel(
   lower.tail = TRUE,
   log.p = FALSE
 )
-
-plgumbel(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 
 ssd_pllogis_llogis(
   q,
@@ -93,10 +87,6 @@ ssd_pweibull(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 \item{location}{location parameter.}
 
-\item{llocation}{location parameter on the log scale.}
-
-\item{lshape}{shape parameter on the log scale.}
-
 \item{locationlog}{location on the log scale parameter.}
 
 \item{scalelog}{scale on log scale parameter.}
@@ -138,15 +128,9 @@ Cumulative Distribution Function
 
 \item \code{ssd_pgompertz()}: Cumulative Distribution Function for Gompertz Distribution
 
-\item \code{pgompertz()}: Cumulative Distribution Function for Gompertz Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-
 \item \code{ssd_pinvpareto()}: Cumulative Distribution Function for Inverse Pareto Distribution
 
 \item \code{ssd_plgumbel()}: Cumulative Distribution Function for Log-Gumbel Distribution
-
-\item \code{plgumbel()}: Cumulative Distribution Function for Log-Gumbel Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \item \code{ssd_pllogis_llogis()}: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution
 
@@ -156,8 +140,7 @@ Cumulative Distribution Function
 
 \item \code{ssd_plnorm()}: Cumulative Distribution Function for Log-Normal Distribution
 
-\item \code{ssd_pmulti()}: Cumulative Distribution Function for
-Weighted Combination of Distributions
+\item \code{ssd_pmulti()}: Cumulative Distribution Function for Multiple Distributions
 
 \item \code{ssd_pweibull()}: Cumulative Distribution Function for Weibull Distribution
 
@@ -183,9 +166,7 @@ ssd_plnorm_lnorm(1)
 ssd_plnorm(1)
 
 # multi 
-fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-wt_est <- ssd_wt_est(fit)
-ssd_pmulti(1, wt_est)
+ssd_pmulti(1, wt_est = ssd_emulti())
 
 ssd_pweibull(1)
 }

@@ -13,15 +13,12 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @describeIn ssd_p Cumulative Distribution Function for 
-#' Weighted Combination of Distributions
+#' @describeIn ssd_p Cumulative Distribution Function for Multiple Distributions
 #' @export
 #' @examples
 #' 
 #' # multi 
-#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-#' wt_est <- ssd_wt_est(fit)
-#' ssd_pmulti(1, wt_est)
+#' ssd_pmulti(1, wt_est = ssd_emulti())
 ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   chk_numeric(q)
   chk_vector(q)
@@ -56,15 +53,12 @@ ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   p
 }
 
-#' @describeIn ssd_q Quantile Function for 
-#' Weighted Combination of Distributions
+#' @describeIn ssd_q Quantile Function for Multiple Distributions
 #' @export
 #' @examples
 #' 
 #' # multi 
-#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-#' wt_est <- ssd_wt_est(fit)
-#' ssd_qmulti(0.5, wt_est)
+#' ssd_qmulti(0.5, wt_est = ssd_emulti())
 ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   chk_numeric(p)
   chk_vector(p)
@@ -100,19 +94,41 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   q
 }
 
-#' @describeIn ssd_r Random Generation for 
-#' Weighted Combination of Distributions
+#' @describeIn ssd_r Random Generation for Multiple Distributions
 #' @export
 #' @examples
 #' 
 #' # multi 
-#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-#' wt_est <- ssd_wt_est(fit)
 #' set.seed(50)
-#' hist(ssd_rmulti(1000, wt_est), breaks = 100)
-ssd_rmulti <- function(n, wt_est) {
+#' hist(ssd_rmulti(1000, ssd_emulti()), breaks = 100)
+ssd_rmulti <- function(n, wt_est = ssd_emulti()) {
   chk_count(n)
   if(n == 0L) return(numeric(0))
   p <- runif(n)
   ssd_qmulti(p, wt_est)
+}
+
+#' @describeIn ssd_e Default Parameter Values for Multiple Distributions
+#' @inheritParams params
+#' @export
+#' @examples
+#'
+#' ssd_emulti()
+ssd_emulti <- function(dists = ssd_dists(bcanz = TRUE)) {
+  chk_character(dists)
+  chk_not_any_na(dists)
+  chk_subset(dists, ssd_dists())
+  check_dim(dists)
+
+  edists <- paste0("ssd_e", dists, ("()"))
+  es <- purrr::map(edists, function(x) eval(parse(text = x)))
+  names(es) <- dists
+  des <- purrr::imap(es, function(x, y) {
+    tibble::tibble(dist = y, term = names(x), est = x)
+  })
+  das <- dplyr::bind_rows(des)
+  nas <- tidyr::nest(das, .by = "dist")
+  was <- dplyr::mutate(nas, weight = 1/nrow(nas))
+  sas <- dplyr::select(was, "dist", "weight", "data")
+  sas
 }

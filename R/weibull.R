@@ -46,6 +46,15 @@ ssd_rweibull <- function(n, shape = 1, scale = 1, chk = TRUE) {
   rdist("weibull", n = n, shape = shape, scale = scale, chk = chk)
 }
 
+#' @describeIn ssd_e Default Parameter Values for Log-Normal Distribution
+#' @export
+#' @examples
+#'
+#' ssd_eweibull()
+ssd_eweibull <- function() {
+  c(shape = 1, scale = 1)
+}
+
 sweibull <- function(data, pars = NULL) {
   if (!is.null(pars)) {
     return(pars)

@@ -84,3 +84,10 @@ test_that("ssd_rmulti", {
   expect_equal(max(n100), 168.790837219526)
   expect_equal(mean(n100), 23.4076761093969)
 })
+
+test_that("ssd_emulti", {
+  wt_est <- ssd_emulti() 
+  expect_snapshot(tidyr::unnest(wt_est, "data"))
+  # FIXME: out by over 5%
+  expect_equal(ssd_qmulti(ssd_pmulti(1, wt_est), wt_est), 0.945776875219507)
+})

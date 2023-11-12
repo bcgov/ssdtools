@@ -56,6 +56,16 @@ ssd_rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
   )
 }
 
+#' @describeIn ssd_e Default Parameter Values for Log-Logistic/Log-Logistic Mixture Distribution
+#' @export
+#' @examples
+#'
+#' ssd_ellogis_llogis()
+ssd_ellogis_llogis <- function() {
+  c(locationlog1 = 0, scalelog1 = 1, 
+       locationlog2 = 1, scalelog2 = 1, pmix = 0.5)
+}
+
 sllogis_llogis <- function(data, pars = NULL) {
   if (!is.null(pars)) {
     return(pars)

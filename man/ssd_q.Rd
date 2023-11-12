@@ -6,10 +6,8 @@
 \alias{ssd_qburrIII3}
 \alias{ssd_qgamma}
 \alias{ssd_qgompertz}
-\alias{qgompertz}
 \alias{ssd_qinvpareto}
 \alias{ssd_qlgumbel}
-\alias{qlgumbel}
 \alias{ssd_qllogis_llogis}
 \alias{ssd_qllogis}
 \alias{ssd_qlnorm_lnorm}
@@ -32,8 +30,6 @@ ssd_qgamma(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 ssd_qgompertz(p, location = 1, shape = 1, lower.tail = TRUE, log.p = FALSE)
 
-qgompertz(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE)
-
 ssd_qinvpareto(p, shape = 3, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 ssd_qlgumbel(
@@ -43,8 +39,6 @@ ssd_qlgumbel(
   lower.tail = TRUE,
   log.p = FALSE
 )
-
-qlgumbel(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 
 ssd_qllogis_llogis(
   p,
@@ -93,10 +87,6 @@ ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 \item{location}{location parameter.}
 
-\item{llocation}{location parameter on the log scale.}
-
-\item{lshape}{shape parameter on the log scale.}
-
 \item{locationlog}{location on the log scale parameter.}
 
 \item{scalelog}{scale on log scale parameter.}
@@ -138,15 +128,9 @@ Quantile Function
 
 \item \code{ssd_qgompertz()}: Quantile Function for Gompertz Distribution
 
-\item \code{qgompertz()}: Quantile Function for Gompertz Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-
 \item \code{ssd_qinvpareto()}: Quantile Function for Inverse Pareto Distribution
 
 \item \code{ssd_qlgumbel()}: Quantile Function for Log-Gumbel Distribution
-
-\item \code{qlgumbel()}: Quantile Function for Log-Gumbel Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \item \code{ssd_qllogis_llogis()}: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution
 
@@ -156,8 +140,7 @@ Quantile Function
 
 \item \code{ssd_qlnorm()}: Cumulative Distribution Function for Log-Normal Distribution
 
-\item \code{ssd_qmulti()}: Quantile Function for
-Weighted Combination of Distributions
+\item \code{ssd_qmulti()}: Quantile Function for Multiple Distributions
 
 \item \code{ssd_qweibull()}: Cumulative Distribution Function for Weibull Distribution
 
@@ -183,9 +166,7 @@ ssd_qlnorm_lnorm(0.5)
 ssd_qlnorm(0.5)
 
 # multi 
-fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-wt_est <- ssd_wt_est(fit)
-ssd_qmulti(0.5, wt_est)
+ssd_qmulti(0.5, wt_est = ssd_emulti())
 
 ssd_qweibull(0.5)
 }
