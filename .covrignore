@@ -1,3 +1,1 @@
-R/deprecated.R
-R/zzz.R
-R/release.R
+R/devtools-helpers.R
