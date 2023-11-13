@@ -70,8 +70,8 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
 
 .ssd_hcp_tmbfit <- function(
     x, value, ci, level, nboot, min_pboot,
-                            data, rescale, weighted, censoring, min_pmix,
-                            range_shape1, range_shape2, parametric, control, hc) {
+    data, rescale, weighted, censoring, min_pmix,
+    range_shape1, range_shape2, parametric, control, hc) {
   args <- estimates(x)
   dist <- .dist_tmbfit(x)
   
@@ -104,41 +104,152 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   }
   cis <- cis_estimates(estimates, what, level = level, x = x)
   hcp <- ci_hcp(cis, estimates = estimates, value = value, dist = dist, 
-         est = est, rescale = rescale, nboot = nboot, hc = hc)
+                est = est, rescale = rescale, nboot = nboot, hc = hc)
   replace_min_pboot_na(hcp, min_pboot)
   
 }
 
 .ssd_hcp_fitdists <- function(
-    x, value, ci, level, nboot,
-    average, delta, min_pboot,
-    parametric, root, control, hc
-) {
+    x, 
+    value, 
+    ci, 
+    level, 
+    nboot,
+    average, 
+    min_pboot, 
+    parametric, 
+    root, 
+    control,
+    hc) {
+  
+  if (!length(x) || !length(value)) {
+    hcp <- no_hcp()
+    if(hc) {
+      hcp <- dplyr::rename(hcp, percent = "value")
+    } else {
+      hcp <- dplyr::rename(hcp, conc = "value")
+    }
+    return(hcp)
+  }
+  
+  if (is.null(control)) {
+    control <- .control_fitdists(x)
+  }
+  
+  data <- .data_fitdists(x)
+  rescale <- .rescale_fitdists(x)
+  censoring <- .censoring_fitdists(x)
+  min_pmix <- .min_pmix_fitdists(x)
+  range_shape1 <- .range_shape1_fitdists(x)
+  range_shape2 <- .range_shape2_fitdists(x)
+  weighted <- .weighted_fitdists(x)
+  unequal <- .unequal_fitdists(x)
+  wt_est_nest <- wt_est_nest(x)
+  
+  if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
+    wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
+    ci <- FALSE
+  }
+  
+  if (parametric && ci && unequal) {
+    wrn("Parametric CIs cannot be calculated for unequally weighted data.")
+    ci <- FALSE
+  }
+  
+  if (!ci) {
+    nboot <- 0L
+  }
   
   if(hc) {
-    return(.ssd_hc_fitdists(
-      x, 
-      percent = value, 
-      ci = ci,
-      level = level, 
-      nboot = nboot,
-      average = average, 
-      min_pboot = min_pboot, 
-      parametric = parametric, 
-      root = root, 
-      control = control))
+    value <- value / 100
   }
-  .ssd_hp_fitdists(
-    x, 
-    conc = value, 
-    ci = ci,
-    level = level, 
-    nboot = nboot,
-    average = average, 
-    min_pboot = min_pboot, 
-    parametric = parametric, 
-    root = root, 
-    control = control)
+  
+  if(root && average) {
+    seeds <- seed_streams(length(value))
+    hcs <- future_map(
+      value, .ssd_hcp_root, 
+      wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
+      min_pboot = min_pboot,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control, hc = hc,
+      .options = furrr::furrr_options(seed = seeds))
+    
+    hcp <- dplyr::bind_rows(hcs)
+    
+    method <- if (parametric) "parametric" else "non-parametric"
+    
+    hcp <- tibble(
+      dist = "average", value = value, est = hcp$est, se = hcp$se,
+      lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
+      method = method, nboot = nboot, pboot = hcp$pboot
+    )
+    if(hc) {
+      hcp <- dplyr::rename(hcp, percent = "value")
+      hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
+    } else {
+      hcp <- dplyr::rename(hcp, conc = "value")
+    }
+    return(hcp)
+  }
+  
+  seeds <- seed_streams(length(x))
+  
+  hcp <- future_map(x, .ssd_hcp_tmbfit,
+                    value = value, ci = ci, level = level, nboot = nboot,
+                    min_pboot = min_pboot,
+                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                    parametric = parametric, control = control,
+                    .options = furrr::furrr_options(seed = seeds),
+                    hc = hc)
+  
+  weight <- wt_est_nest$weight
+  if (!average) {
+    hcp <- mapply(
+      function(x, y) {
+        x$wt <- y
+        x
+      },
+      x = hcp, y = weight,
+      USE.NAMES = FALSE, SIMPLIFY = FALSE
+    )
+    hcp <- bind_rows(hcp)
+    hcp$method <- if (parametric) "parametric" else "non-parametric"
+    #FIXME: do we want wt for !hc
+    if(hc) {
+      hcp <- hcp[c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
+    } else {
+      hcp <- hcp[c("dist", "conc", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
+    }
+    return(hcp)
+  }
+  if(hc) {
+    hcp <- lapply(hcp, function(x) x[c("percent", "est", "se", "lcl", "ucl", "pboot")])
+  } else {
+    hcp <- lapply(hcp, function(x) x[c("conc", "est", "se", "lcl", "ucl", "pboot")])
+  }
+  hcp <- lapply(hcp, as.matrix)
+  hcp <- Reduce(function(x, y) {
+    abind(x, y, along = 3)
+  }, hcp)
+  suppressMessages(min <- apply(hcp, c(1, 2), min))
+  suppressMessages(hcp <- apply(hcp, c(1, 2), weighted.mean, w = weight))
+  min <- as.data.frame(min)
+  hcp <- as.data.frame(hcp)
+  method <- if (parametric) "parametric" else "non-parametric"
+  out <- tibble(
+    dist = "average", value = value, est = hcp$est, se = hcp$se,
+    lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
+    method = method, nboot = nboot, pboot = min$pboot
+  )
+  if(hc) {
+    out <- dplyr::rename(out, percent = "value")
+    out <- dplyr::mutate(out, percent = as.integer(round(.data$percent * 100)))
+  } else {
+    out <- dplyr::rename(out, conc = "value")
+  }
+  out
 }
 
 ssd_hcp_fitdists <- function(
@@ -153,8 +264,7 @@ ssd_hcp_fitdists <- function(
     parametric,
     root,
     control,
-    hc,
-    ...) {
+    hc) {
   
   chk_vector(value)
   chk_numeric(value)
@@ -174,7 +284,7 @@ ssd_hcp_fitdists <- function(
   
   x <- subset(x, delta = delta)
   
-  hc <- .ssd_hcp_fitdists(
+  hcp <- .ssd_hcp_fitdists(
     x, 
     value = value,
     ci = ci, 
@@ -185,7 +295,7 @@ ssd_hcp_fitdists <- function(
     parametric = parametric,
     root = root,
     control = control,
-    hc = hc,
+    hc = hc
   )
-  warn_min_pboot(hc, min_pboot)
+  warn_min_pboot(hcp, min_pboot)
 }
