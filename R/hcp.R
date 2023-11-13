@@ -13,7 +13,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-no_ssd_hcp <- function(hc) {
+no_hcp <- function(hc) {
   x <- tibble(
     dist = character(0),
     percent = numeric(0),

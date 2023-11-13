@@ -43,7 +43,7 @@ ssd_hp <- function(x, ...) {
     control) {
   
   if (!length(x) || !length(conc)) {
-    return(no_ssd_hcp(hc = FALSE))
+    return(no_hcp(hc = FALSE))
   }
   
   if (is.null(control)) {

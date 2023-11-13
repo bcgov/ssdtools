@@ -59,7 +59,7 @@ ssd_hc <- function(x, ...) {
     control) {
 
   if (!length(x) || !length(percent)) {
-    return(no_ssd_hcp(hc = TRUE))
+    return(no_hcp(hc = TRUE))
   }
   
   if (is.null(control)) {
@@ -167,7 +167,7 @@ ssd_hc.list <- function(x, percent = 5, ...) {
   chk_unused(...)
   
   if (!length(x)) {
-    return(no_ssd_hcp(hc = TRUE))
+    return(no_hcp(hc = TRUE))
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
                MoreArgs = list(proportion = percent / 100),
