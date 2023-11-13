@@ -45,16 +45,16 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
     pboot = na
   )
   if(!hc) {
-      x <- dplyr::rename(x, conc = "percent")
-      x <- dplyr::mutate(x, conc = .data$conc / 100, 
-                         est = .data$est / rescale * 100)
+    x <- dplyr::rename(x, conc = "percent")
+    x <- dplyr::mutate(x, conc = .data$conc / 100, 
+                       est = .data$est / rescale * 100)
   }
   x
 }
 
 .ssd_hcp_tmbfit <- function(x, value, ci, level, nboot, min_pboot,
-                           data, rescale, weighted, censoring, min_pmix,
-                           range_shape1, range_shape2, parametric, control, hc) {
+                            data, rescale, weighted, censoring, min_pmix,
+                            range_shape1, range_shape2, parametric, control, hc) {
   args <- estimates(x)
   dist <- .dist_tmbfit(x)
   
@@ -73,13 +73,13 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
   
   censoring <- censoring / rescale
   fun <- safely(fit_tmb)
-  estimates <- boot_estimates(x,
-                              fun = fun, nboot = nboot, data = data, weighted = weighted,
-                              censoring = censoring, min_pmix = min_pmix,
-                              range_shape1 = range_shape1,
-                              range_shape2 = range_shape2,
-                              parametric = parametric,
-                              control = control
+  estimates <- boot_estimates(
+    x, fun = fun, nboot = nboot, data = data, weighted = weighted,
+    censoring = censoring, min_pmix = min_pmix,
+    range_shape1 = range_shape1,
+    range_shape2 = range_shape2,
+    parametric = parametric,
+    control = control
   )
   x <- value
   if(!hc) {
@@ -104,4 +104,85 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
     hcp <- dplyr::mutate(hcp, conc = value)
   }
   replace_min_pboot_na(hcp, min_pboot)
+}
+
+.ssd_hcp_fitdists <- function(
+    x, value, ci, level, nboot,
+    average, delta, min_pboot,
+    parametric, root, control, hc
+) {
+  
+  if(hc) {
+    return(.ssd_hc_fitdists(
+      x, 
+      percent = value, 
+      ci = ci,
+      level = level, 
+      nboot = nboot,
+      average = average, 
+      min_pboot = min_pboot, 
+      parametric = parametric, 
+      root = root, 
+      control = control))
+  }
+  .ssd_hp_fitdists(
+    x, 
+    conc = value, 
+    ci = ci,
+    level = level, 
+    nboot = nboot,
+    average = average, 
+    min_pboot = min_pboot, 
+    parametric = parametric, 
+    root = root, 
+    control = control)
+}
+
+ssd_hcp_fitdists <- function(
+    x, 
+    value, 
+    ci, 
+    level,
+    nboot,
+    average,
+    delta,
+    min_pboot,
+    parametric,
+    root,
+    control,
+    hc,
+    ...) {
+  
+  chk_vector(value)
+  chk_numeric(value)
+  chk_flag(ci)
+  chk_number(level)
+  chk_range(level)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  chk_flag(average)
+  chk_number(delta)
+  chk_gte(delta)
+  chk_number(min_pboot)
+  chk_range(min_pboot)
+  chk_flag(parametric)
+  chk_flag(root)
+  chk_null_or(control, vld = vld_list)
+  
+  x <- subset(x, delta = delta)
+  
+  hc <- .ssd_hcp_fitdists(
+    x, 
+    value = value,
+    ci = ci, 
+    level = level, 
+    nboot = nboot,
+    average = average, 
+    min_pboot = min_pboot,
+    parametric = parametric,
+    root = root,
+    control = control,
+    hc = hc,
+  )
+  warn_min_pboot(hc, min_pboot)
 }

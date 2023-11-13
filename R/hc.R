@@ -195,35 +195,21 @@ ssd_hc.fitdists <- function(
   chk_vector(percent)
   chk_numeric(percent)
   chk_range(percent, c(0, 100))
-  chk_flag(ci)
-  chk_number(level)
-  chk_range(level)
-  chk_whole_number(nboot)
-  chk_gt(nboot)
-  chk_flag(average)
-  chk_number(delta)
-  chk_gte(delta)
-  chk_number(min_pboot)
-  chk_range(min_pboot)
-  chk_flag(parametric)
-  chk_flag(root)
-  chk_null_or(control, vld = vld_list)
   chk_unused(...)
   
-  x <- subset(x, delta = delta)
-  hc <- .ssd_hc_fitdists(
-    x, 
-    percent,
-    ci = ci, 
-    level = level, 
+  ssd_hcp_fitdists(
+    x = x, 
+    value = percent,
+    ci = ci,
+    level = level,
     nboot = nboot,
-    average = average, 
+    average = average,
+    delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
     root = root,
-    control = control
-  )
-  warn_min_pboot(hc, min_pboot)
+    control = control,
+    hc = TRUE)
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for fitburrlioz Object

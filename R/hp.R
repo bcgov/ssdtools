@@ -41,15 +41,15 @@ ssd_hp <- function(x, ...) {
     parametric, 
     root, 
     control) {
-
+  
   if (!length(x) || !length(conc)) {
     return(no_ssd_hcp(hc = FALSE))
   }
-
+  
   if (is.null(control)) {
     control <- .control_fitdists(x)
   }
-
+  
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
@@ -64,7 +64,7 @@ ssd_hp <- function(x, ...) {
     wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
     ci <- FALSE
   }
-
+  
   if (parametric && ci && unequal) {
     wrn("Parametric CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
@@ -83,7 +83,7 @@ ssd_hp <- function(x, ...) {
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control,
       .options = furrr::furrr_options(seed = seeds))
-
+    
     hp <- dplyr::bind_rows(hps)
     
     method <- if (parametric) "parametric" else "non-parametric"
@@ -98,15 +98,15 @@ ssd_hp <- function(x, ...) {
   }
   
   seeds <- seed_streams(length(x))
-
+  
   hp <- future_map(x, .ssd_hcp_tmbfit,
-    value = conc, ci = ci, level = level, nboot = nboot,
-    min_pboot = min_pboot, data = data,
-    rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric,
-    control = control, .options = furrr::furrr_options(seed = seeds),
-    hc = FALSE
+                   value = conc, ci = ci, level = level, nboot = nboot,
+                   min_pboot = min_pboot, data = data,
+                   rescale = rescale, weighted = weighted, censoring = censoring,
+                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                   parametric = parametric,
+                   control = control, .options = furrr::furrr_options(seed = seeds),
+                   hc = FALSE
   )
   
   weight <- wt_est_nest$weight
@@ -145,48 +145,18 @@ ssd_hp <- function(x, ...) {
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
 #' @export
 ssd_hp.fitdists <- function(
-    x, 
-    conc = 1, 
-    ci = FALSE, 
-    level = 0.95, 
-    nboot = 1000,
-    average = TRUE, 
-    delta = 7, 
-    min_pboot = 0.99,
-    parametric = TRUE,
-    root = FALSE,
-    control = NULL,
-    ...) {
-
+    x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
+    average = TRUE,  delta = 7, min_pboot = 0.99,
+    parametric = TRUE, root = FALSE, control = NULL, ...
+) {
+  
   chk_vector(conc)
   chk_numeric(conc)
-  chk_flag(ci)
-  chk_number(level)
-  chk_range(level)
-  chk_whole_number(nboot)
-  chk_gt(nboot)
-  chk_flag(average)
-  chk_number(delta)
-  chk_gte(delta)
-  chk_number(min_pboot)
-  chk_range(min_pboot)
-  chk_flag(parametric)
-  chk_flag(root)
-  chk_null_or(control, vld = vld_list)
   chk_unused(...)
-
-  x <- subset(x, delta = delta)
-  hp <- .ssd_hp_fitdists(
-    x, 
-    conc,
-    ci = ci, 
-    level = level, 
-    nboot = nboot,
-    average = average, 
-    min_pboot = min_pboot,
-    parametric = parametric,
-    root = root,
-    control = control
+  
+  ssd_hcp_fitdists(
+    x = x, value = conc, ci = ci, level = level, nboot = nboot,
+    average = average, delta = delta, min_pboot = min_pboot,
+    parametric = parametric, root = root, control = control, hc = FALSE
   )
-  warn_min_pboot(hp, min_pboot)
 }
