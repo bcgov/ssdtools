@@ -225,10 +225,10 @@ test_that("invpareto with extreme data", {
     2.48618482994608, 2.51794970929166, 2.49716394702713, 2.49218587262049
   ))
  
-  fit99 <- ssd_fit_dists(data, dists = "invpareto")
-  
   skip_on_ci()
   skip_on_cran()
+  
+  fit99 <- ssd_fit_dists(data, dists = "invpareto")
   
   expect_equal(
     estimates(fit99),
