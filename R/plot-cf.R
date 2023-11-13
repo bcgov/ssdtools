@@ -22,9 +22,6 @@
 #'
 #' @inheritParams ssd_fit_dists
 #' @export
-#'
-#' @examples
-#' ssd_plot_cf(ssddata::ccme_boron)
 ssd_plot_cf <- function(data, left = "Conc") {
   if (!requireNamespace("fitdistrplus", quietly = TRUE)) {
     err("Package 'fitdistrplus' is required to produce Cullen and Frey plots.")
