@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 1.0.6.9003
+
+- Added `ssd_exx()` functions to get 
+default parameter estimates for distributions. (@poissonconsulting, #317).
+
 # ssdtools 1.0.6.9002
 
 - `ssd_hc.fitdists()` and `ssd_hp.fitdists()` now have `root = FALSE`
