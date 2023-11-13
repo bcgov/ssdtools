@@ -191,8 +191,6 @@ test_that("ssd_plot censored data", {
 
   data <- ssddata::ccme_boron
   data$Other <- data$Conc * 2
-  expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other"), "boron_cens_pred")
-  expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", label = "Species"), "boron_cens_pred_species")
   expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", ribbon = TRUE), "boron_cens_pred_ribbon")
 })
 

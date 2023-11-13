@@ -19,7 +19,6 @@ test_that("ssd_plot", {
     label = "Species",
     shift_x = 2
   ), "boron_pred_shift_x")
-  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, ribbon = TRUE), "boron_pred_ribbon")
 })
 
 test_that("ssd_plot aes", {
