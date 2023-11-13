@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
 <span><span class="co"># S3 method for fitdists</span></span>
 <span><span class="fu">ssd_hp</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  <span class="va">conc</span>,</span>
+<span>  conc <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
@@ -76,6 +76,7 @@
 <span>  delta <span class="op">=</span> <span class="fl">7</span>,</span>
 <span>  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  root <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -116,12 +117,16 @@
 
 
 <dt>min_pboot</dt>
-<dd><p>A number of the minimum proportion of bootstrap samples that must successfully fit
-in the sense of returning a likelihood.</p></dd>
+<dd><p>A number of the minimum proportion of bootstrap samples that must successfully
+fit in the sense of returning a likelihood.</p></dd>
 
 
 <dt>parametric</dt>
 <dd><p>A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.</p></dd>
+
+
+<dt>root</dt>
+<dd><p>A flag specifying whether to calculate the value by finding the root.</p></dd>
 
 
 <dt>control</dt>

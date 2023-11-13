@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Random Number Generation</h1>
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/burrrIII3.R" class="external-link"><code>R/burrrIII3.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/gamma.R" class="external-link"><code>R/gamma.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/gompertz.R" class="external-link"><code>R/gompertz.R</code></a>, and 8 more</small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/burrrIII3.R" class="external-link"><code>R/burrrIII3.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/gamma.R" class="external-link"><code>R/gamma.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/gompertz.R" class="external-link"><code>R/gompertz.R</code></a>, and 9 more</small>
       <div class="d-none name"><code>ssd_r.Rd</code></div>
     </div>
 
@@ -69,13 +69,9 @@
 <span></span>
 <span><span class="fu">ssd_rgompertz</span><span class="op">(</span><span class="va">n</span>, location <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">rgompertz</span><span class="op">(</span><span class="va">n</span>, llocation <span class="op">=</span> <span class="fl">0</span>, lshape <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">ssd_rinvpareto</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="fl">3</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ssd_rlgumbel</span><span class="op">(</span><span class="va">n</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">rlgumbel</span><span class="op">(</span><span class="va">n</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ssd_rllogis_llogis</span><span class="op">(</span></span>
 <span>  <span class="va">n</span>,</span>
@@ -101,13 +97,15 @@
 <span></span>
 <span><span class="fu">ssd_rlnorm</span><span class="op">(</span><span class="va">n</span>, meanlog <span class="op">=</span> <span class="fl">0</span>, sdlog <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">ssd_rmulti</span><span class="op">(</span><span class="va">n</span>, wt_est <span class="op">=</span> <span class="fu"><a href="ssd_e.html">ssd_emulti</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">ssd_rweibull</span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, chk <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>n</dt>
-<dd><p>number of observations.</p></dd>
+<dd><p>positive number of observations.</p></dd>
 
 
 <dt>shape1</dt>
@@ -127,23 +125,15 @@
 
 
 <dt>shape</dt>
-<dd><p>A string of the column in data for the shape aesthetic.</p></dd>
+<dd><p>shape parameter.</p></dd>
 
 
 <dt>location</dt>
 <dd><p>location parameter.</p></dd>
 
 
-<dt>llocation</dt>
-<dd><p>location parameter on the log scale.</p></dd>
-
-
-<dt>lshape</dt>
-<dd><p>shape parameter on the log scale.</p></dd>
-
-
 <dt>locationlog</dt>
-<dd><p>location on log scale parameter.</p></dd>
+<dd><p>location on the log scale parameter.</p></dd>
 
 
 <dt>scalelog</dt>
@@ -193,6 +183,12 @@
 <dt>sdlog</dt>
 <dd><p>standard deviation on log scale parameter.</p></dd>
 
+
+<dt>wt_est</dt>
+<dd><p>A data frame with dist, wt, and est columns specifying the
+distributions, weights and a list column of estimate data frames with
+term and est columns specifying the estimated value for each parameter.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
@@ -200,16 +196,13 @@
 <ul><li><p><code>ssd_rburrIII3()</code>: Random Generation for BurrIII Distribution</p></li>
 <li><p><code>ssd_rgamma()</code>: Random Generation for Gamma Distribution</p></li>
 <li><p><code>ssd_rgompertz()</code>: Random Generation for Gompertz Distribution</p></li>
-<li><p><code>rgompertz()</code>: Random Generation for Gompertz Distribution
-<a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></li>
 <li><p><code>ssd_rinvpareto()</code>: Random Generation for Inverse Pareto Distribution</p></li>
 <li><p><code>ssd_rlgumbel()</code>: Random Generation for log-Gumbel Distribution</p></li>
-<li><p><code>rlgumbel()</code>: Random Generation for log-Gumbel Distribution
-<a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></li>
 <li><p><code>ssd_rllogis_llogis()</code>: Random Generation for Log-Logistic/Log-Logistic Mixture Distribution</p></li>
 <li><p><code>ssd_rllogis()</code>: Random Generation for Log-Logistic Distribution</p></li>
 <li><p><code>ssd_rlnorm_lnorm()</code>: Random Generation for Log-Normal/Log-Normal Mixture Distribution</p></li>
 <li><p><code>ssd_rlnorm()</code>: Random Generation for Log-Normal Distribution</p></li>
+<li><p><code>ssd_rmulti()</code>: Random Generation for Multiple Distributions</p></li>
 <li><p><code>ssd_rweibull()</code>: Random Generation for Weibull Distribution</p></li>
 </ul></div>
     <div class="section level2">
@@ -256,9 +249,14 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rlnorm</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_r-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># multi </span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rmulti</span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ssd_r-10.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">ssd_rweibull</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="ssd_r-10.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ssd_r-11.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

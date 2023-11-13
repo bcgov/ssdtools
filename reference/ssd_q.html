@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Quantile Function</h1>
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/burrrIII3.R" class="external-link"><code>R/burrrIII3.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/gamma.R" class="external-link"><code>R/gamma.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/gompertz.R" class="external-link"><code>R/gompertz.R</code></a>, and 8 more</small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/burrrIII3.R" class="external-link"><code>R/burrrIII3.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/gamma.R" class="external-link"><code>R/gamma.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/HEAD/R/gompertz.R" class="external-link"><code>R/gompertz.R</code></a>, and 9 more</small>
       <div class="d-none name"><code>ssd_q.Rd</code></div>
     </div>
 
@@ -76,8 +76,6 @@
 <span></span>
 <span><span class="fu">ssd_qgompertz</span><span class="op">(</span><span class="va">p</span>, location <span class="op">=</span> <span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">qgompertz</span><span class="op">(</span><span class="va">p</span>, llocation <span class="op">=</span> <span class="fl">0</span>, lshape <span class="op">=</span> <span class="fl">0</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">ssd_qinvpareto</span><span class="op">(</span><span class="va">p</span>, shape <span class="op">=</span> <span class="fl">3</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ssd_qlgumbel</span><span class="op">(</span></span>
@@ -87,8 +85,6 @@
 <span>  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  log.p <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">qlgumbel</span><span class="op">(</span><span class="va">p</span>, locationlog <span class="op">=</span> <span class="fl">0</span>, scalelog <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ssd_qllogis_llogis</span><span class="op">(</span></span>
 <span>  <span class="va">p</span>,</span>
@@ -116,6 +112,8 @@
 <span></span>
 <span><span class="fu">ssd_qlnorm</span><span class="op">(</span><span class="va">p</span>, meanlog <span class="op">=</span> <span class="fl">0</span>, sdlog <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">ssd_qmulti</span><span class="op">(</span><span class="va">p</span>, wt_est <span class="op">=</span> <span class="fu"><a href="ssd_e.html">ssd_emulti</a></span><span class="op">(</span><span class="op">)</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">ssd_qweibull</span><span class="op">(</span><span class="va">p</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -138,7 +136,7 @@
 
 
 <dt>lower.tail</dt>
-<dd><p>logical; if TRUE (default), probabilities are <code>P[X &lt;= x]</code>,otherwise, <code>P[X &gt; x]</code>.</p></dd>
+<dd><p>logical; if TRUE (default), probabilities are <code>P[X &lt;= x]</code>, otherwise, <code>P[X &gt; x]</code>.</p></dd>
 
 
 <dt>log.p</dt>
@@ -146,23 +144,15 @@
 
 
 <dt>shape</dt>
-<dd><p>A string of the column in data for the shape aesthetic.</p></dd>
+<dd><p>shape parameter.</p></dd>
 
 
 <dt>location</dt>
 <dd><p>location parameter.</p></dd>
 
 
-<dt>llocation</dt>
-<dd><p>location parameter on the log scale.</p></dd>
-
-
-<dt>lshape</dt>
-<dd><p>shape parameter on the log scale.</p></dd>
-
-
 <dt>locationlog</dt>
-<dd><p>location on log scale parameter.</p></dd>
+<dd><p>location on the log scale parameter.</p></dd>
 
 
 <dt>scalelog</dt>
@@ -212,6 +202,12 @@
 <dt>sdlog</dt>
 <dd><p>standard deviation on log scale parameter.</p></dd>
 
+
+<dt>wt_est</dt>
+<dd><p>A data frame with dist, wt, and est columns specifying the
+distributions, weights and a list column of estimate data frames with
+term and est columns specifying the estimated value for each parameter.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
@@ -219,16 +215,13 @@
 <ul><li><p><code>ssd_qburrIII3()</code>: Quantile Function for BurrIII Distribution</p></li>
 <li><p><code>ssd_qgamma()</code>: Quantile Function for Gamma Distribution</p></li>
 <li><p><code>ssd_qgompertz()</code>: Quantile Function for Gompertz Distribution</p></li>
-<li><p><code>qgompertz()</code>: Quantile Function for Gompertz Distribution
-<a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></li>
 <li><p><code>ssd_qinvpareto()</code>: Quantile Function for Inverse Pareto Distribution</p></li>
 <li><p><code>ssd_qlgumbel()</code>: Quantile Function for Log-Gumbel Distribution</p></li>
-<li><p><code>qlgumbel()</code>: Quantile Function for Log-Gumbel Distribution
-<a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></li>
 <li><p><code>ssd_qllogis_llogis()</code>: Cumulative Distribution Function for Log-Logistic/Log-Logistic Mixture Distribution</p></li>
 <li><p><code>ssd_qllogis()</code>: Cumulative Distribution Function for Log-Logistic Distribution</p></li>
 <li><p><code>ssd_qlnorm_lnorm()</code>: Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution</p></li>
 <li><p><code>ssd_qlnorm()</code>: Cumulative Distribution Function for Log-Normal Distribution</p></li>
+<li><p><code>ssd_qmulti()</code>: Quantile Function for Multiple Distributions</p></li>
 <li><p><code>ssd_qweibull()</code>: Cumulative Distribution Function for Weibull Distribution</p></li>
 </ul></div>
     <div class="section level2">
@@ -265,6 +258,10 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">ssd_qlnorm</span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># multi </span></span></span>
+<span class="r-in"><span><span class="fu">ssd_qmulti</span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.018762</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">ssd_qweibull</span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6931472</span>

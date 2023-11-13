@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2023-10-11</h4>
+            <h4 data-toc-skip class="date">2023-11-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="d-none name"><code>ssdtools.Rmd</code></div>
@@ -140,8 +140,8 @@ loaded into the current session using</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in checkMatrixPackageVersion(): Package version inconsistency detected.</span></span>
-<span><span class="co">#&gt; TMB was built with Matrix version 1.6.1.1</span></span>
-<span><span class="co">#&gt; Current Matrix version is 1.5.4.1</span></span>
+<span><span class="co">#&gt; TMB was built with Matrix version 1.6.2</span></span>
+<span><span class="co">#&gt; Current Matrix version is 1.6.1.1</span></span>
 <span><span class="co">#&gt; Please re-install 'TMB' from source using install.packages('TMB', type = 'source') or ask CRAN for a binary version of 'TMB' matching CRAN's 'Matrix' package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -326,19 +326,19 @@ fitted (<code>pboot</code>). There is no requirement for the bootstrap
 samples to converge.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">boron_pred</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 8</span></span></span>
-<span><span class="co">#&gt;    dist    percent   est    se   lcl   ucl nboot pboot</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> average       1 0.379 0.391 0.122  1.58  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> average       2 0.624 0.540 0.213  2.25  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> average       3 0.856 0.656 0.305  2.78  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> average       4 1.08  0.756 0.405  3.27  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> average       5 1.31  0.845 0.509  3.74  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> average       6 1.53  0.926 0.617  4.17  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> average       7 1.76  1.00  0.730  4.55  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> average       8 1.98  1.07  0.852  4.92  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> average       9 2.21  1.14  0.972  5.30  <span style="text-decoration: underline;">1</span>000     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> average      10 2.44  1.20  1.09   5.66  <span style="text-decoration: underline;">1</span>000     1</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 10</span></span></span>
+<span><span class="co">#&gt;    dist    percent   est    se   lcl   ucl    wt method     nboot pboot</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> average       1 0.341 0.328 0.112  1.32     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> average       2 0.573 0.468 0.196  1.95     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> average       3 0.798 0.582 0.283  2.47     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> average       4 1.02  0.682 0.376  2.94     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> average       5 1.24  0.772 0.477  3.39     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> average       6 1.46  0.855 0.581  3.83     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> average       7 1.69  0.934 0.689  4.22     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> average       8 1.91  1.01  0.800  4.62     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> average       9 2.14  1.08  0.914  5.03     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> average      10 2.37  1.15  1.04   5.43     1 parametric  <span style="text-decoration: underline;">1</span>000 0.995</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 89 more rows</span></span></span></code></pre></div>
 <p>The data frame of the estimates can then be plotted together with the
 original data using the <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> function to summarize an
@@ -458,10 +458,9 @@ resolution.</p>
 <!--   xlab = "Concentration (mg/L)" -->
 <!-- ) -->
 <!-- ``` -->
-<hr>
 </div>
-<div class="section level2 unnumbered">
-<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-burnham_model_2002" class="csl-entry">
@@ -496,6 +495,17 @@ Import, Tidy, Transform, Visualize, and Model Data</em>. First edition.
 Sebastopol, CA: O’Reilly. <a href="https://r4ds.had.co.nz" class="external-link">https://r4ds.had.co.nz</a>.
 </div>
 </div>
+</div>
+<div class="section level2">
+<h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
+</h2>
+<p>Copyright 2023 Province of British Columbia, Environment and Climate
+Change Canada, and Australian Government Department of Climate Change,
+Energy, the Environment and Water</p>
+<p>The documentation is released under the <a href="https://creativecommons.org/licenses/by/4.0/" class="external-link">CC BY 4.0
+License</a></p>
+<p>The code is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0" class="external-link">Apache License
+2.0</a></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
