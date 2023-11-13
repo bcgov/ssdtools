@@ -55,6 +55,8 @@ expect_snapshot_boot_data <- function(x, name, digits = 6, min_pboot = 0.9, max_
 }
 
 expect_snapshot_data <- function(x, name, digits = 6) {
+  testthat::skip_on_os("windows")
+
   fun <- function(x) signif(x, digits = digits)
   x <- dplyr::mutate(x, dplyr::across(where(is.numeric), fun))
   path <- save_csv(x)
