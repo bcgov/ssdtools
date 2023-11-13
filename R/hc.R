@@ -87,9 +87,11 @@ ssd_hc.fitdists <- function(
   chk_range(percent, c(0, 100))
   chk_unused(...)
   
+  proportion <- percent / 100
+  
   ssd_hcp_fitdists(
     x = x, 
-    value = percent,
+    value = proportion,
     ci = ci,
     level = level,
     nboot = nboot,

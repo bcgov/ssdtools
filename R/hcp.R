@@ -160,10 +160,6 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     nboot <- 0L
   }
   
-  if(hc) {
-    value <- value / 100
-  }
-  
   if(root && average) {
     seeds <- seed_streams(length(value))
     hcs <- future_map(
