@@ -19,6 +19,3 @@ for non-censored data.
 \details{
 Soft deprecated for direct call to \code{\link[fitdistrplus:descdist]{fitdistrplus::descdist()}}.
 }
-\examples{
-ssd_plot_cf(ssddata::ccme_boron)
-}
