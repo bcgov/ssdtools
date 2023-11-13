@@ -40,18 +40,7 @@ ssd_hp <- function(x, ...) {
 
   est <- do.call(what, args)
   if (!ci) {
-    na <- rep(NA_real_, length(conc))
-    return(tibble(
-      dist = rep(dist, length(conc)),
-      conc = conc,
-      est = est * 100,
-      se = na,
-      lcl = na,
-      ucl = na,
-      wt = rep(1, length(conc)),
-      nboot = rep(0L, length(conc)),
-      pboot = na
-    ))
+    return(no_ci_hcp(value = conc, dist = dist, est = est, rescale = rescale, hc = FALSE))
   }
   censoring <- censoring / rescale
   fun <- safely(fit_tmb)

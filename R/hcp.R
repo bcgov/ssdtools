@@ -30,3 +30,24 @@ no_ssd_hcp <- function(hc) {
   }
   x
 }
+
+no_ci_hcp <- function(value, dist, est, rescale, hc) {
+  na <- rep(NA_real_, length(value))
+  x <- tibble(
+    dist = rep(dist, length(value)),
+    percent = value * 100,
+    est = est * rescale,
+    se = na,
+    lcl = na,
+    ucl = na,
+    wt = rep(1, length(value)),
+    nboot = rep(0L, length(value)),
+    pboot = na
+  )
+  if(!hc) {
+      x <- dplyr::rename(x, conc = .data$percent)
+      x <- dplyr::mutate(x, conc = .data$conc / 100, 
+                         est = .data$est / rescale * 100)
+  }
+  x
+}
