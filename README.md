@@ -7,8 +7,7 @@
 
 [![Lifecycle:Maturing](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/bcgov/ssdtools/master.svg)](https://app.codecov.io/github/bcgov/ssdtools?branch=main)
+[![codecov](https://codecov.io/github/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://codecov.io/github/bcgov/ssdtools)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
