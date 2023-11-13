@@ -21,37 +21,56 @@ authors:
 destination: docs
 
 reference:
-- title: Tables
-  desc: Information as Data Frames
+- title: Information
+  desc: Data frames of information
   contents:
   - '`boron_pred`'
   - '`dist_data`'
-- title: Calculate and Predict
-  desc: Calculate Values and Estimate Model Fit 
+- title: Distribution Names
+  desc: Functions that return character vectors of distribution names
+  contents: 
+  - '`ssd_dists`'
+  - '`ssd_dists_all`'
+  - '`ssd_dists_bcanz`'
+- title: Distributional Functions
+  desc: Distribution, quantile, random functions
+  contents: 
+  - '`ssd_p`'
+  - '`ssd_q`'
+  - '`ssd_r`'
+  - '`ssd_e`'
+- title: Fit
+  desc: Functions that fit distributions to data
+  contents: 
+  - '`ssd_fit_bcanz`'
+  - '`ssd_fit_burrlioz`'
+  - '`ssd_fit_dists`'
+- title: Manipulate Fits
+  desc: Functions that manipulate fits of distributions
   contents:
+  - '`augment.fitdists`'
+  - '`coef.fitdists`'
   - '`estimates.fitdists`'
+  - '`glance.fitdists`'
+  - '`is.fitdists`'
   - '`predict.fitburrlioz`'
   - '`predict.fitdists`'
   - '`ssd_ecd`'
   - '`ssd_ecd_data`'
   - '`ssd_exposure`'
   - '`ssd_gof`'
-  - '`ssd_hc`'
-  - '`ssd_hc_bcanz`'
   - '`ssd_hp`'
   - '`ssd_match_moments`'
   - '`ssd_wt_est`'
+  - '`subset.fitdists`'
+  - '`tidy.fitdists`'
+- title: Hazard Concentrations
+  desc: Functions that calculate hazard concentrations
+  contents:
+  - '`ssd_hc`'
+  - '`ssd_hc_bcanz`'
   - '`ssd_wqg_bc`'
   - '`ssd_wqg_burrlioz`'
-- title: Distributions
-  desc: Distribution Functions
-  contents: 
-  - '`ssd_dists`'
-  - '`ssd_dists_all`'
-  - '`ssd_dists_bcanz`'
-  - '`ssd_fit_bcanz`'
-  - '`ssd_fit_burrlioz`'
-  - '`ssd_fit_dists`'
 - title: Plots
   desc: Functions to Generate Plots
   contents:
@@ -66,30 +85,23 @@ reference:
   - '`ssd_plot_cdf`'
   - '`ssd_plot_data`'
   - '`ssdtools-ggproto`'
-- title: Query
-  desc: Query Parameters and Observations
-  contents:
-  - '`npars`'
-  - '`ssd_is_censored`'
-- title: Test 
-  desc: Test fitdist Objects
-  contents:
-  - '`is.fitdists`'
 - title: Miscellaneous
-  desc: Format and Subset Objects
+  desc: Miscellaneous functions
   contents:
-  - '`augment.fitdists`'
-  - '`coef.fitdists`'
   - '`comma_signif`'
-  - '`glance.fitdists`'
   - '`licensing_md`'
+  - '`npars`'
   - '`ssd_data`'
+  - '`ssd_is_censored`'
   - '`ssd_sort_data`'
-  - '`subset.fitdists`'
-  - '`tidy.fitdists`'
 - title: Deprecated
-  desc: Format and Subset Objects
+  desc: Deprecated functions which will become defunct in future versions
   contents:
+  - '`geom_ssd`'
+  - '`is_censored`'
+  - '`ssd_hc_burrlioz`'
+  - '`ssd_plot_cf`'
+  - '`stat_ssd`'
   - '`dgompertz`'
   - '`pgompertz`'
   - '`qgompertz`'
@@ -98,8 +110,4 @@ reference:
   - '`plgumbel`'
   - '`qlgumbel`'
   - '`rlgumbel`'
-  - '`geom_ssd`'
-  - '`is_censored`'
-  - '`ssd_hc_burrlioz`'
-  - '`ssd_plot_cf`'
-  - '`stat_ssd`'
+

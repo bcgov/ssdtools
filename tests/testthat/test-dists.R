@@ -37,3 +37,7 @@ test_that("dists without tails", {
 test_that("dists 5 pars", {
   expect_identical(ssd_dists(npars = 5L), c("llogis_llogis", "lnorm_lnorm"))
 })
+
+test_that("dists bcanz", {
+  expect_identical(ssd_dists(bcanz = TRUE), ssd_dists_bcanz())
+})

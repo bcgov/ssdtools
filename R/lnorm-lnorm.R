@@ -56,6 +56,16 @@ ssd_rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
   )
 }
 
+#' @describeIn ssd_e Default Parameter Values for Log-Normal/Log-Normal Mixture Distribution
+#' @export
+#' @examples
+#'
+#' ssd_elnorm_lnorm()
+ssd_elnorm_lnorm <- function() {
+  c(meanlog1 = 0, sdlog1 = 1,
+       meanlog2 = 1, sdlog2 = 1, pmix = 0.5)
+}
+
 slnorm_lnorm <- function(data, pars = NULL) {
   if (!is.null(pars)) {
     return(pars)

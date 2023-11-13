@@ -13,7 +13,6 @@
 #    limitations under the License.
 
 #' Log-Gumbel (Inverse Weibull) Probability Density
-#'
 #' `r lifecycle::badge("deprecated")`
 #'
 #' @param x A numeric vector of values.
@@ -40,8 +39,18 @@ ssd_plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, lo
   )
 }
 
-#' @describeIn ssd_p Cumulative Distribution Function for Log-Gumbel Distribution
+#' @describeIn ssd_e Default Parameter Values for Log-Gumbel Distribution
+#' @export
+#' @examples
+#'
+#' ssd_einvpareto()
+ssd_elgumbel <- function() {
+  list(locationlog = 0, scalelog = 1)
+}
+
+#' Cumulative Distribution Function for Log-Gumbel Distribution
 #' `r lifecycle::badge("deprecated")`
+#' @inheritParams params
 #' @export
 plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_warn("1.0.0", "plgumbel()", "ssd_plgumbel()")
@@ -63,8 +72,9 @@ ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, lo
   )
 }
 
-#' @describeIn ssd_q Quantile Function for Log-Gumbel Distribution
+#' Quantile Function for Log-Gumbel Distribution
 #' `r lifecycle::badge("deprecated")`
+#' @inheritParams params
 #' @export
 qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_warn("1.0.0", "qlgumbel()", "ssd_qlgumbel()")
@@ -84,8 +94,18 @@ ssd_rlgumbel <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
   rdist("gumbel", n = n, location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
 }
 
-#' @describeIn ssd_r Random Generation for log-Gumbel Distribution
+#' @describeIn ssd_e Default Parameter Values for log-Gumbel Distribution
+#' @export
+#' @examples
+#'
+#' ssd_elgumbel()
+ssd_elgumbel <- function() {
+  c(locationlog = 0, scalelog = 1)
+}
+
+#' Random Generation for log-Gumbel Distribution
 #' `r lifecycle::badge("deprecated")`
+#' @inheritParams params
 #' @export
 rlgumbel <- function(n, locationlog = 0, scalelog = 1) {
   lifecycle::deprecate_warn("1.0.0", "rlgumbel()", "ssd_rlgumbel()")

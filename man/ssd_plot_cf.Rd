@@ -2,7 +2,8 @@
 % Please edit documentation in R/plot-cf.R
 \name{ssd_plot_cf}
 \alias{ssd_plot_cf}
-\title{Cullen and Frey Plot}
+\title{Cullen and Frey Plot
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 \usage{
 ssd_plot_cf(data, left = "Conc")
 }

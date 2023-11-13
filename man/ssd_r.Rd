@@ -6,10 +6,8 @@
 \alias{ssd_rburrIII3}
 \alias{ssd_rgamma}
 \alias{ssd_rgompertz}
-\alias{rgompertz}
 \alias{ssd_rinvpareto}
 \alias{ssd_rlgumbel}
-\alias{rlgumbel}
 \alias{ssd_rllogis_llogis}
 \alias{ssd_rllogis}
 \alias{ssd_rlnorm_lnorm}
@@ -25,13 +23,9 @@ ssd_rgamma(n, shape = 1, scale = 1, chk = TRUE)
 
 ssd_rgompertz(n, location = 1, shape = 1, chk = TRUE)
 
-rgompertz(n, llocation = 0, lshape = 0)
-
 ssd_rinvpareto(n, shape = 3, scale = 1, chk = TRUE)
 
 ssd_rlgumbel(n, locationlog = 0, scalelog = 1, chk = TRUE)
-
-rlgumbel(n, locationlog = 0, scalelog = 1)
 
 ssd_rllogis_llogis(
   n,
@@ -57,7 +51,7 @@ ssd_rlnorm_lnorm(
 
 ssd_rlnorm(n, meanlog = 0, sdlog = 1, chk = TRUE)
 
-ssd_rmulti(n, wt_est)
+ssd_rmulti(n, wt_est = ssd_emulti())
 
 ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 }
@@ -75,10 +69,6 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 \item{shape}{shape parameter.}
 
 \item{location}{location parameter.}
-
-\item{llocation}{location parameter on the log scale.}
-
-\item{lshape}{shape parameter on the log scale.}
 
 \item{locationlog}{location on the log scale parameter.}
 
@@ -121,15 +111,9 @@ Random Number Generation
 
 \item \code{ssd_rgompertz()}: Random Generation for Gompertz Distribution
 
-\item \code{rgompertz()}: Random Generation for Gompertz Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-
 \item \code{ssd_rinvpareto()}: Random Generation for Inverse Pareto Distribution
 
 \item \code{ssd_rlgumbel()}: Random Generation for log-Gumbel Distribution
-
-\item \code{rlgumbel()}: Random Generation for log-Gumbel Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \item \code{ssd_rllogis_llogis()}: Random Generation for Log-Logistic/Log-Logistic Mixture Distribution
 
@@ -139,8 +123,7 @@ Random Number Generation
 
 \item \code{ssd_rlnorm()}: Random Generation for Log-Normal Distribution
 
-\item \code{ssd_rmulti()}: Random Generation for
-Weighted Combination of Distributions
+\item \code{ssd_rmulti()}: Random Generation for Multiple Distributions
 
 \item \code{ssd_rweibull()}: Random Generation for Weibull Distribution
 
@@ -175,10 +158,8 @@ set.seed(50)
 hist(ssd_rlnorm(10000), breaks = 1000)
 
 # multi 
-fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-wt_est <- ssd_wt_est(fit)
 set.seed(50)
-hist(ssd_rmulti(1000, wt_est), breaks = 100)
+hist(ssd_rmulti(1000), breaks = 100)
 
 set.seed(50)
 hist(ssd_rweibull(10000), breaks = 1000)

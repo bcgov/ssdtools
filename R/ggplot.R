@@ -48,10 +48,9 @@ scale_color_ssd <- function(...) {
 }
 
 #' Species Sensitivity Data Points
-#'
+#' 
 #' Uses the empirical cumulative distribution to create scatterplot of points `x`.
 #'
-#' `geom_ssd()` has been deprecated for `geom_ssdpoint()`.
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @seealso [`ssd_plot_cdf()`]
@@ -181,10 +180,13 @@ geom_xribbon <- function(mapping = NULL,
   )
 }
 
-#' @describeIn geom_ssdpoint Species Sensitivity Data Points
-#'
-#' Uses the empirical cumulative distribution to create scatterplot of points `x`.
+#' Species Sensitivity Data Points
 #' `r lifecycle::badge('deprecated')`
+#' 
+#' `geom_ssd()` has been deprecated for `geom_ssdpoint()`.
+#' 
+#' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::geom_point
 #' @export
 #' @examples
 #' \dontrun{
@@ -209,9 +211,9 @@ geom_ssd <- function(mapping = NULL,
 }
 
 #' Plot Species Sensitivity Data
+#' `r lifecycle::badge('deprecated')`
 #'
 #' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
-#' `r lifecycle::badge('deprecated')`
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point

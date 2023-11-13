@@ -13,19 +13,16 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' @describeIn ssd_p Cumulative Distribution Function for 
-#' Weighted Combination of Distributions
+#' @describeIn ssd_p Cumulative Distribution Function for Multiple Distributions
 #' @export
 #' @examples
 #' 
 #' # multi 
-#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-#' wt_est <- ssd_wt_est(fit)
-#' ssd_pmulti(1, wt_est)
-ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
-  chk_numeric(q)
+#' ssd_pmulti(1)
+ssd_pmulti <- function(q, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALSE) {
+  chk_atomic(q)
   chk_vector(q)
-
+  
   check_wt_est(wt_est)
   chk_flag(lower.tail)
   chk_flag(log.p)
@@ -33,11 +30,13 @@ ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   if (!length(q)) {
     return(numeric(0))
   }
-
+  
+  q <- as.numeric(q)
+  
   ranges <- range_fun(q, wt_est, fun = "p")
   lower <- ranges$lower
   upper <- ranges$upper
-
+  
   f <- ma_fun(wt_est, fun = "q")
   p <- rep(NA_real_, length(q))
   for(i in seq_along(p)) {
@@ -56,19 +55,16 @@ ssd_pmulti <- function(q, wt_est, lower.tail = TRUE, log.p = FALSE) {
   p
 }
 
-#' @describeIn ssd_q Quantile Function for 
-#' Weighted Combination of Distributions
+#' @describeIn ssd_q Quantile Function for Multiple Distributions
 #' @export
 #' @examples
 #' 
 #' # multi 
-#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-#' wt_est <- ssd_wt_est(fit)
-#' ssd_qmulti(0.5, wt_est)
-ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
-  chk_numeric(p)
+#' ssd_qmulti(0.5)
+ssd_qmulti <- function(p, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALSE) {
+  chk_atomic(p)
   chk_vector(p)
-
+  
   check_wt_est(wt_est)
   chk_flag(lower.tail)
   chk_flag(log.p)
@@ -76,7 +72,9 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   if (!length(p)) {
     return(numeric(0))
   }
-
+  
+  p <- as.numeric(p)
+  
   if(log.p) {
     p <- exp(p)
   }
@@ -87,7 +85,7 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   ranges <- range_fun(p, wt_est, fun = "q")
   lower <- ranges$lower
   upper <- ranges$upper
-
+  
   f <- ma_fun(wt_est, fun = "p")
   q <- rep(NA_real_, length(p))
   for(i in seq_along(p)) {
@@ -100,19 +98,48 @@ ssd_qmulti <- function(p, wt_est, lower.tail = TRUE, log.p = FALSE) {
   q
 }
 
-#' @describeIn ssd_r Random Generation for 
-#' Weighted Combination of Distributions
+#' @describeIn ssd_r Random Generation for Multiple Distributions
 #' @export
 #' @examples
 #' 
 #' # multi 
-#' fit <- ssd_fit_dists(data = ssddata::ccme_boron)
-#' wt_est <- ssd_wt_est(fit)
 #' set.seed(50)
-#' hist(ssd_rmulti(1000, wt_est), breaks = 100)
-ssd_rmulti <- function(n, wt_est) {
+#' hist(ssd_rmulti(1000), breaks = 100)
+ssd_rmulti <- function(n, wt_est = ssd_emulti()) {
+  chk_vector(n)
+  if(!length(n)) {
+    return(numeric(0))
+  }
+  if(length(n) > 1) {
+    n <- length(n)
+  }
   chk_count(n)
   if(n == 0L) return(numeric(0))
   p <- runif(n)
   ssd_qmulti(p, wt_est)
+}
+
+#' @describeIn ssd_e Default Parameter Values for Multiple Distributions
+#' @inheritParams params
+#' @export
+#' @examples
+#'
+#' ssd_emulti()
+ssd_emulti <- function(dists = ssd_dists(bcanz = TRUE)) {
+  chk_character(dists)
+  chk_not_any_na(dists)
+  chk_subset(dists, ssd_dists())
+  check_dim(dists)
+  
+  edists <- paste0("ssd_e", dists, ("()"))
+  es <- purrr::map(edists, function(x) eval(parse(text = x)))
+  names(es) <- dists
+  des <- purrr::imap(es, function(x, y) {
+    tibble::tibble(dist = y, term = names(x), est = x)
+  })
+  das <- dplyr::bind_rows(des)
+  nas <- tidyr::nest(das, .by = "dist")
+  was <- dplyr::mutate(nas, weight = 1/nrow(nas))
+  sas <- dplyr::select(was, "dist", "weight", "data")
+  sas
 }

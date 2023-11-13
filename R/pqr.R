@@ -30,6 +30,11 @@ NULL
 #' @name ssd_r
 NULL
 
+#' Default Parameter Estimates
+#' @seealso [`ssd_p`] and [`ssd_q`]
+#' @name ssd_e
+NULL
+
 .pd <- function(q, ..., fun) {
   args <- c(q, list(...))
 
