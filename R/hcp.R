@@ -123,13 +123,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     hc) {
   
   if (!length(x) || !length(value)) {
-    hcp <- no_hcp()
-    if(hc) {
-      hcp <- dplyr::rename(hcp, percent = "value")
-    } else {
-      hcp <- dplyr::rename(hcp, conc = "value")
-    }
-    return(hcp)
+    return(no_hcp())
   }
   
   if (is.null(control)) {
@@ -181,10 +175,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
       method = method, nboot = nboot, pboot = hcp$pboot
     )
     if(hc) {
-      hcp <- dplyr::rename(hcp, percent = "value")
-      hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
-    } else {
-      hcp <- dplyr::rename(hcp, conc = "value")
+      hcp <- dplyr::mutate(hcp, value = as.integer(round(.data$value * 100)))
     }
     return(hcp)
   }
@@ -215,8 +206,10 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     #FIXME: do we want wt for !hc
     if(hc) {
       hcp <- hcp[c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
+      hcp <- dplyr::rename(hcp, value = "percent")
     } else {
       hcp <- hcp[c("dist", "conc", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
+      hcp <- dplyr::rename(hcp, value = "conc")
     }
     return(hcp)
   }
@@ -240,10 +233,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     method = method, nboot = nboot, pboot = min$pboot
   )
   if(hc) {
-    out <- dplyr::rename(out, percent = "value")
-    out <- dplyr::mutate(out, percent = as.integer(round(.data$percent * 100)))
-  } else {
-    out <- dplyr::rename(out, conc = "value")
+    out <- dplyr::mutate(out, value = as.integer(round(.data$value * 100)))
   }
   out
 }

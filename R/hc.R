@@ -89,7 +89,7 @@ ssd_hc.fitdists <- function(
   
   proportion <- percent / 100
   
-  ssd_hcp_fitdists(
+  hcp <- ssd_hcp_fitdists(
     x = x, 
     value = proportion,
     ci = ci,
@@ -102,6 +102,9 @@ ssd_hc.fitdists <- function(
     root = root,
     control = control,
     hc = TRUE)
+  
+  hcp <- dplyr::rename(hcp, percent = "value")
+  hcp
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for fitburrlioz Object

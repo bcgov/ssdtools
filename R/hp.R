@@ -42,9 +42,11 @@ ssd_hp.fitdists <- function(
   chk_numeric(conc)
   chk_unused(...)
   
-  ssd_hcp_fitdists(
+  hcp <- ssd_hcp_fitdists(
     x = x, value = conc, ci = ci, level = level, nboot = nboot,
     average = average, delta = delta, min_pboot = min_pboot,
     parametric = parametric, root = root, control = control, hc = FALSE
   )
+  hcp <- dplyr::rename(hcp, conc = "value")
+  hcp
 }
