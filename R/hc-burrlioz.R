@@ -85,7 +85,8 @@
 }
 
 #' Hazard Concentrations for Burrlioz Fit
-#'
+#' `r lifecycle::badge('deprecated')`
+#' 
 #' Deprecated for [`ssd_hc()`].
 #'
 #' @inheritParams params

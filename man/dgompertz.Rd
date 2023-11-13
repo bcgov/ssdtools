@@ -2,7 +2,8 @@
 % Please edit documentation in R/gompertz.R
 \name{dgompertz}
 \alias{dgompertz}
-\title{Gompertz Probability Density}
+\title{Gompertz Probability Density
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 \usage{
 dgompertz(x, llocation = 0, lshape = 0, log = FALSE)
 }
@@ -19,5 +20,6 @@ dgompertz(x, llocation = 0, lshape = 0, log = FALSE)
 A numeric vector.
 }
 \description{
+Gompertz Probability Density
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }

@@ -13,7 +13,6 @@
 #    limitations under the License.
 
 #' Log-Gumbel (Inverse Weibull) Probability Density
-#'
 #' `r lifecycle::badge("deprecated")`
 #'
 #' @param x A numeric vector of values.

@@ -32,7 +32,8 @@ censoring_text <- function(x) {
 }
 
 #' Is Censored
-#'
+#' `r lifecycle::badge('deprecated')`
+#' 
 #' Deprecated for [`ssd_is_censored()`].
 #'
 #' @param x A fitdists object.

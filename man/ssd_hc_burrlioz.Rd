@@ -2,7 +2,8 @@
 % Please edit documentation in R/hc-burrlioz.R
 \name{ssd_hc_burrlioz}
 \alias{ssd_hc_burrlioz}
-\title{Hazard Concentrations for Burrlioz Fit}
+\title{Hazard Concentrations for Burrlioz Fit
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 \usage{
 ssd_hc_burrlioz(
   x,

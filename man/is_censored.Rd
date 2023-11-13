@@ -2,7 +2,8 @@
 % Please edit documentation in R/censor.R
 \name{is_censored}
 \alias{is_censored}
-\title{Is Censored}
+\title{Is Censored
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 \usage{
 is_censored(x)
 }
