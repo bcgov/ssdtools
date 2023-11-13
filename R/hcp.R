@@ -200,19 +200,10 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     )
     hcp <- bind_rows(hcp)
     hcp$method <- if (parametric) "parametric" else "non-parametric"
-    #FIXME: do we want wt for !hc
-    if(hc) {
-      hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
-    } else {
-      hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
-    }
+    hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
     return(hcp)
   }
-  if(hc) {
-    hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
-  } else {
-    hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
-  }
+  hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
   hcp <- lapply(hcp, as.matrix)
   hcp <- Reduce(function(x, y) {
     abind(x, y, along = 3)

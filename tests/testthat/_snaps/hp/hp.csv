@@ -1,7 +1,7 @@
-dist,conc,est,se,lcl,ucl,method,nboot,pboot
-gamma,1,4.67759,2.80665,1.26827,10.1605,parametric,10,1
-lgumbel,1,0.856452,0.494019,0.0424712,1.494,parametric,10,1
-llogis,1,2.80047,1.34911,0.943957,4.95946,parametric,10,1
-lnorm,1,1.9543,1.37065,0.652246,4.47165,parametric,10,1
-lnorm_lnorm,1,1.23424,1.08697,0.00296516,3.03186,parametric,10,1
-weibull,1,4.62301,2.57709,1.58722,10.0178,parametric,10,1
+dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot
+gamma,1,4.67759,2.80665,1.26827,10.1605,0.356574,parametric,10,1
+lgumbel,1,0.856452,0.494019,0.0424712,1.494,0.0134466,parametric,10,1
+llogis,1,2.80047,1.34911,0.943957,4.95946,0.0656452,parametric,10,1
+lnorm,1,1.9543,1.37065,0.652246,4.47165,0.177236,parametric,10,1
+lnorm_lnorm,1,1.23424,1.08697,0.00296516,3.03186,0.0296268,parametric,10,1
+weibull,1,4.62301,2.57709,1.58722,10.0178,0.357472,parametric,10,1
