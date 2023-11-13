@@ -407,8 +407,6 @@ test_that("ssd_hc cis with error", {
   expect_snapshot_boot_data(hc_err, "hc_err_na")
   hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92)
   expect_s3_class(hc_err, "tbl")
-  testthat::skip_on_ci()
-  testthat::skip_on_cran()
   expect_snapshot_boot_data(hc_err, "hc_err")
 })
 
@@ -445,18 +443,13 @@ test_that("ssd_hc comparable parametric and non-parametric big sample size", {
   fit <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10)
-  testthat::skip_on_ci()
-  testthat::skip_on_cran()
   expect_snapshot_data(hc_para, "hc_para")
   set.seed(10)
   hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE)
-  testthat::skip_on_ci()
-  testthat::skip_on_cran()
   expect_snapshot_boot_data(hc_nonpara, "hc_nonpara")
 })
 
 test_that("ssd_hc parametric and non-parametric small sample size", {
-  
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
   hc_para_small <- ssd_hc(fit, nboot = 10, ci = TRUE)
