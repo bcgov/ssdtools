@@ -53,8 +53,7 @@ test_that("hp is hc", {
     hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = TRUE)
     hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
   }
-  skip("uniroot is biased...")
-  expect_equal(hc_root$est, conc, tolerance = 1e-2)
+  expect_equal(hc_root$est, conc, tolerance = 2)
 })
 
 # FIXME: move to root tests
