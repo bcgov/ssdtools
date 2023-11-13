@@ -30,43 +30,6 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-.ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, min_pboot,
-                           data, rescale, weighted, censoring,
-                           min_pmix, range_shape1, range_shape2, parametric, control) {
-  args <- estimates(x) #TODO: checkout estimates
-  args$q <- conc / rescale
-  dist <- .dist_tmbfit(x)
-  what <- paste0("ssd_p", dist)
-
-  est <- do.call(what, args)
-  if (!ci) {
-    return(no_ci_hcp(value = conc, dist = dist, est = est, rescale = rescale, hc = FALSE))
-  }
-  censoring <- censoring / rescale
-  fun <- safely(fit_tmb)
-  estimates <- boot_estimates(x,
-    fun = fun, nboot = nboot, data = data,
-    weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix,
-    range_shape1 = range_shape1,
-    range_shape2 = range_shape2,
-    parametric = parametric,
-    control = control
-  )
-  cis <- cis_estimates(estimates, what, level = level, x = conc / rescale)
-  hp <- tibble(
-    dist = dist,
-    conc = conc,
-    est = est * 100,
-    se = cis$se * 100,
-    lcl = cis$lcl * 100,
-    ucl = cis$ucl * 100,
-    wt = rep(1, length(conc)),
-    nboot = nboot, pboot = length(estimates) / nboot
-  )
-  replace_min_pboot_na(hp, min_pboot)
-}
-
 .ssd_hp_fitdists <- function(
     x, 
     conc, 
@@ -136,13 +99,14 @@ ssd_hp <- function(x, ...) {
   
   seeds <- seed_streams(length(x))
 
-  hp <- future_map(x, .ssd_hp_tmbfit,
-    conc = conc, ci = ci, level = level, nboot = nboot,
+  hp <- future_map(x, .ssd_hcp_tmbfit,
+    value = conc, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot, data = data,
     rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric,
-    control = control, .options = furrr::furrr_options(seed = seeds)
+    control = control, .options = furrr::furrr_options(seed = seeds),
+    hc = FALSE
   )
   
   weight <- wt_est_nest$weight

@@ -46,40 +46,6 @@ ssd_hc <- function(x, ...) {
   )
 }
 
-.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, min_pboot,
-                           data, rescale, weighted, censoring, min_pmix,
-                           range_shape1, range_shape2, parametric, control) {
-  args <- estimates(x)
-  args$p <- proportion
-  dist <- .dist_tmbfit(x)
-  what <- paste0("ssd_q", dist)
-  
-  est <- do.call(what, args)
-  if (!ci) {
-    return(no_ci_hcp(value = proportion, dist = dist, est = est, rescale = rescale, hc = TRUE))
-  }
-  censoring <- censoring / rescale
-  fun <- safely(fit_tmb)
-  estimates <- boot_estimates(x,
-                              fun = fun, nboot = nboot, data = data, weighted = weighted,
-                              censoring = censoring, min_pmix = min_pmix,
-                              range_shape1 = range_shape1,
-                              range_shape2 = range_shape2,
-                              parametric = parametric,
-                              control = control
-  )
-  
-  cis <- cis_estimates(estimates, what, level = level, x = proportion)
-  hc <- tibble(
-    dist = dist,
-    percent = proportion * 100, est = est * rescale,
-    se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
-    wt = rep(1, length(proportion)),
-    nboot = nboot, pboot = length(estimates) / nboot
-  )
-  replace_min_pboot_na(hc, min_pboot)
-}
-
 .ssd_hc_fitdists <- function(
     x, 
     percent, 
@@ -150,13 +116,14 @@ ssd_hc <- function(x, ...) {
   
   seeds <- seed_streams(length(x))
   
-  hc <- future_map(x, .ssd_hc_tmbfit,
-                   proportion = percent / 100, ci = ci, level = level, nboot = nboot,
+  hc <- future_map(x, .ssd_hcp_tmbfit,
+                   value = percent / 100, ci = ci, level = level, nboot = nboot,
                    min_pboot = min_pboot,
                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                    parametric = parametric, control = control,
-                   .options = furrr::furrr_options(seed = seeds)
+                   .options = furrr::furrr_options(seed = seeds),
+                   hc = TRUE
   )
   
   weight <- wt_est_nest$weight
