@@ -52,7 +52,28 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
   x
 }
 
-.ssd_hcp_tmbfit <- function(x, value, ci, level, nboot, min_pboot,
+ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
+  multiplier <- if(hc) rescale else 100
+  hcp <- tibble(
+    dist = dist,
+    percent = value * 100, 
+    est = est * multiplier,
+    se = cis$se * multiplier, 
+    lcl = cis$lcl * multiplier, 
+    ucl = cis$ucl * multiplier,
+    wt = rep(1, length(value)),
+    nboot = nboot, 
+    pboot = length(estimates) / nboot
+  )
+  if(!hc) {
+    hcp <- dplyr::rename(hcp, conc = "percent")
+    hcp <- dplyr::mutate(hcp, conc = value)
+  }
+  hcp
+}
+
+.ssd_hcp_tmbfit <- function(
+    x, value, ci, level, nboot, min_pboot,
                             data, rescale, weighted, censoring, min_pmix,
                             range_shape1, range_shape2, parametric, control, hc) {
   args <- estimates(x)
@@ -86,24 +107,10 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
     x <- x / rescale
   }
   cis <- cis_estimates(estimates, what, level = level, x = x)
-  
-  multiplier <- if(hc) rescale else 100
-  hcp <- tibble(
-    dist = dist,
-    percent = value * 100, 
-    est = est * multiplier,
-    se = cis$se * multiplier, 
-    lcl = cis$lcl * multiplier, 
-    ucl = cis$ucl * multiplier,
-    wt = rep(1, length(value)),
-    nboot = nboot, 
-    pboot = length(estimates) / nboot
-  )
-  if(!hc) {
-    hcp <- dplyr::rename(hcp, conc = "percent")
-    hcp <- dplyr::mutate(hcp, conc = value)
-  }
+  hcp <- ci_hcp(cis, estimates = estimates, value = value, dist = dist, 
+         est = est, rescale = rescale, nboot = nboot, hc = hc)
   replace_min_pboot_na(hcp, min_pboot)
+  
 }
 
 .ssd_hcp_fitdists <- function(
