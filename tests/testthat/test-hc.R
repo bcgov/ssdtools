@@ -395,21 +395,6 @@ test_that("ssd_hc cis with non-convergence", {
   expect_snapshot_boot_data(hc30, "hc_30")
 })
 
-test_that("ssd_hc cis with error", {
-  
-  set.seed(99)
-  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
-  data <- data.frame(Conc = conc)
-  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
-  expect_identical(attr(fit, "min_pmix"), 0.1)
-  expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100))
-  expect_s3_class(hc_err, "tbl")
-  expect_snapshot_boot_data(hc_err, "hc_err_na")
-  hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92)
-  expect_s3_class(hc_err, "tbl")
-  expect_snapshot_boot_data(hc_err, "hc_err")
-})
-
 test_that("ssd_hc cis with error and multiple dists", {
   
   set.seed(99)
@@ -434,19 +419,6 @@ test_that("ssd_hc with 1 bootstrap", {
   set.seed(10)
   hc <- ssd_hc(fit, ci = TRUE, nboot = 1)
   expect_snapshot_data(hc, "hc_1")
-})
-
-test_that("ssd_hc comparable parametric and non-parametric big sample size", {
-  
-  set.seed(99)
-  data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
-  fit <- ssd_fit_dists(data, dists = "lnorm")
-  set.seed(10)
-  hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10)
-  expect_snapshot_data(hc_para, "hc_para")
-  set.seed(10)
-  hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE)
-  expect_snapshot_boot_data(hc_nonpara, "hc_nonpara")
 })
 
 test_that("ssd_hc parametric and non-parametric small sample size", {

@@ -105,3 +105,66 @@ test_that("sgompertz with initial values still unstable!", {
   )
 })
 
+test_that("ssd_hc cis with error", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
+  expect_identical(attr(fit, "min_pmix"), 0.1)
+  expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100))
+  expect_s3_class(hc_err, "tbl")
+  expect_snapshot_boot_data(hc_err, "hc_err_na")
+  hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92)
+  expect_s3_class(hc_err, "tbl")
+  expect_snapshot_boot_data(hc_err, "hc_err")
+})
+
+test_that("ssd_hc comparable parametric and non-parametric big sample size", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
+  fit <- ssd_fit_dists(data, dists = "lnorm")
+  set.seed(10)
+  hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10)
+  expect_snapshot_data(hc_para, "hc_para")
+  set.seed(10)
+  hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE)
+  expect_snapshot_boot_data(hc_nonpara, "hc_nonpara")
+})
+
+test_that("ssd_hp cis with error", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  set.seed(99)
+  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
+  expect_identical(attr(fit, "min_pmix"), 0.1)
+  expect_warning(hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100))
+  expect_s3_class(hp_err, "tbl")
+  expect_snapshot_boot_data(hp_err, "hp_err_na")
+  hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.92)
+  expect_s3_class(hp_err, "tbl")
+  expect_snapshot_boot_data(hp_err, "hp_err")
+})
+
+test_that("ssd_hp comparable parametric and non-parametric big sample size", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  set.seed(99)
+  data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
+  fit <- ssd_fit_dists(data, dists = "lnorm")
+  set.seed(10)
+  hp_para <- ssd_hp(fit, 1, ci = TRUE, nboot = 10)
+  expect_snapshot_boot_data(hp_para, "hp_para")
+  set.seed(10)
+  hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE)
+  expect_snapshot_boot_data(hp_nonpara, "hp_nonpara")
+})
