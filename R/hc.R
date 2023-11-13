@@ -32,20 +32,6 @@ ssd_hc <- function(x, ...) {
   UseMethod("ssd_hc")
 }
 
-no_ssd_hc <- function() {
-  tibble(
-    dist = character(0),
-    percent = numeric(0),
-    est = numeric(0),
-    se = numeric(0),
-    lcl = numeric(0),
-    ucl = numeric(0),
-    wt = numeric(0),
-    nboot = integer(0),
-    pboot = numeric(0)
-  )
-}
-
 .ssd_hc_dist <- function(x, dist, proportion) {
   fun <- paste0("ssd_q", dist)
   args <- list(p = proportion)
@@ -118,7 +104,7 @@ no_ssd_hc <- function() {
     control) {
 
   if (!length(x) || !length(percent)) {
-    return(no_ssd_hc())
+    return(no_ssd_hcp(hc = TRUE))
   }
   
   if (is.null(control)) {
@@ -225,7 +211,7 @@ ssd_hc.list <- function(x, percent = 5, ...) {
   chk_unused(...)
   
   if (!length(x)) {
-    return(no_ssd_hc())
+    return(no_ssd_hcp(hc = TRUE))
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
                MoreArgs = list(proportion = percent / 100),

@@ -30,20 +30,6 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-no_ssd_hp <- function() {
-  tibble(
-    dist = character(0),
-    conc = numeric(0),
-    est = numeric(0),
-    se = numeric(0),
-    lcl = numeric(0),
-    ucl = numeric(0),
-    wt = numeric(0),
-    nboot = integer(0),
-    pboot = numeric(0)
-  )
-}
-
 .ssd_hp_tmbfit <- function(x, conc, ci, level, nboot, min_pboot,
                            data, rescale, weighted, censoring,
                            min_pmix, range_shape1, range_shape2, parametric, control) {
@@ -105,7 +91,7 @@ no_ssd_hp <- function() {
     control) {
 
   if (!length(x) || !length(conc)) {
-    return(no_ssd_hp())
+    return(no_ssd_hcp(hc = FALSE))
   }
 
   if (is.null(control)) {
