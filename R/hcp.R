@@ -32,7 +32,7 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
   multiplier <- if(hc) rescale else 100
   hcp <- tibble(
     dist = rep(dist, length(value)),
-    value = value * 100,
+    value = value,
     est = est * multiplier,
     se = na,
     lcl = na,
@@ -41,9 +41,6 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
     nboot = rep(0L, length(value)),
     pboot = na
   )
-  if(!hc) {
-    hcp <- dplyr::mutate(hcp, value = .data$value / 100)
-  }
   hcp
 }
 
@@ -51,7 +48,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   multiplier <- if(hc) rescale else 100
   hcp <- tibble(
     dist = dist,
-    value = value * 100, 
+    value = value, 
     est = est * multiplier,
     se = cis$se * multiplier, 
     lcl = cis$lcl * multiplier, 
@@ -60,9 +57,6 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     nboot = nboot, 
     pboot = length(estimates) / nboot
   )
-  if(!hc) {
-    hcp <- dplyr::mutate(hcp, value = .data$value / 100)
-  }
   hcp
 }
 
@@ -166,15 +160,11 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     
     method <- if (parametric) "parametric" else "non-parametric"
     
-    hcp <- tibble(
+    return(tibble(
       dist = "average", value = value, est = hcp$est, se = hcp$se,
       lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
       method = method, nboot = nboot, pboot = hcp$pboot
-    )
-    if(hc) {
-      hcp <- dplyr::mutate(hcp, value = as.integer(round(.data$value * 100)))
-    }
-    return(hcp)
+    ))
   }
   
   seeds <- seed_streams(length(x))
@@ -213,15 +203,11 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   min <- as.data.frame(min)
   hcp <- as.data.frame(hcp)
   method <- if (parametric) "parametric" else "non-parametric"
-  out <- tibble(
+  tibble(
     dist = "average", value = value, est = hcp$est, se = hcp$se,
     lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
     method = method, nboot = nboot, pboot = min$pboot
   )
-  if(hc) {
-    out <- dplyr::mutate(out, value = as.integer(round(.data$value * 100)))
-  }
-  out
 }
 
 ssd_hcp_fitdists <- function(

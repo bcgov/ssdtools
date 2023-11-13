@@ -104,6 +104,7 @@ ssd_hc.fitdists <- function(
     hc = TRUE)
   
   hcp <- dplyr::rename(hcp, percent = "value")
+  hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
   hcp
 }
 
