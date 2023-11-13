@@ -43,7 +43,9 @@ ssd_hp <- function(x, ...) {
     control) {
   
   if (!length(x) || !length(conc)) {
-    return(no_hcp(hc = FALSE))
+    hp <- no_hcp()
+    hp <- dplyr::rename(hp, conc = "value")
+    return(hp)
   }
   
   if (is.null(control)) {

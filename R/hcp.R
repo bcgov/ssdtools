@@ -14,9 +14,9 @@
 #    limitations under the License.
 
 no_hcp <- function(hc) {
-  x <- tibble(
+  tibble(
     dist = character(0),
-    percent = numeric(0),
+    value = numeric(0),
     est = numeric(0),
     se = numeric(0),
     lcl = numeric(0),
@@ -25,10 +25,6 @@ no_hcp <- function(hc) {
     nboot = integer(0),
     pboot = numeric(0)
   )
-  if(!hc) {
-    x <- dplyr::rename(x, conc = percent)
-  }
-  x
 }
 
 no_ci_hcp <- function(value, dist, est, rescale, hc) {
