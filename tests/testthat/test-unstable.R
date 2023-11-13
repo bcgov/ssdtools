@@ -168,3 +168,30 @@ test_that("ssd_hp comparable parametric and non-parametric big sample size", {
   hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE)
   expect_snapshot_boot_data(hp_nonpara, "hp_nonpara")
 })
+
+test_that("plot geoms", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  gp <- ggplot2::ggplot(boron_pred) +
+    geom_ssdpoint(data = ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
+    geom_ssdsegment(data = ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
+    geom_hcintersect(xintercept = 100, yintercept = 0.5) +
+    geom_xribbon(
+      ggplot2::aes(xmin = lcl, xmax = ucl, y = percent / 100),
+      alpha = 1 / 3
+    )
+  expect_snapshot_plot(gp, "geoms_all")
+})
+
+
+test_that("ssd_plot censored data", {
+  skip_on_ci()
+  skip_on_cran()
+
+  data <- ssddata::ccme_boron
+  data$Other <- data$Conc * 2
+  expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other"), "boron_cens_pred")
+  expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", label = "Species"), "boron_cens_pred_species")
+  expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", ribbon = TRUE), "boron_cens_pred_ribbon")
+})

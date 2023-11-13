@@ -113,15 +113,3 @@ test_that("plot geom_xribbon", {
     )
   expect_snapshot_plot(gp, "geom_xribbon")
 })
-
-test_that("plot geoms", {
-  gp <- ggplot2::ggplot(boron_pred) +
-    geom_ssdpoint(data = ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-    geom_ssdsegment(data = ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
-    geom_hcintersect(xintercept = 100, yintercept = 0.5) +
-    geom_xribbon(
-      ggplot2::aes(xmin = lcl, xmax = ucl, y = percent / 100),
-      alpha = 1 / 3
-    )
-  expect_snapshot_plot(gp, "geoms_all")
-})
