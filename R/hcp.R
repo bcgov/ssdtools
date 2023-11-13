@@ -29,10 +29,11 @@ no_hcp <- function(hc) {
 
 no_ci_hcp <- function(value, dist, est, rescale, hc) {
   na <- rep(NA_real_, length(value))
-  x <- tibble(
+  multiplier <- if(hc) rescale else 100
+  hcp <- tibble(
     dist = rep(dist, length(value)),
-    percent = value * 100,
-    est = est * rescale,
+    value = value * 100,
+    est = est * multiplier,
     se = na,
     lcl = na,
     ucl = na,
@@ -41,18 +42,16 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
     pboot = na
   )
   if(!hc) {
-    x <- dplyr::rename(x, conc = "percent")
-    x <- dplyr::mutate(x, conc = .data$conc / 100, 
-                       est = .data$est / rescale * 100)
+    hcp <- dplyr::mutate(hcp, value = .data$value / 100)
   }
-  x
+  hcp
 }
 
 ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   multiplier <- if(hc) rescale else 100
   hcp <- tibble(
     dist = dist,
-    percent = value * 100, 
+    value = value * 100, 
     est = est * multiplier,
     se = cis$se * multiplier, 
     lcl = cis$lcl * multiplier, 
@@ -62,8 +61,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     pboot = length(estimates) / nboot
   )
   if(!hc) {
-    hcp <- dplyr::rename(hcp, conc = "percent")
-    hcp <- dplyr::mutate(hcp, conc = value)
+    hcp <- dplyr::mutate(hcp, value = .data$value / 100)
   }
   hcp
 }
@@ -106,7 +104,6 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   hcp <- ci_hcp(cis, estimates = estimates, value = value, dist = dist, 
                 est = est, rescale = rescale, nboot = nboot, hc = hc)
   replace_min_pboot_na(hcp, min_pboot)
-  
 }
 
 .ssd_hcp_fitdists <- function(
@@ -205,18 +202,16 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     hcp$method <- if (parametric) "parametric" else "non-parametric"
     #FIXME: do we want wt for !hc
     if(hc) {
-      hcp <- hcp[c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
-      hcp <- dplyr::rename(hcp, value = "percent")
+      hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
     } else {
-      hcp <- hcp[c("dist", "conc", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
-      hcp <- dplyr::rename(hcp, value = "conc")
+      hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "method", "nboot", "pboot")]
     }
     return(hcp)
   }
   if(hc) {
-    hcp <- lapply(hcp, function(x) x[c("percent", "est", "se", "lcl", "ucl", "pboot")])
+    hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
   } else {
-    hcp <- lapply(hcp, function(x) x[c("conc", "est", "se", "lcl", "ucl", "pboot")])
+    hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
   }
   hcp <- lapply(hcp, as.matrix)
   hcp <- Reduce(function(x, y) {
