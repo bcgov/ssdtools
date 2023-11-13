@@ -76,12 +76,12 @@ ssd_hp <- function(x, ...) {
   if(root && average) {
     seeds <- seed_streams(length(conc))
     hps <- future_map(
-      conc, .ssd_hp_root, 
+      conc, .ssd_hcp_root, 
       wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control,
+      parametric = parametric, control = control, hc = FALSE,
       .options = furrr::furrr_options(seed = seeds))
     
     hp <- dplyr::bind_rows(hps)

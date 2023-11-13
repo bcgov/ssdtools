@@ -93,12 +93,12 @@ ssd_hc <- function(x, ...) {
   if(root && average) {
     seeds <- seed_streams(length(percent))
     hcs <- future_map(
-      percent / 100, .ssd_hc_root, 
+      percent / 100, .ssd_hcp_root, 
       wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control,
+      parametric = parametric, control = control, hc = TRUE,
       .options = furrr::furrr_options(seed = seeds))
 
     hc <- dplyr::bind_rows(hcs)
