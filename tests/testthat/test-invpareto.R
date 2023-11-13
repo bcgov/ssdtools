@@ -122,10 +122,4 @@ test_that("invpareto with extreme data", {
     estimates(fit99r),
     list(invpareto = list(scale = 1.00038435059807, shape = 26.0278618888664))
   )
-  skip("invpareto ABNORMAL_TERMINATION_IN_LNSRCH.")
-  fit99 <- ssd_fit_dists(data, dists = "invpareto")
-  expect_equal(
-    estimates(fit99),
-    list(invpareto = list(scale = 2.60218050714239, shape = 29.3380717187846))
-  )
 })
