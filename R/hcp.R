@@ -115,6 +115,23 @@ hcp_ind <- function(hcp, weight, method) {
   return(hcp)
 }
 
+hcp_average <- function(hcp, weight, value, method, nboot) {
+  hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
+  hcp <- lapply(hcp, as.matrix)
+  hcp <- Reduce(function(x, y) {
+    abind(x, y, along = 3)
+  }, hcp)
+  suppressMessages(min <- apply(hcp, c(1, 2), min))
+  suppressMessages(hcp <- apply(hcp, c(1, 2), weighted.mean, w = weight))
+  min <- as.data.frame(min)
+  hcp <- as.data.frame(hcp)
+  tibble(
+    dist = "average", value = value, est = hcp$est, se = hcp$se,
+    lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
+    method = method, nboot = nboot, pboot = min$pboot
+  )
+}
+
 .ssd_hcp_fitdists <- function(
     x, 
     value, 
@@ -197,20 +214,7 @@ hcp_ind <- function(hcp, weight, method) {
   if (!average) {
     return(hcp_ind(hcp, weight, method))
   }
-  hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
-  hcp <- lapply(hcp, as.matrix)
-  hcp <- Reduce(function(x, y) {
-    abind(x, y, along = 3)
-  }, hcp)
-  suppressMessages(min <- apply(hcp, c(1, 2), min))
-  suppressMessages(hcp <- apply(hcp, c(1, 2), weighted.mean, w = weight))
-  min <- as.data.frame(min)
-  hcp <- as.data.frame(hcp)
-  tibble(
-    dist = "average", value = value, est = hcp$est, se = hcp$se,
-    lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
-    method = method, nboot = nboot, pboot = min$pboot
-  )
+  hcp_average(hcp, weight, value, method, nboot)
 }
 
 ssd_hcp_fitdists <- function(
