@@ -145,6 +145,8 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     nboot <- 0L
   }
   
+  method <- if (parametric) "parametric" else "non-parametric"
+  
   if(root && average) {
     seeds <- seed_streams(length(value))
     hcs <- future_map(
@@ -157,8 +159,6 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
       .options = furrr::furrr_options(seed = seeds))
     
     hcp <- dplyr::bind_rows(hcs)
-    
-    method <- if (parametric) "parametric" else "non-parametric"
     
     return(tibble(
       dist = "average", value = value, est = hcp$est, se = hcp$se,
@@ -189,7 +189,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
       USE.NAMES = FALSE, SIMPLIFY = FALSE
     )
     hcp <- bind_rows(hcp)
-    hcp$method <- if (parametric) "parametric" else "non-parametric"
+    hcp$method <- method
     hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
     return(hcp)
   }
@@ -202,7 +202,6 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   suppressMessages(hcp <- apply(hcp, c(1, 2), weighted.mean, w = weight))
   min <- as.data.frame(min)
   hcp <- as.data.frame(hcp)
-  method <- if (parametric) "parametric" else "non-parametric"
   tibble(
     dist = "average", value = value, est = hcp$est, se = hcp$se,
     lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
