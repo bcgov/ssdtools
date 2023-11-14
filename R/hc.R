@@ -141,9 +141,12 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
                   average = FALSE, parametric = parametric
     ))
   }
-  hc <- .ssd_hc_burrlioz_fitdists(x,
-                                  percent = percent, level = level, nboot = nboot,
+  proportion <- percent / 100
+  hcp <- .ssd_hc_burrlioz_fitdists(x,
+                                  value = proportion, level = level, nboot = nboot,
                                   min_pboot = min_pboot, parametric = parametric
   )
-  warn_min_pboot(hc, min_pboot)
+  hcp <- dplyr::rename(hcp, percent = "value")
+  hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
+  hcp
 }
