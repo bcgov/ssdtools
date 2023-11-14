@@ -211,10 +211,10 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
                     hc = hc)
   
   weight <- wt_est_nest$weight
-  if (!average) {
-    return(hcp_ind(hcp, weight, method))
+  if (average) {
+    return(hcp_average(hcp, weight, value, method, nboot))
   }
-  hcp_average(hcp, weight, value, method, nboot)
+  hcp_ind(hcp, weight, method)
 }
 
 ssd_hcp_fitdists <- function(
