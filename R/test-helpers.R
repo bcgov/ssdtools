@@ -58,7 +58,10 @@ expect_snapshot_data <- function(x, name, digits = 6) {
   fun <- function(x) signif(x, digits = digits)
   x <- dplyr::mutate(x, dplyr::across(where(is.numeric), fun))
   path <- save_csv(x)
-  testthat::expect_snapshot_file(path, paste0(name, ".csv"))
+  testthat::expect_snapshot_file(
+    path, 
+    paste0(name, ".csv"), 
+    compare = testthat::compare_file_text)
 }
 
 ep <- function(text) {
@@ -128,7 +131,7 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FA
     testthat::expect_true(vld_numeric(ests))
     testthat::expect_true(vld_length(ests, length = 2L, upper = 5L))
     testthat::expect_true(vld_named(ests))
-
+    
     set.seed(97)
     data <- data.frame(Conc = ep(glue::glue("ssd_r{dist}(1000)")))
     fits <- ssd_fit_dists(data = data, dists = dist)
