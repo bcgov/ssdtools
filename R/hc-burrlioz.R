@@ -12,11 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.ssd_hc_burrlioz_tmbfit <- function(x, proportion, level, nboot, min_pboot,
+.ssd_hc_burrlioz_tmbfit <- function(x, value, level, nboot, min_pboot,
                                     data, rescale, weighted, censoring, min_pmix,
                                     range_shape1, range_shape2, parametric, control) {
   args <- estimates(x)
-  args$p <- proportion
+  args$p <- value
   dist <- .dist_tmbfit(x)
   stopifnot(identical(dist, "burrIII3"))
 
@@ -37,7 +37,7 @@
   )
 
   cis <- cis_estimates(estimates,
-    what = "ssd_qburrlioz", level = level, x = proportion,
+    what = "ssd_qburrlioz", level = level, x = value,
     .names = c("scale", "shape", "shape1", "shape2", "locationlog", "scalelog")
   )
 
@@ -45,7 +45,7 @@
 
   hc <- tibble(
     dist = dist,
-    percent = proportion * 100, est = est * rescale,
+    value = value, est = est * rescale,
     se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
     method = method,
     nboot = nboot, pboot = length(estimates) / nboot
@@ -53,7 +53,7 @@
   replace_min_pboot_na(hc, min_pboot)
 }
 
-.ssd_hc_burrlioz_fitdists <- function(x, percent, level, nboot, min_pboot, parametric) {
+.ssd_hc_burrlioz_fitdists <- function(x, value, level, nboot, min_pboot, parametric) {
   control <- .control_fitdists(x)
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
@@ -74,14 +74,14 @@
 
   seeds <- seed_streams(length(x))
   hc <- future_map(x, .ssd_hc_burrlioz_tmbfit,
-    proportion = percent / 100,
+    value = value,
     level = level, nboot = nboot, min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric,
     control = control, .options = furrr::furrr_options(seed = seeds)
   )$burrIII3
-  hc
+  warn_min_pboot(hc, min_pboot)
 }
 
 #' Hazard Concentrations for Burrlioz Fit
