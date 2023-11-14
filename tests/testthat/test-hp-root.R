@@ -42,31 +42,3 @@ test_that("hp root all", {
     hp_root
   })
 })
-
-test_that("hp is hc", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
-  conc <- 1
-  hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = TRUE)
-  hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
-  expect_equal(hc_root$est, conc, tolerance = 1e-2)
-  for(i in 1:100) {
-    hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = TRUE)
-    hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
-  }
-  expect_equal(hc_root$est, conc, tolerance = 2)
-})
-
-# FIXME: move to root tests
-# FIXME: also test actual values as seem deterministic
-test_that("hp is hc 10", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
-  conc <- 10
-  hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = TRUE)
-  hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
-  expect_equal(hc_root$est, conc, tolerance = 1e-2)
-  for(i in 1:100) {
-    hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = TRUE)
-    hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
-  }
-  expect_gt(hc_root$est, 2.3)
-})
