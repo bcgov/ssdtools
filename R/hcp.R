@@ -100,6 +100,21 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   replace_min_pboot_na(hcp, min_pboot)
 }
 
+hcp_ind <- function(hcp, weight, method) {
+  hcp <- mapply(
+    function(x, y) {
+      x$wt <- y
+      x
+    },
+    x = hcp, y = weight,
+    USE.NAMES = FALSE, SIMPLIFY = FALSE
+  )
+  hcp <- bind_rows(hcp)
+  hcp$method <- method
+  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
+  return(hcp)
+}
+
 .ssd_hcp_fitdists <- function(
     x, 
     value, 
@@ -180,18 +195,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   
   weight <- wt_est_nest$weight
   if (!average) {
-    hcp <- mapply(
-      function(x, y) {
-        x$wt <- y
-        x
-      },
-      x = hcp, y = weight,
-      USE.NAMES = FALSE, SIMPLIFY = FALSE
-    )
-    hcp <- bind_rows(hcp)
-    hcp$method <- method
-    hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
-    return(hcp)
+    return(hcp_ind(hcp, weight, method))
   }
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
   hcp <- lapply(hcp, as.matrix)
