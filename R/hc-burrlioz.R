@@ -45,7 +45,7 @@
 
   hc <- tibble(
     dist = dist,
-    percent = proportion * 100, est = est * rescale,
+    proportion = proportion, est = est * rescale,
     se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
     method = method,
     nboot = nboot, pboot = length(estimates) / nboot
@@ -53,7 +53,7 @@
   replace_min_pboot_na(hc, min_pboot)
 }
 
-.ssd_hc_burrlioz_fitdists <- function(x, percent, level, nboot, min_pboot, parametric) {
+.ssd_hc_burrlioz_fitdists <- function(x, proportion, level, nboot, min_pboot, parametric) {
   control <- .control_fitdists(x)
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
@@ -74,14 +74,14 @@
 
   seeds <- seed_streams(length(x))
   hc <- future_map(x, .ssd_hc_burrlioz_tmbfit,
-    proportion = percent / 100,
+    proportion = proportion,
     level = level, nboot = nboot, min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric,
     control = control, .options = furrr::furrr_options(seed = seeds)
   )$burrIII3
-  hc
+  warn_min_pboot(hc, min_pboot)
 }
 
 #' Hazard Concentrations for Burrlioz Fit
