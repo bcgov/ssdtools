@@ -13,10 +13,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-no_ssd_hcp <- function(hc) {
-  x <- tibble(
+no_hcp <- function(hc) {
+  tibble(
     dist = character(0),
-    percent = numeric(0),
+    value = numeric(0),
     est = numeric(0),
     se = numeric(0),
     lcl = numeric(0),
@@ -25,8 +25,242 @@ no_ssd_hcp <- function(hc) {
     nboot = integer(0),
     pboot = numeric(0)
   )
-  if(!hc) {
-    x <- dplyr::rename(x, conc = percent)
+}
+
+no_ci_hcp <- function(value, dist, est, rescale, hc) {
+  na <- rep(NA_real_, length(value))
+  multiplier <- if(hc) rescale else 100
+  hcp <- tibble(
+    dist = rep(dist, length(value)),
+    value = value,
+    est = est * multiplier,
+    se = na,
+    lcl = na,
+    ucl = na,
+    wt = rep(1, length(value)),
+    nboot = rep(0L, length(value)),
+    pboot = na
+  )
+  hcp
+}
+
+ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
+  multiplier <- if(hc) rescale else 100
+  hcp <- tibble(
+    dist = dist,
+    value = value, 
+    est = est * multiplier,
+    se = cis$se * multiplier, 
+    lcl = cis$lcl * multiplier, 
+    ucl = cis$ucl * multiplier,
+    wt = rep(1, length(value)),
+    nboot = nboot, 
+    pboot = length(estimates) / nboot
+  )
+  hcp
+}
+
+.ssd_hcp_tmbfit <- function(
+    x, value, ci, level, nboot, min_pboot,
+    data, rescale, weighted, censoring, min_pmix,
+    range_shape1, range_shape2, parametric, control, hc) {
+  args <- estimates(x)
+  dist <- .dist_tmbfit(x)
+  
+  if(hc) {
+    args$p <- value
+    what <- paste0("ssd_q", dist)
+  } else {
+    args$q <- value / rescale
+    what <- paste0("ssd_p", dist)
   }
-  x
+  
+  est <- do.call(what, args)
+  if (!ci) {
+    return(no_ci_hcp(value = value, dist = dist, est = est, rescale = rescale, hc = hc))
+  }
+  
+  censoring <- censoring / rescale
+  fun <- safely(fit_tmb)
+  estimates <- boot_estimates(
+    x, fun = fun, nboot = nboot, data = data, weighted = weighted,
+    censoring = censoring, min_pmix = min_pmix,
+    range_shape1 = range_shape1,
+    range_shape2 = range_shape2,
+    parametric = parametric,
+    control = control
+  )
+  x <- value
+  if(!hc) {
+    x <- x / rescale
+  }
+  cis <- cis_estimates(estimates, what, level = level, x = x)
+  hcp <- ci_hcp(cis, estimates = estimates, value = value, dist = dist, 
+                est = est, rescale = rescale, nboot = nboot, hc = hc)
+  replace_min_pboot_na(hcp, min_pboot)
+}
+
+hcp_ind <- function(hcp, weight, method) {
+  hcp <- mapply(
+    function(x, y) {
+      x$wt <- y
+      x
+    },
+    x = hcp, y = weight,
+    USE.NAMES = FALSE, SIMPLIFY = FALSE
+  )
+  hcp <- bind_rows(hcp)
+  hcp$method <- method
+  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
+  return(hcp)
+}
+
+hcp_average <- function(hcp, weight, value, method, nboot) {
+  hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
+  hcp <- lapply(hcp, as.matrix)
+  hcp <- Reduce(function(x, y) {
+    abind(x, y, along = 3)
+  }, hcp)
+  suppressMessages(min <- apply(hcp, c(1, 2), min))
+  suppressMessages(hcp <- apply(hcp, c(1, 2), weighted.mean, w = weight))
+  min <- as.data.frame(min)
+  hcp <- as.data.frame(hcp)
+  tibble(
+    dist = "average", value = value, est = hcp$est, se = hcp$se,
+    lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
+    method = method, nboot = nboot, pboot = min$pboot
+  )
+}
+
+.ssd_hcp_fitdists <- function(
+    x, 
+    value, 
+    ci, 
+    level, 
+    nboot,
+    average, 
+    min_pboot, 
+    parametric, 
+    root, 
+    control,
+    hc) {
+  
+  if (!length(x) || !length(value)) {
+    return(no_hcp())
+  }
+  
+  if (is.null(control)) {
+    control <- .control_fitdists(x)
+  }
+  
+  data <- .data_fitdists(x)
+  rescale <- .rescale_fitdists(x)
+  censoring <- .censoring_fitdists(x)
+  min_pmix <- .min_pmix_fitdists(x)
+  range_shape1 <- .range_shape1_fitdists(x)
+  range_shape2 <- .range_shape2_fitdists(x)
+  weighted <- .weighted_fitdists(x)
+  unequal <- .unequal_fitdists(x)
+  wt_est_nest <- wt_est_nest(x)
+  
+  if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
+    wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
+    ci <- FALSE
+  }
+  
+  if (parametric && ci && unequal) {
+    wrn("Parametric CIs cannot be calculated for unequally weighted data.")
+    ci <- FALSE
+  }
+  
+  if (!ci) {
+    nboot <- 0L
+  }
+  
+  method <- if (parametric) "parametric" else "non-parametric"
+  
+  if(root && average) {
+    seeds <- seed_streams(length(value))
+    hcs <- future_map(
+      value, .ssd_hcp_root, 
+      wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
+      min_pboot = min_pboot,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control, hc = hc,
+      .options = furrr::furrr_options(seed = seeds))
+    
+    hcp <- dplyr::bind_rows(hcs)
+    
+    return(tibble(
+      dist = "average", value = value, est = hcp$est, se = hcp$se,
+      lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
+      method = method, nboot = nboot, pboot = hcp$pboot
+    ))
+  }
+  
+  seeds <- seed_streams(length(x))
+  
+  hcp <- future_map(x, .ssd_hcp_tmbfit,
+                    value = value, ci = ci, level = level, nboot = nboot,
+                    min_pboot = min_pboot,
+                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                    parametric = parametric, control = control,
+                    .options = furrr::furrr_options(seed = seeds),
+                    hc = hc)
+  
+  weight <- wt_est_nest$weight
+  if (average) {
+    return(hcp_average(hcp, weight, value, method, nboot))
+  }
+  hcp_ind(hcp, weight, method)
+}
+
+ssd_hcp_fitdists <- function(
+    x, 
+    value, 
+    ci, 
+    level,
+    nboot,
+    average,
+    delta,
+    min_pboot,
+    parametric,
+    root,
+    control,
+    hc) {
+  
+  chk_vector(value)
+  chk_numeric(value)
+  chk_flag(ci)
+  chk_number(level)
+  chk_range(level)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  chk_flag(average)
+  chk_number(delta)
+  chk_gte(delta)
+  chk_number(min_pboot)
+  chk_range(min_pboot)
+  chk_flag(parametric)
+  chk_flag(root)
+  chk_null_or(control, vld = vld_list)
+  
+  x <- subset(x, delta = delta)
+  
+  hcp <- .ssd_hcp_fitdists(
+    x, 
+    value = value,
+    ci = ci, 
+    level = level, 
+    nboot = nboot,
+    average = average, 
+    min_pboot = min_pboot,
+    parametric = parametric,
+    root = root,
+    control = control,
+    hc = hc
+  )
+  warn_min_pboot(hcp, min_pboot)
 }

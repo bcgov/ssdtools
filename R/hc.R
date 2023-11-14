@@ -46,162 +46,6 @@ ssd_hc <- function(x, ...) {
   )
 }
 
-.ssd_hc_tmbfit <- function(x, proportion, ci, level, nboot, min_pboot,
-                           data, rescale, weighted, censoring, min_pmix,
-                           range_shape1, range_shape2, parametric, control) {
-  args <- estimates(x)
-  args$p <- proportion
-  dist <- .dist_tmbfit(x)
-  what <- paste0("ssd_q", dist)
-  
-  est <- do.call(what, args)
-  if (!ci) {
-    na <- rep(NA_real_, length(proportion))
-    return(tibble(
-      dist = rep(dist, length(proportion)),
-      percent = proportion * 100,
-      est = est * rescale,
-      se = na,
-      lcl = na,
-      ucl = na,
-      wt = rep(1, length(proportion)),
-      nboot = rep(0L, length(proportion)),
-      pboot = na
-    ))
-  }
-  censoring <- censoring / rescale
-  fun <- safely(fit_tmb)
-  estimates <- boot_estimates(x,
-                              fun = fun, nboot = nboot, data = data, weighted = weighted,
-                              censoring = censoring, min_pmix = min_pmix,
-                              range_shape1 = range_shape1,
-                              range_shape2 = range_shape2,
-                              parametric = parametric,
-                              control = control
-  )
-  
-  cis <- cis_estimates(estimates, what, level = level, x = proportion)
-  hc <- tibble(
-    dist = dist,
-    percent = proportion * 100, est = est * rescale,
-    se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
-    wt = rep(1, length(proportion)),
-    nboot = nboot, pboot = length(estimates) / nboot
-  )
-  replace_min_pboot_na(hc, min_pboot)
-}
-
-.ssd_hc_fitdists <- function(
-    x, 
-    percent, 
-    ci, 
-    level, 
-    nboot,
-    average, 
-    min_pboot, 
-    parametric, 
-    root, 
-    control) {
-
-  if (!length(x) || !length(percent)) {
-    return(no_ssd_hcp(hc = TRUE))
-  }
-  
-  if (is.null(control)) {
-    control <- .control_fitdists(x)
-  }
-  
-  data <- .data_fitdists(x)
-  rescale <- .rescale_fitdists(x)
-  censoring <- .censoring_fitdists(x)
-  min_pmix <- .min_pmix_fitdists(x)
-  range_shape1 <- .range_shape1_fitdists(x)
-  range_shape2 <- .range_shape2_fitdists(x)
-  weighted <- .weighted_fitdists(x)
-  unequal <- .unequal_fitdists(x)
-  wt_est_nest <- wt_est_nest(x)
-  
-  if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
-    wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
-    ci <- FALSE
-  }
-  
-  if (parametric && ci && unequal) {
-    wrn("Parametric CIs cannot be calculated for unequally weighted data.")
-    ci <- FALSE
-  }
-
-  if (!ci) {
-    nboot <- 0L
-  }
-  
-  if(root && average) {
-    seeds <- seed_streams(length(percent))
-    hcs <- future_map(
-      percent / 100, .ssd_hc_root, 
-      wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
-      min_pboot = min_pboot,
-      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control,
-      .options = furrr::furrr_options(seed = seeds))
-
-    hc <- dplyr::bind_rows(hcs)
-    
-    method <- if (parametric) "parametric" else "non-parametric"
-    
-    return(
-      tibble(
-        dist = "average", percent = percent, est = hc$est, se = hc$se,
-        lcl = hc$lcl, ucl = hc$ucl, wt = rep(1, length(percent)),
-        method = method, nboot = nboot, pboot = hc$pboot
-      )
-    )
-  }
-  
-  seeds <- seed_streams(length(x))
-  
-  hc <- future_map(x, .ssd_hc_tmbfit,
-                   proportion = percent / 100, ci = ci, level = level, nboot = nboot,
-                   min_pboot = min_pboot,
-                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                   parametric = parametric, control = control,
-                   .options = furrr::furrr_options(seed = seeds)
-  )
-  
-  weight <- wt_est_nest$weight
-  if (!average) {
-    hc <- mapply(
-      function(x, y) {
-        x$wt <- y
-        x
-      },
-      x = hc, y = weight,
-      USE.NAMES = FALSE, SIMPLIFY = FALSE
-    )
-    hc <- bind_rows(hc)
-    hc$method <- if (parametric) "parametric" else "non-parametric"
-    hc <- hc[c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
-    return(hc)
-  }
-  hc <- lapply(hc, function(x) x[c("percent", "est", "se", "lcl", "ucl", "pboot")])
-  hc <- lapply(hc, as.matrix)
-  hc <- Reduce(function(x, y) {
-    abind(x, y, along = 3)
-  }, hc)
-  suppressMessages(min <- apply(hc, c(1, 2), min))
-  suppressMessages(hc <- apply(hc, c(1, 2), weighted.mean, w = weight))
-  min <- as.data.frame(min)
-  hc <- as.data.frame(hc)
-  method <- if (parametric) "parametric" else "non-parametric"
-  tibble(
-    dist = "average", percent = percent, est = hc$est, se = hc$se,
-    lcl = hc$lcl, ucl = hc$ucl, wt = rep(1, length(percent)),
-    method = method, nboot = nboot, pboot = min$pboot
-  )
-}
-
 #' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates
 #' @export
 ssd_hc.list <- function(x, percent = 5, ...) {
@@ -211,7 +55,9 @@ ssd_hc.list <- function(x, percent = 5, ...) {
   chk_unused(...)
   
   if (!length(x)) {
-    return(no_ssd_hcp(hc = TRUE))
+    hc <- no_hcp()
+    hc <- dplyr::rename(hc, percent = "value")
+    return(hc)
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
                MoreArgs = list(proportion = percent / 100),
@@ -239,35 +85,27 @@ ssd_hc.fitdists <- function(
   chk_vector(percent)
   chk_numeric(percent)
   chk_range(percent, c(0, 100))
-  chk_flag(ci)
-  chk_number(level)
-  chk_range(level)
-  chk_whole_number(nboot)
-  chk_gt(nboot)
-  chk_flag(average)
-  chk_number(delta)
-  chk_gte(delta)
-  chk_number(min_pboot)
-  chk_range(min_pboot)
-  chk_flag(parametric)
-  chk_flag(root)
-  chk_null_or(control, vld = vld_list)
   chk_unused(...)
   
-  x <- subset(x, delta = delta)
-  hc <- .ssd_hc_fitdists(
-    x, 
-    percent,
-    ci = ci, 
-    level = level, 
+  proportion <- percent / 100
+  
+  hcp <- ssd_hcp_fitdists(
+    x = x, 
+    value = proportion,
+    ci = ci,
+    level = level,
     nboot = nboot,
-    average = average, 
+    average = average,
+    delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
     root = root,
-    control = control
-  )
-  warn_min_pboot(hc, min_pboot)
+    control = control,
+    hc = TRUE)
+  
+  hcp <- dplyr::rename(hcp, percent = "value")
+  hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
+  hcp
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for fitburrlioz Object

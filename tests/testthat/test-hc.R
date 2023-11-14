@@ -105,7 +105,7 @@ test_that("ssd_hc fitdists works zero length percent", {
   expect_s3_class(hc, class = "tbl_df")
   expect_identical(colnames(hc), c("dist", "percent", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot"))
   expect_equal(hc$dist, character(0))
-  expect_identical(hc$percent, numeric(0))
+  expect_identical(hc$percent, integer(0))
   expect_equal(hc$est, numeric(0))
   expect_equal(hc$se, numeric(0))
 })

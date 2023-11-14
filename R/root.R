@@ -50,30 +50,20 @@ range_fun <- function(x, wt_est_nest, fun = "p") {
   list(lower = min, upper = max)
 }
 
-.ssd_hp_root <- function(conc, wt_est_nest, ci, level, nboot, min_pboot,
-                         data, rescale, weighted, censoring, min_pmix,
-                         range_shape1, range_shape2, parametric, control) {
+.ssd_hcp_root <- function(value, wt_est_nest, ci, level, nboot, min_pboot,
+                          data, rescale, weighted, censoring, min_pmix,
+                          range_shape1, range_shape2, parametric, control, hc) {
+  if(hc) {
+    est <- ssd_qmulti(value, wt_est_nest)
+    est <- est * rescale
+  } else {
+    est <- value/rescale
+    est <- ssd_pmulti(est, wt_est_nest)
+    est <- est * 100
+  }
   
-  q <- conc/rescale
-  p <- ssd_pmulti(q, wt_est_nest)
-
   tibble(
-    est = p * 100,
-    se = NA_real_,
-    lcl = NA_real_,
-    ucl = NA_real_,
-    pboot = NA_real_
-  )
-}
-
-.ssd_hc_root <- function(proportion, wt_est_nest, ci, level, nboot, min_pboot,
-                         data, rescale, weighted, censoring, min_pmix,
-                         range_shape1, range_shape2, parametric, control) {
-  
-  q <- ssd_qmulti(proportion, wt_est_nest)  
-
-  tibble(
-    est = q * rescale,
+    est = est,
     se = NA_real_,
     lcl = NA_real_,
     ucl = NA_real_,
