@@ -27,18 +27,18 @@ est_args <- function(x) {
   paste(x$term, "=", x$est, collapse = ", ")
 }
 
-ma_fun <- function(wt_est_nest, fun = "p") {
-  funs <- paste0("ssd_", fun, wt_est_nest$dist)
+ma_funp <- function(wt_est_nest) {
+  funs <- paste0("ssd_p", wt_est_nest$dist)
   wts <- wt_est_nest$weight / sum(wt_est_nest$weight)
   args <- purrr::map_chr(wt_est_nest$data, est_args)
   fun_args <- paste0(wts, " * ", funs, "(x, ", args, ")", collapse = " + ")
   
-  func <- paste0("function(x, ", fun ,") {(", fun_args, ") - ", fun, "}")
+  func <- paste0("function(x, p = 0) {(", fun_args, ") -  p}")
   eval(parse(text = func))
 }
 
-range_fun <- function(x, wt_est_nest, fun = "p") {
-  funs <- paste0("ssd_", fun, wt_est_nest$dist)
+range_funq <- function(x, wt_est_nest) {
+  funs <- paste0("ssd_q", wt_est_nest$dist)
   args <- purrr::map_chr(wt_est_nest$data, est_args)
   fun_args <- paste0(funs, "(x, ", args, ")", collapse = ", ")
   func <- paste0("list(", fun_args, ")", collapse = "")

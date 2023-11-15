@@ -33,10 +33,10 @@ ssd_pmulti <- function(q, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALS
   
   q <- as.numeric(q)
   
-  f <- ma_fun(wt_est, fun = "p")
+  f <- ma_funp(wt_est)
   p <- rep(NA_real_, length(q))
   for(i in seq_along(p)) {
-    p[i] <- f(q[i], p = 0)
+    p[i] <- f(q[i])
   }
   if(!lower.tail) {
     p <- 1 - p
@@ -74,11 +74,11 @@ ssd_qmulti <- function(p, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALS
     p <- 1 - p
   }
   
-  ranges <- range_fun(p, wt_est, fun = "q")
+  ranges <- range_funq(p, wt_est)
   lower <- ranges$lower
   upper <- ranges$upper
   
-  f <- ma_fun(wt_est, fun = "p")
+  f <- ma_funp(wt_est)
   q <- rep(NA_real_, length(p))
   for(i in seq_along(p)) {
     if(is.na(lower[i]) || lower[i] == upper[i]) {
