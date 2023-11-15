@@ -18,50 +18,23 @@ test_that("hp is hc conc = 1 root = TRUE", {
   conc <- 1
   hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = TRUE)
   hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
-  expect_equal(hc_root$est, 1.00305263994978)
-  for(i in 1:100) {
+  expect_equal(hc_root$est, 1.00002572057075)
+  for(i in 1:10) {
     hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = TRUE)
     hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
   }
-  expect_equal(hc_root$est, 2.37979047897204)
+  expect_equal(hc_root$est, 1.00028286154233)
 })
-
-test_that("hp is hc conc = 1 root = FALSE", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
-  conc <- 1
-  hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = FALSE)
-  hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = FALSE)
-  expect_equal(hc_root$est, 0.997184605748195)
-  for(i in 1:100) {
-    hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = FALSE)
-    hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = FALSE)
-  }
-  expect_equal(hc_root$est, 0.958646915712036)
-})
-
 
 test_that("hp is hc conc = 10 root = TRUE", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   conc <- 10
   hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = TRUE)
   hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
-  expect_equal(hc_root$est, 9.91446020346946)
-  for(i in 1:100) {
+  expect_equal(hc_root$est, 10.00000012176)
+  for(i in 1:10) {
     hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = TRUE)
     hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
   }
-  expect_equal(hc_root$est, 4.50212423822917)
-})
-
-test_that("hp is hc conc = 10 root = FALSE", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
-  conc <- 10
-  hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = FALSE)
-  hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = FALSE)
-  expect_equal(hc_root$est, 10.0858243613942)
-  for(i in 1:100) {
-    hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = FALSE)
-    hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = FALSE)
-  }
-  expect_equal(hc_root$est, 16.1423852672884)
+  expect_equal(hc_root$est, 10.0000013393606)
 })

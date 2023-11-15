@@ -33,18 +33,10 @@ ssd_pmulti <- function(q, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALS
   
   q <- as.numeric(q)
   
-  ranges <- range_fun(q, wt_est, fun = "p")
-  lower <- ranges$lower
-  upper <- ranges$upper
-  
-  f <- ma_fun(wt_est, fun = "q")
+  f <- ma_fun(wt_est, fun = "p")
   p <- rep(NA_real_, length(q))
   for(i in seq_along(p)) {
-    if(is.na(lower[i]) || lower[i] == upper[i]) {
-      p[i] <- lower[i]
-    } else {
-      p[i] <- uniroot(f = f, q = q[i], lower = lower[i], upper = upper[i])$root
-    }
+    p[i] <- f(q[i], p = 0)
   }
   if(!lower.tail) {
     p <- 1 - p

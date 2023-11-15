@@ -15,20 +15,16 @@
 
 test_that("multi", {
   test_dist("multi", multi = TRUE)
-  expect_equal(ssd_pmulti(1), 0.474353122919864)
+  expect_equal(ssd_pmulti(1), 0.493574697632382)
   expect_equal(ssd_qmulti(0.75), 2.21920049918256)
   set.seed(42)
   expect_equal(ssd_rmulti(2), c(5.53133427815926, 7.11054891201997))
   
-  #FIXME: this is quite off
   expect_equal(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99))), 
-               c(0, 0.0386791154549625, 0.471087211387115, 0.853375863576664, 
-                 0.936579190900471))
+               c(0, 0.1, 0.5, 0.9, 0.99), tolerance = 1e-5)
   
-  #FIXME: this is less off
   expect_equal(ssd_pmulti(ssd_qmulti(c(0, 0.1, 0.5, 0.9, 0.99))), 
-               c(0, 0.0726829198002702, 0.480573743497238, 0.881269256832833, 
-                 0.988151256271902))
+               c(0, 0.1, 0.5, 0.9, 0.99), tolerance = 1e-6)
 })
 
 test_that("wt_est_nest works", {
@@ -46,10 +42,10 @@ test_that("ssd_pmulti", {
   expect_identical(ssd_pmulti(-Inf, wt_est), 0)
   expect_identical(ssd_pmulti(Inf, wt_est), 1)
   expect_equal(ssd_pmulti(0, wt_est), 0)
-  pone <- 0.0391155639855389
+  pone <- 0.0389879358571718
   expect_equal(ssd_pmulti(1, wt_est), pone)
-  expect_equal(ssd_pmulti(10000, wt_est), 0.99991762078885, tolerance = 1e-5)
-  expect_equal(ssd_pmulti(c(1,2), wt_est), c(pone, 0.083756266589807))
+  expect_equal(ssd_pmulti(10000, wt_est), 0.999954703139271)
+  expect_equal(ssd_pmulti(c(1,2), wt_est), c(pone, 0.0830181438743114))
   expect_equal(ssd_pmulti(c(1,NA), wt_est), c(pone, NA))
   expect_equal(ssd_pmulti(1, wt_est, lower.tail = FALSE),  1-pone)
   expect_equal(ssd_pmulti(1, wt_est, log.p = TRUE), log(pone))
@@ -59,15 +55,15 @@ test_that("ssd_pmulti", {
 test_that("ssd_pmulti weights", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   wt_est <- ssd_wt_est(fit)
-  expect_equal(ssd_pmulti(1, wt_est), 0.0391155639855389)
+  expect_equal(ssd_pmulti(1, wt_est), 0.0389879358571718)
   wt_est$weight[wt_est$dist != "lnorm"] <- 0
-  expect_equal(ssd_pmulti(1, wt_est), 0.0195438776703809)
+  expect_equal(ssd_pmulti(1, wt_est), 0.0195430301950878)
   wt_est$weight[wt_est$dist == "lnorm"] <- 0
   expect_error(ssd_pmulti(1, wt_est), "must be greater than 0")
   wt_est$weight[wt_est$dist == "lnorm"] <- 1.1
   expect_error(ssd_pmulti(1, wt_est), "must have values between 0 and 1")
   wt_est$weight[wt_est$dist == "lnorm"] <- 1
-  expect_equal(ssd_pmulti(1, wt_est), 0.0195438776703809)
+  expect_equal(ssd_pmulti(1, wt_est), 0.0195430301950878)
 })
 
 test_that("ssd_qmulti", {
@@ -122,5 +118,5 @@ test_that("ssd_emulti", {
   wt_est <- ssd_emulti() 
   expect_snapshot(tidyr::unnest(wt_est, "data"))
   # FIXME: out by over 5%
-  expect_equal(ssd_qmulti(ssd_pmulti(1, wt_est), wt_est), 0.945776875219507)
+  expect_equal(ssd_qmulti(ssd_pmulti(1, wt_est), wt_est), 1.00000074289656)
 })

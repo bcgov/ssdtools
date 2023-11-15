@@ -35,9 +35,9 @@ test_that("hp root all", {
   set.seed(102)
   hp_average <- ssd_hp(fits, average = TRUE)
   hp_root <- ssd_hp(fits, average = TRUE, root = TRUE)
-  expect_equal(hp_root, hp_average, tolerance = 1e-2)
+  expect_equal(hp_root, hp_average)
   expect_equal(hp_average$est, 3.89879358571718, tolerance = 1e-6)
-  expect_equal(hp_root$est, 3.91155639855389, tolerance = 1e-6)
+  expect_equal(hp_root$est, 3.89879358571718)
   testthat::expect_snapshot({
     hp_root
   })
