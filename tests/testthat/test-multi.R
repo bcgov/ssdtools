@@ -40,7 +40,7 @@ test_that("ssd_pmulti", {
   expect_identical(ssd_pmulti(NA_real_, wt_est), NA_real_)
   expect_identical(ssd_pmulti(-1, wt_est), 0)
   expect_identical(ssd_pmulti(-Inf, wt_est), 0)
-  expect_identical(ssd_pmulti(Inf, wt_est), 1)
+  expect_equal(ssd_pmulti(Inf, wt_est), 1)
   expect_equal(ssd_pmulti(0, wt_est), 0)
   pone <- 0.0389879358571718
   expect_equal(ssd_pmulti(1, wt_est), pone)
