@@ -179,42 +179,42 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   
   method <- if (parametric) "parametric" else "non-parametric"
   
-  if(multi && average) {
-    seeds <- seed_streams(length(value))
-    hcs <- future_map(
-      value, .ssd_hcp_multi, 
-      wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
-      min_pboot = min_pboot,
-      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control, hc = hc,
-      .options = furrr::furrr_options(seed = seeds))
+  if(!average || !multi) {
+    seeds <- seed_streams(length(x))
     
-    hcp <- dplyr::bind_rows(hcs)
+    hcp <- future_map(x, .ssd_hcp_tmbfit,
+                      value = value, ci = ci, level = level, nboot = nboot,
+                      min_pboot = min_pboot,
+                      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                      parametric = parametric, control = control,
+                      .options = furrr::furrr_options(seed = seeds),
+                      hc = hc)
     
-    return(tibble(
-      dist = "average", value = value, est = hcp$est, se = hcp$se,
-      lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
-      method = method, nboot = nboot, pboot = hcp$pboot
-    ))
-  }
-  
-  seeds <- seed_streams(length(x))
-  
-  hcp <- future_map(x, .ssd_hcp_tmbfit,
-                    value = value, ci = ci, level = level, nboot = nboot,
-                    min_pboot = min_pboot,
-                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                    parametric = parametric, control = control,
-                    .options = furrr::furrr_options(seed = seeds),
-                    hc = hc)
-  
-  weight <- wt_est_nest$weight
-  if (average) {
+    weight <- wt_est_nest$weight
+    if(!average) {
+      return(hcp_ind(hcp, weight, method))
+    }
     return(hcp_average(hcp, weight, value, method, nboot))
   }
-  hcp_ind(hcp, weight, method)
+  
+  seeds <- seed_streams(length(value))
+  hcs <- future_map(
+    value, .ssd_hcp_multi, 
+    wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
+    min_pboot = min_pboot,
+    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+    parametric = parametric, control = control, hc = hc,
+    .options = furrr::furrr_options(seed = seeds))
+  
+  hcp <- dplyr::bind_rows(hcs)
+  
+  tibble(
+    dist = "average", value = value, est = hcp$est, se = hcp$se,
+    lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
+    method = method, nboot = nboot, pboot = hcp$pboot
+  )
 }
 
 ssd_hcp_fitdists <- function(
