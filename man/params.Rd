@@ -123,7 +123,7 @@ remove them with a warning.}
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{root}{A flag specifying whether to calculate the value by finding the root.}
+\item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
 
 \item{scale}{scale parameter.}
 

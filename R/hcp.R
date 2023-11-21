@@ -141,7 +141,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     average, 
     min_pboot, 
     parametric, 
-    root, 
+    multi, 
     control,
     hc) {
   
@@ -179,10 +179,10 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   
   method <- if (parametric) "parametric" else "non-parametric"
   
-  if(root && average) {
+  if(multi && average) {
     seeds <- seed_streams(length(value))
     hcs <- future_map(
-      value, .ssd_hcp_root, 
+      value, .ssd_hcp_multi, 
       wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
@@ -227,7 +227,7 @@ ssd_hcp_fitdists <- function(
     delta,
     min_pboot,
     parametric,
-    root,
+    multi,
     control,
     hc) {
   
@@ -244,7 +244,7 @@ ssd_hcp_fitdists <- function(
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_flag(parametric)
-  chk_flag(root)
+  chk_flag(multi)
   chk_null_or(control, vld = vld_list)
   
   x <- subset(x, delta = delta)
@@ -258,7 +258,7 @@ ssd_hcp_fitdists <- function(
     average = average, 
     min_pboot = min_pboot,
     parametric = parametric,
-    root = root,
+    multi = multi,
     control = control,
     hc = hc
   )

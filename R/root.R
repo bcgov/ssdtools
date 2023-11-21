@@ -50,7 +50,7 @@ range_funq <- function(x, wt_est_nest) {
   list(lower = min, upper = max)
 }
 
-.ssd_hcp_root <- function(value, wt_est_nest, ci, level, nboot, min_pboot,
+.ssd_hcp_multi <- function(value, wt_est_nest, ci, level, nboot, min_pboot,
                           data, rescale, weighted, censoring, min_pmix,
                           range_shape1, range_shape2, parametric, control, hc) {
   if(hc) {
