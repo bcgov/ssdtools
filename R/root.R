@@ -72,6 +72,16 @@ range_funq <- function(x, wt_est_nest) {
     ))
   }
   .NotYetImplemented()
+  #     seeds <- seed_streams(length(value))
+  # future_map(
+  #   value, .ssd_hcp_multi, 
+  #   wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
+  #   min_pboot = min_pboot,
+  #   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+  #   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+  #   parametric = parametric, control = control, hc = hc,
+  #   .options = furrr::furrr_options(seed = seeds))
+  # 
   # need to bootstrap with ci = TRUE treating all as one including non-parametric.
   # draw from ssd_rmulti and then fit all...
 }

@@ -198,15 +198,13 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     return(hcp_average(hcp, weight, value, method, nboot))
   }
   
-  seeds <- seed_streams(length(value))
-  hcs <- future_map(
+  hcs <- map(
     value, .ssd_hcp_multi, 
     wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control, hc = hc,
-    .options = furrr::furrr_options(seed = seeds))
+    parametric = parametric, control = control, hc = hc)
   
   hcp <- dplyr::bind_rows(hcs)
   
