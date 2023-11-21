@@ -72,15 +72,39 @@ range_funq <- function(x, wt_est_nest) {
     ))
   }
   .NotYetImplemented()
-  #     seeds <- seed_streams(length(value))
+  # seeds <- seed_streams(nboot)
+  # bootn <- 1:nboot
   # future_map(
-  #   value, .ssd_hcp_multi, 
-  #   wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
-  #   min_pboot = min_pboot,
+  #   bootn, .ssd_hcp_multi,
+  #   wt_est_nest = wt_est_nest, 
   #   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
   #   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
   #   parametric = parametric, control = control, hc = hc,
   #   .options = furrr::furrr_options(seed = seeds))
+  
+  # this is what doing for other one....
+  # censoring <- censoring / rescale
+  # fun <- safely(fit_tmb)
+  # estimates <- boot_estimates(
+  #   x, fun = fun, nboot = nboot, data = data, weighted = weighted,
+  #   censoring = censoring, min_pmix = min_pmix,
+  #   range_shape1 = range_shape1,
+  #   range_shape2 = range_shape2,
+  #   parametric = parametric,
+  #   control = control
+  # )
+  # x <- value
+  # if(!hc) {
+  #   x <- x / rescale
+  # }
+  # cis <- cis_estimates(estimates, what, level = level, x = x)
+  # hcp <- ci_hcp(cis, estimates = estimates, value = value, dist = dist, 
+  #               est = est, rescale = rescale, nboot = nboot, hc = hc)
+  # replace_min_pboot_na(hcp, min_pboot)
+  
+# level = level,
+#  min_pboot = min_pboot,
+  
   # 
   # need to bootstrap with ci = TRUE treating all as one including non-parametric.
   # draw from ssd_rmulti and then fit all...
