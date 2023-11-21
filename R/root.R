@@ -51,8 +51,8 @@ range_funq <- function(x, wt_est_nest) {
 }
 
 .ssd_hcp_multi <- function(value, wt_est_nest, ci, level, nboot, min_pboot,
-                          data, rescale, weighted, censoring, min_pmix,
-                          range_shape1, range_shape2, parametric, control, hc) {
+                           data, rescale, weighted, censoring, min_pmix,
+                           range_shape1, range_shape2, parametric, control, hc) {
   if(hc) {
     est <- ssd_qmulti(value, wt_est_nest)
     est <- est * rescale
@@ -62,11 +62,16 @@ range_funq <- function(x, wt_est_nest) {
     est <- est * 100
   }
   
-  tibble(
-    est = est,
-    se = NA_real_,
-    lcl = NA_real_,
-    ucl = NA_real_,
-    pboot = NA_real_
-  )
+  if(!ci) {
+    return(tibble(
+      est = est,
+      se = NA_real_,
+      lcl = NA_real_,
+      ucl = NA_real_,
+      pboot = NA_real_
+    ))
+  }
+  .NotYetImplemented()
+  # need to bootstrap with ci = TRUE treating all as one including non-parametric.
+  # draw from ssd_rmulti and then fit all...
 }
