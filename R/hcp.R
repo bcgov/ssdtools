@@ -198,8 +198,8 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     return(hcp_average(hcp, weight, value, method, nboot))
   }
   
-  hcs <- purrr::map(
-    value, .ssd_hcp_multi, 
+  hcs <- .ssd_hcp_multi(
+    value,
     wt_est = wt_est, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
