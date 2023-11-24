@@ -161,7 +161,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   range_shape2 <- .range_shape2_fitdists(x)
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
-  wt_est_nest <- wt_est_nest(x)
+  wt_est <- ssd_wt_est(x)
   
   if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
     wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
@@ -191,7 +191,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
                       .options = furrr::furrr_options(seed = seeds),
                       hc = hc)
     
-    weight <- wt_est_nest$weight
+    weight <- wt_est$weight
     if(!average) {
       return(hcp_ind(hcp, weight, method))
     }
@@ -200,7 +200,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   
   hcs <- purrr::map(
     value, .ssd_hcp_multi, 
-    wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
+    wt_est = wt_est, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,

@@ -27,7 +27,7 @@ test_that("multi", {
                c(0, 0.1, 0.5, 0.9, 0.99), tolerance = 1e-6)
 })
 
-test_that("wt_est_nest works", {
+test_that("wt_est works", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   wt_est <- ssd_wt_est(fit)
   expect_identical(check_wt_est(wt_est), wt_est)

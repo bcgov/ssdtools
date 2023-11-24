@@ -24,7 +24,13 @@
 #' ssd_wt_est(fits)$data[[1]]
 ssd_wt_est <- function(x) {
   chk_s3_class(x, "fitdists")
-  wt_est_nest(x)
+  glance <- glance(x)
+  tidy <- tidy(x)
+  
+  wt <- dplyr::select(glance, "dist", "weight")
+  est <- dplyr::select(tidy, "dist", "term", "est", "se")
+  est_nest <- tidyr::nest(est, .by = "dist")
+  dplyr::inner_join(wt, est_nest, by = "dist")
 }
 
 check_est <- function(x, x_name = NULL) {
