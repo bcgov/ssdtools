@@ -15,7 +15,7 @@
 A named list of the estimates.
 }
 \description{
-Gets a named list of the estimated values by distribution and term.
+Gets a named list of the estimated weights and parameters.
 }
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)

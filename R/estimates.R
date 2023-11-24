@@ -22,7 +22,7 @@ estimates.tmbfit <- function(x, ...) {
 
 #' Estimates for fitdists Object
 #'
-#' Gets a named list of the estimated values by distribution and term.
+#' Gets a named list of the estimated weights and parameters.
 #'
 #' @inheritParams params
 #' @return A named list of the estimates.
@@ -39,5 +39,5 @@ estimates.fitdists <- function(x, ...) {
   wt <- glance(x)$weight
   y <- map2(y, wt, function(a, b) c(list(weight = b), a))
   names(y) <- names(x)
-  y
+  as.list(unlist(y))
 }
