@@ -180,15 +180,15 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   method <- if (parametric) "parametric" else "non-parametric"
   
   if(!average || !multi) {
-    seeds <- seed_streams(length(x))
+ #   seeds <- seed_streams(length(x))
     
-    hcp <- future_map(x, .ssd_hcp_tmbfit,
+    hcp <- purrr::map(x, .ssd_hcp_tmbfit,
                       value = value, ci = ci, level = level, nboot = nboot,
                       min_pboot = min_pboot,
                       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                       parametric = parametric, control = control,
-                      .options = furrr::furrr_options(seed = seeds),
+ #                     .options = furrr::furrr_options(seed = seeds),
                       hc = hc)
     
     weight <- wt_est$weight

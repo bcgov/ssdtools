@@ -73,7 +73,7 @@ boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape
 
   data <- data[c("left", "right", "weight")]
 
-  estimates <- lapply(1:nboot, sample_parameters,
+  estimates <- purrr::map(1:nboot, sample_parameters,
     dist = dist, fun = fun,
     data = data, args = args, pars = pars,
     weighted = weighted, censoring = censoring, min_pmix = min_pmix,

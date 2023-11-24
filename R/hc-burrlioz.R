@@ -72,14 +72,13 @@
     err("Parametric CIs cannot be calculated for unequally weighted data.")
   }
 
-  seeds <- seed_streams(length(x))
-  hc <- future_map(x, .ssd_hc_burrlioz_tmbfit,
+  hc <- purrr::map(x, .ssd_hc_burrlioz_tmbfit,
     value = value,
     level = level, nboot = nboot, min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric,
-    control = control, .options = furrr::furrr_options(seed = seeds)
+    control = control
   )$burrIII3
   warn_min_pboot(hc, min_pboot)
 }

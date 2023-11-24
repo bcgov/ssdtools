@@ -171,7 +171,7 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 2.33001443428834)
+  expect_equal(hp$se, 2.11940073273895)
 
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
@@ -204,7 +204,7 @@ test_that("ssd_hp calculates cis with equally weighted data", {
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 1.76599243917916)
+  expect_equal(hp$se, 1.35655142717243)
 })
 
 test_that("ssd_hp calculates cis with two distributions", {
@@ -213,7 +213,7 @@ test_that("ssd_hp calculates cis with two distributions", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 1.77625311677508)
+  expect_equal(hp$se, 1.59860555280173)
 })
 
 test_that("ssd_hp calculates cis in parallel but one distribution", {
@@ -223,7 +223,7 @@ test_that("ssd_hp calculates cis in parallel but one distribution", {
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 1.76599243917916)
+  expect_equal(hp$se, 1.35655142717243)
 })
 
 test_that("ssd_hp calculates cis in parallel with two distributions", {
@@ -233,7 +233,7 @@ test_that("ssd_hp calculates cis in parallel with two distributions", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 1.77625311677508)
+  expect_equal(hp$se, 1.59860555280173)
 })
 
 test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
@@ -276,8 +276,8 @@ test_that("ssd_hp effect with higher weight two distributions", {
   hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10)
   expect_equal(hp$est, 11.7535819824013)
   expect_equal(hp_10$est, 11.9318338996079)
-  expect_equal(hp$se, 5.90337387777387)
-  expect_equal(hp_10$se, 6.1723994362764)
+  expect_equal(hp$se, 4.79341906726597)
+  expect_equal(hp_10$se, 4.42339687820595)
 })
 
 test_that("ssd_hp cis with non-convergence", {
