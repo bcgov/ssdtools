@@ -198,7 +198,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     return(hcp_average(hcp, weight, value, method, nboot))
   }
   
-  hcs <- map(
+  hcs <- purrr::map(
     value, .ssd_hcp_multi, 
     wt_est_nest = wt_est_nest, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot,

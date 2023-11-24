@@ -53,15 +53,23 @@ range_funq <- function(x, wt_est_nest) {
 .ssd_hcp_multi <- function(value, wt_est_nest, ci, level, nboot, min_pboot,
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control, hc) {
+  
+  args <- list()
   if(hc) {
-    est <- ssd_qmulti(value, wt_est_nest)
-    est <- est * rescale
+    args$p <- value
+    what <- paste0("ssd_qmulti")
   } else {
-    est <- value/rescale
-    est <- ssd_pmulti(est, wt_est_nest)
+    args$q <- value / rescale
+    what <- paste0("ssd_pmulti")
+  }
+  args$wt_est <- wt_est_nest
+  est <- do.call(what, args)
+
+  # FIXME: multiply somewhere else?
+  if(!hc) {
     est <- est * 100
   }
-  
+
   if(!ci) {
     return(tibble(
       est = est,
