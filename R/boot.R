@@ -72,13 +72,16 @@ boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape
   pars <- .pars_tmbfit(x)
 
   data <- data[c("left", "right", "weight")]
+  
+  seeds <- seed_streams(nboot)
 
-  estimates <- purrr::map(1:nboot, sample_parameters,
+  estimates <- future_map(1:nboot, sample_parameters,
     dist = dist, fun = fun,
     data = data, args = args, pars = pars,
     weighted = weighted, censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control
+    parametric = parametric, control = control,
+    .options = furrr::furrr_options(seed = seeds)
   )
 
   estimates[!vapply(estimates, is.null, TRUE)]
