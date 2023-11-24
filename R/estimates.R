@@ -36,6 +36,8 @@ estimates.tmbfit <- function(x, ...) {
 #' ssd_plot_cdf(estimates)
 estimates.fitdists <- function(x, ...) {
   y <- lapply(x, estimates)
+  wt <- glance(x)$weight
+  y <- map2(y, wt, function(a, b) c(list(weight = b), a))
   names(y) <- names(x)
   y
 }

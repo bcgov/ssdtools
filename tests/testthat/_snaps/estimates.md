@@ -1,6 +1,9 @@
 # estimates
 
     $gamma
+    $gamma$weight
+    [1] 0.3565737
+    
     $gamma$scale
     [1] 25.12683
     
@@ -9,6 +12,9 @@
     
     
     $lgumbel
+    $lgumbel$weight
+    [1] 0.01344657
+    
     $lgumbel$locationlog
     [1] 1.922631
     
@@ -17,6 +23,9 @@
     
     
     $llogis
+    $llogis$weight
+    [1] 0.06564519
+    
     $llogis$locationlog
     [1] 2.626276
     
@@ -25,6 +34,9 @@
     
     
     $lnorm
+    $lnorm$weight
+    [1] 0.1772362
+    
     $lnorm$meanlog
     [1] 2.561645
     
@@ -33,6 +45,9 @@
     
     
     $lnorm_lnorm
+    $lnorm_lnorm$weight
+    [1] 0.02962678
+    
     $lnorm_lnorm$meanlog1
     [1] 0.9495395
     
@@ -50,6 +65,9 @@
     
     
     $weibull
+    $weibull$weight
+    [1] 0.3574716
+    
     $weibull$scale
     [1] 23.51397
     
