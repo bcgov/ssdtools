@@ -362,7 +362,7 @@ pmulti_list <- function(q, list) {
 }
 
 qmulti_est <- function(x, dist, p) {
-  fun <- paste0("q", dist, "_ssd(p = ", p, ", ")
+  fun <- paste0("q", dist, "_ssd(p, ")
   value_args <- value_args(x)
   func <- paste0(fun, value_args, ")")
   eval(parse(text = func))
@@ -385,6 +385,7 @@ qmulti_list <- function(p, list) {
   
   f <- pmulti_fun(nlist)
   q <- rep(NA_real_, length(p))
+  
   for(i in seq_along(p)) {
     if(is.na(lower[i]) || lower[i] == upper[i]) {
       q[i] <- lower[i]
@@ -637,6 +638,5 @@ rmulti_ssd <- function(
          weibull.weight = weibull.weight,
          weibull.shape = weibull.shape,
          weibull.scale = weibull.scale))
-  
   qmulti_list(p, list)
 }

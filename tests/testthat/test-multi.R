@@ -18,7 +18,7 @@ test_that("multi", {
   expect_equal(ssd_pmulti(1), 0.493574697632382)
   expect_equal(ssd_qmulti(0.75), 2.21920354567988)
   set.seed(42)
-  expect_equal(ssd_rmulti(2), c(5.53133427815926, 7.11054891201997))
+  expect_equal(ssd_rmulti(2), c(5.5313629268122, 7.11055099947274))
   
   expect_equal(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99))), 
                c(0, 0.1, 0.5, 0.9, 0.99), tolerance = 1e-5)
@@ -107,7 +107,7 @@ test_that("ssd_rmulti", {
   set.seed(99)
   expect_equal(.ssd_rmulti_fitdists(n = 1, fit), 19.7527023210212)
   set.seed(99)
-  expect_equal(.ssd_rmulti_fitdists(2, fit), c(19.752684425643, 2.69562027500859))
+  expect_equal(.ssd_rmulti_fitdists(2, fit), c(19.7527023210212, 2.69562357429223))
   set.seed(99)
   n100 <- .ssd_rmulti_fitdists(100, fit)
   expect_identical(length(n100), 100L)

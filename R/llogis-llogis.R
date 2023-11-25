@@ -103,10 +103,14 @@ qlogis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
   if (scale1 <= 0 || scale2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
-  f <- function(x) {
-    plogis_logis_ssd(x, location1, scale1, location2, scale2, pmix) - p
+  f <- function(x, p) {
+    plogis_logis_ssd(x, meanlog1, sdlog1, meanlog2, sdlog2, pmix) - p
   }
-  stats::uniroot(f, lower = 0, upper = 10, extendInt = "upX", tol = .Machine$double.eps)$root
+  q <- rep(NA_real_, length(p))
+  for(i in seq_along(p)) {
+    q[i] <- stats::uniroot(f, p = p[i], lower = 0, upper = 10, extendInt = "upX", tol = .Machine$double.eps)$root
+  }
+  q
 }
 
 rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {
