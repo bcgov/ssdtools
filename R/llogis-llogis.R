@@ -62,7 +62,7 @@ ssd_rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
 #'
 #' ssd_ellogis_llogis()
 ssd_ellogis_llogis <- function() {
-  c(locationlog1 = 0, scalelog1 = 1, 
+  list(locationlog1 = 0, scalelog1 = 1, 
        locationlog2 = 1, scalelog2 = 1, pmix = 0.5)
 }
 
@@ -119,4 +119,19 @@ rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {
   x[dist] <- rlogis_ssd(sum(dist), location = location1, scale = scale1)
   x[!dist] <- rlogis_ssd(sum(!dist), location = location2, scale = scale2)
   x
+}
+
+#TODO: check this function
+pllogis_llogis_ssd <- function(q, locationlog1, scalelog1,
+                               locationlog2, scalelog2, pmix) {
+  plogis_logis_ssd(log(q), location1 = locationlog1, scale1 = scalelog1,
+                   location2 = locationlog2, scale2 = scalelog2, pmix = pmix)
+}
+
+#TODO: check this function
+qllogis_llogis_ssd <- function(p, locationlog1, scalelog1,
+                               locationlog2, scalelog2, pmix) {
+  qlogis_logis_ssd(p, location1 = exp(locationlog1), scale1 = exp(scalelog1),
+                   location2 = exp(locationlog2), scale2 = exp(scalelog2), 
+                   pmix = pmix)
 }

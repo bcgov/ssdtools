@@ -62,7 +62,7 @@ ssd_rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
 #'
 #' ssd_elnorm_lnorm()
 ssd_elnorm_lnorm <- function() {
-  c(meanlog1 = 0, sdlog1 = 1,
+  list(meanlog1 = 0, sdlog1 = 1,
        meanlog2 = 1, sdlog2 = 1, pmix = 0.5)
 }
 

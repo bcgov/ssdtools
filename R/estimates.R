@@ -35,9 +35,20 @@ estimates.tmbfit <- function(x, ...) {
 #' ssd_hc(estimates)
 #' ssd_plot_cdf(estimates)
 estimates.fitdists <- function(x, ...) {
+  chk_unused(...)
+  estimates <- .list_estimates(x)
+  as.list(unlist(estimates))
+}
+
+.list_estimates <- function(x) {
   y <- lapply(x, estimates)
   wt <- glance(x)$weight
-  y <- map2(y, wt, function(a, b) c(list(weight = b), a))
+  y <- purrr::map2(y, wt, function(a, b) c(list(weight = b), a))
   names(y) <- names(x)
-  as.list(unlist(y))
+  y
+}
+
+.relist_estimates <- function(x) {
+  list <- relist(x, skeleton = emulti_ssd())
+  purrr::map(list, function(x) as.list(unlist(x)))
 }

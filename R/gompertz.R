@@ -91,7 +91,7 @@ ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
 #'
 #' ssd_egompertz()
 ssd_egompertz <- function() {
-  c(location = 1, shape = 1)
+  list(location = 1, shape = 1)
 }
 
 #' Random Generation for Gompertz Distribution

@@ -52,7 +52,7 @@ ssd_rllogis <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
 #'
 #' ssd_ellogis()
 ssd_ellogis <- function() {
-  c(locationlog = 0, scalelog = 1)
+  list(locationlog = 0, scalelog = 1)
 }
 
 sllogis <- function(data, pars = NULL) {
@@ -87,4 +87,14 @@ rlogis_ssd <- function(n, location, scale) {
     return(rep(NaN, n))
   }
   stats::rlogis(n, location, scale)
+}
+
+#TODO: check this function
+pllogis_ssd <- function(q, locationlog, scalelog) {
+  plogis_ssd(log(q), location = locationlog, scale = scalelog)
+}
+
+#TODO: check this function
+qllogis_ssd <- function(p, locationlog, scalelog) {
+  qlogis_ssd(p, location = exp(locationlog), scale = exp(scalelog))
 }

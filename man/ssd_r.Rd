@@ -51,7 +51,47 @@ ssd_rlnorm_lnorm(
 
 ssd_rlnorm(n, meanlog = 0, sdlog = 1, chk = TRUE)
 
-ssd_rmulti(n, wt_est = ssd_emulti())
+ssd_rmulti(
+  n,
+  burrIII3.weight = 0,
+  burrIII3.shape1 = 1,
+  burrIII3.shape2 = 1,
+  burrIII3.scale = 1,
+  gamma.weight = 1/6,
+  gamma.shape = 1,
+  gamma.scale = 1,
+  gompertz.weight = 0,
+  gompertz.location = 1,
+  gompertz.shape = 1,
+  invpareto.weight = 0,
+  invpareto.shape = 3,
+  invpareto.scale = 1,
+  lgumbel.weight = 1/6,
+  lgumbel.locationlog = 0,
+  lgumbel.scalelog = 1,
+  llogis.weight = 1/6,
+  llogis.locationlog = 0,
+  llogis.scalelog = 1,
+  llogis_llogis.weight = 0,
+  llogis_llogis.locationlog1 = 0,
+  llogis_llogis.scalelog1 = 1,
+  llogis_llogis.locationlog2 = 1,
+  llogis_llogis.scalelog2 = 1,
+  llogis_llogis.pmix = 0.5,
+  lnorm.weight = 1/6,
+  lnorm.meanlog = 0,
+  lnorm.sdlog = 1,
+  lnorm_lnorm.weight = 1/6,
+  lnorm_lnorm.meanlog1 = 0,
+  lnorm_lnorm.sdlog1 = 1,
+  lnorm_lnorm.meanlog2 = 1,
+  lnorm_lnorm.sdlog2 = 1,
+  lnorm_lnorm.pmix = 0.5,
+  weibull.weight = 1/6,
+  weibull.shape = 1,
+  weibull.scale = 1,
+  chk = TRUE
+)
 
 ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 }
@@ -95,10 +135,6 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 \item{meanlog}{mean on log scale parameter.}
 
 \item{sdlog}{standard deviation on log scale parameter.}
-
-\item{wt_est}{A data frame with dist, wt, and est columns specifying the
-distributions, weights and a list column of estimate data frames with
-term and est columns specifying the estimated value for each parameter.}
 }
 \description{
 Random Number Generation

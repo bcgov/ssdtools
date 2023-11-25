@@ -52,7 +52,7 @@ ssd_rgamma <- function(n, shape = 1, scale = 1, chk = TRUE) {
 #'
 #' ssd_egamma()
 ssd_egamma <- function() {
-  c(shape = 1, scale = 1)
+  list(shape = 1, scale = 1)
 }
 
 sgamma <- function(data, pars = NULL) {

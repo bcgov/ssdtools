@@ -52,7 +52,7 @@ ssd_rlnorm <- function(n, meanlog = 0, sdlog = 1, chk = TRUE) {
 #'
 #' ssd_elnorm()
 ssd_elnorm <- function() {
-  c(meanlog = 0, sdlog = 1)
+  list(meanlog = 0, sdlog = 1)
 }
 
 slnorm <- function(data, pars = NULL) {

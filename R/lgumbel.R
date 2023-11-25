@@ -100,7 +100,7 @@ ssd_rlgumbel <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
 #'
 #' ssd_elgumbel()
 ssd_elgumbel <- function() {
-  c(locationlog = 0, scalelog = 1)
+  list(locationlog = 0, scalelog = 1)
 }
 
 #' Random Generation for log-Gumbel Distribution
@@ -137,4 +137,14 @@ qgumbel_ssd <- function(p, location, scale) {
     return(NaN)
   }
   location - scale * log(-log(p))
+}
+
+#TODO: check this function
+plgumbel_ssd <- function(q, locationlog, scalelog) {
+  pgumbel_ssd(log(q), location = locationlog, scale = scalelog)
+}
+
+#TODO: check this function
+qlgumbel_ssd <- function(p, locationlog, scalelog) {
+  qgumbel_ssd(p, location = exp(locationlog), scale = exp(scalelog))
 }

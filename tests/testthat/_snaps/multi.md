@@ -1,24 +1,69 @@
 # ssd_emulti
 
     Code
-      tidyr::unnest(wt_est, "data")
+      estimates
     Output
-      # A tibble: 15 x 4
-         dist        weight term          est
-         <chr>        <dbl> <chr>       <dbl>
-       1 gamma        0.167 shape         1  
-       2 gamma        0.167 scale         1  
-       3 lgumbel      0.167 locationlog   0  
-       4 lgumbel      0.167 scalelog      1  
-       5 llogis       0.167 locationlog   0  
-       6 llogis       0.167 scalelog      1  
-       7 lnorm        0.167 meanlog       0  
-       8 lnorm        0.167 sdlog         1  
-       9 lnorm_lnorm  0.167 meanlog1      0  
-      10 lnorm_lnorm  0.167 sdlog1        1  
-      11 lnorm_lnorm  0.167 meanlog2      1  
-      12 lnorm_lnorm  0.167 sdlog2        1  
-      13 lnorm_lnorm  0.167 pmix          0.5
-      14 weibull      0.167 shape         1  
-      15 weibull      0.167 scale         1  
+      $gamma.weight
+      [1] 0.1666667
+      
+      $gamma.shape
+      [1] 1
+      
+      $gamma.scale
+      [1] 1
+      
+      $lgumbel.weight
+      [1] 0.1666667
+      
+      $lgumbel.locationlog
+      [1] 0
+      
+      $lgumbel.scalelog
+      [1] 1
+      
+      $llogis.weight
+      [1] 0.1666667
+      
+      $llogis.locationlog
+      [1] 0
+      
+      $llogis.scalelog
+      [1] 1
+      
+      $lnorm.weight
+      [1] 0.1666667
+      
+      $lnorm.meanlog
+      [1] 0
+      
+      $lnorm.sdlog
+      [1] 1
+      
+      $lnorm_lnorm.weight
+      [1] 0.1666667
+      
+      $lnorm_lnorm.meanlog1
+      [1] 0
+      
+      $lnorm_lnorm.sdlog1
+      [1] 1
+      
+      $lnorm_lnorm.meanlog2
+      [1] 1
+      
+      $lnorm_lnorm.sdlog2
+      [1] 1
+      
+      $lnorm_lnorm.pmix
+      [1] 0.5
+      
+      $weibull.weight
+      [1] 0.1666667
+      
+      $weibull.shape
+      [1] 1
+      
+      $weibull.scale
+      [1] 1
+      
 

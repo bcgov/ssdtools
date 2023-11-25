@@ -101,9 +101,6 @@
 #' @param xlab A string of the x-axis label.
 #' @param yintercept The y-value for the intersect.
 #' @param ylab A string of the x-axis label.
-#' @param wt_est A data frame with dist, wt, and est columns specifying the
-#' distributions, weights and a list column of estimate data frames with 
-#' term and est columns specifying the estimated value for each parameter.
 #' @param ... Unused.
 #' @keywords internal
 #' @name params

@@ -172,10 +172,6 @@ remove them with a warning.}
 
 \item{ylab}{A string of the x-axis label.}
 
-\item{wt_est}{A data frame with dist, wt, and est columns specifying the
-distributions, weights and a list column of estimate data frames with
-term and est columns specifying the estimated value for each parameter.}
-
 \item{...}{Unused.}
 }
 \description{

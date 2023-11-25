@@ -18,12 +18,12 @@ test_that("hp is hc conc = 1 multi = TRUE", {
   conc <- 1
   hp_multi <- ssd_hp(fits, conc = conc, average = TRUE, multi = TRUE)
   hc_multi <- ssd_hc(fits, percent = hp_multi$est, average = TRUE, multi = TRUE)
-  expect_equal(hc_multi$est, 1.00002572057075)
+  expect_equal(hc_multi$est, 0.999999930389277)
   for(i in 1:10) {
     hp_multi <- ssd_hp(fits, conc = hc_multi$est, average = TRUE, multi = TRUE)
     hc_multi <- ssd_hc(fits, percent = hp_multi$est, average = TRUE, multi = TRUE)
   }
-  expect_equal(hc_multi$est, 1.00028286154233)
+  expect_equal(hc_multi$est, 0.999999234284464)
 })
 
 test_that("hp is hc conc = 10 multi = TRUE", {
@@ -31,10 +31,10 @@ test_that("hp is hc conc = 10 multi = TRUE", {
   conc <- 10
   hp_multi <- ssd_hp(fits, conc = conc, average = TRUE, multi = TRUE)
   hc_multi <- ssd_hc(fits, percent = hp_multi$est, average = TRUE, multi = TRUE)
-  expect_equal(hc_multi$est, 10.00000012176)
+  expect_equal(hc_multi$est, 10.0000099303241)
   for(i in 1:10) {
     hp_multi <- ssd_hp(fits, conc = hc_multi$est, average = TRUE, multi = TRUE)
     hc_multi <- ssd_hc(fits, percent = hp_multi$est, average = TRUE, multi = TRUE)
   }
-  expect_equal(hc_multi$est, 10.0000013393606)
+  expect_equal(hc_multi$est, 10.0001092323576)
 })
