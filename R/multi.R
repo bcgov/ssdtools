@@ -382,10 +382,9 @@ qmulti_list <- function(p, list) {
   ranges <- qmulti_ranges(p, nlist)
   lower <- ranges$lower
   upper <- ranges$upper
-  
+
   f <- pmulti_fun(nlist)
   q <- rep(NA_real_, length(p))
-  
   for(i in seq_along(p)) {
     if(is.na(lower[i]) || lower[i] == upper[i]) {
       q[i] <- lower[i]

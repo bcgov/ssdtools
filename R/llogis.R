@@ -96,5 +96,5 @@ pllogis_ssd <- function(q, locationlog, scalelog) {
 
 #TODO: check this function
 qllogis_ssd <- function(p, locationlog, scalelog) {
-  qlogis_ssd(p, location = exp(locationlog), scale = exp(scalelog))
+  exp(qlogis_ssd(p, location = locationlog, scale = scalelog))
 }

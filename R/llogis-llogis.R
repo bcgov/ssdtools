@@ -104,7 +104,7 @@ qlogis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
     return(NaN)
   }
   f <- function(x, p) {
-    plogis_logis_ssd(x, meanlog1, sdlog1, meanlog2, sdlog2, pmix) - p
+    plogis_logis_ssd(x, location1, scale1, location2, scale2, pmix) - p
   }
   q <- rep(NA_real_, length(p))
   for(i in seq_along(p)) {
@@ -135,7 +135,6 @@ pllogis_llogis_ssd <- function(q, locationlog1, scalelog1,
 #TODO: check this function
 qllogis_llogis_ssd <- function(p, locationlog1, scalelog1,
                                locationlog2, scalelog2, pmix) {
-  qlogis_logis_ssd(p, location1 = exp(locationlog1), scale1 = exp(scalelog1),
-                   location2 = exp(locationlog2), scale2 = exp(scalelog2), 
-                   pmix = pmix)
+  exp(qlogis_logis_ssd(p, location1 = locationlog1, scale1 = scalelog1,
+                       location2 = locationlog2, scale2 = scalelog2, pmix = pmix))
 }

@@ -146,5 +146,5 @@ plgumbel_ssd <- function(q, locationlog, scalelog) {
 
 #TODO: check this function
 qlgumbel_ssd <- function(p, locationlog, scalelog) {
-  qgumbel_ssd(p, location = exp(locationlog), scale = exp(scalelog))
+  exp(qgumbel_ssd(p, location = locationlog, scale = scalelog))
 }
