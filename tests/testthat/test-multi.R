@@ -116,6 +116,26 @@ test_that("ssd_rmulti", {
   expect_equal(mean(n100), 23.4076761093969)
 })
 
+test_that("ssd_rmulti all", {
+  set.seed(99)
+  n100 <- ssd_rmulti(n = 100, 
+             burrIII3.weight = 1/10,
+             gamma.weight = 1/10,
+             gompertz.weight = 1/10,
+             invpareto.weight = 1/10,
+             lgumbel.weight = 1/10,
+             llogis.weight = 1/10,
+             llogis_llogis.weight = 1/10,
+             lnorm.weight = 1/10,
+             lnorm_lnorm.weight = 1/10,
+             weibull.weight = 1/10)
+  
+  expect_identical(length(n100), 100L)
+  expect_equal(min(n100), 0.00210111986245713)
+  expect_equal(max(n100), 1.58071260063502)
+  expect_equal(mean(n100), 0.835204190471024)
+})
+
 test_that("ssd_emulti", {
   estimates <- ssd_emulti() 
   expect_snapshot(estimates)
