@@ -199,8 +199,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   }
   
   hcp <- .ssd_hcp_multi(
-    value,
-    estimates = estimates, ci = ci, level = level, nboot = nboot,
+    x, value, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,

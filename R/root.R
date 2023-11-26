@@ -13,10 +13,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.ssd_hcp_multi <- function(value, estimates, ci, level, nboot, min_pboot,
+.ssd_hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control, hc) {
   
+  estimates <- .list_estimates(x)
   args <- list()
   if(hc) {
     args$p <- value
