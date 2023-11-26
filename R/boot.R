@@ -65,8 +65,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   estimates(fit)
 }
 
-boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control) {
-  dist <- dist(x)
+boot_estimates <- function(x, fun, dist, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control) {
   args <- list(n = nrow(data))
   args <- c(args, estimates(x))
   pars <- .pars_tmbfit(x)

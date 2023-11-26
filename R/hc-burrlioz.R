@@ -28,7 +28,7 @@
   fun <- safely(fit_burrlioz)
 
   estimates <- boot_estimates(x,
-    fun = fun, nboot = nboot, data = data, weighted = weighted,
+    fun = fun, dist = dist, nboot = nboot, data = data, weighted = weighted,
     censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1,
     range_shape2 = range_shape2,

@@ -83,7 +83,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   censoring <- censoring / rescale
   fun <- safely(fit_tmb)
   estimates <- boot_estimates(
-    x, fun = fun, nboot = nboot, data = data, weighted = weighted,
+    x, fun = fun, dist = dist, nboot = nboot, data = data, weighted = weighted,
     censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1,
     range_shape2 = range_shape2,
