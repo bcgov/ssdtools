@@ -147,3 +147,15 @@ test_that("ssd_emulti", {
   q <- do.call("ssd_qmulti", args)
   expect_equal(q, 1.00000074289656)
 })
+
+test_that("ssd_pmulti same as pmulti_list", {
+  fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+  args1 <- estimates(fit)
+  args1$q <- 1
+  hc1 <- do.call("ssd_pmulti", args1)
+  args2 <- list()
+  args2$list <- .list_estimates(fit)
+  args2$q <- 1
+  hc2 <- do.call("pmulti_list", args2)
+  expect_identical(hc1, hc2)
+})
