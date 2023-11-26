@@ -106,7 +106,7 @@ ssd_hc.fitdists <- function(
     hc = TRUE)
   
   hcp <- dplyr::rename(hcp, percent = "value")
-  hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
+  hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
   hcp
 }
 
@@ -148,6 +148,6 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
                                   min_pboot = min_pboot, parametric = parametric
   )
   hcp <- dplyr::rename(hcp, percent = "value")
-  hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
+  hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
   hcp
 }
