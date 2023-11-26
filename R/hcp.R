@@ -195,21 +195,17 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     return(hcp_average(hcp, weight, value, method, nboot))
   }
   
-  hcs <- .ssd_hcp_multi(
+  hcp <- .ssd_hcp_multi(
     value,
     estimates = estimates, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, hc = hc)
-  
-  hcp <- dplyr::bind_rows(hcs)
-  
-  tibble(
-    dist = "average", value = value, est = hcp$est, se = hcp$se,
-    lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
-    method = method, nboot = nboot, pboot = hcp$pboot
-  )
+
+  hcp$method <- method
+  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
+  hcp
 }
 
 ssd_hcp_fitdists <- function(

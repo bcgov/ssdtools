@@ -27,20 +27,10 @@
   }
   args$list <- estimates
   est <- do.call(what, args)
-
-  # FIXME: multiply somewhere else?
-  if(!hc) {
-    est <- est * 100
+  
+  if (!ci) {
+    return(no_ci_hcp(value = value, dist = "average", est = est, rescale = rescale, hc = hc))
   }
 
-  if(!ci) {
-    return(tibble(
-      est = est,
-      se = NA_real_,
-      lcl = NA_real_,
-      ucl = NA_real_,
-      pboot = NA_real_
-    ))
-  }
   .NotYetImplemented()
 }
