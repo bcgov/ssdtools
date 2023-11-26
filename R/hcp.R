@@ -64,8 +64,10 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     x, value, ci, level, nboot, min_pboot,
     data, rescale, weighted, censoring, min_pmix,
     range_shape1, range_shape2, parametric, control, hc) {
-  args <- estimates(x)
+  estimates <- estimates(x)
   dist <- .dist_tmbfit(x)
+  
+  args <- estimates
   
   if(hc) {
     args$p <- value
@@ -82,7 +84,6 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   
   censoring <- censoring / rescale
   fun <- fit_tmb
-  estimates <- estimates(x)
   pars <- .pars_tmbfit(x)
   
   ests <- boot_estimates(fun = fun, dist = dist, estimates = estimates, 
