@@ -30,10 +30,7 @@ estimates.tmbfit <- function(x, ...) {
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
-#' estimates <- estimates(fits)
-#' print(estimates)
-#' ssd_hc(estimates)
-#' ssd_plot_cdf(estimates)
+#' estimates(fits)
 estimates.fitdists <- function(x, ...) {
   chk_unused(...)
   estimates <- .list_estimates(x)

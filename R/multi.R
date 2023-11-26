@@ -349,6 +349,9 @@ pmulti_fun <- function(list) {
 
 normalize_weights <- function(list) {
   dlist <- purrr::keep(list, function(x) !is.na(x$weight) && x$weight > 0)
+  if(!length(dlist)) {
+    err("At least one distribution must have a positive weight.")
+  }
   weights <- purrr::map_dbl(dlist, function(x) x$weight)
   wts <- weights / sum(weights)
   wlist <- purrr::map2(dlist, wts, function(x, wt) { x$weight <- wt; x})
@@ -379,6 +382,7 @@ qmulti_ranges <- function(p, list) {
 
 qmulti_list <- function(p, list) {
   nlist <- normalize_weights(list)
+  
   ranges <- qmulti_ranges(p, nlist)
   lower <- ranges$lower
   upper <- ranges$upper

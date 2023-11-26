@@ -39,7 +39,7 @@ utils::globalVariables("where")
 #' @importFrom tibble as_tibble tibble
 #' @importFrom TMB MakeADFun sdreport
 #' @importFrom universals estimates npars
-#' @importFrom utils capture.output
+#' @importFrom utils capture.output relist
 #' @importFrom VGAM gompertz vglm
 ## usethis namespace: end
 NULL

@@ -172,6 +172,80 @@ remove them with a warning.}
 
 \item{ylab}{A string of the x-axis label.}
 
+\item{burrIII3.weight}{weight parameter for the Burr III distribution.}
+
+\item{burrIII3.shape1}{shape1 parameter for the Burr III distribution.}
+
+\item{burrIII3.shape2}{shape2 parameter for the Burr III distribution.}
+
+\item{burrIII3.scale}{scale parameter for the Burr III distribution.}
+
+\item{gamma.weight}{weight parameter for the gamma distribution.}
+
+\item{gamma.shape}{shape parameter for the gamma distribution.}
+
+\item{gamma.scale}{scale parameter for the gamma distribution.}
+
+\item{gompertz.weight}{weight parameter for the Gompertz distribution.}
+
+\item{gompertz.location}{location parameter for the Gompertz distribution.}
+
+\item{gompertz.shape}{shape parameter for the Gompertz distribution.}
+
+\item{invpareto.weight}{weight parameter for the inverse Pareto distribution.}
+
+\item{invpareto.shape}{shape parameter for the inverse Pareto distribution.}
+
+\item{invpareto.scale}{scale parameter for the inverse Pareto distribution.}
+
+\item{lgumbel.weight}{weight parameter for the log-Gumbel distribution.}
+
+\item{lgumbel.locationlog}{location parameter for the log-Gumbel distribution.}
+
+\item{lgumbel.scalelog}{scale parameter for the log-Gumbel distribution.}
+
+\item{llogis.weight}{weight parameter for the log-logistic distribution.}
+
+\item{llogis.locationlog}{location parameter for the log-logistic distribution.}
+
+\item{llogis.scalelog}{scale parameter for the log-logistic distribution.}
+
+\item{llogis_llogis.weight}{weight parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.locationlog1}{locationlog1 parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.scalelog1}{scalelog1 parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.locationlog2}{locationlog2 parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.scalelog2}{scalelog2 parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.pmix}{pmix parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{lnorm.weight}{weight parameter for the log-normal distribution.}
+
+\item{lnorm.meanlog}{meanlog parameter for the log-normal distribution.}
+
+\item{lnorm.sdlog}{sdlog parameter for the log-normal distribution.}
+
+\item{lnorm_lnorm.weight}{weight parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.meanlog1}{meanlog1 parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.sdlog1}{sdlog1 parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.meanlog2}{meanlog2 parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.sdlog2}{sdlog2 parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.pmix}{pmix parameter for the log-normal log-normal mixture distribution.}
+
+\item{weibull.weight}{weight parameter for the Weibull distribution.}
+
+\item{weibull.shape}{shape parameter for the Weibull distribution.}
+
+\item{weibull.scale}{scale parameter for the Weibull distribution.}
+
 \item{...}{Unused.}
 }
 \description{

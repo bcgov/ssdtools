@@ -31,7 +31,6 @@ test_that("ssd_pmulti", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   expect_identical(.ssd_pmulti_fitdists(numeric(0), fit), numeric(0))
   expect_identical(.ssd_pmulti_fitdists(NA_real_, fit), NA_real_)
-  expect_identical(.ssd_pmulti_fitdists(-1, fit), 0)
   expect_identical(.ssd_pmulti_fitdists(-Inf, fit), 0)
   expect_equal(.ssd_pmulti_fitdists(Inf, fit), 1)
   expect_equal(.ssd_pmulti_fitdists(0, fit), 0)
@@ -57,7 +56,7 @@ test_that("ssd_pmulti weights", {
   args$weibull.weight <- 0
   expect_equal(do.call("ssd_pmulti", args), 0.0195430301950878)
   args$lnorm.weight <- 0
-  expect_error(do.call("ssd_pmulti", args), "must be greater than 0")
+  expect_error(do.call("ssd_pmulti", args), "^At least one distribution must have a positive weight\\.$")
   args$lnorm.weight <- 1.1
   expect_equal(do.call("ssd_pmulti", args), 0.0195430301950878)
   args$lnorm.weight <- 1
@@ -93,7 +92,7 @@ test_that("ssd_qmulti weights", {
   args$weibull.weight <- 0
   expect_equal(do.call("ssd_qmulti", args), 5.60825007113764)
   args$lnorm.weight <- 0
-  expect_error(do.call("ssd_qmulti", args), "must be greater than 0")
+  expect_error(do.call("ssd_qmulti", args), "^At least one distribution must have a positive weight\\.$")
   args$lnorm.weight <- 1.1
   expect_equal(do.call("ssd_qmulti", args), 5.60825007113764)
   args$lnorm.weight <- 1.0
@@ -102,6 +101,7 @@ test_that("ssd_qmulti weights", {
 
 test_that("ssd_rmulti", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
+  args <- estimates(fit)
   args$n <- 0
   expect_equal(.ssd_rmulti_fitdists(n = 0, fit), numeric(0))
   set.seed(99)

@@ -83,13 +83,14 @@ hazard concentrations(s).
 
 }}
 \examples{
+
+ssd_hc(ssd_match_moments())
+
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_hc(fits)
-ssd_hc(estimates(fits))
-ssd_hc(ssd_match_moments())
+
 fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 ssd_hc(fit)
-
 }
 \seealso{
 \code{\link[=predict.fitdists]{predict.fitdists()}} and \code{\link[=ssd_hp]{ssd_hp()}}.

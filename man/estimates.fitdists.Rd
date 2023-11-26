@@ -19,10 +19,7 @@ Gets a named list of the estimated weights and parameters.
 }
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
-estimates <- estimates(fits)
-print(estimates)
-ssd_hc(estimates)
-ssd_plot_cdf(estimates)
+estimates(fits)
 }
 \seealso{
 \code{\link[=tidy.fitdists]{tidy.fitdists()}}, \code{\link[=ssd_match_moments]{ssd_match_moments()}}, \code{\link[=ssd_hc]{ssd_hc()}} and \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}
