@@ -139,12 +139,10 @@ qgumbel_ssd <- function(p, location, scale) {
   location - scale * log(-log(p))
 }
 
-#TODO: check this function
 plgumbel_ssd <- function(q, locationlog, scalelog) {
   pgumbel_ssd(log(q), location = locationlog, scale = scalelog)
 }
 
-#TODO: check this function
 qlgumbel_ssd <- function(p, locationlog, scalelog) {
   exp(qgumbel_ssd(p, location = locationlog, scale = scalelog))
 }

@@ -89,12 +89,10 @@ rlogis_ssd <- function(n, location, scale) {
   stats::rlogis(n, location, scale)
 }
 
-#TODO: check this function
 pllogis_ssd <- function(q, locationlog, scalelog) {
   plogis_ssd(log(q), location = locationlog, scale = scalelog)
 }
 
-#TODO: check this function
 qllogis_ssd <- function(p, locationlog, scalelog) {
   exp(qlogis_ssd(p, location = locationlog, scale = scalelog))
 }

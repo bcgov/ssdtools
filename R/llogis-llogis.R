@@ -125,14 +125,12 @@ rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {
   x
 }
 
-#TODO: check this function
 pllogis_llogis_ssd <- function(q, locationlog1, scalelog1,
                                locationlog2, scalelog2, pmix) {
   plogis_logis_ssd(log(q), location1 = locationlog1, scale1 = scalelog1,
                    location2 = locationlog2, scale2 = scalelog2, pmix = pmix)
 }
 
-#TODO: check this function
 qllogis_llogis_ssd <- function(p, locationlog1, scalelog1,
                                locationlog2, scalelog2, pmix) {
   exp(qlogis_logis_ssd(p, location1 = locationlog1, scale1 = scalelog1,
