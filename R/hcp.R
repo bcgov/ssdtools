@@ -82,8 +82,9 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   
   censoring <- censoring / rescale
   fun <- safely(fit_tmb)
-  estimates <- boot_estimates(
-    x, fun = fun, dist = dist, nboot = nboot, data = data, weighted = weighted,
+  estimates <- estimates(x)
+  ests <- boot_estimates(
+    x, fun = fun, dist = dist, estimates = estimates, nboot = nboot, data = data, weighted = weighted,
     censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1,
     range_shape2 = range_shape2,
@@ -94,8 +95,8 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   if(!hc) {
     x <- x / rescale
   }
-  cis <- cis_estimates(estimates, what, level = level, x = x)
-  hcp <- ci_hcp(cis, estimates = estimates, value = value, dist = dist, 
+  cis <- cis_estimates(ests, what, level = level, x = x)
+  hcp <- ci_hcp(cis, estimates = ests, value = value, dist = dist, 
                 est = est, rescale = rescale, nboot = nboot, hc = hc)
   replace_min_pboot_na(hcp, min_pboot)
 }
