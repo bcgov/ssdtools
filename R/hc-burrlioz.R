@@ -27,9 +27,10 @@
 
   fun <- safely(fit_burrlioz)
   estimates <- estimates(x)
+  pars <- .pars_tmbfit(x)
   
-  estimates <- boot_estimates(x,
-    fun = fun, dist = dist, estimates = estimates, 
+  estimates <- boot_estimates(fun = fun, dist = dist, estimates = estimates, 
+    pars = pars,
     nboot = nboot, data = data, weighted = weighted,
     censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1,
