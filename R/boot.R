@@ -66,6 +66,8 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
 }
 
 boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control) {
+  sfun <- safely(fun)
+
   args <- list(n = nrow(data))
   args <- c(args, estimates)
 
@@ -74,7 +76,7 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
   seeds <- seed_streams(nboot)
 
   estimates <- future_map(1:nboot, sample_parameters,
-    dist = dist, fun = fun,
+    dist = dist, fun = sfun,
     data = data, args = args, pars = pars,
     weighted = weighted, censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1, range_shape2 = range_shape2,

@@ -81,7 +81,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   }
   
   censoring <- censoring / rescale
-  fun <- safely(fit_tmb)
+  fun <- fit_tmb
   estimates <- estimates(x)
   pars <- .pars_tmbfit(x)
   

@@ -25,7 +25,7 @@
   est <- do.call(what, args)
   censoring <- censoring / rescale
 
-  fun <- safely(fit_burrlioz)
+  fun <- fit_burrlioz
   estimates <- estimates(x)
   pars <- .pars_tmbfit(x)
   
