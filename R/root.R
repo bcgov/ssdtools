@@ -16,23 +16,24 @@
 .ssd_hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control, hc) {
-  
   estimates <- estimates(x, multi = TRUE)
   dist <- "multi"
   args <- estimates
+  fun <- identity
+  pars <- NULL
   
-  if(hc) {
-    args$p <- value
-    what <- paste0("ssd_q", dist)
-  } else {
-    args$q <- value / rescale
-    what <- paste0("ssd_p", dist)
+  if(ci) {
+    .NotYetImplemented()
   }
-  
-  est <- do.call(what, args)
-  if (!ci) {
-    return(no_ci_hcp(value = value, dist = "average", est = est, rescale = rescale, hc = hc))
-  }
-  
-  .NotYetImplemented()
+
+  hcp <- .ssd_hcp(x, dist = dist, estimates = estimates, 
+           fun = fun, pars = pars,
+           value = value, ci = ci, level = level, nboot = nboot,
+           min_pboot = min_pboot,
+           data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+           min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+           parametric = parametric, control = control,
+           hc = hc)
+  hcp$dist <- "average"
+  hcp
 }
