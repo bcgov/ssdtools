@@ -29,7 +29,7 @@ utils::globalVariables("where")
 #' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
 #' @importFrom parallel nextRNGStream nextRNGSubStream
 #' @importFrom plyr summarise
-#' @importFrom purrr transpose
+#' @importFrom purrr list_assign transpose
 #' @importFrom Rcpp sourceCpp
 #' @importFrom scales comma manual_pal percent trans_breaks
 #' @importFrom ssddata gm_mean

@@ -17,7 +17,7 @@
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control, hc) {
   
-  estimates <- .list_estimates(x)
+  estimates <- .list_estimates(x, multi = TRUE)
   args <- list()
   if(hc) {
     args$p <- value
