@@ -4,10 +4,12 @@
 \alias{estimates.fitdists}
 \title{Estimates for fitdists Object}
 \usage{
-\method{estimates}{fitdists}(x, ...)
+\method{estimates}{fitdists}(x, multi = FALSE, ...)
 }
 \arguments{
 \item{x}{The object.}
+
+\item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
 
 \item{...}{Unused.}
 }

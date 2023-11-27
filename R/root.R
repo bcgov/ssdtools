@@ -17,21 +17,22 @@
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control, hc) {
   
-  estimates <- .list_estimates(x, multi = TRUE)
-  args <- list()
+  estimates <- estimates(x, multi = TRUE)
+  dist <- "multi"
+  args <- estimates
+  
   if(hc) {
     args$p <- value
-    what <- paste0("qmulti_list")
+    what <- paste0("ssd_q", dist)
   } else {
     args$q <- value / rescale
-    what <- paste0("pmulti_list")
+    what <- paste0("ssd_p", dist)
   }
-  args$list <- estimates
-  est <- do.call(what, args)
   
+  est <- do.call(what, args)
   if (!ci) {
     return(no_ci_hcp(value = value, dist = "average", est = est, rescale = rescale, hc = hc))
   }
-
+  
   .NotYetImplemented()
 }
