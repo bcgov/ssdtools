@@ -152,6 +152,31 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   )
 }
 
+.ssd_hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
+                           data, rescale, weighted, censoring, min_pmix,
+                           range_shape1, range_shape2, parametric, control, hc) {
+  estimates <- estimates(x, multi = TRUE)
+  dist <- "multi"
+  args <- estimates
+  fun <- identity
+  pars <- NULL
+  
+  if(ci) {
+    .NotYetImplemented()
+  }
+  
+  hcp <- .ssd_hcp(x, dist = dist, estimates = estimates, 
+                  fun = fun, pars = pars,
+                  value = value, ci = ci, level = level, nboot = nboot,
+                  min_pboot = min_pboot,
+                  data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                  min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                  parametric = parametric, control = control,
+                  hc = hc)
+  hcp$dist <- "average"
+  hcp
+}
+
 .ssd_hcp_fitdists <- function(
     x, 
     value, 
