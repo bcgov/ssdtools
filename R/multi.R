@@ -282,18 +282,12 @@ ssd_rmulti <- function(
 }
 
 #' @describeIn ssd_e Default Parameter Values for Multiple Distributions
-#' @inheritParams params
 #' @export
 #' @examples
 #'
 #' ssd_emulti()
-ssd_emulti <- function(dists = ssd_dists(bcanz = TRUE)) {
-  chk_character(dists)
-  chk_not_any_na(dists)
-  chk_subset(dists, ssd_dists())
-  check_dim(dists)
-  
-  emulti <- emulti_ssd(dists)
+ssd_emulti <- function() {
+  emulti <- emulti_ssd()
   as.list(unlist(emulti))
 }
 
@@ -320,12 +314,15 @@ ssd_emulti <- function(dists = ssd_dists(bcanz = TRUE)) {
   do.call("ssd_rmulti", args)
 }
 
-emulti_ssd <- function(dists = ssd_dists_all()) {
+emulti_ssd <- function() {
+  dists <- ssd_dists_all()
   edists <- paste0("ssd_e", dists, ("()"))
   es <- purrr::map(edists, function(x) eval(parse(text = x)))
   names(es) <- dists
-  wt <- 1/length(dists)
-  purrr::map(es, function(x, wt) c(list(weight = wt), x), wt = wt)
+  es <- purrr::map(es, function(x) c(list(weight = 0), x))
+  dists_bcanz <- ssd_dists_bcanz()
+  wt <- 1/length(dists_bcanz)
+  purrr::map_if(es, dists %in% dists_bcanz, function(x) {x$weight <- wt; x})
 }
 
 value_args <- function(x) {

@@ -37,12 +37,9 @@ ssd_elnorm_lnorm()
 
 ssd_elnorm()
 
-ssd_emulti(dists = ssd_dists(bcanz = TRUE))
+ssd_emulti()
 
 ssd_eweibull()
-}
-\arguments{
-\item{dists}{A character vector of the distribution names.}
 }
 \description{
 Default Parameter Estimates

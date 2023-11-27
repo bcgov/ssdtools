@@ -3,6 +3,18 @@
     Code
       estimates
     Output
+      $burrIII3.weight
+      [1] 0
+      
+      $burrIII3.shape1
+      [1] 1
+      
+      $burrIII3.shape2
+      [1] 1
+      
+      $burrIII3.scale
+      [1] 1
+      
       $gamma.weight
       [1] 0.1666667
       
@@ -10,6 +22,24 @@
       [1] 1
       
       $gamma.scale
+      [1] 1
+      
+      $gompertz.weight
+      [1] 0
+      
+      $gompertz.location
+      [1] 1
+      
+      $gompertz.shape
+      [1] 1
+      
+      $invpareto.weight
+      [1] 0
+      
+      $invpareto.shape
+      [1] 3
+      
+      $invpareto.scale
       [1] 1
       
       $lgumbel.weight
@@ -29,6 +59,24 @@
       
       $llogis.scalelog
       [1] 1
+      
+      $llogis_llogis.weight
+      [1] 0
+      
+      $llogis_llogis.locationlog1
+      [1] 0
+      
+      $llogis_llogis.scalelog1
+      [1] 1
+      
+      $llogis_llogis.locationlog2
+      [1] 1
+      
+      $llogis_llogis.scalelog2
+      [1] 1
+      
+      $llogis_llogis.pmix
+      [1] 0.5
       
       $lnorm.weight
       [1] 0.1666667
