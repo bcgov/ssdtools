@@ -125,9 +125,8 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
                            range_shape1, range_shape2, parametric, control, hc) {
   estimates <- estimates(x, multi = TRUE)
   dist <- "multi"
-  args <- estimates
-  fun <- identity
-  pars <- NULL
+  fun <- fit_dists
+  pars <- pars_fitdists(x)
   
   if(ci) {
     .NotYetImplemented()
