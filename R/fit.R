@@ -77,7 +77,7 @@ remove_nonfits <- function(fits, data, rescale, computable, min_pmix, range_shap
   fits
 }
 
-fit_dists <- function(data, dists, rescale, computable, min_pmix, range_shape1, range_shape2, at_boundary_ok, control, silent, pars = NULL, hessian = TRUE) {
+fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, at_boundary_ok, control, silent, rescale, computable, pars = NULL, hessian = TRUE) {
   data <- data[c("left", "right", "weight")]
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
@@ -172,11 +172,12 @@ ssd_fit_dists <- function(
   if (any(is.infinite(attrs$data$right))) {
     err("Distributions cannot currently be fitted to right censored data.")
   }
-  fits <- fit_dists(attrs$data, dists, attrs$rescale, computable,
+  fits <- fit_dists(attrs$data, dists,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2,
     at_boundary_ok = at_boundary_ok,
-    control = control, silent = silent
+    control = control, silent = silent, 
+    rescale = attrs$rescale, computable = computable,
   )
 
   if (!length(fits)) err("All distributions failed to fit.")
