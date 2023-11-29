@@ -77,13 +77,14 @@ remove_nonfits <- function(fits, data, rescale, computable, min_pmix, range_shap
   fits
 }
 
-fit_dists <- function(data, dists, rescale, computable, min_pmix, range_shape1, range_shape2, at_boundary_ok, control, silent) {
+fit_dists <- function(data, dists, rescale, computable, min_pmix, range_shape1, range_shape2, at_boundary_ok, control, silent, pars = NULL, hessian = TRUE) {
   data <- data[c("left", "right", "weight")]
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
   fits <- lapply(dists, safe_fit_dist,
     data = data, min_pmix = min_pmix,
-    range_shape1 = range_shape1, range_shape2 = range_shape2, control = control
+    range_shape1 = range_shape1, range_shape2 = range_shape2, control = control,
+    pars = pars, hessian = hessian
   )
   fits <- remove_nonfits(fits,
     data = data, rescale = rescale,
