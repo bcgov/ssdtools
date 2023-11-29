@@ -12,9 +12,9 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-fit_burrlioz <- function(dist, data, min_pmix, range_shape1, range_shape2,
+fit_burrlioz <- function(data, dist, min_pmix, range_shape1, range_shape2,
                          control, pars, hessian) {
-  burrIII3 <- fit_tmb(dist, data,
+  burrIII3 <- fit_tmb(data, dist,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2, control = control,
     pars = pars, hessian = hessian
@@ -33,7 +33,7 @@ fit_burrlioz <- function(dist, data, min_pmix, range_shape1, range_shape2,
   } else {
     return(burrIII3)
   }
-  fit_tmb(dist, data,
+  fit_tmb(data, dist,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2, control = control,
     pars = NULL, hessian = hessian

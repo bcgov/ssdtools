@@ -57,7 +57,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
     dist <- names(pars)
   }
 
-  fit <- fun(dist, new_data,
+  fit <- fun(new_data, dist,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE
   )$result
