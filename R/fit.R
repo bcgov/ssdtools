@@ -77,7 +77,7 @@ remove_nonfits <- function(fits, data, rescale, computable, min_pmix, range_shap
   fits
 }
 
-fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, at_boundary_ok, control, silent, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
+fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control, at_boundary_ok= TRUE, silent = TRUE, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
   data <- data[c("left", "right", "weight")]
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
