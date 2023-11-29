@@ -128,10 +128,6 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   fun <- fit_dists
   pars <- pars_fitdists(x)
   
-  if(ci) {
-    .NotYetImplemented()
-  }
-  
   hcp <- .ssd_hcp(x, dist = dist, estimates = estimates, 
                   fun = fun, pars = pars,
                   value = value, ci = ci, level = level, nboot = nboot,

@@ -21,7 +21,7 @@ test_that("hc multi lnorm", {
   hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE)
   expect_identical(hc_dist$est, hc_average$est)
   expect_equal(hc_multi, hc_average)
-
+  
   testthat::expect_snapshot({
     hc_multi
   })
@@ -42,12 +42,21 @@ test_that("hc multi all", {
 test_that("hc multi lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  expect_error(hc_multi <- ssd_hc(fits, multi = TRUE, ci = TRUE))
-  # expect_identical(hc_dist$est, hc_average$est)
-  # expect_equal(hc_multi, hc_average)
-  # 
-  # testthat::expect_snapshot({
-  #   hc_multi
-  # })
+  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100)
+  set.seed(102)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100)
+  set.seed(102)
+  hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
+  
+  testthat::expect_snapshot({
+    hc_average
+  })
+  
+  testthat::expect_snapshot({
+    hc_multi
+  })
+  
+  hc_dist$dist <- NULL
+  hc_average$dist <- NULL
+  expect_identical(hc_dist, hc_average)
 })
-

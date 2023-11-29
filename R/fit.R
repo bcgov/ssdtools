@@ -81,10 +81,16 @@ fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control
   data <- data[c("left", "right", "weight")]
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
-  fits <- lapply(dists, safe_fit_dist,
+  if(!is.null(pars)) {
+    pars <- pars[dists]
+  } else {
+    pars <- rep(list(NULL), length(dists))
+  }
+ 
+  fits <- purrr::map2(dists, pars, .f = safe_fit_dist,
     data = data, min_pmix = min_pmix,
     range_shape1 = range_shape1, range_shape2 = range_shape2, control = control,
-    pars = pars, hessian = hessian
+    hessian = hessian
   )
   fits <- remove_nonfits(fits,
     data = data, rescale = rescale,
@@ -92,6 +98,7 @@ fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control
     range_shape1 = range_shape1, range_shape2 = range_shape2,
     at_boundary_ok = at_boundary_ok, silent = silent
   )
+
   class(fits) <- "fitdists"
   fits
 }
