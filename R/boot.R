@@ -53,6 +53,9 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   if (dist == "lnorm_lnorm") {
     pars <- slnorm_lnorm(new_data)
   }
+  if(dist == "multi") {
+    dist <- names(pars)
+  }
 
   fit <- fun(dist, new_data,
     min_pmix = min_pmix, range_shape1 = range_shape1,
