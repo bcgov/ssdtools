@@ -92,6 +92,7 @@ fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control
     range_shape1 = range_shape1, range_shape2 = range_shape2,
     at_boundary_ok = at_boundary_ok, silent = silent
   )
+  class(fits) <- "fitdists"
   fits
 }
 
@@ -181,7 +182,6 @@ ssd_fit_dists <- function(
   )
 
   if (!length(fits)) err("All distributions failed to fit.")
-  class(fits) <- "fitdists"
 
   attrs$cols <- list(left = left, right = right, weight = weight)
   attrs$control <- control
