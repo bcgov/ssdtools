@@ -26,7 +26,7 @@
       # A tibble: 1 x 10
         dist    percent   est    se   lcl   ucl    wt method     nboot pboot
         <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average       5  1.68 0.729  1.32  2.30     1 parametric     2     1
+      1 average       5  1.68 0.529 0.948  2.76     1 parametric   100     1
 
 ---
 
@@ -36,9 +36,9 @@
       # A tibble: 1 x 10
         dist    percent   est    se   lcl   ucl    wt method     nboot pboot
         <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average       5  1.68 0.342  1.12  1.58     1 parametric     2     1
+      1 average       5  1.68 0.535 0.979  2.99     1 parametric   100     1
 
-# hc multi lnorm default
+# hc multi lnorm default 100
 
     Code
       hc_average
@@ -46,7 +46,7 @@
       # A tibble: 1 x 10
         dist    percent   est    se   lcl   ucl    wt method     nboot pboot
         <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average       5  1.24 0.928  1.27  2.52     1 parametric     2     1
+      1 average       5  1.24 0.743 0.479  3.19     1 parametric   100     1
 
 ---
 
@@ -56,5 +56,5 @@
       # A tibble: 1 x 10
         dist    percent   est    se   lcl   ucl    wt method     nboot pboot
         <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average       5  1.26 0.126 0.920  1.09     1 parametric     2     1
+      1 average       5  1.26 0.752 0.360  3.25     1 parametric   100     1
 
