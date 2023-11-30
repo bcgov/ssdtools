@@ -3,6 +3,7 @@
 \name{ssd_hp}
 \alias{ssd_hp}
 \alias{ssd_hp.fitdists}
+\alias{ssd_hp.fitburrlioz}
 \title{Hazard Percent}
 \usage{
 ssd_hp(x, ...)
@@ -19,6 +20,17 @@ ssd_hp(x, ...)
   parametric = TRUE,
   multi = FALSE,
   control = NULL,
+  ...
+)
+
+\method{ssd_hp}{fitburrlioz}(
+  x,
+  conc = 1,
+  ci = FALSE,
+  level = 0.95,
+  nboot = 1000,
+  min_pboot = 0.99,
+  parametric = FALSE,
   ...
 )
 }
@@ -62,10 +74,15 @@ hazard percent(s).
 \itemize{
 \item \code{ssd_hp(fitdists)}: Hazard Percents for fitdists Object
 
+\item \code{ssd_hp(fitburrlioz)}: Hazard Percents for fitburrlioz Object
+
 }}
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_hp(fits, conc = 1)
+
+fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
+ssd_hp(fit)
 }
 \seealso{
 \code{\link[=ssd_hc]{ssd_hc()}}

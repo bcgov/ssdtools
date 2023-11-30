@@ -12,56 +12,50 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("ssd_hc_burrlioz deprecated", {
+test_that("ssd_hp_burrlioz gets estimates with invpareto", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
-  lifecycle::expect_deprecated(hc_boron <- ssd_hc_burrlioz(fit, nboot = 10, ci = TRUE, min_pboot = 0))
-  expect_snapshot_data(hc_boron, "hc_boron0")
+  hp_boron <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0)
+  expect_snapshot_data(hp_boron, "hp_boron")
 })
 
-test_that("ssd_hc gets estimates with invpareto", {
+test_that("ssd_hp_burrlioz gets estimates with invpareto no ci", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
-  hc_boron <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
-  expect_snapshot_data(hc_boron, "hc_boron")
+  hp_boron <- ssd_hp(fit, nboot = 10, ci = FALSE, min_pboot = 0)
+  expect_snapshot_data(hp_boron, "hp_boron_no_ci")
 })
 
-test_that("ssd_hc gets estimates with invpareto no ci", {
-  fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
-  set.seed(47)
-  hc_boron <- ssd_hc(fit, nboot = 10, ci = FALSE, min_pboot = 0)
-  expect_snapshot_data(hc_boron, "hc_boron_no_ci")
-})
-
-test_that("ssd_hc gets estimates with burrIII3", {
+test_that("ssd_hp_burrlioz gets estimates with burrIII3", {
   set.seed(99)
   data <- data.frame(Conc = ssd_rburrIII3(30))
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
-  hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
-  expect_snapshot_data(hc_burrIII3, "hc_burrIII3")
+  expect_warning(hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0))
+  expect_snapshot_data(hp_burrIII3, "hp_burrIII3")
 })
 
-test_that("ssd_hc currently errors with burrIII3", {
+test_that("ssd_hp_burrlioz currently errors!", {
   set.seed(99)
   data <- data.frame(Conc = ssd_rburrIII3(30))
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(47)
-  #FIXME: currently errors - also hp
-  expect_error(hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0))
+  #FIXME: currently errors!
+  expect_error(hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0))
 })
 
-test_that("ssd_hc gets estimates with burrIII3 parametric", {
+test_that("ssd_hp_burrlioz gets estimates with burrIII3 parametric", {
   set.seed(99)
   data <- data.frame(Conc = ssd_rburrIII3(30))
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
-  hc_burrIII3 <- ssd_hc(fit,
-    nboot = 10, ci = TRUE, min_pboot = 0,
-    parametric = TRUE
-  )
-  expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
+  expect_warning(hp_burrIII3 <- ssd_hp(fit,
+                                 nboot = 10, ci = TRUE, min_pboot = 0,
+                                 parametric = TRUE
+  ))
+  expect_snapshot_data(hp_burrIII3, "hp_burrIII3_parametric")
 })
+

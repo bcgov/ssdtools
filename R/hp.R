@@ -50,3 +50,37 @@ ssd_hp.fitdists <- function(
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp
 }
+
+
+#' @describeIn ssd_hp Hazard Percents for fitburrlioz Object
+#' @export
+#' @examples
+#' 
+#' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
+#' ssd_hp(fit)
+ssd_hp.fitburrlioz <- function(x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
+                               min_pboot = 0.99, parametric = FALSE, ...) {
+  chk_length(x, upper = 1L)
+  chk_named(x)
+  chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
+  chk_vector(conc)
+  chk_numeric(conc)
+  chk_flag(ci)
+  chk_unused(...)
+  
+  if (names(x) != "burrIII3" || !ci || !length(conc)) {
+    class(x) <- class(x)[-1]
+    return(ssd_hp(x,
+                  conc = conc, ci = ci, level = level,
+                  nboot = nboot, min_pboot = min_pboot,
+                  average = FALSE, parametric = parametric
+    ))
+  }
+  
+  hcp <- ssd_hcp_burrlioz(x,value = conc, ci = TRUE,
+                          level = level, nboot = nboot,
+                          min_pboot = min_pboot, parametric = parametric,
+                          hc = TRUE)
+  hcp <- dplyr::rename(hcp, conc = "value")
+  hcp
+}
