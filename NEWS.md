@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 1.0.6.9004
+
+- Renamed `root = TRUE` argument to `multi = TRUE`.
+- `estimates.fitdists()` now includes weights as parameters.
+- `estimates.fitdists()` now returns all distributions by default.
+- Removed `ssd_wt_est()`.
+- Added `wt` to `ssd_hp()` table.
+- Changed how seeds allocated to bootstrap samples. 
+
 # ssdtools 1.0.6.9003
 
 - Added `ssd_exx()` functions to get 
