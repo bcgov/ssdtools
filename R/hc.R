@@ -71,36 +71,6 @@ ssd_hc <- function(x, ...) {
   replace_min_pboot_na(hc, min_pboot)
 }
 
-.ssd_hc_burrlioz_fitdists <- function(x, value, level, nboot, min_pboot, parametric) {
-  control <- .control_fitdists(x)
-  data <- .data_fitdists(x)
-  rescale <- .rescale_fitdists(x)
-  censoring <- .censoring_fitdists(x)
-  min_pmix <- .min_pmix_fitdists(x)
-  range_shape1 <- .range_shape1_fitdists(x)
-  range_shape2 <- .range_shape2_fitdists(x)
-  weighted <- .weighted_fitdists(x)
-  unequal <- .unequal_fitdists(x)
-  
-  if (parametric && identical(censoring, c(NA_real_, NA_real_))) {
-    err("Parametric CIs cannot be calculated for inconsistently censored data.")
-  }
-  
-  if (parametric && unequal) {
-    err("Parametric CIs cannot be calculated for unequally weighted data.")
-  }
-  
-  hc <- purrr::map(x, .ssd_hc_burrlioz_tmbfit,
-                   value = value,
-                   level = level, nboot = nboot, min_pboot = min_pboot,
-                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                   parametric = parametric,
-                   control = control
-  )$burrIII3
-  warn_min_pboot(hc, min_pboot)
-}
-
 .ssd_hc_dist <- function(x, dist, proportion) {
   fun <- paste0("ssd_q", dist)
   args <- list(p = proportion)
@@ -199,6 +169,7 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
   chk_numeric(percent)
   chk_range(percent, c(0, 100))
   chk_flag(ci)
+  chk_unused(...)
   
   if (names(x) != "burrIII3" || !ci || !length(percent)) {
     class(x) <- class(x)[-1]
@@ -208,20 +179,11 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
                   average = FALSE, parametric = parametric
     ))
   }
-  chk_number(level)
-  chk_range(level)
-  chk_whole_number(nboot)
-  chk_gt(nboot)
-  chk_number(min_pboot)
-  chk_range(min_pboot)
-  chk_flag(parametric)
-  chk_unused(...)
   
   proportion <- percent / 100
-  hcp <- .ssd_hc_burrlioz_fitdists(x,
-                                  value = proportion, level = level, nboot = nboot,
-                                  min_pboot = min_pboot, parametric = parametric
-  )
+  hcp <- ssd_hcp_burrlioz(x,value = proportion, level = level, nboot = nboot,
+                                  min_pboot = min_pboot, parametric = parametric,
+                                  hc = TRUE)
   hcp <- dplyr::rename(hcp, percent = "value")
   hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
   hcp
