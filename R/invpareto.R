@@ -52,7 +52,7 @@ ssd_rinvpareto <- function(n, shape = 3, scale = 1, chk = TRUE) {
 #'
 #' ssd_einvpareto()
 ssd_einvpareto <- function() {
-  c(shape = 3, scale = 1)
+  list(shape = 3, scale = 1)
 }
 
 sinvpareto <- function(data, pars = NULL) {

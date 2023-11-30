@@ -29,7 +29,7 @@ utils::globalVariables("where")
 #' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
 #' @importFrom parallel nextRNGStream nextRNGSubStream
 #' @importFrom plyr summarise
-#' @importFrom purrr transpose
+#' @importFrom purrr list_assign transpose
 #' @importFrom Rcpp sourceCpp
 #' @importFrom scales comma manual_pal percent trans_breaks
 #' @importFrom ssddata gm_mean
@@ -39,7 +39,7 @@ utils::globalVariables("where")
 #' @importFrom tibble as_tibble tibble
 #' @importFrom TMB MakeADFun sdreport
 #' @importFrom universals estimates npars
-#' @importFrom utils capture.output
+#' @importFrom utils capture.output relist
 #' @importFrom VGAM gompertz vglm
 ## usethis namespace: end
 NULL

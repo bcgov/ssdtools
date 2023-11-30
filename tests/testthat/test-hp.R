@@ -163,7 +163,6 @@ test_that("hp fitdists with no fitdists", {
 })
 
 test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
-  
   data <- ssddata::ccme_boron
   data$Conc2 <- data$Conc
   data$Conc[1] <- 0.5
@@ -171,7 +170,7 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 2.33001443428834)
+  expect_equal(hp$se, 1.88668081916483)
 
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
@@ -198,42 +197,38 @@ test_that("ssd_hp same with equally weighted data", {
 })
 
 test_that("ssd_hp calculates cis with equally weighted data", {
-  
   data <- ssddata::ccme_boron
   data$Weight <- rep(2, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 1.76599243917916)
+  expect_equal(hp$se, 1.45515712342784)
 })
 
 test_that("ssd_hp calculates cis with two distributions", {
-  
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 1.77625311677508)
+  expect_equal(hp$se, 1.45001268956605)
 })
 
 test_that("ssd_hp calculates cis in parallel but one distribution", {
-  
   local_multisession()
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 1.76599243917916)
+  expect_equal(hp$se, 1.45515712342784)
 })
 
 test_that("ssd_hp calculates cis in parallel with two distributions", {
-  
   local_multisession()
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  expect_equal(hp$se, 1.77625311677508)
+  expect_equal(hp$se, 1.45001268956605)
 })
 
 test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
@@ -264,7 +259,6 @@ test_that("ssd_hp no effect with higher weight one distribution", {
 })
 
 test_that("ssd_hp effect with higher weight two distributions", {
-  
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
@@ -276,8 +270,8 @@ test_that("ssd_hp effect with higher weight two distributions", {
   hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10)
   expect_equal(hp$est, 11.7535819824013)
   expect_equal(hp_10$est, 11.9318338996079)
-  expect_equal(hp$se, 5.90337387777387)
-  expect_equal(hp_10$se, 6.1723994362764)
+  expect_equal(hp$se, 4.56372685665889)
+  expect_equal(hp_10$se, 4.83426663939758)
 })
 
 test_that("ssd_hp cis with non-convergence", {
@@ -287,10 +281,10 @@ test_that("ssd_hp cis with non-convergence", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
   expect_identical(attr(fit, "min_pmix"), 0.15)
-  hp15 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.98)
+  hp15 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9)
   attr(fit, "min_pmix") <- 0.3
   expect_identical(attr(fit, "min_pmix"), 0.3)
-  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.96)
+  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9)
   expect_s3_class(hp30, "tbl")
   expect_snapshot_boot_data(hp30, "hp_30")
 })

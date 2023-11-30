@@ -62,7 +62,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   check_names(data, c(unique(c(left, right)), label, shape))
 
   check_names(pred, c("percent", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
-  chk_whole_numeric(pred$percent)
+  chk_numeric(pred$percent)
   chk_range(pred$percent, c(1, 99))
   check_data(pred, values = list(est = 1, lcl = c(1, NA), ucl = c(1, NA)))
 

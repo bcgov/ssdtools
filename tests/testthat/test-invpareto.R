@@ -45,8 +45,7 @@ test_that("invpareto initial shape is MLEs", {
   fit <- ssd_fit_dists(data, dists = "invpareto")
   expect_equal(
     estimates(fit),
-    list(invpareto = list(scale = 1.03299515712949, shape = 4.14668077241))
-  )
+    list(invpareto.weight = 1, invpareto.scale = 1.03299515712949, invpareto.shape = 4.14668077241))
 })
 
 test_that("invpareto unbiased scale estimator small n", {
@@ -114,12 +113,11 @@ test_that("invpareto with extreme data", {
   fit98 <- ssd_fit_dists(data[1:98, , drop = FALSE], dists = "invpareto")
   expect_equal(
     estimates(fit98),
-    list(invpareto = list(scale = 2.61422908501617, shape = 26.0909009531098))
+    list(invpareto.weight = 1, invpareto.scale = 2.61422908501617, invpareto.shape = 26.0909009531098)
   )
 
   fit99r <- ssd_fit_dists(data, dists = "invpareto", rescale = TRUE)
   expect_equal(
     estimates(fit99r),
-    list(invpareto = list(scale = 1.00038435059807, shape = 26.0278618888664))
-  )
+    list(invpareto.weight = 1, invpareto.scale = 1.00038435059807, invpareto.shape = 26.0278618888664))
 })

@@ -13,28 +13,66 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hc root lnorm", {
+test_that("hc multi lnorm", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc_dist <- ssd_hc(fits, average = FALSE)
   hc_average <- ssd_hc(fits, average = TRUE)
-  hc_root <- ssd_hc(fits, average = TRUE, root = TRUE)
+  hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE)
   expect_identical(hc_dist$est, hc_average$est)
-  expect_equal(hc_root, hc_average)
-
+  expect_equal(hc_multi, hc_average)
+  
   testthat::expect_snapshot({
-    hc_root
+    hc_multi
   })
 })
 
-test_that("hc root all", {
+test_that("hc multi all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc_average <- ssd_hc(fits, average = TRUE)
-  hc_root <- ssd_hc(fits, average = TRUE, root = TRUE)
+  hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE)
   expect_equal(hc_average$est, 1.24151700389853)
-  expect_equal(hc_root$est, 1.25678623624403)
+  expect_equal(hc_multi$est, 1.25678623624403)
   testthat::expect_snapshot({
-    hc_root
+    hc_multi
+  })
+})
+
+test_that("hc multi lnorm ci", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  set.seed(102)
+  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100)
+  set.seed(102)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100)
+  set.seed(102)
+  hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
+  
+  testthat::expect_snapshot({
+    hc_average
+  })
+  
+  testthat::expect_snapshot({
+    hc_multi
+  })
+  
+  hc_dist$dist <- NULL
+  hc_average$dist <- NULL
+  expect_identical(hc_dist, hc_average)
+})
+
+test_that("hc multi lnorm default 100", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  set.seed(102)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100)
+  set.seed(102)
+  hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
+
+  testthat::expect_snapshot({
+    hc_average
+  })
+
+  testthat::expect_snapshot({
+    hc_multi
   })
 })

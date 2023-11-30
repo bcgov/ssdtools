@@ -23,11 +23,6 @@
 #' @return A tibble of corresponding hazard concentrations.
 #' @seealso [`predict.fitdists()`] and [`ssd_hp()`].
 #' @export
-#' @examples
-#' fits <- ssd_fit_dists(ssddata::ccme_boron)
-#' ssd_hc(fits)
-#' ssd_hc(estimates(fits))
-#' ssd_hc(ssd_match_moments())
 ssd_hc <- function(x, ...) {
   UseMethod("ssd_hc")
 }
@@ -48,6 +43,9 @@ ssd_hc <- function(x, ...) {
 
 #' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates
 #' @export
+#' @examples
+#' 
+#' ssd_hc(ssd_match_moments())
 ssd_hc.list <- function(x, percent = 5, ...) {
   chk_list(x)
   chk_named(x)
@@ -68,6 +66,10 @@ ssd_hc.list <- function(x, percent = 5, ...) {
 
 #' @describeIn ssd_hc Hazard Concentrations for fitdists Object
 #' @export
+#' @examples
+#' 
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' ssd_hc(fits)
 ssd_hc.fitdists <- function(
     x, 
     percent = 5, 
@@ -78,7 +80,7 @@ ssd_hc.fitdists <- function(
     delta = 7, 
     min_pboot = 0.99,
     parametric = TRUE, 
-    root = FALSE,
+    multi = FALSE,
     control = NULL, 
     ...) {
   
@@ -99,22 +101,21 @@ ssd_hc.fitdists <- function(
     delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
-    root = root,
+    multi = multi,
     control = control,
     hc = TRUE)
   
   hcp <- dplyr::rename(hcp, percent = "value")
-  hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
+  hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
   hcp
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for fitburrlioz Object
 #' @export
 #' @examples
+#' 
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #' ssd_hc(fit)
-#'
-#' @export
 ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000,
                                min_pboot = 0.99, parametric = FALSE, ...) {
   check_dim(x, values = 1L)
@@ -147,6 +148,6 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
                                   min_pboot = min_pboot, parametric = parametric
   )
   hcp <- dplyr::rename(hcp, percent = "value")
-  hcp <- dplyr::mutate(hcp, percent = as.integer(round(.data$percent * 100)))
+  hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
   hcp
 }
