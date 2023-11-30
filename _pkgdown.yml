@@ -61,7 +61,6 @@ reference:
   - '`ssd_gof`'
   - '`ssd_hp`'
   - '`ssd_match_moments`'
-  - '`ssd_wt_est`'
   - '`subset.fitdists`'
   - '`tidy.fitdists`'
 - title: Hazard Concentrations
