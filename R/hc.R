@@ -137,9 +137,10 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
   }
   
   proportion <- percent / 100
-  hcp <- ssd_hcp_burrlioz(x,value = proportion, level = level, nboot = nboot,
-                                  min_pboot = min_pboot, parametric = parametric,
-                                  hc = TRUE)
+  hcp <- ssd_hcp_burrlioz(x,value = proportion, ci = TRUE,
+                          level = level, nboot = nboot,
+                          min_pboot = min_pboot, parametric = parametric,
+                          hc = TRUE)
   hcp <- dplyr::rename(hcp, percent = "value")
   hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
   hcp

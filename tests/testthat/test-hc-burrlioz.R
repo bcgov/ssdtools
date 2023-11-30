@@ -20,6 +20,14 @@ test_that("ssd_hc_burrlioz gets estimates with invpareto", {
   expect_snapshot_data(hc_boron, "hc_boron")
 })
 
+test_that("ssd_hc_burrlioz gets estimates with invpareto no ci", {
+  rlang::local_options(lifecycle_verbosity = "quiet")
+  fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
+  set.seed(47)
+  hc_boron <- ssd_hc_burrlioz(fit, nboot = 10, ci = FALSE, min_pboot = 0)
+  expect_snapshot_data(hc_boron, "hc_boron_no_ci")
+})
+
 test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
   rlang::local_options(lifecycle_verbosity = "quiet")
   set.seed(99)
