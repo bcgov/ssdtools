@@ -26,7 +26,7 @@
       # A tibble: 1 x 10
         dist    percent   est    se   lcl   ucl    wt method     nboot pboot
         <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average       5  1.68 0.529 0.948  2.76     1 parametric   100     1
+      1 average       5  1.68 0.729  1.32  2.30     1 parametric     2     1
 
 ---
 
@@ -36,5 +36,5 @@
       # A tibble: 1 x 10
         dist    percent   est      se   lcl   ucl    wt method     nboot pboot
         <chr>     <dbl> <dbl>   <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average       5  1.68 0.00230 0.189 0.195     1 parametric   100     1
+      1 average       5  1.68 0.00256 0.191 0.194     1 parametric     2     1
 

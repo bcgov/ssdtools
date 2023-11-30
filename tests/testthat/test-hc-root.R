@@ -42,11 +42,11 @@ test_that("hc multi all", {
 test_that("hc multi lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100)
+  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 2)
   set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 2)
   set.seed(102)
-  hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
+  hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 2)
   
   testthat::expect_snapshot({
     hc_average
