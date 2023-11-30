@@ -38,3 +38,23 @@
         <chr>     <dbl> <dbl>   <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
       1 average       5  1.68 0.00256 0.191 0.194     1 parametric     2     1
 
+# hc multi lnorm default
+
+    Code
+      hc_average
+    Output
+      # A tibble: 1 x 10
+        dist    percent   est    se   lcl   ucl    wt method     nboot pboot
+        <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
+      1 average       5  1.24 0.928  1.27  2.52     1 parametric     2     1
+
+---
+
+    Code
+      hc_multi
+    Output
+      # A tibble: 1 x 10
+        dist    percent   est    se   lcl   ucl    wt method     nboot pboot
+        <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
+      1 average       5  1.26 0.126 0.920  1.09     1 parametric     2     1
+

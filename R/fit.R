@@ -103,13 +103,16 @@ fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control
   fits
 }
 
-fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control, at_boundary_ok= TRUE, silent = TRUE, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
+fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control,
+                       censoring, weighted,
+                       at_boundary_ok= TRUE, silent = TRUE, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
   fits <- fit_dists(data, dists,
                     min_pmix = min_pmix, range_shape1 = range_shape1,
                     range_shape2 = range_shape2,
                     at_boundary_ok = at_boundary_ok,
                     control = control, silent = silent, 
-                    rescale = rescale, computable = computable
+                    rescale = rescale, computable = computable,
+                    
   )
   
   if (!length(fits)) err("All distributions failed to fit.")
@@ -118,6 +121,8 @@ fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, contro
   attrs$data <- data
   attrs$control <- control
   attrs$rescale <- rescale
+  attrs$censoring <- censoring
+  attrs$weighted <- weighted
   attrs$min_pmix <- min_pmix
   attrs$range_shape1 <- range_shape1
   attrs$range_shape2 <- range_shape2
@@ -208,13 +213,12 @@ ssd_fit_dists <- function(
              range_shape2 = range_shape2,
              at_boundary_ok = at_boundary_ok,
              control = control, silent = silent, 
-             rescale = attrs$rescale, computable = computable)
+             rescale = attrs$rescale, computable = computable,
+             censoring = attrs$censoring,
+             weighted = attrs$weighted)
   
   .org_data_fitdists(fits) <- org_data
   .cols_fitdists(fits) <- list(left = left, right = right, weight = weight)
-  .censoring_fitdists(fits) <- attrs$censoring
   .unequal_fitdists(fits) <- attrs$unequal
-  .weighted_fitdists(fits) <- attrs$weighted
-  
   fits
 }

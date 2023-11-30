@@ -13,7 +13,7 @@
 #    limitations under the License.
 
 fit_burrlioz <- function(data, dist, min_pmix, range_shape1, range_shape2,
-                         control, pars, hessian) {
+                         control, pars, hessian, ...) {
   burrIII3 <- fit_tmb(data, dist,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2, control = control,
