@@ -183,7 +183,8 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     parametric, 
     multi, 
     control,
-    hc) {
+    hc,
+    fun) {
   
   if (!length(x) || !length(value)) {
     return(no_hcp())
@@ -226,7 +227,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
                       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                       parametric = parametric, control = control,
-                      hc = hc, fun = fit_tmb)
+                      hc = hc, fun = fun)
     
     weight <- purrr::map_dbl(estimates, function(x) x$weight)
     if(!average) {
@@ -298,7 +299,8 @@ ssd_hcp_fitdists <- function(
     parametric,
     multi,
     control,
-    hc) {
+    hc,
+    fun = fit_tmb) {
   
   chk_vector(value)
   chk_numeric(value)
@@ -329,25 +331,26 @@ ssd_hcp_fitdists <- function(
     parametric = parametric,
     multi = multi,
     control = control,
-    hc = hc
+    hc = hc,
+    fun = fun
   )
   warn_min_pboot(hcp, min_pboot)
 }
 
 ssd_hcp_burrlioz <- function(x, value, ci, level, nboot, min_pboot, parametric, hc) {
-  chk_flag(ci)
-  chk_number(level)
-  chk_range(level)
-  chk_whole_number(nboot)
-  chk_gt(nboot)
-  chk_number(min_pboot)
-  chk_range(min_pboot)
-  chk_flag(parametric)
-  
-  hcp <- .ssd_hcp_burrlioz(x, value = value, ci = ci,
-                           level = level, nboot = nboot, 
-                           min_pboot = min_pboot, parametric = parametric, hc = hc)
-  
-  warn_min_pboot(hcp, min_pboot)
+  ssd_hcp_fitdists (
+    x = x,
+    value = value, 
+    ci = ci,
+    level = level,
+    nboot = nboot,
+    average = FALSE,
+    delta = Inf,
+    min_pboot = min_pboot,
+    parametric = parametric,
+    multi = TRUE,
+    control = NULL,
+    hc = hc,
+    fun = fit_burrlioz)
 }
 
