@@ -82,7 +82,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   }
   
   censoring <- censoring / rescale
-
+  
   ests <- boot_estimates(fun = fun, dist = dist, estimates = estimates, 
                          pars = pars, nboot = nboot, data = data, weighted = weighted,
                          censoring = censoring, min_pmix = min_pmix,
@@ -241,10 +241,47 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, hc = hc)
-
+  
   hcp$method <- method
   hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
   hcp
+}
+
+.ssd_hcp_burrlioz <- function(
+    x, 
+    value, 
+    level,
+    nboot,
+    min_pboot,
+    parametric,
+    hc) {
+  
+  control <- .control_fitdists(x)
+  data <- .data_fitdists(x)
+  rescale <- .rescale_fitdists(x)
+  censoring <- .censoring_fitdists(x)
+  min_pmix <- .min_pmix_fitdists(x)
+  range_shape1 <- .range_shape1_fitdists(x)
+  range_shape2 <- .range_shape2_fitdists(x)
+  weighted <- .weighted_fitdists(x)
+  unequal <- .unequal_fitdists(x)
+  
+  if (parametric && identical(censoring, c(NA_real_, NA_real_))) {
+    err("Parametric CIs cannot be calculated for inconsistently censored data.")
+  }
+  
+  if (parametric && unequal) {
+    err("Parametric CIs cannot be calculated for unequally weighted data.")
+  }
+  
+  hc <- purrr::map(x, .ssd_hc_burrlioz_tmbfit,
+                   value = value,
+                   level = level, nboot = nboot, min_pboot = min_pboot,
+                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                   parametric = parametric,
+                   control = control
+  )$burrIII3
 }
 
 ssd_hcp_fitdists <- function(
@@ -304,32 +341,9 @@ ssd_hcp_burrlioz <- function(x, value, level, nboot, min_pboot, parametric, hc) 
   chk_range(min_pboot)
   chk_flag(parametric)
   
-  control <- .control_fitdists(x)
-  data <- .data_fitdists(x)
-  rescale <- .rescale_fitdists(x)
-  censoring <- .censoring_fitdists(x)
-  min_pmix <- .min_pmix_fitdists(x)
-  range_shape1 <- .range_shape1_fitdists(x)
-  range_shape2 <- .range_shape2_fitdists(x)
-  weighted <- .weighted_fitdists(x)
-  unequal <- .unequal_fitdists(x)
+  hcp <- .ssd_hcp_burrlioz(x, value = value, level = level, nboot = nboot, 
+                    min_pboot = min_pboot, parametric = parametric, hc = hc)
   
-  if (parametric && identical(censoring, c(NA_real_, NA_real_))) {
-    err("Parametric CIs cannot be calculated for inconsistently censored data.")
-  }
-  
-  if (parametric && unequal) {
-    err("Parametric CIs cannot be calculated for unequally weighted data.")
-  }
-  
-  hc <- purrr::map(x, .ssd_hc_burrlioz_tmbfit,
-                   value = value,
-                   level = level, nboot = nboot, min_pboot = min_pboot,
-                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                   parametric = parametric,
-                   control = control
-  )$burrIII3
-  warn_min_pboot(hc, min_pboot)
+  warn_min_pboot(hcp, min_pboot)
 }
 
