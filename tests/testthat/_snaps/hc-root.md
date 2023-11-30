@@ -34,9 +34,9 @@
       hc_multi
     Output
       # A tibble: 1 x 10
-        dist    percent   est      se   lcl   ucl    wt method     nboot pboot
-        <chr>     <dbl> <dbl>   <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average       5  1.68 0.00256 0.191 0.194     1 parametric     2     1
+        dist    percent   est    se   lcl   ucl    wt method     nboot pboot
+        <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
+      1 average       5  1.68 0.342  1.12  1.58     1 parametric     2     1
 
 # hc multi lnorm default
 

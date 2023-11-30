@@ -66,7 +66,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   if (is.null(fit)) {
     return(NULL)
   }
-  estimates(fit)
+  estimates(fit, multi = TRUE)
 }
 
 boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control) {
