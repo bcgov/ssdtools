@@ -192,21 +192,13 @@ ssd_hc.fitdists <- function(
 #' ssd_hc(fit)
 ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000,
                                min_pboot = 0.99, parametric = FALSE, ...) {
-  check_dim(x, values = 1L)
+  chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
   chk_vector(percent)
   chk_numeric(percent)
   chk_range(percent, c(0, 100))
   chk_flag(ci)
-  chk_number(level)
-  chk_range(level)
-  chk_whole_number(nboot)
-  chk_gt(nboot)
-  chk_number(min_pboot)
-  chk_range(min_pboot)
-  chk_flag(parametric)
-  chk_unused(...)
   
   if (names(x) != "burrIII3" || !ci || !length(percent)) {
     class(x) <- class(x)[-1]
@@ -216,6 +208,15 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
                   average = FALSE, parametric = parametric
     ))
   }
+  chk_number(level)
+  chk_range(level)
+  chk_whole_number(nboot)
+  chk_gt(nboot)
+  chk_number(min_pboot)
+  chk_range(min_pboot)
+  chk_flag(parametric)
+  chk_unused(...)
+  
   proportion <- percent / 100
   hcp <- .ssd_hc_burrlioz_fitdists(x,
                                   value = proportion, level = level, nboot = nboot,
