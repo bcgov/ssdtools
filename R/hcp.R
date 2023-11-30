@@ -120,6 +120,53 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
            hc = hc)
 }
 
+.ssd_hcp_tmbfit_burrlioz <- function(
+    x, value, level, nboot, min_pboot,
+    data, rescale, weighted, censoring, min_pmix,
+    range_shape1, range_shape2, parametric, control, hc) {
+
+  args <- estimates(x)
+  args$p <- value
+  dist <- .dist_tmbfit(x)
+  
+  stopifnot(identical(dist, "burrIII3"))
+  
+  what <- paste0("ssd_q", dist)
+  
+  est <- do.call(what, args)
+  censoring <- censoring / rescale
+  
+  fun <- fit_burrlioz
+  estimates <- estimates(x)
+  pars <- .pars_tmbfit(x)
+  
+  estimates <- boot_estimates(fun = fun, dist = dist, estimates = estimates, 
+                              pars = pars,
+                              nboot = nboot, data = data, weighted = weighted,
+                              censoring = censoring, min_pmix = min_pmix,
+                              range_shape1 = range_shape1,
+                              range_shape2 = range_shape2,
+                              parametric = parametric,
+                              control = control
+  )
+  
+  cis <- cis_estimates(estimates,
+                       what = "ssd_qburrlioz", level = level, x = value,
+                       .names = c("scale", "shape", "shape1", "shape2", "locationlog", "scalelog")
+  )
+  
+  method <- if (parametric) "parametric" else "non-parametric"
+  
+  hc <- tibble(
+    dist = dist,
+    value = value, est = est * rescale,
+    se = cis$se * rescale, lcl = cis$lcl * rescale, ucl = cis$ucl * rescale,
+    method = method,
+    nboot = nboot, pboot = length(estimates) / nboot
+  )
+  replace_min_pboot_na(hc, min_pboot)
+}
+
 .ssd_hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control, hc) {
@@ -274,7 +321,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     err("Parametric CIs cannot be calculated for unequally weighted data.")
   }
   
-  hc <- purrr::map(x, .ssd_hc_burrlioz_tmbfit,
+  hc <- purrr::map(x, .ssd_hcp_tmbfit_burrlioz,
                    value = value,
                    level = level, nboot = nboot, min_pboot = min_pboot,
                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
@@ -342,7 +389,7 @@ ssd_hcp_burrlioz <- function(x, value, level, nboot, min_pboot, parametric, hc) 
   chk_flag(parametric)
   
   hcp <- .ssd_hcp_burrlioz(x, value = value, level = level, nboot = nboot, 
-                    min_pboot = min_pboot, parametric = parametric, hc = hc)
+                           min_pboot = min_pboot, parametric = parametric, hc = hc)
   
   warn_min_pboot(hcp, min_pboot)
 }
