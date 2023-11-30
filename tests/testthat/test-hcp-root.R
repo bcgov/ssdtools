@@ -13,28 +13,28 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hp is hc conc = 1 root = TRUE", {
+test_that("hp is hc conc = 1 multi = TRUE", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   conc <- 1
-  hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = TRUE)
-  hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
-  expect_equal(hc_root$est, 1.00002572057075)
+  hp_multi <- ssd_hp(fits, conc = conc, average = TRUE, multi = TRUE)
+  hc_multi <- ssd_hc(fits, percent = hp_multi$est, average = TRUE, multi = TRUE)
+  expect_equal(hc_multi$est, 1.00002572057075)
   for(i in 1:10) {
-    hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = TRUE)
-    hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
+    hp_multi <- ssd_hp(fits, conc = hc_multi$est, average = TRUE, multi = TRUE)
+    hc_multi <- ssd_hc(fits, percent = hp_multi$est, average = TRUE, multi = TRUE)
   }
-  expect_equal(hc_root$est, 1.00028286154233)
+  expect_equal(hc_multi$est, 1.00028286154233)
 })
 
-test_that("hp is hc conc = 10 root = TRUE", {
+test_that("hp is hc conc = 10 multi = TRUE", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   conc <- 10
-  hp_root <- ssd_hp(fits, conc = conc, average = TRUE, root = TRUE)
-  hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
-  expect_equal(hc_root$est, 10.00000012176)
+  hp_multi <- ssd_hp(fits, conc = conc, average = TRUE, multi = TRUE)
+  hc_multi <- ssd_hc(fits, percent = hp_multi$est, average = TRUE, multi = TRUE)
+  expect_equal(hc_multi$est, 10.00000012176)
   for(i in 1:10) {
-    hp_root <- ssd_hp(fits, conc = hc_root$est, average = TRUE, root = TRUE)
-    hc_root <- ssd_hc(fits, percent = hp_root$est, average = TRUE, root = TRUE)
+    hp_multi <- ssd_hp(fits, conc = hc_multi$est, average = TRUE, multi = TRUE)
+    hc_multi <- ssd_hc(fits, percent = hp_multi$est, average = TRUE, multi = TRUE)
   }
-  expect_equal(hc_root$est, 10.0000013393606)
+  expect_equal(hc_multi$est, 10.0000013393606)
 })

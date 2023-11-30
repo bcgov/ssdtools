@@ -62,7 +62,7 @@ ssd_rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
 #'
 #' ssd_ellogis_llogis()
 ssd_ellogis_llogis <- function() {
-  c(locationlog1 = 0, scalelog1 = 1, 
+  list(locationlog1 = 0, scalelog1 = 1, 
        locationlog2 = 1, scalelog2 = 1, pmix = 0.5)
 }
 
@@ -103,10 +103,14 @@ qlogis_logis_ssd <- function(p, location1, scale1, location2, scale2, pmix) {
   if (scale1 <= 0 || scale2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
-  f <- function(x) {
+  f <- function(x, p) {
     plogis_logis_ssd(x, location1, scale1, location2, scale2, pmix) - p
   }
-  stats::uniroot(f, lower = 0, upper = 10, extendInt = "upX", tol = .Machine$double.eps)$root
+  q <- rep(NA_real_, length(p))
+  for(i in seq_along(p)) {
+    q[i] <- stats::uniroot(f, p = p[i], lower = 0, upper = 10, extendInt = "upX", tol = .Machine$double.eps)$root
+  }
+  q
 }
 
 rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {
@@ -119,4 +123,16 @@ rlogis_logis_ssd <- function(n, location1, scale1, location2, scale2, pmix) {
   x[dist] <- rlogis_ssd(sum(dist), location = location1, scale = scale1)
   x[!dist] <- rlogis_ssd(sum(!dist), location = location2, scale = scale2)
   x
+}
+
+pllogis_llogis_ssd <- function(q, locationlog1, scalelog1,
+                               locationlog2, scalelog2, pmix) {
+  plogis_logis_ssd(log(q), location1 = locationlog1, scale1 = scalelog1,
+                   location2 = locationlog2, scale2 = scalelog2, pmix = pmix)
+}
+
+qllogis_llogis_ssd <- function(p, locationlog1, scalelog1,
+                               locationlog2, scalelog2, pmix) {
+  exp(qlogis_logis_ssd(p, location1 = locationlog1, scale1 = scalelog1,
+                       location2 = locationlog2, scale2 = scalelog2, pmix = pmix))
 }

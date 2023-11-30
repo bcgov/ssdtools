@@ -21,7 +21,7 @@ ssd_hc(x, ...)
   delta = 7,
   min_pboot = 0.99,
   parametric = TRUE,
-  root = FALSE,
+  multi = FALSE,
   control = NULL,
   ...
 )
@@ -59,7 +59,7 @@ fit in the sense of returning a likelihood.}
 
 \item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
 
-\item{root}{A flag specifying whether to calculate the value by finding the root.}
+\item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 }
@@ -83,13 +83,14 @@ hazard concentrations(s).
 
 }}
 \examples{
+
+ssd_hc(ssd_match_moments())
+
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_hc(fits)
-ssd_hc(estimates(fits))
-ssd_hc(ssd_match_moments())
+
 fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 ssd_hc(fit)
-
 }
 \seealso{
 \code{\link[=predict.fitdists]{predict.fitdists()}} and \code{\link[=ssd_hp]{ssd_hp()}}.

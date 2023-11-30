@@ -53,32 +53,39 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   if (dist == "lnorm_lnorm") {
     pars <- slnorm_lnorm(new_data)
   }
+  if(dist == "multi") {
+    dist <- names(pars)
+  }
 
-  fit <- fun(dist, new_data,
+  fit <- fun(new_data, dist,
     min_pmix = min_pmix, range_shape1 = range_shape1,
-    range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE
+    range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE,
+    censoring = censoring, weighted = weighted
   )$result
-
+  
   if (is.null(fit)) {
     return(NULL)
   }
-  estimates(fit)
+  estimates(fit, multi = TRUE)
 }
 
-boot_estimates <- function(x, fun, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control) {
-  dist <- .dist_tmbfit(x)
+boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control) {
+  sfun <- safely(fun)
+
   args <- list(n = nrow(data))
-  args <- c(args, estimates(x))
-  pars <- .pars_tmbfit(x)
+  args <- c(args, estimates)
 
   data <- data[c("left", "right", "weight")]
+  
+  seeds <- seed_streams(nboot)
 
-  estimates <- lapply(1:nboot, sample_parameters,
-    dist = dist, fun = fun,
+  estimates <- future_map(1:nboot, sample_parameters,
+    dist = dist, fun = sfun,
     data = data, args = args, pars = pars,
     weighted = weighted, censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control
+    parametric = parametric, control = control,
+    .options = furrr::furrr_options(seed = seeds)
   )
 
   estimates[!vapply(estimates, is.null, TRUE)]

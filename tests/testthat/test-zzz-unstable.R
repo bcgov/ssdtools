@@ -230,7 +230,7 @@ test_that("invpareto with extreme data", {
   
   expect_equal(
     estimates(fit99),
-    list(invpareto = list(scale = 2.61422138795731, shape = 26.0278618888663))
+    list(invpareto.weight = 1, invpareto.scale = 2.61422138795731, invpareto.shape = 26.0278618888663)
   )
 })
 

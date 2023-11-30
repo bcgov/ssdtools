@@ -1,2 +1,2 @@
 dist,percent,est,se,lcl,ucl,wt,method,nboot
-invpareto,5,0.386944,0.263968,0.231651,0.943612,1,non-parametric,10
+invpareto,5,0.386944,0.347873,0.195882,1.10643,1,non-parametric,10

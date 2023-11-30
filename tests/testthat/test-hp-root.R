@@ -13,32 +13,70 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hp root lnorm", {
+test_that("hp multi lnorm", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hp_dist <- ssd_hp(fits, average = FALSE)
   hp_average <- ssd_hp(fits, average = TRUE)
-  hp_root <- ssd_hp(fits, average = TRUE, root = TRUE)
+  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE)
   expect_identical(hp_average$est, hp_dist$est)
-  expect_equal(hp_root, hp_average)
+  expect_equal(hp_multi, hp_average)
   expect_equal(hp_average$est, 1.9543030195088)
-  expect_equal(hp_root$est, 1.95430301950878, tolerance = 1e-6)
+  expect_equal(hp_multi$est, 1.95430301950878, tolerance = 1e-6)
   
   testthat::expect_snapshot({
-    hp_root
+    hp_multi
   })
 })
 
-test_that("hp root all", {
+test_that("hp multi all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hp_average <- ssd_hp(fits, average = TRUE)
-  hp_root <- ssd_hp(fits, average = TRUE, root = TRUE)
-  expect_equal(hp_root, hp_average)
+  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE)
+  expect_equal(hp_multi, hp_average)
   expect_equal(hp_average$est, 3.89879358571718, tolerance = 1e-6)
-  expect_equal(hp_root$est, 3.89879358571718)
+  expect_equal(hp_multi$est, 3.89879358571718)
   testthat::expect_snapshot({
-    hp_root
+    hp_multi
+  })
+})
+
+test_that("hp multi lnorm ci", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  set.seed(102)
+  hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100)
+  set.seed(102)
+  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100)
+  set.seed(102)
+  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
+  
+  testthat::expect_snapshot({
+    hp_average
+  })
+  
+  testthat::expect_snapshot({
+    hp_multi
+  })
+  
+  hp_dist$dist <- NULL
+  hp_average$dist <- NULL
+  expect_identical(hp_dist, hp_average)
+})
+
+test_that("hp multi lnorm default 100", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  set.seed(102)
+  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100)
+  set.seed(102)
+  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
+  
+  testthat::expect_snapshot({
+    hp_average
+  })
+  
+  testthat::expect_snapshot({
+    hp_multi
   })
 })

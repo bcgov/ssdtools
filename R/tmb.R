@@ -46,8 +46,8 @@ optimize <- function(par, fn, gr, lower, upper, control, hessian) {
   optim
 }
 
-fit_tmb <- function(dist, data, min_pmix, range_shape1, range_shape2,
-                    control, pars = NULL, hessian = TRUE) {
+fit_tmb <- function(data, dist, min_pmix, range_shape1, range_shape2,
+                    control, pars = NULL, hessian = TRUE, ...) {
   pars <- sdist(dist, data, pars)
   model <- tmb_model(dist, data, pars = pars)
   bounds <- bdist(dist, data, min_pmix, range_shape1, range_shape2)

@@ -76,7 +76,7 @@
 #' @param rescale A flag specifying whether to rescale concentration values by dividing by the largest finite value.
 #' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param right A string of the column in data with the right concentration values.
-#' @param root A flag specifying whether to calculate the value by finding the root.
+#' @param multi A flag specifying whether to treat the distributions as constituting a single distribution.
 #' @param scale scale parameter.
 #' @param scalelog1 scalelog1 parameter.
 #' @param scalelog2 scalelog2 parameter.
@@ -101,9 +101,43 @@
 #' @param xlab A string of the x-axis label.
 #' @param yintercept The y-value for the intersect.
 #' @param ylab A string of the x-axis label.
-#' @param wt_est A data frame with dist, wt, and est columns specifying the
-#' distributions, weights and a list column of estimate data frames with 
-#' term and est columns specifying the estimated value for each parameter.
+#' @param burrIII3.weight weight parameter for the Burr III distribution.
+#' @param burrIII3.shape1 shape1 parameter for the Burr III distribution.
+#' @param burrIII3.shape2 shape2 parameter for the Burr III distribution.
+#' @param burrIII3.scale scale parameter for the Burr III distribution.
+#' @param gamma.weight weight parameter for the gamma distribution.
+#' @param gamma.shape shape parameter for the gamma distribution.
+#' @param gamma.scale scale parameter for the gamma distribution.
+#' @param gompertz.weight weight parameter for the Gompertz distribution.
+#' @param gompertz.location location parameter for the Gompertz distribution.
+#' @param gompertz.shape shape parameter for the Gompertz distribution.
+#' @param invpareto.weight weight parameter for the inverse Pareto distribution.
+#' @param invpareto.shape shape parameter for the inverse Pareto distribution.
+#' @param invpareto.scale scale parameter for the inverse Pareto distribution.
+#' @param lgumbel.weight weight parameter for the log-Gumbel distribution.
+#' @param lgumbel.locationlog location parameter for the log-Gumbel distribution.
+#' @param lgumbel.scalelog scale parameter for the log-Gumbel distribution.
+#' @param llogis.weight weight parameter for the log-logistic distribution.
+#' @param llogis.locationlog location parameter for the log-logistic distribution.
+#' @param llogis.scalelog scale parameter for the log-logistic distribution.
+#' @param llogis_llogis.weight weight parameter for the log-logistic log-logistic mixture distribution.
+#' @param llogis_llogis.locationlog1 locationlog1 parameter for the log-logistic log-logistic mixture distribution.
+#' @param llogis_llogis.scalelog1 scalelog1 parameter for the log-logistic log-logistic mixture distribution.
+#' @param llogis_llogis.locationlog2 locationlog2 parameter for the log-logistic log-logistic mixture distribution.
+#' @param llogis_llogis.scalelog2 scalelog2 parameter for the log-logistic log-logistic mixture distribution.
+#' @param llogis_llogis.pmix pmix parameter for the log-logistic log-logistic mixture distribution.
+#' @param lnorm.weight weight parameter for the log-normal distribution.
+#' @param lnorm.meanlog meanlog parameter for the log-normal distribution.
+#' @param lnorm.sdlog sdlog parameter for the log-normal distribution.
+#' @param lnorm_lnorm.weight weight parameter for the log-normal log-normal mixture distribution.
+#' @param lnorm_lnorm.meanlog1 meanlog1 parameter for the log-normal log-normal mixture distribution.
+#' @param lnorm_lnorm.sdlog1 sdlog1 parameter for the log-normal log-normal mixture distribution.
+#' @param lnorm_lnorm.meanlog2 meanlog2 parameter for the log-normal log-normal mixture distribution.
+#' @param lnorm_lnorm.sdlog2 sdlog2 parameter for the log-normal log-normal mixture distribution.
+#' @param lnorm_lnorm.pmix pmix parameter for the log-normal log-normal mixture distribution.
+#' @param weibull.weight weight parameter for the Weibull distribution.
+#' @param weibull.shape shape parameter for the Weibull distribution.
+#' @param weibull.scale scale parameter for the Weibull distribution.
 #' @param ... Unused.
 #' @keywords internal
 #' @name params

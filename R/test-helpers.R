@@ -127,8 +127,8 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FA
   
   if(!multi) {
     ests <- ep(glue::glue("ssd_e{dist}()"))
-    testthat::expect_true(vld_atomic(ests))
-    testthat::expect_true(vld_numeric(ests))
+    testthat::expect_true(vld_list(ests))
+    testthat::expect_true(vld_all(ests, vld_number))
     testthat::expect_true(vld_length(ests, length = 2L, upper = 5L))
     testthat::expect_true(vld_named(ests))
     

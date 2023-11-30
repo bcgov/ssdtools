@@ -22,7 +22,7 @@ estimates.tmbfit <- function(x, ...) {
 
 #' Estimates for fitdists Object
 #'
-#' Gets a named list of the estimated values by distribution and term.
+#' Gets a named list of the estimated weights and parameters.
 #'
 #' @inheritParams params
 #' @return A named list of the estimates.
@@ -30,12 +30,30 @@ estimates.tmbfit <- function(x, ...) {
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
-#' estimates <- estimates(fits)
-#' print(estimates)
-#' ssd_hc(estimates)
-#' ssd_plot_cdf(estimates)
-estimates.fitdists <- function(x, ...) {
+#' estimates(fits)
+estimates.fitdists <- function(x, multi = FALSE, ...) {
+  chk_flag(multi)
+  chk_unused(...)
+  estimates <- .list_estimates(x, multi = multi)
+  as.list(unlist(estimates))
+}
+
+.list_estimates <- function(x, multi = TRUE) {
   y <- lapply(x, estimates)
+  wt <- glance(x)$weight
+  y <- purrr::map2(y, wt, function(a, b) c(list(weight = b), a))
   names(y) <- names(x)
-  y
+  if(!multi) {
+    return(y)
+  }
+  all <- emulti_ssd()
+  wall <- purrr::map(all, function(x) {x$weight <- 0; x})
+  args <- y
+  args$.x <- wall
+  do.call("list_assign", args)
+}
+
+.relist_estimates <- function(x) {
+  list <- relist(x, skeleton = emulti_ssd())
+  purrr::map(list, function(x) as.list(unlist(x)))
 }

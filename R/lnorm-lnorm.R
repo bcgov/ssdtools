@@ -21,9 +21,9 @@ ssd_plnorm_lnorm <- function(q, meanlog1 = 0, sdlog1 = 1,
                              meanlog2 = 1, sdlog2 = 1, pmix = 0.5,
                              lower.tail = TRUE, log.p = FALSE) {
   pdist("lnorm_lnorm",
-    q = q, meanlog1 = meanlog1, sdlog1 = sdlog1,
-    meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix,
-    lower.tail = lower.tail, log.p = log.p
+        q = q, meanlog1 = meanlog1, sdlog1 = sdlog1,
+        meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix,
+        lower.tail = lower.tail, log.p = log.p
   )
 }
 
@@ -36,9 +36,9 @@ ssd_qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
                              meanlog2 = 1, sdlog2 = 1, pmix = 0.5,
                              lower.tail = TRUE, log.p = FALSE) {
   qdist("lnorm_lnorm",
-    p = p, meanlog1 = meanlog1, sdlog1 = sdlog1,
-    meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix,
-    lower.tail = lower.tail, log.p = log.p
+        p = p, meanlog1 = meanlog1, sdlog1 = sdlog1,
+        meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix,
+        lower.tail = lower.tail, log.p = log.p
   )
 }
 
@@ -51,8 +51,8 @@ ssd_qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
 ssd_rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
                              meanlog2 = 1, sdlog2 = 1, pmix = 0.5, chk = TRUE) {
   rdist("lnorm_lnorm",
-    n = n, meanlog1 = meanlog1, sdlog1 = sdlog1,
-    meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix, chk = chk
+        n = n, meanlog1 = meanlog1, sdlog1 = sdlog1,
+        meanlog2 = meanlog2, sdlog2 = sdlog2, pmix = pmix, chk = chk
   )
 }
 
@@ -62,7 +62,7 @@ ssd_rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
 #'
 #' ssd_elnorm_lnorm()
 ssd_elnorm_lnorm <- function() {
-  c(meanlog1 = 0, sdlog1 = 1,
+  list(meanlog1 = 0, sdlog1 = 1,
        meanlog2 = 1, sdlog2 = 1, pmix = 0.5)
 }
 
@@ -70,9 +70,9 @@ slnorm_lnorm <- function(data, pars = NULL) {
   if (!is.null(pars)) {
     return(pars)
   }
-
+  
   x <- mean_weighted_values(data)
-
+  
   x <- sort(x)
   n <- length(x)
   n2 <- floor(n / 2)
@@ -104,11 +104,15 @@ qlnorm_lnorm_ssd <- function(p, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
   if (sdlog1 <= 0 || sdlog2 <= 0 || pmix <= 0 || pmix >= 1) {
     return(NaN)
   }
-
-  f <- function(x) {
+  
+  f <- function(x, p) {
     plnorm_lnorm_ssd(x, meanlog1, sdlog1, meanlog2, sdlog2, pmix) - p
   }
-  stats::uniroot(f, lower = 0, upper = 10, extendInt = "upX", tol = .Machine$double.eps)$root
+  q <- rep(NA_real_, length(p))
+  for(i in seq_along(p)) {
+    q[i] <- stats::uniroot(f, p = p[i], lower = 0, upper = 10, extendInt = "upX", tol = .Machine$double.eps)$root
+  }
+  q
 }
 
 rlnorm_lnorm_ssd <- function(n, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {

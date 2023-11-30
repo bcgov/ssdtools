@@ -66,7 +66,48 @@ ssd_qlnorm_lnorm(
 
 ssd_qlnorm(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE)
 
-ssd_qmulti(p, wt_est = ssd_emulti(), lower.tail = TRUE, log.p = FALSE)
+ssd_qmulti(
+  p,
+  burrIII3.weight = 0,
+  burrIII3.shape1 = 1,
+  burrIII3.shape2 = 1,
+  burrIII3.scale = 1,
+  gamma.weight = 1/6,
+  gamma.shape = 1,
+  gamma.scale = 1,
+  gompertz.weight = 0,
+  gompertz.location = 1,
+  gompertz.shape = 1,
+  invpareto.weight = 0,
+  invpareto.shape = 3,
+  invpareto.scale = 1,
+  lgumbel.weight = 1/6,
+  lgumbel.locationlog = 0,
+  lgumbel.scalelog = 1,
+  llogis.weight = 1/6,
+  llogis.locationlog = 0,
+  llogis.scalelog = 1,
+  llogis_llogis.weight = 0,
+  llogis_llogis.locationlog1 = 0,
+  llogis_llogis.scalelog1 = 1,
+  llogis_llogis.locationlog2 = 1,
+  llogis_llogis.scalelog2 = 1,
+  llogis_llogis.pmix = 0.5,
+  lnorm.weight = 1/6,
+  lnorm.meanlog = 0,
+  lnorm.sdlog = 1,
+  lnorm_lnorm.weight = 1/6,
+  lnorm_lnorm.meanlog1 = 0,
+  lnorm_lnorm.sdlog1 = 1,
+  lnorm_lnorm.meanlog2 = 1,
+  lnorm_lnorm.sdlog2 = 1,
+  lnorm_lnorm.pmix = 0.5,
+  weibull.weight = 1/6,
+  weibull.shape = 1,
+  weibull.scale = 1,
+  lower.tail = TRUE,
+  log.p = FALSE
+)
 
 ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 }
@@ -113,9 +154,79 @@ ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 
 \item{sdlog}{standard deviation on log scale parameter.}
 
-\item{wt_est}{A data frame with dist, wt, and est columns specifying the
-distributions, weights and a list column of estimate data frames with
-term and est columns specifying the estimated value for each parameter.}
+\item{burrIII3.weight}{weight parameter for the Burr III distribution.}
+
+\item{burrIII3.shape1}{shape1 parameter for the Burr III distribution.}
+
+\item{burrIII3.shape2}{shape2 parameter for the Burr III distribution.}
+
+\item{burrIII3.scale}{scale parameter for the Burr III distribution.}
+
+\item{gamma.weight}{weight parameter for the gamma distribution.}
+
+\item{gamma.shape}{shape parameter for the gamma distribution.}
+
+\item{gamma.scale}{scale parameter for the gamma distribution.}
+
+\item{gompertz.weight}{weight parameter for the Gompertz distribution.}
+
+\item{gompertz.location}{location parameter for the Gompertz distribution.}
+
+\item{gompertz.shape}{shape parameter for the Gompertz distribution.}
+
+\item{invpareto.weight}{weight parameter for the inverse Pareto distribution.}
+
+\item{invpareto.shape}{shape parameter for the inverse Pareto distribution.}
+
+\item{invpareto.scale}{scale parameter for the inverse Pareto distribution.}
+
+\item{lgumbel.weight}{weight parameter for the log-Gumbel distribution.}
+
+\item{lgumbel.locationlog}{location parameter for the log-Gumbel distribution.}
+
+\item{lgumbel.scalelog}{scale parameter for the log-Gumbel distribution.}
+
+\item{llogis.weight}{weight parameter for the log-logistic distribution.}
+
+\item{llogis.locationlog}{location parameter for the log-logistic distribution.}
+
+\item{llogis.scalelog}{scale parameter for the log-logistic distribution.}
+
+\item{llogis_llogis.weight}{weight parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.locationlog1}{locationlog1 parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.scalelog1}{scalelog1 parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.locationlog2}{locationlog2 parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.scalelog2}{scalelog2 parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{llogis_llogis.pmix}{pmix parameter for the log-logistic log-logistic mixture distribution.}
+
+\item{lnorm.weight}{weight parameter for the log-normal distribution.}
+
+\item{lnorm.meanlog}{meanlog parameter for the log-normal distribution.}
+
+\item{lnorm.sdlog}{sdlog parameter for the log-normal distribution.}
+
+\item{lnorm_lnorm.weight}{weight parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.meanlog1}{meanlog1 parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.sdlog1}{sdlog1 parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.meanlog2}{meanlog2 parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.sdlog2}{sdlog2 parameter for the log-normal log-normal mixture distribution.}
+
+\item{lnorm_lnorm.pmix}{pmix parameter for the log-normal log-normal mixture distribution.}
+
+\item{weibull.weight}{weight parameter for the Weibull distribution.}
+
+\item{weibull.shape}{shape parameter for the Weibull distribution.}
+
+\item{weibull.scale}{scale parameter for the Weibull distribution.}
 }
 \description{
 Quantile Function

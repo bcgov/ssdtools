@@ -52,7 +52,7 @@ ssd_rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE) {
 #'
 #' ssd_eburrIII3()
 ssd_eburrIII3 <- function() {
-  c(shape1 = 1, shape2 = 1, scale = 1)
+  list(shape1 = 1, shape2 = 1, scale = 1)
 }
 
 sburrIII3 <- function(data, pars = NULL) {

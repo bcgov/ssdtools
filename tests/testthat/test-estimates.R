@@ -18,6 +18,12 @@ test_that("estimates", {
   estimates <- estimates(fits)
   expect_type(estimates, "list")
   expect_snapshot_output(print(estimates))
-  tidy <- tidy(fits)
-  expect_identical(unlist(estimates), setNames(tidy$est, paste(tidy$dist, tidy$term, sep = ".")))
+})
+
+test_that("estimates multi = TRUE", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  
+  estimates <- estimates(fits, multi = TRUE)
+  expect_type(estimates, "list")
+  expect_snapshot_output(print(estimates))
 })

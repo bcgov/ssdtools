@@ -52,7 +52,7 @@ ssd_rweibull <- function(n, shape = 1, scale = 1, chk = TRUE) {
 #'
 #' ssd_eweibull()
 ssd_eweibull <- function() {
-  c(shape = 1, scale = 1)
+  list(shape = 1, scale = 1)
 }
 
 sweibull <- function(data, pars = NULL) {
