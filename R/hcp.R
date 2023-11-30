@@ -105,7 +105,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     x, value, ci, level, nboot, min_pboot,
     data, rescale, weighted, censoring, min_pmix,
     range_shape1, range_shape2, parametric, control, hc,
-    fun = fit_tmb) {
+    fun) {
   estimates <- estimates(x)
   dist <- .dist_tmbfit(x)
   pars <- .pars_tmbfit(x)
@@ -226,7 +226,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
                       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                       parametric = parametric, control = control,
-                      hc = hc)
+                      hc = hc, fun = fit_tmb)
     
     weight <- purrr::map_dbl(estimates, function(x) x$weight)
     if(!average) {
@@ -255,7 +255,8 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     nboot,
     min_pboot,
     parametric,
-    hc) {
+    hc,
+    fun = fit_burrlioz) {
   
   control <- .control_fitdists(x)
   data <- .data_fitdists(x)
@@ -281,7 +282,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                    parametric = parametric,
-                   control = control, hc = hc, fun = fit_burrlioz
+                   control = control, hc = hc, fun = fun
   )$burrIII3
 }
 
