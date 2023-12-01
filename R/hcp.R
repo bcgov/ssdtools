@@ -248,45 +248,6 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   hcp
 }
 
-.ssd_hcp_burrlioz <- function(
-    x, 
-    value, 
-    ci,
-    level,
-    nboot,
-    min_pboot,
-    parametric,
-    hc,
-    fun = fit_burrlioz) {
-  
-  control <- .control_fitdists(x)
-  data <- .data_fitdists(x)
-  rescale <- .rescale_fitdists(x)
-  censoring <- .censoring_fitdists(x)
-  min_pmix <- .min_pmix_fitdists(x)
-  range_shape1 <- .range_shape1_fitdists(x)
-  range_shape2 <- .range_shape2_fitdists(x)
-  weighted <- .weighted_fitdists(x)
-  unequal <- .unequal_fitdists(x)
-  
-  if (parametric && identical(censoring, c(NA_real_, NA_real_))) {
-    err("Parametric CIs cannot be calculated for inconsistently censored data.")
-  }
-  
-  if (parametric && unequal) {
-    err("Parametric CIs cannot be calculated for unequally weighted data.")
-  }
-  
-  hc <- purrr::map(x, .ssd_hcp_tmbfit,
-                   value = value, ci = ci,
-                   level = level, nboot = nboot, min_pboot = min_pboot,
-                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                   parametric = parametric,
-                   control = control, hc = hc, fun = fun
-  )$burrIII3
-}
-
 ssd_hcp_fitdists <- function(
     x, 
     value, 
@@ -336,21 +297,3 @@ ssd_hcp_fitdists <- function(
   )
   warn_min_pboot(hcp, min_pboot)
 }
-
-ssd_hcp_burrlioz <- function(x, value, ci, level, nboot, min_pboot, parametric, hc) {
-  ssd_hcp_fitdists (
-    x = x,
-    value = value, 
-    ci = ci,
-    level = level,
-    nboot = nboot,
-    average = FALSE,
-    delta = Inf,
-    min_pboot = min_pboot,
-    parametric = parametric,
-    multi = TRUE,
-    control = NULL,
-    hc = hc,
-    fun = fit_burrlioz)
-}
-

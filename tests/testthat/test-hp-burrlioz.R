@@ -32,7 +32,7 @@ test_that("ssd_hp_burrlioz gets estimates with burrIII3", {
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
-  expect_warning(hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0))
+  hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0)
   expect_snapshot_data(hp_burrIII3, "hp_burrIII3")
 })
 
@@ -52,10 +52,9 @@ test_that("ssd_hp_burrlioz gets estimates with burrIII3 parametric", {
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
-  expect_warning(hp_burrIII3 <- ssd_hp(fit,
-                                 nboot = 10, ci = TRUE, min_pboot = 0,
-                                 parametric = TRUE
-  ))
+  hp_burrIII3 <- ssd_hp(fit,
+                        nboot = 10, ci = TRUE, min_pboot = 0,
+                        parametric = TRUE
+  )
   expect_snapshot_data(hp_burrIII3, "hp_burrIII3_parametric")
 })
-
