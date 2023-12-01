@@ -59,7 +59,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   )
 
   if(!is.null(save_to)) {
-    if(requireNamespace("readr", quietly = TRUE)) {
+    if(!requireNamespace("readr", quietly = TRUE)) {
       err("Package 'readr' must be installed.")
     }
     readr::write_csv(new_data, boot_filepath(i, dist, save_to))
