@@ -80,7 +80,7 @@ ssd_hc.fitdists <- function(
     delta = 7, 
     min_pboot = 0.99,
     parametric = TRUE, 
-    multi = FALSE,
+    multi = TRUE,
     control = NULL, 
     ...) {
   

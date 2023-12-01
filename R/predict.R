@@ -33,7 +33,7 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              average = TRUE, delta = 7,
                              min_pboot = 0.99,
                              parametric = TRUE,
-                             multi = FALSE,
+                             multi = TRUE,
                              control = NULL,
                              ...) {
   chk_unused(...)

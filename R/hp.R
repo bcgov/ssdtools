@@ -35,7 +35,7 @@ ssd_hp <- function(x, ...) {
 ssd_hp.fitdists <- function(
     x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
     average = TRUE,  delta = 7, min_pboot = 0.99,
-    parametric = TRUE, multi = FALSE, control = NULL, ...
+    parametric = TRUE, multi = TRUE, control = NULL, ...
 ) {
   
   chk_vector(conc)

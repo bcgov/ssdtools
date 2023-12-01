@@ -16,8 +16,8 @@
 test_that("hc multi lnorm", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hc_dist <- ssd_hc(fits, average = FALSE)
-  hc_average <- ssd_hc(fits, average = TRUE)
+  hc_dist <- ssd_hc(fits, average = FALSE, multi = FALSE)
+  hc_average <- ssd_hc(fits, average = TRUE, multi = FALSE)
   hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE)
   expect_identical(hc_dist$est, hc_average$est)
   expect_equal(hc_multi, hc_average)
@@ -30,7 +30,7 @@ test_that("hc multi lnorm", {
 test_that("hc multi all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE)
+  hc_average <- ssd_hc(fits, average = TRUE, multi = FALSE)
   hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE)
   expect_equal(hc_average$est, 1.24151700389853)
   expect_equal(hc_multi$est, 1.25678623624403)
@@ -42,9 +42,9 @@ test_that("hc multi all", {
 test_that("hc multi lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100)
+  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100, multi = FALSE)
   set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE)
   set.seed(102)
   hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
   
@@ -64,7 +64,7 @@ test_that("hc multi lnorm ci", {
 test_that("hc multi lnorm default 100", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE)
   set.seed(102)
   hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
 
@@ -82,7 +82,7 @@ test_that("hc multi lnorm default 100", {
   # <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
   #   -   1 average       5  1.26 0.752 0.360  3.25     1 parametric   100     1
   # +   1 average       5  1.26 0.744 0.426  3.25     1 parametric   100     1
-  skip_on_windows()
+  testthat::skip_on_os("windows")
   testthat::expect_snapshot({
     hc_multi
   })
