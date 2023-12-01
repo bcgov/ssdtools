@@ -77,6 +77,7 @@
 #' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param right A string of the column in data with the right concentration values.
 #' @param multi A flag specifying whether to treat the distributions as constituting a single distribution.
+#' @param save_to A string specifying a directory to save the bootstrap datasets to or NULL.
 #' @param scale scale parameter.
 #' @param scalelog1 scalelog1 parameter.
 #' @param scalelog2 scalelog2 parameter.

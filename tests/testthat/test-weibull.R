@@ -38,6 +38,6 @@ test_that("weibull works anona", {
 test_that("weibull bootstraps anona", {
   set.seed(99)
   fit <- ssd_fit_dists(ssddata::anon_a, dists = "weibull")
-  hc <- ssd_hc(fit, nboot = 1000, ci = TRUE)
+  hc <- ssd_hc(fit, nboot = 1000, ci = TRUE, multi = FALSE)
   expect_snapshot_data(hc, "hc_anona")
 })

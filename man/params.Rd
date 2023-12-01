@@ -125,6 +125,8 @@ remove them with a warning.}
 
 \item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
 
+\item{save_to}{A string specifying a directory to save the bootstrap datasets to or NULL.}
+
 \item{scale}{scale parameter.}
 
 \item{scalelog1}{scalelog1 parameter.}

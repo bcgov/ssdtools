@@ -35,7 +35,8 @@ ssd_hp <- function(x, ...) {
 ssd_hp.fitdists <- function(
     x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
     average = TRUE,  delta = 7, min_pboot = 0.99,
-    parametric = TRUE, multi = FALSE, control = NULL, ...
+    parametric = TRUE, multi = TRUE, control = NULL, 
+    save_to = NULL, ...
 ) {
   
   chk_vector(conc)
@@ -45,7 +46,8 @@ ssd_hp.fitdists <- function(
   hcp <- ssd_hcp_fitdists(
     x = x, value = conc, ci = ci, level = level, nboot = nboot,
     average = average, delta = delta, min_pboot = min_pboot,
-    parametric = parametric, multi = multi, control = control, hc = FALSE
+    parametric = parametric, multi = multi, control = control, 
+    save_to = save_to, hc = FALSE
   )
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp
@@ -59,7 +61,8 @@ ssd_hp.fitdists <- function(
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #' ssd_hp(fit)
 ssd_hp.fitburrlioz <- function(x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
-                               min_pboot = 0.99, parametric = FALSE, ...) {
+                               min_pboot = 0.99, parametric = FALSE, 
+                               save_to = NULL, ...) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
@@ -82,6 +85,7 @@ ssd_hp.fitburrlioz <- function(x, conc = 1, ci = FALSE, level = 0.95, nboot = 10
     parametric = parametric,
     multi = TRUE,
     control = NULL,
+    save_to = save_to,
     hc = FALSE,
     fun = fun)
   
