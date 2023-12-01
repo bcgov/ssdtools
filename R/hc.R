@@ -124,24 +124,16 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
   chk_vector(percent)
   chk_numeric(percent)
   chk_range(percent, c(0, 100))
-  chk_flag(ci)
   chk_unused(...)
-  
-  if (names(x) != "burrIII3" || !ci || !length(percent)) {
-    class(x) <- class(x)[-1]
-    return(ssd_hc(x,
-                  percent = percent, ci = ci, level = level,
-                  nboot = nboot, min_pboot = min_pboot,
-                  average = FALSE, parametric = parametric
-    ))
-  }
-  
+
+  fun <- if(names(x) == "burrIII3") fit_burrlioz else fit_tmb
+
   proportion <- percent / 100
   
   hcp <-   ssd_hcp_fitdists (
     x = x,
     value = proportion, 
-    ci = TRUE,
+    ci = ci,
     level = level,
     nboot = nboot,
     average = FALSE,
@@ -151,7 +143,7 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
     multi = TRUE,
     control = NULL,
     hc = TRUE,
-    fun = fit_burrlioz)
+    fun = fun)
   
   hcp <- dplyr::rename(hcp, percent = "value")
   hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)

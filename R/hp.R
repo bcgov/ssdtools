@@ -68,19 +68,12 @@ ssd_hp.fitburrlioz <- function(x, conc = 1, ci = FALSE, level = 0.95, nboot = 10
   chk_flag(ci)
   chk_unused(...)
   
-  if (names(x) != "burrIII3" || !ci || !length(conc)) {
-    class(x) <- class(x)[-1]
-    return(ssd_hp(x,
-                  conc = conc, ci = ci, level = level,
-                  nboot = nboot, min_pboot = min_pboot,
-                  average = FALSE, parametric = parametric
-    ))
-  }
+  fun <- if(names(x) == "burrIII3") fit_burrlioz else fit_tmb
   
-  hcp <-   ssd_hcp_fitdists (
+  hcp <- ssd_hcp_fitdists (
     x = x,
     value = conc, 
-    ci = TRUE,
+    ci = ci,
     level = level,
     nboot = nboot,
     average = FALSE,
@@ -90,8 +83,8 @@ ssd_hp.fitburrlioz <- function(x, conc = 1, ci = FALSE, level = 0.95, nboot = 10
     multi = TRUE,
     control = NULL,
     hc = FALSE,
-    fun = fit_burrlioz)
-
+    fun = fun)
+  
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp
 }
