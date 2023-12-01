@@ -82,7 +82,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   }
   
   censoring <- censoring / rescale
-
+  
   ests <- boot_estimates(fun = fun, dist = dist, estimates = estimates, 
                          pars = pars, nboot = nboot, data = data, weighted = weighted,
                          censoring = censoring, min_pmix = min_pmix,
@@ -104,10 +104,10 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
 .ssd_hcp_tmbfit <- function(
     x, value, ci, level, nboot, min_pboot,
     data, rescale, weighted, censoring, min_pmix,
-    range_shape1, range_shape2, parametric, control, hc) {
+    range_shape1, range_shape2, parametric, control, hc,
+    fun) {
   estimates <- estimates(x)
   dist <- .dist_tmbfit(x)
-  fun <- fit_tmb
   pars <- .pars_tmbfit(x)
   
   .ssd_hcp(x, dist = dist, estimates = estimates, 
@@ -183,7 +183,8 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     parametric, 
     multi, 
     control,
-    hc) {
+    hc,
+    fun) {
   
   if (!length(x) || !length(value)) {
     return(no_hcp())
@@ -226,7 +227,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
                       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                       parametric = parametric, control = control,
-                      hc = hc)
+                      hc = hc, fun = fun)
     
     weight <- purrr::map_dbl(estimates, function(x) x$weight)
     if(!average) {
@@ -241,7 +242,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, hc = hc)
-
+  
   hcp$method <- method
   hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
   hcp
@@ -259,7 +260,8 @@ ssd_hcp_fitdists <- function(
     parametric,
     multi,
     control,
-    hc) {
+    hc,
+    fun = fit_tmb) {
   
   chk_vector(value)
   chk_numeric(value)
@@ -290,7 +292,8 @@ ssd_hcp_fitdists <- function(
     parametric = parametric,
     multi = multi,
     control = control,
-    hc = hc
+    hc = hc,
+    fun = fun
   )
   warn_min_pboot(hcp, min_pboot)
 }

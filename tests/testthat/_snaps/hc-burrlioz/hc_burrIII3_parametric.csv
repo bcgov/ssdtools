@@ -1,2 +1,2 @@
-dist,percent,est,se,lcl,ucl,method,nboot,pboot
-burrIII3,5,0.0180122,0.0149874,0.00621681,0.0503455,parametric,10,1
+dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot
+burrIII3,5,0.0180122,0.0149874,0.00621681,0.0503455,1,parametric,10,1
