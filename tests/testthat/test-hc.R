@@ -167,7 +167,7 @@ test_that("ssd_hc fitdists works fractions", {
 test_that("ssd_hc fitdists averages", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  hc <- ssd_hc(fits)
+  hc <- ssd_hc(fits, multi = FALSE)
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_data(hc, "hc145")
 })
@@ -178,10 +178,10 @@ test_that("ssd_hc fitdists correctly averages", {
   library(ssddata)
   library(testthat)
   fits <- ssd_fit_dists(ssddata::aims_molybdenum_marine, dists = c("lgumbel", "lnorm_lnorm"))
-  hc <- ssd_hc(fits, average = FALSE)
+  hc <- ssd_hc(fits, average = FALSE, multi = FALSE)
   expect_equal(hc$est, c(3881.17238083968, 5540.68414532741))
   expect_equal(hc$wt, c(0.0968427088339105, 0.90315729116609))
-  hc_avg <- ssd_hc(fits)
+  hc_avg <- ssd_hc(fits, multi = FALSE)
   expect_equal(hc_avg$est, sum(hc$est * hc$wt))
 })
 
@@ -215,8 +215,8 @@ test_that("ssd_hc fitdists correct for rescaling", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
-  hc <- ssd_hc(fits)
-  hc_rescale <- ssd_hc(fits_rescale)
+  hc <- ssd_hc(fits, multi = FALSE)
+  hc_rescale <- ssd_hc(fits_rescale, multi = FALSE)
   expect_equal(hc_rescale, hc, tolerance = 1e-05)
 })
 
@@ -225,7 +225,7 @@ test_that("ssd_hc fitdists cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE)
+  hc <- ssd_hc(fits, ci = TRUE, multi = FALSE)
   expect_s3_class(hc, "tbl_df")
 
   expect_snapshot_data(hc, "hc_cis")
@@ -236,7 +236,7 @@ test_that("ssd_hc fitdists cis level = 0.8", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, level = 0.8)
+  hc <- ssd_hc(fits, ci = TRUE, level = 0.8, multi = FALSE)
   expect_s3_class(hc, "tbl_df")
 
   expect_snapshot_data(hc, "hc_cis_level08")
@@ -250,7 +250,7 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   data$Conc2[1] <- 1.0
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
   expect_equal(hc$se, 0.475836654747499)
 
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
@@ -269,7 +269,7 @@ test_that("ssd_hc works with fully left censored data", {
   data$Conc <- 0
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
   expect_equal(hc$se, 0.000753574383044124)
 })
 
@@ -320,7 +320,7 @@ test_that("ssd_hc calculates cis with equally weighted data", {
   data$Weight <- rep(2, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
   expect_equal(hc$se, 0.455819097122445)
 })
 
@@ -329,7 +329,7 @@ test_that("ssd_hc calculates cis in parallel but one distribution", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
   expect_equal(hc$se, 0.455819097122445)
 })
 
@@ -337,7 +337,7 @@ test_that("ssd_hc calculates cis with two distributions", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
   expect_equal(hc$se, 0.511475169043532)
 })
 
@@ -346,7 +346,7 @@ test_that("ssd_hc calculates cis in parallel with two distributions", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
   expect_equal(hc$se, 0.511475169043532)
 })
 
@@ -384,9 +384,9 @@ test_that("ssd_hc effect with higher weight two distributions", {
   data$Weight <- rep(10, nrow(data))
   fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
   set.seed(10)
-  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
+  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, multi = FALSE)
   expect_equal(hc$est, 1.64903597051184)
   expect_equal(hc_10$est, 1.6811748398812)
   expect_equal(hc$se, 0.511475169043532)
@@ -399,10 +399,10 @@ test_that("ssd_hc cis with non-convergence", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
   expect_identical(attr(fit, "min_pmix"), 0.15)
-  hc15 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9)
+  hc15 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, multi = FALSE)
   attr(fit, "min_pmix") <- 0.3
   expect_identical(attr(fit, "min_pmix"), 0.3)
-  hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9)
+  hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, multi = FALSE)
   expect_s3_class(hc30, "tbl")
   expect_snapshot_boot_data(hc30, "hc_30")
 })
@@ -420,7 +420,7 @@ test_that("ssd_hc cis with error and multiple dists", {
   set.seed(99)
   expect_warning(hc_err_avg <- ssd_hc(fit,
     ci = TRUE, nboot = 100,
-    delta = 100
+    delta = 100, multi = FALSE
   ))
   expect_snapshot_boot_data(hc_err_avg, "hc_err_avg")
 })
@@ -429,7 +429,7 @@ test_that("ssd_hc with 1 bootstrap", {
   
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(10)
-  hc <- ssd_hc(fit, ci = TRUE, nboot = 1)
+  hc <- ssd_hc(fit, ci = TRUE, nboot = 1, multi = FALSE)
   expect_snapshot_data(hc, "hc_1")
 })
 
@@ -487,4 +487,88 @@ test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
   expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE))
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_boot_data(hc, "hc_cis_chloride50")
+})
+
+test_that("ssd_hc save_to", {
+  dir <- withr::local_tempdir()
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  set.seed(102)
+  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir)
+  expect_snapshot_boot_data(hc, "hc_save_to")
+  expect_identical(list.files(dir), c("boot_000000001_multi.csv", "boot_000000002_multi.csv", "boot_000000003_multi.csv"))
+  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  expect_snapshot_boot_data(hc, "hc_save_to1")
+})
+
+test_that("ssd_hc save_to multi = FALSE", {
+  dir <- withr::local_tempdir()
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  set.seed(102)
+  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, multi = FALSE)
+  expect_snapshot_boot_data(hc, "hc_save_to_not_multi")
+  expect_identical(list.files(dir), c("boot_000000001_lnorm.csv", "boot_000000002_lnorm.csv", "boot_000000003_lnorm.csv"))
+  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_lnorm.csv"))
+  expect_snapshot_boot_data(hc, "hc_save_to1_not_multi")
+})
+
+test_that("ssd_hc save_to multi = FALSE default", {
+  dir <- withr::local_tempdir()
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  set.seed(102)
+  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, multi = FALSE)
+  expect_snapshot_boot_data(hc, "hc_save_to_not_multi_default")
+  expect_identical(sort(list.files(dir)), sort(c("boot_000000001_gamma.csv", "boot_000000001_lgumbel.csv", "boot_000000001_llogis.csv", 
+                                     "boot_000000001_lnorm_lnorm.csv", "boot_000000001_lnorm.csv", 
+                                     "boot_000000001_weibull.csv", "boot_000000002_gamma.csv", "boot_000000002_lgumbel.csv", 
+                                     "boot_000000002_llogis.csv", "boot_000000002_lnorm_lnorm.csv", 
+                                     "boot_000000002_lnorm.csv", "boot_000000002_weibull.csv", "boot_000000003_gamma.csv", 
+                                     "boot_000000003_lgumbel.csv", "boot_000000003_llogis.csv", "boot_000000003_lnorm_lnorm.csv", 
+                                     "boot_000000003_lnorm.csv", "boot_000000003_weibull.csv")))
+  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_lnorm.csv"))
+  expect_snapshot_boot_data(hc, "hc_save_to1_not_multi_default")
+})
+
+test_that("ssd_hc save_to rescale", {
+  dir <- withr::local_tempdir()
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm", rescale = TRUE)
+  set.seed(102)
+  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir)
+  expect_snapshot_boot_data(hc, "hc_save_to_rescale")
+  expect_identical(list.files(dir), c("boot_000000001_multi.csv", "boot_000000002_multi.csv", "boot_000000003_multi.csv"))
+  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  expect_snapshot_boot_data(hc, "hc_save_to1_rescale")
+})
+
+test_that("ssd_hc save_to lnorm 1", {
+  dir <- withr::local_tempdir()
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  set.seed(102)
+  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
+  expect_snapshot_boot_data(hc, "hc_save_to11")
+  expect_identical(list.files(dir), "boot_000000001_multi.csv")
+  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  fit1 <- ssd_fit_dists(boot1, dist = "lnorm", left = "left", right = "right", weight = "weight")
+  est <- ssd_hc(fit1)$est
+  expect_identical(hc$lcl, est)
+  expect_identical(hc$lcl, hc$ucl)
+})
+
+test_that("ssd_hc save_to replaces", {
+  dir <- withr::local_tempdir()
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  set.seed(102)
+  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
+  expect_identical(list.files(dir), "boot_000000001_multi.csv")
+  boot <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  hc2 <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
+  expect_identical(list.files(dir), "boot_000000001_multi.csv")
+  boot2 <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  expect_snapshot_boot_data(boot, "hc_boot1_replace")
+  expect_snapshot_boot_data(boot2, "hc_boot2_replace")
 })

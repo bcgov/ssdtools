@@ -17,8 +17,8 @@ test_that("hp multi lnorm", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hp_dist <- ssd_hp(fits, average = FALSE)
-  hp_average <- ssd_hp(fits, average = TRUE)
+  hp_dist <- ssd_hp(fits, average = FALSE, multi = FALSE)
+  hp_average <- ssd_hp(fits, average = TRUE, multi = FALSE)
   hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE)
   expect_identical(hp_average$est, hp_dist$est)
   expect_equal(hp_multi, hp_average)
@@ -46,9 +46,9 @@ test_that("hp multi all", {
 test_that("hp multi lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100)
+  hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, multi = FALSE)
   set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100)
+  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE)
   set.seed(102)
   hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
   
@@ -68,7 +68,7 @@ test_that("hp multi lnorm ci", {
 test_that("hp multi lnorm default 100", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100)
+  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE)
   set.seed(102)
   hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
   
@@ -84,6 +84,7 @@ test_that("hp multi lnorm default 100", {
   # <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
   #   -   1 average     1  3.90  3.41 0.361  10.6     1 parametric   100     1
   # +   1 average     1  3.90  2.81 0.361  10.6     1 parametric   100     1
+  testthat::skip_on_os("windows")
   testthat::expect_snapshot({
     hp_multi
   })
