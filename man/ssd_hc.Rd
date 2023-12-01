@@ -23,6 +23,7 @@ ssd_hc(x, ...)
   parametric = TRUE,
   multi = TRUE,
   control = NULL,
+  save_to = NULL,
   ...
 )
 
@@ -34,6 +35,7 @@ ssd_hc(x, ...)
   nboot = 1000,
   min_pboot = 0.99,
   parametric = FALSE,
+  save_to = NULL,
   ...
 )
 }
@@ -62,6 +64,8 @@ fit in the sense of returning a likelihood.}
 \item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
+
+\item{save_to}{A string specifying a directory to save the bootstrap datasets to or NULL.}
 }
 \value{
 A tibble of corresponding hazard concentrations.

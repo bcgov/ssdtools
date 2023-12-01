@@ -44,11 +44,26 @@ generate_data <- function(dist, data, args, weighted, censoring, parametric) {
   sample_parametric(dist, args = args, weighted = weighted, censoring = censoring)
 }
 
-sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, parametric, control) {
+boot_filename <- function(i, dist) {
+  paste0("boot_", sprintf("%09s", i), "_", dist, ".csv")
+}
+
+boot_filepath <- function(i, dist, save_to) {
+  file.path(save_to, boot_filename(i, dist))
+}
+
+sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, parametric, control, save_to) {
   new_data <- generate_data(dist,
     data = data, args = args, weighted = weighted, censoring = censoring,
     parametric = parametric
   )
+
+  if(!is.null(save_to)) {
+    if(requireNamespace("readr", quietly = TRUE)) {
+      err("Package 'readr' must be installed.")
+    }
+    readr::write_csv(new_data, boot_filepath(i, dist, save_to))
+  }
 
   if (dist == "lnorm_lnorm") {
     pars <- slnorm_lnorm(new_data)
@@ -69,7 +84,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   estimates(fit, multi = TRUE)
 }
 
-boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control) {
+boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control, save_to) {
   sfun <- safely(fun)
 
   args <- list(n = nrow(data))
@@ -84,7 +99,7 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     data = data, args = args, pars = pars,
     weighted = weighted, censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control,
+    parametric = parametric, control = control, save_to = save_to,
     .options = furrr::furrr_options(seed = seeds)
   )
 
