@@ -1,0 +1,2 @@
+dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot
+invpareto,1,8.57733,2.41834,4.66069,11.3967,1,non-parametric,10,1
