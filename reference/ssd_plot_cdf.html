@@ -66,7 +66,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for fitdists</span></span>
-<span><span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">x</span>, average <span class="op">=</span> <span class="cn">FALSE</span>, delta <span class="op">=</span> <span class="fl">7</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">x</span>, average <span class="op">=</span> <span class="cn">FALSE</span>, delta <span class="op">=</span> <span class="fl">7</span>, multi <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for list</span></span>
 <span><span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -88,6 +88,10 @@
 
 <dt>delta</dt>
 <dd><p>A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.</p></dd>
+
+
+<dt>multi</dt>
+<dd><p>A flag specifying whether to treat the distributions as constituting a single distribution.</p></dd>
 
 </dl></div>
     <div class="section level2">

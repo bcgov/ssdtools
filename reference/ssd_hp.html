@@ -76,8 +76,9 @@
 <span>  delta <span class="op">=</span> <span class="fl">7</span>,</span>
 <span>  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  multi <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  multi <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  save_to <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -90,6 +91,7 @@
 <span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  save_to <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -143,6 +145,10 @@ fit in the sense of returning a likelihood.</p></dd>
 
 <dt>control</dt>
 <dd><p>A list of control parameters passed to <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>.</p></dd>
+
+
+<dt>save_to</dt>
+<dd><p>A string specifying a directory to save the bootstrap datasets to or NULL.</p></dd>
 
 </dl></div>
     <div class="section level2">
