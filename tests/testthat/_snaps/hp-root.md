@@ -56,5 +56,5 @@
       # A tibble: 1 x 10
         dist     conc   est    se   lcl   ucl    wt method     nboot pboot
         <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average     1  3.90  3.41 0.361  10.6     1 parametric   100     1
+      1 average     1  3.90  3.57 0.347  11.2     1 parametric   100  0.86
 

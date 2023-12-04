@@ -6,6 +6,8 @@
 \arguments{
 \item{all}{A flag specifying whether to also return transformed parameters.}
 
+\item{all_dists}{A flag specifying whether all the named distributions must fit successfully.}
+
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).}
 
