@@ -274,6 +274,7 @@ ssd_hcp_fitdists <- function(
   chk_range(level)
   chk_whole_number(nboot)
   chk_gt(nboot)
+  chk_lt(nboot, 1e+09)
   chk_flag(average)
   chk_number(delta)
   chk_gte(delta)

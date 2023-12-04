@@ -37,7 +37,7 @@
 #' ssd_wqg_bc(ssddata::ccme_boron)
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
-  fits <- ssd_fit_dists(data, left = left, rescale = TRUE)
+  fits <- ssd_fit_dists(data, left = left, rescale = FALSE)
   ssd_hc(fits, ci = TRUE, delta = 7, nboot = 10000)
 }
 
@@ -66,6 +66,6 @@ ssd_wqg_bc <- function(data, left = "Conc") {
 #' ssd_wqg_burrlioz(ssddata::ccme_boron)
 #' }
 ssd_wqg_burrlioz <- function(data, left = "Conc") {
-  fit <- ssd_fit_burrlioz(data, left = left, rescale = TRUE)
+  fit <- ssd_fit_burrlioz(data, left = left, rescale = FALSE)
   ssd_hc_burrlioz(fit, ci = TRUE, nboot = 10000)
 }
