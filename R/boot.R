@@ -59,9 +59,6 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   )
 
   if(!is.null(save_to)) {
-    if(!requireNamespace("readr", quietly = TRUE)) {
-      err("Package 'readr' must be installed.")
-    }
     readr::write_csv(new_data, boot_filepath(i, dist, save_to))
   }
 
@@ -91,6 +88,13 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
   args <- c(args, estimates)
 
   data <- data[c("left", "right", "weight")]
+  
+  if(!is.null(save_to)) {
+    if(!requireNamespace("readr", quietly = TRUE)) {
+      err("Package 'readr' must be installed.")
+    }
+    readr::write_csv(data, boot_filepath(0, dist, save_to))
+  }
   
   seeds <- seed_streams(nboot)
 
