@@ -497,7 +497,7 @@ test_that("ssd_hc save_to", {
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir)
   expect_snapshot_boot_data(hc, "hc_save_to")
   expect_identical(list.files(dir), c("boot_000000001_multi.csv", "boot_000000002_multi.csv", "boot_000000003_multi.csv"))
-  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  boot1 <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
   expect_snapshot_boot_data(hc, "hc_save_to1")
 })
 
@@ -509,7 +509,7 @@ test_that("ssd_hc save_to multi = FALSE", {
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, multi = FALSE)
   expect_snapshot_boot_data(hc, "hc_save_to_not_multi")
   expect_identical(list.files(dir), c("boot_000000001_lnorm.csv", "boot_000000002_lnorm.csv", "boot_000000003_lnorm.csv"))
-  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_lnorm.csv"))
+  boot1 <- read.csv(file.path(dir, "boot_000000001_lnorm.csv"))
   expect_snapshot_boot_data(hc, "hc_save_to1_not_multi")
 })
 
@@ -527,7 +527,7 @@ test_that("ssd_hc save_to multi = FALSE default", {
                                      "boot_000000002_lnorm.csv", "boot_000000002_weibull.csv", "boot_000000003_gamma.csv", 
                                      "boot_000000003_lgumbel.csv", "boot_000000003_llogis.csv", "boot_000000003_lnorm_lnorm.csv", 
                                      "boot_000000003_lnorm.csv", "boot_000000003_weibull.csv")))
-  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_lnorm.csv"))
+  boot1 <- read.csv(file.path(dir, "boot_000000001_lnorm.csv"))
   expect_snapshot_boot_data(hc, "hc_save_to1_not_multi_default")
 })
 
@@ -539,7 +539,7 @@ test_that("ssd_hc save_to rescale", {
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir)
   expect_snapshot_boot_data(hc, "hc_save_to_rescale")
   expect_identical(list.files(dir), c("boot_000000001_multi.csv", "boot_000000002_multi.csv", "boot_000000003_multi.csv"))
-  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  boot1 <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
   expect_snapshot_boot_data(hc, "hc_save_to1_rescale")
 })
 
@@ -551,7 +551,7 @@ test_that("ssd_hc save_to lnorm 1", {
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
   expect_snapshot_boot_data(hc, "hc_save_to11")
   expect_identical(list.files(dir), "boot_000000001_multi.csv")
-  boot1 <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  boot1 <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
   fit1 <- ssd_fit_dists(boot1, dist = "lnorm", left = "left", right = "right", weight = "weight")
   est <- ssd_hc(fit1)$est
   expect_identical(hc$lcl, est)
@@ -565,10 +565,10 @@ test_that("ssd_hc save_to replaces", {
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
   expect_identical(list.files(dir), "boot_000000001_multi.csv")
-  boot <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  boot <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
   hc2 <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
   expect_identical(list.files(dir), "boot_000000001_multi.csv")
-  boot2 <- readr::read_csv(file.path(dir, "boot_000000001_multi.csv"))
+  boot2 <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
   expect_snapshot_boot_data(boot, "hc_boot1_replace")
   expect_snapshot_boot_data(boot2, "hc_boot2_replace")
 })

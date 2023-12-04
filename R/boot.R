@@ -45,7 +45,7 @@ generate_data <- function(dist, data, args, weighted, censoring, parametric) {
 }
 
 boot_filename <- function(i, dist) {
-  paste0("boot_", sprintf("%09s", i), "_", dist, ".csv")
+  paste0("boot_", stringr::str_pad(i, width = 9, pad = "0"), "_", dist, ".csv")
 }
 
 boot_filepath <- function(i, dist, save_to) {
