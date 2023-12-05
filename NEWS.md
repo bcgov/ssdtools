@@ -1,42 +1,37 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9004
+# ssdtools 1.0.6.9005
 
-- Renamed `root = TRUE` argument to `multi = TRUE`.
-- `estimates.fitdists()` now includes weights as parameters.
-- `estimates.fitdists()` now returns all distributions by default.
-- Removed `ssd_wt_est()`.
-- Added `wt` to `ssd_hp()` table.
-- Changed how seeds allocated to bootstrap samples. 
+Additions
 
-# ssdtools 1.0.6.9003
-
-- Added `ssd_exx()` functions to get 
-default parameter estimates for distributions. (@poissonconsulting, #317).
-
-# ssdtools 1.0.6.9002
-
-- `ssd_hc.fitdists()` and `ssd_hp.fitdists()` now have `root = FALSE`
+- `ssd_hc.fitdists()` and `ssd_hp.fitdists()` now have `multi = TRUE`
 argument to get estimates based on `ssd_qmulti()` and `ssd_pmulti()` when
 `average = TRUE`.
-- Added `ssd_wt_est()` to get weights and parameter estimates for distributions.
 - Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` 
-for weights and parameter estimates for distributions.
+for weights and parameter estimates for combined distributions.
+- Added `save_to` argument to specify a directory in which to save the bootstrap datasets as csv files. The files are named `boot_000000001_xx.csv` etc where `xx` is the distribution. The parent data set is named `boot_000000000_xx.csv`.
+- Added `ssd_hp.fitburrlioz()` function.
+- Added `ssd_exx()` functions to get 
+default parameter estimates for distributions.
+- Added David Fox and Rebecca Fisher as co-authors.
+
+Modifications
+
+- `estimates.fitdists()` now returns all distributions by default and includes weights as parameters.
+- `ssd_fit_bcanz()`, `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` no longer rescale data.
+- seeds now allocated to bootstrap samples. 
+
+Fixes
+
+ - `ssd_hc()` and `ssd_hp()` now include `parametric` column.
+ - `ssd_hp()` now includes `wt` column
+ 
+Deprecation
+
 - `is_censored()`, `ssd_plot_cf()` and `comma_signif(...)` now warn deprecated unconditionally.
 - `plot.fitdists()` now defunct.
 - Removed defunct `ssd_cfplot()`
 - Removed `ccme_data` and `ccme_boron` data set.
-
-
-# ssdtools 1.0.6.9001
-
-- Added David Fox and Rebecca Fisher as co-authors.
-
-
-# ssdtools 1.0.6.9000
-
-- Same as previous version.
-
 
 # ssdtools 1.0.6
 
