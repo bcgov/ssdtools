@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9005</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,41 +57,34 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.6.9004" id="ssdtools-1069004">ssdtools 1.0.6.9004<a class="anchor" aria-label="anchor" href="#ssdtools-1069004"></a></h2>
-<ul><li>Renamed <code>root = TRUE</code> argument to <code>multi = TRUE</code>.</li>
-<li>
-<code><a href="../reference/estimates.fitdists.html">estimates.fitdists()</a></code> now includes weights as parameters.</li>
-<li>
-<code><a href="../reference/estimates.fitdists.html">estimates.fitdists()</a></code> now returns all distributions by default.</li>
-<li>Removed <code>ssd_wt_est()</code>.</li>
-<li>Added <code>wt</code> to <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> table.</li>
-<li>Changed how seeds allocated to bootstrap samples.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.6.9003" id="ssdtools-1069003">ssdtools 1.0.6.9003<a class="anchor" aria-label="anchor" href="#ssdtools-1069003"></a></h2>
-<ul><li>Added <code>ssd_exx()</code> functions to get default parameter estimates for distributions. (<a href="https://github.com/poissonconsulting" class="external-link">@poissonconsulting</a>, <a href="https://github.com/bcgov/ssdtools/issues/317" class="external-link">#317</a>).</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.6.9002" id="ssdtools-1069002">ssdtools 1.0.6.9002<a class="anchor" aria-label="anchor" href="#ssdtools-1069002"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.6.9005" id="ssdtools-1069005">ssdtools 1.0.6.9005<a class="anchor" aria-label="anchor" href="#ssdtools-1069005"></a></h2>
+<p>Additions</p>
 <ul><li>
-<code><a href="../reference/ssd_hc.html">ssd_hc.fitdists()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp.fitdists()</a></code> now have <code>root = FALSE</code> argument to get estimates based on <code><a href="../reference/ssd_q.html">ssd_qmulti()</a></code> and <code><a href="../reference/ssd_p.html">ssd_pmulti()</a></code> when <code>average = TRUE</code>.</li>
-<li>Added <code>ssd_wt_est()</code> to get weights and parameter estimates for distributions.</li>
-<li>Added <code><a href="../reference/ssd_p.html">ssd_pmulti()</a></code>, <code><a href="../reference/ssd_q.html">ssd_qmulti()</a></code> and <code><a href="../reference/ssd_r.html">ssd_rmulti()</a></code> for weights and parameter estimates for distributions.</li>
+<code><a href="../reference/ssd_hc.html">ssd_hc.fitdists()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp.fitdists()</a></code> now have <code>multi = TRUE</code> argument to get estimates based on <code><a href="../reference/ssd_q.html">ssd_qmulti()</a></code> and <code><a href="../reference/ssd_p.html">ssd_pmulti()</a></code> when <code>average = TRUE</code>.</li>
+<li>Added <code><a href="../reference/ssd_p.html">ssd_pmulti()</a></code>, <code><a href="../reference/ssd_q.html">ssd_qmulti()</a></code> and <code><a href="../reference/ssd_r.html">ssd_rmulti()</a></code> for weights and parameter estimates for combined distributions.</li>
+<li>Added <code>save_to</code> argument to specify a directory in which to save the bootstrap datasets as csv files. The files are named <code>boot_000000001_xx.csv</code> etc where <code>xx</code> is the distribution. The parent data set is named <code>boot_000000000_xx.csv</code>.</li>
+<li>Added <code><a href="../reference/ssd_hp.html">ssd_hp.fitburrlioz()</a></code> function.</li>
+<li>Added <code>ssd_exx()</code> functions to get default parameter estimates for distributions.</li>
+<li>Added David Fox and Rebecca Fisher as co-authors.</li>
+</ul><p>Modifications</p>
+<ul><li>
+<code><a href="../reference/estimates.fitdists.html">estimates.fitdists()</a></code> now returns all distributions by default and includes weights as parameters.</li>
 <li>
+<code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code>, <code><a href="../reference/ssd_wqg_bc.html">ssd_wqg_bc()</a></code> and <code><a href="../reference/ssd_wqg_burrlioz.html">ssd_wqg_burrlioz()</a></code> no longer rescale data.</li>
+<li>seeds now allocated to bootstrap samples.</li>
+</ul><p>Fixes</p>
+<ul><li>
+<code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now include <code>parametric</code> column.</li>
+<li>
+<code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now includes <code>wt</code> column</li>
+</ul><p>Deprecation</p>
+<ul><li>
 <code><a href="../reference/is_censored.html">is_censored()</a></code>, <code><a href="../reference/ssd_plot_cf.html">ssd_plot_cf()</a></code> and <code>comma_signif(...)</code> now warn deprecated unconditionally.</li>
 <li>
 <code>plot.fitdists()</code> now defunct.</li>
 <li>Removed defunct <code>ssd_cfplot()</code>
 </li>
 <li>Removed <code>ccme_data</code> and <code>ccme_boron</code> data set.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.6.9001" id="ssdtools-1069001">ssdtools 1.0.6.9001<a class="anchor" aria-label="anchor" href="#ssdtools-1069001"></a></h2>
-<ul><li>Added David Fox and Rebecca Fisher as co-authors.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.6.9000" id="ssdtools-1069000">ssdtools 1.0.6.9000<a class="anchor" aria-label="anchor" href="#ssdtools-1069000"></a></h2>
-<ul><li>Same as previous version.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.6" id="ssdtools-106">ssdtools 1.0.6<a class="anchor" aria-label="anchor" href="#ssdtools-106"></a></h2><p class="text-muted">CRAN release: 2023-09-07</p>
