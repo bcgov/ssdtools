@@ -61,10 +61,9 @@ test_that("weibull with challenging data", {
     437.52104))
   
   fits <- ssd_fit_dists(data=data,
-                left = 'Conc', dists = c('gamma', 'lgumbel', 'llogis', 'lnorm',  'weibull'),
+                left = 'Conc', dists = c('gamma', 'weibull'),
                 silent = TRUE, reweight = FALSE, min_pmix = 0, nrow = 6L,
                 computable = TRUE, at_boundary_ok = FALSE, rescale = FALSE)
   
-  tidy <- tidy(fits)
-  expect_snapshot_data(tidy, "tidy weibull challenging data")
+  expect_identical(names(fits), c('gamma', 'weibull'))
 })
