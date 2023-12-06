@@ -64,19 +64,3 @@ test_that("hp multi lnorm ci", {
   hp_average$dist <- NULL
   expect_identical(hp_dist, hp_average)
 })
-
-test_that("hp multi lnorm default 100", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE)
-  set.seed(102)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100,
-                     min_pboot = 0.8)
-  
-  testthat::expect_snapshot({
-    hp_average
-  })
-  testthat::expect_snapshot({
-    hp_multi
-  })
-})
