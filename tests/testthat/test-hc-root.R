@@ -74,7 +74,6 @@ test_that("hc multi lnorm default 100", {
   })
 
 
-  testthat::skip_on_os("windows")
   testthat::expect_snapshot({
     hc_multi
   })
