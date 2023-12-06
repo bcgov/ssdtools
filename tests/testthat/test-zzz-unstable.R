@@ -37,8 +37,8 @@ test_that("weibull is unstable", {
                         computable = TRUE, at_boundary_ok = FALSE, rescale = FALSE)
   
   # not sure why weibull dropping on some OS
-  testthat::skip_on_ci() 
-  testthat::skip_on_cran()
+  # testthat::skip_on_ci() 
+  # testthat::skip_on_cran()
   expect_identical(names(fits), c('gamma', 'weibull'))
 })
 
