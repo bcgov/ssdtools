@@ -79,6 +79,7 @@
 <span>  multi <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  save_to <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fix_weights <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -149,6 +150,10 @@ fit in the sense of returning a likelihood.</p></dd>
 
 <dt>save_to</dt>
 <dd><p>A string specifying a directory to save the bootstrap datasets to or NULL.</p></dd>
+
+
+<dt>fix_weights</dt>
+<dd><p>A flag specifying whether to fix the model weights when performing <code>multi</code> bootstrapping.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -80,6 +80,7 @@
 <span>  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fix_weights <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  save_to <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -144,6 +145,10 @@ fit in the sense of returning a likelihood.</p></dd>
 
 <dt>multi</dt>
 <dd><p>A flag specifying whether to treat the distributions as constituting a single distribution.</p></dd>
+
+
+<dt>fix_weights</dt>
+<dd><p>A flag specifying whether to fix the model weights when performing <code>multi</code> bootstrapping.</p></dd>
 
 
 <dt>control</dt>
