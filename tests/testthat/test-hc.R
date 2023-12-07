@@ -573,3 +573,15 @@ test_that("ssd_hc save_to replaces", {
   expect_snapshot_boot_data(boot, "hc_boot1_replace")
   expect_snapshot_boot_data(boot2, "hc_boot2_replace")
 })
+
+test_that("ssd_hc fix_weight", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  
+  set.seed(102)
+  hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, fix_weights = FALSE)
+  expect_snapshot_boot_data(hc_unfix, "hc_unfix")
+  
+  set.seed(102)
+  hc_fix <- ssd_hc(fits, nboot = 100, ci = TRUE, fix_weights = TRUE)
+  expect_snapshot_boot_data(hc_fix, "hc_fix")
+})
