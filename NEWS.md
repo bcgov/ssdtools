@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9005
+# ssdtools 1.0.6.9006
 
 Additions
 
@@ -10,6 +10,7 @@ argument to get estimates based on `ssd_qmulti()` and `ssd_pmulti()` when
 - Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` 
 for weights and parameter estimates for combined distributions.
 - Implemented bootstrapping for `ssd_hc.fitdists()` and `ssd_hp.fitdists()` based on combined distributions.
+- Add `fix_weights = TRUE` argument to `ssd_hc()` and `ssd_hp()` to specify whether to fix the model weights when performing `multi` bootstrapping.
 - Added `save_to` argument to specify a directory in which to save the bootstrap datasets as csv files. The files are named `boot_000000001_xx.csv` etc where `xx` is the distribution. The parent data set is named `boot_000000000_xx.csv`.
 - Added `ssd_hp.fitburrlioz()` function.
 - Added `ssd_exx()` functions to get 
