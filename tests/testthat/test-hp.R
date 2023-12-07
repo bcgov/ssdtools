@@ -317,3 +317,16 @@ test_that("ssd_hp with 1 bootstrap", {
   hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 1, multi = FALSE)
   expect_snapshot_data(hp, "hp_1")
 })
+
+test_that("ssd_hp fix_weight", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  
+  set.seed(102)
+  hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = FALSE)
+  expect_snapshot_boot_data(hc_unfix, "hc_unfix")
+  
+  set.seed(102)
+  hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = TRUE)
+  expect_snapshot_boot_data(hc_fix, "hc_fix")
+})
+

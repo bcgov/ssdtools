@@ -104,19 +104,23 @@ fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control
 }
 
 fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control,
-                       censoring, weighted,
+                       censoring, weighted, all_dists = TRUE,
                        at_boundary_ok= TRUE, silent = TRUE, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
   fits <- fit_dists(data, dists,
                     min_pmix = min_pmix, range_shape1 = range_shape1,
                     range_shape2 = range_shape2,
                     at_boundary_ok = at_boundary_ok,
                     control = control, silent = silent, 
-                    rescale = rescale, computable = computable,
+                    rescale = rescale, computable = computable
                     
   )
-  
-  if (!length(fits)) err("All distributions failed to fit.")
-  
+  if (!length(fits)) {
+    err("All distributions failed to fit.")
+  }
+  if(all_dists && length(fits) != length(dists)) {
+    err("One or more distributions failed to fit.")
+  }
+
   attrs <- list()
   attrs$data <- data
   attrs$control <- control
@@ -163,6 +167,7 @@ ssd_fit_dists <- function(
     reweight = FALSE,
     computable = TRUE,
     at_boundary_ok = FALSE,
+    all_dists = FALSE,
     min_pmix = 0,
     range_shape1 = c(0.05, 20),
     range_shape2 = range_shape1,
@@ -184,6 +189,7 @@ ssd_fit_dists <- function(
   chk_flag(reweight)
   chk_flag(computable)
   chk_flag(at_boundary_ok)
+  chk_flag(all_dists)
   chk_number(min_pmix)
   chk_range(min_pmix, c(0, 0.5))
   chk_numeric(range_shape1)
@@ -211,6 +217,7 @@ ssd_fit_dists <- function(
   fits <- fits_dists(attrs$data, dists,
              min_pmix = min_pmix, range_shape1 = range_shape1,
              range_shape2 = range_shape2,
+             all_dists = all_dists,
              at_boundary_ok = at_boundary_ok,
              control = control, silent = silent, 
              rescale = attrs$rescale, computable = computable,

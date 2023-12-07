@@ -21,6 +21,7 @@ ssd_hp(x, ...)
   multi = TRUE,
   control = NULL,
   save_to = NULL,
+  fix_weights = TRUE,
   ...
 )
 
@@ -63,6 +64,8 @@ fit in the sense of returning a likelihood.}
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
 \item{save_to}{A string specifying a directory to save the bootstrap datasets to or NULL.}
+
+\item{fix_weights}{A flag specifying whether to fix the model weights when performing \code{multi} bootstrapping.}
 }
 \value{
 A tibble of corresponding hazard percents.

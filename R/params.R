@@ -14,6 +14,7 @@
 
 #' Parameter Descriptions for ssdtools Functions
 #' @param all A flag specifying whether to also return transformed parameters.
+#' @param all_dists A flag specifying whether all the named distributions must fit successfully.
 #' @param at_boundary_ok A flag specifying whether a model with one or more
 #' parameters at the boundary should be considered to have converged (default = FALSE).
 #' @param average A flag specifying whether to model average the estimates.
@@ -31,6 +32,7 @@
 #' @param delta A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.
 #' @param digits A whole number specifying the number of significant figures.
 #' @param dists A character vector of the distribution names.
+#' @param fix_weights A flag specifying whether to fix the model weights when performing `multi` bootstrapping.
 #' @param hc A count between 1 and 99 indicating the percent hazard concentration (or NULL).
 #' @param label A string of the column in data with the labels.
 #' @param left A string of the column in data with the concentrations.

@@ -6,6 +6,8 @@
 \arguments{
 \item{all}{A flag specifying whether to also return transformed parameters.}
 
+\item{all_dists}{A flag specifying whether all the named distributions must fit successfully.}
+
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).}
 
@@ -36,6 +38,8 @@ relative to the extremes for non-missing values.}
 \item{digits}{A whole number specifying the number of significant figures.}
 
 \item{dists}{A character vector of the distribution names.}
+
+\item{fix_weights}{A flag specifying whether to fix the model weights when performing \code{multi} bootstrapping.}
 
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 

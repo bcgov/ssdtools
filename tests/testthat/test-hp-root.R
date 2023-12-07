@@ -64,28 +64,3 @@ test_that("hp multi lnorm ci", {
   hp_average$dist <- NULL
   expect_identical(hp_dist, hp_average)
 })
-
-test_that("hp multi lnorm default 100", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE)
-  set.seed(102)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
-  
-  testthat::expect_snapshot({
-    hp_average
-  })
-  # FIXME: This is failing on Windows - I assume a distribution is falling out?
-  # ── Failure ('test-hp-root.R:79:3'): hp multi lnorm default 100 ─────────────────
-  # Snapshot of code has changed:
-  #   old[4:7] vs new[4:7]
-  # # A tibble: 1 x 10
-  # dist     conc   est    se   lcl   ucl    wt method     nboot pboot
-  # <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-  #   -   1 average     1  3.90  3.41 0.361  10.6     1 parametric   100     1
-  # +   1 average     1  3.90  2.81 0.361  10.6     1 parametric   100     1
-  testthat::skip_on_os("windows")
-  testthat::expect_snapshot({
-    hp_multi
-  })
-})

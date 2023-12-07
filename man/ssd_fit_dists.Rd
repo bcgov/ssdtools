@@ -15,6 +15,7 @@ ssd_fit_dists(
   reweight = FALSE,
   computable = TRUE,
   at_boundary_ok = FALSE,
+  all_dists = FALSE,
   min_pmix = 0,
   range_shape1 = c(0.05, 20),
   range_shape2 = range_shape1,
@@ -43,6 +44,8 @@ ssd_fit_dists(
 
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).}
+
+\item{all_dists}{A flag specifying whether all the named distributions must fit successfully.}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 
