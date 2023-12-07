@@ -93,13 +93,6 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
 
   data <- data[c("left", "right", "weight")]
   
-  if(!is.null(save_to)) {
-    if(!requireNamespace("readr", quietly = TRUE)) {
-      err("Package 'readr' must be installed.")
-    }
-    readr::write_csv(data, boot_filepath(0, dist, save_to))
-  }
-  
   seeds <- seed_streams(nboot)
   
   if(fix_weights) {
@@ -117,6 +110,13 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     wts = wts,
     .options = furrr::furrr_options(seed = seeds)
   )
+  
+  if(!is.null(save_to)) {
+    if(!requireNamespace("readr", quietly = TRUE)) {
+      err("Package 'readr' must be installed.")
+    }
+    readr::write_csv(data, boot_filepath(0, dist, save_to))
+  }
 
   estimates[!vapply(estimates, is.null, TRUE)]
 }
