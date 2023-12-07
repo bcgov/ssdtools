@@ -85,7 +85,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   est
 }
 
-boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control, save_to) {
+boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control, save_to, fix_weights) {
   sfun <- safely(fun)
 
   args <- list(n = nrow(data))
@@ -101,13 +101,20 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
   }
   
   seeds <- seed_streams(nboot)
-
+  
+  if(fix_weights) {
+    wts <- estimates[stringr::str_detect(names(estimates), "\\.weight$")]
+  } else {
+    wts <- NULL
+  }
+  
   estimates <- future_map(1:nboot, sample_parameters,
     dist = dist, fun = sfun,
     data = data, args = args, pars = pars,
     weighted = weighted, censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to,
+    wts = wts,
     .options = furrr::furrr_options(seed = seeds)
   )
 

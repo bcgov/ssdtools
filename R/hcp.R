@@ -64,7 +64,8 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     x, dist, estimates, 
     fun, pars, value, ci, level, nboot, min_pboot,
     data, rescale, weighted, censoring, min_pmix,
-    range_shape1, range_shape2, parametric, control, save_to, hc) {
+    range_shape1, range_shape2, parametric, control, save_to, hc,
+    fix_weights = FALSE) {
   
   args <- estimates
   
@@ -90,7 +91,8 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
                          range_shape2 = range_shape2,
                          parametric = parametric,
                          control = control, 
-                         save_to = save_to
+                         save_to = save_to,
+                         fix_weights = fix_weights
   )
   x <- value
   if(!hc) {
@@ -124,7 +126,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
 .ssd_hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control, 
-                           save_to, hc) {
+                           save_to, fix_weights, hc) {
   estimates <- estimates(x, multi = TRUE)
   dist <- "multi"
   fun <- fits_dists
@@ -137,7 +139,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
                   data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                   min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                   parametric = parametric, control = control, save_to = save_to,
-                  hc = hc)
+                  hc = hc, fix_weights = fix_weights)
   hcp$dist <- "average"
   hcp
 }
@@ -184,6 +186,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     min_pboot, 
     parametric, 
     multi, 
+    fix_weights,
     control,
     hc,
     save_to,
@@ -244,7 +247,8 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control, save_to = save_to, hc = hc)
+    parametric = parametric, control = control, save_to = save_to,
+    fix_weights = fix_weights, hc = hc)
   
   hcp$method <- method
   hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
@@ -265,6 +269,7 @@ ssd_hcp_fitdists <- function(
     control,
     save_to,
     hc,
+    fix_weights,
     fun = fit_tmb) {
   
   chk_vector(value)
@@ -282,6 +287,7 @@ ssd_hcp_fitdists <- function(
   chk_range(min_pboot)
   chk_flag(parametric)
   chk_flag(multi)
+  chk_flag(fix_weights)
   chk_null_or(control, vld = vld_list)
   chk_null_or(save_to, vld = vld_dir)
   
@@ -297,6 +303,7 @@ ssd_hcp_fitdists <- function(
     min_pboot = min_pboot,
     parametric = parametric,
     multi = multi,
+    fix_weights = fix_weights,
     control = control,
     save_to = save_to,
     hc = hc,

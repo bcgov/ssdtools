@@ -22,6 +22,7 @@ ssd_hc(x, ...)
   min_pboot = 0.99,
   parametric = TRUE,
   multi = TRUE,
+  fix_weights = TRUE,
   control = NULL,
   save_to = NULL,
   ...
@@ -62,6 +63,8 @@ fit in the sense of returning a likelihood.}
 \item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
 
 \item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
+
+\item{fix_weights}{A flag specifying whether to fix the model weights when performing \code{multi} bootstrapping.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 

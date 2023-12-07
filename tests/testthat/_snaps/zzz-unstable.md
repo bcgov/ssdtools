@@ -16,7 +16,7 @@
       # A tibble: 1 x 10
         dist    percent   est    se   lcl   ucl    wt method     nboot pboot
         <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average       5  1.26 0.781 0.331  3.25     1 parametric   100  0.86
+      1 average       5  1.26 0.582 0.364  2.69     1 parametric   100  0.86
 
 # hp multi lnorm default 100
 
@@ -36,5 +36,5 @@
       # A tibble: 1 x 10
         dist     conc   est    se   lcl   ucl    wt method     nboot pboot
         <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-      1 average     1  3.90  3.57 0.347  11.2     1 parametric   100  0.86
+      1 average     1  3.90  2.57  1.46  10.4     1 parametric   100  0.86
 

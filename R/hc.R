@@ -81,6 +81,7 @@ ssd_hc.fitdists <- function(
     min_pboot = 0.99,
     parametric = TRUE, 
     multi = TRUE,
+    fix_weights = TRUE,
     control = NULL, 
     save_to = NULL,
     ...) {
@@ -103,6 +104,7 @@ ssd_hc.fitdists <- function(
     min_pboot = min_pboot,
     parametric = parametric,
     multi = multi,
+    fix_weights = fix_weights,
     control = control,
     save_to = save_to,
     hc = TRUE)
@@ -147,6 +149,7 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
     save_to = save_to,
     control = NULL,
     hc = TRUE,
+    fix_weights = FALSE,
     fun = fun)
   
   hcp <- dplyr::rename(hcp, percent = "value")
