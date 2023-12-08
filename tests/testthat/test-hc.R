@@ -18,7 +18,7 @@ test_that("hc", {
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
   expect_s3_class(hc, "tbl")
-  expect_snapshot_boot_data(hc, "hc")
+  expect_snapshot_data(hc, "hc")
 })
 
 test_that("ssd_hc list must be named", {
@@ -404,7 +404,7 @@ test_that("ssd_hc cis with non-convergence", {
   expect_identical(attr(fit, "min_pmix"), 0.3)
   hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, multi = FALSE)
   expect_s3_class(hc30, "tbl")
-  expect_snapshot_boot_data(hc30, "hc_30")
+  expect_snapshot_data(hc30, "hc_30")
 })
 
 test_that("ssd_hc cis with error and multiple dists", {
@@ -448,7 +448,7 @@ test_that("ssd_hc_burrlioz gets estimates with invpareto", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
   hc_boron <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
-  expect_snapshot_boot_data(hc_boron, "hc_boron")
+  expect_snapshot_data(hc_boron, "hc_boron")
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
@@ -459,7 +459,7 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
   hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
-  expect_snapshot_boot_data(hc_burrIII3, "hc_burrIII3")
+  expect_snapshot_data(hc_burrIII3, "hc_burrIII3")
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
@@ -473,7 +473,7 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
                         nboot = 10, ci = TRUE, min_pboot = 0,
                         parametric = TRUE
   )
-  expect_snapshot_boot_data(hc_burrIII3, "hc_burrIII3_parametric")
+  expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
 })
 
 test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
@@ -495,12 +495,30 @@ test_that("ssd_hc save_to", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir)
-  expect_snapshot_boot_data(hc, "hc_save_to")
-  expect_identical(list.files(dir), c("boot_000000000_multi.csv", "boot_000000001_multi.csv", "boot_000000002_multi.csv", "boot_000000003_multi.csv"))
-  data <- read.csv(file.path(dir, "boot_000000000_multi.csv"))
-  expect_snapshot_boot_data(hc, "hc_save_to1data")
-  boot1 <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
-  expect_snapshot_boot_data(hc, "hc_save_to1")
+  expect_snapshot_data(hc, "hc_save_to")
+  expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 
+                                      "data_000000003_multi.csv", "estimates_000000000_multi.rds", 
+                                      "estimates_000000001_multi.rds", "estimates_000000002_multi.rds", 
+                                      "estimates_000000003_multi.rds"))
+  data <- read.csv(file.path(dir, "data_000000000_multi.csv"))
+  expect_snapshot_data(hc, "hc_save_to1data")
+  boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
+  expect_snapshot_data(hc, "hc_save_to1")
+  ests <- readRDS(file.path(dir, "estimates_000000000_multi.rds"))
+  ests1 <- readRDS(file.path(dir, "estimates_000000001_multi.rds"))
+  
+  expect_identical(names(ests), names(ests1))
+  expect_identical(names(ests), c("burrIII3.weight", "burrIII3.shape1", "burrIII3.shape2", "burrIII3.scale", 
+                                  "gamma.weight", "gamma.shape", "gamma.scale", "gompertz.weight", 
+                                  "gompertz.location", "gompertz.shape", "invpareto.weight", "invpareto.shape", 
+                                  "invpareto.scale", "lgumbel.weight", "lgumbel.locationlog", "lgumbel.scalelog", 
+                                  "llogis.weight", "llogis.locationlog", "llogis.scalelog", "llogis_llogis.weight", 
+                                  "llogis_llogis.locationlog1", "llogis_llogis.scalelog1", "llogis_llogis.locationlog2", 
+                                  "llogis_llogis.scalelog2", "llogis_llogis.pmix", "lnorm.weight", 
+                                  "lnorm.meanlog", "lnorm.sdlog", "lnorm_lnorm.weight", "lnorm_lnorm.meanlog1", 
+                                  "lnorm_lnorm.sdlog1", "lnorm_lnorm.meanlog2", "lnorm_lnorm.sdlog2", 
+                                  "lnorm_lnorm.pmix", "weibull.weight", "weibull.shape", "weibull.scale"
+  ))
 })
 
 test_that("ssd_hc save_to multi = FALSE", {
@@ -509,10 +527,13 @@ test_that("ssd_hc save_to multi = FALSE", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, multi = FALSE)
-  expect_snapshot_boot_data(hc, "hc_save_to_not_multi")
-  expect_identical(list.files(dir), c("boot_000000000_lnorm.csv", "boot_000000001_lnorm.csv", "boot_000000002_lnorm.csv", "boot_000000003_lnorm.csv"))
-  boot1 <- read.csv(file.path(dir, "boot_000000001_lnorm.csv"))
-  expect_snapshot_boot_data(hc, "hc_save_to1_not_multi")
+  expect_snapshot_data(hc, "hc_save_to_not_multi")
+  expect_identical(list.files(dir), c("data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "data_000000002_lnorm.csv", 
+                                      "data_000000003_lnorm.csv", "estimates_000000000_lnorm.rds", 
+                                      "estimates_000000001_lnorm.rds", "estimates_000000002_lnorm.rds", 
+                                      "estimates_000000003_lnorm.rds"))
+  data1 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
+  expect_snapshot_data(hc, "hc_save_to1_not_multi")
 })
 
 test_that("ssd_hc save_to multi = FALSE default", {
@@ -521,15 +542,21 @@ test_that("ssd_hc save_to multi = FALSE default", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, multi = FALSE)
-  expect_snapshot_boot_data(hc, "hc_save_to_not_multi_default")
+  expect_snapshot_data(hc, "hc_save_to_not_multi_default")
   expect_identical(sort(list.files(dir)), 
-                   sort(c("boot_000000000_gamma.csv", "boot_000000000_lgumbel.csv", "boot_000000000_llogis.csv", 
-                          "boot_000000000_lnorm_lnorm.csv", "boot_000000000_lnorm.csv", 
-                          "boot_000000000_weibull.csv", "boot_000000001_gamma.csv", "boot_000000001_lgumbel.csv", 
-                          "boot_000000001_llogis.csv", "boot_000000001_lnorm_lnorm.csv", 
-                          "boot_000000001_lnorm.csv", "boot_000000001_weibull.csv")))
-  boot1 <- read.csv(file.path(dir, "boot_000000001_lnorm.csv"))
-  expect_snapshot_boot_data(hc, "hc_save_to1_not_multi_default")
+                   sort(c("data_000000000_gamma.csv", "data_000000000_lgumbel.csv", "data_000000000_llogis.csv", 
+                          "data_000000000_lnorm_lnorm.csv", "data_000000000_lnorm.csv", 
+                          "data_000000000_weibull.csv", "data_000000001_gamma.csv", "data_000000001_lgumbel.csv", 
+                          "data_000000001_llogis.csv", "data_000000001_lnorm_lnorm.csv", 
+                          "data_000000001_lnorm.csv", "data_000000001_weibull.csv", "estimates_000000000_gamma.rds", 
+                          "estimates_000000000_lgumbel.rds", "estimates_000000000_llogis.rds", 
+                          "estimates_000000000_lnorm_lnorm.rds", "estimates_000000000_lnorm.rds", 
+                          "estimates_000000000_weibull.rds", "estimates_000000001_gamma.rds", 
+                          "estimates_000000001_lgumbel.rds", "estimates_000000001_llogis.rds", 
+                          "estimates_000000001_lnorm_lnorm.rds", "estimates_000000001_lnorm.rds", 
+                          "estimates_000000001_weibull.rds")))
+  boot1 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
+  expect_snapshot_data(hc, "hc_save_to1_not_multi_default")
 })
 
 test_that("ssd_hc save_to rescale", {
@@ -538,10 +565,13 @@ test_that("ssd_hc save_to rescale", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm", rescale = TRUE)
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir)
-  expect_snapshot_boot_data(hc, "hc_save_to_rescale")
-  expect_identical(list.files(dir), c("boot_000000000_multi.csv", "boot_000000001_multi.csv", "boot_000000002_multi.csv", "boot_000000003_multi.csv"))
-  boot1 <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
-  expect_snapshot_boot_data(hc, "hc_save_to1_rescale")
+  expect_snapshot_data(hc, "hc_save_to_rescale")
+  expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 
+                                      "data_000000003_multi.csv", "estimates_000000000_multi.rds", 
+                                      "estimates_000000001_multi.rds", "estimates_000000002_multi.rds", 
+                                      "estimates_000000003_multi.rds"))
+  boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
+  expect_snapshot_data(hc, "hc_save_to1_rescale")
 })
 
 test_that("ssd_hc save_to lnorm 1", {
@@ -550,9 +580,10 @@ test_that("ssd_hc save_to lnorm 1", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
-  expect_snapshot_boot_data(hc, "hc_save_to11")
-  expect_identical(list.files(dir), c("boot_000000000_multi.csv", "boot_000000001_multi.csv"))
-  boot1 <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
+  expect_snapshot_data(hc, "hc_save_to11")
+  expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
+                                      "estimates_000000001_multi.rds"))
+  boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
   fit1 <- ssd_fit_dists(boot1, dist = "lnorm", left = "left", right = "right", weight = "weight")
   est <- ssd_hc(fit1)$est
   expect_identical(hc$lcl, est)
@@ -565,13 +596,15 @@ test_that("ssd_hc save_to replaces", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
-  expect_identical(list.files(dir), c("boot_000000000_multi.csv", "boot_000000001_multi.csv"))
-  boot <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
+  expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
+                                      "estimates_000000001_multi.rds"))
+  boot <- read.csv(file.path(dir, "data_000000001_multi.csv"))
   hc2 <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
-  expect_identical(list.files(dir), c("boot_000000000_multi.csv", "boot_000000001_multi.csv"))
-  boot2 <- read.csv(file.path(dir, "boot_000000001_multi.csv"))
-  expect_snapshot_boot_data(boot, "hc_boot1_replace")
-  expect_snapshot_boot_data(boot2, "hc_boot2_replace")
+  expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
+                                      "estimates_000000001_multi.rds"))
+  boot2 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
+  expect_snapshot_data(boot, "hc_boot1_replace")
+  expect_snapshot_data(boot2, "hc_boot2_replace")
 })
 
 test_that("ssd_hc fix_weight", {
@@ -579,9 +612,66 @@ test_that("ssd_hc fix_weight", {
   
   set.seed(102)
   hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, fix_weights = FALSE)
-  expect_snapshot_boot_data(hc_unfix, "hc_unfix")
+  expect_snapshot_data(hc_unfix, "hc_unfix")
   
   set.seed(102)
   hc_fix <- ssd_hc(fits, nboot = 100, ci = TRUE, fix_weights = TRUE)
-  expect_snapshot_boot_data(hc_fix, "hc_fix")
+  expect_snapshot_data(hc_fix, "hc_fix")
+})
+
+test_that("ssd_hc multiple values", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  
+  set.seed(102)
+  hc_unfix <- ssd_hc(fits, percent = c(5,10), nboot = 100, ci = TRUE, fix_weights = FALSE)
+  expect_snapshot_data(hc_unfix, "hc_unfixmulti")
+  
+  set.seed(102)
+  hc_fix <- ssd_hc(fits, percent = c(5,10), nboot = 100, ci = TRUE, fix_weights = TRUE)
+  expect_snapshot_data(hc_fix, "hc_fixmulti")
+})
+
+test_that("ssd_hc multiple values save_to", {
+  dir <- withr::local_tempdir()
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  
+  set.seed(102)
+  hc <- ssd_hc(fits, percent = c(5,10), nboot = 2, save_to = dir, ci = TRUE)
+  expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 
+                                      "estimates_000000000_multi.rds", "estimates_000000001_multi.rds", 
+                                      "estimates_000000002_multi.rds"))
+})
+
+test_that("ssd_hc not multi save_to", {
+  dir <- withr::local_tempdir()
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  
+  set.seed(102)
+  hc <- ssd_hc(fits, nboot = 2, multi = FALSE, save_to = dir, ci = TRUE)
+  expect_identical(list.files(dir), c("data_000000000_lgumbel.csv", "data_000000000_lnorm.csv", "data_000000001_lgumbel.csv", 
+                                      "data_000000001_lnorm.csv", "data_000000002_lgumbel.csv", "data_000000002_lnorm.csv", 
+                                      "estimates_000000000_lgumbel.rds", "estimates_000000000_lnorm.rds", 
+                                      "estimates_000000001_lgumbel.rds", "estimates_000000001_lnorm.rds", 
+                                      "estimates_000000002_lgumbel.rds", "estimates_000000002_lnorm.rds"
+  ))
+})
+
+test_that("not all estimates if fail", {
+  dir <- withr::local_tempdir()
+  
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lnorm_lnorm"))
+  set.seed(49)
+  hc <- ssd_hc(fit, nboot = 10, ci = TRUE,
+                        parametric = TRUE, save_to = dir, min_pboot = 0.8)
+  expect_snapshot_data(hc, "hc_notallestimates")
+  expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 
+                                      "data_000000003_multi.csv", "data_000000004_multi.csv", "data_000000005_multi.csv", 
+                                      "data_000000006_multi.csv", "data_000000007_multi.csv", "data_000000008_multi.csv", 
+                                      "data_000000009_multi.csv", "data_000000010_multi.csv", "estimates_000000000_multi.rds", 
+                                      "estimates_000000001_multi.rds", "estimates_000000002_multi.rds", 
+                                      "estimates_000000003_multi.rds", "estimates_000000004_multi.rds", 
+                                      "estimates_000000005_multi.rds", "estimates_000000006_multi.rds", 
+                                      "estimates_000000007_multi.rds", "estimates_000000009_multi.rds", "estimates_000000010_multi.rds"))
 })

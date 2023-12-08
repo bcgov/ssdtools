@@ -201,10 +201,10 @@ test_that("ssd_hc cis with error", {
   expect_identical(attr(fit, "min_pmix"), 0.1)
   expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100))
   expect_s3_class(hc_err, "tbl")
-  expect_snapshot_boot_data(hc_err, "hc_err_na")
+  expect_snapshot_data(hc_err, "hc_err_na")
   hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92, multi = FALSE)
   expect_s3_class(hc_err, "tbl")
-  expect_snapshot_boot_data(hc_err, "hc_err")
+  expect_snapshot_data(hc_err, "hc_err")
 })
 
 test_that("ssd_hc comparable parametric and non-parametric big sample size", {
@@ -219,7 +219,7 @@ test_that("ssd_hc comparable parametric and non-parametric big sample size", {
   expect_snapshot_data(hc_para, "hc_para")
   set.seed(10)
   hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE, multi = FALSE)
-  expect_snapshot_boot_data(hc_nonpara, "hc_nonpara")
+  expect_snapshot_data(hc_nonpara, "hc_nonpara")
 })
 
 test_that("ssd_hp cis with error", {
@@ -233,10 +233,10 @@ test_that("ssd_hp cis with error", {
   expect_identical(attr(fit, "min_pmix"), 0.1)
   expect_warning(hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100))
   expect_s3_class(hp_err, "tbl")
-  expect_snapshot_boot_data(hp_err, "hp_err_na")
+  expect_snapshot_data(hp_err, "hp_err_na")
   hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.92, multi = FALSE)
   expect_s3_class(hp_err, "tbl")
-  expect_snapshot_boot_data(hp_err, "hp_err")
+  expect_snapshot_data(hp_err, "hp_err")
 })
 
 test_that("ssd_hp comparable parametric and non-parametric big sample size", {
@@ -248,10 +248,10 @@ test_that("ssd_hp comparable parametric and non-parametric big sample size", {
   fit <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hp_para <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, multi = FALSE)
-  expect_snapshot_boot_data(hp_para, "hp_para")
+  expect_snapshot_data(hp_para, "hp_para")
   set.seed(10)
   hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE, multi = FALSE)
-  expect_snapshot_boot_data(hp_nonpara, "hp_nonpara")
+  expect_snapshot_data(hp_nonpara, "hp_nonpara")
 })
 
 test_that("plot geoms", {
