@@ -44,12 +44,12 @@ generate_data <- function(dist, data, args, weighted, censoring, parametric) {
   sample_parametric(dist, args = args, weighted = weighted, censoring = censoring)
 }
 
-boot_filename <- function(i, dist) {
-  paste0("boot_", stringr::str_pad(i, width = 9, pad = "0"), "_", dist, ".csv")
+boot_filename <- function(i, dist, prefix, ext) {
+  paste0(prefix, "_", stringr::str_pad(i, width = 9, pad = "0"), "_", dist, ext)
 }
 
-boot_filepath <- function(i, dist, save_to) {
-  file.path(save_to, boot_filename(i, dist))
+boot_filepath <- function(i, dist, save_to, prefix = "data", ext = ".csv") {
+  file.path(save_to, boot_filename(i, dist, prefix = prefix, ext = ext))
 }
 
 sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censoring, min_pmix, range_shape1, range_shape2, parametric, control, save_to, wts = NULL) {
@@ -66,10 +66,12 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
     pars <- slnorm_lnorm(new_data)
   }
   if(dist == "multi") {
-    dist <- names(pars)
+    dist2 <- names(pars)
+  } else {
+    dist2 <- dist
   }
 
-  fit <- fun(new_data, dist,
+  fit <- fun(new_data, dist2,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE,
     censoring = censoring, weighted = weighted
@@ -79,6 +81,11 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
     return(NULL)
   }
   est <- estimates(fit, multi = TRUE)
+  
+  if(!is.null(save_to)) {
+    saveRDS(est, boot_filepath(i, dist, save_to, prefix = "estimates", ext = ".rds"))
+  }
+  
   if(!is.null(wts)) {
     est[names(wts)] <- unname(wts)
   }
@@ -101,6 +108,14 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     wts <- NULL
   }
   
+  if(!is.null(save_to)) {
+    if(!requireNamespace("readr", quietly = TRUE)) {
+      err("Package 'readr' must be installed.")
+    }
+    readr::write_csv(data, boot_filepath(0, dist, save_to))
+    saveRDS(estimates, boot_filepath(0, dist, save_to, prefix = "estimates", ext = ".rds"))
+  }
+  
   estimates <- future_map(1:nboot, sample_parameters,
     dist = dist, fun = sfun,
     data = data, args = args, pars = pars,
@@ -111,12 +126,5 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     .options = furrr::furrr_options(seed = seeds)
   )
   
-  if(!is.null(save_to)) {
-    if(!requireNamespace("readr", quietly = TRUE)) {
-      err("Package 'readr' must be installed.")
-    }
-    readr::write_csv(data, boot_filepath(0, dist, save_to))
-  }
-
   estimates[!vapply(estimates, is.null, TRUE)]
 }
