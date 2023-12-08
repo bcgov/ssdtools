@@ -286,7 +286,7 @@ test_that("ssd_hp cis with non-convergence", {
   expect_identical(attr(fit, "min_pmix"), 0.3)
   hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9, multi = FALSE)
   expect_s3_class(hp30, "tbl")
-  expect_snapshot_boot_data(hp30, "hp_30")
+  expect_snapshot_data(hp30, "hp_30")
 })
 
 test_that("ssd_hp cis with error and multiple dists", {
@@ -323,10 +323,10 @@ test_that("ssd_hp fix_weight", {
   
   set.seed(102)
   hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = FALSE)
-  expect_snapshot_boot_data(hc_unfix, "hc_unfix")
+  expect_snapshot_data(hc_unfix, "hc_unfix")
   
   set.seed(102)
   hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = TRUE)
-  expect_snapshot_boot_data(hc_fix, "hc_fix")
+  expect_snapshot_data(hc_fix, "hc_fix")
 })
 
