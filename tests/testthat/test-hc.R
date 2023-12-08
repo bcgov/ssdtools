@@ -665,7 +665,7 @@ test_that("not all estimates if fail", {
   set.seed(49)
   hc <- ssd_hc(fit, nboot = 10, ci = TRUE,
                         parametric = TRUE, save_to = dir, min_pboot = 0.8)
-  expect_snapshot_boot_data(hc, "hc_notallestimates")
+  expect_snapshot_data(hc, "hc_notallestimates")
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 
                                       "data_000000003_multi.csv", "data_000000004_multi.csv", "data_000000005_multi.csv", 
                                       "data_000000006_multi.csv", "data_000000007_multi.csv", "data_000000008_multi.csv", 
