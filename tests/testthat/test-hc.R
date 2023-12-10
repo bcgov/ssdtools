@@ -679,15 +679,10 @@ test_that("not all estimates if fail", {
 test_that("ssd_hc identical if in parallel", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
-  t <- hmstimer::tmr_timer(start = TRUE)
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 500)
-  t <- hmstimer::tmr_stop(t)
   local_multisession(workers = 2)
-  library(future)
-  t2 <- hmstimer::tmr_timer(start = TRUE)
   set.seed(10)
   hc2 <- ssd_hc(fits, ci = TRUE, nboot = 500)
-  t2 <- hmstimer::tmr_stop(t2)
   expect_identical(hc, hc2)
 })

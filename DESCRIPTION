@@ -76,7 +76,6 @@ Suggests:
     future,
     glue,
     grDevices,
-    hmstimer,
     knitr,
     magrittr,
     mle.tools,
