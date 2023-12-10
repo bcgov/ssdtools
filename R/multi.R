@@ -370,7 +370,7 @@ qmulti_est <- function(x, dist, p) {
 
 qmulti_ranges <- function(p, list) {
   elist <- purrr::imap(list, qmulti_est, p = p)
-  tlist <- purrr::transpose(elist)
+  tlist <- purrr::list_transpose(elist)
   tlist <- purrr::map(tlist, unlist)
   min <- purrr::map_dbl(tlist, min)
   max <- purrr::map_dbl(tlist, max)

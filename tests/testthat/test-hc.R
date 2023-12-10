@@ -321,7 +321,7 @@ test_that("ssd_hc calculates cis with equally weighted data", {
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
-  expect_equal(hc$se, 0.455819097122445)
+  expect_snapshot_data(hc, "hcici")
 })
 
 test_that("ssd_hc calculates cis in parallel but one distribution", {
@@ -330,7 +330,7 @@ test_that("ssd_hc calculates cis in parallel but one distribution", {
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
-  expect_equal(hc$se, 0.455819097122445)
+  expect_snapshot_data(hc, "hcici_multi")
 })
 
 test_that("ssd_hc calculates cis with two distributions", {
@@ -674,4 +674,15 @@ test_that("not all estimates if fail", {
                                       "estimates_000000003_multi.rds", "estimates_000000004_multi.rds", 
                                       "estimates_000000005_multi.rds", "estimates_000000006_multi.rds", 
                                       "estimates_000000007_multi.rds", "estimates_000000009_multi.rds", "estimates_000000010_multi.rds"))
+})
+
+test_that("ssd_hc identical if in parallel", {
+  data <- ssddata::ccme_boron
+  fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 500)
+  local_multisession(workers = 2)
+  set.seed(10)
+  hc2 <- ssd_hc(fits, ci = TRUE, nboot = 500)
+  expect_identical(hc, hc2)
 })
