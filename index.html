@@ -138,7 +138,7 @@
 <span><span class="co">#&gt; # ℹ 18 more rows</span></span></code></pre></div>
 <p>Distributions are fit using <code><a href="reference/ssd_fit_dists.html">ssd_fit_dists()</a></code></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lnorm"</span>, <span class="st">"llogis"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>and can be quickly plotted using <code>autoplot</code></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -151,16 +151,12 @@
 <p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
-<span><span class="co">#&gt;   dist           ad     ks    cvm   aic  aicc   bic delta weight</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 gamma       0.440 0.117  0.0554  238.  238.  240. 0.005  0.357</span></span>
-<span><span class="co">#&gt; 2 lgumbel     0.829 0.158  0.134   244.  245.  247. 6.56   0.013</span></span>
-<span><span class="co">#&gt; 3 llogis      0.487 0.0994 0.0595  241.  241.  244. 3.39   0.066</span></span>
-<span><span class="co">#&gt; 4 lnorm       0.507 0.107  0.0703  239.  240.  242. 1.40   0.177</span></span>
-<span><span class="co">#&gt; 5 lnorm_lnorm 0.320 0.116  0.0414  240.  243.  247. 4.98   0.03 </span></span>
-<span><span class="co">#&gt; 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357</span></span></code></pre></div>
-<p>and the model-averaged 5% hazard concentration estimated by parametric bootstrapping using <code>ssd_hc</code></p>
+<span><span class="co">#&gt; # A tibble: 2 × 9</span></span>
+<span><span class="co">#&gt;   dist      ad     ks    cvm   aic  aicc   bic delta weight</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 lnorm  0.507 0.107  0.0703  239.  240.  242.  0      0.73</span></span>
+<span><span class="co">#&gt; 2 llogis 0.487 0.0994 0.0595  241.  241.  244.  1.99   0.27</span></span></code></pre></div>
+<p>and the model-averaged 5% hazard concentration estimated by parametric bootstrapping using <code>ssd_hc</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
 <span><span class="va">hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span>, nboot <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="co"># 100 bootstrap samples for speed</span></span>
@@ -168,23 +164,27 @@
 <span><span class="co">#&gt; # A tibble: 1 × 10</span></span>
 <span><span class="co">#&gt;   dist    percent   est    se   lcl   ucl    wt method     nboot pboot</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 average       5  1.24 0.741 0.510  3.35     1 parametric   100     1</span></span></code></pre></div>
-<p>Model-averaged predictions complete with confidence intervals can also be estimated by parametric bootstrapping using the <code>stats</code> generic <code>predict</code>. To perform bootstrapping for each distribution in parallel register the future backend and then select the evaluation strategy.</p>
+<span><span class="co">#&gt; 1 average       5  1.65 0.599 0.923  3.34     1 parametric   100     1</span></span></code></pre></div>
+<p>To bootstrap in parallel set <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code>. For example:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">(</span>workers <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span>, nboot <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
+<p>Model-averaged predictions complete with confidence intervals can also be estimated by parametric bootstrapping using the <code>stats</code> generic <code>predict</code>. To perform bootstrapping for each distribution in parallel register the future backend and then select the evaluation strategy.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">doFuture</span><span class="fu">::</span><span class="fu"><a href="https://doFuture.futureverse.org/reference/registerDoFuture.html" class="external-link">registerDoFuture</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="fu">future</span><span class="fu">::</span><span class="va"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
 <span><span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>and plotted together with the original data using <code>ssd_plot</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span>, <span class="va">boron_pred</span>,</span>
 <span>  shape <span class="op">=</span> <span class="st">"Group"</span>, color <span class="op">=</span> <span class="st">"Group"</span>, label <span class="op">=</span> <span class="st">"Species"</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ribbon <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3000</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.png"><!-- --></p>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.png"><!-- --></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
