@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9007</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,14 +57,14 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.6.9006" id="ssdtools-1069006">ssdtools 1.0.6.9006<a class="anchor" aria-label="anchor" href="#ssdtools-1069006"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.6.9007" id="ssdtools-1069007">ssdtools 1.0.6.9007<a class="anchor" aria-label="anchor" href="#ssdtools-1069007"></a></h2>
 <p>Additions</p>
 <ul><li>
 <code><a href="../reference/ssd_hc.html">ssd_hc.fitdists()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp.fitdists()</a></code> now have <code>multi = TRUE</code> argument to get estimates based on <code><a href="../reference/ssd_q.html">ssd_qmulti()</a></code> and <code><a href="../reference/ssd_p.html">ssd_pmulti()</a></code> when <code>average = TRUE</code>.</li>
 <li>Added <code><a href="../reference/ssd_p.html">ssd_pmulti()</a></code>, <code><a href="../reference/ssd_q.html">ssd_qmulti()</a></code> and <code><a href="../reference/ssd_r.html">ssd_rmulti()</a></code> for weights and parameter estimates for combined distributions.</li>
 <li>Implemented bootstrapping for <code><a href="../reference/ssd_hc.html">ssd_hc.fitdists()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp.fitdists()</a></code> based on combined distributions.</li>
 <li>Add <code>fix_weights = TRUE</code> argument to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> to specify whether to fix the model weights when performing <code>multi</code> bootstrapping.</li>
-<li>Added <code>save_to</code> argument to specify a directory in which to save the bootstrap datasets as csv files. The files are named <code>boot_000000001_xx.csv</code> etc where <code>xx</code> is the distribution. The parent data set is named <code>boot_000000000_xx.csv</code>.</li>
+<li>Added <code>save_to</code> argument to specify a directory in which to save the bootstrap datasets as csv files and estimates as rds files. The files are named <code>data_000000001_xx.csv</code>, <code>estimates_000000001_xx.rds</code> etc where <code>xx</code> is the distribution. The parent data set and estimates are named <code>boot_000000000_xx.csv</code> and <code>estimates_000000000_xx.csv</code>.</li>
 <li>Added <code><a href="../reference/ssd_hp.html">ssd_hp.fitburrlioz()</a></code> function.</li>
 <li>Added <code>ssd_exx()</code> functions to get default parameter estimates for distributions.</li>
 <li>Added David Fox and Rebecca Fisher as co-authors.</li>
