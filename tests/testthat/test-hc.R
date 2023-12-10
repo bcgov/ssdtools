@@ -675,3 +675,20 @@ test_that("not all estimates if fail", {
                                       "estimates_000000005_multi.rds", "estimates_000000006_multi.rds", 
                                       "estimates_000000007_multi.rds", "estimates_000000009_multi.rds", "estimates_000000010_multi.rds"))
 })
+
+test_that("ssd_hc identical if in parallel", {
+  data <- ssddata::ccme_boron
+  fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
+  t <- hmstimer::tmr_timer(start = TRUE)
+  set.seed(10)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 2000, multi = FALSE)
+  t <- hmstimer::tmr_stop(t)
+  local_multisession(workers = 2)
+  library(future)
+  t2 <- hmstimer::tmr_timer(start = TRUE)
+  set.seed(10)
+  hc2 <- ssd_hc(fits, ci = TRUE, nboot = 2000, multi = FALSE)
+  t2 <- hmstimer::tmr_stop(t2)
+  expect_identical(hc, hc2)
+  expect_lt(t2,t)
+})

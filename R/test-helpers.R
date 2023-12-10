@@ -12,11 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-local_multisession <- function(.local_envir = parent.frame()) {
+local_multisession <- function(.local_envir = parent.frame(), workers = 2) {
   oldDoPar <- doFuture::registerDoFuture()
-  withr::defer(with(oldDoPar, foreach::setDoPar(fun = fun, data = data, info = info)))
-  oldPlan <- future::plan("future::multisession", workers = 2)
-  withr::defer(future::plan(oldPlan))
+  withr::defer_parent(with(oldDoPar, foreach::setDoPar(fun = fun, data = data, info = info)))
+  oldPlan <- future::plan("future::multisession", workers = workers)
+  withr::defer_parent(future::plan(oldPlan))
   invisible(oldDoPar)
 }
 
