@@ -321,7 +321,7 @@ test_that("ssd_hc calculates cis with equally weighted data", {
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
-  expect_equal(hc$se, 0.455819097122445)
+  expect_snapshot_data(hc, "hcici")
 })
 
 test_that("ssd_hc calculates cis in parallel but one distribution", {
@@ -330,7 +330,7 @@ test_that("ssd_hc calculates cis in parallel but one distribution", {
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi = FALSE)
-  expect_equal(hc$se, 0.455819097122445)
+  expect_snapshot_data(hc, "hcici_multi")
 })
 
 test_that("ssd_hc calculates cis with two distributions", {

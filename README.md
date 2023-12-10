@@ -68,7 +68,7 @@ ssddata::ccme_boron
 Distributions are fit using `ssd_fit_dists()`
 
 ``` r
-fits <- ssd_fit_dists(ssddata::ccme_boron)
+fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
 ```
 
 and can be quickly plotted using `autoplot`
@@ -88,19 +88,15 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(fits)
-#> # A tibble: 6 × 9
-#>   dist           ad     ks    cvm   aic  aicc   bic delta weight
-#>   <chr>       <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 gamma       0.440 0.117  0.0554  238.  238.  240. 0.005  0.357
-#> 2 lgumbel     0.829 0.158  0.134   244.  245.  247. 6.56   0.013
-#> 3 llogis      0.487 0.0994 0.0595  241.  241.  244. 3.39   0.066
-#> 4 lnorm       0.507 0.107  0.0703  239.  240.  242. 1.40   0.177
-#> 5 lnorm_lnorm 0.320 0.116  0.0414  240.  243.  247. 4.98   0.03 
-#> 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357
+#> # A tibble: 2 × 9
+#>   dist      ad     ks    cvm   aic  aicc   bic delta weight
+#>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 lnorm  0.507 0.107  0.0703  239.  240.  242.  0      0.73
+#> 2 llogis 0.487 0.0994 0.0595  241.  241.  244.  1.99   0.27
 ```
 
 and the model-averaged 5% hazard concentration estimated by parametric
-bootstrapping using `ssd_hc`
+bootstrapping using `ssd_hc`.
 
 ``` r
 set.seed(99)
@@ -109,7 +105,14 @@ print(hc5)
 #> # A tibble: 1 × 10
 #>   dist    percent   est    se   lcl   ucl    wt method     nboot pboot
 #>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-#> 1 average       5  1.24 0.741 0.510  3.35     1 parametric   100     1
+#> 1 average       5  1.65 0.599 0.923  3.34     1 parametric   100     1
+```
+
+To bootstrap in parallel set `future::plan()`. For example:
+
+``` r
+future::multisession(workers = 2)
+hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100)
 ```
 
 Model-averaged predictions complete with confidence intervals can also
@@ -136,7 +139,7 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
   scale_colour_ssd()
 ```
 
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
 
 ## References
 

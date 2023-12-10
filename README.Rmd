@@ -52,7 +52,7 @@ ssddata::ccme_boron
 
 Distributions are fit using `ssd_fit_dists()`
 ```{r}
-fits <- ssd_fit_dists(ssddata::ccme_boron)
+fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
 ```
 
 and can be quickly plotted using `autoplot`
@@ -70,11 +70,17 @@ The goodness of fit can be assessed using `ssd_gof`
 ssd_gof(fits)
 ```
 
-and the model-averaged 5% hazard concentration estimated by parametric bootstrapping using `ssd_hc`
+and the model-averaged 5% hazard concentration estimated by parametric bootstrapping using `ssd_hc`.
 ```{r}
 set.seed(99)
 hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100) # 100 bootstrap samples for speed
 print(hc5)
+```
+
+To bootstrap in parallel set `future::plan()`. For example:
+```{r, eval=FALSE}
+future::multisession(workers = 2)
+hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100)
 ```
 
 Model-averaged predictions complete with confidence intervals can also be estimated by parametric bootstrapping using the `stats` generic `predict`.
