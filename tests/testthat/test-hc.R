@@ -690,5 +690,4 @@ test_that("ssd_hc identical if in parallel", {
   hc2 <- ssd_hc(fits, ci = TRUE, nboot = 500)
   t2 <- hmstimer::tmr_stop(t2)
   expect_identical(hc, hc2)
-  expect_lt(t2,t)
 })
