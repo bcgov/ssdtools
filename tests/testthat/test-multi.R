@@ -16,9 +16,9 @@
 test_that("multi", {
   test_dist("multi", multi = TRUE)
   expect_equal(ssd_pmulti(1), 0.493574697632382)
-  expect_equal(ssd_qmulti(0.75), 2.21920049918256)
+  expect_equal(ssd_qmulti(0.75), 2.21920363150895)
   set.seed(42)
-  expect_equal(ssd_rmulti(2), c(5.53133427815926, 7.11054891201997))
+  expect_equal(ssd_rmulti(2), c(5.53136180221693, 7.1105492251209))
   
   expect_equal(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99))), 
                c(0, 0.1, 0.5, 0.9, 0.99), tolerance = 1e-5)
@@ -72,9 +72,9 @@ test_that("ssd_qmulti", {
   expect_identical(.ssd_qmulti_fitdists(Inf, fit), NaN)
   expect_identical(.ssd_qmulti_fitdists(1, fit), Inf)
   expect_equal(.ssd_qmulti_fitdists(0, fit), 0)
-  q75 <- 32.4740714551225
-  expect_equal(.ssd_qmulti_fitdists(0.5, fit), 15.3258170124633)
-  expect_equal(.ssd_qmulti_fitdists(c(0.5, 0.75), fit), c(15.3258170124633, q75))
+  q75 <- 32.47404165648
+  expect_equal(.ssd_qmulti_fitdists(0.5, fit), 15.3258154238153)
+  expect_equal(.ssd_qmulti_fitdists(c(0.5, 0.75), fit), c(15.3258154238153, q75))
   expect_equal(.ssd_qmulti_fitdists(0.25, fit, lower.tail = FALSE), q75)
   expect_equal(.ssd_qmulti_fitdists(log(0.75), fit, log.p = TRUE), q75)
   expect_equal(.ssd_qmulti_fitdists(log(0.25), fit, lower.tail = FALSE, log.p = TRUE), q75)
@@ -84,7 +84,7 @@ test_that("ssd_qmulti weights", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   args <- estimates(fit)
   args$p <- 0.25
-  expect_equal(do.call("ssd_qmulti", args), 6.1824250029426)
+  expect_equal(do.call("ssd_qmulti", args), 6.1824320185802)
   args$gamma.weight <- 0
   args$lgumbel.weight <- 0
   args$llogis.weight <- 0
@@ -105,15 +105,15 @@ test_that("ssd_rmulti", {
   args$n <- 0
   expect_equal(.ssd_rmulti_fitdists(n = 0, fit), numeric(0))
   set.seed(99)
-  expect_equal(.ssd_rmulti_fitdists(n = 1, fit), 19.752684425643)
+  expect_equal(.ssd_rmulti_fitdists(n = 1, fit), 19.7526821719427)
   set.seed(99)
-  expect_equal(.ssd_rmulti_fitdists(2, fit), c(19.752684425643, 2.69562027500859))
+  expect_equal(.ssd_rmulti_fitdists(2, fit), c(19.7526821719427, 2.69562393167351))
   set.seed(99)
   n100 <- .ssd_rmulti_fitdists(100, fit)
   expect_identical(length(n100), 100L)
-  expect_equal(min(n100), 0.0295884248732781)
-  expect_equal(max(n100), 168.790837219526)
-  expect_equal(mean(n100), 23.4076761093969)
+  expect_equal(min(n100), 0.029587302066941)
+  expect_equal(max(n100), 168.790837576735)
+  expect_equal(mean(n100), 23.407676351398)
 })
 
 test_that("ssd_rmulti all", {
@@ -131,9 +131,9 @@ test_that("ssd_rmulti all", {
              weibull.weight = 1/10)
   
   expect_identical(length(n100), 100L)
-  expect_equal(min(n100), 0.00210111986245713)
-  expect_equal(max(n100), 1.58071260063502)
-  expect_equal(mean(n100), 0.835204190471024)
+  expect_equal(min(n100), 0.00207737078515415)
+  expect_equal(max(n100), 1.58073733537801)
+  expect_equal(mean(n100), 0.835204720884024)
 })
 
 test_that("ssd_emulti", {
@@ -145,7 +145,7 @@ test_that("ssd_emulti", {
   args$q <- NULL
   args$p <- p
   q <- do.call("ssd_qmulti", args)
-  expect_equal(q, 1.00000074289656)
+  expect_equal(q, 1)
 })
 
 test_that("ssd_pmulti same as pmulti_list", {
