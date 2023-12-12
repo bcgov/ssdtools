@@ -28,3 +28,11 @@ safely <- function(.f) {
 }
 
 pow <- function(x, y) x^y
+
+root <- function(p, f) {
+  q <- rep(NA_real_, length(p))
+  for(i in seq_along(p)) {
+    q[i] <- stats::uniroot(f, p = p[i], lower = 0, upper = 10, extendInt = "upX", tol = .Machine$double.eps)$root
+  }
+  q
+}

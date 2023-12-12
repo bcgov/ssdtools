@@ -108,11 +108,7 @@ qlnorm_lnorm_ssd <- function(p, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
   f <- function(x, p) {
     plnorm_lnorm_ssd(x, meanlog1, sdlog1, meanlog2, sdlog2, pmix) - p
   }
-  q <- rep(NA_real_, length(p))
-  for(i in seq_along(p)) {
-    q[i] <- stats::uniroot(f, p = p[i], lower = 0, upper = 10, extendInt = "upX", tol = .Machine$double.eps)$root
-  }
-  q
+  root(p, f)
 }
 
 rlnorm_lnorm_ssd <- function(n, meanlog1, sdlog1, meanlog2, sdlog2, pmix) {
