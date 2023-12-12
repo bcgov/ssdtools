@@ -361,13 +361,6 @@ pmulti_list <- function(q, list) {
   fun(q)
 }
 
-qmulti_est <- function(x, dist, p) {
-  fun <- paste0("q", dist, "_ssd(p, ")
-  value_args <- value_args(x)
-  func <- paste0(fun, value_args, ")")
-  eval(parse(text = func))
-}
-
 qmulti_list <- function(p, list) {
   nlist <- normalize_weights(list)
   
