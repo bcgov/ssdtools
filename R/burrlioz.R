@@ -39,26 +39,3 @@ fit_burrlioz <- function(data, dist, min_pmix, range_shape1, range_shape2,
     pars = NULL, hessian = hessian
   )
 }
-
-ssd_qburrlioz <- function(p, scale = NA_real_, shape = NA_real_, shape1 = NA_real_,
-                          shape2 = NA_real_, locationlog = NA_real_, scalelog = NA_real_,
-                          lower.tail = TRUE, log.p = FALSE) {
-  burrIII3 <- ssd_qburrIII3(p,
-    scale = scale, shape1 = shape1, shape2 = shape2,
-    lower.tail = lower.tail, log.p = log.p
-  )
-
-  invpareto <- ssd_qinvpareto(p,
-    scale = scale, shape = shape,
-    lower.tail = lower.tail, log.p = log.p
-  )
-
-  lgumbel <- ssd_qlgumbel(p,
-    locationlog = locationlog, scalelog = scalelog,
-    lower.tail = lower.tail, log.p = log.p
-  )
-
-  burrIII3[is.na(burrIII3)] <- invpareto[is.na(burrIII3)]
-  burrIII3[is.na(burrIII3)] <- lgumbel[is.na(burrIII3)]
-  burrIII3
-}
