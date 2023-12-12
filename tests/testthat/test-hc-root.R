@@ -33,7 +33,7 @@ test_that("hc multi all", {
   hc_average <- ssd_hc(fits, average = TRUE, multi = FALSE)
   hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE)
   expect_equal(hc_average$est, 1.24151700389853)
-  expect_equal(hc_multi$est, 1.25678623624403)
+  expect_equal(hc_multi$est, 1.25677449265554)
   testthat::expect_snapshot({
     hc_multi
   })

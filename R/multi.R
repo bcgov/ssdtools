@@ -368,32 +368,11 @@ qmulti_est <- function(x, dist, p) {
   eval(parse(text = func))
 }
 
-qmulti_ranges <- function(p, list) {
-  elist <- purrr::imap(list, qmulti_est, p = p)
-  tlist <- purrr::list_transpose(elist)
-  tlist <- purrr::map(tlist, unlist)
-  min <- purrr::map_dbl(tlist, min)
-  max <- purrr::map_dbl(tlist, max)
-  list(lower = min, upper = max)
-}
-
 qmulti_list <- function(p, list) {
   nlist <- normalize_weights(list)
   
-  ranges <- qmulti_ranges(p, nlist)
-  lower <- ranges$lower
-  upper <- ranges$upper
-
   f <- pmulti_fun(nlist)
-  q <- rep(NA_real_, length(p))
-  for(i in seq_along(p)) {
-    if(is.na(lower[i]) || lower[i] == upper[i]) {
-      q[i] <- lower[i]
-    } else {
-      q[i] <- uniroot(f = f, p = p[i], lower = lower[i], upper = upper[i])$root
-    }
-  }
-  q
+  root(p, f)
 }
 
 pmulti_ssd <- function(
