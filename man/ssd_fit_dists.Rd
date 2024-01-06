@@ -36,7 +36,7 @@ ssd_fit_dists(
 
 \item{nrow}{A positive whole number of the minimum number of non-missing rows.}
 
-\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
+\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.}
 
 \item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 

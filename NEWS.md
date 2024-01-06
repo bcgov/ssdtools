@@ -20,8 +20,8 @@ default parameter estimates for distributions.
 Modifications
 
 - `estimates.fitdists()` now returns all distributions by default and includes weights as parameters.
-- `ssd_fit_bcanz()`, `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` no longer rescale data.
-- seeds now allocated to bootstrap samples. 
+- `ssd_fit_bcanz()`, `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` no longer rescale data by default.
+- seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions). 
 
 Fixes
 
