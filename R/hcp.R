@@ -87,7 +87,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   }
   
   censoring <- censoring / rescale
-  
+
   ests <- boot_estimates(fun = fun, dist = dist, estimates = estimates, 
                          pars = pars, nboot = nboot, data = data, weighted = weighted,
                          censoring = censoring, min_pmix = min_pmix,
@@ -241,6 +241,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   method <- if (parametric) "parametric" else "non-parametric"
   
   if(!average || !multi) {
+    weight <- purrr::map_dbl(estimates, function(x) x$weight)
     hcp <- purrr::map(x, .ssd_hcp_tmbfit,
                       value = value, ci = ci, level = level, nboot = nboot,
                       min_pboot = min_pboot,
@@ -249,7 +250,6 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
                       parametric = parametric, control = control,
                       hc = hc, save_to = save_to, samples = samples, fun = fun)
     
-    weight <- purrr::map_dbl(estimates, function(x) x$weight)
     if(!average) {
       return(hcp_ind(hcp, weight, method))
     }

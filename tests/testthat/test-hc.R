@@ -686,3 +686,12 @@ test_that("ssd_hc identical if in parallel", {
   hc2 <- ssd_hc(fits, ci = TRUE, nboot = 500)
   expect_identical(hc, hc2)
 })
+
+test_that("hc multi false weighted", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  set.seed(102)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, samples = TRUE, multi = FALSE, weighted = TRUE)
+  expect_s3_class(hc, "tbl")
+ # expect_snapshot_data(hc, "hc_weighted_bootstrap")
+})
+
