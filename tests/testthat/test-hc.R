@@ -416,12 +416,14 @@ test_that("ssd_hc cis with error and multiple dists", {
   expect_identical(attr(fit, "min_pmix"), 0.1)
   set.seed(99)
   expect_warning(hc_err_two <- ssd_hc(fit, ci = TRUE, nboot = 100, average = FALSE, delta = 100))
+  hc_err_two$samples <- NULL
   expect_snapshot_boot_data(hc_err_two, "hc_err_two")
   set.seed(99)
   expect_warning(hc_err_avg <- ssd_hc(fit,
                                       ci = TRUE, nboot = 100,
                                       delta = 100, multi = FALSE
   ))
+  hc_err_avg$samples <- NULL
   expect_snapshot_boot_data(hc_err_avg, "hc_err_avg")
 })
 
@@ -486,6 +488,7 @@ test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
   set.seed(102)
   expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE))
   expect_s3_class(hc, "tbl_df")
+  hc$samples <- NULL
   expect_snapshot_boot_data(hc, "hc_cis_chloride50")
 })
 

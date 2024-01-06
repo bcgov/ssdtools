@@ -301,12 +301,14 @@ test_that("ssd_hp cis with error and multiple dists", {
     conc = 1, ci = TRUE, nboot = 100, average = FALSE,
     delta = 100
   ))
+  hp_err_two$samples <- NULL
   expect_snapshot_boot_data(hp_err_two, "hp_err_two")
   set.seed(99)
   expect_warning(hp_err_avg <- ssd_hp(fit,
     conc = 1, ci = TRUE, nboot = 100,
     delta = 100, multi = FALSE
   ))
+  hp_err_avg$samples <- NULL
   expect_snapshot_boot_data(hp_err_avg, "hp_err_avg")
 })
 
