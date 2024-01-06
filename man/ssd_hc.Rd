@@ -24,6 +24,7 @@ ssd_hc(x, ...)
   multi = TRUE,
   fix_weights = TRUE,
   control = NULL,
+  samples = FALSE,
   save_to = NULL,
   ...
 )
@@ -37,6 +38,7 @@ ssd_hc(x, ...)
   min_pboot = 0.99,
   parametric = FALSE,
   save_to = NULL,
+  samples = FALSE,
   ...
 )
 }
@@ -68,7 +70,9 @@ fit in the sense of returning a likelihood.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
-\item{save_to}{A string specifying a directory to save the bootstrap datasets to or NULL.}
+\item{samples}{A flag specfying whether to include the bootstrap samples in the output.}
+
+\item{save_to}{A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.}
 }
 \value{
 A tibble of corresponding hazard concentrations.

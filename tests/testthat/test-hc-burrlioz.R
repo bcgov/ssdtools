@@ -22,7 +22,7 @@ test_that("ssd_hc_burrlioz deprecated", {
 test_that("ssd_hc gets estimates with invpareto", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
-  hc_boron <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
+  hc_boron <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE)
   expect_snapshot_data(hc_boron, "hc_boron")
 })
 
@@ -39,7 +39,7 @@ test_that("ssd_hc gets estimates with burrIII3", {
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
-  hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0)
+  hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE)
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3")
 })
 
@@ -61,7 +61,7 @@ test_that("ssd_hc gets estimates with burrIII3 parametric", {
   set.seed(49)
   hc_burrIII3 <- ssd_hc(fit,
     nboot = 10, ci = TRUE, min_pboot = 0,
-    parametric = TRUE
+    parametric = TRUE, samples = TRUE
   )
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
 })

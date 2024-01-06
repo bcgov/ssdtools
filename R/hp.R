@@ -36,6 +36,7 @@ ssd_hp.fitdists <- function(
     x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
     average = TRUE,  delta = 7, min_pboot = 0.99,
     parametric = TRUE, multi = TRUE, control = NULL, 
+    samples = FALSE,
     save_to = NULL, fix_weights = TRUE, ...
 ) {
   
@@ -47,7 +48,7 @@ ssd_hp.fitdists <- function(
     x = x, value = conc, ci = ci, level = level, nboot = nboot,
     average = average, delta = delta, min_pboot = min_pboot,
     parametric = parametric, multi = multi, control = control, 
-    save_to = save_to, hc = FALSE,  fix_weights = fix_weights,
+    save_to = save_to, samples = samples, hc = FALSE,  fix_weights = fix_weights,
   )
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp
@@ -62,6 +63,7 @@ ssd_hp.fitdists <- function(
 #' ssd_hp(fit)
 ssd_hp.fitburrlioz <- function(x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
                                min_pboot = 0.99, parametric = FALSE, 
+                               samples = FALSE,
                                save_to = NULL, ...) {
   chk_length(x, upper = 1L)
   chk_named(x)
@@ -86,6 +88,7 @@ ssd_hp.fitburrlioz <- function(x, conc = 1, ci = FALSE, level = 0.95, nboot = 10
     multi = TRUE,
     control = NULL,
     save_to = save_to,
+    samples = samples,
     hc = FALSE,
     fix_weights = FALSE,
     fun = fun)

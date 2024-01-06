@@ -1,2 +1,2 @@
-dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot
-average,5,1.68117,NA,1.10678,1.10678,1,parametric,1,1
+dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot,samples
+average,5,1.68117,NA,1.10678,1.10678,1,parametric,1,1,c(`000000001_multi` = 1.10678)

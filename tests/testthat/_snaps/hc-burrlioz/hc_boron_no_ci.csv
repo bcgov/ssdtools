@@ -1,2 +1,2 @@
-dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot
-invpareto,5,0.386944,NA,NA,NA,1,non-parametric,0,NA
+dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot,samples
+invpareto,5,0.386944,NA,NA,NA,1,non-parametric,0,NA,numeric(0)

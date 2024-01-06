@@ -129,7 +129,9 @@ remove them with a warning.}
 
 \item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
 
-\item{save_to}{A string specifying a directory to save the bootstrap datasets to or NULL.}
+\item{save_to}{A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.}
+
+\item{samples}{A flag specfying whether to include the bootstrap samples in the output.}
 
 \item{scale}{scale parameter.}
 
