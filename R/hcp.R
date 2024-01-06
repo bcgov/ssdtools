@@ -166,12 +166,16 @@ hcp_ind <- function(hcp, weight, method) {
   return(hcp)
 }
 
-hcp_average <- function(hcp, weight, value, method, nboot) {
+group_samples <- function(hcp) {
   samples <- lapply(hcp, function(x) x[c("dist", "value", "samples")])
   samples <- bind_rows(samples)
   samples <- dplyr::group_by(samples, .data$value)
   samples <- dplyr::summarise(samples, samples = I(list(unlist(samples))))
-  samples <- dplyr::ungroup(samples)
+  dplyr::ungroup(samples)
+}
+
+hcp_average <- function(hcp, weight, value, method, nboot) {
+  samples <- group_samples(hcp)
   
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
   hcp <- lapply(hcp, as.matrix)
@@ -190,6 +194,28 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   tib <- dplyr::inner_join(tib, samples, by = "value")
   dplyr::arrange(tib, .data$value)
 }
+
+hcp_weighted <- function(hcp, weight, value, method, nboot) {
+  samples <- group_samples(hcp)
+  
+  
+  # TODO: implement so that gets estimate from multi and then
+  # se, lcl, ucl etc from 
+  
+  tibble(
+    dist = "weighted", 
+    value = value, 
+    # est = hcp$est, 
+    # se = hcp$se,
+    # lcl = hcp$lcl, 
+    # ucl = hcp$ucl, 
+    # wt = rep(1, length(value)),
+    method = method, 
+    nboot = nboot, 
+  #  pboot = min$pboot
+  )
+}
+
 
 .ssd_hcp_fitdists <- function(
     x, 
@@ -255,6 +281,9 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     if(!average) {
       return(hcp_ind(hcp, weight, method))
     }
+    # TODO: implement hcp_weighted
+    # TODO: perhaps rename average to unweighted
+    # TODO: better yet add weighted column...
     return(hcp_average(hcp, weight, value, method, nboot))
   }
   
