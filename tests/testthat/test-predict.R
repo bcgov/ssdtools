@@ -28,7 +28,7 @@ test_that("predict cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   set.seed(10)
-  pred <- predict(fits, ci = TRUE, nboot = 10L, multi = FALSE)
+  pred <- predict(fits, ci = TRUE, nboot = 10L, multi = FALSE, weighted = FALSE)
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_cis")
 })

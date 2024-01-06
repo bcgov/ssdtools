@@ -34,6 +34,7 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              min_pboot = 0.99,
                              parametric = TRUE,
                              multi = TRUE,
+                             weighted = TRUE,
                              control = NULL,
                              ...) {
   chk_unused(...)
@@ -41,7 +42,7 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
     percent = percent, ci = ci, level = level,
     nboot = nboot, min_pboot = min_pboot,
     average = average, delta = delta, parametric = parametric,
-    multi = multi, control = control
+    multi = multi, weighted = weighted, control = control
   )
 }
 

@@ -16,8 +16,8 @@
 test_that("hc multi lnorm", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hc_dist <- ssd_hc(fits, average = FALSE, multi = FALSE)
-  hc_average <- ssd_hc(fits, average = TRUE, multi = FALSE)
+  hc_dist <- ssd_hc(fits, average = FALSE, multi = FALSE, weighted = FALSE)
+  hc_average <- ssd_hc(fits, average = TRUE, multi = FALSE, weighted = FALSE)
   hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE)
   expect_identical(hc_dist$est, hc_average$est)
   expect_equal(hc_multi, hc_average)
@@ -42,7 +42,7 @@ test_that("hc multi all", {
 test_that("hc multi all multiple hcs", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc_average <- ssd_hc(fits, percent = c(5,10), average = TRUE, multi = FALSE)
+  hc_average <- ssd_hc(fits, percent = c(5,10), average = TRUE, multi = FALSE, weighted = FALSE)
   hc_multi <- ssd_hc(fits, percent = c(5,10), average = TRUE, multi = TRUE)
   expect_equal(hc_average$est, c(1.24151700389853, 2.37337471483992))
   expect_equal(hc_multi$est, c(1.25677449265554, 2.38164905743083))
@@ -54,7 +54,7 @@ test_that("hc multi all multiple hcs", {
 test_that("hc multi all multiple hcs cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc_average <- ssd_hc(fits, percent = c(5,10), average = TRUE, multi = FALSE, nboot = 10, ci = TRUE)
+  hc_average <- ssd_hc(fits, percent = c(5,10), average = TRUE, multi = FALSE, nboot = 10, ci = TRUE, weighted = FALSE)
   set.seed(105)
   hc_multi <- ssd_hc(fits, percent = c(5,10), average = TRUE, multi = TRUE, nboot = 10, ci = TRUE)
   expect_equal(hc_average$est, c(1.24151700389853, 2.37337471483992))
@@ -67,9 +67,9 @@ test_that("hc multi all multiple hcs cis", {
 test_that("hc multi lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100, multi = FALSE)
+  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100, multi = FALSE, weighted = FALSE)
   set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE, weighted = FALSE)
   set.seed(102)
   hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
   

@@ -109,14 +109,16 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
 }
 
 .ssd_hcp_tmbfit <- function(
-    x, value, ci, level, nboot, min_pboot,
+    x, weight, value, ci, level, nboot, min_pboot,
     data, rescale, weighted, censoring, min_pmix,
-    range_shape1, range_shape2, parametric, control, hc, save_to, samples,
+    range_shape1, range_shape2, parametric, fix_weights, average, control, hc, save_to, samples,
     fun) {
   estimates <- estimates(x)
   dist <- .dist_tmbfit(x)
   pars <- .pars_tmbfit(x)
-  
+  if(fix_weights && average) {
+    nboot <- ceiling(nboot * weight)
+  }
   .ssd_hcp(x, dist = dist, estimates = estimates, 
            fun = fun, pars = pars,
            value = value, ci = ci, level = level, nboot = nboot,
@@ -242,12 +244,12 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   
   if(!average || !multi) {
     weight <- purrr::map_dbl(estimates, function(x) x$weight)
-    hcp <- purrr::map(x, .ssd_hcp_tmbfit,
+    hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
                       value = value, ci = ci, level = level, nboot = nboot,
                       min_pboot = min_pboot,
                       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                      parametric = parametric, control = control,
+                      parametric = parametric, fix_weights = fix_weights, average = average, control = control,
                       hc = hc, save_to = save_to, samples = samples, fun = fun)
     
     if(!average) {
