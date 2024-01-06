@@ -20,6 +20,7 @@ ssd_hp(x, ...)
   parametric = TRUE,
   multi = TRUE,
   control = NULL,
+  samples = FALSE,
   save_to = NULL,
   fix_weights = TRUE,
   ...
@@ -33,6 +34,7 @@ ssd_hp(x, ...)
   nboot = 1000,
   min_pboot = 0.99,
   parametric = FALSE,
+  samples = FALSE,
   save_to = NULL,
   ...
 )
@@ -63,7 +65,9 @@ fit in the sense of returning a likelihood.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
-\item{save_to}{A string specifying a directory to save the bootstrap datasets to or NULL.}
+\item{samples}{A flag specfying whether to include the bootstrap samples in the output.}
+
+\item{save_to}{A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.}
 
 \item{fix_weights}{A flag specifying whether to fix the model weights when performing \code{multi} bootstrapping.}
 }

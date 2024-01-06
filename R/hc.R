@@ -82,7 +82,8 @@ ssd_hc.fitdists <- function(
     parametric = TRUE, 
     multi = TRUE,
     fix_weights = TRUE,
-    control = NULL, 
+    control = NULL,
+    samples = FALSE,
     save_to = NULL,
     ...) {
   
@@ -106,6 +107,7 @@ ssd_hc.fitdists <- function(
     multi = multi,
     fix_weights = fix_weights,
     control = control,
+    samples = samples,
     save_to = save_to,
     hc = TRUE)
   
@@ -122,7 +124,7 @@ ssd_hc.fitdists <- function(
 #' ssd_hc(fit)
 ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000,
                                min_pboot = 0.99, parametric = FALSE, 
-                               save_to = NULL, ...) {
+                               save_to = NULL, samples = FALSE, ...) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
@@ -147,6 +149,7 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
     parametric = parametric,
     multi = TRUE,
     save_to = save_to,
+    samples = samples,
     control = NULL,
     hc = TRUE,
     fix_weights = FALSE,

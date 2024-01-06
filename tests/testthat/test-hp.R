@@ -104,7 +104,7 @@ test_that("hp fitdists works with cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(10)
-  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi = FALSE)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi = FALSE, samples = TRUE)
   expect_s3_class(hp, "tbl_df")
   expect_snapshot_data(hp, "hp98")
 })
@@ -284,7 +284,7 @@ test_that("ssd_hp cis with non-convergence", {
   hp15 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9)
   attr(fit, "min_pmix") <- 0.3
   expect_identical(attr(fit, "min_pmix"), 0.3)
-  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9, multi = FALSE)
+  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9, multi = FALSE, samples = TRUE)
   expect_s3_class(hp30, "tbl")
   expect_snapshot_data(hp30, "hp_30")
 })
@@ -301,14 +301,12 @@ test_that("ssd_hp cis with error and multiple dists", {
     conc = 1, ci = TRUE, nboot = 100, average = FALSE,
     delta = 100
   ))
-  hp_err_two$samples <- NULL
   expect_snapshot_boot_data(hp_err_two, "hp_err_two")
   set.seed(99)
   expect_warning(hp_err_avg <- ssd_hp(fit,
     conc = 1, ci = TRUE, nboot = 100,
     delta = 100, multi = FALSE
   ))
-  hp_err_avg$samples <- NULL
   expect_snapshot_boot_data(hp_err_avg, "hp_err_avg")
 })
 
@@ -316,7 +314,7 @@ test_that("ssd_hp with 1 bootstrap", {
   
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(10)
-  hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 1, multi = FALSE)
+  hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 1, multi = FALSE, samples = TRUE)
   expect_snapshot_data(hp, "hp_1")
 })
 
@@ -324,11 +322,11 @@ test_that("ssd_hp fix_weight", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
   
   set.seed(102)
-  hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = FALSE)
+  hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = FALSE, samples = TRUE)
   expect_snapshot_data(hc_unfix, "hc_unfix")
   
   set.seed(102)
-  hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = TRUE)
+  hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = TRUE, samples = TRUE)
   expect_snapshot_data(hc_fix, "hc_fix")
 })
 
