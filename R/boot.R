@@ -44,8 +44,8 @@ generate_data <- function(dist, data, args, weighted, censoring, parametric) {
   sample_parametric(dist, args = args, weighted = weighted, censoring = censoring)
 }
 
-boot_filename <- function(i, dist, prefix, ext) {
-  paste0(prefix, "_", stringr::str_pad(i, width = 9, pad = "0"), "_", dist, ext)
+boot_filename <- function(i, dist, prefix, ext = NULL, sep = "_") {
+  paste0(prefix, sep, stringr::str_pad(i, width = 9, pad = "0"), sep, dist, ext)
 }
 
 boot_filepath <- function(i, dist, save_to, prefix = "data", ext = ".csv") {
@@ -125,6 +125,7 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     wts = wts,
     .options = furrr::furrr_options(seed = seeds)
   )
-  names(estimates) <- 1:length(estimates)
+  names(estimates) <- boot_filename(1:length(estimates), prefix = "", sep = "",
+                                    dist = paste0("_", dist))
   estimates[!vapply(estimates, is.null, TRUE)]
 }
