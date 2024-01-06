@@ -1,2 +1,2 @@
 dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-average,5,1.68117,NA,1.10678,1.10678,1,parametric,1,1,1.106777161543
+average,5,1.68117,NA,1.10678,1.10678,1,parametric,1,1,c(`1` = 1.106777161543)

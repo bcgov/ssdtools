@@ -12,13 +12,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-xcis_estimates <- function(x, args, what, level) {
+xcis_estimates <- function(x, args, n, what, level) {
   if (grepl("^ssd_p", what)) {
     args$q <- x
   } else {
     args$p <- x
   }
   samples <- do.call(what, args)
+  names(samples) <- n
   quantile <- quantile(samples, probs = probs(level))
   data.frame(
     se = sd(samples), lcl = quantile[1], ucl = quantile[2],
@@ -28,11 +29,12 @@ xcis_estimates <- function(x, args, what, level) {
 }
 
 cis_estimates <- function(estimates, what, level, x, .names = NULL) {
+  n <- names(estimates)
   args <- transpose(estimates, .names = .names)
   args <- purrr::map_depth(args, 2, function(x) {
     if (is.null(x)) NA_real_ else x
   })
   args <- lapply(args, as.double)
-  x <- lapply(x, xcis_estimates, args, what, level)
+  x <- lapply(x, xcis_estimates, args, n, what, level)
   bind_rows(x)
 }

@@ -125,6 +125,6 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     wts = wts,
     .options = furrr::furrr_options(seed = seeds)
   )
-  
+  names(estimates) <- 1:length(estimates)
   estimates[!vapply(estimates, is.null, TRUE)]
 }
