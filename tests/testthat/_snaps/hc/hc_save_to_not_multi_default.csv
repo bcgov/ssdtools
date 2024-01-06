@@ -1,2 +1,2 @@
-dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot
-average,5,1.24152,NA,1.62613,1.62613,1,parametric,1,1
+dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot,samples
+average,5,1.24152,NA,1.62613,1.62613,1,parametric,1,1,"c(0.987785080379412, 2.28329745731025, 0.751505396262533, 3.09183052735202, 1.6416648068869, 1.67077008872954)"

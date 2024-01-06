@@ -23,7 +23,8 @@ no_hcp <- function(hc) {
     ucl = numeric(0),
     wt = numeric(0),
     nboot = integer(0),
-    pboot = numeric(0)
+    pboot = numeric(0),
+    samples = I(list(numeric(0)))
   )
 }
 
@@ -39,13 +40,15 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
     ucl = na,
     wt = rep(1, length(value)),
     nboot = rep(0L, length(value)),
-    pboot = na
+    pboot = na,
+    samples = I(list(numeric(0)))
   )
   hcp
 }
 
 ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   multiplier <- if(hc) rescale else 100
+  
   hcp <- tibble(
     dist = dist,
     value = value, 
@@ -55,7 +58,8 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     ucl = cis$ucl * multiplier,
     wt = rep(1, length(value)),
     nboot = nboot, 
-    pboot = length(estimates) / nboot
+    pboot = length(estimates) / nboot,
+    samples = I(lapply(cis$samples, function(x) x * multiplier))
   )
   hcp
 }
@@ -155,11 +159,17 @@ hcp_ind <- function(hcp, weight, method) {
   )
   hcp <- bind_rows(hcp)
   hcp$method <- method
-  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
+  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot", "samples")]
   return(hcp)
 }
 
 hcp_average <- function(hcp, weight, value, method, nboot) {
+  samples <- lapply(hcp, function(x) x[c("dist", "value", "samples")])
+  samples <- bind_rows(samples)
+  samples <- dplyr::group_by(samples, .data$value)
+  samples <- dplyr::summarise(samples, samples = I(list(unlist(samples))))
+  samples <- dplyr::ungroup(samples)
+  
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
   hcp <- lapply(hcp, as.matrix)
   hcp <- Reduce(function(x, y) {
@@ -169,11 +179,13 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   suppressMessages(hcp <- apply(hcp, c(1, 2), weighted.mean, w = weight))
   min <- as.data.frame(min)
   hcp <- as.data.frame(hcp)
-  tibble(
+  tib <- tibble(
     dist = "average", value = value, est = hcp$est, se = hcp$se,
     lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
     method = method, nboot = nboot, pboot = min$pboot
   )
+  tib <- dplyr::inner_join(tib, samples, by = "value")
+  dplyr::arrange(tib, .data$value)
 }
 
 .ssd_hcp_fitdists <- function(
@@ -225,7 +237,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   }
   
   method <- if (parametric) "parametric" else "non-parametric"
-
+  
   if(!average || !multi) {
     hcp <- purrr::map(x, .ssd_hcp_tmbfit,
                       value = value, ci = ci, level = level, nboot = nboot,
@@ -251,7 +263,7 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
     fix_weights = fix_weights, hc = hc)
   
   hcp$method <- method
-  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot")]
+  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot", "samples")]
   hcp
 }
 

@@ -22,6 +22,7 @@ xcis_estimates <- function(x, args, what, level) {
   quantile <- quantile(samples, probs = probs(level))
   data.frame(
     se = sd(samples), lcl = quantile[1], ucl = quantile[2],
+    samples = I(list(samples)),
     row.names = NULL
   )
 }
