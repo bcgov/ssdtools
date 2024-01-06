@@ -72,8 +72,8 @@
 <ul><li>
 <code><a href="../reference/estimates.fitdists.html">estimates.fitdists()</a></code> now returns all distributions by default and includes weights as parameters.</li>
 <li>
-<code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code>, <code><a href="../reference/ssd_wqg_bc.html">ssd_wqg_bc()</a></code> and <code><a href="../reference/ssd_wqg_burrlioz.html">ssd_wqg_burrlioz()</a></code> no longer rescale data.</li>
-<li>seeds now allocated to bootstrap samples.</li>
+<code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code>, <code><a href="../reference/ssd_wqg_bc.html">ssd_wqg_bc()</a></code> and <code><a href="../reference/ssd_wqg_burrlioz.html">ssd_wqg_burrlioz()</a></code> no longer rescale data by default.</li>
+<li>seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions).</li>
 </ul><p>Fixes</p>
 <ul><li>
 <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now include <code>parametric</code> column.</li>
