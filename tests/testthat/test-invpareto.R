@@ -119,5 +119,5 @@ test_that("invpareto with extreme data", {
   fit99r <- ssd_fit_dists(data, dists = "invpareto", rescale = TRUE)
   expect_equal(
     estimates(fit99r),
-    list(invpareto.weight = 1, invpareto.scale = 1.00038435059807, invpareto.shape = 26.0278618888664))
+    list(invpareto.weight = 1, invpareto.scale = 1.03020756694085, invpareto.shape = 26.0278618888664))
 })

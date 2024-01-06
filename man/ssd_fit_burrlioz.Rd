@@ -11,7 +11,7 @@ ssd_fit_burrlioz(data, left = "Conc", rescale = FALSE, silent = FALSE)
 
 \item{left}{A string of the column in data with the concentrations.}
 
-\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
+\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 }

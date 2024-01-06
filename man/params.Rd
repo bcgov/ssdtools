@@ -121,7 +121,7 @@ remove them with a warning.}
 
 \item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 
-\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the largest finite value.}
+\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.}
 
 \item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
 

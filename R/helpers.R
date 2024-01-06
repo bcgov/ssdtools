@@ -121,6 +121,13 @@ is_at_boundary <- function(fit, data, min_pmix = 0.5, range_shape1 = c(0.05, 20)
   any(pars == lower | pars == upper)
 }
 
+geomid <- function(x) {
+  x <- x[is.finite(x)]
+  x <- x[x > 0]
+  if(!length(x)) return(1)
+  exp(mean(log(range(x))))
+}
+
 adjust_data <- function(data, rescale, reweight, silent) {
   censoring <- censoring(data)
 
@@ -132,7 +139,7 @@ adjust_data <- function(data, rescale, reweight, silent) {
 
   if (rescale) {
     rescale <- c(data$left, data$right)
-    rescale <- max(rescale[is.finite(rescale)])
+    rescale <- geomid(rescale)
     data$left <- data$left / rescale
     data$right <- data$right / rescale
   } else {
