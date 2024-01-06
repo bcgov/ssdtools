@@ -82,6 +82,7 @@
 <span>  multi <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fix_weights <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  samples <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  save_to <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
@@ -96,6 +97,7 @@
 <span>  min_pboot <span class="op">=</span> <span class="fl">0.99</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  save_to <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  samples <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -155,8 +157,12 @@ fit in the sense of returning a likelihood.</p></dd>
 <dd><p>A list of control parameters passed to <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code>.</p></dd>
 
 
+<dt>samples</dt>
+<dd><p>A flag specfying whether to include the bootstrap samples in the output.</p></dd>
+
+
 <dt>save_to</dt>
-<dd><p>A string specifying a directory to save the bootstrap datasets to or NULL.</p></dd>
+<dd><p>A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -198,17 +204,17 @@ hazard concentrations(s).</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ssd_hc</span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   dist    percent   est    se   lcl   ucl    wt method     nboot pboot</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> average       5  1.26    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dist    percent   est    se   lcl   ucl    wt method     nboot pboot samples  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;list&gt;&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> average       5  1.26    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl [0]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_burrlioz.html">ssd_fit_burrlioz</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ssd_hc</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   dist      percent   est    se   lcl   ucl    wt method         nboot pboot</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> invpareto       5 0.387    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 non-parametric     0    <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dist      percent   est    se   lcl   ucl    wt method     nboot pboot samples</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> invpareto       5 0.387    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 non-param…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
