@@ -37,7 +37,7 @@ ssd_hp.fitdists <- function(
     average = TRUE,  delta = 7, min_pboot = 0.99,
     parametric = TRUE, multi = TRUE, control = NULL, 
     samples = FALSE,
-    save_to = NULL, fix_weights = TRUE, ...
+    save_to = NULL, weighted = TRUE, ...
 ) {
   
   chk_vector(conc)
@@ -48,7 +48,7 @@ ssd_hp.fitdists <- function(
     x = x, value = conc, ci = ci, level = level, nboot = nboot,
     average = average, delta = delta, min_pboot = min_pboot,
     parametric = parametric, multi = multi, control = control, 
-    save_to = save_to, samples = samples, hc = FALSE,  fix_weights = fix_weights,
+    save_to = save_to, samples = samples, hc = FALSE,  fix_weights = weighted,
   )
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp

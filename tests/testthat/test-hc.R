@@ -611,11 +611,11 @@ test_that("ssd_hc fix_weight", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
   
   set.seed(102)
-  hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, fix_weights = FALSE, samples = TRUE)
+  hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, weighted = FALSE, samples = TRUE)
   expect_snapshot_data(hc_unfix, "hc_unfix")
   
   set.seed(102)
-  hc_fix <- ssd_hc(fits, nboot = 100, ci = TRUE, fix_weights = TRUE, samples = TRUE)
+  hc_fix <- ssd_hc(fits, nboot = 100, ci = TRUE, weighted = TRUE, samples = TRUE)
   expect_snapshot_data(hc_fix, "hc_fix")
 })
 
@@ -623,11 +623,11 @@ test_that("ssd_hc multiple values", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
   
   set.seed(102)
-  hc_unfix <- ssd_hc(fits, percent = c(5,10), nboot = 100, ci = TRUE, fix_weights = FALSE, samples = TRUE)
+  hc_unfix <- ssd_hc(fits, percent = c(5,10), nboot = 100, ci = TRUE, weighted = FALSE, samples = TRUE)
   expect_snapshot_data(hc_unfix, "hc_unfixmulti")
   
   set.seed(102)
-  hc_fix <- ssd_hc(fits, percent = c(5,10), nboot = 100, ci = TRUE, fix_weights = TRUE, samples = TRUE)
+  hc_fix <- ssd_hc(fits, percent = c(5,10), nboot = 100, ci = TRUE, weighted = TRUE, samples = TRUE)
   expect_snapshot_data(hc_fix, "hc_fixmulti")
 })
 

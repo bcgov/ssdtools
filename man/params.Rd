@@ -39,8 +39,6 @@ relative to the extremes for non-missing values.}
 
 \item{dists}{A character vector of the distribution names.}
 
-\item{fix_weights}{A flag specifying whether to fix the model weights when performing \code{multi} bootstrapping.}
-
 \item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
 
 \item{label}{A string of the column in data with the labels.}
@@ -101,7 +99,7 @@ remove them with a warning.}
 
 \item{object}{The object.}
 
-\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping when \code{ci = TRUE}.}
 
 \item{p}{vector of probabilities.}
 
@@ -162,6 +160,8 @@ remove them with a warning.}
 \item{size}{A number for the size of the labels.}
 
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
+
+\item{weighted}{A flag specifying whether to fix the model weights when performing \code{multi = TRUE} or do the weighted bootstrap when \code{multi = FALSE}.}
 
 \item{x}{The object.}
 

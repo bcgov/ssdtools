@@ -22,7 +22,7 @@ ssd_hp(x, ...)
   control = NULL,
   samples = FALSE,
   save_to = NULL,
-  fix_weights = TRUE,
+  weighted = TRUE,
   ...
 )
 
@@ -59,7 +59,7 @@ ssd_hp(x, ...)
 \item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
 fit in the sense of returning a likelihood.}
 
-\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping when \code{ci = TRUE}.}
 
 \item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
 
@@ -69,7 +69,7 @@ fit in the sense of returning a likelihood.}
 
 \item{save_to}{A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.}
 
-\item{fix_weights}{A flag specifying whether to fix the model weights when performing \code{multi} bootstrapping.}
+\item{weighted}{A flag specifying whether to fix the model weights when performing \code{multi = TRUE} or do the weighted bootstrap when \code{multi = FALSE}.}
 }
 \value{
 A tibble of corresponding hazard percents.

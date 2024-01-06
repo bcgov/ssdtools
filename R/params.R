@@ -32,7 +32,6 @@
 #' @param delta A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.
 #' @param digits A whole number specifying the number of significant figures.
 #' @param dists A character vector of the distribution names.
-#' @param fix_weights A flag specifying whether to fix the model weights when performing `multi` bootstrapping.
 #' @param hc A count between 1 and 99 indicating the percent hazard concentration (or NULL).
 #' @param label A string of the column in data with the labels.
 #' @param left A string of the column in data with the concentrations.
@@ -64,7 +63,7 @@
 #' @param nrow A positive whole number of the minimum number of non-missing rows.
 #' @param nsim A positive whole number of the number of simulations to generate.
 #' @param object The object.
-#' @param parametric A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.
+#' @param parametric A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping when `ci = TRUE`.
 #' @param p vector of probabilities.
 #' @param percent A numeric vector of percentages.
 #' @param pmix Proportion mixture parameter.
@@ -96,6 +95,7 @@
 #' @param silent A flag indicating whether fits should fail silently.
 #' @param size A number for the size of the labels.
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
+#' @param weighted A flag specifying whether to fix the model weights when performing `multi = TRUE` or do the weighted bootstrap when `multi = FALSE`.
 #' @param x The object.
 #' @param xbreaks The x-axis breaks as one of:
 #'   - `NULL` for no breaks
