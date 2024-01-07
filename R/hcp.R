@@ -87,7 +87,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   }
   
   censoring <- censoring / rescale
-
+  
   ests <- boot_estimates(fun = fun, dist = dist, estimates = estimates, 
                          pars = pars, nboot = nboot, data = data, weighted = weighted,
                          censoring = censoring, min_pmix = min_pmix,
@@ -212,8 +212,24 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
     # wt = rep(1, length(value)),
     method = method, 
     nboot = nboot, 
-  #  pboot = min$pboot
+    #  pboot = min$pboot
   )
+}
+
+.ssd_hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates, 
+                         data, rescale, 
+                         weighted, censoring, min_pmix, range_shape1, 
+                         range_shape2, parametric, fix_weights, 
+                         average, control, hc, save_to, samples, fun, method) {
+  weight <- purrr::map_dbl(estimates, function(x) x$weight)
+  hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
+                     value = value, ci = ci, level = level, nboot = nboot,
+                     min_pboot = min_pboot,
+                     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                     parametric = parametric, fix_weights = fix_weights, average = average, control = control,
+                     hc = hc, save_to = save_to, samples = samples, fun = fun)
+  hcp_ind(hcp, weight, method)
 }
 
 .ssd_hcp_fitdists <- function(
@@ -268,8 +284,18 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
   
   method <- if (parametric) "parametric" else "non-parametric"
   
-  # roll this block into own function and then call with ci = FALSE to get estimates if needed.
   if(!average) {
+    hcp_ind <- .ssd_hcp_ind(
+      x, value = value, ci = ci, level = level, nboot = nboot,
+      min_pboot = min_pboot, estimates = estimates,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, fix_weights = fix_weights, average = average, control = control,
+      hc = hc, save_to = save_to, samples = samples, fun = fun, method = method)
+    return(hcp_ind)
+  }
+  
+  if(!multi) {
     weight <- purrr::map_dbl(estimates, function(x) x$weight)
     hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
                        value = value, ci = ci, level = level, nboot = nboot,
@@ -278,18 +304,6 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
                        min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                        parametric = parametric, fix_weights = fix_weights, average = average, control = control,
                        hc = hc, save_to = save_to, samples = samples, fun = fun)
-    return(hcp_ind(hcp, weight, method))    
-  }
-  
-  if(!multi) {
-    weight <- purrr::map_dbl(estimates, function(x) x$weight)
-    hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
-                      value = value, ci = ci, level = level, nboot = nboot,
-                      min_pboot = min_pboot,
-                      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                      parametric = parametric, fix_weights = fix_weights, average = average, control = control,
-                      hc = hc, save_to = save_to, samples = samples, fun = fun)
     
     # TODO: implement hcp_weighted
     # TODO: perhaps rename average to unweighted
