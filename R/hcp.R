@@ -268,7 +268,20 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
   
   method <- if (parametric) "parametric" else "non-parametric"
   
-  if(!average || !multi) {
+  # roll this block into own function and then call with ci = FALSE to get estimates if needed.
+  if(!average) {
+    weight <- purrr::map_dbl(estimates, function(x) x$weight)
+    hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
+                       value = value, ci = ci, level = level, nboot = nboot,
+                       min_pboot = min_pboot,
+                       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                       parametric = parametric, fix_weights = fix_weights, average = average, control = control,
+                       hc = hc, save_to = save_to, samples = samples, fun = fun)
+    return(hcp_ind(hcp, weight, method))    
+  }
+  
+  if(!multi) {
     weight <- purrr::map_dbl(estimates, function(x) x$weight)
     hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
                       value = value, ci = ci, level = level, nboot = nboot,
@@ -278,9 +291,6 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
                       parametric = parametric, fix_weights = fix_weights, average = average, control = control,
                       hc = hc, save_to = save_to, samples = samples, fun = fun)
     
-    if(!average) {
-      return(hcp_ind(hcp, weight, method))
-    }
     # TODO: implement hcp_weighted
     # TODO: perhaps rename average to unweighted
     # TODO: better yet add weighted column...
