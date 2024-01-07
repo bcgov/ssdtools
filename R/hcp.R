@@ -216,7 +216,6 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
   )
 }
 
-
 .ssd_hcp_fitdists <- function(
     x, 
     value, 
@@ -224,6 +223,7 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
     level, 
     nboot,
     average, 
+    multi_est,
     min_pboot, 
     parametric, 
     multi, 
@@ -307,6 +307,7 @@ ssd_hcp_fitdists <- function(
     level,
     nboot,
     average,
+    multi_est,
     delta,
     min_pboot,
     parametric,
@@ -327,6 +328,7 @@ ssd_hcp_fitdists <- function(
   chk_gt(nboot)
   chk_lt(nboot, 1e+09)
   chk_flag(average)
+  chk_flag(multi_est)
   chk_number(delta)
   chk_gte(delta)
   chk_number(min_pboot)
@@ -347,6 +349,7 @@ ssd_hcp_fitdists <- function(
     level = level, 
     nboot = nboot,
     average = average, 
+    multi_est = multi_est,
     min_pboot = min_pboot,
     parametric = parametric,
     multi = multi,

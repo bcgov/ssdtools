@@ -56,6 +56,7 @@
 #' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully 
 #' fit in the sense of returning a likelihood.
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
+#' @param multi_est A flag specifying whether to calculate model averaged estimates using the multi as opposed to the mean method.
 #' @param na.rm A flag specifying whether to silently remove missing values or 
 #' remove them with a warning.
 #' @param n positive number of observations.

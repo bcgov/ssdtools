@@ -86,6 +86,8 @@ fit in the sense of returning a likelihood.}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 
+\item{multi_est}{A flag specifying whether to calculate model averaged estimates using the multi as opposed to the mean method.}
+
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
 
