@@ -217,7 +217,7 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control, 
                            save_to, samples, fix_weights, hc) {
-  estimates <- estimates(x, multi = TRUE)
+  estimates <- estimates(x, all_estimates = TRUE)
   dist <- "multi"
   fun <- fits_dists
   pars <- pars_fitdists(x)
@@ -294,7 +294,7 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
   range_shape2 <- .range_shape2_fitdists(x)
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
-  estimates <- .list_estimates(x, multi = FALSE)
+  estimates <- .list_estimates(x, all_estimates = FALSE)
   
   if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
     wrn("Parametric CIs cannot be calculated for inconsistently censored data.")

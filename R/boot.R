@@ -80,7 +80,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   if (is.null(fit)) {
     return(NULL)
   }
-  est <- estimates(fit, multi = TRUE)
+  est <- estimates(fit, all_estimates = TRUE)
   
   if(!is.null(save_to)) {
     saveRDS(est, boot_filepath(i, dist, save_to, prefix = "estimates", ext = ".rds"))

@@ -86,7 +86,7 @@ fit in the sense of returning a likelihood.}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 
-\item{multi}{A flag specifying whether to calculate estimates for all implemented distributions.}
+\item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
 \item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution for generating model averaged confidence intervals.}
 

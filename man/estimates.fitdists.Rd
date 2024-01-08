@@ -4,12 +4,12 @@
 \alias{estimates.fitdists}
 \title{Estimates for fitdists Object}
 \usage{
-\method{estimates}{fitdists}(x, multi = FALSE, ...)
+\method{estimates}{fitdists}(x, all_estimates = FALSE, ...)
 }
 \arguments{
 \item{x}{The object.}
 
-\item{multi}{A flag specifying whether to calculate estimates for all implemented distributions.}
+\item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
 \item{...}{Unused.}
 }

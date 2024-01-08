@@ -56,7 +56,7 @@
 #' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully 
 #' fit in the sense of returning a likelihood.
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
-#' @param multi A flag specifying whether to calculate estimates for all implemented distributions.
+#' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
 #' @param multi_ci A flag specifying whether to treat the distributions as constituting a single distribution for generating model averaged confidence intervals.
 #' @param multi_est A flag specifying whether to treat the distributions as constituting a single distribution for calculating the model averaged estimates.
 #' @param na.rm A flag specifying whether to silently remove missing values or 
