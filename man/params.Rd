@@ -86,7 +86,11 @@ fit in the sense of returning a likelihood.}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 
-\item{multi_est}{A flag specifying whether to calculate model averaged estimates using the multi as opposed to the mean method.}
+\item{multi}{A flag specifying whether to calculate estimates for all implemented distributions.}
+
+\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution for generating model averaged confidence intervals.}
+
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution for calculating the model averaged estimates.}
 
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
@@ -126,8 +130,6 @@ remove them with a warning.}
 \item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
 
 \item{right}{A string of the column in data with the right concentration values.}
-
-\item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
 
 \item{save_to}{A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.}
 

@@ -56,7 +56,9 @@
 #' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully 
 #' fit in the sense of returning a likelihood.
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
-#' @param multi_est A flag specifying whether to calculate model averaged estimates using the multi as opposed to the mean method.
+#' @param multi A flag specifying whether to calculate estimates for all implemented distributions.
+#' @param multi_ci A flag specifying whether to treat the distributions as constituting a single distribution for generating model averaged confidence intervals.
+#' @param multi_est A flag specifying whether to treat the distributions as constituting a single distribution for calculating the model averaged estimates.
 #' @param na.rm A flag specifying whether to silently remove missing values or 
 #' remove them with a warning.
 #' @param n positive number of observations.
@@ -78,7 +80,6 @@
 #' @param rescale A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.
 #' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param right A string of the column in data with the right concentration values.
-#' @param multi A flag specifying whether to treat the distributions as constituting a single distribution.
 #' @param save_to A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.
 #' @param samples A flag specfying whether to include the bootstrap samples in the output. 
 #' @param scale scale parameter.

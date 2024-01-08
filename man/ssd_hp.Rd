@@ -19,7 +19,7 @@ ssd_hp(x, ...)
   delta = 7,
   min_pboot = 0.99,
   parametric = TRUE,
-  multi = TRUE,
+  multi_ci = TRUE,
   control = NULL,
   samples = FALSE,
   save_to = NULL,
@@ -55,7 +55,7 @@ ssd_hp(x, ...)
 
 \item{average}{A flag specifying whether to model average the estimates.}
 
-\item{multi_est}{A flag specifying whether to calculate model averaged estimates using the multi as opposed to the mean method.}
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution for calculating the model averaged estimates.}
 
 \item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
 
@@ -64,7 +64,7 @@ fit in the sense of returning a likelihood.}
 
 \item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping when \code{ci = TRUE}.}
 
-\item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
+\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution for generating model averaged confidence intervals.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 

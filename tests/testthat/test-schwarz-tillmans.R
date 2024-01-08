@@ -19,11 +19,11 @@ test_that("schwarz-tillmans", {
   )
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
 
-  hc <- ssd_hc(fits, average = FALSE, multi = FALSE)
+  hc <- ssd_hc(fits, average = FALSE, multi_ci = FALSE)
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
 
-  hc_avg <- ssd_hc(fits, average = TRUE, multi = FALSE)
+  hc_avg <- ssd_hc(fits, average = TRUE, multi_ci = FALSE)
   expect_s3_class(hc_avg, "tbl")
   expect_snapshot_data(hc_avg, "hc_avg")
 

@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{The object.}
 
-\item{multi}{A flag specifying whether to treat the distributions as constituting a single distribution.}
+\item{multi}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
 \item{...}{Unused.}
 }
