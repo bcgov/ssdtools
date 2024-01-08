@@ -198,14 +198,14 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
                          data, rescale, 
                          weighted, censoring, min_pmix, range_shape1, 
                          range_shape2, parametric, fix_weights, 
-                         average, control, hc, save_to, samples, fun) {
+                         control, hc, save_to, samples, fun) {
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
   hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
                      value = value, ci = ci, level = level, nboot = nboot,
                      min_pboot = min_pboot,
                      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                     parametric = parametric, fix_weights = fix_weights, average = average, control = control,
+                     parametric = parametric, fix_weights = fix_weights, average = FALSE, control = control,
                      hc = hc, save_to = save_to, samples = samples, fun = fun)
   method <- if (parametric) "parametric" else "non-parametric"
   
@@ -236,6 +236,28 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
   hcp$method <- method
   hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot", "samples")]
   hcp
+}
+
+.ssd_hcp_conventional <- function(x, value, ci, level, nboot, min_pboot, estimates,
+                           data, rescale, weighted, censoring, min_pmix,
+                           range_shape1, range_shape2, parametric, control, 
+                           save_to, samples, fix_weights, hc, fun) {
+  
+  weight <- purrr::map_dbl(estimates, function(x) x$weight)
+  hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
+                     value = value, ci = ci, level = level, nboot = nboot,
+                     min_pboot = min_pboot,
+                     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                     parametric = parametric, fix_weights = fix_weights, average = TRUE, control = control,
+                     hc = hc, save_to = save_to, samples = samples, fun = fun)
+  
+  method <- if (parametric) "parametric" else "non-parametric"
+  
+  # TODO: implement hcp_weighted
+  # TODO: perhaps rename average to unweighted
+  # TODO: better yet add weighted column...
+  hcp_average(hcp, weight, value, method, nboot)
 }
 
 .ssd_hcp_fitdists <- function(
@@ -288,15 +310,13 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
     nboot <- 0L
   }
   
-  method <- if (parametric) "parametric" else "non-parametric"
-  
   if(!average) {
     hcp <- .ssd_hcp_ind(
       x, value = value, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, fix_weights = fix_weights, average = average, control = control,
+      parametric = parametric, fix_weights = fix_weights, control = control,
       hc = hc, save_to = save_to, samples = samples, fun = fun)
     return(hcp)
   }
@@ -312,19 +332,15 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
     return(hcp)
   }
   
-  weight <- purrr::map_dbl(estimates, function(x) x$weight)
-  hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
-                     value = value, ci = ci, level = level, nboot = nboot,
-                     min_pboot = min_pboot,
-                     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                     parametric = parametric, fix_weights = fix_weights, average = average, control = control,
-                     hc = hc, save_to = save_to, samples = samples, fun = fun)
+  hcp <- .ssd_hcp_conventional(
+    x, value, ci = ci, level = level, nboot = nboot,
+    min_pboot = min_pboot, estimates = estimates,
+    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+    parametric = parametric, control = control, save_to = save_to, samples = samples,
+    fix_weights = fix_weights, hc = hc, fun = fun)
   
-  # TODO: implement hcp_weighted
-  # TODO: perhaps rename average to unweighted
-  # TODO: better yet add weighted column...
-  hcp_average(hcp, weight, value, method, nboot)
+  return(hcp)
 }
 
 ssd_hcp_fitdists <- function(
