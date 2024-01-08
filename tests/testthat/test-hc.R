@@ -643,7 +643,7 @@ test_that("ssd_hc multiple values save_to", {
                                       "estimates_000000002_multi.rds"))
 })
 
-test_that("ssd_hc not multi save_to", {
+test_that("ssd_hc not multi_ci save_to", {
   dir <- withr::local_tempdir()
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
@@ -687,7 +687,7 @@ test_that("ssd_hc identical if in parallel", {
   expect_identical(hc, hc2)
 })
 
-test_that("hc multi false weighted", {
+test_that("hc multi_ci false weighted", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, multi_ci = FALSE, weighted = TRUE)

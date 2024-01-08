@@ -13,7 +13,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hc multi lnorm", {
+test_that("hc multi_ci lnorm", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc_dist <- ssd_hc(fits, average = FALSE, multi_ci = FALSE, weighted = FALSE)
@@ -27,7 +27,7 @@ test_that("hc multi lnorm", {
   })
 })
 
-test_that("hc multi all", {
+test_that("hc multi_ci all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc_average <- ssd_hc(fits, average = TRUE, multi_ci = FALSE)
@@ -39,7 +39,7 @@ test_that("hc multi all", {
   })
 })
 
-test_that("hc multi all multiple hcs", {
+test_that("hc multi_ci all multiple hcs", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc_average <- ssd_hc(fits, percent = c(5,10), average = TRUE, multi_ci = FALSE, weighted = FALSE)
@@ -51,7 +51,7 @@ test_that("hc multi all multiple hcs", {
   })
 })
 
-test_that("hc multi all multiple hcs cis", {
+test_that("hc multi_ci all multiple hcs cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc_average <- ssd_hc(fits, percent = c(5,10), average = TRUE, multi_ci = FALSE, nboot = 10, ci = TRUE, weighted = FALSE)
@@ -64,7 +64,7 @@ test_that("hc multi all multiple hcs cis", {
   })
 })
 
-test_that("hc multi lnorm ci", {
+test_that("hc multi_ci lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100, multi_ci = FALSE, weighted = FALSE)

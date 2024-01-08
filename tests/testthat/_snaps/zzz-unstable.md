@@ -1,4 +1,4 @@
-# hc multi lnorm default 100
+# hc multi_ci lnorm default 100
 
     Code
       hc_average
@@ -18,7 +18,7 @@
         <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>>
       1 average       5  1.26 0.774 0.410  3.25     1 parametric   100  0.86 <dbl>    
 
-# hp multi lnorm default 100
+# hp multi_ci lnorm default 100
 
     Code
       hp_average

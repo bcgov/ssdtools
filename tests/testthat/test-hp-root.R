@@ -13,7 +13,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hp multi lnorm", {
+test_that("hp multi_ci lnorm", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
@@ -30,7 +30,7 @@ test_that("hp multi lnorm", {
   })
 })
 
-test_that("hp multi all", {
+test_that("hp multi_ci all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hp_average <- ssd_hp(fits, average = TRUE)
@@ -43,7 +43,7 @@ test_that("hp multi all", {
   })
 })
 
-test_that("hp multi lnorm ci", {
+test_that("hp multi_ci lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, multi_ci = FALSE, weighted = FALSE)

@@ -270,7 +270,7 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
     multi_est,
     min_pboot, 
     parametric, 
-    multi, 
+    multi_ci, 
     fix_weights,
     control,
     hc,
@@ -321,7 +321,7 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
     return(hcp)
   }
   
-  if(multi) {
+  if(multi_ci) {
     hcp <- .ssd_hcp_multi(
       x, value, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot,
@@ -354,7 +354,7 @@ ssd_hcp_fitdists <- function(
     delta,
     min_pboot,
     parametric,
-    multi,
+    multi_ci,
     control,
     samples,
     save_to,
@@ -377,7 +377,7 @@ ssd_hcp_fitdists <- function(
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_flag(parametric)
-  chk_flag(multi)
+  chk_flag(multi_ci)
   chk_flag(fix_weights)
   chk_null_or(control, vld = vld_list)
   chk_null_or(save_to, vld = vld_dir)
@@ -395,7 +395,7 @@ ssd_hcp_fitdists <- function(
     multi_est = multi_est,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi = multi,
+    multi_ci = multi_ci,
     fix_weights = fix_weights,
     control = control,
     save_to = save_to,

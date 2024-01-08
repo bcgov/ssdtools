@@ -43,7 +43,7 @@ test_that("weibull is unstable", {
   expect_identical(names(fits), c('gamma', 'weibull'))
 })
 
-test_that("hc multi lnorm default 100", {
+test_that("hc multi_ci lnorm default 100", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
@@ -55,9 +55,9 @@ test_that("hc multi lnorm default 100", {
     hc_average
   })
   
-  # not sure why hc multi is different on windows
+  # not sure why hc multi_ci is different on windows
   # ══ Failed tests ════════════════════════════════════════════════════════════════
-  # ── Failure ('test-hc-root.R:77:3'): hc multi lnorm default 100 ─────────────────
+  # ── Failure ('test-hc-root.R:77:3'): hc multi_ci lnorm default 100 ─────────────────
   # Snapshot of code has changed:
   #   old[4:7] vs new[4:7]
   # # A tibble: 1 x 10
@@ -72,7 +72,7 @@ test_that("hc multi lnorm default 100", {
   })
 })
 
-test_that("hp multi lnorm default 100", {
+test_that("hp multi_ci lnorm default 100", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
@@ -85,7 +85,7 @@ test_that("hp multi lnorm default 100", {
   })
   testthat::skip_on_ci() 
   testthat::skip_on_cran()
-  # ── Failure ('test-hp-root.R:79:3'): hp multi lnorm default 100 ─────────────────
+  # ── Failure ('test-hp-root.R:79:3'): hp multi_ci lnorm default 100 ─────────────────
   # Snapshot of code has changed:
   #   old[4:7] vs new[4:7]
   # # A tibble: 1 x 10
