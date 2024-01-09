@@ -239,9 +239,9 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
 }
 
 .ssd_hcp_conventional <- function(x, value, ci, level, nboot, min_pboot, estimates,
-                           data, rescale, weighted, censoring, min_pmix,
-                           range_shape1, range_shape2, parametric, control, 
-                           save_to, samples, fix_weights, hc, fun) {
+                                  data, rescale, weighted, censoring, min_pmix,
+                                  range_shape1, range_shape2, parametric, control, 
+                                  save_to, samples, fix_weights, hc, fun) {
   
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
   hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
@@ -329,6 +329,25 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control, save_to = save_to, samples = samples,
       fix_weights = fix_weights, hc = hc)
+    
+    if(multi_est) {
+      return(hcp)
+    }
+    
+    est <- .ssd_hcp_conventional(
+      x, value, ci = FALSE, level = level, nboot = nboot,
+      min_pboot = min_pboot, estimates = estimates,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control, save_to = save_to, samples = samples,
+      fix_weights = fix_weights, hc = hc, fun = fun)
+    
+    est <- est[c("value", "est")]
+    colnames(est) <- c("value", "est2")
+    hcp <- dplyr::inner_join(hcp, est, by = c("value"))
+    hcp$est <- hcp$est2
+    hcp$est2 <- NULL
+    
     return(hcp)
   }
   
@@ -340,7 +359,25 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
     parametric = parametric, control = control, save_to = save_to, samples = samples,
     fix_weights = fix_weights, hc = hc, fun = fun)
   
-  return(hcp)
+  if(!multi_est) {
+    return(hcp)
+  }
+  
+  est <- .ssd_hcp_multi(
+    x, value, ci = FALSE, level = level, nboot = nboot,
+    min_pboot = min_pboot,
+    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+    parametric = parametric, control = control, save_to = save_to, samples = samples,
+    fix_weights = fix_weights, hc = hc)
+  
+  est <- est[c("value", "est")]
+  colnames(est) <- c("value", "est2")
+  hcp <- dplyr::inner_join(hcp, est, by = c("value"))
+  hcp$est <- hcp$est2
+  hcp$est2 <- NULL
+  
+  hcp
 }
 
 ssd_hcp_fitdists <- function(

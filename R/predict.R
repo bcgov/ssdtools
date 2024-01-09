@@ -34,6 +34,7 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
                              min_pboot = 0.99,
                              parametric = TRUE,
                              multi_ci = TRUE,
+                             multi_est = TRUE,
                              weighted = TRUE,
                              control = NULL,
                              ...) {

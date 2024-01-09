@@ -167,7 +167,7 @@ test_that("ssd_hc fitdists works fractions", {
 test_that("ssd_hc fitdists averages", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  hc <- ssd_hc(fits, multi_ci = FALSE, weighted = FALSE)
+  hc <- ssd_hc(fits, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_data(hc, "hc145")
 })
@@ -178,10 +178,10 @@ test_that("ssd_hc fitdists correctly averages", {
   library(ssddata)
   library(testthat)
   fits <- ssd_fit_dists(ssddata::aims_molybdenum_marine, dists = c("lgumbel", "lnorm_lnorm"))
-  hc <- ssd_hc(fits, average = FALSE, multi_ci = FALSE, weighted = FALSE)
+  hc <- ssd_hc(fits, average = FALSE, weighted = FALSE)
   expect_equal(hc$est, c(3881.17238083968, 5540.68414532741))
   expect_equal(hc$wt, c(0.0968427088339105, 0.90315729116609))
-  hc_avg <- ssd_hc(fits, multi_ci = FALSE, weighted = FALSE)
+  hc_avg <- ssd_hc(fits, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
   expect_equal(hc_avg$est, sum(hc$est * hc$wt))
 })
 
@@ -384,9 +384,9 @@ test_that("ssd_hc effect with higher weight two distributions", {
   data$Weight <- rep(10, nrow(data))
   fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
   set.seed(10)
-  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
+  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
   expect_equal(hc$est, 1.64903597051184)
   expect_equal(hc_10$est, 1.6811748398812)
   expect_equal(hc$se, 0.511475169043532)
@@ -541,7 +541,7 @@ test_that("ssd_hc save_to multi_ci = FALSE default", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
+  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, multi_ci = FALSE, multi_est = FALSE, samples = TRUE, weighted = FALSE)
   expect_snapshot_data(hc, "hc_save_to_not_multi_default")
   expect_identical(sort(list.files(dir)), 
                    sort(c("data_000000000_gamma.csv", "data_000000000_lgumbel.csv", "data_000000000_llogis.csv", 
@@ -688,10 +688,26 @@ test_that("ssd_hc identical if in parallel", {
 })
 
 test_that("hc multi_ci false weighted", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
   set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, multi_ci = FALSE, weighted = TRUE)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, multi_ci = FALSE, multi_est = FALSE, weighted = TRUE, min_pboot = 0.8)
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc_weighted_bootstrap")
 })
 
+test_that("hc multis match", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
+  set.seed(102)
+  hc_tf <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, multi_ci = FALSE)
+  set.seed(102)
+  hc_ft <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = TRUE)
+  set.seed(102)
+  hc_ff <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = FALSE)
+  set.seed(102)
+  hc_tt <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, multi_ci = TRUE)
+  
+  expect_identical(hc_tf$est, hc_tt$est)
+  expect_identical(hc_ft$est, hc_ff$est)
+  expect_identical(hc_ft$se, hc_tt$se)
+  expect_identical(hc_ff$se, hc_tf$se)
+})

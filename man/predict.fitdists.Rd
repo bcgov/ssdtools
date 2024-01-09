@@ -15,6 +15,7 @@
   min_pboot = 0.99,
   parametric = TRUE,
   multi_ci = TRUE,
+  multi_est = TRUE,
   weighted = TRUE,
   control = NULL,
   ...
@@ -41,6 +42,8 @@ fit in the sense of returning a likelihood.}
 \item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping when \code{ci = TRUE}.}
 
 \item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution for generating model averaged confidence intervals.}
+
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution for calculating the model averaged estimates.}
 
 \item{weighted}{A flag specifying whether to fix the model weights when performing \code{multi = TRUE} or do the weighted bootstrap when \code{multi = FALSE}.}
 

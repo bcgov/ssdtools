@@ -141,7 +141,7 @@ test_that("hp fitdists gives different answer with model averaging as hc not sam
   expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, percent = 5)$est)$est, 5)
 
   fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"))
-  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, percent = 5, multi_ci = FALSE, weighted = FALSE)$est)$est, 4.59188450624579)
+  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, percent = 5, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)$est)$est, 4.59188450624579)
 })
 
 test_that("ssd_hp fitdists correct for rescaling", {
@@ -330,3 +330,19 @@ test_that("ssd_hp fix_weight", {
   expect_snapshot_data(hc_fix, "hc_fix")
 })
 
+test_that("hp multis match", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
+  set.seed(102)
+  hp_tf <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, multi_ci = FALSE)
+  set.seed(102)
+  hp_ft <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = TRUE)
+  set.seed(102)
+  hp_ff <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = FALSE)
+  set.seed(102)
+  hp_tt <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, multi_ci = TRUE)
+  
+  expect_identical(hp_tf$est, hp_tt$est)
+  expect_identical(hp_ft$est, hp_ff$est)
+  expect_identical(hp_ft$se, hp_tt$se)
+  expect_identical(hp_ff$se, hp_tf$se)
+})
