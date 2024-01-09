@@ -1,26 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9008
+# ssdtools 1.0.6.9009
 
 Additions
 
-- `ssd_hc.fitdists()` and `ssd_hp.fitdists()` now have `multi = TRUE`
-argument to get estimates based on `ssd_qmulti()` and `ssd_pmulti()` when
-`average = TRUE`.
-- Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` 
-for weights and parameter estimates for combined distributions.
-- Implemented bootstrapping for `ssd_hc.fitdists()` and `ssd_hp.fitdists()` based on combined distributions.
-- Add `fix_weights = TRUE` argument to `ssd_hc()` and `ssd_hp()` to specify whether to fix the model weights when performing `multi` bootstrapping.
-- Added `save_to` argument to specify a directory in which to save the bootstrap datasets as csv files and estimates as rds files. The files are named `data_000000001_xx.csv`, `estimates_000000001_xx.rds` etc where `xx` is the distribution. The parent data set and estimates are named `boot_000000000_xx.csv` and `estimates_000000000_xx.csv`.
-- Added `ssd_hp.fitburrlioz()` function.
-- Added `ssd_exx()` functions to get 
-default parameter estimates for distributions.
 - Added David Fox and Rebecca Fisher as co-authors.
+- Added to `ssd_hc()` and `ssd_hp()`
+  - `multi_est = TRUE` argument to calculate model averaged estimates 
+  treating the distributions as constituting a single mixture distribution.
+  - `multi_ci = TRUE` argument to calculate model averaged confidence intervals 
+  treating the distributions as constituting a single mixture distribution.
+  - `weighted = TRUE` argument to specify whether to use the original model weights versus
+  re-estimating for each bootstrap sample unless `multi_ci = FALSE` in which case it
+  specifies whether to take bootstrap samples from each distribution proportional to 
+  its weight versus calculating the weighted arithmetic means of the lower 
+  and upper confidence limits for each distribution.
+  - `samples` argument to include bootstrap samples as list of numeric vector(s).
+  - `save_to` argument to specify a directory in which to save the bootstrap datasets as csv files and parameter estimates as rds files. The files are named `data_000000001_xx.csv` and `estimates_000000001_xx.rds` etc where `xx` is the distribution. The parent data set and estimates are named `boot_000000000_xx.csv` and `estimates_000000000_xx.csv`.
+- Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
+- Added `ssd_exx()` functions to get default parameter estimates for distributions.
+- Added `ssd_hp.fitburrlioz()` function to get hazard proportion.
 
 Modifications
 
-- `estimates.fitdists()` now returns all distributions by default and includes weights as parameters.
+- `estimates.fitdists()` now includes weights in returned parameters as well as an
+`all_estimates = FALSE` argument to allow parameter values for all implemented distributions to be included.
 - `ssd_fit_bcanz()`, `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` no longer rescale data by default.
+- `rescale = TRUE` now divides by the geometric mean of the minimum and maximum positive finite values as opposed to dividing by the geometric mean of the maximum finite value.
 - seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions). 
 
 Fixes
