@@ -146,9 +146,17 @@ ssd_hc.fitdists <- function(
 #' 
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #' ssd_hc(fit)
-ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000,
-                               min_pboot = 0.99, parametric = FALSE, 
-                               save_to = NULL, samples = FALSE, ...) {
+ssd_hc.fitburrlioz <- function(
+    x, 
+    percent = 5, 
+    ci = FALSE, 
+    level = 0.95, 
+    nboot = 1000,
+    min_pboot = 0.99, 
+    parametric = FALSE, 
+    save_to = NULL, 
+    samples = FALSE, 
+    ...) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))

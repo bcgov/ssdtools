@@ -28,22 +28,35 @@ stats::predict
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' predict(fits)
-predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
-                             level = 0.95, nboot = 1000,
-                             average = TRUE, delta = 7,
-                             min_pboot = 0.99,
-                             parametric = TRUE,
-                             multi_ci = TRUE,
-                             multi_est = TRUE,
-                             weighted = TRUE,
-                             control = NULL,
-                             ...) {
+predict.fitdists <- function(
+    object, 
+    percent = 1:99, 
+    ci = FALSE,
+    level = 0.95, 
+    nboot = 1000,
+    average = TRUE, 
+    delta = 7,
+    min_pboot = 0.99,
+    parametric = TRUE,
+    multi_ci = TRUE,
+    multi_est = TRUE,
+    weighted = TRUE,
+    control = NULL,
+    ...) {
   chk_unused(...)
-  ssd_hc(object,
-    percent = percent, ci = ci, level = level,
-    nboot = nboot, min_pboot = min_pboot,
-    average = average, delta = delta, parametric = parametric,
-    multi_ci = multi_ci, weighted = weighted, control = control
+  ssd_hc(
+    object,
+    percent = percent, 
+    ci = ci, 
+    level = level,
+    nboot = nboot, 
+    min_pboot = min_pboot,
+    average = average, 
+    delta = delta, 
+    parametric = parametric,
+    multi_ci = multi_ci, 
+    weighted = weighted, 
+    control = control
   )
 }
 
@@ -60,15 +73,22 @@ predict.fitdists <- function(object, percent = 1:99, ci = FALSE,
 #' @examples
 #' fits <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #' predict(fits)
-predict.fitburrlioz <- function(object, percent = 1:99, ci = FALSE,
-                                level = 0.95, nboot = 1000,
-                                min_pboot = 0.99,
-                                parametric = TRUE,
-                                ...) {
+predict.fitburrlioz <- function(
+    object, 
+    percent = 1:99, 
+    ci = FALSE,
+    level = 0.95, 
+    nboot = 1000,
+    min_pboot = 0.99,
+    parametric = TRUE,
+    ...) {
   chk_unused(...)
   ssd_hc(object,
-    percent = percent, ci = ci, level = level,
-    nboot = nboot, min_pboot = min_pboot,
+    percent = percent, 
+    ci = ci, 
+    level = level,
+    nboot = nboot, 
+    min_pboot = min_pboot,
     parametric = parametric
   )
 }

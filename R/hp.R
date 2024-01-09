@@ -34,13 +34,22 @@ ssd_hp <- function(x, ...) {
 #' @describeIn ssd_hp Hazard Percents for fitdists Object
 #' @export
 ssd_hp.fitdists <- function(
-    x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
+    x, 
+    conc = 1, 
+    ci = FALSE, 
+    level = 0.95, 
+    nboot = 1000,
     average = TRUE, 
     multi_est = TRUE,
-    delta = 7, min_pboot = 0.99,
-    parametric = TRUE, multi_ci = TRUE, control = NULL, 
+    delta = 7, 
+    min_pboot = 0.99,
+    parametric = TRUE, 
+    multi_ci = TRUE, 
+    control = NULL, 
     samples = FALSE,
-    save_to = NULL, weighted = TRUE, ...
+    save_to = NULL, 
+    weighted = TRUE, 
+    ...
 ) {
   
   chk_vector(conc)
@@ -48,10 +57,22 @@ ssd_hp.fitdists <- function(
   chk_unused(...)
   
   hcp <- ssd_hcp_fitdists(
-    x = x, value = conc, ci = ci, level = level, nboot = nboot,
-    average = average, multi_est = multi_est, delta = delta, min_pboot = min_pboot,
-    parametric = parametric, multi_ci = multi_ci, control = control, 
-    save_to = save_to, samples = samples, hc = FALSE,  fix_weights = weighted,
+    x = x, 
+    value = conc, 
+    ci = ci, 
+    level = level, 
+    nboot = nboot,
+    average = average, 
+    multi_est = multi_est, 
+    delta = delta, 
+    min_pboot = min_pboot,
+    parametric = parametric, 
+    multi_ci = multi_ci, 
+    control = control, 
+    save_to = save_to, 
+    samples = samples, 
+    hc = FALSE,  
+    fix_weights = weighted,
   )
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp
@@ -64,10 +85,17 @@ ssd_hp.fitdists <- function(
 #' 
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #' ssd_hp(fit)
-ssd_hp.fitburrlioz <- function(x, conc = 1, ci = FALSE, level = 0.95, nboot = 1000,
-                               min_pboot = 0.99, parametric = FALSE, 
-                               samples = FALSE,
-                               save_to = NULL, ...) {
+ssd_hp.fitburrlioz <- function(
+    x, 
+    conc = 1, 
+    ci = FALSE, 
+    level = 0.95, 
+    nboot = 1000,
+    min_pboot = 0.99, 
+    parametric = FALSE, 
+    samples = FALSE,
+    save_to = NULL, 
+    ...) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
