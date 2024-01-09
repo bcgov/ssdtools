@@ -14,10 +14,38 @@
 
 #' Hazard Concentrations for Species Sensitivity Distributions
 #'
-#' Gets concentration(s) that protect specified percentage(s) of species.
-#'
-#' If `ci = TRUE` uses parameteric bootstrapping to get confidence intervals on the
-#' hazard concentrations(s).
+#' Calculates concentration(s) with bootstrap confidence intervals 
+#' that protect specified percentage(s) of species for 
+#' individual or model-averaged distributions
+#' using parametric or non-parametric bootstrapping.
+#' 
+#' Model-averaged estimates and/or confidence intervals (including standard error) 
+#' can be calculated  by treating the distributions as 
+#' constituting a single mixture distribution
+#' versus 'taking the mean'.
+#' When calculating the model averaged estimates treating the
+#' distributions as constituting a single mixture distribution 
+#' ensures that `ssd_hc()` is the inverse of `ssd_hp()`.
+#' 
+#' If treating the distributions as constituting a single mixture distribution
+#' when calculating model average confidence intervals then
+#' `weighted` specifies whether to use the original model weights versus
+#' re-estimating for each bootstrap sample unless 'taking the mean' in which case 
+#' `weighted` specifies
+#' whether to take bootstrap samples from each distribution proportional to 
+#' its weight (so that they sum to `nboot`) versus 
+#' calculating the weighted arithmetic means of the lower 
+#' and upper confidence limits based on `nboot` samples for each distribution.
+#' 
+#' Based on Burnham and Anderson (2002),
+#' distributions with an absolute AIC difference greater 
+#' than a delta of by default 7 are unlikely to influence the calculations and 
+#' are excluded
+#' prior to calculation of the hazard concentrations to reduce the run time.
+#' 
+#' @references
+#' 
+#' Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY. doi:10.1007/b97636.
 #'
 #' @inheritParams params
 #' @return A tibble of corresponding hazard concentrations.
@@ -73,19 +101,21 @@ ssd_hc.list <- function(x, percent = 5, ...) {
 ssd_hc.fitdists <- function(
     x, 
     percent = 5, 
+    average = TRUE,
     ci = FALSE, 
     level = 0.95, 
     nboot = 1000,
-    average = TRUE, 
-    delta = 7, 
     min_pboot = 0.99,
+    multi_est = TRUE,
+    multi_ci = TRUE,
+    weighted = TRUE,
     parametric = TRUE, 
-    multi = TRUE,
-    fix_weights = TRUE,
-    control = NULL,
+    delta = 7, 
     samples = FALSE,
     save_to = NULL,
-    ...) {
+    control = NULL,
+    ...
+) {
   
   chk_vector(percent)
   chk_numeric(percent)
@@ -101,11 +131,12 @@ ssd_hc.fitdists <- function(
     level = level,
     nboot = nboot,
     average = average,
+    multi_est = multi_est,
     delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi = multi,
-    fix_weights = fix_weights,
+    multi_ci = multi_ci,
+    fix_weights = weighted,
     control = control,
     samples = samples,
     save_to = save_to,
@@ -122,9 +153,17 @@ ssd_hc.fitdists <- function(
 #' 
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #' ssd_hc(fit)
-ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot = 1000,
-                               min_pboot = 0.99, parametric = FALSE, 
-                               save_to = NULL, samples = FALSE, ...) {
+ssd_hc.fitburrlioz <- function(
+    x, 
+    percent = 5, 
+    ci = FALSE, 
+    level = 0.95, 
+    nboot = 1000,
+    min_pboot = 0.99, 
+    parametric = FALSE, 
+    samples = FALSE, 
+    save_to = NULL, 
+    ...) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
@@ -144,10 +183,11 @@ ssd_hc.fitburrlioz <- function(x, percent = 5, ci = FALSE, level = 0.95, nboot =
     level = level,
     nboot = nboot,
     average = FALSE,
+    multi_est = TRUE,
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi = TRUE,
+    multi_ci = TRUE,
     save_to = save_to,
     samples = samples,
     control = NULL,

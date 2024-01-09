@@ -43,21 +43,21 @@ test_that("weibull is unstable", {
   expect_identical(names(fits), c('gamma', 'weibull'))
 })
 
-test_that("hc multi lnorm default 100", {
+test_that("hc multi_ci lnorm default 100", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE, samples = TRUE)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, multi_ci = FALSE, multi_est = FALSE, samples = TRUE, weighted = FALSE)
   set.seed(102)
-  hc_multi <- ssd_hc(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100,
-                     min_pboot = 0.8, samples = TRUE)
+  hc_multi <- ssd_hc(fits, average = TRUE, multi_ci = TRUE, ci = TRUE, nboot = 100,
+                     min_pboot = 0.8, samples = TRUE, weighted = FALSE)
   
   testthat::expect_snapshot({
     hc_average
   })
   
-  # not sure why hc multi is different on windows
+  # not sure why hc multi_ci is different on windows
   # ══ Failed tests ════════════════════════════════════════════════════════════════
-  # ── Failure ('test-hc-root.R:77:3'): hc multi lnorm default 100 ─────────────────
+  # ── Failure ('test-hc-root.R:77:3'): hc multi_ci lnorm default 100 ─────────────────
   # Snapshot of code has changed:
   #   old[4:7] vs new[4:7]
   # # A tibble: 1 x 10
@@ -72,20 +72,20 @@ test_that("hc multi lnorm default 100", {
   })
 })
 
-test_that("hp multi lnorm default 100", {
+test_that("hp multi_ci lnorm default 100", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE, samples = TRUE)
+  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   set.seed(102)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100,
-                     min_pboot = 0.8, samples = TRUE)
+  hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE, ci = TRUE, nboot = 100,
+                     min_pboot = 0.8, samples = TRUE, weighted = FALSE)
   
   testthat::expect_snapshot({
     hp_average
   })
   testthat::skip_on_ci() 
   testthat::skip_on_cran()
-  # ── Failure ('test-hp-root.R:79:3'): hp multi lnorm default 100 ─────────────────
+  # ── Failure ('test-hp-root.R:79:3'): hp multi_ci lnorm default 100 ─────────────────
   # Snapshot of code has changed:
   #   old[4:7] vs new[4:7]
   # # A tibble: 1 x 10
@@ -202,7 +202,7 @@ test_that("ssd_hc cis with error", {
   expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100))
   expect_s3_class(hc_err, "tbl")
   expect_snapshot_data(hc_err, "hc_err_na")
-  hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92, multi = FALSE)
+  hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92, multi_ci = FALSE)
   expect_s3_class(hc_err, "tbl")
   expect_snapshot_data(hc_err, "hc_err")
 })
@@ -215,10 +215,10 @@ test_that("ssd_hc comparable parametric and non-parametric big sample size", {
   data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
   fit <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
-  hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10, multi = FALSE, samples = TRUE)
+  hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   expect_snapshot_data(hc_para, "hc_para")
   set.seed(10)
-  hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE, multi = FALSE, samples = TRUE)
+  hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   expect_snapshot_data(hc_nonpara, "hc_nonpara")
 })
 
@@ -234,7 +234,7 @@ test_that("ssd_hp cis with error", {
   expect_warning(hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100))
   expect_s3_class(hp_err, "tbl")
   expect_snapshot_data(hp_err, "hp_err_na")
-  hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.92, multi = FALSE)
+  hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.92, multi_ci = FALSE, weighted = FALSE)
   expect_s3_class(hp_err, "tbl")
   expect_snapshot_data(hp_err, "hp_err")
 })
@@ -247,10 +247,10 @@ test_that("ssd_hp comparable parametric and non-parametric big sample size", {
   data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
   fit <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
-  hp_para <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, multi = FALSE, samples = TRUE)
+  hp_para <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   expect_snapshot_data(hp_para, "hp_para")
   set.seed(10)
-  hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE, multi = FALSE, samples = TRUE)
+  hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   expect_snapshot_data(hp_nonpara, "hp_nonpara")
 })
 

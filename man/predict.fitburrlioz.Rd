@@ -18,18 +18,19 @@
 \arguments{
 \item{object}{The object.}
 
-\item{percent}{A numeric vector of percentages.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for.}
 
-\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
-\item{level}{A number between 0 and 1 of the confidence level.}
+\item{level}{A number between 0 and 1 of the confidence level of the interval.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.}
 
-\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
-fit in the sense of returning a likelihood.}
+\item{min_pboot}{A number between 0 and 1 of the minimum
+proportion of bootstrap samples that must successfully fit (return a likelihood)
+to report the confidence intervals.}
 
-\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.}
+\item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 
 \item{...}{Unused.}
 }

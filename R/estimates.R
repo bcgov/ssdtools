@@ -31,19 +31,19 @@ estimates.tmbfit <- function(x, ...) {
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' estimates(fits)
-estimates.fitdists <- function(x, multi = FALSE, ...) {
-  chk_flag(multi)
+estimates.fitdists <- function(x, all_estimates = FALSE, ...) {
+  chk_flag(all_estimates)
   chk_unused(...)
-  estimates <- .list_estimates(x, multi = multi)
+  estimates <- .list_estimates(x, all_estimates = all_estimates)
   as.list(unlist(estimates))
 }
 
-.list_estimates <- function(x, multi = TRUE) {
+.list_estimates <- function(x, all_estimates = TRUE) {
   y <- lapply(x, estimates)
   wt <- glance(x)$weight
   y <- purrr::map2(y, wt, function(a, b) c(list(weight = b), a))
   names(y) <- names(x)
-  if(!multi) {
+  if(!all_estimates) {
     return(y)
   }
   all <- emulti_ssd()

@@ -104,7 +104,7 @@ test_that("hp fitdists works with cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(10)
-  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi = FALSE, samples = TRUE)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   expect_s3_class(hp, "tbl_df")
   expect_snapshot_data(hp, "hp98")
 })
@@ -141,7 +141,7 @@ test_that("hp fitdists gives different answer with model averaging as hc not sam
   expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, percent = 5)$est)$est, 5)
 
   fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"))
-  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, percent = 5, multi = FALSE)$est)$est, 4.59188450624579)
+  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, percent = 5, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)$est)$est, 4.59188450624579)
 })
 
 test_that("ssd_hp fitdists correct for rescaling", {
@@ -169,7 +169,7 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   data$Conc2[1] <- 1.0
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
-  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi = FALSE)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   expect_equal(hp$se, 1.88668081916483)
 
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
@@ -201,7 +201,7 @@ test_that("ssd_hp calculates cis with equally weighted data", {
   data$Weight <- rep(2, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
-  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi = FALSE)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   expect_equal(hp$se, 1.45515712342784)
 })
 
@@ -209,7 +209,7 @@ test_that("ssd_hp calculates cis with two distributions", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
-  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi = FALSE)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   expect_equal(hp$se, 1.45001268956605)
 })
 
@@ -218,7 +218,7 @@ test_that("ssd_hp calculates cis in parallel but one distribution", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
-  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi = FALSE)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   expect_equal(hp$se, 1.45515712342784)
 })
 
@@ -227,7 +227,7 @@ test_that("ssd_hp calculates cis in parallel with two distributions", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
-  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi = FALSE)
+  hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   expect_equal(hp$se, 1.45001268956605)
 })
 
@@ -265,9 +265,9 @@ test_that("ssd_hp effect with higher weight two distributions", {
   data$Weight <- rep(10, nrow(data))
   fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
   set.seed(10)
-  hp <- ssd_hp(fits, 3, ci = TRUE, nboot = 10, multi = FALSE)
+  hp <- ssd_hp(fits, 3, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   set.seed(10)
-  hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10, multi = FALSE)
+  hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   expect_equal(hp$est, 11.7535819824013)
   expect_equal(hp_10$est, 11.9318338996079)
   expect_equal(hp$se, 4.56372685665889)
@@ -284,7 +284,7 @@ test_that("ssd_hp cis with non-convergence", {
   hp15 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9)
   attr(fit, "min_pmix") <- 0.3
   expect_identical(attr(fit, "min_pmix"), 0.3)
-  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9, multi = FALSE, samples = TRUE)
+  hp30 <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.9, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   expect_s3_class(hp30, "tbl")
   expect_snapshot_data(hp30, "hp_30")
 })
@@ -305,7 +305,7 @@ test_that("ssd_hp cis with error and multiple dists", {
   set.seed(99)
   expect_warning(hp_err_avg <- ssd_hp(fit,
     conc = 1, ci = TRUE, nboot = 100,
-    delta = 100, multi = FALSE
+    delta = 100, multi_ci = FALSE, weighted = FALSE
   ))
   expect_snapshot_boot_data(hp_err_avg, "hp_err_avg")
 })
@@ -314,7 +314,7 @@ test_that("ssd_hp with 1 bootstrap", {
   
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(10)
-  hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 1, multi = FALSE, samples = TRUE)
+  hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 1, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   expect_snapshot_data(hp, "hp_1")
 })
 
@@ -322,11 +322,43 @@ test_that("ssd_hp fix_weight", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
   
   set.seed(102)
-  hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = FALSE, samples = TRUE)
+  hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, weighted = FALSE, samples = TRUE)
   expect_snapshot_data(hc_unfix, "hc_unfix")
   
   set.seed(102)
-  hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, fix_weights = TRUE, samples = TRUE)
+  hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, weighted = TRUE, samples = TRUE)
   expect_snapshot_data(hc_fix, "hc_fix")
 })
 
+test_that("hp multis match", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
+  set.seed(102)
+  hp_tf <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, multi_ci = FALSE)
+  set.seed(102)
+  hp_ft <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = TRUE)
+  set.seed(102)
+  hp_ff <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = FALSE)
+  set.seed(102)
+  hp_tt <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, multi_ci = TRUE)
+  
+  expect_identical(hp_tf$est, hp_tt$est)
+  expect_identical(hp_ft$est, hp_ff$est)
+  expect_identical(hp_ft$se, hp_tt$se)
+  expect_identical(hp_ff$se, hp_tf$se)
+})
+
+test_that("hp weighted bootie", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  set.seed(102)
+  hp_weighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = FALSE,
+                         samples = TRUE)
+  set.seed(102)
+  hp_unweighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = FALSE, weighted = FALSE, samples = TRUE)
+  
+  expect_identical(hp_weighted2$est, hp_unweighted2$est)
+  expect_identical(length(hp_weighted2$samples[[1]]), 13L)
+  expect_identical(length(hp_unweighted2$samples[[1]]), 60L)
+  
+  expect_snapshot_boot_data(hp_weighted2, "hp_weighted2")
+  expect_snapshot_boot_data(hp_unweighted2, "hp_unweighted2")
+})

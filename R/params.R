@@ -17,26 +17,26 @@
 #' @param all_dists A flag specifying whether all the named distributions must fit successfully.
 #' @param at_boundary_ok A flag specifying whether a model with one or more
 #' parameters at the boundary should be considered to have converged (default = FALSE).
-#' @param average A flag specifying whether to model average the estimates.
+#' @param average A flag specifying whether to provide model averaged values as opposed to a value for each distribution.
 #' @param breaks A character vector
 #' @param bounds A named non-negative numeric vector of the left and right bounds for
 #' uncensored missing (0 and Inf) data in terms of the orders of magnitude
 #' relative to the extremes for non-missing values.
 #' @param chk A flag specifying whether to check the arguments.
-#' @param ci A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).
+#' @param ci A flag specifying whether to estimate confidence intervals (by bootstrapping).
 #' @param color A string of the column in data for the color aesthetic.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
-#' @param conc A numeric vector of concentrations.
+#' @param conc A numeric vector of concentrations to calculate the hazard proportions for.
 #' @param control A list of control parameters passed to [`stats::optim()`].
 #' @param data A data frame.
-#' @param delta A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.
+#' @param delta A non-negative number specifying the maximum absolute AIC difference cutoff.
+#' Distributions with an absolute AIC difference greater than delta are excluded from the calculations.
 #' @param digits A whole number specifying the number of significant figures.
 #' @param dists A character vector of the distribution names.
-#' @param fix_weights A flag specifying whether to fix the model weights when performing `multi` bootstrapping.
 #' @param hc A count between 1 and 99 indicating the percent hazard concentration (or NULL).
 #' @param label A string of the column in data with the labels.
 #' @param left A string of the column in data with the concentrations.
-#' @param level A number between 0 and 1 of the confidence level.
+#' @param level A number between 0 and 1 of the confidence level of the interval.
 #' @param linecolor A string of the column in pred to use for the line color.
 #' @param linetype A string of the column in pred to use for the linetype.
 #' @param llocation location parameter on the log scale.
@@ -54,19 +54,23 @@
 #' @param meanlog mean on log scale parameter.
 #' @param meanlog1 mean on log scale parameter.
 #' @param meanlog2 mean on log scale parameter.
-#' @param min_pboot A number of the minimum proportion of bootstrap samples that must successfully 
-#' fit in the sense of returning a likelihood.
+#' @param min_pboot A number between 0 and 1 of the minimum 
+#' proportion of bootstrap samples that must successfully fit (return a likelihood) 
+#' to report the confidence intervals.
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
+#' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
+#' @param multi_ci A flag specifying whether to treat the distributions as constituting a single distribution which is now the recommended approach (as opposed to taking the mean) when calculating model averaged confidence intervals.
+#' @param multi_est A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.
 #' @param na.rm A flag specifying whether to silently remove missing values or 
 #' remove them with a warning.
 #' @param n positive number of observations.
-#' @param nboot A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.
+#' @param nboot A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.
 #' @param nrow A positive whole number of the minimum number of non-missing rows.
 #' @param nsim A positive whole number of the number of simulations to generate.
 #' @param object The object.
-#' @param parametric A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping.
+#' @param parametric A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.
 #' @param p vector of probabilities.
-#' @param percent A numeric vector of percentages.
+#' @param percent A numeric vector of percent values to estimate hazard concentrations for.
 #' @param pmix Proportion mixture parameter.
 #' @param pvalue A flag specifying whether to return p-values or the statistics (default) for the various tests.
 #' @param pred A data frame of the predictions.
@@ -78,9 +82,8 @@
 #' @param rescale A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.
 #' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param right A string of the column in data with the right concentration values.
-#' @param multi A flag specifying whether to treat the distributions as constituting a single distribution.
-#' @param save_to A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.
-#' @param samples A flag specfying whether to include the bootstrap samples in the output. 
+#' @param save_to NULL or a string specifying a directory to save where the bootstrap datasets and parameter estimates (when successfully converged) to.
+#' @param samples A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output. 
 #' @param scale scale parameter.
 #' @param scalelog1 scalelog1 parameter.
 #' @param scalelog2 scalelog2 parameter.
@@ -96,6 +99,10 @@
 #' @param silent A flag indicating whether fits should fail silently.
 #' @param size A number for the size of the labels.
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
+#' @param weighted A flag which specifies whether to use the original model weights (as opposed to re-estimating for each bootstrap sample) unless `multi_ci = FALSE` in which case it specifies
+#' whether to take bootstrap samples from each distribution proportional to 
+#' its weight versus calculating the weighted arithmetic means of the lower 
+#' and upper confidence limits.
 #' @param x The object.
 #' @param xbreaks The x-axis breaks as one of:
 #'   - `NULL` for no breaks

@@ -1,4 +1,4 @@
-# hp multi lnorm
+# hp multi_ci lnorm
 
     Code
       hp_multi
@@ -8,7 +8,7 @@
         <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <int> <dbl> <I<list>>
       1 average     1  1.95    NA    NA    NA     1 parametric     0    NA <dbl [0]>
 
-# hp multi all
+# hp multi_ci all
 
     Code
       hp_multi
@@ -18,7 +18,7 @@
         <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <int> <dbl> <I<list>>
       1 average     1  3.90    NA    NA    NA     1 parametric     0    NA <dbl [0]>
 
-# hp multi lnorm ci
+# hp multi_ci lnorm ci
 
     Code
       hp_average

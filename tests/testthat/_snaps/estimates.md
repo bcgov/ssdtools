@@ -64,7 +64,7 @@
     [1] 0.9660997
     
 
-# estimates multi = TRUE
+# estimates all_estimates = TRUE
 
     $burrIII3.weight
     [1] 0

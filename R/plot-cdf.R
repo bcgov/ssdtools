@@ -30,8 +30,8 @@ ssd_plot_cdf <- function(x, ...) {
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_plot_cdf(fits)
-ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 7, multi = TRUE, ...) {
-  pred <- ssd_hc(x, percent = 1:99, average = average, delta = delta, multi = multi)
+ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 7, ...) {
+  pred <- ssd_hc(x, percent = 1:99, average = average, delta = delta)
   data <- ssd_data(x)
   cols <- .cols_fitdists(x)
 

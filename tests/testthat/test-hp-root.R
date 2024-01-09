@@ -13,13 +13,13 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hp multi lnorm", {
+test_that("hp multi_ci lnorm", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hp_dist <- ssd_hp(fits, average = FALSE, multi = FALSE)
-  hp_average <- ssd_hp(fits, average = TRUE, multi = FALSE)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE)
+  hp_dist <- ssd_hp(fits, average = FALSE, multi_ci = FALSE, weighted = FALSE)
+  hp_average <- ssd_hp(fits, average = TRUE, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
+  hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE, multi_est = TRUE)
   expect_identical(hp_average$est, hp_dist$est)
   expect_equal(hp_multi, hp_average)
   expect_equal(hp_average$est, 1.9543030195088)
@@ -30,11 +30,11 @@ test_that("hp multi lnorm", {
   })
 })
 
-test_that("hp multi all", {
+test_that("hp multi_ci all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hp_average <- ssd_hp(fits, average = TRUE)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE)
+  hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE)
   expect_equal(hp_multi, hp_average)
   expect_equal(hp_average$est, 3.89879358571718, tolerance = 1e-6)
   expect_equal(hp_multi$est, 3.89879358571718)
@@ -43,14 +43,14 @@ test_that("hp multi all", {
   })
 })
 
-test_that("hp multi lnorm ci", {
+test_that("hp multi_ci lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, multi = FALSE)
+  hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, multi_ci = FALSE, weighted = FALSE)
   set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi = FALSE)
+  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi_ci = FALSE, multi_est = TRUE, weighted = FALSE)
   set.seed(102)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi = TRUE, ci = TRUE, nboot = 100)
+  hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE, ci = TRUE, nboot = 100)
   
   testthat::expect_snapshot({
     hp_average
@@ -62,5 +62,5 @@ test_that("hp multi lnorm ci", {
   
   hp_dist$dist <- NULL
   hp_average$dist <- NULL
-  expect_identical(hp_dist, hp_average)
+  expect_equal(hp_dist, hp_average)
 })
