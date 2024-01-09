@@ -152,6 +152,15 @@ group_samples <- function(hcp) {
   dplyr::ungroup(samples)
 }
 
+replace_estimates <- function(hcp, est) {
+  est <- est[c("value", "est")]
+  colnames(est) <- c("value", "est2")
+  hcp <- dplyr::inner_join(hcp, est, by = c("value"))
+  hcp$est <- hcp$est2
+  hcp$est2 <- NULL
+  hcp
+}
+
 hcp_average <- function(hcp, weight, value, method, nboot) {
   samples <- group_samples(hcp)
   
@@ -343,11 +352,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
       parametric = parametric, control = control, save_to = save_to, samples = samples,
       fix_weights = fix_weights, hc = hc, fun = fun)
     
-    est <- est[c("value", "est")]
-    colnames(est) <- c("value", "est2")
-    hcp <- dplyr::inner_join(hcp, est, by = c("value"))
-    hcp$est <- hcp$est2
-    hcp$est2 <- NULL
+    hcp <- replace_estimates(hcp, est)
     
     return(hcp)
   }
@@ -372,11 +377,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     parametric = parametric, control = control, save_to = save_to, samples = samples,
     fix_weights = fix_weights, hc = hc)
   
-  est <- est[c("value", "est")]
-  colnames(est) <- c("value", "est2")
-  hcp <- dplyr::inner_join(hcp, est, by = c("value"))
-  hcp$est <- hcp$est2
-  hcp$est2 <- NULL
+  hcp <- replace_estimates(hcp, est)
   
   hcp
 }
