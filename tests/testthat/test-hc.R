@@ -711,3 +711,19 @@ test_that("hc multis match", {
   expect_identical(hc_ft$se, hc_tt$se)
   expect_identical(hc_ff$se, hc_tf$se)
 })
+
+test_that("hc weighted bootie", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  set.seed(102)
+  hc_weighted2 <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = FALSE,
+                        samples = TRUE)
+  set.seed(102)
+  hc_unweighted2 <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = FALSE, weighted = FALSE, samples = TRUE)
+  
+  expect_identical(hc_weighted2$est, hc_unweighted2$est)
+  expect_identical(length(hc_weighted2$samples[[1]]), 13L)
+  expect_identical(length(hc_unweighted2$samples[[1]]), 60L)
+  
+  expect_snapshot_boot_data(hc_weighted2, "hc_weighted2")
+  expect_snapshot_boot_data(hc_unweighted2, "hc_unweighted2")
+})

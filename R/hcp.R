@@ -173,25 +173,22 @@ hcp_average <- function(hcp, weight, value, method, nboot) {
   dplyr::arrange(tib, .data$value)
 }
 
-hcp_weighted <- function(hcp, weight, value, method, nboot) {
-  samples <- group_samples(hcp)
+hcp_weighted <- function(hcp, level, samples, min_pboot) {
   
-  
-  # TODO: implement so that gets estimate from multi and then
-  # se, lcl, ucl etc from 
-  
-  tibble(
-    dist = "weighted", 
-    value = value, 
-    # est = hcp$est, 
-    # se = hcp$se,
-    # lcl = hcp$lcl, 
-    # ucl = hcp$ucl, 
-    # wt = rep(1, length(value)),
-    method = method, 
-    nboot = nboot, 
-    #  pboot = min$pboot
-  )
+  quantiles <- purrr::map(hcp$samples, stats::quantile, probs = probs(level))
+  quantiles <- purrr::transpose(quantiles)
+  hcp$lcl <- unlist(quantiles[[1]])
+  hcp$ucl <- unlist(quantiles[[2]])
+  hcp$se <- purrr::map_dbl(hcp$samples, sd)
+  hcp$pboot <- pmin(purrr::map_dbl(hcp$samples, length) / hcp$nboot, 1)
+  fail <- hcp$pboot < min_pboot
+  hcp$lcl[fail] <- NA_real_
+  hcp$ucl[fail] <- NA_real_
+  hcp$se[fail] <- NA_real_
+  if(!samples) {
+    hcp$samples <- I(list(numeric(0)))
+  }
+  hcp
 }
 
 .ssd_hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates, 
@@ -250,12 +247,18 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
                      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
                      parametric = parametric, fix_weights = fix_weights, average = TRUE, control = control,
-                     hc = hc, save_to = save_to, samples = samples, fun = fun)
+                     hc = hc, save_to = save_to, samples = samples || fix_weights, fun = fun)
   
   method <- if (parametric) "parametric" else "non-parametric"
-  
-  # TODO: implement hcp_weighted
-  hcp_average(hcp, weight, value, method, nboot)
+
+  hcp <- hcp_average(hcp, weight, value, method, nboot)  
+  if(!fix_weights) {
+    if(!samples) {
+      hcp$samples <- I(list(numeric(0)))
+    }
+    return(hcp)
+  }
+  hcp_weighted(hcp, level = level, samples = samples, min_pboot = min_pboot)
 }
 
 .ssd_hcp_fitdists <- function(
