@@ -8,14 +8,7 @@
 \usage{
 ssd_plot_cdf(x, ...)
 
-\method{ssd_plot_cdf}{fitdists}(
-  x,
-  average = FALSE,
-  delta = 7,
-  multi_ci = TRUE,
-  multi_est = TRUE,
-  ...
-)
+\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, delta = 7, ...)
 
 \method{ssd_plot_cdf}{list}(x, ...)
 }
@@ -28,10 +21,6 @@ ssd_plot_cdf(x, ...)
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded.}
-
-\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution when generating model averaged confidence intervals.}
-
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution when providing model averaged estimates.}
 }
 \description{
 Generic function to plots the cumulative distribution function (CDF).
