@@ -117,7 +117,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   dist <- .dist_tmbfit(x)
   pars <- .pars_tmbfit(x)
   if(fix_weights && average) {
-    nboot <- ceiling(nboot * weight)
+    nboot <- round(nboot * weight)
   }
   .ssd_hcp(x, dist = dist, estimates = estimates, 
            fun = fun, pars = pars,
@@ -150,6 +150,15 @@ group_samples <- function(hcp) {
   samples <- dplyr::group_by(samples, .data$value)
   samples <- dplyr::summarise(samples, samples = I(list(unlist(samples))))
   dplyr::ungroup(samples)
+}
+
+replace_estimates <- function(hcp, est) {
+  est <- est[c("value", "est")]
+  colnames(est) <- c("value", "est2")
+  hcp <- dplyr::inner_join(hcp, est, by = c("value"))
+  hcp$est <- hcp$est2
+  hcp$est2 <- NULL
+  hcp
 }
 
 hcp_average <- function(hcp, weight, value, method, nboot) {
@@ -240,6 +249,11 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
                                   range_shape1, range_shape2, parametric, control, 
                                   save_to, samples, fix_weights, hc, fun) {
   
+  if(ci & fix_weights) {
+    atleast1 <- round(glance(x)$weight * nboot) >= 1L
+    x <- subset(x, names(x)[atleast1])
+    estimates <- estimates[atleast1]
+  }
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
   hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit, 
                      value = value, ci = ci, level = level, nboot = nboot,
@@ -250,7 +264,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
                      hc = hc, save_to = save_to, samples = samples || fix_weights, fun = fun)
   
   method <- if (parametric) "parametric" else "non-parametric"
-
+  
   hcp <- hcp_average(hcp, weight, value, method, nboot)  
   if(!fix_weights) {
     if(!samples) {
@@ -343,11 +357,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
       parametric = parametric, control = control, save_to = save_to, samples = samples,
       fix_weights = fix_weights, hc = hc, fun = fun)
     
-    est <- est[c("value", "est")]
-    colnames(est) <- c("value", "est2")
-    hcp <- dplyr::inner_join(hcp, est, by = c("value"))
-    hcp$est <- hcp$est2
-    hcp$est2 <- NULL
+    hcp <- replace_estimates(hcp, est)
     
     return(hcp)
   }
@@ -359,24 +369,28 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to, samples = samples,
     fix_weights = fix_weights, hc = hc, fun = fun)
-  
+
   if(!multi_est) {
-    return(hcp)
+    if(!fix_weights) {
+      return(hcp)
+    }
+    est <- .ssd_hcp_conventional(
+      x, value, ci = FALSE, level = level, nboot = nboot,
+      min_pboot = min_pboot, estimates = estimates,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control, save_to = save_to, samples = samples,
+      fix_weights = fix_weights, hc = hc, fun = fun)
+  } else {
+    est <- .ssd_hcp_multi(
+      x, value, ci = FALSE, level = level, nboot = nboot,
+      min_pboot = min_pboot,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control, save_to = save_to, samples = samples,
+      fix_weights = fix_weights, hc = hc)
   }
-  
-  est <- .ssd_hcp_multi(
-    x, value, ci = FALSE, level = level, nboot = nboot,
-    min_pboot = min_pboot,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control, save_to = save_to, samples = samples,
-    fix_weights = fix_weights, hc = hc)
-  
-  est <- est[c("value", "est")]
-  colnames(est) <- c("value", "est2")
-  hcp <- dplyr::inner_join(hcp, est, by = c("value"))
-  hcp$est <- hcp$est2
-  hcp$est2 <- NULL
+  hcp <- replace_estimates(hcp, est)
   
   hcp
 }

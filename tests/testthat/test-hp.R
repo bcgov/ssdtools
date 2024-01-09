@@ -356,7 +356,7 @@ test_that("hp weighted bootie", {
   hp_unweighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, multi_ci = FALSE, weighted = FALSE, samples = TRUE)
   
   expect_identical(hp_weighted2$est, hp_unweighted2$est)
-  expect_identical(length(hp_weighted2$samples[[1]]), 13L)
+  expect_identical(length(hp_weighted2$samples[[1]]), 11L)
   expect_identical(length(hp_unweighted2$samples[[1]]), 60L)
   
   expect_snapshot_boot_data(hp_weighted2, "hp_weighted2")

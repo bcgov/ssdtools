@@ -39,8 +39,8 @@
 #' 
 #' Based on Burnham and Anderson (2002),
 #' distributions with an absolute AIC difference greater 
-#' than a delta of by default 7 are unlikely to influence the calculations and 
-#' are excluded
+#' than a delta of by default 7 have considerably less support (weight < 0.03)
+#' and are excluded
 #' prior to calculation of the hazard concentrations to reduce the run time.
 #' 
 #' @references
