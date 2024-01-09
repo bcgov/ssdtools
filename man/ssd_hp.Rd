@@ -11,19 +11,19 @@ ssd_hp(x, ...)
 \method{ssd_hp}{fitdists}(
   x,
   conc = 1,
+  average = TRUE,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  average = TRUE,
-  multi_est = TRUE,
-  delta = 7,
   min_pboot = 0.99,
-  parametric = TRUE,
+  multi_est = TRUE,
   multi_ci = TRUE,
-  control = NULL,
+  weighted = TRUE,
+  parametric = TRUE,
+  delta = 7,
   samples = FALSE,
   save_to = NULL,
-  weighted = TRUE,
+  control = NULL,
   ...
 )
 
@@ -47,34 +47,37 @@ ssd_hp(x, ...)
 
 \item{conc}{A numeric vector of concentrations to calculate the hazard proportions for.}
 
+\item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
+
 \item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
-\item{level}{A number between 0 and 1 of the confidence level.}
+\item{level}{A number between 0 and 1 of the confidence level of the interval.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate confidence limits. A value of at least 10,000 is recommended for official guidelines.}
-
-\item{average}{A flag specifying whether to provide model averaged values.}
-
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution when providing model averaged estimates.}
-
-\item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
-Distributions with an absolute AIC difference greater than delta are excluded.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.}
 
 \item{min_pboot}{A number between 0 and 1 of the minimum
-proportion of bootstrap samples that must successfully fit in the sense of returning a likelihood
-in order to report the confidence intervals.}
+proportion of bootstrap samples that must successfully fit (return a likelihood)
+to report the confidence intervals.}
 
-\item{parametric}{A flag specifying whether to perform parametric (as opposed to non-parametric) bootstrapping when \code{ci = TRUE}.}
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
 
-\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution when generating model averaged confidence intervals.}
+\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution which is now the recommended approach (as opposed to taking the mean) when calculating model averaged confidence intervals.}
 
-\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
+\item{weighted}{A flag which specifies whether to use the original model weights (as opposed to re-estimating for each bootstrap sample) unless \code{multi_ci = FALSE} in which case it specifies
+whether to take bootstrap samples from each distribution proportional to
+its weight versus calculating the weighted arithmetic means of the lower
+and upper confidence limits.}
+
+\item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
+
+\item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
+Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 
 \item{samples}{A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output.}
 
-\item{save_to}{NULL or a string specifying a directory to save the bootstrap datasets and parameter estimates to.}
+\item{save_to}{NULL or a string specifying a directory to save where the bootstrap datasets and parameter estimates (when successfully converged) to.}
 
-\item{weighted}{A flag which when \code{multi_ci = TRUE} specifies whether to use the original model weights (as opposed to reestimating for each bootstrap sample) or when \code{multi_ci = FALSE} specifies whether to use the weighted bootstrap (as opposed to generating the same number of bootstrap samples for each model).}
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 }
 \value{
 A tibble of corresponding hazard percents.

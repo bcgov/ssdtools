@@ -17,10 +17,10 @@ ssd_plot_cdf(x, ...)
 
 \item{...}{Additional arguments passed to \code{\link[=ssd_plot]{ssd_plot()}}.}
 
-\item{average}{A flag specifying whether to provide model averaged values.}
+\item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
-Distributions with an absolute AIC difference greater than delta are excluded.}
+Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 }
 \description{
 Generic function to plots the cumulative distribution function (CDF).

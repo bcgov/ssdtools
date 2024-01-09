@@ -255,8 +255,6 @@ hcp_weighted <- function(hcp, weight, value, method, nboot) {
   method <- if (parametric) "parametric" else "non-parametric"
   
   # TODO: implement hcp_weighted
-  # TODO: perhaps rename average to unweighted
-  # TODO: better yet add weighted column...
   hcp_average(hcp, weight, value, method, nboot)
 }
 

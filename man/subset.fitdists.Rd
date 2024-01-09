@@ -12,7 +12,7 @@
 \item{select}{A character vector of the distributions to select.}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
-Distributions with an absolute AIC difference greater than delta are excluded.}
+Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 
 \item{...}{Unused.}
 }

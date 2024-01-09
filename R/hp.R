@@ -36,19 +36,19 @@ ssd_hp <- function(x, ...) {
 ssd_hp.fitdists <- function(
     x, 
     conc = 1, 
+    average = TRUE,
     ci = FALSE, 
     level = 0.95, 
     nboot = 1000,
-    average = TRUE, 
-    multi_est = TRUE,
-    delta = 7, 
     min_pboot = 0.99,
+    multi_est = TRUE,
+    multi_ci = TRUE,
+    weighted = TRUE,
     parametric = TRUE, 
-    multi_ci = TRUE, 
-    control = NULL, 
+    delta = 7, 
     samples = FALSE,
-    save_to = NULL, 
-    weighted = TRUE, 
+    save_to = NULL,
+    control = NULL,
     ...
 ) {
   

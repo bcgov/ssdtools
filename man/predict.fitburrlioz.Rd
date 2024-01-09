@@ -22,15 +22,15 @@
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
-\item{level}{A number between 0 and 1 of the confidence level.}
+\item{level}{A number between 0 and 1 of the confidence level of the interval.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate confidence limits. A value of at least 10,000 is recommended for official guidelines.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.}
 
 \item{min_pboot}{A number between 0 and 1 of the minimum
-proportion of bootstrap samples that must successfully fit in the sense of returning a likelihood
-in order to report the confidence intervals.}
+proportion of bootstrap samples that must successfully fit (return a likelihood)
+to report the confidence intervals.}
 
-\item{parametric}{A flag specifying whether to perform parametric (as opposed to non-parametric) bootstrapping when \code{ci = TRUE}.}
+\item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 
 \item{...}{Unused.}
 }

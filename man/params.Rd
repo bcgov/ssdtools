@@ -11,7 +11,7 @@
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).}
 
-\item{average}{A flag specifying whether to provide model averaged values.}
+\item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
 \item{breaks}{A character vector}
 
@@ -34,7 +34,7 @@ relative to the extremes for non-missing values.}
 \item{data}{A data frame.}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
-Distributions with an absolute AIC difference greater than delta are excluded.}
+Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 
 \item{digits}{A whole number specifying the number of significant figures.}
 
@@ -46,7 +46,7 @@ Distributions with an absolute AIC difference greater than delta are excluded.}
 
 \item{left}{A string of the column in data with the concentrations.}
 
-\item{level}{A number between 0 and 1 of the confidence level.}
+\item{level}{A number between 0 and 1 of the confidence level of the interval.}
 
 \item{linecolor}{A string of the column in pred to use for the line color.}
 
@@ -83,23 +83,23 @@ Distributions with an absolute AIC difference greater than delta are excluded.}
 \item{meanlog2}{mean on log scale parameter.}
 
 \item{min_pboot}{A number between 0 and 1 of the minimum
-proportion of bootstrap samples that must successfully fit in the sense of returning a likelihood
-in order to report the confidence intervals.}
+proportion of bootstrap samples that must successfully fit (return a likelihood)
+to report the confidence intervals.}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 
 \item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
-\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution when generating model averaged confidence intervals.}
+\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution which is now the recommended approach (as opposed to taking the mean) when calculating model averaged confidence intervals.}
 
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution when providing model averaged estimates.}
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
 
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
 
 \item{n}{positive number of observations.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate confidence limits. A value of at least 10,000 is recommended for official guidelines.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.}
 
 \item{nrow}{A positive whole number of the minimum number of non-missing rows.}
 
@@ -107,7 +107,7 @@ remove them with a warning.}
 
 \item{object}{The object.}
 
-\item{parametric}{A flag specifying whether to perform parametric (as opposed to non-parametric) bootstrapping when \code{ci = TRUE}.}
+\item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 
 \item{p}{vector of probabilities.}
 
@@ -133,7 +133,7 @@ remove them with a warning.}
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{save_to}{NULL or a string specifying a directory to save the bootstrap datasets and parameter estimates to.}
+\item{save_to}{NULL or a string specifying a directory to save where the bootstrap datasets and parameter estimates (when successfully converged) to.}
 
 \item{samples}{A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output.}
 
@@ -167,7 +167,10 @@ remove them with a warning.}
 
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
-\item{weighted}{A flag which when \code{multi_ci = TRUE} specifies whether to use the original model weights (as opposed to reestimating for each bootstrap sample) or when \code{multi_ci = FALSE} specifies whether to use the weighted bootstrap (as opposed to generating the same number of bootstrap samples for each model).}
+\item{weighted}{A flag which specifies whether to use the original model weights (as opposed to re-estimating for each bootstrap sample) unless \code{multi_ci = FALSE} in which case it specifies
+whether to take bootstrap samples from each distribution proportional to
+its weight versus calculating the weighted arithmetic means of the lower
+and upper confidence limits.}
 
 \item{x}{The object.}
 

@@ -14,28 +14,34 @@
 
 #' Hazard Concentrations for Species Sensitivity Distributions
 #'
-#' Calculates concentration(s) with quantile based bootstrap confidence intervals 
+#' Calculates concentration(s) with bootstrap confidence intervals 
 #' that protect specified percentage(s) of species for 
 #' individual or model-averaged distributions
 #' using parametric or non-parametric bootstrapping.
 #' 
 #' Model-averaged estimates and/or confidence intervals (including standard error) 
-#' can be calculated  by treating the distributions as constituting a single mixture distribution
+#' can be calculated  by treating the distributions as 
+#' constituting a single mixture distribution
 #' versus 'taking the mean'.
+#' When calculating the model averaged estimates treating the
+#' distributions as constituting a single mixture distribution 
+#' ensures that `ssd_hc()` is the inverse of `ssd_hp()`.
 #' 
 #' If treating the distributions as constituting a single mixture distribution
 #' when calculating model average confidence intervals then
 #' `weighted` specifies whether to use the original model weights versus
-#' re-estimating for each bootstrap sample.
-#' Conversely when 'taking the mean' then `weighted` specifies
+#' re-estimating for each bootstrap sample unless 'taking the mean' in which case 
+#' `weighted` specifies
 #' whether to take bootstrap samples from each distribution proportional to 
-#' its weight versus calculating the weighted arithmetic means of the lower 
-#' and upper confidence limits.
+#' its weight (so that they sum to `nboot`) versus 
+#' calculating the weighted arithmetic means of the lower 
+#' and upper confidence limits based on `nboot` samples for each distribution.
 #' 
 #' Based on Burnham and Anderson (2002),
 #' distributions with an absolute AIC difference greater 
-#' than a delta of by default 7 are excluded
-#' prior to calculation of the hazard concentrations.
+#' than a delta of by default 7 are unlikely to influence the calculations and 
+#' are excluded
+#' prior to calculation of the hazard concentrations to reduce the run time.
 #' 
 #' @references
 #' 
@@ -95,20 +101,21 @@ ssd_hc.list <- function(x, percent = 5, ...) {
 ssd_hc.fitdists <- function(
     x, 
     percent = 5, 
+    average = TRUE,
     ci = FALSE, 
     level = 0.95, 
     nboot = 1000,
-    average = TRUE,
-    multi_est = TRUE,
-    delta = 7, 
     min_pboot = 0.99,
-    parametric = TRUE, 
+    multi_est = TRUE,
     multi_ci = TRUE,
     weighted = TRUE,
-    control = NULL,
+    parametric = TRUE, 
+    delta = 7, 
     samples = FALSE,
     save_to = NULL,
-    ...) {
+    control = NULL,
+    ...
+) {
   
   chk_vector(percent)
   chk_numeric(percent)
@@ -154,8 +161,8 @@ ssd_hc.fitburrlioz <- function(
     nboot = 1000,
     min_pboot = 0.99, 
     parametric = FALSE, 
-    save_to = NULL, 
     samples = FALSE, 
+    save_to = NULL, 
     ...) {
   chk_length(x, upper = 1L)
   chk_named(x)

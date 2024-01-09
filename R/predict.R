@@ -31,16 +31,16 @@ stats::predict
 predict.fitdists <- function(
     object, 
     percent = 1:99, 
-    ci = FALSE,
+    average = TRUE,
+    ci = FALSE, 
     level = 0.95, 
     nboot = 1000,
-    average = TRUE, 
-    delta = 7,
     min_pboot = 0.99,
-    parametric = TRUE,
-    multi_ci = TRUE,
     multi_est = TRUE,
+    multi_ci = TRUE,
     weighted = TRUE,
+    parametric = TRUE, 
+    delta = 7, 
     control = NULL,
     ...) {
   chk_unused(...)
@@ -55,6 +55,7 @@ predict.fitdists <- function(
     delta = delta, 
     parametric = parametric,
     multi_ci = multi_ci, 
+    multi_est = multi_est,
     weighted = weighted, 
     control = control
   )
