@@ -9,12 +9,14 @@ ssd_hc_bcanz(x, nboot = 10000, delta = 10, min_pboot = 0.9)
 \arguments{
 \item{x}{The object.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate confidence limits. A value of at least 10,000 is recommended for official guidelines.}
 
-\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+\item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
+Distributions with an absolute AIC difference greater than delta are excluded.}
 
-\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
-fit in the sense of returning a likelihood.}
+\item{min_pboot}{A number between 0 and 1 of the minimum
+proportion of bootstrap samples that must successfully fit in the sense of returning a likelihood
+in order to report the confidence intervals.}
 }
 \value{
 A tibble of corresponding hazard concentrations.

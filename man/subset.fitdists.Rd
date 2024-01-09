@@ -11,7 +11,8 @@
 
 \item{select}{A character vector of the distributions to select.}
 
-\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+\item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
+Distributions with an absolute AIC difference greater than delta are excluded.}
 
 \item{...}{Unused.}
 }

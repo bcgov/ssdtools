@@ -45,44 +45,46 @@ ssd_hp(x, ...)
 
 \item{...}{Unused.}
 
-\item{conc}{A numeric vector of concentrations.}
+\item{conc}{A numeric vector of concentrations to calculate the hazard proportions for.}
 
-\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
 \item{level}{A number between 0 and 1 of the confidence level.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate confidence limits. A value of at least 10,000 is recommended for official guidelines.}
 
-\item{average}{A flag specifying whether to model average the estimates.}
+\item{average}{A flag specifying whether to provide model averaged values.}
 
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution for calculating the model averaged estimates.}
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution when providing model averaged estimates.}
 
-\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+\item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
+Distributions with an absolute AIC difference greater than delta are excluded.}
 
-\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
-fit in the sense of returning a likelihood.}
+\item{min_pboot}{A number between 0 and 1 of the minimum
+proportion of bootstrap samples that must successfully fit in the sense of returning a likelihood
+in order to report the confidence intervals.}
 
-\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping when \code{ci = TRUE}.}
+\item{parametric}{A flag specifying whether to perform parametric (as opposed to non-parametric) bootstrapping when \code{ci = TRUE}.}
 
-\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution for generating model averaged confidence intervals.}
+\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution when generating model averaged confidence intervals.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
-\item{samples}{A flag specfying whether to include the bootstrap samples in the output.}
+\item{samples}{A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output.}
 
-\item{save_to}{A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.}
+\item{save_to}{NULL or a string specifying a directory to save the bootstrap datasets and parameter estimates to.}
 
-\item{weighted}{A flag specifying whether to fix the model weights when performing \code{multi = TRUE} or do the weighted bootstrap when \code{multi = FALSE}.}
+\item{weighted}{A flag which when \code{multi_ci = TRUE} specifies whether to use the original model weights (as opposed to reestimating for each bootstrap sample) or when \code{multi_ci = FALSE} specifies whether to use the weighted bootstrap (as opposed to generating the same number of bootstrap samples for each model).}
 }
 \value{
 A tibble of corresponding hazard percents.
 }
 \description{
-Gets percent of species affected at specified concentration(s).
-}
-\details{
-If \code{ci = TRUE} uses parameteric bootstrapping to get confidence intervals on the
-hazard percent(s).
+Calculates percent of species affected at specified concentration(s)
+with quantile based bootstrap confidence intervals for
+individual or model-averaged distributions
+using parametric or non-parametric bootstrapping.
+For more information see the inverse function \code{\link[=ssd_hc]{ssd_hc()}}.
 }
 \section{Methods (by class)}{
 \itemize{

@@ -11,7 +11,7 @@
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).}
 
-\item{average}{A flag specifying whether to model average the estimates.}
+\item{average}{A flag specifying whether to provide model averaged values.}
 
 \item{breaks}{A character vector}
 
@@ -21,19 +21,20 @@ relative to the extremes for non-missing values.}
 
 \item{chk}{A flag specifying whether to check the arguments.}
 
-\item{ci}{A flag specifying whether to estimate confidence intervals (by parametric bootstrapping).}
+\item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
 \item{color}{A string of the column in data for the color aesthetic.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 
-\item{conc}{A numeric vector of concentrations.}
+\item{conc}{A numeric vector of concentrations to calculate the hazard proportions for.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
 \item{data}{A data frame.}
 
-\item{delta}{A non-negative number specifying the maximum absolute Akaike Information-theoretic Criterion difference cutoff. Distributions with an absolute difference from the best model greater than the cutoff are excluded.}
+\item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
+Distributions with an absolute AIC difference greater than delta are excluded.}
 
 \item{digits}{A whole number specifying the number of significant figures.}
 
@@ -81,23 +82,24 @@ relative to the extremes for non-missing values.}
 
 \item{meanlog2}{mean on log scale parameter.}
 
-\item{min_pboot}{A number of the minimum proportion of bootstrap samples that must successfully
-fit in the sense of returning a likelihood.}
+\item{min_pboot}{A number between 0 and 1 of the minimum
+proportion of bootstrap samples that must successfully fit in the sense of returning a likelihood
+in order to report the confidence intervals.}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
 
 \item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
-\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution for generating model averaged confidence intervals.}
+\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution when generating model averaged confidence intervals.}
 
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution for calculating the model averaged estimates.}
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution when providing model averaged estimates.}
 
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
 
 \item{n}{positive number of observations.}
 
-\item{nboot}{A count of the number of bootstrap samples to use to estimate the se and confidence limits. A value of 10000 is recommended for official guidelines.}
+\item{nboot}{A count of the number of bootstrap samples to use to estimate confidence limits. A value of at least 10,000 is recommended for official guidelines.}
 
 \item{nrow}{A positive whole number of the minimum number of non-missing rows.}
 
@@ -105,11 +107,11 @@ remove them with a warning.}
 
 \item{object}{The object.}
 
-\item{parametric}{A flag specifying whether to perform parametric as opposed to non-parametric bootstrapping when \code{ci = TRUE}.}
+\item{parametric}{A flag specifying whether to perform parametric (as opposed to non-parametric) bootstrapping when \code{ci = TRUE}.}
 
 \item{p}{vector of probabilities.}
 
-\item{percent}{A numeric vector of percentages.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for.}
 
 \item{pmix}{Proportion mixture parameter.}
 
@@ -131,9 +133,9 @@ remove them with a warning.}
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{save_to}{A string specifying a directory to save the bootstrap datasets and parameter estimates to or NULL.}
+\item{save_to}{NULL or a string specifying a directory to save the bootstrap datasets and parameter estimates to.}
 
-\item{samples}{A flag specfying whether to include the bootstrap samples in the output.}
+\item{samples}{A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output.}
 
 \item{scale}{scale parameter.}
 
@@ -165,7 +167,7 @@ remove them with a warning.}
 
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
-\item{weighted}{A flag specifying whether to fix the model weights when performing \code{multi = TRUE} or do the weighted bootstrap when \code{multi = FALSE}.}
+\item{weighted}{A flag which when \code{multi_ci = TRUE} specifies whether to use the original model weights (as opposed to reestimating for each bootstrap sample) or when \code{multi_ci = FALSE} specifies whether to use the weighted bootstrap (as opposed to generating the same number of bootstrap samples for each model).}
 
 \item{x}{The object.}
 

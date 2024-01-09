@@ -14,10 +14,32 @@
 
 #' Hazard Concentrations for Species Sensitivity Distributions
 #'
-#' Gets concentration(s) that protect specified percentage(s) of species.
-#'
-#' If `ci = TRUE` uses parameteric bootstrapping to get confidence intervals on the
-#' hazard concentrations(s).
+#' Calculates concentration(s) with quantile based bootstrap confidence intervals 
+#' that protect specified percentage(s) of species for 
+#' individual or model-averaged distributions
+#' using parametric or non-parametric bootstrapping.
+#' 
+#' Model-averaged estimates and/or confidence intervals (including standard error) 
+#' can be calculated  by treating the distributions as constituting a single mixture distribution
+#' versus 'taking the mean'.
+#' 
+#' If treating the distributions as constituting a single mixture distribution
+#' when calculating model average confidence intervals then
+#' `weighted` specifies whether to use the original model weights versus
+#' re-estimating for each bootstrap sample.
+#' Conversely when 'taking the mean' then `weighted` specifies
+#' whether to take bootstrap samples from each distribution proportional to 
+#' its weight versus calculating the weighted arithmetic means of the lower 
+#' and upper confidence limits.
+#' 
+#' Based on Burnham and Anderson (2002),
+#' distributions with an absolute AIC difference greater 
+#' than a delta of by default 7 are excluded
+#' prior to calculation of the hazard concentrations.
+#' 
+#' @references
+#' 
+#' Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY. doi:10.1007/b97636.
 #'
 #' @inheritParams params
 #' @return A tibble of corresponding hazard concentrations.

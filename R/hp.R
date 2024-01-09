@@ -14,10 +14,11 @@
 
 #' Hazard Percent
 #'
-#' Gets percent of species affected at specified concentration(s).
-#'
-#' If `ci = TRUE` uses parameteric bootstrapping to get confidence intervals on the
-#' hazard percent(s).
+#' Calculates percent of species affected at specified concentration(s)
+#' with quantile based bootstrap confidence intervals for 
+#' individual or model-averaged distributions
+#' using parametric or non-parametric bootstrapping.
+#' For more information see the inverse function [`ssd_hc()`].
 #'
 #' @inheritParams params
 #' @return A tibble of corresponding hazard percents.
