@@ -70,8 +70,9 @@
 #' @param object The object.
 #' @param parametric A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.
 #' @param p vector of probabilities.
-#' @param percent A numeric vector of percent values to estimate hazard concentrations for.
+#' @param percent A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for `proportion = 0.05`.
 #' @param pmix Proportion mixture parameter.
+#' @param proportion A numeric vector of proportion values to estimate hazard concentrations for.
 #' @param pvalue A flag specifying whether to return p-values or the statistics (default) for the various tests.
 #' @param pred A data frame of the predictions.
 #' @param q	vector of quantiles.

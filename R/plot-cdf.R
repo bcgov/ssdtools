@@ -31,7 +31,7 @@ ssd_plot_cdf <- function(x, ...) {
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_plot_cdf(fits)
 ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 7, ...) {
-  pred <- ssd_hc(x, percent = 1:99, average = average, delta = delta)
+  pred <- ssd_hc(x, proportion = 1:99/100, average = average, delta = delta)
   data <- ssd_data(x)
   cols <- .cols_fitdists(x)
 
@@ -57,12 +57,11 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 7, ...) {
 #'   lnorm = c(meanlog = 2, sdlog = 2)
 #' ))
 ssd_plot_cdf.list <- function(x, ...) {
-  pred <- ssd_hc(x, percent = 1:99)
+  pred <- ssd_hc(x, proportion = 1:99/100)
   data <- data.frame(Conc = numeric(0))
 
   linetype <- if (length(unique(pred$dist)) > 1) "dist" else NULL
   linecolor <- linetype
-  pred$percent <- round(pred$percent) # not sure why needed
 
   ssd_plot(
     data = data, pred = pred,

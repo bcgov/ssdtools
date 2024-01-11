@@ -135,13 +135,13 @@ test_that("hp fitdists gives different answer with model averaging as hc not sam
   data <- ssddata::aims_molybdenum_marine
 
   fits_lgumbel <- ssd_fit_dists(data, dists = "lgumbel")
-  expect_equal(ssd_hp(fits_lgumbel, ssd_hc(fits_lgumbel, percent = 5)$est)$est, 5)
+  expect_equal(ssd_hp(fits_lgumbel, ssd_hc(fits_lgumbel, proportion = 5/100)$est)$est, 5)
 
   fits_lnorm_lnorm <- ssd_fit_dists(data, dists = "lnorm_lnorm")
-  expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, percent = 5)$est)$est, 5)
+  expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, proportion = 5/100)$est)$est, 5)
 
   fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"))
-  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, percent = 5, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)$est)$est, 4.59188450624579)
+  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5/100, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)$est)$est, 4.59188450624579)
 })
 
 test_that("ssd_hp fitdists correct for rescaling", {

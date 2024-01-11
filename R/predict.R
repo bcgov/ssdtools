@@ -30,7 +30,8 @@ stats::predict
 #' predict(fits)
 predict.fitdists <- function(
     object, 
-    percent = 1:99, 
+    percent, 
+    proportion = 1:99/100,
     average = TRUE,
     ci = FALSE, 
     level = 0.95, 
@@ -44,9 +45,23 @@ predict.fitdists <- function(
     control = NULL,
     ...) {
   chk_unused(...)
+  
+  
+  if(lifecycle::is_present(percent)) {
+    lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    chk_vector(percent)
+    chk_numeric(percent)
+    chk_range(percent, c(0, 100))
+    proportion <- percent / 100
+  }
+  
+  chk_vector(proportion)
+  chk_numeric(proportion)
+  chk_range(proportion)
+  
   ssd_hc(
     object,
-    percent = percent, 
+    proportion = proportion, 
     ci = ci, 
     level = level,
     nboot = nboot, 
@@ -76,7 +91,8 @@ predict.fitdists <- function(
 #' predict(fits)
 predict.fitburrlioz <- function(
     object, 
-    percent = 1:99, 
+    percent, 
+    proportion = 1:99/100,
     ci = FALSE,
     level = 0.95, 
     nboot = 1000,
@@ -84,8 +100,21 @@ predict.fitburrlioz <- function(
     parametric = TRUE,
     ...) {
   chk_unused(...)
+  
+  if(lifecycle::is_present(percent)) {
+    lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    chk_vector(percent)
+    chk_numeric(percent)
+    chk_range(percent, c(0, 100))
+    proportion <- percent / 100
+  }
+  
+  chk_vector(proportion)
+  chk_numeric(proportion)
+  chk_range(proportion)
+  
   ssd_hc(object,
-    percent = percent, 
+    proportion = proportion, 
     ci = ci, 
     level = level,
     nboot = nboot, 

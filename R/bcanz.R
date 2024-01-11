@@ -70,7 +70,7 @@ ssd_fit_bcanz <- function(data, left = "Conc") {
 #' ssd_hc_bcanz(fits, nboot = 100)
 ssd_hc_bcanz <- function(x, nboot = 10000, delta = 10, min_pboot = 0.9) {
   ssd_hc(x,
-    percent = c(1, 5, 10, 20),
+    proportion = c(0.01, 0.05, 0.1, 0.2),
     ci = TRUE,
     level = 0.95,
     nboot = nboot,

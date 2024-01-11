@@ -111,9 +111,11 @@ remove them with a warning.}
 
 \item{p}{vector of probabilities.}
 
-\item{percent}{A numeric vector of percent values to estimate hazard concentrations for.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for \code{proportion = 0.05}.}
 
 \item{pmix}{Proportion mixture parameter.}
+
+\item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
 
 \item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
 
