@@ -738,3 +738,10 @@ test_that("hc percent deprecated", {
   hc2 <- ssd_hc(fits, proportion = c(0.05, 0.1))
   expect_identical(hc2, hc)
 })
+
+test_that("hc proportion multiple decimal places", {
+  
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  hc2 <- ssd_hc(fits, proportion = 0.111111)
+  expect_identical(hc2$proportion, 0.111111)
+})
