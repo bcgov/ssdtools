@@ -17,7 +17,7 @@
   multi_ci = TRUE,
   weighted = TRUE,
   parametric = TRUE,
-  delta = 7,
+  delta = 9.21,
   control = NULL,
   ...
 )

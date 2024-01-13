@@ -37,9 +37,8 @@
 #' calculating the weighted arithmetic means of the lower 
 #' and upper confidence limits based on `nboot` samples for each distribution.
 #' 
-#' Based on Burnham and Anderson (2002),
-#' distributions with an absolute AIC difference greater 
-#' than a delta of by default 7 have considerably less support (weight < 0.03)
+#' Distributions with an absolute AIC difference greater 
+#' than a delta of by default 7 have considerably less support (weight < 0.01)
 #' and are excluded
 #' prior to calculation of the hazard concentrations to reduce the run time.
 #' 
@@ -127,7 +126,7 @@ ssd_hc.fitdists <- function(
     multi_ci = TRUE,
     weighted = TRUE,
     parametric = TRUE, 
-    delta = 7, 
+    delta = 9.21, 
     samples = FALSE,
     save_to = NULL,
     control = NULL,

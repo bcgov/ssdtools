@@ -20,7 +20,7 @@ ssd_hp(x, ...)
   multi_ci = TRUE,
   weighted = TRUE,
   parametric = TRUE,
-  delta = 7,
+  delta = 9.21,
   samples = FALSE,
   save_to = NULL,
   control = NULL,

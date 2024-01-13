@@ -38,7 +38,7 @@
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
   fits <- ssd_fit_dists(data, left = left, rescale = FALSE)
-  ssd_hc(fits, ci = TRUE, delta = 7, nboot = 10000)
+  ssd_hc(fits, ci = TRUE, nboot = 10000)
 }
 
 
