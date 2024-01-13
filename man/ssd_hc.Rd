@@ -91,7 +91,7 @@ A tibble of corresponding hazard concentrations.
 }
 \description{
 Calculates concentration(s) with bootstrap confidence intervals
-that protect specified percentage(s) of species for
+that protect specified proportion(s) of species for
 individual or model-averaged distributions
 using parametric or non-parametric bootstrapping.
 }

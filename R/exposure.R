@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Percent Exposure
+#' Proportion Exposure
 #'
 #' Calculates average proportion exposed based on log-normal distribution of concentrations.
 #'

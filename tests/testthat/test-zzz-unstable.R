@@ -263,7 +263,7 @@ test_that("plot geoms", {
     geom_ssdsegment(data = ssddata::ccme_boron, ggplot2::aes(x = Conc, xend = Conc * 2)) +
     geom_hcintersect(xintercept = 100, yintercept = 0.5) +
     geom_xribbon(
-      ggplot2::aes(xmin = lcl, xmax = ucl, y = percent / 100),
+      ggplot2::aes(xmin = lcl, xmax = ucl, y = proportion),
       alpha = 1 / 3
     )
   expect_snapshot_plot(gp, "geoms_all")

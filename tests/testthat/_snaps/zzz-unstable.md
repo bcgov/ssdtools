@@ -4,9 +4,9 @@
       hc_average
     Output
       # A tibble: 1 x 11
-        dist    percent   est    se   lcl   ucl    wt method     nboot pboot samples  
-        <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>>
-      1 average       5  1.24 0.743 0.479  3.19     1 parametric   100     1 <dbl>    
+        dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
+        <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
+      1 average       0.05  1.24 0.743 0.479  3.19     1 parametr~   100     1 <dbl>  
 
 ---
 
@@ -14,9 +14,9 @@
       hc_multi
     Output
       # A tibble: 1 x 11
-        dist    percent   est    se   lcl   ucl    wt method     nboot pboot samples  
-        <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>>
-      1 average       5  1.26 0.774 0.410  3.25     1 parametric   100  0.86 <dbl>    
+        dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
+        <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
+      1 average       0.05  1.26 0.774 0.410  3.25     1 parametr~   100  0.86 <dbl>  
 
 # hp multi_ci lnorm default 100
 

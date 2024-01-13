@@ -4,7 +4,7 @@
 \alias{ssd_hp}
 \alias{ssd_hp.fitdists}
 \alias{ssd_hp.fitburrlioz}
-\title{Hazard Percent}
+\title{Hazard Proportion}
 \usage{
 ssd_hp(x, ...)
 
@@ -80,10 +80,10 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 }
 \value{
-A tibble of corresponding hazard percents.
+A tibble of corresponding hazard proportions.
 }
 \description{
-Calculates percent of species affected at specified concentration(s)
+Calculates proportion of species affected at specified concentration(s)
 with quantile based bootstrap confidence intervals for
 individual or model-averaged distributions
 using parametric or non-parametric bootstrapping.
@@ -91,9 +91,9 @@ For more information see the inverse function \code{\link[=ssd_hc]{ssd_hc()}}.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ssd_hp(fitdists)}: Hazard Percents for fitdists Object
+\item \code{ssd_hp(fitdists)}: Hazard Proportions for fitdists Object
 
-\item \code{ssd_hp(fitburrlioz)}: Hazard Percents for fitburrlioz Object
+\item \code{ssd_hp(fitburrlioz)}: Hazard Proportions for fitburrlioz Object
 
 }}
 \examples{

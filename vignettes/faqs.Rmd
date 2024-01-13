@@ -28,7 +28,7 @@ dist <- ssdtools::ssd_fit_dists(ssddata::ccme_boron)
 pred <- predict(dist, ci = FALSE)
 
 ssdtools::ssd_plot_cdf(dist) +
-  geom_line(data = pred, aes(x = est, y = percent / 100))
+  geom_line(data = pred, aes(x = est, y = proportion))
 ```
 
 ## How do I fit distributions to multiple groups such taxa and/or chemicals?

@@ -70,7 +70,7 @@ Plots the \code{x} interval defined by \code{xmin} and \code{xmax}.
 }
 \examples{
 gp <- ggplot2::ggplot(boron_pred) +
-  geom_xribbon(ggplot2::aes(xmin = lcl, xmax = ucl, y = percent))
+  geom_xribbon(ggplot2::aes(xmin = lcl, xmax = ucl, y = proportion))
 }
 \seealso{
 \code{\link[=ssd_plot_cdf]{ssd_plot_cdf()}}

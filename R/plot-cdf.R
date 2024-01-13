@@ -37,7 +37,6 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 7, ...) {
 
   linetype <- if (length(unique(pred$dist)) > 1) "dist" else NULL
   linecolor <- linetype
-  pred$percent <- round(pred$percent) # not sure why needed
 
   ssd_plot(
     data = data, pred = pred, left = cols$left, right = cols$right,

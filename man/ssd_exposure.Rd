@@ -2,7 +2,7 @@
 % Please edit documentation in R/exposure.R
 \name{ssd_exposure}
 \alias{ssd_exposure}
-\title{Percent Exposure}
+\title{Proportion Exposure}
 \usage{
 ssd_exposure(x, meanlog = 0, sdlog = 1, nboot = 1000)
 }

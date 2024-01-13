@@ -15,7 +15,7 @@
 #' Hazard Concentrations for Species Sensitivity Distributions
 #'
 #' Calculates concentration(s) with bootstrap confidence intervals 
-#' that protect specified percentage(s) of species for 
+#' that protect specified proportion(s) of species for 
 #' individual or model-averaged distributions
 #' using parametric or non-parametric bootstrapping.
 #' 
@@ -62,7 +62,7 @@ ssd_hc <- function(x, ...) {
   est <- do.call(fun, args)
   tibble(
     dist = dist,
-    percent = proportion * 100, est = est,
+    proportion = proportion, est = est,
     se = NA_real_, lcl = NA_real_, ucl = NA_real_,
     wt = 1,
     nboot = 0L, pboot = NA_real_
@@ -98,7 +98,7 @@ ssd_hc.list <- function(
   
   if (!length(x)) {
     hc <- no_hcp()
-    hc <- dplyr::rename(hc, percent = "value")
+    hc <- dplyr::rename(hc, proportion = "value")
     return(hc)
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
@@ -166,8 +166,7 @@ ssd_hc.fitdists <- function(
     save_to = save_to,
     hc = TRUE)
   
-  hcp <- dplyr::rename(hcp, percent = "value")
-  hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
+  hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }
 
@@ -227,7 +226,6 @@ ssd_hc.fitburrlioz <- function(
     fix_weights = FALSE,
     fun = fun)
   
-  hcp <- dplyr::rename(hcp, percent = "value")
-  hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
+  hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }

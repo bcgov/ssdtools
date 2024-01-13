@@ -19,7 +19,7 @@ ssd_plot(
   ylab = "Species Affected",
   ci = TRUE,
   ribbon = FALSE,
-  hc = 5L,
+  hc = 0.05,
   shift_x = 3,
   bounds = c(left = 1, right = 1),
   xbreaks = waiver()
@@ -54,7 +54,7 @@ ssd_plot(
 
 \item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
 
-\item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
+\item{hc}{A value between 0 and 1 indicating the proportion hazard concentration (or NULL).}
 
 \item{shift_x}{The value to multiply the label x values by.}
 
