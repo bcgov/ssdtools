@@ -6,7 +6,8 @@
 \usage{
 \method{predict}{fitdists}(
   object,
-  percent = 1:99,
+  percent,
+  proportion = 1:99/100,
   average = TRUE,
   ci = FALSE,
   level = 0.95,
@@ -16,7 +17,7 @@
   multi_ci = TRUE,
   weighted = TRUE,
   parametric = TRUE,
-  delta = 7,
+  delta = 9.21,
   control = NULL,
   ...
 )
@@ -24,7 +25,9 @@
 \arguments{
 \item{object}{The object.}
 
-\item{percent}{A numeric vector of percent values to estimate hazard concentrations for.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for \code{proportion = 0.05}.}
+
+\item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
 
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 

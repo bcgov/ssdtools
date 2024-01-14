@@ -15,7 +15,7 @@
 #' Hazard Concentrations for Species Sensitivity Distributions
 #'
 #' Calculates concentration(s) with bootstrap confidence intervals 
-#' that protect specified percentage(s) of species for 
+#' that protect specified proportion(s) of species for 
 #' individual or model-averaged distributions
 #' using parametric or non-parametric bootstrapping.
 #' 
@@ -37,9 +37,8 @@
 #' calculating the weighted arithmetic means of the lower 
 #' and upper confidence limits based on `nboot` samples for each distribution.
 #' 
-#' Based on Burnham and Anderson (2002),
-#' distributions with an absolute AIC difference greater 
-#' than a delta of by default 7 have considerably less support (weight < 0.03)
+#' Distributions with an absolute AIC difference greater 
+#' than a delta of by default 7 have considerably less support (weight < 0.01)
 #' and are excluded
 #' prior to calculation of the hazard concentrations to reduce the run time.
 #' 
@@ -62,7 +61,7 @@ ssd_hc <- function(x, ...) {
   est <- do.call(fun, args)
   tibble(
     dist = dist,
-    percent = proportion * 100, est = est,
+    proportion = proportion, est = est,
     se = NA_real_, lcl = NA_real_, ucl = NA_real_,
     wt = 1,
     nboot = 0L, pboot = NA_real_
@@ -74,19 +73,35 @@ ssd_hc <- function(x, ...) {
 #' @examples
 #' 
 #' ssd_hc(ssd_match_moments())
-ssd_hc.list <- function(x, percent = 5, ...) {
+ssd_hc.list <- function(
+    x, 
+    percent, 
+    proportion = 0.05, 
+    ...) {
   chk_list(x)
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
   
+  if(lifecycle::is_present(percent)) {
+    lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    chk_vector(percent)
+    chk_numeric(percent)
+    chk_range(percent, c(0, 100))
+    proportion <- percent / 100
+  }
+  
+  chk_vector(proportion)
+  chk_numeric(proportion)
+  chk_range(proportion)
+  
   if (!length(x)) {
     hc <- no_hcp()
-    hc <- dplyr::rename(hc, percent = "value")
+    hc <- dplyr::rename(hc, proportion = "value")
     return(hc)
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
-               MoreArgs = list(proportion = percent / 100),
+               MoreArgs = list(proportion = proportion),
                SIMPLIFY = FALSE
   )
   bind_rows(hc)
@@ -100,7 +115,8 @@ ssd_hc.list <- function(x, percent = 5, ...) {
 #' ssd_hc(fits)
 ssd_hc.fitdists <- function(
     x, 
-    percent = 5, 
+    percent, 
+    proportion = 0.05,
     average = TRUE,
     ci = FALSE, 
     level = 0.95, 
@@ -110,20 +126,27 @@ ssd_hc.fitdists <- function(
     multi_ci = TRUE,
     weighted = TRUE,
     parametric = TRUE, 
-    delta = 7, 
+    delta = 9.21, 
     samples = FALSE,
     save_to = NULL,
     control = NULL,
     ...
 ) {
   
-  chk_vector(percent)
-  chk_numeric(percent)
-  chk_range(percent, c(0, 100))
   chk_unused(...)
   
-  proportion <- percent / 100
-  
+  if(lifecycle::is_present(percent)) {
+    lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    chk_vector(percent)
+    chk_numeric(percent)
+    chk_range(percent, c(0, 100))
+    proportion <- percent / 100
+  }
+
+  chk_vector(proportion)
+  chk_numeric(proportion)
+  chk_range(proportion)
+
   hcp <- ssd_hcp_fitdists(
     x = x, 
     value = proportion,
@@ -142,8 +165,7 @@ ssd_hc.fitdists <- function(
     save_to = save_to,
     hc = TRUE)
   
-  hcp <- dplyr::rename(hcp, percent = "value")
-  hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
+  hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }
 
@@ -155,7 +177,8 @@ ssd_hc.fitdists <- function(
 #' ssd_hc(fit)
 ssd_hc.fitburrlioz <- function(
     x, 
-    percent = 5, 
+    percent, 
+    proportion = 0.05,
     ci = FALSE, 
     level = 0.95, 
     nboot = 1000,
@@ -167,15 +190,22 @@ ssd_hc.fitburrlioz <- function(
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
-  chk_vector(percent)
-  chk_numeric(percent)
-  chk_range(percent, c(0, 100))
   chk_unused(...)
+  
+  if(lifecycle::is_present(percent)) {
+    lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    chk_vector(percent)
+    chk_numeric(percent)
+    chk_range(percent, c(0, 100))
+    proportion <- percent / 100
+  }
+  
+  chk_vector(proportion)
+  chk_numeric(proportion)
+  chk_range(proportion)
 
   fun <- if(names(x) == "burrIII3") fit_burrlioz else fit_tmb
 
-  proportion <- percent / 100
-  
   hcp <-   ssd_hcp_fitdists (
     x = x,
     value = proportion, 
@@ -195,7 +225,6 @@ ssd_hc.fitburrlioz <- function(
     fix_weights = FALSE,
     fun = fun)
   
-  hcp <- dplyr::rename(hcp, percent = "value")
-  hcp <- dplyr::mutate(hcp, percent = .data$percent * 100)
+  hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }

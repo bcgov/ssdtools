@@ -1,2 +1,2 @@
-dist,percent,est,se,lcl,ucl,wt,method,nboot,samples
-average,5,0.945788,NA,NA,NA,1,parametric,100,numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,method,nboot,samples
+average,0.05,0.945788,NA,NA,NA,1,parametric,100,numeric(0)

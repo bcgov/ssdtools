@@ -212,20 +212,20 @@ ggplot(ccme_boron) +
 The third is `geom_xribbon()` which plots species sensitivity confidence intervals
 ```{r}
 ggplot(boron_pred) +
-  geom_xribbon(aes(xmin = lcl, xmax = ucl, y = percent / 100))
+  geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion))
 ```  
 
 And the fourth is `geom_hcintersect()` which plots hazard concentrations
 ```{r}
 ggplot() +
-  geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(5, 10, 20) / 100)
+  geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(0.05, 0.1, 0.2))
 ```    
 
 They can be combined together as follows
 ```{r}
 gp <- ggplot(boron_pred, aes(x = est)) +
-  geom_xribbon(aes(xmin = lcl, xmax = ucl, y = percent / 100), alpha = 0.2) +
-  geom_line(aes(y = percent / 100)) +
+  geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion), alpha = 0.2) +
+  geom_line(aes(y = proportion)) +
   geom_ssdsegment(data = ccme_boron, aes(x = Conc / 2, xend = Conc * 2)) +
   geom_ssdpoint(data = ccme_boron, aes(x = Conc / 2)) +
   geom_ssdpoint(data = ccme_boron, aes(x = Conc * 2)) +
@@ -242,7 +242,7 @@ gp <- gp + coord_trans(x = "log10") +
     breaks = scales::trans_breaks("log10", function(x) 10^x),
     labels = comma_signif
   )
-print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5 / 100))
+print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 0.05))
 ```
 
 The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.

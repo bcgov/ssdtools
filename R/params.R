@@ -33,7 +33,7 @@
 #' Distributions with an absolute AIC difference greater than delta are excluded from the calculations.
 #' @param digits A whole number specifying the number of significant figures.
 #' @param dists A character vector of the distribution names.
-#' @param hc A count between 1 and 99 indicating the percent hazard concentration (or NULL).
+#' @param hc A value between 0 and 1 indicating the proportion hazard concentration (or NULL).
 #' @param label A string of the column in data with the labels.
 #' @param left A string of the column in data with the concentrations.
 #' @param level A number between 0 and 1 of the confidence level of the interval.
@@ -70,8 +70,9 @@
 #' @param object The object.
 #' @param parametric A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.
 #' @param p vector of probabilities.
-#' @param percent A numeric vector of percent values to estimate hazard concentrations for.
+#' @param percent A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for `proportion = 0.05`.
 #' @param pmix Proportion mixture parameter.
+#' @param proportion A numeric vector of proportion values to estimate hazard concentrations for.
 #' @param pvalue A flag specifying whether to return p-values or the statistics (default) for the various tests.
 #' @param pred A data frame of the predictions.
 #' @param q	vector of quantiles.

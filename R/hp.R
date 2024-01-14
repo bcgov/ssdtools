@@ -12,16 +12,16 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-#' Hazard Percent
+#' Hazard Proportion
 #'
-#' Calculates percent of species affected at specified concentration(s)
+#' Calculates proportion of species affected at specified concentration(s)
 #' with quantile based bootstrap confidence intervals for 
 #' individual or model-averaged distributions
 #' using parametric or non-parametric bootstrapping.
 #' For more information see the inverse function [`ssd_hc()`].
 #'
 #' @inheritParams params
-#' @return A tibble of corresponding hazard percents.
+#' @return A tibble of corresponding hazard proportions.
 #' @seealso [`ssd_hc()`]
 #' @export
 #' @examples
@@ -31,7 +31,7 @@ ssd_hp <- function(x, ...) {
   UseMethod("ssd_hp")
 }
 
-#' @describeIn ssd_hp Hazard Percents for fitdists Object
+#' @describeIn ssd_hp Hazard Proportions for fitdists Object
 #' @export
 ssd_hp.fitdists <- function(
     x, 
@@ -45,7 +45,7 @@ ssd_hp.fitdists <- function(
     multi_ci = TRUE,
     weighted = TRUE,
     parametric = TRUE, 
-    delta = 7, 
+    delta = 9.21, 
     samples = FALSE,
     save_to = NULL,
     control = NULL,
@@ -79,7 +79,7 @@ ssd_hp.fitdists <- function(
 }
 
 
-#' @describeIn ssd_hp Hazard Percents for fitburrlioz Object
+#' @describeIn ssd_hp Hazard Proportions for fitburrlioz Object
 #' @export
 #' @examples
 #' 

@@ -1,2 +1,2 @@
-dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-average,5,16.7034,19.9308,4.02109,58.4951,1,parametric,10,1,"c(`000000001_burrIII3` = 64.5764, `000000002_burrIII3` = 5.34432, `000000003_burrIII3` = 7.7973, `000000004_burrIII3` = 4.32216, `000000005_burrIII3` = 10.0636, `000000006_burrIII3` = 10.8304, `000000007_burrIII3` = 5.65714, `000000008_burrIII3` = 37.5486, `000000009_burrIII3` = 4.96084, `000000010_burrIII3` = 3.93368)"
+dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
+average,0.05,16.7034,19.9308,4.02109,58.4951,1,parametric,10,1,"c(`000000001_burrIII3` = 64.5764, `000000002_burrIII3` = 5.34432, `000000003_burrIII3` = 7.7973, `000000004_burrIII3` = 4.32216, `000000005_burrIII3` = 10.0636, `000000006_burrIII3` = 10.8304, `000000007_burrIII3` = 5.65714, `000000008_burrIII3` = 37.5486, `000000009_burrIII3` = 4.96084, `000000010_burrIII3` = 3.93368)"

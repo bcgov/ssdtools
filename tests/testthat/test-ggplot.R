@@ -109,7 +109,7 @@ test_that("plot geom_hcintersect aes", {
 test_that("plot geom_xribbon", {
   gp <- ggplot2::ggplot(boron_pred) +
     geom_xribbon(
-      ggplot2::aes(xmin = lcl, xmax = ucl, y = percent)
+      ggplot2::aes(xmin = lcl, xmax = ucl, y = proportion)
     )
   expect_snapshot_plot(gp, "geom_xribbon")
 })

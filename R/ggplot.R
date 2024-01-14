@@ -164,7 +164,7 @@ geom_hcintersect <- function(mapping = NULL,
 #' @export
 #' @examples
 #' gp <- ggplot2::ggplot(boron_pred) +
-#'   geom_xribbon(ggplot2::aes(xmin = lcl, xmax = ucl, y = percent))
+#'   geom_xribbon(ggplot2::aes(xmin = lcl, xmax = ucl, y = proportion))
 geom_xribbon <- function(mapping = NULL,
                          data = NULL,
                          stat = "identity",

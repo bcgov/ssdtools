@@ -8,7 +8,7 @@
 \usage{
 ssd_plot_cdf(x, ...)
 
-\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, delta = 7, ...)
+\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, delta = 9.21, ...)
 
 \method{ssd_plot_cdf}{list}(x, ...)
 }

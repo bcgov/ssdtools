@@ -40,7 +40,7 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 
 \item{dists}{A character vector of the distribution names.}
 
-\item{hc}{A count between 1 and 99 indicating the percent hazard concentration (or NULL).}
+\item{hc}{A value between 0 and 1 indicating the proportion hazard concentration (or NULL).}
 
 \item{label}{A string of the column in data with the labels.}
 
@@ -111,9 +111,11 @@ remove them with a warning.}
 
 \item{p}{vector of probabilities.}
 
-\item{percent}{A numeric vector of percent values to estimate hazard concentrations for.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for \code{proportion = 0.05}.}
 
 \item{pmix}{Proportion mixture parameter.}
+
+\item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
 
 \item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
 

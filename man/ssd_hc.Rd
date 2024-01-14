@@ -9,11 +9,12 @@
 \usage{
 ssd_hc(x, ...)
 
-\method{ssd_hc}{list}(x, percent = 5, ...)
+\method{ssd_hc}{list}(x, percent, proportion = 0.05, ...)
 
 \method{ssd_hc}{fitdists}(
   x,
-  percent = 5,
+  percent,
+  proportion = 0.05,
   average = TRUE,
   ci = FALSE,
   level = 0.95,
@@ -23,7 +24,7 @@ ssd_hc(x, ...)
   multi_ci = TRUE,
   weighted = TRUE,
   parametric = TRUE,
-  delta = 7,
+  delta = 9.21,
   samples = FALSE,
   save_to = NULL,
   control = NULL,
@@ -32,7 +33,8 @@ ssd_hc(x, ...)
 
 \method{ssd_hc}{fitburrlioz}(
   x,
-  percent = 5,
+  percent,
+  proportion = 0.05,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
@@ -48,7 +50,9 @@ ssd_hc(x, ...)
 
 \item{...}{Unused.}
 
-\item{percent}{A numeric vector of percent values to estimate hazard concentrations for.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for \code{proportion = 0.05}.}
+
+\item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
 
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
@@ -87,7 +91,7 @@ A tibble of corresponding hazard concentrations.
 }
 \description{
 Calculates concentration(s) with bootstrap confidence intervals
-that protect specified percentage(s) of species for
+that protect specified proportion(s) of species for
 individual or model-averaged distributions
 using parametric or non-parametric bootstrapping.
 }
@@ -110,9 +114,8 @@ its weight (so that they sum to \code{nboot}) versus
 calculating the weighted arithmetic means of the lower
 and upper confidence limits based on \code{nboot} samples for each distribution.
 
-Based on Burnham and Anderson (2002),
-distributions with an absolute AIC difference greater
-than a delta of by default 7 have considerably less support (weight < 0.03)
+Distributions with an absolute AIC difference greater
+than a delta of by default 7 have considerably less support (weight < 0.01)
 and are excluded
 prior to calculation of the hazard concentrations to reduce the run time.
 }

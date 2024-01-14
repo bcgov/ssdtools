@@ -6,7 +6,8 @@
 \usage{
 \method{predict}{fitburrlioz}(
   object,
-  percent = 1:99,
+  percent,
+  proportion = 1:99/100,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
@@ -18,7 +19,9 @@
 \arguments{
 \item{object}{The object.}
 
-\item{percent}{A numeric vector of percent values to estimate hazard concentrations for.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for \code{proportion = 0.05}.}
+
+\item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 

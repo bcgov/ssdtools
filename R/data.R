@@ -17,7 +17,7 @@
 #' A data frame of the predictions based on 1,000 bootstrap iterations.
 #'
 #' \describe{
-#'   \item{percent}{The percent of species affected (int).}
+#'   \item{proportion}{The proportion of species affected (int).}
 #'   \item{est}{The estimated concentration (dbl).}
 #'   \item{se}{The standard error of the estimate (dbl).}
 #'   \item{lcl}{The lower confidence limit (dbl).}

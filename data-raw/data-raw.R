@@ -36,5 +36,5 @@ use_data(dist_data, overwrite = TRUE)
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 
 set.seed(99)
-boron_pred <- predict(fits, ci = TRUE)
+boron_pred <- predict(fits, ci = TRUE, multi_ci = FALSE)
 use_data(boron_pred, overwrite = TRUE)

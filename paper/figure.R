@@ -6,7 +6,7 @@ dists <- ssd_fit_dists(ssddata::ccme_boron)
 hc <- ssd_hc(dists)
 
 gp <- autoplot(dists) +
-  geom_hcintersect(data = hc, aes(xintercept = est, yintercept = percent/100))
+  geom_hcintersect(data = hc, aes(xintercept = est, yintercept = proportion))
 
 print(gp)
 

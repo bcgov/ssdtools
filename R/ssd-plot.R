@@ -50,7 +50,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Species Affected",
-                     ci = TRUE, ribbon = FALSE, hc = 5L, shift_x = 3,
+                     ci = TRUE, ribbon = FALSE, hc = 0.05, shift_x = 3,
                      bounds = c(left = 1, right = 1),
                      xbreaks = waiver()) {
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
@@ -61,9 +61,9 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   chk_null_or(linecolor, vld = vld_string)
   check_names(data, c(unique(c(left, right)), label, shape))
 
-  check_names(pred, c("percent", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
-  chk_numeric(pred$percent)
-  chk_range(pred$percent, c(1, 99))
+  check_names(pred, c("proportion", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
+  chk_numeric(pred$proportion)
+  chk_range(pred$proportion)
   check_data(pred, values = list(est = 1, lcl = c(1, NA), ucl = c(1, NA)))
 
   chk_number(shift_x)
@@ -74,13 +74,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 
   if (!is.null(hc)) {
     chk_vector(hc)
-    chk_whole_numeric(hc)
     chk_gt(length(hc))
-    chk_subset(hc, pred$percent)
+    chk_subset(hc, pred$proportion)
   }
   .chk_bounds(bounds)
-
-  pred$percent <- pred$percent / 100
 
   data <- process_data(data, left, right, weight = NULL)
   data <- bound_data(data, bounds)
@@ -96,26 +93,26 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 
   if (ci) {
     if (ribbon) {
-      gp <- gp + geom_xribbon(data = pred, aes(xmin = !!sym("lcl"), xmax = !!sym("ucl"), y = !!sym("percent")), alpha = 0.2)
+      gp <- gp + geom_xribbon(data = pred, aes(xmin = !!sym("lcl"), xmax = !!sym("ucl"), y = !!sym("proportion")), alpha = 0.2)
     } else {
       gp <- gp +
-        geom_line(data = pred, aes(x = !!sym("lcl"), y = !!sym("percent")), color = "darkgreen") +
-        geom_line(data = pred, aes(x = !!sym("ucl"), y = !!sym("percent")), color = "darkgreen")
+        geom_line(data = pred, aes(x = !!sym("lcl"), y = !!sym("proportion")), color = "darkgreen") +
+        geom_line(data = pred, aes(x = !!sym("ucl"), y = !!sym("proportion")), color = "darkgreen")
     }
   }
 
   if (!is.null(linecolor)) {
-    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("percent"), linetype = !!linetype, color = !!linecolor))
+    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype, color = !!linecolor))
   } else if (ribbon) {
-    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("percent"), linetype = !!linetype), color = "black")
+    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "black")
   } else {
-    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("percent"), linetype = !!linetype), color = "red")
+    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "red")
   }
 
   if (!is.null(hc)) {
     gp <- gp + geom_hcintersect(
-      data = pred[round(pred$percent * 100) %in% hc, ],
-      aes(xintercept = !!sym("est"), yintercept = !!sym("percent"))
+      data = pred[pred$proportion %in% hc, ],
+      aes(xintercept = !!sym("est"), yintercept = !!sym("proportion"))
     )
   }
 

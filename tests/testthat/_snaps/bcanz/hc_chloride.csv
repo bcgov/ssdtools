@@ -1,5 +1,5 @@
-dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-average,1,0.267258,0.110132,0.0373797,0.336421,1,parametric,10,0.8,numeric(0)
-average,5,1.25677,0.426673,0.395098,1.58918,1,parametric,10,0.8,numeric(0)
-average,10,2.38165,0.729251,1.01781,3.05366,1,parametric,10,0.8,numeric(0)
-average,20,4.81004,1.247,2.733,6.16935,1,parametric,10,0.8,numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
+average,0.01,0.267258,0.110132,0.0373797,0.336421,1,parametric,10,0.8,numeric(0)
+average,0.05,1.25677,0.426673,0.395098,1.58918,1,parametric,10,0.8,numeric(0)
+average,0.1,2.38165,0.729251,1.01781,3.05366,1,parametric,10,0.8,numeric(0)
+average,0.2,4.81004,1.247,2.733,6.16935,1,parametric,10,0.8,numeric(0)

@@ -1,2 +1,2 @@
-dist,percent,est,se,lcl,ucl,wt,method,nboot,pboot,samples
+dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
 average,NA,NA,NA,NA,NA,1,parametric,0,NA,numeric(0)
