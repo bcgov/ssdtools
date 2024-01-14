@@ -69,7 +69,8 @@ all hazard concentrations from 1 to 99%.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for fitdists</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
 <span>  <span class="va">object</span>,</span>
-<span>  percent <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">99</span>,</span>
+<span>  <span class="va">percent</span>,</span>
+<span>  proportion <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">99</span><span class="op">/</span><span class="fl">100</span>,</span>
 <span>  average <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
@@ -79,7 +80,7 @@ all hazard concentrations from 1 to 99%.</p>
 <span>  multi_ci <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  weighted <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  delta <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  delta <span class="op">=</span> <span class="fl">9.21</span>,</span>
 <span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -92,7 +93,11 @@ all hazard concentrations from 1 to 99%.</p>
 
 
 <dt>percent</dt>
-<dd><p>A numeric vector of percent values to estimate hazard concentrations for.</p></dd>
+<dd><p>A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for <code>proportion = 0.05</code>.</p></dd>
+
+
+<dt>proportion</dt>
+<dd><p>A numeric vector of proportion values to estimate hazard concentrations for.</p></dd>
 
 
 <dt>average</dt>
@@ -163,18 +168,18 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 99 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    dist    percent   est    se   lcl   ucl    wt method     nboot pboot samples </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;list&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> average       1 0.267    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> average       2 0.531    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> average       3 0.783    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> average       4 1.02     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> average       5 1.26     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> average       6 1.48     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> average       7 1.71     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> average       8 1.93     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> average       9 2.16     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> average      10 2.38     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    dist    proportion   est    se   lcl   ucl    wt method   nboot pboot samples</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> average       0.01 0.267    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> average       0.02 0.531    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> average       0.03 0.783    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> average       0.04 1.02     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> average       0.05 1.26     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> average       0.06 1.48     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> average       0.07 1.71     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> average       0.08 1.93     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> average       0.09 2.16     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> average       0.1  2.38     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 89 more rows</span></span>
 </code></pre></div>
     </div>

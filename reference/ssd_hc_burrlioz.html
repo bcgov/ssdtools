@@ -68,7 +68,8 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_hc_burrlioz</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  percent <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  <span class="va">percent</span>,</span>
+<span>  proportion <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
@@ -84,7 +85,11 @@
 
 
 <dt>percent</dt>
-<dd><p>A numeric vector of percent values to estimate hazard concentrations for.</p></dd>
+<dd><p>A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for <code>proportion = 0.05</code>.</p></dd>
+
+
+<dt>proportion</dt>
+<dd><p>A numeric vector of proportion values to estimate hazard concentrations for.</p></dd>
 
 
 <dt>ci</dt>
@@ -123,9 +128,9 @@ to report the confidence intervals.</p></dd>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`ssd_hc_burrlioz()` was deprecated in ssdtools 0.3.5.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `ssd_hc()` instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   dist      percent   est    se   lcl   ucl    wt method     nboot pboot samples</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> invpareto       5 0.387    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 non-param…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dist      proportion   est    se   lcl   ucl    wt method  nboot pboot samples</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> invpareto       0.05 0.387    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 non-pa…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

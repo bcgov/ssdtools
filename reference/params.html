@@ -133,7 +133,7 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 
 
 <dt>hc</dt>
-<dd><p>A count between 1 and 99 indicating the percent hazard concentration (or NULL).</p></dd>
+<dd><p>A value between 0 and 1 indicating the proportion hazard concentration (or NULL).</p></dd>
 
 
 <dt>label</dt>
@@ -272,11 +272,15 @@ remove them with a warning.</p></dd>
 
 
 <dt>percent</dt>
-<dd><p>A numeric vector of percent values to estimate hazard concentrations for.</p></dd>
+<dd><p>A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for <code>proportion = 0.05</code>.</p></dd>
 
 
 <dt>pmix</dt>
 <dd><p>Proportion mixture parameter.</p></dd>
+
+
+<dt>proportion</dt>
+<dd><p>A numeric vector of proportion values to estimate hazard concentrations for.</p></dd>
 
 
 <dt>pvalue</dt>
