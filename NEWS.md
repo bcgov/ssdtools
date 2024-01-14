@@ -1,8 +1,8 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9009
+# ssdtools 1.0.6.9010
 
-Additions
+## Additions
 
 - Added David Fox and Rebecca Fisher as co-authors.
 - Added to `ssd_hc()` and `ssd_hp()`
@@ -21,21 +21,24 @@ Additions
 - Added `ssd_exx()` functions to get default parameter estimates for distributions.
 - Added `ssd_hp.fitburrlioz()` function to get hazard proportion.
 
-Modifications
+## Modifications
 
 - `estimates.fitdists()` now includes weights in returned parameters as well as an
 `all_estimates = FALSE` argument to allow parameter values for all implemented distributions to be included.
 - `ssd_fit_bcanz()`, `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` no longer rescale data by default.
 - `rescale = TRUE` now divides by the geometric mean of the minimum and maximum positive finite values as opposed to dividing by the geometric mean of the maximum finite value.
+- Replaced column percentage between 0 and 100 with proportion between 0 and 1 in output of `ssd_hc()`
+- Changed `delta = 7` to `delta = 9.21` to exclude models with AIC weight < 0.01.
 - seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions). 
 
-Fixes
+## Fixes
 
  - `ssd_hc()` and `ssd_hp()` now include `parametric` column.
  - `ssd_hp()` now includes `wt` column
  
-Deprecation
+## Deprecation
 
+- Soft-deprecated argument `percent = 5` for `proportion = 0.05` for `ssd_hc()` and `predict()`.
 - `is_censored()`, `ssd_plot_cf()` and `comma_signif(...)` now warn deprecated unconditionally.
 - `plot.fitdists()` now defunct.
 - Removed defunct `ssd_cfplot()`
