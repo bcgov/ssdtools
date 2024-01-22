@@ -15,10 +15,10 @@
 
 test_that("multi", {
   test_dist("multi", multi = TRUE)
-  expect_equal(ssd_pmulti(1), 0.493574697632382)
-  expect_equal(ssd_qmulti(0.75), 2.21920363150895)
+  expect_equal(ssd_pmulti(1), 0.5)
+  expect_equal(ssd_qmulti(0.75), 1.96303108415826)
   set.seed(42)
-  expect_equal(ssd_rmulti(2), c(5.53136180221693, 7.1105492251209))
+  expect_equal(ssd_rmulti(2), c(3.93912428813385, 4.62130564767823))
   
   expect_equal(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99))), 
                c(0, 0.1, 0.5, 0.9, 0.99), tolerance = 1e-5)

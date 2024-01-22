@@ -25,7 +25,7 @@ ssd_pmulti <- function(
     burrIII3.shape1 = 1, 
     burrIII3.shape2 = 1, 
     burrIII3.scale = 1, 
-    gamma.weight = 1/6, 
+    gamma.weight = 0, 
     gamma.shape = 1, 
     gamma.scale = 1, 
     gompertz.weight = 0, 
@@ -34,10 +34,10 @@ ssd_pmulti <- function(
     invpareto.weight = 0, 
     invpareto.shape = 3, 
     invpareto.scale = 1, 
-    lgumbel.weight = 1/6, 
+    lgumbel.weight = 0, 
     lgumbel.locationlog = 0, 
     lgumbel.scalelog = 1, 
-    llogis.weight = 1/6, 
+    llogis.weight = 0, 
     llogis.locationlog = 0, 
     llogis.scalelog = 1, 
     llogis_llogis.weight = 0, 
@@ -46,16 +46,16 @@ ssd_pmulti <- function(
     llogis_llogis.locationlog2 = 1, 
     llogis_llogis.scalelog2 = 1, 
     llogis_llogis.pmix = 0.5, 
-    lnorm.weight = 1/6, 
+    lnorm.weight = 1, 
     lnorm.meanlog = 0, 
     lnorm.sdlog = 1, 
-    lnorm_lnorm.weight = 1/6, 
+    lnorm_lnorm.weight = 0, 
     lnorm_lnorm.meanlog1 = 0, 
     lnorm_lnorm.sdlog1 = 1, 
     lnorm_lnorm.meanlog2 = 1, 
     lnorm_lnorm.sdlog2 = 1, 
     lnorm_lnorm.pmix = 0.5, 
-    weibull.weight = 1/6, 
+    weibull.weight = 0, 
     weibull.shape = 1, 
     weibull.scale = 1,  
     lower.tail = TRUE, log.p = FALSE) {
@@ -114,7 +114,7 @@ ssd_qmulti <- function(
     burrIII3.shape1 = 1, 
     burrIII3.shape2 = 1, 
     burrIII3.scale = 1, 
-    gamma.weight = 1/6, 
+    gamma.weight = 0, 
     gamma.shape = 1, 
     gamma.scale = 1, 
     gompertz.weight = 0, 
@@ -123,10 +123,10 @@ ssd_qmulti <- function(
     invpareto.weight = 0, 
     invpareto.shape = 3, 
     invpareto.scale = 1, 
-    lgumbel.weight = 1/6, 
+    lgumbel.weight = 0, 
     lgumbel.locationlog = 0, 
     lgumbel.scalelog = 1, 
-    llogis.weight = 1/6, 
+    llogis.weight = 0, 
     llogis.locationlog = 0, 
     llogis.scalelog = 1, 
     llogis_llogis.weight = 0, 
@@ -135,16 +135,16 @@ ssd_qmulti <- function(
     llogis_llogis.locationlog2 = 1, 
     llogis_llogis.scalelog2 = 1, 
     llogis_llogis.pmix = 0.5, 
-    lnorm.weight = 1/6, 
+    lnorm.weight = 1, 
     lnorm.meanlog = 0, 
     lnorm.sdlog = 1, 
-    lnorm_lnorm.weight = 1/6, 
+    lnorm_lnorm.weight = 0, 
     lnorm_lnorm.meanlog1 = 0, 
     lnorm_lnorm.sdlog1 = 1, 
     lnorm_lnorm.meanlog2 = 1, 
     lnorm_lnorm.sdlog2 = 1, 
     lnorm_lnorm.pmix = 0.5, 
-    weibull.weight = 1/6, 
+    weibull.weight = 0, 
     weibull.shape = 1, 
     weibull.scale = 1, 
     lower.tail = TRUE, log.p = FALSE) {
@@ -204,7 +204,7 @@ ssd_rmulti <- function(
     burrIII3.shape1 = 1, 
     burrIII3.shape2 = 1, 
     burrIII3.scale = 1, 
-    gamma.weight = 1/6, 
+    gamma.weight = 0, 
     gamma.shape = 1, 
     gamma.scale = 1, 
     gompertz.weight = 0, 
@@ -213,10 +213,10 @@ ssd_rmulti <- function(
     invpareto.weight = 0, 
     invpareto.shape = 3, 
     invpareto.scale = 1, 
-    lgumbel.weight = 1/6, 
+    lgumbel.weight = 0, 
     lgumbel.locationlog = 0, 
     lgumbel.scalelog = 1, 
-    llogis.weight = 1/6, 
+    llogis.weight = 0, 
     llogis.locationlog = 0, 
     llogis.scalelog = 1, 
     llogis_llogis.weight = 0, 
@@ -225,16 +225,16 @@ ssd_rmulti <- function(
     llogis_llogis.locationlog2 = 1, 
     llogis_llogis.scalelog2 = 1, 
     llogis_llogis.pmix = 0.5, 
-    lnorm.weight = 1/6, 
+    lnorm.weight = 1, 
     lnorm.meanlog = 0, 
     lnorm.sdlog = 1, 
-    lnorm_lnorm.weight = 1/6, 
+    lnorm_lnorm.weight = 0, 
     lnorm_lnorm.meanlog1 = 0, 
     lnorm_lnorm.sdlog1 = 1, 
     lnorm_lnorm.meanlog2 = 1, 
     lnorm_lnorm.sdlog2 = 1, 
     lnorm_lnorm.pmix = 0.5, 
-    weibull.weight = 1/6, 
+    weibull.weight = 0, 
     weibull.shape = 1, 
     weibull.scale = 1, 
     chk = TRUE) {
@@ -292,7 +292,7 @@ ssd_emulti <- function() {
 }
 
 .ssd_pmulti_fitdists <- function(q, fitdists, lower.tail = TRUE, log.p = FALSE) {
-  args <- estimates(fitdists)
+  args <- estimates(fitdists, all_estimates = TRUE)
   args$q <- q
   args$lower.tail <- lower.tail
   args$log.p <- log.p
@@ -300,7 +300,7 @@ ssd_emulti <- function() {
 }
 
 .ssd_qmulti_fitdists <- function(p, fitdists, lower.tail = TRUE, log.p = FALSE) {
-  args <- estimates(fitdists)
+  args <- estimates(fitdists, all_estimates = TRUE)
   args$p <- p
   args$lower.tail <- lower.tail
   args$log.p <- log.p  
@@ -308,7 +308,7 @@ ssd_emulti <- function() {
 }
 
 .ssd_rmulti_fitdists <- function(n, fitdists, chk = TRUE) {
-  args <- estimates(fitdists)
+  args <- estimates(fitdists, all_estimates = TRUE)
   args$n <- n
   args$chk <- chk
   do.call("ssd_rmulti", args)
