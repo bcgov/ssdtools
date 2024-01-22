@@ -3,6 +3,7 @@
 S3method(augment,fitdists)
 S3method(autoplot,fitdists)
 S3method(coef,fitdists)
+S3method(dist,tmbfit)
 S3method(estimates,fitdists)
 S3method(estimates,tmbfit)
 S3method(glance,fitdists)
