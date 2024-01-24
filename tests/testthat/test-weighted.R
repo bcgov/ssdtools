@@ -1,3 +1,24 @@
+test_that("weighted errors", {
+  data <- ssddata::ccme_boron
+  
+  data$Weight <- 1
+  data$Weight[rank(data$Conc) > 6] <- 0
+  
+  expect_error(ssd_fit_dists(data, dists="lnorm", weight = "Weight"),
+               "^`data` has 22 rows with zero weight in 'Weight'\\.$")
+
+  data$Weight[rank(data$Conc) > 6] <- -1
+  
+  expect_error(ssd_fit_dists(data, dists="lnorm", weight = "Weight"),
+               "^`data\\$Weight` must have values between 0 and Inf\\.$")
+  
+  data$Weight[rank(data$Conc) > 6] <- Inf
+  
+  expect_warning(expect_error(ssd_fit_dists(data, dists="lnorm", weight = "Weight"),
+               "^All distributions failed to fit\\.$"))
+  
+})
+  
 test_that("weighted works", {
   data <- ssddata::ccme_boron
   
