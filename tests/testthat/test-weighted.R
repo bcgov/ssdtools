@@ -53,3 +53,13 @@ test_that("weighted works", {
   hcallw1000 <- ssd_hc(fitallw1000)
   expect_snapshot_data(hcallw1000, "hcallw1000")
 })
+
+test_that("weighted2", {
+  data <- ssddata::ccme_boron
+  
+  data$Weight <- 2
+
+  fit2 <- ssd_fit_dists(data, dists="lnorm", weight = "Weight")
+  hc2 <- ssd_hc(fit2)
+  expect_snapshot_data(hc2, "hc2")
+})
