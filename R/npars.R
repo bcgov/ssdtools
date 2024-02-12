@@ -16,10 +16,14 @@
 universals::npars
 
 #' @export
-npars.tmbfit <- function(x, ...) length(.pars_tmbfit(x))
+npars.tmbfit <- function(x, ...) {
+  chk_unused(...)
+  length(.pars_tmbfit(x))
+}
 
 #' @export
 npars.fitdists <- function(x, ...) {
+  chk_unused(...)
   x <- vapply(x, npars, 1L)
   x
 }

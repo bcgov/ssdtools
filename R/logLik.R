@@ -17,11 +17,13 @@ stats::logLik
 
 #' @export
 logLik.tmbfit <- function(object, ...) {
+  chk_unused(...)
   .objective_tmbfit(object) * -1
 }
 
 #' @export
 logLik.fitdists <- function(object, ...) {
+  chk_unused(...)
   object <- vapply(object, logLik, 1)
   object
 }

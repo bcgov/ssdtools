@@ -18,6 +18,7 @@ stats::nobs
 
 #' @export
 nobs.fitdists <- function(object, ...) {
+  chk_unused(...)
   if (ssd_is_censored(object)) {
     return(NA_integer_)
   }
