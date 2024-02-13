@@ -8,15 +8,6 @@ test_that("print fitdists", {
   expect_snapshot_output(print(fits))
 })
 
-test_that("summary fitdists with left censored, rescaled, weighted data", {
-  data <- ssddata::ccme_boron
-  data$Mass <- seq_len(nrow(data))
-  data$Other <- data$Conc
-  data$Conc[2] <- NA
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, right = "Other", weight = "Mass", rescale = TRUE, dists = "lnorm"))
-#  expect_snapshot_output(print(fits))
-})
-
 test_that("summary fitdists with inconsistently censored data", {
   data <- ssddata::ccme_boron
   data$Conc2 <- data$Conc

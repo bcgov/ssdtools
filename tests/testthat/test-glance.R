@@ -15,30 +15,6 @@ test_that("glance weights independent of rescaling", {
   expect_equal(glance_rescale$weight, glance$weight)
 })
 
-test_that("glance weights rescale log_lik", {
-  data <- ssddata::ccme_boron
-  data$weight <- rep(1, nrow(data))
-  lifecycle::expect_defunct(fit <- ssd_fit_dists(data, weight = "weight"))
-  # data$weight <- rep(2, nrow(data))
-  # fit_weight <- ssd_fit_dists(data, weight = "weight")
-  # 
-  # glance <- glance(fit)
-  # glance_weight <- glance(fit_weight)
-  # expect_equal(glance_weight$log_lik / 2, glance$log_lik)
-})
-
-test_that("glance reweight same log_lik", {
-  data <- ssddata::ccme_boron
-  data$weight <- rep(1, nrow(data))
-  lifecycle::expect_defunct(fit <- ssd_fit_dists(data, weight = "weight"))
-  # data$weight <- rep(2, nrow(data))
-  # fit_weight <- ssd_fit_dists(data, weight = "weight", reweight = TRUE)
-  # 
-  # glance <- glance(fit)
-  # glance_weight <- glance(fit_weight)
-  # expect_equal(glance_weight$log_lik, glance$log_lik)
-})
-
 test_that("glance reweight same log_lik", {
   data <- ssddata::ccme_boron
   data$Upper <- data$Conc

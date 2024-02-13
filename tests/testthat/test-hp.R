@@ -181,30 +181,6 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   expect_identical(hp$se, NA_real_)
 })
 
-test_that("ssd_hp same with equally weighted data", {
-  
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(1, nrow(data))
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
-  # set.seed(10)
-  # hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10)
-  # 
-  # data$Weight <- rep(2, nrow(data))
-  # fits2 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  # set.seed(10)
-  # hp2 <- ssd_hp(fits2, 1, ci = TRUE, nboot = 10)
-  # expect_equal(hp2, hp)
-})
-
-test_that("ssd_hp calculates cis with equally weighted data", {
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(2, nrow(data))
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
-  # set.seed(10)
-  # hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  # expect_equal(hp$se, 1.45515712342784)
-})
-
 test_that("ssd_hp calculates cis with two distributions", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
@@ -229,49 +205,6 @@ test_that("ssd_hp calculates cis in parallel with two distributions", {
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   expect_equal(hp$se, 1.45001268956605)
-})
-
-test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
-  
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(1, nrow(data))
-  data$Weight[1] <- 2
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
-  # expect_warning(
-  #   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
-  #   "^Parametric CIs cannot be calculated for unequally weighted data[.]$"
-  # )
-  # expect_identical(hp$se, NA_real_)
-})
-
-test_that("ssd_hp no effect with higher weight one distribution", {
-  
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(1, nrow(data))
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
-  # data$Weight <- rep(10, nrow(data))
-  # fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  # set.seed(10)
-  # hp <- ssd_hp(fits, 3, ci = TRUE, nboot = 10)
-  # set.seed(10)
-  # hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10)
-  # expect_equal(hp_10, hp)
-})
-
-test_that("ssd_hp effect with higher weight two distributions", {
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(1, nrow(data))
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis")))
-  # data$Weight <- rep(10, nrow(data))
-  # fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
-  # set.seed(10)
-  # hp <- ssd_hp(fits, 3, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  # set.seed(10)
-  # hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  # expect_equal(hp$est, 11.7535819824013)
-  # expect_equal(hp_10$est, 11.9318338996079)
-  # expect_equal(hp$se, 4.56372685665889)
-  # expect_equal(hp_10$se, 4.83426663939758)
 })
 
 test_that("ssd_hp cis with non-convergence", {

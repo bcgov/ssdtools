@@ -38,42 +38,6 @@ test_that("summary fitdists with multiple dists", {
   expect_identical(summary$unequal, FALSE)
 })
 
-test_that("summary fitdists with censored, rescaled, unequally weighted data", {
-  data <- ssddata::ccme_boron
-  data$Mass <- seq_len(nrow(data))
-  data$Other <- data$Conc
-  data$Conc[2] <- NA
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, right = "Other", weight = "Mass", rescale = TRUE, dists = "lnorm"))
-  # summary <- summary(fits)
-  # expect_s3_class(summary, "summary_fitdists")
-  # expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted", "unequal", "min_pmix"))
-  # expect_equal(summary$censoring, c(2.4, Inf))
-  # expect_identical(summary$nrow, 28L)
-  # expect_equal(summary$rescaled, 8.40832920383116)
-  # expect_identical(summary$weighted, 28)
-  # expect_identical(summary$unequal, TRUE)
-})
-
-test_that("summary weighted if equal weights but not 1", {
-  data <- ssddata::ccme_boron
-  data$Mass <- 2
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm"))
-  # summary <- summary(fits)
-  # expect_s3_class(summary, "summary_fitdists")
-  # expect_identical(summary$weighted, 2)
-  # expect_identical(summary$unequal, FALSE)
-})
-
-test_that("summary not weighted if equal weights but not 1 and reweighted", {
-  data <- ssddata::ccme_boron
-  data$Mass <- 2
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Mass", reweight = TRUE, dists = "lnorm"))
-  # summary <- summary(fits)
-  # expect_s3_class(summary, "summary_fitdists")
-  # expect_identical(summary$weighted, 1)
-  # expect_identical(summary$unequal, FALSE)
-})
-
 test_that("summary min_pmix 0.1", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm", min_pmix = 0.1)

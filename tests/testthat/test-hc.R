@@ -299,30 +299,6 @@ test_that("ssd_hc doesn't works with inconsisently censored data", {
   )
 })
 
-test_that("ssd_hc same with equally weighted data", {
-  
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(1, nrow(data))
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
-  # set.seed(10)
-  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
-  # 
-  # data$Weight <- rep(2, nrow(data))
-  # fits2 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  # set.seed(10)
-  # hc2 <- ssd_hc(fits2, ci = TRUE, nboot = 10)
-  # expect_equal(hc2, hc)
-})
-
-test_that("ssd_hc calculates cis with equally weighted data", {
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(2, nrow(data))
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
-  # set.seed(10)
-  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
-  # expect_snapshot_data(hc, "hcici")
-})
-
 test_that("ssd_hc calculates cis in parallel but one distribution", {
   local_multisession()
   data <- ssddata::ccme_boron
@@ -347,49 +323,6 @@ test_that("ssd_hc calculates cis in parallel with two distributions", {
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   expect_equal(hc$se, 0.511475169043532)
-})
-
-test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
-  
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(1, nrow(data))
-  data$Weight[1] <- 2
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
-  # expect_warning(
-  #   hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-  #   "^Parametric CIs cannot be calculated for unequally weighted data[.]$"
-  # )
-  # expect_identical(hc$se, NA_real_)
-})
-
-test_that("ssd_hc no effect with higher weight one distribution", {
-  
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(1, nrow(data))
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
-  # data$Weight <- rep(10, nrow(data))
-  # fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  # set.seed(10)
-  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
-  # set.seed(10)
-  # hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
-  # expect_equal(hc_10, hc)
-})
-
-test_that("ssd_hc effect with higher weight two distributions", {
-  data <- ssddata::ccme_boron
-  data$Weight <- rep(1, nrow(data))
-  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis")))
-  # data$Weight <- rep(10, nrow(data))
-  # fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
-  # set.seed(10)
-  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
-  # set.seed(10)
-  # hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
-  # expect_equal(hc$est, 1.64903597051184)
-  # expect_equal(hc_10$est, 1.6811748398812)
-  # expect_equal(hc$se, 0.511475169043532)
-  # expect_equal(hc_10$se, 0.455819097122445)
 })
 
 test_that("ssd_hc cis with non-convergence", {
@@ -571,22 +504,6 @@ test_that("ssd_hc save_to rescale", {
                                       "estimates_000000003_multi.rds"))
   boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
   expect_snapshot_data(hc, "hc_save_to1_rescale")
-})
-
-test_that("ssd_hc save_to lnorm 1", {
-  dir <- withr::local_tempdir()
-  
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, samples = TRUE)
-  expect_snapshot_data(hc, "hc_save_to11")
-  expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
-                                      "estimates_000000001_multi.rds"))
-  boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
-  lifecycle::expect_defunct(fit1 <- ssd_fit_dists(boot1, dists = "lnorm", left = "left", right = "right", weight = "weight"))
-  # est <- ssd_hc(fit1)$est
-  # expect_identical(hc$lcl, est)
-  # expect_identical(hc$lcl, hc$ucl)
 })
 
 test_that("ssd_hc save_to replaces", {
