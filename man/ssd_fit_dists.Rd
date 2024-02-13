@@ -8,7 +8,7 @@ ssd_fit_dists(
   data,
   left = "Conc",
   right = left,
-  weight = NULL,
+  ...,
   dists = ssd_dists_bcanz(),
   nrow = 6L,
   rescale = FALSE,
@@ -30,7 +30,7 @@ ssd_fit_dists(
 
 \item{right}{A string of the column in data with the right concentration values.}
 
-\item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
+\item{...}{Unused.}
 
 \item{dists}{A character vector of the distribution names.}
 

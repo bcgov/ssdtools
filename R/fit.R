@@ -160,7 +160,10 @@ fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, contro
 #' ssd_plot_cdf(fits)
 #' ssd_hc(fits)
 ssd_fit_dists <- function(
-    data, left = "Conc", right = left, weight = NULL,
+    data, 
+    left = "Conc", 
+    right = left, 
+    ...,
     dists = ssd_dists_bcanz(),
     nrow = 6L,
     rescale = FALSE,
@@ -183,8 +186,15 @@ ssd_fit_dists <- function(
   
   chk_whole_number(nrow)
   chk_gte(nrow, 4L)
-  .chk_data(data, left, right, weight, nrow)
   
+  if(rlang::has_name(rlang::list2(...), "weight")) {
+    lifecycle::deprecate_stop(when = "1.0.6.9011", "ssd_fit_dists(weight)")
+  }
+  chk_unused(...)
+  weight <- NULL
+
+  .chk_data(data, left, right, weight, nrow)
+
   chk_flag(rescale)
   chk_flag(reweight)
   chk_flag(computable)

@@ -99,7 +99,6 @@
 #' @param shift_x The value to multiply the label x values by.
 #' @param silent A flag indicating whether fits should fail silently.
 #' @param size A number for the size of the labels.
-#' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
 #' @param weighted A flag which specifies whether to use the original model weights (as opposed to re-estimating for each bootstrap sample) unless `multi_ci = FALSE` in which case it specifies
 #' whether to take bootstrap samples from each distribution proportional to 
 #' its weight versus calculating the weighted arithmetic means of the lower 

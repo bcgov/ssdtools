@@ -43,7 +43,7 @@ test_that("ssd_fit_dists gives chk error if missing right column", {
 
 test_that("ssd_fit_dists gives chk error if missing weight column", {
   data <- ssddata::ccme_boron
-  chk::expect_chk_error(ssd_fit_dists(data, weight = "Conc2"))
+  lifecycle::expect_defunct(chk::expect_chk_error(ssd_fit_dists(data, weight = "Conc2")))
 })
 
 test_that("ssd_fit_dists gives chk error if right call left", {
@@ -83,40 +83,40 @@ test_that("ssd_fit_dists not affected if all weight 1", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm")
   data$Mass <- rep(1, nrow(data))
-  fits_right <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
-  expect_equal(estimates(fits_right), estimates(fits))
+  lifecycle::expect_defunct(fits_right <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm"))
+  #expect_equal(estimates(fits_right), estimates(fits))
 })
 
 test_that("ssd_fit_dists not affected if all equal weight ", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm")
   data$Mass <- rep(0.1, nrow(data))
-  fits_right <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm")
-  expect_equal(estimates(fits_right), estimates(fits))
+  lifecycle::expect_defunct(fits_right <- ssd_fit_dists(data, weight = "Mass", dists = "lnorm"))
+#  expect_equal(estimates(fits_right), estimates(fits))
 })
 
 test_that("ssd_fit_dists gives correct chk error if zero weight", {
   data <- ssddata::ccme_boron
   data$Heavy <- rep(1, nrow(data))
   data$Heavy[2] <- 0
-  chk::expect_chk_error(
+  lifecycle::expect_defunct(chk::expect_chk_error(
     ssd_fit_dists(data, weight = "Heavy"),
     "^`data` has 1 row with zero weight in 'Heavy'\\.$"
-  )
+  ))
 })
 
 test_that("ssd_fit_dists gives chk error if negative weights", {
   data <- ssddata::ccme_boron
   data$Mass <- rep(1, nrow(data))
   data$Mass[1] <- -1
-  chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass"))
+  lifecycle::expect_defunct(chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass")))
 })
 
 test_that("ssd_fit_dists gives chk error if missing weight values", {
   data <- ssddata::ccme_boron
   data$Mass <- rep(1, nrow(data))
   data$Mass[1] <- NA
-  chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass"))
+  lifecycle::expect_defunct(chk::expect_chk_error(ssd_fit_dists(data, weight = "Mass")))
 })
 
 test_that("ssd_fit_dists gives chk error if missing left values", {
@@ -141,13 +141,13 @@ test_that("ssd_fit_dists all distributions fail to fit if Inf weight", {
   data <- ssddata::ccme_boron
   data$Mass <- rep(1, nrow(data))
   data$Mass[1] <- Inf
-  expect_error(
+  lifecycle::expect_defunct(expect_error(
     expect_warning(
       ssd_fit_dists(data, weight = "Mass", dists = "lnorm"),
       "^Distribution 'lnorm' failed to fit"
     ),
     "^All distributions failed to fit\\."
-  )
+  ))
 })
 
 test_that("ssd_fit_dists not affected if right values identical to left but in different column", {

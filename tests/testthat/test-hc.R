@@ -303,24 +303,24 @@ test_that("ssd_hc same with equally weighted data", {
   
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
-  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
-  
-  data$Weight <- rep(2, nrow(data))
-  fits2 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  set.seed(10)
-  hc2 <- ssd_hc(fits2, ci = TRUE, nboot = 10)
-  expect_equal(hc2, hc)
+  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
+  # set.seed(10)
+  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  # 
+  # data$Weight <- rep(2, nrow(data))
+  # fits2 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  # set.seed(10)
+  # hc2 <- ssd_hc(fits2, ci = TRUE, nboot = 10)
+  # expect_equal(hc2, hc)
 })
 
 test_that("ssd_hc calculates cis with equally weighted data", {
   data <- ssddata::ccme_boron
   data$Weight <- rep(2, nrow(data))
-  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
-  expect_snapshot_data(hc, "hcici")
+  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
+  # set.seed(10)
+  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
+  # expect_snapshot_data(hc, "hcici")
 })
 
 test_that("ssd_hc calculates cis in parallel but one distribution", {
@@ -354,42 +354,42 @@ test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   data$Weight[1] <- 2
-  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  expect_warning(
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-    "^Parametric CIs cannot be calculated for unequally weighted data[.]$"
-  )
-  expect_identical(hc$se, NA_real_)
+  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
+  # expect_warning(
+  #   hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+  #   "^Parametric CIs cannot be calculated for unequally weighted data[.]$"
+  # )
+  # expect_identical(hc$se, NA_real_)
 })
 
 test_that("ssd_hc no effect with higher weight one distribution", {
   
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
-  fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  data$Weight <- rep(10, nrow(data))
-  fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
-  set.seed(10)
-  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
-  expect_equal(hc_10, hc)
+  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm"))
+  # data$Weight <- rep(10, nrow(data))
+  # fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
+  # set.seed(10)
+  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  # set.seed(10)
+  # hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
+  # expect_equal(hc_10, hc)
 })
 
 test_that("ssd_hc effect with higher weight two distributions", {
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
-  fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
-  data$Weight <- rep(10, nrow(data))
-  fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
-  set.seed(10)
-  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
-  expect_equal(hc$est, 1.64903597051184)
-  expect_equal(hc_10$est, 1.6811748398812)
-  expect_equal(hc$se, 0.511475169043532)
-  expect_equal(hc_10$se, 0.455819097122445)
+  lifecycle::expect_defunct(fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis")))
+  # data$Weight <- rep(10, nrow(data))
+  # fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
+  # set.seed(10)
+  # hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
+  # set.seed(10)
+  # hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
+  # expect_equal(hc$est, 1.64903597051184)
+  # expect_equal(hc_10$est, 1.6811748398812)
+  # expect_equal(hc$se, 0.511475169043532)
+  # expect_equal(hc_10$se, 0.455819097122445)
 })
 
 test_that("ssd_hc cis with non-convergence", {
@@ -491,7 +491,7 @@ test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
 test_that("ssd_hc save_to", {
   dir <- withr::local_tempdir()
   
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to")
@@ -523,7 +523,7 @@ test_that("ssd_hc save_to", {
 test_that("ssd_hc save_to multi_ci = FALSE", {
   dir <- withr::local_tempdir()
   
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
   expect_snapshot_data(hc, "hc_save_to_not_multi")
@@ -561,7 +561,7 @@ test_that("ssd_hc save_to multi_ci = FALSE default", {
 test_that("ssd_hc save_to rescale", {
   dir <- withr::local_tempdir()
   
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm", rescale = TRUE)
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm", rescale = TRUE)
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to_rescale")
@@ -576,23 +576,23 @@ test_that("ssd_hc save_to rescale", {
 test_that("ssd_hc save_to lnorm 1", {
   dir <- withr::local_tempdir()
   
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to11")
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
                                       "estimates_000000001_multi.rds"))
   boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
-  fit1 <- ssd_fit_dists(boot1, dist = "lnorm", left = "left", right = "right", weight = "weight")
-  est <- ssd_hc(fit1)$est
-  expect_identical(hc$lcl, est)
-  expect_identical(hc$lcl, hc$ucl)
+  lifecycle::expect_defunct(fit1 <- ssd_fit_dists(boot1, dists = "lnorm", left = "left", right = "right", weight = "weight"))
+  # est <- ssd_hc(fit1)$est
+  # expect_identical(hc$lcl, est)
+  # expect_identical(hc$lcl, hc$ucl)
 })
 
 test_that("ssd_hc save_to replaces", {
   dir <- withr::local_tempdir()
   
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
@@ -607,7 +607,7 @@ test_that("ssd_hc save_to replaces", {
 })
 
 test_that("ssd_hc fix_weight", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
   set.seed(102)
   hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, weighted = FALSE, samples = TRUE)
@@ -619,7 +619,7 @@ test_that("ssd_hc fix_weight", {
 })
 
 test_that("ssd_hc multiple values", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
   set.seed(102)
   hc_unfix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 100, ci = TRUE, weighted = FALSE, samples = TRUE)
@@ -633,7 +633,7 @@ test_that("ssd_hc multiple values", {
 test_that("ssd_hc multiple values save_to", {
   dir <- withr::local_tempdir()
   
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
   set.seed(102)
   hc <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 2, save_to = dir, ci = TRUE)
@@ -645,7 +645,7 @@ test_that("ssd_hc multiple values save_to", {
 test_that("ssd_hc not multi_ci save_to", {
   dir <- withr::local_tempdir()
   
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 2, multi_ci = FALSE, save_to = dir, ci = TRUE, weighted = FALSE)
