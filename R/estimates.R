@@ -17,6 +17,9 @@ universals::estimates
 
 #' @export
 estimates.tmbfit <- function(x, ...) {
+  # intentionally does not check if ... unused so that the following call 
+  # `est <- estimates(fit, all_estimates = TRUE)`
+  # in sample_parameters will work with fitdists or tmbfit objects
   as.list(.ests_tmbfit(x))
 }
 
