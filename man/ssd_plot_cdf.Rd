@@ -17,7 +17,7 @@ ssd_plot_cdf(x, ...)
 
 \item{...}{Additional arguments passed to \code{\link[=ssd_plot]{ssd_plot()}}.}
 
-\item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
+\item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution or if NA provides model averaged and individual values.}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
@@ -35,6 +35,7 @@ Generic function to plots the cumulative distribution function (CDF).
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_plot_cdf(fits)
+ssd_plot_cdf(fits, average = NA)
 
 ssd_plot_cdf(list(
   llogis = c(locationlog = 2, scalelog = 1),

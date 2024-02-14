@@ -25,13 +25,24 @@ ssd_plot_cdf <- function(x, ...) {
 
 #' @describeIn ssd_plot_cdf Plot CDF for fitdists object
 #' @inheritParams params
+#' @param average A flag specifying whether to provide model averaged values as opposed to a value for each distribution or if NA provides model averaged and individual values.
 #' @param ... Additional arguments passed to [ssd_plot()].
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_plot_cdf(fits)
+#' ssd_plot_cdf(fits, average = NA)
 ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 9.21, ...) {
-  pred <- ssd_hc(x, proportion = 1:99/100, average = average, delta = delta)
+  chk_scalar(average)
+  chk_logical(average)
+  
+  if(!is.na(average)) {
+    pred <- ssd_hc(x, proportion = 1:99/100, average = average, delta = delta)
+  } else {
+    pred <- ssd_hc(x, proportion = 1:99/100, average = FALSE, delta = delta)
+    pred_ave <- ssd_hc(x, proportion = 1:99/100, average = TRUE, delta = delta)
+    pred <- dplyr::bind_rows(pred, pred_ave)
+  }
   data <- ssd_data(x)
   cols <- .cols_fitdists(x)
 
