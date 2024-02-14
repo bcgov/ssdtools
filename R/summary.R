@@ -14,6 +14,7 @@
 
 #' @export
 summary.tmbfit <- function(object, ...) {
+  chk_unused(...)
   x <- list()
   x$dist <- .dist_tmbfit(object)
   x$estimates <- estimates(object)
@@ -23,6 +24,7 @@ summary.tmbfit <- function(object, ...) {
 
 #' @export
 summary.fitdists <- function(object, ...) {
+  chk_unused(...)
   x <- list()
   x$fits <- lapply(object, summary)
   x$censoring <- .censoring_fitdists(object)

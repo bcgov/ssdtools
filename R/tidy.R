@@ -29,6 +29,7 @@ generics::tidy
 #' @export
 tidy.tmbfit <- function(x, all = FALSE, ...) {
   chk_flag(all)
+  chk_unused(...)
 
   dist <- x$dist
   suppressWarnings(capture.output(x <- sdreport(x$model)))
@@ -64,6 +65,7 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
 #' tidy(fits)
 #' tidy(fits, all = TRUE)
 tidy.fitdists <- function(x, all = FALSE, ...) {
+  chk_unused(...)
   x <- lapply(x, tidy, all = all)
   x <- bind_rows(x)
   x

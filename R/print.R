@@ -20,6 +20,7 @@
 
 #' @export
 print.summary_tmbfit <- function(x, ...) {
+  chk_unused(...)
   txt <- paste0("Distribution '", x$dist, "'")
   cat(txt)
   mapply(.print_parameter, x$estimates, names(x$estimates))
@@ -29,6 +30,7 @@ print.summary_tmbfit <- function(x, ...) {
 
 #' @export
 print.summary_fitdists <- function(x, ...) {
+  chk_unused(...)
   lapply(x$fits, print)
   censoring <- censoring_text(x$censoring)
   if (x$unequal) {
@@ -54,10 +56,12 @@ print.summary_fitdists <- function(x, ...) {
 
 #' @export
 print.tmbfit <- function(x, ...) {
+  chk_unused(...)
   print(summary(x))
 }
 
 #' @export
 print.fitdists <- function(x, ...) {
+  chk_unused(...)
   print(summary(x))
 }

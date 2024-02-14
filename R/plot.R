@@ -18,5 +18,6 @@ graphics::plot
 #' @export
 plot.fitdists <- function(x, ...) {
   lifecycle::deprecate_stop("0.3.4", "plot.fitdists()", "autoplot.fitdists()")
+  chk_unused(...)
   autoplot(x)
 }
