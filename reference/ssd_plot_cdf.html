@@ -83,7 +83,7 @@
 
 
 <dt>average</dt>
-<dd><p>A flag specifying whether to provide model averaged values as opposed to a value for each distribution.</p></dd>
+<dd><p>A flag specifying whether to provide model averaged values as opposed to a value for each distribution or if NA provides model averaged and individual values.</p></dd>
 
 
 <dt>delta</dt>
@@ -108,12 +108,14 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_plot_cdf-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="va">fits</span>, average <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="ssd_plot_cdf-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">ssd_plot_cdf</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  llogis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>locationlog <span class="op">=</span> <span class="fl">2</span>, scalelog <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  lnorm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="ssd_plot_cdf-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="ssd_plot_cdf-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
