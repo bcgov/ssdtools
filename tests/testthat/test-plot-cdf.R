@@ -13,11 +13,11 @@
 #    limitations under the License.
 
 test_that("ssd_plot_cdf", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   expect_snapshot_plot(ssd_plot_cdf(fits), "fits")
   expect_snapshot_plot(ssd_plot_cdf(fits, average = TRUE), "fits_average")
+  expect_snapshot_plot(ssd_plot_cdf(fits, average = NA), "fits_average_na")
 })
 
 test_that("autoplot deals with rescaled data", {
