@@ -40,10 +40,10 @@ ssd_dists_bcanz <- function() {
 #' @export
 #' @examples
 #' ssd_fit_bcanz(ssddata::ccme_boron)
-ssd_fit_bcanz <- function(data, left = "Conc") {
+ssd_fit_bcanz <- function(data, left = "Conc", dists = ssd_dists_bcanz()) {
   ssd_fit_dists(data,
     left = left,
-    dists = ssd_dists_bcanz(),
+    dists = dists,
     nrow = 6L,
     rescale = FALSE,
     reweight = FALSE,
