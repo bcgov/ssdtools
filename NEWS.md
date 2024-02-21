@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9010
+# ssdtools 1.0.6.9011
 
 ## Additions
 
@@ -30,6 +30,9 @@
 - Replaced column percentage between 0 and 100 with proportion between 0 and 1 in output of `ssd_hc()`
 - Changed `delta = 7` to `delta = 9.21` to exclude models with AIC weight < 0.01.
 - seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions). 
+- Exported `dists = ssd_dists_bcanz()` argument to `ssd_fit_bcanz()` to allow other packages to modify.
+- Check `...` unused where appropriate.
+- `ssd_plot_cdf()` now includes average with other distributions if `average = NA` (@poissonconsulting, #351).
 
 ## Fixes
 
