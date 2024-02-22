@@ -273,7 +273,7 @@ test_that("plot geoms", {
 test_that("ssd_plot censored data", {
   skip_on_ci()
   skip_on_cran()
-
+  
   data <- ssddata::ccme_boron
   data$Other <- data$Conc * 2
   expect_snapshot_plot(ssd_plot(data, boron_pred, right = "Other", ribbon = TRUE), "boron_cens_pred_ribbon")
@@ -307,7 +307,7 @@ test_that("invpareto with extreme data", {
     2.52987952199996, 2.58987810707128, 2.46777896999791, 2.51447342615507,
     2.48618482994608, 2.51794970929166, 2.49716394702713, 2.49218587262049
   ))
- 
+  
   skip_on_ci()
   skip_on_cran()
   
@@ -319,3 +319,11 @@ test_that("invpareto with extreme data", {
   )
 })
 
+test_that("lnorm with pearson1000 errors", {
+  expect_warning(expect_error(ssd_fit_dists(ssdtools::pearson1000, dists = "lnorm")), "ABNORMAL_TERMINATION_IN_LNSRCH.")
+})
+
+test_that("lnorm with pearson1000 mean and sd", {
+  expect_equal(mean(log(pearson1000$Conc)), 4.93885895685649)
+  expect_equal(sd(log(pearson1000$Conc)), 0.132482694377829)
+})
