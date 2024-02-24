@@ -31,7 +31,7 @@
     [1] 0.1772362
     
     $lnorm.meanlog
-    [1] 2.561645
+    [1] 2.561646
     
     $lnorm.sdlog
     [1] 1.24154
@@ -40,13 +40,13 @@
     [1] 0.02962678
     
     $lnorm_lnorm.meanlog1
-    [1] 0.9495395
+    [1] 0.9495396
     
     $lnorm_lnorm.meanlog2
     [1] 3.201088
     
     $lnorm_lnorm.pmix
-    [1] 0.283985
+    [1] 0.2839849
     
     $lnorm_lnorm.sdlog1
     [1] 0.5545454
@@ -145,7 +145,7 @@
     [1] 0.1772362
     
     $lnorm.meanlog
-    [1] 2.561645
+    [1] 2.561646
     
     $lnorm.sdlog
     [1] 1.24154
@@ -154,13 +154,13 @@
     [1] 0.02962678
     
     $lnorm_lnorm.meanlog1
-    [1] 0.9495395
+    [1] 0.9495396
     
     $lnorm_lnorm.meanlog2
     [1] 3.201088
     
     $lnorm_lnorm.pmix
-    [1] 0.283985
+    [1] 0.2839849
     
     $lnorm_lnorm.sdlog1
     [1] 0.5545454

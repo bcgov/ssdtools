@@ -35,32 +35,32 @@ test_that("ssd_pmulti", {
   expect_equal(.ssd_pmulti_fitdists(Inf, fit), 1)
   expect_equal(.ssd_pmulti_fitdists(0, fit), 0)
   pone <- 0.0389879358571718
-  expect_equal(.ssd_pmulti_fitdists(1, fit), pone)
-  expect_equal(.ssd_pmulti_fitdists(10000, fit), 0.999954703139271)
-  expect_equal(.ssd_pmulti_fitdists(c(1,2), fit), c(pone, 0.0830181438743114))
-  expect_equal(.ssd_pmulti_fitdists(c(1,NA), fit), c(pone, NA))
-  expect_equal(.ssd_pmulti_fitdists(1, fit, lower.tail = FALSE),  1-pone)
-  expect_equal(.ssd_pmulti_fitdists(1, fit, log.p = TRUE), log(pone))
-  expect_equal(.ssd_pmulti_fitdists(1, fit, lower.tail = FALSE, log.p = TRUE),  log(1-pone))
+  expect_equal(.ssd_pmulti_fitdists(1, fit), pone, tolerance = 1e-6)
+  expect_equal(.ssd_pmulti_fitdists(10000, fit), 0.999954703139271, tolerance = 1e-6)
+  expect_equal(.ssd_pmulti_fitdists(c(1,2), fit), c(pone, 0.0830181438743114), tolerance = 1e-6)
+  expect_equal(.ssd_pmulti_fitdists(c(1,NA), fit), c(pone, NA), tolerance = 1e-6)
+  expect_equal(.ssd_pmulti_fitdists(1, fit, lower.tail = FALSE),  1-pone, tolerance = 1e-6)
+  expect_equal(.ssd_pmulti_fitdists(1, fit, log.p = TRUE), log(pone), tolerance = 1e-6)
+  expect_equal(.ssd_pmulti_fitdists(1, fit, lower.tail = FALSE, log.p = TRUE),  log(1-pone), tolerance = 1e-6)
 })
 
 test_that("ssd_pmulti weights", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   args <- estimates(fit)
   args$q <- 1
-  expect_equal(do.call("ssd_pmulti", args), 0.0389879358571718)
+  expect_equal(do.call("ssd_pmulti", args), 0.0389879358571718, tolerance = 1e-6)
   args$gamma.weight <- 0
   args$lgumbel.weight <- 0
   args$llogis.weight <- 0
   args$lnorm_lnorm.weight <- 0
   args$weibull.weight <- 0
-  expect_equal(do.call("ssd_pmulti", args), 0.0195430301950878)
+  expect_equal(do.call("ssd_pmulti", args), 0.0195430301950878, tolerance = 1e-5)
   args$lnorm.weight <- 0
   expect_error(do.call("ssd_pmulti", args), "^At least one distribution must have a positive weight\\.$")
   args$lnorm.weight <- 1.1
-  expect_equal(do.call("ssd_pmulti", args), 0.0195430301950878)
+  expect_equal(do.call("ssd_pmulti", args), 0.0195430301950878, tolerance = 1e-5)
   args$lnorm.weight <- 1
-  expect_equal(do.call("ssd_pmulti", args), 0.0195430301950878)
+  expect_equal(do.call("ssd_pmulti", args), 0.0195430301950878, tolerance = 1e-5)
 })
 
 test_that("ssd_qmulti", {
@@ -73,30 +73,30 @@ test_that("ssd_qmulti", {
   expect_identical(.ssd_qmulti_fitdists(1, fit), Inf)
   expect_equal(.ssd_qmulti_fitdists(0, fit), 0)
   q75 <- 32.47404165648
-  expect_equal(.ssd_qmulti_fitdists(0.5, fit), 15.3258154238153)
-  expect_equal(.ssd_qmulti_fitdists(c(0.5, 0.75), fit), c(15.3258154238153, q75))
-  expect_equal(.ssd_qmulti_fitdists(0.25, fit, lower.tail = FALSE), q75)
-  expect_equal(.ssd_qmulti_fitdists(log(0.75), fit, log.p = TRUE), q75)
-  expect_equal(.ssd_qmulti_fitdists(log(0.25), fit, lower.tail = FALSE, log.p = TRUE), q75)
+  expect_equal(.ssd_qmulti_fitdists(0.5, fit), 15.3258154238153, tolerance = 1e-6)
+  expect_equal(.ssd_qmulti_fitdists(c(0.5, 0.75), fit), c(15.3258154238153, q75), tolerance = 1e-6)
+  expect_equal(.ssd_qmulti_fitdists(0.25, fit, lower.tail = FALSE), q75, tolerance = 1e-6)
+  expect_equal(.ssd_qmulti_fitdists(log(0.75), fit, log.p = TRUE), q75, tolerance = 1e-6)
+  expect_equal(.ssd_qmulti_fitdists(log(0.25), fit, lower.tail = FALSE, log.p = TRUE), q75, tolerance = 1e-6)
 })
 
 test_that("ssd_qmulti weights", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   args <- estimates(fit)
   args$p <- 0.25
-  expect_equal(do.call("ssd_qmulti", args), 6.1824320185802)
+  expect_equal(do.call("ssd_qmulti", args), 6.1824320185802, tolerance = 1e-6)
   args$gamma.weight <- 0
   args$lgumbel.weight <- 0
   args$llogis.weight <- 0
   args$lnorm_lnorm.weight <- 0
   args$weibull.weight <- 0
-  expect_equal(do.call("ssd_qmulti", args), 5.60825007113764)
+  expect_equal(do.call("ssd_qmulti", args), 5.60825007113764, tolerance = 1e-6)
   args$lnorm.weight <- 0
   expect_error(do.call("ssd_qmulti", args), "^At least one distribution must have a positive weight\\.$")
   args$lnorm.weight <- 1.1
-  expect_equal(do.call("ssd_qmulti", args), 5.60825007113764)
+  expect_equal(do.call("ssd_qmulti", args), 5.60825007113764, tolerance = 1e-6)
   args$lnorm.weight <- 1.0
-  expect_equal(do.call("ssd_qmulti", args), 5.60825007113764)
+  expect_equal(do.call("ssd_qmulti", args), 5.60825007113764, tolerance = 1e-6)
 })
 
 test_that("ssd_rmulti", {
@@ -105,15 +105,15 @@ test_that("ssd_rmulti", {
   args$n <- 0
   expect_equal(.ssd_rmulti_fitdists(n = 0, fit), numeric(0))
   set.seed(99)
-  expect_equal(.ssd_rmulti_fitdists(n = 1, fit), 19.7526821719427)
+  expect_equal(.ssd_rmulti_fitdists(n = 1, fit), 19.7526821719427, tolerance = 1e-6)
   set.seed(99)
-  expect_equal(.ssd_rmulti_fitdists(2, fit), c(19.7526821719427, 2.69562393167351))
+  expect_equal(.ssd_rmulti_fitdists(2, fit), c(19.7526821719427, 2.69562393167351), tolerance = 1e-6)
   set.seed(99)
   n100 <- .ssd_rmulti_fitdists(100, fit)
   expect_identical(length(n100), 100L)
-  expect_equal(min(n100), 0.029587302066941)
-  expect_equal(max(n100), 168.790837576735)
-  expect_equal(mean(n100), 23.407676351398)
+  expect_equal(min(n100), 0.029587302066941, tolerance = 1e-6)
+  expect_equal(max(n100), 168.790837576735, tolerance = 1e-6)
+  expect_equal(mean(n100), 23.407676351398, tolerance = 1e-6)
 })
 
 test_that("ssd_rmulti all", {

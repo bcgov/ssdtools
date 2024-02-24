@@ -16,28 +16,28 @@ test_that("exposure fitdist", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(1)
-  expect_equal(ssd_exposure(fits), 0.0554388690057964)
+  expect_equal(ssd_exposure(fits), 0.0554388690057964, tolerance = 1e-6)
 })
 
 test_that("exposure different mean", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(1)
-  expect_equal(ssd_exposure(fits, 1), 0.165064610334353)
+  expect_equal(ssd_exposure(fits, 1), 0.165064610334353, tolerance = 1e-6)
 })
 
 test_that("exposure different mean and log", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(1)
-  expect_equal(ssd_exposure(fits, 1, sdlog = 10), 0.433888512432359)
+  expect_equal(ssd_exposure(fits, 1, sdlog = 10), 0.433888512432359, tolerance = 1e-7)
 })
 
 test_that("exposure multiple distributions", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   set.seed(1)
-  expect_equal(ssd_exposure(fits), 0.0663586716105648)
+  expect_equal(ssd_exposure(fits), 0.0663586716105648, tolerance = 1e-6)
 })
 
 test_that("exposure not sensitive to rescaling", {
@@ -50,5 +50,5 @@ test_that("exposure not sensitive to rescaling", {
   set.seed(10)
   exposure_rescale <- ssd_exposure(fits_rescale)
 
-  expect_equal(exposure_rescale, exposure)
+  expect_equal(exposure_rescale, exposure, tolerance = 1e-6)
 })

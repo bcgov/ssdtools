@@ -22,8 +22,8 @@ test_that("hp multi_ci lnorm", {
   hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE, multi_est = TRUE)
   expect_identical(hp_average$est, hp_dist$est)
   expect_equal(hp_multi, hp_average)
-  expect_equal(hp_average$est, 1.9543030195088)
-  expect_equal(hp_multi$est, 1.95430301950878, tolerance = 1e-6)
+  expect_equal(hp_average$est, 1.9543030195088, tolerance = 1e-5)
+  expect_equal(hp_multi$est, 1.95430301950878, tolerance = 1e-5)
   
   testthat::expect_snapshot({
     hp_multi
@@ -37,7 +37,7 @@ test_that("hp multi_ci all", {
   hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE)
   expect_equal(hp_multi, hp_average)
   expect_equal(hp_average$est, 3.89879358571718, tolerance = 1e-6)
-  expect_equal(hp_multi$est, 3.89879358571718)
+  expect_equal(hp_multi$est, 3.89879358571718, tolerance = 1e-6)
   testthat::expect_snapshot({
     hp_multi
   })

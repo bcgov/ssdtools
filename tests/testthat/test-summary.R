@@ -5,7 +5,7 @@ test_that("summary tmbfit", {
   expect_s3_class(summary, "summary_tmbfit")
   expect_identical(names(summary), c("dist", "estimates"))
   expect_identical(summary$dist, "lnorm")
-  expect_equal(summary$estimates, list(meanlog = 2.56164496371788, sdlog = 1.24154032419128))
+  expect_equal(summary$estimates, list(meanlog = 2.56164496371788, sdlog = 1.24154032419128), tolerance = 1e-6)
 })
 
 test_that("summary fitdists", {

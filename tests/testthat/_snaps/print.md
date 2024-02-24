@@ -1,14 +1,14 @@
 # print tmbfit
 
     Distribution 'lnorm'
-      meanlog 2.56164
+      meanlog 2.56165
       sdlog 1.24154
     
 
 # print fitdists
 
     Distribution 'lnorm'
-      meanlog 2.56164
+      meanlog 2.56165
       sdlog 1.24154
     
     Parameters estimated from 28 rows of data.
@@ -44,11 +44,11 @@
       scalelog 0.740426
     
     Distribution 'lnorm'
-      meanlog 2.56164
+      meanlog 2.56165
       sdlog 1.24154
     
     Distribution 'lnorm_lnorm'
-      meanlog1 0.949539
+      meanlog1 0.94954
       meanlog2 3.20109
       pmix 0.283985
       sdlog1 0.554545

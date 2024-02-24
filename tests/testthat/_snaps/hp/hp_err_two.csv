@@ -1,3 +1,3 @@
 dist,conc,est,se,lcl,ucl,wt,method,nboot,samples
-lnorm,1,0.937534,0.949488,0.0469125,3.30871,2.15098e-11,parametric,100,numeric(0)
+lnorm,1,0.937512,0.949472,0.0469106,3.30865,2.15098e-11,parametric,100,numeric(0)
 llogis_llogis,1,8.71503,NA,NA,NA,1,parametric,100,numeric(0)

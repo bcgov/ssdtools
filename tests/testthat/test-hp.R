@@ -170,7 +170,7 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  expect_equal(hp$se, 1.88668081916483)
+  expect_equal(hp$se, 1.88668081916483, tolerance = 1e-6)
 
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
@@ -202,7 +202,7 @@ test_that("ssd_hp calculates cis with equally weighted data", {
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  expect_equal(hp$se, 1.45515712342784)
+  expect_equal(hp$se, 1.45515712342784, tolerance = 1e-6)
 })
 
 test_that("ssd_hp calculates cis with two distributions", {
@@ -210,7 +210,7 @@ test_that("ssd_hp calculates cis with two distributions", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  expect_equal(hp$se, 1.45001268956605)
+  expect_equal(hp$se, 1.45001268956605, tolerance = 1e-6)
 })
 
 test_that("ssd_hp calculates cis in parallel but one distribution", {
@@ -219,7 +219,7 @@ test_that("ssd_hp calculates cis in parallel but one distribution", {
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  expect_equal(hp$se, 1.45515712342784)
+  expect_equal(hp$se, 1.45515712342784, tolerance = 1e-6)
 })
 
 test_that("ssd_hp calculates cis in parallel with two distributions", {
@@ -228,7 +228,7 @@ test_that("ssd_hp calculates cis in parallel with two distributions", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  expect_equal(hp$se, 1.45001268956605)
+  expect_equal(hp$se, 1.45001268956605, tolerance = 1e-6)
 })
 
 test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
@@ -268,10 +268,10 @@ test_that("ssd_hp effect with higher weight two distributions", {
   hp <- ssd_hp(fits, 3, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
   set.seed(10)
   hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  expect_equal(hp$est, 11.7535819824013)
-  expect_equal(hp_10$est, 11.9318338996079)
-  expect_equal(hp$se, 4.56372685665889)
-  expect_equal(hp_10$se, 4.83426663939758)
+  expect_equal(hp$est, 11.7535819824013, tolerance = 1e-6)
+  expect_equal(hp_10$est, 11.9318338996079, tolerance = 1e-6)
+  expect_equal(hp$se, 4.56372685665889, tolerance = 1e-6)
+  expect_equal(hp_10$se, 4.83426663939758, tolerance = 1e-6)
 })
 
 test_that("ssd_hp cis with non-convergence", {

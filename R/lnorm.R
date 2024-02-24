@@ -63,8 +63,8 @@ slnorm <- function(data, pars = NULL) {
   x <- mean_weighted_values(data)
 
   list(
-    meanlog = mean(log(x), na.rm = TRUE),
-    log_sdlog = log(sd(log(x), na.rm = TRUE))
+    meanlog = mean(log(x), na.rm = TRUE) * (1 + 1e-6),
+    log_sdlog = log(sd(log(x), na.rm = TRUE)) * (1 - 1e-6) 
   )
 }
 
