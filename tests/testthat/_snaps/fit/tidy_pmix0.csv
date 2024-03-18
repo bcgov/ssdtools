@@ -1,9 +1,9 @@
 dist,term,est,se
-lnorm_lnorm,meanlog1,-1.29506,0.210537
-lnorm_lnorm,meanlog2,2.01558,0.0865601
-lnorm_lnorm,pmix,0.0194319,0.0140217
-lnorm_lnorm,sdlog1,0.288809,0.146555
-lnorm_lnorm,sdlog2,0.853774,0.0622857
+lnorm_lnorm,meanlog1,-1.2951,0.210577
+lnorm_lnorm,meanlog2,2.01559,0.0865585
+lnorm_lnorm,pmix,0.01942,0.0140177
+lnorm_lnorm,sdlog1,0.288861,0.146609
+lnorm_lnorm,sdlog2,0.853757,0.0622839
 llogis_llogis,locationlog1,1.50158,0.774845
 llogis_llogis,locationlog2,2.26711,0.453497
 llogis_llogis,pmix,0.399466,0.68281

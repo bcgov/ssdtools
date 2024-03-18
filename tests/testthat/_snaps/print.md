@@ -24,7 +24,7 @@
 # summary fitdists with inconsistently censored data
 
     Distribution 'lnorm'
-      meanlog 2.54949
+      meanlog 2.54946
       sdlog 1.26141
     
     Parameters estimated from 28 rows of inconsistently censored data.
@@ -48,11 +48,11 @@
       sdlog 1.24154
     
     Distribution 'lnorm_lnorm'
-      meanlog1 0.94954
-      meanlog2 3.20109
-      pmix 0.283985
-      sdlog1 0.554545
-      sdlog2 0.768816
+      meanlog1 0.949475
+      meanlog2 3.2011
+      pmix 0.283994
+      sdlog1 0.554531
+      sdlog2 0.768824
     
     Distribution 'weibull'
       scale 23.514

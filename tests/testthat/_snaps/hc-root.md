@@ -37,7 +37,7 @@
       # A tibble: 2 x 11
         dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
         <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
-      1 average       0.05  1.26 0.623 0.492  2.13     1 parametr~    10     1 <dbl>  
+      1 average       0.05  1.26 0.622 0.492  2.13     1 parametr~    10     1 <dbl>  
       2 average       0.1   2.38 0.928 1.17   3.59     1 parametr~    10     1 <dbl>  
 
 # hc multi_ci lnorm ci

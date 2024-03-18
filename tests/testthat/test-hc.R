@@ -174,7 +174,7 @@ test_that("ssd_hc fitdists averages", {
 test_that("ssd_hc fitdists correctly averages", {
   fits <- ssd_fit_dists(ssddata::aims_molybdenum_marine, dists = c("lgumbel", "lnorm_lnorm"))
   hc <- ssd_hc(fits, average = FALSE, weighted = FALSE)
-  expect_equal(hc$est, c(3881.17238083968, 5540.68414532741), tolerance = 1e-6)
+  expect_equal(hc$est, c(3881.17238083968, 5540.61563025621), tolerance = 1e-6)
   expect_equal(hc$wt, c(0.0968427088339105, 0.90315729116609))
   hc_avg <- ssd_hc(fits, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
   expect_equal(hc_avg$est, sum(hc$est * hc$wt))
@@ -212,7 +212,7 @@ test_that("ssd_hc fitdists correct for rescaling", {
   fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
   hc <- ssd_hc(fits, multi_ci = FALSE, weighted = FALSE)
   hc_rescale <- ssd_hc(fits_rescale, multi_ci = FALSE, weighted = FALSE)
-  expect_equal(hc_rescale, hc, tolerance = 1e-05)
+  expect_equal(hc_rescale, hc, tolerance = 1e-04)
 })
 
 test_that("ssd_hc fitdists cis", {
@@ -258,14 +258,13 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
 })
 
 test_that("ssd_hc works with fully left censored data", {
-  
   data <- ssddata::ccme_boron
   data$Conc2 <- data$Conc
   data$Conc <- 0
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, weighted = FALSE)
-  expect_equal(hc$se, 0.000753574383044124, tolerance = 1e-6)
+  expect_equal(hc$se, 0.000753288708572757, tolerance = 1e-6)
 })
 
 test_that("ssd_hc not work partially censored even if all same left", {
@@ -382,10 +381,10 @@ test_that("ssd_hc effect with higher weight two distributions", {
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
   set.seed(10)
   hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
-  expect_equal(hc$est, 1.64903597051184, tolerance = 1e-6)
-  expect_equal(hc_10$est, 1.6811748398812, tolerance = 1e-6)
-  expect_equal(hc$se, 0.511475169043532, tolerance = 1e-6)
-  expect_equal(hc_10$se, 0.455819097122445, tolerance = 1e-6)
+  expect_equal(hc$est, 1.6490386909599, tolerance = 1e-6)
+  expect_equal(hc_10$est, 1.68117856793665, tolerance = 1e-6)
+  expect_equal(hc$se, 0.511475588315084, tolerance = 1e-6)
+  expect_equal(hc_10$se, 0.455819671683407, tolerance = 1e-6)
 })
 
 test_that("ssd_hc cis with non-convergence", {

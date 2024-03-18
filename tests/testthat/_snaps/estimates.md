@@ -31,28 +31,28 @@
     [1] 0.1772362
     
     $lnorm.meanlog
-    [1] 2.561646
+    [1] 2.561645
     
     $lnorm.sdlog
-    [1] 1.24154
+    [1] 1.241539
     
     $lnorm_lnorm.weight
     [1] 0.02962678
     
     $lnorm_lnorm.meanlog1
-    [1] 0.9495396
+    [1] 0.9494753
     
     $lnorm_lnorm.meanlog2
-    [1] 3.201088
+    [1] 3.201102
     
     $lnorm_lnorm.pmix
-    [1] 0.2839849
+    [1] 0.2839944
     
     $lnorm_lnorm.sdlog1
-    [1] 0.5545454
+    [1] 0.5545305
     
     $lnorm_lnorm.sdlog2
-    [1] 0.7688162
+    [1] 0.7688241
     
     $weibull.weight
     [1] 0.3574716
@@ -145,28 +145,28 @@
     [1] 0.1772362
     
     $lnorm.meanlog
-    [1] 2.561646
+    [1] 2.561645
     
     $lnorm.sdlog
-    [1] 1.24154
+    [1] 1.241539
     
     $lnorm_lnorm.weight
     [1] 0.02962678
     
     $lnorm_lnorm.meanlog1
-    [1] 0.9495396
+    [1] 0.9494753
     
     $lnorm_lnorm.meanlog2
-    [1] 3.201088
+    [1] 3.201102
     
     $lnorm_lnorm.pmix
-    [1] 0.2839849
+    [1] 0.2839944
     
     $lnorm_lnorm.sdlog1
-    [1] 0.5545454
+    [1] 0.5545305
     
     $lnorm_lnorm.sdlog2
-    [1] 0.7688162
+    [1] 0.7688241
     
     $weibull.weight
     [1] 0.3574716

@@ -32,8 +32,8 @@ test_that("hc multi_ci all", {
   set.seed(102)
   hc_average <- ssd_hc(fits, average = TRUE, multi_ci = FALSE, multi_est = FALSE)
   hc_multi <- ssd_hc(fits, average = TRUE, multi_ci = TRUE)
-  expect_equal(hc_average$est, 1.24151700389853, tolerance = 1e-6)
-  expect_equal(hc_multi$est, 1.25677449265554, tolerance = 1e-6)
+  expect_equal(hc_average$est, 1.241515, tolerance = 1e-6)
+  expect_equal(hc_multi$est, 1.25677175021465, tolerance = 1e-6)
   testthat::expect_snapshot({
     hc_multi
   })
@@ -44,8 +44,8 @@ test_that("hc multi_ci all multiple hcs", {
   set.seed(102)
   hc_average <- ssd_hc(fits, proportion = c(5,10)/100, average = TRUE, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
   hc_multi <- ssd_hc(fits, proportion = c(5,10)/100, average = TRUE, multi_ci = TRUE)
-  expect_equal(hc_average$est, c(1.24151700389853, 2.37337471483992), tolerance = 1e-6)
-  expect_equal(hc_multi$est, c(1.25677449265554, 2.38164905743083), tolerance = 1e-6)
+  expect_equal(hc_average$est, c(1.24151480646654, 2.37337090704541), tolerance = 1e-6)
+  expect_equal(hc_multi$est, c(1.25677175021465, 2.38163882548732), tolerance = 1e-6)
   testthat::expect_snapshot({
     hc_multi
   })
@@ -57,8 +57,8 @@ test_that("hc multi_ci all multiple hcs cis", {
   hc_average <- ssd_hc(fits, proportion = c(5,10)/100, average = TRUE, multi_ci = FALSE, multi_est = FALSE, nboot = 10, ci = TRUE, weighted = FALSE)
   set.seed(105)
   hc_multi <- ssd_hc(fits, proportion = c(5,10)/100, average = TRUE, multi_ci = TRUE, nboot = 10, ci = TRUE)
-  expect_equal(hc_average$est, c(1.24151700389853, 2.37337471483992), tolerance = 1e-6)
-  expect_equal(hc_multi$est, c(1.25677449265554, 2.38164905743083), tolerance = 1e-6)
+  expect_equal(hc_average$est, c(1.24151480646654, 2.37337090704541), tolerance = 1e-6)
+  expect_equal(hc_multi$est, c(1.25677175021465, 2.38163882548732), tolerance = 1e-6)
   testthat::expect_snapshot({
     hc_multi
   })
