@@ -38,13 +38,13 @@ ssd_pal <- function() {
 #' ssd_plot(ssddata::ccme_boron, boron_pred, shape = "Group") +
 #'   scale_colour_ssd()
 scale_colour_ssd <- function(...) {
-  discrete_scale("colour", "ssd", ssd_pal(), ...)
+  discrete_scale("colour", palette = ssd_pal(), ...)
 }
 
 #' @describeIn scale_colour_ssd Discrete color-blind scale for SSD Plots
 #' @export
 scale_color_ssd <- function(...) {
-  discrete_scale("colour", "ssd", ssd_pal(), ...)
+  discrete_scale("colour", palette = ssd_pal(), ...)
 }
 
 #' Species Sensitivity Data Points
