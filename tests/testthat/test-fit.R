@@ -265,13 +265,13 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   expect_warning(
     expect_warning(
       ssd_fit_dists(data, right = "Other", rescale = FALSE),
-      "^Distribution 'lnorm_lnorm' failed to compute standard errors \\(try rescaling data\\)\\.$"
+      "^Distribution 'lnorm_lnorm' failed to fit \\(try rescaling data\\): one or more parameters at boundary\\.$"
     ),
     "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$"
   )
 
   set.seed(102)
-  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm", "lnorm_lnorm"), rescale = FALSE, computable = FALSE)
+  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm", "lnorm_lnorm"), rescale = FALSE, computable = FALSE, at_boundary_ok = TRUE)
 
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")

@@ -82,14 +82,14 @@ slnorm_lnorm <- function(data, pars = NULL) {
   s2 <- slnorm(data.frame(left = x2, right = x2, weight = 1))
   names(s1) <- paste0(names(s1), "1")
   names(s2) <- paste0(names(s2), "2")
-  logit_pmix <- list(logit_pmix = 0)
-  c(s1, s2, logit_pmix)
+  pmix <- list(pmix = 0.5)
+  c(s1, s2, pmix)
 }
 
 blnorm_lnorm <- function(x, min_pmix, ...) {
   list(
-    lower = list(meanlog1 = -Inf, log_sdlog1 = -Inf, meanlog2 = -Inf, log_sdlog2 = -Inf, logit_pmix = qlogis(min_pmix)),
-    upper = list(meanlog1 = Inf, log_sdlog1 = Inf, meanlog2 = Inf, log_sdlog2 = Inf, logit_pmix = qlogis(1 - min_pmix))
+    lower = list(meanlog1 = -Inf, log_sdlog1 = -Inf, meanlog2 = -Inf, log_sdlog2 = -Inf, pmix = min_pmix),
+    upper = list(meanlog1 = Inf, log_sdlog1 = Inf, meanlog2 = Inf, log_sdlog2 = Inf, pmix = 1 - min_pmix)
   )
 }
 

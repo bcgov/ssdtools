@@ -16,7 +16,7 @@
       # A tibble: 1 x 11
         dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
         <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
-      1 average       0.05  1.26 0.760 0.457  3.25     1 parametr~   100  0.85 <dbl>  
+      1 average       0.05  1.26 0.757 0.410  3.25     1 parametr~   100  0.86 <dbl>  
 
 # hp multi_ci lnorm default 100
 
@@ -26,7 +26,7 @@
       # A tibble: 1 x 11
         dist     conc   est    se   lcl   ucl    wt method     nboot pboot samples    
         <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>>  
-      1 average     1  3.90  2.31 0.738  9.57     1 parametric   100     1 <dbl [600]>
+      1 average     1  3.90  2.32 0.738  9.57     1 parametric   100     1 <dbl [600]>
 
 ---
 
@@ -36,5 +36,5 @@
       # A tibble: 1 x 11
         dist     conc   est    se   lcl   ucl    wt method     nboot pboot samples   
         <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>> 
-      1 average     1  3.90  2.48 0.346  9.22     1 parametric   100  0.85 <dbl [85]>
+      1 average     1  3.90  2.50 0.343  9.20     1 parametric   100  0.86 <dbl [86]>
 

@@ -34,10 +34,10 @@ test_that("ssd_pmulti", {
   expect_identical(.ssd_pmulti_fitdists(-Inf, fit), 0)
   expect_equal(.ssd_pmulti_fitdists(Inf, fit), 1)
   expect_equal(.ssd_pmulti_fitdists(0, fit), 0)
-  pone <- 0.0389879837498468
+  pone <- 0.0389879276872944
   expect_equal(.ssd_pmulti_fitdists(1, fit), pone, tolerance = 1e-6)
   expect_equal(.ssd_pmulti_fitdists(10000, fit), 0.999954703139271, tolerance = 1e-6)
-  expect_equal(.ssd_pmulti_fitdists(c(1,2), fit), c(pone, 0.0830185080182789), tolerance = 1e-6)
+  expect_equal(.ssd_pmulti_fitdists(c(1,2), fit), c(pone, 0.0830184001863268), tolerance = 1e-6)
   expect_equal(.ssd_pmulti_fitdists(c(1,NA), fit), c(pone, NA), tolerance = 1e-6)
   expect_equal(.ssd_pmulti_fitdists(1, fit, lower.tail = FALSE),  1-pone, tolerance = 1e-6)
   expect_equal(.ssd_pmulti_fitdists(1, fit, log.p = TRUE), log(pone), tolerance = 1e-6)
@@ -48,7 +48,7 @@ test_that("ssd_pmulti weights", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   args <- estimates(fit)
   args$q <- 1
-  expect_equal(do.call("ssd_pmulti", args), 0.0389879837498468, tolerance = 1e-6)
+  expect_equal(do.call("ssd_pmulti", args), 0.0389879276872944, tolerance = 1e-6)
   args$gamma.weight <- 0
   args$lgumbel.weight <- 0
   args$llogis.weight <- 0
@@ -107,7 +107,7 @@ test_that("ssd_rmulti", {
   set.seed(99)
   expect_equal(.ssd_rmulti_fitdists(n = 1, fit), 19.7526821719427, tolerance = 1e-6)
   set.seed(99)
-  expect_equal(.ssd_rmulti_fitdists(2, fit), c(19.7526821719427, 2.69562393167351), tolerance = 1e-6)
+  expect_equal(.ssd_rmulti_fitdists(2, fit), c(19.7526668357838, 2.69561402072501), tolerance = 1e-6)
   set.seed(99)
   n100 <- .ssd_rmulti_fitdists(100, fit)
   expect_identical(length(n100), 100L)

@@ -48,10 +48,10 @@
       sdlog 1.24154
     
     Distribution 'lnorm_lnorm'
-      meanlog1 0.949475
-      meanlog2 3.2011
+      meanlog1 0.949487
+      meanlog2 3.20108
       pmix 0.283994
-      sdlog1 0.554531
+      sdlog1 0.554514
       sdlog2 0.768824
     
     Distribution 'weibull'
