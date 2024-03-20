@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9011
+# ssdtools 1.0.6.9012
 
 ## Additions
 
@@ -33,6 +33,8 @@
 - Exported `dists = ssd_dists_bcanz()` argument to `ssd_fit_bcanz()` to allow other packages to modify.
 - Check `...` unused where appropriate.
 - `ssd_plot_cdf()` now includes average with other distributions if `average = NA` (@poissonconsulting, #351).
+- switched from `logit_pmix` to `pmix` in mixture distributions
+- `lnorm` no longer initializes optimization with maximum likelihood estimates
 
 ## Fixes
 
