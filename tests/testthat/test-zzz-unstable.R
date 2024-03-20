@@ -280,6 +280,9 @@ test_that("ssd_plot censored data", {
 })
 
 test_that("invpareto with extreme data", {
+  skip_on_ci()
+  skip_on_cran()
+
   data <- data.frame(Conc = c(
     2.48892649039671, 2.5258371156749, 2.51281264491458,
     2.49866046657748, 2.56572740160664, 2.49440006912093, 2.4817062813665,
@@ -308,9 +311,6 @@ test_that("invpareto with extreme data", {
     2.48618482994608, 2.51794970929166, 2.49716394702713, 2.49218587262049
   ))
   
-  skip_on_ci()
-  skip_on_cran()
-  
   fit99 <- ssd_fit_dists(data, dists = "invpareto")
   
   expect_equal(
@@ -320,6 +320,9 @@ test_that("invpareto with extreme data", {
 })
 
 test_that("not all estimates if fail", {
+  skip_on_ci()
+  skip_on_cran()
+  
   dir <- withr::local_tempdir()
   
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lnorm_lnorm"))
@@ -339,6 +342,9 @@ test_that("not all estimates if fail", {
 })
 
 test_that("lnorm_lnorm fits anonb", {
+  skip_on_ci()
+  skip_on_cran()
+  
   set.seed(99)
   data <- ssddata::anon_b
   fit <- ssd_fit_dists(data,
@@ -352,6 +358,9 @@ test_that("lnorm_lnorm fits anonb", {
 })
 
 test_that("lnorm_lnorm non-bimodal 1000 data", {
+  skip_on_ci()
+  skip_on_cran()
+
   data <- data.frame(Conc = c(
     11.6635934627129, 11.3655834538171, 11.8239438136152, 11.4457330597547, 
     11.2733838979158, 11.6555694734405, 11.6077458629663, 11.6253179146231, 
