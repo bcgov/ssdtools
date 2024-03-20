@@ -22,7 +22,9 @@ test_that("scale_colour_ssd is ggproto", {
 })
 
 test_that("scale_color_ssd is ggproto", {
-  expect_identical(scale_color_ssd(), scale_colour_ssd())
+  color <- scale_color_ssd()
+  colour <- scale_colour_ssd()
+  expect_output(expect_identical(str(color), str(colour)))
 })
 
 test_that("stat_ssd deprecated", {

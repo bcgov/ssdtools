@@ -31,12 +31,10 @@ Type ll_lnorm_lnorm(objective_function<Type>* obj) // normal with parameters mu 
   PARAMETER( log_sdlog1    );
   PARAMETER( meanlog2 ); // second distribution
   PARAMETER( log_sdlog2    );
-  PARAMETER( logit_pmix         );  // mixing proportion
+  PARAMETER( pmix         );  // mixing proportion
 
   Type sdlog1 = exp(log_sdlog1);    // Convert to the [0,Inf] range
   Type sdlog2 = exp(log_sdlog2);
-  Type pmix      = 1/(1+exp(-logit_pmix));// Convert to the [0,1] range
-  
   
   Type nll = 0;  // negative log-likelihood
   int n_data    = left.size(); // number of data values
@@ -68,8 +66,6 @@ Type ll_lnorm_lnorm(objective_function<Type>* obj) // normal with parameters mu 
   REPORT  (sdlog1);
   ADREPORT(sdlog2);
   REPORT  (sdlog2);
-  ADREPORT(pmix);
-  REPORT  (pmix);
   
   return nll;
 }

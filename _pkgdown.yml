@@ -85,7 +85,7 @@ reference:
   - '`ssd_plot_data`'
   - '`ssdtools-ggproto`'
 - title: Miscellaneous
-  desc: Miscellaneous functions
+  desc: Miscellaneous functions and data
   contents:
   - '`comma_signif`'
   - '`licensing_md`'
@@ -93,6 +93,7 @@ reference:
   - '`ssd_data`'
   - '`ssd_is_censored`'
   - '`ssd_sort_data`'
+  - '`pearson1000`'
 - title: Deprecated
   desc: Deprecated functions which will become defunct in future versions
   contents:

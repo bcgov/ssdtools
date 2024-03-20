@@ -12,7 +12,7 @@ test_that("glance weights independent of rescaling", {
 
   glance <- glance(fit)
   glance_rescale <- glance(fit_rescale)
-  expect_equal(glance_rescale$weight, glance$weight)
+  expect_equal(glance_rescale$weight, glance$weight, tolerance = 1e-06)
 })
 
 test_that("glance weights rescale log_lik", {

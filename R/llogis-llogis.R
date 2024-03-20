@@ -81,14 +81,14 @@ sllogis_llogis <- function(data, pars = NULL) {
   s2 <- sllogis(data.frame(left = x2, right = x2, weight = 1))
   names(s1) <- paste0(names(s1), "1")
   names(s2) <- paste0(names(s2), "2")
-  logit_pmix <- list(logit_pmix = 0)
-  c(s1, s2, logit_pmix)
+  pmix <- list(pmix = 0.5)
+  c(s1, s2, pmix)
 }
 
 bllogis_llogis <- function(x, min_pmix, ...) {
   list(
-    lower = list(locationlog1 = -Inf, log_scalelog1 = -Inf, locationlog2 = -Inf, log_scalelog2 = -Inf, logit_pmix = qlogis(min_pmix)),
-    upper = list(locationlog1 = Inf, log_scalelog1 = Inf, locationlog2 = Inf, log_scalelog2 = Inf, logit_pmix = qlogis(1 - min_pmix))
+    lower = list(locationlog1 = -Inf, log_scalelog1 = -Inf, locationlog2 = -Inf, log_scalelog2 = -Inf, pmix = min_pmix),
+    upper = list(locationlog1 = Inf, log_scalelog1 = Inf, locationlog2 = Inf, log_scalelog2 = Inf, pmix = 1 - min_pmix)
   )
 }
 

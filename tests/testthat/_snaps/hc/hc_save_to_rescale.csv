@@ -1,2 +1,2 @@
 dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-average,0.05,1.68117,0.515645,1.13096,2.11007,1,parametric,3,1,"c(`000000001_multi` = 1.10678, `000000002_multi` = 1.59039, `000000003_multi` = 2.13742)"
+average,0.05,1.68135,0.515647,1.13118,2.11029,1,parametric,3,1,"c(`000000001_multi` = 1.107, `000000002_multi` = 1.59058, `000000003_multi` = 2.13764)"

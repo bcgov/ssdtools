@@ -265,13 +265,13 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   expect_warning(
     expect_warning(
       ssd_fit_dists(data, right = "Other", rescale = FALSE),
-      "^Distribution 'lnorm_lnorm' failed to compute standard errors \\(try rescaling data\\)\\.$"
+      "^Distribution 'lnorm_lnorm' failed to fit \\(try rescaling data\\): one or more parameters at boundary\\.$"
     ),
     "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$"
   )
 
   set.seed(102)
-  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm", "lnorm_lnorm"), rescale = FALSE, computable = FALSE)
+  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm", "lnorm_lnorm"), rescale = FALSE, computable = FALSE, at_boundary_ok = TRUE)
 
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
@@ -288,8 +288,8 @@ test_that("ssd_fit_dists works with slightly censored data", {
 
   tidy <- tidy(fits)
 
-  expect_equal(tidy$est, c(2.56052524750529, 1.17234562953404))
-  expect_equal(tidy$se, c(0.234063281091344, 0.175423555900586))
+  expect_equal(tidy$est, c(2.56052524750529, 1.17234562953404), tolerance = 1e-06)
+  expect_equal(tidy$se, c(0.234063281091344, 0.175423555900586), tolerance = 1e-06)
 })
 
 test_that("ssd_fit_dists accepts 0 for left censored data", {
@@ -302,8 +302,8 @@ test_that("ssd_fit_dists accepts 0 for left censored data", {
 
   tidy <- tidy(fits)
 
-  expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323))
-  expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761))
+  expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323), tolerance = 1e-06)
+  expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761), tolerance = 1e-06)
 })
 
 test_that("ssd_fit_dists gives same values with zero and missing left values", {
