@@ -173,6 +173,19 @@ test_that("sgompertz with initial values still unstable!", {
   expect_error(ssdtools:::sgompertz(sdata))
 })
 
+test_that("sgompertz cant even fit some values", {
+  skip_on_ci() # as incredibly unstable
+  skip_on_cran()
+  x <- c(160, 800, 840, 1500, 8200, 12800, 22000, 38000, 60900, 63000)
+  expect_snapshot({
+    ssdtools:::sgompertz(data.frame(left = x, right = x))
+    ssdtools:::sgompertz(data.frame(left = rep(x,10), right = rep(x,10)))
+    ssdtools:::sgompertz(data.frame(left = x, right = x), pars = c(12800, 1))
+    ssdtools:::sgompertz(data.frame(left = x / 12800, right = x / 12800))
+  },
+  error = TRUE)
+})
+
 test_that("ssd_hc cis with error", {
   skip_on_ci()
   skip_on_cran()
