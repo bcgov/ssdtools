@@ -114,3 +114,26 @@
       [1] -669.3178
       
 
+# sgompertz cant even fit some values
+
+    Code
+      ssdtools:::sgompertz(data.frame(left = x, right = x))
+    Condition
+      Error in `lm.fit()`:
+      ! NA/NaN/Inf in 'y'
+    Code
+      ssdtools:::sgompertz(data.frame(left = rep(x, 10), right = rep(x, 10)))
+    Condition
+      Error in `lm.fit()`:
+      ! NA/NaN/Inf in 'y'
+    Code
+      ssdtools:::sgompertz(data.frame(left = x, right = x), pars = c(12800, 1))
+    Condition
+      Error in `checkwz()`:
+      ! NAs found in the working weights variable 'wz'
+    Code
+      ssdtools:::sgompertz(data.frame(left = x / 12800, right = x / 12800))
+    Condition
+      Error in `checkwz()`:
+      ! Some elements in the working weights variable 'wz' are not finite
+
