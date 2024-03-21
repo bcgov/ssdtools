@@ -123,16 +123,12 @@ test_that("sgompertz completely unstable!", {
     1.00725113964435, 7.04244885481452, 1.32336941144339, 1.51533791792454
   )
   data <- data.frame(left = x, right = x, weight = 1)
-  set.seed(94)
-  expect_equal(ssdtools:::sgompertz(data),
-               list(log_location = -0.8097519, log_shape = -301.126),
-               tolerance = 1e-06
-  )
-  set.seed(99)
-  expect_equal(
-    ssdtools:::sgompertz(data),
-    list(log_location = -0.96528645818605, log_shape = -2.6047441710778)
-  )
+  expect_snapshot({
+    set.seed(94)
+    ssdtools:::sgompertz(data)
+    set.seed(99)
+    ssdtools:::sgompertz(data)
+  })
   set.seed(100)
   expect_error(ssdtools:::sgompertz(data))
 })
@@ -161,33 +157,20 @@ test_that("sgompertz with initial values still unstable!", {
   sdata <- data.frame(left = x, right = x, weight = 1)
   pars <- estimates(fit$gompertz)
   
-  set.seed(94)
-  expect_equal(ssdtools:::sgompertz(sdata),
-               list(log_location = -0.809751972284548, log_shape = -301.126),
-               tolerance = 1e-06
-  )
-  set.seed(94)
-  expect_equal(
-    ssdtools:::sgompertz(sdata, pars),
-    list(log_location = 4.06999915669631, log_shape = -2936.08880499417)
-  )
-  set.seed(99)
-  expect_equal(
-    ssdtools:::sgompertz(sdata),
-    list(log_location = -0.96528645818605, log_shape = -2.6047441710778)
-  )
-  set.seed(99)
-  expect_equal(
-    ssdtools:::sgompertz(sdata, pars),
-    list(log_location = 3.42665325399873, log_shape = -102.775579919568)
-  )
+  expect_snapshot({
+    set.seed(94)
+    ssdtools:::sgompertz(sdata)
+    set.seed(94)
+    ssdtools:::sgompertz(sdata, pars)
+    set.seed(99)
+    ssdtools:::sgompertz(sdata)
+    set.seed(99)
+    ssdtools:::sgompertz(sdata, pars)
+    set.seed(100)
+    ssdtools:::sgompertz(sdata, pars)
+  })
   set.seed(100)
   expect_error(ssdtools:::sgompertz(sdata))
-  set.seed(100)
-  expect_equal(
-    ssdtools:::sgompertz(sdata, pars),
-    list(log_location = 3.80715953030506, log_shape = -658.432910074053)
-  )
 })
 
 test_that("ssd_hc cis with error", {
@@ -282,7 +265,7 @@ test_that("ssd_plot censored data", {
 test_that("invpareto with extreme data", {
   skip_on_ci()
   skip_on_cran()
-
+  
   data <- data.frame(Conc = c(
     2.48892649039671, 2.5258371156749, 2.51281264491458,
     2.49866046657748, 2.56572740160664, 2.49440006912093, 2.4817062813665,
@@ -360,7 +343,7 @@ test_that("lnorm_lnorm fits anonb", {
 test_that("lnorm_lnorm non-bimodal 1000 data", {
   skip_on_ci()
   skip_on_cran()
-
+  
   data <- data.frame(Conc = c(
     11.6635934627129, 11.3655834538171, 11.8239438136152, 11.4457330597547, 
     11.2733838979158, 11.6555694734405, 11.6077458629663, 11.6253179146231, 

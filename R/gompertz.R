@@ -112,8 +112,8 @@ sgompertz <- function(data, pars = NULL) {
   data <- data.frame(x = x)
   fit <- suppressWarnings(vglm(x ~ 1, gompertz, coefstart = pars, data = data))
   list(
-    log_location = unname(coef(fit)[2]),
-    log_shape = unname(coef(fit)[1])
+    log_location = unname(coef(fit)[2]) * (1 + 1e-3),
+    log_shape = unname(coef(fit)[1]) * (1 - 1e-3)
   )
 }
 
