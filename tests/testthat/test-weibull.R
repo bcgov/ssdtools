@@ -35,6 +35,13 @@ test_that("weibull works anona", {
   expect_snapshot_data(tidy, "tidy_anona")
 })
 
+test_that("weibull works anon_e", {
+  set.seed(99)
+  fit <- ssd_fit_dists(ssddata::anon_e, dists = c("weibull", "lgumbel"))
+  tidy <- tidy(fit)
+  expect_snapshot_data(tidy, "tidy_anon_e")
+})
+
 test_that("weibull bootstraps anona", {
   set.seed(99)
   fit <- ssd_fit_dists(ssddata::anon_a, dists = "weibull")
