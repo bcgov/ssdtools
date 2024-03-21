@@ -4,7 +4,7 @@
 \alias{ssd_hc_bcanz}
 \title{BCANZ Hazard Concentrations}
 \usage{
-ssd_hc_bcanz(x, nboot = 10000, delta = 10, min_pboot = 0.9)
+ssd_hc_bcanz(x, nboot = 10000, delta = 10, min_pboot = 0.95)
 }
 \arguments{
 \item{x}{The object.}

@@ -68,7 +68,7 @@ ssd_fit_bcanz <- function(data, left = "Conc", dists = ssd_dists_bcanz()) {
 #' @examples
 #' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 #' ssd_hc_bcanz(fits, nboot = 100)
-ssd_hc_bcanz <- function(x, nboot = 10000, delta = 10, min_pboot = 0.9) {
+ssd_hc_bcanz <- function(x, nboot = 10000, delta = 10, min_pboot = 0.95) {
   ssd_hc(x,
     proportion = c(0.01, 0.05, 0.1, 0.2),
     ci = TRUE,
