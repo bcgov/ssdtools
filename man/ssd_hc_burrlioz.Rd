@@ -12,7 +12,7 @@ ssd_hc_burrlioz(
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  min_pboot = 0.99,
+  min_pboot = 0.95,
   parametric = FALSE
 )
 }
