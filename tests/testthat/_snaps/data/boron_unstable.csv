@@ -1,6 +1,6 @@
 dist,term,est,se
-gompertz,location,0.0394098,0.0119839
-gompertz,shape,0.00260152,0.00997852
+gompertz,location,0.0394073,0.0119791
+gompertz,shape,0.00260432,0.00997275
 invpareto,scale,75.2608,0
 invpareto,shape,0.568403,0.107418
 llogis_llogis,locationlog1,0.896677,0.379787
