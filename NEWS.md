@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9012
+# ssdtools 1.0.6.9013
 
 ## Additions
 
@@ -23,18 +23,20 @@
 
 ## Modifications
 
+- Changed to `min_pboot = 0.95` for all functions.
 - `estimates.fitdists()` now includes weights in returned parameters as well as an
 `all_estimates = FALSE` argument to allow parameter values for all implemented distributions to be included.
 - `ssd_fit_bcanz()`, `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` no longer rescale data by default.
 - `rescale = TRUE` now divides by the geometric mean of the minimum and maximum positive finite values as opposed to dividing by the geometric mean of the maximum finite value.
 - Replaced column percentage between 0 and 100 with proportion between 0 and 1 in output of `ssd_hc()`
-- Changed `delta = 7` to `delta = 9.21` to exclude models with AIC weight < 0.01.
+- Changed `delta = 7` to `delta = 9.21` to weight of included models no more than 0.01.
 - seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions). 
 - Exported `dists = ssd_dists_bcanz()` argument to `ssd_fit_bcanz()` to allow other packages to modify.
 - Check `...` unused where appropriate.
 - `ssd_plot_cdf()` now includes average with other distributions if `average = NA` (@poissonconsulting, #351).
 - switched from `logit_pmix` to `pmix` in mixture distributions
 - `lnorm` no longer initializes optimization with maximum likelihood estimates
+- Offset starting values for `gompertz` distribution.
 
 ## Fixes
 
