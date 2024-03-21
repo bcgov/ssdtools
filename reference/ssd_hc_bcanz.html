@@ -72,7 +72,7 @@ This function can take several minutes to run with required 10,000 iterations.</
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_hc_bcanz</span><span class="op">(</span><span class="va">x</span>, nboot <span class="op">=</span> <span class="fl">10000</span>, delta <span class="op">=</span> <span class="fl">10</span>, min_pboot <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_hc_bcanz</span><span class="op">(</span><span class="va">x</span>, nboot <span class="op">=</span> <span class="fl">10000</span>, delta <span class="op">=</span> <span class="fl">10</span>, min_pboot <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -113,7 +113,7 @@ to report the confidence intervals.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_bcanz.html">ssd_fit_bcanz</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ssd_hc_bcanz</span><span class="op">(</span><span class="va">fits</span>, nboot <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>One or more pboot values less than 0.9 (decrease min_pboot with caution).</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>One or more pboot values less than 0.95 (decrease min_pboot with caution).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span>
