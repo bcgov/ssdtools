@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9013</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,9 +57,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.6.9012" id="ssdtools-1069012">ssdtools 1.0.6.9012<a class="anchor" aria-label="anchor" href="#ssdtools-1069012"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.6.9013" id="ssdtools-1069013">ssdtools 1.0.6.9013<a class="anchor" aria-label="anchor" href="#ssdtools-1069013"></a></h2>
 <div class="section level3">
-<h3 id="additions-1-0-6-9012">Additions<a class="anchor" aria-label="anchor" href="#additions-1-0-6-9012"></a></h3>
+<h3 id="additions-1-0-6-9013">Additions<a class="anchor" aria-label="anchor" href="#additions-1-0-6-9013"></a></h3>
 <ul><li>Added David Fox and Rebecca Fisher as co-authors.</li>
 <li>Added to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code>
 <ul><li>
@@ -78,8 +78,9 @@
 <li>Added <code><a href="../reference/ssd_hp.html">ssd_hp.fitburrlioz()</a></code> function to get hazard proportion.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="modifications-1-0-6-9012">Modifications<a class="anchor" aria-label="anchor" href="#modifications-1-0-6-9012"></a></h3>
-<ul><li>
+<h3 id="modifications-1-0-6-9013">Modifications<a class="anchor" aria-label="anchor" href="#modifications-1-0-6-9013"></a></h3>
+<ul><li>Changed to <code>min_pboot = 0.95</code> for all functions.</li>
+<li>
 <code><a href="../reference/estimates.fitdists.html">estimates.fitdists()</a></code> now includes weights in returned parameters as well as an <code>all_estimates = FALSE</code> argument to allow parameter values for all implemented distributions to be included.</li>
 <li>
 <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code>, <code><a href="../reference/ssd_wqg_bc.html">ssd_wqg_bc()</a></code> and <code><a href="../reference/ssd_wqg_burrlioz.html">ssd_wqg_burrlioz()</a></code> no longer rescale data by default.</li>
@@ -87,7 +88,7 @@
 <code>rescale = TRUE</code> now divides by the geometric mean of the minimum and maximum positive finite values as opposed to dividing by the geometric mean of the maximum finite value.</li>
 <li>Replaced column percentage between 0 and 100 with proportion between 0 and 1 in output of <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>
 </li>
-<li>Changed <code>delta = 7</code> to <code>delta = 9.21</code> to exclude models with AIC weight &lt; 0.01.</li>
+<li>Changed <code>delta = 7</code> to <code>delta = 9.21</code> to weight of included models no more than 0.01.</li>
 <li>seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions).</li>
 <li>Exported <code>dists = ssd_dists_bcanz()</code> argument to <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> to allow other packages to modify.</li>
 <li>Check <code>...</code> unused where appropriate.</li>
@@ -96,16 +97,17 @@
 <li>switched from <code>logit_pmix</code> to <code>pmix</code> in mixture distributions</li>
 <li>
 <code>lnorm</code> no longer initializes optimization with maximum likelihood estimates</li>
+<li>Offset starting values for <code>gompertz</code> distribution.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="fixes-1-0-6-9012">Fixes<a class="anchor" aria-label="anchor" href="#fixes-1-0-6-9012"></a></h3>
+<h3 id="fixes-1-0-6-9013">Fixes<a class="anchor" aria-label="anchor" href="#fixes-1-0-6-9013"></a></h3>
 <ul><li>
 <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now include <code>parametric</code> column.</li>
 <li>
 <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now includes <code>wt</code> column</li>
 </ul></div>
 <div class="section level3">
-<h3 id="deprecation-1-0-6-9012">Deprecation<a class="anchor" aria-label="anchor" href="#deprecation-1-0-6-9012"></a></h3>
+<h3 id="deprecation-1-0-6-9013">Deprecation<a class="anchor" aria-label="anchor" href="#deprecation-1-0-6-9013"></a></h3>
 <ul><li>Soft-deprecated argument <code>percent = 5</code> for <code>proportion = 0.05</code> for <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</li>
 <li>
 <code><a href="../reference/is_censored.html">is_censored()</a></code>, <code><a href="../reference/ssd_plot_cf.html">ssd_plot_cf()</a></code> and <code>comma_signif(...)</code> now warn deprecated unconditionally.</li>
