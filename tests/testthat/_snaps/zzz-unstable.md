@@ -137,3 +137,51 @@
       Error in `checkwz()`:
       ! Some elements in the working weights variable 'wz' are not finite
 
+# sgompertz cant even initialize lots of values
+
+    Code
+      set.seed(99)
+      ssdtools:::sgompertz(data.frame(left = x, right = x))
+    Condition
+      Error in `checkwz()`:
+      ! Some elements in the working weights variable 'wz' are not finite
+    Code
+      set.seed(99)
+      ssd_fit_dists(data.frame(Conc = x), dists = "gompertz")
+    Condition
+      Warning:
+      Distribution 'gompertz' failed to fit (try rescaling data): Error in checkwz(wz, M = M, trace = trace, wzepsilon = control$wzepsilon) : 
+        Some elements in the working weights variable 'wz' are not finite
+      .
+      Error:
+      ! All distributions failed to fit.
+    Code
+      set.seed(100)
+      ssdtools:::sgompertz(data.frame(left = x, right = x))
+    Output
+      $log_location
+      [1] -0.9424722
+      
+      $log_shape
+      [1] -128.6335
+      
+    Code
+      set.seed(100)
+      ssd_fit_dists(data.frame(Conc = x), dists = "gompertz")
+    Condition
+      Warning:
+      Distribution 'gompertz' failed to fit (try rescaling data): Error in optim(par, fn, gr, method = method, lower = lower, upper = upper,  : 
+        L-BFGS-B needs finite values of 'fn'
+      .
+      Error:
+      ! All distributions failed to fit.
+    Code
+      set.seed(131)
+      ssd_fit_dists(data.frame(Conc = x), dists = "gompertz")
+    Output
+      Distribution 'gompertz'
+        location 0.0256225
+        shape 3.35465e-14
+      
+      Parameters estimated from 1000 rows of data.
+
