@@ -1,0 +1,6 @@
+dist,term,est,se
+lnorm_lnorm,meanlog1,2.4389,0.00991542
+lnorm_lnorm,meanlog2,2.44216,7.12844e-4
+lnorm_lnorm,pmix,0.0353095,0.0648397
+lnorm_lnorm,sdlog1,0.0376977,0.0159742
+lnorm_lnorm,sdlog2,0.018095,0.00101426
