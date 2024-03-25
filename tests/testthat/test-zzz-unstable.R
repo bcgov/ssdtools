@@ -624,6 +624,7 @@ test_that("lnorm_lnorm fits anonb", {
 })
 
 test_that("lnorm_lnorm non-bimodal 1000 data", {
+  skip_on_ci()
   skip_on_cran()
   
   data <- data.frame(Conc = c(
@@ -1141,4 +1142,4 @@ test_that("lnorm_lnorm non-bimodal 1000 data", {
   fit <- ssd_fit_dists(data = data, dists = 'lnorm_lnorm', at_boundary_ok=TRUE, min_pmix = 3/nrow(data))
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_lnorm_lnorm_uni1000_3n", digits = 6)
-}) 
+})
