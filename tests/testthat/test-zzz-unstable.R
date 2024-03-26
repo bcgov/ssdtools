@@ -1139,6 +1139,7 @@ test_that("lnorm_lnorm non-bimodal 1000 data", {
     11.702545464272, 11.7485923966285, 11.8047860348248, 11.4448541804893, 
     11.4705435703147, 11.716935272144, 10.9954029806633, 11.1256601239288
   ))
+  set.seed(100)
   fit <- ssd_fit_dists(data = data, dists = 'lnorm_lnorm', at_boundary_ok=TRUE, min_pmix = 3/nrow(data))
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_lnorm_lnorm_uni1000_3n", digits = 6)
