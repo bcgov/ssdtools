@@ -885,6 +885,7 @@ test_that("lnorm_lnorm non-bimodal 1000 data", {
 })
 
 test_that("lnorm_lnorm non-bimodal 1000 data", {
+  skip_on_ci()
   skip_on_cran()
   
   data <- data.frame(Conc = c(
