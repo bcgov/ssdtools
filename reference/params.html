@@ -64,7 +64,11 @@
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>all</dt>
+    <dl><dt>add_x</dt>
+<dd><p>The value to add to the label x values (before multiplying by <code>shift_x</code>).</p></dd>
+
+
+<dt>all</dt>
 <dd><p>A flag specifying whether to also return transformed parameters.</p></dd>
 
 
@@ -372,7 +376,7 @@ remove them with a warning.</p></dd>
 
 
 <dt>shift_x</dt>
-<dd><p>The value to multiply the label x values by.</p></dd>
+<dd><p>The value to multiply the label x values by (after adding <code>add_x</code>).</p></dd>
 
 
 <dt>silent</dt>
@@ -381,6 +385,10 @@ remove them with a warning.</p></dd>
 
 <dt>size</dt>
 <dd><p>A number for the size of the labels.</p></dd>
+
+
+<dt>trans</dt>
+<dd><p>A string which transformation to use by default <code>"log10"</code>.</p></dd>
 
 
 <dt>weight</dt>
