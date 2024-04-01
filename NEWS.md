@@ -1,5 +1,8 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 1.0.6.9014
+
+
 # ssdtools 1.0.6.9013
 
 ## Additions
@@ -20,6 +23,7 @@
 - Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
 - Added `ssd_exx()` functions to get default parameter estimates for distributions.
 - Added `ssd_hp.fitburrlioz()` function to get hazard proportion.
+- Add `trans = "log10"` and `add_x = 0` arguments to `ssd_plot()` and `ssd_plot_data()`.
 
 ## Modifications
 
