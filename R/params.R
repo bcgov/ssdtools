@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 #' Parameter Descriptions for ssdtools Functions
+#' @param add_x The value to add to the label x values (before multiplying by `shift_x`).
 #' @param all A flag specifying whether to also return transformed parameters.
 #' @param all_dists A flag specifying whether all the named distributions must fit successfully.
 #' @param at_boundary_ok A flag specifying whether a model with one or more
@@ -96,9 +97,10 @@
 #' @param shape	shape parameter.
 #' @param shape1 shape1 parameter.
 #' @param shape2 shape2 parameter.
-#' @param shift_x The value to multiply the label x values by.
+#' @param shift_x The value to multiply the label x values by (after adding `add_x`).
 #' @param silent A flag indicating whether fits should fail silently.
 #' @param size A number for the size of the labels.
+#' @param trans A string which transformation to use by default `"log10"`.
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
 #' @param weighted A flag which specifies whether to use the original model weights (as opposed to re-estimating for each bootstrap sample) unless `multi_ci = FALSE` in which case it specifies
 #' whether to take bootstrap samples from each distribution proportional to 

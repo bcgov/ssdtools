@@ -21,7 +21,9 @@ ssd_plot(
   ribbon = FALSE,
   hc = 0.05,
   shift_x = 3,
+  add_x = 0,
   bounds = c(left = 1, right = 1),
+  trans = "log10",
   xbreaks = waiver()
 )
 }
@@ -56,11 +58,15 @@ ssd_plot(
 
 \item{hc}{A value between 0 and 1 indicating the proportion hazard concentration (or NULL).}
 
-\item{shift_x}{The value to multiply the label x values by.}
+\item{shift_x}{The value to multiply the label x values by (after adding \code{add_x}).}
+
+\item{add_x}{The value to add to the label x values (before multiplying by \code{shift_x}).}
 
 \item{bounds}{A named non-negative numeric vector of the left and right bounds for
 uncensored missing (0 and Inf) data in terms of the orders of magnitude
 relative to the extremes for non-missing values.}
+
+\item{trans}{A string which transformation to use by default \code{"log10"}.}
 
 \item{xbreaks}{The x-axis breaks as one of:
 \itemize{

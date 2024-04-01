@@ -4,6 +4,8 @@
 \alias{params}
 \title{Parameter Descriptions for ssdtools Functions}
 \arguments{
+\item{add_x}{The value to add to the label x values (before multiplying by \code{shift_x}).}
+
 \item{all}{A flag specifying whether to also return transformed parameters.}
 
 \item{all_dists}{A flag specifying whether all the named distributions must fit successfully.}
@@ -161,11 +163,13 @@ remove them with a warning.}
 
 \item{shape2}{shape2 parameter.}
 
-\item{shift_x}{The value to multiply the label x values by.}
+\item{shift_x}{The value to multiply the label x values by (after adding \code{add_x}).}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 
 \item{size}{A number for the size of the labels.}
+
+\item{trans}{A string which transformation to use by default \code{"log10"}.}
 
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
