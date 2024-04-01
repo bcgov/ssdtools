@@ -15,16 +15,16 @@
 #' @export
 ggplot2::waiver
 
-plot_coord_scale <- function(data, xlab, ylab, xbreaks = waiver()) {
+plot_coord_scale <- function(data, xlab, ylab, trans, xbreaks = waiver()) {
   chk_string(xlab)
   chk_string(ylab)
 
-  if (is.waive(xbreaks)) {
+  if (is.waive(xbreaks) & trans == "log10") {
     xbreaks <- trans_breaks("log10", function(x) 10^x)
   }
-
+  
   list(
-    coord_trans(x = "log10"),
+    coord_trans(x = trans),
     scale_x_continuous(xlab,
       breaks = xbreaks,
       labels = comma_signif
@@ -50,9 +50,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Species Affected",
-                     ci = TRUE, ribbon = FALSE, hc = 0.05, shift_x = 3,
+                     ci = TRUE, ribbon = FALSE, hc = 0.05, 
+                     shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
-                     xbreaks = waiver()) {
+                     trans = "log10", xbreaks = waiver()) {
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
   chk_null_or(label, vld = vld_string)
   chk_null_or(shape, vld = vld_string)
@@ -68,7 +69,9 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
 
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
-
+  chk_number(add_x)
+  chk_range(add_x, c(-1000, 1000))
+  
   chk_flag(ci)
   chk_flag(ribbon)
 
@@ -78,6 +81,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_subset(hc, pred$proportion)
   }
   .chk_bounds(bounds)
+  chk_string(trans)
 
   data <- process_data(data, left, right, weight = NULL)
   data <- bound_data(data, bounds)
@@ -149,10 +153,11 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       ), stat = "identity")
   }
 
-  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, xbreaks = xbreaks)
+  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab,
+                              trans = trans, xbreaks = xbreaks)
 
   if (!is.null(label)) {
-    data$right <- data$right * shift_x
+    data$right <- (data$right + add_x) * shift_x
     gp <- gp + geom_text(
       data = data, aes(x = !!sym("right"), y = !!sym("y"), label = !!label),
       hjust = 0, size = size, fontface = "italic"

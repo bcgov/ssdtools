@@ -17,5 +17,6 @@ test_that("ssd_plot_data ccme_boron", {
 })
 
 test_that("ssd_plot_data ccme_boron color", {
-  expect_snapshot_plot(ssd_plot_data(ssddata::ccme_boron, color = "Group", label = "Species"), "ccme_boron2")
+  expect_snapshot_plot(ssd_plot_data(ssddata::ccme_boron, color = "Group", label = "Species", trans = "identity",
+                                     shift_x = 1, add_x = 10), "ccme_boron2")
 })
