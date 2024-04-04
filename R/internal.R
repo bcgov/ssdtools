@@ -12,6 +12,10 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+identical_parameters <- function(x){
+  length(unique(npars(x))) < 2
+}
+
 probs <- function(level) {
   probs <- (1 - level) / 2
   c(probs, 1 - probs)

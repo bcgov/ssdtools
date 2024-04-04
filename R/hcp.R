@@ -335,6 +335,9 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
       hc = hc, save_to = save_to, samples = samples, fun = fun)
     return(hcp)
   }
+  if(.is_censored(censoring) & !identical_parameters(x)) {
+     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
+  }
   
   if(multi_ci) {
     hcp <- .ssd_hcp_multi(
