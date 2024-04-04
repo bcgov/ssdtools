@@ -16,32 +16,50 @@ test_that("gof", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   gof_statistic <- ssd_gof(fits)
-  expect_s3_class(gof_statistic, "tbl")
   expect_snapshot_data(gof_statistic, "gof_statistic")
 
   gof <- ssd_gof(fits, pvalue = TRUE)
-  expect_s3_class(gof, "tbl")
   expect_snapshot_data(gof, "gof")
 })
 
-test_that("gof mixture", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "llogis_llogis")
-
-  gof_statistic <- ssd_gof(fits)
-  expect_s3_class(gof_statistic, "tbl")
-  expect_snapshot_data(gof_statistic, "gof_statistic_mixture")
-
-  gof <- ssd_gof(fits, pvalue = TRUE)
-  expect_s3_class(gof, "tbl")
-  expect_snapshot_data(gof, "gof_pvalue_mixture")
-})
-
-test_that("gof censored", {
-  skip("error with gof with censored data")
+test_that("gof censored same parameters2", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
   data$Conc[c(3,6,8)] <- NA
-  fit <- ssd_fit_dists(data, right = "right") 
-  gof <- ssd_gof(fit)
-  expect_snapshot_data(gof, "censored")
+
+  fits <- ssd_fit_dists(data, right = "right", dists = c("llogis", "lnorm"))
+  
+  gof_statistic <- ssd_gof(fits)
+  expect_snapshot_data(gof_statistic, "gof_statistic2")
+  
+  gof <- ssd_gof(fits, pvalue = TRUE)
+  expect_snapshot_data(gof, "gof2")
+})
+
+test_that("gof censored same parameters5", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  
+  fits <- ssd_fit_dists(data, right = "right", dists = c("llogis_llogis", "lnorm_lnorm"))
+  
+  gof_statistic <- ssd_gof(fits)
+  expect_snapshot_data(gof_statistic, "gof_statistic5")
+  
+  gof <- ssd_gof(fits, pvalue = TRUE)
+  expect_snapshot_data(gof, "gof5")
+})
+
+test_that("gof censored same diff parameters", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  
+  fits <- ssd_fit_dists(data, right = "right", dists = c("llogis", "lnorm_lnorm"))
+  
+  gof_statistic <- ssd_gof(fits)
+  expect_snapshot_data(gof_statistic, "gof_statisticn")
+  
+  gof <- ssd_gof(fits, pvalue = TRUE)
+  expect_snapshot_data(gof, "gofn")
 })
