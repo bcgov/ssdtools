@@ -71,7 +71,7 @@ ssd_gof.fitdists <- function(x, pvalue = FALSE, ...) {
   glance <- glance(x)
   glance$bic <- -2 * glance$log_lik + log(glance$nobs) * glance$npars
 
-  if (glance$nobs[1] < 8) {
+  if (is.na(glance$nobs[1] || glance$nobs[1] < 8)) {
     glance$ad <- NA_real_
     glance$ks <- NA_real_
     glance$cvm <- NA_real_

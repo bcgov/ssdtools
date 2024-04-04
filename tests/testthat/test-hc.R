@@ -13,12 +13,41 @@
 #    limitations under the License.
 
 test_that("hc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, samples = TRUE)
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
+})
+
+test_that("hc estimate with censored data same number of 2parameters", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  fit <- ssd_fit_dists(data, right = "right", dists = c("lnorm", "llogis"))
+  hc <- ssd_hc(fit)
+  expect_snapshot_data(hc, "censored_2ll")
+})
+
+test_that("hc estimate with censored data same number of 5parameters", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  fit <- ssd_fit_dists(data, right = "right", dists = c("lnorm_lnorm", "llogis_llogis"))
+  hc <- ssd_hc(fit)
+  expect_snapshot_data(hc, "censored_5ll")
+})
+
+test_that("hc not estimate with different number of parameters", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  fit <- ssd_fit_dists(data, right = "right", dists = c("lnorm", "lnorm_lnorm"))
+  hc_each <- ssd_hc(fit, average = FALSE)
+  expect_snapshot_data(hc_each, "censored_each")
+  expect_warning(hc_ave <- ssd_hc(fit), 
+                 "Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
+  expect_snapshot_data(hc_ave, "censored_ave")
 })
 
 test_that("ssd_hc list must be named", {
