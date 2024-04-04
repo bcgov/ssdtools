@@ -13,12 +13,21 @@
 #    limitations under the License.
 
 test_that("hc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, samples = TRUE)
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
+})
+
+test_that("gof censored", {
+  skip("not getting fit with censored data")
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  fit <- ssd_fit_dists(data, right = "right")
+  hc <- ssd_hc(fit)
+  expect_snapshot_data(hc, "censored")
 })
 
 test_that("ssd_hc list must be named", {

@@ -35,3 +35,13 @@ test_that("gof mixture", {
   expect_s3_class(gof, "tbl")
   expect_snapshot_data(gof, "gof_pvalue_mixture")
 })
+
+test_that("gof censored", {
+  skip("error with gof with censored data")
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  fit <- ssd_fit_dists(data, right = "right") 
+  gof <- ssd_gof(fit)
+  expect_snapshot_data(gof, "censored")
+})
