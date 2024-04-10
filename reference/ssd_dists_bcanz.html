@@ -66,9 +66,15 @@ adopted by BC, Canada, Australia and New Zealand for official guidelines.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_dists_bcanz</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_dists_bcanz</span><span class="op">(</span>npars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2L</span>, <span class="fl">5L</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>npars</dt>
+<dd><p>A whole numeric vector specifying which distributions to include based on the number of parameters.</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
@@ -85,6 +91,8 @@ adopted by BC, Canada, Australia and New Zealand for official guidelines.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ssd_dists_bcanz</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gamma"       "lgumbel"     "llogis"      "lnorm"       "lnorm_lnorm"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] "weibull"    </span>
+<span class="r-in"><span><span class="fu">ssd_dists_bcanz</span><span class="op">(</span>npars <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gamma"   "lgumbel" "llogis"  "lnorm"   "weibull"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

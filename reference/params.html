@@ -85,6 +85,10 @@ parameters at the boundary should be considered to have converged (default = FAL
 <dd><p>A flag specifying whether to provide model averaged values as opposed to a value for each distribution.</p></dd>
 
 
+<dt>bcanz</dt>
+<dd><p>A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.</p></dd>
+
+
 <dt>breaks</dt>
 <dd><p>A character vector</p></dd>
 
@@ -228,6 +232,10 @@ to report the confidence intervals.</p></dd>
 
 <dt>min_pmix</dt>
 <dd><p>A number between 0 and 0.5 specifying the minimum proportion in mixture models.</p></dd>
+
+
+<dt>npars</dt>
+<dd><p>A whole numeric vector specifying which distributions to include based on the number of parameters.</p></dd>
 
 
 <dt>all_estimates</dt>
@@ -385,6 +393,10 @@ remove them with a warning.</p></dd>
 
 <dt>size</dt>
 <dd><p>A number for the size of the labels.</p></dd>
+
+
+<dt>tails</dt>
+<dd><p>A flag or NULL specifying whether to only include distributions with both tails.</p></dd>
 
 
 <dt>trans</dt>
