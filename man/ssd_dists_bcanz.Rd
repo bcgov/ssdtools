@@ -4,7 +4,10 @@
 \alias{ssd_dists_bcanz}
 \title{BCANZ Distributions}
 \usage{
-ssd_dists_bcanz()
+ssd_dists_bcanz(npars = c(2L, 5L))
+}
+\arguments{
+\item{npars}{A whole numeric vector specifying which distributions to include based on the number of parameters.}
 }
 \value{
 A unique, sorted character vector of the distributions.
@@ -15,6 +18,7 @@ adopted by BC, Canada, Australia and New Zealand for official guidelines.
 }
 \examples{
 ssd_dists_bcanz()
+ssd_dists_bcanz(npars = 2)
 }
 \seealso{
 \code{\link[=ssd_dists]{ssd_dists()}}

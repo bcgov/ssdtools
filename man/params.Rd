@@ -15,6 +15,8 @@ parameters at the boundary should be considered to have converged (default = FAL
 
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
+\item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
+
 \item{breaks}{A character vector}
 
 \item{bounds}{A named non-negative numeric vector of the left and right bounds for
@@ -89,6 +91,8 @@ proportion of bootstrap samples that must successfully fit (return a likelihood)
 to report the confidence intervals.}
 
 \item{min_pmix}{A number between 0 and 0.5 specifying the minimum proportion in mixture models.}
+
+\item{npars}{A whole numeric vector specifying which distributions to include based on the number of parameters.}
 
 \item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
@@ -168,6 +172,8 @@ remove them with a warning.}
 \item{silent}{A flag indicating whether fits should fail silently.}
 
 \item{size}{A number for the size of the labels.}
+
+\item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
 
 \item{trans}{A string which transformation to use by default \code{"log10"}.}
 

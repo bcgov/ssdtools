@@ -39,5 +39,6 @@ test_that("dists 5 pars", {
 })
 
 test_that("dists bcanz", {
-  expect_identical(ssd_dists(bcanz = TRUE), ssd_dists_bcanz())
+  expect_identical(ssd_dists_bcanz(), ssd_dists(bcanz = TRUE))
+  expect_identical(ssd_dists_bcanz(npars = 2L), c("gamma", "lgumbel", "llogis", "lnorm", "weibull"))
 })
