@@ -19,6 +19,7 @@
 #' @param at_boundary_ok A flag specifying whether a model with one or more
 #' parameters at the boundary should be considered to have converged (default = FALSE).
 #' @param average A flag specifying whether to provide model averaged values as opposed to a value for each distribution.
+#' @param bcanz A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines. 
 #' @param breaks A character vector
 #' @param bounds A named non-negative numeric vector of the left and right bounds for
 #' uncensored missing (0 and Inf) data in terms of the orders of magnitude
@@ -59,6 +60,7 @@
 #' proportion of bootstrap samples that must successfully fit (return a likelihood) 
 #' to report the confidence intervals.
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
+#' @param npars A whole numeric vector specifying which distributions to include based on the number of parameters.
 #' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
 #' @param multi_ci A flag specifying whether to treat the distributions as constituting a single distribution which is now the recommended approach (as opposed to taking the mean) when calculating model averaged confidence intervals.
 #' @param multi_est A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.
@@ -100,6 +102,7 @@
 #' @param shift_x The value to multiply the label x values by (after adding `add_x`).
 #' @param silent A flag indicating whether fits should fail silently.
 #' @param size A number for the size of the labels.
+#' @param tails A flag or NULL specifying whether to only include distributions with both tails.
 #' @param trans A string which transformation to use by default `"log10"`.
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
 #' @param weighted A flag which specifies whether to use the original model weights (as opposed to re-estimating for each bootstrap sample) unless `multi_ci = FALSE` in which case it specifies
