@@ -17,9 +17,9 @@ test_that("hp multi_ci lnorm", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hp_dist <- ssd_hp(fits, average = FALSE, multi_ci = FALSE, weighted = FALSE)
-  hp_average <- ssd_hp(fits, average = TRUE, multi_ci = FALSE, multi_est = FALSE, weighted = FALSE)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE, multi_est = TRUE)
+  hp_dist <- ssd_hp(fits, average = FALSE, ci_method = "weighted_arithmetic")
+  hp_average <- ssd_hp(fits, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE)
+  hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "rmulti_fixp", multi_est = TRUE)
   expect_identical(hp_average$est, hp_dist$est)
   expect_equal(hp_multi, hp_average)
   expect_equal(hp_average$est, 1.9543030195088, tolerance = 1e-5)
@@ -34,7 +34,7 @@ test_that("hp multi_ci all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hp_average <- ssd_hp(fits, average = TRUE)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE)
+  hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "rmulti_fixp")
   expect_equal(hp_multi, hp_average)
   expect_equal(hp_average$est, 3.89879276872944, tolerance = 1e-6)
   expect_equal(hp_multi$est, 3.89879276872944, tolerance = 1e-6)
@@ -46,11 +46,11 @@ test_that("hp multi_ci all", {
 test_that("hp multi_ci lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
-  hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, multi_ci = FALSE, weighted = FALSE)
+  hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, ci_method = "weighted_arithmetic")
   set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi_ci = FALSE, multi_est = TRUE, weighted = FALSE)
+  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, ci_method = "weighted_arithmetic", multi_est = TRUE)
   set.seed(102)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE, ci = TRUE, nboot = 100)
+  hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "rmulti_fixp", ci = TRUE, nboot = 100)
   
   testthat::expect_snapshot({
     hp_average

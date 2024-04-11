@@ -62,7 +62,8 @@
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
 #' @param npars A whole numeric vector specifying which distributions to include based on the number of parameters.
 #' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
-#' @param multi_ci A flag specifying whether to treat the distributions as constituting a single distribution which is now the recommended approach (as opposed to taking the mean) when calculating model averaged confidence intervals.
+#' @param ci_method A string specifying which method to use for estimating the bootstrap values. 
+#' Possible values are "rmulti" and "rmulti_fixp" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_bootstrap" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.
 #' @param multi_est A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.
 #' @param na.rm A flag specifying whether to silently remove missing values or 
 #' remove them with a warning.
@@ -105,10 +106,6 @@
 #' @param tails A flag or NULL specifying whether to only include distributions with both tails.
 #' @param trans A string which transformation to use by default `"log10"`.
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
-#' @param weighted A flag which specifies whether to use the original model weights (as opposed to re-estimating for each bootstrap sample) unless `multi_ci = FALSE` in which case it specifies
-#' whether to take bootstrap samples from each distribution proportional to 
-#' its weight versus calculating the weighted arithmetic means of the lower 
-#' and upper confidence limits.
 #' @param x The object.
 #' @param xbreaks The x-axis breaks as one of:
 #'   - `NULL` for no breaks

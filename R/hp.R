@@ -42,8 +42,7 @@ ssd_hp.fitdists <- function(
     nboot = 1000,
     min_pboot = 0.95,
     multi_est = TRUE,
-    multi_ci = TRUE,
-    weighted = TRUE,
+    ci_method = "rmulti_fixp",
     parametric = TRUE, 
     delta = 9.21, 
     samples = FALSE,
@@ -54,7 +53,13 @@ ssd_hp.fitdists <- function(
   
   chk_vector(conc)
   chk_numeric(conc)
+  chk_subset(ci_method, c("weighted_bootstrap", "weighted_arithmetic", "rmulti", "rmulti_fixp"))
+  
   chk_unused(...)
+
+  
+  fix_weights <- ci_method %in% c("weighted_bootstrap", "rmulti_fixp")
+  multi_ci <- ci_method %in% c("rmulti", "rmulti_fixp")
   
   hcp <- ssd_hcp_fitdists(
     x = x, 
@@ -68,11 +73,11 @@ ssd_hp.fitdists <- function(
     min_pboot = min_pboot,
     parametric = parametric, 
     multi_ci = multi_ci, 
+    fix_weights = fix_weights,
     control = control, 
     save_to = save_to, 
     samples = samples, 
-    hc = FALSE,  
-    fix_weights = weighted,
+    hc = FALSE
   )
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp

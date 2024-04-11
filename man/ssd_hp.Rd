@@ -17,8 +17,7 @@ ssd_hp(x, ...)
   nboot = 1000,
   min_pboot = 0.95,
   multi_est = TRUE,
-  multi_ci = TRUE,
-  weighted = TRUE,
+  ci_method = "rmulti_fixp",
   parametric = TRUE,
   delta = 9.21,
   samples = FALSE,
@@ -61,12 +60,8 @@ to report the confidence intervals.}
 
 \item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
 
-\item{multi_ci}{A flag specifying whether to treat the distributions as constituting a single distribution which is now the recommended approach (as opposed to taking the mean) when calculating model averaged confidence intervals.}
-
-\item{weighted}{A flag which specifies whether to use the original model weights (as opposed to re-estimating for each bootstrap sample) unless \code{multi_ci = FALSE} in which case it specifies
-whether to take bootstrap samples from each distribution proportional to
-its weight versus calculating the weighted arithmetic means of the lower
-and upper confidence limits.}
+\item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
+Possible values are "rmulti" and "rmulti_fixp" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_bootstrap" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
 
 \item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 

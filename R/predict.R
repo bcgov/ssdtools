@@ -38,8 +38,7 @@ predict.fitdists <- function(
     nboot = 1000,
     min_pboot = 0.95,
     multi_est = TRUE,
-    multi_ci = TRUE,
-    weighted = TRUE,
+    ci_method = "rmulti_fixp",
     parametric = TRUE, 
     delta = 9.21, 
     control = NULL,
@@ -69,9 +68,7 @@ predict.fitdists <- function(
     average = average, 
     delta = delta, 
     parametric = parametric,
-    multi_ci = multi_ci, 
-    multi_est = multi_est,
-    weighted = weighted, 
+    ci_method = ci_method,
     control = control
   )
 }
