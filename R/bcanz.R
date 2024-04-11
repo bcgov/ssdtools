@@ -78,3 +78,26 @@ ssd_hc_bcanz <- function(x, nboot = 10000, min_pboot = 0.95) {
          min_pboot = min_pboot
   )
 }
+
+#' BCANZ Hazard Proportion
+#'
+#' Gets  proportion of species affected at specified concentration(s)
+#' using settings adopted by BC, Canada, Australia and New Zealand for official guidelines.
+#' This function can take several minutes to run with recommended 10,000 iterations.
+#'
+#' @inheritParams params
+#' @return A tibble of corresponding hazard concentrations.
+#' @seealso [`ssd_hp()`].
+#' @family BCANZ
+#' @export
+#' @examples
+#' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
+#' ssd_hp_bcanz(fits, nboot = 100)
+ssd_hp_bcanz <- function(x, conc = 1, nboot = 10000, min_pboot = 0.95) {
+  ssd_hp(x,
+         conc = conc,
+         ci = TRUE,
+         nboot = nboot,
+         min_pboot = min_pboot
+  )
+}
