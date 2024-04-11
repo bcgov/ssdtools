@@ -22,7 +22,7 @@ A tibble of corresponding hazard concentrations.
 Gets hazard concentrations with confidence intervals that protect
 1, 5, 10 and 20\% of species using settings adopted by
 BC, Canada, Australia and New Zealand for official guidelines.
-This function can take several minutes to run with required 10,000 iterations.
+This function can take several minutes to run with recommended 10,000 iterations.
 }
 \examples{
 fits <- ssd_fit_bcanz(ssddata::ccme_boron)
