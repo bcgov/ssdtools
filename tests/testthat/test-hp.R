@@ -94,7 +94,7 @@ test_that("hp fitdists works with multiple concs", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
-  hp <- ssd_hp(fits, c(2.5, 1))
+  hp <- ssd_hp(fits, c(2.5, 1), ci_method = "rmulti_fixp")
   expect_s3_class(hp, "tbl_df")
   expect_snapshot_data(hp, "hp89")
 })

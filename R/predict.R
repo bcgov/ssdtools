@@ -38,7 +38,7 @@ predict.fitdists <- function(
     nboot = 1000,
     min_pboot = 0.95,
     multi_est = TRUE,
-    ci_method = "rmulti_fixp",
+    ci_method = "weighted_bootstrap",
     parametric = TRUE, 
     delta = 9.21, 
     control = NULL,

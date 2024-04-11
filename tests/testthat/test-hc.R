@@ -517,7 +517,7 @@ test_that("ssd_hc save_to", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
   set.seed(102)
-  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, samples = TRUE)
+  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "rmulti_fixp", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to")
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 
                                       "data_000000003_multi.csv", "estimates_000000000_multi.rds", 
@@ -587,7 +587,7 @@ test_that("ssd_hc save_to rescale", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm", rescale = TRUE)
   set.seed(102)
-  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, samples = TRUE)
+  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "rmulti_fixp", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to_rescale")
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 
                                       "data_000000003_multi.csv", "estimates_000000000_multi.rds", 
@@ -602,7 +602,7 @@ test_that("ssd_hc save_to lnorm 1", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
   set.seed(102)
-  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, samples = TRUE)
+  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "rmulti_fixp", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to11")
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
                                       "estimates_000000001_multi.rds"))
@@ -618,11 +618,11 @@ test_that("ssd_hc save_to replaces", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
   set.seed(102)
-  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
+  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "rmulti_fixp", save_to = dir)
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
                                       "estimates_000000001_multi.rds"))
   boot <- read.csv(file.path(dir, "data_000000001_multi.csv"))
-  hc2 <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir)
+  hc2 <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "rmulti_fixp", save_to = dir)
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds", 
                                       "estimates_000000001_multi.rds"))
   boot2 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
@@ -660,7 +660,7 @@ test_that("ssd_hc multiple values save_to", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
   
   set.seed(102)
-  hc <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 2, save_to = dir, ci = TRUE)
+  hc <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 2, save_to = dir, ci = TRUE, ci_method = "rmulti_fixp")
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 
                                       "estimates_000000000_multi.rds", "estimates_000000001_multi.rds", 
                                       "estimates_000000002_multi.rds"))
