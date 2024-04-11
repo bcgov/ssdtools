@@ -4,15 +4,12 @@
 \alias{ssd_hc_bcanz}
 \title{BCANZ Hazard Concentrations}
 \usage{
-ssd_hc_bcanz(x, nboot = 10000, delta = 10, min_pboot = 0.95)
+ssd_hc_bcanz(x, nboot = 10000, min_pboot = 0.95)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.}
-
-\item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
-Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 
 \item{min_pboot}{A number between 0 and 1 of the minimum
 proportion of bootstrap samples that must successfully fit (return a likelihood)
