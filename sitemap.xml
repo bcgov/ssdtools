@@ -43,9 +43,6 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>/pull_request_template.html</loc>
-  </url>
-  <url>
     <loc>/reference/augment.fitdists.html</loc>
   </url>
   <url>
@@ -185,6 +182,9 @@
   </url>
   <url>
     <loc>/reference/ssd_hp.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ssd_hp_bcanz.html</loc>
   </url>
   <url>
     <loc>/reference/ssd_is_censored.html</loc>
