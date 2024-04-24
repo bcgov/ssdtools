@@ -1,26 +1,21 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9014
+# ssdtools 1.0.6.9015
 
 ## Additions
 
-- Added David Fox and Rebecca Fisher as co-authors.
 - Added to `ssd_hc()` and `ssd_hp()`
   - `multi_est = TRUE` argument to calculate model averaged estimates 
   treating the distributions as constituting a single mixture distribution.
-  - `multi_ci = TRUE` argument to calculate model averaged confidence intervals 
-  treating the distributions as constituting a single mixture distribution.
-  - `weighted = TRUE` argument to specify whether to use the original model weights versus
-  re-estimating for each bootstrap sample unless `multi_ci = FALSE` in which case it
-  specifies whether to take bootstrap samples from each distribution proportional to 
-  its weight versus calculating the weighted arithmetic means of the lower 
-  and upper confidence limits for each distribution.
+  - `method_ci = "weighted_samples"` to specify whether to use `"weighted_samples"`, `"weighted_arithmetic"`, `"multi_free"` or `"multi_fixed"` methods to generate confidence intervals.
   - `samples` argument to include bootstrap samples as list of numeric vector(s).
   - `save_to` argument to specify a directory in which to save the bootstrap datasets as csv files and parameter estimates as rds files. The files are named `data_000000001_xx.csv` and `estimates_000000001_xx.rds` etc where `xx` is the distribution. The parent data set and estimates are named `boot_000000000_xx.csv` and `estimates_000000000_xx.csv`.
+- Added `ssd_hp_bcanz()` and `ssd_hp.fitburrlioz()` function to get hazard proportions.
+- Added `trans = "log10"` and `add_x = 0` arguments to `ssd_plot()` and `ssd_plot_data()`.
 - Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
 - Added `ssd_exx()` functions to get default parameter estimates for distributions.
-- Added `ssd_hp.fitburrlioz()` function to get hazard proportion.
-- Add `trans = "log10"` and `add_x = 0` arguments to `ssd_plot()` and `ssd_plot_data()`.
+- Added David Fox and Rebecca Fisher as co-authors.
+- Added `npars` argument to `ssd_dists_bcanz()`.
 
 ## Modifications
 
