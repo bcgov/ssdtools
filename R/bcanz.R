@@ -51,13 +51,7 @@ ssd_dists_bcanz <- function(npars = c(2L, 5L)) {
 ssd_fit_bcanz <- function(data, left = "Conc", dists = ssd_dists_bcanz()) {
   ssd_fit_dists(data,
                 left = left,
-                dists = dists,
-                nrow = 6L,
-                rescale = FALSE,
-                reweight = FALSE,
-                computable = TRUE,
-                at_boundary_ok = FALSE,
-                min_pmix = 0
+                dists = dists
   )
 }
 
@@ -66,7 +60,7 @@ ssd_fit_bcanz <- function(data, left = "Conc", dists = ssd_dists_bcanz()) {
 #' Gets hazard concentrations with confidence intervals that protect
 #' 1, 5, 10 and 20% of species using settings adopted by
 #' BC, Canada, Australia and New Zealand for official guidelines.
-#' This function can take several minutes to run with required 10,000 iterations.
+#' This function can take several minutes to run with recommended 10,000 iterations.
 #'
 #' @inheritParams params
 #' @return A tibble of corresponding hazard concentrations.
@@ -76,15 +70,34 @@ ssd_fit_bcanz <- function(data, left = "Conc", dists = ssd_dists_bcanz()) {
 #' @examples
 #' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 #' ssd_hc_bcanz(fits, nboot = 100)
-ssd_hc_bcanz <- function(x, nboot = 10000, delta = 10, min_pboot = 0.95) {
+ssd_hc_bcanz <- function(x, nboot = 10000, min_pboot = 0.95) {
   ssd_hc(x,
          proportion = c(0.01, 0.05, 0.1, 0.2),
          ci = TRUE,
-         level = 0.95,
          nboot = nboot,
-         average = TRUE,
-         delta = delta,
-         min_pboot = min_pboot,
-         parametric = TRUE
+         min_pboot = min_pboot
+  )
+}
+
+#' BCANZ Hazard Proportion
+#'
+#' Gets  proportion of species affected at specified concentration(s)
+#' using settings adopted by BC, Canada, Australia and New Zealand for official guidelines.
+#' This function can take several minutes to run with recommended 10,000 iterations.
+#'
+#' @inheritParams params
+#' @return A tibble of corresponding hazard concentrations.
+#' @seealso [`ssd_hp()`].
+#' @family BCANZ
+#' @export
+#' @examples
+#' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
+#' ssd_hp_bcanz(fits, nboot = 100)
+ssd_hp_bcanz <- function(x, conc = 1, nboot = 10000, min_pboot = 0.95) {
+  ssd_hp(x,
+         conc = conc,
+         ci = TRUE,
+         nboot = nboot,
+         min_pboot = min_pboot
   )
 }

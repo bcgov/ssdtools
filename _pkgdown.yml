@@ -3,14 +3,12 @@ template:
 authors:
   Joe Thorley:
     href: "https://github.com/joethorley"
-  Carl Schwarz:
-    href: "https://www.sfu.ca/stat-actsci/department/profiles/carl-schwarz.html"
-  David Fox:
-    href: "https://training.ecotox.science/who-we-are/"
   Rebecca Fisher:
     href: "https://www.aims.gov.au/about/our-people/dr-rebecca-fisher"
-  Angeline Tillmans:
-    href: "https://www.linkedin.com/in/angeline-tillmanns-5b7999a/"
+  David Fox:
+    href: "https://training.ecotox.science/who-we-are/"
+  Carl Schwarz:
+    href: "https://www.sfu.ca/stat-actsci/department/profiles/carl-schwarz.html"
   Province of British Columbia:
     href: "https://www2.gov.bc.ca/"
   Environment and Climate Change Canada:
@@ -21,48 +19,18 @@ authors:
 destination: docs
 
 reference:
-- title: Information
-  desc: Data frames of information
-  contents:
-  - '`boron_pred`'
-  - '`dist_data`'
 - title: Distribution Names
   desc: Functions that return character vectors of distribution names
   contents: 
   - '`ssd_dists`'
   - '`ssd_dists_all`'
   - '`ssd_dists_bcanz`'
-- title: Distributional Functions
-  desc: Distribution, quantile, random functions
-  contents: 
-  - '`ssd_p`'
-  - '`ssd_q`'
-  - '`ssd_r`'
-  - '`ssd_e`'
 - title: Fit
   desc: Functions that fit distributions to data
   contents: 
+  - '`ssd_fit_dists`'
   - '`ssd_fit_bcanz`'
   - '`ssd_fit_burrlioz`'
-  - '`ssd_fit_dists`'
-- title: Manipulate Fits
-  desc: Functions that manipulate fits of distributions
-  contents:
-  - '`augment.fitdists`'
-  - '`coef.fitdists`'
-  - '`estimates.fitdists`'
-  - '`glance.fitdists`'
-  - '`is.fitdists`'
-  - '`predict.fitburrlioz`'
-  - '`predict.fitdists`'
-  - '`ssd_ecd`'
-  - '`ssd_ecd_data`'
-  - '`ssd_exposure`'
-  - '`ssd_gof`'
-  - '`ssd_hp`'
-  - '`ssd_match_moments`'
-  - '`subset.fitdists`'
-  - '`tidy.fitdists`'
 - title: Hazard Concentrations
   desc: Functions that calculate hazard concentrations
   contents:
@@ -70,6 +38,23 @@ reference:
   - '`ssd_hc_bcanz`'
   - '`ssd_wqg_bc`'
   - '`ssd_wqg_burrlioz`'
+- title: Hazard Proportions
+  desc: Functions that calculate hazard proportions
+  contents:
+  - '`ssd_hp`'
+  - '`ssd_hp_bcanz`'
+- title: Manipulate Fits
+  desc: Functions that manipulate fits of distributions
+  contents:
+  - '`augment.fitdists`'
+  - '`coef.fitdists`'
+  - '`estimates.fitdists`'
+  - '`glance.fitdists`'
+  - '`predict.fitburrlioz`'
+  - '`predict.fitdists`'
+  - '`ssd_gof`'
+  - '`subset.fitdists`'
+  - '`tidy.fitdists`'
 - title: Plots
   desc: Functions to Generate Plots
   contents:
@@ -84,14 +69,29 @@ reference:
   - '`ssd_plot_cdf`'
   - '`ssd_plot_data`'
   - '`ssdtools-ggproto`'
+- title: Distributional Functions
+  desc: Distribution, quantile, random functions
+  contents: 
+  - '`ssd_p`'
+  - '`ssd_q`'
+  - '`ssd_r`'
+  - '`ssd_e`'
 - title: Miscellaneous
   desc: Miscellaneous functions and data
   contents:
+  - '`boron_pred`'
   - '`comma_signif`'
+  - '`dist_data`'
+  - '`is.fitdists`'
   - '`licensing_md`'
   - '`npars`'
   - '`ssd_data`'
+  - '`ssd_ecd`'
+  - '`ssd_ecd_data`'
+  - '`ssd_exposure`'
+  - '`ssd_fit_dists`'
   - '`ssd_is_censored`'
+  - '`ssd_match_moments`'
   - '`ssd_sort_data`'
   - '`pearson1000`'
 - title: Deprecated
