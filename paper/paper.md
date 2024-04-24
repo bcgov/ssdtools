@@ -1,5 +1,5 @@
 ---
-title: 'A major revision to ssdtools: The R package for fitting Species Sensitivity Distributions'
+title: 'ssdtools v2: A major update to the R package for fitting Species Sensitivity Distributions'
 authors:
 - affiliation: 1
   name: Joe Thorley
