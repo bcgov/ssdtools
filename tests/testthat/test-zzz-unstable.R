@@ -46,10 +46,10 @@ test_that("weibull is unstable", {
 test_that("hc multi_ci lnorm default 100", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, multi_ci = FALSE, multi_est = FALSE, samples = TRUE, weighted = FALSE)
+  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, ci_method = "weighted_arithmetic", multi_est = FALSE, samples = TRUE)
   set.seed(102)
-  hc_multi <- ssd_hc(fits, average = TRUE, multi_ci = TRUE, ci = TRUE, nboot = 100,
-                     min_pboot = 0.8, samples = TRUE, weighted = FALSE)
+  hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_free", ci = TRUE, nboot = 100,
+                     min_pboot = 0.8, samples = TRUE)
   
   testthat::expect_snapshot({
     hc_average
@@ -75,10 +75,10 @@ test_that("hc multi_ci lnorm default 100", {
 test_that("hp multi_ci lnorm default 100", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
+  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, ci_method = "weighted_arithmetic", samples = TRUE)
   set.seed(102)
-  hp_multi <- ssd_hp(fits, average = TRUE, multi_ci = TRUE, ci = TRUE, nboot = 100,
-                     min_pboot = 0.8, samples = TRUE, weighted = FALSE)
+  hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_free", ci = TRUE, nboot = 100,
+                     min_pboot = 0.8, samples = TRUE)
   
   testthat::expect_snapshot({
     hp_average
@@ -465,10 +465,10 @@ test_that("ssd_hc cis with error", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
-  expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, min_pboot = 0.99, nboot = 100))
+  expect_warning(hc_err <- ssd_hc(fit, ci = TRUE, ci_method = "multi_fixed", min_pboot = 0.99, nboot = 100))
   expect_s3_class(hc_err, "tbl")
   expect_snapshot_data(hc_err, "hc_err_na")
-  hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92, multi_ci = FALSE)
+  hc_err <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.92, ci_method = "weighted_samples")
   expect_s3_class(hc_err, "tbl")
   expect_snapshot_data(hc_err, "hc_err")
 })
@@ -481,10 +481,10 @@ test_that("ssd_hc comparable parametric and non-parametric big sample size", {
   data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
   fit <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
-  hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
+  hc_para <- ssd_hc(fit, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic", samples = TRUE)
   expect_snapshot_data(hc_para, "hc_para")
   set.seed(10)
-  hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
+  hc_nonpara <- ssd_hc(fit, ci = TRUE, nboot = 10, parametric = FALSE, ci_method = "weighted_arithmetic", samples = TRUE)
   expect_snapshot_data(hc_nonpara, "hc_nonpara")
 })
 
@@ -497,10 +497,10 @@ test_that("ssd_hp cis with error", {
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
-  expect_warning(hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.99))
+  expect_warning(hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, ci_method = "multi_fixed", nboot = 100, min_pboot = 0.99))
   expect_s3_class(hp_err, "tbl")
   expect_snapshot_data(hp_err, "hp_err_na")
-  hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.92, multi_ci = FALSE, weighted = FALSE)
+  hp_err <- ssd_hp(fit, conc = 1, ci = TRUE, nboot = 100, min_pboot = 0.92, ci_method = "weighted_arithmetic")
   expect_s3_class(hp_err, "tbl")
   expect_snapshot_data(hp_err, "hp_err")
 })
@@ -513,10 +513,10 @@ test_that("ssd_hp comparable parametric and non-parametric big sample size", {
   data <- data.frame(Conc = ssd_rlnorm(10000, 2, 1))
   fit <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
-  hp_para <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
+  hp_para <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic", samples = TRUE)
   expect_snapshot_data(hp_para, "hp_para")
   set.seed(10)
-  hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE, multi_ci = FALSE, samples = TRUE, weighted = FALSE)
+  hp_nonpara <- ssd_hp(fit, 1, ci = TRUE, nboot = 10, parametric = FALSE, ci_method = "weighted_arithmetic", samples = TRUE)
   expect_snapshot_data(hp_nonpara, "hp_nonpara")
 })
 
@@ -593,7 +593,7 @@ test_that("not all estimates if fail", {
   
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lnorm_lnorm"))
   set.seed(49)
-  hc <- ssd_hc(fit, nboot = 10, ci = TRUE,
+  hc <- ssd_hc(fit, nboot = 10, ci = TRUE, ci_method = "multi_fixed",
                parametric = TRUE, save_to = dir, min_pboot = 0.8, samples = TRUE)
   expect_snapshot_data(hc, "hc_notallestimates")
   expect_identical(list.files(dir), c("data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv", 

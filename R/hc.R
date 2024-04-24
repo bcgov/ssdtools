@@ -123,8 +123,7 @@ ssd_hc.fitdists <- function(
     nboot = 1000,
     min_pboot = 0.95,
     multi_est = TRUE,
-    multi_ci = TRUE,
-    weighted = TRUE,
+    ci_method = "weighted_samples",
     parametric = TRUE, 
     delta = 9.21, 
     samples = FALSE,
@@ -146,6 +145,11 @@ ssd_hc.fitdists <- function(
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
+  chk_string(ci_method)
+  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
+  
+  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
+  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
 
   hcp <- ssd_hcp_fitdists(
     x = x, 
@@ -159,7 +163,7 @@ ssd_hc.fitdists <- function(
     min_pboot = min_pboot,
     parametric = parametric,
     multi_ci = multi_ci,
-    fix_weights = weighted,
+    fix_weights = fix_weights,
     control = control,
     samples = samples,
     save_to = save_to,
