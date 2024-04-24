@@ -14,7 +14,7 @@
   nboot = 1000,
   min_pboot = 0.95,
   multi_est = TRUE,
-  ci_method = "weighted_bootstrap",
+  ci_method = "weighted_samples",
   parametric = TRUE,
   delta = 9.21,
   control = NULL,
@@ -43,7 +43,7 @@ to report the confidence intervals.}
 \item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
 
 \item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
-Possible values are "rmulti" and "rmulti_fixp" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_bootstrap" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
+Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
 
 \item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 

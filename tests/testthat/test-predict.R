@@ -17,7 +17,7 @@ test_that("predict", {
 
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
-  pred <- predict(fits, ci_method = "weighted_bootstrap", multi_est = FALSE)
+  pred <- predict(fits, ci_method = "weighted_samples", multi_est = FALSE)
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_dists")
 })
@@ -39,7 +39,7 @@ test_that("predict not average", {
 
   expect_true(is.fitdists(fits))
 
-  pred <- predict(fits, average = FALSE, ci_method = "weighted_bootstrap")
+  pred <- predict(fits, average = FALSE, ci_method = "weighted_samples")
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_notaverage")
 })

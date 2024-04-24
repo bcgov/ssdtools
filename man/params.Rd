@@ -97,7 +97,7 @@ to report the confidence intervals.}
 \item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
 \item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
-Possible values are "rmulti" and "rmulti_fixp" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_bootstrap" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
+Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
 
 \item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
 

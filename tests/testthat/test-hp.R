@@ -94,7 +94,7 @@ test_that("hp fitdists works with multiple concs", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
-  hp <- ssd_hp(fits, c(2.5, 1), ci_method = "rmulti_fixp")
+  hp <- ssd_hp(fits, c(2.5, 1), ci_method = "multi_fixed")
   expect_s3_class(hp, "tbl_df")
   expect_snapshot_data(hp, "hp89")
 })
@@ -317,24 +317,24 @@ test_that("ssd_hp fix_weight", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
   
   set.seed(102)
-  hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, ci_method = "rmulti", samples = TRUE)
+  hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
   expect_snapshot_data(hc_unfix, "hc_unfix")
   
   set.seed(102)
-  hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, ci_method = "rmulti_fixp", samples = TRUE)
+  hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
   expect_snapshot_data(hc_fix, "hc_fix")
 })
 
 test_that("hp multis match", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
   set.seed(102)
-  hp_tf <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, ci_method = "weighted_bootstrap")
+  hp_tf <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, ci_method = "weighted_samples")
   set.seed(102)
-  hp_ft <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "rmulti_fixp")
+  hp_ft <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "multi_fixed")
   set.seed(102)
-  hp_ff <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_bootstrap")
+  hp_ff <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_samples")
   set.seed(102)
-  hp_tt <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, ci_method = "rmulti_fixp")
+  hp_tt <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, ci_method = "multi_fixed")
   
   expect_identical(hp_tf$est, hp_tt$est)
   expect_identical(hp_ft$est, hp_ff$est)
@@ -345,7 +345,7 @@ test_that("hp multis match", {
 test_that("hp weighted bootie", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hp_weighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_bootstrap",
+  hp_weighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_samples",
                          samples = TRUE)
   set.seed(102)
   hp_unweighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_arithmetic", samples = TRUE)
