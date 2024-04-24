@@ -38,11 +38,14 @@ affiliations:
 
 Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate the percent of species that are affected by a given concentration of a chemical. 
 
-The concentration that affects x% of the species is referred to as the Hazard Concentration (*HCx*), and these are used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
+The concentration that affects x% of the species is referred to as the Hazard Concentration (*HCx*) while the x% of species affected by a particular concentration is the Hazard Proportion[^1] (*HPx*). 
+*HCx* and *HPx* values are used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 
-`ssdtools` [@thorley2018ssdtools] is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and provide estimates of Hazard Concentration (HC) and Hazard Protection (HP) using single distributions, as well as a multi-distribution set via model averaging. 
+[^1] The Hazard Protection is the p% of species protected by a particular concentration, ie *HPp* = 1 - *HPx*.
 
-Here we report on a major new version of the `sstools` R package now based on `TMB` which provides additional distributions, implements critical updates to ensure that *HCx* and *HCp* estimates satisfy the *inversion principle*, and provides bootstrap methods to obtain confidence intervals which are unbiased have appropriate coverage.
+`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and provide estimates of Hazard Concentration (HC) and Hazard Proportion (HP) values using single distributions, as well as a multiple distribution via model averaging. 
+
+Here we report on a major new version of the `sstools` R package which provides additional distributions, implements critical updates to ensure that *HCx* and *HCp* estimates satisfy the *inversion principle*, and provides bootstrap methods to obtain confidence intervals with appropriate coverage.
 
 # Statement of need
 
@@ -118,4 +121,3 @@ We acknowledge contributions from Ali Azizishirazi, Angeline Tillmanns, Stephani
 Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia and the Department of Climate Change, Energy, the Environment and Water, Australia.
 
 # References
-
