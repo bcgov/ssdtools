@@ -21,10 +21,9 @@ toxicity concentrations for different species as described by Posthuma
 et al. (2001). The ssdtools package uses Maximum Likelihood to fit
 distributions such as the log-normal, log-logistic, log-Gumbel (also
 known as the inverse Weibull), gamma, Weibull and log-normal log-normal
-mixture to censored and/or weighted data. Multiple distributions can be
-averaged using Akaike Information Criteria. Confidence intervals on
-hazard concentrations and proportions are produced by parametric
-bootstrapping.
+mixture. Multiple distributions can be averaged using Akaike Information
+Criteria. Confidence intervals on hazard concentrations and proportions
+are produced by bootstrapping.
 
 ## Installation
 
@@ -76,12 +75,7 @@ fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
 and can be quickly plotted using `autoplot`
 
 ``` r
-library(ggplot2)
-
-theme_set(theme_bw())
-
-autoplot(fits) +
-  scale_colour_ssd()
+autoplot(fits)
 ```
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
@@ -134,6 +128,10 @@ The predictions can be plotted together with the original data using
 `ssd_plot`.
 
 ``` r
+library(ggplot2)
+
+theme_set(theme_bw())
+
 ssd_plot(ssddata::ccme_boron, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
@@ -205,7 +203,7 @@ By contributing to this project, you agree to abide by its terms.
 
 ## Licensing
 
-Copyright 2023 Province of British Columbia, Environment and Climate
+Copyright 2024 Province of British Columbia, Environment and Climate
 Change Canada, and Australian Government Department of Climate Change,
 Energy, the Environment and Water
 

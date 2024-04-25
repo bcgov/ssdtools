@@ -11,7 +11,7 @@ predictions <- ssdtools::predict(fits, ci = TRUE)
 library(ggplot2)
 ssd_plot(ssddata::ccme_boron, predictions,
          shape = "Group", color = "Group", label = "Species",
-         xlab = "Concentration (mg/L)", ribbon = TRUE
+         xlab = "Concentration (mg/L)"
 ) +
   expand_limits(x = 3000) +
   scale_colour_ssd()
