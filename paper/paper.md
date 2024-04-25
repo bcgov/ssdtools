@@ -111,7 +111,6 @@ As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ an
 The following code fits the six default distributions to the boron example data set from `ssddata` [@ssddata] and prints the goodness of fit table complete with information criteria:
 
 ```r
-# install.packages("ssdtools")
 library(ssdtools)
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_gof(fits)
