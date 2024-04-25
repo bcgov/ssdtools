@@ -1,5 +1,5 @@
 ---
-title: 'ssdtools v2: An R package for fitting Species Sensitivity Distributions'
+title: 'ssdtools v2: An R package to fit Species Sensitivity Distributions'
 authors:
 - name: Joe Thorley
   orcid: 0000-0002-7683-4592
@@ -12,6 +12,7 @@ authors:
   orcid: 0000-0002-3178-7243
   affiliation: "4, 5"
 - name: Carl Schwarz
+  affiliation: 6
 affiliations:
 - index: 1
   name: Poisson Consulting, Canada
@@ -23,6 +24,8 @@ affiliations:
   name: The University of Melbourne, Australia
 - index: 5
   name: Environmetrics Australia, Australia
+- index: 6
+  name: Simon Fraser University, Canada
 date: 25 April 2024
 bibliography: paper.bib
 tags:
