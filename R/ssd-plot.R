@@ -50,7 +50,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Species Affected",
-                     ci = TRUE, ribbon = FALSE, hc = 0.05, 
+                     ci = TRUE, ribbon = TRUE, hc = 0.05, 
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
                      trans = "log10", xbreaks = waiver()) {

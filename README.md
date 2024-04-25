@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:Maturing](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+[![Lifecycle:Stable](https://img.shields.io/badge/Lifecycle-Stable-97ca00)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/github/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://codecov.io/github/bcgov/ssdtools)
 [![CRAN
@@ -19,11 +19,11 @@ Distributions (SSD).
 SSDs are cumulative probability distributions which are fitted to
 toxicity concentrations for different species as described by Posthuma
 et al. (2001). The ssdtools package uses Maximum Likelihood to fit
-distributions such as the gamma, log-Gumbel (identical to inverse
-Weibull), log-logistic, log-normal and Weibull to censored and/or
-weighted data. Multiple distributions can be averaged using Akaike
-Information Criteria. Confidence intervals on hazard concentrations and
-proportions are produced by parametric bootstrapping.
+distributions such as the log-normal, log-logistic, log-Gumbel (also
+known as the inverse Weibull), gamma, Weibull and log-normal log-normal
+mixture. Multiple distributions can be averaged using Akaike Information
+Criteria. Confidence intervals on hazard concentrations and proportions
+are produced by bootstrapping.
 
 ## Installation
 
@@ -38,13 +38,14 @@ To install the latest development version from
 [GitHub](https://github.com/bcgov/ssdtools)
 
 ``` r
-# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-pak::pak("bcgov/ssdtools")
+# install.packages("remotes")
+remotes::install_github("bcgov/ssdtools")
 ```
 
 ## Introduction
 
-`ssdtools` provides a data set for several chemicals including Boron.
+The dependency `ssddata` provides a example data sets for several
+chemicals including Boron.
 
 ``` r
 library(ssdtools)
@@ -65,21 +66,16 @@ ssddata::ccme_boron
 #> # ℹ 18 more rows
 ```
 
-Distributions are fit using `ssd_fit_dists()`
+The six default distributions are fit using `ssd_fit_dists()`
 
 ``` r
-fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 ```
 
 and can be quickly plotted using `autoplot`
 
 ``` r
-library(ggplot2)
-
-theme_set(theme_bw())
-
-autoplot(fits) +
-  scale_colour_ssd()
+autoplot(fits)
 ```
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
@@ -88,31 +84,35 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(fits)
-#> # A tibble: 2 × 9
-#>   dist      ad     ks    cvm   aic  aicc   bic delta weight
-#>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 lnorm  0.507 0.107  0.0703  239.  240.  242.  0      0.73
-#> 2 llogis 0.487 0.0994 0.0595  241.  241.  244.  1.99   0.27
+#> # A tibble: 6 × 9
+#>   dist           ad     ks    cvm   aic  aicc   bic delta weight
+#>   <chr>       <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 gamma       0.440 0.117  0.0554  238.  238.  240. 0.005  0.357
+#> 2 lgumbel     0.829 0.158  0.134   244.  245.  247. 6.56   0.013
+#> 3 llogis      0.487 0.0994 0.0595  241.  241.  244. 3.39   0.066
+#> 4 lnorm       0.507 0.107  0.0703  239.  240.  242. 1.40   0.177
+#> 5 lnorm_lnorm 0.320 0.116  0.0414  240.  243.  247. 4.98   0.03 
+#> 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357
 ```
 
-and the model-averaged 5% hazard concentration estimated by parametric
+and the model-averaged 5% hazard concentration estimated by
 bootstrapping using `ssd_hc`.
 
 ``` r
 set.seed(99)
-hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100) # 100 bootstrap samples for speed
+hc5 <- ssd_hc(fits, ci = TRUE)
 print(hc5)
-#> # A tibble: 1 × 10
-#>   dist    percent   est    se   lcl   ucl    wt method     nboot pboot
-#>   <chr>     <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl>
-#> 1 average       5  1.65 0.599 0.923  3.34     1 parametric   100     1
+#> # A tibble: 1 × 11
+#>   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
+#>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
+#> 1 average       0.05  1.26 0.781 0.407  3.29     1 parametr…  1000 0.999 <dbl>
 ```
 
 To bootstrap in parallel set `future::plan()`. For example:
 
 ``` r
 future::multisession(workers = 2)
-hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100)
+hc5 <- ssd_hc(fits, ci = TRUE)
 ```
 
 Model-averaged predictions complete with confidence intervals can also
@@ -128,9 +128,14 @@ set.seed(99)
 boron_pred <- predict(fits, ci = TRUE)
 ```
 
-and plotted together with the original data using `ssd_plot`.
+The predictions can be plotted together with the original data using
+`ssd_plot`.
 
 ``` r
+library(ggplot2)
+
+theme_set(theme_bw())
+
 ssd_plot(ssddata::ccme_boron, boron_pred,
   shape = "Group", color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
@@ -202,7 +207,7 @@ By contributing to this project, you agree to abide by its terms.
 
 ## Licensing
 
-Copyright 2023 Province of British Columbia, Environment and Climate
+Copyright 2024 Province of British Columbia, Environment and Climate
 Change Canada, and Australian Government Department of Climate Change,
 Energy, the Environment and Water
 
