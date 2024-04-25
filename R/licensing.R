@@ -8,7 +8,7 @@
 licensing_md <- function() {
 "## Licensing
   
-  Copyright 2023 Province of British Columbia,
+  Copyright 2024 Province of British Columbia,
    Environment and Climate Change Canada, and 
    Australian Government Department of 
    Climate Change, Energy, the Environment and Water

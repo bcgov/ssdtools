@@ -18,7 +18,7 @@ ssd_plot(
   xlab = "Concentration",
   ylab = "Species Affected",
   ci = TRUE,
-  ribbon = FALSE,
+  ribbon = TRUE,
   hc = 0.05,
   shift_x = 3,
   add_x = 0,

@@ -4,27 +4,31 @@ Version: 1.0.6.9015
 Authors@R: c(
     person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7683-4592")),
-    person("Carl", "Schwarz", role = "aut"),
     person("Rebecca", "Fisher", , "R.Fisher@aims.gov.au", role = "aut"),
     person("David", "Fox", , "david.fox@environmetrics.net.au", role = "aut"),
+    person("Carl", "Schwarz", role = "aut"),
     person("Angeline", "Tillmanns", role = "ctb"),
-    person("Ali", "Azizishirazi", role = "ctb"),
+    person("Seb", "Dalgarno", , "seb@poissonconsulting.ca", role = "ctb",
+           comment = c(ORCID = "0000-0002-3658-4517")),
     person("Kathleen", "McTavish", role = "ctb"),
     person("Heather", "Thompson", role = "ctb"),
     person("Doug", "Spry", role = "ctb"),
     person("Rick", "van Dam", role = "ctb"),
     person("Graham", "Batley", role = "ctb"),
-    person("Heather", "Thompson", role = "ctb"),
-    person("Andy", "Teucher", role = "ctb"),
-    person("Seb", "Dalgarno", , "seb@poissonconsulting.ca", role = "ctb",
-           comment = c(ORCID = "0000-0002-3658-4517")),
-    person("Emilie", "Doussantousse", role = "ctb"),
-    person("Stephanie", "Hazlitt", role = "ctb"),
+    person("Yulia", "Cuthbertson", role = "ctb"),
+    person("Tony", "Bigwood", role = "ctb"),
+    person("Michael", "Antenucci", role = "ctb"),
+    person("Ali", "Azizishirazi", role = "ctb"),
     person("Nadine", "Hussein", , "nadine@poissonconsulting.ca", role = "ctb",
            comment = c(ORCID = "0000-0003-4470-8361")),
-    person("Nan-Hung", "Hsieh", role = "ctb"),
-    person("Sergio", "Ibarra Espinosa", role = "ctb"),
+    person("Sarah", "Lyons", , "sarah@poissonconsulting.ca", role = "ctb",
+           comment = c(ORCID = "0000-0002-6745-6796")),
+    person("Stephanie", "Hazlitt", role = "ctb"),
     person("Hadley", "Wickham", role = "ctb"),
+    person("Sergio", "Ibarra Espinosa", role = "ctb"),
+    person("Andy", "Teucher", role = "ctb"),
+    person("Emilie", "Doussantousse", role = "ctb"),
+    person("Nan-Hung", "Hsieh", role = "ctb"),
     person("Province of British Columbia", role = c("fnd", "cph")),
     person("Environment and Climate Change Canada", role = c("fnd", "cph")),
     person("Australian Government Department of Climate Change, Energy, the Environment and Water", role = c("fnd", "cph"))
@@ -32,9 +36,9 @@ Authors@R: c(
 Description: Species sensitivity distributions are cumulative probability
     distributions which are fitted to toxicity concentrations for
     different species as described by Posthuma et al.(2001)
-    <isbn:9781566705783>.  The ssdtools package uses Maximum Likelihood to
+    <isbn:9781566705783>. The ssdtools package uses Maximum Likelihood to
     fit distributions such as the gamma, log-logistic, log-normal and
-    Weibull to censored and/or weighted data.  Multiple distributions can
+    log-normal log-normal mixture. Multiple distributions can
     be averaged using Akaike Information Criteria.  Confidence intervals
     on hazard concentrations and proportions are produced by parametric
     bootstrapping.

@@ -27,6 +27,12 @@ test_that("ssd_plot aes", {
   expect_snapshot_plot(ssd_plot(data, boron_pred, shape = "Group"), "boron_shape")
 })
 
+test_that("ssd_plot ribbon", {
+  data <- ssddata::ccme_boron
+  expect_snapshot_plot(ssd_plot(data, boron_pred, ribbon = TRUE), "ribbon")
+  expect_snapshot_plot(ssd_plot(data, boron_pred, ribbon = FALSE), "no_ribbon")
+})
+
 test_that("ssd_plot xbreaks", {
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, xbreaks = c(1, 2)), "boron_breaks")
 })
