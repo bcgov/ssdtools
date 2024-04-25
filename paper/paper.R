@@ -6,6 +6,7 @@ ssd_hc(fits, ci = TRUE)
 autoplot(fits)
 
 ggplot2::ggsave("paper/autoplot.png", device = "png", width = 6, height = 4)
+
 predictions <- ssdtools::predict(fits, ci = TRUE)
 
 library(ggplot2)

@@ -66,10 +66,10 @@ ssddata::ccme_boron
 #> # ℹ 18 more rows
 ```
 
-Distributions are fit using `ssd_fit_dists()`
+The six default distributions are fit using `ssd_fit_dists()`
 
 ``` r
-fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
+fits <- ssd_fit_dists(ssddata::ccme_boron)
 ```
 
 and can be quickly plotted using `autoplot`
@@ -84,31 +84,35 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(fits)
-#> # A tibble: 2 × 9
-#>   dist      ad     ks    cvm   aic  aicc   bic delta weight
-#>   <chr>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 lnorm  0.507 0.107  0.0703  239.  240.  242.  0      0.73
-#> 2 llogis 0.487 0.0994 0.0595  241.  241.  244.  1.99   0.27
+#> # A tibble: 6 × 9
+#>   dist           ad     ks    cvm   aic  aicc   bic delta weight
+#>   <chr>       <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+#> 1 gamma       0.440 0.117  0.0554  238.  238.  240. 0.005  0.357
+#> 2 lgumbel     0.829 0.158  0.134   244.  245.  247. 6.56   0.013
+#> 3 llogis      0.487 0.0994 0.0595  241.  241.  244. 3.39   0.066
+#> 4 lnorm       0.507 0.107  0.0703  239.  240.  242. 1.40   0.177
+#> 5 lnorm_lnorm 0.320 0.116  0.0414  240.  243.  247. 4.98   0.03 
+#> 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357
 ```
 
-and the model-averaged 5% hazard concentration estimated by parametric
+and the model-averaged 5% hazard concentration estimated by
 bootstrapping using `ssd_hc`.
 
 ``` r
 set.seed(99)
-hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100) # 100 bootstrap samples for speed
+hc5 <- ssd_hc(fits, ci = TRUE)
 print(hc5)
 #> # A tibble: 1 × 11
 #>   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
 #>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
-#> 1 average       0.05  1.65 0.655 0.723  2.93     1 parametr…   100     1 <dbl>
+#> 1 average       0.05  1.26 0.781 0.407  3.29     1 parametr…  1000 0.999 <dbl>
 ```
 
 To bootstrap in parallel set `future::plan()`. For example:
 
 ``` r
 future::multisession(workers = 2)
-hc5 <- ssd_hc(fits, ci = TRUE, nboot = 100)
+hc5 <- ssd_hc(fits, ci = TRUE)
 ```
 
 Model-averaged predictions complete with confidence intervals can also

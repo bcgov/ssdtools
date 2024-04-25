@@ -107,7 +107,7 @@ As well as to fitting SSDs and providing methods for estimating HCx and HPx valu
 
 # Example of use
 
-The following code fits the default distributions to the boron example data set from `ssddata` [@ssddata] and prints the goodness of fit table complete with information criteria:
+The following code fits the six default distributions to the boron example data set from `ssddata` [@ssddata] and prints the goodness of fit table complete with information criteria:
 
 ```r
 # install.packages("ssdtools")
@@ -149,7 +149,7 @@ autoplot(fits)
 
 ![Species sensitivity distributions for sample species concentration values](autoplot.png){height="4in"}
 
-The complete model averaged cdf with 95% CIs (with the model averaged HC5 indicated by a dotted line) can be plotted using:
+The proper model averaged cdf with 95% CIs (with the model averaged HC5 indicated by a dotted line) can be plotted using:
 
 ```r
 predictions <- ssdtools::predict(fits, ci = TRUE)
