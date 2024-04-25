@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # ssdtools <img src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
-[![Lifecycle:Maturing](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+[![Lifecycle:Stable](https://img.shields.io/badge/Lifecycle-Stable-97ca00)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/github/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://codecov.io/github/bcgov/ssdtools)
 [![CRAN status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 `ssdtools` is an R package to fit and plot Species Sensitivity Distributions (SSD). 
 
 SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al. (2001).
-The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-Gumbel (identical to inverse Weibull), log-logistic, log-normal and Weibull to censored and/or weighted data.
+The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, log-logistic, log-Gumbel (also known as the inverse Weibull), gamma, Weibull and log-normal log-normal mixture to censored and/or weighted data.
 Multiple distributions can be averaged using Akaike Information Criteria.
 Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.
 
@@ -38,13 +38,13 @@ install.packages("ssdtools")
 
 To install the latest development version from [GitHub](https://github.com/bcgov/ssdtools)
 ```{r, eval = FALSE}
-# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-pak::pak("bcgov/ssdtools")
+# install.packages("remotes")
+remotes::install_github("bcgov/ssdtools")
 ```
 
 ## Introduction
 
-`ssdtools` provides a data set for several chemicals including Boron.
+The dependency `ssddata` provides a example data sets for several chemicals including Boron.
 ```{r, message=FALSE}
 library(ssdtools)
 ssddata::ccme_boron
@@ -94,7 +94,7 @@ set.seed(99)
 boron_pred <- predict(fits, ci = TRUE)
 ```
 
-and plotted together with the original data using `ssd_plot`.
+The predictions can be plotted together with the original data using `ssd_plot`.
 ```{r}
 ssd_plot(ssddata::ccme_boron, boron_pred,
   shape = "Group", color = "Group", label = "Species",
