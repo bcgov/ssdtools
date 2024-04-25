@@ -113,8 +113,8 @@ The following code fits the default distributions to the boron example data set 
 # install.packages("ssdtools")
 library(ssdtools)
 set.seed(42)
-fit <- ssd_fit_dists(ssddata::ccme_boron)
-ssd_gof(fit)
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_gof(fits)
 ```
 
 ```r
@@ -132,7 +132,7 @@ ssd_gof(fit)
 The model averaged HC5 estimate with 95% CIs can then be obtained using:
 
 ```r
-ssd_hc(fit, ci = TRUE)
+ssd_hc(fits, ci = TRUE)
 ```
 
 ```r
@@ -144,16 +144,22 @@ ssd_hc(fit, ci = TRUE)
 
 And all of the distributions plotted via:
 ```r
-autoplot(fit)
+autoplot(fits)
 ```
 
 ![Species sensitivity distributions for sample species concentration values](autoplot.png){height="4in"}
 
-The complete model averaged cdf with 95% CIs and the model averaged HC5 can be plotted using:
+The complete model averaged cdf with 95% CIs (with the model averaged HC5 indicated by a dotted line) can be plotted using:
 
 ```r
-predictions <- ssdtools::predict(fit, ci = TRUE)
-ssd_plot(ssddata::ccme_boron, predictions, label = "Species", shape = "Group")
+predictions <- ssdtools::predict(fits, ci = TRUE)
+library(ggplot2)
+ssd_plot(ssddata::ccme_boron, predictions,
+         shape = "Group", color = "Group", label = "Species",
+         xlab = "Concentration (mg/L)", ribbon = TRUE
+) +
+  expand_limits(x = 3000) +
+  scale_colour_ssd()
 ```
 
 ![Model averaged sensitivity distribution for sample species concentration values](ssd_plot.png){height="4in"}
