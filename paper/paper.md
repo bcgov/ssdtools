@@ -147,7 +147,7 @@ And all of the distributions plotted via:
 autoplot(fits)
 ```
 
-![Species sensitivity distributions for sample species concentration values.](autoplot.png){height="4in"}
+![Species sensitivity distributions for the six default distributions with the Boron species concentration data.](autoplot.png){height="4in"}
 
 The proper model averaged cdf with 95% CIs (with the model averaged $\text{HC}_5$ indicated by a dotted line) can be plotted using:
 
@@ -162,10 +162,11 @@ ssd_plot(ssddata::ccme_boron, predictions,
   scale_color_ssd()
 ```
 
-![Model averaged sensitivity distribution for sample species concentration values.](ssd_plot.png){height="4in"}
+![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The HC5 value is indicated by the dotted line.](ssd_plot.png){height="4in"}
+
 # Acknowledgements
 
-We acknowledge contributions from Ali Azizishirazi, Angeline Tillmanns, Stephanie Hazlitt, Kathleen McTavish, Emilie Doussantousse, Heather Thompson and Andy Teucher.
+We acknowledge contributions from Angeline Tillmanns, Seb Dalgarno, Kathleen McTavish, Heather Thompson, Doug Spry, Rick van Dam, Graham Batley, Yulia Cuthbertson, Tony Bigwood, Michael Antenucci and Ali Azizisharzi.
 Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia and the Department of Climate Change, Energy, the Environment and Water, Australia.
 
 # References
