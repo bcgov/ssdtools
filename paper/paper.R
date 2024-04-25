@@ -15,6 +15,6 @@ ssd_plot(ssddata::ccme_boron, predictions,
          xlab = "Concentration (mg/L)"
 ) +
   expand_limits(x = 3000) +
-  scale_colour_ssd()
+  scale_color_ssd()
 
 ggplot2::ggsave("paper/ssd_plot.png", device = "png", width = 7, height = 4)
