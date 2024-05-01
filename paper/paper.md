@@ -78,20 +78,22 @@ The move to `TMB` allowed more control over model specification, transparency re
 In both the original [@thorley2018ssdtools] and updated versions, `ssdtools` calculates the Akaike Information Criterion (AIC), AIC corrected for small sample size (AICc) and Bayesian Information Criterion (BIC) can be calculated for each distribution [@burnham_model_2002].
 Except in the case of censored data, `ssdtools` uses AICc based model weights for model averaging. 
 
-The first two implementations of `ssdtools` used the weighted arithmetic mean for model averaging: $$\bar{X}=\sum\limits_{i=1}^{m}{{{w}_{i}}{{X}_{i}}}$$ 
-where $w_i$ is the weight for the *i^th^* model, $0\le {w_i}\le 1$ and $\sum\limits_{i=1}^{m}{{w_i}=1}$. 
+The first two implementations of `ssdtools` used the weighted arithmetic mean to obtain a model-averaged estimate of the $H{C_x}$: 
+\[\widetilde {H{C_x}} = \sum\limits_{i = 1}^m {{w_i}} HC_x^{\left\{ i \right\}}\]
+where $HC_x^{\left\{ i \right\}}$ is the $H{C_x}$ estimate from the ${i^{th}}$ *SSD*; $w_i$ is the $AI{C_c}$ weight for the *i^th^* *SSD* with $0\le {w_i}\le 1$ and $\sum\limits_{i=1}^{m}{{w_i}=1}$. 
 
 The weighted arithmetic mean is conventionally used for averaging model parameters or estimates [@burnham_model_2002]. 
-However, in the case of $\text{HC}_x$ and $\text{HP}_x$ values, the conventional approach produces estimates that fail to satisfy the *inversion principle* [@fox_methodologies_2024]. 
-Consequently, v2 of `ssdtools` treats the distribution set as an ensemble with a single proper *cumulative distribution function* (cdf) given by the expression: 
-$$G\left( x \right) = \sum\limits_{i = 1}^m {{w_i}} {F_i}\left( x \right)$$
-where ${F_i}\left(  \cdot  \right)$ is the cdf for the the *i^th^* model and $w_i$ is the model weight as before.
+However, in the case of $\text{HC}_x$ and $\text{HP}_x$ values, the estimator $\widetilde {H{C_x}}$ fails to satisfy the *inversion principle* [@fox_methodologies_2024] which requires \[{\left[ {H{P_x}} \right]_{x = H{C_\theta }}} = \theta \]
+This inconsistency has been rectified in `ssdtools` v2 by estimating the model-averaged $\text{HC}_x$ (denoted $\widehat {H{C_x}}$) directly from the model-averaged SSD $\left\{ {G\left( x \right)} \right\}$ directly as follows:
 
-$\text{HC}_x$ and $\text{HP}_x$ estimates are then obtained from the joint cdf as the solution to
+Using the model-averaged *cdf* \[G\left( x \right) = \sum\limits_{i = 1}^m {{w_i}} {F_i}\left( x \right)\]
+where ${F_i}\left(  \cdot  \right)$ is the *cdf* for the the *i^th^* model and $w_i$ is the model weight as before then $\widehat {H{C_p}}$ is obtained as the solution to
+
+
 $${x:G\left( x \right) = p}$$ 
 or, equivalently
 $$x:G\left( x \right) - p = 0$$ for the fraction affected $p$. 
-Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( x \right)$. 
+Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( x \right)-p$. 
 
 ## Confidence Intervals
 
