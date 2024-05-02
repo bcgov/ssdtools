@@ -2,10 +2,11 @@ pandoc: 3.1.11
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
-  distributions: distributions.html
-  exposure-plots: exposure-plots.html
-  faqs: faqs.html
-  small-sample-bias-ref: small-sample-bias-ref.html
+  A_model_averaging: A_model_averaging.html
+  B_distributions: B_distributions.html
+  C_confidence_intervals: C_confidence_intervals.html
+  D_embelishing-plots: D_embelishing-plots.html
+  E_additional-technical-details: E_additional-technical-details.html
   ssdtools: ssdtools.html
-last_built: 2024-05-01T14:53Z
+last_built: 2024-05-02T12:52Z
 
