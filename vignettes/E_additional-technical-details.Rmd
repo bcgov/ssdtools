@@ -1,0 +1,132 @@
+---
+title: "Additional technical details"
+author: "sstools Team"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+output: rmarkdown::html_vignette
+#output: rmarkdown::pdf_document
+csl: my-style.csl
+latex_engine: MathJax
+mainfont: Arial
+mathfont: Courier
+vignette: >
+  %\VignetteIndexEntry{Additional technical details}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style>
+
+.box {
+  height: auto;
+  width: 65%;
+  padding: 10px;
+  border: 1.5px outset #5C5B5D;
+  background-color: #E7E8EC;
+  border-radius: 8px;
+  text-align: left;
+  margin: auto;
+}
+
+</style>
+
+<script type="text/x-mathjax-config">MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 0.5, availableFonts: [] }  });
+</script>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE,
+  fig.width = 6,
+  fig.height = 4
+)
+```
+
+## Small sample bias
+
+The ssdtools package uses the method of Maximum Likelihood (ML) to estimate parameters for each distribution
+that is fit to the data. Statistical theory says that maximum likelihood estimators are asymptotically
+unbiased, but does not guarantee performance in small samples. A detailed account of the issue of small sample bias in estimates can be found in the following [pdf](https://github.com/bcgov/ssdtools/blob/master/vignettes/small-sample-bias.pdf).
+
+## The inverse Pareto and inverse Weibull as limiting distributions of the Burr Type-III distribution
+
+### Burr III distribution
+
+The probability density function, ${f_X}(x;b,c,k)$ and cumulative distribution function, ${F_X}(x;b,c,k)$ for the Burr III distribution (also known as the *Dagum* distribution) as used in `ssdtools` are:
+
+
+<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
+<b><u>Burr III distribution</u></b>\[\begin{array}{*{20}{c}}
+{{f_X}(x;b,c,k) = \frac{{b\,k\,c}}{{{x^2}}}\frac{{{{\left( {\frac{b}{x}} \right)}^{c - 1}}}}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^{k + 1}}}}{\rm{ }}}&{b,c,k,x > 0}
+\end{array}\]<br>\[\begin{array}{*{20}{c}}
+{{F_X}(x;b,c,k) = \frac{1}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^k}}}{\rm{ }}}&{b,c,k,x > 0}
+\end{array}\]
+</div>
+
+### Inverse Pareto distribution
+
+<br>Let $X \sim Burr(b,c,k)$ have the *pdf* given in the box above. It is well known that the distribution of $Y = \frac{1}{X}$ is the *inverse Burr* distribution (also known as the *SinghMaddala* distribution) for which:\[\begin{array}{*{20}{c}}
+{{f_Y}(y;b,c,k) = \frac{{c{\kern 1pt} {\kern 1pt} k{{\left( {\frac{y}{b}} \right)}^c}}}{{y{\kern 1pt} {{\left[ {1 + {{\left( {\frac{y}{b}} \right)}^c}} \right]}^{k + 1}}}}}&{b,c,k,y > 0}
+\end{array}\]
+
+\[\begin{array}{*{20}{c}}
+{{F_Y}(y;b,c,k) = 1 - \frac{1}{{{{\left[ {1 + {{\left( {\frac{y}{b}} \right)}^c}} \right]}^k}}}}&{b,c,k,y > 0}
+\end{array}\]
+
+We now consider the limiting distribution when $c \to \infty$ and $k \to 0$ in such a way that the product $ck$ remains constant, i.e. $ck = \lambda$.
+
+Now, 
+\[\begin{array}{l}
+\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{F_Y}(y;b,c,k)} \right\} = 1 - \mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \frac{1}{{{{\left[ {1 + {{\left( {\frac{y}{b}} \right)}^c}} \right]}^k}}}\\
+\\
+and\\
+\\
+\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } {\left[ {1 + {{\left( {\frac{y}{b}} \right)}^c}} \right]^k} = \mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left( {\frac{y}{b}} \right)}^{ck}}{{\left[ {1 + {{\left( {\frac{b}{y}} \right)}^c}} \right]}^k}} \right\}\\
+\\
+and\\
+\\
+\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left( {\frac{y}{b}} \right)}^{ck}}{{\left[ {1 + {{\left( {\frac{b}{y}} \right)}^c}} \right]}^k}} \right\} = \mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left( {\frac{y}{b}} \right)}^{ck}}} \right\}\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left[ {1 + {{\left( {\frac{b}{y}} \right)}^c}} \right]}^k}} \right\}\\
+ = \mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left( {\frac{y}{b}} \right)}^{ck}}} \right\}\; \cdot \,1\\
+ = {\left( {\frac{y}{b}} \right)^\lambda }
+\end{array}\]
+
+Therefore, \[\begin{array}{*{20}{c}}
+{\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{F_Y}(y;b,c,k)} \right\} = 1 - {{\left( {\frac{b}{y}} \right)}^\lambda }}&{y \ge b}
+\end{array}\]
+
+which we recognise as the (American) Pareto distribution. So, if the limiting distribution of $Y = \frac{1}{X}$ is a Pareto distribution, then the limiting distribution of $X = \frac{1}{Y}$ is the (American) *inverse Pareto* distribution:
+
+\[\begin{array}{l}
+{f_X}\left( {x;\alpha ,\beta } \right) = \lambda {b^\lambda }{x^{\lambda  - 1}};{\rm{  }}0 \le x \le {\textstyle{1 \over b}};{\rm{  }}\lambda {\rm{,}}b > 0\\
+{F_X}\left( {x;\alpha ,\beta } \right) = {\left( {xb} \right)^\lambda };{\rm{  }}0 \le x \le {\textstyle{1 \over b}};{\rm{  }}\lambda {\rm{,}}b > 0
+\end{array}\]
+
+For completeness, the MLEs of this distribution have closed-form expressions and are given by:
+\[\begin{array}{l}
+\hat \lambda  = {\left[ {\ln \left( {\frac{{{g_X}}}{{\hat b}}} \right)} \right]^{ - 1}}\\
+\hat b = \frac{1}{{\max \left\{ {{X_i}} \right\}}}{\rm{ }}
+\end{array}\]
+
+and ${\rm{ }}{g_X}$is the *geometric mean* of the data.
+
+### Inverse Weibull distribution
+
+<br>Let $X \sim Burr(b,c,k)$ have the *pdf* given in the box above. We make the transformation \[Y = \frac{{b{\kern 1pt} {k^{\tfrac{1}{c}}}{\kern 1pt} \theta }}{X}\]
+where $\theta$ is a parameter (constant). The distribution of $Y$ is also a Burr distribution and has *cdf* \[{G_Y}\left( y \right) = 1 - \frac{1}{{{{\left[ {1 + {{\left( {\frac{y}{{{k^{\tfrac{1}{c}}}{\kern 1pt} \theta }}} \right)}^c}} \right]}^k}}}\].<br><br>We are interested in the limiting behaviour of this Burr distribution as $k \to \infty$.
+<br>Now,\[\mathop {\lim }\limits_{k \to \infty } {G_Y}\left( y \right) = 1 - \mathop {\lim }\limits_{k \to \infty } {\left[ {1 + {{\left( {\frac{y}{{{k^{\tfrac{1}{c}}}{\kern 1pt} \theta }}} \right)}^c}} \right]^{ - k}}\]
+
+\[{ = 1 - \mathop {\lim }\limits_{k \to \infty } {{\left[ {1 + \frac{{{{\left( {\frac{y}{\theta }} \right)}^c}}}{{k{\kern 1pt} }}} \right]}^{ - k}}}\]
+
+\[\begin{matrix}
+   =1-\exp \left[ -{{\left( \frac{y}{\theta } \right)}^{c}} \right]  \\
+   \left\{ \text{using the fact that }\underset{n\to \infty }{\mathop{\lim }}\,{{\left( 1+{}^{z}\!\!\diagup\!\!{}_{n}\; \right)}^{-n}}={{e}^{-z}} \right\}  \\
+\end{matrix}\]
+
+We recognise the last expression as the *cdf* of a Weibull distribution with parameters $c$ and $\theta$.
+
+
+
+```{r, results = "asis", echo = FALSE}
+cat(ssdtools::licensing_md())
+```

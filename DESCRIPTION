@@ -71,18 +71,23 @@ Imports:
     utils,
     VGAM
 Suggests:
+    actuar,
     covr,
     car,
     doFuture,
     dplyr,
+    EnvStats,
+    extraDistr,
     fitdistrplus,
     foreach,
     future,
     glue,
     grDevices,
+    ggpubr,
     knitr,
     magrittr,
     mle.tools,
+    patchwork,
     R.rsp,
     readr,
     reshape2,
@@ -91,6 +96,7 @@ Suggests:
     testthat,
     tidyr,
     tidyselect,
+    tinytex,
     withr
 LinkingTo: 
     Rcpp,
