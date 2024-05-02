@@ -26,7 +26,7 @@ affiliations:
   name: Environmetrics Australia, Australia
 - index: 6
   name: Simon Fraser University, Canada
-date: 25 April 2024
+date: 2 May 2024
 bibliography: paper.bib
 tags:
   - ssdtools
@@ -43,11 +43,11 @@ Species sensitivity distributions (SSDs) are cumulative probability distribution
 $\text{HC}_5$ values, which protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a given concentration $x$.
 
-`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and allow estimates of $\text{HC}_x$ and $\text{HP}_u$ values by model averaging across multiple distribution [@schwarz_improving_2019]. 
+`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and allow estimates of $\text{HC}_x$ and $\text{HP}_u$ values by model averaging [@schwarz_improving_2019] across multiple distribution [@thorley2018ssdtools]. 
 The `shinyssdtools` R package [@dalgarno_shinyssdtools_2021] provides a Graphical User Interface to `ssdtools`.
 
-Since the initial publication of @thorley2018ssdtools for v0.0.3, the `ssdtools` R package has undergone two major updates.
-The first update (v1) included the addition of four new distributions and a switch to `TMB` [@tmb] for model fitting.
+Since the publication of @thorley2018ssdtools for v0, the `ssdtools` R package has undergone two major updates.
+The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] for model fitting.
 The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_u$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with appropriate coverage [@fox_methodologies_2024].
 
 # Statement of need
@@ -55,7 +55,7 @@ The second major release (v2) includes critical updates to ensure that the $\tex
 SSDs are a practical tool for the determination of safe threshold concentrations for toxicants in fresh and marine waters, and are implemented in some form for risk assessment and water quality criteria derivation throughout multiple jurisdictions globally [@lepper2005manual; @Warne2018; @bcmecc2019; @USEPA2020].
 
 The selection of a suitable probability model has been identified as one of the most important and difficult choices in the use of SSDs [@chapman_2007]. 
-Since the original implementation, `ssdtools` has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_u$ values using multiple distributions, thereby avoiding the need for selection of a single distribution. 
+Since the original implementation (v0), `ssdtools` [@thorley2018ssdtools] has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_u$ values using multiple distributions, thereby avoiding the need for selection of a single distribution [@schwarz_improving_2019]. 
 The method, as applied in the SSD context is described in detail in [@fox_recent_2021], and provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
 
 # Technical details
@@ -63,14 +63,14 @@ The method, as applied in the SSD context is described in detail in [@fox_recent
 ## Distributions
 
 Ten distributions are currently available in `ssdtools`. 
-The original version of `ssdtools` provided the two parameters log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
-In the first major update, the two parameter inverse Pareto (invpareto), three parameter Burr Type III (burrIII3) and five parameter log-normal log-normal (lnorm_lnorm) and log-logistic log-logistic (llogis_llogis) mixture distributions were added.
-Together with the inverse Weibull, the Burr Type III and inverse Pareto provide the underlying distributions of the SSD fitting software `Burrlioz` [@barry2012burrlioz] while the mixture distributions were added to accommodate bimodality [@fox_recent_2021]. 
+The original version (v0) of `ssdtools` provided the two parameters log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
+In the first major update (v1), the two parameter inverse Pareto (invpareto), three parameter Burr Type III (burrIII3) and five parameter log-normal log-normal (lnorm_lnorm) and log-logistic log-logistic (llogis_llogis) mixture distributions were added.
+Together with the Burr Type III, the inverse Pareto and inverse Weibull provide the underlying distributions of the SSD fitting software `Burrlioz` [@barry2012burrlioz] while the mixture distributions were added to accommodate bimodality [@fox_recent_2021]. 
 Since v1, `ssdtools` has by default fitted the lnorm, llogis, lgumbel, gamma, weibull and lnorm_lnorm distributions.
 
 ## Model Fitting
 
-In the first major update (v1), `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood. 
+In the first major update (v1), the dependency `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood [@millar_maximum_2011]. 
 The move to `TMB` allowed more control over model specification, transparency regarding convergence criteria and better assessment of numerical instability issues. 
 
 ## Model Averaging
@@ -166,7 +166,7 @@ ssd_plot(ssddata::ccme_boron, predictions,
   scale_color_ssd()
 ```
 
-![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The HC5 value is indicated by the dotted line.](ssd_plot.png){height="4in"}
+![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The $\text{HC}_5$ value is indicated by the dotted line.](ssd_plot.png){height="4in"}
 
 # Acknowledgements
 
