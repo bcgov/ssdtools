@@ -116,6 +116,6 @@ articles:
   contents:
   - B_distributions
   - A_model_averaging
-  - articles/confidence_intervals
+  - articles/confidence-intervals
   - D_embelishing-plots
   - E_additional-technical-details
