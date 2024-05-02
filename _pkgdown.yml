@@ -114,8 +114,8 @@ reference:
 articles:
 - title: All vignettes
   contents:
-  - B_distributions
-  - A_model_averaging
+  - model-averaging
+  - distributions
   - articles/confidence-intervals
-  - D_embelishing-plots
-  - E_additional-technical-details
+  - embelishing-plots
+  - additional-technical-details
