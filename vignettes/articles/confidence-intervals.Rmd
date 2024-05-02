@@ -1,18 +1,12 @@
 ---
-title: "Obtaining Confidence Intervals"
+title: "Confidence Intervals for Hazard Concentrations"
 author: "ssdtools Team"
 date: "`r Sys.Date()`"
 bibliography: references.bib
-output: rmarkdown::html_vignette
-#output: rmarkdown::pdf_document
 csl: my-style.csl
 latex_engine: MathJax
 mainfont: Arial
 mathfont: Courier
-vignette: >
-  %\VignetteIndexEntry{Obtaining Confidence Intervals}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}

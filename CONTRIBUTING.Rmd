@@ -16,18 +16,19 @@ All contributors retain the original copyright to their stuff, but by contributi
 
 **To track copyright, please use the following:** 
 
-**New code file:** At the top of the file, please ensure copyright is attributed to collaborator and assign the Apache 2.0 license
+**New code file:** At the top of the file, please ensure copyright and year is attributed to collaborator and assign the Apache 2.0 license
 
-**Major addition to code file:** “Copyright Province of British Columbia” and Apache 2.0 remains as a header and either the second collaborator is added if there are changes throughout the code or copyright is listed for specific lines of code.  So it could read:
+**Major addition to code file:** “Copyright YYYY Province of British Columbia” and Apache 2.0 remains as a header and either the second collaborator is added if there are changes throughout the code or copyright is listed for specific lines of code.  So it could read:
 
-Copyright Province of British Columbia and
-Copyright Collaborator
+Copyright 2020-2022 Province of British Columbia
+Copyright 2024 Collaborator
 Apache 2.0 License
 
 Or 
 
-Copyright Province of British Columbia and
-Lines 200-500 Copyright Collaborator
+Copyright 2020-2022 Province of British Columbia
+Copyright 2024 Collaborator Lines 200-500
 Apache 2.0 License
 
-**Minor changes:**  If there are small changes to the code throughout the file then it may be easiest to keep these files as Copyright Province of British Columbia.  However, the contribution will be tracked through GitHub.
+**Minor changes:**  If there are small changes to the code throughout the file then it may be easiest to keep these files as Copyright YYYY Province of British Columbia.  
+However, the contribution will be tracked through GitHub.
