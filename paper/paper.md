@@ -41,21 +41,21 @@ tags:
 
 Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate Hazard Concentrations ($\text{HC}_x$) - the concentration of a chemical that affects a given $x$% of species.
 $\text{HC}_5$ values, which protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
-The Hazard Proportion ($\text{HP}_x$) is the proportion of species affected by a given concentration $x$.
+The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a given concentration $x$.
 
-`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and allow estimates of $\text{HC}_x$ and $\text{HP}_x$ values by model averaging across multiple distribution [@schwarz_improving_2019]. 
+`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and allow estimates of $\text{HC}_x$ and $\text{HP}_u$ values by model averaging across multiple distribution [@schwarz_improving_2019]. 
 The `shinyssdtools` R package [@dalgarno_shinyssdtools_2021] provides a Graphical User Interface to `ssdtools`.
 
 Since the initial publication of @thorley2018ssdtools for v0.0.3, the `ssdtools` R package has undergone two major updates.
 The first update (v1) included the addition of four new distributions and a switch to `TMB` [@tmb] for model fitting.
-The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_x$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with appropriate coverage [@fox_methodologies_2024].
+The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_u$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with appropriate coverage [@fox_methodologies_2024].
 
 # Statement of need
 
 SSDs are a practical tool for the determination of safe threshold concentrations for toxicants in fresh and marine waters, and are implemented in some form for risk assessment and water quality criteria derivation throughout multiple jurisdictions globally [@lepper2005manual; @Warne2018; @bcmecc2019; @USEPA2020].
 
 The selection of a suitable probability model has been identified as one of the most important and difficult choices in the use of SSDs [@chapman_2007]. 
-Since the original implementation, `ssdtools` has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_x$ values using multiple distributions, thereby avoiding the need for selection of a single distribution. 
+Since the original implementation, `ssdtools` has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_u$ values using multiple distributions, thereby avoiding the need for selection of a single distribution. 
 The method, as applied in the SSD context is described in detail in [@fox_recent_2021], and provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
 
 # Technical details
@@ -84,20 +84,20 @@ $$\widetilde{\text{HC}}_x = \sum\limits_{i = 1}^m w_i \text{HC}_x^{\left\{ i \ri
 where $\text{HC}_x^{\left\{ i \right\}}$ is the $\text{HC}_x$ estimate for the $i^{th}$ model.
 
 The weighted arithmetic mean is conventionally used for averaging model parameters or estimates [@burnham_model_2002]. 
-However, in the case of $\text{HC}_x$ and $\text{HP}_x$ values, the estimator $\widetilde{\text{HC}}_x$ fails to satisfy the *inversion principle* [@fox_methodologies_2024] which requires 
-$$\left[ \text{HP}_x \right]_{x = \text{HC}_\theta } = \theta$$
+However, in the case of $\text{HC}_x$ and $\text{HP}_u$ values, the estimator $\widetilde{\text{HC}}_x$ fails to satisfy the *inversion principle* [@fox_methodologies_2024] which requires 
+$$\left[ \text{HP}_u \right]_{x = \text{HC}_\theta } = \theta$$
 This inconsistency has been rectified in `ssdtools` v2 by estimating the model-averaged $\text{HC}_x$ (denoted $\widehat{\text{HC}}_x$) directly from the model-averaged cumulative distribution function (*cdf*) 
-$$G\left( x \right) = \sum\limits_{i = 1}^m w_i F_i\left( x \right)$$
-where ${F_i}\left(  \cdot  \right)$ is the *cdf* for the the *i^th^* model and $w_i$ is the model weight as before. $\widehat{\text{HC}}_p$ is then obtained as the solution to
-$${x:G\left( x \right) = p}$$ 
+$$G\left( u \right) = \sum\limits_{i = 1}^m w_i F_i\left( u \right)$$
+where ${F_i}\left(  \cdot  \right)$ is the *cdf* for the the *i^th^* model and $w_i$ is the model weight as before. $\widehat{\text{HC}}_x$ is then obtained as the solution to
+$${u:G\left( u \right) = x}$$ 
 or, equivalently
-$$x:G\left( x \right) - p = 0$$ 
-for the fraction affected $p$. 
-Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( x \right)-p$. 
+$$u:G\left( u \right) - x = 0$$ 
+for the proportion affected $x$. 
+Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$. 
 
 ## Confidence Intervals
 
-`ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_x$ values via bootstrapping.
+`ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_u$ values via bootstrapping.
 By default all versions of `ssdtools` use parametric bootstrapping as it has better coverage than the equivalent non parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2021].
 The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions.
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
@@ -109,7 +109,7 @@ As a result, the default method provided by the current update is a faster heuri
 
 ## Plotting 
 
-As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_x$ values, `ssdtools` also extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
+As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` also extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
 
 # Example of use
 
