@@ -26,7 +26,7 @@ affiliations:
   name: Environmetrics Australia, Australia
 - index: 6
   name: Simon Fraser University, Canada
-date: 25 April 2024
+date: 2 May 2024
 bibliography: paper.bib
 tags:
   - ssdtools
@@ -39,23 +39,23 @@ tags:
 
 # Summary
 
-Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate the percent of species that are affected by a given concentration of a chemical. 
-The concentration that affects $x$% of the species is referred to as the Hazard Concentration ($\text{HC}_x$) while the $x$% of species affected by a particular concentration is the Hazard Proportion ($\text{HP}_x$). 
+Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate Hazard Concentrations ($\text{HC}_x$) - the concentration of a chemical that affects a given $x$% of species.
 $\text{HC}_5$ values, which protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
+The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a given concentration $x$.
 
-`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and allow estimates of $\text{HC}_x$ and $\text{HP}_x$ values by model averaging across multiple distribution [@schwarz_improving_2019]. 
+`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and allow estimates of $\text{HC}_x$ and $\text{HP}_u$ values by model averaging [@schwarz_improving_2019] across multiple distribution [@thorley2018ssdtools]. 
 The `shinyssdtools` R package [@dalgarno_shinyssdtools_2021] provides a Graphical User Interface to `ssdtools`.
 
-Since the initial publication of @thorley2018ssdtools for v0.0.3, the `ssdtools` R package has undergone two major updates.
-The first update (v1) included the addition of four new distributions and a switch to `TMB` [@tmb] for model fitting.
-The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_x$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with appropriate coverage [@fox_methodologies_2024].
+Since the publication of @thorley2018ssdtools for v0, the `ssdtools` R package has undergone two major updates.
+The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] for model fitting.
+The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_u$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with appropriate coverage [@fox_methodologies_2024].
 
 # Statement of need
 
-SSDs remain a practical tool for the determination of safe threshold concentrations for toxicants in fresh and marine waters, and are implemented in some form for risk assessment and water quality criteria derivation throughout multiple jurisdictions globally [@lepper2005manual; @Warne2018; @bcmecc2019; @USEPA2020].
+SSDs are a practical tool for the determination of safe threshold concentrations for toxicants in fresh and marine waters, and are implemented in some form for risk assessment and water quality criteria derivation throughout multiple jurisdictions globally [@lepper2005manual; @Warne2018; @bcmecc2019; @USEPA2020].
 
 The selection of a suitable probability model has been identified as one of the most important and difficult choices in the use of SSDs [@chapman_2007]. 
-Since the original implementation, `ssdtools` has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_x$ values using multiple distributions, thereby avoiding the need for selection of a single distribution. 
+Since the original implementation (v0), `ssdtools` [@thorley2018ssdtools] has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_u$ values using multiple distributions, thereby avoiding the need for selection of a single distribution [@schwarz_improving_2019]. 
 The method, as applied in the SSD context is described in detail in [@fox_recent_2021], and provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
 
 # Technical details
@@ -63,41 +63,41 @@ The method, as applied in the SSD context is described in detail in [@fox_recent
 ## Distributions
 
 Ten distributions are currently available in `ssdtools`. 
-The original version of `ssdtools` provided the two parameters log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
-In the first major update, the two parameter inverse Pareto (invpareto), three parameter Burr Type III (burrIII3) and five parameter log-normal log-normal (lnorm_lnorm) and log-logistic log-logistic (llogis_llogis) mixture distributions were added.
-Together with the inverse Weibull, the Burr Type III and inverse Pareto provide the underlying distributions of the SSD fitting software `Burrlioz` [@barry2012burrlioz] while the mixture distributions were added to accommodate bimodality [@fox_recent_2021]. 
+The original version (v0) of `ssdtools` provided the two parameters log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
+In the first major update (v1), the two parameter inverse Pareto (invpareto), three parameter Burr Type III (burrIII3) and five parameter log-normal log-normal (lnorm_lnorm) and log-logistic log-logistic (llogis_llogis) mixture distributions were added.
+Together with the Burr Type III, the inverse Pareto and inverse Weibull provide the underlying distributions of the SSD fitting software `Burrlioz` [@barry2012burrlioz] while the mixture distributions were added to accommodate bimodality [@fox_recent_2021]. 
 Since v1, `ssdtools` has by default fitted the lnorm, llogis, lgumbel, gamma, weibull and lnorm_lnorm distributions.
 
 ## Model Fitting
 
-In the first major update (v1), `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood. 
+In the first major update (v1), the dependency `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood [@millar_maximum_2011]. 
 The move to `TMB` allowed more control over model specification, transparency regarding convergence criteria and better assessment of numerical instability issues. 
 
 ## Model Averaging
 
-In both the original [@thorley2018ssdtools] and updated versions, `ssdtools` calculates the Akaike Information Criterion (AIC), AIC corrected for small sample size (AICc) and Bayesian Information Criterion (BIC) can be calculated for each distribution [@burnham_model_2002].
-Except in the case of censored data, `ssdtools` uses AICc based model weights for model averaging. 
+In both the original [@thorley2018ssdtools] and updated versions, the Akaike Information Criterion (AIC), AIC corrected for small sample size (AICc) and Bayesian Information Criterion (BIC) can be calculated for each distribution [@burnham_model_2002].
+Information criterion based model weights have the properties $0\le w_i\le 1$ and $\sum_{i=1}^{m} w_i = 1$ where $w_i$ is the weight of the $i^{th}$ of the $m$ models [@burnham_model_2002].
+Except in the case of censored data, `ssdtools` uses AICc based weights for model averaging.
 
-The first two implementations of `ssdtools` used the weighted arithmetic mean to obtain a model-averaged estimate of the $H{C_x}$: 
-\[\widetilde {H{C_x}} = \sum\limits_{i = 1}^m {{w_i}} HC_x^{\left\{ i \right\}}\]
-where $HC_x^{\left\{ i \right\}}$ is the $H{C_x}$ estimate from the ${i^{th}}$ *SSD*; $w_i$ is the $AI{C_c}$ weight for the *i^th^* *SSD* with $0\le {w_i}\le 1$ and $\sum\limits_{i=1}^{m}{{w_i}=1}$. 
+The first two implementations of `ssdtools` used the weighted arithmetic mean to obtain a model-averaged estimate of $\text{HC}_x$:
+$$\widetilde{\text{HC}}_x = \sum\limits_{i = 1}^m w_i \text{HC}_x^{\left\{ i \right\}}$$
+where $\text{HC}_x^{\left\{ i \right\}}$ is the $\text{HC}_x$ estimate for the $i^{th}$ model.
 
 The weighted arithmetic mean is conventionally used for averaging model parameters or estimates [@burnham_model_2002]. 
-However, in the case of $\text{HC}_x$ and $\text{HP}_x$ values, the estimator $\widetilde {H{C_x}}$ fails to satisfy the *inversion principle* [@fox_methodologies_2024] which requires \[{\left[ {H{P_x}} \right]_{x = H{C_\theta }}} = \theta \]
-This inconsistency has been rectified in `ssdtools` v2 by estimating the model-averaged $\text{HC}_x$ (denoted $\widehat {H{C_x}}$) directly from the model-averaged SSD $\left\{ {G\left( x \right)} \right\}$ directly as follows:
-
-Using the model-averaged *cdf* \[G\left( x \right) = \sum\limits_{i = 1}^m {{w_i}} {F_i}\left( x \right)\]
-where ${F_i}\left(  \cdot  \right)$ is the *cdf* for the the *i^th^* model and $w_i$ is the model weight as before then $\widehat {H{C_p}}$ is obtained as the solution to
-
-
-$${x:G\left( x \right) = p}$$ 
+However, in the case of $\text{HC}_x$ and $\text{HP}_u$ values, the estimator $\widetilde{\text{HC}}_x$ fails to satisfy the *inversion principle* [@fox_methodologies_2024] which requires 
+$$\left[ \text{HP}_u \right]_{x = \text{HC}_\theta } = \theta$$
+This inconsistency has been rectified in `ssdtools` v2 by estimating the model-averaged $\text{HC}_x$ (denoted $\widehat{\text{HC}}_x$) directly from the model-averaged cumulative distribution function (*cdf*) 
+$$G\left( u \right) = \sum\limits_{i = 1}^m w_i F_i\left( u \right)$$
+where ${F_i}\left(  \cdot  \right)$ is the *cdf* for the the *i^th^* model and $w_i$ is the model weight as before. $\widehat{\text{HC}}_x$ is then obtained as the solution to
+$${u:G\left( u \right) = x}$$ 
 or, equivalently
-$$x:G\left( x \right) - p = 0$$ for the fraction affected $p$. 
-Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( x \right)-p$. 
+$$u:G\left( u \right) - x = 0$$ 
+for the proportion affected $x$. 
+Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$. 
 
 ## Confidence Intervals
 
-`ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_x$ values via bootstrapping.
+`ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_u$ values via bootstrapping.
 By default all versions of `ssdtools` use parametric bootstrapping as it has better coverage than the equivalent non parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2021].
 The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions.
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
@@ -109,7 +109,7 @@ As a result, the default method provided by the current update is a faster heuri
 
 ## Plotting 
 
-As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_x$ values, `ssdtools` also extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
+As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` also extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
 
 # Example of use
 
@@ -166,7 +166,7 @@ ssd_plot(ssddata::ccme_boron, predictions,
   scale_color_ssd()
 ```
 
-![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The HC5 value is indicated by the dotted line.](ssd_plot.png){height="4in"}
+![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The $\text{HC}_5$ value is indicated by the dotted line.](ssd_plot.png){height="4in"}
 
 # Acknowledgements
 

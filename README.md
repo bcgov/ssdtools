@@ -44,8 +44,9 @@ remotes::install_github("bcgov/ssdtools")
 
 ## Introduction
 
-The dependency `ssddata` provides a example data sets for several
-chemicals including Boron.
+The dependency
+[`ssddata`](https://cran.r-project.org/web/packages/ssddata/index.html)
+provides a example data sets for several chemicals including Boron.
 
 ``` r
 library(ssdtools)
