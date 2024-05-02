@@ -111,3 +111,11 @@ reference:
   - '`qlgumbel`'
   - '`rlgumbel`'
 
+articles:
+- title: All vignettes
+  contents:
+  - B_distributions
+  - A_model_averaging
+  - confidence-intervals
+  - D_embelishing-plots
+  - E_additional-technical-details
