@@ -16,22 +16,22 @@
     <loc>/SUPPORT.html</loc>
   </url>
   <url>
-    <loc>/articles/A_model_averaging.html</loc>
+    <loc>/articles/additional-technical-details.html</loc>
   </url>
   <url>
-    <loc>/articles/B_distributions.html</loc>
+    <loc>/articles/confidence-intervals.html</loc>
   </url>
   <url>
-    <loc>/articles/C_confidence_intervals.html</loc>
+    <loc>/articles/distributions.html</loc>
   </url>
   <url>
-    <loc>/articles/D_embelishing-plots.html</loc>
-  </url>
-  <url>
-    <loc>/articles/E_additional-technical-details.html</loc>
+    <loc>/articles/embelishing-plots.html</loc>
   </url>
   <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/model-averaging.html</loc>
   </url>
   <url>
     <loc>/articles/ssdtools.html</loc>

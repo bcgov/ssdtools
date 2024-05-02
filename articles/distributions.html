@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="ssdtools">
-<title>Selecting Distributions • ssdtools</title>
+<title>Distributions in ssdtools • ssdtools</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Selecting Distributions">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Distributions in ssdtools">
 <meta property="og:description" content="ssdtools">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -48,14 +48,8 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/distributions.html">Selecting Distributions</a>
-    <a class="dropdown-item" href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
-    <a class="dropdown-item" href="../articles/faqs.html">Frequently Asked Questions</a>
-    <a class="dropdown-item" href="../articles/small-sample-bias-ref.html">Small sample bias in estimates - reference</a>
-  </div>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/index.html">Articles</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -84,11 +78,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Selecting Distributions</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Distributions in ssdtools</h1>
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-05-01</h4>
+            <h4 data-toc-skip class="date">2024-05-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/distributions.Rmd" class="external-link"><code>vignettes/distributions.Rmd</code></a></small>
       <div class="d-none name"><code>distributions.Rmd</code></div>
@@ -96,134 +90,793 @@ Team</h4>
 
     
     
-<div class="section level2">
-<h2 id="model-selection">Model selection<a class="anchor" aria-label="anchor" href="#model-selection"></a>
+<style>
+
+.box {
+  height: auto;
+  width: 75%;
+  padding: 10px;
+  border: 1.5px outset #5C5B5D;
+  background-color: #E7E8EC;
+  border-radius: 8px;
+  text-align: left;
+  margin: auto;
+}
+
+</style>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 0.5, availableFonts: [] }  });
+</script><div class="section level2">
+<h2 id="distributions-for-ssd-modelling">Distributions for SSD modelling<a class="anchor" aria-label="anchor" href="#distributions-for-ssd-modelling"></a>
 </h2>
-<p>It can be difficult to select a ‘best fitting’ distribution when
-modeling species sensitivity data with low sample sizes. In these
-situations, model averaging can be used to fit multiple distributions
-and calculate a weighted average HCx and confidence limits <span class="citation">(Schwarz and Tillmanns 2019)</span>. Distributions
-selected to use in model averaging must be bounded by zero given that
-effect concentrations cannot be negative. Furthermore, the selected
-distributions should provide a variety of shapes to capture the
-diversity of shapes in empirical species sensitivity distributions.</p>
-<p>By default, the ssdtools uses Akaike Information Criterion corrected
-for small sample size (AICc) as a measure of relative quality of fit for
-different distributions and as the basis for calculating the
-model-averaged HCx.<br>
-However, if two or more similar models fit the data well then the
-support for this type of shape will be over-inflated <span class="citation">(Burnham and Anderson 2002)</span>.</p>
+<p>Many authors have noted that there is no guiding theory in
+ecotoxicology to justify any particular distributional form for the SSD
+other than that its domain be restricted to the positive real line <span class="citation">(Newman et al. 2000; Zajdlik 2005; Fox 2016)</span>.
+<!-- (Newman et al. 2000, Zajdlik 2005, Chapman PF & Tarazona J 2007, Fox 2016). --></p>
+<p>Distributions selected to use in model averaging of SSDs must be
+bounded by zero given that effect concentrations cannot be negative.
+They must also be continuous, and generally unbounded on the right.</p>
+<p>Furthermore, the selected distributions within the candidate model
+set should provide a variety of shapes to capture the diversity of
+shapes in empirical species sensitivity distributions.</p>
+<p>There is a wide range of distributions that have been implemented in
+<code>ssdtools</code>, although not all distributions appear in the
+default set. Here we provide a detailed account of the distributions
+available in <code>ssdtools</code>, and guidance on their use.</p>
+<div class="section level3">
+<h3 id="original-ssdtools-distributions">Original <code>ssdtools</code> distributions<a class="anchor" aria-label="anchor" href="#original-ssdtools-distributions"></a>
+</h3>
+<p>The log-normal, log-logistic and Gamma distributions have been widely
+used in SSD modelling, and were part of the original distribution set
+for early releases of <code>ssdtools</code> as developed by <a href="https://joss.theoj.org/papers/10.21105/joss.01082.pdf" class="external-link">Thorley and
+Schwarz 2018</a>. They were adopted as the default set of three
+distributions in early updates of <code>ssdtools</code> and the
+associated ShinyApp <span class="citation">(Dalgarno 2021)</span>. All
+three distributions show good convergence properties and are retained as
+part of the default model set in version 2.0 of
+<code>ssdtools</code>.</p>
+<p>In addition to the log-normal, log-logistic and Gamma distributions,
+the original version of <code>ssdtools</code> as developed by <a href="https://joss.theoj.org/papers/10.21105/joss.01082.pdf" class="external-link">Thorley and
+Schwarz 2018</a> also included three additional distributions in the
+candidate model set, including the log-gumbel, Gompertz and Weibull
+distributions. Of these, the log-Gumbel (otherwise known as the inverse
+Weibull, see below) shows relatively good convergence <span class="citation">(see Figure 32, Fox et al. 2021b)</span>, and is also
+one of the limiting distributions of the Burrr Type 3 distribution
+implemented in <code>ssdtools</code>, and has been retained in the
+default model set. The Gompertz and Weibull distributions, however can
+exhibit unstable behaviour, sometimes showing poor convergence, and
+therefore been excluded from the default set <span class="citation">(see
+Figure 32, Fox et al. 2021b)</span></p>
+</div>
+<div class="section level3">
+<h3 id="burr-iii-distribution">Burr III distribution<a class="anchor" aria-label="anchor" href="#burr-iii-distribution"></a>
+</h3>
+<p>A history of Burrlioz and the primary distributions it used were
+recently summmarized by <span class="citation">Fox et al.
+(2021a)</span>.</p>
+<p><em>“In 2000, Australia and New Zealand (Australian and New Zealand
+Environment and Conservation Council/Agriculture and Resource Management
+Council of Australia and New Zealand 2000) adopted an SSD‐based method
+for deriving WQBs, following a critical review of multiple WQB
+derivation methods (Warne 1998). A distinct feature of the method was
+the use of a 3‐parameter Burr distribution to model the empirical SSD,
+which was implemented in the Burrlioz software tool (Campbell et
+al. 2000). This represented a generalization of the methods previously
+employed by Aldenberg and Slob (1993) because the log–logistic
+distribution was shown to be a speciﬁc case of the Burr family
+(Tadikamalla 1980). Recent revision of the derivation method recognized
+that using the 3‐parameter Burr distributions for small sample sizes
+(&lt;8 species) created additional uncertainty by estimating more
+parameters than could be justiﬁed, essentially overﬁtting the data
+(Batley et al. 2018). Consequently, the method, and the updated software
+(Burrlioz Ver 2.0), now uses a 2‐parameter log–logistic distribution for
+these small data sets, whereas the Burr type III distribution is used
+for data sets of 8 species or more (Batley et al. 2018; Australian and
+New Zealand Guidelines 2018).”</em>         <span class="citation">(Fox
+et al. 2021a)</span></p>
+<p>The probability density function, <span class="math inline">\({f_X}(x;b,c,k)\)</span> and cumulative
+distribution function, <span class="math inline">\({F_X}(x;b,c,k)\)</span> for the Burr III
+distribution are:</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Burr III distribution</u></b>\[\begin{array}{*{20}{c}}
+{{f_X}(x;b,c,k) = \frac{{b\,k\,c}}{{{x^2}}}\frac{{{{\left( {\frac{b}{x}} \right)}^{c - 1}}}}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^{k + 1}}}}{\rm{ }}}&amp;{b,c,k,x &gt; 0}
+\end{array}\]<br>\[\begin{array}{*{20}{c}}
+{{F_X}(x;b,c,k) = \frac{1}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^k}}}{\rm{ }}}&amp;{b,c,k,x &gt; 0}
+\end{array}\]
+</div>
+<hr>
+<h4 id="burr-iii-distribution-1">
+Sample Burr probability density functions
+<a class="anchor" aria-label="anchor" href="#burr-iii-distribution-1"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4 id="burr-iii-distribution-2">
+Sample Burr cumulative distribution functions
+<a class="anchor" aria-label="anchor" href="#burr-iii-distribution-2"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;"></p>
+<p>While the Burr type III distribution was adopted as the default
+distribution in Burrlioz, it is well known (e.g., Tadikamalla (1980))
+that the Burr III distribution is related to several other theoretical
+distributions, some of which only exist as limiting cases of the Burr
+III, i.e., as one or more of the Burr III parameters approaches either
+zero or infinity. The Burrlioz software incorporates logic that aims to
+identify situations where parameter estimates are tending towards either
+very large or very small values. In such cases, fitting a Burr III
+distribution is abandoned and one of the limiting distributions is
+fitted instead.</p>
+<p>Specifically:</p>
+<ul>
+<li><p>As c tends to infinity the Burr III distribution tends to the
+inverse (North American) Pareto distribution (see <a href="https://bcgov.github.io/ssdtools/articles/E_additional-technical-details.html" class="external-link">technical
+details</a>)</p></li>
+<li><p>As k tends to infinity the Burr III distribution tends to the
+inverse Weibull (log-Gumbel) distribution (see <a href="https://bcgov.github.io/ssdtools/articles/E_additional-technical-details.html" class="external-link">technical
+details</a>)</p></li>
+</ul>
+<p>In practical terms, if the Burr III distribution is fitted and k is
+estimated to be greater than 100, the estimation procedure is carried
+out again using an inverse Weibull distribution. Similarly, if c is
+greater than 80 an (American) Pareto distribution is fitted. This is
+necessary to ensure numerical stability.</p>
+<p>Since the Burr type III, inverse Pareto and inverse Weibull (log
+Gumbel) distributions are used by the Burrlioz software, these have been
+implemented in <code>ssdtools</code>. However, we have found there are
+stability issues with both the Burr type III, as well as the inverse
+Pareto distributions, which currently precludes their inclusion in the
+default model set (see <span class="citation">Fox et al. (2021b)</span>,
+and below for more details).</p>
+</div>
+<div class="section level3">
+<h3 id="bimodal-distributions">Bimodal distributions<a class="anchor" aria-label="anchor" href="#bimodal-distributions"></a>
+</h3>
+<p>The use of statistical mixture-models was promoted by Fox as a
+convenient and more realistic way of modelling bimodal toxicity data
+<span class="citation">(Fisher et al. 2019)</span>. Although parameter
+heavy, statistical mixture models provide a better conceptual match to
+the inherent underlying data generating process since they directly
+model bimodality as a mixture of 2 underlying univariate distributions
+that represent, for example, different modes of action <span class="citation">(Fox et al. 2021a)</span>. It has been postulated that
+a mixture-model would only be selected in a model-averaging context when
+the fit afforded by the mixture is demonstrably better than the fit
+afforded by any single distribution. This is a consequence of the high
+penalty in AICc associated with the increased number of parameters (p in
+Equation 7 of <span class="citation">(Fox et al. 2021a)</span>) and will
+be most pronounced for relatively small sample sizes.</p>
+<p>The TMB version of <code>ssdtools</code> now includes the option of
+fitting two mixture distributions, individually or as part of a model
+average set. These can be fitted using <code>ssdtools</code> by
+supplying the strings “llogis_llogis” and/or “lnorm_lnorm” to the
+<em>dists</em> argument in the <em>ssd_fit_dists</em> call.</p>
+<p>The underlying code for these mixtures has three components: the
+likelihood function required for TMB; exported R functions to allow the
+usual methods for a distribution to be called (p, q and r); and a set of
+supporting R functions (see <span class="citation">Fox et al.
+(2021b)</span> Appendix D for more details). Both mixtures have five
+parameters - two parameters for each of the component distributions and
+a mixing parameter (pmix) that defines the weighting of the two
+distributions in the ‘mixture.’</p>
+<div class="section level6">
+<h6 id="sample-lognormal-mixture-distributions">Sample lognormal mixture distributions<a class="anchor" aria-label="anchor" href="#sample-lognormal-mixture-distributions"></a>
+</h6>
+<p><img src="distributions_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><br>AS can be see from the plot above, the mixture distributions
+provide a highly flexible means of modelling <em>bimodality</em> in an
+emprical SSD. This happens, for example, when the toxicity data for some
+toxicant include both animal and plant species, or there are different
+modes of action operating. Unfortunately, this increased flexibilty
+comes with a high penalty in the model-averaging process. The
+combination of small sample sizes and a high parameter count (typically
+5 or more) means that mixture distributions will be down-weighted - even
+when they do a good job at describing the data. For this reason, when
+attempting to model bimodal data, we suggest looking at the fit using
+the default set of distributions and then examining the fit with just
+one of either the log-normal mixture or the log-logistic mixture. Keep
+in mind that this should only be done if the sample size is not
+pathologically small. As a guide, Prof. David Fox recommends as an
+<em>absolute minimum</em> <span class="math inline">\(n \ge 3k +
+1\)</span> but preferably <span class="math inline">\(n \ge 5k +
+1\)</span> where <span class="math inline">\(k\)</span> is the number of
+model parameters.</p>
+</div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="default-distributions">Default Distributions<a class="anchor" aria-label="anchor" href="#default-distributions"></a>
 </h2>
-<p>To avoid such model redundancy <span class="citation">(Burnham and
-Anderson 2002)</span>, ssdtools and the accompanying Shiny app <span class="citation">(Dalgarno 2021)</span> fit three different shape
-distributions by default: the log-normal, log-logistic and gamma.</p>
-<p>The three distributions are plotted below with a mean of 2 and
+<p>While there is a variety of distributions available in
+<code>ssdtools</code>, the inclusion of all of them for estimating a
+model-averaged SSD is not recommended.</p>
+<p>By default, <code>ssdtools</code> uses the (corrected) Akaike
+Information Criterion for small sample size (AICc) as a measure of
+relative quality of fit for different distributions and as the basis for
+calculating the model-averaged weights. However, the choice of
+distributions used to fit a model-averaged SSD can have a profound
+effect on the estimated <em>HCx</em> values.</p>
+<p>Deciding on a final default set of distributions to adopt using the
+model averaging approach is non-trivial, and we acknowledge that there
+is probably no definitive ‘solution’ to this issue. However, the default
+set should be underpinned by a guiding principle of parsimony, i.e., the
+set should be as large as is necessary to cover a wide variety of
+distributional shapes and contingencies but no bigger. Further, the
+default set should result in model-averaged estimates of <em>HCx</em>
+values that: 1) minimise bias; 2) have actual coverages of confidence
+intervals that are close to the nominal level of confidence; 3)
+estimated <em>HCx</em> and confidence intervals of <em>HCx</em> are
+robust to small changes in the data; and 4) represent a positively
+continuous distribution that has both right and left tails.</p>
+<p>The <code>ssdtools</code> development team has undertaken extensive
+simulation studies, as well as some detailed technical examinations of
+the various candidate distributions to examine issues of bias, coverage
+and numerical stability. A detailed account of our findings can be found
+in our report <span class="citation">(Fox et al. 2021b)</span> and are
+not repeated in detail here, although some of the issues associated with
+individual distributions are outlined below.</p>
+<div class="section level3">
+<h3 id="currently-recommended-default-distributions">Currently recommended default distributions<a class="anchor" aria-label="anchor" href="#currently-recommended-default-distributions"></a>
+</h3>
+<p>The default list of candidate distributions in <code>ssdtools</code>
+is comprised of the following: log-normal; log-logistic; gamma; inverse
+Weibull (log-Gumbel); Weibull; mixture of two log-normal
+distributions</p>
+<p>The default distributions are plotted below with a mean of 2 and
 standard deviation of 2 on the (natural) log concentration scale or
 around 7.4 on the concentration scale.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="fu"><a href="../reference/ssd_match_moments.html">ssd_match_moments</a></span><span class="op">(</span>meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_color_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="distributions_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
-<div class="section level3">
-<h3 id="log-normal-distribution">Log-normal distribution<a class="anchor" aria-label="anchor" href="#log-normal-distribution"></a>
-</h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Log-normal_distribution" class="external-link">log-normal</a>
-distribution was selected as the starting distribution given the data
-are for effect concentrations.</p>
-<p>The log-normal distribution does have a couple limitations to
-consider when fitting species sensitivity data. First, on the
-logarithmic scale, the normal distribution is symmetrical. Second, the
-log-normal distribution decays too quickly in the tails giving narrow
-tails which may not adequately fit the data. Additional distributions
-were selected to compensate for these deficiencies.</p>
-</div>
-<div class="section level3">
-<h3 id="log-logistic-distribution">Log-logistic distribution<a class="anchor" aria-label="anchor" href="#log-logistic-distribution"></a>
-</h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Log-logistic_distribution" class="external-link">log-logistic</a>
-distribution is often used as a candidate SSD primarily because of its
-analytic tractability <span class="citation">(Aldenberg and Slob
-1993)</span>. We included it because it has wider tails than the
-log-normal and because it is a specific case of the more general Burr
-family of distributions <span class="citation">Burr (1942)</span>.</p>
-</div>
-<div class="section level3">
-<h3 id="gamma-distribution">Gamma distribution<a class="anchor" aria-label="anchor" href="#gamma-distribution"></a>
-</h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Gamma_distribution" class="external-link">gamma</a>
-distribution is a two-parameter distribution commonly used to model
-failure times or time to events. For use in modeling species sensitivity
-data, the gamma distribution has two key features that provide
-additional flexibility relative to the log-normal distribution: 1) it is
-non-symmetrical on the logarithmic scale; and 2) it has wider tails. The
-Weibull distribution was considered as an alternative but the Gamma
-distribution is generally more flexible.</p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="all-distributions">All Distributions<a class="anchor" aria-label="anchor" href="#all-distributions"></a>
+<h2 id="distributions-currently-implemented-in-ssdtools">Distributions currently implemented in <code>ssdtools</code><a class="anchor" aria-label="anchor" href="#distributions-currently-implemented-in-ssdtools"></a>
 </h2>
-<p>For completeness the hazard concentrations for the other stable
-distributions provided by <code>ssdtools</code> are plotted below with a
-mean of 2 and standard deviation of 2 on the (natural) log concentration
-scale.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="fu"><a href="../reference/ssd_match_moments.html">ssd_match_moments</a></span><span class="op">(</span>dists <span class="op">=</span> <span class="fu"><a href="../reference/ssd_dists_all.html">ssd_dists_all</a></span><span class="op">(</span><span class="op">)</span>, meanlog <span class="op">=</span> <span class="fl">2</span>, sdlog <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_color_ssd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: This manual palette can handle a maximum of 8 values. You have</span></span>
-<span><span class="co">#&gt; supplied 10</span></span>
-<span><span class="co">#&gt; Warning: Removed 198 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_line()`).</span></span></code></pre></div>
-<p><img src="distributions_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
+<div class="section level4">
+<h4 id="burr-type-iii-distribution">Burr Type III distribution<a class="anchor" aria-label="anchor" href="#burr-type-iii-distribution"></a>
+</h4>
+<p>The Burr Type 3 is a flexible three parameter distribution can be
+fitted using <code>ssdtools</code> by supplying the string
+<code>burrIII3</code> to the <code>dists</code> argument in the
+<code>ssd_fit_dists</code> call.</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Burr III distribution</u></b>
+
+<br><br><i>See above for details</i>
+
+</div>
+<p><br> The Burr family of distributions has been central to the
+derivation of guideline values in Australia and New Zealand for over 20
+yr <span class="citation">(Fox et al. 2021a)</span>. While offering a
+high degree of ﬂexibility, experience with these distributions during
+that time has repeatedly highlighted numerical stability and convergence
+issues when parameters are estimated using maximum likelihood <span class="citation">(Fox et al. 2021a)</span>. This is thought to be due to
+the high degree of collinearity between parameter estimates and/or
+relatively ﬂat likelihood proﬁles <span class="citation">(Fox et al.
+2021a)</span>, and is one of the motivations behind the logic coded into
+Burrlioz to revert to either of the two limiting distributions. Burr
+Type 3 distribution is not currently one of the recommended
+distributionsin the default model set. This is because of 1) the
+convergence issues associated with the Burr Type 3 distribution, 2) the
+fact that reverting to a limiting two parameter distribution does not
+fit easily within a model averaging framework, and 3) that one of the
+two limiting distributions (the inverse Pareto, see below) also has
+estimation and convergence issues.</p>
+</div>
+<div class="section level4">
+<h4 id="log-normal">Log-normal<a class="anchor" aria-label="anchor" href="#log-normal"></a>
+</h4>
+<p>The <a href="https://en.wikipedia.org/wiki/Log-normal_distribution" class="external-link">log-normal</a>
+distribution is a commonly used distribution in the natural sciences -
+particularly as a probability model to describe right (positive)-skewed
+pehnomena such as <em>concentration</em> data.</p>
+<p>A random variable, <span class="math inline">\(X\)</span> is
+lognormally distributed if the <em>logarithm</em> of <span class="math inline">\(X\)</span> is normally distributed. The
+<em>pdf</em> of <span class="math inline">\(X\)</span> is given by</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Lognormal distribution</u></b>
+\[{f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma ^2}}}} \right]{\rm{  ;  }}x,\sigma  &gt; 0,\; - \infty  
+<p>The lognormal distribution was selected as the starting distribution
+given the data are for effect concentrations. The log-normal
+distribution can be fitted using <code>ssdtools</code> supplying the
+string <code>lnorm</code> to the <code>dists</code> argument in the
+<code>ssd_fit_dists</code> call.</p>
+<hr>
+<div class="section level6">
+<h6 id="sample-lognormal-probability-density-functions">Sample lognormal probability density functions<a class="anchor" aria-label="anchor" href="#sample-lognormal-probability-density-functions"></a>
+</h6>
+<p><img src="distributions_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
+<hr>
+</div>
+<div class="section level6">
+<h6 id="sample-lognormal-cumulative-distribution-functions">Sample lognormal cumulative distribution functions<a class="anchor" aria-label="anchor" href="#sample-lognormal-cumulative-distribution-functions"></a>
+</h6>
+<p><img src="distributions_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
+</div>
+</div>
+<div class="section level4">
+<h4 id="log-logistic-distribution">Log-logistic distribution<a class="anchor" aria-label="anchor" href="#log-logistic-distribution"></a>
+</h4>
+<p>Like the <em>lognormal</em> distribution, the <a href="https://en.wikipedia.org/wiki/Log-logistic_distribution" class="external-link">log-logistic</a>
+is similarly defined, that is: if <span class="math inline">\(X\)</span>
+has a log-logistic distribution, then <span class="math inline">\(Y =
+\ln (X)\)</span> has a <em>logistic</em> distribution.</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Log-logistic distribution</u></b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\left( {{\raise0.5ex\hbox{$\scriptstyle \beta $}
+\kern-0.1em/\kern-0.15em
+\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right){{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
+\kern-0.1em/\kern-0.15em
+\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^{\beta  - 1}}}}{{{{\left[ {1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
+\kern-0.1em/\kern-0.15em
+\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }} \right]}^2}}};}&amp;{y,}
+\end{array}\alpha ,\beta  &gt; 0\\
+\begin{array}{*{20}{c}}
+{{F_Y}\left( {y;\alpha ,\beta } \right) = \frac{{{{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
+\kern-0.1em/\kern-0.15em
+\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}}{{1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
+\kern-0.1em/\kern-0.15em
+\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}};}&amp;{y,}
+\end{array}\alpha ,\beta  &gt; 0
+\end{array}\]
+</div>
+<p><br>letting <span class="math inline">\(\mu  = \ln \left(
+\alpha  \right)\)</span> and <span class="math inline">\(s =
+\frac{1}{\beta }\)</span> we have:</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Logistic distribution</u></b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_X}\left( {x;\mu ,s} \right) = \frac{{{e^{ - x}}}}{{{{\left( {1 + {e^{ - x}}} \right)}^2}}};}&amp;{x,s &gt; 0,\; - \infty   0,\; - \infty  
+<p><br> The log-logistic distribution is often used as a candidate SSD
+primarily because of its analytic tractability <span class="citation">(Aldenberg and Slob 1993)</span>. We included it
+because it has wider tails than the log-normal and because it is a
+specific case of the more general Burr family of distributions <span class="citation">Burr (1942)</span>. The log-logistic distribution can
+be fitted using <code>ssdtools</code> by supplying the string
+<code>lnorm</code> to the <code>dists</code> argument in the
+<code>ssd_fit_dists</code> call.</p>
+<hr>
+<h4>
+Sample Log-logistic probability density functions
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4>
+Sample Log-logistic cumulative distribution functions
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level4">
+<h4 id="gamma-distribution">Gamma distribution<a class="anchor" aria-label="anchor" href="#gamma-distribution"></a>
+</h4>
+<p>The two-parameter <a href="https://en.wikipedia.org/wiki/Gamma_distribution" class="external-link">gamma</a>
+distribution has the following <em>pdf</em> and <em>cdf</em>.</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Gamma distribution</u></b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_X}\left( {x;b,c} \right) = \frac{{{x^{c - 1}}{e^{ - \left( {\frac{x}{b}} \right)}}}}{{{b^c}\,\Gamma \left( c \right)}}}&amp;{0 \le x}
+\end{array}  0\\
+\begin{array}{*{20}{c}}
+{{F_X}\left( {x;b,c} \right) = \frac{1}{{\,\Gamma \left( c \right)}}\,\gamma \left( {c,\frac{x}{b}} \right)}&amp;{0 \le x}
+\end{array}  0
+\end{array}\]
+</div>
+<p><br>where <span class="math inline">\(\Gamma
+\left(  \cdot  \right)\)</span> is the <em>gamma</em> function (in
+<code>R</code> this is simply <code>gamma(x)</code>) and <span class="math inline">\(\gamma \left(  \cdot  \right)\)</span> is the
+(lower) <em>incomplete gamma</em> function <span class="math display">\[\gamma \left( {x,a} \right) = \int\limits_0^x
+{{t^{a - 1}}} \,{e^{ - t}}\,dt\]</span> (this can be computed using the
+<code>gammainc</code> function from the <code>pracma</code> package in
+<code>R</code>).</p>
+<p>For use in modeling species sensitivity data, the gamma distribution
+has two key features that provide additional flexibility relative to the
+log-normal distribution: 1) it is asymmetrical on the logarithmic scale;
+and 2) it has wider tails.</p>
+<p>The gamma distribution can be fitted using <code>ssdtools</code> by
+supplying the string “gamma” to the <em>dists</em> argument in the
+<em>ssd_fit_dists</em> call.</p>
+<hr>
+<div class="section level6">
+<h6 id="sample-gamma-probability-density-functions">Sample gamma probability density functions<a class="anchor" aria-label="anchor" href="#sample-gamma-probability-density-functions"></a>
+</h6>
+<p><img src="distributions_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;"></p>
+<hr>
+</div>
+<div class="section level6">
+<h6 id="sample-gamma-cumulative-distribution-functions">Sample gamma cumulative distribution functions<a class="anchor" aria-label="anchor" href="#sample-gamma-cumulative-distribution-functions"></a>
+</h6>
+<p><img src="distributions_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;"></p>
+<hr>
+</div>
+</div>
+<div class="section level4">
+<h4 id="log-gumbel-inverse-weibull-distribution">Log-gumbel (inverse Weibull) distribution<a class="anchor" aria-label="anchor" href="#log-gumbel-inverse-weibull-distribution"></a>
+</h4>
+<p>The log-gumbel distribution is a two-parameter distribution commonly
+used to model extreme values.</p>
+<p>The log-gumbel distribution can be fitted using <code>ssdtools</code>
+by supplying the string <code>lgumbel</code> to the <code>dists</code>
+argument in the <code>ssd_fit_dists</code> call.</p>
+<p>The two-parameter log-gumbel distribution has the following
+<em>pdf</em> and <em>cdf</em>:</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Log-Gumbel distribution</u></b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\beta \,{e^{ - {{(\alpha x)}^{ - \beta }}}}}}{{{\alpha ^\beta }\,{x^{\beta  + 1}}}}}&amp;;
+\end{array}\quad x,\alpha ,\beta  &gt; 0\\
+\begin{array}{*{20}{c}}
+{{F_X}\left( {x;\alpha ,\beta } \right) = {e^{ - {{(\alpha x)}^{ - \beta }}}}}&amp;;
+\end{array}\quad x,\alpha ,\beta  &gt; 0
+\end{array}\]
+</div>
+<hr>
+<h4 id="log-gumbel-inverse-weibull-distribution-1">
+Sample Log-Gumbel probability density functions
+<a class="anchor" aria-label="anchor" href="#log-gumbel-inverse-weibull-distribution-1"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4 id="log-gumbel-inverse-weibull-distribution-2">
+Sample Log-Gumbel cumulative distribution functions
+<a class="anchor" aria-label="anchor" href="#log-gumbel-inverse-weibull-distribution-2"></a>
+</h4>
+<img src="distributions_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;"><hr>
+</div>
+<div class="section level4">
+<h4 id="gompertz-distribution">Gompertz distribution<a class="anchor" aria-label="anchor" href="#gompertz-distribution"></a>
+</h4>
+<p>The Gompertz distribution is a flexible distribution that exhibits
+both positive and negative skewness.</p>
+<p>The Gompertz distribution can be fitted using <code>ssdtools</code>
+by supplying the string <code>gompertz</code> to the <code>dists</code>
+argument in the <code>ssd_fit_dists</code> call.</p>
+<p>We condiser two parameterisations of the Gompertz distribution.The
+first, as given in <a href="https://en.wikipedia.org/wiki/Gompertz_distribution" class="external-link">Wikipedia</a>
+and also used in <code>ssdtools</code> [Gompertz] has the following
+<em>pdf</em> and <em>cdf</em>:</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Gompertz distribution: Parameterisation I</u></b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_X}\left( {x;\eta ,b} \right) = b{\kern 1pt} \eta \exp \left( {\eta  + bx - \eta {e^{bx}}} \right)}&amp;;
+\end{array}\quad 0 \le x  0\\
+\begin{array}{*{20}{c}}
+{{F_X}\left( {x;\eta ,b} \right) = 1 - \exp \left[ { - \eta \left( {{e^{bx}} - 1} \right)} \right]}&amp;;
+\end{array}\quad 0 \le x  0
+\end{array}\]
+</div>
+<p>The second parameterisation in which the <em>product</em> <span class="math inline">\(b\eta\)</span> in the formulae above is replaced
+by the parameter <span class="math inline">\(a\)</span> giving:</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Gompertz distribution: Parameterisation II</u></b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_X}(x;a,b) = \frac{a}{b}\;{e^{\frac{x}{b}}}\;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]}&amp;{;\quad 0 \le x  0}
+\end{array}\\
+\begin{array}{*{20}{c}}
+{{F_X}(x;a,b) = 1 - \;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]}&amp;{;\quad 0 \le x  0}
+\end{array}
+\end{array}\]
+</div>
+<hr>
+<h4 id="gompertz-distribution-1">
+Sample Gompertz probability density functions
+<a class="anchor" aria-label="anchor" href="#gompertz-distribution-1"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4 id="gompertz-distribution-2">
+Sample Gompertz cumulative distribution functions
+<a class="anchor" aria-label="anchor" href="#gompertz-distribution-2"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;"></p>
+<p>The Gompertz distribution is available in <code>ssdtools</code>,
+however parameter estimation can be somewhat unstable <span class="citation">(Fox et al. 2021b)</span>, and for this reason it is
+not currently included in the default set.</p>
+<hr>
+</div>
+<div class="section level4">
+<h4 id="weibull-distribution">Weibull distribution<a class="anchor" aria-label="anchor" href="#weibull-distribution"></a>
+</h4>
+<p>The inclusion of the Weibull distribution and inverse Pareto
+distribution (see next) in <code>ssdtools</code> was primarily
+necessitated by the need to maintain consistency with the calculations
+undertaken in <code>Burrlioz</code>. As mentioned earlier, both the
+Weibull and inverse Pareto distributions arise as <em>limiting
+distributions</em> when the Burr parameters <span class="math inline">\(c\)</span> and <span class="math inline">\(k\)</span> tend to either zero and/or infinity in
+specific ways.</p>
+<p>The two-parameter <a href="https://en.wikipedia.org/wiki/Weibull_distribution" class="external-link">Weibull</a>
+distribution has the following <em>pdf</em> and <em>cdf</em>:</p>
+<div style="text-align: center;" font-size: color: class="box">
+<b><u>Weibull distribution</u></b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_X}(x;a,b) = \frac{c}{\theta }\,{{\left( {\frac{x}{\theta }} \right)}^{c - 1}}{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}}&amp;{;\quad 0 \le x  0}
+\end{array}\\
+\begin{array}{*{20}{c}}
+{{F_X}(x;a,b) = 1 - \;{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}}&amp;{;\quad 0 \le x  0}
+\end{array}
+\end{array}\]
+</div>
+<p>The Weibull distribution can be fitted in <code>ssdtools</code> by
+supplying the string <code>weibull</code> to the <code>dists</code>
+argument in the <code>ssd_fit_dists</code> call.</p>
+<hr>
+<h4 id="weibull-distribution-1">
+Sample Weibull probability density functions
+<a class="anchor" aria-label="anchor" href="#weibull-distribution-1"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4 id="weibull-distribution-2">
+Sample Weibull cumulative distribution functions
+<a class="anchor" aria-label="anchor" href="#weibull-distribution-2"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level4">
+<h4 id="inverse-pareto-distribution">Inverse Pareto distribution<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution"></a>
+</h4>
+<p>The inverse Pareto distribution can be fitted using
+<code>ssdtools</code> by supplying the string <code>invpareto</code> to
+the <code>dists</code> argument in the <code>ssd_fit_dists</code>
+call.</p>
+<p>While the inverse Pareto distribution is implemented in the
+<code>Burrlioz 2.0</code> software, it is important to understand that
+it is done so only as one of the limiting Burr distributions (see <a href="https://bcgov.github.io/ssdtools/articles/E_additional-technical-details.html" class="external-link">technical
+details</a>). The inverse Pareto is not offered as a stand-alone option
+in the <code>Burrlioz 2.0</code> software. We have spent considerable
+time and effort exploring the properties of the inverse Pareto
+distribution, including deriving bias correction equations and
+alternative methods for deriving confidence intervals <span class="citation">(Fox et al. 2021b)</span>. This work has substantial
+value for improving the current <code>Burrlioz 2.0</code> method, and
+our bias corrections should be adopted when deriving <em>HCx</em>
+estimates from the inverse Pareto where parameters have been estimated
+using maximum likelihood.</p>
+<p>As is the case with the <code>Burrlioz 2.0</code> software, we have
+decided not to include the inverse Pareto distribution in the default
+candidate set in <code>ssdtools</code> although it is offered ass a
+user-selectable distribution to use in the model-fitting process.</p>
+<p>As with many statistical distributions, different ‘variants’ exist.
+These ‘variants’ are not so much different distributions as they are
+simple re-parameterisations. For example, many distributions have a
+<em>scale</em> parameter, <span class="math inline">\(\beta\)</span> and
+some authors and texts will use <span class="math inline">\(\beta\)</span> while others use <span class="math inline">\(\frac{1}{\beta }\)</span>. An example of this
+re-paramterisation was given above for the Gompertz distribution. While
+the choice of mathematical representation may be purely preferential, it
+is sometimes done for mathematical convenience. For example,
+Parameterisation I of the Gompertz distribution above was obtained by
+letting <span class="math inline">\(a = b\eta\)</span> in
+Parameterisation II. This re-expression involving parameters <span class="math inline">\(b\)</span> and <span class="math inline">\(\eta\)</span> would be particularly useful when
+trying to fit a distribution for which one of <span class="math inline">\(\left\{ {b,\,\eta } \right\}\)</span> was very
+small and the other was very large.</p>
+<p>It has already been noted that the particular parameterisation of the
+(Inverse)Pareto distribution used in both <code>Burrlioz 2.0</code> and
+<code>ssdtools</code> was <strong>not</strong> a matter of preference,
+but rather was dictated by mathematical considerations which
+demonstrated convergence of the Burr distribution to one specific
+version of the (Inverse)Pareto distribution. While the mathematics
+provides an elegant solution to an otherwise problematic situation, this
+version of the (Inverse)Pareto distribution is not particularly use as a
+stand-alone distribution for fitting an SSD (other than as a special,
+limiting case of the Burr distribution).</p>
+<p>The two versions of the (Inverse)Pareto distribution are known as the
+<em>European</em> and <em>North American</em> versions. Their
+<em>pdfs</em> and <em>cdfs</em> are given below.</p>
+<hr>
+<div style="text-align: left;" font-size: color: class="box">
+                    <b><u>(Inverse)Pareto distribution - North American version</u><br><br>Pareto distribution</b>
+
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_X}\left( {x;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {x^{ - \left( {\alpha  + 1} \right)}}}&amp;;
+\end{array}\quad x &gt; \beta ;\;\alpha ,\beta  &gt; 0\\
+\begin{array}{*{20}{c}}
+{{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{x}} \right)}^\alpha }}&amp;;
+\end{array}\quad x &gt; \beta ;\;\alpha ,\beta  &gt; 0
+\end{array}\]
+Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>inverse Pareto distribution.</i><br><br><b>inverse Pareto distribution</b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{g_Y}\left( {y;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}}&amp;;
+\end{array}\quad y \le \frac{1}{\beta };\;\;\alpha ,\beta  &gt; 0\\
+\begin{array}{*{20}{c}}
+{{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\beta \,y} \right)}^\alpha }}&amp;;
+\end{array}\quad 0  0
+\end{array}\]
+</div>
+<p><br><br>Importantly, we see that the <em>North American</em> versions
+of these distributions are <b><u>bounded</u></b> with the Pareto
+distribution bounded <strong>below</strong> by <span class="math inline">\(\beta\)</span> and the inverse Pareto distribution
+bounded <em>above</em> by <span class="math inline">\(\frac{1}{\beta
+}\)</span>.<br>As an aside, the <em>mle</em> of <span class="math inline">\(\beta\)</span> in the Pareto distribution is <span class="math display">\[\hat \beta  = \min \left\{ {{X_1}, \ldots ,{X_n}}
+\right\}\]</span> and the <em>mle</em> of <span class="math inline">\(\frac{1}{\beta }\)</span> in the inverse Pareto is
+<span class="math display">\[\begin{array}{*{20}{l}}
+{\tilde \beta  = \max \left\{ {{Y_1}, \ldots ,{Y_n}} \right\}}\\
+{\quad  = \max \left\{ {\frac{1}{{{X_1}}}, \ldots ,\frac{1}{{{X_n}}}}
+\right\} = \frac{1}{{\min \left\{ {{X_1}, \ldots ,{X_n}} \right\}}}}\\
+{\quad  = \frac{1}{{\hat \beta }}}
+\end{array}\]</span>.</p>
+<p>and the <em>mle</em> of <span class="math inline">\(\alpha\)</span>
+is: <span class="math display">\[\hat \alpha  = {\left[ {\ln \left(
+{\frac{g}{{\hat \beta }}} \right)} \right]^{ - 1}}\]</span> where <span class="math inline">\(g\)</span> is the <em>geometric mean</em>: <span class="math display">\[g = {\left[ {\prod\limits_{i = 1}^n {{X_i}} }
+\right]^{\frac{1}{n}}}\]</span></p>
+<p>Thus, it doesn’t matter whether you’re fitting a Pareto or inverse
+Pareto distribution to your data - the parameter estimates are the
+<u>same</u>.</p>
+<p>Because it is <em>bounded</em>, the North American version of the
+(Inverse)Pareto distribution is not useful as a stand-alone SSD - more
+so for the <em>inverse Pareto</em> distribution since it is bounded from
+<em>above</em>.</p>
+<h4 id="inverse-pareto-distribution-1">
+Sample North American probability density functions : Pareto
+distribution
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-1"></a>
+</h4>
+<img src="distributions_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;"><h4 id="inverse-pareto-distribution-2">
+Sample North American cumulative distribution functions : Pareto
+distribution
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-2"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><br>We see from the <em>pdf</em> plots that the</p>
+<h4 id="inverse-pareto-distribution-3">
+Sample North American probability density functions : inverse Pareto
+distribution
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-3"></a>
+</h4>
+<img src="distributions_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;"><h4 id="inverse-pareto-distribution-4">
+Sample North American cumulative distribution functions : inverse Pareto
+distribution
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-4"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;"></p>
+<p>The alternative, <em>European</em> version of the inverse Pareto
+distribution is a more realistic candidate.</p>
+<hr>
+<div style="text-align: left;" font-size: color: class="box">
+                    <b><u>(Inverse)Pareto distribution - European version</u><br><br>Pareto distribution</b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\alpha \,\beta \,{x^{\alpha  - 1}}}}{{{{\left( {x + \beta } \right)}^{\alpha  + 1}}}}}&amp;;
+\end{array}\quad x,\;\alpha ,\beta  &gt; 0\\
+\begin{array}{*{20}{c}}
+{{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{{x + \beta }}} \right)}^\alpha }}&amp;;
+\end{array}\quad x,\;\alpha ,\beta  &gt; 0
+\end{array}\]
+Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>inverse Pareto distribution.</i><br><br><b>inverse Pareto distribution</b>
+\[\begin{array}{l}
+\begin{array}{*{20}{c}}
+{{g_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}}}{{{{\left( {1 + \beta y} \right)}^{\alpha  + 1}}}}}&amp;;
+\end{array}\quad y,\;\alpha ,\beta  &gt; 0\\
+\begin{array}{*{20}{c}}
+{{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\frac{{\beta y}}{{1 + \beta y}}} \right)}^\alpha }}&amp;;
+\end{array}\quad y,\;\alpha ,\beta  &gt; 0
+\end{array}\]
+</div>
+<p>We note in passing that <em>both</em> versions of these Pareto and
+inverse Pareto distrbutions are availabale in <code>R</code>. For
+example, the <code>R</code>package <code>extraDistr</code> has North
+American versions, while the <code>actuar</code> package has European
+versions.</p>
+<h4 id="inverse-pareto-distribution-5">
+Sample European probability density functions : Pareto distribution
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-5"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4 id="inverse-pareto-distribution-6">
+Sample European cumulative distribution functions : Pareto distribution
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-6"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4 id="inverse-pareto-distribution-7">
+Sample European probability density functions : inverse Pareto
+distribution
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-7"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4 id="inverse-pareto-distribution-8">
+Sample European cumulative distribution functions : inverse Pareto
+distribution
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-8"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level4">
+<h4 id="inverse-weibull-distribution-see-log-gumbel-above">Inverse Weibull distribution (see log-Gumbel, above)<a class="anchor" aria-label="anchor" href="#inverse-weibull-distribution-see-log-gumbel-above"></a>
+</h4>
+<p>The inverse Weibull is mathematically equivalent to the log-Gumbel
+distribution described above. While which is also a limiting
+distribution of the Burr Type 3, this distribution does not show the
+same instability issues, and is unbounded to the right. It therefore
+represents a valid SSD distribution and is included in the default model
+set as a distribution in its own right.</p>
+<p>The inverse Weibull (log-Gumbel) distribution can be fitted in
+<code>ssdtools</code> by supplying the string <code>lgumbel</code> to
+the <code>dists</code> argument in the <code>ssd_fit_dists</code>
+call.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="relationships-among-distributions-in-ssdtools">Relationships among distributions in <code>ssdtools</code><a class="anchor" aria-label="anchor" href="#relationships-among-distributions-in-ssdtools"></a>
+</h2>
+<h5 id="relationships-among-distributions-in-ssdtools-1">
+NOTES
+<a class="anchor" aria-label="anchor" href="#relationships-among-distributions-in-ssdtools-1"></a>
+</h5>
+<ol style="list-style-type: decimal">
+<li><p>In the diagram below, <span class="math inline">\(X\)</span>
+denotes the random variable in the box at the <em>beginning</em> of the
+arrow and the expression beside the arrow indicates the mathematical
+transformation of <span class="math inline">\(X\)</span> such that the
+resultant <em>transformed</em> data has the distribution identified in
+the box at the <em>end</em> of the arrow.</p></li>
+<li><p><em>Reciprocal</em> transformations (<span class="math inline">\(\frac{1}{X}\)</span>) are
+<strong>bi-directional</strong> (<span class="math inline">\(\leftrightarrow\)</span>).</p></li>
+<li><p>Although the <em>negative exponential</em> distribution is
+<strong>not</strong> explicitly included in <code>ssdtools</code>, it is
+a special case of the <em>gamma</em> distribution with <span class="math inline">\(c=1\)</span>. It is included in this figure as it
+is related to other distributions that <em>are</em> included in
+<code>ssdtools</code>.</p></li>
+<li><p>The <em>European</em> versions of the Pareto and inverse Pareto
+distributions are <strong>unbounded</strong>; the <em>North
+American</em> versions are <strong>bounded</strong>.</p></li>
+</ol>
+<hr>
+<p><img src="images/relationships.png" style="width:100.0%"></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-aldenberg_confidence_1993" class="csl-entry">
-Aldenberg, T., and W. Slob. 1993. <span>“Confidence <span>Limits</span>
-for <span>Hazardous</span> <span>Concentrations</span>
-<span>Based</span> on <span>Logistically</span> <span>Distributed</span>
-<span>NOEC</span> <span>Toxicity</span> <span>Data</span>.”</span>
-<em>Ecotoxicology and Environmental Safety</em> 25 (1): 48–63. <a href="https://doi.org/10.1006/eesa.1993.1006" class="external-link">https://doi.org/10.1006/eesa.1993.1006</a>.
-</div>
-<div id="ref-burnham_model_2002" class="csl-entry">
-Burnham, Kenneth P., and David R. Anderson, eds. 2002. <em>Model
-<span>Selection</span> and <span>Multimodel</span>
-<span>Inference</span></em>. New York, NY: Springer New York. <a href="https://doi.org/10.1007/b97636" class="external-link">https://doi.org/10.1007/b97636</a>.
+Aldenberg T, Slob W (1993) Confidence <span>Limits</span> for
+<span>Hazardous</span> <span>Concentrations</span> <span>Based</span> on
+<span>Logistically</span> <span>Distributed</span> <span>NOEC</span>
+<span>Toxicity</span> <span>Data</span>. Ecotoxicology and Environmental
+Safety 25:48–63. <a href="https://doi.org/10.1006/eesa.1993.1006" class="external-link">https://doi.org/10.1006/eesa.1993.1006</a>
 </div>
 <div id="ref-burr_cumulative_1942" class="csl-entry">
-Burr, Irving W. 1942. <span>“Cumulative <span>Frequency</span>
-<span>Functions</span>.”</span> <em>The Annals of Mathematical
-Statistics</em> 13 (2): 215–32.
+Burr IW (1942) Cumulative <span>Frequency</span> <span>Functions</span>.
+The Annals of Mathematical Statistics 13:215–232
 </div>
 <div id="ref-dalgarno_shinyssdtools_2021" class="csl-entry">
-Dalgarno, Seb. 2021. <span>“Shinyssdtools: <span>A</span> Web
-Application for Fitting <span>Species</span> <span>Sensitivity</span>
-<span>Distributions</span> (<span>SSDs</span>).”</span> <em>Journal of
-Open Source Software</em> 6 (57): 2848. <a href="https://doi.org/10.21105/joss.02848" class="external-link">https://doi.org/10.21105/joss.02848</a>.
+Dalgarno S (2021) Shinyssdtools: <span>A</span> web application for
+fitting <span>Species</span> <span>Sensitivity</span>
+<span>Distributions</span> (<span>SSDs</span>). Journal of Open Source
+Software 6:2848. <a href="https://doi.org/10.21105/joss.02848" class="external-link">https://doi.org/10.21105/joss.02848</a>
 </div>
-<div id="ref-schwarz_improving_2019" class="csl-entry">
-Schwarz, Carl, and Angeline Tillmanns. 2019. <span>“Improving
-<span>Statistical</span> <span>Methods</span> for <span>Modeling</span>
-<span>Species</span> <span>Sensitivity</span>
-<span>Distributions</span>.”</span> WSS2019-07. Victoria, BC: Province
-of British Columbia.
+<div id="ref-fisher2019" class="csl-entry">
+Fisher R, Dam R van, Batley G, et al (2019) KEY ISSUES IN THE DERIVATION
+OF WATER QUALITY GUIDELINE VALUES: A WORKSHOP REPORT
+</div>
+<div id="ref-fox_2016" class="csl-entry">
+Fox DR (2016) <a href="https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5" class="external-link">Contemporary
+methods for statistical design and analysis</a>. In: Blasco J, Chapman
+PM, Campana O, Hampel M (eds) Marine Ecotoxicology
+</div>
+<div id="ref-fox_recent_2021" class="csl-entry">
+Fox DR, Dam RA, Fisher R, et al (2021a) Recent <span>Developments</span>
+in <span>Species</span> <span>Sensitivity</span>
+<span>Distribution</span> <span>Modeling</span>. Environmental
+Toxicology and Chemistry 40:293–308. <a href="https://doi.org/10.1002/etc.4925" class="external-link">https://doi.org/10.1002/etc.4925</a>
+</div>
+<div id="ref-fox_methodologies_2021" class="csl-entry">
+Fox DR, Fisher R, Thorley JL, Schwarz C (2021b) <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">Joint
+investigation into <span class="nocase">statistical</span> <span class="nocase">methodologies</span> underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
+<span class="nocase">guideline</span> <span class="nocase">values</span>
+in <span>Australia</span> and <span>New Zealand</span></a>.
+Environmetrics Australia; Australian Institute of Marine Science
+</div>
+<div id="ref-newman_2000" class="csl-entry">
+Newman MC, Ownby DR, Mézin LCA, et al (2000) Applying <span class="nocase">species-sensitivity distributions</span> in <span class="nocase">ecological</span> <span class="nocase">risk
+assessment</span>: Assumptions of <span class="nocase">distribution
+type</span> and sufficient <span class="nocase">numbers of
+species</span>. Environmental Toxicology and Chemistry 19:508–515. <a href="https://doi.org/10.1002/etc.5620190233" class="external-link">https://doi.org/10.1002/etc.5620190233</a>
 </div>
 <div id="ref-shao_estimation_2000" class="csl-entry">
-Shao, Quanxi. 2000. <span>“Estimation for Hazardous Concentrations Based
-on <span>NOEC</span> Toxicity Data: An Alternative Approach,”</span> 13.
+Shao Q (2000) Estimation for hazardous concentrations based on
+<span>NOEC</span> toxicity data: An alternative approach. 13
+</div>
+<div id="ref-Zajdlik_2005" class="csl-entry">
+Zajdlik B (2005) Statistical analysis of the SSD approach for
+development of canadian water quality guidelines. Zajdlik; Associates
 </div>
 </div>
 </div>
@@ -238,7 +891,7 @@ License</a></p>
 <p>The code is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0" class="external-link">Apache License
 2.0</a></p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  <aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -259,5 +912,8 @@ License</a></p>
 
   
 
-  </body>
+  </main>
+</div>
+</div>
+</body>
 </html>
