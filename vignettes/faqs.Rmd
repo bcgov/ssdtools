@@ -30,7 +30,7 @@ library(ssdtools)
 
 dist <- ssdtools::ssd_fit_dists(ssddata::ccme_boron)
 
-ssdtools::ssd_plot_cdf(dist)
+ssdtools::ssd_plot_cdf(dist, average = NA)
 ```
 
 ## How do I fit distributions to multiple groups such taxa and/or chemicals?
