@@ -48,14 +48,8 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/distributions.html">Selecting Distributions</a>
-    <a class="dropdown-item" href="../articles/exposure-plots.html">Embellishing Plots with an Exposure Distribution</a>
-    <a class="dropdown-item" href="../articles/faqs.html">Frequently Asked Questions</a>
-    <a class="dropdown-item" href="../articles/small-sample-bias-ref.html">Small sample bias in estimates - reference</a>
-  </div>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/index.html">Articles</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -88,7 +82,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-05-01</h4>
+            <h4 data-toc-skip class="date">2024-05-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/faqs.Rmd" class="external-link"><code>vignettes/faqs.Rmd</code></a></small>
       <div class="d-none name"><code>faqs.Rmd</code></div>
@@ -100,15 +94,10 @@ Team</h4>
 <h2 id="how-can-i-plot-the-model-averaged-fit-with-individual-fits">How can I plot the model averaged fit with individual fits?<a class="anchor" aria-label="anchor" href="#how-can-i-plot-the-model-averaged-fit-with-individual-fits"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ssddata</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">dist</span> <span class="op">&lt;-</span> <span class="fu">ssdtools</span><span class="fu">::</span><span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span>
-<span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dist</span>, ci <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ssdtools</span><span class="fu">::</span><span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="va">dist</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">est</span>, y <span class="op">=</span> <span class="va">proportion</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="va">dist</span>, average <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faqs_files/figure-html/unnamed-chunk-2-1.png" width="480"></p>
 </div>
 <div class="section level2">
@@ -137,12 +126,16 @@ follows.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">ccme_boron</span>, <span class="va">boron_preds</span>, xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ci <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">Group</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faqs_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
+<div id="refs">
+
+</div>
 </div>
 <div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
 </h2>
-<p>Copyright 2024 Province of British Columbia, Environment and Climate
-Change Canada, and Australian Government Department of Climate Change,
+<p>Copyright 2018-2024 Province of British Columbia<br>
+Copyright 2021 Environment and Climate Change Canada<br>
+Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water</p>
 <p>The documentation is released under the <a href="https://creativecommons.org/licenses/by/4.0/" class="external-link">CC BY 4.0
 License</a></p>
