@@ -85,7 +85,7 @@ where $\text{HC}_x^{\left\{ i \right\}}$ is the $\text{HC}_x$ estimate for the $
 
 The weighted arithmetic mean is conventionally used for averaging model parameters or estimates [@burnham_model_2002]. 
 However, in the case of $\text{HC}_x$ and $\text{HP}_u$ values, the estimator $\widetilde{\text{HC}}_x$ fails to satisfy the *inversion principle* [@fox_methodologies_2024] which requires 
-$$\left[ \text{HP}_u \right]_{x = \text{HC}_\theta } = \theta$$
+$$\left[ \text{HP}_u \right]_{u = \text{HC}_\theta } = \theta$$
 This inconsistency has been rectified in `ssdtools` v2 by estimating the model-averaged $\text{HC}_x$ (denoted $\widehat{\text{HC}}_x$) directly from the model-averaged cumulative distribution function (*cdf*) 
 $$G\left( u \right) = \sum\limits_{i = 1}^m w_i F_i\left( u \right)$$
 where ${F_i}\left(  \cdot  \right)$ is the *cdf* for the the *i^th^* model and $w_i$ is the model weight as before. $\widehat{\text{HC}}_x$ is then obtained as the solution to
