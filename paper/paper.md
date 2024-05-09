@@ -39,7 +39,7 @@ tags:
 
 # Summary
 
-Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate Hazard Concentrations ($\text{HC}_x$) - the concentration of a chemical that affects a given $x$% of species.
+Species sensitivity distributions (SSDs) are probability distributions that are used to estimate Hazard Concentrations ($\text{HC}_x$) - the concentration of a chemical that affects a given $x$% of species.
 $\text{HC}_5$ values, which protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a given concentration $x$.
 
@@ -63,7 +63,7 @@ The method, as applied in the SSD context is described in detail in [@fox_recent
 ## Distributions
 
 Ten distributions are currently available in `ssdtools`. 
-The original version (v0) of `ssdtools` provided the two parameters log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
+The original version (v0) of `ssdtools` provided the two parameter log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
 In the first major update (v1), the two parameter inverse Pareto (invpareto), three parameter Burr Type III (burrIII3) and five parameter log-normal log-normal (lnorm_lnorm) and log-logistic log-logistic (llogis_llogis) mixture distributions were added.
 Together with the Burr Type III, the inverse Pareto and inverse Weibull provide the underlying distributions of the SSD fitting software `Burrlioz` [@barry2012burrlioz] while the mixture distributions were added to accommodate bimodality [@fox_recent_2021]. 
 Since v1, `ssdtools` has by default fitted the lnorm, llogis, lgumbel, gamma, weibull and lnorm_lnorm distributions.
@@ -153,7 +153,7 @@ autoplot(fits)
 
 ![Species sensitivity distributions for the six default distributions with the Boron species concentration data.](autoplot.png){height="4in"}
 
-The proper model averaged cdf with 95% CIs (with the model averaged $\text{HC}_5$ indicated by a dotted line) can be plotted using:
+The model averaged cdf with 95% CIs (with the model averaged $\text{HC}_5$ indicated by a dotted line) can be plotted using:
 
 ```r
 predictions <- ssdtools::predict(fits, ci = TRUE)
