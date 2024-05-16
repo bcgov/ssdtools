@@ -109,7 +109,7 @@ As a result, the default method provided by the current update is a faster heuri
 
 ## Multiple Distribution Functions
 
-In order to implement the "multi" method of bootstrapping, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) set of functions for multiple distributions.
+In order to implement the "multi" method of bootstrapping, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
 
 ## Plotting 
 
