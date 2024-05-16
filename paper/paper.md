@@ -39,7 +39,7 @@ tags:
 
 # Summary
 
-Species sensitivity distributions (SSDs) are probability distributions that are used to estimate Hazard Concentrations ($\text{HC}_x$) - the concentration of a chemical that affects a given $x$% of species.
+Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate Hazard Concentrations ($\text{HC}_x$) - the concentration of a chemical that affects a given $x$% of species.
 $\text{HC}_5$ values, which protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a given concentration $x$.
 
