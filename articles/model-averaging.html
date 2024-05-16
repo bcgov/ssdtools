@@ -82,7 +82,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-05-06</h4>
+            <h4 data-toc-skip class="date">2024-05-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/model-averaging.Rmd" class="external-link"><code>vignettes/model-averaging.Rmd</code></a></small>
       <div class="d-none name"><code>model-averaging.Rmd</code></div>
@@ -431,8 +431,7 @@ using the <code><a href="https://rdrr.io/r/stats/uniroot.html" class="external-l
 </h2>
 <p>This is a little more complex, although we’ll try to provide a
 non-mathematical explanation. For those interested in going deeper, a
-more comprehensive treatment can be found in <span class="citation">(Burnham and Anderson 2002)</span> and <span class="citation">(Fletcher 2018)</span> as well as <a href="https://training.ecotox.science/courses/an-introduction-to-model-averaging-using-ssdtools-in-r/" class="external-link">this</a>
-on-line course .</p>
+more comprehensive treatment can be found in <span class="citation">(Burnham and Anderson 2002)</span> and <span class="citation">(Fletcher 2018)</span>.</p>
 <p>
 </p>
 <p>This time, we’ll look at fitting a gamma, lognormal, and pareto
@@ -518,8 +517,7 @@ computed from the value of the relevant <em>test statistic</em> - in
 this case, the value of the <code>omega2max</code> test statistic. For
 this particular test, it’s a case of the <u>smaller</u> the better. From
 the output above we see that the <code>omega2max</code> values are <span class="math inline">\(0.344\)</span> for the gamma distribution, <span class="math inline">\(0.328\)</span> for the lognormal distribution, and
-<span class="math inline">\(0.0.314\)</span> for the Pareto
-distribution.
+<span class="math inline">\(0.314\)</span> for the Pareto distribution.
 </p>
 <p>
 We might somewhat naively compute the relative weights as:<br><span class="math inline">\({w_1} = \frac{{{{0.344}^{ - 1}}}}{{\left(
@@ -542,9 +540,9 @@ determining the weights that we seek.
 <p><br>A discussion of <em>information theoretic</em> methods for
 assessing goodness-of-fit is beyond the scope of this vignette.
 Interested readers should consult <span class="citation">(Burnham and
-Anderson 2002)</span> or the <a href="https://training.ecotox.science/courses/an-introduction-to-model-averaging-using-ssdtools-in-r/" class="external-link">on-line
-course</a>. A commonly used metric to determine the model-average
-weights is the <strong>Akaike Information Criterion</strong> or <a href="https://en.wikipedia.org/wiki/Akaike_information_criterion" class="external-link">AIC</a>.
+Anderson 2002)</span>. A commonly used metric to determine the
+model-average weights is the <strong>Akaike Information
+Criterion</strong> or <a href="https://en.wikipedia.org/wiki/Akaike_information_criterion" class="external-link">AIC</a>.
 The formula for the <span class="math inline">\(AIC\)</span> is: <span class="math display">\[AIC = 2k - 2\ln \left( \ell  \right)\]</span></p>
 where <span class="math inline">\(k\)</span> is the number of model
 parameters and <span class="math inline">\(\ell\)</span> is the
@@ -556,12 +554,12 @@ introduction can be found <a href="https://ep-news.web.cern.ch/what-likelihood-f
 <p>The likelihood for our three distributions can be computed in
 <code>R</code> as follows:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/Pareto.html" class="external-link">dpareto</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,location <span class="op">=</span> <span class="fl">0.1800000</span>, shape<span class="op">=</span><span class="fl">0.9566756</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; [1] -5.621683</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,shape <span class="op">=</span> <span class="fl">2.0591977</span>,scale <span class="op">=</span> <span class="fl">0.3231032</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,shape <span class="op">=</span> <span class="fl">2.0591977</span>,scale <span class="op">=</span> <span class="fl">0.3231032</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; [1] -7.020597</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>, meanlog <span class="op">=</span> <span class="op">-</span><span class="fl">0.6695120</span>,sdlog   <span class="op">=</span>  <span class="fl">0.7199573</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; [1] -5.812947</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -5.812947</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/Pareto.html" class="external-link">dpareto</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,location <span class="op">=</span> <span class="fl">0.1800000</span>, shape<span class="op">=</span><span class="fl">0.9566756</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; [1] -5.621683</span></span></code></pre></div>
 <p>From which the <em>AIC</em> values readily follow:</p>
 <pre><code><span><span class="co">#&gt; AIC for gamma distribution = 18.04119</span></span>
 <span><span class="co">#&gt; AIC for lognormal distribution = 15.62589</span></span>
@@ -642,7 +640,7 @@ to address this problem, although it too relied on a number of
 assumptions. This ‘correction’ to the AIC for small samples (referred to
 as <span class="math inline">\(AI{{C}_{c}}\)</span>) is:</p>
 <div style="text-align: center;" font-size: color: class="box">
-<b><u>Corrected Akaike Information Criterion (AICc)</u></b><br>\[AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+<b><u>Corrected Akaike Information Criterion (AICc)</u></b>\[AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
 </div>
 <p><br>It is clear from the formula for <span class="math inline">\(AI{{C}_{c}}\)</span> that for   <span class="math inline">\(n\gg k\)</span>,    <span class="math inline">\(AI{{C}_{c}}\simeq AIC\)</span>. The issue of
 sample size is ubiquitous in statistics, but even more so in

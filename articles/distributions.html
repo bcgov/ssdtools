@@ -82,7 +82,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-05-06</h4>
+            <h4 data-toc-skip class="date">2024-05-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/distributions.Rmd" class="external-link"><code>vignettes/distributions.Rmd</code></a></small>
       <div class="d-none name"><code>distributions.Rmd</code></div>
@@ -185,15 +185,10 @@ distribution are:</p>
 </div>
 <hr>
 <h4 id="burr-iii-distribution-1">
-Sample Burr probability density functions
+Sample Burr probability density and cumulative distribution functions
 <a class="anchor" aria-label="anchor" href="#burr-iii-distribution-1"></a>
 </h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"></p>
-<h4 id="burr-iii-distribution-2">
-Sample Burr cumulative distribution functions
-<a class="anchor" aria-label="anchor" href="#burr-iii-distribution-2"></a>
-</h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-4-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-4-2.png" width="576"></p>
 <p>While the Burr type III distribution was adopted as the default
 distribution in Burrlioz, it is well known (e.g., Tadikamalla (1980))
 that the Burr III distribution is related to several other theoretical
@@ -258,9 +253,13 @@ distributions in the ‘mixture.’</p>
 <div class="section level6">
 <h6 id="sample-lognormal-mixture-distributions">Sample lognormal mixture distributions<a class="anchor" aria-label="anchor" href="#sample-lognormal-mixture-distributions"></a>
 </h6>
-<p><img src="distributions_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;"></p>
-<p><img src="distributions_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></p>
-<p><br>AS can be see from the plot above, the mixture distributions
+<h4 id="sample-lognormal-mixture-distributions-1">
+Sample lognormal mixture probability density and cumulative distribution
+functions
+<a class="anchor" aria-label="anchor" href="#sample-lognormal-mixture-distributions-1"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-5-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-5-2.png" width="576"></p>
+<p><br>As can be see from the plot above, the mixture distributions
 provide a highly flexible means of modelling <em>bimodality</em> in an
 emprical SSD. This happens, for example, when the toxicity data for some
 toxicant include both animal and plant species, or there are different
@@ -322,7 +321,7 @@ distributions</p>
 <p>The default distributions are plotted below with a mean of 2 and
 standard deviation of 2 on the (natural) log concentration scale or
 around 7.4 on the concentration scale.</p>
-<p><img src="distributions_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -378,17 +377,11 @@ distribution can be fitted using <code>ssdtools</code> supplying the
 string <code>lnorm</code> to the <code>dists</code> argument in the
 <code>ssd_fit_dists</code> call.</p>
 <hr>
-<div class="section level6">
-<h6 id="sample-lognormal-probability-density-functions">Sample lognormal probability density functions<a class="anchor" aria-label="anchor" href="#sample-lognormal-probability-density-functions"></a>
-</h6>
-<p><img src="distributions_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
-<hr>
-</div>
-<div class="section level6">
-<h6 id="sample-lognormal-cumulative-distribution-functions">Sample lognormal cumulative distribution functions<a class="anchor" aria-label="anchor" href="#sample-lognormal-cumulative-distribution-functions"></a>
-</h6>
-<p><img src="distributions_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
-</div>
+<h4>
+Sample lognormal probability density and cumulative distribution
+functions
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-7-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-7-2.png" width="576"></p>
 </div>
 <div class="section level4">
 <h4 id="log-logistic-distribution">Log-logistic distribution<a class="anchor" aria-label="anchor" href="#log-logistic-distribution"></a>
@@ -435,13 +428,10 @@ be fitted using <code>ssdtools</code> by supplying the string
 <code>ssd_fit_dists</code> call.</p>
 <hr>
 <h4>
-Sample Log-logistic probability density functions
+Sample Log-logistic probability density and cumulative distribution
+functions
 </h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></p>
-<h4>
-Sample Log-logistic cumulative distribution functions
-</h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-8-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-8-2.png" width="576"></p>
 </div>
 <div class="section level4">
 <h4 id="gamma-distribution">Gamma distribution<a class="anchor" aria-label="anchor" href="#gamma-distribution"></a>
@@ -474,18 +464,12 @@ and 2) it has wider tails.</p>
 supplying the string “gamma” to the <em>dists</em> argument in the
 <em>ssd_fit_dists</em> call.</p>
 <hr>
-<div class="section level6">
-<h6 id="sample-gamma-probability-density-functions">Sample gamma probability density functions<a class="anchor" aria-label="anchor" href="#sample-gamma-probability-density-functions"></a>
-</h6>
-<p><img src="distributions_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;"></p>
+<h4 id="gamma-distribution-1">
+Sample gamma probability density and cumulative distribution functions
+<a class="anchor" aria-label="anchor" href="#gamma-distribution-1"></a>
+</h4>
+<p><img src="distributions_files/figure-html/unnamed-chunk-9-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-9-2.png" width="576"></p>
 <hr>
-</div>
-<div class="section level6">
-<h6 id="sample-gamma-cumulative-distribution-functions">Sample gamma cumulative distribution functions<a class="anchor" aria-label="anchor" href="#sample-gamma-cumulative-distribution-functions"></a>
-</h6>
-<p><img src="distributions_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;"></p>
-<hr>
-</div>
 </div>
 <div class="section level4">
 <h4 id="log-gumbel-inverse-weibull-distribution">Log-gumbel (inverse Weibull) distribution<a class="anchor" aria-label="anchor" href="#log-gumbel-inverse-weibull-distribution"></a>
@@ -510,15 +494,11 @@ argument in the <code>ssd_fit_dists</code> call.</p>
 </div>
 <hr>
 <h4 id="log-gumbel-inverse-weibull-distribution-1">
-Sample Log-Gumbel probability density functions
+Sample log-Gumbel probability density and cumulative distribution
+functions
 <a class="anchor" aria-label="anchor" href="#log-gumbel-inverse-weibull-distribution-1"></a>
 </h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;"></p>
-<h4 id="log-gumbel-inverse-weibull-distribution-2">
-Sample Log-Gumbel cumulative distribution functions
-<a class="anchor" aria-label="anchor" href="#log-gumbel-inverse-weibull-distribution-2"></a>
-</h4>
-<img src="distributions_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;"><hr>
+<img src="distributions_files/figure-html/unnamed-chunk-10-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-10-2.png" width="576"><hr>
 </div>
 <div class="section level4">
 <h4 id="gompertz-distribution">Gompertz distribution<a class="anchor" aria-label="anchor" href="#gompertz-distribution"></a>
@@ -558,15 +538,11 @@ by the parameter <span class="math inline">\(a\)</span> giving:</p>
 </div>
 <hr>
 <h4 id="gompertz-distribution-1">
-Sample Gompertz probability density functions
+Sample Gompertz probability density and cumulative distribution
+functions
 <a class="anchor" aria-label="anchor" href="#gompertz-distribution-1"></a>
 </h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;"></p>
-<h4 id="gompertz-distribution-2">
-Sample Gompertz cumulative distribution functions
-<a class="anchor" aria-label="anchor" href="#gompertz-distribution-2"></a>
-</h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-11-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-11-2.png" width="576"></p>
 <p>The Gompertz distribution is available in <code>ssdtools</code>,
 however parameter estimation can be somewhat unstable <span class="citation">(Fox et al. 2021b)</span>, and for this reason it is
 not currently included in the default set.</p>
@@ -600,15 +576,10 @@ supplying the string <code>weibull</code> to the <code>dists</code>
 argument in the <code>ssd_fit_dists</code> call.</p>
 <hr>
 <h4 id="weibull-distribution-1">
-Sample Weibull probability density functions
+Sample Weibull probability density and cumulative distribution functions
 <a class="anchor" aria-label="anchor" href="#weibull-distribution-1"></a>
 </h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;"></p>
-<h4 id="weibull-distribution-2">
-Sample Weibull cumulative distribution functions
-<a class="anchor" aria-label="anchor" href="#weibull-distribution-2"></a>
-</h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-12-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-12-2.png" width="576"></p>
 </div>
 <div class="section level4">
 <h4 id="inverse-pareto-distribution">Inverse Pareto distribution<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution"></a>
@@ -705,28 +676,18 @@ Pareto distribution to your data - the parameter estimates are the
 so for the <em>inverse Pareto</em> distribution since it is bounded from
 <em>above</em>.</p>
 <h4 id="inverse-pareto-distribution-1">
-Sample North American probability density functions : Pareto
-distribution
+Sample North American Pareto probability density and cumulative
+distribution functions
 <a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-1"></a>
 </h4>
-<img src="distributions_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;"><h4 id="inverse-pareto-distribution-2">
-Sample North American cumulative distribution functions : Pareto
-distribution
+<p><img src="distributions_files/figure-html/unnamed-chunk-13-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-13-2.png" width="576"></p>
+<p><br>We see from the <em>pdf</em> plots that the</p>
+<h4 id="inverse-pareto-distribution-2">
+Sample North American inverse Pareto probability density and cumulative
+distribution functions
 <a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-2"></a>
 </h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;"></p>
-<p><br>We see from the <em>pdf</em> plots that the</p>
-<h4 id="inverse-pareto-distribution-3">
-Sample North American probability density functions : inverse Pareto
-distribution
-<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-3"></a>
-</h4>
-<img src="distributions_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;"><h4 id="inverse-pareto-distribution-4">
-Sample North American cumulative distribution functions : inverse Pareto
-distribution
-<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-4"></a>
-</h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-14-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-14-2.png" width="576"></p>
 <p>The alternative, <em>European</em> version of the inverse Pareto
 distribution is a more realistic candidate.</p>
 <hr>
@@ -755,28 +716,18 @@ inverse Pareto distrbutions are availabale in <code>R</code>. For
 example, the <code>R</code>package <code>extraDistr</code> has North
 American versions, while the <code>actuar</code> package has European
 versions.</p>
-<h4 id="inverse-pareto-distribution-5">
-Sample European probability density functions : Pareto distribution
-<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-5"></a>
+<h4 id="inverse-pareto-distribution-3">
+Sample European Pareto probability density and cumulative distribution
+functions
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-3"></a>
 </h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;"></p>
-<h4 id="inverse-pareto-distribution-6">
-Sample European cumulative distribution functions : Pareto distribution
-<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-6"></a>
+<p><img src="distributions_files/figure-html/unnamed-chunk-15-1.png" width="576"><img src="distributions_files/figure-html/unnamed-chunk-15-2.png" width="576"></p>
+<h4 id="inverse-pareto-distribution-4">
+Sample European inverse Pareto probability density and cumulative
+distribution functions
+<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-4"></a>
 </h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;"></p>
-<h4 id="inverse-pareto-distribution-7">
-Sample European probability density functions : inverse Pareto
-distribution
-<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-7"></a>
-</h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;"></p>
-<h4 id="inverse-pareto-distribution-8">
-Sample European cumulative distribution functions : inverse Pareto
-distribution
-<a class="anchor" aria-label="anchor" href="#inverse-pareto-distribution-8"></a>
-</h4>
-<p><img src="distributions_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="distributions_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;"><img src="distributions_files/figure-html/unnamed-chunk-16-2.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="inverse-weibull-distribution-see-log-gumbel-above">Inverse Weibull distribution (see log-Gumbel, above)<a class="anchor" aria-label="anchor" href="#inverse-weibull-distribution-see-log-gumbel-above"></a>

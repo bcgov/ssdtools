@@ -4,10 +4,10 @@ pkgdown_sha: ~
 articles:
   additional-technical-details: additional-technical-details.html
   confidence-intervals: confidence-intervals.html
+  customising-plots: customising-plots.html
   distributions: distributions.html
-  embelishing-plots: embelishing-plots.html
   faqs: faqs.html
   model-averaging: model-averaging.html
   ssdtools: ssdtools.html
-last_built: 2024-05-06T18:12Z
+last_built: 2024-05-16T03:27Z
 
