@@ -255,7 +255,7 @@ for some fraction affected, $p$.
  Help on the `uniroot` function can be found [here](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/uniroot.html)
 
 ## Where do the model-averaged weights come from?
-This is a little more complex, although we'll try to provide a non-mathematical explanation. For those interested in going deeper, a more comprehensive treatment can be found in [@model_averaging] and [@fletcher] as well as [this](https://training.ecotox.science/courses/an-introduction-to-model-averaging-using-ssdtools-in-r/) on-line course .
+This is a little more complex, although we'll try to provide a non-mathematical explanation. For those interested in going deeper, a more comprehensive treatment can be found in [@model_averaging] and [@fletcher].
 
 <p>This time, we'll look at fitting a gamma, lognormal, and pareto distribution to our sample data:
 
@@ -334,13 +334,13 @@ lines(xx,ppareto(xx, location = 0.1800000,shape    = 0.9566756),col="red")
 </p>
 
 <p><br>As in the earlier example, we might expect to find a better fitting distribution by combining *all three distributions* using a *weighted SSD*.
- The issue we face now is *how do we choose the weights* to reflect the relative fits of the three distributions? Like all tests of statistical significance, a *p-value* is computed from the value of the relevant *test statistic* - in this case, the value of the `omega2max` test statistic. For this particular test, it's a case of the <u>smaller</u> the better. From the output above we see that the `omega2max` values are $0.344$ for the gamma distribution,  $0.328$ for the lognormal distribution, and $0.0.314$ for the Pareto distribution.</p>
+ The issue we face now is *how do we choose the weights* to reflect the relative fits of the three distributions? Like all tests of statistical significance, a *p-value* is computed from the value of the relevant *test statistic* - in this case, the value of the `omega2max` test statistic. For this particular test, it's a case of the <u>smaller</u> the better. From the output above we see that the `omega2max` values are $0.344$ for the gamma distribution,  $0.328$ for the lognormal distribution, and $0.314$ for the Pareto distribution.</p>
 
 <p>We might somewhat naively compute the relative weights as:<br>  ${w_1} = \frac{{{{0.344}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.318$ &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  ${w_2} = \frac{{{{0.328}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.333$ &nbsp;&nbsp;&nbsp; and ${w_3} = \frac{{{{0.314}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.349$ <br> &nbsp;&nbsp;&nbsp;(we use *reciprocals* since smaller values of `omega2max` represent better fits). As will be seen shortly - these are incorrect.
 <p>However, being based on a simplistic measure of discrepancy between the *observed* and *hypothesized* distributions, the `omega2max` statistic is a fairly 'blunt instrument' and has no grounding in information theory which *is* the basis for determining the weights that we seek.
 </p>
 
-<br>A discussion of *information theoretic* methods for assessing goodness-of-fit is beyond the scope of this vignette. Interested readers should consult [@model_averaging] or the [on-line course](https://training.ecotox.science/courses/an-introduction-to-model-averaging-using-ssdtools-in-r/).
+<br>A discussion of *information theoretic* methods for assessing goodness-of-fit is beyond the scope of this vignette. Interested readers should consult [@model_averaging].
  A commonly used metric to determine the model-average weights is the **Akaike Information Criterion** or [AIC](https://en.wikipedia.org/wiki/Akaike_information_criterion). The formula for the $AIC$ is: $$AIC = 2k - 2\ln \left( \ell  \right)$$
 
 where $k$ is the number of model parameters and $\ell$ is the *likelihood* for that model. Again, a full discussion of statistical likelihood is beyond the present scope. A relatively gentle introduction can be found [here](https://ep-news.web.cern.ch/what-likelihood-function-and-how-it-used-particle-physics).
@@ -348,9 +348,9 @@ where $k$ is the number of model parameters and $\ell$ is the *likelihood* for t
 
 
 ```{r, echo=TRUE}
-sum(log(EnvStats::dpareto(dat$Conc,location = 0.1800000, shape=0.9566756))) 
 sum(log(dgamma(dat$Conc,shape = 2.0591977,scale = 0.3231032))) 
 sum(log(dlnorm(dat$Conc, meanlog = -0.6695120,sdlog   =  0.7199573))) 
+sum(log(EnvStats::dpareto(dat$Conc,location = 0.1800000, shape=0.9566756))) 
 ```
 
 From which the *AIC* values readily follow:
@@ -440,8 +440,8 @@ As can be seen from the figure above, the model-averaged fit provides a very goo
 ### Correcting for distributions having differing numbers of parameters
 In deriving the AIC, Akaike had to make certain, strong assumptions. In addition, the bias factor (the $2k$ term) was derived from theoretical considerations (such as mathematical *expectation*) that relate to *infinite* sample sizes. For small sample sizes, the AIC is likely to select models having too many parameters (i.e models which *over-fit*) In 1978, Sugiura proposed a modification to the AIC to address this problem, although it too relied on a number of assumptions. This 'correction' to the AIC for small samples (referred to as $AI{{C}_{c}}$) is: 
 
-
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";><b><u>Corrected Akaike Information Criterion (AICc)</u></b><br>\[AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
+<b><u>Corrected Akaike Information Criterion (AICc)</u></b>\[AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
 </div>
 
 <br>It is clear from the formula for $AI{{C}_{c}}$ that for &nbsp; $n\gg k$, &nbsp;&nbsp; $AI{{C}_{c}}\simeq AIC$. The issue of sample size is ubiquitous in statistics, but even more so in ecotoxicology where logistical and practical limitations invariably mean we are dealing with (pathologically) small sample sizes. There are no hard and fast rules as to what constitutes an *appropriate* sample size for SSD modelling. However, Professor David Fox's personal rule of thumb which works quite well is: 
