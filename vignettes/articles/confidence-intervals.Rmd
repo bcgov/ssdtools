@@ -7,7 +7,8 @@ latex_engine: MathJax
 mainfont: Arial
 mathfont: Courier
 bibliography: references.bib
-output: pdf_document
+output: rmarkdown::html_vignette
+#output: rmarkdown::pdf_document
 ---
 
 ```{r, include = FALSE}

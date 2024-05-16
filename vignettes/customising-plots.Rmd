@@ -7,7 +7,8 @@ latex_engine: MathJax
 mainfont: Arial
 mathfont: Courier
 csl: my-style.csl
-output: pdf_document
+output: rmarkdown::html_vignette
+#output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{Customising Plots}
   %\VignetteEngine{knitr::rmarkdown}
