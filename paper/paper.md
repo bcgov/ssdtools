@@ -63,7 +63,7 @@ The method, as applied in the SSD context is described in detail in [@fox_recent
 ## Distributions
 
 Ten distributions are currently available in `ssdtools`. 
-The original version (v0) of `ssdtools` provided the two parameters log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
+The original version (v0) of `ssdtools` provided the two parameter log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
 In the first major update (v1), the two parameter inverse Pareto (invpareto), three parameter Burr Type III (burrIII3) and five parameter log-normal log-normal (lnorm_lnorm) and log-logistic log-logistic (llogis_llogis) mixture distributions were added.
 Together with the Burr Type III, the inverse Pareto and inverse Weibull provide the underlying distributions of the SSD fitting software `Burrlioz` [@barry2012burrlioz] while the mixture distributions were added to accommodate bimodality [@fox_recent_2021]. 
 Since v1, `ssdtools` has by default fitted the lnorm, llogis, lgumbel, gamma, weibull and lnorm_lnorm distributions.
@@ -85,7 +85,7 @@ where $\text{HC}_x^{\left\{ i \right\}}$ is the $\text{HC}_x$ estimate for the $
 
 The weighted arithmetic mean is conventionally used for averaging model parameters or estimates [@burnham_model_2002]. 
 However, in the case of $\text{HC}_x$ and $\text{HP}_u$ values, the estimator $\widetilde{\text{HC}}_x$ fails to satisfy the *inversion principle* [@fox_methodologies_2024] which requires 
-$$\left[ \text{HP}_u \right]_{x = \text{HC}_\theta } = \theta$$
+$$\left[ \text{HP}_u \right]_{u = \text{HC}_\theta } = \theta$$
 This inconsistency has been rectified in `ssdtools` v2 by estimating the model-averaged $\text{HC}_x$ (denoted $\widehat{\text{HC}}_x$) directly from the model-averaged cumulative distribution function (*cdf*) 
 $$G\left( u \right) = \sum\limits_{i = 1}^m w_i F_i\left( u \right)$$
 where ${F_i}\left(  \cdot  \right)$ is the *cdf* for the the *i^th^* model and $w_i$ is the model weight as before. $\widehat{\text{HC}}_x$ is then obtained as the solution to
@@ -107,9 +107,13 @@ This "multi" method can be implemented with and without re-estimation of the mod
 However, although the "multi" method has good coverage it is computationally slow.
 As a result, the default method provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
 
+## Multiple Distribution Functions
+
+In order to implement the "multi" method of bootstrapping, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
+
 ## Plotting 
 
-As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` also extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
+As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
 
 # Example of use
 
@@ -153,7 +157,7 @@ autoplot(fits)
 
 ![Species sensitivity distributions for the six default distributions with the Boron species concentration data.](autoplot.png){height="4in"}
 
-The proper model averaged cdf with 95% CIs (with the model averaged $\text{HC}_5$ indicated by a dotted line) can be plotted using:
+The model averaged cdf with 95% CIs (with the model averaged $\text{HC}_5$ indicated by a dotted line) can be plotted using:
 
 ```r
 predictions <- ssdtools::predict(fits, ci = TRUE)
