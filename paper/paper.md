@@ -107,9 +107,13 @@ This "multi" method can be implemented with and without re-estimation of the mod
 However, although the "multi" method has good coverage it is computationally slow.
 As a result, the default method provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
 
+## Multiple Distribution Functions
+
+In order to implement the "multi" method of bootstrapping, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) set of functions for multiple distributions.
+
 ## Plotting 
 
-As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` also extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
+As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
 
 # Example of use
 
