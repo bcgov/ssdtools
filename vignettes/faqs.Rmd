@@ -7,8 +7,7 @@ csl: my-style.csl
 latex_engine: MathJax
 mainfont: Arial
 mathfont: Courier
-output: rmarkdown::html_vignette
-#output: rmarkdown::pdf_document
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Frequently Asked Questions}
   %\VignetteEngine{knitr::rmarkdown}

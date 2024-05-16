@@ -2,11 +2,12 @@
 title: "Confidence Intervals for Hazard Concentrations"
 author: "ssdtools Team"
 date: "`r Sys.Date()`"
-bibliography: references.bib
-csl: my-style.csl
+csl: "my-style.csl"
 latex_engine: MathJax
 mainfont: Arial
 mathfont: Courier
+bibliography: references.bib
+output: pdf_document
 ---
 
 ```{r, include = FALSE}

@@ -4,11 +4,10 @@ author: "ssdtools Team"
 date: "`r Sys.Date()`"
 bibliography: references.bib
 csl: my-style.csl
-output: rmarkdown::html_vignette
-#output: rmarkdown::pdf_document
 latex_engine: MathJax
 mainfont: Arial
 mathfont: Courier
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Model Averaged SSDs}
   %\VignetteEngine{knitr::rmarkdown}
