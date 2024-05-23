@@ -128,5 +128,5 @@ We recognise the last expression as the *cdf* of a Weibull distribution with par
 
 
 ```{r, results = "asis", echo = FALSE}
-cat(ssdtools::licensing_md())
+cat(ssdtools::ssd_licensing_md())
 ```

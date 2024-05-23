@@ -4,8 +4,8 @@
 #' and documentation
 #' @export
 #' @examples
-#' licensing_md()
-licensing_md <- function() {
+#' ssd_licensing_md()
+ssd_licensing_md <- function() {
 "## Licensing
   Copyright 2018-2024 Province of British Columbia\\
   Copyright 2021 Environment and Climate Change Canada\\
