@@ -198,6 +198,9 @@ ssd_qmulti <- function(
 #' # multi 
 #' set.seed(50)
 #' hist(ssd_rmulti(1000), breaks = 100)
+#' 
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' do.call("ssd_rmulti", c(n = 10, estimates(fits)))
 ssd_rmulti <- function(
     n,     
     burrIII3.weight = 0, 
