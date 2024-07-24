@@ -83,7 +83,7 @@ reference:
   - '`comma_signif`'
   - '`dist_data`'
   - '`is.fitdists`'
-  - '`licensing_md`'
+  - '`ssd_licensing_md`'
   - '`npars`'
   - '`ssd_data`'
   - '`ssd_ecd`'
@@ -117,6 +117,6 @@ articles:
   - model-averaging
   - distributions
   - articles/confidence-intervals
-  - embelishing-plots
+  - customising-plots
   - additional-technical-details
   - faqs

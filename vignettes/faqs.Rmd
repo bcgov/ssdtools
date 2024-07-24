@@ -28,9 +28,8 @@ knitr::opts_chunk$set(
 ```{r, fig.width = 5, fig.height = 5}
 library(ssdtools)
 
-dist <- ssdtools::ssd_fit_dists(ssddata::ccme_boron)
-
-ssdtools::ssd_plot_cdf(dist, average = NA)
+dist <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_plot_cdf(dist, average = NA)
 ```
 
 ## How do I fit distributions to multiple groups such taxa and/or chemicals?
@@ -62,6 +61,6 @@ ssd_plot(ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
 <div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
-cat(licensing_md())
+cat(ssd_licensing_md())
 ```
 

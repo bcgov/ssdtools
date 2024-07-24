@@ -2,12 +2,12 @@
 title: "Additional technical details"
 author: "sstools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
-output: rmarkdown::html_vignette
-#output: rmarkdown::pdf_document
 csl: my-style.csl
 latex_engine: MathJax
 mainfont: Arial
 mathfont: Courier
+output: rmarkdown::html_vignette
+#output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{Additional technical details}
   %\VignetteEngine{knitr::rmarkdown}
@@ -128,5 +128,5 @@ We recognise the last expression as the *cdf* of a Weibull distribution with par
 
 
 ```{r, results = "asis", echo = FALSE}
-cat(ssdtools::licensing_md())
+cat(ssdtools::ssd_licensing_md())
 ```

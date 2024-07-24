@@ -4,11 +4,11 @@ author: "ssdtools Team"
 date: "`r Sys.Date()`"
 bibliography: references.bib
 csl: my-style.csl
-output: rmarkdown::html_vignette
-#output: rmarkdown::pdf_document
 latex_engine: MathJax
 mainfont: Arial
 mathfont: Courier
+output: rmarkdown::html_vignette
+#output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{Getting Started with ssdtools}
   %\VignetteEngine{knitr::rmarkdown}
@@ -85,7 +85,7 @@ print(ccme_boron)
 ## Fitting Distributions
 
 The function `ssd_fit_dists()` inputs a data frame and fits one or more distributions.
-The user can specify a subset of the following `r length(ssd_dists_all())` distributions. Please see the [Distributions](https://bcgov.github.io/ssdtools/articles/B_distributions.html) and [Model averaging](https://bcgov.github.io/ssdtools/articles/A_model_averaging.html) vignettes for more information appropriate use of distributions and the use of model-averaged SSDs.
+The user can specify a subset of the following `r length(ssd_dists_all())` distributions. Please see the [Distributions](https://bcgov.github.io/ssdtools/articles/B_distributions.html) and [Model averaging](https://bcgov.github.io/ssdtools/articles/A_model_averaging.html) vignettes for more information regarding appropriate use of distributions and the use of model-averaged SSDs.
 
 ```{r}
 ssd_dists_all()
@@ -260,5 +260,5 @@ right_censored_dists <- try(ssd_fit_dists(right_censored_example,
 <div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
-cat(licensing_md())
+cat(ssd_licensing_md())
 ```
