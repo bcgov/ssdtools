@@ -144,7 +144,7 @@ However, the lower confidence interval obtained using the weighted arithmetic me
 
 ```{r fig.width=7,fig.height=5}
 library(ggplot2)
-library(ggpubr)
+# library(ggpubr)
 p1 <- ggplot(compare_dat, aes(method, ucl, fill = method)) +
     geom_bar(stat="identity", position=position_dodge()) +
   theme_classic() +
@@ -154,7 +154,7 @@ p2 <- ggplot(compare_dat, aes(method, lcl, fill = method)) +
   theme_classic() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-ggarrange(p1, p2,common.legend = TRUE)
+# ggarrange(p1, p2,common.legend = TRUE)
 ```
 
 Given the similarity of upper and lower confidence intervals of the weighted bootstrap sample method compared to the potentially more theoretically correct, but computationally more intensive weighted mixture method (via *ssd_rmulti()*), we also compared the time taken to undertake bootstrapping across the methods.
