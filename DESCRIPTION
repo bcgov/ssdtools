@@ -73,7 +73,6 @@ Imports:
 Suggests:
     actuar,
     covr,
-    car,
     doFuture,
     dplyr,
     EnvStats,
