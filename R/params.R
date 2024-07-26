@@ -60,6 +60,7 @@
 #' proportion of bootstrap samples that must successfully fit (return a likelihood) 
 #' to report the confidence intervals.
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
+#' @param n A whole number of the effective number of rows of data.
 #' @param npars A whole numeric vector specifying which distributions to include based on the number of parameters.
 #' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
 #' @param ci_method A string specifying which method to use for estimating the bootstrap values. 

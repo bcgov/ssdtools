@@ -265,7 +265,7 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   expect_warning(
     expect_warning(
       ssd_fit_dists(data, right = "Other", rescale = FALSE),
-      "^Distribution 'lnorm_lnorm' failed to fit \\(try rescaling data\\): one or more parameters at boundary\\.$"
+      "^Distribution 'lnorm_lnorm' failed to compute standard errors \\(try rescaling data\\)\\.$"
     ),
     "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$"
   )

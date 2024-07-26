@@ -16,7 +16,7 @@
       # A tibble: 1 x 11
         dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
         <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
-      1 average       0.05  1.26 0.757 0.410  3.25     1 parametr~   100  0.86 <dbl>  
+      1 average       0.05  1.26 0.734 0.456  3.25     1 parametr~   100     1 <dbl>  
 
 # hp multi_ci lnorm default 100
 
@@ -34,9 +34,9 @@
       hp_multi
     Output
       # A tibble: 1 x 11
-        dist     conc   est    se   lcl   ucl    wt method     nboot pboot samples   
-        <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>> 
-      1 average     1  3.90  2.50 0.343  9.20     1 parametric   100  0.86 <dbl [86]>
+        dist     conc   est    se   lcl   ucl    wt method     nboot pboot samples    
+        <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>>  
+      1 average     1  3.90  2.46 0.347  9.21     1 parametric   100     1 <dbl [100]>
 
 # sgompertz completely unstable!
 

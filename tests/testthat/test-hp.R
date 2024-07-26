@@ -136,7 +136,7 @@ test_that("hp fitdists gives different answer with model averaging as hc not sam
   fits_lnorm_lnorm <- ssd_fit_dists(data, dists = "lnorm_lnorm")
   expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, proportion = 5/100)$est)$est, 5)
 
-  fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"))
+  fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"), min_pmix = 0)
   expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5/100, ci_method = "weighted_arithmetic", multi_est = FALSE)$est)$est, 4.59185244765045)
 })
 

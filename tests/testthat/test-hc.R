@@ -201,7 +201,8 @@ test_that("ssd_hc fitdists averages", {
 })
 
 test_that("ssd_hc fitdists correctly averages", {
-  fits <- ssd_fit_dists(ssddata::aims_molybdenum_marine, dists = c("lgumbel", "lnorm_lnorm"))
+  fits <- ssd_fit_dists(ssddata::aims_molybdenum_marine, dists = c("lgumbel", "lnorm_lnorm"),
+                        min_pmix = 0)
   hc <- ssd_hc(fits, average = FALSE, ci_method = "multi_free")
   expect_equal(hc$est, c(3881.17238083968, 5540.69271009251), tolerance = 1e-6)
   expect_equal(hc$wt, c(0.0968427088339105, 0.90315729116609))

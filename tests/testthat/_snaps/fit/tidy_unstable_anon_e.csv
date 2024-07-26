@@ -1,8 +1,8 @@
 dist,term,est,se
 invpareto,scale,38106.2,0
 invpareto,shape,0.231937,0.0562529
-llogis_llogis,locationlog1,2.26675,0.557708
-llogis_llogis,locationlog2,9.14324,0.257326
-llogis_llogis,pmix,0.41598,0.121011
-llogis_llogis,scalelog1,0.839584,0.296992
-llogis_llogis,scalelog2,0.461779,0.129323
+llogis_llogis,locationlog1,2.26716,0.557743
+llogis_llogis,locationlog2,9.14327,0.257326
+llogis_llogis,pmix,0.415978,0.121012
+llogis_llogis,scalelog1,0.839608,0.297029
+llogis_llogis,scalelog2,0.461775,0.129324

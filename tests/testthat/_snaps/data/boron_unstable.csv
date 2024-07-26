@@ -3,8 +3,8 @@ gompertz,location,0.0394073,0.0119791
 gompertz,shape,0.00260432,0.00997275
 invpareto,scale,75.2608,0
 invpareto,shape,0.568403,0.107418
-llogis_llogis,locationlog1,0.896677,0.379787
-llogis_llogis,locationlog2,3.14911,0.288357
-llogis_llogis,pmix,0.255182,0.144381
-llogis_llogis,scalelog1,0.317596,0.168008
-llogis_llogis,scalelog2,0.496754,0.13515
+llogis_llogis,locationlog1,0.896787,0.379717
+llogis_llogis,locationlog2,3.14918,0.288289
+llogis_llogis,pmix,0.255219,0.14435
+llogis_llogis,scalelog1,0.317647,0.167982
+llogis_llogis,scalelog2,0.49671,0.135114
