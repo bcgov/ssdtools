@@ -65,6 +65,7 @@ predict.fitdists <- function(
     level = level,
     nboot = nboot, 
     min_pboot = min_pboot,
+    multi_est = multi_est,
     average = average, 
     delta = delta, 
     parametric = parametric,
