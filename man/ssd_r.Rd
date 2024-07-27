@@ -271,6 +271,9 @@ hist(ssd_rlnorm(10000), breaks = 1000)
 set.seed(50)
 hist(ssd_rmulti(1000), breaks = 100)
 
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+do.call("ssd_rmulti", c(n = 10, estimates(fits)))
+
 set.seed(50)
 hist(ssd_rweibull(10000), breaks = 1000)
 }

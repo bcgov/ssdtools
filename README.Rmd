@@ -144,5 +144,5 @@ If you would like to contribute to the package, please see our
 Please note that the ssdtools project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 ```{r, results = "asis", echo = FALSE}
-cat(licensing_md())
+cat(ssd_licensing_md())
 ```

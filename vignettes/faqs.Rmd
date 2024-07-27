@@ -61,6 +61,6 @@ ssd_plot(ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
 <div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
-cat(licensing_md())
+cat(ssd_licensing_md())
 ```
 

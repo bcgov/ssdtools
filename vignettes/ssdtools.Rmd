@@ -260,5 +260,5 @@ right_censored_dists <- try(ssd_fit_dists(right_censored_example,
 <div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
-cat(licensing_md())
+cat(ssd_licensing_md())
 ```
