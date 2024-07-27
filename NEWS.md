@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9015
+# ssdtools 1.0.6.9016
 
 ## Additions
 
@@ -20,6 +20,8 @@
 ## Modifications
 
 - Changed to `min_pboot = 0.95` for all functions.
+- Changed `min_pmix = 0` to `min_pmix = ssd_min_pmix(nrow(data))` to by default 
+give set min_pmix to be `0.1` or `3/nrow(data)` if greater to improve convergence of mixture models.
 - `estimates.fitdists()` now includes weights in returned parameters as well as an
 `all_estimates = FALSE` argument to allow parameter values for all implemented distributions to be included.
 - `ssd_fit_bcanz()`, `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` no longer rescale data by default.
