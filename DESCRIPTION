@@ -91,7 +91,7 @@ Suggests:
     reshape2,
     rlang,
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     tidyr,
     tidyselect,
     tinytex,
