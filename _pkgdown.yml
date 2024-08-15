@@ -92,6 +92,7 @@ reference:
   - '`ssd_fit_dists`'
   - '`ssd_is_censored`'
   - '`ssd_match_moments`'
+  - '`ssd_min_pmix`'
   - '`ssd_sort_data`'
   - '`pearson1000`'
 - title: Deprecated
