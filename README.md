@@ -79,7 +79,7 @@ and can be quickly plotted using `autoplot`
 autoplot(fits)
 ```
 
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -106,7 +106,7 @@ print(hc5)
 #> # A tibble: 1 × 11
 #>   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
 #>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
-#> 1 average       0.05  1.26 0.781 0.407  3.29     1 parametr…  1000 0.999 <dbl>
+#> 1 average       0.05  1.26 0.782 0.407  3.29     1 parametr…  1000     1 <dbl>
 ```
 
 To bootstrap in parallel set `future::plan()`. For example:
@@ -145,7 +145,7 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
   scale_colour_ssd()
 ```
 
-![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 ## References
 
@@ -208,8 +208,9 @@ By contributing to this project, you agree to abide by its terms.
 
 ## Licensing
 
-Copyright 2024 Province of British Columbia, Environment and Climate
-Change Canada, and Australian Government Department of Climate Change,
+Copyright 2018-2024 Province of British Columbia  
+Copyright 2021 Environment and Climate Change Canada  
+Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water
 
 The documentation is released under the [CC BY 4.0
