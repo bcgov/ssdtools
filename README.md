@@ -5,7 +5,8 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:Stable](https://img.shields.io/badge/Lifecycle-Stable-97ca00)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/github/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://codecov.io/github/bcgov/ssdtools)
 [![CRAN
@@ -106,7 +107,7 @@ print(hc5)
 #> # A tibble: 1 × 11
 #>   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
 #>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
-#> 1 average       0.05  1.26 0.781 0.407  3.29     1 parametr…  1000 0.999 <dbl>
+#> 1 average       0.05  1.26 0.782 0.407  3.29     1 parametr…  1000     1 <dbl>
 ```
 
 To bootstrap in parallel set `future::plan()`. For example:
@@ -208,8 +209,9 @@ By contributing to this project, you agree to abide by its terms.
 
 ## Licensing
 
-Copyright 2024 Province of British Columbia, Environment and Climate
-Change Canada, and Australian Government Department of Climate Change,
+Copyright 2018-2024 Province of British Columbia  
+Copyright 2021 Environment and Climate Change Canada  
+Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water
 
 The documentation is released under the [CC BY 4.0
