@@ -3,32 +3,30 @@ template:
   bootstrap: 5
 authors:
   Joe Thorley:
-    href: "https://github.com/joethorley"
+    href: https://github.com/joethorley
   Rebecca Fisher:
-    href: "https://www.aims.gov.au/about/our-people/dr-rebecca-fisher"
+    href: https://www.aims.gov.au/about/our-people/dr-rebecca-fisher
   David Fox:
-    href: "https://training.ecotox.science/who-we-are/"
+    href: https://training.ecotox.science/who-we-are/
   Carl Schwarz:
-    href: "https://www.sfu.ca/stat-actsci/department/profiles/carl-schwarz.html"
+    href: https://www.sfu.ca/stat-actsci/department/profiles/carl-schwarz.html
   Province of British Columbia:
-    href: "https://www2.gov.bc.ca/"
+    href: https://www2.gov.bc.ca/
   Environment and Climate Change Canada:
-    href: "https://www.canada.ca/en/environment-climate-change.html"
+    href: https://www.canada.ca/en/environment-climate-change.html
   Australian Government Department of Climate Change, Energy, the Environment and Water:
-    href: "https://www.dcceew.gov.au/"
-
+    href: https://www.dcceew.gov.au/
 destination: docs
-
 reference:
 - title: Distribution Names
   desc: Functions that return character vectors of distribution names
-  contents: 
+  contents:
   - '`ssd_dists`'
   - '`ssd_dists_all`'
   - '`ssd_dists_bcanz`'
 - title: Fit
   desc: Functions that fit distributions to data
-  contents: 
+  contents:
   - '`ssd_fit_dists`'
   - '`ssd_fit_bcanz`'
   - '`ssd_fit_burrlioz`'
@@ -72,7 +70,7 @@ reference:
   - '`ssdtools-ggproto`'
 - title: Distributional Functions
   desc: Distribution, quantile, random functions
-  contents: 
+  contents:
   - '`ssd_p`'
   - '`ssd_q`'
   - '`ssd_r`'
@@ -111,7 +109,6 @@ reference:
   - '`plgumbel`'
   - '`qlgumbel`'
   - '`rlgumbel`'
-
 articles:
 - title: All vignettes
   contents:
@@ -121,3 +118,4 @@ articles:
   - customising-plots
   - additional-technical-details
   - faqs
+
