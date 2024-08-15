@@ -254,7 +254,8 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
                                   data, rescale, weighted, censoring, min_pmix,
                                   range_shape1, range_shape2, parametric, control,
                                   save_to, samples, fix_weights, hc, fun) {
-  if (ci & fix_weights) {
+  
+  if(ci && fix_weights) {
     atleast1 <- round(glance(x)$weight * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
     estimates <- estimates[atleast1]
@@ -342,8 +343,8 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     )
     return(hcp)
   }
-  if (.is_censored(censoring) & !identical_parameters(x)) {
-    wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
+  if(.is_censored(censoring) && !identical_parameters(x)) {
+     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
 
   if (multi_ci) {
