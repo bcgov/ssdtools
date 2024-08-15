@@ -197,7 +197,7 @@ The hazard/protection concentrations can be obtained using the ssd_hc function, 
 
 ```{r, cache=TRUE}
 set.seed(99)
-boron_hc5 <- ssd_hc(fits, proportion =  0.05, ci = TRUE)
+boron_hc5 <- ssd_hc(fits, proportion = 0.05, ci = TRUE)
 print(boron_hc5)
 boron_pc <- ssd_hp(fits, conc = boron_hc5$est, ci = TRUE)
 print(boron_pc)
@@ -209,11 +209,11 @@ If the `right` argument in `ssd_fit_dists()` is different to the `left` argument
 Let's make some example censored data.
 
 ```{r}
-example_dat <- ssddata::ccme_boron |> 
-  dplyr::mutate(left=Conc, right=Conc)
+example_dat <- ssddata::ccme_boron |>
+  dplyr::mutate(left = Conc, right = Conc)
 
-left_censored_example <- example_dat 
-left_censored_example$left[c(3,6,8)] <- NA
+left_censored_example <- example_dat
+left_censored_example$left[c(3, 6, 8)] <- NA
 ```
 
 There are less goodness-of-fit statistics available for
@@ -225,9 +225,10 @@ However, if all the models have the same number of parameters, the `AIC` `delta`
 For this reason, `ssdtools` only permits the analysis of censored data using two-parameter models. We can call only the default two parameter models using `ssd_dists_bcanz(n = 2)`.
 
 ```{r, eval = TRUE}
-left_censored_dists <- ssd_fit_dists(left_censored_example, 
-                                     dists = ssd_dists_bcanz(n = 2),
-                                     left = "left", right = "right")
+left_censored_dists <- ssd_fit_dists(left_censored_example,
+  dists = ssd_dists_bcanz(n = 2),
+  left = "left", right = "right"
+)
 ssd_hc(left_censored_dists, average = FALSE)
 ssd_hc(left_censored_dists)
 ssd_gof(left_censored_dists)
@@ -247,11 +248,12 @@ ssd_plot(left_censored_example, left_censored_pred,
 Note that `ssdtools` doesn't currently support right censored data:
 
 ```{r, eval = TRUE}
-right_censored_example <- example_dat 
-right_censored_example$right[c(3,6,8)] <- NA
-right_censored_dists <- try(ssd_fit_dists(right_censored_example, 
-                                          dists = ssd_dists_bcanz(n = 2),
-                                          left = "left", right = "right"))
+right_censored_example <- example_dat
+right_censored_example$right[c(3, 6, 8)] <- NA
+right_censored_dists <- try(ssd_fit_dists(right_censored_example,
+  dists = ssd_dists_bcanz(n = 2),
+  left = "left", right = "right"
+))
 ```
 
 

@@ -276,7 +276,7 @@ ssd_qlnorm_lnorm(0.5)
 
 ssd_qlnorm(0.5)
 
-# multi 
+# multi
 ssd_qmulti(0.5)
 
 ssd_qweibull(0.5)

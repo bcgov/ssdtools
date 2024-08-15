@@ -5,7 +5,7 @@ test_that("ssd_min_pmix", {
   chk::expect_chk_error(ssd_min_pmix(10.5))
   expect_identical(ssd_min_pmix(1), 0.5)
   expect_identical(ssd_min_pmix(2L), 0.5)
-  expect_identical(ssd_min_pmix(9), 1/3)
+  expect_identical(ssd_min_pmix(9), 1 / 3)
   expect_identical(ssd_min_pmix(10), 0.3)
   expect_identical(ssd_min_pmix(15), 0.2)
   expect_identical(ssd_min_pmix(20), 0.15)

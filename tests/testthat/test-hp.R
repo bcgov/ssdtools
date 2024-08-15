@@ -13,7 +13,6 @@
 #    limitations under the License.
 
 test_that("hp", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   set.seed(102)
@@ -23,7 +22,6 @@ test_that("hp", {
 })
 
 test_that("hp fitdists works with zero length conc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hp <- ssd_hp(fits, numeric(0))
@@ -37,7 +35,6 @@ test_that("hp fitdists works with zero length conc", {
 })
 
 test_that("hp fitdist works with missing conc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hp <- ssd_hp(fits, NA_real_)
@@ -46,7 +43,6 @@ test_that("hp fitdist works with missing conc", {
 })
 
 test_that("hp fitdist works with 0 conc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hp <- ssd_hp(fits, 0)
@@ -55,7 +51,6 @@ test_that("hp fitdist works with 0 conc", {
 })
 
 test_that("hp fitdist works with negative conc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hp <- ssd_hp(fits, -1)
@@ -64,7 +59,6 @@ test_that("hp fitdist works with negative conc", {
 })
 
 test_that("hp fitdist works with -Inf conc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hp <- ssd_hp(fits, -Inf)
@@ -73,7 +67,6 @@ test_that("hp fitdist works with -Inf conc", {
 })
 
 test_that("hp fitdist works with Inf conc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hp <- ssd_hp(fits, Inf)
@@ -82,7 +75,6 @@ test_that("hp fitdist works with Inf conc", {
 })
 
 test_that("hp fitdists works reasonable conc", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hp <- ssd_hp(fits, 1)
@@ -91,7 +83,6 @@ test_that("hp fitdists works reasonable conc", {
 })
 
 test_that("hp fitdists works with multiple concs", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   hp <- ssd_hp(fits, c(2.5, 1), ci_method = "multi_fixed")
@@ -100,7 +91,6 @@ test_that("hp fitdists works with multiple concs", {
 })
 
 test_that("hp fitdists works with cis", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(10)
@@ -110,7 +100,6 @@ test_that("hp fitdists works with cis", {
 })
 
 test_that("hp fitdists works with multiple dists", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   hp <- ssd_hp(fits, 1)
@@ -119,7 +108,6 @@ test_that("hp fitdists works with multiple dists", {
 })
 
 test_that("hp fitdists works not average multiple dists", {
-  
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   hp <- ssd_hp(fits, 1, average = FALSE)
@@ -131,13 +119,13 @@ test_that("hp fitdists gives different answer with model averaging as hc not sam
   data <- ssddata::aims_molybdenum_marine
 
   fits_lgumbel <- ssd_fit_dists(data, dists = "lgumbel")
-  expect_equal(ssd_hp(fits_lgumbel, ssd_hc(fits_lgumbel, proportion = 5/100)$est)$est, 5)
+  expect_equal(ssd_hp(fits_lgumbel, ssd_hc(fits_lgumbel, proportion = 5 / 100)$est)$est, 5)
 
   fits_lnorm_lnorm <- ssd_fit_dists(data, dists = "lnorm_lnorm")
-  expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, proportion = 5/100)$est)$est, 5)
+  expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, proportion = 5 / 100)$est)$est, 5)
 
   fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"), min_pmix = 0)
-  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5/100, ci_method = "weighted_arithmetic", multi_est = FALSE)$est)$est, 4.59185244765045)
+  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5 / 100, ci_method = "weighted_arithmetic", multi_est = FALSE)$est)$est, 4.59185244765045)
 })
 
 test_that("ssd_hp fitdists correct for rescaling", {
@@ -149,7 +137,6 @@ test_that("ssd_hp fitdists correct for rescaling", {
 })
 
 test_that("hp fitdists with no fitdists", {
-  
   x <- list()
   class(x) <- c("fitdists")
   hp <- ssd_hp(x, 1)
@@ -177,7 +164,6 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
 })
 
 test_that("ssd_hp same with equally weighted data", {
-  
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
@@ -227,7 +213,6 @@ test_that("ssd_hp calculates cis in parallel with two distributions", {
 })
 
 test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
-  
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   data$Weight[1] <- 2
@@ -240,7 +225,6 @@ test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
 })
 
 test_that("ssd_hp no effect with higher weight one distribution", {
-  
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
@@ -270,7 +254,6 @@ test_that("ssd_hp effect with higher weight two distributions", {
 })
 
 test_that("ssd_hp cis with non-convergence", {
-  
   set.seed(99)
   conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
@@ -285,7 +268,6 @@ test_that("ssd_hp cis with non-convergence", {
 })
 
 test_that("ssd_hp cis with error and multiple dists", {
-  
   set.seed(99)
   conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
   data <- data.frame(Conc = conc)
@@ -306,7 +288,6 @@ test_that("ssd_hp cis with error and multiple dists", {
 })
 
 test_that("ssd_hp with 1 bootstrap", {
-  
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fit, 1, ci = TRUE, nboot = 1, ci_method = "weighted_arithmetic", samples = TRUE)
@@ -315,11 +296,11 @@ test_that("ssd_hp with 1 bootstrap", {
 
 test_that("ssd_hp fix_weight", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
-  
+
   set.seed(102)
   hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
   expect_snapshot_data(hc_unfix, "hc_unfix")
-  
+
   set.seed(102)
   hc_fix <- ssd_hp(fits, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
   expect_snapshot_data(hc_fix, "hc_fix")
@@ -335,7 +316,7 @@ test_that("hp multis match", {
   hp_ff <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_samples")
   set.seed(102)
   hp_tt <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = TRUE, ci_method = "multi_fixed")
-  
+
   expect_identical(hp_tf$est, hp_tt$est)
   expect_identical(hp_ft$est, hp_ff$est)
   expect_identical(hp_ft$se, hp_tt$se)
@@ -345,15 +326,17 @@ test_that("hp multis match", {
 test_that("hp weighted bootie", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hp_weighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_samples",
-                         samples = TRUE)
+  hp_weighted2 <- ssd_hp(fits,
+    ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_samples",
+    samples = TRUE
+  )
   set.seed(102)
   hp_unweighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = FALSE, ci_method = "weighted_arithmetic", samples = TRUE)
-  
+
   expect_identical(hp_weighted2$est, hp_unweighted2$est)
   expect_identical(length(hp_weighted2$samples[[1]]), 11L)
   expect_identical(length(hp_unweighted2$samples[[1]]), 60L)
-  
+
   expect_snapshot_boot_data(hp_weighted2, "hp_weighted2")
   expect_snapshot_boot_data(hp_unweighted2, "hp_unweighted2")
 })

@@ -49,7 +49,7 @@ test_that("ssd_hc currently errors with burrIII3", {
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(47)
-  #FIXME: currently errors - also hp
+  # FIXME: currently errors - also hp
   expect_error(hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0))
 })
 

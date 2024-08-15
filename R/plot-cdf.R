@@ -35,12 +35,12 @@ ssd_plot_cdf <- function(x, ...) {
 ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 9.21, ...) {
   chk_scalar(average)
   chk_logical(average)
-  
-  if(!is.na(average)) {
-    pred <- ssd_hc(x, proportion = 1:99/100, average = average, delta = delta)
+
+  if (!is.na(average)) {
+    pred <- ssd_hc(x, proportion = 1:99 / 100, average = average, delta = delta)
   } else {
-    pred <- ssd_hc(x, proportion = 1:99/100, average = FALSE, delta = delta)
-    pred_ave <- ssd_hc(x, proportion = 1:99/100, average = TRUE, delta = delta)
+    pred <- ssd_hc(x, proportion = 1:99 / 100, average = FALSE, delta = delta)
+    pred_ave <- ssd_hc(x, proportion = 1:99 / 100, average = TRUE, delta = delta)
     pred <- dplyr::bind_rows(pred, pred_ave)
   }
   data <- ssd_data(x)
@@ -67,7 +67,7 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 9.21, ...) {
 #'   lnorm = c(meanlog = 2, sdlog = 2)
 #' ))
 ssd_plot_cdf.list <- function(x, ...) {
-  pred <- ssd_hc(x, proportion = 1:99/100)
+  pred <- ssd_hc(x, proportion = 1:99 / 100)
   data <- data.frame(Conc = numeric(0))
 
   linetype <- if (length(unique(pred$dist)) > 1) "dist" else NULL

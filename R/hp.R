@@ -15,7 +15,7 @@
 #' Hazard Proportion
 #'
 #' Calculates proportion of species affected at specified concentration(s)
-#' with quantile based bootstrap confidence intervals for 
+#' with quantile based bootstrap confidence intervals for
 #' individual or model-averaged distributions
 #' using parametric or non-parametric bootstrapping.
 #' For more information see the inverse function [`ssd_hc()`].
@@ -34,49 +34,47 @@ ssd_hp <- function(x, ...) {
 #' @describeIn ssd_hp Hazard Proportions for fitdists Object
 #' @export
 ssd_hp.fitdists <- function(
-    x, 
-    conc = 1, 
+    x,
+    conc = 1,
     average = TRUE,
-    ci = FALSE, 
-    level = 0.95, 
+    ci = FALSE,
+    level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
     multi_est = TRUE,
     ci_method = "weighted_samples",
-    parametric = TRUE, 
-    delta = 9.21, 
+    parametric = TRUE,
+    delta = 9.21,
     samples = FALSE,
     save_to = NULL,
     control = NULL,
-    ...
-) {
-  
+    ...) {
   chk_vector(conc)
   chk_numeric(conc)
   chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-  
+
   chk_unused(...)
 
-  
+
   fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
   multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
-  
+
   hcp <- ssd_hcp_fitdists(
-    x = x, 
-    value = conc, 
-    ci = ci, 
-    level = level, 
+    x = x,
+    value = conc,
+    ci = ci,
+    level = level,
     nboot = nboot,
-    average = average, 
-    multi_est = multi_est, 
-    delta = delta, 
+    average = average,
+    multi_est = multi_est,
+    delta = delta,
     min_pboot = min_pboot,
-    parametric = parametric, 
-    multi_ci = multi_ci, 
+    parametric = parametric,
+    multi_ci = multi_ci,
     fix_weights = fix_weights,
-    control = control, 
-    save_to = save_to, 
-    samples = samples, 
+    control = control,
+    save_to = save_to,
+    samples = samples,
     hc = FALSE
   )
   hcp <- dplyr::rename(hcp, conc = "value")
@@ -87,19 +85,19 @@ ssd_hp.fitdists <- function(
 #' @describeIn ssd_hp Hazard Proportions for fitburrlioz Object
 #' @export
 #' @examples
-#' 
+#'
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #' ssd_hp(fit)
 ssd_hp.fitburrlioz <- function(
-    x, 
-    conc = 1, 
-    ci = FALSE, 
-    level = 0.95, 
+    x,
+    conc = 1,
+    ci = FALSE,
+    level = 0.95,
     nboot = 1000,
-    min_pboot = 0.95, 
-    parametric = FALSE, 
+    min_pboot = 0.95,
+    parametric = FALSE,
     samples = FALSE,
-    save_to = NULL, 
+    save_to = NULL,
     ...) {
   chk_length(x, upper = 1L)
   chk_named(x)
@@ -108,12 +106,12 @@ ssd_hp.fitburrlioz <- function(
   chk_numeric(conc)
   chk_flag(ci)
   chk_unused(...)
-  
-  fun <- if(names(x) == "burrIII3") fit_burrlioz else fit_tmb
-  
-  hcp <- ssd_hcp_fitdists (
+
+  fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
+
+  hcp <- ssd_hcp_fitdists(
     x = x,
-    value = conc, 
+    value = conc,
     ci = ci,
     level = level,
     nboot = nboot,
@@ -128,8 +126,9 @@ ssd_hp.fitburrlioz <- function(
     samples = samples,
     hc = FALSE,
     fix_weights = FALSE,
-    fun = fun)
-  
+    fun = fun
+  )
+
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp
 }
