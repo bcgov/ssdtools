@@ -7,7 +7,7 @@
 
 [![Lifecycle:Stable](https://img.shields.io/badge/Lifecycle-Stable-97ca00)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/github/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://codecov.io/github/bcgov/ssdtools)
+[![codecov](https://app.codecov.io/github/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://app.codecov.io/github/bcgov/ssdtools)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
@@ -44,8 +44,7 @@ remotes::install_github("bcgov/ssdtools")
 
 ## Introduction
 
-The dependency
-[`ssddata`](https://cran.r-project.org/web/packages/ssddata/index.html)
+The dependency [`ssddata`](https://cran.r-project.org/package=ssddata)
 provides a example data sets for several chemicals including Boron.
 
 ``` r
@@ -161,7 +160,7 @@ A shiny app to allow non-R users to interface with ssdtools is available
 at <https://github.com/bcgov/shinyssdtools>.
 
 For the latest changes visit
-[NEWS](https://bcgov.github.io/ssdtools/news).
+[NEWS](https://bcgov.github.io/ssdtools/news/).
 
 The citation for the shiny app:
 
