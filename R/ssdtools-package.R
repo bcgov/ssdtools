@@ -26,7 +26,7 @@ utils::globalVariables("where")
 #' @importFrom goftest ad.test cvm.test
 #' @importFrom graphics par plot title
 #' @importFrom grid gList gpar grobName gTree polygonGrob segmentsGrob
-#' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
+#' @importFrom lifecycle deprecated expect_deprecated deprecate_soft deprecate_stop deprecate_warn
 #' @importFrom parallel nextRNGStream nextRNGSubStream
 #' @importFrom plyr summarise
 #' @importFrom purrr list_assign transpose
