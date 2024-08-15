@@ -28,19 +28,28 @@ are produced by bootstrapping.
 
 ## Installation
 
-To install the latest version from
-[CRAN](https://CRAN.R-project.org/package=ssdtools)
+## Installation
+
+To install the latest release version from
+[CRAN](https://CRAN.R-project.org/package=ssdtools).
 
 ``` r
 install.packages("ssdtools")
 ```
 
 To install the latest development version from
+[r-universe](https://bcgov.r-universe.dev/ssdtools).
+
+``` r
+install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+To install the latest development version from
 [GitHub](https://github.com/bcgov/ssdtools)
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("bcgov/ssdtools")
+# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+pak::pak("bcgov/ssdtools")
 ```
 
 ## Introduction
@@ -79,7 +88,7 @@ and can be quickly plotted using `autoplot`
 autoplot(fits)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -145,7 +154,7 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
   scale_colour_ssd()
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 ## References
 

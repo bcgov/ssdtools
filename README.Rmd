@@ -32,15 +32,22 @@ Confidence intervals on hazard concentrations and proportions are produced by bo
 
 ## Installation
 
-To install the latest version from [CRAN](https://CRAN.R-project.org/package=ssdtools)
-```{r, eval = FALSE}
+## Installation
+
+To install the latest release version from [CRAN](https://CRAN.R-project.org/package=ssdtools).
+```r
 install.packages("ssdtools")
 ```
 
+To install the latest development version from [r-universe](https://bcgov.r-universe.dev/ssdtools).
+```r
+install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://cloud.r-project.org"))
+```
+
 To install the latest development version from [GitHub](https://github.com/bcgov/ssdtools)
-```{r, eval = FALSE}
-# install.packages("remotes")
-remotes::install_github("bcgov/ssdtools")
+```r
+# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+pak::pak("bcgov/ssdtools")
 ```
 
 ## Introduction
