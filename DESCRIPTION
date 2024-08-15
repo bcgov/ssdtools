@@ -53,6 +53,7 @@ Imports:
     furrr,
     generics,
     ggplot2,
+    glue,
     goftest,
     graphics,
     grid,
@@ -61,6 +62,7 @@ Imports:
     plyr,
     purrr,
     Rcpp,
+    rlang,
     scales,
     ssddata,
     stats,
@@ -69,7 +71,8 @@ Imports:
     TMB,
     universals,
     utils,
-    VGAM
+    VGAM,
+    withr
 Suggests:
     actuar,
     covr,
@@ -80,7 +83,6 @@ Suggests:
     fitdistrplus,
     foreach,
     future,
-    glue,
     grDevices,
     knitr,
     magrittr,
@@ -89,13 +91,11 @@ Suggests:
     R.rsp,
     readr,
     reshape2,
-    rlang,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
     tidyselect,
-    tinytex,
-    withr
+    tinytex
 LinkingTo: 
     Rcpp,
     RcppEigen,
