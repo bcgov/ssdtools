@@ -28,8 +28,6 @@ are produced by bootstrapping.
 
 ## Installation
 
-## Installation
-
 To install the latest release version from
 [CRAN](https://CRAN.R-project.org/package=ssdtools).
 
