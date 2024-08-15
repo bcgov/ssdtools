@@ -124,7 +124,9 @@ is_at_boundary <- function(fit, data, min_pmix = 0.5, range_shape1 = c(0.05, 20)
 geomid <- function(x) {
   x <- x[is.finite(x)]
   x <- x[x > 0]
-  if(!length(x)) return(1)
+  if (!length(x)) {
+    return(1)
+  }
   exp(mean(log(range(x))))
 }
 

@@ -8,7 +8,8 @@
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/github/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://codecov.io/github/bcgov/ssdtools)
+[![Codecov test
+coverage](https://codecov.io/gh/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://app.codecov.io/gh/bcgov/ssdtools)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
@@ -28,25 +29,31 @@ are produced by bootstrapping.
 
 ## Installation
 
-To install the latest version from
-[CRAN](https://CRAN.R-project.org/package=ssdtools)
+To install the latest release version from
+[CRAN](https://CRAN.R-project.org/package=ssdtools).
 
 ``` r
 install.packages("ssdtools")
 ```
 
 To install the latest development version from
+[r-universe](https://bcgov.r-universe.dev/ssdtools).
+
+``` r
+install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+To install the latest development version from
 [GitHub](https://github.com/bcgov/ssdtools)
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("bcgov/ssdtools")
+# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+pak::pak("bcgov/ssdtools")
 ```
 
 ## Introduction
 
-The dependency
-[`ssddata`](https://cran.r-project.org/web/packages/ssddata/index.html)
+The dependency [`ssddata`](https://cran.r-project.org/package=ssddata)
 provides a example data sets for several chemicals including Boron.
 
 ``` r
@@ -80,7 +87,7 @@ and can be quickly plotted using `autoplot`
 autoplot(fits)
 ```
 
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -146,7 +153,7 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
   scale_colour_ssd()
 ```
 
-![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 ## References
 
@@ -162,7 +169,7 @@ A shiny app to allow non-R users to interface with ssdtools is available
 at <https://github.com/bcgov/shinyssdtools>.
 
 For the latest changes visit
-[NEWS](https://bcgov.github.io/ssdtools/news).
+[NEWS](https://bcgov.github.io/ssdtools/news/).
 
 The citation for the shiny app:
 

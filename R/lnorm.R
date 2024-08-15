@@ -64,7 +64,7 @@ slnorm <- function(data, pars = NULL) {
 
   list(
     meanlog = mean(log(x), na.rm = TRUE) * (1 + 1e-3),
-    log_sdlog = log(sd(log(x), na.rm = TRUE)) * (1 - 1e-3) 
+    log_sdlog = log(sd(log(x), na.rm = TRUE)) * (1 - 1e-3)
   )
 }
 

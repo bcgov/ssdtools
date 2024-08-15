@@ -276,7 +276,7 @@ ssd_plnorm_lnorm(1)
 
 ssd_plnorm(1)
 
-# multi 
+# multi
 ssd_pmulti(1)
 
 ssd_pweibull(1)

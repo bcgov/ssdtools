@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-identical_parameters <- function(x){
+identical_parameters <- function(x) {
   length(unique(npars(x))) < 2
 }
 
@@ -35,7 +35,7 @@ pow <- function(x, y) x^y
 
 root <- function(p, f) {
   q <- rep(NA_real_, length(p))
-  for(i in seq_along(p)) {
+  for (i in seq_along(p)) {
     q[i] <- stats::uniroot(f, p = p[i], lower = 0, upper = 1, extendInt = "upX", tol = .Machine$double.eps)$root
   }
   q
