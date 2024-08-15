@@ -102,39 +102,35 @@ The *weighted average* acknowledges that the elements in the computation are <u>
 
 
 ```{r echo=FALSE,warning=FALSE, message=FALSE,class.output="scroll-100"}
-samp<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
- print(samp)
+samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+print(samp)
 # knitr::kable(samp,caption="Some toxicity data (concentrations)")
 ```
 
 Now, suppose we have only two possibilities for fitting an SSD - both lognormal distributions. Model 1 is the LN(-1.067,0.414) distribution while Model 2 is the LN(-0.387,0.617) distribution. A plot of the empirical *cdf* and Models 1 and 2 is shown below.
 
 ```{r echo=FALSE,fig.cap="Emprirical cdf (black); Model 1(green); and Model 2 (blue)", fig.width=7,fig.height=4.5}
-samp<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
-samp<-sort(samp)
-plot(ecdf(samp),main="Empirical and fitted SSDs",xlab="Concentration",ylab="Probability")
-xx<-seq(0.01,3,by=0.01)
-lines(xx,plnorm(xx,meanlog=mean(log(samp[1:10])),sd=sd(log(samp[1:10]))),col= "#77d408" )
-lines(xx,plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15]))),col="#08afd4")
-#lines(xx,(0.4419*plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15])))+
+samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+samp <- sort(samp)
+plot(ecdf(samp), main = "Empirical and fitted SSDs", xlab = "Concentration", ylab = "Probability")
+xx <- seq(0.01, 3, by = 0.01)
+lines(xx, plnorm(xx, meanlog = mean(log(samp[1:10])), sd = sd(log(samp[1:10]))), col = "#77d408")
+lines(xx, plnorm(xx, meanlog = mean(log(samp[5:15])), sd = sd(log(samp[5:15]))), col = "#08afd4")
+# lines(xx,(0.4419*plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15])))+
 #          0.5581*plnorm(xx,meanlog=mean(log(samp[1:10])),sd=sd(log(samp[1:10]))))  ,col="#d40830")
-
-
 ```
 
 <br>We see that Model 1 fits well in the lower, left region and poorly in the upper region, while the reverse is true for Model 2. So using *either* Model 1 **or** Model 2 is going to result in a poor fit overall. However, the obvious thing to do is to **combine** both models. We could just try using 50% of Model 1 and 50% of Model 2, but that may be sub-optimal. It turns out that the best fit is obtained by using 44% of Model 1 and 56% of Model 2. Redrawing the plot and adding the *weighted average* of Models 1 and 2 is shown below.
 
 ```{r echo=FALSE,fig.cap="Empirical cdf (black); Model 1(green); Model 2 (blue); and averaged Model (red)",fig.width=7,fig.height=4.5}
-samp<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
-samp<-sort(samp)
-plot(ecdf(samp),main="Empirical and fitted SSDs",xlab="Concentration",ylab="Probability")
-xx<-seq(0.01,3,by=0.01)
-lines(xx,plnorm(xx,meanlog=mean(log(samp[1:10])),sd=sd(log(samp[1:10]))),col= "#77d408" )
-lines(xx,plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15]))),col="#08afd4")
-lines(xx,(0.4419*plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15])))+
-          0.5581*plnorm(xx,meanlog=mean(log(samp[1:10])),sd=sd(log(samp[1:10]))))  ,col="#d40830")
-
-
+samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+samp <- sort(samp)
+plot(ecdf(samp), main = "Empirical and fitted SSDs", xlab = "Concentration", ylab = "Probability")
+xx <- seq(0.01, 3, by = 0.01)
+lines(xx, plnorm(xx, meanlog = mean(log(samp[1:10])), sd = sd(log(samp[1:10]))), col = "#77d408")
+lines(xx, plnorm(xx, meanlog = mean(log(samp[5:15])), sd = sd(log(samp[5:15]))), col = "#08afd4")
+lines(xx, (0.4419 * plnorm(xx, meanlog = mean(log(samp[5:15])), sd = sd(log(samp[5:15]))) +
+  0.5581 * plnorm(xx, meanlog = mean(log(samp[1:10])), sd = sd(log(samp[1:10])))), col = "#d40830")
 ```
 
 <br>Clearly the strategy has worked - we now have an excellent fitting SSD.What about estimation of an *HC20*?
@@ -142,28 +138,29 @@ lines(xx,(0.4419*plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15])))
 
 ```{r, echo=TRUE}
 # Model 1 HC20
-cat("Model 1 HC20 =",qlnorm(0.2,-1.067,0.414))
+cat("Model 1 HC20 =", qlnorm(0.2, -1.067, 0.414))
 
 # Model 2 HC20
-cat("Model 2 HC20 =",qlnorm(0.2,-0.387,0.617))
+cat("Model 2 HC20 =", qlnorm(0.2, -0.387, 0.617))
 ```
 What about the averaged distribution? An intuitively appealing approach would be to apply the same weights to the individual *HC20* values as was applied to the respective models. That is `0.44*0.2428209 + 0.56*0.4040243 = 0.33`.
 
 So our model-averaged *HC20* estimate is 0.33. As a check, we can determine the *fraction affected* at concentration = 0.33 - it should of course be 20%. Let's take a look at the plot.
 
 ```{r echo=FALSE,fig.width=7,fig.height=5}
-samp<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
-samp<-sort(samp)
-xx<-seq(0.01,3,by=0.01)
+samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+samp <- sort(samp)
+xx <- seq(0.01, 3, by = 0.01)
 
 
-plot(xx,(0.4419*plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15])))+
-          0.5581*plnorm(xx,meanlog=mean(log(samp[1:10])),sd=sd(log(samp[1:10]))))  ,
-          col="#d40830",type="l",xlab="Concentration",ylab="Probability")
-segments(0.33,-1,0.33,0.292,col="blue",lty=21)
-segments(-1,0.292,0.33,0.292,col="blue",lty=21)
-mtext("0.3",side=2,at=0.3,cex=0.8,col="blue")
-mtext("0.33",side=1,at=0.33,cex=0.8,col="blue")
+plot(xx, (0.4419 * plnorm(xx, meanlog = mean(log(samp[5:15])), sd = sd(log(samp[5:15]))) +
+  0.5581 * plnorm(xx, meanlog = mean(log(samp[1:10])), sd = sd(log(samp[1:10])))),
+col = "#d40830", type = "l", xlab = "Concentration", ylab = "Probability"
+)
+segments(0.33, -1, 0.33, 0.292, col = "blue", lty = 21)
+segments(-1, 0.292, 0.33, 0.292, col = "blue", lty = 21)
+mtext("0.3", side = 2, at = 0.3, cex = 0.8, col = "blue")
+mtext("0.33", side = 1, at = 0.33, cex = 0.8, col = "blue")
 ```
 
 Something's wrong - the fraction affected at concentration 0.33 is 30% - **not the required 20%**. This issue is taken up in the next section
@@ -193,26 +190,26 @@ If you need a visual demonstration, we can plot $G\left( x \right)$ and the *inv
  
 
 ```{r echo=FALSE, fig.width=8,fig.height=6}
-t<-seq(0.01,0.99,by=0.001)
+t <- seq(0.01, 0.99, by = 0.001)
 
-                            
-F<-0.4419*qlnorm(t,-1.067,0.414) + 0.5581*qlnorm(t,-0.387,0.617)
 
-plot(xx,(0.4419*plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15])))+
-           0.5581*plnorm(xx,meanlog=mean(log(samp[1:10])),sd=sd(log(samp[1:10]))))  ,
-     col="#d40830",type="l",xlab="Concentration",ylab="Probability")
+F <- 0.4419 * qlnorm(t, -1.067, 0.414) + 0.5581 * qlnorm(t, -0.387, 0.617)
 
-lines(F,t,col="#51c157",lwd=1.75)
+plot(xx, (0.4419 * plnorm(xx, meanlog = mean(log(samp[5:15])), sd = sd(log(samp[5:15]))) +
+  0.5581 * plnorm(xx, meanlog = mean(log(samp[1:10])), sd = sd(log(samp[1:10])))),
+col = "#d40830", type = "l", xlab = "Concentration", ylab = "Probability"
+)
 
-segments(-1,0.2,0.34,0.2,col="black",lty=21,lwd=2)
-segments(0.28,0.2,0.28,-1,col="red",lty=21,lwd=2)
-segments(0.34,0.2,0.34,-1,col="#51c157",lty=21,lwd=2)
-segments(1.12,-1,1.12,0.9,col="grey",lty=21,lwd=1.7)
+lines(F, t, col = "#51c157", lwd = 1.75)
 
-text(0.25,0.6,"Correct MA-SSD",col="red",cex=0.75)
-text(0.75,0.4,"Erroneous MA-SSD",col="#51c157",cex=0.75)
-mtext("1.12",side=1,at=1.12,cex=0.8,col="grey")
+segments(-1, 0.2, 0.34, 0.2, col = "black", lty = 21, lwd = 2)
+segments(0.28, 0.2, 0.28, -1, col = "red", lty = 21, lwd = 2)
+segments(0.34, 0.2, 0.34, -1, col = "#51c157", lty = 21, lwd = 2)
+segments(1.12, -1, 1.12, 0.9, col = "grey", lty = 21, lwd = 1.7)
 
+text(0.25, 0.6, "Correct MA-SSD", col = "red", cex = 0.75)
+text(0.75, 0.4, "Erroneous MA-SSD", col = "#51c157", cex = 0.75)
+mtext("1.12", side = 1, at = 1.12, cex = 0.8, col = "grey")
 ```
 
 Clearly, the two functions are **not** the same and thus *HCx* values derived from each will nearly always be different (as indicated by the positions of the vertical red and green dashed lines in the Figure above corresponding to the 2 values of the *HC20*). (Note: The two curves do cross over at a concentration of about 1.12 corresponding to the 90^th^ percentile, but in the region of ecotoxicological interest, there is no such cross-over and so the two approaches will **always** yield different *HCx* values with this difference &#8594; 0 as x &#8594; 0).<p>WE next discuss the use of a model-averaged SSD to obtain the *correct* model-averaged *HCx*.
@@ -260,27 +257,26 @@ This is a little more complex, although we'll try to provide a non-mathematical 
 <p>This time, we'll look at fitting a gamma, lognormal, and pareto distribution to our sample data:
 
 ```{r echo=FALSE,warning=FALSE, results="markup",message=FALSE,class.output="scroll-100"}
-samp<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
- print(samp)
+samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+print(samp)
 # knitr::kable(samp,caption="Some toxicity data (concentrations)")
 ```
 <br>The adequacy (or otherwise) of a fitted model can be assessed using a variety of numerical measures known as **goodness-of-fit** or GoF statistics. These are invariably based on a measure of discrepancy between the emprical data and the hypothesized model. Common GoF statistics used to test whether the hypothesis of some specified theoretical probability distribution is plausible for a given data set include: *Kolmogorov-Smirnov test; Anderson-Darling test; Shapiro-Wilk test;and Cramer-von Mises test*.
  [The Cramer-von Mises](https://en.wikipedia.org/wiki/Cram%C3%A9r%E2%80%93von_Mises_criterion) test is a good choice and is readily performed using the `cvm.test()` function in the `goftest` package in `R` as follows:
 
 ```{r, echo=TRUE,results='hide',warning=FALSE,message=FALSE}
-dat<-data.frame(Conc=c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59))
+dat <- data.frame(Conc = c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59))
 library(goftest)
-library(EnvStats)  # this is required for the Pareto cdf (ppareto)
+library(EnvStats) # this is required for the Pareto cdf (ppareto)
 
 # Examine the fit for the gamma distribution (NB: parameters estimated from the data)
-cvm.test(dat$Conc,null = "pgamma",shape = 2.0591977,scale = 0.3231032,estimated = TRUE)
+cvm.test(dat$Conc, null = "pgamma", shape = 2.0591977, scale = 0.3231032, estimated = TRUE)
 
 # Examine the fit for the lognormal distribution (NB: parameters estimated from the data)
-cvm.test(dat$Conc,null = "plnorm",meanlog=-0.6695120,sd=0.7199573,estimated = TRUE)
+cvm.test(dat$Conc, null = "plnorm", meanlog = -0.6695120, sd = 0.7199573, estimated = TRUE)
 
 # Examine the fit for the Pareto distribution (NB: parameters estimated from the data)
-cvm.test(dat$Conc,null = "ppareto",location = 0.1800000,shape    = 0.9566756,estimated = TRUE)
-
+cvm.test(dat$Conc, null = "ppareto", location = 0.1800000, shape = 0.9566756, estimated = TRUE)
 ```
 
 ```
@@ -319,17 +315,15 @@ From this output and using a level of significance of $p = 0.05$, we see that no
 
 ```{r echo=FALSE,fig.cap="Emprirical cdf (black); lognormal (green); gamma (blue); and Pareeto (red)", fig.width=7,fig.height=4.5}
 library(EnvStats)
-samp<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
-samp<-sort(samp)
-plot(ecdf(samp),main="Empirical and fitted SSDs",xlab="Concentration",ylab="Probability")
-xx<-seq(0.01,3,by=0.01)
-lines(xx,plnorm(xx,meanlog=-0.6695120,sd=0.7199573),col= "#77d408" )
-lines(xx,pgamma(xx,shape = 2.0591977,scale = 0.3231032),col="#08afd4")
-lines(xx,ppareto(xx, location = 0.1800000,shape    = 0.9566756),col="red")
-#lines(xx,(0.4419*plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15])))+
+samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+samp <- sort(samp)
+plot(ecdf(samp), main = "Empirical and fitted SSDs", xlab = "Concentration", ylab = "Probability")
+xx <- seq(0.01, 3, by = 0.01)
+lines(xx, plnorm(xx, meanlog = -0.6695120, sd = 0.7199573), col = "#77d408")
+lines(xx, pgamma(xx, shape = 2.0591977, scale = 0.3231032), col = "#08afd4")
+lines(xx, ppareto(xx, location = 0.1800000, shape = 0.9566756), col = "red")
+# lines(xx,(0.4419*plnorm(xx,meanlog=mean(log(samp[5:15])),sd=sd(log(samp[5:15])))+
 #          0.5581*plnorm(xx,meanlog=mean(log(samp[1:10])),sd=sd(log(samp[1:10]))))  ,col="#d40830")
-
-
 ```
 </p>
 
@@ -348,27 +342,27 @@ where $k$ is the number of model parameters and $\ell$ is the *likelihood* for t
 
 
 ```{r, echo=TRUE}
-sum(log(dgamma(dat$Conc,shape = 2.0591977,scale = 0.3231032))) 
-sum(log(dlnorm(dat$Conc, meanlog = -0.6695120,sdlog   =  0.7199573))) 
-sum(log(EnvStats::dpareto(dat$Conc,location = 0.1800000, shape=0.9566756))) 
+sum(log(dgamma(dat$Conc, shape = 2.0591977, scale = 0.3231032)))
+sum(log(dlnorm(dat$Conc, meanlog = -0.6695120, sdlog = 0.7199573)))
+sum(log(EnvStats::dpareto(dat$Conc, location = 0.1800000, shape = 0.9566756)))
 ```
 
 From which the *AIC* values readily follow:
 
 ```{r echo=FALSE,results='markup'}
-dat<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
-k<-2  # number of parameters for each of the distributions
+dat <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+k <- 2 # number of parameters for each of the distributions
 # Gamma distribution
-aic1<-2*k-2*sum(log(dgamma(dat,shape = 2.0591977,scale = 0.3231032)))
-cat("AIC for gamma distribution =",aic1,"\n")
+aic1 <- 2 * k - 2 * sum(log(dgamma(dat, shape = 2.0591977, scale = 0.3231032)))
+cat("AIC for gamma distribution =", aic1, "\n")
 
 # lognormal distribution
-aic2<-2*k-2*sum(log(dlnorm(dat, meanlog = -0.6695120,sdlog   =  0.7199573))) 
-cat("AIC for lognormal distribution =",aic2,"\n")
+aic2 <- 2 * k - 2 * sum(log(dlnorm(dat, meanlog = -0.6695120, sdlog = 0.7199573)))
+cat("AIC for lognormal distribution =", aic2, "\n")
 
 # Pareto distribution
-aic3<-2*k-2*sum(log(EnvStats::dpareto(dat,location = 0.1800000, shape=0.9566756))) 
-cat("AIC for Pareto distribution =",aic3,"\n")
+aic3 <- 2 * k - 2 * sum(log(EnvStats::dpareto(dat, location = 0.1800000, shape = 0.9566756)))
+cat("AIC for Pareto distribution =", aic3, "\n")
 ```
 </p>
 
@@ -391,25 +385,27 @@ where $AI{C_0}$ is the *AIC* for the **best-fitting** model (i.e.$AI{C_0} = \mat
 
 
 ```{r echo=TRUE,results='hide'}
-dat<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
-aic<-NULL
-k<-2  # number of parameters for each of the distributions
+dat <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+aic <- NULL
+k <- 2 # number of parameters for each of the distributions
 
 
-aic[1]<-2*k-2*sum(log(dgamma(dat,shape = 2.0591977,scale = 0.3231032))) # Gamma distribution
+aic[1] <- 2 * k - 2 * sum(log(dgamma(dat, shape = 2.0591977, scale = 0.3231032))) # Gamma distribution
 
-aic[2]<-2*k-2*sum(log(dlnorm(dat, meanlog = -0.6695120,sdlog   =  0.7199573)))  # lognormal distribution
+aic[2] <- 2 * k - 2 * sum(log(dlnorm(dat, meanlog = -0.6695120, sdlog = 0.7199573))) # lognormal distribution
 
-aic[3]<-2*k-2*sum(log(EnvStats::dpareto(dat,location = 0.1800000, shape=0.9566756))) # Pareto distribution
+aic[3] <- 2 * k - 2 * sum(log(EnvStats::dpareto(dat, location = 0.1800000, shape = 0.9566756))) # Pareto distribution
 
-delta<-aic-min(aic)  #  compute the delta values
+delta <- aic - min(aic) #  compute the delta values
 
-aic.w<-exp(-0.5*delta); aic.w<-round(aic.w/sum(aic.w),4)
+aic.w <- exp(-0.5 * delta)
+aic.w <- round(aic.w / sum(aic.w), 4)
 
-cat(" AIC weight for gamma distribution =",aic.w[1],"\n",
-    "AIC weight for lognormal distribution =",aic.w[2],"\n",
-    "AIC weight for pareto distribution =",aic.w[3],"\n")
-
+cat(
+  " AIC weight for gamma distribution =", aic.w[1], "\n",
+  "AIC weight for lognormal distribution =", aic.w[2], "\n",
+  "AIC weight for pareto distribution =", aic.w[3], "\n"
+)
 ```
 ```
  AIC weight for gamma distribution = 0.1191 
@@ -421,18 +417,17 @@ cat(" AIC weight for gamma distribution =",aic.w[1],"\n",
 Finally, let's look at the fitted *model-averaged SSD*:
 
 ```{r echo=FALSE,fig.cap="Empirical cdf (black) and model-averaged fit (magenta)",fig.width=8,fig.height=5}
-samp<-c(1.73,0.57,0.33,0.28,0.3,0.29,2.15,0.8,0.76,0.54,0.42,0.83,0.21,0.18,0.59)
-samp<-sort(samp)
-plot(ecdf(samp),main="Empirical and fitted SSDs",xlab="Concentration",ylab="Probability")
-xx<-seq(0.01,3,by=0.005)
+samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
+samp <- sort(samp)
+plot(ecdf(samp), main = "Empirical and fitted SSDs", xlab = "Concentration", ylab = "Probability")
+xx <- seq(0.01, 3, by = 0.005)
 
-lines(xx,plnorm(xx,meanlog=-0.6695120,sd=0.7199573),col= "#959495",lty=2 )
-lines(xx,pgamma(xx,shape = 2.0591977,scale = 0.3231032),col="#959495",lty=3)
-lines(xx,ppareto(xx, location = 0.1800000,shape    = 0.9566756),col="#959495",lty=4)
-lines(xx,0.1191*pgamma(xx,shape = 2.0591977,scale = 0.3231032) + 
-        0.3985*plnorm(xx,meanlog=-0.6695120,sd=0.7199573) +
-        0.4824*ppareto(xx, location = 0.1800000,shape= 0.9566756),col="#FF33D5",lwd=1.5)
-
+lines(xx, plnorm(xx, meanlog = -0.6695120, sd = 0.7199573), col = "#959495", lty = 2)
+lines(xx, pgamma(xx, shape = 2.0591977, scale = 0.3231032), col = "#959495", lty = 3)
+lines(xx, ppareto(xx, location = 0.1800000, shape = 0.9566756), col = "#959495", lty = 4)
+lines(xx, 0.1191 * pgamma(xx, shape = 2.0591977, scale = 0.3231032) +
+  0.3985 * plnorm(xx, meanlog = -0.6695120, sd = 0.7199573) +
+  0.4824 * ppareto(xx, location = 0.1800000, shape = 0.9566756), col = "#FF33D5", lwd = 1.5)
 ```
 
 As can be seen from the figure above, the model-averaged fit provides a very good fit to the empirical data. 

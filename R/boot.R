@@ -58,14 +58,14 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
     parametric = parametric
   )
 
-  if(!is.null(save_to)) {
+  if (!is.null(save_to)) {
     readr::write_csv(new_data, boot_filepath(i, dist, save_to))
   }
 
   if (dist == "lnorm_lnorm") {
     pars <- slnorm_lnorm(new_data)
   }
-  if(dist == "multi") {
+  if (dist == "multi") {
     dist2 <- names(pars)
   } else {
     dist2 <- dist
@@ -76,17 +76,17 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
     range_shape2 = range_shape2, control = control, pars = pars, hessian = FALSE,
     censoring = censoring, weighted = weighted
   )$result
-  
+
   if (is.null(fit)) {
     return(NULL)
   }
   est <- estimates(fit, all_estimates = TRUE)
-  
-  if(!is.null(save_to)) {
+
+  if (!is.null(save_to)) {
     saveRDS(est, boot_filepath(i, dist, save_to, prefix = "estimates", ext = ".rds"))
   }
-  
-  if(!is.null(wts)) {
+
+  if (!is.null(wts)) {
     est[names(wts)] <- unname(wts)
   }
   est
@@ -99,23 +99,23 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
   args <- c(args, estimates)
 
   data <- data[c("left", "right", "weight")]
-  
+
   seeds <- seed_streams(nboot)
-  
-  if(fix_weights) {
+
+  if (fix_weights) {
     wts <- estimates[stringr::str_detect(names(estimates), "\\.weight$")]
   } else {
     wts <- NULL
   }
-  
-  if(!is.null(save_to)) {
-    if(!requireNamespace("readr", quietly = TRUE)) {
+
+  if (!is.null(save_to)) {
+    if (!requireNamespace("readr", quietly = TRUE)) {
       err("Package 'readr' must be installed.")
     }
     readr::write_csv(data, boot_filepath(0, dist, save_to))
     saveRDS(estimates, boot_filepath(0, dist, save_to, prefix = "estimates", ext = ".rds"))
   }
-  
+
   estimates <- future_map(1:nboot, sample_parameters,
     dist = dist, fun = sfun,
     data = data, args = args, pars = pars,
@@ -125,7 +125,9 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     wts = wts,
     .options = furrr::furrr_options(seed = seeds)
   )
-  names(estimates) <- boot_filename(1:length(estimates), prefix = "", sep = "",
-                                    dist = paste0("_", dist))
+  names(estimates) <- boot_filename(1:length(estimates),
+    prefix = "", sep = "",
+    dist = paste0("_", dist)
+  )
   estimates[!vapply(estimates, is.null, TRUE)]
 }

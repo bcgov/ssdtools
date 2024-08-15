@@ -32,7 +32,7 @@ ssd_dists_bcanz <- function(npars = c(2L, 5L)) {
   chk_unique(npars)
   check_dim(npars, values = 1:2)
   chk_subset(npars, c(2L, 5L))
-  
+
   ssd_dists(bcanz = TRUE, npars = npars)
 }
 
@@ -50,8 +50,8 @@ ssd_dists_bcanz <- function(npars = c(2L, 5L)) {
 #' ssd_fit_bcanz(ssddata::ccme_boron)
 ssd_fit_bcanz <- function(data, left = "Conc", dists = ssd_dists_bcanz()) {
   ssd_fit_dists(data,
-                left = left,
-                dists = dists
+    left = left,
+    dists = dists
   )
 }
 
@@ -72,10 +72,10 @@ ssd_fit_bcanz <- function(data, left = "Conc", dists = ssd_dists_bcanz()) {
 #' ssd_hc_bcanz(fits, nboot = 100)
 ssd_hc_bcanz <- function(x, nboot = 10000, min_pboot = 0.95) {
   ssd_hc(x,
-         proportion = c(0.01, 0.05, 0.1, 0.2),
-         ci = TRUE,
-         nboot = nboot,
-         min_pboot = min_pboot
+    proportion = c(0.01, 0.05, 0.1, 0.2),
+    ci = TRUE,
+    nboot = nboot,
+    min_pboot = min_pboot
   )
 }
 
@@ -95,9 +95,9 @@ ssd_hc_bcanz <- function(x, nboot = 10000, min_pboot = 0.95) {
 #' ssd_hp_bcanz(fits, nboot = 100)
 ssd_hp_bcanz <- function(x, conc = 1, nboot = 10000, min_pboot = 0.95) {
   ssd_hp(x,
-         conc = conc,
-         ci = TRUE,
-         nboot = nboot,
-         min_pboot = min_pboot
+    conc = conc,
+    ci = TRUE,
+    nboot = nboot,
+    min_pboot = min_pboot
   )
 }

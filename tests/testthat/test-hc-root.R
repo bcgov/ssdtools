@@ -1,4 +1,4 @@
-#    Copyright 2023 Australian Government Department of 
+#    Copyright 2023 Australian Government Department of
 #    Climate Change, Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ test_that("hc multi_ci lnorm", {
   hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed")
   expect_identical(hc_dist$est, hc_average$est)
   expect_equal(hc_multi, hc_average)
-  
+
   testthat::expect_snapshot({
     hc_multi
   })
@@ -42,8 +42,8 @@ test_that("hc multi_ci all", {
 test_that("hc multi_ci all multiple hcs", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc_average <- ssd_hc(fits, proportion = c(5,10)/100, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE)
-  hc_multi <- ssd_hc(fits, proportion = c(5,10)/100, average = TRUE, ci_method = "multi_fixed")
+  hc_average <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE)
+  hc_multi <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "multi_fixed")
   expect_equal(hc_average$est, c(1.24151480646654, 2.37337090704541), tolerance = 1e-6)
   expect_equal(hc_multi$est, c(1.2567737470831, 2.38164080837643), tolerance = 1e-6)
   testthat::expect_snapshot({
@@ -54,9 +54,9 @@ test_that("hc multi_ci all multiple hcs", {
 test_that("hc multi_ci all multiple hcs cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc_average <- ssd_hc(fits, proportion = c(5,10)/100, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE, nboot = 10, ci = TRUE)
+  hc_average <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE, nboot = 10, ci = TRUE)
   set.seed(105)
-  hc_multi <- ssd_hc(fits, proportion = c(5,10)/100, average = TRUE, ci_method = "multi_fixed", nboot = 10, ci = TRUE)
+  hc_multi <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "multi_fixed", nboot = 10, ci = TRUE)
   expect_equal(hc_average$est, c(1.24151480646654, 2.37337090704541), tolerance = 1e-6)
   expect_equal(hc_multi$est, c(1.2567737470831, 2.38164080837643), tolerance = 1e-6)
   testthat::expect_snapshot({
@@ -72,15 +72,15 @@ test_that("hc multi_ci lnorm ci", {
   hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, ci_method = "weighted_arithmetic", multi_est = FALSE)
   set.seed(102)
   hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 100)
-  
+
   testthat::expect_snapshot({
     hc_average
   })
-  
+
   testthat::expect_snapshot({
     hc_multi
   })
-  
+
   hc_dist$dist <- NULL
   hc_average$dist <- NULL
   expect_identical(hc_dist, hc_average)

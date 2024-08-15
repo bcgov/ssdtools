@@ -10,9 +10,8 @@
 
 *.html
 
-docs/
-inst/docs/
-inst/doc
-paper/paper.pdf
-scripts/boron_samples1
-scripts/checks.md
+/docs/
+/inst/docs/
+/paper/paper.pdf
+/scripts/boron_samples1
+/scripts/checks.md

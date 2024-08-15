@@ -17,9 +17,9 @@ nullify_nonfit <- function(fit, dist, data, rescale, computable,
                            min_pmix, range_shape1, range_shape2, at_boundary_ok, silent) {
   error <- fit$error
   fit <- fit$result
-  
+
   rescale <- if (rescale == 1) " (try rescaling data)" else NULL
-  
+
   if (!is.null(error)) {
     if (!silent) {
       wrn(
@@ -38,7 +38,7 @@ nullify_nonfit <- function(fit, dist, data, rescale, computable,
     }
     return(NULL)
   }
-  
+
   if (!optimizer_converged(fit)) {
     message <- optimizer_message(fit)
     if (!silent) {
@@ -66,58 +66,58 @@ nullify_nonfit <- function(fit, dist, data, rescale, computable,
 
 remove_nonfits <- function(fits, data, rescale, computable, min_pmix, range_shape1, range_shape2, at_boundary_ok, silent) {
   fits <- mapply(nullify_nonfit, fits, names(fits),
-                 MoreArgs = list(
-                   data = data, rescale = rescale, computable = computable,
-                   min_pmix = min_pmix,
-                   range_shape1 = range_shape1, range_shape2 = range_shape2,
-                   at_boundary_ok = at_boundary_ok, silent = silent
-                 ), SIMPLIFY = FALSE
+    MoreArgs = list(
+      data = data, rescale = rescale, computable = computable,
+      min_pmix = min_pmix,
+      range_shape1 = range_shape1, range_shape2 = range_shape2,
+      at_boundary_ok = at_boundary_ok, silent = silent
+    ), SIMPLIFY = FALSE
   )
   fits <- fits[!vapply(fits, is.null, TRUE)]
   fits
 }
 
-fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control, at_boundary_ok= TRUE, silent = TRUE, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
+fit_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control, at_boundary_ok = TRUE, silent = TRUE, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
   data <- data[c("left", "right", "weight")]
   safe_fit_dist <- safely(fit_tmb)
   names(dists) <- dists
-  if(!is.null(pars)) {
+  if (!is.null(pars)) {
     pars <- pars[dists]
   } else {
     pars <- rep(list(NULL), length(dists))
   }
-  
-  fits <- purrr::map2(dists, pars, .f = safe_fit_dist,
-                      data = data, min_pmix = min_pmix,
-                      range_shape1 = range_shape1, range_shape2 = range_shape2, control = control,
-                      hessian = hessian
+
+  fits <- purrr::map2(dists, pars,
+    .f = safe_fit_dist,
+    data = data, min_pmix = min_pmix,
+    range_shape1 = range_shape1, range_shape2 = range_shape2, control = control,
+    hessian = hessian
   )
   fits <- remove_nonfits(fits,
-                         data = data, rescale = rescale,
-                         computable = computable, min_pmix = min_pmix,
-                         range_shape1 = range_shape1, range_shape2 = range_shape2,
-                         at_boundary_ok = at_boundary_ok, silent = silent
+    data = data, rescale = rescale,
+    computable = computable, min_pmix = min_pmix,
+    range_shape1 = range_shape1, range_shape2 = range_shape2,
+    at_boundary_ok = at_boundary_ok, silent = silent
   )
-  
+
   class(fits) <- "fitdists"
   fits
 }
 
 fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, control,
                        censoring, weighted, all_dists = TRUE,
-                       at_boundary_ok= TRUE, silent = TRUE, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
+                       at_boundary_ok = TRUE, silent = TRUE, rescale = FALSE, computable = FALSE, pars = NULL, hessian = TRUE) {
   fits <- fit_dists(data, dists,
-                    min_pmix = min_pmix, range_shape1 = range_shape1,
-                    range_shape2 = range_shape2,
-                    at_boundary_ok = at_boundary_ok,
-                    control = control, silent = silent, 
-                    rescale = rescale, computable = computable
-                    
+    min_pmix = min_pmix, range_shape1 = range_shape1,
+    range_shape2 = range_shape2,
+    at_boundary_ok = at_boundary_ok,
+    control = control, silent = silent,
+    rescale = rescale, computable = computable
   )
   if (!length(fits)) {
     err("All distributions failed to fit.")
   }
-  if(all_dists && length(fits) != length(dists)) {
+  if (all_dists && length(fits) != length(dists)) {
     err("One or more distributions failed to fit.")
   }
 
@@ -130,7 +130,7 @@ fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, contro
   attrs$min_pmix <- min_pmix
   attrs$range_shape1 <- range_shape1
   attrs$range_shape2 <- range_shape2
-  
+
   .attrs_fitdists(fits) <- attrs
   fits
 }
@@ -178,13 +178,13 @@ ssd_fit_dists <- function(
   check_dim(dists, values = TRUE)
   chk_not_any_na(dists)
   chk_unique(dists)
-  
+
   chk_subset(dists, ssd_dists_all())
-  
+
   chk_whole_number(nrow)
   chk_gte(nrow, 4L)
   .chk_data(data, left, right, weight, nrow)
-  
+
   chk_flag(rescale)
   chk_flag(reweight)
   chk_flag(computable)
@@ -206,7 +206,7 @@ ssd_fit_dists <- function(
   chk_sorted(range_shape2)
   chk_list(control)
   chk_flag(silent)
-  
+
   org_data <- as_tibble(data)
   data <- process_data(data, left, right, weight)
   attrs <- adjust_data(data, rescale = rescale, reweight = reweight, silent = silent)
@@ -215,15 +215,16 @@ ssd_fit_dists <- function(
     err("Distributions cannot currently be fitted to right censored data.")
   }
   fits <- fits_dists(attrs$data, dists,
-             min_pmix = min_pmix, range_shape1 = range_shape1,
-             range_shape2 = range_shape2,
-             all_dists = all_dists,
-             at_boundary_ok = at_boundary_ok,
-             control = control, silent = silent, 
-             rescale = attrs$rescale, computable = computable,
-             censoring = attrs$censoring,
-             weighted = attrs$weighted)
-  
+    min_pmix = min_pmix, range_shape1 = range_shape1,
+    range_shape2 = range_shape2,
+    all_dists = all_dists,
+    at_boundary_ok = at_boundary_ok,
+    control = control, silent = silent,
+    rescale = attrs$rescale, computable = computable,
+    censoring = attrs$censoring,
+    weighted = attrs$weighted
+  )
+
   .org_data_fitdists(fits) <- org_data
   .cols_fitdists(fits) <- list(left = left, right = right, weight = weight)
   .unequal_fitdists(fits) <- attrs$unequal

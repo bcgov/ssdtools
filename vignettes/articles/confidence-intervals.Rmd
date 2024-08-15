@@ -146,13 +146,13 @@ However, the lower confidence interval obtained using the weighted arithmetic me
 library(ggplot2)
 # library(ggpubr)
 p1 <- ggplot(compare_dat, aes(method, ucl, fill = method)) +
-    geom_bar(stat="identity", position=position_dodge()) +
+  geom_bar(stat = "identity", position = position_dodge()) +
   theme_classic() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 p2 <- ggplot(compare_dat, aes(method, lcl, fill = method)) +
-    geom_bar(stat="identity", position=position_dodge()) +
+  geom_bar(stat = "identity", position = position_dodge()) +
   theme_classic() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
 # ggarrange(p1, p2,common.legend = TRUE)
 ```
@@ -164,10 +164,10 @@ This means that the weighted bootstrap method is ~ `r round(t2["elapsed"]/t4["el
 
 ```{r fig.width=7,fig.height=5}
 p3 <- ggplot(compare_dat, aes(method, time, fill = method)) +
-    geom_bar(stat="identity", position=position_dodge()) +
-    ylab("Elapsed time (seconds)") +
-    theme_classic() +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  geom_bar(stat = "identity", position = position_dodge()) +
+  ylab("Elapsed time (seconds)") +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 p3
 ```
 

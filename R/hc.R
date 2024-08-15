@@ -14,36 +14,36 @@
 
 #' Hazard Concentrations for Species Sensitivity Distributions
 #'
-#' Calculates concentration(s) with bootstrap confidence intervals 
-#' that protect specified proportion(s) of species for 
+#' Calculates concentration(s) with bootstrap confidence intervals
+#' that protect specified proportion(s) of species for
 #' individual or model-averaged distributions
 #' using parametric or non-parametric bootstrapping.
-#' 
-#' Model-averaged estimates and/or confidence intervals (including standard error) 
-#' can be calculated  by treating the distributions as 
+#'
+#' Model-averaged estimates and/or confidence intervals (including standard error)
+#' can be calculated  by treating the distributions as
 #' constituting a single mixture distribution
 #' versus 'taking the mean'.
 #' When calculating the model averaged estimates treating the
-#' distributions as constituting a single mixture distribution 
+#' distributions as constituting a single mixture distribution
 #' ensures that `ssd_hc()` is the inverse of `ssd_hp()`.
-#' 
+#'
 #' If treating the distributions as constituting a single mixture distribution
 #' when calculating model average confidence intervals then
 #' `weighted` specifies whether to use the original model weights versus
-#' re-estimating for each bootstrap sample unless 'taking the mean' in which case 
+#' re-estimating for each bootstrap sample unless 'taking the mean' in which case
 #' `weighted` specifies
-#' whether to take bootstrap samples from each distribution proportional to 
-#' its weight (so that they sum to `nboot`) versus 
-#' calculating the weighted arithmetic means of the lower 
+#' whether to take bootstrap samples from each distribution proportional to
+#' its weight (so that they sum to `nboot`) versus
+#' calculating the weighted arithmetic means of the lower
 #' and upper confidence limits based on `nboot` samples for each distribution.
-#' 
-#' Distributions with an absolute AIC difference greater 
+#'
+#' Distributions with an absolute AIC difference greater
 #' than a delta of by default 7 have considerably less support (weight < 0.01)
 #' and are excluded
 #' prior to calculation of the hazard concentrations to reduce the run time.
-#' 
+#'
 #' @references
-#' 
+#'
 #' Burnham, K.P., and Anderson, D.R. 2002. Model Selection and Multimodel Inference. Springer New York, New York, NY. doi:10.1007/b97636.
 #'
 #' @inheritParams params
@@ -71,38 +71,38 @@ ssd_hc <- function(x, ...) {
 #' @describeIn ssd_hc Hazard Concentrations for Distributional Estimates
 #' @export
 #' @examples
-#' 
+#'
 #' ssd_hc(ssd_match_moments())
 ssd_hc.list <- function(
-    x, 
-    percent, 
-    proportion = 0.05, 
+    x,
+    percent,
+    proportion = 0.05,
     ...) {
   chk_list(x)
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
-  
-  if(lifecycle::is_present(percent)) {
+
+  if (lifecycle::is_present(percent)) {
     lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
     chk_numeric(percent)
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-  
+
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
-  
+
   if (!length(x)) {
     hc <- no_hcp()
     hc <- dplyr::rename(hc, proportion = "value")
     return(hc)
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
-               MoreArgs = list(proportion = proportion),
-               SIMPLIFY = FALSE
+    MoreArgs = list(proportion = proportion),
+    SIMPLIFY = FALSE
   )
   bind_rows(hc)
 }
@@ -110,31 +110,29 @@ ssd_hc.list <- function(
 #' @describeIn ssd_hc Hazard Concentrations for fitdists Object
 #' @export
 #' @examples
-#' 
+#'
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_hc(fits)
 ssd_hc.fitdists <- function(
-    x, 
-    percent, 
+    x,
+    percent,
     proportion = 0.05,
     average = TRUE,
-    ci = FALSE, 
-    level = 0.95, 
+    ci = FALSE,
+    level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
     multi_est = TRUE,
     ci_method = "weighted_samples",
-    parametric = TRUE, 
-    delta = 9.21, 
+    parametric = TRUE,
+    delta = 9.21,
     samples = FALSE,
     save_to = NULL,
     control = NULL,
-    ...
-) {
-  
+    ...) {
   chk_unused(...)
-  
-  if(lifecycle::is_present(percent)) {
+
+  if (lifecycle::is_present(percent)) {
     lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
     chk_numeric(percent)
@@ -147,12 +145,12 @@ ssd_hc.fitdists <- function(
   chk_range(proportion)
   chk_string(ci_method)
   chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-  
+
   fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
   multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
 
   hcp <- ssd_hcp_fitdists(
-    x = x, 
+    x = x,
     value = proportion,
     ci = ci,
     level = level,
@@ -167,8 +165,9 @@ ssd_hc.fitdists <- function(
     control = control,
     samples = samples,
     save_to = save_to,
-    hc = TRUE)
-  
+    hc = TRUE
+  )
+
   hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }
@@ -176,43 +175,43 @@ ssd_hc.fitdists <- function(
 #' @describeIn ssd_hc Hazard Concentrations for fitburrlioz Object
 #' @export
 #' @examples
-#' 
+#'
 #' fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
 #' ssd_hc(fit)
 ssd_hc.fitburrlioz <- function(
-    x, 
-    percent, 
+    x,
+    percent,
     proportion = 0.05,
-    ci = FALSE, 
-    level = 0.95, 
+    ci = FALSE,
+    level = 0.95,
     nboot = 1000,
-    min_pboot = 0.95, 
-    parametric = FALSE, 
-    samples = FALSE, 
-    save_to = NULL, 
+    min_pboot = 0.95,
+    parametric = FALSE,
+    samples = FALSE,
+    save_to = NULL,
     ...) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
   chk_unused(...)
-  
-  if(lifecycle::is_present(percent)) {
+
+  if (lifecycle::is_present(percent)) {
     lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
     chk_numeric(percent)
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-  
+
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
 
-  fun <- if(names(x) == "burrIII3") fit_burrlioz else fit_tmb
+  fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
 
-  hcp <-   ssd_hcp_fitdists (
+  hcp <- ssd_hcp_fitdists(
     x = x,
-    value = proportion, 
+    value = proportion,
     ci = ci,
     level = level,
     nboot = nboot,
@@ -227,8 +226,9 @@ ssd_hc.fitburrlioz <- function(
     control = NULL,
     hc = TRUE,
     fix_weights = FALSE,
-    fun = fun)
-  
+    fun = fun
+  )
+
   hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }

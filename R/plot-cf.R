@@ -14,7 +14,7 @@
 
 #' Cullen and Frey Plot
 #' `r lifecycle::badge('deprecated')`
-#' 
+#'
 #' Plots a Cullen and Frey graph of the skewness and kurtosis
 #' for non-censored data.
 #'
