@@ -64,12 +64,13 @@ censor_data <- function(data, censoring) {
 
 censoring <- function(data) {
   censoring <- c(0, Inf)
-  data <- data[data$left != data$right, ]
 
-  if (!nrow(data)) {
+  if (all(data$left == data$right)) {
     return(censoring)
   }
-
+  
+  data <- data[data$left != data$right, ]
+  
   left <- data$left == 0
   right <- is.infinite(data$right)
 
