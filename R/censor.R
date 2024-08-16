@@ -64,22 +64,19 @@ censor_data <- function(data, censoring) {
 
 censoring <- function(data) {
   censoring <- c(0, Inf)
+  
+  censored <- data[data$left != data$right, ]
 
-  if (all(data$left == data$right)) {
+  if (!nrow(censored)) {
     return(censoring)
   }
-  
-  data <- data[data$left != data$right, ]
-  
-  left <- data$left == 0
-  right <- is.infinite(data$right)
 
-  if (any(!left & !right)) {
+  if (any(censored$left != 0 & !is.infinite(censored$right))) {
     return(c(NA_real_, NA_real_))
   }
 
-  censoring[1] <- max(0, data$right[data$left == 0])
-  censoring[2] <- min(Inf, data$left[is.infinite(data$right)])
+  censoring[1] <- max(0, censored$right[censored$left == 0])
+  censoring[2] <- min(Inf, censored$left[is.infinite(censored$right)])
 
   if (censoring[1] >= censoring[2]) {
     return(c(NA_real_, NA_real_))
