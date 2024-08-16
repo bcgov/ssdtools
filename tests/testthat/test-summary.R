@@ -25,6 +25,31 @@ test_that("summary fitdists", {
   expect_identical(summary$unequal, FALSE)
 })
 
+test_that("summary left censored", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  
+  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  summary <- summary(fits)
+  expect_s3_class(summary, "summary_fitdists")
+  expect_identical(names(summary), c("fits", "censoring", "nrow", "rescaled", "weighted", "unequal", "min_pmix"))
+  expect_identical(summary$censoring, c(18.3, Inf))
+  expect_identical(summary$nrow, 28L)
+  expect_equal(summary$min_pmix, 0.107142857)
+  expect_identical(summary$rescaled, 1)
+  expect_identical(summary$weighted, 1)
+  expect_identical(summary$unequal, FALSE)
+})
+
+test_that("summary right censored", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$right[c(3,6,8)] <- NA
+  
+  expect_error(ssd_fit_dists(data, dists = "lnorm", right = "right"), "^Distributions cannot currently be fitted to right censored data\\.$")
+})
+
 test_that("summary fitdists with multiple dists", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, rescale = TRUE)
