@@ -293,6 +293,19 @@ test_that("ssd_hc works with partially left censored data", {
   expect_gt(hc$ucl, hc$est)
 })
 
+test_that("ssd_hc works with fully left censored data", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$right[data$Conc < 4] <- 4
+  data$Conc[data$Conc < 4] <- NA
+  
+  set.seed(100)
+  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
+  expect_snapshot_data(hc, "partialeftfull")
+  expect_gt(hc$ucl, hc$est)
+})
+
 test_that("ssd_hc works with partially left censored data non-parametric", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
