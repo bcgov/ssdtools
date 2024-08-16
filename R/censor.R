@@ -78,7 +78,7 @@ censoring <- function(data) {
   }
 
   censoring[1] <- max(0, data$right[data$left == 0])
-  censoring[2] <- min(Inf, censoring[2], data$left[is.infinite(data$right)])
+  censoring[2] <- min(Inf, data$left[is.infinite(data$right)])
 
   if (censoring[1] >= censoring[2]) {
     return(c(NA_real_, NA_real_))
