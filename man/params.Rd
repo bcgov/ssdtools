@@ -27,6 +27,8 @@ relative to the extremes for non-missing values.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
+\item{censoring}{A numeric vector of the left and right censoring values.}
+
 \item{color}{A string of the column in data for the color aesthetic.}
 
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}

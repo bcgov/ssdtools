@@ -12,17 +12,26 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("censor", {
-  rlang::local_options(lifecycle_verbosity = "quiet")
-
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-
-  expect_false(is_censored(fits))
-
-  # need to have example censored data
+test_that("ssd_censor only add right by default", {
   data <- ssddata::ccme_boron
-  data$Right <- data$Conc
-  data$Conc <- 0
-  fits <- ssd_fit_dists(data, right = "Right", dists = c("gamma", "llogis", "lnorm"))
-  expect_true(is_censored(fits))
+  data$right <- data$Conc
+  expect_identical(ssd_censor_data(ssddata::ccme_boron), data)
+})
+
+test_that("ssd_censor no rows", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  expect_identical(ssd_censor_data(ssddata::ccme_boron[0,]), data[0,])
+})
+
+test_that("ssd_censor c(2.5, Inf)", {
+  expect_snapshot_data(ssd_censor_data(ssddata::ccme_boron, censoring = c(2.5, Inf)), "boron_25")
+})
+
+test_that("ssd_censor c(0, 10)", {
+  expect_snapshot_data(ssd_censor_data(ssddata::ccme_boron, censoring = c(0, 10)), "boron_10")
+})
+
+test_that("ssd_censor c(2.5, 10)", {
+  expect_snapshot_data(ssd_censor_data(ssddata::ccme_boron, censoring = c(2.5, 10)), "boron_2510")
 })

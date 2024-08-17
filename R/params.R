@@ -26,6 +26,7 @@
 #' relative to the extremes for non-missing values.
 #' @param chk A flag specifying whether to check the arguments.
 #' @param ci A flag specifying whether to estimate confidence intervals (by bootstrapping).
+#' @param censoring A numeric vector of the left and right censoring values.
 #' @param color A string of the column in data for the color aesthetic.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
 #' @param conc A numeric vector of concentrations to calculate the hazard proportions for.
