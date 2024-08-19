@@ -33,8 +33,7 @@ not guarantee performance in small samples.
 For example, consider the CCME silver data that ships with *ssdtools*.
 
 ```{r warning=FALSE, message=FALSE}
-data(ccme_data)
-Ag <- ccme_data[ ccme_data$Chemical=="Silver",]
+Ag <- ssddata::ccme_silver
 Ag$ecdf <- (rank(Ag$Conc)+.25)/(nrow(Ag)+.5)
 Ag
 ```
@@ -81,7 +80,7 @@ $\overline{Y}$ is the sample mean concentration again on the logarithmic scale.
 We notice that the MLE uses a divisor of $n$ while the traditional
 method uses a divisor of $n-1$. Hence the MLE has a negative bias and its value 
 is
-`r round(fit$lnorm$estimate["sdlog"]/sd(log(Ag$Conc)),2)`x the 
+`r round(estimates(fit)$lnorm.sdlog/sd(log(Ag$Conc)),2)`x the 
 usual estimator for $\sigma$ which is 
 $\sqrt{\frac{n-1}{n}}$ = 
 `r round(sqrt((nrow(Ag)-1)/(nrow(Ag))),2)` evaluated at $n$ = `r nrow(Ag)` . 
@@ -105,11 +104,11 @@ as shown in the following plot:
 
 ```{r echo=FALSE,message=FALSE, warning=FALSE}
 MLEcurve <- data.frame(logConc=seq(-3,3,.1), source="MLE")
-MLEcurve$density <- pnorm(MLEcurve$logConc, mean=fit$lnorm$estimate["meanlog"],
-                                    sd=  fit$lnorm$estimate["sdlog"])
+MLEcurve$density <- pnorm(MLEcurve$logConc, mean=estimates(fit)$lnorm.meanlog,
+                                    sd=  estimates(fit)$lnorm.sdlog)
 REGcurve <- data.frame(logConc=seq(-3,3,.1), source="Corrected SD")
 REGcurve$density <- pnorm(REGcurve$logConc,
-                          mean=fit$lnorm$estimate["meanlog"],
+                          mean=estimates(fit)$lnorm.meanlog,
                             sd=  sd(log(Ag$Conc)))
 plotdata <- rbind(MLEcurve, REGcurve)
 ggplot(data=plotdata, aes(x=logConc, y=density))+
@@ -126,14 +125,14 @@ ggplot(data=plotdata, aes(x=logConc, y=density))+
 
 ```{r echo=FALSE}
 # compute the HC5 from the two fit
-MLE.HC5.log <- qnorm(.05,mean=fit$lnorm$estimate["meanlog"], sd=  fit$lnorm$estimate["sdlog"])
+MLE.HC5.log <- qnorm(.05,mean=estimates(fit)$lnorm.meanlog, sd=  estimates(fit)$lnorm.sdlog)
 MLE.HC5     <- exp(MLE.HC5.log)
-REG.HC5.log <- qnorm(.05,mean=fit$lnorm$estimate["meanlog"], sd= sd(log(Ag$Conc)) )
+REG.HC5.log <- qnorm(.05,mean=estimates(fit)$lnorm.meanlog, sd= sd(log(Ag$Conc)) )
 REG.HC5     <- exp(REG.HC5.log)
 
-MLE.HC1.log <- qnorm(.01,mean=fit$lnorm$estimate["meanlog"], sd=  fit$lnorm$estimate["sdlog"])
+MLE.HC1.log <- qnorm(.01,mean=estimates(fit)$lnorm.meanlog, sd=  estimates(fit)$lnorm.sdlog)
 MLE.HC1     <- exp(MLE.HC1.log)
-REG.HC1.log <- qnorm(.01,mean=fit$lnorm$estimate["meanlog"], sd= sd(log(Ag$Conc)) )
+REG.HC1.log <- qnorm(.01,mean=estimates(fit)$lnorm.meanlog, sd= sd(log(Ag$Conc)) )
 REG.HC1     <- exp(REG.HC1.log)
 
     
@@ -182,8 +181,8 @@ bias.correct <- coxsnell.bc(density = norm.pdf,
             logdensity = log.norm.pdf, 
             n = length(Ag$Conc), 
             parms = c("mu", "sigma"),
-            mle = c(fit$lnorm$estimate["meanlog"], 
-                    fit$lnorm$estimate["sdlog" ]), 
+            mle = c(estimates(fit)$lnorm.meanlog, 
+                    estimates(fit)$lnorm.sdlog), 
             lower = '-Inf', upper = 'Inf')
 bias.correct
 
@@ -226,11 +225,12 @@ sample.sizes <- c(6, 8, 10, 12, 15, 20, 25, 30, 50)
 res <- plyr::ldply(sample.sizes, function(n, mu, sd, nsim=1000){
   fits <- plyr::ldply(1:nsim, function(sim, n, mu, sd){
      # generate sample of size n from a normal distribution with specified mean and variance
-     #browser()
+     # browser()
      df <- data.frame(Conc= exp(rnorm(n, mean=mu, sd=sd)))
      
+     xx <<- df
      # find the mle using ssd tools 
-     fit <- ssd_fit_dists(df, dist="lnorm")
+     fit <- ssd_fit_dists(xx, dist="lnorm",control = list(maxit = 1, trace = 4))
      
      # find the bias corrected estimates
      norm.pdf <- quote(1 / (sqrt(2 * pi) * sigma) * exp(-0.5 / sigma ^ 2 * (x - mu) ^ 2))
@@ -242,8 +242,8 @@ res <- plyr::ldply(sample.sizes, function(n, mu, sd, nsim=1000){
             logdensity = log.norm.pdf, 
             n = n, 
             parms = c("mu", "sigma"),
-            mle = c(fit$lnorm$estimate["meanlog"], 
-                    fit$lnorm$estimate["sdlog" ]), 
+            mle = c(estimates(fit)$lnorm.meanlog, 
+                    estimates(fit)$lnorm.sdlog), 
             lower = '-Inf', upper = 'Inf')
 
      # find the hc5 and hc1 using the MLE and bias corrected values
@@ -252,21 +252,21 @@ res <- plyr::ldply(sample.sizes, function(n, mu, sd, nsim=1000){
      actual.HC1.log <- qnorm(.01, mean=mu, sd=sd)
      actual.HC5     <- exp(actual.HC5.log)
      actual.HC1     <- exp(actual.HC1.log)
-     MLE.HC5.log <- qnorm(.05,mean=fit$lnorm$estimate["meanlog"], sd=  fit$lnorm$estimate["sdlog"])
+     MLE.HC5.log <- qnorm(.05,mean=estimates(fit)$lnorm.meanlog, sd=  estimates(fit)$lnorm.sdlog)
      MLE.HC5     <- exp(MLE.HC5.log)
      BC.HC5.log  <- qnorm(.05,mean=bias.correct$mle.bc["mu"], 
                              sd   =bias.correct$mle.bc["sigma"] )
      BC.HC5      <- exp(BC.HC5.log)
 
-     MLE.HC1.log <- qnorm(.01,mean=fit$lnorm$estimate["meanlog"], sd=  fit$lnorm$estimate["sdlog"])
+     MLE.HC1.log <- qnorm(.01,mean=estimates(fit)$lnorm.meanlog, sd=  estimates(fit)$lnorm.sdlog)
      MLE.HC1     <- exp(MLE.HC1.log)
      BC.HC1.log  <- qnorm(.01,mean=bias.correct$mle.bc["mu"], 
                              sd   =bias.correct$mle.bc["sigma"] )
      BC.HC1      <- exp(BC.HC1.log)
 
      data.frame(n=n, sim=sim,  mu=mu, sd=sd,
-              mle.meanlog=fit$lnorm$estimate["meanlog"], 
-              mle.sdlog  =fit$lnorm$estimate["sdlog"],
+              mle.meanlog=estimates(fit)$lnorm.meanlog, 
+              mle.sdlog  =estimates(fit)$lnorm.sdlog,
               bc.meanlog = bias.correct$mle.bc["mu"],
               bc.sdlog   = bias.correct$mle.bc["sigma"],
               actual.HC5.log,
