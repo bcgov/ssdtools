@@ -38,7 +38,7 @@
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
   lifecycle::deprecate_warn("1.0.6.9016", "ssd_wqg_bc()", "ssd_fit_bcanz()",
-                            details = "Please use `ssd_fit_bcanz()` and `ssd_hc()` instead.")
+                            details = "Please use `ssd_fit_bcanz()` and `ssd_hc_bcanz()` instead.")
   fits <- ssd_fit_dists(data, left = left, rescale = FALSE)
   ssd_hc(fits, ci = TRUE, nboot = 10000)
 }
