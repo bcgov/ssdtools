@@ -228,9 +228,8 @@ res <- plyr::ldply(sample.sizes, function(n, mu, sd, nsim=1000){
      # browser()
      df <- data.frame(Conc= exp(rnorm(n, mean=mu, sd=sd)))
      
-     xx <<- df
      # find the mle using ssd tools 
-     fit <- ssd_fit_dists(xx, dist="lnorm",control = list(maxit = 1, trace = 4))
+     fit <- ssd_fit_dists(df, dist="lnorm")
      
      # find the bias corrected estimates
      norm.pdf <- quote(1 / (sqrt(2 * pi) * sigma) * exp(-0.5 / sigma ^ 2 * (x - mu) ^ 2))
@@ -462,8 +461,8 @@ bias.correct.gamma <- coxsnell.bc(density = gamma.pdf,
             logdensity = log.gamma.pdf, 
             n = length(Ag$Conc), 
             parms = c("shape", "scale"),
-            mle = c(fit.gamma$gamma$estimate["shape"], 
-                    fit.gamma$gamma$estimate["scale" ]), 
+            mle = c(estimates(fit.gamma)$gamma.shape, 
+                    estimates(fit.gamma)$gamma.scale), 
             lower = 0, upper = 'Inf')
 bias.correct.gamma
 
@@ -474,8 +473,8 @@ The two cumulative density functions are:
 ```{r echo=FALSE,message=FALSE, warning=FALSE}
 MLEcurve <- data.frame(logConc=seq(-5,3,.1), source="MLE")
 MLEcurve$density <- pgamma(exp(MLEcurve$logConc),  
-                           shape=fit.gamma$gamma$estimate["shape"],
-                           scale=fit.gamma$gamma$estimate["scale"])
+                           shape=estimates(fit.gamma)$gamma.shape,
+                           scale=estimates(fit.gamma)$gamma.scale)
 REGcurve <- data.frame(logConc=seq(-5,3,.1), source="Bias corrected")
 REGcurve$density <- pgamma(exp(REGcurve$logConc),
                            shape=bias.correct.gamma$mle.bc["shape"],
@@ -496,8 +495,8 @@ ggplot(data=plotdata, aes(x=logConc, y=density))+
 ```{r echo=FALSE}
 # compute the HC5 from the two fit
 MLE.gamma.HC5.log <- log(qgamma(.05, 
-                           shape=fit.gamma$gamma$estimate["shape"],
-                           scale=fit.gamma$gamma$estimate["scale"]))
+                           shape=estimates(fit.gamma)$gamma.shape,
+                           scale=estimates(fit.gamma)$gamma.scale))
 MLE.gamma.HC5     <- exp(MLE.gamma.HC5.log)
 REG.gamma.HC5.log <- log(qgamma(.05,
                            shape=bias.correct.gamma$mle.bc["shape"],
@@ -505,8 +504,8 @@ REG.gamma.HC5.log <- log(qgamma(.05,
 REG.gamma.HC5     <- exp(REG.gamma.HC5.log)
 
 MLE.gamma.HC1.log <- log(qgamma(.01, 
-                           shape=fit.gamma$gamma$estimate["shape"],
-                           scale=fit.gamma$gamma$estimate["scale"]))
+                           shape=estimates(fit.gamma)$gamma.shape,
+                           scale=estimates(fit.gamma)$gamma.scale))
 MLE.gamma.HC1     <- exp(MLE.gamma.HC1.log)
 REG.gamma.HC1.log <- log(qgamma(.01,
                            shape=bias.correct.gamma$mle.bc["shape"],
@@ -583,8 +582,8 @@ res <- plyr::ldply(sample.sizes, function(n, shape, scale, nsim=1000){
             logdensity = log.gamma.pdf, 
             n = n, 
             parms = c("shape", "scale"),
-            mle = c(fit$gamma$estimate["shape"], 
-                    fit$gamma$estimate["scale" ]), 
+            mle = c(estimates(fit)$gamma.shape, 
+                    estimates(fit)$gamma.scale), 
             lower = 0, upper = 'Inf'))
      if(class(bias.correct)=="try-error"){
         sim.error = TRUE
@@ -599,21 +598,21 @@ res <- plyr::ldply(sample.sizes, function(n, shape, scale, nsim=1000){
      actual.HC1.log <- log(qgamma(.01, shape=shape, scale=scale))
      actual.HC5     <- exp(actual.HC5.log)
      actual.HC1     <- exp(actual.HC1.log)
-     MLE.HC5.log <- log(qgamma(.05,shape=fit$gamma$estimate["shape"], scale=fit$gamma$estimate["scale"]))
+     MLE.HC5.log <- log(qgamma(.05,shape=estimates(fit)$gamma.shape, scale=estimates(fit)$gamma.scale))
      MLE.HC5     <- exp(MLE.HC5.log)
      BC.HC5.log  <- log(qgamma(.05,shape = bias.correct$mle.bc["shape"], 
                                    scale = bias.correct$mle.bc["scale"] ))
      BC.HC5      <- exp(BC.HC5.log)
 
-     MLE.HC1.log <- log(qgamma(.01, shape=fit$gamma$estimate["shape"], scale=  fit$gamma$estimate["scale"]))
+     MLE.HC1.log <- log(qgamma(.01, shape=estimates(fit)$gamma.shape, scale=  estimates(fit)$gamma.scale))
      MLE.HC1     <- exp(MLE.HC1.log)
      BC.HC1.log  <- log(qgamma(.01,shape=bias.correct$mle.bc["shape"], 
                                    scale=bias.correct$mle.bc["scale"] ))
      BC.HC1      <- exp(BC.HC1.log)
 
      data.frame(n=n, sim=sim,  shape=shape, scale=scale,
-              mle.shape = fit$gamma$estimate["shape"], 
-              mle.scale =fit$gamma$estimate["scale"],
+              mle.shape = estimates(fit)$gamma.shape, 
+              mle.scale = estimates(fit)$gamma.scale,
               bc.shape  = bias.correct$mle.bc["shape"],
               bc.scale  = bias.correct$mle.bc["scale"],
               actual.HC5.log,
