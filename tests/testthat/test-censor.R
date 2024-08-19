@@ -18,6 +18,19 @@ test_that("ssd_censor only add right by default", {
   expect_identical(ssd_censor_data(ssddata::ccme_boron), data)
 })
 
+test_that("ssd_censor use existing right", {
+  data <- ssddata::ccme_boron
+  data$right2 <- data$Conc
+  expect_identical(ssd_censor_data(data, right = "right2"), data)
+})
+
+test_that("ssd_censor use existing right and left", {
+  data <- ssddata::ccme_boron
+  data$right2 <- data$Conc
+  data$left3 <- data$Conc
+  expect_identical(ssd_censor_data(data, left = "left3", right = "right2"), data)
+})
+
 test_that("ssd_censor no rows", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
