@@ -1,0 +1,807 @@
+---
+title: "Small sample bias in estimates"
+author: "sstools Team"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+output: pdf_document
+vignette: >
+  %\VignetteIndexEntry{Small sample bias in estimates}   
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.width = 6,
+                      fig.height = 6)
+
+library(ggplot2)
+library(mle.tools)
+library(reshape2)
+library(ssdtools)
+
+nsim <- 1000 # number of simulations for effect of bias correction
+```
+
+## Introduction
+
+### What is the issue
+
+The *ssdtools* package uses the method of Maximum Likelihood (ML) to estimate parameters for each distribution that is fit to the data. Statistical theory
+says that maximum likelihood estimators are asymptotically unbiased, but does
+not guarantee performance in small samples.
+
+For example, consider the CCME silver data that ships with *ssdtools*.
+
+```{r warning=FALSE, message=FALSE}
+data(ccme_data)
+Ag <- ccme_data[ ccme_data$Chemical=="Silver",]
+Ag$ecdf <- (rank(Ag$Conc)+.25)/(nrow(Ag)+.5)
+Ag
+```
+
+Let us fit a log-normal distribution to the Ag endpoint data and estimate the parameters:
+
+```{r warning=FALSE, message=FALSE}
+fit <- ssd_fit_dists(Ag, dist="lnorm")
+fit
+```
+
+For most distributions, the MLE must be found numerically by iterative
+methods, but the log-normal distribution has easily computed estimators.
+
+The *meanlog* parameter shown above represents the mean of the concentrations
+on the (natural) logarithmic scale and we can easily reproduce
+this value:
+
+```{r }
+mean(log(Ag$Conc))
+```
+
+The *sdlog* parameter represents the standard deviation on the logarithmic scale, but
+the direct computation of the standard deviation gives a slightly different
+result:
+
+```{r }
+sd(log(Ag$Conc))
+```
+
+
+It turns out that in small samples, the MLE of the standard deviation
+for a log-normal distribution has a negative bias, i.e. the MLE tends to be
+smaller than the underlying true parameter value. The cause of this bias
+is found by comparing the formula for the MLE of the standard deviation
+and the traditional estimator for the standard deviation:
+
+$$ \widehat{\sigma}_{MLE} = \sqrt{\frac{\sum{(Y_i-\overline{Y})^2}}{{n}}}$$
+$$ \widehat{\sigma}_{traditional} = \sqrt{\frac{\sum{(Y_i-\overline{Y})^2}}{{n-1}}}$$
+
+where $n$ is the sample size, $Y_i$ are the $\log(concentrations)$, and
+$\overline{Y}$ is the sample mean concentration again on the logarithmic scale.
+
+We notice that the MLE uses a divisor of $n$ while the traditional
+method uses a divisor of $n-1$. Hence the MLE has a negative bias and its value 
+is
+`r round(fit$lnorm$estimate["sdlog"]/sd(log(Ag$Conc)),2)`x the 
+usual estimator for $\sigma$ which is 
+$\sqrt{\frac{n-1}{n}}$ = 
+`r round(sqrt((nrow(Ag)-1)/(nrow(Ag))),2)` evaluated at $n$ = `r nrow(Ag)` . 
+
+As the sample size
+increases the absolute size of the bias will get smaller and smaller, i.e.,
+if $n=20$, then the MLE estimator is `r round(sqrt((20-1)/(20)),2)`x the traditional 
+estimator for $\sigma$
+which is neglible given the uncertainties in the actual end points.
+
+Conversly, as the sample size decreases, the absolute size of the bias could become quite large, i.e.,
+if $n=4$, then the MLE is `r round(sqrt((4-1)/(4)),2)`x the traditional estimator. But
+if you are fitting a species sensitivity distribution to only 4 data values, 
+perhaps concern about bias in MLE is misplaced. Australian guidelines recommend a minimum sample size of 8 species.
+
+## What is the impact on the HCx value?
+If the standard deviation is underestimated, then the tails of the 
+distribution will be pulled inwards and the HCx values will tend 
+to be larger compared to the case where the standard deviation is not deflated 
+as shown in the following plot:
+
+```{r echo=FALSE,message=FALSE, warning=FALSE}
+MLEcurve <- data.frame(logConc=seq(-3,3,.1), source="MLE")
+MLEcurve$density <- pnorm(MLEcurve$logConc, mean=fit$lnorm$estimate["meanlog"],
+                                    sd=  fit$lnorm$estimate["sdlog"])
+REGcurve <- data.frame(logConc=seq(-3,3,.1), source="Corrected SD")
+REGcurve$density <- pnorm(REGcurve$logConc,
+                          mean=fit$lnorm$estimate["meanlog"],
+                            sd=  sd(log(Ag$Conc)))
+plotdata <- rbind(MLEcurve, REGcurve)
+ggplot(data=plotdata, aes(x=logConc, y=density))+
+   ggtitle( "Comparing the estimated cumulative density computed using \nMLE and bias-corrected SD",
+            subtitle=paste("Ag CCME data with n=",nrow(Ag),sep=""))+
+   geom_line(aes(color=source, linetype=source))+
+   geom_hline(yintercept=.05)+
+   ylab("Cumulative probabiity")+
+   xlab("log(Concentration) \n Horizontal line represents the HC5")+
+   geom_point(data=Ag, aes(x=log(Conc),y=ecdf))
+   
+
+```
+
+```{r echo=FALSE}
+# compute the HC5 from the two fit
+MLE.HC5.log <- qnorm(.05,mean=fit$lnorm$estimate["meanlog"], sd=  fit$lnorm$estimate["sdlog"])
+MLE.HC5     <- exp(MLE.HC5.log)
+REG.HC5.log <- qnorm(.05,mean=fit$lnorm$estimate["meanlog"], sd= sd(log(Ag$Conc)) )
+REG.HC5     <- exp(REG.HC5.log)
+
+MLE.HC1.log <- qnorm(.01,mean=fit$lnorm$estimate["meanlog"], sd=  fit$lnorm$estimate["sdlog"])
+MLE.HC1     <- exp(MLE.HC1.log)
+REG.HC1.log <- qnorm(.01,mean=fit$lnorm$estimate["meanlog"], sd= sd(log(Ag$Conc)) )
+REG.HC1     <- exp(REG.HC1.log)
+
+    
+```
+
+The HC5 estimated from the MLE fit is `r round(MLE.HC5.log,2)` on the logarithmic concentrations
+scale or `r round(MLE.HC5,3)` on the concentration scale.
+The HC5 estimated after correcting the standard deviation for small sample bias is
+`r round(REG.HC5.log,2)` on the logarithmic concentrations
+scale or `r round(REG.HC5,3)` on the concentration scale. 
+The ratio of HC5 values 
+is `r round(REG.HC5/MLE.HC5,2)`x on the concentration scale, i.e.
+the estimated HC5 from the MLE is `r round(MLE.HC5/REG.HC5,1)`x larger than the HC5 computed using the bias correction.
+
+The differences between the HCx computed from the MLE fit and using the corrected
+standard deviation will become more pronounced for small HCx values. For example,
+the HC1 estimated from the MLE fit is `r round(MLE.HC1,3)` 
+and the HC1 estimated using the corrected standard deviation
+is `r round(REG.HC1,3)` on the concentration scale. 
+The ratio of the HC1 values
+is `r round(REG.HC1/MLE.HC1,2)`x on the concentrations scale, i.e.
+the estimated HC1 from the MLE is `r round(MLE.HC1/REG.HC1,1)`x larger than the HC5 computed using the bias correction.
+
+
+## What can be done?
+A similar concernalso occurs with other distributions. Howeve, except for a few distributions,
+such as the normal distribution, analytical expressions for the MLE
+and for unbiased estimators do not exist. The *mle.tools* package from CRAN
+provides a method that numerically corrects the bias after the fit is completed.
+
+### Bias correction using Cox-Snell method - log-normal distribution
+
+For example, again using the Ag log-normal fit we have:
+```{r }
+# apply the Cox and Snell (1968) bias correction using mle.tools.
+# what is the density function
+norm.pdf <- quote(1 / (sqrt(2 * pi) * sigma) * exp(-0.5 / sigma ^ 2 * (x - mu) ^ 2))
+norm.pdf
+
+# what is the log(density) function (ignoring constants)
+log.norm.pdf <- quote(- log(sigma) - 0.5 / sigma ^ 2 * (x - mu) ^ 2)
+log.norm.pdf
+
+
+bias.correct <- coxsnell.bc(density = norm.pdf, 
+            logdensity = log.norm.pdf, 
+            n = length(Ag$Conc), 
+            parms = c("mu", "sigma"),
+            mle = c(fit$lnorm$estimate["meanlog"], 
+                    fit$lnorm$estimate["sdlog" ]), 
+            lower = '-Inf', upper = 'Inf')
+bias.correct
+
+```
+
+The biased corrected value for the standard deviation is
+`r round(bias.correct$mle.b["sigma"],2)` which is comparable 
+to the standard deviation of the log(concentration) found
+earlier of `r round(sd(log(Ag$Conc)),2)`.
+
+
+A small simulation study was conducted to investigate the effect of sample size
+on the bias correction and effects of the small-sample bias in the estimates
+of HC5 and HC1. For this simulation study, it was assumed that a log-normal
+distribution represented the distribution of endpoints among species with a mean of 0
+and a standard deviation of 1 (on the logarithmic scale). These values are arbitrary, but
+any log-normal distribution can be rescaled (e.g. by changing units) to have this mean 
+and standard deviation. 
+
+Simulated data sets at various sample sizes were generated, the MLE and bias-corrected estimates
+were obtained and these were used to estimate the HC5 and HC1 on the $\log()$ and anti-log scales. The average
+value of each response was then computed and plotted vs. the actual parameter values based
+on the known mean and standard deviation (shown in the plot below as a black horizontal line). 
+For example, for a log-normal distribution with a mean
+of 0 and a standard deviation of 1 on the log-scale, the $log(HC5)$ is the 0.05 quantile
+of the normal distribution or `r round(qnorm(.05, 0, 1),3)`. 
+
+A plot of the results is:
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+# Simulation study to estimate effect of small sample bias on estimates of HC5 and HC1
+# Use a normal distribution 
+set.seed(964544)
+
+mu <- 0
+sd <- 1
+
+sample.sizes <- c(6, 8, 10, 12, 15, 20, 25, 30, 50)
+
+res <- plyr::ldply(sample.sizes, function(n, mu, sd, nsim=1000){
+  fits <- plyr::ldply(1:nsim, function(sim, n, mu, sd){
+     # generate sample of size n from a normal distribution with specified mean and variance
+     #browser()
+     df <- data.frame(Conc= exp(rnorm(n, mean=mu, sd=sd)))
+     
+     # find the mle using ssd tools 
+     fit <- ssd_fit_dists(df, dist="lnorm")
+     
+     # find the bias corrected estimates
+     norm.pdf <- quote(1 / (sqrt(2 * pi) * sigma) * exp(-0.5 / sigma ^ 2 * (x - mu) ^ 2))
+     # what is the log(density) function (ignoring constants)
+     log.norm.pdf <- quote(- log(sigma) - 0.5 / sigma ^ 2 * (x - mu) ^ 2)
+     log.norm.pdf
+
+     bias.correct <- coxsnell.bc(density = norm.pdf, 
+            logdensity = log.norm.pdf, 
+            n = n, 
+            parms = c("mu", "sigma"),
+            mle = c(fit$lnorm$estimate["meanlog"], 
+                    fit$lnorm$estimate["sdlog" ]), 
+            lower = '-Inf', upper = 'Inf')
+
+     # find the hc5 and hc1 using the MLE and bias corrected values
+     # compute the HC5 from the two fit
+     actual.HC5.log <- qnorm(.05, mean=mu, sd=sd)
+     actual.HC1.log <- qnorm(.01, mean=mu, sd=sd)
+     actual.HC5     <- exp(actual.HC5.log)
+     actual.HC1     <- exp(actual.HC1.log)
+     MLE.HC5.log <- qnorm(.05,mean=fit$lnorm$estimate["meanlog"], sd=  fit$lnorm$estimate["sdlog"])
+     MLE.HC5     <- exp(MLE.HC5.log)
+     BC.HC5.log  <- qnorm(.05,mean=bias.correct$mle.bc["mu"], 
+                             sd   =bias.correct$mle.bc["sigma"] )
+     BC.HC5      <- exp(BC.HC5.log)
+
+     MLE.HC1.log <- qnorm(.01,mean=fit$lnorm$estimate["meanlog"], sd=  fit$lnorm$estimate["sdlog"])
+     MLE.HC1     <- exp(MLE.HC1.log)
+     BC.HC1.log  <- qnorm(.01,mean=bias.correct$mle.bc["mu"], 
+                             sd   =bias.correct$mle.bc["sigma"] )
+     BC.HC1      <- exp(BC.HC1.log)
+
+     data.frame(n=n, sim=sim,  mu=mu, sd=sd,
+              mle.meanlog=fit$lnorm$estimate["meanlog"], 
+              mle.sdlog  =fit$lnorm$estimate["sdlog"],
+              bc.meanlog = bias.correct$mle.bc["mu"],
+              bc.sdlog   = bias.correct$mle.bc["sigma"],
+              actual.HC5.log,
+              actual.HC5,
+              actual.HC1.log,
+              actual.HC1,
+              MLE.HC5.log = MLE.HC5.log,
+              MLE.HC5,
+              BC.HC5.log,
+              BC.HC5,
+              MLE.HC1.log,
+              MLE.HC1,
+              BC.HC1.log,
+              BC.HC1)
+   }, n=n, mu=mu, sd=sd) 
+   fits
+}, mu=mu, sd=sd, nsim=nsim)
+
+head(res)
+# summarize the output from the simulation
+res.summary <- plyr::ddply(res,"n", plyr::summarize,
+                           n=mean(n),
+                           nsims=max(sim),
+                           mu=mean(mu),
+                           sd=mean(sd),
+                           mean.mle.meanlog= mean(mle.meanlog),
+                           mean.mle.sdlog  = mean(mle.sdlog),
+                           mean.bc.meanlog = mean(bc.meanlog),
+                           mean.bc.sdlog   = mean(bc.sdlog),
+                           actual.HC5.log  = mean(actual.HC5.log),
+                           actual.HC1.log  = mean(actual.HC1.log),
+                           mean.mle.HC5.log= mean(MLE.HC5.log),
+                           mean.mle.HC1.log= mean(MLE.HC1.log),
+                           mean.bc.HC5.log = mean(BC.HC5.log),
+                           mean.bc.HC1.log = mean(BC.HC1.log),
+                           mean.mle.HC5    = mean(MLE.HC5),
+                           mean.mle.HC1    = mean(MLE.HC1),
+                           mean.bc.HC5     = mean(BC.HC5),
+                           mean.bc.HC1     = mean(BC.HC1)
+
+                           )
+res.summary
+
+
+plotdata <- reshape2::melt(res.summary,
+                           id.vars="n",
+                           value.name="value",
+                           variable.name="Measure")
+plotdata$Measure <- as.character(plotdata$Measure)
+unique(plotdata$Measure)
+str(plotdata)
+
+plotdata$parameter <- car::recode(plotdata$Measure,
+                          " 'mean.mle.meanlog'='Mean of log(Conc)';
+                            'mean.bc.meanlog' ='Mean of log(Conc)';
+                            'mean.mle.sdlog'  ='SD of log(Conc)';
+                            'mean.bc.sdlog'   ='SD of log(Conc)';
+                            'mean.mle.HC5.log'='log(HC)';
+                            'mean.mle.HC1.log'='log(HC)';
+                            'mean.bc.HC5.log' ='log(HC)';
+                            'mean.bc.HC1.log' ='log(HC)';
+                            'mean.mle.HC5'    ='actual HC';
+                            'mean.mle.HC1'    ='actual HC';
+                            'mean.bc.HC5'     ='actual HC';
+                            'mean.bc.HC1'     ='actual HC';
+
+                          ")
+
+plotdata$method <- car::recode(plotdata$Measure,
+                           "'mean.mle.meanlog'='MLE';
+                            'mean.bc.meanlog' ='BC';
+                            'mean.mle.sdlog'  ='MLE';
+                            'mean.bc.sdlog'   ='BC';
+                            'mean.mle.HC5.log'='MLE';
+                            'mean.mle.HC1.log'='MLE';
+                            'mean.bc.HC5.log' ='BC';
+                            'mean.bc.HC1.log' ='BC';
+                            'mean.mle.HC5'    ='MLE';
+                            'mean.mle.HC1'    ='MLE';
+                            'mean.bc.HC5'     ='BC';
+                            'mean.bc.HC1'     ='BC';
+
+                          ")
+
+plotdata$HC <- car::recode(plotdata$Measure,
+                           "'mean.mle.HC5.log'='HC5';
+                            'mean.mle.HC1.log'='HC1';
+                            'mean.bc.HC5.log' ='HC5';
+                            'mean.bc.HC1.log' ='HC1';
+                            'mean.mle.HC5'    ='HC5';
+                            'mean.mle.HC1'    ='HC1';
+                            'mean.bc.HC5'     ='HC5';
+                            'mean.bc.HC1'     ='HC1';
+
+                           else='NA';
+                          ")
+
+head(plotdata)
+
+xtabs(~Measure+parameter,  data=plotdata, exclude=NULL, na.action=na.pass)
+xtabs(~Measure+method   ,  data=plotdata, exclude=NULL, na.action=na.pass)
+
+select <- grepl("meanlog", plotdata$Measure) |
+          grepl("sdlog"  , plotdata$Measure) |
+          grepl("mle.HC5.log", plotdata$Measure) |
+          grepl("mle.HC1.log", plotdata$Measure) |
+          grepl("bc.HC5.log", plotdata$Measure) |
+          grepl("bc.HC1.log", plotdata$Measure) |
+          grepl("mle.HC5",    plotdata$Measure) |
+          grepl("mle.HC1",    plotdata$Measure) |
+          grepl("bc.HC5",     plotdata$Measure) |
+          grepl("bc.HC1",     plotdata$Measure)
+
+plotdata[select,]
+
+true.parms <- data.frame(parameter=c("Mean of log(Conc)",
+                                    "SD of log(Conc)",
+                                    "log(HC)",
+                                    "log(HC)",
+                                    "actual HC",
+                                    'actual HC'),
+                         value=c(0,1,qnorm(.05, mu, sd), qnorm(.01, mu, sd), exp(qnorm(.05, mu, sd)), exp(qnorm(.01, mu, sd))),
+                         linetype=c("solid","solid","dashed","solid","dashed","solid"), stringsAsFactors=FALSE)
+true.parms
+
+simplot <- ggplot(data=plotdata[select,], aes(x=n, y=value,color=method, linetype=HC))+
+  ggtitle("Performance of mle and bias corrected estimators",
+          subtitle=paste("Log-normal distribution with mean= ", mu, ' and sd =',sd,' on the log() scale',sep=""))+
+  geom_point(position=position_jitter(w=0.4))+
+  geom_line( position=position_jitter(w=0.4))+
+  facet_wrap(~parameter, ncol=2,scales="free")+
+  geom_hline(data=true.parms, aes(yintercept=value), linetype=true.parms$linetype)+
+  xlab("Sample size")+
+  scale_linetype_discrete(na.value="solid", breaks=c("HC1","HC5"), )
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+simplot
+```
+
+The MLE is unbiased for the mean of the log-normal distribution (bottom left plot)  -
+the apparent deviations from the true value of 0 are very small (note the scale
+on the $Y$ axis) and simply simulation artefacts. 
+
+The MLE for the standard deviation
+is biased downwards (lower right plot) and the bias become smaller with 
+increasing sample size (the curve for the mean of the MLE estimate of the
+standard deviation increases and approaches the true value of 0). The bias-correction for the
+standard deviation is effective for all but the smallest sample sizes.
+
+The estimated $\log{HC}$ (upper right plot) based on the MLE is biased upwards (i.e. larger) than the true
+values but the bias declines with sample size (as expected). The 
+estimate of the $\log{HC}$ based on the bias-corrected estimates performs well 
+(close to the true value) except at very small sample sizes.
+
+Finally, the estimated $HC1$ and $HC5$ values are again biased upwards (upper left plot). 
+This bias consists of two parts  
+
+1. bias in the underlying estimates of the parameters
+of the distribution
+2. non-linear tranformation bias, i.e. the mean of a function of the parameter values is
+not equal to the function evaluated at the mean of the parameter values. For example, the
+HC5 is found as the anti-log of the 5$^{th}$ percentile of the normal distribution. Suppose 
+we have two simulation results where the estimated 5$^{th}$ percentile of the fitted normal distribution
+were $-1.8$ and $-1.5$. The mean of the estimated 5$^th$ percentile is $\frac{-1.8+(-1.5)}{2}=-1.65$ and
+is unbiased for the actual percentile value of $-1.645$. However, the actual HC5 is found as the anti-log
+of the two individual estimates, i.e. $\exp(-1.8)=0.165$ and $\exp(-1.6)=.223$ whose mean is 0.194, but 
+the anti-log of the average, $exp(-1.65)=.192$ which is not the same value.
+
+The total bias does not appear to be large except in the case of very small sample sizes.
+
+### Bias correction using Cox-Snell method - gamma distribution
+
+We can also apply this to other distributions such as the gamma
+distribution. If we fit a gamma distribution to the
+Ag data we obtain:
+```{r warnings=FALSE, message=FALSE}
+fit.gamma <- ssd_fit_dists(Ag, dist="gamma")
+fit.gamma
+```
+The bias corrected estimates are:
+```{r }
+# apply the Cox and Snell (1968) bias correction using mle.tools.
+# what is the density function
+gamma.pdf <- quote(1 /(scale ^ shape * gamma(shape)) * x ^ (shape - 1) * exp(-x / scale))
+gamma.pdf
+
+# what is the log(density) functiong ingoring constants
+log.gamma.pdf <- quote(-shape * log(scale) - lgamma(shape) + shape * log(x) -
+ x / scale)
+log.gamma.pdf
+
+bias.correct.gamma <- coxsnell.bc(density = gamma.pdf, 
+            logdensity = log.gamma.pdf, 
+            n = length(Ag$Conc), 
+            parms = c("shape", "scale"),
+            mle = c(fit.gamma$gamma$estimate["shape"], 
+                    fit.gamma$gamma$estimate["scale" ]), 
+            lower = 0, upper = 'Inf')
+bias.correct.gamma
+
+```
+
+The two cumulative density functions are:
+
+```{r echo=FALSE,message=FALSE, warning=FALSE}
+MLEcurve <- data.frame(logConc=seq(-5,3,.1), source="MLE")
+MLEcurve$density <- pgamma(exp(MLEcurve$logConc),  
+                           shape=fit.gamma$gamma$estimate["shape"],
+                           scale=fit.gamma$gamma$estimate["scale"])
+REGcurve <- data.frame(logConc=seq(-5,3,.1), source="Bias corrected")
+REGcurve$density <- pgamma(exp(REGcurve$logConc),
+                           shape=bias.correct.gamma$mle.bc["shape"],
+                           scale=bias.correct.gamma$mle.bc["scale"])
+plotdata <- rbind(MLEcurve, REGcurve)
+ggplot(data=plotdata, aes(x=logConc, y=density))+
+   ggtitle( "Comparing the estimated cumulative gamma density \nusing MLE and bias correction",
+            subtitle=paste("Ag CCME data with n=",nrow(Ag),
+                            ' and gamma fit',sep=""))+
+   geom_line(aes(color=source, linetype=source))+
+   geom_hline(yintercept=.05)+
+   xlab("log(Concentration) \n Horizontal line represents the HC5")+
+   ylab("Cumulative probability")+
+   geom_point(data=Ag, aes(x=log(Conc),y=ecdf))
+
+```
+
+```{r echo=FALSE}
+# compute the HC5 from the two fit
+MLE.gamma.HC5.log <- log(qgamma(.05, 
+                           shape=fit.gamma$gamma$estimate["shape"],
+                           scale=fit.gamma$gamma$estimate["scale"]))
+MLE.gamma.HC5     <- exp(MLE.gamma.HC5.log)
+REG.gamma.HC5.log <- log(qgamma(.05,
+                           shape=bias.correct.gamma$mle.bc["shape"],
+                           scale=bias.correct.gamma$mle.bc["scale"]))
+REG.gamma.HC5     <- exp(REG.gamma.HC5.log)
+
+MLE.gamma.HC1.log <- log(qgamma(.01, 
+                           shape=fit.gamma$gamma$estimate["shape"],
+                           scale=fit.gamma$gamma$estimate["scale"]))
+MLE.gamma.HC1     <- exp(MLE.gamma.HC1.log)
+REG.gamma.HC1.log <- log(qgamma(.01,
+                           shape=bias.correct.gamma$mle.bc["shape"],
+                           scale=bias.correct.gamma$mle.bc["scale"]))
+REG.gamma.HC1     <- exp(REG.gamma.HC1.log)
+
+    
+```
+
+The HC5 estimated from the MLE.gamma fit is `r round(MLE.gamma.HC5.log,2)` on the logarithmic concentrations
+scale or `r round(MLE.gamma.HC5,3)` on the concentration scale.
+The HC5 estimated after correcting for small sample bias is
+`r round(REG.gamma.HC5.log,2)` on the logarithmic concentrations
+scale or `r round(REG.gamma.HC5,3)` on the concentration scale. The ratio of these two HC5 values
+is `r round(REG.gamma.HC5/MLE.gamma.HC5,3)`x on the concentration scale, 
+i.e. the HCx based on the MLE is `r round(MLE.gamma.HC5/REG.gamma.HC5,1)`x larger on the concentration scale.
+
+The differences between the HCx computed from the MLE and for
+the bias corrected estimates will become more pronounced for small HCx values. For example,
+the HC1 estimated from the MLE.gamma fit is `r round(MLE.gamma.HC1,3)` 
+and the HC1 estimated using the biased corrected estimates
+is `r formatC(REG.gamma.HC1,digits=6, format="f")` on the concentration scale. The ratio of these two values
+is now `r round(REG.gamma.HC1/MLE.gamma.HC1,3)`x,
+i.e. the HCx based on the MLE is `r round(MLE.gamma.HC1/REG.gamma.HC1,1)`x larger on the concentration scale.
+
+
+We repeated a similar simulation study with the gamma distribution. The shape and scale
+parameters were chosen to match the mean and variance of the log-normal distribution used
+in the previous simulation study. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+# Simulation study to estimate effect of small sample bias on estimates of HC5 and HC1
+# Use a gamma distribution with the same mean and sd as a log-normal (0,1) 
+
+set.seed(23432)
+
+
+# get the shape and scale parameter
+mean.log <- 0
+sd.log <- 1
+mu <- exp(mean.log+.5*sd.log^2)
+sd <- sqrt(exp(sd.log^2-1) * (exp(2*mean.log + sd.log^2)))
+cat("Mean and variance of lognormal(0,1)", mu, sd, "\n")
+
+# solve for shape and scale
+scale = sd^2/mu
+shape = mu/scale
+cat("Estimated shape and scale ", shape, scale, "\n")
+scale*shape
+sqrt(shape*scale^2)
+
+mean(rgamma(1000, shape=shape, scale=scale))
+sd  (rgamma(1000, shape=shape, scale=scale))
+
+sample.sizes <- c(6, 8, 10, 12, 15, 20, 25, 30, 50)
+
+res <- plyr::ldply(sample.sizes, function(n, shape, scale, nsim=1000){
+  fits <- plyr::ldply(1:nsim, function(sim, n, shape, scale){
+     # generate sample of size n from a normal distribution with specified mean and variance
+     #browser()
+     sim.error=FALSE
+     df <- data.frame(Conc= rgamma(n, shape=shape, scale=scale))
+     
+     # find the mle using ssd tools 
+     fit <- ssd_fit_dists(df, dist="gamma")
+     
+     # find the bias corrected estimates
+     gamma.pdf <- quote(1 /(scale ^ shape * gamma(shape)) * x ^ (shape - 1) * exp(-x / scale))
+
+     # what is the log(density) functiong ingoring constants
+     log.gamma.pdf <- quote(-shape * log(scale) - lgamma(shape) + shape * log(x) - x / scale)
+     #browser()
+     bias.correct <- try(coxsnell.bc(density = gamma.pdf, 
+            logdensity = log.gamma.pdf, 
+            n = n, 
+            parms = c("shape", "scale"),
+            mle = c(fit$gamma$estimate["shape"], 
+                    fit$gamma$estimate["scale" ]), 
+            lower = 0, upper = 'Inf'))
+     if(class(bias.correct)=="try-error"){
+        sim.error = TRUE
+        cat("Gamma bias correct sim error ", n, sim, "\n")
+        bias.correct <- NULL
+        bias.correct$mle.bc <- c(shape=shape, scale=scale)
+     }
+   
+     # find the hc5 and hc1 using the MLE and bias corrected values
+     # compute the HC5 from the two fit
+     actual.HC5.log <- log(qgamma(.05, shape=shape, scale=scale))
+     actual.HC1.log <- log(qgamma(.01, shape=shape, scale=scale))
+     actual.HC5     <- exp(actual.HC5.log)
+     actual.HC1     <- exp(actual.HC1.log)
+     MLE.HC5.log <- log(qgamma(.05,shape=fit$gamma$estimate["shape"], scale=fit$gamma$estimate["scale"]))
+     MLE.HC5     <- exp(MLE.HC5.log)
+     BC.HC5.log  <- log(qgamma(.05,shape = bias.correct$mle.bc["shape"], 
+                                   scale = bias.correct$mle.bc["scale"] ))
+     BC.HC5      <- exp(BC.HC5.log)
+
+     MLE.HC1.log <- log(qgamma(.01, shape=fit$gamma$estimate["shape"], scale=  fit$gamma$estimate["scale"]))
+     MLE.HC1     <- exp(MLE.HC1.log)
+     BC.HC1.log  <- log(qgamma(.01,shape=bias.correct$mle.bc["shape"], 
+                                   scale=bias.correct$mle.bc["scale"] ))
+     BC.HC1      <- exp(BC.HC1.log)
+
+     data.frame(n=n, sim=sim,  shape=shape, scale=scale,
+              mle.shape = fit$gamma$estimate["shape"], 
+              mle.scale =fit$gamma$estimate["scale"],
+              bc.shape  = bias.correct$mle.bc["shape"],
+              bc.scale  = bias.correct$mle.bc["scale"],
+              actual.HC5.log,
+              actual.HC5,
+              actual.HC1.log,
+              actual.HC1,
+              MLE.HC5.log = MLE.HC5.log,
+              MLE.HC5,
+              BC.HC5.log,
+              BC.HC5,
+              MLE.HC1.log,
+              MLE.HC1,
+              BC.HC1.log,
+              BC.HC1,
+              sim.error=sim.error)
+   }, n=n, shape=shape, scale=scale) 
+   fits
+}, shape=shape, scale=scale, nsim=nsim)
+
+# remove simulation errors
+sum(res$sim.error)
+res <- res[ !res$sim.error, ]
+
+head(res)
+# summarize the output from the sishapelation
+res.summary <- plyr::ddply(res,"n", plyr::summarize,
+                           n=mean(n),
+                           nsims=max(sim),
+                           gamma.shape=mean(shape),
+                           gamma.scale=mean(scale),
+                           mean.mle.shape  = mean(mle.shape),
+                           mean.mle.scale  = mean(mle.scale),
+                           mean.bc.shape   = mean(bc.shape),
+                           mean.bc.scale   = mean(bc.scale),
+                           actual.HC5.log  = mean(actual.HC5.log),
+                           actual.HC1.log  = mean(actual.HC1.log),
+                           mean.mle.HC5.log= mean(MLE.HC5.log),
+                           mean.mle.HC1.log= mean(MLE.HC1.log),
+                           mean.bc.HC5.log = mean(BC.HC5.log),
+                           mean.bc.HC1.log = mean(BC.HC1.log),
+                           mean.mle.HC5    = mean(MLE.HC5),
+                           mean.mle.HC1    = mean(MLE.HC1),
+                           mean.bc.HC5     = mean(BC.HC5),
+                           mean.bc.HC1     = mean(BC.HC1)
+                           )
+res.summary
+
+
+plotdata <- reshape2::melt(res.summary,
+                           id.vars="n",
+                           value.name="value",
+                           variable.name="Measure")
+plotdata$Measure <- as.character(plotdata$Measure)
+unique(plotdata$Measure)
+str(plotdata)
+
+plotdata$parameter <- car::recode(plotdata$Measure,
+                          " 'mean.mle.shape'= 'Shape';
+                            'mean.bc.shape' = 'Shape';
+                            'mean.mle.scale'  ='Scale';
+                            'mean.bc.scale'   ='Scale';
+                            'mean.mle.HC5.log'='log(HC)';
+                            'mean.mle.HC1.log'='log(HC)';
+                            'mean.bc.HC5.log' ='log(HC)';
+                            'mean.bc.HC1.log' ='log(HC)';
+                            'mean.mle.HC5'    ='actual HC';
+                            'mean.mle.HC1'    ='actual HC';
+                            'mean.bc.HC5'     ='actual HC';
+                            'mean.bc.HC1'     ='actual HC';
+
+                          ")
+
+plotdata$method <- car::recode(plotdata$Measure,
+                           "'mean.mle.shape'  ='MLE';
+                            'mean.bc.shape'   ='BC';
+                            'mean.mle.scale'  ='MLE';
+                            'mean.bc.scale'   ='BC';
+                            'mean.mle.HC5.log'='MLE';
+                            'mean.mle.HC1.log'='MLE';
+                            'mean.bc.HC5.log' ='BC';
+                            'mean.bc.HC1.log' ='BC';
+                            'mean.mle.HC5'    ='MLE';
+                            'mean.mle.HC1'    ='MLE';
+                            'mean.bc.HC5'     ='BC';
+                            'mean.bc.HC1'     ='BC';
+                          ")
+
+plotdata$HC <- car::recode(plotdata$Measure,
+                           "'mean.mle.HC5.log'='HC5';
+                            'mean.mle.HC1.log'='HC1';
+                            'mean.bc.HC5.log' ='HC5';
+                            'mean.bc.HC1.log' ='HC1';
+                            'mean.mle.HC5'    ='HC5';
+                            'mean.mle.HC1'    ='HC1';
+                            'mean.bc.HC5'     ='HC5';
+                            'mean.bc.HC1'     ='HC1';
+                           else='NA';
+                          ")
+
+head(plotdata)
+
+xtabs(~Measure+parameter,  data=plotdata, exclude=NULL, na.action=na.pass)
+xtabs(~Measure+method   ,  data=plotdata, exclude=NULL, na.action=na.pass)
+unique(plotdata$Measure)
+select <- grepl("mle.shape$", plotdata$Measure) |
+          grepl("mle.scale$", plotdata$Measure) |
+          grepl("bc.shape$" , plotdata$Measure) |
+          grepl("bc.scale$" , plotdata$Measure) |
+          grepl("mle.HC5.log", plotdata$Measure) |
+          grepl("mle.HC1.log", plotdata$Measure) |
+          grepl("bc.HC5.log", plotdata$Measure) |
+          grepl("bc.HC1.log", plotdata$Measure) |
+          grepl("mle.HC5",    plotdata$Measure) |
+          grepl("mle.HC1",    plotdata$Measure) |
+          grepl("bc.HC5",     plotdata$Measure) |
+          grepl("bc.HC1",     plotdata$Measure)
+
+plotdata[select,]
+
+true.parms <- data.frame(parameter=c("Shape",
+                                     "Scale",
+                                    "log(HC)",
+                                    "log(HC)",
+                                    "actual HC",
+                                    'actual HC'),
+                         value=c(shape,scale,
+                                 log(qgamma(.05, shape=shape, scale=scale)), log(qgamma(.01, shape=shape, scale=scale)), 
+                                 qgamma(.05, shape=shape, scale=scale), qgamma(.01, shape=shape, scale=scale)),
+                         linetype=c("solid","solid","dashed","solid","dashed","solid"), stringsAsFactors=FALSE)
+true.parms
+
+sim.plot <- ggplot(data=plotdata[select,], aes(x=n, y=value,color=method, linetype=HC))+
+  ggtitle("Performance of mle and bias corrected estimators",
+           subtitle=paste("Gamma distribution with shape= ", round(shape,2), ' and scale =',round(scale,2),sep=""))+
+  geom_point(position=position_jitter(w=0.4))+
+  geom_line( position=position_jitter(w=0.4))+
+  facet_wrap(~parameter, ncol=2,scales="free")+
+  geom_hline(data=true.parms, aes(yintercept=value), linetype=true.parms$linetype)+
+  xlab("Sample size")+
+  scale_linetype_discrete(na.value="solid", breaks=c("HC1","HC5") )
+
+```
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+sim.plot
+```
+
+The MLEs are biased in small-samples for both the shape and scale (bottom row of plots) but the
+small-sample bias declines as sample size increases (as expected). The biases of the
+two parameters are in opposite directions (i.e. one bias is positive and one bias is negative).
+The bias corrected estimates
+are unbiased (as expected). 
+
+The estimated $\log{HC}$ (upper right plot) based on the MLE is slightly biased upwards (i.e. larger) than the true
+values but the bias rapidly declines with sample size (as expected). Rather surprisingly, the
+estimated HC5 and HC1 values using the bias-corrected estimates are biased downwards, likely an artefact
+of the non-linear transformation from scale and shape to the HCx.
+
+Finally, the estimated $HC1$ and $HC5$ values are again biased upwards (upper left plot) based
+on the MLEs, but the estimated $HCx$ values based on the bias-corrected estimates appear to exhibit 
+less bias despite the bias in the $\log(HCx)$ values.
+
+## Recommendations
+
+In cases with reasonably large sample sizes (around 15+), the small sample bias is 
+unlikely to be of concern given the uncertainty in the endpoints actually used
+for the fit, and the uncertainty generated for the HCx from the model averaging process.
+
+The small sample bias in the estimates is expected to affect the smaller 
+HCx values (e.g. HC1) more than larger HCx values (e.g. HC5). 
+This is not unexpected because you are
+trying to extrapolate out to the extreme tails of the distribution where there
+is typically no data available and small changes to parameter values can have
+large impacts on the extreme tails.
+
+For smaller sample sizes, a similar exercise as above can be used to 
+estimate the impact of the small sample bias. Howeverr, for small sample sizes,
+this exercise may be akin to "fiddling while Rome burns", i.e, this does not change the basic
+problems with small sample sizes including (a) most distributions will have adequate fits and it is unlikely be possible to discriminate between distributions;
+and (b) extrapoloting even to a moderate tail fraction (e.g. HC5) is very, very
+dependent on the chosen distribution; (c) there is no data available
+to support even moderate extrapolation to tail proportions. Higher certainty in 
+the estimates can only be obtained by increasing sample sizes.
+
+-----
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
+style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
+xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span
+xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia
+</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+Creative Commons Attribution 4.0 International License</a>.
