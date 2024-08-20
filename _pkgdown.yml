@@ -35,8 +35,6 @@ reference:
   contents:
   - ssd_hc
   - ssd_hc_bcanz
-  - ssd_wqg_bc
-  - ssd_wqg_burrlioz
 - title: Hazard Proportions
   desc: Functions that calculate hazard proportions
   contents:
@@ -102,6 +100,8 @@ reference:
   contents:
   - geom_ssd
   - is_censored
+  - ssd_wqg_bc
+  - ssd_wqg_burrlioz
   - ssd_hc_burrlioz
   - ssd_plot_cf
   - stat_ssd
