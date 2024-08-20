@@ -121,6 +121,7 @@ articles:
   - distributions
   - articles/confidence-intervals
   - customising-plots
+  - small-sample-bias
   - additional-technical-details
   - faqs
 
