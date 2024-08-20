@@ -42,7 +42,7 @@
 #' }
 #' @family dists
 #' @examples
-#' dist
+#' dist_data
 "dist_data"
 
 #' Pearson 1000 Data

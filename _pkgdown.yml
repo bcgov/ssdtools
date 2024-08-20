@@ -40,6 +40,12 @@ reference:
   contents:
   - ssd_hp
   - ssd_hp_bcanz
+- title: Manipulate Data
+  desc: Functions that manipulate data
+  contents:
+  - ssd_censor_data
+  - ssd_data
+  - ssd_sort_data
 - title: Manipulate Fits
   desc: Functions that manipulate fits of distributions
   contents:
@@ -82,15 +88,12 @@ reference:
   - is.fitdists
   - ssd_licensing_md
   - npars
-  - ssd_data
   - ssd_ecd
   - ssd_ecd_data
   - ssd_exposure
-  - ssd_fit_dists
   - ssd_is_censored
   - ssd_match_moments
   - ssd_min_pmix
-  - ssd_sort_data
   - pearson1000
 - title: Deprecated
   desc: Deprecated functions which will become defunct in future versions
