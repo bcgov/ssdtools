@@ -224,13 +224,18 @@ sample.sizes <- c(6, 8, 10, 12, 15, 20, 25, 30, 50)
 
 res <- plyr::ldply(sample.sizes, function(n, mu, sd, nsim=1000){
   fits <- plyr::ldply(1:nsim, function(sim, n, mu, sd){
+
+     fit <- NULL
+     while(is.null(fit)) {
+       try({
      # generate sample of size n from a normal distribution with specified mean and variance
-     # browser()
-     df <- data.frame(Conc= exp(rnorm(n, mean=mu, sd=sd)))
-     
+          df <- data.frame(Conc= exp(rnorm(n, mean=mu, sd=sd)))
+
      # find the mle using ssd tools 
      fit <- ssd_fit_dists(df, dist="lnorm")
-     
+       },  silent=TRUE)
+     }
+
      # find the bias corrected estimates
      norm.pdf <- quote(1 / (sqrt(2 * pi) * sigma) * exp(-0.5 / sigma ^ 2 * (x - mu) ^ 2))
      # what is the log(density) function (ignoring constants)
@@ -567,10 +572,15 @@ res <- plyr::ldply(sample.sizes, function(n, shape, scale, nsim=1000){
      # generate sample of size n from a normal distribution with specified mean and variance
      #browser()
      sim.error=FALSE
+     fit <- NULL
+     while(is.null(fit)) {
+       try({
      df <- data.frame(Conc= rgamma(n, shape=shape, scale=scale))
      
      # find the mle using ssd tools 
      fit <- ssd_fit_dists(df, dist="gamma")
+       },  silent=TRUE)
+     }
      
      # find the bias corrected estimates
      gamma.pdf <- quote(1 /(scale ^ shape * gamma(shape)) * x ^ (shape - 1) * exp(-x / scale))
