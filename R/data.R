@@ -44,18 +44,3 @@
 #' @examples
 #' dist_data
 "dist_data"
-
-#' Pearson 1000 Data
-#'
-#' An example tibble of 1000 values simulated using a Pearson distribution
-#' with a #FIXME of #FIXME and a #FIXME of #FIXME.
-#'
-#' The data is released under $FIXME
-#'
-#' @format A tbl data frame that includes:
-#' \describe{
-#'  \item{Conc}{A numeric vector of the simulate concentrations.}
-#' }
-#' @examples
-#' head(pearson1000)
-"pearson1000"

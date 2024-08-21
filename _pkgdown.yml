@@ -94,7 +94,6 @@ reference:
   - ssd_is_censored
   - ssd_match_moments
   - ssd_min_pmix
-  - pearson1000
 - title: Deprecated
   desc: Deprecated functions which will become defunct in future versions
   contents:
