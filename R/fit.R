@@ -139,15 +139,19 @@ fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, contro
 #'
 #' Fits one or more distributions to species sensitivity data.
 #'
-#' By default the 'llogis', 'gamma' and 'lnorm'
-#' distributions are fitted to the data.
-#' For a complete list of the implemented distributions see [`ssd_dists_all()`].
+#' By default the 'gamma', 'lgumbel', 'llogis', 'lnorm', 'lnorm_lnorm' and 
+#' 'weibull' distributions are fitted to the data.
+#' For a complete list of the distributions that are currently implemented in
+#' `ssdtools` see [`ssd_dists_all()`].
 #'
 #' If weight specifies a column in the data frame with positive numbers,
 #' weighted estimation occurs.
 #' However, currently only the resultant parameter estimates are available.
 #'
-#' If the `right` argument is different to the `left` argument then the data are considered to be censored.
+#' If the `right` argument is different to the `left` argument 
+#' then the data are considered to be censored.
+#' 
+#' The optim argument `pgtol` is set to 1e-5 if not specified via the control argument.
 #'
 #' @inheritParams params
 #' @return An object of class fitdists.
@@ -214,6 +218,11 @@ ssd_fit_dists <- function(
   if (any(is.infinite(attrs$data$right))) {
     err("Distributions cannot currently be fitted to right censored data.")
   }
+  
+  if(!utils::hasName(control, "pgtol")) {
+    control$pgtol <- 1e-5
+  }
+  
   fits <- fits_dists(attrs$data, dists,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2,

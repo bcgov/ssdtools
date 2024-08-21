@@ -64,15 +64,19 @@ An object of class fitdists.
 Fits one or more distributions to species sensitivity data.
 }
 \details{
-By default the 'llogis', 'gamma' and 'lnorm'
-distributions are fitted to the data.
-For a complete list of the implemented distributions see \code{\link[=ssd_dists_all]{ssd_dists_all()}}.
+By default the 'gamma', 'lgumbel', 'llogis', 'lnorm', 'lnorm_lnorm' and
+'weibull' distributions are fitted to the data.
+For a complete list of the distributions that are currently implemented in
+\code{ssdtools} see \code{\link[=ssd_dists_all]{ssd_dists_all()}}.
 
 If weight specifies a column in the data frame with positive numbers,
 weighted estimation occurs.
 However, currently only the resultant parameter estimates are available.
 
-If the \code{right} argument is different to the \code{left} argument then the data are considered to be censored.
+If the \code{right} argument is different to the \code{left} argument
+then the data are considered to be censored.
+
+The optim argument \code{pgtol} is set to 1e-5 if not specified via the control argument.
 }
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
