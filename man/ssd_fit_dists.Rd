@@ -75,8 +75,6 @@ However, currently only the resultant parameter estimates are available.
 
 If the \code{right} argument is different to the \code{left} argument
 then the data are considered to be censored.
-
-The optim argument \code{pgtol} is set to 1e-5 if not specified via the control argument.
 }
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)

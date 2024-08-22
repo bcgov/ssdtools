@@ -151,7 +151,6 @@ fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, contro
 #' If the `right` argument is different to the `left` argument 
 #' then the data are considered to be censored.
 #' 
-#' The optim argument `pgtol` is set to 1e-5 if not specified via the control argument.
 #'
 #' @inheritParams params
 #' @return An object of class fitdists.
@@ -218,11 +217,7 @@ ssd_fit_dists <- function(
   if (any(is.infinite(attrs$data$right))) {
     err("Distributions cannot currently be fitted to right censored data.")
   }
-  
-  if(!utils::hasName(control, "pgtol")) {
-    control$pgtol <- 1e-5
-  }
-  
+
   fits <- fits_dists(attrs$data, dists,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2,
