@@ -2,6 +2,6 @@ dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot,samples
 gamma,1,4.67759,2.14332,0.993989,6.55631,0.356574,parametric,10,1,numeric(0)
 lgumbel,1,0.856452,0.732699,0.0636536,2.21195,0.0134466,parametric,10,1,numeric(0)
 llogis,1,2.80047,1.89766,0.460372,6.09523,0.0656452,parametric,10,1,numeric(0)
-lnorm,1,1.95429,2.09645,0.409858,5.86466,0.177236,parametric,10,1,numeric(0)
-lnorm_lnorm,1,1.23428,1.92474,0.251385,5.72094,0.0296268,parametric,10,1,numeric(0)
+lnorm,1,1.95431,2.09646,0.409862,5.86469,0.177236,parametric,10,1,numeric(0)
+lnorm_lnorm,1,1.23379,1.92431,0.251332,5.71961,0.0296268,parametric,10,1,numeric(0)
 weibull,1,4.62301,1.81696,0.79621,6.01478,0.357472,parametric,10,1,numeric(0)

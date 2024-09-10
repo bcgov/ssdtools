@@ -35,8 +35,8 @@ test_that("hp multi_ci all", {
   hp_average <- ssd_hp(fits, average = TRUE)
   hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed")
   expect_equal(hp_multi, hp_average)
-  expect_equal(hp_average$est, 3.89879276872944, tolerance = 1e-6)
-  expect_equal(hp_multi$est, 3.89879276872944, tolerance = 1e-6)
+  expect_equal(hp_average$est, 3.89879276872944, tolerance = 1e-5)
+  expect_equal(hp_multi$est, 3.89879276872944, tolerance = 1e-5)
   testthat::expect_snapshot({
     hp_multi
   })

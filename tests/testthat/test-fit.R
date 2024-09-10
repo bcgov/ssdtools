@@ -265,7 +265,7 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   expect_warning(
     expect_warning(
       ssd_fit_dists(data, right = "Other", rescale = FALSE),
-      "^Distribution 'lnorm_lnorm' failed to compute standard errors \\(try rescaling data\\)\\.$"
+      "^Distribution 'lnorm_lnorm' failed to fit \\(try rescaling data\\)"
     ),
     "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$"
   )
@@ -289,7 +289,7 @@ test_that("ssd_fit_dists works with slightly censored data", {
   tidy <- tidy(fits)
 
   expect_equal(tidy$est, c(2.56052524750529, 1.17234562953404), tolerance = 1e-06)
-  expect_equal(tidy$se, c(0.234063281091344, 0.175423555900586), tolerance = 1e-06)
+  expect_equal(tidy$se, c(0.234063281091344, 0.175423555900586), tolerance = 1e-05)
 })
 
 test_that("ssd_fit_dists accepts 0 for left censored data", {

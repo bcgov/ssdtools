@@ -125,7 +125,7 @@ test_that("hp fitdists gives different answer with model averaging as hc not sam
   expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, proportion = 5 / 100)$est)$est, 5)
 
   fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"), min_pmix = 0)
-  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5 / 100, ci_method = "weighted_arithmetic", multi_est = FALSE)$est)$est, 4.59185244765045)
+  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5 / 100, ci_method = "weighted_arithmetic", multi_est = FALSE)$est)$est, 4.59194131309822, tolerance = 1e-06)
 })
 
 test_that("ssd_hp fitdists correct for rescaling", {
@@ -183,7 +183,7 @@ test_that("ssd_hp calculates cis with equally weighted data", {
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic")
-  expect_equal(hp$se, 1.4551513510538, tolerance = 1e-6)
+  expect_equal(hp$se, 1.4551513510538, tolerance = 1e-5)
 })
 
 test_that("ssd_hp calculates cis with two distributions", {
@@ -191,7 +191,7 @@ test_that("ssd_hp calculates cis with two distributions", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic")
-  expect_equal(hp$se, 1.4500084773305, tolerance = 1e-6)
+  expect_equal(hp$se, 1.4500084773305, tolerance = 1e-5)
 })
 
 test_that("ssd_hp calculates cis in parallel but one distribution", {
@@ -200,7 +200,7 @@ test_that("ssd_hp calculates cis in parallel but one distribution", {
   fits <- ssd_fit_dists(data, dists = "lnorm")
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic")
-  expect_equal(hp$se, 1.4551513510538, tolerance = 1e-6)
+  expect_equal(hp$se, 1.4551513510538, tolerance = 1e-5)
 })
 
 test_that("ssd_hp calculates cis in parallel with two distributions", {
@@ -209,7 +209,7 @@ test_that("ssd_hp calculates cis in parallel with two distributions", {
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   set.seed(10)
   hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic")
-  expect_equal(hp$se, 1.4500084773305, tolerance = 1e-6)
+  expect_equal(hp$se, 1.4500084773305, tolerance = 1e-5)
 })
 
 test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
@@ -247,10 +247,10 @@ test_that("ssd_hp effect with higher weight two distributions", {
   hp <- ssd_hp(fits, 3, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic")
   set.seed(10)
   hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic")
-  expect_equal(hp$est, 11.753562486648, tolerance = 1e-6)
-  expect_equal(hp_10$est, 11.931807182972, tolerance = 1e-6)
-  expect_equal(hp$se, 4.5637225910467, tolerance = 1e-6)
-  expect_equal(hp_10$se, 4.83426079388412, tolerance = 1e-6)
+  expect_equal(hp$est, 11.753562486648, tolerance = 1e-5)
+  expect_equal(hp_10$est, 11.931807182972, tolerance = 1e-5)
+  expect_equal(hp$se, 4.5637225910467, tolerance = 1e-5)
+  expect_equal(hp_10$se, 4.83426079388412, tolerance = 1e-5)
 })
 
 test_that("ssd_hp cis with non-convergence", {

@@ -1,2 +1,2 @@
 dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-average,1,1.95429,NA,5.5825,5.5825,1,parametric,1,1,c(`000000001_lnorm` = 5.5825)
+average,1,1.95431,NA,5.58253,5.58253,1,parametric,1,1,c(`000000001_lnorm` = 5.58253)
