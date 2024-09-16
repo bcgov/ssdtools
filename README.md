@@ -43,8 +43,7 @@ To install the latest development version from
 install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
-To install the latest development version from
-[GitHub](https://github.com/bcgov/ssdtools)
+or from [GitHub](https://github.com/bcgov/ssdtools)
 
 ``` r
 # install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
