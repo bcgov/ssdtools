@@ -19,13 +19,14 @@
 #' @param at_boundary_ok A flag specifying whether a model with one or more
 #' parameters at the boundary should be considered to have converged (default = FALSE).
 #' @param average A flag specifying whether to provide model averaged values as opposed to a value for each distribution.
-#' @param bcanz A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines. 
+#' @param bcanz A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.
 #' @param breaks A character vector
 #' @param bounds A named non-negative numeric vector of the left and right bounds for
 #' uncensored missing (0 and Inf) data in terms of the orders of magnitude
 #' relative to the extremes for non-missing values.
 #' @param chk A flag specifying whether to check the arguments.
 #' @param ci A flag specifying whether to estimate confidence intervals (by bootstrapping).
+#' @param censoring A numeric vector of the left and right censoring values.
 #' @param color A string of the column in data for the color aesthetic.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
 #' @param conc A numeric vector of concentrations to calculate the hazard proportions for.
@@ -56,17 +57,17 @@
 #' @param meanlog mean on log scale parameter.
 #' @param meanlog1 mean on log scale parameter.
 #' @param meanlog2 mean on log scale parameter.
-#' @param min_pboot A number between 0 and 1 of the minimum 
-#' proportion of bootstrap samples that must successfully fit (return a likelihood) 
+#' @param min_pboot A number between 0 and 1 of the minimum
+#' proportion of bootstrap samples that must successfully fit (return a likelihood)
 #' to report the confidence intervals.
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
 #' @param n A whole number of the effective number of rows of data.
 #' @param npars A whole numeric vector specifying which distributions to include based on the number of parameters.
 #' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
-#' @param ci_method A string specifying which method to use for estimating the bootstrap values. 
+#' @param ci_method A string specifying which method to use for estimating the bootstrap values.
 #' Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.
 #' @param multi_est A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.
-#' @param na.rm A flag specifying whether to silently remove missing values or 
+#' @param na.rm A flag specifying whether to silently remove missing values or
 #' remove them with a warning.
 #' @param n positive number of observations.
 #' @param nboot A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.
@@ -89,7 +90,7 @@
 #' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param right A string of the column in data with the right concentration values.
 #' @param save_to NULL or a string specifying a directory to save where the bootstrap datasets and parameter estimates (when successfully converged) to.
-#' @param samples A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output. 
+#' @param samples A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output.
 #' @param scale scale parameter.
 #' @param scalelog1 scalelog1 parameter.
 #' @param scalelog2 scalelog2 parameter.

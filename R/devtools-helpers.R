@@ -1,4 +1,4 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2024 Province of British Columbia
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -15,6 +15,9 @@
 release_questions <- function() {
   c(
     "Have you confirmed Apache 2.0 license at the top of all code files?",
-    "Have you confirmed Creative Commons license for all non-code files?"
+    "Have you confirmed Creative Commons license for all non-code files?",
+    "Have you run `data-raw/data-raw.R`?",
+    "Have you tested using `ssdtests` package?",
+    "Have you updated `small-sample-bias.pdf` using `ssdtests` package?"  
   )
 }

@@ -3,10 +3,10 @@ lgumbel,locationlog,0.011,NA
 lgumbel,scalelog,0.0337,NA
 llogis,locationlog,0.012,0.278
 llogis,scalelog,0.0109,0.253
-lnorm,meanlog,0.0233,1.48
-lnorm,sdlog,0.0345,2.19
-lnorm_lnorm,meanlog1,0.0199,NA
-lnorm_lnorm,meanlog2,0.329,NA
-lnorm_lnorm,pmix,0.885,NA
-lnorm_lnorm,sdlog1,0.0346,NA
-lnorm_lnorm,sdlog2,1.57e-4,NA
+lnorm,meanlog,0.0233,1.41
+lnorm,sdlog,0.0346,2.1
+lnorm_lnorm,meanlog1,0.032,NA
+lnorm_lnorm,meanlog2,-3.48e-4,0.0186
+lnorm_lnorm,pmix,0.893,NA
+lnorm_lnorm,sdlog1,0.0408,1.73
+lnorm_lnorm,sdlog2,0.00519,NA

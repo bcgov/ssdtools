@@ -1,5 +1,0 @@
-dist,term,est,se
-lnorm,meanlog,0.02,1
-lnorm,sdlog,0.03,2
-gamma,scale,0.001,0.04
-gamma,shape,900,30000

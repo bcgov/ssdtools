@@ -4,7 +4,13 @@
 \alias{ssd_fit_burrlioz}
 \title{Fit Burrlioz Distributions}
 \usage{
-ssd_fit_burrlioz(data, left = "Conc", rescale = FALSE, silent = FALSE)
+ssd_fit_burrlioz(
+  data,
+  left = "Conc",
+  rescale = FALSE,
+  control = list(),
+  silent = FALSE
+)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -12,6 +18,8 @@ ssd_fit_burrlioz(data, left = "Conc", rescale = FALSE, silent = FALSE)
 \item{left}{A string of the column in data with the concentrations.}
 
 \item{rescale}{A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.}
+
+\item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 }

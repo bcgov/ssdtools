@@ -22,7 +22,7 @@ test_that("estimates", {
 
 test_that("estimates all_estimates = TRUE", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   estimates <- estimates(fits, all_estimates = TRUE)
   expect_type(estimates, "list")
   expect_snapshot_output(print(estimates))

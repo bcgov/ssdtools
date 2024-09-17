@@ -38,9 +38,9 @@ Description: Species sensitivity distributions are cumulative probability
     different species as described by Posthuma et al.(2001)
     <isbn:9781566705783>. The ssdtools package uses Maximum Likelihood to
     fit distributions such as the gamma, log-logistic, log-normal and
-    log-normal log-normal mixture. Multiple distributions can
-    be averaged using Akaike Information Criteria.  Confidence intervals
-    on hazard concentrations and proportions are produced by parametric
+    log-normal log-normal mixture. Multiple distributions can be averaged
+    using Akaike Information Criteria.  Confidence intervals on hazard
+    concentrations and proportions are produced by parametric
     bootstrapping.
 License: Apache License (== 2.0) | file LICENSE
 URL: https://github.com/bcgov/ssdtools, https://bcgov.github.io/ssdtools/
@@ -53,6 +53,7 @@ Imports:
     furrr,
     generics,
     ggplot2,
+    glue,
     goftest,
     graphics,
     grid,
@@ -61,6 +62,7 @@ Imports:
     plyr,
     purrr,
     Rcpp,
+    rlang,
     scales,
     ssddata,
     stats,
@@ -69,7 +71,8 @@ Imports:
     TMB,
     universals,
     utils,
-    VGAM
+    VGAM,
+    withr
 Suggests:
     actuar,
     covr,
@@ -80,7 +83,6 @@ Suggests:
     fitdistrplus,
     foreach,
     future,
-    glue,
     grDevices,
     knitr,
     magrittr,
@@ -89,13 +91,11 @@ Suggests:
     R.rsp,
     readr,
     reshape2,
-    rlang,
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     tidyr,
     tidyselect,
-    tinytex,
-    withr
+    tinytex
 LinkingTo: 
     Rcpp,
     RcppEigen,

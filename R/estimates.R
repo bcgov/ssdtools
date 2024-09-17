@@ -43,11 +43,14 @@ estimates.fitdists <- function(x, all_estimates = FALSE, ...) {
   wt <- glance(x)$weight
   y <- purrr::map2(y, wt, function(a, b) c(list(weight = b), a))
   names(y) <- names(x)
-  if(!all_estimates) {
+  if (!all_estimates) {
     return(y)
   }
   all <- emulti_ssd()
-  wall <- purrr::map(all, function(x) {x$weight <- 0; x})
+  wall <- purrr::map(all, function(x) {
+    x$weight <- 0
+    x
+  })
   args <- y
   args$.x <- wall
   do.call("list_assign", args)

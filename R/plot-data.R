@@ -35,10 +35,10 @@ ssd_plot_data <- function(data, left = "Conc", right = left,
 
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
-  
+
   chk_number(add_x)
   chk_range(add_x, c(-1000, 1000))
-  
+
   .chk_bounds(bounds)
 
   data <- process_data(data, left, right, weight = NULL)
@@ -84,8 +84,10 @@ ssd_plot_data <- function(data, left = "Conc", right = left,
       ), stat = "identity")
   }
 
-  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, 
-                              trans = trans, xbreaks = xbreaks)
+  gp <- gp + plot_coord_scale(data,
+    xlab = xlab, ylab = ylab,
+    trans = trans, xbreaks = xbreaks
+  )
 
   if (!is.null(label)) {
     data$right <- (data$right + add_x) * shift_x

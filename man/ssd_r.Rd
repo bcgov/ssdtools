@@ -267,7 +267,7 @@ hist(ssd_rlnorm_lnorm(10000), breaks = 1000)
 set.seed(50)
 hist(ssd_rlnorm(10000), breaks = 1000)
 
-# multi 
+# multi
 set.seed(50)
 hist(ssd_rmulti(1000), breaks = 100)
 

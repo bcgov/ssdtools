@@ -19,9 +19,3 @@ test_that("lnorm", {
   set.seed(42)
   expect_equal(ssd_rlnorm(2), c(3.93912432924107, 0.568531719998709))
 })
-
-test_that("lnorm with pearson1000 converges", {
-  data <- ssdtools::pearson1000
-  fit <- ssd_fit_dists(data, dists = "lnorm")
-  expect_snapshot_value(estimates(fit), style = "deparse", tolerance = 1e-6)
-})

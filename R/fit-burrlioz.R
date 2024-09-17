@@ -27,12 +27,13 @@
 #' @examples
 #' ssd_fit_burrlioz(ssddata::ccme_boron)
 ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE,
+                             control = list(),
                              silent = FALSE) {
   if (nrow(data) <= 8) {
     fit <- ssd_fit_dists(data,
       left = left, dists = "llogis",
       computable = FALSE, nrow = 5L,
-      rescale = rescale, silent = silent
+      rescale = rescale, silent = silent, control = control,
     )
     class(fit) <- c("fitburrlioz", class(fit))
     return(fit)
@@ -46,6 +47,7 @@ ssd_fit_burrlioz <- function(data, left = "Conc", rescale = FALSE,
       left = left, dists = "burrIII3",
       rescale = rescale, computable = FALSE,
       at_boundary_ok = TRUE, silent = TRUE,
+      control = control,
       range_shape1 = range_shape1,
       range_shape2 = range_shape2
     ),

@@ -22,7 +22,7 @@ plot_coord_scale <- function(data, xlab, ylab, trans, xbreaks = waiver()) {
   if (is.waive(xbreaks) & trans == "log10") {
     xbreaks <- trans_breaks("log10", function(x) 10^x)
   }
-  
+
   list(
     coord_trans(x = trans),
     scale_x_continuous(xlab,
@@ -50,7 +50,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Species Affected",
-                     ci = TRUE, ribbon = TRUE, hc = 0.05, 
+                     ci = TRUE, ribbon = TRUE, hc = 0.05,
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
                      trans = "log10", xbreaks = waiver()) {
@@ -71,7 +71,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   chk_range(shift_x, c(1, 1000))
   chk_number(add_x)
   chk_range(add_x, c(-1000, 1000))
-  
+
   chk_flag(ci)
   chk_flag(ribbon)
 
@@ -153,8 +153,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       ), stat = "identity")
   }
 
-  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab,
-                              trans = trans, xbreaks = xbreaks)
+  gp <- gp + plot_coord_scale(data,
+    xlab = xlab, ylab = ylab,
+    trans = trans, xbreaks = xbreaks
+  )
 
   if (!is.null(label)) {
     data$right <- (data$right + add_x) * shift_x

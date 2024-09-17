@@ -12,5 +12,5 @@
 ssd_min_pmix <- function(n) {
   chk_whole_number(n)
   chk_gt(n)
-  max(min(3/n, 0.5), 0.1)
+  max(min(3 / n, 0.5), 0.1)
 }
