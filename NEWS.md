@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9016
+# ssdtools 1.0.6.9017
 
 ## Additions
 
@@ -14,11 +14,13 @@
 - Added `trans = "log10"` and `add_x = 0` arguments to `ssd_plot()` and `ssd_plot_data()`.
 - Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
 - Added `ssd_exx()` functions to get default parameter estimates for distributions.
+- Added `ssd_censor_data()` to censor data. 
 - Added David Fox and Rebecca Fisher as co-authors.
 - Added `npars` argument to `ssd_dists_bcanz()`.
 
 ## Modifications
 
+- Changed `at_boundary_ok = TRUE` to ensure `lnorm_lnorm` mixture distribution included.
 - Changed to `min_pboot = 0.95` for all functions.
 - Changed `min_pmix = 0` to `min_pmix = ssd_min_pmix(nrow(data))` to by default 
 give set min_pmix to be `0.1` or `3/nrow(data)` if greater to improve convergence of mixture models.
@@ -46,8 +48,10 @@ give set min_pmix to be `0.1` or `3/nrow(data)` if greater to improve convergenc
 - Soft-deprecated argument `percent = 5` for `proportion = 0.05` for `ssd_hc()` and `predict()`.
 - `is_censored()`, `ssd_plot_cf()` and `comma_signif(...)` now warn deprecated unconditionally.
 - `plot.fitdists()` now defunct.
+- Deprecated `ssd_wqg_bc()` and `ssd_wqg_burrlioz()`. (#75).
 - Removed defunct `ssd_cfplot()`
 - Removed `ccme_data` and `ccme_boron` data set.
+- Removed `pearson1000` data set (now in `ssdtests` data).
 
 # ssdtools 1.0.6
 
