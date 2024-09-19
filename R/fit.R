@@ -169,7 +169,7 @@ ssd_fit_dists <- function(
     rescale = FALSE,
     reweight = FALSE,
     computable = TRUE,
-    at_boundary_ok = FALSE,
+    at_boundary_ok = TRUE,
     all_dists = FALSE,
     min_pmix = ssd_min_pmix(nrow(data)),
     range_shape1 = c(0.05, 20),

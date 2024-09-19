@@ -264,7 +264,7 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
 
   expect_warning(
     expect_warning(
-      ssd_fit_dists(data, right = "Other", rescale = FALSE),
+      ssd_fit_dists(data, right = "Other", rescale = FALSE, at_boundary_ok = FALSE),
       "^Distribution 'lnorm_lnorm' failed to fit \\(try rescaling data\\)"
     ),
     "^Distribution 'lgumbel' failed to compute standard errors \\(try rescaling data\\)\\.$"
@@ -366,14 +366,14 @@ test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
   # expect_equal(tidy(fits0), tidy(fitsna))
 })
 
-test_that("ssd_fit_dists min_pmix", {
+test_that("ssd_fit_dists min_pmix at_boundary_ok FALSE", {
   set.seed(99)
   conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.1)
   data <- data.frame(Conc = conc)
   fits <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.1)
   tidy <- tidy(fits)
   expect_error(
-    expect_warning(expect_warning(ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.11))),
+    expect_warning(expect_warning(ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.11, at_boundary_ok = FALSE))),
     "All distributions failed to fit."
   )
   expect_snapshot_data(tidy, "min_pmix5")
@@ -391,7 +391,7 @@ test_that("ssd_fit_dists min_pmix", {
 test_that("ssd_fit_dists at_boundary_ok message", {
   set.seed(99)
   expect_warning(
-    ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "burrIII3")),
+    ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "burrIII3"), at_boundary_ok = FALSE),
     "one or more parameters at boundary[.]$"
   )
   expect_warning(
@@ -410,10 +410,8 @@ test_that("ssd_fit_dists bcanz with anon_e", {
 })
 
 test_that("ssd_fit_dists unstable with anon_e", {
-  expect_warning(expect_warning(
-    fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists(bcanz = FALSE)),
-    "burrIII3"
-  ), "gompertz")
+  expect_warning(
+    fit <- ssd_fit_dists(ssddata::anon_e, dists = ssd_dists(bcanz = FALSE)), "gompertz")
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_unstable_anon_e")
 })
