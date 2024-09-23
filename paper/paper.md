@@ -63,10 +63,10 @@ The method, as applied in the SSD context is described in detail in [@fox_recent
 ## Distributions
 
 Ten distributions are currently available in `ssdtools`. 
-The original version (v0) of `ssdtools` provided the two parameter log-normal (lnorm), log-logistic (llogis), log-Gumbel (lgumbel, also known as the inverse Weibull), gamma, Weibull (weibull) and Gompertz (gompertz) distributions. 
-In the first major update (v1), the two parameter inverse Pareto (invpareto), three parameter Burr Type III (burrIII3) and five parameter log-normal log-normal (lnorm_lnorm) and log-logistic log-logistic (llogis_llogis) mixture distributions were added.
+The original version (v0) of `ssdtools` provided the two parameter log-normal (`lnorm`), log-logistic (`llogis`), log-Gumbel (`lgumbel`, also known as the inverse Weibull), gamma (`gamma`), Weibull (`weibull`) and Gompertz (`gompertz`) distributions. 
+In the first major update (v1), the two parameter inverse Pareto (`invpareto`), three parameter Burr Type III (`burrIII3`) and five parameter log-normal log-normal (`lnorm_lnorm`) and log-logistic log-logistic (`llogis_llogis`) mixture distributions were added.
 Together with the Burr Type III, the inverse Pareto and inverse Weibull provide the underlying distributions of the SSD fitting software `Burrlioz` [@barry2012burrlioz] while the mixture distributions were added to accommodate bimodality [@fox_recent_2021]. 
-Since v1, `ssdtools` has by default fitted the lnorm, llogis, lgumbel, gamma, weibull and lnorm_lnorm distributions.
+Since v1, `ssdtools` has by default fitted the `lnorm`, `llogis`, `lgumbel`, `gamma`, `weibull` and `lnorm_lnorm` distributions.
 
 ## Model Fitting
 
