@@ -83,6 +83,7 @@ Suggests:
     future,
     grDevices,
     knitr,
+    latex2exp,
     magrittr,
     mle.tools,
     patchwork,
