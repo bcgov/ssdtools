@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("gof", {
+test_that("gof paper also", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   gof_statistic <- ssd_gof(fits)

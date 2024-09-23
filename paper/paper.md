@@ -39,16 +39,16 @@ tags:
 
 # Summary
 
-Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate Hazard Concentrations ($\text{HC}_x$) - the concentration of a chemical that affects a given $x$% of species.
-$\text{HC}_5$ values, which protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
+Species sensitivity distributions (SSDs) are cumulative probability distributions that are used to estimate Hazard Concentrations ($\text{HC}_x$) - the concentration of a chemical that is expected to affect a given $x$% of species.
+$\text{HC}_5$ values, which are intended to protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a given concentration $x$.
 
-`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and allow estimates of $\text{HC}_x$ and $\text{HP}_u$ values by model averaging [@schwarz_improving_2019] across multiple distribution [@thorley2018ssdtools]. 
+`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and estimate $\text{HC}_x$ and $\text{HP}_u$ values by model averaging [@schwarz_improving_2019] across multiple distribution [@thorley2018ssdtools]. 
 The `shinyssdtools` R package [@dalgarno_shinyssdtools_2021] provides a Graphical User Interface to `ssdtools`.
 
-Since the publication of @thorley2018ssdtools for v0, the `ssdtools` R package has undergone two major updates.
+Since the publication of @thorley2018ssdtools, the `ssdtools` R package has undergone two major updates.
 The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] for model fitting.
-The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_u$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with appropriate coverage [@fox_methodologies_2024].
+The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_u$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with more appropriate coverage [@fox_methodologies_2024].
 
 # Statement of need
 
@@ -174,7 +174,7 @@ ssd_plot(ssddata::ccme_boron, predictions,
 
 # Acknowledgements
 
-We acknowledge contributions from Angeline Tillmanns, Seb Dalgarno, Kathleen McTavish, Heather Thompson, Doug Spry, Rick van Dam, Graham Batley, Yulia Cuthbertson, Tony Bigwood, Michael Antenucci and Ali Azizisharzi.
+We acknowledge contributions from Angeline Tillmanns, Seb Dalgarno, Kathleen McTavish, Heather Thompson, Doug Spry, Rick van Dam, Graham Batley, Tony Bigwood, and Ali Azizisharzi.
 Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia and the Department of Climate Change, Energy, the Environment and Water, Australia.
 
 # References
