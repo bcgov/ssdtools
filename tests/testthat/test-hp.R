@@ -158,7 +158,7 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   set.seed(10)
   expect_warning(
     hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10),
-    "^Parametric CIs cannot be calculated for inconsistently censored data[.]$"
+    "^Parametric CIs cannot be calculated for censored data[.]$"
   )
   expect_identical(hp$se, NA_real_)
 })

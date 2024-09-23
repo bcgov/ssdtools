@@ -316,9 +316,9 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
   estimates <- .list_estimates(x, all_estimates = FALSE)
-
-  if (parametric && ci && identical(censoring, c(NA_real_, NA_real_))) {
-    wrn("Parametric CIs cannot be calculated for inconsistently censored data.")
+  
+  if (parametric && ci && !identical(censoring, c(0, Inf))) {
+    wrn("Parametric CIs cannot be calculated for censored data.")
     ci <- FALSE
   }
 

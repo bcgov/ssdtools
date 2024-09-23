@@ -265,7 +265,7 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   set.seed(10)
   expect_warning(
     hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-    "^Parametric CIs cannot be calculated for inconsistently censored data[.]$"
+    "^Parametric CIs cannot be calculated for censored data[.]$"
   )
   expect_identical(hc$se, NA_real_)
 })
@@ -276,7 +276,8 @@ test_that("ssd_hc works with fully left censored data", {
   data$Conc <- 0
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic")
+  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic"),
+                 "^Parametric CIs cannot be calculated for censored data[.]$")
   expect_snapshot_data(hc, "fullyleft")
 })
 
@@ -288,7 +289,7 @@ test_that("ssd_hc warns with partially left censored data", {
   set.seed(100)
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
   expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
-                 "Parametric CIs cannot be calculated for inconsistently censored data\\.")
+                 "Parametric CIs cannot be calculated for censored data\\.")
   expect_snapshot_data(hc, "partialeft")
 })
 
@@ -302,7 +303,6 @@ test_that("ssd_hc works with fully left censored data", {
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
   expect_snapshot_data(hc, "partialeftfull")
-  expect_gt(hc$ucl, hc$est)
 })
 
 test_that("ssd_hc works with partially left censored data non-parametric", {
@@ -325,7 +325,7 @@ test_that("ssd_hc not work partially censored even if all same left", {
   set.seed(10)
   expect_warning(
     hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-    "^Parametric CIs cannot be calculated for inconsistently censored data[.]$"
+    "^Parametric CIs cannot be calculated for censored data[.]$"
   )
 })
 
@@ -338,7 +338,7 @@ test_that("ssd_hc doesn't works with inconsisently censored data", {
   set.seed(10)
   expect_warning(
     hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-    "^Parametric CIs cannot be calculated for inconsistently censored data[.]$"
+    "^Parametric CIs cannot be calculated for censored data[.]$"
   )
 })
 
