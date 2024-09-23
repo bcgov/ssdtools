@@ -55,3 +55,16 @@ test_that("lnorm_lnorm positive q with extreme large distribution", {
     meanlog2 = 100.39362, sdlog2 = 2.583824, pmix = 0.1308133
   ), 1.41684268426224e+46)
 })
+
+test_that("ssd_fit_dists allows for fits without standard errors lnorm_lnorm", {
+  data <- ssddata::ccme_boron
+  data$Other <- data$Conc
+  data$Conc <- data$Conc / max(data$Conc)
+  
+  set.seed(102)
+  fits <- ssd_fit_dists(data, right = "Other", dists = c("lnorm_lnorm"))
+  
+  tidy <- tidy(fits)
+  expect_s3_class(tidy, "tbl")
+  expect_snapshot_data(tidy, "lnorm_lnorm_no_se", digits = 3)
+})

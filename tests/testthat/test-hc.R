@@ -301,7 +301,8 @@ test_that("ssd_hc works with fully left censored data", {
   
   set.seed(100)
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE)
+  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
+          "^Parametric CIs cannot be calculated for censored data\\.$")
   expect_snapshot_data(hc, "partialeftfull")
 })
 

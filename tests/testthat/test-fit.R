@@ -268,11 +268,11 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   )
   
   set.seed(102)
-  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm", "lnorm_lnorm"), rescale = FALSE, at_boundary_ok = TRUE)
+  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm"), rescale = FALSE, at_boundary_ok = TRUE)
   
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
-  expect_snapshot_data(tidy, "tidy_stable_computable", digits = 3)
+  expect_snapshot_data(tidy, "tidy_stable_computable", digits = 6)
 })
 
 test_that("ssd_fit_dists works with slightly censored data", {
