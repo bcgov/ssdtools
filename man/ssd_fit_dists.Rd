@@ -13,7 +13,7 @@ ssd_fit_dists(
   nrow = 6L,
   rescale = FALSE,
   reweight = FALSE,
-  computable = TRUE,
+  computable = FALSE,
   at_boundary_ok = TRUE,
   all_dists = FALSE,
   min_pmix = ssd_min_pmix(nrow(data)),
