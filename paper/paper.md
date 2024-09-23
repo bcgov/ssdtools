@@ -99,13 +99,13 @@ Finding the solution to this last equation is referred to as *finding the root(s
 
 `ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_u$ values via bootstrapping.
 By default all versions of `ssdtools` use parametric bootstrapping as it has better coverage than the equivalent non parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2021].
-The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions.
+The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions (`weighted_arithmetic`).
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
 
 Consequently, v2 also offers a parametric bootstrap method that uses the joint cdf to generate data before refitting the original distribution set and solving for the newly estimated joint cdf [see details in @fox_methodologies_2024].
-This "multi" method can be implemented with and without re-estimation of the model weights.
+This "multi" method can be implemented with (`multi_free`) and without (`multi_fixed`) re-estimation of the model weights.
 However, although the "multi" method has good coverage it is computationally slow.
-As a result, the default method provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
+As a result, the default method (`weighted_samples`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
 
 ## Multiple Distribution Functions
 
@@ -113,7 +113,7 @@ In order to implement the "multi" method of bootstrapping, v2 also provides the 
 
 ## Plotting 
 
-As well as to fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms as well as a discrete color-blind scale `scale_color_sdd()` for SSD plots.
+As well as fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms and a discrete color-blind scale `scale_color_sdd()` for SSD plots.
 
 # Example of use
 
