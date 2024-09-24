@@ -37,7 +37,7 @@ test_that("ssd_plot xbreaks", {
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, xbreaks = c(1, 2)), "boron_breaks")
 })
 
-test_that("ssd_plot bigmark", {
+test_that("ssd_plot language", {
   data <- ssddata::ccme_boron
   data$Conc <- data$Conc * 100
   boron_pred <- ssdtools::boron_pred
@@ -45,6 +45,7 @@ test_that("ssd_plot bigmark", {
   boron_pred$lcl <- boron_pred$lcl * 100
   boron_pred$ucl <- boron_pred$ucl * 100
   expect_snapshot_plot(ssd_plot(data, boron_pred, big.mark = " "), "boron_bigmark")
+  expect_snapshot_plot(ssd_plot(data, boron_pred, suffix = " %%"), "suffix")
 })
 
 test_that("ssd_plot can't handles missing values all", {

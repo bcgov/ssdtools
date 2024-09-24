@@ -26,7 +26,7 @@ ssd_plot_data <- function(data, left = "Conc", right = left, ...,
                           label = NULL, shape = NULL, color = NULL, size = 2.5,
                           xlab = "Concentration", ylab = "Species Affected",
                           shift_x = 3, add_x = 0,
-                          big.mark = ",",
+                          big.mark = ",", suffix = "%",
                           bounds = c(left = 1, right = 1),
                           trans = "log10", xbreaks = waiver()) {
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
@@ -88,7 +88,7 @@ ssd_plot_data <- function(data, left = "Conc", right = left, ...,
   }
 
   gp <- gp + plot_coord_scale(data,
-    xlab = xlab, ylab = ylab, big.mark = big.mark,
+    xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
     trans = trans, xbreaks = xbreaks
   )
 

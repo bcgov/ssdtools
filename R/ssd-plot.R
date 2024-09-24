@@ -29,7 +29,7 @@ label_comma_signif <- function(digits = 3, ..., big.mark = ",") {
   }
 }
 
-plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, xbreaks = waiver()) {
+plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver()) {
   chk_string(xlab)
   chk_string(ylab)
 
@@ -44,7 +44,7 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, xbreaks = waiver
       labels = label_comma_signif(big.mark = big.mark)
     ),
     scale_y_continuous(ylab,
-      labels = percent, limits = c(0, 1),
+      labels = label_percent(suffix = suffix), limits = c(0, 1),
       breaks = seq(0, 1, by = 0.2), expand = c(0, 0)
     )
   )
@@ -67,7 +67,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
                      ci = TRUE, ribbon = TRUE, hc = 0.05,
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
-                     big.mark = ",",
+                     big.mark = ",", suffix = "%",
                      trans = "log10", xbreaks = waiver()) {
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
   chk_unused(...)
@@ -97,6 +97,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
     chk_subset(hc, pred$proportion)
   }
   chk_string(big.mark)
+  chk_string(suffix)
   .chk_bounds(bounds)
   chk_string(trans)
 
@@ -171,7 +172,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   }
 
   gp <- gp + plot_coord_scale(data,
-    xlab = xlab, ylab = ylab, big.mark = big.mark,
+    xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
     trans = trans, xbreaks = xbreaks
   )
 

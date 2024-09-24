@@ -23,9 +23,10 @@ test_that("ssd_plot_data ccme_boron color", {
   ), "ccme_boron2")
 })
 
-test_that("ssd_plot_data ccme_boron bigmark", {
+test_that("ssd_plot_data ccme_boron language", {
   data <- ssddata::ccme_boron
   data$Conc <- data$Conc * 100
+  expect_snapshot_plot(ssd_plot_data(data, suffix = " %"), "suffix")
   expect_snapshot_plot(ssd_plot_data(data), "big_mark_comma")
   expect_snapshot_plot(ssd_plot_data(data, big.mark = " "), "big_mark_space")
 })

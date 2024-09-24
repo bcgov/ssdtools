@@ -25,6 +25,7 @@ ssd_plot(
   add_x = 0,
   bounds = c(left = 1, right = 1),
   big.mark = ",",
+  suffix = "\%",
   trans = "log10",
   xbreaks = waiver()
 )
@@ -70,7 +71,9 @@ ssd_plot(
 uncensored missing (0 and Inf) data in terms of the orders of magnitude
 relative to the extremes for non-missing values.}
 
-\item{big.mark}{A string specifying used between every 3 digits to separate thousands.}
+\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
+
+\item{suffix}{Additional text to display after the number on the y-axis.}
 
 \item{trans}{A string which transformation to use by default \code{"log10"}.}
 

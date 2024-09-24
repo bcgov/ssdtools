@@ -22,7 +22,7 @@ parameters at the boundary should be considered to have converged (default = FAL
 
 \item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
 
-\item{big.mark}{A string specifying used between every 3 digits to separate thousands.}
+\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
 
 \item{breaks}{A character vector}
 
@@ -182,6 +182,8 @@ remove them with a warning.}
 \item{silent}{A flag indicating whether fits should fail silently.}
 
 \item{size}{A number for the size of the labels.}
+
+\item{suffix}{Additional text to display after the number on the y-axis.}
 
 \item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
 

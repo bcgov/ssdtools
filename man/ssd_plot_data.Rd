@@ -18,6 +18,7 @@ ssd_plot_data(
   shift_x = 3,
   add_x = 0,
   big.mark = ",",
+  suffix = "\%",
   bounds = c(left = 1, right = 1),
   trans = "log10",
   xbreaks = waiver()
@@ -48,7 +49,9 @@ ssd_plot_data(
 
 \item{add_x}{The value to add to the label x values (before multiplying by \code{shift_x}).}
 
-\item{big.mark}{A string specifying used between every 3 digits to separate thousands.}
+\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
+
+\item{suffix}{Additional text to display after the number on the y-axis.}
 
 \item{bounds}{A named non-negative numeric vector of the left and right bounds for
 uncensored missing (0 and Inf) data in terms of the orders of magnitude

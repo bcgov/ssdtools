@@ -33,7 +33,7 @@ utils::globalVariables("where")
 #' @importFrom plyr summarise
 #' @importFrom purrr list_assign transpose
 #' @importFrom Rcpp sourceCpp
-#' @importFrom scales manual_pal percent trans_breaks
+#' @importFrom scales manual_pal label_percent trans_breaks
 #' @importFrom ssddata gm_mean
 #' @importFrom stats coef complete.cases ks.test logLik nobs optim plogis predict qlogis runif sd setNames weighted.mean
 #' @importFrom stats uniroot
