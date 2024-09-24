@@ -88,6 +88,7 @@ reference:
   - is.fitdists
   - ssd_licensing_md
   - npars
+  - params
   - ssd_ecd
   - ssd_ecd_data
   - ssd_exposure
