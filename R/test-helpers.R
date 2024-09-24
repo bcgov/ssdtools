@@ -54,6 +54,18 @@ expect_snapshot_boot_data <- function(x, name, digits = 6, min_pboot = 0.9, max_
   expect_snapshot_data(x, name, digits = digits)
 }
 
+
+#' Snapshot testing for [data.frame]s
+#'
+#' @param x a [data.frame] to snapshot
+#' @param name [character] snapshot name
+#' @param digits [integer] passed to [signif()] for numeric variables
+#'
+#' @returns [NULL] (from [testthat::expect_snapshot_file()])
+#' @export
+#'
+#' @examples
+#' expect_snapshot_data(iris, name = iris)
 expect_snapshot_data <- function(x, name, digits = 6) {
   fun <- function(x) signif(x, digits = digits)
   lapply_fun <- function(x) I(lapply(x, fun))
