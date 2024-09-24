@@ -20,6 +20,7 @@
 #' parameters at the boundary should be considered to have converged (default = FALSE).
 #' @param average A flag specifying whether to provide model averaged values as opposed to a value for each distribution.
 #' @param bcanz A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.
+#' @param big.mark A string specifying used between every 3 digits to separate thousands.
 #' @param breaks A character vector
 #' @param bounds A named non-negative numeric vector of the left and right bounds for
 #' uncensored missing (0 and Inf) data in terms of the orders of magnitude
@@ -155,6 +156,9 @@
 #' @param weibull.shape shape parameter for the Weibull distribution.
 #' @param weibull.scale scale parameter for the Weibull distribution.
 #' @param ... Unused.
-#' @keywords internal
-#' @name params
-NULL
+#' @aliases parameters arguments args
+#' @usage NULL
+#' @export
+# nocov start
+params <- function(...) NULL
+# nocov end

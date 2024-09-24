@@ -2,8 +2,13 @@
 % Please edit documentation in R/params.R
 \name{params}
 \alias{params}
+\alias{parameters}
+\alias{arguments}
+\alias{args}
 \title{Parameter Descriptions for ssdtools Functions}
 \arguments{
+\item{...}{Unused.}
+
 \item{add_x}{The value to add to the label x values (before multiplying by \code{shift_x}).}
 
 \item{all}{A flag specifying whether to also return transformed parameters.}
@@ -16,6 +21,8 @@ parameters at the boundary should be considered to have converged (default = FAL
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
 \item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
+
+\item{big.mark}{A string specifying used between every 3 digits to separate thousands.}
 
 \item{breaks}{A character vector}
 
@@ -272,10 +279,7 @@ remove them with a warning.}
 \item{weibull.shape}{shape parameter for the Weibull distribution.}
 
 \item{weibull.scale}{scale parameter for the Weibull distribution.}
-
-\item{...}{Unused.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions
 }
-\keyword{internal}

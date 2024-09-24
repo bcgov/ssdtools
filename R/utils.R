@@ -14,27 +14,22 @@
 
 #' Comma and Significance Formatter
 #'
-#' By default the numeric vectors are first rounded to three significant figures.
-#' Then scales::comma is only applied to values greater than or equal to 1000
-#' to ensure that labels are permitted to have different numbers of decimal places.
-#'
 #' @param x A numeric vector to format.
-#' @param ... Additional arguments passed to [scales::comma].
 #' @inheritParams params
 #' @return A character vector.
 #' @export
 #' @examples
-#' comma_signif(c(0.1, 1, 10, 1000))
-#' scales::comma(c(0.1, 1, 10, 1000))
-comma_signif <- function(x, digits = 3, ...) {
-  if (vld_used(...)) {
-    lifecycle::deprecate_warn("0.3.3", "comma_signif(...)")
-  }
+#' comma_signif(c(0.1, 1, 10, 1000, 10000))
+comma_signif <- function(x, digits = 3, ..., big.mark = ",") {
+  chk_numeric(x)
+  chk_number(digits)
+  chk_string(big.mark)
+  chk_unused(...)
 
   x <- signif(x, digits = digits)
   y <- as.character(x)
   bol <- !is.na(x) & as.numeric(x) >= 1000
-  y[bol] <- comma(x[bol], ...)
+  y[bol] <- stringr::str_replace_all(y[bol], "(\\d{1,1})(\\d{3,3}(?<=\\.|$))", paste0("\\1", big.mark, "\\2"))
   y
 }
 
