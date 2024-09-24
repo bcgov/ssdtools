@@ -15,7 +15,7 @@
 #' @export
 ggplot2::waiver
 
-plot_coord_scale <- function(data, xlab, ylab, trans, xbreaks = waiver()) {
+plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, xbreaks = waiver()) {
   chk_string(xlab)
   chk_string(ylab)
 
@@ -46,15 +46,17 @@ plot_coord_scale <- function(data, xlab, ylab, trans, xbreaks = waiver()) {
 #' @export
 #' @examples
 #' ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species", shape = "Group")
-ssd_plot <- function(data, pred, left = "Conc", right = left,
+ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Species Affected",
                      ci = TRUE, ribbon = TRUE, hc = 0.05,
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
+                     big.mark = ",",
                      trans = "log10", xbreaks = waiver()) {
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
+  chk_unused(...)
   chk_null_or(label, vld = vld_string)
   chk_null_or(shape, vld = vld_string)
   chk_null_or(color, vld = vld_string)
@@ -80,6 +82,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_gt(length(hc))
     chk_subset(hc, pred$proportion)
   }
+  chk_string(big.mark)
   .chk_bounds(bounds)
   chk_string(trans)
 
@@ -154,7 +157,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   }
 
   gp <- gp + plot_coord_scale(data,
-    xlab = xlab, ylab = ylab,
+    xlab = xlab, ylab = ylab, big.mark = big.mark,
     trans = trans, xbreaks = xbreaks
   )
 

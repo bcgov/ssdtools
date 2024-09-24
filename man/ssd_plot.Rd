@@ -9,6 +9,7 @@ ssd_plot(
   pred,
   left = "Conc",
   right = left,
+  ...,
   label = NULL,
   shape = NULL,
   color = NULL,
@@ -23,6 +24,7 @@ ssd_plot(
   shift_x = 3,
   add_x = 0,
   bounds = c(left = 1, right = 1),
+  big.mark = ",",
   trans = "log10",
   xbreaks = waiver()
 )
@@ -35,6 +37,8 @@ ssd_plot(
 \item{left}{A string of the column in data with the concentrations.}
 
 \item{right}{A string of the column in data with the right concentration values.}
+
+\item{...}{Unused.}
 
 \item{label}{A string of the column in data with the labels.}
 
@@ -65,6 +69,8 @@ ssd_plot(
 \item{bounds}{A named non-negative numeric vector of the left and right bounds for
 uncensored missing (0 and Inf) data in terms of the orders of magnitude
 relative to the extremes for non-missing values.}
+
+\item{big.mark}{A string specifying used between every 3 digits to separate thousands.}
 
 \item{trans}{A string which transformation to use by default \code{"log10"}.}
 
