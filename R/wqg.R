@@ -37,7 +37,7 @@
 #' ssd_wqg_bc(ssddata::ccme_boron)
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
-  lifecycle::deprecate_warn("1.0.6.9016", "ssd_wqg_bc()", "ssd_fit_bcanz()",
+  lifecycle::deprecate_warn("2.0.0", "ssd_wqg_bc()", "ssd_fit_bcanz()",
                             details = "Please use `ssd_fit_bcanz()` and `ssd_hc_bcanz()` instead.")
   fits <- ssd_fit_dists(data, left = left, rescale = FALSE)
   ssd_hc(fits, ci = TRUE, nboot = 10000)
@@ -68,7 +68,7 @@ ssd_wqg_bc <- function(data, left = "Conc") {
 #' ssd_wqg_burrlioz(ssddata::ccme_boron)
 #' }
 ssd_wqg_burrlioz <- function(data, left = "Conc") {
-  lifecycle::deprecate_warn("1.0.6.9016", "ssd_wqg_burrlioz()", "ssd_fit_bcanz()",
+  lifecycle::deprecate_warn("2.0.0", "ssd_wqg_burrlioz()", "ssd_fit_bcanz()",
                             details = "Please use `ssd_fit_burrlioz()` and `ssd_hc_burrlioz()` instead.")
   fit <- ssd_fit_burrlioz(data, left = left, rescale = FALSE)
   ssd_hc_burrlioz(fit, ci = TRUE, nboot = 10000)

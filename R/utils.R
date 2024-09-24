@@ -25,7 +25,7 @@
 #' }
 comma_signif <- function(x, digits = 3, ..., big.mark = ",") {
   lifecycle::deprecate_soft(
-    "1.0.6.9017", "comma_signif()", "ssd_label_comma()",
+    "2.0.0", "comma_signif()", "ssd_label_comma()",
     details = "Use `labels = ssd_label_comma()` instead of `labels = comma_signif` when constructing `ggplot` objects.")
   
   chk_numeric(x)

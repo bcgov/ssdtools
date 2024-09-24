@@ -84,7 +84,7 @@ ssd_hc.list <- function(
   chk_unused(...)
 
   if (lifecycle::is_present(percent)) {
-    lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
     chk_numeric(percent)
     chk_range(percent, c(0, 100))
@@ -133,7 +133,7 @@ ssd_hc.fitdists <- function(
   chk_unused(...)
 
   if (lifecycle::is_present(percent)) {
-    lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
     chk_numeric(percent)
     chk_range(percent, c(0, 100))
@@ -196,7 +196,7 @@ ssd_hc.fitburrlioz <- function(
   chk_unused(...)
 
   if (lifecycle::is_present(percent)) {
-    lifecycle::deprecate_soft("1.0.6.9009", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
     chk_numeric(percent)
     chk_range(percent, c(0, 100))

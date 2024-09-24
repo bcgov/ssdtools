@@ -15,8 +15,7 @@
 test_that("ssd_hc_burrlioz deprecated", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   set.seed(47)
-  lifecycle::expect_deprecated(hc_boron <- ssd_hc_burrlioz(fit, nboot = 10, ci = TRUE, min_pboot = 0))
-  expect_snapshot_data(hc_boron, "hc_boron0")
+  expect_defunct(hc_boron <- ssd_hc_burrlioz(fit, nboot = 10, ci = TRUE, min_pboot = 0))
 })
 
 test_that("ssd_hc gets estimates with invpareto", {

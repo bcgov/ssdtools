@@ -65,12 +65,8 @@ ssd_is_censored.fitdists <- function(x, ...) {
 #' @return A flag indicating if the data is censored.
 #' @export
 #' @seealso [`ssd_is_censored()`]
-#'
-#' @examples
-#' fits <- ssd_fit_dists(ssddata::ccme_boron)
-#' is_censored(fits)
 is_censored <- function(x) {
-  lifecycle::deprecate_warn("0.3.7", "is_censored()", "ssd_is_censored()")
+  lifecycle::deprecate_stop("0.3.7", "is_censored()", "ssd_is_censored()")
   chk_s3_class(x, "fitdists")
   ssd_is_censored(x)
 }

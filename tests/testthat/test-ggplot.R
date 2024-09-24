@@ -28,27 +28,23 @@ test_that("scale_color_ssd is ggproto", {
 })
 
 test_that("stat_ssd deprecated", {
-  lifecycle::expect_deprecated(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
+  lifecycle::expect_defunct(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
     stat_ssd())
 })
 
 test_that("plot stat_ssd", {
-  withr::local_options(lifecycle_verbosity = "quiet")
-  gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-    stat_ssd()
-  expect_snapshot_plot(gp, "stat_ssd")
+  expect_defunct(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
+    stat_ssd())
 })
 
 test_that("geom_ssd deprecated", {
-  lifecycle::expect_deprecated(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
+  expect_defunct(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
     geom_ssd())
 })
 
 test_that("plot geom_ssd", {
-  withr::local_options(lifecycle_verbosity = "quiet")
-  gp <- ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-    geom_ssd()
-  expect_snapshot_plot(gp, "geom_ssd")
+  expect_defunct(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
+    geom_ssd())
 })
 
 test_that("plot geom_ssdpoint", {
