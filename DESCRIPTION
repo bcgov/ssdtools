@@ -69,7 +69,6 @@ Imports:
     TMB,
     universals,
     utils,
-    VGAM,
     withr
 Suggests:
     actuar,
@@ -94,7 +93,8 @@ Suggests:
     testthat (>= 3.0.0),
     tidyr,
     tidyselect,
-    tinytex
+    tinytex,
+    VGAM
 LinkingTo: 
     Rcpp,
     RcppEigen,

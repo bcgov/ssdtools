@@ -42,6 +42,5 @@ utils::globalVariables("where")
 #' @importFrom TMB MakeADFun sdreport
 #' @importFrom universals estimates npars
 #' @importFrom utils capture.output relist
-#' @importFrom VGAM gompertz vglm
 ## usethis namespace: end
 NULL

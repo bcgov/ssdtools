@@ -104,13 +104,14 @@ rgompertz <- function(n, llocation = 0, lshape = 0) {
 }
 
 sgompertz <- function(data, pars = NULL) {
+  rlang::check_installed("VGAM")
   x <- mean_weighted_values(data)
 
   if (!is.null(pars)) {
     pars <- rev(unlist(pars))
   }
   data <- data.frame(x = x)
-  fit <- suppressWarnings(vglm(x ~ 1, gompertz, coefstart = pars, data = data))
+  fit <- suppressWarnings(VGAM::vglm(x ~ 1, VGAM::gompertz, coefstart = pars, data = data))
   list(
     log_location = unname(coef(fit)[2]) * (1 + 1e-3),
     log_shape = unname(coef(fit)[1]) * (1 - 1e-3)
