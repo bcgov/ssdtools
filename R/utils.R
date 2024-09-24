@@ -17,15 +17,22 @@
 #' @param x A numeric vector to format.
 #' @inheritParams params
 #' @return A character vector.
+#' @seealso [ssd_label_comma()]
 #' @export
 #' @examples
-#' comma_signif(c(0.1, 1, 10, 1000, 10000))
+#' \dontrun{
+#'  comma_signif(c(0.1, 1, 10, 1000, 10000))
+#' }
 comma_signif <- function(x, digits = 3, ..., big.mark = ",") {
+  lifecycle::deprecate_soft(
+    "1.0.6.9017", "comma_signif()", "ssd_label_comma()",
+    details = "Use `labels = ssd_label_comma()` instead of `labels = comma_signif` when constructing `ggplot` objects.")
+  
   chk_numeric(x)
   chk_number(digits)
   chk_string(big.mark)
   chk_unused(...)
-
+  
   x <- signif(x, digits = digits)
   y <- as.character(x)
   bol <- !is.na(x) & as.numeric(x) >= 1000
@@ -59,11 +66,11 @@ ssd_ecd_data <- function(
     data, left = "Conc", right = left, bounds = c(left = 1, right = 1)) {
   .chk_data(data, left, right)
   .chk_bounds(bounds)
-
+  
   if (!nrow(data)) {
     return(double(0))
   }
-
+  
   data <- process_data(data, left = left, right = right)
   data <- bound_data(data, bounds)
   x <- rowMeans(log(data[c("left", "right")]))

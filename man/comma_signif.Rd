@@ -22,5 +22,10 @@ A character vector.
 Comma and Significance Formatter
 }
 \examples{
-comma_signif(c(0.1, 1, 10, 1000, 10000))
+\dontrun{
+ comma_signif(c(0.1, 1, 10, 1000, 10000))
+}
+}
+\seealso{
+\code{\link[=ssd_label_comma]{ssd_label_comma()}}
 }

@@ -15,20 +15,6 @@
 #' @export
 ggplot2::waiver
 
-label_comma_signif <- function(digits = 3, ..., big.mark = ",") {
-  chk_number(digits)
-  chk_string(big.mark)
-  chk_unused(...)
-  
-  comma_signif_format <- function(x) {
-    x <- signif(x, digits = digits)
-    y <- as.character(x)
-    bol <- !is.na(x) & as.numeric(x) >= 1000
-    y[bol] <- stringr::str_replace_all(y[bol], "(\\d{1,1})(\\d{3,3}(?<=\\.|$))", paste0("\\1", big.mark, "\\2"))
-    y
-  }
-}
-
 plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver()) {
   chk_string(xlab)
   chk_string(ylab)
@@ -41,7 +27,7 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
     coord_trans(x = trans),
     scale_x_continuous(xlab,
       breaks = xbreaks,
-      labels = label_comma_signif(big.mark = big.mark)
+      labels = ssd_label_comma(big.mark = big.mark)
     ),
     scale_y_continuous(ylab,
       labels = label_percent(suffix = suffix), limits = c(0, 1),

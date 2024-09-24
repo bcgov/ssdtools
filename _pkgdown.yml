@@ -67,6 +67,7 @@ reference:
   - geom_ssdsegment
   - geom_xribbon
   - scale_colour_ssd
+  - ssd_label_comma
   - ssd_pal
   - ssd_plot
   - ssd_plot_cdf
@@ -83,7 +84,6 @@ reference:
   desc: Miscellaneous functions and data
   contents:
   - boron_pred
-  - comma_signif
   - dist_data
   - is.fitdists
   - ssd_licensing_md
@@ -98,6 +98,7 @@ reference:
 - title: Deprecated
   desc: Deprecated functions which will become defunct in future versions
   contents:
+  - comma_signif
   - geom_ssd
   - is_censored
   - ssd_wqg_bc
