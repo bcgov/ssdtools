@@ -20,12 +20,12 @@ test_that("ssd_plot_cdf", {
   expect_snapshot_plot(ssd_plot_cdf(fits, average = NA), "fits_average_na")
 })
 
-test_that("autoplot deals with rescaled data", {
+test_that("ssd_plot_cdf deals with rescaled data", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
   expect_snapshot_plot(ssd_plot_cdf(fits), "fits_rescale")
 })
 
-test_that("autoplot deals with named list", {
+test_that("ssd_plot_cdf deals with named list", {
   expect_snapshot_plot(
     ssd_plot_cdf(list(
       llogis = c(locationlog = 2, scalelog = 1),
@@ -39,4 +39,12 @@ test_that("autoplot deals with delta", {
   dists <- ssd_dists_all()
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists, at_boundary_ok = TRUE, computable = FALSE)
   expect_snapshot_plot(ssd_plot_cdf(fits, delta = Inf), "fits_delta")
+})
+
+test_that("ssd_plot_cdf bigmark", {
+  data <- ssddata::ccme_boron
+  data$Conc <- data$Conc * 100
+  fits <- ssd_fit_dists(data)
+  
+  expect_snapshot_plot(ssd_plot_cdf(fits, big.mark = "_"), "fits_bigmark")
 })
