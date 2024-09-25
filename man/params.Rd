@@ -2,8 +2,13 @@
 % Please edit documentation in R/params.R
 \name{params}
 \alias{params}
+\alias{parameters}
+\alias{arguments}
+\alias{args}
 \title{Parameter Descriptions for ssdtools Functions}
 \arguments{
+\item{...}{Unused.}
+
 \item{add_x}{The value to add to the label x values (before multiplying by \code{shift_x}).}
 
 \item{all}{A flag specifying whether to also return transformed parameters.}
@@ -17,6 +22,8 @@ parameters at the boundary should be considered to have converged (default = FAL
 
 \item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
 
+\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
+
 \item{breaks}{A character vector}
 
 \item{bounds}{A named non-negative numeric vector of the left and right bounds for
@@ -26,6 +33,8 @@ relative to the extremes for non-missing values.}
 \item{chk}{A flag specifying whether to check the arguments.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
+
+\item{censoring}{A numeric vector of the left and right censoring values.}
 
 \item{color}{A string of the column in data for the color aesthetic.}
 
@@ -174,6 +183,8 @@ remove them with a warning.}
 
 \item{size}{A number for the size of the labels.}
 
+\item{suffix}{Additional text to display after the number on the y-axis.}
+
 \item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
 
 \item{trans}{A string which transformation to use by default \code{"log10"}.}
@@ -270,10 +281,7 @@ remove them with a warning.}
 \item{weibull.shape}{shape parameter for the Weibull distribution.}
 
 \item{weibull.scale}{scale parameter for the Weibull distribution.}
-
-\item{...}{Unused.}
 }
 \description{
 Parameter Descriptions for ssdtools Functions
 }
-\keyword{internal}

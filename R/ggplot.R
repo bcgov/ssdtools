@@ -48,7 +48,7 @@ scale_color_ssd <- function(...) {
 }
 
 #' Species Sensitivity Data Points
-#' 
+#'
 #' Uses the empirical cumulative distribution to create scatterplot of points `x`.
 #'
 #' @inheritParams ggplot2::layer
@@ -182,9 +182,9 @@ geom_xribbon <- function(mapping = NULL,
 
 #' Species Sensitivity Data Points
 #' `r lifecycle::badge('deprecated')`
-#' 
+#'
 #' `geom_ssd()` has been deprecated for `geom_ssdpoint()`.
-#' 
+#'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @export
@@ -201,7 +201,7 @@ geom_ssd <- function(mapping = NULL,
                      na.rm = FALSE,
                      show.legend = NA,
                      inherit.aes = TRUE) {
-  lifecycle::deprecate_warn("0.3.5", "geom_ssd()", "geom_ssdpoint()")
+  lifecycle::deprecate_stop("0.3.5", "geom_ssd()", "geom_ssdpoint()")
 
   geom_ssdpoint(
     mapping = mapping, data = data, stat = stat,
@@ -233,7 +233,7 @@ stat_ssd <- function(mapping = NULL,
                      na.rm = FALSE,
                      show.legend = NA,
                      inherit.aes = TRUE) {
-  lifecycle::deprecate_warn("0.3.5", "stat_ssd()")
+  lifecycle::deprecate_stop("0.3.5", "stat_ssd()")
 
   layer(
     stat = StatSsdpoint, data = data, mapping = mapping, geom = geom,

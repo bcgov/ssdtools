@@ -4,24 +4,28 @@
 \alias{comma_signif}
 \title{Comma and Significance Formatter}
 \usage{
-comma_signif(x, digits = 3, ...)
+comma_signif(x, digits = 3, ..., big.mark = ",")
 }
 \arguments{
 \item{x}{A numeric vector to format.}
 
 \item{digits}{A whole number specifying the number of significant figures.}
 
-\item{...}{Additional arguments passed to \link[scales:comma]{scales::comma}.}
+\item{...}{Unused.}
+
+\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
 }
 \value{
 A character vector.
 }
 \description{
-By default the numeric vectors are first rounded to three significant figures.
-Then scales::comma is only applied to values greater than or equal to 1000
-to ensure that labels are permitted to have different numbers of decimal places.
+Comma and Significance Formatter
 }
 \examples{
-comma_signif(c(0.1, 1, 10, 1000))
-scales::comma(c(0.1, 1, 10, 1000))
+\dontrun{
+ comma_signif(c(0.1, 1, 10, 1000, 10000))
+}
+}
+\seealso{
+\code{\link[=ssd_label_comma]{ssd_label_comma()}}
 }

@@ -15,22 +15,22 @@
 #' @export
 ggplot2::waiver
 
-plot_coord_scale <- function(data, xlab, ylab, trans, xbreaks = waiver()) {
+plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver()) {
   chk_string(xlab)
   chk_string(ylab)
 
   if (is.waive(xbreaks) & trans == "log10") {
     xbreaks <- trans_breaks("log10", function(x) 10^x)
   }
-  
+
   list(
     coord_trans(x = trans),
     scale_x_continuous(xlab,
       breaks = xbreaks,
-      labels = comma_signif
+      labels = ssd_label_comma(big.mark = big.mark)
     ),
     scale_y_continuous(ylab,
-      labels = percent, limits = c(0, 1),
+      labels = label_percent(suffix = suffix), limits = c(0, 1),
       breaks = seq(0, 1, by = 0.2), expand = c(0, 0)
     )
   )
@@ -46,15 +46,17 @@ plot_coord_scale <- function(data, xlab, ylab, trans, xbreaks = waiver()) {
 #' @export
 #' @examples
 #' ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species", shape = "Group")
-ssd_plot <- function(data, pred, left = "Conc", right = left,
+ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
                      label = NULL, shape = NULL, color = NULL, size = 2.5,
                      linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Species Affected",
-                     ci = TRUE, ribbon = TRUE, hc = 0.05, 
+                     ci = TRUE, ribbon = TRUE, hc = 0.05,
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
+                     big.mark = ",", suffix = "%",
                      trans = "log10", xbreaks = waiver()) {
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
+  chk_unused(...)
   chk_null_or(label, vld = vld_string)
   chk_null_or(shape, vld = vld_string)
   chk_null_or(color, vld = vld_string)
@@ -71,7 +73,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
   chk_range(shift_x, c(1, 1000))
   chk_number(add_x)
   chk_range(add_x, c(-1000, 1000))
-  
+
   chk_flag(ci)
   chk_flag(ribbon)
 
@@ -80,6 +82,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
     chk_gt(length(hc))
     chk_subset(hc, pred$proportion)
   }
+  chk_string(big.mark)
+  chk_string(suffix)
   .chk_bounds(bounds)
   chk_string(trans)
 
@@ -153,8 +157,10 @@ ssd_plot <- function(data, pred, left = "Conc", right = left,
       ), stat = "identity")
   }
 
-  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab,
-                              trans = trans, xbreaks = xbreaks)
+  gp <- gp + plot_coord_scale(data,
+    xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
+    trans = trans, xbreaks = xbreaks
+  )
 
   if (!is.null(label)) {
     data$right <- (data$right + add_x) * shift_x

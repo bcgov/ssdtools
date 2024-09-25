@@ -1,115 +1,119 @@
+url: ~
 template:
   bootstrap: 5
 authors:
   Joe Thorley:
-    href: "https://github.com/joethorley"
+    href: https://github.com/joethorley
   Rebecca Fisher:
-    href: "https://www.aims.gov.au/about/our-people/dr-rebecca-fisher"
+    href: https://www.aims.gov.au/about/our-people/dr-rebecca-fisher
   David Fox:
-    href: "https://training.ecotox.science/who-we-are/"
+    href: https://training.ecotox.science/who-we-are/
   Carl Schwarz:
-    href: "https://www.sfu.ca/stat-actsci/department/profiles/carl-schwarz.html"
+    href: https://www.sfu.ca/stat-actsci/department/profiles/carl-schwarz.html
   Province of British Columbia:
-    href: "https://www2.gov.bc.ca/"
+    href: https://www2.gov.bc.ca/
   Environment and Climate Change Canada:
-    href: "https://www.canada.ca/en/environment-climate-change.html"
+    href: https://www.canada.ca/en/environment-climate-change.html
   Australian Government Department of Climate Change, Energy, the Environment and Water:
-    href: "https://www.dcceew.gov.au/"
-
+    href: https://www.dcceew.gov.au/
 destination: docs
-
 reference:
 - title: Distribution Names
   desc: Functions that return character vectors of distribution names
   contents: 
-  - '`ssd_dists`'
-  - '`ssd_dists_all`'
-  - '`ssd_dists_bcanz`'
+  - ssd_dists
+  - ssd_dists_all
+  - ssd_dists_bcanz
 - title: Fit
   desc: Functions that fit distributions to data
   contents: 
-  - '`ssd_fit_dists`'
-  - '`ssd_fit_bcanz`'
-  - '`ssd_fit_burrlioz`'
+  - ssd_fit_dists
+  - ssd_fit_bcanz
+  - ssd_fit_burrlioz
 - title: Hazard Concentrations
   desc: Functions that calculate hazard concentrations
   contents:
-  - '`ssd_hc`'
-  - '`ssd_hc_bcanz`'
-  - '`ssd_wqg_bc`'
-  - '`ssd_wqg_burrlioz`'
+  - ssd_hc
+  - ssd_hc_bcanz
 - title: Hazard Proportions
   desc: Functions that calculate hazard proportions
   contents:
-  - '`ssd_hp`'
-  - '`ssd_hp_bcanz`'
+  - ssd_hp
+  - ssd_hp_bcanz
+- title: Manipulate Data
+  desc: Functions that manipulate data
+  contents:
+  - ssd_censor_data
+  - ssd_data
+  - ssd_sort_data
 - title: Manipulate Fits
   desc: Functions that manipulate fits of distributions
   contents:
-  - '`augment.fitdists`'
-  - '`coef.fitdists`'
-  - '`estimates.fitdists`'
-  - '`glance.fitdists`'
-  - '`predict.fitburrlioz`'
-  - '`predict.fitdists`'
-  - '`ssd_gof`'
-  - '`subset.fitdists`'
-  - '`tidy.fitdists`'
+  - augment.fitdists
+  - coef.fitdists
+  - estimates.fitdists
+  - glance.fitdists
+  - predict.fitburrlioz
+  - predict.fitdists
+  - ssd_gof
+  - subset.fitdists
+  - tidy.fitdists
 - title: Plots
   desc: Functions to Generate Plots
   contents:
-  - '`autoplot.fitdists`'
-  - '`geom_hcintersect`'
-  - '`geom_ssdpoint`'
-  - '`geom_ssdsegment`'
-  - '`geom_xribbon`'
-  - '`scale_colour_ssd`'
-  - '`ssd_pal`'
-  - '`ssd_plot`'
-  - '`ssd_plot_cdf`'
-  - '`ssd_plot_data`'
-  - '`ssdtools-ggproto`'
+  - autoplot.fitdists
+  - geom_hcintersect
+  - geom_ssdpoint
+  - geom_ssdsegment
+  - geom_xribbon
+  - scale_colour_ssd
+  - ssd_label_comma
+  - ssd_pal
+  - ssd_plot
+  - ssd_plot_cdf
+  - ssd_plot_data
+  - ssdtools-ggproto
 - title: Distributional Functions
   desc: Distribution, quantile, random functions
   contents: 
-  - '`ssd_p`'
-  - '`ssd_q`'
-  - '`ssd_r`'
-  - '`ssd_e`'
+  - ssd_p
+  - ssd_q
+  - ssd_r
+  - ssd_e
 - title: Miscellaneous
   desc: Miscellaneous functions and data
   contents:
-  - '`boron_pred`'
-  - '`comma_signif`'
-  - '`dist_data`'
-  - '`is.fitdists`'
-  - '`ssd_licensing_md`'
-  - '`npars`'
-  - '`ssd_data`'
-  - '`ssd_ecd`'
-  - '`ssd_ecd_data`'
-  - '`ssd_exposure`'
-  - '`ssd_fit_dists`'
-  - '`ssd_is_censored`'
-  - '`ssd_match_moments`'
-  - '`ssd_sort_data`'
-  - '`pearson1000`'
+  - boron_pred
+  - dist_data
+  - is.fitdists
+  - ssd_licensing_md
+  - npars
+  - params
+  - ssd_ecd
+  - ssd_ecd_data
+  - ssd_exposure
+  - ssd_is_censored
+  - ssd_match_moments
+  - ssd_min_pmix
 - title: Deprecated
   desc: Deprecated functions which will become defunct in future versions
   contents:
-  - '`geom_ssd`'
-  - '`is_censored`'
-  - '`ssd_hc_burrlioz`'
-  - '`ssd_plot_cf`'
-  - '`stat_ssd`'
-  - '`dgompertz`'
-  - '`pgompertz`'
-  - '`qgompertz`'
-  - '`rgompertz`'
-  - '`dlgumbel`'
-  - '`plgumbel`'
-  - '`qlgumbel`'
-  - '`rlgumbel`'
+  - comma_signif
+  - geom_ssd
+  - is_censored
+  - ssd_wqg_bc
+  - ssd_wqg_burrlioz
+  - ssd_hc_burrlioz
+  - ssd_plot_cf
+  - stat_ssd
+  - dgompertz
+  - pgompertz
+  - qgompertz
+  - rgompertz
+  - dlgumbel
+  - plgumbel
+  - qlgumbel
+  - rlgumbel
 
 articles:
 - title: All vignettes

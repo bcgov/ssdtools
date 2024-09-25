@@ -42,7 +42,7 @@ test_that("ssd_hp_burrlioz currently errors!", {
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   set.seed(47)
-  #FIXME: currently errors!
+  # FIXME: currently errors!
   expect_error(hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0))
 })
 
@@ -53,8 +53,8 @@ test_that("ssd_hp_burrlioz gets estimates with burrIII3 parametric", {
   expect_identical(names(fit), "burrIII3")
   set.seed(49)
   hp_burrIII3 <- ssd_hp(fit,
-                        nboot = 10, ci = TRUE, min_pboot = 0,
-                        parametric = TRUE, samples = TRUE
+    nboot = 10, ci = TRUE, min_pboot = 0,
+    parametric = TRUE, samples = TRUE
   )
   expect_snapshot_data(hp_burrIII3, "hp_burrIII3_parametric")
 })

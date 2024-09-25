@@ -14,7 +14,7 @@
 
 #' Cullen and Frey Plot
 #' `r lifecycle::badge('deprecated')`
-#' 
+#'
 #' Plots a Cullen and Frey graph of the skewness and kurtosis
 #' for non-censored data.
 #'
@@ -27,7 +27,7 @@ ssd_plot_cf <- function(data, left = "Conc") {
     err("Package 'fitdistrplus' is required to produce Cullen and Frey plots.")
   }
 
-  lifecycle::deprecate_warn("0.3.5", "ssd_plot_cf()", "fitdistrplus::descdist()",
+  lifecycle::deprecate_stop("0.3.5", "ssd_plot_cf()", "fitdistrplus::descdist()",
     details = "Please use fitdistrplus::descdist(data$Conc, boot = 100L)."
   )
 

@@ -13,6 +13,5 @@
 #    limitations under the License.
 
 test_that("cfplot", {
-  withr::local_options(lifecycle_verbosity = "quiet")
-  expect_snapshot_plot(ssd_plot_cf(ssddata::ccme_boron), "ccme_boron")
+  expect_defunct(ssd_plot_cf(ssddata::ccme_boron))
 })

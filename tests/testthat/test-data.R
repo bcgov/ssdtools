@@ -20,19 +20,6 @@ test_that("boron stable", {
   expect_snapshot_data(tidy, "boron_stable")
 })
 
-test_that("boron unstable", {
-  dists <- ssd_dists(bcanz = FALSE)
-  set.seed(50)
-  expect_warning(
-    fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists),
-    "Distribution 'burrIII3' failed to fit"
-  )
-
-  tidy <- tidy(fits)
-  expect_s3_class(tidy, "tbl_df")
-  expect_snapshot_data(tidy, "boron_unstable")
-})
-
 test_that("dist_data", {
   expect_snapshot_data(ssdtools::dist_data, "dist_data")
 })

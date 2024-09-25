@@ -41,8 +41,3 @@ A tibble of corresponding hazard concentrations.
 \description{
 Deprecated for \code{\link[=ssd_hc]{ssd_hc()}}.
 }
-\examples{
-fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
-ssd_hc_burrlioz(fit)
-
-}

@@ -1,14 +1,3 @@
-## Test environments
-
-release 4.3.1
-
-* OSX (local) - release
-* OSX (macbuilder) - release
-* OSX (actions) - release
-* Ubuntu (actions) - oldrel, release and devel
-* Windows (actions) - release
-* Windows (winbuilder) - devel
-
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note

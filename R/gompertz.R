@@ -20,7 +20,7 @@
 #' @return A numeric vector.
 #' @export
 dgompertz <- function(x, llocation = 0, lshape = 0, log = FALSE) {
-  lifecycle::deprecate_warn("1.0.0", "dgompertz()")
+  lifecycle::deprecate_stop("1.0.0", "dgompertz()")
   ddist("gompertz", x,
     location = exp(llocation), shape = exp(lshape),
     log = log
@@ -44,7 +44,7 @@ ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p =
 #' @inheritParams params
 #' @export
 pgompertz <- function(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
-  lifecycle::deprecate_warn("1.0.0", "pgompertz()", "ssd_pgompertz()")
+  lifecycle::deprecate_stop("1.0.0", "pgompertz()", "ssd_pgompertz()")
   ssd_pgompertz(q,
     location = exp(llocation), shape = exp(lshape),
     lower.tail = lower.tail, log.p = log.p
@@ -68,7 +68,7 @@ ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p =
 #' @inheritParams params
 #' @export
 qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
-  lifecycle::deprecate_warn("1.0.0", "qgompertz()", "ssd_qgompertz()")
+  lifecycle::deprecate_stop("1.0.0", "qgompertz()", "ssd_qgompertz()")
   ssd_qgompertz(
     p = p, location = exp(llocation), shape = exp(lshape),
     lower.tail = lower.tail, log.p = log.p
@@ -99,18 +99,19 @@ ssd_egompertz <- function() {
 #' @inheritParams params
 #' @export
 rgompertz <- function(n, llocation = 0, lshape = 0) {
-  lifecycle::deprecate_warn("1.0.0", "rgompertz()", "ssd_rgompertz()")
+  lifecycle::deprecate_stop("1.0.0", "rgompertz()", "ssd_rgompertz()")
   ssd_rgompertz(n = n, location = exp(llocation), shape = exp(lshape))
 }
 
 sgompertz <- function(data, pars = NULL) {
+  rlang::check_installed("VGAM")
   x <- mean_weighted_values(data)
 
   if (!is.null(pars)) {
     pars <- rev(unlist(pars))
   }
   data <- data.frame(x = x)
-  fit <- suppressWarnings(vglm(x ~ 1, gompertz, coefstart = pars, data = data))
+  fit <- suppressWarnings(VGAM::vglm(x ~ 1, VGAM::gompertz, coefstart = pars, data = data))
   list(
     log_location = unname(coef(fit)[2]) * (1 + 1e-3),
     log_shape = unname(coef(fit)[1]) * (1 - 1e-3)

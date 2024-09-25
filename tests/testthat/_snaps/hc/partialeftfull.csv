@@ -1,0 +1,2 @@
+dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
+lnorm,0.05,1.83148,NA,NA,NA,1,parametric,0,NA,numeric(0)

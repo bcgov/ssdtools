@@ -23,7 +23,7 @@ A data frame of information on the implemented distributions.
 }
 }
 \examples{
-dist
+dist_data
 }
 \seealso{
 Other dists: 

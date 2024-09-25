@@ -68,3 +68,18 @@ test_that("ssd_is_censored TRUE fitdists censored", {
   fits <- ssd_fit_dists(data, right = "Right", dists = c("gamma", "llogis", "lnorm"))
   expect_true(ssd_is_censored(fits))
 })
+
+test_that("ssd_is_censored TRUE fitdists multiple", {
+  data <- ssddata::ccme_boron
+  data$right <- data$Conc
+  data$Conc[c(3,6,8)] <- NA
+  
+  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  expect_true(ssd_is_censored(fits))
+})
+
+
+test_that("censor", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  expect_defunct(is_censored(fits))
+})

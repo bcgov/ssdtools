@@ -19,19 +19,21 @@ utils::globalVariables("where")
 
 ## usethis namespace: start
 #' @import chk ggplot2
+#' @import rlang
 #' @importFrom abind abind
 #' @importFrom furrr future_map furrr_options
 #' @importFrom generics augment glance tidy
 #' @importFrom ggplot2 autoplot sym
+#' @importFrom glue glue
 #' @importFrom goftest ad.test cvm.test
 #' @importFrom graphics par plot title
 #' @importFrom grid gList gpar grobName gTree polygonGrob segmentsGrob
-#' @importFrom lifecycle expect_deprecated deprecate_soft deprecate_stop deprecate_warn
+#' @importFrom lifecycle deprecated expect_defunct expect_deprecated deprecate_soft deprecate_stop deprecate_warn
 #' @importFrom parallel nextRNGStream nextRNGSubStream
 #' @importFrom plyr summarise
 #' @importFrom purrr list_assign transpose
 #' @importFrom Rcpp sourceCpp
-#' @importFrom scales comma manual_pal percent trans_breaks
+#' @importFrom scales manual_pal label_percent trans_breaks
 #' @importFrom ssddata gm_mean
 #' @importFrom stats coef complete.cases ks.test logLik nobs optim plogis predict qlogis runif sd setNames weighted.mean
 #' @importFrom stats uniroot
@@ -40,6 +42,5 @@ utils::globalVariables("where")
 #' @importFrom TMB MakeADFun sdreport
 #' @importFrom universals estimates npars
 #' @importFrom utils capture.output relist
-#' @importFrom VGAM gompertz vglm
 ## usethis namespace: end
 NULL

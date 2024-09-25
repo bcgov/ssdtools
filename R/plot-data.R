@@ -22,23 +22,26 @@
 #' @export
 #' @examples
 #' ssd_plot_data(ssddata::ccme_boron, label = "Species", shape = "Group")
-ssd_plot_data <- function(data, left = "Conc", right = left,
+ssd_plot_data <- function(data, left = "Conc", right = left, ...,
                           label = NULL, shape = NULL, color = NULL, size = 2.5,
                           xlab = "Concentration", ylab = "Species Affected",
                           shift_x = 3, add_x = 0,
+                          big.mark = ",", suffix = "%",
                           bounds = c(left = 1, right = 1),
                           trans = "log10", xbreaks = waiver()) {
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
+  chk_unused(...)
   chk_null_or(label, vld = vld_string)
   chk_null_or(shape, vld = vld_string)
   check_names(data, c(unique(c(left, right)), label, shape))
 
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
-  
+
   chk_number(add_x)
   chk_range(add_x, c(-1000, 1000))
-  
+  chk_string(big.mark)
+
   .chk_bounds(bounds)
 
   data <- process_data(data, left, right, weight = NULL)
@@ -84,8 +87,10 @@ ssd_plot_data <- function(data, left = "Conc", right = left,
       ), stat = "identity")
   }
 
-  gp <- gp + plot_coord_scale(data, xlab = xlab, ylab = ylab, 
-                              trans = trans, xbreaks = xbreaks)
+  gp <- gp + plot_coord_scale(data,
+    xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
+    trans = trans, xbreaks = xbreaks
+  )
 
   if (!is.null(label)) {
     data$right <- (data$right + add_x) * shift_x
