@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="ssdtools">
 <title>Model Averaged SSDs • ssdtools</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -15,61 +14,41 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Model Averaged SSDs">
-<meta property="og:description" content="ssdtools">
-<meta property="og:image" content="/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Model Averaged SSDs">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9015</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/ssdtools.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
-<li class="active nav-item">
-  <a class="nav-link" href="../articles/index.html">Articles</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../articles/ssdtools.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="active nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/bcgov/ssdtools/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/bcgov/ssdtools/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -82,9 +61,9 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-05-16</h4>
+            <h4 data-toc-skip class="date">2024-09-25</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/HEAD/vignettes/model-averaging.Rmd" class="external-link"><code>vignettes/model-averaging.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/model-averaging.Rmd" class="external-link"><code>vignettes/model-averaging.Rmd</code></a></small>
       <div class="d-none name"><code>model-averaging.Rmd</code></div>
     </div>
 
@@ -167,7 +146,8 @@ information in the process. Nevertheless, the benefits tend to outweigh
 this information loss. Indeed, much of ‘conventional’ statistical theory
 and practice is focused on the mean. Examples include T-tests, ANOVA,
 regression, and clustering. When we talk of an ‘average’ we are usually
-referring to the simple, <em>arithmetic mean</em>:<span class="math display">\[\bar{X}=\frac{1}{n}\sum\limits_{i=1}^{n}{{{X}_{i}}}\]</span>
+referring to the simple, <em>arithmetic
+mean</em>:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>X</mi><mo accent="true">‾</mo></mover><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>X</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\bar{X}=\frac{1}{n}\sum\limits_{i=1}^{n}{{{X}_{i}}}</annotation></semantics></math>
 although we recognize there are other types of mean including the
 geometric mean, the harmonic mean and the weighted mean. The last of
 these is particularly pertinent to model averaging.</p>
@@ -175,29 +155,36 @@ these is particularly pertinent to model averaging.</p>
 <h3 id="weighted-averages">Weighted Averages<a class="anchor" aria-label="anchor" href="#weighted-averages"></a>
 </h3>
 <p>For the simple arithmetic mean, all of the individual values receive
-the same weighting - they each contribute <span class="math inline">\(\frac{1}{n}\)</span> to the summation. While this
-is appropriate in many cases, it’s not useful when the components
-contribute to varying degrees. An example familiar to ecotoxicologists
-is that of a <em>time-varying</em> concentration as shown in the figure
-below.<br></p>
-<p><img src="images/Figure1.jpg" style="width:90.0%" align="center"></p>
+the same weighting - they each contribute
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mn>1</mn><mi>n</mi></mfrac><annotation encoding="application/x-tex">\frac{1}{n}</annotation></semantics></math>
+to the summation. While this is appropriate in many cases, it’s not
+useful when the components contribute to varying degrees. An example
+familiar to ecotoxicologists is that of a <em>time-varying</em>
+concentration as shown in the figure below.<br></p>
+<p><img src="images%2FFigure1.jpg" style="width:90.0%" align="center"></p>
 <p>From the figure we see there are 5 concentrations going from left to
-to right: <span class="math inline">\(\left\{ 0.25,0.95,0.25,0.12,0.5
-\right\}\)</span>. If we were to take the simple arithmetic mean of
-these concentrations we get <span class="math inline">\(\bar{X}=0.414\)</span>. But this ignores the
-different <em>durations</em> of these 5 concentrations. Of the 170
-hours, 63 were at concentration 0.25, 25 at concentration 0.95, 23 at
-concentration 0.25, 23 at concentration 0.12, and 36 at concentration
-0.50. So if we were to <em>weight</em> these concentrations by time
-have:<br><span class="math display">\[{{{\bar{X}}}_{TW}}=\frac{\left(
-63\cdot 0.25+25\cdot 0.95+23\cdot 0.25+23\cdot 0.12+36\cdot 0.50
-\right)}{\left( 63+25+23+23+36
-\right)}=\frac{56.01}{170}=0.33\]</span><br>So, our formula for a
-<em>weighted average</em> is:<span class="math display">\[\bar{X}=\sum\limits_{i=1}^{n}{{{w}_{i}}{{X}_{i}}}\]</span>
-with <span class="math inline">\(0\le {{w}_{i}}\le 1\)</span> and <span class="math inline">\(\sum\limits_{i=1}^{n}{{{w}_{i}}=1}\)</span>.<br>Note,
+to right:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">{</mo><mn>0.25</mn><mo>,</mo><mn>0.95</mn><mo>,</mo><mn>0.25</mn><mo>,</mo><mn>0.12</mn><mo>,</mo><mn>0.5</mn><mo stretchy="true" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\left\{ 0.25,0.95,0.25,0.12,0.5 \right\}</annotation></semantics></math>.
+If we were to take the simple arithmetic mean of these concentrations we
+get
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>X</mi><mo accent="true">‾</mo></mover><mo>=</mo><mn>0.414</mn></mrow><annotation encoding="application/x-tex">\bar{X}=0.414</annotation></semantics></math>.
+But this ignores the different <em>durations</em> of these 5
+concentrations. Of the 170 hours, 63 were at concentration 0.25, 25 at
+concentration 0.95, 23 at concentration 0.25, 23 at concentration 0.12,
+and 36 at concentration 0.50. So if we were to <em>weight</em> these
+concentrations by time
+have:<br><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>X</mi><mo accent="true">‾</mo></mover><mrow><mi>T</mi><mi>W</mi></mrow></msub><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>63</mn><mo>⋅</mo><mn>0.25</mn><mo>+</mo><mn>25</mn><mo>⋅</mo><mn>0.95</mn><mo>+</mo><mn>23</mn><mo>⋅</mo><mn>0.25</mn><mo>+</mo><mn>23</mn><mo>⋅</mo><mn>0.12</mn><mo>+</mo><mn>36</mn><mo>⋅</mo><mn>0.50</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>63</mn><mo>+</mo><mn>25</mn><mo>+</mo><mn>23</mn><mo>+</mo><mn>23</mn><mo>+</mo><mn>36</mn><mo stretchy="true" form="postfix">)</mo></mrow></mfrac><mo>=</mo><mfrac><mn>56.01</mn><mn>170</mn></mfrac><mo>=</mo><mn>0.33</mn></mrow><annotation encoding="application/x-tex">{{{\bar{X}}}_{TW}}=\frac{\left( 63\cdot 0.25+25\cdot 0.95+23\cdot 0.25+23\cdot 0.12+36\cdot 0.50 \right)}{\left( 63+25+23+23+36 \right)}=\frac{56.01}{170}=0.33</annotation></semantics></math><br>So,
+our formula for a <em>weighted average</em>
+is:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>X</mi><mo accent="true">‾</mo></mover><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>w</mi><mi>i</mi></msub><msub><mi>X</mi><mi>i</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\bar{X}=\sum\limits_{i=1}^{n}{{{w}_{i}}{{X}_{i}}}</annotation></semantics></math>
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><msub><mi>w</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0\le {{w}_{i}}\le 1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>w</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn></mrow></mrow><annotation encoding="application/x-tex">\sum\limits_{i=1}^{n}{{{w}_{i}}=1}</annotation></semantics></math>.<br>Note,
 the simple arithmetic mean is just a special case of the weighted mean
-with <span class="math inline">\(\sum\limits_{i=1}^{n}{{{w}_{i}}=\frac{1}{n}}\)</span>
-; <span class="math inline">\(\forall i=1,\ldots ,n\)</span></p>
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>w</mi><mi>i</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mrow><annotation encoding="application/x-tex">\sum\limits_{i=1}^{n}{{{w}_{i}}=\frac{1}{n}}</annotation></semantics></math>
+;
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\forall i=1,\ldots ,n</annotation></semantics></math></p>
 </div>
 </div>
 <div class="section level2">
@@ -247,11 +234,11 @@ Models 1&amp;2 using the appropriate <code><a href="https://rdrr.io/r/stats/Logn
 <code>R</code>. Thus we have:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Model 1 HC20</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Model 1 HC20 ="</span>,<span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">qlnorm</a></span><span class="op">(</span><span class="fl">0.2</span>,<span class="op">-</span><span class="fl">1.067</span>,<span class="fl">0.414</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Model 1 HC20 ="</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">qlnorm</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="op">-</span><span class="fl">1.067</span>, <span class="fl">0.414</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Model 1 HC20 = 0.2428209</span></span>
 <span></span>
 <span><span class="co"># Model 2 HC20</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Model 2 HC20 ="</span>,<span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">qlnorm</a></span><span class="op">(</span><span class="fl">0.2</span>,<span class="op">-</span><span class="fl">0.387</span>,<span class="fl">0.617</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Model 2 HC20 ="</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">qlnorm</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.387</span>, <span class="fl">0.617</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Model 2 HC20 = 0.4040243</span></span></code></pre></div>
 <p>What about the averaged distribution? An intuitively appealing
 approach would be to apply the same weights to the individual
@@ -277,57 +264,69 @@ next section</em>).
 The fallacy of weighting individual <em>HCx</em> values
 <a class="anchor" aria-label="anchor" href="#model-averaged-ssds-1"></a>
 </h4>
-<p>The correct expression for a model-averaged SSD is: <span class="math display">\[G\left( x \right) = \sum\limits_{i = 1}^k {{w_i}}
-{F_i}\left( x \right)\]</span> where <span class="math inline">\({F_i}\left(  \cdot  \right)\)</span> is the
-<em>i<sup>th</sup></em> component SSD (i.e. <em>cdf</em>) and
-<em>w<sub>i</sub></em> is the weight assigned to <span class="math inline">\({F_i}\left(  \cdot  \right)\)</span>. <br>Notice
-that the function <span class="math inline">\(G\left( x \right)\)</span>
+<p>The correct expression for a model-averaged SSD is:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><msub><mi>w</mi><mi>i</mi></msub><msub><mi>F</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}\left( x \right)</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{F_i}\left(  \cdot  \right)</annotation></semantics></math>
+is the <em>i<sup>th</sup></em> component SSD (i.e. <em>cdf</em>) and
+<em>w<sub>i</sub></em> is the weight assigned to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{F_i}\left(  \cdot  \right)</annotation></semantics></math>.
+<br>Notice that the function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right)</annotation></semantics></math>
 is a proper <em>cumulative distribution function</em> (<em>cdf</em>)
-which means for a given quantile, <em>x</em>, <span class="math inline">\(G\left( x \right)\)</span> returns the
-<em>cumulative probability</em>: <span class="math display">\[P\left[ {X
-\leqslant x} \right]\]</span></p>
+which means for a given quantile, <em>x</em>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right)</annotation></semantics></math>
+returns the <em>cumulative probability</em>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>X</mi><mo>≤</mo><mi>x</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">P\left[ {X \leqslant x} \right]</annotation></semantics></math></p>
 <p><br>Now, the <em>incorrect</em> approach takes a weighted sum of the
 component <em>inverse cdf’s</em>, that is:</p>
-<span class="math display">\[H\left( p \right) = \sum\limits_{i = 1}^k
-{{w_i}} {F_i}^{ - 1}\left( p \right)\]</span> where <span class="math inline">\({F_i}^{ - 1}\left(  \cdot  \right)\)</span> is the
-<em>i<sup>th</sup></em> <em>inverse cdf</em>. Notice that <span class="math inline">\({G_i}\left(  \cdot  \right)\)</span> is a function
-of a <em>quantile</em> and returns a <strong>probability</strong> while
-<span class="math inline">\({H_i}\left(  \cdot  \right)\)</span> is a
-function of a <em>probability</em> and returns an
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><msub><mi>w</mi><mi>i</mi></msub><msup><msub><mi>F</mi><mi>i</mi></msub><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H\left( p \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}^{ - 1}\left( p \right)</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><msub><mi>F</mi><mi>i</mi></msub><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{F_i}^{ - 1}\left(  \cdot  \right)</annotation></semantics></math>
+is the <em>i<sup>th</sup></em> <em>inverse cdf</em>. Notice that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>G</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{G_i}\left(  \cdot  \right)</annotation></semantics></math>
+is a function of a <em>quantile</em> and returns a
+<strong>probability</strong> while
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{H_i}\left(  \cdot  \right)</annotation></semantics></math>
+is a function of a <em>probability</em> and returns an
 <strong>quantile</strong>.
 <p>
 Now, the <u>correct</u> method of determining the <em>HCx</em> is to
-work with the proper model-averaged <em>cdf</em> <span class="math inline">\(G\left( x \right)\)</span>. This means finding the
-<strong>inverse</strong> function <span class="math inline">\({G^{ -
-1}}\left( p \right)\)</span>. We’ll address how we do this in a moment.
+work with the proper model-averaged <em>cdf</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right)</annotation></semantics></math>.
+This means finding the <strong>inverse</strong> function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>G</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{G^{ - 1}}\left( p \right)</annotation></semantics></math>.
+We’ll address how we do this in a moment.
 </p>
-The reason why <span class="math inline">\(H\left( p \right)\)</span>
+The reason why
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H\left( p \right)</annotation></semantics></math>
 does <strong>not</strong> return the correct result is because of <u>the
-implicit assumption that the inverse of <span class="math inline">\(G\left( x \right)\)</span> is equivalent to <span class="math inline">\(H\left( p \right)\)</span>.</u> This is akin to
-stating the inverse of a <em>sum</em> is equal to the sum of the
-inverses i.e. <span class="math display">\[\sum\limits_{i = 1}^n
-{\frac{1}{{{X_i}}}}  = \frac{1}{{\sum\limits_{i = 1}^n {{X_i}}
-}}{\text{  ???}}\]</span>
-<hr>
+implicit assumption that the inverse of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right)</annotation></semantics></math>
+is equivalent to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H\left( p \right)</annotation></semantics></math>.</u>
+This is akin to stating the inverse of a <em>sum</em> is equal to the
+sum of the inverses i.e.
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfrac><mn>1</mn><msub><mi>X</mi><mi>i</mi></msub></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>X</mi><mi>i</mi></msub></mrow></mfrac><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> ???</mtext></mrow></mrow><annotation encoding="application/x-tex">\sum\limits_{i = 1}^n {\frac{1}{{{X_i}}}}  = \frac{1}{{\sum\limits_{i = 1}^n {{X_i}} }}{\text{  ???}}</annotation></semantics></math><hr>
 <b><u>For the mathematical nerds:</u></b> There are some very special
 cases where the above identity does in fact hold, but for that you need
 to use <strong>complex numbers</strong>.
 <p>
-For example, consider two complex numbers <span class="math display">\[{\text{a = }}\frac{{\left( {5 - i}
-\right)}}{2}{\text{   and     }}b =  - 1.683 - 1.915i\]</span> It can be
-shown that <span class="math display">\[\frac{1}{{a + b}} = \frac{1}{a}
-+ \frac{1}{b} = 0.126 + 0.372i\]</span>
-</p>
+For example, consider two complex numbers
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">a = </mtext><mspace width="0.333em"></mspace></mrow><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>5</mn><mo>−</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></mfrac><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> and </mtext><mspace width="0.333em"></mspace></mrow><mi>b</mi><mo>=</mo><mo>−</mo><mn>1.683</mn><mo>−</mo><mn>1.915</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">{\text{a = }}\frac{{\left( {5 - i} \right)}}{2}{\text{   and     }}b =  - 1.683 - 1.915i</annotation></semantics></math>
+It can be shown that
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mi>a</mi></mfrac><mo>+</mo><mfrac><mn>1</mn><mi>b</mi></mfrac><mo>=</mo><mn>0.126</mn><mo>+</mo><mn>0.372</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">\frac{1}{{a + b}} = \frac{1}{a} + \frac{1}{b} = 0.126 + 0.372i</annotation></semantics></math></p>
 <hr>
 <p>
 Back to the issue at hand, and since we’re not dealing with complex
-numbers, it’s safe to say:<span class="math display">\[{G^{ - 1}}\left(
-p \right) \ne H\left( p \right)\]</span>
-</p>
-<p>If you need a visual demonstration, we can plot <span class="math inline">\(G\left( x \right)\)</span> and the
-<em>inverse</em> of <span class="math inline">\(H\left( p
-\right)\)</span> both as functions of <em>x</em> (a quantile) for our
-two-component lognormal distribution above.</p>
+numbers, it’s safe to
+say:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>G</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≠</mo><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{G^{ - 1}}\left( p \right) \ne H\left( p \right)</annotation></semantics></math></p>
+<p>If you need a visual demonstration, we can plot
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right)</annotation></semantics></math>
+and the <em>inverse</em> of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H\left( p \right)</annotation></semantics></math>
+both as functions of <em>x</em> (a quantile) for our two-component
+lognormal distribution above.</p>
 <p><img src="model-averaging_files/figure-html/unnamed-chunk-10-1.png" width="768"></p>
 Clearly, the two functions are <strong>not</strong> the same and thus
 <em>HCx</em> values derived from each will nearly always be different
@@ -350,25 +349,30 @@ A proper <em>HCx</em> needs to satisfy what David Fox refers to as
 <strong>the inversion principle</strong>.
 <p>
 More formally, the inversion principle states that an <em>HCx</em>
-(denoted as <span class="math inline">\({\varphi _x}\)</span>)
+(denoted as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>φ</mi><mi>x</mi></msub><annotation encoding="application/x-tex">{\varphi _x}</annotation></semantics></math>)
 <u><i>must</i></u> satisfy the following:
 </p>
 <p>
-<span class="math display">\[df\left( {{\varphi _x}} \right) = x\quad
-\quad and\quad \quad qf\left( x \right) = {\varphi _x}\]</span>
-</p>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>φ</mi><mi>x</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>x</mi><mspace width="1.0em"></mspace><mspace width="1.0em"></mspace><mi>a</mi><mi>n</mi><mi>d</mi><mspace width="1.0em"></mspace><mspace width="1.0em"></mspace><mi>q</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>φ</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">df\left( {{\varphi _x}} \right) = x\quad \quad and\quad \quad qf\left( x \right) = {\varphi _x}</annotation></semantics></math></p>
 <p>
-where <span class="math inline">\(df\left(  \cdot  \right)\)</span> is a
-model-averaged <em>distribution function</em> (i.e. SSD) and <span class="math inline">\(qf\left(  \cdot  \right)\)</span> is a
-model-averaged <em>quantile function</em>. For this equality to hold, it
-is necessary that <span class="math inline">\(qf\left( p \right) = d{f^{
-- 1}}\left( p \right)\)</span>.
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">df\left(  \cdot  \right)</annotation></semantics></math>
+is a model-averaged <em>distribution function</em> (i.e. SSD) and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">qf\left(  \cdot  \right)</annotation></semantics></math>
+is a model-averaged <em>quantile function</em>. For this equality to
+hold, it is necessary that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>d</mi><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">qf\left( p \right) = d{f^{ - 1}}\left( p \right)</annotation></semantics></math>.
 </p>
-<br>So, in our example above, the green curve was taken to be <span class="math inline">\(qf\left( x \right)\)</span> and this was used to
-derive <span class="math inline">\({\varphi _x}\)</span> but the
-<em>fraction affected</em> <span class="math inline">\(\left\{ { =
-df\left( {{\varphi _x}} \right)} \right\}\)</span> at <span class="math inline">\({\varphi _x}\)</span> is computed using the red
-curve.
+<br>So, in our example above, the green curve was taken to be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">qf\left( x \right)</annotation></semantics></math>
+and this was used to derive
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>φ</mi><mi>x</mi></msub><annotation encoding="application/x-tex">{\varphi _x}</annotation></semantics></math>
+but the <em>fraction affected</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">{</mo><mo>=</mo><mi>d</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>φ</mi><mi>x</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\left\{ { = df\left( {{\varphi _x}} \right)} \right\}</annotation></semantics></math>
+at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>φ</mi><mi>x</mi></msub><annotation encoding="application/x-tex">{\varphi _x}</annotation></semantics></math>
+is computed using the red curve.
 <p>
 In <code>ssdtools</code> the following is a check that the inversion
 principle holds:
@@ -388,7 +392,7 @@ principle holds:
 below, the <em>HCx</em> is obtained from the MA-SSD (red curve) by
 following the → arrows while the fraction affected is obtained by
 following the ← arrows.</p>
-<p><img src="images/Figure2.jpg" style="width:100.0%" align="center"></p>
+<p><img src="images%2FFigure2.jpg" style="width:100.0%" align="center"></p>
 <p>
 Finally, we’ll briefly discuss how the <em>HCx</em> is computed in
 <code>R</code> using the same method as has been implemented in
@@ -398,30 +402,39 @@ Finally, we’ll briefly discuss how the <em>HCx</em> is computed in
 <h3 id="computing-the-hcx-in-rssdtools">Computing the <em>HCx</em> in
 <code>R</code>/<code>ssdtools</code><a class="anchor" aria-label="anchor" href="#computing-the-hcx-in-rssdtools"></a>
 </h3>
-Recall, our MA-SSD was given as <span class="math display">\[G\left( x
-\right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}\left( x \right)\]</span>
+Recall, our MA-SSD was given as
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><msub><mi>w</mi><mi>i</mi></msub><msub><mi>F</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}\left( x \right)</annotation></semantics></math>
 and an <em>HCx</em> is obtained from the MA-SSD by essentially working
-‘in reverse’ by starting at a value of <span class="math inline">\(x\)</span> on the <strong>vertical</strong> scale
-in the Figure above and following the → arrows and reading off the
-corresponding value on the horizontal scale.
+‘in reverse’ by starting at a value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+on the <strong>vertical</strong> scale in the Figure above and following
+the → arrows and reading off the corresponding value on the horizontal
+scale.
 <p>
 Obviously, we need to be able to ‘codify’ this process in <code>R</code>
 (or any other computer language).<br>Mathematically this is equivalent
-to seeking a solution to the following equation:<span class="math display">\[{x:G\left( x \right) = p}\]</span> or,
-equivalently:<span class="math display">\[x:G\left( x \right) - p =
-0\]</span> for some fraction affected, <span class="math inline">\(p\)</span>.
+to seeking a solution to the following
+equation:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>:</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">{x:G\left( x \right) = p}</annotation></semantics></math>
+or,
+equivalently:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>:</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>p</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x:G\left( x \right) - p = 0</annotation></semantics></math>
+for some fraction affected,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>.
 </p>
 <p>
 </p>
 <p>Finding the solution to this last equation is referred to as
-<em>finding the root(s)</em> of the function <span class="math inline">\(G\left( x \right)\)</span> or, as is made clear in
-the figure below, <em>finding the zero-crossing</em> of the function
-<span class="math inline">\(G\left( x \right)\)</span> for the case
-<span class="math inline">\(p=0.2\)</span>.</p>
-<p><img src="images/uniroot.jpg" style="width:100.0%" align="center"></p>
+<em>finding the root(s)</em> of the function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right)</annotation></semantics></math>
+or, as is made clear in the figure below, <em>finding the
+zero-crossing</em> of the function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right)</annotation></semantics></math>
+for the case
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">p=0.2</annotation></semantics></math>.</p>
+<p><img src="images%2Funiroot.jpg" style="width:100.0%" align="center"></p>
 <br><p>
-In <code>R</code> finding the roots of <span class="math inline">\(x:G\left( x \right) - p = 0\)</span> is achieved
-using the <code><a href="https://rdrr.io/r/stats/uniroot.html" class="external-link">uniroot()</a></code> function.
+In <code>R</code> finding the roots of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>:</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>p</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x:G\left( x \right) - p = 0</annotation></semantics></math>
+is achieved using the <code><a href="https://rdrr.io/r/stats/uniroot.html" class="external-link">uniroot()</a></code> function.
 </p>
 <p>Help on the <code>uniroot</code> function can be found <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/uniroot.html" class="external-link">here</a></p>
 </div>
@@ -450,18 +463,18 @@ Cramer-von Mises</a> test is a good choice and is readily performed
 using the <code><a href="https://rdrr.io/pkg/goftest/man/cvm.test.html" class="external-link">cvm.test()</a></code> function in the <code>goftest</code>
 package in <code>R</code> as follows:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Conc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.73</span>,<span class="fl">0.57</span>,<span class="fl">0.33</span>,<span class="fl">0.28</span>,<span class="fl">0.3</span>,<span class="fl">0.29</span>,<span class="fl">2.15</span>,<span class="fl">0.8</span>,<span class="fl">0.76</span>,<span class="fl">0.54</span>,<span class="fl">0.42</span>,<span class="fl">0.83</span>,<span class="fl">0.21</span>,<span class="fl">0.18</span>,<span class="fl">0.59</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Conc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.73</span>, <span class="fl">0.57</span>, <span class="fl">0.33</span>, <span class="fl">0.28</span>, <span class="fl">0.3</span>, <span class="fl">0.29</span>, <span class="fl">2.15</span>, <span class="fl">0.8</span>, <span class="fl">0.76</span>, <span class="fl">0.54</span>, <span class="fl">0.42</span>, <span class="fl">0.83</span>, <span class="fl">0.21</span>, <span class="fl">0.18</span>, <span class="fl">0.59</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/baddstats/goftest" class="external-link">goftest</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexkowa/EnvStats" class="external-link">EnvStats</a></span><span class="op">)</span>  <span class="co"># this is required for the Pareto cdf (ppareto)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexkowa/EnvStats" class="external-link">EnvStats</a></span><span class="op">)</span> <span class="co"># this is required for the Pareto cdf (ppareto)</span></span>
 <span></span>
 <span><span class="co"># Examine the fit for the gamma distribution (NB: parameters estimated from the data)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/goftest/man/cvm.test.html" class="external-link">cvm.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,null <span class="op">=</span> <span class="st">"pgamma"</span>,shape <span class="op">=</span> <span class="fl">2.0591977</span>,scale <span class="op">=</span> <span class="fl">0.3231032</span>,estimated <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/goftest/man/cvm.test.html" class="external-link">cvm.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>, null <span class="op">=</span> <span class="st">"pgamma"</span>, shape <span class="op">=</span> <span class="fl">2.0591977</span>, scale <span class="op">=</span> <span class="fl">0.3231032</span>, estimated <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Examine the fit for the lognormal distribution (NB: parameters estimated from the data)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/goftest/man/cvm.test.html" class="external-link">cvm.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,null <span class="op">=</span> <span class="st">"plnorm"</span>,meanlog<span class="op">=</span><span class="op">-</span><span class="fl">0.6695120</span>,sd<span class="op">=</span><span class="fl">0.7199573</span>,estimated <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/goftest/man/cvm.test.html" class="external-link">cvm.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>, null <span class="op">=</span> <span class="st">"plnorm"</span>, meanlog <span class="op">=</span> <span class="op">-</span><span class="fl">0.6695120</span>, sd <span class="op">=</span> <span class="fl">0.7199573</span>, estimated <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Examine the fit for the Pareto distribution (NB: parameters estimated from the data)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/goftest/man/cvm.test.html" class="external-link">cvm.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,null <span class="op">=</span> <span class="st">"ppareto"</span>,location <span class="op">=</span> <span class="fl">0.1800000</span>,shape    <span class="op">=</span> <span class="fl">0.9566756</span>,estimated <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/goftest/man/cvm.test.html" class="external-link">cvm.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>, null <span class="op">=</span> <span class="st">"ppareto"</span>, location <span class="op">=</span> <span class="fl">0.1800000</span>, shape <span class="op">=</span> <span class="fl">0.9566756</span>, estimated <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>    Cramer-von Mises test of goodness-of-fit
     Braun's adjustment using 4 groups
     Null hypothesis: Gamma distribution
@@ -490,16 +503,18 @@ omega2max = 0.32845, p-value = 0.3719
 
 data:  dat$Conc
 omega2max = 0.31391, p-value = 0.4015</code></pre>
-<p>From this output and using a level of significance of <span class="math inline">\(p = 0.05\)</span>, we see that none of the
-distributions is implausible. However, if <em>forced</em> to choose just
-one distribution, we would choose the <em>Pareto</em> distribution
-(smaller values of the <code>omega2max</code> statistic are better).
-However, this does not mean that the gamma and lognormal distributions
-are of no value in describing the data. We can see from the plot below,
-that in fact both the gamma and lognormal distributions do a reasonable
-job over the range of toxicity values. The use of the Pareto may be a
-questionable choice given it is truncated at 0.18 (which is the minimum
-value of our toxicity data). <br></p>
+<p>From this output and using a level of significance of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">p = 0.05</annotation></semantics></math>,
+we see that none of the distributions is implausible. However, if
+<em>forced</em> to choose just one distribution, we would choose the
+<em>Pareto</em> distribution (smaller values of the
+<code>omega2max</code> statistic are better). However, this does not
+mean that the gamma and lognormal distributions are of no value in
+describing the data. We can see from the plot below, that in fact both
+the gamma and lognormal distributions do a reasonable job over the range
+of toxicity values. The use of the Pareto may be a questionable choice
+given it is truncated at 0.18 (which is the minimum value of our
+toxicity data). <br></p>
 <div class="figure">
 <img src="model-averaging_files/figure-html/unnamed-chunk-13-1.png" alt="Emprirical cdf (black); lognormal (green); gamma (blue); and Pareeto (red)" width="672"><p class="caption">
 Emprirical cdf (black); lognormal (green); gamma (blue); and Pareeto
@@ -516,19 +531,22 @@ Like all tests of statistical significance, a <em>p-value</em> is
 computed from the value of the relevant <em>test statistic</em> - in
 this case, the value of the <code>omega2max</code> test statistic. For
 this particular test, it’s a case of the <u>smaller</u> the better. From
-the output above we see that the <code>omega2max</code> values are <span class="math inline">\(0.344\)</span> for the gamma distribution, <span class="math inline">\(0.328\)</span> for the lognormal distribution, and
-<span class="math inline">\(0.314\)</span> for the Pareto distribution.
+the output above we see that the <code>omega2max</code> values are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.344</mn><annotation encoding="application/x-tex">0.344</annotation></semantics></math>
+for the gamma distribution,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.328</mn><annotation encoding="application/x-tex">0.328</annotation></semantics></math>
+for the lognormal distribution, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.314</mn><annotation encoding="application/x-tex">0.314</annotation></semantics></math>
+for the Pareto distribution.
 </p>
 <p>
-We might somewhat naively compute the relative weights as:<br><span class="math inline">\({w_1} = \frac{{{{0.344}^{ - 1}}}}{{\left(
-{{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} =
-0.318\)</span>         <span class="math inline">\({w_2} =
-\frac{{{{0.328}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} +
-{{0.314}^{ - 1}}} \right)}} = 0.333\)</span>     and <span class="math inline">\({w_3} = \frac{{{{0.314}^{ - 1}}}}{{\left(
-{{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} =
-0.349\)</span> <br>    (we use <em>reciprocals</em> since smaller values
-of <code>omega2max</code> represent better fits). As will be seen
-shortly - these are incorrect.
+We might somewhat naively compute the relative weights as:<br><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mn>1</mn></msub><mo>=</mo><mfrac><msup><mn>0.344</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mn>0.344</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mn>0.328</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mn>0.314</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow></mfrac><mo>=</mo><mn>0.318</mn></mrow><annotation encoding="application/x-tex">{w_1} = \frac{{{{0.344}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.318</annotation></semantics></math>
+       
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mn>2</mn></msub><mo>=</mo><mfrac><msup><mn>0.328</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mn>0.344</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mn>0.328</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mn>0.314</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow></mfrac><mo>=</mo><mn>0.333</mn></mrow><annotation encoding="application/x-tex">{w_2} = \frac{{{{0.328}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.333</annotation></semantics></math>
+    and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mn>3</mn></msub><mo>=</mo><mfrac><msup><mn>0.314</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mn>0.344</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mn>0.328</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mn>0.314</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow></mfrac><mo>=</mo><mn>0.349</mn></mrow><annotation encoding="application/x-tex">{w_3} = \frac{{{{0.314}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.349</annotation></semantics></math><br>    (we use <em>reciprocals</em> since smaller values of
+<code>omega2max</code> represent better fits). As will be seen shortly -
+these are incorrect.
 </p>
 <p>
 However, being based on a simplistic measure of discrepancy between the
@@ -543,10 +561,15 @@ Interested readers should consult <span class="citation">(Burnham and
 Anderson 2002)</span>. A commonly used metric to determine the
 model-average weights is the <strong>Akaike Information
 Criterion</strong> or <a href="https://en.wikipedia.org/wiki/Akaike_information_criterion" class="external-link">AIC</a>.
-The formula for the <span class="math inline">\(AIC\)</span> is: <span class="math display">\[AIC = 2k - 2\ln \left( \ell  \right)\]</span></p>
-where <span class="math inline">\(k\)</span> is the number of model
-parameters and <span class="math inline">\(\ell\)</span> is the
-<em>likelihood</em> for that model. Again, a full discussion of
+The formula for the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">AIC</annotation></semantics></math>
+is:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><mi>C</mi><mo>=</mo><mn>2</mn><mi>k</mi><mo>−</mo><mn>2</mn><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>ℓ</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">AIC = 2k - 2\ln \left( \ell  \right)</annotation></semantics></math></p>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is the number of model parameters and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>ℓ</mo><annotation encoding="application/x-tex">\ell</annotation></semantics></math>
+is the <em>likelihood</em> for that model. Again, a full discussion of
 statistical likelihood is beyond the present scope. A relatively gentle
 introduction can be found <a href="https://ep-news.web.cern.ch/what-likelihood-function-and-how-it-used-particle-physics" class="external-link">here</a>.
 <p>
@@ -554,11 +577,11 @@ introduction can be found <a href="https://ep-news.web.cern.ch/what-likelihood-f
 <p>The likelihood for our three distributions can be computed in
 <code>R</code> as follows:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,shape <span class="op">=</span> <span class="fl">2.0591977</span>,scale <span class="op">=</span> <span class="fl">0.3231032</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>, shape <span class="op">=</span> <span class="fl">2.0591977</span>, scale <span class="op">=</span> <span class="fl">0.3231032</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -7.020597</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>, meanlog <span class="op">=</span> <span class="op">-</span><span class="fl">0.6695120</span>,sdlog   <span class="op">=</span>  <span class="fl">0.7199573</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>, meanlog <span class="op">=</span> <span class="op">-</span><span class="fl">0.6695120</span>, sdlog <span class="op">=</span> <span class="fl">0.7199573</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -5.812947</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/Pareto.html" class="external-link">dpareto</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>,location <span class="op">=</span> <span class="fl">0.1800000</span>, shape<span class="op">=</span><span class="fl">0.9566756</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/Pareto.html" class="external-link">dpareto</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Conc</span>, location <span class="op">=</span> <span class="fl">0.1800000</span>, shape <span class="op">=</span> <span class="fl">0.9566756</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -5.621683</span></span></code></pre></div>
 <p>From which the <em>AIC</em> values readily follow:</p>
 <pre><code><span><span class="co">#&gt; AIC for gamma distribution = 18.04119</span></span>
@@ -578,14 +601,22 @@ fits (best to worst) as: <em>Pareto &gt; lognormal &gt; gamma</em></p>
 <p>We will simply provide a formula for computing the model weights from
 the <code>AIC</code> values. More detailed information can be found <a href="https://training.visionanalytix.com/ssd-model-averaging/" class="external-link">here</a>.</p>
 <p>The <em>AIC</em> for the <em>i<sup>th</sup></em> distribution fitted
-to the data is <span class="math display">\[AI{C_i} = 2{k_i} - 2\ln
-\left( {{L_i}} \right)  \]</span> where <span class="math inline">\({L_i}\)</span> is the <em>i<sup>th</sup>
-likelihood</em> and <span class="math inline">\({k_i}\)</span> is the
-<em>number of parameters</em> for the <em>i<sup>th</sup>
-distribution</em>. Next, we form the differences:<span class="math display">\[{\Delta _i} = AI{C_i} - AI{C_0}\]</span> where
-<span class="math inline">\(AI{C_0}\)</span> is the <em>AIC</em> for the
-<strong>best-fitting</strong> model (i.e.<span class="math inline">\(AI{C_0} = \mathop {\min }\limits_i \left\{
-{AI{C_i}} \right\}\)</span> ). The <em>model-averaged weights</em> <span class="math inline">\({w_i}\)</span> are then computed as:</p>
+to the data is
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo>=</mo><mn>2</mn><msub><mi>k</mi><mi>i</mi></msub><mo>−</mo><mn>2</mn><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>L</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">AI{C_i} = 2{k_i} - 2\ln \left( {{L_i}} \right)  </annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{L_i}</annotation></semantics></math>
+is the <em>i<sup>th</sup> likelihood</em> and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{k_i}</annotation></semantics></math>
+is the <em>number of parameters</em> for the <em>i<sup>th</sup>
+distribution</em>. Next, we form the
+differences:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>i</mi></msub><mo>=</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo>−</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">{\Delta _i} = AI{C_i} - AI{C_0}</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">AI{C_0}</annotation></semantics></math>
+is the <em>AIC</em> for the <strong>best-fitting</strong> model
+(i.e.<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mn>0</mn></msub><mo>=</mo><munder><mo>min</mo><mi>i</mi></munder><mrow><mo stretchy="true" form="prefix">{</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow><annotation encoding="application/x-tex">AI{C_0} = \mathop {\min }\limits_i \left\{ {AI{C_i}} \right\}</annotation></semantics></math>
+). The <em>model-averaged weights</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{w_i}</annotation></semantics></math>
+are then computed as:</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>AIC Model averaging weights</u></b>\[{{w}_{i}}=\frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}\]
 </div>
@@ -595,24 +626,27 @@ distribution</em>. Next, we form the differences:<span class="math display">\[{\
 distributions used in the previous example can be computed ‘manually’ in
 <code>R</code> as follows:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.73</span>,<span class="fl">0.57</span>,<span class="fl">0.33</span>,<span class="fl">0.28</span>,<span class="fl">0.3</span>,<span class="fl">0.29</span>,<span class="fl">2.15</span>,<span class="fl">0.8</span>,<span class="fl">0.76</span>,<span class="fl">0.54</span>,<span class="fl">0.42</span>,<span class="fl">0.83</span>,<span class="fl">0.21</span>,<span class="fl">0.18</span>,<span class="fl">0.59</span><span class="op">)</span></span>
-<span><span class="va">aic</span><span class="op">&lt;-</span><span class="cn">NULL</span></span>
-<span><span class="va">k</span><span class="op">&lt;-</span><span class="fl">2</span>  <span class="co"># number of parameters for each of the distributions</span></span>
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.73</span>, <span class="fl">0.57</span>, <span class="fl">0.33</span>, <span class="fl">0.28</span>, <span class="fl">0.3</span>, <span class="fl">0.29</span>, <span class="fl">2.15</span>, <span class="fl">0.8</span>, <span class="fl">0.76</span>, <span class="fl">0.54</span>, <span class="fl">0.42</span>, <span class="fl">0.83</span>, <span class="fl">0.21</span>, <span class="fl">0.18</span>, <span class="fl">0.59</span><span class="op">)</span></span>
+<span><span class="va">aic</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># number of parameters for each of the distributions</span></span>
 <span></span>
 <span></span>
-<span><span class="va">aic</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">&lt;-</span><span class="fl">2</span><span class="op">*</span><span class="va">k</span><span class="op">-</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">dat</span>,shape <span class="op">=</span> <span class="fl">2.0591977</span>,scale <span class="op">=</span> <span class="fl">0.3231032</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># Gamma distribution</span></span>
+<span><span class="va">aic</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">k</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">dgamma</a></span><span class="op">(</span><span class="va">dat</span>, shape <span class="op">=</span> <span class="fl">2.0591977</span>, scale <span class="op">=</span> <span class="fl">0.3231032</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># Gamma distribution</span></span>
 <span></span>
-<span><span class="va">aic</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">&lt;-</span><span class="fl">2</span><span class="op">*</span><span class="va">k</span><span class="op">-</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="va">dat</span>, meanlog <span class="op">=</span> <span class="op">-</span><span class="fl">0.6695120</span>,sdlog   <span class="op">=</span>  <span class="fl">0.7199573</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="co"># lognormal distribution</span></span>
+<span><span class="va">aic</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">k</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="va">dat</span>, meanlog <span class="op">=</span> <span class="op">-</span><span class="fl">0.6695120</span>, sdlog <span class="op">=</span> <span class="fl">0.7199573</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># lognormal distribution</span></span>
 <span></span>
-<span><span class="va">aic</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">&lt;-</span><span class="fl">2</span><span class="op">*</span><span class="va">k</span><span class="op">-</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/Pareto.html" class="external-link">dpareto</a></span><span class="op">(</span><span class="va">dat</span>,location <span class="op">=</span> <span class="fl">0.1800000</span>, shape<span class="op">=</span><span class="fl">0.9566756</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># Pareto distribution</span></span>
+<span><span class="va">aic</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">k</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu">EnvStats</span><span class="fu">::</span><span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/Pareto.html" class="external-link">dpareto</a></span><span class="op">(</span><span class="va">dat</span>, location <span class="op">=</span> <span class="fl">0.1800000</span>, shape <span class="op">=</span> <span class="fl">0.9566756</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># Pareto distribution</span></span>
 <span></span>
-<span><span class="va">delta</span><span class="op">&lt;-</span><span class="va">aic</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">aic</span><span class="op">)</span>  <span class="co">#  compute the delta values</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="va">aic</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">aic</span><span class="op">)</span> <span class="co">#  compute the delta values</span></span>
 <span></span>
-<span><span class="va">aic.w</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span><span class="op">*</span><span class="va">delta</span><span class="op">)</span>; <span class="va">aic.w</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">aic.w</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">aic.w</span><span class="op">)</span>,<span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">aic.w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> <span class="va">delta</span><span class="op">)</span></span>
+<span><span class="va">aic.w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">aic.w</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">aic.w</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">" AIC weight for gamma distribution ="</span>,<span class="va">aic.w</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="st">"\n"</span>,</span>
-<span>    <span class="st">"AIC weight for lognormal distribution ="</span>,<span class="va">aic.w</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,<span class="st">"\n"</span>,</span>
-<span>    <span class="st">"AIC weight for pareto distribution ="</span>,<span class="va">aic.w</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>,<span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
+<span>  <span class="st">" AIC weight for gamma distribution ="</span>, <span class="va">aic.w</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"\n"</span>,</span>
+<span>  <span class="st">"AIC weight for lognormal distribution ="</span>, <span class="va">aic.w</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="st">"\n"</span>,</span>
+<span>  <span class="st">"AIC weight for pareto distribution ="</span>, <span class="va">aic.w</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, <span class="st">"\n"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <pre><code> AIC weight for gamma distribution = 0.1191 
  AIC weight for lognormal distribution = 0.3985 
  AIC weight for pareto distribution = 0.4824 </code></pre>
@@ -631,22 +665,30 @@ a very good fit to the empirical data.</p>
 parameters<a class="anchor" aria-label="anchor" href="#correcting-for-distributions-having-differing-numbers-of-parameters"></a>
 </h3>
 <p>In deriving the AIC, Akaike had to make certain, strong assumptions.
-In addition, the bias factor (the <span class="math inline">\(2k\)</span> term) was derived from theoretical
-considerations (such as mathematical <em>expectation</em>) that relate
-to <em>infinite</em> sample sizes. For small sample sizes, the AIC is
-likely to select models having too many parameters (i.e models which
-<em>over-fit</em>) In 1978, Sugiura proposed a modification to the AIC
-to address this problem, although it too relied on a number of
-assumptions. This ‘correction’ to the AIC for small samples (referred to
-as <span class="math inline">\(AI{{C}_{c}}\)</span>) is:</p>
+In addition, the bias factor (the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>k</mi></mrow><annotation encoding="application/x-tex">2k</annotation></semantics></math>
+term) was derived from theoretical considerations (such as mathematical
+<em>expectation</em>) that relate to <em>infinite</em> sample sizes. For
+small sample sizes, the AIC is likely to select models having too many
+parameters (i.e models which <em>over-fit</em>) In 1978, Sugiura
+proposed a modification to the AIC to address this problem, although it
+too relied on a number of assumptions. This ‘correction’ to the AIC for
+small samples (referred to as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}</annotation></semantics></math>)
+is:</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>Corrected Akaike Information Criterion (AICc)</u></b>\[AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
 </div>
-<p><br>It is clear from the formula for <span class="math inline">\(AI{{C}_{c}}\)</span> that for   <span class="math inline">\(n\gg k\)</span>,    <span class="math inline">\(AI{{C}_{c}}\simeq AIC\)</span>. The issue of
-sample size is ubiquitous in statistics, but even more so in
-ecotoxicology where logistical and practical limitations invariably mean
-we are dealing with (pathologically) small sample sizes. There are no
-hard and fast rules as to what constitutes an <em>appropriate</em>
+<p><br>It is clear from the formula for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}</annotation></semantics></math>
+that for  
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≫</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">n\gg k</annotation></semantics></math>,
+  
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub><mo>≃</mo><mi>A</mi><mi>I</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}\simeq AIC</annotation></semantics></math>.
+The issue of sample size is ubiquitous in statistics, but even more so
+in ecotoxicology where logistical and practical limitations invariably
+mean we are dealing with (pathologically) small sample sizes. There are
+no hard and fast rules as to what constitutes an <em>appropriate</em>
 sample size for SSD modelling. However, Professor David Fox’s personal
 rule of thumb which works quite well is:</p>
 <div style="text-align: center;" font-size: color: class="box">
@@ -731,7 +773,7 @@ License</a></p>
 <p>The code is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0" class="external-link">Apache License
 2.0</a></p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -742,15 +784,15 @@ License</a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

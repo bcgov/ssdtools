@@ -1,13 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   additional-technical-details: additional-technical-details.html
-  confidence-intervals: confidence-intervals.html
+  articles/confidence-intervals: confidence-intervals.html
   customising-plots: customising-plots.html
   distributions: distributions.html
   faqs: faqs.html
   model-averaging: model-averaging.html
   ssdtools: ssdtools.html
-last_built: 2024-05-16T03:27Z
-
+last_built: 2024-09-25T18:23Z

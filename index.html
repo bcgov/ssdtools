@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al.(2001) &lt;isbn:9781566705783&gt;. The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-logistic, log-normal and log-normal log-normal mixture. Multiple distributions can be averaged using Akaike Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.">
 <title>Species Sensitivity Distributions • ssdtools</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -15,61 +14,44 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Species Sensitivity Distributions">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Species Sensitivity Distributions">
+<meta name="description" content="Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al.(2001) &lt;isbn:9781566705783&gt;. The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-logistic, log-normal and log-normal log-normal mixture. Multiple distributions can be averaged using Akaike Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.">
 <meta property="og:description" content="Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al.(2001) &lt;isbn:9781566705783&gt;. The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-logistic, log-normal and log-normal log-normal mixture. Multiple distributions can be averaged using Akaike Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.">
 <meta property="og:image" content="/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9015</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="articles/ssdtools.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="articles/index.html">Articles</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="articles/ssdtools.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="articles/index.html">Articles</a></li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/bcgov/ssdtools/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/bcgov/ssdtools/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-home">
 <div class="row">
@@ -85,19 +67,22 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>To install the latest version from <a href="https://CRAN.R-project.org/package=ssdtools" class="external-link">CRAN</a></p>
+<p>To install the latest release version from <a href="https://CRAN.R-project.org/package=ssdtools" class="external-link">CRAN</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ssdtools"</span><span class="op">)</span></span></code></pre></div>
-<p>To install the latest development version from <a href="https://github.com/bcgov/ssdtools" class="external-link">GitHub</a></p>
+<p>To install the latest development version from <a href="https://bcgov.r-universe.dev/ssdtools" class="external-link">r-universe</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"bcgov/ssdtools"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ssdtools"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://bcgov.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>or from <a href="https://github.com/bcgov/ssdtools" class="external-link">GitHub</a></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"bcgov/ssdtools"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>The dependency <a href="https://cran.r-project.org/web/packages/ssddata/index.html" class="external-link"><code>ssddata</code></a> provides a example data sets for several chemicals including Boron.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>The dependency <a href="https://cran.r-project.org/package=ssddata" class="external-link"><code>ssddata</code></a> provides a example data sets for several chemicals including Boron.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
 <span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span></span>
 <span><span class="co">#&gt; # A tibble: 28 × 5</span></span>
@@ -115,14 +100,14 @@
 <span><span class="co">#&gt; 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L </span></span>
 <span><span class="co">#&gt; # ℹ 18 more rows</span></span></code></pre></div>
 <p>The six default distributions are fit using <code><a href="reference/ssd_fit_dists.html">ssd_fit_dists()</a></code></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></code></pre></div>
 <p>and can be quickly plotted using <code>autoplot</code></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png"><!-- --></p>
-<p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+<p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
 <span><span class="co">#&gt;   dist           ad     ks    cvm   aic  aicc   bic delta weight</span></span>
@@ -134,27 +119,27 @@
 <span><span class="co">#&gt; 5 lnorm_lnorm 0.320 0.116  0.0414  240.  243.  247. 4.98   0.03 </span></span>
 <span><span class="co">#&gt; 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357</span></span></code></pre></div>
 <p>and the model-averaged 5% hazard concentration estimated by bootstrapping using <code>ssd_hc</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
 <span><span class="va">hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">hc5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 11</span></span>
 <span><span class="co">#&gt;   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;I&lt;lis&gt;</span></span>
-<span><span class="co">#&gt; 1 average       0.05  1.26 0.781 0.407  3.29     1 parametr…  1000 0.999 &lt;dbl&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 average       0.05  1.26 0.782 0.407  3.29     1 parametr…  1000     1 &lt;dbl&gt;</span></span></code></pre></div>
 <p>To bootstrap in parallel set <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code>. For example:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">(</span>workers <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Model-averaged predictions complete with confidence intervals can also be estimated by parametric bootstrapping using the <code>stats</code> generic <code>predict</code>. To perform bootstrapping for each distribution in parallel register the future backend and then select the evaluation strategy.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">doFuture</span><span class="fu">::</span><span class="fu"><a href="https://doFuture.futureverse.org/reference/registerDoFuture.html" class="external-link">registerDoFuture</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="fu">future</span><span class="fu">::</span><span class="va"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
 <span><span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The predictions can be plotted together with the original data using <code>ssd_plot</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -165,7 +150,7 @@
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3000</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png"><!-- --></p>
+<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -177,7 +162,7 @@
 </h2>
 <p>Get started with ssdtools at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="external-link uri">https://bcgov.github.io/ssdtools/articles/ssdtools.html</a>.</p>
 <p>A shiny app to allow non-R users to interface with ssdtools is available at <a href="https://github.com/bcgov/shinyssdtools" class="external-link uri">https://github.com/bcgov/shinyssdtools</a>.</p>
-<p>For the latest changes visit <a href="https://bcgov.github.io/ssdtools/news" class="external-link">NEWS</a>.</p>
+<p>For the latest changes visit <a href="https://bcgov.github.io/ssdtools/news/" class="external-link">NEWS</a>.</p>
 <p>The citation for the shiny app:</p>
 <p><em>Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species Sensitivity Distributions (SSDs). JOSS 6(57): 2848. <a href="https://joss.theoj.org/papers/10.21105/joss.02848" class="external-link uri">https://joss.theoj.org/papers/10.21105/joss.02848</a>.</em></p>
 <p>The ssdtools package was developed as a result of earlier drafts of:</p>
@@ -204,7 +189,9 @@
 <div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
 </h2>
-<p>Copyright 2024 Province of British Columbia, Environment and Climate Change Canada, and Australian Government Department of Climate Change, Energy, the Environment and Water</p>
+<p>Copyright 2018-2024 Province of British Columbia<br>
+Copyright 2021 Environment and Climate Change Canada<br>
+Copyright 2023-2024 Australian Government Department of Climate Change, Energy, the Environment and Water</p>
 <p>The documentation is released under the <a href="https://creativecommons.org/licenses/by/4.0/" class="external-link">CC BY 4.0 License</a></p>
 <p>The code is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0" class="external-link">Apache License 2.0</a></p>
 </div>
@@ -266,9 +253,9 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-Stable-97ca00" alt="Lifecycle:Stable"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/github/bcgov/ssdtools" class="external-link"><img src="https://codecov.io/github/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp" alt="codecov"></a></li>
+<li><a href="https://app.codecov.io/gh/bcgov/ssdtools" class="external-link"><img src="https://codecov.io/gh/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp" alt="Codecov test coverage"></a></li>
 <li><a href="https://cran.r-project.org/package=ssdtools" class="external-link"><img src="https://www.r-pkg.org/badges/version/ssdtools" alt="CRAN status"></a></li>
 </ul>
 </div>
@@ -282,15 +269,15 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
