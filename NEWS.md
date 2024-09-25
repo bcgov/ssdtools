@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9017
+# ssdtools 1.0.6.9018
 
 ## Additions
 
@@ -11,16 +11,20 @@
   - `samples` argument to include bootstrap samples as list of numeric vector(s).
   - `save_to` argument to specify a directory in which to save the bootstrap datasets as csv files and parameter estimates as rds files. The files are named `data_000000001_xx.csv` and `estimates_000000001_xx.rds` etc where `xx` is the distribution. The parent data set and estimates are named `boot_000000000_xx.csv` and `estimates_000000000_xx.csv`.
 - Added `ssd_hp_bcanz()` and `ssd_hp.fitburrlioz()` function to get hazard proportions.
+- Added `ssd_label_comma()` for x-axis labels.
 - Added `trans = "log10"` and `add_x = 0` arguments to `ssd_plot()` and `ssd_plot_data()`.
 - Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
 - Added `ssd_exx()` functions to get default parameter estimates for distributions.
 - Added `ssd_censor_data()` to censor data. 
 - Added David Fox and Rebecca Fisher as co-authors.
 - Added `npars` argument to `ssd_dists_bcanz()`.
+- Added `big.mark = ","` for x-axis labels and `suffix = "%"` to y-axis labels to plotting functions.
 
 ## Modifications
 
+- Only non-parametric bootstrap for censored data.
 - Changed `at_boundary_ok = TRUE` to ensure `lnorm_lnorm` mixture distribution included.
+- Changed `computable = TRUE` to as not required for bootstrapping.
 - Changed to `min_pboot = 0.95` for all functions.
 - Changed `min_pmix = 0` to `min_pmix = ssd_min_pmix(nrow(data))` to by default 
 give set min_pmix to be `0.1` or `3/nrow(data)` if greater to improve convergence of mixture models.
@@ -45,11 +49,11 @@ give set min_pmix to be `0.1` or `3/nrow(data)` if greater to improve convergenc
  
 ## Deprecation
 
+- Soft-deprecated `comma_signif()`.
 - Soft-deprecated argument `percent = 5` for `proportion = 0.05` for `ssd_hc()` and `predict()`.
-- `is_censored()`, `ssd_plot_cf()` and `comma_signif(...)` now warn deprecated unconditionally.
-- `plot.fitdists()` now defunct.
+- `is_censored()`, `plot.fitdists()`, `ssd_plot_cf()` `geom_ssd()`, `stat_ssd()`, `xgompertz()`, `xlgumbel`, `ssd_hc_burrlioz()` now defunct.
 - Deprecated `ssd_wqg_bc()` and `ssd_wqg_burrlioz()`. (#75).
-- Removed defunct `ssd_cfplot()`
+- Deprecated `ssd_fit_bcanz()` and `ssd_hp_bcanz()`.
 - Removed `ccme_data` and `ccme_boron` data set.
 - Removed `pearson1000` data set (now in `ssdtests` data).
 
