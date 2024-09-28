@@ -22,8 +22,9 @@ knitr::opts_chunk$set(
 )
 ```
 
+## How can I...
 
-## How can I plot the model averaged fit with individual fits?
+### ... plot the model averaged fit with individual fits?
 
 ```{r, fig.width = 6, fig.height = 4}
 library(ssdtools)
@@ -32,7 +33,7 @@ dist <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_plot_cdf(dist, average = NA)
 ```
 
-## How do I fit distributions to multiple groups such taxa and/or chemicals?
+### ... fit distributions to multiple groups such taxa and/or chemicals?
 
 An elegant approach using some tidyverse packages is demonstrated below.
 
@@ -58,8 +59,7 @@ ssd_plot(ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
   facet_wrap(~Group)
 ```
 
-## How do I allow mathematical expressions in the xlabel when using `ssd_plot()`?
-
+### ... include mathematical expressions in the xlabel when using `ssd_plot()`?
 
 ```{r, fig.width = 6, fig.height = 4}
 library(ggplot2)
@@ -68,6 +68,25 @@ library(latex2exp)
 ssd_plot(ssddata::ccme_boron, ssdtools::boron_pred, label = "Species", shape = "Group") +
   scale_x_continuous(TeX("Boron $(\\mu g$/L)$"), breaks = c(1, 10, 100, 1000, 10000))
 ```
+
+<!-- ### ... generate bootstrap samples in parallel? -->
+
+<!-- Set `future::plan()`.  -->
+<!-- For example: -->
+<!-- ```{r, eval=FALSE} -->
+<!-- future::multisession(workers = 2) -->
+<!-- hc5 <- ssd_hc(fits, ci = TRUE) -->
+<!-- ``` -->
+
+<!-- To perform bootstrapping for each distribution in parallel register the future backend -->
+<!-- and then select the evaluation strategy. -->
+<!-- ```{r, eval=FALSE} -->
+<!-- doFuture::registerDoFuture() -->
+<!-- future::plan(future::multisession) -->
+
+<!-- set.seed(99) -->
+<!-- boron_pred <- predict(fits, ci = TRUE) -->
+<!-- ``` -->
 
 <div id="refs"></div>
 
