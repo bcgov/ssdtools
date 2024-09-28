@@ -23,7 +23,7 @@ Comma and Significance Formatter
 }
 \examples{
 \dontrun{
- comma_signif(c(0.1, 1, 10, 1000, 10000))
+comma_signif(c(0.1, 1, 10, 1000, 10000))
 }
 }
 \seealso{

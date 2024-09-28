@@ -16,7 +16,7 @@
 #'
 #' @inheritParams params
 #'
-#' @return A "labelling" function that takes a vector x and 
+#' @return A "labelling" function that takes a vector x and
 #' returns a character vector of `length(x)` giving a label for each input value.
 #' @seealso [scales::label_comma()]
 #' @export
@@ -29,7 +29,7 @@ ssd_label_comma <- function(digits = 3, ..., big.mark = ",") {
   chk_number(digits)
   chk_string(big.mark)
   chk_unused(...)
-  
+
   function(x) {
     x <- signif(x, digits = digits)
     y <- as.character(x)

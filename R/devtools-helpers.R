@@ -18,6 +18,6 @@ release_questions <- function() {
     "Have you confirmed Creative Commons license for all non-code files?",
     "Have you run `data-raw/data-raw.R`?",
     "Have you tested using `ssdtests` package?",
-    "Have you updated `small-sample-bias.pdf` using `ssdtests` package?"  
+    "Have you updated `small-sample-bias.pdf` using `ssdtests` package?"
   )
 }

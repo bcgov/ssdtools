@@ -45,7 +45,7 @@ test_that("ssd_plot_cdf language", {
   data <- ssddata::ccme_boron
   data$Conc <- data$Conc * 100
   fits <- ssd_fit_dists(data)
-  
+
   expect_snapshot_plot(ssd_plot_cdf(fits, suffix = "="), "suffix")
   expect_snapshot_plot(ssd_plot_cdf(fits, big.mark = "_"), "fits_bigmark")
 })

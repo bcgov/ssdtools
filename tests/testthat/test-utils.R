@@ -22,7 +22,7 @@ test_that("ssd_ecd_data", {
 
 test_that("comma_signif", {
   withr::local_options(lifecycle_verbosity = "quiet")
-  
+
   expect_identical(
     comma_signif(c(0.0191, 1, NA, 177, 1111)),
     c("0.0191", "1", NA, "177", "1,110")

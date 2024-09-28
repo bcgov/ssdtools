@@ -25,12 +25,12 @@
 ssd_censor_data <- function(data, left = "Conc", ..., right = left, censoring = c(0, Inf)) {
   .chk_data(data, left, right)
   chk_unused(...)
-  
-  if(left == right) {
+
+  if (left == right) {
     right <- "right"
     data$right <- data[[left]]
   }
-  
+
   processed <- process_data(data, left, right)
   censored <- censor_data(processed, censoring)
   data[[left]] <- censored$left
@@ -62,7 +62,7 @@ censor_data <- function(data, censoring) {
     return(data)
   }
   chk_not_any_na(censoring)
-  
+
   data$right[data$left < censoring[1]] <- censoring[1]
   data$left[data$left < censoring[1]] <- 0
   data$left[data$right > censoring[2]] <- censoring[2]
@@ -72,7 +72,7 @@ censor_data <- function(data, censoring) {
 
 censoring <- function(data) {
   censoring <- c(0, Inf)
-  
+
   censored <- data[data$left != data$right, ]
   data <- data[data$left == data$right, ]
 
@@ -90,8 +90,8 @@ censoring <- function(data) {
   if (censoring[1] >= censoring[2]) {
     return(c(NA_real_, NA_real_))
   }
-  
-  if(any(data$right < censoring[1]) || any(data$left > censoring[2])) {
+
+  if (any(data$right < censoring[1]) || any(data$left > censoring[2])) {
     return(c(NA_real_, NA_real_))
   }
 

@@ -44,7 +44,8 @@ use_data(dist_data, overwrite = TRUE)
 
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 
-withr::with_seed(99,
+withr::with_seed(
+  99,
   boron_pred <- predict(fits, ci = TRUE, ci_method = "weighted_samples")
 )
 

@@ -276,20 +276,24 @@ test_that("ssd_hc works with fully left censored data", {
   data$Conc <- 0
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   set.seed(10)
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic"),
-                 "^Parametric CIs cannot be calculated for censored data[.]$")
+  expect_warning(
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic"),
+    "^Parametric CIs cannot be calculated for censored data[.]$"
+  )
   expect_snapshot_data(hc, "fullyleft")
 })
 
 test_that("ssd_hc warns with partially left censored data", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
-  data$Conc[c(3,6,8)] <- NA
-  
+  data$Conc[c(3, 6, 8)] <- NA
+
   set.seed(100)
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
-                 "Parametric CIs cannot be calculated for censored data\\.")
+  expect_warning(
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
+    "Parametric CIs cannot be calculated for censored data\\."
+  )
   expect_snapshot_data(hc, "partialeft")
 })
 
@@ -298,19 +302,21 @@ test_that("ssd_hc works with fully left censored data", {
   data$right <- data$Conc
   data$right[data$Conc < 4] <- 4
   data$Conc[data$Conc < 4] <- NA
-  
+
   set.seed(100)
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
-          "^Parametric CIs cannot be calculated for censored data\\.$")
+  expect_warning(
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
+    "^Parametric CIs cannot be calculated for censored data\\.$"
+  )
   expect_snapshot_data(hc, "partialeftfull")
 })
 
 test_that("ssd_hc works with partially left censored data non-parametric", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
-  data$Conc[c(3,6,8)] <- NA
-  
+  data$Conc[c(3, 6, 8)] <- NA
+
   set.seed(100)
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
   hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, parametric = FALSE)

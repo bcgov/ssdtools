@@ -34,7 +34,7 @@ test_that("ssd_censor use existing right and left", {
 test_that("ssd_censor no rows", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
-  expect_identical(ssd_censor_data(ssddata::ccme_boron[0,]), data[0,])
+  expect_identical(ssd_censor_data(ssddata::ccme_boron[0, ]), data[0, ])
 })
 
 test_that("ssd_censor c(2.5, Inf)", {

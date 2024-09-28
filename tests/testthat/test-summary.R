@@ -28,8 +28,8 @@ test_that("summary fitdists", {
 test_that("summary partially left censored", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
-  data$Conc[c(3,6,8)] <- NA
-  
+  data$Conc[c(3, 6, 8)] <- NA
+
   fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
@@ -45,8 +45,8 @@ test_that("summary partially left censored", {
 test_that("summary partiaally right censored", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
-  data$right[c(3,6,8)] <- NA
-  
+  data$right[c(3, 6, 8)] <- NA
+
   expect_error(ssd_fit_dists(data, dists = "lnorm", right = "right"), "^Distributions cannot currently be fitted to right censored data\\.$")
 })
 
