@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ssdtools <img src="man/figures/logo.png" align="right" />
+# ssdtools <img src="man/figures/logo.png" align="right" alt="ssdtools logo of cumulative species sensitivity distribution with outlines of commonly used species as data" />
 
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -62,7 +62,7 @@ fits <- ssd_fit_dists(ssddata::ccme_boron)
 ```
 
 and can be quickly plotted using `autoplot`
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, fig.alt="A plot of the data and fitted distributions"}
 autoplot(fits)
 ```
 
@@ -96,7 +96,7 @@ boron_pred <- predict(fits, ci = TRUE)
 ```
 
 The predictions can be plotted together with the original data using `ssd_plot`.
-```{r}
+```{r, fig.alt="A plot of the data and model-averaged prediction with confidence intervals"}
 library(ggplot2)
 
 theme_set(theme_bw())

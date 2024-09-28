@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ssdtools <img src="man/figures/logo.png" align="right" />
+# ssdtools <img src="man/figures/logo.png" align="right" alt="ssdtools logo of cumulative species sensitivity distribution with outlines of commonly used species as data" />
 
 <!-- badges: start -->
 
@@ -86,7 +86,7 @@ and can be quickly plotted using `autoplot`
 autoplot(fits)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" alt="A plot of the data and fitted distributions" width="100%" />
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -152,7 +152,7 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
   scale_colour_ssd()
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" alt="A plot of the data and model-averaged prediction with confidence intervals" width="100%" />
 
 ## References
 
