@@ -119,11 +119,9 @@ The probability density function, ${f_X}(x;b,c,k)$ and cumulative distribution f
 \end{array}\]
 </div>
 
-<hr>
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5, fig.cap="Sample Burr probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
 
-<h4>Sample Burr probability density and cumulative distribution functions</h4> 
-
-```{r echo=FALSE}
 f <- function(x, b, c, k) {
   z1 <- (b / x)^(c - 1)
   z2 <- (b / x)^c
@@ -136,6 +134,7 @@ plot(conc, f(conc, 1, 3, 5), type = "l", ylab = "Probability density", xlab = "C
 lines(conc, f(conc, 1, 1, 2), col = "#F2A61C")
 lines(conc, f(conc, 1, 2, 2), col = "#1CADF2")
 lines(conc, f(conc, 1, 2, 5), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 F <- function(x, b, c, k) {
   z2 <- (b / x)^c
@@ -147,6 +146,7 @@ plot(conc, F(conc, 1, 3, 5), type = "l", ylab = "Cumulative probability", xlab =
 lines(conc, F(conc, 1, 1, 2), col = "#F2A61C")
 lines(conc, F(conc, 1, 2, 2), col = "#1CADF2")
 lines(conc, F(conc, 1, 2, 5), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
 
 While the Burr type III distribution was adopted as the default distribution in Burrlioz, it is well known (e.g., Tadikamalla (1980)) that the Burr III distribution is related to several other theoretical distributions, some of
@@ -190,11 +190,11 @@ and r); and a set of supporting R functions (see @fox_methodologies_2021  Append
 parameters - two parameters for each of the component distributions and a mixing parameter (pmix)
 that defines the weighting of the two distributions in the ‘mixture.’
 
-###### Sample lognormal mixture distributions
 
-<h4>Sample lognormal mixture probability density and cumulative distribution functions</h4> 
 
-```{r echo=FALSE}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5, fig.cap="Sample lognormal lognormal mixture probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
+
 f <- function(x, m1, s1, m2, s2, p) {
   y <- p * dlnorm(x, m1, s1) + (1 - p) * dlnorm(x, m2, s2)
   return(y)
@@ -210,6 +210,7 @@ plot(conc, f(conc, m1, s1, m2, s2, p), type = "l", ylab = "Cumulative probabilit
 lines(conc, f(conc, 0.09, 0.5, 1, 0.08, 0.9), col = "#F2A61C")
 lines(conc, f(conc, 0.5, 0.5, 1, 0.08, 0.9), col = "#1CADF2")
 lines(conc, f(conc, 0.7, 1.5, 0.5, 0.1, .7), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 F <- function(x, m1, s1, m2, s2, p) {
   y <- p * plnorm(x, m1, s1) + (1 - p) * plnorm(x, m2, s2)
@@ -226,6 +227,7 @@ plot(conc, F(conc, m1, s1, m2, s2, p), type = "l", ylab = "Probability density",
 lines(conc, F(conc, 0.09, 0.5, 1, 0.08, 0.9), col = "#F2A61C")
 lines(conc, F(conc, 0.5, 0.5, 1, 0.08, 0.9), col = "#1CADF2")
 lines(conc, F(conc, 0.7, 1.5, 0.5, 0.1, .7), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
 
 <br>As can be see from the plot above, the mixture distributions provide a highly flexible means of modelling *bimodality* in an emprical SSD. This happens, for example, when the toxicity data for some toxicant include both animal and plant species, or there are different modes of action operating. Unfortunately, this increased flexibilty comes with a high penalty in the model-averaging process. The combination of small sample sizes and a high parameter count (typically 5 or more) means that mixture distributions will be down-weighted - even when they do a good job at describing the data. For this reason, when attempting to model bimodal data, we suggest looking at the fit using the default set of distributions and then examining the fit with just one of either the log-normal mixture or the log-logistic mixture. Keep in mind that this should only be done if the sample size is not pathologically small. As a guide, Prof. David Fox recommends as an *absolute minimum* $n \ge 3k + 1$ but preferably $n \ge 5k + 1$ where $k$ is the number of model parameters.
@@ -254,7 +256,7 @@ of two log-normal distributions
 
 The default distributions are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.
 
-```{r, message=FALSE, echo=FALSE, fig.width=7,fig.height=5}
+```{r, message=FALSE, echo=FALSE, fig.width=7,fig.height=5, fig.cap="Currently recommended default distributions."}
 library(ssdtools)
 library(ggplot2)
 
@@ -297,7 +299,6 @@ The [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) distribu
 
 A random variable, $X$ is lognormally distributed if the *logarithm* of $X$ is normally distributed. The *pdf* of $X$ is given by 
 
-
 <div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
 <b><u>Lognormal distribution</u></b>
 \[{f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma ^2}}}} \right]{\rm{  ;  }}x,\sigma  > 0,\; - \infty  < \mu  < \infty \]
@@ -305,11 +306,9 @@ A random variable, $X$ is lognormally distributed if the *logarithm* of $X$ is n
 
 The lognormal distribution was selected as the starting distribution given the data are for effect concentrations. The log-normal distribution can be fitted using `ssdtools` supplying the string `lnorm` to the `dists` argument in the `ssd_fit_dists` call.
 
-<hr>
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample lognormal probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
 
-<h4>Sample lognormal probability density and cumulative distribution functions</h4> 
-
-```{r echo=FALSE}
 conc <- seq(0, 10, by = 0.005)
 m1 <- 1
 s1 <- .2
@@ -320,6 +319,7 @@ plot(conc, dlnorm(conc, m1, s1), type = "l", ylab = "Probability density", xlab 
 lines(conc, dlnorm(conc, 0.4, 2), col = "#F2A61C")
 lines(conc, dlnorm(conc, m1 * 2, s1), col = "#1CADF2")
 lines(conc, dlnorm(conc, 0.9, 1.5), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 conc <- seq(0, 10, by = 0.005)
 m1 <- 1
@@ -331,7 +331,9 @@ plot(conc, plnorm(conc, m1, s1), type = "l", ylab = "Cumulative probability", xl
 lines(conc, plnorm(conc, 0.4, 2), col = "#F2A61C")
 lines(conc, plnorm(conc, m1 * 2, s1), col = "#1CADF2")
 lines(conc, plnorm(conc, 0.9, 1.5), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
+
 
 #### Log-logistic distribution
 Like the *lognormal* distribution, the [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) is similarly defined, that is: if $X$ has a log-logistic distribution, then $Y = \ln (X)$ has a *logistic* distribution.
@@ -378,11 +380,9 @@ Like the *lognormal* distribution, the [log-logistic](https://en.wikipedia.org/w
 The log-logistic distribution is often used as a candidate SSD primarily because of its analytic tractability [@aldenberg_confidence_1993].
 We included it because it has wider tails than the log-normal and because it is a specific case of the more general Burr family of distributions [@shao_estimation_2000, @burr_cumulative_1942]. The log-logistic distribution can be fitted using `ssdtools` by supplying the string `lnorm` to the `dists` argument in the `ssd_fit_dists` call.
 
-<hr>
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Log logistic probability density (A) and cumulative probability (B)  functions."}
+par(mfrow = c(1, 2))
 
-<h4>Sample Log-logistic probability density and cumulative distribution functions</h4> 
-
-```{r echo=FALSE}
 f <- function(x, a, b) {
   z1 <- (x / a)^(b - 1)
   z2 <- (x / a)^b
@@ -395,6 +395,7 @@ plot(conc, f(conc, 3.2, 3.5), type = "l", ylab = "Probability density", xlab = "
 lines(conc, f(conc, 1.5, 1.5), col = "#F2A61C")
 lines(conc, f(conc, 1, 1), col = "#1CADF2")
 lines(conc, f(conc, 1, 4), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 F <- function(x, a, b) {
   z2 <- (x / a)^(-b)
@@ -406,8 +407,8 @@ plot(conc, F(conc, 3.2, 3.5), type = "l", ylab = "Cumulative probability", xlab 
 lines(conc, F(conc, 1.5, 1.5), col = "#F2A61C")
 lines(conc, F(conc, 1, 1), col = "#1CADF2")
 lines(conc, F(conc, 1, 4), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
-
 
 #### Gamma distribution
 The two-parameter  [gamma](https://en.wikipedia.org/wiki/Gamma_distribution) distribution has the following *pdf* and *cdf*.
@@ -430,25 +431,24 @@ For use in modeling species sensitivity data, the gamma distribution has two key
 
 The gamma distribution can be fitted using `ssdtools` by supplying the string  "gamma" to the *dists* argument in the *ssd_fit_dists* call.  
 
-<hr>
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample gamma probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
 
-<h4>Sample gamma probability density and cumulative distribution functions</h4> 
-
-```{r echo=FALSE}
 conc <- seq(0, 10, by = 0.005)
 plot(conc, dgamma(conc, 5, 5), type = "l", ylab = "Probability density", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1.1))
 lines(conc, dgamma(conc, 4, 1), col = "#F2A61C")
 lines(conc, dgamma(conc, 0.9, 1), col = "#1CADF2")
 lines(conc, dgamma(conc, 2, 1.), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 conc <- seq(0, 10, by = 0.005)
 plot(conc, pgamma(conc, 5, 5), type = "l", ylab = "Cumulative probability", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1.1))
 lines(conc, pgamma(conc, 4, 1), col = "#F2A61C")
 lines(conc, pgamma(conc, 0.9, 1), col = "#1CADF2")
 lines(conc, pgamma(conc, 2, 1.), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
 
-<hr>
 
 #### Log-gumbel (inverse Weibull) distribution
 
@@ -470,12 +470,9 @@ The two-parameter log-gumbel distribution has the following *pdf* and *cdf*:
 \end{array}\]
 </div>
 
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Log-Gumbel probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
 
-<hr>
-
-<h4>Sample log-Gumbel probability density and cumulative distribution functions</h4> 
-
-```{r echo=FALSE}
 f <- function(x, a, b) {
   y <- b * exp(-(a * x)^(-b)) / (a^b * x^(b + 1))
   return(y)
@@ -486,6 +483,7 @@ plot(conc, f(conc, 0.2, 5), type = "l", ylab = "Probability density", xlab = "Co
 lines(conc, f(conc, 0.5, 1.5), col = "#F2A61C")
 lines(conc, f(conc, 1, 2), col = "#1CADF2")
 lines(conc, f(conc, 10, .5), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 F <- function(x, a, b) {
   y <- exp(-(a * x)^(-b))
@@ -497,8 +495,9 @@ plot(conc, F(conc, 0.2, 5), type = "l", ylab = "Cumulative probability", xlab = 
 lines(conc, F(conc, 0.5, 1.5), col = "#F2A61C")
 lines(conc, F(conc, 1, 2), col = "#1CADF2")
 lines(conc, F(conc, 10, .5), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
-<hr>
+
 
 #### Gompertz distribution
 
@@ -534,11 +533,9 @@ The second parameterisation in which the *product* $b\eta$ in the formulae above
 \end{array}\]
 </div>
 
-<hr>
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Gompertz probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
 
-<h4>Sample Gompertz probability density and cumulative distribution functions</h4> 
-
-```{r echo=FALSE}
 f <- function(x, n, b) {
   y <- n * b * exp(n + b * x - n * exp(b * x))
   return(y)
@@ -549,6 +546,7 @@ plot(conc, f(conc, 0.089, 1.25), type = "l", ylab = "Probability density", xlab 
 lines(conc, f(conc, 0.001, 3.5), col = "#F2A61C")
 lines(conc, f(conc, 0.0005, 1.1), col = "#1CADF2")
 lines(conc, f(conc, 0.01, 5), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 F <- function(x, n, b) {
   y <- 1 - exp(-n * exp(b * x - 1))
@@ -560,11 +558,11 @@ plot(conc, F(conc, 0.089, 1.25), type = "l", ylab = "Cumulative probability", xl
 lines(conc, F(conc, 0.001, 3.5), col = "#F2A61C")
 lines(conc, F(conc, 0.0005, 1.1), col = "#1CADF2")
 lines(conc, F(conc, 0.01, 5), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
 
 The Gompertz distribution is available in `ssdtools`, however parameter estimation can be somewhat unstable [@fox_methodologies_2021], and for this reason it is not currently included in the default set.
 
-<hr>
 
 #### Weibull distribution
 
@@ -586,22 +584,22 @@ The two-parameter [Weibull](https://en.wikipedia.org/wiki/Weibull_distribution) 
 
 The Weibull distribution can be fitted in `ssdtools` by supplying the string  `weibull` to the `dists` argument in the `ssd_fit_dists` call.  
 
-<hr>
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Weibull probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
 
-<h4>Sample Weibull probability density and cumulative distribution functions</h4> 
-
-```{r echo=FALSE}
 conc <- seq(0, 10, by = 0.005)
 plot(conc, dweibull(conc, 4.321, 4.949), type = "l", ylab = "Probability density", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1))
 lines(conc, dweibull(conc, 0.838, 0.911), col = "#F2A61C")
 lines(conc, dweibull(conc, 1, 1.546), col = "#1CADF2")
 lines(conc, dweibull(conc, 17.267, 7.219), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 conc <- seq(0, 10, by = 0.005)
 plot(conc, pweibull(conc, 4.321, 4.949), type = "l", ylab = "Cumulative probability", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1))
 lines(conc, pweibull(conc, 0.838, 0.911), col = "#F2A61C")
 lines(conc, pweibull(conc, 1, 1.546), col = "#1CADF2")
 lines(conc, pweibull(conc, 17.267, 7.219), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
 
 
@@ -661,14 +659,23 @@ Thus, it doesn't matter whether you're fitting a Pareto or inverse Pareto distri
 
 Because it is *bounded*, the North American version of the (Inverse)Pareto distribution is not useful as a stand-alone SSD - more so for the *inverse Pareto* distribution since it is bounded from *above*.
 
-<h4>Sample North American Pareto probability density and cumulative distribution functions</h4> 
 
-```{r echo=FALSE}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample North American Pareto probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
+
 conc <- seq(0, 10, by = 0.005)
 plot(conc, extraDistr::dpareto(conc, 3, 2), type = "l", ylab = "Probability density", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1.5))
 lines(conc, extraDistr::dpareto(conc, 0.838, 0.911), col = "#F2A61C")
 lines(conc, extraDistr::dpareto(conc, 4, 4), col = "#1CADF2")
 lines(conc, extraDistr::dpareto(conc, 10, 7), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
+
+conc <- seq(0, 10, by = 0.005)
+plot(conc, extraDistr::ppareto(conc, 3, 2), type = "l", ylab = "Cumulative probability", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1))
+lines(conc, extraDistr::ppareto(conc, 0.838, 0.911), col = "#F2A61C")
+lines(conc, extraDistr::ppareto(conc, 4, 4), col = "#1CADF2")
+lines(conc, extraDistr::ppareto(conc, 10, 7), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 
 conc <- seq(0, 10, by = 0.005)
 plot(conc, extraDistr::ppareto(conc, 3, 2), type = "l", ylab = "Cumulative probability", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1))
@@ -677,11 +684,9 @@ lines(conc, extraDistr::ppareto(conc, 4, 4), col = "#1CADF2")
 lines(conc, extraDistr::ppareto(conc, 10, 7), col = "#1F1CF2")
 ```
 
-<br>We see from the *pdf* plots that the 
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Sample North American inverse Pareto probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
 
-<h4>Sample North American inverse Pareto probability density and cumulative distribution functions</h4> 
-
-```{r echo=FALSE}
 f <- function(x, a, b) {
   y <- a * (b^a) * x^(a - 1)
   return(y)
@@ -692,6 +697,7 @@ plot(conc, f(conc, 5, 0.1), type = "l", ylab = "Probability density", xlab = "Co
 lines(conc, f(conc, 3, 0.1), col = "#F2A61C")
 lines(conc, f(conc, 0.5, 0.1), col = "#1CADF2")
 lines(conc, f(conc, 0.1, 0.1), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 F <- function(x, a, b) {
   y <- (b * x)^a
@@ -703,10 +709,10 @@ plot(conc, F(conc, 5, 0.1), type = "l", ylab = "Probability density", xlab = "Co
 lines(conc, F(conc, 3, 0.1), col = "#F2A61C")
 lines(conc, F(conc, 0.5, 0.1), col = "#1CADF2")
 lines(conc, F(conc, 0.1, 0.1), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
 
-
-The alternative, *European* version of the inverse Pareto distribution is a more realistic candidate.
+We see from the *pdf* plots that the alternative, *European* version of the inverse Pareto distribution is a more realistic candidate.
 
 <hr>
 
@@ -733,30 +739,35 @@ Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>
 
 We note in passing that *both* versions of these Pareto and inverse Pareto distrbutions are availabale in `R`. For example, the `R`package `extraDistr` has North American versions, while the `actuar` package has European versions.
 
-<h4>Sample European Pareto probability density and cumulative distribution functions</h4> 
 
-```{r echo=FALSE}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample European Pareto probability density (A) and cumulative probability (B) functions."}
+par(mfrow = c(1, 2))
+
 conc <- seq(0, 10, by = 0.005)
 plot(conc, actuar::dpareto(conc, 1, 1), type = "l", ylab = "Probability density", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1))
 lines(conc, actuar::dpareto(conc, 2, 3), col = "#F2A61C")
 lines(conc, actuar::dpareto(conc, 0.5, 1), col = "#1CADF2")
 lines(conc, actuar::dpareto(conc, 10.5, 6.5), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 conc <- seq(0, 10, by = 0.005)
 plot(conc, actuar::ppareto(conc, 1, 1), type = "l", ylab = "Cumulative probability", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1))
 lines(conc, actuar::ppareto(conc, 2, 3), col = "#F2A61C")
 lines(conc, actuar::ppareto(conc, 0.5, 1), col = "#1CADF2")
 lines(conc, actuar::ppareto(conc, 10.5, 6.5), col = "#1F1CF2")
+legend("topleft", "(B)", bty = "n")
 ```
 
-<h4>Sample European inverse Pareto probability density and cumulative distribution functions</h4> 
 
-```{r echo=FALSE,fig.align='center',fig.width=7,fig.height=5}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample European inverse Pareto probability density (A) and cumulative probability (B)  functions."}
+par(mfrow = c(1, 2))
+
 conc <- seq(0, 10, by = 0.001)
 plot(conc, actuar::dinvpareto(conc, 1, 1), type = "l", ylab = "Probability density", xlab = "Concentration", col = "#FF5733", ylim = c(0, 0.8))
 lines(conc, actuar::dinvpareto(conc, 1, 3), col = "#F2A61C")
 lines(conc, actuar::dinvpareto(conc, 10, 0.1), col = "#1CADF2")
 lines(conc, actuar::dinvpareto(conc, 2.045, 0.98), col = "#1F1CF2")
+legend("topleft", "(A)", bty = "n")
 
 conc <- seq(0, 10, by = 0.001)
 plot(conc, actuar::pinvpareto(conc, 1, 1), type = "l", ylab = "Probability density", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1))
@@ -765,12 +776,9 @@ lines(conc, actuar::pinvpareto(conc, 10, 0.1), col = "#1CADF2")
 lines(conc, actuar::pinvpareto(conc, 2.045, 0.98), col = "#1F1CF2")
 ```
 
-
 #### Inverse Weibull distribution (see log-Gumbel, above)
 
 The inverse Weibull is mathematically equivalent to the log-Gumbel distribution described above. While which is also a limiting distribution of the Burr Type 3, this distribution does not show the same instability issues, and is unbounded to the right. It therefore represents a valid SSD distribution and is included in the default model set as a distribution in its own right.
-
-
 
 The inverse Weibull (log-Gumbel) distribution can be fitted in `ssdtools` by supplying the string  `lgumbel` to the `dists` argument in the `ssd_fit_dists` call.  
 
