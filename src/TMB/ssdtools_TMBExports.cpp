@@ -52,7 +52,7 @@ Type objective_function<Type>::operator() () {
   } else if(model == "ll_weibull") {
     return ll_weibull(this);
   } else {
-    error("Unknown model.");
+    Rf_error("Unknown model.");
   }
   return 0;
 }

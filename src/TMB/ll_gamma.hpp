@@ -95,4 +95,3 @@ Type ll_gamma(objective_function<Type>* obj) // normal with parameters mu and lo
 #define TMB_OBJECTIVE_PTR this
   
 #endif
-  
