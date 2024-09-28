@@ -254,5 +254,5 @@ ssd_plot(left_censored_example, left_censored_pred,
 <div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
-cat(ssd_licensing_md())
+cat(ssdtools::ssd_licensing_md())
 ```

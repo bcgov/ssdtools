@@ -212,11 +212,10 @@ gp +
   )
 ```
 
-
 ## References
 
 <div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
-cat(ssd_licensing_md())
+cat(ssdtools::ssd_licensing_md())
 ```
