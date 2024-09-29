@@ -41,10 +41,10 @@ ssd_plot_cdf(fits)
 
 This graphic is a [ggplot](https://ggplot2.tidyverse.org) object and so can be customized in the usual way.
 
-For example, we can add the model-averaged cdf by setting `average = NA` and then customize the color scale with `scale_color_manual()` and theme.
+For example, we can add the model-averaged cdf by setting `average = NA` and change the string used to separate thousands using `big.mark` then customize the color scale with `scale_color_manual()` and change the theme.
 
 ```{r}
-ssd_plot_cdf(fits, average = NA) + 
+ssd_plot_cdf(fits, average = NA, big.mark = " ") + 
   scale_color_manual(name = "Distribution", breaks = c("average", names(fits)), values = 1:7) +
   theme_bw()
 ```
@@ -53,16 +53,20 @@ ssd_plot_cdf(fits, average = NA) +
 
 The `ssdtools` package provides four ggplot geoms to allow you construct your own plots.
 
+### `geom_ssdpoint()`
+
 The first is `geom_ssdpoint()` which plots species sensitivity data
 
 ```{r}
 ggplot(ssddata::ccme_boron) +
   geom_ssdpoint(aes(x = Conc)) +
   ylab("Probability density") +
-  xlab("Concenration")
+  xlab("Concentration")
 ``` 
 
-The second is `geom_ssdsegments()` which plots the range of censored species sensitivity data
+### `geom_ssdsegments()`
+
+The second is `geom_ssdsegments()` which plots the ranges of censored species sensitivity data
 
 ```{r}
 ggplot(ssddata::ccme_boron) +
@@ -70,6 +74,8 @@ ggplot(ssddata::ccme_boron) +
   ylab("Probability density") +
   xlab("Concenration")
 ``` 
+
+### `geom_xribbon()`
 
 The third is `geom_xribbon()` which plots species sensitivity confidence intervals
 
@@ -80,6 +86,8 @@ ggplot(boron_pred) +
   xlab("Concenration")
 ```  
 
+### `geom_hcintersect()`
+
 And the fourth is `geom_hcintersect()` which plots hazard concentrations
 
 ```{r}
@@ -89,7 +97,9 @@ ggplot() +
   xlab("Concenration")
 ```    
 
-They can be combined together as follows
+### Combining geoms
+
+Geoms can be combined together as follows
 
 ```{r}
 gp <- ggplot(boron_pred, aes(x = est)) +
@@ -101,19 +111,23 @@ gp <- ggplot(boron_pred, aes(x = est)) +
   scale_y_continuous("Species Affected (%)", labels = scales::percent) +
   expand_limits(y = c(0, 1)) +
   xlab("Concentration (mg/L)")
-print(gp + geom_hcintersect(xintercept = ssd_hc(fits)$est, yintercept = 5 / 100))
+
+print(gp)
 ```
 
-To log the x-axis add the following code.
+To log the x-axis and add the HC5 value use the following code.
 
 ```{r}
-gp <- gp + coord_trans(x = "log10") +
+gp + 
+  coord_trans(x = "log10") +
   scale_x_continuous(
     breaks = scales::trans_breaks("log10", function(x) 10^x),
-    labels = comma_signif
-  )
-print(gp + geom_hcintersect(xintercept = ssd_hc(fits)$est, yintercept = 0.05))
+    labels = ssd_label_comma()
+  ) +
+  geom_hcintersect(xintercept = ssd_hc(fits)$est, yintercept = 0.05)
 ```
+
+## Saving plots
 
 The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
 
@@ -126,19 +140,13 @@ ggsave("file_name.png", dpi = 600)
 An elegant approach using some tidyverse packages is demonstrated below.
 
 ```{r, message=FALSE}
-library(ssddata)
-library(ssdtools)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(purrr)
 
-boron_preds <- nest(ssddata::ccme_boron, data = c(Chemical, Species, Conc, Units)) %>%
-  mutate(
-    Fit = map(data, ssd_fit_dists, dists = "lnorm"),
-    Prediction = map(Fit, predict)
-  ) %>%
-  unnest(Prediction)
+boron_preds <- tidyr::nest(ssddata::ccme_boron, data = c(Chemical, Species, Conc, Units)) |>
+  dplyr::mutate(
+    Fit = purrr::map(data, ssd_fit_dists, dists = "lnorm"),
+    Prediction = purrr::map(Fit, predict)
+  ) |>
+  tidyr::unnest(Prediction)
 ```
 
 The resultant data and predictions can then be plotted as follows.
@@ -148,64 +156,6 @@ library(ssdtools)
 library(ssddata)
 ssd_plot(ssddata::ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
   facet_wrap(~Group)
-```
-
-
-## Embellishing Plots with an Exposure Distribution
-
-For example, suppose we want to superimpose an environmental concentration cumulative distribution and compute the exposure risk as outlined in @verdonck_limitations_2003.
-
-```{r echo=FALSE}
-# what are the mean and sd on the log-scale for the environmental concentration
-ex.mean.log <- log(0.1)
-ex.sd.log <- 1
-```
-
-Finding a suitable probability distribution to describe the exposure concentration is beyond the scope of this document -- we will assume that this has been done elsewhere.
-In particular, suppose that the exposure concentration follows a log-normal distribution with a mean of `r signif(ex.mean.log, 3)` and a standard deviation of `r ex.sd.log` on the logarithmic scale. 
-From the exposure distribution, we construct a data frame with the concentration values and the cumulative probability of seeing this exposure or less in the environment.
-
-Notice that some care is needed because the ssdtools plot is on the logarithmic base 10 scale and not the natural logarithm base $e$ scale.
-
-```{r}
-ex.cdf <- data.frame(Conc = exp(seq(log(.01), log(10), .1))) # generate a grid of concentrations
-ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc,
-  meanlog = ex.mean.log,
-  sdlog = ex.sd.log
-) # generate the cdf
-```
-
-We now add this to the plot
-```{r}
-gp +
-  geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", linewidth = 2) +
-  annotate("text",
-    label = paste("Exposure distribution"),
-    x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
-  )
-```
-
-The `ssdtools` package contains a function `ssd_exposure()` that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.
-
-```{r echo=TRUE}
-set.seed(99)
-ex.risk <- ssd_exposure(fits, meanlog = ex.mean.log, sdlog = ex.sd.log)
-ex.risk
-```
-
-The risk of `r round(ex.risk, 5)` can also be added to the plot in the usual way:
-
-```{r echo=TRUE}
-gp +
-  geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", linewidth = 2) +
-  annotate("text",
-    label = paste("Exposure distribution"),
-    x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
-  ) +
-  annotate("text",
-    label = paste("Verdonck risk :", round(ex.risk, 5)),
-    x = Inf, y = 0, hjust = 1.1, vjust = -.5
-  )
 ```
 
 ## References
