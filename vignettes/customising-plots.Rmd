@@ -3,7 +3,6 @@ title: "Customising Plots"
 author: "ssdtools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
 bibliography: references.bib
-# csl: style.csl
 mainfont: Arial
 mathfont: Courier
 latex_engine: MathJax
@@ -157,8 +156,6 @@ library(ssddata)
 ssd_plot(ssddata::ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
   facet_wrap(~Group)
 ```
-
-## References
 
 <div id="refs"></div>
 
