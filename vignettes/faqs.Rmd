@@ -90,6 +90,15 @@ ssd_plot(ssddata::ccme_boron, ssdtools::boron_pred, label = "Species", shape = "
 <!-- boron_pred <- predict(fits, ci = TRUE) -->
 <!-- ``` -->
 
+<!-- Bootstrapping is computationally intensive.  -->
+<!-- To bootstrap for each distribution in parallel register the future back-end -->
+<!-- and then select the evaluation strategy. -->
+
+<!-- ```{r, eval = FALSE} -->
+<!-- doFuture::registerDoFuture() -->
+<!-- future::plan(future::multisession) -->
+<!-- ``` -->
+
 <div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
