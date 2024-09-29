@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 The `ssdtools` package produces a plot of the cumulative distribution functions for the multiple input distributions through the use of the `ssd_plot_cdf()` function. 
 For example, consider the boron data. We can fit, and then plot the cdf using:
 
-```{r echo=TRUE, warning=FALSE, message=FALSE, cache=TRUE, fig.width=7,fig.height=5}
+```{r echo=TRUE, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(ssdtools)
 
@@ -48,7 +48,7 @@ This graphic is a [ggplot](https://ggplot2.tidyverse.org) object and so can be s
 
 We can add the model-averaged cdf by first obtaining predicted values, and extending the default ssdtools ggplot in the usual way using geom_line:
 
-```{r, fig.width=7,fig.height=5}
+```{r}
 library(ssddata)
 library(ssdtools)
 library(ggplot2)
@@ -68,7 +68,7 @@ ssdtools::ssd_plot_cdf(dist) +
 The `ssdtools` package provides four ggplot geoms to allow you construct your own plots.
 
 The first is `geom_ssdpoint()` which plots species sensitivity data 
-```{r fig.width=7,fig.height=5}
+```{r}
 ggplot(ccme_boron) +
   geom_ssdpoint(aes(x = Conc)) +
   ylab("Probability density") +
@@ -76,7 +76,7 @@ ggplot(ccme_boron) +
 ``` 
 
 The second is `geom_ssdsegments()` which plots the range of censored species sensitivity data 
-```{r fig.width=7,fig.height=5}
+```{r}
 ggplot(ccme_boron) +
   geom_ssdsegment(aes(x = Conc, xend = Conc * 2)) +
   ylab("Probability density") +
@@ -84,7 +84,7 @@ ggplot(ccme_boron) +
 ``` 
 
 The third is `geom_xribbon()` which plots species sensitivity confidence intervals
-```{r fig.width=7,fig.height=5}
+```{r}
 ggplot(boron_pred) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion)) +
   ylab("Probability density") +
@@ -92,7 +92,7 @@ ggplot(boron_pred) +
 ```  
 
 And the fourth is `geom_hcintersect()` which plots hazard concentrations
-```{r fig.width=7,fig.height=5}
+```{r}
 ggplot() +
   geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(0.05, 0.1, 0.2)) +
   ylab("Probability density") +
@@ -100,7 +100,7 @@ ggplot() +
 ```    
 
 They can be combined together as follows
-```{r fig.width=7,fig.height=5}
+```{r}
 gp <- ggplot(boron_pred, aes(x = est)) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion), alpha = 0.2) +
   geom_line(aes(y = proportion)) +
@@ -114,7 +114,7 @@ print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5 / 100))
 ```
 
 To log the x-axis add the following code.
-```{r fig.width=7,fig.height=5}
+```{r}
 gp <- gp + coord_trans(x = "log10") +
   scale_x_continuous(
     breaks = scales::trans_breaks("log10", function(x) 10^x),
@@ -150,7 +150,7 @@ boron_preds <- nest(ccme_boron, data = c(Chemical, Species, Conc, Units)) %>%
 ```
 
 The resultant data and predictions can then be plotted as follows.
-```{r, fig.width = 7, fig.height = 5}
+```{r}
 library(ssdtools)
 library(ssddata)
 ssd_plot(ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
@@ -183,7 +183,7 @@ ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc,
 ```
 
 We now add this to the plot
-```{r fig.width=7,fig.height=5}
+```{r}
 gp +
   geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", linewidth = 2) +
   annotate("text",
@@ -201,7 +201,7 @@ ex.risk
 ```
 The risk of `r round(ex.risk, 5)` can also be added to the plot in the usual way:
 
-```{r echo=TRUE, fig.width=7,fig.height=5}
+```{r echo=TRUE}
 gp +
   geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", linewidth = 2) +
   annotate("text",
