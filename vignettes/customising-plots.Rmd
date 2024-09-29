@@ -67,7 +67,8 @@ ssdtools::ssd_plot_cdf(dist) +
 
 The `ssdtools` package provides four ggplot geoms to allow you construct your own plots.
 
-The first is `geom_ssdpoint()` which plots species sensitivity data 
+The first is `geom_ssdpoint()` which plots species sensitivity data
+
 ```{r}
 ggplot(ccme_boron) +
   geom_ssdpoint(aes(x = Conc)) +
@@ -75,7 +76,8 @@ ggplot(ccme_boron) +
   xlab("Concenration")
 ``` 
 
-The second is `geom_ssdsegments()` which plots the range of censored species sensitivity data 
+The second is `geom_ssdsegments()` which plots the range of censored species sensitivity data
+
 ```{r}
 ggplot(ccme_boron) +
   geom_ssdsegment(aes(x = Conc, xend = Conc * 2)) +
@@ -84,6 +86,7 @@ ggplot(ccme_boron) +
 ``` 
 
 The third is `geom_xribbon()` which plots species sensitivity confidence intervals
+
 ```{r}
 ggplot(boron_pred) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion)) +
@@ -92,6 +95,7 @@ ggplot(boron_pred) +
 ```  
 
 And the fourth is `geom_hcintersect()` which plots hazard concentrations
+
 ```{r}
 ggplot() +
   geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(0.05, 0.1, 0.2)) +
@@ -100,6 +104,7 @@ ggplot() +
 ```    
 
 They can be combined together as follows
+
 ```{r}
 gp <- ggplot(boron_pred, aes(x = est)) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion), alpha = 0.2) +
@@ -114,6 +119,7 @@ print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5 / 100))
 ```
 
 To log the x-axis add the following code.
+
 ```{r}
 gp <- gp + coord_trans(x = "log10") +
   scale_x_continuous(
@@ -150,6 +156,7 @@ boron_preds <- nest(ccme_boron, data = c(Chemical, Species, Conc, Units)) %>%
 ```
 
 The resultant data and predictions can then be plotted as follows.
+
 ```{r}
 library(ssdtools)
 library(ssddata)
@@ -174,7 +181,7 @@ From the exposure distribution, we construct a data frame with the concentration
 
 Notice that some care is needed because the ssdtools plot is on the logarithmic base 10 scale and not the natural logarithm base $e$ scale.
 
-```{r }
+```{r}
 ex.cdf <- data.frame(Conc = exp(seq(log(.01), log(10), .1))) # generate a grid of concentrations
 ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc,
   meanlog = ex.mean.log,
@@ -199,6 +206,7 @@ set.seed(99)
 ex.risk <- ssd_exposure(fits, meanlog = ex.mean.log, sdlog = ex.sd.log)
 ex.risk
 ```
+
 The risk of `r round(ex.risk, 5)` can also be added to the plot in the usual way:
 
 ```{r echo=TRUE}
