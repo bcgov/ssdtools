@@ -1,16 +1,16 @@
 ---
-title: "Model Averaged SSDs"
+title: "Model Averaging SSDs"
 author: "ssdtools Team"
-date: "`r Sys.Date()`"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
 bibliography: references.bib
-csl: my-style.csl
-latex_engine: MathJax
+csl: style.csl
 mainfont: Arial
 mathfont: Courier
+latex_engine: MathJax
 output: rmarkdown::html_vignette
 #output: rmarkdown::pdf_document
 vignette: >
-  %\VignetteIndexEntry{Model Averaged SSDs}
+  %\VignetteIndexEntry{Model Averaging SSDs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

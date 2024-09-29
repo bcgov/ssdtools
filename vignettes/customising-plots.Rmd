@@ -3,10 +3,10 @@ title: "Customising Plots"
 author: "ssdtools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
 bibliography: references.bib
-latex_engine: MathJax
+csl: style.csl
 mainfont: Arial
 mathfont: Courier
-csl: my-style.csl
+latex_engine: MathJax
 output: rmarkdown::html_vignette
 #output: rmarkdown::pdf_document
 vignette: >
