@@ -12,6 +12,17 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.height = 4
+)
+library(tinytex)
+```
+
+
 ```{css, echo=FALSE}
 pre {
   max-height: 300px;
@@ -29,16 +40,6 @@ pre[class] {
   overflow-y: auto;
   background-color: inherit;
 }
-```
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.width = 6,
-  fig.height = 4
-)
-library(tinytex)
 ```
 
 <style>
@@ -63,20 +64,23 @@ library(tinytex)
 # this just loads the package and suppresses the load package message
 library(ssdtools)
 require(ggplot2)
-require(patchwork)
 ```
 
 ## Background
-*"Many authors have noted that there is no guiding theory in ecotoxicology to justify any particular distributional form for the SSD other than that its domain be restricted to the positive real line [@newman_2000], [@Zajdlik_2005], [@chapman_2007], [@fox_2016]. 
+
+> Many authors have noted that there is no guiding theory in ecotoxicology to justify any particular distributional form for the SSD other than that its domain be restricted to the positive real line [@newman_2000], [@Zajdlik_2005], [@chapman_2007], [@fox_2016]. 
 Indeed, [@chapman_2007] described the identification of a suitable probability model as one of the most important and difficult choices in the use of SSDs.
 Compounding this lack of clarity about the functional form of the SSD is the omnipresent, and equally vexatious issue of small sample size, meaning that any plausible candidate model is unlikely to be rejected [@fox_recent_2021].
 The ssdtools R package uses a model averaging procedure to avoid the need to a-priori select a candidate distribution and instead uses a measure of ‘fit’ for each model to compute weights to be applied to an initial set of candidate distributions. 
-The method, as applied in the SSD context is described in detail in [@fox_recent_2021], and potentially provides a level of flexibility and parsimony that is difficult to achieve with a single SSD distribution".* &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; [@fox_methodologies_2021]
+The method, as applied in the SSD context is described in detail in [@fox_recent_2021], and potentially provides a level of flexibility and parsimony that is difficult to achieve with a single SSD distribution.
+
+[@fox_methodologies_2021]
 
 ## Preliminaries
-Before we jump into model averaging and in particular, SSD Model Averaging, let's backup a little and consider why we average and the advantages and disadvantages of averaging.<br>
 
-<h4>The pros and cons of averaging</h4>
+Before we jump into model averaging and in particular, SSD Model Averaging, let's backup a little and consider why we average and the advantages and disadvantages of averaging.
+
+#### The pros and cons of averaging
 
 We're all familiar with the process of averaging. 
 Indeed, *averages* are pervasive in everyday life - we talk of average income; mean sea level; average global temperature; average height, weight, age etc. etc. So what's the obsession with *averaging*? 
