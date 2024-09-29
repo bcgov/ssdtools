@@ -12,14 +12,14 @@ output: rmarkdown::html_vignette
 ---
 
 ```{r, include = FALSE}
-library(ssdtools)
-load("confidence_intervals.RData")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.height = 4,
   fig.width = 6
 )
+library(ssdtools)
+load("confidence_intervals.RData")
 ```
 
 ## Bootstrap confidence intervals

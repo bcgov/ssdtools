@@ -35,15 +35,14 @@ pre[class] {
 }
 ```
 
-
 ```{r, include = FALSE}
-library(tinytex)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.height = 4,
-  fig.width = 6
+  fig.width = 6,
+  fig.height = 4
 )
+library(tinytex)
 ```
 
 <style>

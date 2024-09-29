@@ -34,13 +34,13 @@ vignette: >
 </script>
 
 
-```{r setup, include=FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  echo = TRUE,
   fig.width = 6,
-  fig.height = 4
+  fig.height = 4,
+  echo = TRUE
 )
 ```
 
