@@ -30,7 +30,7 @@ The `ssdtools` package plots the cumulative distribution functions using `ssd_pl
 For example, consider the CCME boron data from the [`ssddata`](https://github.com/open-AIMS/ssddata) package. 
 We can fit, and then plot the cdfs as follows.
 
-```{r warning=FALSE, message=FALSE}
+```{r warning=FALSE, message=FALSE, fig.alt="A plot of the CCME boron data with the six default distributions."}
 library(ssdtools)
 library(ggplot2)
 
@@ -40,9 +40,9 @@ ssd_plot_cdf(fits)
 
 This graphic is a [ggplot](https://ggplot2.tidyverse.org) object and so can be customized in the usual way.
 
-For example, we can add the model-averaged cdf by setting `average = NA` and change the string used to separate thousands using `big.mark` then customize the color scale with `scale_color_manual()` and change the theme.
+For example, we can add the model-averaged cdf by setting `average = NA`, change the string used to separate thousands using `big.mark`, customize the color scale with `scale_color_manual()` and change the theme.
 
-```{r}
+```{r, fig.alt="A plot of the CCME boron data with the model average distribution and the six default distributions."}
 ssd_plot_cdf(fits, average = NA, big.mark = " ") + 
   scale_color_manual(name = "Distribution", breaks = c("average", names(fits)), values = 1:7) +
   theme_bw()
@@ -56,7 +56,7 @@ The `ssdtools` package provides four ggplot geoms to allow you construct your ow
 
 The first is `geom_ssdpoint()` which plots species sensitivity data
 
-```{r}
+```{r, fig.alt = "A plot of the CCME boron data."}
 ggplot(ssddata::ccme_boron) +
   geom_ssdpoint(aes(x = Conc)) +
   ylab("Probability density") +
@@ -67,9 +67,9 @@ ggplot(ssddata::ccme_boron) +
 
 The second is `geom_ssdsegments()` which plots the ranges of censored species sensitivity data
 
-```{r}
+```{r, fig.alt = "A plot of CCME boron data with the ranges of the censored data indicated by horizontal lines."}
 ggplot(ssddata::ccme_boron) +
-  geom_ssdsegment(aes(x = Conc, xend = Conc * 2)) +
+  geom_ssdsegment(aes(x = Conc, xend = Conc * 4)) +
   ylab("Probability density") +
   xlab("Concenration")
 ``` 
@@ -78,7 +78,7 @@ ggplot(ssddata::ccme_boron) +
 
 The third is `geom_xribbon()` which plots species sensitivity confidence intervals
 
-```{r}
+```{r, fig.alt="A plot of the confidence intervals for the CCME boron data."}
 ggplot(boron_pred) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion)) +
   ylab("Probability density") +
@@ -89,18 +89,18 @@ ggplot(boron_pred) +
 
 And the fourth is `geom_hcintersect()` which plots hazard concentrations
 
-```{r}
+```{r, fig.alt="A plot of hazard concentrations as dotted lines."}
 ggplot() +
   geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(0.05, 0.1, 0.2)) +
   ylab("Probability density") +
   xlab("Concenration")
 ```    
 
-### Combining geoms
+### Putting it together
 
-Geoms can be combined together as follows
+Geoms can be combined as follows
 
-```{r}
+```{r, fig.alt="A plot of censored CCME boron data with confidence intervals"}
 gp <- ggplot(boron_pred, aes(x = est)) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion), alpha = 0.2) +
   geom_line(aes(y = proportion)) +
@@ -108,20 +108,18 @@ gp <- ggplot(boron_pred, aes(x = est)) +
   geom_ssdpoint(data = ssddata::ccme_boron, aes(x = Conc / 2)) +
   geom_ssdpoint(data = ssddata::ccme_boron, aes(x = Conc * 2)) +
   scale_y_continuous("Species Affected (%)", labels = scales::percent) +
-  expand_limits(y = c(0, 1)) +
-  xlab("Concentration (mg/L)")
+  xlab("Concentration (mg/L)") +
+  expand_limits(y = c(0, 1))
 
-print(gp)
+gp
 ```
 
-To log the x-axis and add the HC5 value use the following code.
+To log the x-axis and include mathematical notation and add the HC5 value use the following code.
 
-```{r}
+```{r, fig.alt="A plot of censored CCME boron data on log scale with confidence intervals, mathematical and the 5% hazard concentration."}
 gp + 
-  coord_trans(x = "log10") +
-  scale_x_continuous(
-    breaks = scales::trans_breaks("log10", function(x) 10^x),
-    labels = ssd_label_comma()
+  scale_x_log10(
+    latex2exp::TeX("Boron $(\\mu g$/L)$")
   ) +
   geom_hcintersect(xintercept = ssd_hc(fits)$est, yintercept = 0.05)
 ```
@@ -130,31 +128,8 @@ gp +
 
 The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
 
-```r
-ggsave("file_name.png", dpi = 600)
-```
-
-## Fitting and plotting distributions to multiple groups such taxa and/or chemicals
-
-An elegant approach using some tidyverse packages is demonstrated below.
-
-```{r, message=FALSE}
-
-boron_preds <- tidyr::nest(ssddata::ccme_boron, data = c(Chemical, Species, Conc, Units)) |>
-  dplyr::mutate(
-    Fit = purrr::map(data, ssd_fit_dists, dists = "lnorm"),
-    Prediction = purrr::map(Fit, predict)
-  ) |>
-  tidyr::unnest(Prediction)
-```
-
-The resultant data and predictions can then be plotted as follows.
-
-```{r}
-library(ssdtools)
-library(ssddata)
-ssd_plot(ssddata::ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
-  facet_wrap(~Group)
+```{r, eval = FALSE}
+ggsave("file_name.png", dpi = 300)
 ```
 
 <div id="refs"></div>

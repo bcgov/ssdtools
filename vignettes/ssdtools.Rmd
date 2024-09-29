@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 `ssdtools` is an R package to fit Species Sensitivity Distributions (SSDs) using Maximum Likelihood and model averaging.
 
 SSDs are cumulative probability distributions that are used to estimate the percent of species that are affected and/or protected by a given concentration of a chemical.
-The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (*HC5*). This is equivalent to a 95% protection value (*PC~95~*).
+The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (*HC~5~*). This is equivalent to a 95% protection value (*PC~95~*).
 For more information on SSDs the reader is referred to @posthuma_species_2001.
 
 In order to use `ssdtools` you need to install R (see below) or use the Shiny [app](https://bcgov-env.shinyapps.io/ssdtools/).
@@ -88,7 +88,7 @@ ssddata::ccme_boron
 ## Fitting Distributions
 
 The function `ssd_fit_dists()` inputs a data frame and fits one or more distributions.
-The user can specify a subset of the following `r length(ssd_dists_all())` distributions. Please see the [Distributions](https://bcgov.github.io/ssdtools/articles/B_distributions.html) and [Model averaging](https://bcgov.github.io/ssdtools/articles/A_model_averaging.html) vignettes for more information regarding appropriate use of distributions and the use of model-averaged SSDs.
+The user can specify a subset of the following `r length(ssd_dists_all())` distributions. Please see the [distributions](https://bcgov.github.io/ssdtools/articles/B_distributions.html) and [model averaging](https://bcgov.github.io/ssdtools/articles/A_model_averaging.html) vignettes for more information regarding appropriate use of distributions and the use of model-averaged SSDs.
 
 ```{r}
 ssd_dists_all()
@@ -112,6 +112,7 @@ tidy(fits)
 
 It is generally more informative to plot the fits using the `autoplot` generic function (a wrapper on `ssd_plot_cdf()`).
 As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
+For more information see the [customising plots](https://bcgov.github.io/ssdtools/articles/A_model_averaging.html) vignette.
 
 ```{r, fig.alt="A plot of the CCME boron dataset with the gamma, log-logistic and log-normal distributions with a simple black and white background color scheme."}
 theme_set(theme_bw()) # set plot theme
