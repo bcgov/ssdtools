@@ -3,7 +3,7 @@ title: "Frequently Asked Questions"
 author: "ssdtools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
 bibliography: references.bib
-csl: style.csl
+# csl: style.csl
 mainfont: Arial
 mathfont: Courier
 latex_engine: MathJax

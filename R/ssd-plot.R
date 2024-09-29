@@ -19,7 +19,7 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
   chk_string(xlab)
   chk_string(ylab)
 
-  if (is.waive(xbreaks) & trans == "log10") {
+  if (is.waive(xbreaks) && trans == "log10") {
     xbreaks <- trans_breaks("log10", function(x) 10^x)
   }
 

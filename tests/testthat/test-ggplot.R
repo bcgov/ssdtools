@@ -55,7 +55,7 @@ test_that("plot geom_ssdpoint", {
 
 test_that("plot geom_ssdpoint identity stat", {
   data <- ssddata::ccme_boron
-  data$New <- (1:nrow(data) - 0.5) / nrow(data)
+  data$New <- (seq_len(nrow(data)) - 0.5) / nrow(data)
   gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc, y = New)) +
     geom_ssdpoint(stat = "identity")
   expect_snapshot_plot(gp, "geom_ssdpoint_identity")
@@ -69,7 +69,7 @@ test_that("plot geom_ssdsegment", {
 
 test_that("plot geom_ssdsegment identity", {
   data <- ssddata::ccme_boron
-  data$New <- (1:nrow(data) - 0.5) / nrow(data)
+  data$New <- (seq_len(nrow(data)) - 0.5) / nrow(data)
   gp <- ggplot2::ggplot(data, ggplot2::aes(
     x = Conc, xend = Conc * 2,
     y = New, yend = New

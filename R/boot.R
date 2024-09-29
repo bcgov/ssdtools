@@ -125,7 +125,7 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     wts = wts,
     .options = furrr::furrr_options(seed = seeds)
   )
-  names(estimates) <- boot_filename(1:length(estimates),
+  names(estimates) <- boot_filename(seq_along(estimates),
     prefix = "", sep = "",
     dist = paste0("_", dist)
   )

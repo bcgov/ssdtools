@@ -17,7 +17,6 @@ generics::tidy
 
 # optimized function for tmbfit
 .tidy_tmbfit_estimates <- function(x) {
-  dist <- x$dist
   suppressWarnings(capture.output(x <- sdreport(x$model)))
   x <- suppressWarnings(summary(x))
   est <- unname(x[, 1])
