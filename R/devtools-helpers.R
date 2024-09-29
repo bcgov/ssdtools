@@ -14,10 +14,11 @@
 
 release_questions <- function() {
   c(
-    "Have you confirmed Apache 2.0 license at the top of all code files?",
-    "Have you confirmed Creative Commons license for all non-code files?",
     "Have you run `data-raw/data-raw.R`?",
     "Have you tested using `ssdtests` package?",
-    "Have you updated `small-sample-bias.pdf` using `ssdtests` package?"
+    "Have you updated `small-sample-bias.pdf` using `ssdtests` package?",
+    "Have you confirmed all images in .Rmd files have alternative text defined using the `fig.alt` argument?",
+    "Have you confirmed Apache 2.0 license at the top of all code files?",
+    "Have you confirmed Creative Commons license for all non-code files?"
   )
 }
