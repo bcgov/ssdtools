@@ -52,7 +52,7 @@ pak::pak("bcgov/ssdtools")
 
 ## Introduction
 
-The dependency [`ssddata`](https://cran.r-project.org/package=ssddata)
+The dependency [`ssddata`](https://github.com/open-AIMS/ssddata)
 provides example data sets for several chemicals including Boron.
 
 ``` r
@@ -142,16 +142,10 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" alt="A plot of the data and model-averaged prediction with confidence intervals" width="100%" />
 
-### References
-
-Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
-Distributions in Ecotoxicology. CRC Press.
-
 ## Information
 
 Get started with ssdtools at
-<https://bcgov.github.io/ssdtools/articles/ssdtools.html> and visit the
-[FAQ](https://bcgov.github.io/ssdtools/articles/faqs.html)s.
+<https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
 
 A shiny app to allow non-R users to interface with ssdtools is available
 at <https://github.com/bcgov/shinyssdtools>.
@@ -183,6 +177,15 @@ Please note that the ssdtools project is released with a [Contributor
 Code of
 Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
+
+## References
+
+Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
+Distributions in Ecotoxicology. CRC Press.
+
+<div id="refs">
+
+</div>
 
 ## Licensing
 

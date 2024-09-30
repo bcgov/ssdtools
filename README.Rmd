@@ -50,28 +50,33 @@ pak::pak("bcgov/ssdtools")
 
 ## Introduction
 
-The dependency [`ssddata`](https://cran.r-project.org/package=ssddata) provides example data sets for several chemicals including Boron.
+The dependency [`ssddata`](https://github.com/open-AIMS/ssddata) provides example data sets for several chemicals including Boron.
+
 ```{r, message=FALSE}
 library(ssdtools)
 ssddata::ccme_boron
 ```
 
 The six default distributions are fit using `ssd_fit_dists()`
+
 ```{r}
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ```
 
 and can be quickly plotted using `autoplot`
+
 ```{r, warning = FALSE, message = FALSE, fig.alt="A plot of the data and fitted distributions"}
 autoplot(fits)
 ```
 
 The goodness of fit can be assessed using `ssd_gof`
+
 ```{r}
 ssd_gof(fits)
 ```
 
 and the model-averaged 5% hazard concentration estimated (with bootstrapping to get confidence intervals) using `ssd_hc`.
+
 ```{r}
 set.seed(99)
 hc5 <- ssd_hc(fits, ci = TRUE)
@@ -79,11 +84,13 @@ print(hc5)
 ```
 
 Model-averaged predictions complete with confidence intervals can also be estimated by parametric bootstrapping using the `stats` generic `predict`.
+
 ```{r, eval=FALSE}
 boron_pred <- predict(fits, ci = TRUE)
 ```
 
 The predictions can be plotted together with the original data using `ssd_plot`.
+
 ```{r, fig.alt="A plot of the data and model-averaged prediction with confidence intervals"}
 library(ggplot2)
 
@@ -97,13 +104,9 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
   scale_colour_ssd()
 ```
 
-### References
-
-Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.
-
 ## Information
 
-Get started with ssdtools at <https://bcgov.github.io/ssdtools/articles/ssdtools.html> and visit the [FAQ](https://bcgov.github.io/ssdtools/articles/faqs.html)s.
+Get started with ssdtools at <https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
 
 A shiny app to allow non-R users to interface with ssdtools is available at <https://github.com/bcgov/shinyssdtools>.
 
@@ -126,6 +129,12 @@ If you would like to contribute to the package, please see our
 
 Please note that the ssdtools project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). 
 By contributing to this project, you agree to abide by its terms.
+
+## References
+
+Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.
+
+<div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
 cat(ssdtools::ssd_licensing_md())
