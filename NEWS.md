@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.0.0
+
+- Added `scale_fill_ssd()`.
+
+- Merge branch 'open-AIMS-consolidate_figs' into dev.
+
+- PLACEHOLDER https://github.com/poissonconsulting/ssdtools/pull/381 (#381).
+
+
 # ssdtools 1.0.6.9018
 
 ## Additions
