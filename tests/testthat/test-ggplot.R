@@ -27,6 +27,10 @@ test_that("scale_color_ssd is ggproto", {
   expect_output(expect_identical(str(color), str(colour)))
 })
 
+test_that("scale_fill_ssd is ggproto", {
+  expect_true(ggplot2::is.ggproto(scale_fill_ssd()))
+})
+
 test_that("stat_ssd deprecated", {
   lifecycle::expect_defunct(ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
     stat_ssd())

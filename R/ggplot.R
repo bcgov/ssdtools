@@ -47,6 +47,12 @@ scale_color_ssd <- function(...) {
   discrete_scale("colour", palette = ssd_pal(), ...)
 }
 
+#' @describeIn scale_colour_ssd Discrete color-blind scale for SSD Plots
+#' @export
+scale_fill_ssd <- function(...) {
+  discrete_scale("fill", palette = ssd_pal(), ...)
+}
+
 #' Species Sensitivity Data Points
 #'
 #' Uses the empirical cumulative distribution to create scatterplot of points `x`.

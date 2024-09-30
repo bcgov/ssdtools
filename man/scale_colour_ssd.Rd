@@ -3,11 +3,14 @@
 \name{scale_colour_ssd}
 \alias{scale_colour_ssd}
 \alias{scale_color_ssd}
+\alias{scale_fill_ssd}
 \title{Discrete color-blind scale for SSD Plots}
 \usage{
 scale_colour_ssd(...)
 
 scale_color_ssd(...)
+
+scale_fill_ssd(...)
 }
 \arguments{
 \item{...}{Arguments passed to \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}.}
@@ -18,6 +21,8 @@ Discrete color-blind scale for SSD Plots
 \section{Functions}{
 \itemize{
 \item \code{scale_color_ssd()}: Discrete color-blind scale for SSD Plots
+
+\item \code{scale_fill_ssd()}: Discrete color-blind scale for SSD Plots
 
 }}
 \examples{
