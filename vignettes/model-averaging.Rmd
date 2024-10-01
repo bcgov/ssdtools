@@ -516,7 +516,7 @@ Sadly, this is rarely the case in practice!
 
 ### Model-Averaging in `ssdtools`
 
-Please see the [Getting started with ssdtools](https://poissonconsulting.github.io/ssdtools/articles/ssdtools.html) vignette for examples of obtaining model-averaged *HCx* values and predictions using `ssdtools`.
+Please see the [Getting started with ssdtools](https://bcgov.github.io/ssdtools/articles/ssdtools.html) vignette for examples of obtaining model-averaged *HCx* values and predictions using `ssdtools`.
 
 ## References
 
