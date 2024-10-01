@@ -800,7 +800,7 @@ For smaller sample sizes, a similar exercise as above can be used to
 estimate the impact of the small sample bias. Howeverr, for small sample sizes,
 this exercise may be akin to "fiddling while Rome burns", i.e, this does not change the basic
 problems with small sample sizes including (a) most distributions will have adequate fits and it is unlikely be possible to discriminate between distributions;
-and (b) extrapoloting even to a moderate tail fraction (e.g. HC5) is very, very
+and (b) extrapolating even to a moderate tail fraction (e.g. HC5) is very, very
 dependent on the chosen distribution; (c) there is no data available
 to support even moderate extrapolation to tail proportions. Higher certainty in 
 the estimates can only be obtained by increasing sample sizes.
