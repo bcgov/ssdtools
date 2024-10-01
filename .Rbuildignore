@@ -13,7 +13,6 @@
 ^LICENSE\.md$
 ^_pkgdown\.yml$
 ^README\.Rmd$
-^CONTRIBUTING\.Rmd$
 
 ^paper$
 ^vignettestatic$
