@@ -48,7 +48,7 @@ A detailed account of the issue of small sample bias in estimates can be found i
 ## Investigations into setting minimum sample sizes for uni-modal and bi-modal distributions in ssdtools
 
 Most jurisdictions require a minimum sample size for fitting a valid SSD. 
-The current Australian and New Zealand minimum is 5, in order to fit the two-parameter log-normal distribution [@warne2018; @anzg]. 
+The current Australian and New Zealand minimum is 5, in order to fit the two-parameter log-normal distribution [@warne2018]. 
 In ssdtools the default minimum sample size is 6 [@thorleysschwartz2018joss], which is consistent with the current methodology for British Columbia [@ccme]. 
 
 Here we report on a series of simulation studies designed to inform a final decision on the default minimum sample size to adopt for both the uni-modal 2 parameter distributions, as well as the bi-modal 5 parameter distributions.
