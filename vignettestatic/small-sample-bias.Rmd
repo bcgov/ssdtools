@@ -1,7 +1,10 @@
 ---
 title: "Small sample bias in estimates"
-author: "sstools Team"
-date: '`r format(Sys.time(), "%Y-%m-%d")`'
+author: "ssdtools Team"
+date: '`r format(Sys.time(), "%Y-%m-%d", tz = "UTC")`'
+bibliography: ../vignettes/references.bib
+mathfont: Courier
+latex_engine: MathJax
 output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Small sample bias in estimates}   
@@ -807,9 +810,12 @@ the estimates can only be obtained by increasing sample sizes.
 
 -----
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence"
-style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br /><span
-xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ssdtools</span> by <span
-xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">the Province of British Columbia
-</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-Creative Commons Attribution 4.0 International License</a>.
+<h2>Licensing</h2>
+<p>Copyright 2018-2024 Province of British Columbia<br>
+Copyright 2021 Environment and Climate Change Canada<br>
+Copyright 2023-2024 Australian Government Department of Climate Change,
+Energy, the Environment and Water</p>
+<p>The documentation is released under the <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0
+License</a></p>
+<p>The code is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License
+2.0</a></p>
