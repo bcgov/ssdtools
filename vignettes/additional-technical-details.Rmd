@@ -97,7 +97,7 @@ However, there as a gradual improvement in bias with increasing N.
 There is no strong evidence for preferring  N=6 over N=7 in the context of bias from either of the simulation studies. 
 We note that the bias was highest at these small sample sizes for data generated using a gamma distribution, likely reflecting the extreme left-tailed nature of this distribution. 
 
-### ACIc based model weights
+### AICc based model weights
 
 Aside from considerations of bias, coverage and confidence interval width, it is also prudent to examine how the weights of the different distributions changed with sample size, for data generated using the six different default distributions, to more fully investigate sample size issues associated with the use of the mixture distributions. 
 This was examined using the simulation study across the larger combined ssddata and EnviroTox datasets (353 datasets) to ensure a wide range of potential representations of each of the six default distributions was considered.
