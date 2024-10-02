@@ -1,222 +1,137 @@
 ---
 title: "Customising Plots"
 author: "ssdtools Team"
-date: '`r format(Sys.time(), "%Y-%m-%d")`'
+date: '`r format(Sys.time(), "%Y-%m-%d", tz = "UTC")`'
 bibliography: references.bib
-latex_engine: MathJax
-mainfont: Arial
 mathfont: Courier
-csl: my-style.csl
+latex_engine: MathJax
 output: rmarkdown::html_vignette
-#output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{Customising Plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
-  echo = TRUE,
+  collapse = TRUE,
+  comment = "#>",
   fig.width = 6,
   fig.height = 4
 )
 ```
 
-## Plotting the cumulative distribution
+## Plotting the cumulative distributions
 
-The `ssdtools` package produces a plot of the cumulative distribution functions for the multiple input distributions through the use of the `ssd_plot_cdf()` function. 
-For example, consider the boron data. We can fit, and then plot the cdf using:
+The `ssdtools` package plots the cumulative distribution functions using `ssd_plot_cdf()`. 
 
-```{r echo=TRUE, warning=FALSE, message=FALSE, cache=TRUE, fig.width=7,fig.height=5}
-library(ggplot2)
+For example, consider the CCME boron data from the [`ssddata`](https://github.com/open-AIMS/ssddata) package. 
+We can fit, and then plot the cdfs as follows.
+
+```{r warning=FALSE, message=FALSE, fig.alt="A plot of the CCME boron data with the six default distributions."}
 library(ssdtools)
+library(ggplot2)
 
 fits <- ssd_fit_dists(ssddata::ccme_boron)
-gp <- ssd_plot_cdf(fits)
-
-print(gp)
+ssd_plot_cdf(fits)
 ```
 
-This graphic is a [ggplot](https://ggplot2.tidyverse.org) object and so can be saved and embellished in the usual way.
+This graphic is a [ggplot](https://ggplot2.tidyverse.org) object and so can be customized in the usual way.
 
-## Customising the cumulative distribution plot
+For example, we can add the model-averaged cdf by setting `average = NA`, change the string used to separate thousands using `big.mark`, customize the color scale with `scale_color_manual()` and change the theme.
 
-### Plot the model-averaged fit with individual fits
-
-We can add the model-averaged cdf by first obtaining predicted values, and extending the default ssdtools ggplot in the usual way using geom_line:
-
-```{r, fig.width=7,fig.height=5}
-library(ssddata)
-library(ssdtools)
-library(ggplot2)
-
-dist <- ssdtools::ssd_fit_dists(ssddata::ccme_boron)
-pred <- predict(dist, ci = FALSE)
-boron_hc5 <- ssd_hc(dist)
-ssdtools::ssd_plot_cdf(dist) +
-  geom_line(data = pred, aes(x = est, y = proportion, colour = "Model average", lty = "Model average"), lwd = 0.75) +
-  scale_linetype_manual(name = "Distribution", breaks = c("Model average", names(dist)), values = 1:7) +
-  scale_color_manual(name = "Distribution", breaks = c("Model average", names(dist)), values = 1:7) +
+```{r, fig.alt="A plot of the CCME boron data with the model average distribution and the six default distributions."}
+ssd_plot_cdf(fits, average = NA, big.mark = " ") + 
+  scale_color_manual(name = "Distribution", breaks = c("average", names(fits)), values = 1:7) +
   theme_bw()
 ```
 
-### Other customisations
+## ggplot Geoms
 
 The `ssdtools` package provides four ggplot geoms to allow you construct your own plots.
 
-The first is `geom_ssdpoint()` which plots species sensitivity data 
-```{r fig.width=7,fig.height=5}
-ggplot(ccme_boron) +
+### `geom_ssdpoint()`
+
+The first is `geom_ssdpoint()` which plots species sensitivity data
+
+```{r, fig.alt = "A plot of the CCME boron data."}
+ggplot(ssddata::ccme_boron) +
   geom_ssdpoint(aes(x = Conc)) +
   ylab("Probability density") +
-  xlab("Concenration")
+  xlab("Concentration")
 ``` 
 
-The second is `geom_ssdsegments()` which plots the range of censored species sensitivity data 
-```{r fig.width=7,fig.height=5}
-ggplot(ccme_boron) +
-  geom_ssdsegment(aes(x = Conc, xend = Conc * 2)) +
+### `geom_ssdsegments()`
+
+The second is `geom_ssdsegments()` which plots the ranges of censored species sensitivity data
+
+```{r, fig.alt = "A plot of CCME boron data with the ranges of the censored data indicated by horizontal lines."}
+ggplot(ssddata::ccme_boron) +
+  geom_ssdsegment(aes(x = Conc, xend = Conc * 4)) +
   ylab("Probability density") +
   xlab("Concenration")
 ``` 
 
+### `geom_xribbon()`
+
 The third is `geom_xribbon()` which plots species sensitivity confidence intervals
-```{r fig.width=7,fig.height=5}
+
+```{r, fig.alt="A plot of the confidence intervals for the CCME boron data."}
 ggplot(boron_pred) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion)) +
   ylab("Probability density") +
   xlab("Concenration")
 ```  
 
+### `geom_hcintersect()`
+
 And the fourth is `geom_hcintersect()` which plots hazard concentrations
-```{r fig.width=7,fig.height=5}
+
+```{r, fig.alt="A plot of hazard concentrations as dotted lines."}
 ggplot() +
   geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(0.05, 0.1, 0.2)) +
   ylab("Probability density") +
   xlab("Concenration")
 ```    
 
-They can be combined together as follows
-```{r fig.width=7,fig.height=5}
+### Putting it together
+
+Geoms can be combined as follows
+
+```{r, fig.alt="A plot of censored CCME boron data with confidence intervals"}
 gp <- ggplot(boron_pred, aes(x = est)) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion), alpha = 0.2) +
   geom_line(aes(y = proportion)) +
-  geom_ssdsegment(data = ccme_boron, aes(x = Conc / 2, xend = Conc * 2)) +
-  geom_ssdpoint(data = ccme_boron, aes(x = Conc / 2)) +
-  geom_ssdpoint(data = ccme_boron, aes(x = Conc * 2)) +
+  geom_ssdsegment(data = ssddata::ccme_boron, aes(x = Conc / 2, xend = Conc * 2)) +
+  geom_ssdpoint(data = ssddata::ccme_boron, aes(x = Conc / 2)) +
+  geom_ssdpoint(data = ssddata::ccme_boron, aes(x = Conc * 2)) +
   scale_y_continuous("Species Affected (%)", labels = scales::percent) +
-  expand_limits(y = c(0, 1)) +
-  xlab("Concentration (mg/L)")
-print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 5 / 100))
+  xlab("Concentration (mg/L)") +
+  expand_limits(y = c(0, 1))
+
+gp
 ```
 
-To log the x-axis add the following code.
-```{r fig.width=7,fig.height=5}
-gp <- gp + coord_trans(x = "log10") +
-  scale_x_continuous(
-    breaks = scales::trans_breaks("log10", function(x) 10^x),
-    labels = comma_signif
-  )
-print(gp + geom_hcintersect(xintercept = boron_hc5$est, yintercept = 0.05))
+To log the x-axis and include mathematical notation and add the HC5 value use the following code.
+
+```{r, fig.alt="A plot of censored CCME boron data on log scale with confidence intervals, mathematical and the 5% hazard concentration."}
+gp + 
+  scale_x_log10(
+    latex2exp::TeX("Boron $(\\mu g$/L)$")
+  ) +
+  geom_hcintersect(xintercept = ssd_hc(fits)$est, yintercept = 0.05)
 ```
+
+## Saving plots
 
 The most recent plot can be saved as a file using `ggsave()`, which also allows the user to set the resolution.
 
-```r
-ggsave("file_name.png", dpi = 600)
+```{r, eval = FALSE}
+ggsave("file_name.png", dpi = 300)
 ```
-
-## Fitting and plotting distributions to multiple groups such taxa and/or chemicals
-
-An elegant approach using some tidyverse packages is demonstrated below.
-
-```{r, message=FALSE}
-library(ssddata)
-library(ssdtools)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(purrr)
-
-boron_preds <- nest(ccme_boron, data = c(Chemical, Species, Conc, Units)) %>%
-  mutate(
-    Fit = map(data, ssd_fit_dists, dists = "lnorm"),
-    Prediction = map(Fit, predict)
-  ) %>%
-  unnest(Prediction)
-```
-
-The resultant data and predictions can then be plotted as follows.
-```{r, fig.width = 7, fig.height = 5}
-library(ssdtools)
-library(ssddata)
-ssd_plot(ccme_boron, boron_preds, xlab = "Concentration (mg/L)", ci = FALSE) +
-  facet_wrap(~Group)
-```
-
-
-## Embellishing Plots with an Exposure Distribution
-
-For example, suppose we want to superimpose an environmental concentration cumulative distribution and compute the exposure risk as outlined in @verdonck_limitations_2003.
-
-```{r echo=FALSE}
-# what are the mean and sd on the log-scale for the environmental concentration
-ex.mean.log <- log(0.1)
-ex.sd.log <- 1
-```
-
-Finding a suitable probability distribution to describe the exposure concentration is beyond the scope of this document -- we will assume that this has been done elsewhere.
-In particular, suppose that the exposure concentration follows a log-normal distribution with a mean of `r signif(ex.mean.log, 3)` and a standard deviation of `r ex.sd.log` on the logarithmic scale. 
-From the exposure distribution, we construct a data frame with the concentration values and the cumulative probability of seeing this exposure or less in the environment.
-
-Notice that some care is needed because the ssdtools plot is on the logarithmic base 10 scale and not the natural logarithm base $e$ scale.
-
-```{r }
-ex.cdf <- data.frame(Conc = exp(seq(log(.01), log(10), .1))) # generate a grid of concentrations
-ex.cdf$ex.cdf <- plnorm(ex.cdf$Conc,
-  meanlog = ex.mean.log,
-  sdlog = ex.sd.log
-) # generate the cdf
-```
-
-We now add this to the plot
-```{r fig.width=7,fig.height=5}
-gp +
-  geom_line(data = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", linewidth = 2) +
-  annotate("text",
-    label = paste("Exposure distribution"),
-    x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
-  )
-```
-
-The `ssdtools` package contains a function `ssd_exposure()` that computes the risk as defined by Verdonck et al (2003) representing the average proportion of species at risk.
-
-```{r echo=TRUE}
-set.seed(99)
-ex.risk <- ssd_exposure(fits, meanlog = ex.mean.log, sdlog = ex.sd.log)
-ex.risk
-```
-The risk of `r round(ex.risk, 5)` can also be added to the plot in the usual way:
-
-```{r echo=TRUE, fig.width=7,fig.height=5}
-gp +
-  geom_line(dat = ex.cdf, aes(x = Conc, y = ex.cdf), color = "red", linewidth = 2) +
-  annotate("text",
-    label = paste("Exposure distribution"),
-    x = 1.08 * ex.cdf$Conc[which.max(ex.cdf$ex.cdf > 0.5)], y = 0.5, angle = 75
-  ) +
-  annotate("text",
-    label = paste("Verdonck risk :", round(ex.risk, 5)),
-    x = Inf, y = 0, hjust = 1.1, vjust = -.5
-  )
-```
-
-
-## References
 
 <div id="refs"></div>
 
 ```{r, results = "asis", echo = FALSE}
-cat(ssd_licensing_md())
+cat(ssdtools::ssd_licensing_md())
 ```

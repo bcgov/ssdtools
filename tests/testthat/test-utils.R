@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -22,7 +25,7 @@ test_that("ssd_ecd_data", {
 
 test_that("comma_signif", {
   withr::local_options(lifecycle_verbosity = "quiet")
-  
+
   expect_identical(
     comma_signif(c(0.0191, 1, NA, 177, 1111)),
     c("0.0191", "1", NA, "177", "1,110")

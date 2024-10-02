@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ssdtools <img src="man/figures/logo.png" align="right" />
+# ssdtools <img src="man/figures/logo.png" align="right" alt="ssdtools logo of cumulative species sensitivity distribution with outlines of commonly used species as data" />
 
 <!-- badges: start -->
 
@@ -52,8 +52,8 @@ pak::pak("bcgov/ssdtools")
 
 ## Introduction
 
-The dependency [`ssddata`](https://cran.r-project.org/package=ssddata)
-provides a example data sets for several chemicals including Boron.
+The dependency [`ssddata`](https://github.com/open-AIMS/ssddata)
+provides example data sets for several chemicals including Boron.
 
 ``` r
 library(ssdtools)
@@ -86,7 +86,7 @@ and can be quickly plotted using `autoplot`
 autoplot(fits)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" alt="A plot of the data and fitted distributions" width="100%" />
 
 The goodness of fit can be assessed using `ssd_gof`
 
@@ -103,8 +103,8 @@ ssd_gof(fits)
 #> 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357
 ```
 
-and the model-averaged 5% hazard concentration estimated by
-bootstrapping using `ssd_hc`.
+and the model-averaged 5% hazard concentration estimated (with
+bootstrapping to get confidence intervals) using `ssd_hc`.
 
 ``` r
 set.seed(99)
@@ -116,23 +116,11 @@ print(hc5)
 #> 1 average       0.05  1.26 0.782 0.407  3.29     1 parametr…  1000     1 <dbl>
 ```
 
-To bootstrap in parallel set `future::plan()`. For example:
-
-``` r
-future::multisession(workers = 2)
-hc5 <- ssd_hc(fits, ci = TRUE)
-```
-
 Model-averaged predictions complete with confidence intervals can also
 be estimated by parametric bootstrapping using the `stats` generic
-`predict`. To perform bootstrapping for each distribution in parallel
-register the future backend and then select the evaluation strategy.
+`predict`.
 
 ``` r
-doFuture::registerDoFuture()
-future::plan(future::multisession)
-
-set.seed(99)
 boron_pred <- predict(fits, ci = TRUE)
 ```
 
@@ -152,12 +140,7 @@ ssd_plot(ssddata::ccme_boron, boron_pred,
   scale_colour_ssd()
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
-
-## References
-
-Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
-Distributions in Ecotoxicology. CRC Press.
+<img src="man/figures/README-unnamed-chunk-8-1.png" alt="A plot of the data and model-averaged prediction with confidence intervals" width="100%" />
 
 ## Information
 
@@ -167,20 +150,8 @@ Get started with ssdtools at
 A shiny app to allow non-R users to interface with ssdtools is available
 at <https://github.com/bcgov/shinyssdtools>.
 
-For the latest changes visit
-[NEWS](https://bcgov.github.io/ssdtools/news/).
-
-The citation for the shiny app:
-
-*Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species
-Sensitivity Distributions (SSDs). JOSS 6(57): 2848.
-<https://joss.theoj.org/papers/10.21105/joss.02848>.*
-
-The ssdtools package was developed as a result of earlier drafts of:
-
-*Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for
-Modeling Species Sensitivity Distributions. Province of British
-Columbia, Victoria, BC.*
+For the latest changes to the development version see the
+[NEWS](https://bcgov.github.io/ssdtools/news/) file.
 
 For recent developments in SSD modeling including a review of existing
 software see:
@@ -189,29 +160,32 @@ software see:
 Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
 <https://doi.org/10.1002/etc.4925>.*
 
-The CCME `data.csv` data file is derived from a factsheet prepared by
-the [Canadian Council of Ministers of the
-Environment](http://ceqg-rcqe.ccme.ca/en/index.html). See the
-[`data-raw`](https://github.com/bcgov/ssdtools/tree/master/data-raw)
-folder for more information.
-
-## Getting Help or Reporting an Issue
+### Getting Help or Reporting an Issue
 
 To report bugs/issues/feature requests, please file an
 [issue](https://github.com/bcgov/ssdtools/issues/).
 
-## How to Contribute
+### Contribution
 
 If you would like to contribute to the package, please see our
 [CONTRIBUTING](https://github.com/bcgov/ssdtools/blob/master/.github/CONTRIBUTING.md)
 guidelines.
 
-## Code of Conduct
+### Code of Conduct
 
 Please note that the ssdtools project is released with a [Contributor
 Code of
 Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
+
+## References
+
+Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
+Distributions in Ecotoxicology. CRC Press.
+
+<div id="refs">
+
+</div>
 
 ## Licensing
 

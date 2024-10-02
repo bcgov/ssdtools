@@ -1,4 +1,7 @@
-# Copyright 2023 Environment and Climate Change Canada
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -38,7 +41,8 @@
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
   lifecycle::deprecate_warn("2.0.0", "ssd_wqg_bc()", "ssd_fit_bcanz()",
-                            details = "Please use `ssd_fit_bcanz()` and `ssd_hc_bcanz()` instead.")
+    details = "Please use `ssd_fit_bcanz()` and `ssd_hc_bcanz()` instead."
+  )
   fits <- ssd_fit_dists(data, left = left, rescale = FALSE)
   ssd_hc(fits, ci = TRUE, nboot = 10000)
 }
@@ -69,7 +73,8 @@ ssd_wqg_bc <- function(data, left = "Conc") {
 #' }
 ssd_wqg_burrlioz <- function(data, left = "Conc") {
   lifecycle::deprecate_warn("2.0.0", "ssd_wqg_burrlioz()", "ssd_fit_bcanz()",
-                            details = "Please use `ssd_fit_burrlioz()` and `ssd_hc_burrlioz()` instead.")
+    details = "Please use `ssd_fit_burrlioz()` and `ssd_hc_burrlioz()` instead."
+  )
   fit <- ssd_fit_burrlioz(data, left = left, rescale = FALSE)
   ssd_hc_burrlioz(fit, ci = TRUE, nboot = 10000)
 }

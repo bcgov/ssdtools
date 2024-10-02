@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -45,7 +48,7 @@ test_that("ssd_plot_cdf language", {
   data <- ssddata::ccme_boron
   data$Conc <- data$Conc * 100
   fits <- ssd_fit_dists(data)
-  
+
   expect_snapshot_plot(ssd_plot_cdf(fits, suffix = "="), "suffix")
   expect_snapshot_plot(ssd_plot_cdf(fits, big.mark = "_"), "fits_bigmark")
 })

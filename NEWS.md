@@ -1,61 +1,100 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 1.0.6.9018
+# ssdtools 2.0.0
 
-## Additions
+`ssdtools` v2.0.0, which now includes David Fox and Rebecca Fisher as co-authors, is the second major release of `ssdtools`.
 
-- Added to `ssd_hc()` and `ssd_hp()`
-  - `multi_est = TRUE` argument to calculate model averaged estimates 
-  treating the distributions as constituting a single mixture distribution.
-  - `method_ci = "weighted_samples"` to specify whether to use `"weighted_samples"`, `"weighted_arithmetic"`, `"multi_free"` or `"multi_fixed"` methods to generate confidence intervals.
-  - `samples` argument to include bootstrap samples as list of numeric vector(s).
-  - `save_to` argument to specify a directory in which to save the bootstrap datasets as csv files and parameter estimates as rds files. The files are named `data_000000001_xx.csv` and `estimates_000000001_xx.rds` etc where `xx` is the distribution. The parent data set and estimates are named `boot_000000000_xx.csv` and `estimates_000000000_xx.csv`.
-- Added `ssd_hp_bcanz()` and `ssd_hp.fitburrlioz()` function to get hazard proportions.
-- Added `ssd_label_comma()` for x-axis labels.
-- Added `trans = "log10"` and `add_x = 0` arguments to `ssd_plot()` and `ssd_plot_data()`.
-- Added `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
-- Added `ssd_exx()` functions to get default parameter estimates for distributions.
-- Added `ssd_censor_data()` to censor data. 
-- Added David Fox and Rebecca Fisher as co-authors.
-- Added `npars` argument to `ssd_dists_bcanz()`.
-- Added `big.mark = ","` for x-axis labels and `suffix = "%"` to y-axis labels to plotting functions.
+## Major Changes
 
-## Modifications
+The following changes are major in the sense that they could alter previous hazard concentrations or break code.
 
-- Only non-parametric bootstrap for censored data.
-- Changed `at_boundary_ok = TRUE` to ensure `lnorm_lnorm` mixture distribution included.
-- Changed `computable = TRUE` to as not required for bootstrapping.
-- Changed to `min_pboot = 0.95` for all functions.
-- Changed `min_pmix = 0` to `min_pmix = ssd_min_pmix(nrow(data))` to by default 
-give set min_pmix to be `0.1` or `3/nrow(data)` if greater to improve convergence of mixture models.
-- `estimates.fitdists()` now includes weights in returned parameters as well as an
-`all_estimates = FALSE` argument to allow parameter values for all implemented distributions to be included.
-- `ssd_fit_bcanz()`, `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` no longer rescale data by default.
-- `rescale = TRUE` now divides by the geometric mean of the minimum and maximum positive finite values as opposed to dividing by the geometric mean of the maximum finite value.
-- Replaced column percentage between 0 and 100 with proportion between 0 and 1 in output of `ssd_hc()`
-- Changed `delta = 7` to `delta = 9.21` to weight of included models no more than 0.01.
-- seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions). 
-- Exported `dists = ssd_dists_bcanz()` argument to `ssd_fit_bcanz()` to allow other packages to modify.
-- Check `...` unused where appropriate.
-- `ssd_plot_cdf()` now includes average with other distributions if `average = NA` (@poissonconsulting, #351).
-- switched from `logit_pmix` to `pmix` in mixture distributions
-- `lnorm` no longer initializes optimization with maximum likelihood estimates
-- Offset starting values for `gompertz` distribution.
+### Model Fitting and Averaging
 
-## Fixes
+#### Modifications
 
- - `ssd_hc()` and `ssd_hp()` now include `parametric` column.
- - `ssd_hp()` now includes `wt` column
- 
-## Deprecation
+The following arguments were added to `ssd_hc()` and `ssd_hp()`
 
-- Soft-deprecated `comma_signif()`.
-- Soft-deprecated argument `percent = 5` for `proportion = 0.05` for `ssd_hc()` and `predict()`.
-- `is_censored()`, `plot.fitdists()`, `ssd_plot_cf()` `geom_ssd()`, `stat_ssd()`, `xgompertz()`, `xlgumbel`, `ssd_hc_burrlioz()` now defunct.
-- Deprecated `ssd_wqg_bc()` and `ssd_wqg_burrlioz()`. (#75).
-- Deprecated `ssd_fit_bcanz()` and `ssd_hp_bcanz()`.
-- Removed `ccme_data` and `ccme_boron` data set.
-- Removed `pearson1000` data set (now in `ssdtests` data).
+- `multi_est = TRUE` to calculate model averaged estimates treating the distributions as constituting a single mixture distribution (previously it was effectively `FALSE`).
+- `method_ci = "weighted_samples"` to specify whether to use `"weighted_samples"`, `"weighted_arithmetic"`, `"multi_free"` or `"multi_fixed"` methods to generate confidence intervals (previously it was effectively `"weighted_arithmetic"`).
+
+In addition the data frame returned by `ssd_hc()` and `predict()` now includes a column `proportion` with values between 0 and 1 as opposed to a column `percentage` with between 0 and 100.
+
+Finally, with censored data confidence intervals can now only be estimated by non-parametric bootstrapping as the methods of parameterically bootstrapping censored data require review.
+
+## Minor Changes
+
+The remaining changes are minor.
+
+### Model Fitting
+
+#### Modifications
+
+The following arguments of `ssd_fit_dists()` were changed to reduce the chances of the `lnorm_lnorm` bimodal distribution being dropped from the default set:
+
+- `min_pmix = ssd_min_pmix(nrow(data))` so that by default `min_pmix` is 0.1 or `3/nrow(data)` if greater.
+- `at_boundary_ok = TRUE`.
+- `computable = TRUE`.
+
+These changes also allowed the `min_pboot = 0.95` argument to be changed from `0.80` for all bootstrapping functions.
+
+It is worth noting that the second two changes also reduce the chances of the BurrIII distribution being dropped.
+
+In addition `rescale = TRUE` now divides by the geometric mean of the minimum and maximum positive finite values as opposed to dividing by the geometric mean of the maximum finite value to improve the chances of convergence although `ssd_fit_bcanz()` no longer rescales by default.
+
+Other minor modifications to the model fitting functions include
+
+- `estimates.fitdists()` now includes weights in returned parameters as well as an `all_estimates = FALSE` argument to allow parameter values for all implemented distributions to be included.
+- `delta = 7` instead of `delta = 9.21` to ensure weight of included models at least 0.01.
+- seeds are now allocated to bootstrap samples as opposed to distributions (which results in a speed gain when there are more cores than the number of distributions). 
+- `lnorm` and `gompertz` initial values are offset from their maximum likelihood estimates to avoid errors in `optim()`.
+
+The following functions and arguments were also added:
+
+- `ssd_hp_bcanz()` and `ssd_hp.fitburrlioz()` to get hazard proportions.
+- `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
+- `ssd_exx()` functions to get default parameter estimates for distributions.
+- `ssd_censor_data()` to censor data. 
+- `npars = c(2L, 5L)` argument to `ssd_dists_bcanz()` to specify the number of parameters.
+- `dists = ssd_dists_bcanz()` to `ssd_fit_bcanz()` to allow other packages to modify.
+- `samples = FALSE` to `ssd_hc()` and `ssd_hp()` include bootstrap samples as list of numeric vector(s).
+- `save_to = NULL` to `ssd_hc()` and `ssd_hp()` to specify a directory in which to save the bootstrap datasets as csv files and parameter estimates as .rds files. 
+
+#### Fixes
+
+- `ssd_hc()` and `ssd_hp()` now return data frame with `parametric` column.
+- `ssd_hp()` now return data frame with `wt` column.
+
+#### Deprecations
+
+The following functions and arguments were deprecated:
+
+- `ssd_wqg_bc()` and `ssd_wqg_burrlioz()` were deprecated.
+- `percent = 5` in `ssd_hc()` and `predict()` was soft-deprecated for `proportion = 0.05`.
+- `is_censored()` is now defunct.
+
+### Plotting
+
+Perhaps the biggest plotting change is that `ssd_plot_cdf()` now plots the average SSD together with the individual distributions if `average = NA`. 
+
+In addition, the following functions and arguments were added.
+
+- `scale_fill_ssd()` for color-blind fill scale.
+- `ssd_label_comma()` for formatting of x-axis labels.
+- `trans = "log10"` and `add_x = 0` to `ssd_plot()` and `ssd_plot_data()` to control x-axis scale.
+- `big.mark = ","` for x-axis labels and `suffix = "%"` for y-axis labels to all plotting functions.
+
+and the following functions deprecated
+
+- `comma_signif()` was soft-deprecated.
+- `is_censored()`, `plot.fitdists()`, `ssd_plot_cf()` `geom_ssd()` and `stat_ssd()` are now defunct.
+
+### Data
+
+The following data sets were removed
+
+- `ccme_data` and `ccme_boron` (available in `ssddata` package).
+- `pearson1000` data set.
+
 
 # ssdtools 1.0.6
 

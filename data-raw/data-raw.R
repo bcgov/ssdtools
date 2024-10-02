@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -44,8 +47,9 @@ use_data(dist_data, overwrite = TRUE)
 
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 
-withr::with_seed(99,
-  boron_pred <- predict(fits, ci = TRUE, ci_method = "weighted_samples")
+withr::with_seed(
+  99,
+  boron_pred <- predict(fits, ci = TRUE)
 )
 
 use_data(boron_pred, overwrite = TRUE)

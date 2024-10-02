@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -19,7 +22,7 @@ test_that("ssd_plot_data ccme_boron", {
 test_that("ssd_plot_data ccme_boron color", {
   expect_snapshot_plot(ssd_plot_data(ssddata::ccme_boron,
     color = "Group", label = "Species", trans = "identity",
-    shift_x = 1, add_x = 10, 
+    shift_x = 1, add_x = 10,
   ), "ccme_boron2")
 })
 

@@ -54,9 +54,9 @@ The second major release (v2) includes critical updates to ensure that the $\tex
 
 SSDs are a practical tool for the determination of safe threshold concentrations for toxicants in fresh and marine waters, and are implemented in some form for risk assessment and water quality criteria derivation throughout multiple jurisdictions globally [@lepper2005manual; @Warne2018; @bcmecc2019; @USEPA2020].
 
-The selection of a suitable probability model has been identified as one of the most important and difficult choices in the use of SSDs [@chapman_2007]. 
+The selection of a suitable probability model has been identified as one of the most important and difficult choices in the use of SSDs [@newman_applying_2000]. 
 Since the original implementation (v0), `ssdtools` [@thorley2018ssdtools] has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_u$ values using multiple distributions, thereby avoiding the need for selection of a single distribution [@schwarz_improving_2019]. 
-The method, as applied in the SSD context is described in detail in [@fox_recent_2021], and provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
+The method, as applied in the SSD context is described in detail in @fox_recent_2021, and provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
 
 # Technical details
 
@@ -71,7 +71,7 @@ Since v1, `ssdtools` has by default fitted the `lnorm`, `llogis`, `lgumbel`, `ga
 ## Model Fitting
 
 In the first major update (v1), the dependency `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood [@millar_maximum_2011]. 
-The move to `TMB` allowed more control over model specification, transparency regarding convergence criteria and better assessment of numerical instability issues. 
+The move to `TMB` allowed more control over model specification. 
 
 ## Model Averaging
 
@@ -98,11 +98,11 @@ Finding the solution to this last equation is referred to as *finding the root(s
 ## Confidence Intervals
 
 `ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_u$ values via bootstrapping.
-By default all versions of `ssdtools` use parametric bootstrapping as it has better coverage than the equivalent non parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2021].
+By default all versions of `ssdtools` use parametric bootstrapping for non-censored data as it has better coverage than the equivalent non parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2021].
 The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions (`weighted_arithmetic`).
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
 
-Consequently, v2 also offers a parametric bootstrap method that uses the joint cdf to generate data before refitting the original distribution set and solving for the newly estimated joint cdf [see details in @fox_methodologies_2024].
+Consequently, v2 also offers a parametric bootstrap method for non-censored data that uses the joint cdf to generate data before refitting the original distribution set and solving for the newly estimated joint cdf [see details in @fox_methodologies_2024].
 This "multi" method can be implemented with (`multi_free`) and without (`multi_fixed`) re-estimation of the model weights.
 However, although the "multi" method has good coverage it is computationally slow.
 As a result, the default method (`weighted_samples`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
@@ -113,7 +113,8 @@ In order to implement the "multi" method of bootstrapping, v2 also provides the 
 
 ## Plotting 
 
-As well as fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, `ssdtools` extends the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms and a discrete color-blind scale `scale_color_sdd()` for SSD plots.
+As well as fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, from v1 `ssdtools` has extended the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms and a discrete color-blind scale `scale_color_sdd()` for SSD plots.
+The current version (v2) adds `scale_fill_ssd()` for a discrete color-blind fill scale and `ssd_label_comma()` for formatting of x-axis labels.
 
 # Example of use
 
@@ -147,7 +148,7 @@ ssd_hc(fits, ci = TRUE)
 # A tibble: 1 × 11
   dist    proportion   est    se   lcl   ucl    wt method     nboot pboot samples  
   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>>
-1 average       0.05  1.26 0.818 0.397  3.41     1 parametric  1000 0.999 <dbl [0]>
+1 average       0.05  1.26 0.819 0.397  3.41     1 parametric  1000     1 <dbl [0]>
 ```
 
 And all of the distributions plotted via:

@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -12,7 +15,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-
 test_that("ssd_pal is function", {
   expect_true(chk::vld_function(ssd_pal()))
 })
@@ -25,6 +27,10 @@ test_that("scale_color_ssd is ggproto", {
   color <- scale_color_ssd()
   colour <- scale_colour_ssd()
   expect_output(expect_identical(str(color), str(colour)))
+})
+
+test_that("scale_fill_ssd is ggproto", {
+  expect_true(ggplot2::is.ggproto(scale_fill_ssd()))
 })
 
 test_that("stat_ssd deprecated", {
@@ -55,7 +61,7 @@ test_that("plot geom_ssdpoint", {
 
 test_that("plot geom_ssdpoint identity stat", {
   data <- ssddata::ccme_boron
-  data$New <- (1:nrow(data) - 0.5) / nrow(data)
+  data$New <- (seq_len(nrow(data)) - 0.5) / nrow(data)
   gp <- ggplot2::ggplot(data, ggplot2::aes(x = Conc, y = New)) +
     geom_ssdpoint(stat = "identity")
   expect_snapshot_plot(gp, "geom_ssdpoint_identity")
@@ -69,7 +75,7 @@ test_that("plot geom_ssdsegment", {
 
 test_that("plot geom_ssdsegment identity", {
   data <- ssddata::ccme_boron
-  data$New <- (1:nrow(data) - 0.5) / nrow(data)
+  data$New <- (seq_len(nrow(data)) - 0.5) / nrow(data)
   gp <- ggplot2::ggplot(data, ggplot2::aes(
     x = Conc, xend = Conc * 2,
     y = New, yend = New

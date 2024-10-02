@@ -24,6 +24,11 @@ A data frame of the predictions based on 1,000 bootstrap iterations.
 }
 }
 \examples{
+\dontrun{
+ fits <- ssd_fit_dists(ssddata::ccme_boron)
+ set.seed(99)
+ boron_pred <- predict(fits, ci = TRUE)
+}
 head(boron_pred)
 }
 \concept{boron}

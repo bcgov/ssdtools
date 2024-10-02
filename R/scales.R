@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -16,7 +19,7 @@
 #'
 #' @inheritParams params
 #'
-#' @return A "labelling" function that takes a vector x and 
+#' @return A "labelling" function that takes a vector x and
 #' returns a character vector of `length(x)` giving a label for each input value.
 #' @seealso [scales::label_comma()]
 #' @export
@@ -29,7 +32,7 @@ ssd_label_comma <- function(digits = 3, ..., big.mark = ",") {
   chk_number(digits)
   chk_string(big.mark)
   chk_unused(...)
-  
+
   function(x) {
     x <- signif(x, digits = digits)
     y <- as.character(x)

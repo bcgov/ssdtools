@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -45,6 +48,12 @@ scale_colour_ssd <- function(...) {
 #' @export
 scale_color_ssd <- function(...) {
   discrete_scale("colour", palette = ssd_pal(), ...)
+}
+
+#' @describeIn scale_colour_ssd Discrete color-blind scale for SSD Plots
+#' @export
+scale_fill_ssd <- function(...) {
+  discrete_scale("fill", palette = ssd_pal(), ...)
 }
 
 #' Species Sensitivity Data Points

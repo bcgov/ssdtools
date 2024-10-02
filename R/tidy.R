@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -17,7 +20,6 @@ generics::tidy
 
 # optimized function for tmbfit
 .tidy_tmbfit_estimates <- function(x) {
-  dist <- x$dist
   suppressWarnings(capture.output(x <- sdreport(x$model)))
   x <- suppressWarnings(summary(x))
   est <- unname(x[, 1])

@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -34,7 +37,7 @@ test_that("ssd_censor use existing right and left", {
 test_that("ssd_censor no rows", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
-  expect_identical(ssd_censor_data(ssddata::ccme_boron[0,]), data[0,])
+  expect_identical(ssd_censor_data(ssddata::ccme_boron[0, ]), data[0, ])
 })
 
 test_that("ssd_censor c(2.5, Inf)", {

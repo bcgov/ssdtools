@@ -1,4 +1,7 @@
-# Copyright 2023 Province of British Columbia
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -139,7 +142,7 @@ fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, contro
 #'
 #' Fits one or more distributions to species sensitivity data.
 #'
-#' By default the 'gamma', 'lgumbel', 'llogis', 'lnorm', 'lnorm_lnorm' and 
+#' By default the 'gamma', 'lgumbel', 'llogis', 'lnorm', 'lnorm_lnorm' and
 #' 'weibull' distributions are fitted to the data.
 #' For a complete list of the distributions that are currently implemented in
 #' `ssdtools` see [`ssd_dists_all()`].
@@ -148,9 +151,9 @@ fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, contro
 #' weighted estimation occurs.
 #' However, currently only the resultant parameter estimates are available.
 #'
-#' If the `right` argument is different to the `left` argument 
+#' If the `right` argument is different to the `left` argument
 #' then the data are considered to be censored.
-#' 
+#'
 #'
 #' @inheritParams params
 #' @return An object of class fitdists.

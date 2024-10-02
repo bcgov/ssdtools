@@ -1,5 +1,7 @@
-#    Copyright 2023 Australian Government Department of
-#    Climate Change, Energy, the Environment and Water
+# Copyright 2015-2023 Province of British Columbia
+# Copyright 2021 Environment and Climate Change Canada
+# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -254,8 +256,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
                                   data, rescale, weighted, censoring, min_pmix,
                                   range_shape1, range_shape2, parametric, control,
                                   save_to, samples, fix_weights, hc, fun) {
-  
-  if(ci && fix_weights) {
+  if (ci && fix_weights) {
     atleast1 <- round(glance(x)$weight * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
     estimates <- estimates[atleast1]
@@ -316,7 +317,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
   estimates <- .list_estimates(x, all_estimates = FALSE)
-  
+
   if (parametric && ci && !identical(censoring, c(0, Inf))) {
     wrn("Parametric CIs cannot be calculated for censored data.")
     ci <- FALSE
@@ -343,8 +344,8 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     )
     return(hcp)
   }
-  if(.is_censored(censoring) && !identical_parameters(x)) {
-     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
+  if (.is_censored(censoring) && !identical_parameters(x)) {
+    wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
 
   if (multi_ci) {

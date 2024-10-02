@@ -66,6 +66,8 @@ reference:
   - geom_ssdpoint
   - geom_ssdsegment
   - geom_xribbon
+  - scale_fill_ssd
+  - scale_color_ssd
   - scale_colour_ssd
   - ssd_label_comma
   - ssd_pal
@@ -123,4 +125,3 @@ articles:
   - articles/confidence-intervals
   - customising-plots
   - additional-technical-details
-  - faqs
