@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Model Averaged SSDs • ssdtools</title>
+<title>Model Averaging SSDs • ssdtools</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Model Averaged SSDs">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Model Averaging SSDs">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,11 +57,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Model Averaged SSDs</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Model Averaging SSDs</h1>
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-09-25</h4>
+            <h4 data-toc-skip class="date">2024-10-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/model-averaging.Rmd" class="external-link"><code>vignettes/model-averaging.Rmd</code></a></small>
       <div class="d-none name"><code>model-averaging.Rmd</code></div>
@@ -104,32 +104,35 @@ pre[class] {
 </script><div class="section level2">
 <h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
 </h2>
-<p><em>“Many authors have noted that there is no guiding theory in
+<blockquote>
+<p>Many authors have noted that there is no guiding theory in
 ecotoxicology to justify any particular distributional form for the SSD
 other than that its domain be restricted to the positive real line <span class="citation">(Newman et al. 2000)</span>, <span class="citation">(Zajdlik 2005)</span>, <span class="citation">(Chapman
-et al. 2007)</span>, <span class="citation">(Fox 2016)</span>. Indeed,
-<span class="citation">(Chapman et al. 2007)</span> described the
-identification of a suitable probability model as one of the most
+et al. 2007)</span>, <span class="citation">(David R. Fox 2016)</span>.
+Indeed, <span class="citation">(Chapman et al. 2007)</span> described
+the identification of a suitable probability model as one of the most
 important and difficult choices in the use of SSDs. Compounding this
 lack of clarity about the functional form of the SSD is the omnipresent,
 and equally vexatious issue of small sample size, meaning that any
-plausible candidate model is unlikely to be rejected <span class="citation">(Fox et al. 2021a)</span>. The ssdtools R package uses
-a model averaging procedure to avoid the need to a-priori select a
+plausible candidate model is unlikely to be rejected <span class="citation">(D. R. Fox et al. 2021)</span>. The ssdtools R package
+uses a model averaging procedure to avoid the need to a-priori select a
 candidate distribution and instead uses a measure of ‘fit’ for each
 model to compute weights to be applied to an initial set of candidate
 distributions. The method, as applied in the SSD context is described in
-detail in <span class="citation">(Fox et al. 2021a)</span>, and
+detail in <span class="citation">(D. R. Fox et al. 2021)</span>, and
 potentially provides a level of flexibility and parsimony that is
-difficult to achieve with a single SSD distribution”.</em>         <span class="citation">(Fox et al. 2021b)</span></p>
+difficult to achieve with a single SSD distribution.</p>
+</blockquote>
+<p><span class="citation">(David R. Fox et al. 2021)</span></p>
 </div>
 <div class="section level2">
 <h2 id="preliminaries">Preliminaries<a class="anchor" aria-label="anchor" href="#preliminaries"></a>
 </h2>
-Before we jump into model averaging and in particular, SSD Model
+<p>Before we jump into model averaging and in particular, SSD Model
 Averaging, let’s backup a little and consider why we average and the
-advantages and disadvantages of averaging.<br><h4 id="preliminaries-1">
-The pros and cons of averaging
-<a class="anchor" aria-label="anchor" href="#preliminaries-1"></a>
+advantages and disadvantages of averaging.</p>
+<div class="section level4">
+<h4 id="the-pros-and-cons-of-averaging">The pros and cons of averaging<a class="anchor" aria-label="anchor" href="#the-pros-and-cons-of-averaging"></a>
 </h4>
 <p>We’re all familiar with the process of averaging. Indeed,
 <em>averages</em> are pervasive in everyday life - we talk of average
@@ -151,6 +154,7 @@ mean</em>:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><sema
 although we recognize there are other types of mean including the
 geometric mean, the harmonic mean and the weighted mean. The last of
 these is particularly pertinent to model averaging.</p>
+</div>
 <div class="section level3">
 <h3 id="weighted-averages">Weighted Averages<a class="anchor" aria-label="anchor" href="#weighted-averages"></a>
 </h3>
@@ -179,9 +183,9 @@ is:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><
 with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><msub><mi>w</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0\le {{w}_{i}}\le 1</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>w</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn></mrow></mrow><annotation encoding="application/x-tex">\sum\limits_{i=1}^{n}{{{w}_{i}}=1}</annotation></semantics></math>.<br>Note,
-the simple arithmetic mean is just a special case of the weighted mean
-with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>w</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn></mrow></mrow><annotation encoding="application/x-tex">\sum\limits_{i=1}^{n}{{{w}_{i}}=1}</annotation></semantics></math>.
+<br>Note, the simple arithmetic mean is just a special case of the
+weighted mean with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><msub><mi>w</mi><mi>i</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mrow><annotation encoding="application/x-tex">\sum\limits_{i=1}^{n}{{{w}_{i}}=\frac{1}{n}}</annotation></semantics></math>
 ;
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\forall i=1,\ldots ,n</annotation></semantics></math></p>
@@ -228,7 +232,7 @@ Model (red)
 </p>
 </div>
 <p><br>Clearly the strategy has worked - we now have an excellent
-fitting SSD.What about estimation of an <em>HC20</em>? It’s a simple
+fitting SSD. What about estimation of an <em>HC20</em>? It’s a simple
 matter to work out the <em>individual</em> <em>HC20</em> values for
 Models 1&amp;2 using the appropriate <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">qlnorm()</a></code> function in
 <code>R</code>. Thus we have:</p>
@@ -255,11 +259,11 @@ the next section</p>
 <div class="section level2">
 <h2 id="model-averaged-ssds">Model Averaged SSDs<a class="anchor" aria-label="anchor" href="#model-averaged-ssds"></a>
 </h2>
-As we’ve just seen, applying the model weights to component <em>HCx</em>
-values and summing does <strong>not</strong> produce the correct result.
-The reason for this can be explained mathematically as follows (<em>if
-your not interested in the mathematical explanation - skip ahead to the
-next section</em>).
+<p>As we’ve just seen, applying the model weights to component
+<em>HCx</em> values and summing does <strong>not</strong> produce the
+correct result. The reason for this can be explained mathematically as
+follows (<em>if your not interested in the mathematical explanation -
+skip ahead to the next section</em>).</p>
 <h4 id="model-averaged-ssds-1">
 The fallacy of weighting individual <em>HCx</em> values
 <a class="anchor" aria-label="anchor" href="#model-averaged-ssds-1"></a>
@@ -339,7 +343,7 @@ so the two approaches will <strong>always</strong> yield different
 <em>HCx</em> values with this difference → 0 as x → 0).
 <p>
 </p>
-<p>WE next discuss the use of a model-averaged SSD to obtain the
+<p>We next discuss the use of a model-averaged SSD to obtain the
 <em>correct</em> model-averaged <em>HCx</em>.</p>
 </div>
 <div class="section level2">
@@ -555,16 +559,15 @@ However, being based on a simplistic measure of discrepancy between the
 no grounding in information theory which <em>is</em> the basis for
 determining the weights that we seek.
 </p>
-<p><br>A discussion of <em>information theoretic</em> methods for
-assessing goodness-of-fit is beyond the scope of this vignette.
-Interested readers should consult <span class="citation">(Burnham and
-Anderson 2002)</span>. A commonly used metric to determine the
-model-average weights is the <strong>Akaike Information
-Criterion</strong> or <a href="https://en.wikipedia.org/wiki/Akaike_information_criterion" class="external-link">AIC</a>.
+<br>A discussion of <em>information theoretic</em> methods for assessing
+goodness-of-fit is beyond the scope of this vignette. Interested readers
+should consult <span class="citation">(Burnham and Anderson
+2002)</span>. A commonly used metric to determine the model-average
+weights is the <strong>Akaike Information Criterion</strong> or <a href="https://en.wikipedia.org/wiki/Akaike_information_criterion" class="external-link">AIC</a>.
 The formula for the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">AIC</annotation></semantics></math>
 is:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><mi>C</mi><mo>=</mo><mn>2</mn><mi>k</mi><mo>−</mo><mn>2</mn><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>ℓ</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">AIC = 2k - 2\ln \left( \ell  \right)</annotation></semantics></math></p>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><mi>C</mi><mo>=</mo><mn>2</mn><mi>k</mi><mo>−</mo><mn>2</mn><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>ℓ</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">AIC = 2k - 2\ln \left( \ell  \right)</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 is the number of model parameters and
@@ -602,14 +605,14 @@ fits (best to worst) as: <em>Pareto &gt; lognormal &gt; gamma</em></p>
 the <code>AIC</code> values. More detailed information can be found <a href="https://training.visionanalytix.com/ssd-model-averaging/" class="external-link">here</a>.</p>
 <p>The <em>AIC</em> for the <em>i<sup>th</sup></em> distribution fitted
 to the data is
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo>=</mo><mn>2</mn><msub><mi>k</mi><mi>i</mi></msub><mo>−</mo><mn>2</mn><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>L</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">AI{C_i} = 2{k_i} - 2\ln \left( {{L_i}} \right)  </annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo>=</mo><mn>2</mn><msub><mi>k</mi><mi>i</mi></msub><mo>−</mo><mn>2</mn><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>L</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">AI{C_i} = 2{k_i} - 2\ln \left( {{L_i}} \right)</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{L_i}</annotation></semantics></math>
 is the <em>i<sup>th</sup> likelihood</em> and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{k_i}</annotation></semantics></math>
 is the <em>number of parameters</em> for the <em>i<sup>th</sup>
-distribution</em>. Next, we form the
-differences:<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>i</mi></msub><mo>=</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo>−</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">{\Delta _i} = AI{C_i} - AI{C_0}</annotation></semantics></math>
+distribution</em>. Next, we form the differences:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Δ</mi><mi>i</mi></msub><mo>=</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo>−</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">{\Delta _i} = AI{C_i} - AI{C_0}</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">AI{C_0}</annotation></semantics></math>
 is the <em>AIC</em> for the <strong>best-fitting</strong> model
@@ -670,7 +673,7 @@ In addition, the bias factor (the
 term) was derived from theoretical considerations (such as mathematical
 <em>expectation</em>) that relate to <em>infinite</em> sample sizes. For
 small sample sizes, the AIC is likely to select models having too many
-parameters (i.e models which <em>over-fit</em>) In 1978, Sugiura
+parameters (i.e models which <em>over-fit</em>). In 1978, Sugiura
 proposed a modification to the AIC to address this problem, although it
 too relied on a number of assumptions. This ‘correction’ to the AIC for
 small samples (referred to as
@@ -705,7 +708,7 @@ case in practice!</p>
 <div class="section level3">
 <h3 id="model-averaging-in-ssdtools">Model-Averaging in <code>ssdtools</code><a class="anchor" aria-label="anchor" href="#model-averaging-in-ssdtools"></a>
 </h3>
-<p>Please see the <a href="https://poissonconsulting.github.io/ssdtools/articles/ssdtools.html" class="external-link">Getting
+<p>Please see the <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="external-link">Getting
 started with ssdtools</a> vignette for examples of obtaining
 model-averaged <em>HCx</em> values and predictions using
 <code>ssdtools</code>.</p>
@@ -714,57 +717,62 @@ model-averaged <em>HCx</em> values and predictions using
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-model_averaging" class="csl-entry">
-Burnham K, Anderson D (2002) <a href="https://link.springer.com/book/10.1007/b97636" class="external-link">Model selection and
-multimodel inference - a practical information-theoretic approach</a>.
-Springer
+Burnham, Kenneth, and David Anderson. 2002. <em>Model Selection and
+Multimodel Inference - a Practical Information-Theoretic Approach</em>.
+Springer. <a href="https://link.springer.com/book/10.1007/b97636" class="external-link">https://link.springer.com/book/10.1007/b97636</a>.
 </div>
 <div id="ref-chapman_2007" class="csl-entry">
-Chapman PR, Hart A, Roelofs W, et al (2007) Methods of uncertainty
-analysis. In: A H (ed) EUFRAM Concerted Action to Develop a European
-Framework for Probabilistic Risk Assessment of the Environmental Impacts
-of Pesticides, Vol 2, Detailed Reports on Role, Methods, Reporting and
-Validation
+Chapman, PF RM, A Hart, W Roelofs, T Aldenberg, K Solomon, J LM
+Tarazona, P Byrne, et al. 2007. <span>“Methods of Uncertainty
+Analysis.”</span> <em>In: A H (Ed) EUFRAM Concerted Action to Develop a
+European Framework for Probabilistic Risk Assessment of the
+Environmental Impacts of Pesticides, Vol 2, Detailed Reports on Role,
+Methods, Reporting and Validation</em>.
 </div>
 <div id="ref-fletcher" class="csl-entry">
-Fletcher D (2018) <a href="https://link.springer.com/book/10.1007/978-3-662-58541-2" class="external-link">Model
-averaging</a>. Springer
-</div>
-<div id="ref-fox_2016" class="csl-entry">
-Fox DR (2016) <a href="https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5" class="external-link">Contemporary
-methods for statistical design and analysis</a>. In: Blasco J, Chapman
-PM, Campana O, Hampel M (eds) Marine Ecotoxicology
+Fletcher, David. 2018. <em>Model Averaging</em>. Springer. <a href="https://link.springer.com/book/10.1007/978-3-662-58541-2" class="external-link">https://link.springer.com/book/10.1007/978-3-662-58541-2</a>.
 </div>
 <div id="ref-fox_recent_2021" class="csl-entry">
-Fox DR, Dam RA, Fisher R, et al (2021a) Recent <span>Developments</span>
-in <span>Species</span> <span>Sensitivity</span>
-<span>Distribution</span> <span>Modeling</span>. Environmental
-Toxicology and Chemistry 40:293–308. <a href="https://doi.org/10.1002/etc.4925" class="external-link">https://doi.org/10.1002/etc.4925</a>
+Fox, D. R., R. A. Dam, R. Fisher, G. E. Batley, A. R. Tillmanns, J.
+Thorley, C. J. Schwarz, D. J. Spry, and K. McTavish. 2021. <span>“Recent
+<span>Developments</span> in <span>Species</span>
+<span>Sensitivity</span> <span>Distribution</span>
+<span>Modeling</span>.”</span> <em>Environmental Toxicology and
+Chemistry</em> 40 (2): 293–308. <a href="https://doi.org/10.1002/etc.4925" class="external-link">https://doi.org/10.1002/etc.4925</a>.
+</div>
+<div id="ref-fox_2016" class="csl-entry">
+Fox, David R. 2016. <span>“Contemporary Methods for Statistical Design
+and Analysis.”</span> <em>In: Blasco J, Chapman PM, Campana O, Hampel M
+(Eds) Marine Ecotoxicology.</em>, August. <a href="https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5" class="external-link">https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5</a>.
 </div>
 <div id="ref-fox_methodologies_2021" class="csl-entry">
-Fox DR, Fisher R, Thorley JL, Schwarz C (2021b) <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">Joint
-investigation into <span class="nocase">statistical</span> <span class="nocase">methodologies</span> underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
+Fox, David R, Rebecca Fisher, Joseph L Thorley, and Carl Schwarz. 2021.
+<span>“Joint Investigation into <span class="nocase">statistical</span>
+<span class="nocase">methodologies</span> Underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
 <span class="nocase">guideline</span> <span class="nocase">values</span>
-in <span>Australia</span> and <span>New Zealand</span></a>.
-Environmetrics Australia; Australian Institute of Marine Science
+in <span>Australia</span> and <span>New Zealand</span>.”</span>
+Environmetrics Australia; Australian Institute of Marine Science. <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0</a>.
 </div>
 <div id="ref-newman_2000" class="csl-entry">
-Newman MC, Ownby DR, Mézin LCA, et al (2000) Applying <span class="nocase">species-sensitivity distributions</span> in <span class="nocase">ecological</span> <span class="nocase">risk
-assessment</span>: Assumptions of <span class="nocase">distribution
-type</span> and sufficient <span class="nocase">numbers of
-species</span>. Environmental Toxicology and Chemistry 19:508–515. <a href="https://doi.org/10.1002/etc.5620190233" class="external-link">https://doi.org/10.1002/etc.5620190233</a>
+Newman, Michael C., David R. Ownby, Laurent C. A. Mézin, David C.
+Powell, Tyler R. L. Christensen, Scott B. Lerberg, and Britt-Anne
+Anderson. 2000. <span>“Applying <span class="nocase">species-sensitivity
+distributions</span> in <span class="nocase">ecological</span> <span class="nocase">risk assessment</span>: Assumptions of <span class="nocase">distribution type</span> and Sufficient <span class="nocase">numbers of species</span>.”</span> <em>Environmental
+Toxicology and Chemistry</em> 19 (February): 508–15. <a href="https://doi.org/10.1002/etc.5620190233" class="external-link">https://doi.org/10.1002/etc.5620190233</a>.
 </div>
 <div id="ref-Zajdlik_2005" class="csl-entry">
-Zajdlik B (2005) Statistical analysis of the SSD approach for
-development of canadian water quality guidelines. Zajdlik; Associates
+Zajdlik, B. 2005. <span>“Statistical Analysis of the SSD Approach for
+Development of Canadian Water Quality Guidelines.”</span> CCME Project
+354‐200/5. Zajdlik; Associates.
 </div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
 </h2>
-<p>Copyright 2018-2024 Province of British Columbia<br>
+<p>Copyright 2015-2023 Province of British Columbia<br>
 Copyright 2021 Environment and Climate Change Canada<br>
 Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water</p>

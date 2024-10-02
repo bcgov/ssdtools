@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,73 +34,113 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.6.9018" id="ssdtools-1069018">ssdtools 1.0.6.9018<a class="anchor" aria-label="anchor" href="#ssdtools-1069018"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.0.0" id="ssdtools-200">ssdtools 2.0.0<a class="anchor" aria-label="anchor" href="#ssdtools-200"></a></h2>
+<p><code>ssdtools</code> v2.0.0, which now includes David Fox and Rebecca Fisher as co-authors, is the second major release of <code>ssdtools</code>.</p>
 <div class="section level3">
-<h3 id="additions-1-0-6-9018">Additions<a class="anchor" aria-label="anchor" href="#additions-1-0-6-9018"></a></h3>
-<ul><li>Added to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code>
+<h3 id="major-changes-2-0-0">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-2-0-0"></a></h3>
+<p>The following changes are major in the sense that they could alter previous hazard concentrations or break code.</p>
+<div class="section level4">
+<h4 id="model-fitting-and-averaging-2-0-0">Model Fitting and Averaging<a class="anchor" aria-label="anchor" href="#model-fitting-and-averaging-2-0-0"></a></h4>
+<div class="section level5">
+<h5 id="modifications-2-0-0">Modifications<a class="anchor" aria-label="anchor" href="#modifications-2-0-0"></a></h5>
+<p>The following arguments were added to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code></p>
 <ul><li>
-<code>multi_est = TRUE</code> argument to calculate model averaged estimates treating the distributions as constituting a single mixture distribution.</li>
+<code>multi_est = TRUE</code> to calculate model averaged estimates treating the distributions as constituting a single mixture distribution (previously it was effectively <code>FALSE</code>).</li>
 <li>
-<code>method_ci = "weighted_samples"</code> to specify whether to use <code>"weighted_samples"</code>, <code>"weighted_arithmetic"</code>, <code>"multi_free"</code> or <code>"multi_fixed"</code> methods to generate confidence intervals.</li>
-<li>
-<code>samples</code> argument to include bootstrap samples as list of numeric vector(s).</li>
-<li>
-<code>save_to</code> argument to specify a directory in which to save the bootstrap datasets as csv files and parameter estimates as rds files. The files are named <code>data_000000001_xx.csv</code> and <code>estimates_000000001_xx.rds</code> etc where <code>xx</code> is the distribution. The parent data set and estimates are named <code>boot_000000000_xx.csv</code> and <code>estimates_000000000_xx.csv</code>.</li>
-</ul></li>
-<li>Added <code><a href="../reference/ssd_hp_bcanz.html">ssd_hp_bcanz()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp.fitburrlioz()</a></code> function to get hazard proportions.</li>
-<li>Added <code><a href="../reference/ssd_label_comma.html">ssd_label_comma()</a></code> for x-axis labels.</li>
-<li>Added <code>trans = "log10"</code> and <code>add_x = 0</code> arguments to <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> and <code><a href="../reference/ssd_plot_data.html">ssd_plot_data()</a></code>.</li>
-<li>Added <code><a href="../reference/ssd_p.html">ssd_pmulti()</a></code>, <code><a href="../reference/ssd_q.html">ssd_qmulti()</a></code> and <code><a href="../reference/ssd_r.html">ssd_rmulti()</a></code> for combined mixture distributions.</li>
-<li>Added <code>ssd_exx()</code> functions to get default parameter estimates for distributions.</li>
-<li>Added <code><a href="../reference/ssd_censor_data.html">ssd_censor_data()</a></code> to censor data.</li>
-<li>Added David Fox and Rebecca Fisher as co-authors.</li>
-<li>Added <code>npars</code> argument to <code><a href="../reference/ssd_dists_bcanz.html">ssd_dists_bcanz()</a></code>.</li>
-<li>Added <code>big.mark = ","</code> for x-axis labels and <code>suffix = "%"</code> to y-axis labels to plotting functions.</li>
-</ul></div>
+<code>method_ci = "weighted_samples"</code> to specify whether to use <code>"weighted_samples"</code>, <code>"weighted_arithmetic"</code>, <code>"multi_free"</code> or <code>"multi_fixed"</code> methods to generate confidence intervals (previously it was effectively <code>"weighted_arithmetic"</code>).</li>
+</ul><p>In addition the data frame returned by <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> now includes a column <code>proportion</code> with values between 0 and 1 as opposed to a column <code>percentage</code> with between 0 and 100.</p>
+<p>Finally, with censored data confidence intervals can now only be estimated by non-parametric bootstrapping as the methods of parameterically bootstrapping censored data require review.</p>
+</div>
+</div>
+</div>
 <div class="section level3">
-<h3 id="modifications-1-0-6-9018">Modifications<a class="anchor" aria-label="anchor" href="#modifications-1-0-6-9018"></a></h3>
-<ul><li>Only non-parametric bootstrap for censored data.</li>
-<li>Changed <code>at_boundary_ok = TRUE</code> to ensure <code>lnorm_lnorm</code> mixture distribution included.</li>
-<li>Changed <code>computable = TRUE</code> to as not required for bootstrapping.</li>
-<li>Changed to <code>min_pboot = 0.95</code> for all functions.</li>
-<li>Changed <code>min_pmix = 0</code> to <code>min_pmix = ssd_min_pmix(nrow(data))</code> to by default give set min_pmix to be <code>0.1</code> or <code>3/nrow(data)</code> if greater to improve convergence of mixture models.</li>
+<h3 id="minor-changes-2-0-0">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-2-0-0"></a></h3>
+<p>The remaining changes are minor.</p>
+<div class="section level4">
+<h4 id="model-fitting-2-0-0">Model Fitting<a class="anchor" aria-label="anchor" href="#model-fitting-2-0-0"></a></h4>
+<div class="section level5">
+<h5 id="modifications-2-0-0-1">Modifications<a class="anchor" aria-label="anchor" href="#modifications-2-0-0-1"></a></h5>
+<p>The following arguments of <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> were changed to reduce the chances of the <code>lnorm_lnorm</code> bimodal distribution being dropped from the default set:</p>
+<ul><li>
+<code>min_pmix = ssd_min_pmix(nrow(data))</code> so that by default <code>min_pmix</code> is 0.1 or <code>3/nrow(data)</code> if greater.</li>
 <li>
+<code>at_boundary_ok = TRUE</code>.</li>
+<li>
+<code>computable = TRUE</code>.</li>
+</ul><p>These changes also allowed the <code>min_pboot = 0.95</code> argument to be changed from <code>0.80</code> for all bootstrapping functions.</p>
+<p>It is worth noting that the second two changes also reduce the chances of the BurrIII distribution being dropped.</p>
+<p>In addition <code>rescale = TRUE</code> now divides by the geometric mean of the minimum and maximum positive finite values as opposed to dividing by the geometric mean of the maximum finite value to improve the chances of convergence although <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> no longer rescales by default.</p>
+<p>Other minor modifications to the model fitting functions include</p>
+<ul><li>
 <code><a href="../reference/estimates.fitdists.html">estimates.fitdists()</a></code> now includes weights in returned parameters as well as an <code>all_estimates = FALSE</code> argument to allow parameter values for all implemented distributions to be included.</li>
 <li>
-<code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code>, <code><a href="../reference/ssd_wqg_bc.html">ssd_wqg_bc()</a></code> and <code><a href="../reference/ssd_wqg_burrlioz.html">ssd_wqg_burrlioz()</a></code> no longer rescale data by default.</li>
+<code>delta = 7</code> instead of <code>delta = 9.21</code> to ensure weight of included models at least 0.01.</li>
+<li>seeds are now allocated to bootstrap samples as opposed to distributions (which results in a speed gain when there are more cores than the number of distributions).</li>
 <li>
-<code>rescale = TRUE</code> now divides by the geometric mean of the minimum and maximum positive finite values as opposed to dividing by the geometric mean of the maximum finite value.</li>
-<li>Replaced column percentage between 0 and 100 with proportion between 0 and 1 in output of <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>
-</li>
-<li>Changed <code>delta = 7</code> to <code>delta = 9.21</code> to weight of included models no more than 0.01.</li>
-<li>seeds now allocated to bootstrap samples as opposed to distributions (this results in a speed gain when more cores than the number of distributions).</li>
-<li>Exported <code>dists = ssd_dists_bcanz()</code> argument to <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> to allow other packages to modify.</li>
-<li>Check <code>...</code> unused where appropriate.</li>
-<li>
-<code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code> now includes average with other distributions if <code>average = NA</code> (<a href="https://github.com/poissonconsulting" class="external-link">@poissonconsulting</a>, <a href="https://github.com/bcgov/ssdtools/issues/351" class="external-link">#351</a>).</li>
-<li>switched from <code>logit_pmix</code> to <code>pmix</code> in mixture distributions</li>
-<li>
-<code>lnorm</code> no longer initializes optimization with maximum likelihood estimates</li>
-<li>Offset starting values for <code>gompertz</code> distribution.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="fixes-1-0-6-9018">Fixes<a class="anchor" aria-label="anchor" href="#fixes-1-0-6-9018"></a></h3>
+<code>lnorm</code> and <code>gompertz</code> initial values are offset from their maximum likelihood estimates to avoid errors in <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim()</a></code>.</li>
+</ul><p>The following functions and arguments were also added:</p>
 <ul><li>
-<code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now include <code>parametric</code> column.</li>
+<code><a href="../reference/ssd_hp_bcanz.html">ssd_hp_bcanz()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp.fitburrlioz()</a></code> to get hazard proportions.</li>
 <li>
-<code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now includes <code>wt</code> column</li>
-</ul></div>
-<div class="section level3">
-<h3 id="deprecation-1-0-6-9018">Deprecation<a class="anchor" aria-label="anchor" href="#deprecation-1-0-6-9018"></a></h3>
-<ul><li>Soft-deprecated <code><a href="../reference/comma_signif.html">comma_signif()</a></code>.</li>
-<li>Soft-deprecated argument <code>percent = 5</code> for <code>proportion = 0.05</code> for <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</li>
+<code><a href="../reference/ssd_p.html">ssd_pmulti()</a></code>, <code><a href="../reference/ssd_q.html">ssd_qmulti()</a></code> and <code><a href="../reference/ssd_r.html">ssd_rmulti()</a></code> for combined mixture distributions.</li>
 <li>
-<code><a href="../reference/is_censored.html">is_censored()</a></code>, <code>plot.fitdists()</code>, <code><a href="../reference/ssd_plot_cf.html">ssd_plot_cf()</a></code> <code><a href="../reference/geom_ssd.html">geom_ssd()</a></code>, <code><a href="../reference/stat_ssd.html">stat_ssd()</a></code>, <code>xgompertz()</code>, <code>xlgumbel</code>, <code><a href="../reference/ssd_hc_burrlioz.html">ssd_hc_burrlioz()</a></code> now defunct.</li>
-<li>Deprecated <code><a href="../reference/ssd_wqg_bc.html">ssd_wqg_bc()</a></code> and <code><a href="../reference/ssd_wqg_burrlioz.html">ssd_wqg_burrlioz()</a></code>. (<a href="https://github.com/bcgov/ssdtools/issues/75" class="external-link">#75</a>).</li>
-<li>Deprecated <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> and <code><a href="../reference/ssd_hp_bcanz.html">ssd_hp_bcanz()</a></code>.</li>
-<li>Removed <code>ccme_data</code> and <code>ccme_boron</code> data set.</li>
-<li>Removed <code>pearson1000</code> data set (now in <code>ssdtests</code> data).</li>
+<code>ssd_exx()</code> functions to get default parameter estimates for distributions.</li>
+<li>
+<code><a href="../reference/ssd_censor_data.html">ssd_censor_data()</a></code> to censor data.</li>
+<li>
+<code>npars = c(2L, 5L)</code> argument to <code><a href="../reference/ssd_dists_bcanz.html">ssd_dists_bcanz()</a></code> to specify the number of parameters.</li>
+<li>
+<code>dists = ssd_dists_bcanz()</code> to <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> to allow other packages to modify.</li>
+<li>
+<code>samples = FALSE</code> to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> include bootstrap samples as list of numeric vector(s).</li>
+<li>
+<code>save_to = NULL</code> to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> to specify a directory in which to save the bootstrap datasets as csv files and parameter estimates as .rds files.</li>
 </ul></div>
+<div class="section level5">
+<h5 id="fixes-2-0-0">Fixes<a class="anchor" aria-label="anchor" href="#fixes-2-0-0"></a></h5>
+<ul><li>
+<code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now return data frame with <code>parametric</code> column.</li>
+<li>
+<code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now return data frame with <code>wt</code> column.</li>
+</ul></div>
+<div class="section level5">
+<h5 id="deprecations-2-0-0">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-2-0-0"></a></h5>
+<p>The following functions and arguments were deprecated:</p>
+<ul><li>
+<code><a href="../reference/ssd_wqg_bc.html">ssd_wqg_bc()</a></code> and <code><a href="../reference/ssd_wqg_burrlioz.html">ssd_wqg_burrlioz()</a></code> were deprecated.</li>
+<li>
+<code>percent = 5</code> in <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> was soft-deprecated for <code>proportion = 0.05</code>.</li>
+<li>
+<code><a href="../reference/is_censored.html">is_censored()</a></code> is now defunct.</li>
+</ul></div>
+</div>
+<div class="section level4">
+<h4 id="plotting-2-0-0">Plotting<a class="anchor" aria-label="anchor" href="#plotting-2-0-0"></a></h4>
+<p>Perhaps the biggest plotting change is that <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code> now plots the average SSD together with the individual distributions if <code>average = NA</code>.</p>
+<p>In addition, the following functions and arguments were added.</p>
+<ul><li>
+<code><a href="../reference/scale_colour_ssd.html">scale_fill_ssd()</a></code> for color-blind fill scale.</li>
+<li>
+<code><a href="../reference/ssd_label_comma.html">ssd_label_comma()</a></code> for formatting of x-axis labels.</li>
+<li>
+<code>trans = "log10"</code> and <code>add_x = 0</code> to <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> and <code><a href="../reference/ssd_plot_data.html">ssd_plot_data()</a></code> to control x-axis scale.</li>
+<li>
+<code>big.mark = ","</code> for x-axis labels and <code>suffix = "%"</code> for y-axis labels to all plotting functions.</li>
+</ul><p>and the following functions deprecated</p>
+<ul><li>
+<code><a href="../reference/comma_signif.html">comma_signif()</a></code> was soft-deprecated.</li>
+<li>
+<code><a href="../reference/is_censored.html">is_censored()</a></code>, <code>plot.fitdists()</code>, <code><a href="../reference/ssd_plot_cf.html">ssd_plot_cf()</a></code> <code><a href="../reference/geom_ssd.html">geom_ssd()</a></code> and <code><a href="../reference/stat_ssd.html">stat_ssd()</a></code> are now defunct.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="data-2-0-0">Data<a class="anchor" aria-label="anchor" href="#data-2-0-0"></a></h4>
+<p>The following data sets were removed</p>
+<ul><li>
+<code>ccme_data</code> and <code>ccme_boron</code> (available in <code>ssddata</code> package).</li>
+<li>
+<code>pearson1000</code> data set.</li>
+</ul></div>
+</div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.6" id="ssdtools-106">ssdtools 1.0.6<a class="anchor" aria-label="anchor" href="#ssdtools-106"></a></h2><p class="text-muted">CRAN release: 2023-09-07</p>

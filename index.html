@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,7 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>The dependency <a href="https://cran.r-project.org/package=ssddata" class="external-link"><code>ssddata</code></a> provides a example data sets for several chemicals including Boron.</p>
+<p>The dependency <a href="https://github.com/open-AIMS/ssddata" class="external-link"><code>ssddata</code></a> provides example data sets for several chemicals including Boron.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
 <span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span></span>
@@ -105,7 +105,7 @@
 <p>and can be quickly plotted using <code>autoplot</code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" alt="A plot of the data and fitted distributions" width="100%"></p>
 <p>The goodness of fit can be assessed using <code>ssd_gof</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span>
@@ -118,7 +118,7 @@
 <span><span class="co">#&gt; 4 lnorm       0.507 0.107  0.0703  239.  240.  242. 1.40   0.177</span></span>
 <span><span class="co">#&gt; 5 lnorm_lnorm 0.320 0.116  0.0414  240.  243.  247. 4.98   0.03 </span></span>
 <span><span class="co">#&gt; 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357</span></span></code></pre></div>
-<p>and the model-averaged 5% hazard concentration estimated by bootstrapping using <code>ssd_hc</code>.</p>
+<p>and the model-averaged 5% hazard concentration estimated (with bootstrapping to get confidence intervals) using <code>ssd_hc</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
 <span><span class="va">hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -127,19 +127,11 @@
 <span><span class="co">#&gt;   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;I&lt;lis&gt;</span></span>
 <span><span class="co">#&gt; 1 average       0.05  1.26 0.782 0.407  3.29     1 parametr…  1000     1 &lt;dbl&gt;</span></span></code></pre></div>
-<p>To bootstrap in parallel set <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code>. For example:</p>
+<p>Model-averaged predictions complete with confidence intervals can also be estimated by parametric bootstrapping using the <code>stats</code> generic <code>predict</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">(</span>workers <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>Model-averaged predictions complete with confidence intervals can also be estimated by parametric bootstrapping using the <code>stats</code> generic <code>predict</code>. To perform bootstrapping for each distribution in parallel register the future backend and then select the evaluation strategy.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">doFuture</span><span class="fu">::</span><span class="fu"><a href="https://doFuture.futureverse.org/reference/registerDoFuture.html" class="external-link">registerDoFuture</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="fu">future</span><span class="fu">::</span><span class="va"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
-<span><span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The predictions can be plotted together with the original data using <code>ssd_plot</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -150,41 +142,39 @@
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3000</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
-</div>
-<div class="section level2">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
-<p>Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.</p>
+<p><img src="reference/figures/README-unnamed-chunk-8-1.png" alt="A plot of the data and model-averaged prediction with confidence intervals" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="information">Information<a class="anchor" aria-label="anchor" href="#information"></a>
 </h2>
 <p>Get started with ssdtools at <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="external-link uri">https://bcgov.github.io/ssdtools/articles/ssdtools.html</a>.</p>
 <p>A shiny app to allow non-R users to interface with ssdtools is available at <a href="https://github.com/bcgov/shinyssdtools" class="external-link uri">https://github.com/bcgov/shinyssdtools</a>.</p>
-<p>For the latest changes visit <a href="https://bcgov.github.io/ssdtools/news/" class="external-link">NEWS</a>.</p>
-<p>The citation for the shiny app:</p>
-<p><em>Dalgarno, S. 2021. shinyssdtools: A web application for fitting Species Sensitivity Distributions (SSDs). JOSS 6(57): 2848. <a href="https://joss.theoj.org/papers/10.21105/joss.02848" class="external-link uri">https://joss.theoj.org/papers/10.21105/joss.02848</a>.</em></p>
-<p>The ssdtools package was developed as a result of earlier drafts of:</p>
-<p><em>Schwarz, C., and Tillmanns, A. 2019. Improving Statistical Methods for Modeling Species Sensitivity Distributions. Province of British Columbia, Victoria, BC.</em></p>
+<p>For the latest changes to the development version see the <a href="https://bcgov.github.io/ssdtools/news/" class="external-link">NEWS</a> file.</p>
 <p>For recent developments in SSD modeling including a review of existing software see:</p>
 <p><em>Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity Distribution Modeling. Environ Toxicol Chem 40(2): 293–308. <a href="https://doi.org/10.1002/etc.4925" class="external-link uri">https://doi.org/10.1002/etc.4925</a>.</em></p>
-<p>The CCME <code>data.csv</code> data file is derived from a factsheet prepared by the <a href="http://ceqg-rcqe.ccme.ca/en/index.html" class="external-link">Canadian Council of Ministers of the Environment</a>. See the <a href="https://github.com/bcgov/ssdtools/tree/master/data-raw" class="external-link"><code>data-raw</code></a> folder for more information.</p>
-</div>
-<div class="section level2">
-<h2 id="getting-help-or-reporting-an-issue">Getting Help or Reporting an Issue<a class="anchor" aria-label="anchor" href="#getting-help-or-reporting-an-issue"></a>
-</h2>
+<div class="section level3">
+<h3 id="getting-help-or-reporting-an-issue">Getting Help or Reporting an Issue<a class="anchor" aria-label="anchor" href="#getting-help-or-reporting-an-issue"></a>
+</h3>
 <p>To report bugs/issues/feature requests, please file an <a href="https://github.com/bcgov/ssdtools/issues/" class="external-link">issue</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="how-to-contribute">How to Contribute<a class="anchor" aria-label="anchor" href="#how-to-contribute"></a>
-</h2>
+<div class="section level3">
+<h3 id="contribution">Contribution<a class="anchor" aria-label="anchor" href="#contribution"></a>
+</h3>
 <p>If you would like to contribute to the package, please see our <a href="https://github.com/bcgov/ssdtools/blob/master/.github/CONTRIBUTING.md" class="external-link">CONTRIBUTING</a> guidelines.</p>
 </div>
-<div class="section level2">
-<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
-</h2>
+<div class="section level3">
+<h3 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h3>
 <p>Please note that the ssdtools project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity Distributions in Ecotoxicology. CRC Press.</p>
+<div id="refs">
+
+</div>
 </div>
 <div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>

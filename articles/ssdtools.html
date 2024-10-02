@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-09-25</h4>
+            <h4 data-toc-skip class="date">2024-10-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="d-none name"><code>ssdtools.Rmd</code></div>
@@ -78,9 +78,10 @@ Distributions (SSDs) using Maximum Likelihood and model averaging.</p>
 estimate the percent of species that are affected and/or protected by a
 given concentration of a chemical. The concentration that affects 5% of
 the species is referred to as the 5% Hazard Concentration
-(<em>HC5</em>). This is equivalent to a 95% protection value
+(<em>HC<sub>5</sub></em>). This is equivalent to a 95% protection value
 (<em>PC<sub>95</sub></em>). For more information on SSDs the reader is
-referred to <span class="citation">Posthuma et al. (2001)</span>.</p>
+referred to <span class="citation">Posthuma, Suter II, and Traas
+(2001)</span>.</p>
 <p>In order to use <code>ssdtools</code> you need to install R (see
 below) or use the Shiny <a href="https://bcgov-env.shinyapps.io/ssdtools/" class="external-link">app</a>. The shiny app
 includes a user guide. This vignette is a user manual for the R
@@ -90,8 +91,8 @@ package.</p>
 <h2 id="philosophy">Philosophy<a class="anchor" aria-label="anchor" href="#philosophy"></a>
 </h2>
 <p><code>ssdtools</code> provides the key functionality required to fit
-SSDs using Maximum Likelihood and model averaging in R. It is intended
-to be used in conjunction with <a href="https://www.tidyverse.org" class="external-link">tidyverse</a> packages such as
+SSDs using Maximum Likelihood and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">model
+averaging</a> in R. It is intended to be used in conjunction with <a href="https://www.tidyverse.org" class="external-link">tidyverse</a> packages such as
 <code>readr</code> to input data, <code>tidyr</code> and
 <code>dplyr</code> to group and manipulate data and <code>ggplot2</code>
 <span class="citation">(Wickham 2016)</span> to plot data. As such it
@@ -101,7 +102,7 @@ endeavors to fulfill the tidyverse <a href="https://tidyverse.tidyverse.org/arti
 <h2 id="installing">Installing<a class="anchor" aria-label="anchor" href="#installing"></a>
 </h2>
 <p>In order to install R <span class="citation">(R Core Team
-2018)</span> the appropriate binary for the users operating system
+2024)</span> the appropriate binary for the users operating system
 should be downloaded from <a href="https://cran.r-project.org" class="external-link">CRAN</a>
 and then installed.</p>
 <p>Once R is installed, the <code>ssdtools</code> package can be
@@ -140,11 +141,11 @@ species and/or group information is available then this can be saved as
 <code>.csv</code> file can then be read into R using the following</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"path/to/file.csv"</span><span class="op">)</span></span></code></pre></div>
-<p>For the purposes of this manual we use the CCME dataset for
-boron.</p>
+<p>For the purposes of this manual we use the CCME dataset for boron
+from the <a href="https://github.com/open-AIMS/ssddata" class="external-link"><code>ssddata</code></a>
+package.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ccme_boron</span> <span class="op">&lt;-</span> <span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ccme_boron</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 28 × 5</span></span></span>
 <span><span class="co">#&gt;    Chemical Species                  Conc Group        Units</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
@@ -165,8 +166,8 @@ boron.</p>
 </h2>
 <p>The function <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> inputs a data frame and
 fits one or more distributions. The user can specify a subset of the
-following 10 distributions. Please see the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html" class="external-link">Distributions</a>
-and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">Model
+following 10 distributions. Please see the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html" class="external-link">distributions</a>
+and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">model
 averaging</a> vignettes for more information regarding appropriate use
 of distributions and the use of model-averaged SSDs.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -176,7 +177,7 @@ of distributions and the use of model-averaged SSDs.</p>
 <span><span class="co">#&gt;  [9] "lnorm_lnorm"   "weibull"</span></span></code></pre></div>
 <p>using the <code>dists</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">ccme_boron</span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="coefficients">Coefficients<a class="anchor" aria-label="anchor" href="#coefficients"></a>
@@ -202,14 +203,16 @@ tidyverse generic <code>tidy</code> function (or the base R generic
 <p>It is generally more informative to plot the fits using the
 <code>autoplot</code> generic function (a wrapper on
 <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code>). As <code>autoplot</code> returns a
-<code>ggplot</code> object it can be modified prior to plotting.</p>
+<code>ggplot</code> object it can be modified prior to plotting. For
+more information see the <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">customising
+plots</a> vignette.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># set plot theme</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity Distributions for Boron"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<p><img src="ssdtools_files/figure-html/unnamed-chunk-9-1.png" alt="A plot of the CCME boron dataset with the gamma, log-logistic and log-normal distributions with a simple black and white background color scheme." width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="selecting-one-distribution">Selecting One Distribution<a class="anchor" aria-label="anchor" href="#selecting-one-distribution"></a>
@@ -252,9 +255,10 @@ are returned for the ad, ks and cvm tests.</p>
 <p>Following <span class="citation">Burnham and Anderson (2002)</span>
 we recommend the <code>AICc</code> for model selection. The best
 predictive model is that with the lowest <code>AICc</code> (indicated by
-the model with a <code>delta</code> value of 0.000 in the goodness of
-fit table). In the current example the best predictive model is the
-gamma distribution but the lnorm distribution has some support.</p>
+the model with a <code>delta</code> value of 0 in the goodness of fit
+table). In the current example the best predictive model is the gamma
+distribution but both the lnorm and llogis distributions have some
+support.</p>
 <p>For further information on the advantages of an information theoretic
 approach in the context of selecting SSDs the reader is referred to
 <span class="citation">Fox et al. (2021)</span>.</p>
@@ -263,14 +267,12 @@ approach in the context of selecting SSDs the reader is referred to
 <h2 id="averaging-multiple-distributions">Averaging Multiple Distributions<a class="anchor" aria-label="anchor" href="#averaging-multiple-distributions"></a>
 </h2>
 <p>Often other distributions will fit the data almost as well as the
-best distribution as evidenced by <code>delta</code> values &lt; 2 <span class="citation">(Burnham and Anderson 2002)</span>. In this situation
-the recommended approach is to estimate the average fit based on the
+best distribution as evidenced by <code>delta</code> values &lt; 2 <span class="citation">(Burnham and Anderson 2002)</span>. In general, the
+recommended approach is to estimate the average fit based on the
 relative weights of the distributions <span class="citation">(Burnham
 and Anderson 2002)</span>. The <code>AICc</code> based weights are
 indicated by the <code>weight</code> column in the goodness of fit
-table. In the current example, the gamma and log-normal distributions
-have <code>delta</code> values &lt; 2. A detailed introduction to model
-averaging can be found in the <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">Model
+table. A detailed introduction to model averaging can be found in the <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">Model
 averaging</a> vignette. A discussion on the recommended set of default
 distributions can be found in the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html" class="external-link">Distributions</a>
 vignette.</p>
@@ -279,19 +281,14 @@ vignette.</p>
 <h2 id="estimating-the-fit">Estimating the Fit<a class="anchor" aria-label="anchor" href="#estimating-the-fit"></a>
 </h2>
 <p>The <code>predict</code> function can be used to generate
-model-averaged (or if <code>average = FALSE</code> individual) estimates
-by parametric bootstrapping. Model averaging is based on
-<code>AICc</code> unless the data censored is which case
-<code>AICc</code> in undefined. In this situation model averaging is
-only possible if the distributions have the same number of parameters.
-Parametric bootstrapping is computationally intensive. To bootstrap for
-each distribution in parallel register the future back-end and then
-select the evaluation strategy.</p>
+model-averaged estimates (or if <code>average = FALSE</code> estimates
+for each distribution individual) by bootstrapping. Model averaging is
+based on <code>AICc</code> unless the data censored is which case
+<code>AICc</code> is undefined. In this situation model averaging is
+only possible if the distributions have the same number of parameters
+(so that <code>AIC</code> can be used to compare the models).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">doFuture</span><span class="fu">::</span><span class="fu"><a href="https://doFuture.futureverse.org/reference/registerDoFuture.html" class="external-link">registerDoFuture</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="fu">future</span><span class="fu">::</span><span class="va"><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">multisession</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
 <span><span class="va">boron_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fits</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The resultant object is a data frame of the estimated concentration
 (<code>est</code>) with standard error (<code>se</code>) and lower
@@ -299,8 +296,7 @@ select the evaluation strategy.</p>
 (CLs) by percent of species affected (<code>percent</code>). The object
 includes the number of bootstraps (<code>nboot</code>) data sets
 generated as well as the proportion of the data sets that successfully
-fitted (<code>pboot</code>). There is no requirement for the bootstrap
-samples to converge.</p>
+fitted (<code>pboot</code>).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">boron_pred</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 11</span></span></span>
@@ -322,14 +318,14 @@ original data using the <code><a href="../reference/ssd_plot.html">ssd_plot()</a
 analysis. Once again the returned object is a <code>ggplot</code> object
 which can be customized prior to plotting.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">ccme_boron</span>, <span class="va">boron_pred</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span>, <span class="va">boron_pred</span>,</span>
 <span>  color <span class="op">=</span> <span class="st">"Group"</span>, label <span class="op">=</span> <span class="st">"Species"</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ribbon <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> <span class="op">+</span> <span class="co"># to ensure the species labels fit</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity for Boron"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+<p><img src="ssdtools_files/figure-html/unnamed-chunk-13-1.png" alt="A plot of the CCME boron dataset species colored by group and the model average species sensitivity distribution with a simple black and white background color scheme." width="576"></p>
 <p>In the above plot the model-averaged 95% confidence interval is
 indicated by the shaded band and the model-averaged 5%/95%
 Hazard/Protection Concentration (<em>HC5</em>/ <em>PC<sub>95</sub></em>)
@@ -345,10 +341,11 @@ protection concentration which protects 95% of species
 (<em>PC<sub>95</sub></em>). The hazard and protection concentrations are
 directly interchangeable, and terminology depends simply on user
 preference.</p>
-<p>The hazard/protection concentrations can be obtained using the ssd_hc
-function, which can be used to obtain any desired percentage value. The
-fitted SSD can also be used to determine the percentage of species
-protected at a given concentration using ssd_hp.</p>
+<p>The hazard/protection concentrations can be obtained using the
+<code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> function, which can be used to obtain any desired
+percentage value. The fitted SSD can also be used to determine the
+percentage of species protected at a given concentration using
+<code><a href="../reference/ssd_hp.html">ssd_hp()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
 <span><span class="va">boron_hc5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span>, proportion <span class="op">=</span> <span class="fl">0.05</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -369,44 +366,33 @@ protected at a given concentration using ssd_hp.</p>
 <p>Censored data is that for which only a lower and/or upper limit is
 known for a particular species. If the <code>right</code> argument in
 <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> is different to the <code>left</code>
-argument then the data are considered to be censored. Let’s make some
-example censored data.</p>
+argument then the data are considered to be censored.</p>
+<p>It is important to note that <code>ssdtools</code> doesn’t currently
+support right censored data.</p>
+<p>Let’s produce some left censored data.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">example_dat</span> <span class="op">&lt;-</span> <span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">boron_censored</span> <span class="op">&lt;-</span> <span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>left <span class="op">=</span> <span class="va">Conc</span>, right <span class="op">=</span> <span class="va">Conc</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">left_censored_example</span> <span class="op">&lt;-</span> <span class="va">example_dat</span></span>
-<span><span class="va">left_censored_example</span><span class="op">$</span><span class="va">left</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">8</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
-<p>There are less goodness-of-fit statistics available for fits to
-censored data (currently just <code>AIC</code> and <code>BIC</code>).
-The <code>delta</code> values are calculated using AIC`.</p>
+<span><span class="va">boron_censored</span><span class="op">$</span><span class="va">left</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">8</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 <p>As the sample size <code>n</code> is undefined for censored data,
 <code>AICc</code> cannot be calculated. However, if all the models have
 the same number of parameters, the <code>AIC</code> <code>delta</code>
 values are identical to those for <code>AICc</code>. For this reason,
-<code>ssdtools</code> only permits the analysis of censored data using
-two-parameter models. We can call only the default two parameter models
-using <code>ssd_dists_bcanz(n = 2)</code>.</p>
+<code>ssdtools</code> only permits model averaging of censored data for
+distributions with the same number of parameters. We can call only the
+default two parameter models using
+<code>ssd_dists_bcanz(n = 2)</code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">left_censored_dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">left_censored_example</span>,</span>
+<code class="sourceCode R"><span><span class="va">dists</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">boron_censored</span>,</span>
 <span>  dists <span class="op">=</span> <span class="fu"><a href="../reference/ssd_dists_bcanz.html">ssd_dists_bcanz</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
 <span>  left <span class="op">=</span> <span class="st">"left"</span>, right <span class="op">=</span> <span class="st">"right"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">left_censored_dists</span>, average <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 11</span></span></span>
-<span><span class="co">#&gt;   dist    proportion   est    se   lcl   ucl     wt method   nboot pboot samples</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> gamma         0.05 0.674    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.376  paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lgumbel       0.05 1.51     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.022<span style="text-decoration: underline;">1</span> paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> llogis        0.05 1.15     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.059<span style="text-decoration: underline;">0</span> paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> lnorm         0.05 1.32     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.176  paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> weibull       0.05 0.752    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.367  paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span></span></span>
-<span><span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">left_censored_dists</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
-<span><span class="co">#&gt;   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> average       0.05 0.859    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametr…     0   <span style="color: #BB0000;">NaN</span> <span style="color: #949494;">&lt;dbl&gt;</span></span></span>
-<span><span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">left_censored_dists</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>There are less goodness-of-fit statistics available for fits to
+censored data (currently just <code>AIC</code> and
+<code>BIC</code>).</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_gof.html">ssd_gof</a></span><span class="op">(</span><span class="va">dists</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
 <span><span class="co">#&gt;   dist       ad    ks   cvm   aic  aicc   bic delta weight</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -415,71 +401,78 @@ using <code>ssd_dists_bcanz(n = 2)</code>.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> llogis     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  226.    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 3.70   0.059</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> lnorm      <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  224.    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 1.52   0.176</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> weibull    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  222.    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.046  0.367</span></span></code></pre></div>
-<p>The model-averaged predictions (and hazard concentrations complete
-with 95% confidence limits) can be calculated using <code>AIC</code> and
-the results plotted complete with arrows indicating the censorship.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<p>The model-averaged predictions are calculated using
+<code>AIC</code></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">dists</span>, average <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 11</span></span></span>
+<span><span class="co">#&gt;   dist    proportion   est    se   lcl   ucl     wt method   nboot pboot samples</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> gamma         0.05 0.674    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.376  paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lgumbel       0.05 1.51     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.022<span style="text-decoration: underline;">1</span> paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> llogis        0.05 1.15     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.059<span style="text-decoration: underline;">0</span> paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> lnorm         0.05 1.32     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.176  paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> weibull       0.05 0.752    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> 0.367  paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span></span></span>
+<span><span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">dists</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
+<span><span class="co">#&gt;   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> average       0.05 0.859    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametr…     0   <span style="color: #BB0000;">NaN</span> <span style="color: #949494;">&lt;dbl&gt;</span></span></span></code></pre></div>
+<p>The confidence intervals can currently only be generated for censored
+data using non-parametric bootstrapping. The horizontal lines in the
+plot indicate the censoring (range of possible values).</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
-<span><span class="va">left_censored_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">left_censored_dists</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Parametric CIs cannot be calculated for censored data.</span></span>
+<span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">dists</span>, ci <span class="op">=</span> <span class="cn">TRUE</span>, parametric <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">left_censored_example</span>, <span class="va">left_censored_pred</span>,</span>
+<span><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">boron_censored</span>, <span class="va">pred</span>,</span>
 <span>  left <span class="op">=</span> <span class="st">"left"</span>, right <span class="op">=</span> <span class="st">"right"</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-16-1.png" width="384"></p>
-<p>Note that <code>ssdtools</code> doesn’t currently support right
-censored data:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">right_censored_example</span> <span class="op">&lt;-</span> <span class="va">example_dat</span></span>
-<span><span class="va">right_censored_example</span><span class="op">$</span><span class="va">right</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">8</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
-<span><span class="va">right_censored_dists</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="va">right_censored_example</span>,</span>
-<span>  dists <span class="op">=</span> <span class="fu"><a href="../reference/ssd_dists_bcanz.html">ssd_dists_bcanz</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>  left <span class="op">=</span> <span class="st">"left"</span>, right <span class="op">=</span> <span class="st">"right"</span></span>
-<span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir) : </span></span>
-<span><span class="co">#&gt;   Distributions cannot currently be fitted to right censored data.</span></span></code></pre></div>
+<p><img src="ssdtools_files/figure-html/unnamed-chunk-19-1.png" alt="A plot of the left censored CCME boron dataset with the model average species sensitivity distribution and arrows indicating the censoring." width="576"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-burnham_model_2002" class="csl-entry">
-Burnham KP, Anderson DR (eds) (2002) <a href="https://doi.org/10.1007/b97636" class="external-link">Model <span>Selection</span> and
-<span>Multimodel</span> <span>Inference</span></a>. Springer New York,
-New York, NY
+Burnham, Kenneth P., and David R. Anderson, eds. 2002. <em>Model
+<span>Selection</span> and <span>Multimodel</span>
+<span>Inference</span></em>. New York, NY: Springer New York. <a href="https://doi.org/10.1007/b97636" class="external-link">https://doi.org/10.1007/b97636</a>.
 </div>
 <div id="ref-fox_recent_2021" class="csl-entry">
-Fox DR, Dam RA, Fisher R, et al (2021) Recent <span>Developments</span>
-in <span>Species</span> <span>Sensitivity</span>
-<span>Distribution</span> <span>Modeling</span>. Environmental
-Toxicology and Chemistry 40:293–308. <a href="https://doi.org/10.1002/etc.4925" class="external-link">https://doi.org/10.1002/etc.4925</a>
+Fox, D. R., R. A. Dam, R. Fisher, G. E. Batley, A. R. Tillmanns, J.
+Thorley, C. J. Schwarz, D. J. Spry, and K. McTavish. 2021. <span>“Recent
+<span>Developments</span> in <span>Species</span>
+<span>Sensitivity</span> <span>Distribution</span>
+<span>Modeling</span>.”</span> <em>Environmental Toxicology and
+Chemistry</em> 40 (2): 293–308. <a href="https://doi.org/10.1002/etc.4925" class="external-link">https://doi.org/10.1002/etc.4925</a>.
 </div>
 <div id="ref-posthuma_species_2001" class="csl-entry">
-Posthuma L, Suter II GW, Traas TP (2001) <a href="https://www.routledge.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783" class="external-link">Species
-sensitivity distributions in ecotoxicology</a>. CRC press
+Posthuma, Leo, Glenn W Suter II, and Theo P Traas. 2001. <em>Species
+Sensitivity Distributions in Ecotoxicology</em>. CRC press. <a href="https://www.routledge.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783" class="external-link">https://www.routledge.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783</a>.
 </div>
 <div id="ref-r" class="csl-entry">
-R Core Team (2018) <a href="https://www.R-project.org/" class="external-link">R: A language
-and environment for statistical computing</a>. R Foundation for
-Statistical Computing, Vienna, Austria
+R Core Team. 2024. <em>R: A Language and Environment for Statistical
+Computing</em>. Vienna, Austria: R Foundation for Statistical Computing.
+<a href="https://www.R-project.org/" class="external-link">https://www.R-project.org/</a>.
 </div>
 <div id="ref-ggplot2" class="csl-entry">
-Wickham H (2016) <a href="https://ggplot2.tidyverse.org" class="external-link"><span class="nocase">ggplot2</span>: Elegant graphics for data analysis</a>.
-Springer-Verlag New York
+Wickham, Hadley. 2016. <em><span class="nocase">ggplot2</span>: Elegant
+Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org" class="external-link">https://ggplot2.tidyverse.org</a>.
 </div>
 <div id="ref-wickham_r_2016" class="csl-entry">
-Wickham H, Grolemund G (2016) <a href="https://r4ds.had.co.nz" class="external-link">R for
-data science: Import, tidy, transform, visualize, and model data</a>,
-First edition. O’Reilly, Sebastopol, CA
+Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science:
+Import, Tidy, Transform, Visualize, and Model Data</em>. First edition.
+Sebastopol, CA: O’Reilly. <a href="https://r4ds.had.co.nz" class="external-link">https://r4ds.had.co.nz</a>.
 </div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
 </h2>
-<p>Copyright 2018-2024 Province of British Columbia<br>
+<p>Copyright 2015-2023 Province of British Columbia<br>
 Copyright 2021 Environment and Climate Change Canada<br>
 Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water</p>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Additional technical details • ssdtools</title>
+<title>Additional Technical Details • ssdtools</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Additional technical details">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Additional Technical Details">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,11 +57,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Additional technical details</h1>
-                        <h4 data-toc-skip class="author">sstools
+      <img src="../logo.png" class="logo" alt=""><h1>Additional Technical Details</h1>
+                        <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-09-25</h4>
+            <h4 data-toc-skip class="date">2024-10-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/additional-technical-details.Rmd" class="external-link"><code>vignettes/additional-technical-details.Rmd</code></a></small>
       <div class="d-none name"><code>additional-technical-details.Rmd</code></div>
@@ -70,7 +70,6 @@ Team</h4>
     
     
 <style>
-
 .box {
   height: auto;
   width: 65%;
@@ -81,7 +80,6 @@ Team</h4>
   text-align: left;
   margin: auto;
 }
-
 </style>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 0.5, availableFonts: [] }  });
 </script><div class="section level2">
@@ -99,13 +97,12 @@ estimates can be found in the following <a href="https://github.com/bcgov/ssdtoo
 bi-modal distributions in ssdtools<a class="anchor" aria-label="anchor" href="#investigations-into-setting-minimum-sample-sizes-for-uni-modal-and-bi-modal-distributions-in-ssdtools"></a>
 </h2>
 <p>Most jurisdictions require a minimum sample size for fitting a valid
-SSD. The current Austalian and New Zealand minimum is 5, in order to fit
-a the two-parameter log-normal distribution <span class="citation">(ANZG
-2018; Warne et al. 2018)</span>. The current default minimum sample size
-is 6 for version 1.0 of ssdtools <span class="citation">(Thorley and
-Schwarz 2018a, b)</span>, which is consistent with the current
-methodology for British Columbia <span class="citation">(BC Ministry of
-Environment and Climate Change Strategy 2019)</span>.</p>
+SSD. The current Australian and New Zealand minimum is 5, in order to
+fit the two-parameter log-normal distribution <span class="citation">(Warne et al. 2018)</span>. In ssdtools the default
+minimum sample size is 6 <span class="citation">(Thorley and Schwarz
+2018)</span>, which is consistent with the current methodology for
+British Columbia <span class="citation">(BC Ministry of Environment and
+Climate Change Strategy 2019)</span>.</p>
 <p>Here we report on a series of simulation studies designed to inform a
 final decision on the default minimum sample size to adopt for both the
 uni-modal 2 parameter distributions, as well as the bi-modal 5 parameter
@@ -116,28 +113,29 @@ distributions.</p>
 <div class="section level4">
 <h4 id="simulations-based-on-ssddata">Simulations based on ssddata<a class="anchor" aria-label="anchor" href="#simulations-based-on-ssddata"></a>
 </h4>
-<p>We used the example datasets in the ssddata package in R <span class="citation">(Fisher and Thorley 2021)</span> to undertake a
-simulation study to examine bias, coverage and confidence interval
-widths using the recommended default set of distributions (lognormal,
-log-Gumbel, log-logistic, gamma, Weibull, and the lognormal-log-normal
-mixture), with model averaged estimates obtained using the multi-method,
-and confidence intervals estimated using the recommended weighted sample
-bootstrap method (see Fox et al. 2024). A total of 20 unique datasets
-were extracted from ssddata and used to define the parameters for the
-simulation study as follows:</p>
+<p>We used the example datasets in the <a href="https://github.com/open-AIMS/ssddata" class="external-link"><code>ssddata</code></a>
+package in R <span class="citation">(Fisher and Thorley 2021)</span> to
+undertake a simulation study to examine bias, coverage and confidence
+interval (CI) widths using the recommended default set of six
+distributions (lognormal, log-Gumbel, log-logistic, gamma, Weibull, and
+the lognormal-log-normal mixture), with model averaged estimates
+obtained using the multi-method, and confidence intervals estimated
+using the recommended weighted sample bootstrap method (see <span class="citation">Fox et al. (2024)</span>). A total of 20 unique
+datasets were extracted from ssddata and used to define the parameters
+for the simulation study as follows:</p>
 <ol style="list-style-type: decimal">
-<li>Each dataset was extracted from ssddata and fit using the default
-distribution set as recommended in <span class="citation">(Fox et al.
-2021)</span> and <span class="citation">(Fox et al. 2024)</span>.</li>
+<li>Each dataset was extracted from <code>ssddata</code> and fit using
+the default distribution set as recommended in <span class="citation">(Fox et al. 2021)</span> and <span class="citation">(Fox et al. 2024)</span>.</li>
 <li>Of the six default distributions, the parameters for the
 distribution having the highest weight for each dataset was used to
 generate new random datasets of varying values of N, including (but not
 limited to): 5 (current ANZG minimum), 6 (current BC minimum), and 8
 (current ANZG preferred).</li>
-<li>For each randomly generated dataset, ssdtools was used to re-fit the
-data, and model averaged estimates were obtained using the multi-method,
-with upper and lower confidence intervals estimated using the
-recommended weighted sample method.</li>
+<li>For each randomly generated dataset, <code>ssdtools</code> was used
+to re-fit the data, and model averaged estimates were obtained using the
+multi-method, with upper and lower confidence limits (CLs) produced
+using the recommended weighted sample method (see <a href="https://bcgov.github.io/ssdtools/articles/confidence-intervals.html" class="external-link">Confidence
+Intervals for Hazard Concentrations</a> vignette).</li>
 </ol>
 <p>The individual ssdtools fits are shown below for each of the 20
 simulation datasets from ssddata, for the six recommended default
@@ -387,9 +385,54 @@ and
 </div>
 </div>
 <div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-ccme" class="csl-entry">
+BC Ministry of Environment and Climate Change Strategy. 2019.
+<em>Derivation of Water Quality Guidelines for the Protection of Aquatic
+Life in British Columbia. Water Quality Guideline Series, WQG‐06.</em>
+Province of British Columbia, Victoria, BC, Canada. <a href="https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-guidelines/derivation-protocol/bc_wqg_aquatic_life_derivation_protocol.pdf" class="external-link">https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-guidelines/derivation-protocol/bc_wqg_aquatic_life_derivation_protocol.pdf</a>.
+</div>
+<div id="ref-ssddata" class="csl-entry">
+Fisher, Rebecca, and Joe Thorley. 2021. <em>Ssddata: Species Sensitivity
+Distribution Data</em>. <a href="https://CRAN.R-project.org/package=ssddata" class="external-link">https://CRAN.R-project.org/package=ssddata</a>.
+</div>
+<div id="ref-fox_methodologies_2021" class="csl-entry">
+Fox, David R, Rebecca Fisher, Joseph L Thorley, and Carl Schwarz. 2021.
+<span>“Joint Investigation into <span class="nocase">statistical</span>
+<span class="nocase">methodologies</span> Underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
+<span class="nocase">guideline</span> <span class="nocase">values</span>
+in <span>Australia</span> and <span>New Zealand</span>.”</span>
+Environmetrics Australia; Australian Institute of Marine Science. <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0</a>.
+</div>
+<div id="ref-fox_methodologies_2024" class="csl-entry">
+Fox, David R, Rebecca Fisher, Thorley, and Joseph L. 2024. <span>“Final
+Report of the Joint Investigation into SSD Modelling and Ssdtools
+Implementation for the Derivation of Toxicant Guidelines Values in
+Australia and New Zealand.”</span> Environmetrics Australia; Australian
+Institute of Marine Science. <a href="https://doi.org/10.25845/xtvt-yc51" class="external-link">https://doi.org/10.25845/xtvt-yc51</a>.
+</div>
+<div id="ref-thorleysschwartz2018joss" class="csl-entry">
+Thorley, Joe, and Carl Schwarz. 2018. <span>“Ssdtools: An r Package to
+Fit Species Sensitivity Distributions.”</span> <em>Journal of Open
+Source Software</em> 3 (31). <a href="https://joss.theoj.org/papers/10.21105/joss.01082" class="external-link">https://joss.theoj.org/papers/10.21105/joss.01082</a>.
+</div>
+<div id="ref-warne2018" class="csl-entry">
+Warne, M, GE Batley, RA van Dam, JC Chapman, DR Fox, CW Hickey, and JL
+Stauber. 2018. <span>“Revised Method for Deriving Australian and New
+Zealand Water Quality Guideline Values for Toxicants – Update of 2015
+Version.”</span> Journal Article. <em>Prepared for the Revision of the
+Australian and New Zealand Guidelines for Fresh and Marine Water
+Quality. Australian and New Zealand Governments and Australian State and
+Territory Governments, Canberra, 48 Pp</em>.
+</div>
+</div>
+</div>
+<div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
 </h2>
-<p>Copyright 2018-2024 Province of British Columbia<br>
+<p>Copyright 2015-2023 Province of British Columbia<br>
 Copyright 2021 Environment and Climate Change Canada<br>
 Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water</p>
@@ -397,59 +440,6 @@ Energy, the Environment and Water</p>
 License</a></p>
 <p>The code is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0" class="external-link">Apache License
 2.0</a></p>
-</div>
-<div class="section level2 unnumbered">
-<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-anzg" class="csl-entry">
-ANZG (2018) <a href="https://www.waterquality.gov.au/guidelines/anz-fresh-marine" class="external-link">Australian
-and new zealand guidelines for fresh and marine water quality.</a>
-Australian; New Zealand Governments; Australian State; Territory
-Governments
-</div>
-<div id="ref-ccme" class="csl-entry">
-BC Ministry of Environment and Climate Change Strategy (2019) <a href="https://www2.gov.bc.ca/assets/gov/environment/air-land-water/water/waterquality/water-quality-guidelines/derivation-protocol/bc_wqg_aquatic_life_derivation_protocol.pdf&amp;ved=2ahUKEwip7IfF_PCFAxUxqlYBHY0YBNMQFnoECBUQAQ&amp;usg=AOvVaw16moKPwHywW1cutwlQaMoK" class="external-link">Derivation
-of water quality guidelines for the protection of aquatic life in
-british columbia. Water quality guideline series, WQG‐06.</a> Province
-of British Columbia, Victoria, BC, Canada
-</div>
-<div id="ref-ssddata" class="csl-entry">
-Fisher R, Thorley J (2021) <a href="https://CRAN.R-project.org/package=ssddata" class="external-link">Ssddata: Species
-sensitivity distribution data</a>
-</div>
-<div id="ref-fox_methodologies_2021" class="csl-entry">
-Fox DR, Fisher R, Thorley JL, Schwarz C (2021) <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">Joint
-investigation into <span class="nocase">statistical</span> <span class="nocase">methodologies</span> underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
-<span class="nocase">guideline</span> <span class="nocase">values</span>
-in <span>Australia</span> and <span>New Zealand</span></a>.
-Environmetrics Australia; Australian Institute of Marine Science
-</div>
-<div id="ref-fox_methodologies_2024" class="csl-entry">
-Fox DR, Fisher R, Thorley, L J (2024) <a href="https://doi.org/10.25845/xtvt-yc51" class="external-link">Final report of the joint
-investigation into SSD modelling and ssdtools implementation for the
-derivation of toxicant guidelines values in australia and new
-zealand</a>. Environmetrics Australia; Australian Institute of Marine
-Science
-</div>
-<div id="ref-thorleyschwarz" class="csl-entry">
-Thorley J, Schwarz C (2018a) Ssdtools: Species sensitivity
-distributions. Https://CRAN.r-project.org/package=ssdtools
-</div>
-<div id="ref-thorleysschwartz2018joss" class="csl-entry">
-Thorley J, Schwarz C (2018b) <a href="https://joss.theoj.org/papers/10.21105/joss.01082" class="external-link">Ssdtools: An r
-package to fit species sensitivity distributions.</a> Journal of Open
-Source Software 3:
-</div>
-<div id="ref-warne2018" class="csl-entry">
-Warne M, Batley G, Dam R van, et al (2018) Revised method for deriving
-australian and new zealand water quality guideline values for toxicants
-– update of 2015 version. Prepared for the revision of the Australian
-and New Zealand Guidelines for Fresh and Marine Water Quality Australian
-and New Zealand Governments and Australian state and territory
-governments, Canberra, 48 pp
-</div>
-</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

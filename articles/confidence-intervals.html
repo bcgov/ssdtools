@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-09-25</h4>
+            <h4 data-toc-skip class="date">2024-10-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/confidence-intervals.Rmd" class="external-link"><code>vignettes/articles/confidence-intervals.Rmd</code></a></small>
       <div class="d-none name"><code>confidence-intervals.Rmd</code></div>
@@ -72,10 +72,11 @@ Team</h4>
 <div class="section level2">
 <h2 id="bootstrap-confidence-intervals">Bootstrap confidence intervals<a class="anchor" aria-label="anchor" href="#bootstrap-confidence-intervals"></a>
 </h2>
-<p>Bootstrapping is a resampling technique used to obtain estimates of
-summary statistics. The team have explored the use of alternative
-methods for obtaining the confidence interval of <em>HCx</em> estimates.
-This included using the closed-form expression for the
+<p>Bootstrapping is a resampling technique used to obtain confidence
+intervals (CIs) for summary statistics. The team have explored the use
+of alternative methods for obtaining the CIs of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+estimates. This included using the closed-form expression for the
 variance-covariance matrix of the parameters of the Burr III
 distribution, coupled with the delta-method, as well as an alternative
 bootstrap method for the inverse Pareto distribution based on
@@ -83,81 +84,84 @@ statistical properties of the parameters <span class="citation">(Fox et
 al. 2021)</span>. In both cases, it appeared that these methods can give
 results similar to other traditional bootstrapping approaches in much
 less time, and are therefore potentially worth further investigation.
-However, implementation of such methods across all the distributions now
-available in ssdtools would be a substantial undertaking.</p>
+However, implementation of such methods across all the distributions in
+<code>ssdtools</code> would be a substantial undertaking.</p>
 <p>The revised version of ssdtools retains the computationally intensive
-bootstrapping method to obtain confidence intervals and an estimate of
-standard errors. We recommend a minimum bootstrap sample of 1,000 (the
-current default - see argument nboot in <em>?ssd_hc()</em>). However,
-more reliable results can be obtained using samples of 5,000 or 10,000.
-We recommend larger bootstrap samples for final reporting.</p>
+bootstrapping method to obtain CIs. We recommend a minimum bootstrap
+sample of 1,000 (the current default - see argument
+<code>nboot = 1000</code> in <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>). However, more
+reliable results can be obtained using samples of 5,000 or 10,000. We
+recommend 10,000 bootstrap samples for final reporting.</p>
 </div>
 <div class="section level2">
 <h2 id="parametric-versus-non-parametric-bootstrapping">Parametric versus non-parametric bootstrapping<a class="anchor" aria-label="anchor" href="#parametric-versus-non-parametric-bootstrapping"></a>
 </h2>
-<p>Burrlioz 2.0 uses a non-parametric bootstrap method to obtain
-confidence intervals on the <em>HCx</em> estimate. Non-parametric
-bootstrapping is carried out by repeatedly resampling the raw data with
-replacement, and refitting the distribution many times. The 95%
-confidence limits are then obtained by calculating the lower 0.025th and
-upper 0.975th quantiles of the resulting <em>HCx</em> estimates across
-all the bootstrap samples (typically &gt;1000). This type of bootstrap
-takes into account uncertainty in the distribution fit based on
-uncertainty in the data.</p>
-<p>The ssdtools package by default uses a parametric bootstrap. Instead
-of resampling the data, parametric bootstrapping draws a random a set of
-new data (of the same sample size as the original) from the fitted
-distribution to repeatedly refit the distribution. Upper and lower 95%
-bounds are again calculated as the lower 0.025th and upper 0.975th
-quantiles of the resulting <em>HCx</em> estimates across all the
-bootstrap samples (again, typically &gt;1000). This will capture the
-possible uncertainty that may occur for a sample size from a given
-distribution, but it assumes no uncertainty in that original fit, so it
-is not accounting for uncertainty in the input data.</p>
-<p>The new TMB version of ssdtools has the capacity to do bootstrapping
-either using the Burrlioz non-parametric method, or the original
-parametric method of ssdtools (based on fitdistrplus <span class="citation">(Delignette-Muller and Dutang 2015)</span>).</p>
+<p><a href="https://research.csiro.au/software/burrlioz/" class="external-link"><code>Burrlioz</code></a>
+uses a non-parametric bootstrap method to obtain CIs on the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+estimate. Non-parametric bootstrapping is carried out by repeatedly
+resampling the raw data with replacement, and refitting the distribution
+many times. The 95% confidence limits (CLs) are then obtained by
+calculating the lower 0.025th and upper 0.975th quantiles of the
+resulting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+estimates across all the bootstrap samples (typically &gt; 1,000). This
+type of bootstrap takes into account uncertainty in the distribution fit
+based on uncertainty in the data.</p>
+<p>The <code>ssdtools</code> package by default uses a parametric
+bootstrap (although non-parametric bootstrapping is also available).
+Instead of resampling the data, parametric bootstrapping draws a random
+a set of new data (of the same sample size as the original) from the
+fitted distribution to repeatedly refit the distribution. Upper and
+lower 95% bounds are again calculated as the lower 0.025th and upper
+0.975th quantiles of the resulting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+estimates across all the bootstrap samples (again, typically &gt;
+1,000). This approach attempts to capture the uncertainty in the data
+for a sample size from a given distribution, but it assumes no
+uncertainty in that original fit.</p>
 <p>Using simulation studies the ssdtools team examined bias and compared
 the resulting coverage of the parametric and non-parametric
 bootstrapping methods <span class="citation">(Fox et al. 2021)</span>.
 They found that coverage was better using the parametric bootstrapping
 method, and this has been retained as the default bootstrapping method
-in the update to ssdtools.</p>
+in the update to ssdtools although non-parametric bootstrapping is
+currently the only method available for censored data.</p>
 </div>
 <div class="section level2">
 <h2 id="bootstrapping-model-averaged-ssds">Bootstrapping model-averaged SSDs<a class="anchor" aria-label="anchor" href="#bootstrapping-model-averaged-ssds"></a>
 </h2>
-<p>Bootstrapping to obtain confidence intervals for individual fitted
-distributions is relatively straightforward. However, obtaining
-bootstrap confidence intervals for model-averaged SSDs requires careful
-consideration, as the procedure is subject to the same pitfalls evident
-when obtaining model-averaged <em>HCx</em> estimates. The <a href="/model_averaging.html">Model Average SSDs</a> vignette contains a
-detailed explanation of the fallacy of using the summed weighting of
-individual <em>HCx</em> values (as weighted arithmetic average), and how
-this can lead to spurious results. Model-averaged estimates and/or
-confidence intervals (including standard error) can be calculated by
-treating the distributions as constituting a single mixture distribution
-versus ‘taking the mean’. When calculating the model-averaged estimates
-treating the distributions as constituting a single mixture distribution
-ensures that <em>ssd_hc()</em> is the inverse of <em>ssd_hp()</em>, and
-this applies for model-averaged confidence intervals.</p>
-<p>The revised version of ssdtools supports four methods for obtaining
-bootstrap confidence intervals, and these are discussed in detail
-below.</p>
+<p>Bootstrapping to obtain CIs for individual distributions is
+relatively straightforward. However, obtaining bootstrap CIs for
+model-averaged SSDs requires careful consideration, as the procedure is
+subject to the same problems evident when obtaining model-averaged
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+estimates (see the <a href="https://bcgov.github.io/ssdtools/articles/model-averaging.html" class="external-link">Model
+Averaging SSDs</a> vignette). Model-averaged estimates and/or CIs can be
+calculated by treating the distributions as constituting a single
+mixture distribution versus ‘taking the (weighted) mean’. When
+calculating the model-averaged estimates treating the distributions as
+constituting a single mixture distribution ensures that
+<code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> is the inverse of <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code>.</p>
+<p>Version 2.0 of <code>ssdtools</code> supports three main methods for
+obtaining bootstrap CIs, and these are discussed in detail below.</p>
 <div class="section level3">
 <h3 id="weighted-arithmetic-mean">Weighted arithmetic mean<a class="anchor" aria-label="anchor" href="#weighted-arithmetic-mean"></a>
 </h3>
-<p>The early versions of ssdtools provided model-averaged confidence
-intervals (cis) and standard errors (se) that were calculated as
-weighted arithmetic means of the upper and lower cis and se values
-obtained via bootstrap simulation from each of the individual candidate
-distributions independently. This method is incorrect and may lead to
-spurious results (as described above) and has been shown via simulations
-studies to result in confidence intervals with very low coverage. The
-current version of ssdtools retains the functionality to reproduce the
-original behavior of ssdtools.</p>
+<p>Prior to version 2.0, <code>ssdtools</code> calculated the
+model-averaged estimates and CLs as the weighted (by the AICc values)
+arithmetic means of the estimates and upper and lower CLs obtained via
+bootstrapping from each of the candidate distributions independently.
+This method is not only computationally inefficient but may lead to
+incorrect results (as described in the <a href="https://bcgov.github.io/ssdtools/articles/model-averaging.html" class="external-link">Model
+Averaging SSDs</a> vignette) and has been shown via simulations studies
+to result in CIs with very low coverage. The current version of
+<code>ssdtools</code> retains this functionality by setting
+<code>ci_method = "weighted_arithmetic"</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_silver.html" class="external-link">ccme_silver</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_silver.html" class="external-link">ccme_silver</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">99</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fit</span>, ci <span class="op">=</span> <span class="cn">TRUE</span>, multi_est <span class="op">=</span> <span class="cn">FALSE</span>, ci_method <span class="op">=</span> <span class="st">"weighted_arithmetic"</span><span class="op">)</span></span>
@@ -165,36 +169,39 @@ original behavior of ssdtools.</p>
 <span><span class="co">#&gt;   dist    proportion   est    se    lcl   ucl    wt method   nboot pboot samples</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> average       0.05 0.192 0.216 0.067<span style="text-decoration: underline;">9</span> 0.861     1 paramet…  <span style="text-decoration: underline;">1</span>000 0.998 <span style="color: #949494;">&lt;dbl&gt;</span></span></span></code></pre></div>
-<p>Use of this method for obtaining ci and se values is not recommended
-and only retained for legacy comparison purposes. It is both technically
-incorrect, and computationally inefficient.</p>
+<p>Use of this method is not recommended as it is both technically
+incorrect and computationally inefficient and only retained to allow
+users to reproduce previous results.</p>
 </div>
 <div class="section level3">
 <h3 id="weighted-mixture-distribution">Weighted mixture distribution<a class="anchor" aria-label="anchor" href="#weighted-mixture-distribution"></a>
 </h3>
-<p>A more theoretically correct way of obtaining ci and se values is to
-consider the model average set as a mixture distribution (see above, and
-the <a href="model_averaging.html">Model Average SSDs</a> vignette).
-When we consider the model set as a mixture distribution, bootstrapping
-is achieved by resampling from the model set according to the AICc based
-model weights. A method for sampling from mixture distributions has been
-implemented in ssdtools, via the function <em>ssd_rmulti()</em>, which
-will generate random samples from a mixture of any combination of
-distributions currently implemented in <code>ssdtools</code>.</p>
+<p>A more theoretically correct way of obtaining model averaged
+estimates (see the <a href="model_averaging.html">Model Averaging
+SSDs</a> vignette) and CLs values is to consider the set of
+distributions as a mixture distribution where the individual
+distributions are weighted by the AICc values. When we consider the
+model set as a mixture distribution, bootstrapping is achieved by
+sampling from the mixture distribution. A method for sampling from
+mixture distributions has been implemented in <code>ssdtools</code>, via
+the function <code><a href="../reference/ssd_r.html">ssd_rmulti()</a></code>, which will generate random
+samples from a weighted combination of the distributions currently
+implemented in <code>ssdtools</code> as a mixture distribution.</p>
 <p>When bootstrapping from the mixture distribution, a question arises
 whether the model weights should be re-estimated for every bootstrap
 sample, or fixed at the values estimated from the models fitted to the
-original sample of toxicity data? This is an interesting question that
-may warrant further investigation, however our current view is that they
-should be fixed at their nominal values in the same way that the
-component distributions to be used in bootstrapping are informed by the
-fit to the sample toxicity data. Using simulation studies we explored
-the coverage and bias of ci values obtained without and without fixing
-the distribution weights, and results indicate little difference.</p>
-<p>The following code can be used to obtain confidence intervals for
-<em>HCx</em> estimates via bootstrapping from the weighted mixture
-distribution (using <em>ssd_rmulti()</em>), with and without fixed
-weight values respectively.</p>
+original data? This is an interesting question that may warrant further
+investigation, however our current view is that they should be fixed at
+their nominal values in the same way that the component distributions to
+be used in bootstrapping are informed by the fit to the original data.
+Using simulation studies we explored the coverage and bias of CI values
+obtained without and without fixing the distribution weights, and
+results indicate little difference.</p>
+<p>The following code can be used to obtain CIs for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+estimates via bootstrapping from the weighted mixture distribution
+(using <code><a href="../reference/ssd_r.html">ssd_rmulti()</a></code>), with and without fixed weight values
+respectively.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Using the multi boostrapping method with fixed weights</span></span>
 <span><span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fit</span>, ci <span class="op">=</span> <span class="cn">TRUE</span>, ci_method <span class="op">=</span> <span class="st">"multi_fixed"</span><span class="op">)</span></span>
@@ -216,11 +223,12 @@ theoretically correct, but is computationally very inefficient.</p>
 <h3 id="weighted-bootstrap-sample">Weighted bootstrap sample<a class="anchor" aria-label="anchor" href="#weighted-bootstrap-sample"></a>
 </h3>
 <p>The developers of <code>ssdtools</code> investigated a third method
-for obtaining confidence intervals for the model-averaged SSD. This
-method bootstraps from each of the distributions individually, taking a
-weighted sample from each, and then combining these into a pooled
-bootstrap sample for estimation of te ci and se values. Pseudo code for
-this method is as follows:</p>
+for obtaining CIs for the model-averaged SSD. This method bootstraps
+from each of the distributions individually proportional to
+distributions AICc weight and then combines these into a pooled
+bootstrap sample before calculting the 95% CLs as the lower 0.025th and
+upper 0.975th quantiles.</p>
+<p>Pseudo-code for this method is as follows:</p>
 <ul>
 <li><p>For each distribution in the <code>fitdists</code> object, the
 proportional number of bootstrap samples to draw
@@ -228,29 +236,34 @@ proportional number of bootstrap samples to draw
 <code>round(nboot * weight)</code>, where <code>nboot</code> is the
 total number of bootstrap samples and weight is the AICc based model
 weights for each distribution based on the original
-<code>ssd_fitdist</code> fit.</p></li>
+<code>ssd_fitdist()</code> fit.</p></li>
 <li><p>For each of the <code>nboot_vals</code> for each distribution, a
 random sample of size N is drawn (the total number of original data
 points included in the original SSD fit) based on the estimated
 parameters from the original data for that distribution.</p></li>
-<li><p>The random sample is re-fitting using that distribution.</p></li>
-<li><p><em>HCx</em> is estimated from the re-fitted bootstrap
-fit.</p></li>
-<li><p>The <em>HCx</em> estimates for all <code>nboot_vals</code> for
-each distribution are then pooled across all distributions, and
-<em>quantile()</em> is used to determine the lower and upper confidence
-bounds for this pooled weighted bootstrap sample of <em>HCx</em>
+<li><p>The random sample is re-fit using that distribution.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+is estimated from the re-fitted bootstrap fit.</p></li>
+<li><p>The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+estimates for all <code>nboot_vals</code> for all distribution are then
+pooled across all distributions, and <em>quantile()</em> is used to
+determine the lower and upper confidence bounds for this pooled weighted
+bootstrap sample of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
 values.</p></li>
 </ul>
 <p>This method does not draw random samples from the mixture
 distribution using <em>ssd_rmulti</em>. While mathematically the method
-shares some properties with obtaining <em>HCx</em> estimates via summing
-the weighted values (weighted arithmetic mean), simulation studies have
-shown that, as a method for obtaining confidence intervals, this pooled
-weighted sample method yields similar ci values and coverage the
-<em>ssd_rmulti()</em> method, and is computationally much faster.</p>
-<p>This method is currently the default method in ssdtools, and can be
-implemented by simply calling <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>.</p>
+shares some properties with obtaining
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
+estimates via summing the weighted values (weighted arithmetic mean),
+simulation studies have shown that, as a method for obtaining CIs, this
+pooled weighted sample method yields similar CIs and coverage to the
+<code><a href="../reference/ssd_r.html">ssd_rmulti()</a></code> method but is computationally much faster</p>
+<p>This method which is recommended is currently the default method in
+<code>ssdtools</code> and so can be implemented by simply calling
+<code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Using a weighted pooled bootstrap sample</span></span>
 <span><span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fit</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -264,73 +277,61 @@ implemented by simply calling <code><a href="../reference/ssd_hc.html">ssd_hc()<
 <h2 id="comparing-bootrapping-methods">Comparing bootrapping methods<a class="anchor" aria-label="anchor" href="#comparing-bootrapping-methods"></a>
 </h2>
 <p>We have undertaken extensive simulation studies comparing the
-implemented methods, and the results of these are reported elsewhere.
-For illustrative purposes, here we compare upper and lower confidence
-intervals using only a single example data set, the Silver data set from
-the Canadian Council of Ministers of the Environment (ccme).</p>
-<p>Using the default settings for ssdtools, we compared the upper and
-lower confidence intervals for the four bootstrapping methods described
-above. Estimate upper confidence limits are relatively similar among the
-four methods. However, the lower confidence interval obtained using the
-weighted arithmetic mean (the method implemented in earlier versions of
-ssdtools) is much higher than the other three methods, potentially
-accounting for the relatively poor coverage of this method in our
-simulation studies.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="co"># library(ggpubr)</span></span>
-<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">compare_dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">method</span>, <span class="va">ucl</span>, fill <span class="op">=</span> <span class="va">method</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html" class="external-link">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">compare_dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">method</span>, <span class="va">lcl</span>, fill <span class="op">=</span> <span class="va">method</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html" class="external-link">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># ggarrange(p1, p2,common.legend = TRUE)</span></span></code></pre></div>
-<p>Given the similarity of upper and lower confidence intervals of the
-weighted bootstrap sample method compared to the potentially more
-theoretically correct, but computationally more intensive weighted
-mixture method (via <em>ssd_rmulti()</em>), we also compared the time
-taken to undertake bootstrapping across the methods.</p>
+implemented methods, and the results of these are reported in <span class="citation">Fox et al. (2024)</span>. For illustrative purposes,
+here we compare upper and lower CLs using only a single example data
+set, the silver data set from the Canadian Council of Ministers of the
+Environment (CCME) in the <a href="https://github.com/open-AIMS/ssddata" class="external-link"><code>ssddata</code></a>
+package.</p>
+<p>Using the other default settings for <code>ssdtools</code>, we
+compare the upper and lower CLs for the four bootstrapping methods
+described above. The upper CLs are relatively similar among the four
+methods.</p>
+<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-2-1.png" alt="A plot of the upper confidence limits for the four bootstrapping methods showing they are relatively similar." width="576"></p>
+<p>However, the lower CL obtained using the weighted arithmetic mean
+(the default method implemented in earlier versions of
+<code>ssdtools</code>) is much higher than the other three methods,
+potentially accounting for the relatively poor coverage of this method
+in our simulation studies.</p>
+<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-3-1.png" alt="A plot of the lower confidence limits for the four bootstrapping methods showing that the value for the weighted arithmetic mean is substantially higher than the other three." width="576"></p>
+<p>Given the similarity of the upper and lower CLs of the weighted
+bootstrap sample method compared to the potentially more theoretically
+correct, but computationally more intensive weighted mixture method (via
+<em>ssd_rmulti()</em>), we also compared the time taken to undertake
+bootstrapping across the methods.</p>
 <p>Using the default 1,000 bootstrap samples, the elapsed time to
 undertake bootstrapping for the mixture method was 29.07 seconds,
 compared to 2.66 seconds for the weighted bootstrap sample. This means
 that the weighted bootstrap method is ~ 11 times faster, representing a
 considerable computational saving across many SSDs. For this reason,
 this method is currently set as the default method for confidence
-interval estimation in ssdtools.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">compare_dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">method</span>, <span class="va">time</span>, fill <span class="op">=</span> <span class="va">method</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html" class="external-link">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Elapsed time (seconds)"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">p3</span></span></code></pre></div>
-<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+interval estimation in <code>ssdtools</code>.</p>
+<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-4-1.png" alt="A plot of the elapsed time for the four bootstrapping methods showing that the weighted bootstrap sample method is much faster than the other methods." width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-fitdistrplus" class="csl-entry">
-Delignette-Muller ML, Dutang C (2015) <a href="http://www.jstatsoft.org/v64/i04/" class="external-link"><span class="nocase">fitdistrplus</span>: An <span>R</span> package for
-fitting distributions</a>. Journal of Statistical Software 64:1–34
-</div>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-fox_methodologies_2021" class="csl-entry">
-Fox DR, Fisher R, Thorley JL, Schwarz C (2021) <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">Joint
-investigation into <span class="nocase">statistical</span> <span class="nocase">methodologies</span> underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
+Fox, David R, Rebecca Fisher, Joseph L Thorley, and Carl Schwarz. 2021.
+<span>“Joint Investigation into <span class="nocase">statistical</span>
+<span class="nocase">methodologies</span> Underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
 <span class="nocase">guideline</span> <span class="nocase">values</span>
-in <span>Australia</span> and <span>New Zealand</span></a>.
-Environmetrics Australia; Australian Institute of Marine Science
+in <span>Australia</span> and <span>New Zealand</span>.”</span>
+Environmetrics Australia; Australian Institute of Marine Science. <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0</a>.
+</div>
+<div id="ref-fox_methodologies_2024" class="csl-entry">
+Fox, David R, Rebecca Fisher, Thorley, and Joseph L. 2024. <span>“Final
+Report of the Joint Investigation into SSD Modelling and Ssdtools
+Implementation for the Derivation of Toxicant Guidelines Values in
+Australia and New Zealand.”</span> Environmetrics Australia; Australian
+Institute of Marine Science. <a href="https://doi.org/10.25845/xtvt-yc51" class="external-link">https://doi.org/10.25845/xtvt-yc51</a>.
 </div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
 </h2>
-<p>Copyright 2018-2024 Province of British Columbia<br>
+<p>Copyright 2015-2023 Province of British Columbia<br>
 Copyright 2021 Environment and Climate Change Canada<br>
 Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water</p>
