@@ -51,7 +51,7 @@ They found that coverage was better using the parametric bootstrapping method, a
 Bootstrapping to obtain CIs for individual distributions is relatively straightforward. 
 However, obtaining bootstrap CIs for model-averaged SSDs requires careful consideration, as the procedure is subject to the same problems evident when obtaining model-averaged $HC_x$ estimates (see the [Model Averaging SSDs](https://bcgov.github.io/ssdtools/articles/model-averaging.html) vignette).
 Model-averaged estimates and/or CIs can be calculated by treating the distributions as constituting a single mixture distribution versus 'taking the (weighted) mean'. 
-When calculating the model-averaged estimates treating the distributions as constituting a single mixture distribution ensures that `ssd_hc()` is the inverse of `ssd_hp()`, and this applies for model-averaged CIs.
+When calculating the model-averaged estimates treating the distributions as constituting a single mixture distribution ensures that `ssd_hc()` is the inverse of `ssd_hp()`.
 
 Version 2.0 of `ssdtools` supports three main methods for obtaining bootstrap CIs, and these are discussed in detail below.
 
