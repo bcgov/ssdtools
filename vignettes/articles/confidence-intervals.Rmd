@@ -99,7 +99,7 @@ Use of this method (without or without fixed weights) is theoretically correct, 
 ### Weighted bootstrap sample 
 
 The developers of `ssdtools` investigated a third method for obtaining CIs for the model-averaged SSD. 
-This method bootstraps from each of the distributions individually proportional to distributions AICc weight and then combines these into a pooled bootstrap sample before calculting the 95% CLs as the lower 0.025th and upper 0.975th quantiles.
+This method bootstraps from each of the distributions individually proportional to distributions AICc weight and then combines these into a pooled bootstrap sample before calculating the 95% CLs as the lower 0.025th and upper 0.975th quantiles.
 
 Pseudo-code for this method is as follows:
 
@@ -123,7 +123,7 @@ This method which is recommended is currently the default method in `ssdtools` a
 ssd_hc(fit, ci = TRUE)
 ```
 
-## Comparing bootrapping methods
+## Comparing bootstrapping methods
 
 We have undertaken extensive simulation studies comparing the implemented methods, and the results of these are reported in @fox_methodologies_2024. 
 For illustrative purposes, here we compare upper and lower CLs using only a single example data set, the silver data set from the Canadian Council of Ministers of the Environment (CCME) in the [`ssddata`](https://github.com/open-AIMS/ssddata) package.

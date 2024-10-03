@@ -19,7 +19,7 @@ The following arguments were added to `ssd_hc()` and `ssd_hp()`
 
 In addition the data frame returned by `ssd_hc()` and `predict()` now includes a column `proportion` with values between 0 and 1 as opposed to a column `percentage` with between 0 and 100.
 
-Finally, with censored data confidence intervals can now only be estimated by non-parametric bootstrapping as the methods of parameterically bootstrapping censored data require review.
+Finally, with censored data confidence intervals can now only be estimated by non-parametric bootstrapping as the methods of parametrically bootstrapping censored data require review.
 
 ## Minor Changes
 

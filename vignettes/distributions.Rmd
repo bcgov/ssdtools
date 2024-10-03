@@ -66,8 +66,8 @@ A history of Burrlioz and the primary distributions it used were recently summma
 > In 2000, Australia and New Zealand (Australian and New Zealand Environment and Conservation Council/Agriculture and Resource Management Council of Australia and New Zealand 2000) adopted an SSD‐based method for deriving WQBs, following a critical review of multiple WQB derivation methods (Warne 1998). 
 A distinct feature of the method was the use of a 3‐parameter Burr distribution to model the empirical SSD, which was implemented in the Burrlioz software tool (Campbell et al. 2000). 
 This represented a generalization of the methods previously employed by Aldenberg and Slob (1993) because the log–logistic distribution
-was shown to be a speciﬁc case of the Burr family (Tadikamalla 1980).
-Recent revision of the derivation method recognized that using the 3‐parameter Burr distributions for small sample sizes (<8 species) created additional uncertainty by estimating more parameters than could be justiﬁed, essentially overﬁtting the data (Batley et al. 2018).
+was shown to be a specific case of the Burr family (Tadikamalla 1980).
+Recent revision of the derivation method recognized that using the 3‐parameter Burr distributions for small sample sizes (<8 species) created additional uncertainty by estimating more parameters than could be justified, essentially overfitting the data (Batley et al. 2018).
 Consequently, the method, and the updated software (Burrlioz Ver 2.0), now uses a 2‐parameter log–logistic distribution for these small
 data sets, whereas the Burr type III distribution is used for data sets of 8 species or more (Batley et al. 2018; Australian and
 New Zealand Guidelines 2018).
@@ -185,7 +185,7 @@ legend("topleft", "(B)", bty = "n")
 
 <br>As can be see from the plot above, the mixture distributions provide a highly flexible means of modelling *bimodality* in an emprical SSD. 
 This happens, for example, when the toxicity data for some toxicant include both animal and plant species, or there are different modes of action operating.
-Unfortunately, this increased flexibilty comes with a high penalty in the model-averaging process. 
+Unfortunately, this increased flexibility comes with a high penalty in the model-averaging process. 
 The combination of small sample sizes and a high parameter count (typically 5 or more) means that mixture distributions will be down-weighted - even when they do a good job at describing the data. 
 For this reason, when attempting to model bimodal data, we suggest looking at the fit using the default set of distributions and then examining the fit with just one of either the log-normal mixture or the log-logistic mixture. 
 Keep in mind that this should only be done if the sample size is not pathologically small. 
@@ -245,7 +245,7 @@ This is because of 1) the convergence issues associated with the Burr Type 3 dis
 
 #### Log-normal
 
-The [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) distribution is a commonly used distribution in the natural sciences - particularly as a probability model to describe right (positive)-skewed pehnomena such as *concentration* data.
+The [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) distribution is a commonly used distribution in the natural sciences - particularly as a probability model to describe right (positive)-skewed phenomena such as *concentration* data.
 
 A random variable, $X$ is lognormally distributed if the *logarithm* of $X$ is normally distributed. The *pdf* of $X$ is given by 
 
@@ -451,7 +451,7 @@ legend("topleft", "(B)", bty = "n")
 
 The Gompertz distribution is a flexible distribution that exhibits both positive and negative skewness.
 The Gompertz distribution can be fitted using `ssdtools` by supplying the string `gompertz` to the `dists` argument in the `ssd_fit_dists` call. 
-We condiser two parameterisations of the Gompertz distribution.
+We consider two parameterisations of the Gompertz distribution.
 The first, as given in [Wikipedia](https://en.wikipedia.org/wiki/Gompertz_distribution) and also used in `ssdtools` [Gompertz] has the following *pdf* and *cdf*:
 
 <div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
@@ -685,7 +685,7 @@ Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>
 \end{array}\]
 </div>
 
-We note in passing that *both* versions of these Pareto and inverse Pareto distrbutions are availabale in `R`. 
+We note in passing that *both* versions of these Pareto and inverse Pareto distrbutions are available in `R`. 
 For example, the `R`package `extraDistr` has North American versions, while the `actuar` package has European versions.
 
 ```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample European Pareto probability density (A) and cumulative probability (B) functions."}
