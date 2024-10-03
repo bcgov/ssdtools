@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-10-02</h4>
+            <h4 data-toc-skip class="date">2024-10-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/distributions.Rmd" class="external-link"><code>vignettes/distributions.Rmd</code></a></small>
       <div class="d-none name"><code>distributions.Rmd</code></div>
@@ -138,11 +138,11 @@ the use of a 3‐parameter Burr distribution to model the empirical SSD,
 which was implemented in the Burrlioz software tool (Campbell et
 al. 2000). This represented a generalization of the methods previously
 employed by Aldenberg and Slob (1993) because the log–logistic
-distribution was shown to be a speciﬁc case of the Burr family
+distribution was shown to be a specific case of the Burr family
 (Tadikamalla 1980). Recent revision of the derivation method recognized
 that using the 3‐parameter Burr distributions for small sample sizes
 (&lt;8 species) created additional uncertainty by estimating more
-parameters than could be justiﬁed, essentially overﬁtting the data
+parameters than could be justified, essentially overfitting the data
 (Batley et al. 2018). Consequently, the method, and the updated software
 (Burrlioz Ver 2.0), now uses a 2‐parameter log–logistic distribution for
 these small data sets, whereas the Burr type III distribution is used
@@ -239,7 +239,7 @@ cumulative probability (B) functions.
 provide a highly flexible means of modelling <em>bimodality</em> in an
 emprical SSD. This happens, for example, when the toxicity data for some
 toxicant include both animal and plant species, or there are different
-modes of action operating. Unfortunately, this increased flexibilty
+modes of action operating. Unfortunately, this increased flexibility
 comes with a high penalty in the model-averaging process. The
 combination of small sample sizes and a high parameter count (typically
 5 or more) means that mixture distributions will be down-weighted - even
@@ -346,7 +346,7 @@ estimation and convergence issues.</p>
 <p>The <a href="https://en.wikipedia.org/wiki/Log-normal_distribution" class="external-link">log-normal</a>
 distribution is a commonly used distribution in the natural sciences -
 particularly as a probability model to describe right (positive)-skewed
-pehnomena such as <em>concentration</em> data.</p>
+phenomena such as <em>concentration</em> data.</p>
 <p>A random variable,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
 is lognormally distributed if the <em>logarithm</em> of
@@ -496,7 +496,7 @@ functions.
 both positive and negative skewness. The Gompertz distribution can be
 fitted using <code>ssdtools</code> by supplying the string
 <code>gompertz</code> to the <code>dists</code> argument in the
-<code>ssd_fit_dists</code> call. We condiser two parameterisations of
+<code>ssd_fit_dists</code> call. We consider two parameterisations of
 the Gompertz distribution. The first, as given in <a href="https://en.wikipedia.org/wiki/Gompertz_distribution" class="external-link">Wikipedia</a>
 and also used in <code>ssdtools</code> [Gompertz] has the following
 <em>pdf</em> and <em>cdf</em>:</p>
@@ -730,7 +730,7 @@ Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>
 \end{array}\]
 </div>
 <p>We note in passing that <em>both</em> versions of these Pareto and
-inverse Pareto distrbutions are availabale in <code>R</code>. For
+inverse Pareto distrbutions are available in <code>R</code>. For
 example, the <code>R</code>package <code>extraDistr</code> has North
 American versions, while the <code>actuar</code> package has European
 versions.</p>

@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-10-02</h4>
+            <h4 data-toc-skip class="date">2024-10-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/confidence-intervals.Rmd" class="external-link"><code>vignettes/articles/confidence-intervals.Rmd</code></a></small>
       <div class="d-none name"><code>confidence-intervals.Rmd</code></div>
@@ -226,7 +226,7 @@ theoretically correct, but is computationally very inefficient.</p>
 for obtaining CIs for the model-averaged SSD. This method bootstraps
 from each of the distributions individually proportional to
 distributions AICc weight and then combines these into a pooled
-bootstrap sample before calculting the 95% CLs as the lower 0.025th and
+bootstrap sample before calculating the 95% CLs as the lower 0.025th and
 upper 0.975th quantiles.</p>
 <p>Pseudo-code for this method is as follows:</p>
 <ul>
@@ -274,7 +274,7 @@ pooled weighted sample method yields similar CIs and coverage to the
 </div>
 </div>
 <div class="section level2">
-<h2 id="comparing-bootrapping-methods">Comparing bootrapping methods<a class="anchor" aria-label="anchor" href="#comparing-bootrapping-methods"></a>
+<h2 id="comparing-bootstrapping-methods">Comparing bootstrapping methods<a class="anchor" aria-label="anchor" href="#comparing-bootstrapping-methods"></a>
 </h2>
 <p>We have undertaken extensive simulation studies comparing the
 implemented methods, and the results of these are reported in <span class="citation">Fox et al. (2024)</span>. For illustrative purposes,
