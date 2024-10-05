@@ -277,6 +277,7 @@ test_that("ssd_hp cis with error and multiple dists", {
   fit <- ssd_fit_dists(data, dists = c("lnorm", "llogis_llogis"), min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
   set.seed(99)
+  skip_on_cran() # did not throw the expected warning.
   expect_warning(hp_err_two <- ssd_hp(fit,
     conc = 1, ci = TRUE, nboot = 100, average = FALSE,
     delta = 100

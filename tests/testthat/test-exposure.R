@@ -37,21 +37,23 @@ test_that("exposure different mean and log", {
 })
 
 test_that("exposure multiple distributions", {
+  skip_on_cran() # slow on debian
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-
+  
   set.seed(1)
   expect_equal(ssd_exposure(fits), 0.0663588247125051, tolerance = 1e-5)
 })
 
 test_that("exposure somewhat sensitive to rescaling", {
+  skip_on_cran() # slow on debian
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-
+  
   set.seed(10)
   exposure <- ssd_exposure(fits)
-
+  
   fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm", rescale = TRUE)
   set.seed(10)
   exposure_rescale <- ssd_exposure(fits_rescale)
-
+  
   expect_equal(exposure_rescale, exposure, tolerance = 1e-3)
 })
