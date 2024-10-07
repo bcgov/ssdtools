@@ -16,6 +16,7 @@
 #    limitations under the License.
 
 test_that("exposure fitdist", {
+  skip_on_cran() # slow on debian
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(1)
@@ -23,6 +24,7 @@ test_that("exposure fitdist", {
 })
 
 test_that("exposure different mean", {
+  skip_on_cran() # slow on debian
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(1)
@@ -30,6 +32,7 @@ test_that("exposure different mean", {
 })
 
 test_that("exposure different mean and log", {
+  skip_on_cran() # slow on debian
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
   set.seed(1)
