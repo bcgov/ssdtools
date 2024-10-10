@@ -4,7 +4,7 @@
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
-#    you may not use this file except in compliance with the License.
+#    you may not use this file except in compl %>% iance with the License.
 #    You may obtain a copy of the License at
 #
 #       https://www.apache.org/licenses/LICENSE-2.0
@@ -26,11 +26,13 @@
 #' @return The proportion exposed.
 #' @export
 #' @examples
-#' fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-#' set.seed(10)
-#' ssd_exposure(fits)
-#' ssd_exposure(fits, meanlog = 1)
-#' ssd_exposure(fits, meanlog = 1, sdlog = 1)
+#' \dontrun{
+#'   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+#'   set.seed(10)
+#'   ssd_exposure(fits)
+#'   ssd_exposure(fits, meanlog = 1)
+#'   ssd_exposure(fits, meanlog = 1, sdlog = 1)
+#' }
 ssd_exposure <- function(x, meanlog = 0, sdlog = 1, nboot = 1000) {
   chk_number(meanlog)
   chk_number(sdlog)

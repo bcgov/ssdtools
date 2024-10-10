@@ -74,7 +74,7 @@ Compounding this lack of clarity about the functional form of the SSD is the omn
 The ssdtools R package uses a model averaging procedure to avoid the need to a-priori select a candidate distribution and instead uses a measure of ‘fit’ for each model to compute weights to be applied to an initial set of candidate distributions. 
 The method, as applied in the SSD context is described in detail in [@fox_recent_2021], and potentially provides a level of flexibility and parsimony that is difficult to achieve with a single SSD distribution.
 
-[@fox_methodologies_2021]
+[@fox_methodologies_2022]
 
 ## Preliminaries
 

@@ -22,7 +22,7 @@ load("confidence_intervals.RData")
 
 Bootstrapping is a resampling technique used to obtain confidence intervals (CIs) for summary statistics.
 The team have explored the use of alternative methods for obtaining the CIs of $HC_x$ estimates.
-This included using the closed-form expression for the variance-covariance matrix of the parameters of the Burr III distribution, coupled with the delta-method, as well as an alternative bootstrap method for the inverse Pareto distribution based on statistical properties of the parameters [@fox_methodologies_2021]. 
+This included using the closed-form expression for the variance-covariance matrix of the parameters of the Burr III distribution, coupled with the delta-method, as well as an alternative bootstrap method for the inverse Pareto distribution based on statistical properties of the parameters [@fox_methodologies_2022]. 
 In both cases, it appeared that these methods can give results similar to other traditional bootstrapping approaches in much less time, and are therefore potentially worth further investigation. 
 However, implementation of such methods across all the distributions in `ssdtools` would be a substantial undertaking.
 
@@ -43,7 +43,7 @@ Instead of resampling the data, parametric bootstrapping draws a random a set of
 Upper and lower 95% bounds are again calculated as the lower 0.025th and upper 0.975th quantiles of the resulting $HC_x$ estimates across all the bootstrap samples (again, typically > 1,000). 
 This approach attempts to capture the uncertainty in the data for a sample size from a given distribution, but it assumes no uncertainty in that original fit.
 
-Using simulation studies the ssdtools team examined bias and compared the resulting coverage of the parametric and non-parametric bootstrapping methods [@fox_methodologies_2021]. 
+Using simulation studies the ssdtools team examined bias and compared the resulting coverage of the parametric and non-parametric bootstrapping methods [@fox_methodologies_2022]. 
 They found that coverage was better using the parametric bootstrapping method, and this has been retained as the default bootstrapping method in the update to ssdtools although non-parametric bootstrapping is currently the only method available for censored data.
 
 ## Bootstrapping model-averaged SSDs

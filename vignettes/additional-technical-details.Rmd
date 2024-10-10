@@ -60,7 +60,7 @@ Here we report on a series of simulation studies designed to inform a final deci
 We used the example datasets in the [`ssddata`](https://github.com/open-AIMS/ssddata) package in R [@ssddata] to undertake a simulation study to examine bias, coverage and confidence interval (CI) widths using the recommended default set of six distributions (lognormal, log-Gumbel, log-logistic, gamma, Weibull, and the lognormal-log-normal mixture), with model averaged estimates obtained using the multi-method, and confidence intervals estimated using the recommended weighted sample bootstrap method (see @fox_methodologies_2024).
 A total of 20 unique datasets were extracted from ssddata and used to define the parameters for the simulation study as follows:
 
-  1.	Each dataset was extracted from `ssddata` and fit using the default distribution set as recommended in [@fox_methodologies_2021] and [@fox_methodologies_2024].
+  1.	Each dataset was extracted from `ssddata` and fit using the default distribution set as recommended in [@fox_methodologies_2022] and [@fox_methodologies_2024].
   2.	Of the six default distributions, the parameters for the distribution having the highest weight for each dataset was used to generate new random datasets of varying values of N, including (but not limited to): 5 (current ANZG minimum), 6 (current BC minimum), and 8 (current ANZG preferred).
   3.	For each randomly generated dataset, `ssdtools` was used to re-fit the data, and model averaged estimates were obtained using the multi-method, with upper and lower confidence limits (CLs) produced using the recommended weighted sample method (see [Confidence Intervals for Hazard Concentrations](https://bcgov.github.io/ssdtools/articles/confidence-intervals.html) vignette).
 
