@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-10-03</h4>
+            <h4 data-toc-skip class="date">2024-10-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/confidence-intervals.Rmd" class="external-link"><code>vignettes/articles/confidence-intervals.Rmd</code></a></small>
       <div class="d-none name"><code>confidence-intervals.Rmd</code></div>
@@ -80,12 +80,13 @@ estimates. This included using the closed-form expression for the
 variance-covariance matrix of the parameters of the Burr III
 distribution, coupled with the delta-method, as well as an alternative
 bootstrap method for the inverse Pareto distribution based on
-statistical properties of the parameters <span class="citation">(Fox et
-al. 2021)</span>. In both cases, it appeared that these methods can give
-results similar to other traditional bootstrapping approaches in much
-less time, and are therefore potentially worth further investigation.
-However, implementation of such methods across all the distributions in
-<code>ssdtools</code> would be a substantial undertaking.</p>
+statistical properties of the parameters <span class="citation">(D. Fox
+et al. 2022)</span>. In both cases, it appeared that these methods can
+give results similar to other traditional bootstrapping approaches in
+much less time, and are therefore potentially worth further
+investigation. However, implementation of such methods across all the
+distributions in <code>ssdtools</code> would be a substantial
+undertaking.</p>
 <p>The revised version of ssdtools retains the computationally intensive
 bootstrapping method to obtain CIs. We recommend a minimum bootstrap
 sample of 1,000 (the current default - see argument
@@ -122,11 +123,12 @@ for a sample size from a given distribution, but it assumes no
 uncertainty in that original fit.</p>
 <p>Using simulation studies the ssdtools team examined bias and compared
 the resulting coverage of the parametric and non-parametric
-bootstrapping methods <span class="citation">(Fox et al. 2021)</span>.
-They found that coverage was better using the parametric bootstrapping
-method, and this has been retained as the default bootstrapping method
-in the update to ssdtools although non-parametric bootstrapping is
-currently the only method available for censored data.</p>
+bootstrapping methods <span class="citation">(D. Fox et al.
+2022)</span>. They found that coverage was better using the parametric
+bootstrapping method, and this has been retained as the default
+bootstrapping method in the update to ssdtools although non-parametric
+bootstrapping is currently the only method available for censored
+data.</p>
 </div>
 <div class="section level2">
 <h2 id="bootstrapping-model-averaged-ssds">Bootstrapping model-averaged SSDs<a class="anchor" aria-label="anchor" href="#bootstrapping-model-averaged-ssds"></a>
@@ -277,10 +279,10 @@ pooled weighted sample method yields similar CIs and coverage to the
 <h2 id="comparing-bootstrapping-methods">Comparing bootstrapping methods<a class="anchor" aria-label="anchor" href="#comparing-bootstrapping-methods"></a>
 </h2>
 <p>We have undertaken extensive simulation studies comparing the
-implemented methods, and the results of these are reported in <span class="citation">Fox et al. (2024)</span>. For illustrative purposes,
-here we compare upper and lower CLs using only a single example data
-set, the silver data set from the Canadian Council of Ministers of the
-Environment (CCME) in the <a href="https://github.com/open-AIMS/ssddata" class="external-link"><code>ssddata</code></a>
+implemented methods, and the results of these are reported in <span class="citation">D. R. Fox et al. (2024)</span>. For illustrative
+purposes, here we compare upper and lower CLs using only a single
+example data set, the silver data set from the Canadian Council of
+Ministers of the Environment (CCME) in the <a href="https://github.com/open-AIMS/ssddata" class="external-link"><code>ssddata</code></a>
 package.</p>
 <p>Using the other default settings for <code>ssdtools</code>, we
 compare the upper and lower CLs for the four bootstrapping methods
@@ -311,20 +313,19 @@ interval estimation in <code>ssdtools</code>.</p>
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div id="ref-fox_methodologies_2021" class="csl-entry">
-Fox, David R, Rebecca Fisher, Joseph L Thorley, and Carl Schwarz. 2021.
-<span>“Joint Investigation into <span class="nocase">statistical</span>
-<span class="nocase">methodologies</span> Underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
-<span class="nocase">guideline</span> <span class="nocase">values</span>
-in <span>Australia</span> and <span>New Zealand</span>.”</span>
-Environmetrics Australia; Australian Institute of Marine Science. <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0</a>.
-</div>
 <div id="ref-fox_methodologies_2024" class="csl-entry">
 Fox, David R, Rebecca Fisher, Thorley, and Joseph L. 2024. <span>“Final
 Report of the Joint Investigation into SSD Modelling and Ssdtools
 Implementation for the Derivation of Toxicant Guidelines Values in
 Australia and New Zealand.”</span> Environmetrics Australia; Australian
 Institute of Marine Science. <a href="https://doi.org/10.25845/xtvt-yc51" class="external-link">https://doi.org/10.25845/xtvt-yc51</a>.
+</div>
+<div id="ref-fox_methodologies_2022" class="csl-entry">
+Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. <span>“Joint
+Investigation into <span class="nocase">statistical</span> <span class="nocase">methodologies</span> Underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
+<span class="nocase">guideline</span> <span class="nocase">values</span>
+in <span>Australia</span> and <span>New Zealand</span>.”</span>
+Environmetrics Australia; Australian Institute of Marine Science. <a href="https://doi.org/10.25845/fm9b-7n28" class="external-link">https://doi.org/10.25845/fm9b-7n28</a>.
 </div>
 </div>
 </div>

@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-10-03</h4>
+            <h4 data-toc-skip class="date">2024-10-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/distributions.Rmd" class="external-link"><code>vignettes/distributions.Rmd</code></a></small>
       <div class="d-none name"><code>distributions.Rmd</code></div>
@@ -115,12 +115,13 @@ the original version of <code>ssdtools</code> as developed by <a href="https://j
 Schwarz (2018)</a> also included three additional distributions in the
 candidate model set, including the log-gumbel, Gompertz and Weibull
 distributions. Of these, the log-Gumbel (otherwise known as the inverse
-Weibull, see below) shows relatively good convergence <span class="citation">(see Figure 32, David R. Fox et al. 2021)</span>, and
-is also one of the limiting distributions of the Burr Type 3
-distribution implemented in <code>ssdtools</code>, and has been retained
-in the default model set. The Gompertz and Weibull distributions,
-however can exhibit unstable behaviour, sometimes showing poor
-convergence, and therefore been excluded from the default set <span class="citation">(see Figure 32, David R. Fox et al. 2021)</span></p>
+Weibull, see below) shows relatively good convergence <span class="citation">(see Figure 32, D. Fox et al. 2022)</span>, and is also
+one of the limiting distributions of the Burr Type 3 distribution
+implemented in <code>ssdtools</code>, and has been retained in the
+default model set. The Gompertz and Weibull distributions, however can
+exhibit unstable behaviour, sometimes showing poor convergence, and
+therefore been excluded from the default set <span class="citation">(see
+Figure 32, D. Fox et al. 2022)</span></p>
 </div>
 <div class="section level3">
 <h3 id="burr-iii-distribution">Burr III distribution<a class="anchor" aria-label="anchor" href="#burr-iii-distribution"></a>
@@ -197,8 +198,8 @@ Gumbel) distributions are used by the Burrlioz software, these have been
 implemented in <code>ssdtools</code>. However, we have found there are
 stability issues with both the Burr type III, as well as the inverse
 Pareto distributions, which currently precludes their inclusion in the
-default model set (see <span class="citation">David R. Fox et al.
-(2021)</span>, and below for more details).</p>
+default model set (see <span class="citation">D. Fox et al.
+(2022)</span>, and below for more details).</p>
 </div>
 <div class="section level3">
 <h3 id="bimodal-distributions">Bimodal distributions<a class="anchor" aria-label="anchor" href="#bimodal-distributions"></a>
@@ -224,8 +225,8 @@ supplying the strings “llogis_llogis” and/or “lnorm_lnorm” to the
 <p>The underlying code for these mixtures has three components: the
 likelihood function required for TMB; exported R functions to allow the
 usual methods for a distribution to be called (p, q and r); and a set of
-supporting R functions (see <span class="citation">David R. Fox et al.
-(2021)</span> Appendix D for more details). Both mixtures have five
+supporting R functions (see <span class="citation">D. Fox et al.
+(2022)</span> Appendix D for more details). Both mixtures have five
 parameters - two parameters for each of the component distributions and
 a mixing parameter (pmix) that defines the weighting of the two
 distributions in the ‘mixture.’</p>
@@ -286,9 +287,9 @@ continuous distribution that has both right and left tails.</p>
 simulation studies, as well as some detailed technical examinations of
 the various candidate distributions to examine issues of bias, coverage
 and numerical stability. A detailed account of our findings can be found
-in our report <span class="citation">(David R. Fox et al. 2021)</span>
-and are not repeated in detail here, although some of the issues
-associated with individual distributions are outlined below.</p>
+in our report <span class="citation">(D. Fox et al. 2022)</span> and are
+not repeated in detail here, although some of the issues associated with
+individual distributions are outlined below.</p>
 <div class="section level3">
 <h3 id="currently-recommended-default-distributions">Currently recommended default distributions<a class="anchor" aria-label="anchor" href="#currently-recommended-default-distributions"></a>
 </h3>
@@ -534,8 +535,8 @@ functions.
 </p>
 </div>
 <p>The Gompertz distribution is available in <code>ssdtools</code>,
-however parameter estimation can be somewhat unstable <span class="citation">(David R. Fox et al. 2021)</span>, and for this reason
-it is not currently included in the default set.</p>
+however parameter estimation can be somewhat unstable <span class="citation">(D. Fox et al. 2022)</span>, and for this reason it is
+not currently included in the default set.</p>
 </div>
 <div class="section level4">
 <h4 id="weibull-distribution">Weibull distribution<a class="anchor" aria-label="anchor" href="#weibull-distribution"></a>
@@ -587,11 +588,11 @@ details</a>). The inverse Pareto is not offered as a stand-alone option
 in the <code>Burrlioz 2.0</code> software. We have spent considerable
 time and effort exploring the properties of the inverse Pareto
 distribution, including deriving bias correction equations and
-alternative methods for deriving confidence intervals <span class="citation">(David R. Fox et al. 2021)</span>. This work has
-substantial value for improving the current <code>Burrlioz 2.0</code>
-method, and our bias corrections should be adopted when deriving
-<em>HCx</em> estimates from the inverse Pareto where parameters have
-been estimated using maximum likelihood.</p>
+alternative methods for deriving confidence intervals <span class="citation">(D. Fox et al. 2022)</span>. This work has substantial
+value for improving the current <code>Burrlioz 2.0</code> method, and
+our bias corrections should be adopted when deriving <em>HCx</em>
+estimates from the inverse Pareto where parameters have been estimated
+using maximum likelihood.</p>
 <p>As is the case with the <code>Burrlioz 2.0</code> software, we have
 decided not to include the inverse Pareto distribution in the default
 candidate set in <code>ssdtools</code> although it is offered ass a
@@ -836,13 +837,12 @@ Fox, David R. 2016. <span>“Contemporary Methods for Statistical Design
 and Analysis.”</span> <em>In: Blasco J, Chapman PM, Campana O, Hampel M
 (Eds) Marine Ecotoxicology.</em>, August. <a href="https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5" class="external-link">https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5</a>.
 </div>
-<div id="ref-fox_methodologies_2021" class="csl-entry">
-Fox, David R, Rebecca Fisher, Joseph L Thorley, and Carl Schwarz. 2021.
-<span>“Joint Investigation into <span class="nocase">statistical</span>
-<span class="nocase">methodologies</span> Underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
+<div id="ref-fox_methodologies_2022" class="csl-entry">
+Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. <span>“Joint
+Investigation into <span class="nocase">statistical</span> <span class="nocase">methodologies</span> Underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
 <span class="nocase">guideline</span> <span class="nocase">values</span>
 in <span>Australia</span> and <span>New Zealand</span>.”</span>
-Environmetrics Australia; Australian Institute of Marine Science. <a href="https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0" class="external-link">https://environmetrics.net/docs/FOX%20and%20FISHER%20Final_final_report_rev2.3.pdf?189db0&amp;189db0</a>.
+Environmetrics Australia; Australian Institute of Marine Science. <a href="https://doi.org/10.25845/fm9b-7n28" class="external-link">https://doi.org/10.25845/fm9b-7n28</a>.
 </div>
 <div id="ref-newman_2000" class="csl-entry">
 Newman, Michael C., David R. Ownby, Laurent C. A. Mézin, David C.
