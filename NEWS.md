@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.1.0
+
+- Merge pull request #385 from poissonconsulting/dev.
+
+  fix cran and bug if using multi functions with lnorm not included
+
+- Merge pull request #384 from bcgov/cran.
+
+  cran v2.0.0
+
+
 # ssdtools 2.0.0.9001
 
 - Add `ssd_xxmulti_fitdists()` functions to accept object of class fitdists.
