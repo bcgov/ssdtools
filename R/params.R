@@ -40,6 +40,7 @@
 #' Distributions with an absolute AIC difference greater than delta are excluded from the calculations.
 #' @param digits A whole number specifying the number of significant figures.
 #' @param dists A character vector of the distribution names.
+#' @param fitdists An object of class fitdists.
 #' @param hc A value between 0 and 1 indicating the proportion hazard concentration (or NULL).
 #' @param label A string of the column in data with the labels.
 #' @param left A string of the column in data with the concentrations.
