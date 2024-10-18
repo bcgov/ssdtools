@@ -13,6 +13,7 @@
 \alias{ssd_rlnorm_lnorm}
 \alias{ssd_rlnorm}
 \alias{ssd_rmulti}
+\alias{ssd_rmulti_fitdists}
 \alias{ssd_r}
 \alias{ssd_rweibull}
 \title{Random Number Generation}
@@ -92,6 +93,8 @@ ssd_rmulti(
   weibull.scale = 1,
   chk = TRUE
 )
+
+ssd_rmulti_fitdists(n, fitdists, chk = TRUE)
 
 ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 }
@@ -209,6 +212,8 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 \item{weibull.shape}{shape parameter for the Weibull distribution.}
 
 \item{weibull.scale}{scale parameter for the Weibull distribution.}
+
+\item{fitdists}{An object of class fitdists.}
 }
 \description{
 Random Number Generation
@@ -234,6 +239,8 @@ Random Number Generation
 \item \code{ssd_rlnorm()}: Random Generation for Log-Normal Distribution
 
 \item \code{ssd_rmulti()}: Random Generation for Multiple Distributions
+
+\item \code{ssd_rmulti_fitdists()}: Random Generation for Multiple Distributions
 
 \item \code{ssd_rweibull()}: Random Generation for Weibull Distribution
 
@@ -271,8 +278,9 @@ hist(ssd_rlnorm(10000), breaks = 1000)
 set.seed(50)
 hist(ssd_rmulti(1000, gamma.weight = 0.5, lnorm.weight = 0.5), breaks = 100)
 
-fits <- ssd_fit_dists(ssddata::ccme_boron)
-do.call("ssd_rmulti", c(n = 10, estimates(fits)))
+# multi fitdists
+fit <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_rmulti_fitdists(2, fit)
 
 set.seed(50)
 hist(ssd_rweibull(10000), breaks = 1000)

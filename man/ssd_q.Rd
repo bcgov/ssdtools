@@ -13,6 +13,7 @@
 \alias{ssd_qlnorm_lnorm}
 \alias{ssd_qlnorm}
 \alias{ssd_qmulti}
+\alias{ssd_qmulti_fitdists}
 \alias{ssd_q}
 \alias{ssd_qweibull}
 \title{Quantile Function}
@@ -108,6 +109,8 @@ ssd_qmulti(
   lower.tail = TRUE,
   log.p = FALSE
 )
+
+ssd_qmulti_fitdists(p, fitdists, lower.tail = TRUE, log.p = FALSE)
 
 ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 }
@@ -227,6 +230,8 @@ ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 \item{weibull.shape}{shape parameter for the Weibull distribution.}
 
 \item{weibull.scale}{scale parameter for the Weibull distribution.}
+
+\item{fitdists}{An object of class fitdists.}
 }
 \description{
 Quantile Function
@@ -253,6 +258,8 @@ Quantile Function
 
 \item \code{ssd_qmulti()}: Quantile Function for Multiple Distributions
 
+\item \code{ssd_qmulti_fitdists()}: Quantile Function for Multiple Distributions
+
 \item \code{ssd_qweibull()}: Cumulative Distribution Function for Weibull Distribution
 
 }}
@@ -278,6 +285,10 @@ ssd_qlnorm(0.5)
 
 # multi
 ssd_qmulti(0.5, gamma.weight = 0.5, lnorm.weight = 0.5)
+
+# multi fitdists
+fit <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_qmulti_fitdists(0.5, fit)
 
 ssd_qweibull(0.5)
 }

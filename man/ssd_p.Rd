@@ -13,6 +13,7 @@
 \alias{ssd_plnorm_lnorm}
 \alias{ssd_plnorm}
 \alias{ssd_pmulti}
+\alias{ssd_pmulti_fitdists}
 \alias{ssd_p}
 \alias{ssd_pweibull}
 \title{Cumulative Distribution Function}
@@ -108,6 +109,8 @@ ssd_pmulti(
   lower.tail = TRUE,
   log.p = FALSE
 )
+
+ssd_pmulti_fitdists(q, fitdists, lower.tail = TRUE, log.p = FALSE)
 
 ssd_pweibull(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 }
@@ -227,6 +230,8 @@ ssd_pweibull(q, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 \item{weibull.shape}{shape parameter for the Weibull distribution.}
 
 \item{weibull.scale}{scale parameter for the Weibull distribution.}
+
+\item{fitdists}{An object of class fitdists.}
 }
 \description{
 Cumulative Distribution Function
@@ -253,6 +258,8 @@ Cumulative Distribution Function
 
 \item \code{ssd_pmulti()}: Cumulative Distribution Function for Multiple Distributions
 
+\item \code{ssd_pmulti_fitdists()}: Cumulative Distribution Function for Multiple Distributions
+
 \item \code{ssd_pweibull()}: Cumulative Distribution Function for Weibull Distribution
 
 }}
@@ -278,6 +285,10 @@ ssd_plnorm(1)
 
 # multi
 ssd_pmulti(1, gamma.weight = 0.5, lnorm.weight = 0.5)
+
+# multi fitdists
+fit <- ssd_fit_dists(ssddata::ccme_boron)
+ssd_pmulti_fitdists(1, fit)
 
 ssd_pweibull(1)
 }

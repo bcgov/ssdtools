@@ -53,6 +53,8 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 
 \item{dists}{A character vector of the distribution names.}
 
+\item{fitdists}{An object of class fitdists.}
+
 \item{hc}{A value between 0 and 1 indicating the proportion hazard concentration (or NULL).}
 
 \item{label}{A string of the column in data with the labels.}
