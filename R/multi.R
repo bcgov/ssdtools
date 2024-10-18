@@ -297,7 +297,7 @@ ssd_emulti <- function() {
 }
 
 .ssd_pmulti_fitdists <- function(q, fitdists, lower.tail = TRUE, log.p = FALSE) {
-  args <- estimates(fitdists, all_estimates = TRUE)
+  args <- estimates(fitdists)
   args$q <- q
   args$lower.tail <- lower.tail
   args$log.p <- log.p
@@ -305,7 +305,7 @@ ssd_emulti <- function() {
 }
 
 .ssd_qmulti_fitdists <- function(p, fitdists, lower.tail = TRUE, log.p = FALSE) {
-  args <- estimates(fitdists, all_estimates = TRUE)
+  args <- estimates(fitdists)
   args$p <- p
   args$lower.tail <- lower.tail
   args$log.p <- log.p
@@ -313,7 +313,7 @@ ssd_emulti <- function() {
 }
 
 .ssd_rmulti_fitdists <- function(n, fitdists, chk = TRUE) {
-  args <- estimates(fitdists, all_estimates = TRUE)
+  args <- estimates(fitdists)
   args$n <- n
   args$chk <- chk
   do.call("ssd_rmulti", args)
