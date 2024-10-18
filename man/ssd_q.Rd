@@ -93,7 +93,7 @@ ssd_qmulti(
   llogis_llogis.locationlog2 = 1,
   llogis_llogis.scalelog2 = 1,
   llogis_llogis.pmix = 0.5,
-  lnorm.weight = 1,
+  lnorm.weight = 0,
   lnorm.meanlog = 0,
   lnorm.sdlog = 1,
   lnorm_lnorm.weight = 0,
@@ -277,7 +277,7 @@ ssd_qlnorm_lnorm(0.5)
 ssd_qlnorm(0.5)
 
 # multi
-ssd_qmulti(0.5)
+ssd_qmulti(0.5, gamma.weight = 0.5, lnorm.weight = 0.5)
 
 ssd_qweibull(0.5)
 }

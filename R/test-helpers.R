@@ -94,6 +94,15 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FA
                c(ssd_p{dist}(1, 1, 3), ssd_p{dist}(2, 2, 4)))"))
     ep(glue::glue("expect_equal(ssd_p{dist}(1:2, c(1, NA), 3:4),
                c(ssd_p{dist}(1, 1, 3), NA_real_))"))
+    ep(glue::glue("expect_gt(ssd_q{dist}(0.5000001), ssd_q{dist}(0.5))"))
+    ep(glue::glue("expect_identical(ssd_q{dist}(log(0.75), log.p = TRUE), ssd_q{dist}(0.75))"))
+    ep(glue::glue("expect_identical(ssd_q{dist}(0.75, lower.tail = FALSE), ssd_q{dist}(0.25))"))
+    ep(glue::glue("expect_identical(ssd_q{dist}(log(0.75), lower.tail = FALSE, log.p = TRUE), ssd_q{dist}(0.25))"))
+  } else {
+    ep(glue::glue("expect_gt(ssd_q{dist}(0.5000001, lnorm.weight = 1), ssd_q{dist}(0.5, lnorm.weight = 1))"))
+    ep(glue::glue("expect_identical(ssd_q{dist}(log(0.75), log.p = TRUE, lnorm.weight = 1), ssd_q{dist}(0.75, lnorm.weight = 1))"))
+    ep(glue::glue("expect_identical(ssd_q{dist}(0.75, lower.tail = FALSE, lnorm.weight = 1), ssd_q{dist}(0.25, lnorm.weight = 1))"))
+    ep(glue::glue("expect_identical(ssd_q{dist}(log(0.75), lower.tail = FALSE, log.p = TRUE, lnorm.weight = 1), ssd_q{dist}(0.25, lnorm.weight = 1))"))
   }
 
   ep(glue::glue("expect_identical(ssd_q{dist}(numeric(0)), numeric(0))"))
@@ -106,11 +115,6 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FA
   ep(glue::glue("expect_identical(ssd_q{dist}(-Inf), NaN)"))
   ep(glue::glue("expect_identical(ssd_q{dist}(Inf), NaN)"))
   ep(glue::glue("expect_identical(ssd_q{dist}(0.75, log.p = TRUE), NaN)"))
-  ep(glue::glue("expect_gt(ssd_q{dist}(0.5000001), ssd_q{dist}(0.5))"))
-  ep(glue::glue("expect_identical(ssd_q{dist}(log(0.75), log.p = TRUE), ssd_q{dist}(0.75))"))
-  ep(glue::glue("expect_identical(ssd_q{dist}(0.75, lower.tail = FALSE), ssd_q{dist}(0.25))"))
-  ep(glue::glue("expect_identical(ssd_q{dist}(log(0.75), lower.tail = FALSE, log.p = TRUE), ssd_q{dist}(0.25))"))
-
   ep(glue::glue("expect_identical(ssd_q{dist}(c(NA, NaN, 0, Inf, -Inf)), c(NA, NaN, 0, NaN, NaN))"))
 
   if (!multi) {
@@ -126,12 +130,13 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FA
   ep(glue::glue("expect_identical(ssd_r{dist}(0), numeric(0))"))
   ep(glue::glue("expect_error(ssd_r{dist}(NA))"))
   ep(glue::glue("expect_error(ssd_r{dist}(-1))"))
-  ep(glue::glue("expect_identical(length(ssd_r{dist}(1)), 1L)"))
-  ep(glue::glue("expect_identical(length(ssd_r{dist}(2)), 2L)"))
-  ep(glue::glue("expect_identical(length(ssd_r{dist}(3:4)), 2L)"))
-  ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1))), 2L)"))
 
   if (!multi) {
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(1)), 1L)"))
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(2)), 2L)"))
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(3:4)), 2L)"))
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1))), 2L)"))
+
     ests <- ep(glue::glue("ssd_e{dist}()"))
     testthat::expect_true(vld_list(ests))
     testthat::expect_true(vld_all(ests, vld_number))
@@ -156,5 +161,10 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FA
     tidy <- merge(tidy, default, by = "term", all = "TRUE")
     testthat::expect_true(all(tidy$default > tidy$lower - upadj))
     testthat::expect_true(all(tidy$default < tidy$upper + upadj))
+  } else {
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(1, lnorm.weight = 1)), 1L)"))
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(2, lnorm.weight = 1)), 2L)"))
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(3:4, lnorm.weight = 1)), 2L)"))
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1), lnorm.weight = 1)), 2L)")) 
   }
 }

@@ -20,7 +20,7 @@
 #' @examples
 #'
 #' # multi
-#' ssd_pmulti(1)
+#' ssd_pmulti(1, gamma.weight = 0.5, lnorm.weight = 0.5)
 ssd_pmulti <- function(
     q,
     burrIII3.weight = 0,
@@ -48,7 +48,7 @@ ssd_pmulti <- function(
     llogis_llogis.locationlog2 = 1,
     llogis_llogis.scalelog2 = 1,
     llogis_llogis.pmix = 0.5,
-    lnorm.weight = 1,
+    lnorm.weight = 0,
     lnorm.meanlog = 0,
     lnorm.sdlog = 1,
     lnorm_lnorm.weight = 0,
@@ -109,7 +109,7 @@ ssd_pmulti <- function(
 #' @examples
 #'
 #' # multi
-#' ssd_qmulti(0.5)
+#' ssd_qmulti(0.5, gamma.weight = 0.5, lnorm.weight = 0.5)
 ssd_qmulti <- function(
     p,
     burrIII3.weight = 0,
@@ -137,7 +137,7 @@ ssd_qmulti <- function(
     llogis_llogis.locationlog2 = 1,
     llogis_llogis.scalelog2 = 1,
     llogis_llogis.pmix = 0.5,
-    lnorm.weight = 1,
+    lnorm.weight = 0,
     lnorm.meanlog = 0,
     lnorm.sdlog = 1,
     lnorm_lnorm.weight = 0,
@@ -199,7 +199,7 @@ ssd_qmulti <- function(
 #'
 #' # multi
 #' set.seed(50)
-#' hist(ssd_rmulti(1000), breaks = 100)
+#' hist(ssd_rmulti(1000, gamma.weight = 0.5, lnorm.weight = 0.5), breaks = 100)
 #'
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' do.call("ssd_rmulti", c(n = 10, estimates(fits)))
@@ -230,7 +230,7 @@ ssd_rmulti <- function(
     llogis_llogis.locationlog2 = 1,
     llogis_llogis.scalelog2 = 1,
     llogis_llogis.pmix = 0.5,
-    lnorm.weight = 1,
+    lnorm.weight = 0,
     lnorm.meanlog = 0,
     lnorm.sdlog = 1,
     lnorm_lnorm.weight = 0,

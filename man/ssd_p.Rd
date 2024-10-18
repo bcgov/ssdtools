@@ -93,7 +93,7 @@ ssd_pmulti(
   llogis_llogis.locationlog2 = 1,
   llogis_llogis.scalelog2 = 1,
   llogis_llogis.pmix = 0.5,
-  lnorm.weight = 1,
+  lnorm.weight = 0,
   lnorm.meanlog = 0,
   lnorm.sdlog = 1,
   lnorm_lnorm.weight = 0,
@@ -277,7 +277,7 @@ ssd_plnorm_lnorm(1)
 ssd_plnorm(1)
 
 # multi
-ssd_pmulti(1)
+ssd_pmulti(1, gamma.weight = 0.5, lnorm.weight = 0.5)
 
 ssd_pweibull(1)
 }
