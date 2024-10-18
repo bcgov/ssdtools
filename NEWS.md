@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.0.0.9001
+
+- Add `ssd_xxmulti_fitdists()` functions to accept object of class fitdists.
+
+
 # ssdtools 2.0.0.9000
 
 - Set `ssd_xxmulti(lnorm.weight = 0)` (instead of 1) to avoid incorrect values.
