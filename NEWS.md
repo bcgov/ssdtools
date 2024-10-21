@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.1.0.9000
+
+- Same as previous version.
+
+
 # ssdtools 2.1.0
 
 - Added `ssd_xxmulti_fitdists()` functions to accept object of class `fitdists`.
