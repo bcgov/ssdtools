@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://app.codecov.io/gh/bcgov/ssdtools)
+[![Codecov test coverage](https://codecov.io/gh/bcgov/ssdtools/graph/badge.svg)](https://app.codecov.io/gh/bcgov/ssdtools)
 [![CRAN status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
 <!-- badges: end -->
@@ -32,10 +32,18 @@ Confidence intervals on hazard concentrations and proportions are produced by bo
 
 ## Installation
 
+### Release
+
 To install the latest release version from [CRAN](https://CRAN.R-project.org/package=ssdtools).
 ```r
 install.packages("ssdtools")
 ```
+
+#### Website
+
+The website for the release version is at <https://bcgov.github.io/ssdtools/>.
+
+### Development
 
 To install the latest development version from [r-universe](https://bcgov.r-universe.dev/ssdtools).
 ```r
@@ -47,6 +55,10 @@ or from [GitHub](https://github.com/bcgov/ssdtools)
 # install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
 pak::pak("bcgov/ssdtools")
 ```
+
+#### Website
+
+The website for the development version is at <https://bcgov.github.io/ssdtools/dev/>.
 
 ## Introduction
 

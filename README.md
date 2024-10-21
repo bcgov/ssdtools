@@ -9,7 +9,7 @@
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/bcgov/ssdtools/graph/badge.svg?token=gVKHQQD1Jp)](https://app.codecov.io/gh/bcgov/ssdtools)
+coverage](https://codecov.io/gh/bcgov/ssdtools/graph/badge.svg)](https://app.codecov.io/gh/bcgov/ssdtools)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
@@ -29,12 +29,21 @@ are produced by bootstrapping.
 
 ## Installation
 
+### Release
+
 To install the latest release version from
 [CRAN](https://CRAN.R-project.org/package=ssdtools).
 
 ``` r
 install.packages("ssdtools")
 ```
+
+#### Website
+
+The website for the release version is at
+<https://bcgov.github.io/ssdtools/>.
+
+### Development
 
 To install the latest development version from
 [r-universe](https://bcgov.r-universe.dev/ssdtools).
@@ -49,6 +58,11 @@ or from [GitHub](https://github.com/bcgov/ssdtools)
 # install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
 pak::pak("bcgov/ssdtools")
 ```
+
+#### Website
+
+The website for the development version is at
+<https://bcgov.github.io/ssdtools/dev/>.
 
 ## Introduction
 
@@ -189,7 +203,7 @@ Distributions in Ecotoxicology. CRC Press.
 
 ## Licensing
 
-Copyright 2018-2024 Province of British Columbia  
+Copyright 2015-2023 Province of British Columbia  
 Copyright 2021 Environment and Climate Change Canada  
 Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water

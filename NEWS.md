@@ -1,13 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.0.0.9001
+# ssdtools 2.1.0.9000
 
-- Add `ssd_xxmulti_fitdists()` functions to accept object of class fitdists.
+- Same as previous version.
 
 
-# ssdtools 2.0.0.9000
+# ssdtools 2.1.0
 
-- Set `ssd_xxmulti(lnorm.weight = 0)` (instead of 1) to avoid incorrect values with `do.call("ssd_xxmulti", c(..., estimates(fits))` if `fits` does not include the log-normal distribution.
+- Added `ssd_xxmulti_fitdists()` functions to accept object of class `fitdists`.
+- Set `ssd_xxmulti(..., lnorm.weight = 0)` (instead of 1) to avoid incorrect values with `do.call("ssd_xxmulti", c(..., estimates(fits))` if `fits` does not include the log-normal distribution.
 
 
 # ssdtools 2.0.0
