@@ -62,7 +62,7 @@ pak::pak("bcgov/ssdtools")
 #### Website
 
 The website for the development version is at
-<https://bcgov.github.io/ssdtools/dev>.
+<https://bcgov.github.io/ssdtools/dev/>.
 
 ## Introduction
 
