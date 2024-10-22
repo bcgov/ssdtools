@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Cumulative Distribution Function</h1>
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/v2.0.0/R/burrrIII3.R" class="external-link"><code>R/burrrIII3.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/v2.0.0/R/gamma.R" class="external-link"><code>R/gamma.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/v2.0.0/R/gompertz.R" class="external-link"><code>R/gompertz.R</code></a>, and 9 more</small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/v2.1.0/R/burrrIII3.R" class="external-link"><code>R/burrrIII3.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/v2.1.0/R/gamma.R" class="external-link"><code>R/gamma.R</code></a>, <a href="https://github.com/bcgov/ssdtools/blob/v2.1.0/R/gompertz.R" class="external-link"><code>R/gompertz.R</code></a>, and 9 more</small>
       <div class="d-none name"><code>ssd_p.Rd</code></div>
     </div>
 
@@ -116,7 +116,7 @@
 <span>  llogis_llogis.locationlog2 <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  llogis_llogis.scalelog2 <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  llogis_llogis.pmix <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  lnorm.weight <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  lnorm.weight <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  lnorm.meanlog <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  lnorm.sdlog <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  lnorm_lnorm.weight <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -131,6 +131,8 @@
 <span>  lower.tail <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  log.p <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ssd_pmulti_fitdists</span><span class="op">(</span><span class="va">q</span>, <span class="va">fitdists</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ssd_pweibull</span><span class="op">(</span><span class="va">q</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -370,6 +372,10 @@
 <dt id="arg-weibull-scale">weibull.scale<a class="anchor" aria-label="anchor" href="#arg-weibull-scale"></a></dt>
 <dd><p>scale parameter for the Weibull distribution.</p></dd>
 
+
+<dt id="arg-fitdists">fitdists<a class="anchor" aria-label="anchor" href="#arg-fitdists"></a></dt>
+<dd><p>An object of class fitdists.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
@@ -384,6 +390,7 @@
 <li><p><code>ssd_plnorm_lnorm()</code>: Cumulative Distribution Function for Log-Normal/Log-Normal Mixture Distribution</p></li>
 <li><p><code>ssd_plnorm()</code>: Cumulative Distribution Function for Log-Normal Distribution</p></li>
 <li><p><code>ssd_pmulti()</code>: Cumulative Distribution Function for Multiple Distributions</p></li>
+<li><p><code>ssd_pmulti_fitdists()</code>: Cumulative Distribution Function for Multiple Distributions</p></li>
 <li><p><code>ssd_pweibull()</code>: Cumulative Distribution Function for Weibull Distribution</p></li>
 </ul></div>
     <div class="section level2">
@@ -422,8 +429,13 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># multi</span></span></span>
-<span class="r-in"><span><span class="fu">ssd_pmulti</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
+<span class="r-in"><span><span class="fu">ssd_pmulti</span><span class="op">(</span><span class="fl">1</span>, gamma.weight <span class="op">=</span> <span class="fl">0.5</span>, lnorm.weight <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5660603</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># multi fitdists</span></span></span>
+<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ssd_pmulti_fitdists</span><span class="op">(</span><span class="fl">1</span>, <span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03898781</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">ssd_pweibull</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6321206</span>
