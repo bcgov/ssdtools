@@ -84,6 +84,17 @@ The probability density function, ${f_X}(x;b,c,k)$ and cumulative distribution f
 <!-- \end{array}\] -->
 <!-- </div> -->
 
+<div style="text-align: center; font-size: 1.2em; color: #3664EE; border: 1px solid #3664EE; padding: 10px; border-radius: 5px;">
+  <b><u>Burr III Distribution</u></b>
+  
+  $$f_X(x;b,c,k) = \frac{{b\,k\,c}}{{x^2}} \frac{{\left( \frac{b}{x} \right)}^{c - 1}}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^{k + 1}}, \quad b, c, k, x > 0$$
+  
+  <br>
+  
+  $$F_X(x;b,c,k) = \frac{1}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^k}, \quad b, c, k, x > 0$$
+  
+</div>
+
 <div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
 <b><u>Burr III distribution</u></b>
 
@@ -92,10 +103,7 @@ $${{f_X}(x;b,c,k) = \frac{{b\,k\,c}}{{{x^2}}}\frac{{{{\left( {\frac{b}{x}} \righ
 
 
 $${{F_X}(x;b,c,k) = \frac{1}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^k}}}{\rm{ }}} {b,c,k,x > 0}$$
-
-
 </div>
-
 
 ```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5, fig.cap="Sample Burr probability density (A) and cumulative probability (B) functions."}
 par(mfrow = c(1, 2))
