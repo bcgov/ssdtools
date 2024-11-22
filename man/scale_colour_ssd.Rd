@@ -26,7 +26,7 @@ Discrete color-blind scale for SSD Plots
 
 }}
 \examples{
-ssd_plot(ssddata::ccme_boron, boron_pred, shape = "Group") +
+ssd_plot(ssddata::ccme_boron, boron_pred, shape = "Group", color = "Group") +
   scale_colour_ssd()
 }
 \seealso{
