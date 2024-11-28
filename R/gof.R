@@ -66,7 +66,7 @@ ssd_gof <- function(x, ...) {
 #' @describeIn ssd_gof Goodness of Fit
 #' @export
 #' @examples
-#' ssd_gof(fits)
+#' ssd_gof(fits, pvalue = TRUE)
 ssd_gof.fitdists <- function(x, pvalue = FALSE, ...) {
   chk_flag(pvalue)
   chk_unused(...)

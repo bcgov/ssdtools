@@ -38,7 +38,7 @@ ssd_pal <- function() {
 #' @family ggplot
 #' @export
 #' @examples
-#' ssd_plot(ssddata::ccme_boron, boron_pred, shape = "Group") +
+#' ssd_plot(ssddata::ccme_boron, boron_pred, shape = "Group", color = "Group") +
 #'   scale_colour_ssd()
 scale_colour_ssd <- function(...) {
   discrete_scale("colour", palette = ssd_pal(), ...)
