@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-11-28</h4>
+            <h4 data-toc-skip class="date">2024-12-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/distributions.Rmd" class="external-link"><code>vignettes/distributions.Rmd</code></a></small>
       <div class="d-none name"><code>distributions.Rmd</code></div>
@@ -157,12 +157,27 @@ New Zealand Guidelines 2018).</p>
 and cumulative distribution function,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{F_X}(x;b,c,k)</annotation></semantics></math>
 for the Burr III distribution are:</p>
+<!-- <div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";> -->
+<!-- <b><u>Burr III distribution</u></b>\[\begin{array}{*{20}{c}} -->
+<!-- {{f_X}(x;b,c,k) = \frac{{b\,k\,c}}{{{x^2}}}\frac{{{{\left( {\frac{b}{x}} \right)}^{c - 1}}}}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^{k + 1}}}}{\rm{ }}}&{b,c,k,x > 0} -->
+<!-- \end{array}\]<br>\[\begin{array}{*{20}{c}} -->
+<!-- {{F_X}(x;b,c,k) = \frac{1}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^k}}}{\rm{ }}}&{b,c,k,x > 0} -->
+<!-- \end{array}\] -->
+<!-- </div> -->
+<div style="text-align: center; font-size: 1.2em; color: #3664EE; border: 1px solid #3664EE; padding: 10px; border-radius: 5px;">
+<p><b><u>Burr III Distribution</u></b></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>b</mi><mspace width="0.167em"></mspace><mi>k</mi><mspace width="0.167em"></mspace><mi>c</mi></mrow><msup><mi>x</mi><mn>2</mn></msup></mfrac><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msup></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f_X(x;b,c,k) = \frac{{b\,k\,c}}{{x^2}} \frac{{\left( \frac{b}{x} \right)}^{c - 1}}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^{k + 1}}, \quad b, c, k, x &gt; 0</annotation></semantics></math></p>
+<p><br></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup><mo stretchy="true" form="postfix">]</mo></mrow><mi>k</mi></msup></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">F_X(x;b,c,k) = \frac{1}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^k}, \quad b, c, k, x &gt; 0</annotation></semantics></math></p>
+</div>
 <div style="text-align: center;" font-size: color: class="box">
-<b><u>Burr III distribution</u></b>\[\begin{array}{*{20}{c}}
-{{f_X}(x;b,c,k) = \frac{{b\,k\,c}}{{{x^2}}}\frac{{{{\left( {\frac{b}{x}} \right)}^{c - 1}}}}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^{k + 1}}}}{\rm{ }}}&amp;{b,c,k,x &gt; 0}
-\end{array}\]<br>\[\begin{array}{*{20}{c}}
-{{F_X}(x;b,c,k) = \frac{1}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^k}}}{\rm{ }}}&amp;{b,c,k,x &gt; 0}
-\end{array}\]
+<b><u>Burr III distribution</u></b>
+
+$${{f_X}(x;b,c,k) = \frac{{b\,k\,c}}{{{x^2}}}\frac{{{{\left( {\frac{b}{x}} \right)}^{c - 1}}}}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^{k + 1}}}}{\rm{ }}} {b,c,k,x &gt; 0}$$
+<br>
+
+
+$${{F_X}(x;b,c,k) = \frac{1}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^k}}}{\rm{ }}} {b,c,k,x &gt; 0}$$
 </div>
 <div class="figure" style="text-align: center">
 <img src="distributions_files/figure-html/unnamed-chunk-2-1.png" alt="Sample Burr probability density (A) and cumulative probability (B) functions." width="864"><p class="caption">
@@ -358,7 +373,8 @@ is normally distributed. The <em>pdf</em> of
 is given by</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>Lognormal distribution</u></b>
-\[{f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma ^2}}}} \right]{\rm{  ;  }}x,\sigma  &gt; 0,\; - \infty  
+
+$${f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma ^2}}}} \right]{\rm{  ;  }}x,\sigma  &gt; 0,\; - \infty  
 <p>The lognormal distribution was selected as the starting distribution
 given the data are for effect concentrations. The log-normal
 distribution can be fitted using <code>ssdtools</code> supplying the
@@ -381,25 +397,45 @@ has a log-logistic distribution, then
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y = \ln (X)</annotation></semantics></math>
 has a <em>logistic</em> distribution.</p>
 <div style="text-align: center;" font-size: color: class="box">
+<!-- <b><u>Log-logistic distribution</u></b> -->
+<!-- \[\begin{array}{l} -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{f_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\left( {{\raise0.5ex\hbox{$\scriptstyle \beta $} -->
+<!-- \kern-0.1em/\kern-0.15em -->
+<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right){{\left( {{\raise0.5ex\hbox{$\scriptstyle y$} -->
+<!-- \kern-0.1em/\kern-0.15em -->
+<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^{\beta  - 1}}}}{{{{\left[ {1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$} -->
+<!-- \kern-0.1em/\kern-0.15em -->
+<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }} \right]}^2}}};}&{y,} -->
+<!-- \end{array}\alpha ,\beta  > 0\\ -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{F_Y}\left( {y;\alpha ,\beta } \right) = \frac{{{{\left( {{\raise0.5ex\hbox{$\scriptstyle y$} -->
+<!-- \kern-0.1em/\kern-0.15em -->
+<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}}{{1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$} -->
+<!-- \kern-0.1em/\kern-0.15em -->
+<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}};}&{y,} -->
+<!-- \end{array}\alpha ,\beta  > 0 -->
+<!-- \end{array}\] -->
+<!-- </div> -->
+
 <b><u>Log-logistic distribution</u></b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\left( {{\raise0.5ex\hbox{$\scriptstyle \beta $}
+
+$${{f_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\left( {{\raise0.5ex\hbox{$\scriptstyle \beta $}
 \kern-0.1em/\kern-0.15em
 \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right){{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
 \kern-0.1em/\kern-0.15em
 \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^{\beta  - 1}}}}{{{{\left[ {1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
 \kern-0.1em/\kern-0.15em
-\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }} \right]}^2}}};}&amp;{y,}
-\end{array}\alpha ,\beta  &gt; 0\\
-\begin{array}{*{20}{c}}
-{{F_Y}\left( {y;\alpha ,\beta } \right) = \frac{{{{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
+\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }} \right]}^2}}};} {y,}$$
+
+$${{F_Y}\left( {y;\alpha ,\beta } \right) = \frac{{{{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
 \kern-0.1em/\kern-0.15em
 \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}}{{1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
 \kern-0.1em/\kern-0.15em
-\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}};}&amp;{y,}
-\end{array}\alpha ,\beta  &gt; 0
-\end{array}\]
+\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}};} {y,}$$
+
+$$\alpha ,\beta  &gt; 0$$
+
 </div>
 <p><br>letting
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mu  = \ln \left( \alpha  \right)</annotation></semantics></math>
@@ -408,9 +444,8 @@ and
 we have:</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>Logistic distribution</u></b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_X}\left( {x;\mu ,s} \right) = \frac{{{e^{ - x}}}}{{{{\left( {1 + {e^{ - x}}} \right)}^2}}};}&amp;{x,s &gt; 0,\; - \infty   0,\; - \infty  
+
+$${{f_X}\left( {x;\mu ,s} \right) = \frac{{{e^{ - x}}}}{{{{\left( {1 + {e^{ - x}}} \right)}^2}}};} {x,s &gt; 0,\; - \infty   0,\; - \infty  
 <p><br> The log-logistic distribution is often used as a candidate SSD
 primarily because of its analytic tractability <span class="citation">(Aldenberg and Slob 1993)</span>. We included it
 because it has wider tails than the log-normal and because it is a
@@ -432,14 +467,12 @@ Sample Log logistic probability density (A) and cumulative probability
 distribution has the following <em>pdf</em> and <em>cdf</em>.</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>Gamma distribution</u></b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_X}\left( {x;b,c} \right) = \frac{{{x^{c - 1}}{e^{ - \left( {\frac{x}{b}} \right)}}}}{{{b^c}\,\Gamma \left( c \right)}}}&amp;{0 \le x}
-\end{array}  0\\
-\begin{array}{*{20}{c}}
-{{F_X}\left( {x;b,c} \right) = \frac{1}{{\,\Gamma \left( c \right)}}\,\gamma \left( {c,\frac{x}{b}} \right)}&amp;{0 \le x}
-\end{array}  0
-\end{array}\]
+
+$${{f_X}\left( {x;b,c} \right) = \frac{{{x^{c - 1}}{e^{ - \left( {\frac{x}{b}} \right)}}}}{{{b^c}\,\Gamma \left( c \right)}}} {0 \le x}$$
+
+$${{F_X}\left( {x;b,c} \right) = \frac{1}{{\,\Gamma \left( c \right)}}\,\gamma \left( {c,\frac{x}{b}} \right)} {0 \le x}$$
+$$  0$$
+
 </div>
 <p><br>where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Gamma \left(  \cdot  \right)</annotation></semantics></math>
@@ -475,15 +508,22 @@ call. The two-parameter log-gumbel distribution has the following
 <em>pdf</em> and <em>cdf</em>:</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>Log-Gumbel distribution</u></b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\beta \,{e^{ - {{(\alpha x)}^{ - \beta }}}}}}{{{\alpha ^\beta }\,{x^{\beta  + 1}}}}}&amp;;
-\end{array}\quad x,\alpha ,\beta  &gt; 0\\
-\begin{array}{*{20}{c}}
-{{F_X}\left( {x;\alpha ,\beta } \right) = {e^{ - {{(\alpha x)}^{ - \beta }}}}}&amp;;
-\end{array}\quad x,\alpha ,\beta  &gt; 0
-\end{array}\]
+
+$${{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\beta \,{e^{ - {{(\alpha x)}^{ - \beta }}}}}}{{{\alpha ^\beta }\,{x^{\beta  + 1}}}}} ;\quad x,\alpha ,\beta  &gt; 0\\$$
+
+$${{F_X}\left( {x;\alpha ,\beta } \right) = {e^{ - {{(\alpha x)}^{ - \beta }}}}} ;\quad x,\alpha ,\beta  &gt; 0$$
+
 </div>
+<!-- <b><u>Log-Gumbel distribution</u></b> -->
+<!-- \[\begin{array}{l} -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\beta \,{e^{ - {{(\alpha x)}^{ - \beta }}}}}}{{{\alpha ^\beta }\,{x^{\beta  + 1}}}}}&; -->
+<!-- \end{array}\quad x,\alpha ,\beta  > 0\\ -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{F_X}\left( {x;\alpha ,\beta } \right) = {e^{ - {{(\alpha x)}^{ - \beta }}}}}&; -->
+<!-- \end{array}\quad x,\alpha ,\beta  > 0 -->
+<!-- \end{array}\] -->
+<!-- </div> -->
 <div class="figure" style="text-align: center">
 <img src="distributions_files/figure-html/unnamed-chunk-8-1.png" alt="Sample Log-Gumbel probability density (A) and cumulative probability (B) functions." width="864"><p class="caption">
 Sample Log-Gumbel probability density (A) and cumulative probability (B)
@@ -504,14 +544,22 @@ and also used in <code>ssdtools</code> [Gompertz] has the following
 <em>pdf</em> and <em>cdf</em>:</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>Gompertz distribution: Parameterisation I</u></b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_X}\left( {x;\eta ,b} \right) = b{\kern 1pt} \eta \exp \left( {\eta  + bx - \eta {e^{bx}}} \right)}&amp;;
-\end{array}\quad 0 \le x  0\\
-\begin{array}{*{20}{c}}
-{{F_X}\left( {x;\eta ,b} \right) = 1 - \exp \left[ { - \eta \left( {{e^{bx}} - 1} \right)} \right]}&amp;;
-\end{array}\quad 0 \le x  0
-\end{array}\]
+<!-- \[\begin{array}{l} -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{f_X}\left( {x;\eta ,b} \right) = b{\kern 1pt} \eta \exp \left( {\eta  + bx - \eta {e^{bx}}} \right)}&; -->
+<!-- \end{array}\quad 0 \le x < \infty ,\eta ,b > 0\\ -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{F_X}\left( {x;\eta ,b} \right) = 1 - \exp \left[ { - \eta \left( {{e^{bx}} - 1} \right)} \right]}&; -->
+<!-- \end{array}\quad 0 \le x < \infty ,\eta ,b > 0 -->
+<!-- \end{array}\] -->
+<!-- </div> -->
+
+$${{f_X}\left( {x;\eta ,b} \right) = b{\kern 1pt} \eta \exp \left( {\eta  + bx - \eta {e^{bx}}} \right)} ; \quad 0 \le x  0\\$$
+
+
+$${{F_X}\left( {x;\eta ,b} \right) = 1 - \exp \left[ { - \eta \left( {{e^{bx}} - 1} \right)} \right]} ; \quad 0 \le x  0$$
+
+
 </div>
 <p>The second parameterisation in which the <em>product</em>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>η</mi></mrow><annotation encoding="application/x-tex">b\eta</annotation></semantics></math>
@@ -520,14 +568,20 @@ in the formulae above is replaced by the parameter
 giving:</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>Gompertz distribution: Parameterisation II</u></b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_X}(x;a,b) = \frac{a}{b}\;{e^{\frac{x}{b}}}\;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]}&amp;{;\quad 0 \le x  0}
-\end{array}\\
-\begin{array}{*{20}{c}}
-{{F_X}(x;a,b) = 1 - \;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]}&amp;{;\quad 0 \le x  0}
-\end{array}
-\end{array}\]
+<!-- \[\begin{array}{l} -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{f_X}(x;a,b) = \frac{a}{b}\;{e^{\frac{x}{b}}}\;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]}&{;\quad 0 \le x < \infty,a,b > 0} -->
+<!-- \end{array}\\ -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{F_X}(x;a,b) = 1 - \;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]}&{;\quad 0 \le x < \infty,a,b > 0} -->
+<!-- \end{array} -->
+<!-- \end{array}\] -->
+
+
+$${{f_X}(x;a,b) = \frac{a}{b}\;{e^{\frac{x}{b}}}\;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]} {;\quad 0 \le x  0}$$
+
+$${{F_X}(x;a,b) = 1 - \;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]} {;\quad 0 \le x  0}$$
+
 </div>
 <div class="figure" style="text-align: center">
 <img src="distributions_files/figure-html/unnamed-chunk-9-1.png" alt="Sample Gompertz probability density (A) and cumulative probability (B) functions." width="864"><p class="caption">
@@ -556,14 +610,21 @@ tend to either zero and/or infinity in specific ways.</p>
 distribution has the following <em>pdf</em> and <em>cdf</em>:</p>
 <div style="text-align: center;" font-size: color: class="box">
 <b><u>Weibull distribution</u></b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_X}(x;a,b) = \frac{c}{\theta }\,{{\left( {\frac{x}{\theta }} \right)}^{c - 1}}{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}}&amp;{;\quad 0 \le x  0}
-\end{array}\\
-\begin{array}{*{20}{c}}
-{{F_X}(x;a,b) = 1 - \;{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}}&amp;{;\quad 0 \le x  0}
-\end{array}
-\end{array}\]
+<!-- \[\begin{array}{l} -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{f_X}(x;a,b) = \frac{c}{\theta }\,{{\left( {\frac{x}{\theta }} \right)}^{c - 1}}{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}}&{;\quad 0 \le x < \infty ,c,\theta  > 0} -->
+<!-- \end{array}\\ -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{F_X}(x;a,b) = 1 - \;{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}}&{;\quad 0 \le x < \infty ,c,\theta  > 0} -->
+<!-- \end{array} -->
+<!-- \end{array}\] -->
+
+
+$${{f_X}(x;a,b) = \frac{c}{\theta }\,{{\left( {\frac{x}{\theta }} \right)}^{c - 1}}{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}} {;\quad 0 \le x  0}$$
+
+
+$${{F_X}(x;a,b) = 1 - \;{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}} {;\quad 0 \le x  0}$$
+
 </div>
 <p>The Weibull distribution can be fitted in <code>ssdtools</code> by
 supplying the string <code>weibull</code> to the <code>dists</code>
@@ -638,23 +699,38 @@ limiting case of the Burr distribution).</p>
 <div style="text-align: left;" font-size: color: class="box">
                     <b><u>(Inverse)Pareto distribution - North American version</u><br><br>Pareto distribution</b>
 
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_X}\left( {x;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {x^{ - \left( {\alpha  + 1} \right)}}}&amp;;
-\end{array}\quad x &gt; \beta ;\;\alpha ,\beta  &gt; 0\\
-\begin{array}{*{20}{c}}
-{{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{x}} \right)}^\alpha }}&amp;;
-\end{array}\quad x &gt; \beta ;\;\alpha ,\beta  &gt; 0
-\end{array}\]
+<!-- \[\begin{array}{l} -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{f_X}\left( {x;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {x^{ - \left( {\alpha  + 1} \right)}}}&; -->
+<!-- \end{array}\quad x > \beta ;\;\alpha ,\beta  > 0\\ -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{x}} \right)}^\alpha }}&; -->
+<!-- \end{array}\quad x > \beta ;\;\alpha ,\beta  > 0 -->
+<!-- \end{array}\] -->
+<!-- Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>inverse Pareto distribution.</i><br><br><b>inverse Pareto distribution</b> -->
+<!-- \[\begin{array}{l} -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{g_Y}\left( {y;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}}&; -->
+<!-- \end{array}\quad y \le \frac{1}{\beta };\;\;\alpha ,\beta  > 0\\ -->
+<!-- \begin{array}{*{20}{c}} -->
+<!-- {{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\beta \,y} \right)}^\alpha }}&; -->
+<!-- \end{array}\quad 0 < y \le \frac{1}{\beta };\;\;\alpha ,\beta  > 0 -->
+<!-- \end{array}\] -->
+<!-- </div> -->
+
+$${{f_X}\left( {x;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {x^{ - \left( {\alpha  + 1} \right)}}} ; \quad x &gt; \beta ;\;\alpha ,\beta  &gt; 0\\$$
+
+
+$${{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{x}} \right)}^\alpha }}; \quad x &gt; \beta ;\;\alpha ,\beta  &gt; 0$$
+
+
 Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>inverse Pareto distribution.</i><br><br><b>inverse Pareto distribution</b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{g_Y}\left( {y;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}}&amp;;
-\end{array}\quad y \le \frac{1}{\beta };\;\;\alpha ,\beta  &gt; 0\\
-\begin{array}{*{20}{c}}
-{{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\beta \,y} \right)}^\alpha }}&amp;;
-\end{array}\quad 0  0
-\end{array}\]
+
+
+$${{g_Y}\left( {y;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}} ;\quad y \le \frac{1}{\beta };\;\;\alpha ,\beta  &gt; 0\\$$
+
+$${{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\beta \,y} \right)}^\alpha }}; \quad 0  0$$
+
 </div>
 <p><br><br>Importantly, we see that the <em>North American</em> versions
 of these distributions are <b><u>bounded</u></b> with the Pareto
@@ -713,23 +789,24 @@ realistic candidate.</p>
 <hr>
 <div style="text-align: left;" font-size: color: class="box">
                     <b><u>(Inverse)Pareto distribution - European version</u><br><br>Pareto distribution</b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\alpha \,\beta \,{x^{\alpha  - 1}}}}{{{{\left( {x + \beta } \right)}^{\alpha  + 1}}}}}&amp;;
-\end{array}\quad x,\;\alpha ,\beta  &gt; 0\\
-\begin{array}{*{20}{c}}
-{{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{{x + \beta }}} \right)}^\alpha }}&amp;;
-\end{array}\quad x,\;\alpha ,\beta  &gt; 0
-\end{array}\]
+
+
+$${{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\alpha \,\beta \,{x^{\alpha  - 1}}}}{{{{\left( {x + \beta } \right)}^{\alpha  + 1}}}}} ; \quad x,\;\alpha ,\beta  &gt; 0\\$$
+
+
+$${{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{{x + \beta }}} \right)}^\alpha }};
+\quad x,\;\alpha ,\beta  &gt; 0$$
+
+
 Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>inverse Pareto distribution.</i><br><br><b>inverse Pareto distribution</b>
-\[\begin{array}{l}
-\begin{array}{*{20}{c}}
-{{g_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}}}{{{{\left( {1 + \beta y} \right)}^{\alpha  + 1}}}}}&amp;;
-\end{array}\quad y,\;\alpha ,\beta  &gt; 0\\
-\begin{array}{*{20}{c}}
-{{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\frac{{\beta y}}{{1 + \beta y}}} \right)}^\alpha }}&amp;;
-\end{array}\quad y,\;\alpha ,\beta  &gt; 0
-\end{array}\]
+
+$${{g_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}}}{{{{\left( {1 + \beta y} \right)}^{\alpha  + 1}}}}};
+\quad y,\;\alpha ,\beta  &gt; 0\\$$
+
+
+$${{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\frac{{\beta y}}{{1 + \beta y}}} \right)}^\alpha }};
+\quad y,\;\alpha ,\beta  &gt; 0$$
+
 </div>
 <p>We note in passing that <em>both</em> versions of these Pareto and
 inverse Pareto distrbutions are available in <code>R</code>. For

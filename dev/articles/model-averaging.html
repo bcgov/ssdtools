@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-11-28</h4>
+            <h4 data-toc-skip class="date">2024-12-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/model-averaging.Rmd" class="external-link"><code>vignettes/model-averaging.Rmd</code></a></small>
       <div class="d-none name"><code>model-averaging.Rmd</code></div>
@@ -620,11 +620,15 @@ is the <em>AIC</em> for the <strong>best-fitting</strong> model
 (i.e.<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mn>0</mn></msub><mo>=</mo><munder><mo>min</mo><mi>i</mi></munder><mrow><mo stretchy="true" form="prefix">{</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow><annotation encoding="application/x-tex">AI{C_0} = \mathop {\min }\limits_i \left\{ {AI{C_i}} \right\}</annotation></semantics></math>
 ). The <em>model-averaged weights</em>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{w_i}</annotation></semantics></math>
-are then computed as:</p>
+are then computed as</p>
 <div style="text-align: center;" font-size: color: class="box">
-<b><u>AIC Model averaging weights</u></b>\[{{w}_{i}}=\frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}\]
+<b><u>AIC Model averaging weights</u></b>
+
+$${w}_{i}=\frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}$$
+
 </div>
-<br><p>
+<p><br></p>
+<p>
 </p>
 <p>The model-averaged weights for the gamma, lognormal, and Pareto
 distributions used in the previous example can be computed ‘manually’ in
@@ -679,9 +683,14 @@ proposed a modification to the AIC to address this problem, although it
 too relied on a number of assumptions. This ‘correction’ to the AIC for
 small samples (referred to as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}</annotation></semantics></math>)
-is:</p>
+is</p>
 <div style="text-align: center;" font-size: color: class="box">
-<b><u>Corrected Akaike Information Criterion (AICc)</u></b>\[AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+<b><u>Corrected Akaike Information Criterion (AICc)</u></b>
+
+$$AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}$$
+
+where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+
 </div>
 <p><br>It is clear from the formula for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}</annotation></semantics></math>
@@ -696,7 +705,9 @@ no hard and fast rules as to what constitutes an <em>appropriate</em>
 sample size for SSD modelling. However, Professor David Fox’s personal
 rule of thumb which works quite well is:</p>
 <div style="text-align: center;" font-size: color: class="box">
-<b><u>Sample size rule-of-thumb for SSD modelling</u></b> \[n\ge 5k+1\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+<b><u>Sample size rule-of-thumb for SSD modelling</u></b> $$n\ge 5k+1$$
+
+where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
 </div>
 <p><br>Since most of the common SSD models are 2-parameter, we should be
 aiming to have a sample size of at least 11. For 3-parameter models
@@ -704,7 +715,9 @@ aiming to have a sample size of at least 11. For 3-parameter models
 fit a mixture of two, 2-parameter models (eg.
 <em>logNormal-logNormal</em> or <em>logLogistic-logLogistic</em>) the
 sample size should be <em>at least</em> 26. Sadly, this is rarely the
-case in practice!</p>
+case in practice! Jurisdictional guidance material may specify minimum
+sample size requirements, and should be adhered to where available and
+relevant.</p>
 </div>
 <div class="section level3">
 <h3 id="model-averaging-in-ssdtools">Model-Averaging in <code>ssdtools</code><a class="anchor" aria-label="anchor" href="#model-averaging-in-ssdtools"></a>
