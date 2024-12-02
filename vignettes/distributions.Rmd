@@ -76,34 +76,18 @@ New Zealand Guidelines 2018).
 
 The probability density function, ${f_X}(x;b,c,k)$ and cumulative distribution function, ${F_X}(x;b,c,k)$ for the Burr III distribution are:
 
-<!-- <div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";> -->
-<!-- <b><u>Burr III distribution</u></b>\[\begin{array}{*{20}{c}} -->
-<!-- {{f_X}(x;b,c,k) = \frac{{b\,k\,c}}{{{x^2}}}\frac{{{{\left( {\frac{b}{x}} \right)}^{c - 1}}}}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^{k + 1}}}}{\rm{ }}}&{b,c,k,x > 0} -->
-<!-- \end{array}\]<br>\[\begin{array}{*{20}{c}} -->
-<!-- {{F_X}(x;b,c,k) = \frac{1}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^k}}}{\rm{ }}}&{b,c,k,x > 0} -->
-<!-- \end{array}\] -->
-<!-- </div> -->
-
-<div style="text-align: center; font-size: 1.2em; color: #3664EE; border: 1px solid #3664EE; padding: 10px; border-radius: 5px;">
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
   <b><u>Burr III Distribution</u></b>
   
-  $$f_X(x;b,c,k) = \frac{{b\,k\,c}}{{x^2}} \frac{{\left( \frac{b}{x} \right)}^{c - 1}}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^{k + 1}}, \quad b, c, k, x > 0$$
+  $$f_X(x;b,c,k) = \frac{{b\,k\,c}}{{x^2}} \frac{{\left( \frac{b}{x} \right)}^{c - 1}}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^{k + 1}}; \quad b, c, k, x > 0$$
   
   <br>
   
-  $$F_X(x;b,c,k) = \frac{1}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^k}, \quad b, c, k, x > 0$$
-  
+  $$F_X(x;b,c,k) = \frac{1}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^k}; \quad b, c, k, x > 0$$
+
 </div>
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Burr III distribution</u></b>
-
-$${{f_X}(x;b,c,k) = \frac{{b\,k\,c}}{{{x^2}}}\frac{{{{\left( {\frac{b}{x}} \right)}^{c - 1}}}}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^{k + 1}}}}{\rm{ }}} {b,c,k,x > 0}$$
 <br>
-
-
-$${{F_X}(x;b,c,k) = \frac{1}{{{{\left[ {1 + {{\left( {\frac{b}{x}} \right)}^c}} \right]}^k}}}{\rm{ }}} {b,c,k,x > 0}$$
-</div>
 
 ```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5, fig.cap="Sample Burr probability density (A) and cumulative probability (B) functions."}
 par(mfrow = c(1, 2))
@@ -251,14 +235,15 @@ ssd_plot_cdf(ssd_match_moments(meanlog = 2, sdlog = 2)) +
 
 The Burr Type 3 is a flexible three parameter distribution can be fitted using `ssdtools` by supplying the string  `burrIII3`  to the `dists` argument in the `ssd_fit_dists` call.
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Burr III distribution</u></b>
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Burr III distribution</u></b>
 
 <br><br><i>See above for details</i>
 
 </div>
 
 <br>
+
 The Burr family of distributions has been central to the derivation of guideline values in Australia and New Zealand for over 20 yr [@fox_recent_2021]. While offering a high degree of ﬂexibility, experience with these distributions during that time has repeatedly highlighted numerical stability and convergence issues when parameters are estimated using maximum likelihood [@fox_recent_2021]. 
 This is thought to be due to the high degree of collinearity between parameter estimates and/or relatively ﬂat likelihood proﬁles [@fox_recent_2021], and is one of the motivations behind the logic coded into Burrlioz to revert to either of the two limiting distributions.
 Burr Type 3 distribution is not currently one of the recommended distributionsin the default model set. 
@@ -270,12 +255,14 @@ The [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) distribu
 
 A random variable, $X$ is lognormally distributed if the *logarithm* of $X$ is normally distributed. The *pdf* of $X$ is given by 
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Lognormal distribution</u></b>
-
-$${f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma ^2}}}} \right]{\rm{  ;  }}x,\sigma  > 0,\; - \infty  < \mu  < \infty $$
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Lognormal Distribution</u></b>
+  
+  $${f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma ^2}}}} \right]; \quad x,\sigma  > 0,\; - \infty  < \mu  < \infty $$
 
 </div>
+
+<br>
 
 The lognormal distribution was selected as the starting distribution given the data are for effect concentrations. 
 The log-normal distribution can be fitted using `ssdtools` supplying the string `lnorm` to the `dists` argument in the `ssd_fit_dists` call.
@@ -312,60 +299,30 @@ legend("topleft", "(B)", bty = "n")
 
 Like the *lognormal* distribution, the [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution) is similarly defined, that is: if $X$ has a log-logistic distribution, then $Y = \ln (X)$ has a *logistic* distribution.
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<!-- <b><u>Log-logistic distribution</u></b> -->
-<!-- \[\begin{array}{l} -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{f_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\left( {{\raise0.5ex\hbox{$\scriptstyle \beta $} -->
-<!-- \kern-0.1em/\kern-0.15em -->
-<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right){{\left( {{\raise0.5ex\hbox{$\scriptstyle y$} -->
-<!-- \kern-0.1em/\kern-0.15em -->
-<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^{\beta  - 1}}}}{{{{\left[ {1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$} -->
-<!-- \kern-0.1em/\kern-0.15em -->
-<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }} \right]}^2}}};}&{y,} -->
-<!-- \end{array}\alpha ,\beta  > 0\\ -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{F_Y}\left( {y;\alpha ,\beta } \right) = \frac{{{{\left( {{\raise0.5ex\hbox{$\scriptstyle y$} -->
-<!-- \kern-0.1em/\kern-0.15em -->
-<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}}{{1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$} -->
-<!-- \kern-0.1em/\kern-0.15em -->
-<!-- \lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}};}&{y,} -->
-<!-- \end{array}\alpha ,\beta  > 0 -->
-<!-- \end{array}\] -->
-<!-- </div> -->
-
-<b><u>Log-logistic distribution</u></b>
-
-$${{f_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\left( {{\raise0.5ex\hbox{$\scriptstyle \beta $}
-\kern-0.1em/\kern-0.15em
-\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right){{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
-\kern-0.1em/\kern-0.15em
-\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^{\beta  - 1}}}}{{{{\left[ {1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
-\kern-0.1em/\kern-0.15em
-\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }} \right]}^2}}};} {y,}$$
-
-$${{F_Y}\left( {y;\alpha ,\beta } \right) = \frac{{{{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
-\kern-0.1em/\kern-0.15em
-\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}}{{1 + {{\left( {{\raise0.5ex\hbox{$\scriptstyle y$}
-\kern-0.1em/\kern-0.15em
-\lower0.25ex\hbox{$\scriptstyle \alpha $}}} \right)}^\beta }}};} {y,}$$
-
-$$\alpha ,\beta  > 0$$
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Log-logistic Distribution</u></b>
+  
+  $${f_Y}\left( {y;\alpha ,\beta } \right) = \frac{\left( \frac{\beta}{\alpha} \right) \left( \frac{y}{\alpha} \right)^{\beta - 1}}{\left[ 1 + \left( \frac{y}{\alpha} \right)^\beta \right]^2}; \quad y, \alpha, \beta > 0$$
+  
+  $${F_Y}\left( {y;\alpha ,\beta } \right) = \frac{\left( \frac{y}{\alpha} \right)^\beta}{1 + \left( \frac{y}{\alpha} \right)^\beta}; \quad y, \alpha, \beta > 0$$
 
 </div>
-
-<br>letting $\mu  = \ln \left( \alpha  \right)$ and $s = \frac{1}{\beta }$ we have:
-
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Logistic distribution</u></b>
-
-$${{f_X}\left( {x;\mu ,s} \right) = \frac{{{e^{ - x}}}}{{{{\left( {1 + {e^{ - x}}} \right)}^2}}};} {x,s > 0,\; - \infty  < \mu  < \infty }$$
-
-$${{F_X}\left( {x;\mu ,s} \right) = \frac{1}{{1 + {e^{ - \frac{{\left( {x - \mu } \right)}}{s}}}}};} {x,s > 0,\; - \infty  < \mu  < \infty }$$
-</div>
-
 
 <br>
+
+letting $\mu  = \ln \left( \alpha  \right)$ and $s = \frac{1}{\beta }$ we have:
+
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Logistic Distribution</u></b>
+  
+  $${f_X}\left( {x;\mu ,s} \right) = \frac{e^{-x}}{\left( 1 + e^{-x} \right)^2}; \quad x, s > 0, \; -\infty < \mu < \infty$$
+  
+  $${F_X}\left( {x;\mu ,s} \right) = \frac{1}{1 + e^{-\frac{x - \mu}{s}}}; \quad x, s > 0, \; -\infty < \mu < \infty$$
+
+</div>
+
+<br>
+
 The log-logistic distribution is often used as a candidate SSD primarily because of its analytic tractability [@aldenberg_confidence_1993].
 We included it because it has wider tails than the log-normal and because it is a specific case of the more general Burr family of distributions [@shao_estimation_2000, @burr_cumulative_1942].
 The log-logistic distribution can be fitted using `ssdtools` by supplying the string `lnorm` to the `dists` argument in the `ssd_fit_dists` call.
@@ -403,17 +360,18 @@ legend("topleft", "(B)", bty = "n")
 #### Gamma distribution
 The two-parameter  [gamma](https://en.wikipedia.org/wiki/Gamma_distribution) distribution has the following *pdf* and *cdf*.
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Gamma distribution</u></b>
-
-$${{f_X}\left( {x;b,c} \right) = \frac{{{x^{c - 1}}{e^{ - \left( {\frac{x}{b}} \right)}}}}{{{b^c}\,\Gamma \left( c \right)}}} {0 \le x}$$
-
-$${{F_X}\left( {x;b,c} \right) = \frac{1}{{\,\Gamma \left( c \right)}}\,\gamma \left( {c,\frac{x}{b}} \right)} {0 \le x}$$
-$$ < \infty ;b,c > 0$$
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Gamma Distribution</u></b>
+  
+  $${f_X}\left( {x;b,c} \right) = \frac{x^{c - 1} e^{-\frac{x}{b}}}{b^c \, \Gamma(c)}, \quad 0 \leq x < \infty,b,c > 0$$
+  
+  $${F_X}\left( {x;b,c} \right) = \frac{1}{\Gamma(c)} \, \gamma\left(c, \frac{x}{b}\right), \quad 0 \leq x < \infty,b,c > 0$$
 
 </div>
 
-<br>where $\Gamma \left(  \cdot  \right)$ is the *gamma* function (in `R` this is simply `gamma(x)`) and $\gamma \left(  \cdot  \right)$ is the (lower) *incomplete gamma* function \[\gamma \left( {x,a} \right) = \int\limits_0^x {{t^{a - 1}}} \,{e^{ - t}}\,dt\] (this can be computed using the  `gammainc` function from the `pracma` package in `R`).
+<br>
+
+where $\Gamma \left(  \cdot  \right)$ is the *gamma* function (in `R` this is simply `gamma(x)`) and $\gamma \left(  \cdot  \right)$ is the (lower) *incomplete gamma* function \[\gamma \left( {x,a} \right) = \int\limits_0^x {{t^{a - 1}}} \,{e^{ - t}}\,dt\] (this can be computed using the  `gammainc` function from the `pracma` package in `R`).
 
 For use in modeling species sensitivity data, the gamma distribution has two key features that provide additional flexibility relative to the log-normal distribution: 1) it is asymmetrical on the logarithmic scale; and 2) it has wider tails.
 
@@ -443,24 +401,16 @@ The log-gumbel distribution is a two-parameter distribution commonly used to mod
 The log-gumbel distribution can be fitted using `ssdtools` by supplying the string `lgumbel` to the `dists` argument in the `ssd_fit_dists` call. 
 The two-parameter log-gumbel distribution has the following *pdf* and *cdf*:
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Log-Gumbel distribution</u></b>
-
-$${{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\beta \,{e^{ - {{(\alpha x)}^{ - \beta }}}}}}{{{\alpha ^\beta }\,{x^{\beta  + 1}}}}} ;\quad x,\alpha ,\beta  > 0\\$$
-
-$${{F_X}\left( {x;\alpha ,\beta } \right) = {e^{ - {{(\alpha x)}^{ - \beta }}}}} ;\quad x,\alpha ,\beta  > 0$$
-
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Log-Gumbel Distribution</u></b>
+  
+  $${f_X}\left( {x;\alpha ,\beta } \right) = \frac{\beta \, e^{-(\alpha x)^{-\beta}}}{\alpha^\beta \, x^{\beta + 1}}, \quad x, \alpha, \beta > 0$$
+  
+  $${F_X}\left( {x;\alpha ,\beta } \right) = e^{-(\alpha x)^{-\beta}}, \quad x, \alpha, \beta > 0$$
+  
 </div>
-<!-- <b><u>Log-Gumbel distribution</u></b> -->
-<!-- \[\begin{array}{l} -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\beta \,{e^{ - {{(\alpha x)}^{ - \beta }}}}}}{{{\alpha ^\beta }\,{x^{\beta  + 1}}}}}&; -->
-<!-- \end{array}\quad x,\alpha ,\beta  > 0\\ -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{F_X}\left( {x;\alpha ,\beta } \right) = {e^{ - {{(\alpha x)}^{ - \beta }}}}}&; -->
-<!-- \end{array}\quad x,\alpha ,\beta  > 0 -->
-<!-- \end{array}\] -->
-<!-- </div> -->
+
+<br>
 
 ```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Log-Gumbel probability density (A) and cumulative probability (B) functions."}
 par(mfrow = c(1, 2))
@@ -498,45 +448,29 @@ The Gompertz distribution can be fitted using `ssdtools` by supplying the string
 We consider two parameterisations of the Gompertz distribution.
 The first, as given in [Wikipedia](https://en.wikipedia.org/wiki/Gompertz_distribution) and also used in `ssdtools` [Gompertz] has the following *pdf* and *cdf*:
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Gompertz distribution: Parameterisation I</u></b>
-<!-- \[\begin{array}{l} -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{f_X}\left( {x;\eta ,b} \right) = b{\kern 1pt} \eta \exp \left( {\eta  + bx - \eta {e^{bx}}} \right)}&; -->
-<!-- \end{array}\quad 0 \le x < \infty ,\eta ,b > 0\\ -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{F_X}\left( {x;\eta ,b} \right) = 1 - \exp \left[ { - \eta \left( {{e^{bx}} - 1} \right)} \right]}&; -->
-<!-- \end{array}\quad 0 \le x < \infty ,\eta ,b > 0 -->
-<!-- \end{array}\] -->
-<!-- </div> -->
-
-$${{f_X}\left( {x;\eta ,b} \right) = b{\kern 1pt} \eta \exp \left( {\eta  + bx - \eta {e^{bx}}} \right)} ; \quad 0 \le x < \infty ,\eta ,b > 0\\$$
-
-
-$${{F_X}\left( {x;\eta ,b} \right) = 1 - \exp \left[ { - \eta \left( {{e^{bx}} - 1} \right)} \right]} ; \quad 0 \le x < \infty ,\eta ,b > 0$$
-
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Gompertz Distribution: Parameterisation I</u></b>
+  
+  $${f_X}\left( {x;\eta ,b} \right) = b \eta \exp\left(\eta + bx - \eta e^{bx}\right), \quad 0 \leq x < \infty, \eta, b > 0$$
+  
+  $${F_X}\left( {x;\eta ,b} \right) = 1 - \exp\left[ -\eta \left(e^{bx} - 1\right) \right], \quad 0 \leq x < \infty, \eta, b > 0$$
 
 </div>
+
+<br>
 
 The second parameterisation in which the *product* $b\eta$ in the formulae above is replaced by the parameter $a$ giving:
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Gompertz distribution: Parameterisation II</u></b>
-<!-- \[\begin{array}{l} -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{f_X}(x;a,b) = \frac{a}{b}\;{e^{\frac{x}{b}}}\;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]}&{;\quad 0 \le x < \infty,a,b > 0} -->
-<!-- \end{array}\\ -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{F_X}(x;a,b) = 1 - \;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]}&{;\quad 0 \le x < \infty,a,b > 0} -->
-<!-- \end{array} -->
-<!-- \end{array}\] -->
-
-
-$${{f_X}(x;a,b) = \frac{a}{b}\;{e^{\frac{x}{b}}}\;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]} {;\quad 0 \le x < \infty,a,b > 0}$$
-
-$${{F_X}(x;a,b) = 1 - \;\exp \left[ { - a\left( {{e^{\frac{x}{b}}}\; - 1} \right)} \right]} {;\quad 0 \le x < \infty,a,b > 0}$$
-
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Gompertz Distribution: Parameterisation II</u></b>
+  
+  $${f_X}(x;a,b) = \frac{a}{b} e^{\frac{x}{b}} \exp\left[ -a\left(e^{\frac{x}{b}} - 1\right) \right], \quad 0 \leq x < \infty, a, b > 0$$
+  
+  $${F_X}(x;a,b) = 1 - \exp\left[ -a\left(e^{\frac{x}{b}} - 1\right) \right], \quad 0 \leq x < \infty, a, b > 0$$
+  
 </div>
+
+<br>
 
 ```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Gompertz probability density (A) and cumulative probability (B) functions."}
 par(mfrow = c(1, 2))
@@ -575,24 +509,16 @@ As mentioned earlier, both the Weibull and inverse Pareto distributions arise as
 
 The two-parameter [Weibull](https://en.wikipedia.org/wiki/Weibull_distribution) distribution has the following *pdf* and *cdf*:
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Weibull distribution</u></b>
-<!-- \[\begin{array}{l} -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{f_X}(x;a,b) = \frac{c}{\theta }\,{{\left( {\frac{x}{\theta }} \right)}^{c - 1}}{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}}&{;\quad 0 \le x < \infty ,c,\theta  > 0} -->
-<!-- \end{array}\\ -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{F_X}(x;a,b) = 1 - \;{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}}&{;\quad 0 \le x < \infty ,c,\theta  > 0} -->
-<!-- \end{array} -->
-<!-- \end{array}\] -->
-
-
-$${{f_X}(x;a,b) = \frac{c}{\theta }\,{{\left( {\frac{x}{\theta }} \right)}^{c - 1}}{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}} {;\quad 0 \le x < \infty ,c,\theta  > 0}$$
-
-
-$${{F_X}(x;a,b) = 1 - \;{e^{ - {{\left( {\frac{x}{\theta }} \right)}^c}}}} {;\quad 0 \le x < \infty ,c,\theta  > 0}$$
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Weibull Distribution</u></b>
+  
+  $${f_X}(x;c,\theta) = \frac{c}{\theta} \left( \frac{x}{\theta} \right)^{c - 1} e^{-\left( \frac{x}{\theta} \right)^c}, \quad 0 \leq x < \infty, c, \theta > 0$$
+  
+  $${F_X}(x;c,\theta) = 1 - e^{-\left( \frac{x}{\theta} \right)^c}, \quad 0 \leq x < \infty, c, \theta > 0$$
 
 </div>
+
+<br>
 
 The Weibull distribution can be fitted in `ssdtools` by supplying the string  `weibull` to the `dists` argument in the `ssd_fit_dists` call.  
 
@@ -639,44 +565,24 @@ The two versions of the (Inverse)Pareto distribution are known as the *European*
 
 <hr>
 
-<div style="text-align: left;"font-size: 1.2em; color:#3664EE;" class="box";>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>(Inverse)Pareto distribution - North American version</u><br><br>Pareto distribution</b>
-
-<!-- \[\begin{array}{l} -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{f_X}\left( {x;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {x^{ - \left( {\alpha  + 1} \right)}}}&; -->
-<!-- \end{array}\quad x > \beta ;\;\alpha ,\beta  > 0\\ -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{x}} \right)}^\alpha }}&; -->
-<!-- \end{array}\quad x > \beta ;\;\alpha ,\beta  > 0 -->
-<!-- \end{array}\] -->
-<!-- Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>inverse Pareto distribution.</i><br><br><b>inverse Pareto distribution</b> -->
-<!-- \[\begin{array}{l} -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{g_Y}\left( {y;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}}&; -->
-<!-- \end{array}\quad y \le \frac{1}{\beta };\;\;\alpha ,\beta  > 0\\ -->
-<!-- \begin{array}{*{20}{c}} -->
-<!-- {{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\beta \,y} \right)}^\alpha }}&; -->
-<!-- \end{array}\quad 0 < y \le \frac{1}{\beta };\;\;\alpha ,\beta  > 0 -->
-<!-- \end{array}\] -->
-<!-- </div> -->
-
-$${{f_X}\left( {x;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {x^{ - \left( {\alpha  + 1} \right)}}} ; \quad x > \beta ;\;\alpha ,\beta  > 0\\$$
-
-
-$${{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{x}} \right)}^\alpha }}; \quad x > \beta ;\;\alpha ,\beta  > 0$$
-
-
-Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>inverse Pareto distribution.</i><br><br><b>inverse Pareto distribution</b>
-
-
-$${{g_Y}\left( {y;\alpha ,\beta } \right) = \alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}} ;\quad y \le \frac{1}{\beta };\;\;\alpha ,\beta  > 0\\$$
-
-$${{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\beta \,y} \right)}^\alpha }}; \quad 0 < y \le \frac{1}{\beta };\;\;\alpha ,\beta  > 0$$
+<div style="text-align: left; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>(Inverse) Pareto Distribution - North American Version</u><br><br> Pareto Distribution</b>
+  
+  $${f_X}\left( {x;\alpha ,\beta } \right) = \alpha \beta^\alpha x^{-(\alpha + 1)}, \quad x > \beta, \; \alpha, \beta > 0$$
+  
+  $${F_X}\left( {x;\alpha ,\beta } \right) = 1 - \left( \frac{\beta}{x} \right)^\alpha, \quad x > \beta, \; \alpha, \beta > 0$$
+  
+  Now, if \( X \) has the Pareto distribution above, then <br> \[ Y = \frac{1}{X} \] <br> has an <i>inverse Pareto distribution.</i><br><br><b>Inverse Pareto Distribution</b>
+  
+  $${g_Y}\left( {y;\alpha ,\beta } \right) = \alpha \beta^\alpha y^{\alpha - 1}, \quad y \le \frac{1}{\beta}, \; \alpha, \beta > 0$$
+  
+  $${G_Y}\left( {y;\alpha ,\beta } \right) = \left( \beta y \right)^\alpha, \quad 0 < y \le \frac{1}{\beta}, \; \alpha, \beta > 0$$
 
 </div>
 
-<br><br>Importantly, we see that the *North American* versions of these distributions are <b><u>bounded</u></b> with the Pareto distribution bounded **below** by $\beta$ and the inverse Pareto distribution bounded *above* by $\frac{1}{\beta }$.<br>As an aside, the *mle* of $\beta$ in the Pareto distribution is \[\hat \beta  = \min \left\{ {{X_1}, \ldots ,{X_n}} \right\}\] and the *mle* of $\frac{1}{\beta }$ in the inverse Pareto is \[\begin{array}{*{20}{l}}
+<br>
+
+Importantly, we see that the *North American* versions of these distributions are <b><u>bounded</u></b> with the Pareto distribution bounded **below** by $\beta$ and the inverse Pareto distribution bounded *above* by $\frac{1}{\beta }$.<br>As an aside, the *mle* of $\beta$ in the Pareto distribution is \[\hat \beta  = \min \left\{ {{X_1}, \ldots ,{X_n}} \right\}\] and the *mle* of $\frac{1}{\beta }$ in the inverse Pareto is \[\begin{array}{*{20}{l}}
 {\tilde \beta  = \max \left\{ {{Y_1}, \ldots ,{Y_n}} \right\}}\\
 {\quad  = \max \left\{ {\frac{1}{{{X_1}}}, \ldots ,\frac{1}{{{X_n}}}} \right\} = \frac{1}{{\min \left\{ {{X_1}, \ldots ,{X_n}} \right\}}}}\\
 {\quad  = \frac{1}{{\hat \beta }}}
@@ -744,27 +650,22 @@ We see from the *pdf* plots that the alternative, *European* version of the inve
 
 <hr>
 
-<div style="text-align: left;"font-size: 1.2em; color:#3664EE;" class="box";>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>(Inverse)Pareto distribution - European version</u><br><br>Pareto distribution</b>
-
-
-$${{f_X}\left( {x;\alpha ,\beta } \right) = \frac{{\alpha \,\beta \,{x^{\alpha  - 1}}}}{{{{\left( {x + \beta } \right)}^{\alpha  + 1}}}}} ; \quad x,\;\alpha ,\beta  > 0\\$$
-
-
-$${{F_X}\left( {x;\alpha ,\beta } \right) = 1 - {{\left( {\frac{\beta }{{x + \beta }}} \right)}^\alpha }};
-\quad x,\;\alpha ,\beta  > 0$$
-
-
-Now, if X has the Pareto distribution above, then \[Y = \frac{1}{X}\] has an <i>inverse Pareto distribution.</i><br><br><b>inverse Pareto distribution</b>
-
-$${{g_Y}\left( {y;\alpha ,\beta } \right) = \frac{{\alpha {\kern 1pt} {\beta ^\alpha }{\kern 1pt} {y^{\alpha  - 1}}}}{{{{\left( {1 + \beta y} \right)}^{\alpha  + 1}}}}};
-\quad y,\;\alpha ,\beta  > 0\\$$
-
-
-$${{G_Y}\left( {y;\alpha ,\beta } \right) = {{\left( {\frac{{\beta y}}{{1 + \beta y}}} \right)}^\alpha }};
-\quad y,\;\alpha ,\beta  > 0$$
+<div style="text-align: left; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>(Inverse) Pareto Distribution - European Version</u><br><br> Pareto Distribution</b>
+  
+  $${f_X}\left( {x;\alpha ,\beta } \right) = \frac{\alpha \beta x^{\alpha - 1}}{\left( x + \beta \right)^{\alpha + 1}}, \quad x, \alpha, \beta > 0$$
+  
+  $${F_X}\left( {x;\alpha ,\beta } \right) = 1 - \left( \frac{\beta}{x + \beta} \right)^\alpha, \quad x, \alpha, \beta > 0$$
+  
+  Now, if \( X \) has the Pareto distribution above, then <br> \[ Y = \frac{1}{X} \] <br> has an <i>inverse Pareto distribution.</i><br><br><b>Inverse Pareto Distribution</b>
+  
+  $${g_Y}\left( {y;\alpha ,\beta } \right) = \frac{\alpha \beta^\alpha y^{\alpha - 1}}{\left( 1 + \beta y \right)^{\alpha + 1}}, \quad y, \alpha, \beta > 0$$
+  
+  $${G_Y}\left( {y;\alpha ,\beta } \right) = \left( \frac{\beta y}{1 + \beta y} \right)^\alpha, \quad y, \alpha, \beta > 0$$
 
 </div>
+
+<br>
 
 We note in passing that *both* versions of these Pareto and inverse Pareto distrbutions are available in `R`. 
 For example, the `R`package `extraDistr` has North American versions, while the `actuar` package has European versions.
@@ -822,7 +723,6 @@ The inverse Weibull (log-Gumbel) distribution can be fitted in `ssdtools` by sup
 3. Although the *negative exponential* distribution is **not** explicitly included in `ssdtools`, it is a special case of the *gamma* distribution with $c=1$. It is included in this figure as it is related to other distributions that *are* included in `ssdtools`.
 
 4. The *European* versions of the Pareto and inverse Pareto distributions are **unbounded**; the *North American* versions are **bounded**.
-
 
 <hr>
 
