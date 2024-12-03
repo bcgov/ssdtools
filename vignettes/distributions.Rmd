@@ -256,7 +256,7 @@ The [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) distribu
 A random variable, $X$ is lognormally distributed if the *logarithm* of $X$ is normally distributed. The *pdf* of $X$ is given by 
 
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
-  <b><u>Lognormal Distribution</u></b>
+  <b><u>Log-normal Distribution</u></b>
   
   $${f_X}\left( x; \mu, \sigma \right) = \frac{1}{\sqrt{2\pi}\ \sigma x}\exp \left[ - \frac{\left( {\ln x - \mu } \right)^2}{2\sigma^2} \right] ;\ x,\sigma  > 0;\ - \infty  < \mu  < \infty$$
 </div>
