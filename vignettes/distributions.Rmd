@@ -258,7 +258,9 @@ A random variable, $X$ is lognormally distributed if the *logarithm* of $X$ is n
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
   <b><u>Lognormal Distribution</u></b>
   
-  $${f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma ^2}}}} \right]; \quad x,\sigma  > 0; - \infty  < \mu  < \infty $$
+  $${f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma^2}}}} \right] $$
+
+$$; \quad x,\sigma  > 0; - \infty  < \mu  < \infty$$
 
 </div>
 
