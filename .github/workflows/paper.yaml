@@ -2,9 +2,9 @@
 
 on:
   push:
-    branches: [main]
+    branches: [main, joss-paper]
   pull_request:
-    branches: [main, dev]
+    branches: [main, joss-paper]
     
 name: paper
 
