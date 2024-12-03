@@ -62,7 +62,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-12-02</h4>
+            <h4 data-toc-skip class="date">2024-12-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/model-averaging.Rmd" class="external-link"><code>vignettes/model-averaging.Rmd</code></a></small>
       <div class="d-none name"><code>model-averaging.Rmd</code></div>
@@ -621,11 +621,9 @@ is the <em>AIC</em> for the <strong>best-fitting</strong> model
 ). The <em>model-averaged weights</em>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{w_i}</annotation></semantics></math>
 are then computed as</p>
-<div style="text-align: center;" font-size: color: class="box">
-<b><u>AIC Model averaging weights</u></b>
-
-$${w}_{i}=\frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}$$
-
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+<p><b><u>AIC Model Averaging Weights</u></b></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mi>i</mi></msub><mo>=</mo><mfrac><mrow><mo>exp</mo><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>Δ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow><mrow><mo>∑</mo><mrow><mo>exp</mo><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>Δ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">{w}_{i} = \frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <p>
@@ -684,15 +682,14 @@ too relied on a number of assumptions. This ‘correction’ to the AIC for
 small samples (referred to as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}</annotation></semantics></math>)
 is</p>
-<div style="text-align: center;" font-size: color: class="box">
-<b><u>Corrected Akaike Information Criterion (AICc)</u></b>
-
-$$AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}$$
-
-where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
-
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+<p><b><u>Corrected Akaike Information Criterion (AICc)</u></b></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>A</mi><mi>I</mi><mi>C</mi></mrow><mi>c</mi></msub><mo>=</mo><mi>A</mi><mi>I</mi><mi>C</mi><mo>+</mo><mfrac><mrow><mn>2</mn><msup><mi>k</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>k</mi></mrow><mrow><mi>n</mi><mo>−</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">{AIC}_{c} = AIC + \frac{2k^2 + 2k}{n - k - 1}</annotation></semantics></math></p>
+<p>where <em>n</em> is the sample size and <em>k</em> is the number of
+parameters.</p>
 </div>
-<p><br>It is clear from the formula for
+<p><br></p>
+<p>It is clear from the formula for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}</annotation></semantics></math>
 that for  
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≫</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">n\gg k</annotation></semantics></math>,
@@ -704,12 +701,14 @@ mean we are dealing with (pathologically) small sample sizes. There are
 no hard and fast rules as to what constitutes an <em>appropriate</em>
 sample size for SSD modelling. However, Professor David Fox’s personal
 rule of thumb which works quite well is:</p>
-<div style="text-align: center;" font-size: color: class="box">
-<b><u>Sample size rule-of-thumb for SSD modelling</u></b> $$n\ge 5k+1$$
-
-where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+<p><b><u>Sample Size Rule-of-Thumb for SSD Modelling</u></b></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>5</mn><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">{n \geq 5k + 1}</annotation></semantics></math></p>
+<p>where <em>n</em> is the sample size and <em>k</em> is the number of
+parameters.</p>
 </div>
-<p><br>Since most of the common SSD models are 2-parameter, we should be
+<p><br></p>
+<p>Since most of the common SSD models are 2-parameter, we should be
 aiming to have a sample size of at least 11. For 3-parameter models
 (like the Burr III), the minimum sample size is 16 and if we wanted to
 fit a mixture of two, 2-parameter models (eg.
