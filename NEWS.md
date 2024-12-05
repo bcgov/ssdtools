@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.1.0.9001
+
+- Fixed equation rendering for vignettes on website.
+- Corrected y-axis labels for bimodal plots in distributions vignette from Cumulative Probability to Probability Density.
+
+
+# ssdtools 2.1.0.9000
+
+- Same as previous version.
+
+
 # ssdtools 2.1.0
 
 - Added `ssd_xxmulti_fitdists()` functions to accept object of class `fitdists`.

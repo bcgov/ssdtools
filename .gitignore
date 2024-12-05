@@ -16,3 +16,6 @@
 /scripts/boron_samples1
 /scripts/checks.md
 inst/doc
+/ignore
+/doc/
+/Meta/

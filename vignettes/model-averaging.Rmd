@@ -435,12 +435,17 @@ where ${L_i}$ is the *i^th^ likelihood* and ${k_i}$ is the *number of parameters
 Next, we form the differences:
 $${\Delta _i} = AI{C_i} - AI{C_0}$$
 where $AI{C_0}$ is the *AIC* for the **best-fitting** model (i.e.$AI{C_0} = \mathop {\min }\limits_i \left\{ {AI{C_i}} \right\}$ ). 
-The *model-averaged weights* ${w_i}$ are then computed as: 
+The *model-averaged weights* ${w_i}$ are then computed as 
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>AIC Model averaging weights</u></b>\[{{w}_{i}}=\frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}\]
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>AIC Model Averaging Weights</u></b>
+  
+  $${w}_{i} = \frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}$$
+
 </div>
+
 <br>
+
 <p>The model-averaged weights for the gamma, lognormal, and Pareto distributions used in the previous example can be computed 'manually' in `R` as follows:
 
 
@@ -498,21 +503,35 @@ In deriving the AIC, Akaike had to make certain, strong assumptions.
 In addition, the bias factor (the $2k$ term) was derived from theoretical considerations (such as mathematical *expectation*) that relate to *infinite* sample sizes.
 For small sample sizes, the AIC is likely to select models having too many parameters (i.e models which *over-fit*).
 In 1978, Sugiura proposed a modification to the AIC to address this problem, although it too relied on a number of assumptions.
-This 'correction' to the AIC for small samples (referred to as $AI{{C}_{c}}$) is: 
+This 'correction' to the AIC for small samples (referred to as $AI{{C}_{c}}$) is 
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";>
-<b><u>Corrected Akaike Information Criterion (AICc)</u></b>\[AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Corrected Akaike Information Criterion (AICc)</u></b>
+  
+  $${AIC}_{c} = AIC + \frac{2k^2 + 2k}{n - k - 1}$$
+  
+  where *n* is the sample size and *k* is the number of parameters.
+
 </div>
 
-<br>It is clear from the formula for $AI{{C}_{c}}$ that for &nbsp; $n\gg k$, &nbsp;&nbsp; $AI{{C}_{c}}\simeq AIC$. The issue of sample size is ubiquitous in statistics, but even more so in ecotoxicology where logistical and practical limitations invariably mean we are dealing with (pathologically) small sample sizes. There are no hard and fast rules as to what constitutes an *appropriate* sample size for SSD modelling. However, Professor David Fox's personal rule of thumb which works quite well is: 
+<br>
 
+It is clear from the formula for $AI{{C}_{c}}$ that for &nbsp; $n\gg k$, &nbsp;&nbsp; $AI{{C}_{c}}\simeq AIC$. The issue of sample size is ubiquitous in statistics, but even more so in ecotoxicology where logistical and practical limitations invariably mean we are dealing with (pathologically) small sample sizes. There are no hard and fast rules as to what constitutes an *appropriate* sample size for SSD modelling. However, Professor David Fox's personal rule of thumb which works quite well is: 
 
-<div style="text-align: center;"font-size: 1.2em; color:#3664EE;" class="box";><b><u>Sample size rule-of-thumb for SSD modelling</u></b> \[n\ge 5k+1\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+  <b><u>Sample Size Rule-of-Thumb for SSD Modelling</u></b>
+  
+  $${n \geq 5k + 1}$$
+  
+  where *n* is the sample size and *k* is the number of parameters.
+
 </div>
 
-<br>Since most of the common SSD models are 2-parameter, we should be aiming to have a sample size of at least 11.
+<br>
+
+Since most of the common SSD models are 2-parameter, we should be aiming to have a sample size of at least 11.
 For 3-parameter models (like the Burr III), the minimum sample size is 16 and if we wanted to fit a mixture of two, 2-parameter models (eg. *logNormal-logNormal* or *logLogistic-logLogistic*) the sample size should be *at least* 26.
-Sadly, this is rarely the case in practice! 
+Sadly, this is rarely the case in practice! Jurisdictional guidance material may specify minimum sample size requirements, and should be adhered to where available and relevant. 
 
 ### Model-Averaging in `ssdtools`
 
