@@ -202,6 +202,13 @@ remove them with a warning.}
 \item A numeric vector of positions
 }}
 
+\item{xlimits}{The x-axis limits as one of:
+\itemize{
+\item \code{NULL} to use the default scale range
+\item A numeric vector of length two providing the limits.
+Use NA to refer to the existing minimum or maximum limits.
+}}
+
 \item{xintercept}{The x-value for the intersect}
 
 \item{xlab}{A string of the x-axis label.}

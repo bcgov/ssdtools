@@ -68,3 +68,8 @@ test_that("ssd_plot fills in missing order", {
     "missing_order"
   )
 })
+
+test_that("ssd_plot xlims", {
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, xlimits = c(NA, 10000)), "boron_limits")
+})
+         

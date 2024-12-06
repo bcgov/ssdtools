@@ -18,7 +18,7 @@
 #' @export
 ggplot2::waiver
 
-plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver()) {
+plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver(), xlimits = NULL) {
   chk_string(xlab)
   chk_string(ylab)
 
@@ -30,7 +30,8 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
     coord_trans(x = trans),
     scale_x_continuous(xlab,
       breaks = xbreaks,
-      labels = ssd_label_comma(big.mark = big.mark)
+      labels = ssd_label_comma(big.mark = big.mark), 
+      limits = xlimits
     ),
     scale_y_continuous(ylab,
       labels = label_percent(suffix = suffix), limits = c(0, 1),
@@ -57,7 +58,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
                      big.mark = ",", suffix = "%",
-                     trans = "log10", xbreaks = waiver()) {
+                     trans = "log10", xbreaks = waiver(),
+                     xlimits = NULL) {
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
   chk_unused(...)
   chk_null_or(label, vld = vld_string)
@@ -162,7 +164,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
 
   gp <- gp + plot_coord_scale(data,
     xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
-    trans = trans, xbreaks = xbreaks
+    trans = trans, xbreaks = xbreaks, xlimits = xlimits
   )
 
   if (!is.null(label)) {

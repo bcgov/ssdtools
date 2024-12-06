@@ -119,6 +119,10 @@
 #'   - `NULL` for no breaks
 #'   - `waiver()` for the default breaks
 #'   - A numeric vector of positions
+#' @param xlimits The x-axis limits as one of:
+#'   - `NULL` to use the default scale range
+#'   - A numeric vector of length two providing the limits. 
+#'   Use NA to refer to the existing minimum or maximum limits.
 #' @param xintercept The x-value for the intersect
 #' @param xlab A string of the x-axis label.
 #' @param yintercept The y-value for the intersect.

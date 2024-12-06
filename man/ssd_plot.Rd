@@ -27,7 +27,8 @@ ssd_plot(
   big.mark = ",",
   suffix = "\%",
   trans = "log10",
-  xbreaks = waiver()
+  xbreaks = waiver(),
+  xlimits = NULL
 )
 }
 \arguments{
@@ -82,6 +83,13 @@ relative to the extremes for non-missing values.}
 \item \code{NULL} for no breaks
 \item \code{waiver()} for the default breaks
 \item A numeric vector of positions
+}}
+
+\item{xlimits}{The x-axis limits as one of:
+\itemize{
+\item \code{NULL} to use the default scale range
+\item A numeric vector of length two providing the limits.
+Use NA to refer to the existing minimum or maximum limits.
 }}
 }
 \description{
