@@ -61,7 +61,7 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
 #' @examples
 #' ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species", shape = "Group")
 ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
-                     label = NULL, shape = NULL, color = NULL, size = 2.5,
+                     label = NULL, shape = NULL, color = NULL, size,
                      linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Species Affected",
                      ci = TRUE, ribbon = TRUE, hc = 0.05,
@@ -69,7 +69,13 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
                      bounds = c(left = 1, right = 1),
                      big.mark = ",", suffix = "%",
                      trans = "log10", xbreaks = waiver(),
-                     xlimits = NULL) {
+                     xlimits = NULL, text_size = 11, label_size = 2.5) {
+  
+  if (lifecycle::is_present(size)) {
+    lifecycle::deprecate_soft("2.1.0", "ssd_plot(size)", "ssd_plot(label_size)", id = "size")
+    chk_number(size)
+    label_size <- size
+  }
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
   chk_unused(...)
   chk_null_or(label, vld = vld_string)
@@ -101,6 +107,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   chk_string(suffix)
   .chk_bounds(bounds)
   chk_subset(trans, c("log10", "log", "identity"))
+  chk_number(text_size)
 
   data <- process_data(data, left, right, weight = NULL)
   data <- bound_data(data, bounds)
@@ -185,9 +192,15 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
     data$right <- (data$right + add_x) * shift_x
     gp <- gp + geom_text(
       data = data, aes(x = !!sym("right"), y = !!sym("y"), label = !!label),
-      hjust = 0, size = size, fontface = "italic"
+      hjust = 0, size = label_size, fontface = "italic"
     )
   }
+  
+  gp <- gp + 
+    theme(
+      text = element_text(size = text_size),
+      axis.text.x = ggtext::element_markdown()
+    ) 
 
   gp
 }
