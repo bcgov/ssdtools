@@ -108,6 +108,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   .chk_bounds(bounds)
   chk_subset(trans, c("log10", "log", "identity"))
   chk_number(text_size)
+  chk_numeric(xlimits)
+  chk_length(xlimits, 2L)
 
   data <- process_data(data, left, right, weight = NULL)
   data <- bound_data(data, bounds)
