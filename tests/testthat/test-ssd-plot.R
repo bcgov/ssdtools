@@ -80,3 +80,11 @@ test_that("ssd_plot no hcvalue", {
 test_that("ssd_plot if hc value also in xbreaks", {
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, xbreaks = c(1, 1.26, 10, 100)), "boron_hcdup")
 })
+
+test_that("ssd_plot text_size", {
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, text_size = 18), "boron_textsize")
+})
+
+test_that("ssd_plot label_size", {
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, label_size = 5), "boron_labelsize")
+})
