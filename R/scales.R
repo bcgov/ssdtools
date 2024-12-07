@@ -42,7 +42,8 @@ ssd_label_comma <- function(digits = 3, ..., big.mark = ",") {
   }
 }
 
-#' Label numbers with significant digits and comma and offset hazard concentration value if present in breaks.
+#' Label numbers with significant digits and comma. 
+#' If `hc_value` is present in breaks, put on new line and make bold.
 #'
 #' @inheritParams params
 #'
