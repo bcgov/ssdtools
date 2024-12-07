@@ -72,4 +72,11 @@ test_that("ssd_plot fills in missing order", {
 test_that("ssd_plot xlims", {
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, xlimits = c(NA, 10000)), "boron_limits")
 })
-         
+
+test_that("ssd_plot no hcvalue", {
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, hc = NULL), "boron_nohc")
+})
+
+test_that("ssd_plot if hc value also in xbreaks", {
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, xbreaks = c(1, 1.26, 10, 100)), "boron_hcdup")
+})
