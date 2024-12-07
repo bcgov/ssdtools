@@ -18,19 +18,29 @@
 #' @export
 ggplot2::waiver
 
-plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver(), xlimits = NULL) {
+plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver(), xlimits = NULL, hc_value = NULL) {
   chk_string(xlab)
   chk_string(ylab)
-
-  if (is.waive(xbreaks) && trans == "log10") {
-    xbreaks <- trans_breaks("log10", function(x) 10^x)
-  }
-
+  
+  if (is.waive(xbreaks)) {
+    xbreaks <- switch(trans, 
+                      "log10" = function(x) unique(c(scales::log10_trans()$breaks(x), hc_value)),
+                      "log" = function(x) unique(c(scales::log_trans()$breaks(x), hc_value)),
+                      "identity" = function(x) unique(c(scales::identity_trans()$breaks(x), hc_value)))
+  } else {
+    xbreaks <- unique(c(xbreaks, hc_value))
+  } 
+  
+  ssd_label_fun <- ssd_label_comma(big.mark = big.mark)
+  if(!is.null(hc_value)) {
+    ssd_label_fun <- ssd_label_comma_hc(hc_value, big.mark = big.mark)
+  } 
+  
   list(
     coord_trans(x = trans),
     scale_x_continuous(xlab,
       breaks = xbreaks,
-      labels = ssd_label_comma(big.mark = big.mark), 
+      labels = ssd_label_fun, 
       limits = xlimits
     ),
     scale_y_continuous(ylab,
@@ -90,7 +100,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   chk_string(big.mark)
   chk_string(suffix)
   .chk_bounds(bounds)
-  chk_string(trans)
+  chk_subset(trans, c("log10", "log", "identity"))
 
   data <- process_data(data, left, right, weight = NULL)
   data <- bound_data(data, bounds)
@@ -162,9 +172,13 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
       ), stat = "identity")
   }
 
+  hc_value <- NULL
+  if(!is.null(hc)){
+    hc_value <- pred$est[pred$proportion %in% hc]
+  }
   gp <- gp + plot_coord_scale(data,
     xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
-    trans = trans, xbreaks = xbreaks, xlimits = xlimits
+    trans = trans, xbreaks = xbreaks, xlimits = xlimits, hc_value = hc_value
   )
 
   if (!is.null(label)) {
