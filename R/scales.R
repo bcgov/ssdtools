@@ -41,3 +41,29 @@ ssd_label_comma <- function(digits = 3, ..., big.mark = ",") {
     y
   }
 }
+
+#' Label numbers with significant digits and comma and offset hazard concentration value if present in breaks.
+#'
+#' @inheritParams params
+#'
+#' @return A "labelling" function that takes a vector x and
+#' returns a character vector of `length(x)` giving a label for each input value.
+#' @seealso [scales::label_comma()]
+#' @export
+#'
+#' @examples
+#' ggplot2::ggplot(data = ssddata::anon_e, ggplot2::aes(x = Conc / 10)) +
+#'   geom_ssdpoint() +
+#'   ggplot2::scale_x_log10(labels = ssd_label_comma_hc())
+ssd_label_comma_hc <- function(hc_value, digits = 3, big.mark = ",") {
+  chk_number(hc_value)
+  
+  function(x) {
+    marked <- ssd_label_comma(digits = digits, big.mark = big.mark)(x)
+    purrr::map_chr(marked, ~ {
+      if (!is.na(.x) && .x == signif(hc_value, digits = digits)) 
+        .x <- paste0("\n", .x)
+      .x
+    })
+  }
+}
