@@ -61,6 +61,8 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 
 \item{label}{A string of the column in data with the labels.}
 
+\item{label_size}{A number for the size of the labels.}
+
 \item{left}{A string of the column in data with the concentrations.}
 
 \item{level}{A number between 0 and 1 of the confidence level of the interval.}
@@ -185,11 +187,13 @@ remove them with a warning.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 
-\item{size}{A number for the size of the labels.}
+\item{size}{A number for the size of the labels. Soft-deprecated for \code{label_size}.}
 
 \item{suffix}{Additional text to display after the number on the y-axis.}
 
 \item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
+
+\item{text_size}{A number for the text size.}
 
 \item{trans}{A string of which transformation to use. Accepted values include \code{"log10"}, \code{"log"}, and \code{"identity"} (\code{"log10"} by default).}
 

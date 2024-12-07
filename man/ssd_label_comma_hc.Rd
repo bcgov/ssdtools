@@ -23,7 +23,7 @@ Label numbers with significant digits and comma and offset hazard concentration 
 \examples{
 ggplot2::ggplot(data = ssddata::anon_e, ggplot2::aes(x = Conc / 10)) +
   geom_ssdpoint() +
-  ggplot2::scale_x_log10(labels = ssd_label_comma_hc())
+  ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26))
 }
 \seealso{
 \code{\link[scales:label_number]{scales::label_comma()}}

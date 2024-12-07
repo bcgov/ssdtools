@@ -13,7 +13,7 @@ ssd_plot(
   label = NULL,
   shape = NULL,
   color = NULL,
-  size = 2.5,
+  size,
   linetype = NULL,
   linecolor = NULL,
   xlab = "Concentration",
@@ -28,7 +28,9 @@ ssd_plot(
   suffix = "\%",
   trans = "log10",
   xbreaks = waiver(),
-  xlimits = NULL
+  xlimits = NULL,
+  text_size = 11,
+  label_size = 2.5
 )
 }
 \arguments{
@@ -48,7 +50,7 @@ ssd_plot(
 
 \item{color}{A string of the column in data for the color aesthetic.}
 
-\item{size}{A number for the size of the labels.}
+\item{size}{A number for the size of the labels. Soft-deprecated for \code{label_size}.}
 
 \item{linetype}{A string of the column in pred to use for the linetype.}
 
@@ -91,6 +93,10 @@ relative to the extremes for non-missing values.}
 \item A numeric vector of length two providing the limits.
 Use NA to refer to the existing minimum or maximum limits.
 }}
+
+\item{text_size}{A number for the text size.}
+
+\item{label_size}{A number for the size of the labels.}
 }
 \description{
 Plots species sensitivity data and distributions.

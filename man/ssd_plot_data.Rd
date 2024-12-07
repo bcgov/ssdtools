@@ -39,7 +39,7 @@ ssd_plot_data(
 
 \item{color}{A string of the column in data for the color aesthetic.}
 
-\item{size}{A number for the size of the labels.}
+\item{size}{A number for the size of the labels. Soft-deprecated for \code{label_size}.}
 
 \item{xlab}{A string of the x-axis label.}
 
