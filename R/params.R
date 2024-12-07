@@ -42,6 +42,7 @@
 #' @param dists A character vector of the distribution names.
 #' @param fitdists An object of class fitdists.
 #' @param hc A value between 0 and 1 indicating the proportion hazard concentration (or NULL).
+#' @param hc_value A number of the hazard concentration value to offset.
 #' @param label A string of the column in data with the labels.
 #' @param left A string of the column in data with the concentrations.
 #' @param level A number between 0 and 1 of the confidence level of the interval.
@@ -112,7 +113,7 @@
 #' @param size A number for the size of the labels.
 #' @param suffix Additional text to display after the number on the y-axis.
 #' @param tails A flag or NULL specifying whether to only include distributions with both tails.
-#' @param trans A string which transformation to use by default `"log10"`.
+#' @param trans A string of which transformation to use. Accepted values include `"log10"`, `"log"`, and `"identity"` (`"log10"` by default).
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
 #' @param x The object.
 #' @param xbreaks The x-axis breaks as one of:
@@ -123,7 +124,7 @@
 #'   - `NULL` to use the default scale range
 #'   - A numeric vector of length two providing the limits. 
 #'   Use NA to refer to the existing minimum or maximum limits.
-#' @param xintercept The x-value for the intersect
+#' @param xintercept The x-value for the intersect.
 #' @param xlab A string of the x-axis label.
 #' @param yintercept The y-value for the intersect.
 #' @param ylab A string of the x-axis label.
