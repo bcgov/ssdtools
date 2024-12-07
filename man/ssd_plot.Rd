@@ -76,7 +76,7 @@ relative to the extremes for non-missing values.}
 
 \item{suffix}{Additional text to display after the number on the y-axis.}
 
-\item{trans}{A string which transformation to use by default \code{"log10"}.}
+\item{trans}{A string of which transformation to use. Accepted values include \code{"log10"}, \code{"log"}, and \code{"identity"} (\code{"log10"} by default).}
 
 \item{xbreaks}{The x-axis breaks as one of:
 \itemize{
