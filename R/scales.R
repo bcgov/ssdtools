@@ -54,7 +54,7 @@ ssd_label_comma <- function(digits = 3, ..., big.mark = ",") {
 #' @examples
 #' ggplot2::ggplot(data = ssddata::anon_e, ggplot2::aes(x = Conc / 10)) +
 #'   geom_ssdpoint() +
-#'   ggplot2::scale_x_log10(labels = ssd_label_comma_hc())
+#'   ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26))
 ssd_label_comma_hc <- function(hc_value, digits = 3, big.mark = ",") {
   chk_number(hc_value)
   
@@ -62,7 +62,7 @@ ssd_label_comma_hc <- function(hc_value, digits = 3, big.mark = ",") {
     marked <- ssd_label_comma(digits = digits, big.mark = big.mark)(x)
     purrr::map_chr(marked, ~ {
       if (!is.na(.x) && .x == signif(hc_value, digits = digits)) 
-        .x <- paste0("\n", .x)
+        .x <- paste0("<br>**", .x, "**")
       .x
     })
   }
