@@ -100,7 +100,7 @@ For the simple arithmetic mean, all of the individual values receive the same we
 While this is appropriate in many cases, it's not useful when the components contribute to varying degrees.
 An example familiar to ecotoxicologists is that of a *time-varying* concentration as shown in the figure below.<br>
 
-![](images/Figure1.jpg){width=90% align="center"}
+![ A hypothetical time series showing a concentration measurement changing over time, with different time periods associated with different concentrations. ](images/Figure1.jpg){width=90% align="center"} \
 
 From the figure we see there are 5 concentrations going from left to to right: $\left\{ 0.25,0.95,0.25,0.12,0.5 \right\}$.
 If we were to take the simple arithmetic mean of these concentrations we get $\bar{X}=0.414$.
@@ -127,7 +127,7 @@ Now, suppose we have only two possibilities for fitting an SSD - both lognormal 
 Model 1 is the LN(-1.067,0.414) distribution while Model 2 is the LN(-0.387,0.617) distribution.
 A plot of the empirical *cdf* and Models 1 and 2 is shown below.
 
-```{r echo=FALSE,fig.cap="Emprirical cdf (black); Model 1(green); and Model 2 (blue)", fig.width=7,fig.height=4.5}
+```{r echo=FALSE,fig.cap="Emprirical cdf (black); Model 1(green); and Model 2 (blue)", fig.alt="The example data ploted as an empirical cumulative distribution function. Two fitted lines are shown for two different lognormal distributions, one that fits the lower left tail, and another that fits the upper right tail.", fig.width=7,fig.height=4.5}
 samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
 samp <- sort(samp)
 plot(ecdf(samp), main = "Empirical and fitted SSDs", xlab = "Concentration", ylab = "Probability")
@@ -144,7 +144,7 @@ However, the obvious thing to do is to **combine** both models.
 We could just try using 50% of Model 1 and 50% of Model 2, but that may be sub-optimal.
 It turns out that the best fit is obtained by using 44% of Model 1 and 56% of Model 2. Redrawing the plot and adding the *weighted average* of Models 1 and 2 is shown below.
 
-```{r echo=FALSE,fig.cap="Empirical cdf (black); Model 1(green); Model 2 (blue); and averaged Model (red)",fig.width=7,fig.height=4.5}
+```{r echo=FALSE,fig.cap="Empirical cdf (black); Model 1(green); Model 2 (blue); and averaged Model (red)", fig.alt="The example data ploted as an empirical cumulative distribution function. Two fitted lines are shown for two different lognormal distributions, one that fits the lower left tail, and another that fits the upper right tail. A third line shows the weighted average of these two distributions, which appears between the two inidividual distributions and fits the data well.",fig.width=7,fig.height=4.5}
 samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
 samp <- sort(samp)
 plot(ecdf(samp), main = "Empirical and fitted SSDs", xlab = "Concentration", ylab = "Probability")
@@ -173,7 +173,7 @@ An intuitively appealing approach would be to apply the same weights to the indi
 So our model-averaged *HC20* estimate is 0.33.
 As a check, we can determine the *fraction affected* at concentration = 0.33 - it should of course be 20%. Let's take a look at the plot.
 
-```{r echo=FALSE,fig.width=7,fig.height=5}
+```{r echo=FALSE,fig.width=7,fig.height=5, fig.alt="The weighted average of the two lognormal distributions, as fitted to the example data. Highlighted is the corresponding fraction affected at a concentration of 0.33, which is at 30 percent."}
 samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
 samp <- sort(samp)
 xx <- seq(0.01, 3, by = 0.01)
@@ -224,7 +224,7 @@ It can be shown that $$\frac{1}{{a + b}} = \frac{1}{a} + \frac{1}{b} = 0.126 + 0
 If you need a visual demonstration, we can plot $G\left( x \right)$ and the *inverse* of $H\left( p \right)$ both as functions of *x* (a quantile) for our two-component lognormal distribution above.
  
 
-```{r echo=FALSE, fig.width=8,fig.height=6}
+```{r echo=FALSE, fig.width=8,fig.height=6, fig.alt="The weighted average of the two lognormal distributions, as fitted to the example data, plotted as a line for the incorrect weighting method, as well as the correct weighting method. The line for two methods do not overlap, although they do cross at a value of 1.12. Because they do not overlap, the two methods will return a different concentration for the 80 percent fraction affected."}
 t <- seq(0.01, 0.99, by = 0.001)
 
 
@@ -272,7 +272,7 @@ ssd_hp(x, hcp, multi_est = TRUE) == p   # this should result in logical `TRUE`
 <p>The *inversion principle* ensures that we only use a **single** distribution function to compute both the *HCx* *and* the fraction affected.
 Referring to the figure below, the *HCx* is obtained from the MA-SSD (red curve) by following the &#8594; arrows while the fraction affected is obtained by following the &#8592; arrows.
  
-![](images/Figure2.jpg){width=100% align="center"}
+![ The weighted average of the two lognormal distributions, as fitted to the example data, plotted as a line for the correct weighting method only. Highlighted is the corresponding fraction affected at a concentration of 0.292, which is at 20 percent for the correct weighting method, and confirms this method meets the inversion principle. ](images/Figure2.jpg){width=100% align="center"} \
  
 <p>Finally, we'll briefly discuss how the *HCx* is computed in `R` using the same method as has been implemented in `ssdtools`.</p>
 
@@ -286,7 +286,7 @@ for some fraction affected, $p$.
 </p>
 <p>Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( x \right)$ or, as is made clear in the figure below, *finding the zero-crossing* of the function $G\left( x \right)$ for the case $p=0.2$.
  
-![](images/uniroot.jpg){width=100% align="center"}
+![ The weighted average of the two lognormal distributions, as fitted to the example data, plotted as a line for the correct weighting method only, demonstrating finding the zero crossing on the function. ](images/uniroot.jpg){width=100% align="center"} \
 
 <br>
 <p>In `R` finding the roots of $x:G\left( x \right) - p = 0$ is achieved using the `uniroot()` function.</p>
@@ -361,7 +361,7 @@ We can see from the plot below, that in fact both the gamma and lognormal distri
 The use of the Pareto may be a questionable choice given it is truncated at 0.18 (which is the minimum value of our toxicity data).
 <br>
 
-```{r echo=FALSE,fig.cap="Emprirical cdf (black); lognormal (green); gamma (blue); and Pareeto (red)", fig.width=7,fig.height=4.5}
+```{r echo=FALSE,fig.cap="Empirical cdf (black); lognormal (green); gamma (blue); and Pareto (red)", fig.alt="The example empirical cdf showing how the lognormal, gamma and Pareeto distributions fit these data.", fig.width=7,fig.height=4.5}
 library(EnvStats)
 samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
 samp <- sort(samp)
@@ -481,7 +481,7 @@ cat(
 
 Finally, let's look at the fitted *model-averaged SSD*:
 
-```{r echo=FALSE,fig.cap="Empirical cdf (black) and model-averaged fit (magenta)",fig.width=8,fig.height=5}
+```{r echo=FALSE,fig.cap="Empirical cdf (black) and model-averaged fit (magenta)", fig.alt="The example empirical cdf showing how the model average of the lognormal, Gamma and pareto distributions fit these data.", fig.width=8,fig.height=5}
 samp <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
 samp <- sort(samp)
 plot(ecdf(samp), main = "Empirical and fitted SSDs", xlab = "Concentration", ylab = "Probability")
