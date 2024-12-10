@@ -102,7 +102,7 @@ To estimate the values using the weighted arithmetic mean set `multi_est = FALSE
 
 `ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_u$ values via bootstrapping.
 By default all versions of `ssdtools` use parametric bootstrapping for non-censored data as it has better coverage than the equivalent non parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2022].
-The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions (`weighted_arithmetic`).
+The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions.
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
 
 Consequently, v2 also offers a parametric bootstrap method for non-censored data that uses the joint cdf to generate data before refitting the original distribution set and solving for the newly estimated joint cdf [see details in @fox_methodologies_2024].
