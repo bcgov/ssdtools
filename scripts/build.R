@@ -31,6 +31,7 @@ lintr::lint_package()
 devtools::test()
 devtools::document()
 
+pkgdown::build_reference()
 pkgdown::build_site()
 
 devtools::check()
