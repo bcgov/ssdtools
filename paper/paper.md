@@ -56,7 +56,7 @@ SSDs are a practical tool for the determination of safe threshold concentrations
 
 The selection of a suitable distribution has been identified as one of the most important and difficult choices in the use of SSDs [@newman_applying_2000]. 
 Since the original implementation (v0), `ssdtools` [@thorley2018ssdtools] has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_u$ values using multiple distributions [@schwarz_improving_2019]. 
-The method, as applied in the SSD context is described in detail in @fox_recent_2021, and provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
+The method, which is described in detail by @fox_recent_2021 in the SSD context, provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
 
 # Technical details
 
