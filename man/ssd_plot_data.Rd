@@ -39,7 +39,7 @@ ssd_plot_data(
 
 \item{color}{A string of the column in data for the color aesthetic.}
 
-\item{size}{A number for the size of the labels.}
+\item{size}{A number for the size of the labels. Soft-deprecated for \code{label_size}.}
 
 \item{xlab}{A string of the x-axis label.}
 
@@ -57,7 +57,7 @@ ssd_plot_data(
 uncensored missing (0 and Inf) data in terms of the orders of magnitude
 relative to the extremes for non-missing values.}
 
-\item{trans}{A string which transformation to use by default \code{"log10"}.}
+\item{trans}{A string of which transformation to use. Accepted values include \code{"log10"}, \code{"log"}, and \code{"identity"} (\code{"log10"} by default).}
 
 \item{xbreaks}{The x-axis breaks as one of:
 \itemize{

@@ -13,7 +13,7 @@ ssd_plot(
   label = NULL,
   shape = NULL,
   color = NULL,
-  size = 2.5,
+  size,
   linetype = NULL,
   linecolor = NULL,
   xlab = "Concentration",
@@ -27,7 +27,10 @@ ssd_plot(
   big.mark = ",",
   suffix = "\%",
   trans = "log10",
-  xbreaks = waiver()
+  xbreaks = waiver(),
+  xlimits = NULL,
+  text_size = 11,
+  label_size = 2.5
 )
 }
 \arguments{
@@ -47,7 +50,7 @@ ssd_plot(
 
 \item{color}{A string of the column in data for the color aesthetic.}
 
-\item{size}{A number for the size of the labels.}
+\item{size}{A number for the size of the labels. Soft-deprecated for \code{label_size}.}
 
 \item{linetype}{A string of the column in pred to use for the linetype.}
 
@@ -75,7 +78,7 @@ relative to the extremes for non-missing values.}
 
 \item{suffix}{Additional text to display after the number on the y-axis.}
 
-\item{trans}{A string which transformation to use by default \code{"log10"}.}
+\item{trans}{A string of which transformation to use. Accepted values include \code{"log10"}, \code{"log"}, and \code{"identity"} (\code{"log10"} by default).}
 
 \item{xbreaks}{The x-axis breaks as one of:
 \itemize{
@@ -83,6 +86,17 @@ relative to the extremes for non-missing values.}
 \item \code{waiver()} for the default breaks
 \item A numeric vector of positions
 }}
+
+\item{xlimits}{The x-axis limits as one of:
+\itemize{
+\item \code{NULL} to use the default scale range
+\item A numeric vector of length two providing the limits.
+Use NA to refer to the existing minimum or maximum limits.
+}}
+
+\item{text_size}{A number for the text size.}
+
+\item{label_size}{A number for the size of the labels.}
 }
 \description{
 Plots species sensitivity data and distributions.
