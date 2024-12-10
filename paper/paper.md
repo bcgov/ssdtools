@@ -95,8 +95,8 @@ or, equivalently
 $$u:G\left( u \right) - x = 0$$ 
 for the proportion affected $x$. 
 Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$.
-As of `ssdtools` v2, methods such as `ssd_hc()` and `ssd_hp()` now use the *inversion principle* by default with `multi_est = TRUE`.
-To estimate the values using the weighted arithmetic mean set `multi_est = FALSE`.  
+As of `ssdtools` v2, methods such as `ssd_hc()` and `ssd_hp()` now use the *inversion principle* by default when `multi_est = TRUE`.
+To estimate the values using the original weighted arithmetic mean set `multi_est = FALSE`.  
 
 ## Confidence Intervals
 
