@@ -244,9 +244,9 @@ The Burr Type 3 is a flexible three parameter distribution can be fitted using `
 
 <br>
 
-The Burr family of distributions has been central to the derivation of guideline values in Australia and New Zealand for over 20 yr [@fox_recent_2021]. While offering a high degree of ﬂexibility, experience with these distributions during that time has repeatedly highlighted numerical stability and convergence issues when parameters are estimated using maximum likelihood [@fox_recent_2021]. 
-This is thought to be due to the high degree of collinearity between parameter estimates and/or relatively ﬂat likelihood proﬁles [@fox_recent_2021], and is one of the motivations behind the logic coded into Burrlioz to revert to either of the two limiting distributions.
-Burr Type 3 distribution is not currently one of the recommended distributionsin the default model set. 
+The Burr family of distributions has been central to the derivation of guideline values in Australia and New Zealand for over 20 yr [@fox_recent_2021]. While offering a high degree of flexibility, experience with these distributions during that time has repeatedly highlighted numerical stability and convergence issues when parameters are estimated using maximum likelihood [@fox_recent_2021]. 
+This is thought to be due to the high degree of collinearity between parameter estimates and/or relatively flat likelihood profiles [@fox_recent_2021], and is one of the motivations behind the logic coded into Burrlioz to revert to either of the two limiting distributions.
+Burr Type 3 distribution is not currently one of the recommended distributions in the default model set. 
 This is because of 1) the convergence issues associated with the Burr Type 3 distribution, 2) the fact that reverting to a limiting two parameter distribution does not fit easily within a model averaging framework, and 3) that one of the two limiting distributions (the inverse Pareto, see below) also has estimation and convergence issues.
 
 #### Log-normal

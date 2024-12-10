@@ -69,7 +69,7 @@ The following functions and arguments were also added:
 
 - `ssd_hp_bcanz()` and `ssd_hp.fitburrlioz()` to get hazard proportions.
 - `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
-- `ssd_exx()` family of functions (ie `ssd_elnorm()`, `ssd_egamma()` etc) to get default parameter estimates for distributions.
+- `ssd_exx()` family of functions (i.e. `ssd_elnorm()`, `ssd_egamma()` etc) to get default parameter estimates for distributions.
 - `ssd_censor_data()` to censor data. 
 - `npars = c(2L, 5L)` argument to `ssd_dists_bcanz()` to specify the number of parameters.
 - `dists = ssd_dists_bcanz()` to `ssd_fit_bcanz()` to allow other packages to modify.

@@ -16,6 +16,7 @@ Customising
 Dagum
 Deprecations
 ECD
+ECOTOX
 Ecotoxicology
 EnviroTox
 Environ
@@ -27,6 +28,7 @@ Gompertz
 HC
 HCx
 Ibarra
+Knowledgebase
 Lifecycle
 Mises
 Multimodel
@@ -74,7 +76,6 @@ coverages
 csv
 customising
 cvm
-diagup
 distrbutions
 dists
 dlnorm
@@ -98,6 +99,7 @@ funder
 ge
 geom's
 geoms
+geq
 gg
 ggplot
 ggproto
@@ -116,6 +118,7 @@ labelling
 ldots
 le
 leftrightarrow
+leq
 leqslant
 lgumbel
 lim
@@ -155,7 +158,6 @@ reprex
 rescale
 rescaled
 rescales
-rescaling
 reweight
 rmulti
 scalelog
@@ -171,13 +173,11 @@ summarising
 summmarized
 tbl
 textstyle
-tfrac
 th
 tibble
 tibbles
 tidyverse
 toxicant
-underset
 unmapped
 von
 weibull

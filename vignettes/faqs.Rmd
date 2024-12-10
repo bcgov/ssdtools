@@ -30,7 +30,7 @@ dist <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_plot_cdf(dist, average = NA)
 ```
 
-### How can I include mathematical expressions in the xlabel when using `ssd_plot()`?
+### How can I include mathematical expressions in the x-axis label when using `ssd_plot()`?
 
 ```{r, message = FALSE, alt.text = "A plot showing the model averaged fit with a mathematical expression in the xlabel with the units."}
 library(ssdtools)
