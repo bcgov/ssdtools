@@ -6,6 +6,10 @@ bibliography: ../references.bib
 mathfont: Courier
 latex_engine: MathJax
 output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Confidence Intervals for Hazard Concentrations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
