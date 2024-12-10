@@ -115,7 +115,7 @@ To overcome this limitation, the default method (`ci_method = weighted_samples`)
 ## Plotting 
 
 As well as fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, from v1 `ssdtools` has extended the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms and a discrete color-blind scale `scale_color_sdd()` for SSD plots.
-The current version (v2) adds `scale_fill_ssd()` for a discrete color-blind fill scale and `ssd_label_comma()` for formatting of x-axis labels.
+The current version (v2) adds `scale_fill_ssd()` for a discrete color-blind fill scale and `ssd_label_comma()` and `ssd_label_comma_hc()` for formatting of x-axis labels.
 
 # Example of use
 
