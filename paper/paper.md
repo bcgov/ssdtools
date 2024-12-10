@@ -94,7 +94,9 @@ $${u:G\left( u \right) = x}$$
 or, equivalently
 $$u:G\left( u \right) - x = 0$$ 
 for the proportion affected $x$. 
-Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$. 
+Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$.
+As of `ssdtools` v2, methods such as `ssd_hc()` and `ssd_hp()` now use the *inversion principle* by default with `multi_est = TRUE`.
+To estimate the values using the weighted arithmetic mean set `multi_est = FALSE`.  
 
 ## Confidence Intervals
 
@@ -104,13 +106,11 @@ The first two versions of `ssdtools` both calculated the model averaged CI from 
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
 
 Consequently, v2 also offers a parametric bootstrap method for non-censored data that uses the joint cdf to generate data before refitting the original distribution set and solving for the newly estimated joint cdf [see details in @fox_methodologies_2024].
-This "multi" method can be implemented with (`multi_free`) and without (`multi_fixed`) re-estimation of the model weights.
+This so-called "multi" method can be implemented with (`ci_method = multi_free`) and without (`ci_method = multi_fixed`) re-estimation of the model weights.
+In order to implement the "multi" method of bootstrapping described above, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
+
 However, although the "multi" method has good coverage it is computationally slow.
-As a result, the default method (`weighted_samples`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
-
-## Multiple Distribution Functions
-
-In order to implement the "multi" method of bootstrapping, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
+To overcome this limitation, the default method (`ci_method = weighted_samples`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
 
 ## Plotting 
 
