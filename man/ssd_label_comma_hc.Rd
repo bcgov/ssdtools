@@ -2,7 +2,8 @@
 % Please edit documentation in R/scales.R
 \name{ssd_label_comma_hc}
 \alias{ssd_label_comma_hc}
-\title{Label numbers with significant digits and comma and offset hazard concentration value if present in breaks.}
+\title{Label numbers with significant digits and comma.
+If \code{hc_value} is present in breaks, put on new line and make bold.}
 \usage{
 ssd_label_comma_hc(hc_value, digits = 3, big.mark = ",")
 }
@@ -18,7 +19,8 @@ A "labelling" function that takes a vector x and
 returns a character vector of \code{length(x)} giving a label for each input value.
 }
 \description{
-Label numbers with significant digits and comma and offset hazard concentration value if present in breaks.
+Label numbers with significant digits and comma.
+If \code{hc_value} is present in breaks, put on new line and make bold.
 }
 \examples{
 ggplot2::ggplot(data = ssddata::anon_e, ggplot2::aes(x = Conc / 10)) +
