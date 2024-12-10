@@ -155,7 +155,7 @@ ssdtools version 1.0.0 is the first major release of `ssdtools` with some import
 
 ## Fitting
 
-An important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/lbbe-software/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) which has resulted in improved handling of censored data.
+An important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/lbbe-software/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) to allow full control over model specification as well as improved handling of censored data.
 Although it was hoped that model fitting would be faster this is currently not the case.
 
 As a result of the change the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.

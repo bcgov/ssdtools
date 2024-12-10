@@ -47,7 +47,7 @@ The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a
 The `shinyssdtools` R package [@dalgarno_shinyssdtools_2021] provides a Graphical User Interface to `ssdtools`.
 
 Since the publication of @thorley2018ssdtools, the `ssdtools` R package has undergone two major updates.
-The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] for model fitting.
+The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] allowing full control over model specification.
 The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_u$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with more appropriate coverage [@fox_methodologies_2024].
 
 # Statement of need
@@ -71,7 +71,8 @@ Since v1, `ssdtools` has by default fitted the `lnorm`, `llogis`, `lgumbel`, `ga
 ## Model Fitting
 
 In the first major update (v1), the dependency `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood [@millar_maximum_2011]. 
-The move to `TMB` allowed more control over model specification. 
+The move to `TMB` means the likelihood function is hand coded in `C++`, which allows full control over model specification and improved handling of censored data.
+The change is internal and does not affect the user interface.
 
 ## Model Averaging
 
