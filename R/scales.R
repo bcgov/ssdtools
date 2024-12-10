@@ -56,8 +56,9 @@ ssd_label_comma <- function(digits = 3, ..., big.mark = ",") {
 #' ggplot2::ggplot(data = ssddata::anon_e, ggplot2::aes(x = Conc / 10)) +
 #'   geom_ssdpoint() +
 #'   ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26))
-ssd_label_comma_hc <- function(hc_value, digits = 3, big.mark = ",") {
+ssd_label_comma_hc <- function(hc_value, digits = 3, ..., big.mark = ",") {
   chk_number(hc_value)
+  chk_unused(...)
   
   function(x) {
     marked <- ssd_label_comma(digits = digits, big.mark = big.mark)(x)

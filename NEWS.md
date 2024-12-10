@@ -2,39 +2,14 @@
 
 # ssdtools 2.2.0
 
-- PLACEHOLDER https://github.com/bcgov/ssdtools/pull/393 (#393).
-
-- Merge branch 'joss-paper' of github.com:bcgov/ssdtools into joss-paper.
-
-- Merge pull request #395 from poissonconsulting/main.
-
-- Merge pull request #394 from beckyfisher/joss-paper-rf.
-
-- Fix equations in vignettes. (@poissonconsulting, #392).
-
-- Merge main.
-
-  Merge branch 'main' into joss-paper
-
-  # Conflicts:
-  # DESCRIPTION
-  # NEWS.md
-
-- Add missing dois.
-
-  Merge branch 'main' into joss-paper
-
-
-# ssdtools 2.1.0.9001
-
-- Fixed equation rendering for vignettes on website.
-- Corrected y-axis labels for bimodal plots in distributions vignette from Cumulative Probability to Probability Density.
-
-
-# ssdtools 2.1.0.9000
-
-- Same as previous version.
-
+- Added `ssd_label_comma_hc()` function to label numbers with significant digits and comma and offset hazard concentration value if present in breaks.
+- For `plot_coord_scale()` function:
+  - Added `x_limits = NULL` to allow setting of x-axis limits.
+  - Added `hc_value = NULL` to pass hazard concentration value.
+  - Restricted `trans` argument to `"identity"`, `"log10"` or "`log`".
+- For `ssd_plot()` function:
+  - Added `text_size` argument.
+  - Soft-deprecated `size` argument for `label_size`.
 
 # ssdtools 2.1.0
 

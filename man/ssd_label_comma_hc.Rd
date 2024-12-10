@@ -5,12 +5,14 @@
 \title{Label numbers with significant digits and comma.
 If \code{hc_value} is present in breaks, put on new line and make bold.}
 \usage{
-ssd_label_comma_hc(hc_value, digits = 3, big.mark = ",")
+ssd_label_comma_hc(hc_value, digits = 3, ..., big.mark = ",")
 }
 \arguments{
 \item{hc_value}{A number of the hazard concentration value to offset.}
 
 \item{digits}{A whole number specifying the number of significant figures.}
+
+\item{...}{Unused.}
 
 \item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
 }
