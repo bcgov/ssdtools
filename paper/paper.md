@@ -47,7 +47,7 @@ The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a
 The `shinyssdtools` R package [@dalgarno_shinyssdtools_2021] provides a Graphical User Interface to `ssdtools`.
 
 Since the publication of @thorley2018ssdtools, the `ssdtools` R package has undergone two major updates.
-The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] for model fitting.
+The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] allowing full control over model specification.
 The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_u$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with more appropriate coverage [@fox_methodologies_2024].
 
 # Statement of need
@@ -71,7 +71,8 @@ Since v1, `ssdtools` has by default fitted the `lnorm`, `llogis`, `lgumbel`, `ga
 ## Model Fitting
 
 In the first major update (v1), the dependency `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood [@millar_maximum_2011]. 
-The move to `TMB` allowed more control over model specification. 
+The move to `TMB` means the likelihood function is hand coded in `C++`, which allows full control over model specification and improved handling of censored data.
+The change is internal and does not directly affect the user interface.
 
 ## Model Averaging
 
@@ -93,23 +94,23 @@ $${u:G\left( u \right) = x}$$
 or, equivalently
 $$u:G\left( u \right) - x = 0$$ 
 for the proportion affected $x$. 
-Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$. 
+Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$.
+As of `ssdtools` v2, methods such as `ssd_hc()` and `ssd_hp()` now use the *inversion principle* by default with `multi_est = TRUE`.
+To estimate the values using the weighted arithmetic mean set `multi_est = FALSE`.  
 
 ## Confidence Intervals
 
 `ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_u$ values via bootstrapping.
 By default all versions of `ssdtools` use parametric bootstrapping for non-censored data as it has better coverage than the equivalent non parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2022].
-The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions (`weighted_arithmetic`).
+The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions.
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
 
 Consequently, v2 also offers a parametric bootstrap method for non-censored data that uses the joint cdf to generate data before refitting the original distribution set and solving for the newly estimated joint cdf [see details in @fox_methodologies_2024].
-This "multi" method can be implemented with (`multi_free`) and without (`multi_fixed`) re-estimation of the model weights.
+This so-called "multi" method can be implemented with (`ci_method = multi_free`) and without (`ci_method = multi_fixed`) re-estimation of the model weights.
+In order to implement the "multi" method of bootstrapping described above, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
+
 However, although the "multi" method has good coverage it is computationally slow.
-As a result, the default method (`weighted_samples`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
-
-## Multiple Distribution Functions
-
-In order to implement the "multi" method of bootstrapping, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
+To overcome this limitation, the default method (`ci_method = weighted_samples`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
 
 ## Plotting 
 

@@ -13,8 +13,8 @@
 
 # ssdtools 2.1.0
 
-- Added `ssd_xxmulti_fitdists()` functions to accept object of class `fitdists`.
-- Set `ssd_xxmulti(..., lnorm.weight = 0)` (instead of 1) to avoid incorrect values with `do.call("ssd_xxmulti", c(..., estimates(fits))` if `fits` does not include the log-normal distribution.
+- Added `ssd_xxmulti_fitdists()` family of functions (`ssd_rmulti_fitdists()`, `ssd_pmulti_fitdists()` and `ssd_qmulti_fitdists()`) to accept object of class `fitdists`.
+- Set `lnorm.weight = 1` instead of `1` in the `ssd_xxmulti()` family of functions (`ssd_rmulti()`, `ssd_pmulti()` and `ssd_qmulti`) to avoid incorrect values with `do.call("ssd_xxmulti", c(..., estimates(fits))` if `fits` does not include the log-normal distribution.
 
 
 # ssdtools 2.0.0
@@ -69,7 +69,7 @@ The following functions and arguments were also added:
 
 - `ssd_hp_bcanz()` and `ssd_hp.fitburrlioz()` to get hazard proportions.
 - `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
-- `ssd_exx()` functions to get default parameter estimates for distributions.
+- `ssd_exx()` family of functions (ie `ssd_elnorm()`, `ssd_egamma()` etc) to get default parameter estimates for distributions.
 - `ssd_censor_data()` to censor data. 
 - `npars = c(2L, 5L)` argument to `ssd_dists_bcanz()` to specify the number of parameters.
 - `dists = ssd_dists_bcanz()` to `ssd_fit_bcanz()` to allow other packages to modify.
@@ -155,7 +155,8 @@ ssdtools version 1.0.0 is the first major release of `ssdtools` with some import
 
 ## Fitting
 
-An important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/lbbe-software/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) which has resulted in improved handling of censored data.
+An important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/lbbe-software/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) to allow full control over model specification as well as improved handling of censored data.
+The change is internal and does not directly affect the user interface.
 Although it was hoped that model fitting would be faster this is currently not the case.
 
 As a result of the change the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.

@@ -67,7 +67,9 @@ The website for the development version is at
 ## Introduction
 
 The dependency [`ssddata`](https://github.com/open-AIMS/ssddata)
-provides example data sets for several chemicals including Boron.
+provides example data sets for several chemicals including Boron. The
+[ECOTOX](https://cfpub.epa.gov/ecotox/) Knowledgebase is another source
+of toxicity concentrations for over 12,000 chemicals.
 
 ``` r
 library(ssdtools)

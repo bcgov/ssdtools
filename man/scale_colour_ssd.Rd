@@ -16,7 +16,7 @@ scale_fill_ssd(...)
 \item{...}{Arguments passed to \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}.}
 }
 \description{
-Discrete color-blind scale for SSD Plots
+The functions were designed for coloring different groups in a plot of SSD data.
 }
 \section{Functions}{
 \itemize{
@@ -26,8 +26,14 @@ Discrete color-blind scale for SSD Plots
 
 }}
 \examples{
+# Use the color-blind palette for a SSD plot
 ssd_plot(ssddata::ccme_boron, boron_pred, shape = "Group", color = "Group") +
   scale_colour_ssd()
+# Use the color-blind palette for a histogram of concentrations
+ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Species, y = Conc, fill = Group)) +
+  ggplot2::geom_col() +
+  scale_fill_ssd() +
+  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1))
 }
 \seealso{
 Other ggplot: 

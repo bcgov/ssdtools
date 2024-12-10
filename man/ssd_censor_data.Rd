@@ -21,7 +21,8 @@ ssd_censor_data(data, left = "Conc", ..., right = left, censoring = c(0, Inf))
 A tibble of the censored data.
 }
 \description{
-Censor Data
+Censors data to a specified range based on the \code{censoring} argument.
+The function is useful for creating test data sets.
 }
 \examples{
 ssd_censor_data(ssddata::ccme_boron, censoring = c(2.5, Inf))
