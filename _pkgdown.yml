@@ -70,6 +70,7 @@ reference:
   - scale_color_ssd
   - scale_colour_ssd
   - ssd_label_comma
+  - ssd_label_comma_hc
   - ssd_pal
   - ssd_plot
   - ssd_plot_cdf
