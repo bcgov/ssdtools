@@ -126,6 +126,7 @@ articles:
   - articles/confidence-intervals
   - customising-plots
   - additional-technical-details
+  - faqs
 
 development:
   mode: auto
