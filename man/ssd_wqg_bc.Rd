@@ -2,7 +2,8 @@
 % Please edit documentation in R/wqg.R
 \name{ssd_wqg_bc}
 \alias{ssd_wqg_bc}
-\title{Water Quality Guideline for British Columbia}
+\title{Water Quality Guideline for British Columbia
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 \usage{
 ssd_wqg_bc(data, left = "Conc")
 }
@@ -15,17 +16,8 @@ ssd_wqg_bc(data, left = "Conc")
 A tibble of the 5\% hazard concentration with 95\% confidence intervals.
 }
 \description{
-Calculates the 5\% Hazard Concentration for British Columbia
-after rescaling the data
-based on the log-logistic, log-normal and gamma distributions
-using the parametric bootstrap and AICc model averaging.
-}
-\details{
-Returns a tibble the model averaged 5\% hazard concentration with
-standard errors, 95\% lower and upper confidence limits
-and the number of bootstrap samples as well as the proportion of bootstrap
-samples that successfully returned a likelihood
-(convergence of the bootstrap sample is not required).
+Calculates the 5\% Hazard Concentration using \code{ssd_fit_bcanz()}
+and \code{ssd_hc()}.
 }
 \examples{
 \dontrun{
@@ -33,7 +25,7 @@ ssd_wqg_bc(ssddata::ccme_boron)
 }
 }
 \seealso{
-\code{\link[=ssd_fit_dists]{ssd_fit_dists()}} and \code{\link[=ssd_hc]{ssd_hc()}}
+\code{\link[=ssd_fit_bcanz]{ssd_fit_bcanz()}} and \code{\link[=ssd_hc]{ssd_hc()}}
 
 Other wqg: 
 \code{\link{ssd_wqg_burrlioz}()}

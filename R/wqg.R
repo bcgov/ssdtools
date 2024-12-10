@@ -16,23 +16,16 @@
 #    limitations under the License.
 
 #' Water Quality Guideline for British Columbia
+#' `r lifecycle::badge("deprecated")`
 #'
-#' Calculates the 5% Hazard Concentration for British Columbia
-#' after rescaling the data
-#' based on the log-logistic, log-normal and gamma distributions
-#' using the parametric bootstrap and AICc model averaging.
-#'
-#' Returns a tibble the model averaged 5% hazard concentration with
-#' standard errors, 95% lower and upper confidence limits
-#' and the number of bootstrap samples as well as the proportion of bootstrap
-#' samples that successfully returned a likelihood
-#' (convergence of the bootstrap sample is not required).
+#' Calculates the 5% Hazard Concentration using `ssd_fit_bcanz()`
+#' and `ssd_hc()`.
 #'
 #' @inheritParams params
 #'
 #' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @family wqg
-#' @seealso [`ssd_fit_dists()`] and [`ssd_hc()`]
+#' @seealso [`ssd_fit_bcanz()`] and [`ssd_hc()`]
 #' @export
 #'
 #' @examples
@@ -40,31 +33,26 @@
 #' ssd_wqg_bc(ssddata::ccme_boron)
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
-  lifecycle::deprecate_warn("2.0.0", "ssd_wqg_bc()", "ssd_fit_bcanz()",
-    details = "Please use `ssd_fit_bcanz()` and `ssd_hc_bcanz()` instead."
+  lifecycle::deprecate_warn(
+    "2.0.0", "ssd_wqg_bc()", 
+    details = "Please use `ssd_fit_bcanz()` and `ssd_hc()` instead."
   )
-  fits <- ssd_fit_dists(data, left = left, rescale = FALSE)
+  fits <- ssd_fit_bcanz(data, left = left)
   ssd_hc(fits, ci = TRUE, nboot = 10000)
 }
 
 
 #' Water Quality Guideline for Burrlioz
+#' `r lifecycle::badge("deprecated")`
 #'
-#' Calculates the 5% Hazard Concentration (after rescaling the data)
-#' using the same approach as Burrlioz based on 10,000 non-parametric bootstrap
-#' samples.
-#'
-#' Returns a tibble the model averaged 5% hazard concentration with
-#' standard errors, 95% lower and upper confidence limits
-#' and the number of bootstrap samples as well as the proportion of bootstrap
-#' samples that successfully returned a likelihood
-#' (convergence of the bootstrap sample is not required).
+#' Calculates the 5% Hazard Concentration using `ssd_fit_burrlioz()`
+#' and `ssd_hc()`.
 #'
 #' @inheritParams params
 #'
 #' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @family wqg
-#' @seealso [`ssd_fit_burrlioz()`] and [`ssd_hc_burrlioz()`]
+#' @seealso [`ssd_fit_burrlioz()`] and [`ssd_hc()`]
 #' @export
 #'
 #' @examples
@@ -72,9 +60,10 @@ ssd_wqg_bc <- function(data, left = "Conc") {
 #' ssd_wqg_burrlioz(ssddata::ccme_boron)
 #' }
 ssd_wqg_burrlioz <- function(data, left = "Conc") {
-  lifecycle::deprecate_warn("2.0.0", "ssd_wqg_burrlioz()", "ssd_fit_bcanz()",
-    details = "Please use `ssd_fit_burrlioz()` and `ssd_hc_burrlioz()` instead."
+  lifecycle::deprecate_warn(
+    "2.0.0", "ssd_wqg_burrlioz()",
+    details = "Please use `ssd_fit_burrlioz()` and `ssd_hc()` instead."
   )
   fit <- ssd_fit_burrlioz(data, left = left, rescale = FALSE)
-  ssd_hc_burrlioz(fit, ci = TRUE, nboot = 10000)
+  ssd_hc(fit, ci = TRUE, nboot = 10000)
 }

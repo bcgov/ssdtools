@@ -19,6 +19,5 @@ qgompertz(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE)
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 }
 \description{
-Quantile Function for Gompertz Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Deprecated for \code{ssd_qgompertz()}.
 }

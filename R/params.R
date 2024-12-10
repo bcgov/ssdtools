@@ -83,7 +83,7 @@
 #' @param object The object.
 #' @param parametric A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.
 #' @param p vector of probabilities.
-#' @param percent A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for `proportion = 0.05`.
+#' @param percent A numeric vector of percent values to estimate hazard concentrations for. Deprecated for `proportion = 0.05`. `r lifecycle::badge("deprecated")`
 #' @param pmix Proportion mixture parameter.
 #' @param proportion A numeric vector of proportion values to estimate hazard concentrations for.
 #' @param pvalue A flag specifying whether to return p-values or the statistics (default) for the various tests.
@@ -111,7 +111,7 @@
 #' @param shape2 shape2 parameter.
 #' @param shift_x The value to multiply the label x values by (after adding `add_x`).
 #' @param silent A flag indicating whether fits should fail silently.
-#' @param size A number for the size of the labels. Soft-deprecated for `label_size`.
+#' @param size A number for the size of the labels. Deprecated for `label_size`. #' `r lifecycle::badge("deprecated")`
 #' @param suffix Additional text to display after the number on the y-axis.
 #' @param tails A flag or NULL specifying whether to only include distributions with both tails.
 #' @param text_size A number for the text size. 

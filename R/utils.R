@@ -16,7 +16,10 @@
 #    limitations under the License.
 
 #' Comma and Significance Formatter
+#' `r lifecycle::badge("deprecated")`
 #'
+#' Deprecated for `ssd_label_comma()`
+#' 
 #' @param x A numeric vector to format.
 #' @inheritParams params
 #' @return A character vector.

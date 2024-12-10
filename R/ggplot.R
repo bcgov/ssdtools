@@ -201,16 +201,11 @@ geom_xribbon <- function(mapping = NULL,
 #' Species Sensitivity Data Points
 #' `r lifecycle::badge('deprecated')`
 #'
-#' `geom_ssd()` has been deprecated for `geom_ssdpoint()`.
+#' Deprecated for `geom_ssdpoint()`.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @export
-#' @examples
-#' \dontrun{
-#' ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-#'   geom_ssd()
-#' }
 geom_ssd <- function(mapping = NULL,
                      data = NULL,
                      stat = "ssdpoint",
@@ -220,12 +215,6 @@ geom_ssd <- function(mapping = NULL,
                      show.legend = NA,
                      inherit.aes = TRUE) {
   lifecycle::deprecate_stop("0.3.5", "geom_ssd()", "geom_ssdpoint()")
-
-  geom_ssdpoint(
-    mapping = mapping, data = data, stat = stat,
-    position = position, na.rm = na.rm, show.legend = show.legend,
-    inherit.aes = inherit.aes, ...
-  )
 }
 
 #' Plot Species Sensitivity Data
@@ -238,11 +227,6 @@ geom_ssd <- function(mapping = NULL,
 #' @seealso [`geom_ssdpoint()`]
 #' @family ggplot2
 #' @export
-#' @examples
-#' \dontrun{
-#' ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-#'   stat_ssd()
-#' }
 stat_ssd <- function(mapping = NULL,
                      data = NULL,
                      geom = "point",
@@ -252,10 +236,4 @@ stat_ssd <- function(mapping = NULL,
                      show.legend = NA,
                      inherit.aes = TRUE) {
   lifecycle::deprecate_stop("0.3.5", "stat_ssd()")
-
-  layer(
-    stat = StatSsdpoint, data = data, mapping = mapping, geom = geom,
-    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(na.rm = na.rm, ...)
-  )
 }

@@ -106,11 +106,5 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
-\code{geom_ssd()} has been deprecated for \code{geom_ssdpoint()}.
-}
-\examples{
-\dontrun{
-ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-  geom_ssd()
-}
+Deprecated for \code{geom_ssdpoint()}.
 }

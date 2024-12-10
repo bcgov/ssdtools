@@ -24,10 +24,6 @@
 #' @export
 dlgumbel <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
   lifecycle::deprecate_stop("1.0.0", "dlgumbel()")
-  ddist("gumbel",
-    x = x, location = locationlog, scale = scalelog,
-    log = log, .lgt = TRUE
-  )
 }
 
 #' @describeIn ssd_p Cumulative Distribution Function for Log-Gumbel Distribution
@@ -53,14 +49,13 @@ ssd_elgumbel <- function() {
 
 #' Cumulative Distribution Function for Log-Gumbel Distribution
 #' `r lifecycle::badge("deprecated")`
+#' 
+#' Deprecated for `ssd_plgumbel()`.
+#' 
 #' @inheritParams params
 #' @export
 plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_stop("1.0.0", "plgumbel()", "ssd_plgumbel()")
-  ssd_plgumbel(q,
-    locationlog = locationlog, scalelog = scalelog,
-    lower.tail = lower.tail, log.p = log.p
-  )
 }
 
 #' @describeIn ssd_q Quantile Function for Log-Gumbel Distribution
@@ -77,6 +72,9 @@ ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, lo
 
 #' Quantile Function for Log-Gumbel Distribution
 #' `r lifecycle::badge("deprecated")`
+#' 
+#' Deprecated for `ssd_qlgumbel()`.
+#'
 #' @inheritParams params
 #' @export
 qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
@@ -107,6 +105,9 @@ ssd_elgumbel <- function() {
 }
 
 #' Random Generation for log-Gumbel Distribution
+#' 
+#' Deprecated for `ssd_rlgumbel()`.
+#' 
 #' `r lifecycle::badge("deprecated")`
 #' @inheritParams params
 #' @export

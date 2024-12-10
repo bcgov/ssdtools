@@ -133,7 +133,7 @@ remove them with a warning.}
 
 \item{p}{vector of probabilities.}
 
-\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for \code{proportion = 0.05}.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Deprecated for \code{proportion = 0.05}. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{pmix}{Proportion mixture parameter.}
 
@@ -187,7 +187,7 @@ remove them with a warning.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 
-\item{size}{A number for the size of the labels. Soft-deprecated for \code{label_size}.}
+\item{size}{A number for the size of the labels. Deprecated for \code{label_size}. #' \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{suffix}{Additional text to display after the number on the y-axis.}
 

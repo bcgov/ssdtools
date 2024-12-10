@@ -50,7 +50,7 @@ ssd_plot(
 
 \item{color}{A string of the column in data for the color aesthetic.}
 
-\item{size}{A number for the size of the labels. Soft-deprecated for \code{label_size}.}
+\item{size}{A number for the size of the labels. Deprecated for \code{label_size}. #' \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{linetype}{A string of the column in pred to use for the linetype.}
 
