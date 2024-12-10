@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.2.0
+
+- PLACEHOLDER https://github.com/bcgov/ssdtools/pull/393 (#393).
+
+- Merge branch 'joss-paper' of github.com:bcgov/ssdtools into joss-paper.
+
+- Merge pull request #395 from poissonconsulting/main.
+
+- Merge pull request #394 from beckyfisher/joss-paper-rf.
+
+- Fix equations in vignettes. (@poissonconsulting, #392).
+
+- Merge main.
+
+  Merge branch 'main' into joss-paper
+
+  # Conflicts:
+  # DESCRIPTION
+  # NEWS.md
+
+- Add missing dois.
+
+  Merge branch 'main' into joss-paper
+
+
 # ssdtools 2.1.0.9001
 
 - Fixed equation rendering for vignettes on website.
