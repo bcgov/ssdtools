@@ -252,7 +252,7 @@ The function `ssd_fit_burrlioz()` was added to approximate the behaviour of [Bur
 Hazard concentration estimation is performed by `ssd_hc()` (which is wrapped by `predict()`) and hazard protection estimation by `ssd_hp()`.
 By default confidence intervals are estimated by parametric bootstrapping.
 
-To reduce the time required for bootstrapping, parallelization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
+To reduce the time required for bootstrapping, parallelization was implemented using the [future](https://github.com/futureverse/future) package.
 
 The following arguments were added to `ssd_hc()` and `ssd_hp()`
 

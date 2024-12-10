@@ -43,7 +43,7 @@ knitr::opts_chunk$set(
 
 The ssdtools package uses the method of Maximum Likelihood (ML) to estimate parameters for each distribution that is fit to the data. 
 Statistical theory says that maximum likelihood estimators are asymptotically unbiased, but does not guarantee performance in small samples. 
-A detailed account of the issue of small sample bias in estimates can be found in the following [pdf](https://github.com/bcgov/ssdtools/blob/master/vignettes/small-sample-bias.pdf).
+A detailed account of the issue of small sample bias in estimates can be found in the small sample size vignette.
 
 ## Investigations into setting minimum sample sizes for uni-modal and bi-modal distributions in ssdtools
 
