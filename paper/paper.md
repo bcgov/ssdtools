@@ -72,7 +72,7 @@ Since v1, `ssdtools` has by default fitted the `lnorm`, `llogis`, `lgumbel`, `ga
 
 In the first major update (v1), the dependency `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood [@millar_maximum_2011]. 
 The move to `TMB` means the likelihood function is hand coded in `C++`, which allows full control over model specification and improved handling of censored data.
-The change is internal and does not affect the user interface.
+The change is internal and does not directly affect the user interface.
 
 ## Model Averaging
 
