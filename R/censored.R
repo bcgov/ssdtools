@@ -70,6 +70,4 @@ ssd_is_censored.fitdists <- function(x, ...) {
 #' @seealso [`ssd_is_censored()`]
 is_censored <- function(x) {
   lifecycle::deprecate_stop("0.3.7", "is_censored()", "ssd_is_censored()")
-  chk_s3_class(x, "fitdists")
-  ssd_is_censored(x)
 }

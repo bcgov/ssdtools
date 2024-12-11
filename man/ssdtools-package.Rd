@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al.(2001) <isbn:9781566705783>. The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-logistic, log-normal and log-normal log-normal mixture. Multiple distributions can be averaged using Akaike Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by parametric bootstrapping.
+Species sensitivity distributions are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al.(2001) <isbn:9781566705783>. The ssdtools package uses Maximum Likelihood to fit distributions such as the gamma, log-logistic, log-normal and log-normal log-normal mixture. Multiple distributions can be averaged using Akaike Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by bootstrapping.
 }
 \seealso{
 Useful links:
@@ -42,12 +42,14 @@ Other contributors:
   \item Ali Azizishirazi [contributor]
   \item Nadine Hussein \email{nadine@poissonconsulting.ca} (\href{https://orcid.org/0000-0003-4470-8361}{ORCID}) [contributor]
   \item Sarah Lyons \email{sarah@poissonconsulting.ca} (\href{https://orcid.org/0000-0002-6745-6796}{ORCID}) [contributor]
+  \item Duncan Kennedy \email{duncan@poissonconsulting.ca} (\href{https://orcid.org/0009-0001-4880-5751}{ORCID}) [contributor]
   \item Stephanie Hazlitt [contributor]
   \item Hadley Wickham [contributor]
   \item Sergio Ibarra Espinosa [contributor]
   \item Andy Teucher [contributor]
   \item Emilie Doussantousse [contributor]
   \item Nan-Hung Hsieh [contributor]
+  \item Florencia D'Andrea [contributor]
   \item Province of British Columbia [funder, copyright holder]
   \item Environment and Climate Change Canada [funder, copyright holder]
   \item Australian Government Department of Climate Change, Energy, the Environment and Water [funder, copyright holder]

@@ -63,7 +63,7 @@ lists which parameters it can accept.
 \link[ggplot2:draw_key]{key glyphs}, to change the display of the layer in the legend.
 }}
 
-\item{xintercept}{The x-value for the intersect}
+\item{xintercept}{The x-value for the intersect.}
 
 \item{yintercept}{The y-value for the intersect.}
 

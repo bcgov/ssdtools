@@ -17,5 +17,5 @@ Plots a Cullen and Frey graph of the skewness and kurtosis
 for non-censored data.
 }
 \details{
-Soft deprecated for direct call to \code{\link[fitdistrplus:descdist]{fitdistrplus::descdist()}}.
+Deprecated for \code{\link[fitdistrplus:descdist]{fitdistrplus::descdist()}}.
 }

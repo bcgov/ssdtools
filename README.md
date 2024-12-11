@@ -55,8 +55,8 @@ install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://
 or from [GitHub](https://github.com/bcgov/ssdtools)
 
 ``` r
-# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-pak::pak("bcgov/ssdtools")
+# install.packages("remotes")
+remotes::install_github("bcgov/ssdtools")
 ```
 
 #### Website
@@ -67,7 +67,9 @@ The website for the development version is at
 ## Introduction
 
 The dependency [`ssddata`](https://github.com/open-AIMS/ssddata)
-provides example data sets for several chemicals including Boron.
+provides example data sets for several chemicals including Boron. The
+[ECOTOX](https://cfpub.epa.gov/ecotox/) Knowledgebase is another source
+of toxicity concentrations for over 12,000 chemicals.
 
 ``` r
 library(ssdtools)

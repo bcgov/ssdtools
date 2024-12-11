@@ -24,7 +24,7 @@
 \arguments{
 \item{object}{The object.}
 
-\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for \code{proportion = 0.05}.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Deprecated for \code{proportion = 0.05}. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
 

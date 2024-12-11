@@ -9,7 +9,3 @@
 >      libs  16.9Mb
 
 The large size of these sub-directories is necessary.
-
-## CRAN Package Check Results for Package
-
-Fixed M1mac issue.
