@@ -40,6 +40,7 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
     coord_trans(x = trans),
     scale_x_continuous(xlab,
       breaks = xbreaks,
+      minor_breaks = NULL,
       labels = ssd_label_fun, 
       limits = xlimits
     ),
