@@ -26,7 +26,7 @@ affiliations:
   name: Environmetrics Australia, Australia
 - index: 6
   name: Simon Fraser University, Canada
-date: 2 May 2024
+date: 10 December 2024
 bibliography: paper.bib
 tags:
   - ssdtools
@@ -101,16 +101,16 @@ To estimate the values using the original weighted arithmetic mean set `multi_es
 ## Confidence Intervals
 
 `ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_u$ values via bootstrapping.
-By default all versions of `ssdtools` use parametric bootstrapping for non-censored data as it has better coverage than the equivalent non-parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2022].
+By default all versions of `ssdtools` use parametric bootstrapping for non-censored data as it has better coverage than the equivalent non-parametric approach used in some other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2022].
 The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions.
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
 
 Consequently, v2 also offers a parametric bootstrap method for non-censored data that uses the joint cdf to generate data before refitting the original distribution set and solving for the newly estimated joint cdf [see details in @fox_methodologies_2024].
-This so-called "multi" method can be implemented with (`ci_method = multi_free`) and without (`ci_method = multi_fixed`) re-estimation of the model weights.
-In order to implement the "multi" method of bootstrapping described above, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
+This so-called 'multi' method can be implemented with (`ci_method = "multi_free"`) and without (`ci_method = "multi_fixed"`) re-estimation of the model weights.
+In order to implement the 'multi' method of bootstrapping described above, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
 
-However, although the "multi" method has good coverage it is computationally slow.
-To overcome this limitation, the default method (`ci_method = weighted_samples`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
+However, although the 'multi' method has good coverage it is computationally slow.
+To overcome this limitation, the default method (`ci_method = "weighted_samples"`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
 
 ## Plotting 
 
@@ -159,20 +159,19 @@ autoplot(fits)
 
 ![Species sensitivity distributions for the six default distributions with the Boron species concentration data.](autoplot.png){height="4in"}
 
-The model averaged cdf with 95% CIs (with the model averaged $\text{HC}_5$ indicated by a dotted line) can be plotted using:
+The model averaged cdf with 95% CIs (with the model averaged $\text{HC}_{10}$ indicated by a dotted line) can be plotted using:
 
 ```r
 predictions <- ssdtools::predict(fits, ci = TRUE)
-library(ggplot2)
-ssd_plot(ssddata::ccme_boron, predictions,
+ssd_plot(ssddata::ccme_boron, predictions, 
+         hc = 0.1, xlimits = c(NA, 3000),
          shape = "Group", color = "Group", label = "Species",
          xlab = "Concentration (mg/L)"
 ) +
-  expand_limits(x = 3000) +
   scale_color_ssd()
 ```
 
-![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The $\text{HC}_5$ value is indicated by the dotted line.](ssd_plot.png){height="4in"}
+![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The $\text{HC}_{10}$ value is indicated by the dotted line.](ssd_plot.png){height="4in"}
 
 # Acknowledgements
 
