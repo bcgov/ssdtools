@@ -30,7 +30,8 @@ ssd_plot(
   xbreaks = waiver(),
   xlimits = NULL,
   text_size = 11,
-  label_size = 2.5
+  label_size = 2.5,
+  theme_classic = FALSE
 )
 }
 \arguments{
@@ -97,6 +98,8 @@ Use NA to refer to the existing minimum or maximum limits.
 \item{text_size}{A number for the text size.}
 
 \item{label_size}{A number for the size of the labels.}
+
+\item{theme_classic}{A flag specifying whether to use the classic theme or the default.}
 }
 \description{
 Plots species sensitivity data and distributions.

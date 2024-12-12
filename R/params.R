@@ -115,6 +115,7 @@
 #' @param suffix Additional text to display after the number on the y-axis.
 #' @param tails A flag or NULL specifying whether to only include distributions with both tails.
 #' @param text_size A number for the text size. 
+#' @param theme_classic A flag specifying whether to use the classic theme or the default.
 #' @param trans A string of which transformation to use. Accepted values include `"log10"`, `"log"`, and `"identity"` (`"log10"` by default).
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
 #' @param x The object.

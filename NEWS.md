@@ -9,6 +9,7 @@
   - Restricted `trans` argument to `"identity"`, `"log10"` or "`log`".
 - For `ssd_plot()` function:
   - Added `text_size` argument.
+  - Added `theme_classic = FALSE` argument to switch classic theme.
   - Soft-deprecated `size` argument for `label_size`.
 - Turned off x-axis minor breaks for all plots (for consistency) as HC major break causing multiple minor breaks in `ssd_plot()`.
 

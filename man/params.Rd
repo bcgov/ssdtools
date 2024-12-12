@@ -195,6 +195,8 @@ remove them with a warning.}
 
 \item{text_size}{A number for the text size.}
 
+\item{theme_classic}{A flag specifying whether to use the classic theme or the default.}
+
 \item{trans}{A string of which transformation to use. Accepted values include \code{"log10"}, \code{"log"}, and \code{"identity"} (\code{"log10"} by default).}
 
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}

@@ -88,3 +88,7 @@ test_that("ssd_plot text_size", {
 test_that("ssd_plot label_size", {
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, label_size = 5), "boron_labelsize")
 })
+
+test_that("ssd_plot label_size", {
+  expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, label_size = 5, theme_classic = TRUE), "boron_themeclassic")
+})
