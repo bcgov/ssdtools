@@ -43,7 +43,7 @@ Species sensitivity distributions (SSDs) are cumulative probability distribution
 $\text{HC}_5$ values, which are intended to protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a given concentration $x$.
 
-`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and estimate $\text{HC}_x$ and $\text{HP}_u$ values by model averaging [@schwarz_improving_2019] across multiple distribution [@thorley2018ssdtools]. 
+`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and estimate $\text{HC}_x$ and $\text{HP}_u$ values by model averaging [@schwarz_improving_2019] across multiple distributions [@thorley2018ssdtools]. 
 The `shinyssdtools` R package [@dalgarno_shinyssdtools_2021] provides a Graphical User Interface to `ssdtools`.
 
 Since the publication of @thorley2018ssdtools, the `ssdtools` R package has undergone two major updates.
@@ -175,7 +175,7 @@ ssd_plot(ssddata::ccme_boron, predictions,
 
 # Acknowledgements
 
-We acknowledge contributions from Angeline Tillmanns, Seb Dalgarno, Kathleen McTavish, Heather Thompson, Doug Spry, Rick van Dam, Graham Batley, Tony Bigwood, and Ali Azizisharzi.
+We acknowledge contributions from Angeline Tillmanns, Seb Dalgarno, Kathleen McTavish, Heather Thompson, Doug Spry, Rick van Dam, Graham Batley, and Ali Azizisharzi.
 Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia and the Department of Climate Change, Energy, the Environment and Water, Australia.
 
 # References
