@@ -11,20 +11,20 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// fun
-double fun(double x);
-RcppExport SEXP _ssdtools_fun(SEXP xSEXP) {
+// fun_ssd
+double fun_ssd(double x);
+RcppExport SEXP _ssdtools_fun_ssd(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(fun(x));
+    rcpp_result_gen = Rcpp::wrap(fun_ssd(x));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ssdtools_fun", (DL_FUNC) &_ssdtools_fun, 1},
+    {"_ssdtools_fun_ssd", (DL_FUNC) &_ssdtools_fun_ssd, 1},
     {NULL, NULL, 0}
 };
 

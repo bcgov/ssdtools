@@ -19,6 +19,6 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-double fun(double x) {
+double fun_ssd(double x) {
   return x;
 }
