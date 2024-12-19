@@ -62,3 +62,18 @@ ssd_dists <- function(bcanz = NULL, tails = NULL, npars = 2:5) {
 ssd_dists_all <- function() {
   ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5)
 }
+
+#' All Shiny Species Sensitivity Distributions
+#'
+#' Gets a character vector of the names of all the available distributions
+#' in the shinyssdtools.
+#'
+#' @return A unique, sorted character vector of the distributions.
+#' @family dists
+#' @export
+#'
+#' @examples
+#' ssd_dists_shiny()
+ssd_dists_shiny <- function() {
+  ssd_dists(bcanz = NULL, tails = TRUE, npars = 2:5)
+}

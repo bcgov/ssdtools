@@ -3,6 +3,7 @@
 # ssdtools 2.2.0
 
 - Added `ssd_label_comma_hc()` function to label numbers with significant digits and comma and offset hazard concentration value if present in breaks.
+- Added `ssd_dists_shiny()` to define distributions for use in shiny app.
 - For `plot_coord_scale()` function:
   - Added `x_limits = NULL` to allow setting of x-axis limits.
   - Added `hc_value = NULL` to pass hazard concentration value.

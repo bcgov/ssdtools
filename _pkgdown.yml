@@ -24,6 +24,7 @@ reference:
   - ssd_dists
   - ssd_dists_all
   - ssd_dists_bcanz
+  - ssd_dists_shiny
 - title: Fit
   desc: Functions that fit distributions to data
   contents: 

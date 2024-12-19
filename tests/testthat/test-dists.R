@@ -25,6 +25,16 @@ test_that("dists all", {
   )
 })
 
+test_that("dists shiny", {
+  expect_identical(
+    ssd_dists_shiny(),
+    c(
+      "burrIII3", "gamma", "gompertz", "lgumbel", "llogis",
+      "llogis_llogis", "lnorm", "lnorm_lnorm", "weibull"
+    )
+  )
+})
+
 test_that("dists all", {
   expect_identical(ssd_dists(), ssd_dists_all())
 })
