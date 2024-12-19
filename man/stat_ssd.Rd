@@ -108,12 +108,6 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 \description{
 Uses the empirical cumulative density/distribution to visualize species sensitivity data.
 }
-\examples{
-\dontrun{
-ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-  stat_ssd()
-}
-}
 \seealso{
 \code{\link[=geom_ssdpoint]{geom_ssdpoint()}}
 }

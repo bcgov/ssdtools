@@ -19,6 +19,5 @@ qlgumbel(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 }
 \description{
-Quantile Function for Log-Gumbel Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Deprecated for \code{ssd_qlgumbel()}.
 }

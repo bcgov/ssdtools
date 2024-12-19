@@ -26,7 +26,7 @@ affiliations:
   name: Environmetrics Australia, Australia
 - index: 6
   name: Simon Fraser University, Canada
-date: 2 May 2024
+date: 11 December 2024
 bibliography: paper.bib
 tags:
   - ssdtools
@@ -43,20 +43,20 @@ Species sensitivity distributions (SSDs) are cumulative probability distribution
 $\text{HC}_5$ values, which are intended to protect 95% of species, are often used for the derivation of environmental quality criteria and ecological risk assessment for contaminated ecosystems [@posthuma_species_2001].
 The Hazard Proportion ($\text{HP}_u$) is the proportion of species affected by a given concentration $x$.
 
-`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and estimate $\text{HC}_x$ and $\text{HP}_u$ values by model averaging [@schwarz_improving_2019] across multiple distribution [@thorley2018ssdtools]. 
+`ssdtools` is an R package [@r] to fit SSDs using Maximum Likelihood [@millar_maximum_2011] and estimate $\text{HC}_x$ and $\text{HP}_u$ values by model averaging [@schwarz_improving_2019] across multiple distributions [@thorley2018ssdtools]. 
 The `shinyssdtools` R package [@dalgarno_shinyssdtools_2021] provides a Graphical User Interface to `ssdtools`.
 
 Since the publication of @thorley2018ssdtools, the `ssdtools` R package has undergone two major updates.
-The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] for model fitting.
+The first update (v1) included the addition of four new distributions (inverse Pareto, Burr Type III and the log-normal log-normal and log-logistic log-logistic mixtures) and a switch to the R package `TMB` [@tmb] allowing full control over model specification.
 The second major release (v2) includes critical updates to ensure that the $\text{HC}_x$ and $\text{HP}_u$ estimates satisfy the *inversion principle* as well as bootstrap methods to obtain confidence intervals (CIs) with more appropriate coverage [@fox_methodologies_2024].
 
 # Statement of need
 
 SSDs are a practical tool for the determination of safe threshold concentrations for toxicants in fresh and marine waters, and are implemented in some form for risk assessment and water quality criteria derivation throughout multiple jurisdictions globally [@lepper2005manual; @Warne2018; @bcmecc2019; @USEPA2020].
 
-The selection of a suitable probability model has been identified as one of the most important and difficult choices in the use of SSDs [@newman_applying_2000]. 
-Since the original implementation (v0), `ssdtools` [@thorley2018ssdtools] has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_u$ values using multiple distributions, thereby avoiding the need for selection of a single distribution [@schwarz_improving_2019]. 
-The method, as applied in the SSD context is described in detail in @fox_recent_2021, and provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
+The selection of a suitable distribution has been identified as one of the most important and difficult choices in the use of SSDs [@newman_applying_2000]. 
+Since the original implementation (v0), `ssdtools` [@thorley2018ssdtools] has used model averaging to allow estimation of $\text{HC}_x$ and $\text{HP}_u$ values using multiple distributions [@schwarz_improving_2019]. 
+The method, which is described in detail by @fox_recent_2021 in the SSD context, provides a level of flexibility and parsimony that is difficult to achieve with a single distribution.
 
 # Technical details
 
@@ -71,7 +71,8 @@ Since v1, `ssdtools` has by default fitted the `lnorm`, `llogis`, `lgumbel`, `ga
 ## Model Fitting
 
 In the first major update (v1), the dependency `fitdistrplus` [@fitdistrplus] was replaced by `TMB` [@tmb] for fitting the available distributions via Maximum Likelihood [@millar_maximum_2011]. 
-The move to `TMB` allowed more control over model specification. 
+The move to `TMB` means the likelihood function is hand coded in `C++`, which allows full control over model specification and improved handling of censored data.
+The change is internal and does not directly affect the user interface.
 
 ## Model Averaging
 
@@ -93,28 +94,28 @@ $${u:G\left( u \right) = x}$$
 or, equivalently
 $$u:G\left( u \right) - x = 0$$ 
 for the proportion affected $x$. 
-Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$. 
+Finding the solution to this last equation is referred to as *finding the root(s)* of the function $G\left( u \right)-x$.
+As of `ssdtools` v2, methods such as `ssd_hc()` and `ssd_hp()` now use the *inversion principle* by default when `multi_est = TRUE`.
+To estimate the values using the original weighted arithmetic mean set `multi_est = FALSE`.  
 
 ## Confidence Intervals
 
 `ssdtools` generates confidence intervals for $\text{HC}_x$ and $\text{HP}_u$ values via bootstrapping.
-By default all versions of `ssdtools` use parametric bootstrapping for non-censored data as it has better coverage than the equivalent non parametric approach used in other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2022].
-The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions (`weighted_arithmetic`).
+By default all versions of `ssdtools` use parametric bootstrapping for non-censored data as it has better coverage than the equivalent non-parametric approach used in some other SSD modelling software such as `Burrlioz` [see @fox_methodologies_2022].
+The first two versions of `ssdtools` both calculated the model averaged CI from the weighted arithmetic mean of the CIs of the individual distributions.
 Unfortunately, this approach has recently been shown to have poor coverage [@fox_methodologies_2024] and is inconsistent with the *inversion principle*.
 
 Consequently, v2 also offers a parametric bootstrap method for non-censored data that uses the joint cdf to generate data before refitting the original distribution set and solving for the newly estimated joint cdf [see details in @fox_methodologies_2024].
-This "multi" method can be implemented with (`multi_free`) and without (`multi_fixed`) re-estimation of the model weights.
-However, although the "multi" method has good coverage it is computationally slow.
-As a result, the default method (`weighted_samples`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
+This so-called 'multi' method can be implemented with (`ci_method = "multi_free"`) and without (`ci_method = "multi_fixed"`) re-estimation of the model weights.
+In order to implement the 'multi' method of bootstrapping described above, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
 
-## Multiple Distribution Functions
-
-In order to implement the "multi" method of bootstrapping, v2 also provides the probability density (`ssd_pmulti()`), cumulative distribution (`ssd_qmulti()`) and random generation (`ssd_rmulti()`) functions for multiple distributions.
+However, although the 'multi' method has good coverage it is computationally slow.
+To overcome this limitation, the default method (`ci_method = "weighted_samples"`) provided by the current update is a faster heuristic based on taking bootstrap samples from the individual distributions proportional to their weights [@fox_methodologies_2024].
 
 ## Plotting 
 
 As well as fitting SSDs and providing methods for estimating $\text{HC}_x$ and $\text{HP}_u$ values, from v1 `ssdtools` has extended the `ggplot2` R package [@ggplot2] by defining `geom_ssdpoint()`, `geom_ssdsegment()`, `geom_hcintersect()` and `geom_xribbon()` geoms and a discrete color-blind scale `scale_color_sdd()` for SSD plots.
-The current version (v2) adds `scale_fill_ssd()` for a discrete color-blind fill scale and `ssd_label_comma()` for formatting of x-axis labels.
+The current version (v2) adds `scale_fill_ssd()` for a discrete color-blind fill scale and `ssd_label_comma()` and `ssd_label_comma_hc()` for formatting of x-axis labels.
 
 # Example of use
 
@@ -158,24 +159,23 @@ autoplot(fits)
 
 ![Species sensitivity distributions for the six default distributions with the Boron species concentration data.](autoplot.png){height="4in"}
 
-The model averaged cdf with 95% CIs (with the model averaged $\text{HC}_5$ indicated by a dotted line) can be plotted using:
+The model averaged cdf with 95% CIs (with the model averaged $\text{HC}_{10}$ indicated by a dotted line) can be plotted using:
 
 ```r
 predictions <- ssdtools::predict(fits, ci = TRUE)
-library(ggplot2)
-ssd_plot(ssddata::ccme_boron, predictions,
+ssd_plot(ssddata::ccme_boron, predictions, 
+         hc = 0.1, xlimits = c(NA, 3000),
          shape = "Group", color = "Group", label = "Species",
          xlab = "Concentration (mg/L)"
 ) +
-  expand_limits(x = 3000) +
   scale_color_ssd()
 ```
 
-![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The $\text{HC}_5$ value is indicated by the dotted line.](ssd_plot.png){height="4in"}
+![Model averaged species sensitivity distribution with 95% CI based on the six default distributions with Boron species concentration data. The $\text{HC}_{10}$ value is indicated by the dotted line.](ssd_plot.png){height="4in"}
 
 # Acknowledgements
 
-We acknowledge contributions from Angeline Tillmanns, Seb Dalgarno, Kathleen McTavish, Heather Thompson, Doug Spry, Rick van Dam, Graham Batley, Tony Bigwood, and Ali Azizisharzi.
+We acknowledge contributions from Angeline Tillmanns, Seb Dalgarno, Kathleen McTavish, Heather Thompson, Doug Spry, Rick van Dam, Graham Batley, and Ali Azizisharzi.
 Development of `ssdtools` was funded by the Ministry of Environment and Climate Change Strategy, British Columbia and the Department of Climate Change, Energy, the Environment and Water, Australia.
 
 # References

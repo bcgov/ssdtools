@@ -2,7 +2,8 @@
 % Please edit documentation in R/wqg.R
 \name{ssd_wqg_burrlioz}
 \alias{ssd_wqg_burrlioz}
-\title{Water Quality Guideline for Burrlioz}
+\title{Water Quality Guideline for Burrlioz
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 \usage{
 ssd_wqg_burrlioz(data, left = "Conc")
 }
@@ -15,16 +16,8 @@ ssd_wqg_burrlioz(data, left = "Conc")
 A tibble of the 5\% hazard concentration with 95\% confidence intervals.
 }
 \description{
-Calculates the 5\% Hazard Concentration (after rescaling the data)
-using the same approach as Burrlioz based on 10,000 non-parametric bootstrap
-samples.
-}
-\details{
-Returns a tibble the model averaged 5\% hazard concentration with
-standard errors, 95\% lower and upper confidence limits
-and the number of bootstrap samples as well as the proportion of bootstrap
-samples that successfully returned a likelihood
-(convergence of the bootstrap sample is not required).
+Calculates the 5\% Hazard Concentration using \code{ssd_fit_burrlioz()}
+and \code{ssd_hc()}.
 }
 \examples{
 \dontrun{
@@ -32,7 +25,7 @@ ssd_wqg_burrlioz(ssddata::ccme_boron)
 }
 }
 \seealso{
-\code{\link[=ssd_fit_burrlioz]{ssd_fit_burrlioz()}} and \code{\link[=ssd_hc_burrlioz]{ssd_hc_burrlioz()}}
+\code{\link[=ssd_fit_burrlioz]{ssd_fit_burrlioz()}} and \code{\link[=ssd_hc]{ssd_hc()}}
 
 Other wqg: 
 \code{\link{ssd_wqg_bc}()}

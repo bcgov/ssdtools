@@ -18,23 +18,35 @@
 #' @export
 ggplot2::waiver
 
-plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver()) {
+plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver(), xlimits = NULL, hc_value = NULL) {
   chk_string(xlab)
   chk_string(ylab)
-
-  if (is.waive(xbreaks) && trans == "log10") {
-    xbreaks <- trans_breaks("log10", function(x) 10^x)
-  }
-
+  
+  if (is.waive(xbreaks)) {
+    xbreaks <- switch(trans, 
+                      "log10" = function(x) unique(c(scales::log10_trans()$breaks(x), hc_value)),
+                      "log" = function(x) unique(c(scales::log_trans()$breaks(x), hc_value)),
+                      "identity" = function(x) unique(c(scales::identity_trans()$breaks(x), hc_value)))
+  } else {
+    xbreaks <- unique(c(xbreaks, hc_value))
+  } 
+  
+  ssd_label_fun <- ssd_label_comma(big.mark = big.mark)
+  if(!is.null(hc_value)) {
+    ssd_label_fun <- ssd_label_comma_hc(hc_value, big.mark = big.mark)
+  } 
+  
   list(
     coord_trans(x = trans),
     scale_x_continuous(xlab,
-      breaks = xbreaks,
-      labels = ssd_label_comma(big.mark = big.mark)
+                       breaks = xbreaks,
+                       minor_breaks = NULL,
+                       labels = ssd_label_fun, 
+                       limits = xlimits
     ),
     scale_y_continuous(ylab,
-      labels = label_percent(suffix = suffix), limits = c(0, 1),
-      breaks = seq(0, 1, by = 0.2), expand = c(0, 0)
+                       labels = label_percent(suffix = suffix), limits = c(0, 1),
+                       breaks = seq(0, 1, by = 0.2), expand = c(0, 0)
     )
   )
 }
@@ -50,14 +62,22 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
 #' @examples
 #' ssd_plot(ssddata::ccme_boron, boron_pred, label = "Species", shape = "Group")
 ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
-                     label = NULL, shape = NULL, color = NULL, size = 2.5,
+                     label = NULL, shape = NULL, color = NULL, size,
                      linetype = NULL, linecolor = NULL,
                      xlab = "Concentration", ylab = "Species Affected",
                      ci = TRUE, ribbon = TRUE, hc = 0.05,
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
                      big.mark = ",", suffix = "%",
-                     trans = "log10", xbreaks = waiver()) {
+                     trans = "log10", xbreaks = waiver(),
+                     xlimits = NULL, text_size = 11, label_size = 2.5,
+                     theme_classic = FALSE) {
+  
+  if (lifecycle::is_present(size)) {
+    lifecycle::deprecate_soft("2.1.0", "ssd_plot(size)", "ssd_plot(label_size)", id = "size")
+    chk_number(size)
+    label_size <- size
+  }
   .chk_data(data, left, right, weight = NULL, missing = TRUE)
   chk_unused(...)
   chk_null_or(label, vld = vld_string)
@@ -66,20 +86,20 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   chk_null_or(linetype, vld = vld_string)
   chk_null_or(linecolor, vld = vld_string)
   check_names(data, c(unique(c(left, right)), label, shape))
-
+  
   check_names(pred, c("proportion", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
   chk_numeric(pred$proportion)
   chk_range(pred$proportion)
   check_data(pred, values = list(est = 1, lcl = c(1, NA), ucl = c(1, NA)))
-
+  
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
   chk_number(add_x)
   chk_range(add_x, c(-1000, 1000))
-
+  
   chk_flag(ci)
   chk_flag(ribbon)
-
+  
   if (!is.null(hc)) {
     chk_vector(hc)
     chk_gt(length(hc))
@@ -88,20 +108,24 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   chk_string(big.mark)
   chk_string(suffix)
   .chk_bounds(bounds)
-  chk_string(trans)
-
+  chk_subset(trans, c("log10", "log", "identity"))
+  chk_number(text_size)
+  chk_null_or(xlimits, vld = vld_numeric)
+  chk_null_or(xlimits, vld = vld_length, length = 2L)
+  chk_flag(theme_classic)
+  
   data <- process_data(data, left, right, weight = NULL)
   data <- bound_data(data, bounds)
   data$y <- ssd_ecd_data(data, "left", "right", bounds = bounds)
-
+  
   label <- if (!is.null(label)) sym(label) else label
   shape <- if (!is.null(shape)) sym(shape) else shape
   color <- if (!is.null(color)) sym(color) else color
   linetype <- if (!is.null(linetype)) sym(linetype) else linetype
   linecolor <- if (!is.null(linecolor)) sym(linecolor) else linecolor
-
+  
   gp <- ggplot(data)
-
+  
   if (ci) {
     if (ribbon) {
       gp <- gp + geom_xribbon(data = pred, aes(xmin = !!sym("lcl"), xmax = !!sym("ucl"), y = !!sym("proportion")), alpha = 0.2)
@@ -111,7 +135,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
         geom_line(data = pred, aes(x = !!sym("ucl"), y = !!sym("proportion")), color = "darkgreen")
     }
   }
-
+  
   if (!is.null(linecolor)) {
     gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype, color = !!linecolor))
   } else if (ribbon) {
@@ -119,14 +143,14 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   } else {
     gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "red")
   }
-
+  
   if (!is.null(hc)) {
     gp <- gp + geom_hcintersect(
       data = pred[pred$proportion %in% hc, ],
       aes(xintercept = !!sym("est"), yintercept = !!sym("proportion"))
     )
   }
-
+  
   if (!is.null(color)) {
     gp <- gp +
       geom_ssdpoint(data = data, aes(
@@ -159,19 +183,33 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
         x = !!sym("left"), y = !!sym("y"), xend = !!sym("right"), yend = !!sym("y")
       ), stat = "identity")
   }
-
+  
+  hc_value <- NULL
+  if(!is.null(hc)){
+    hc_value <- pred$est[pred$proportion %in% hc]
+  }
   gp <- gp + plot_coord_scale(data,
-    xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
-    trans = trans, xbreaks = xbreaks
+                              xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
+                              trans = trans, xbreaks = xbreaks, xlimits = xlimits, hc_value = hc_value
   )
-
+  
   if (!is.null(label)) {
     data$right <- (data$right + add_x) * shift_x
     gp <- gp + geom_text(
       data = data, aes(x = !!sym("right"), y = !!sym("y"), label = !!label),
-      hjust = 0, size = size, fontface = "italic"
+      hjust = 0, size = label_size, fontface = "italic"
     )
   }
-
+  
+  if(theme_classic) {
+    gp <- gp + ggplot2::theme_classic()   
+  }
+  
+  gp <- gp + 
+    theme(
+      text = element_text(size = text_size),
+      axis.text.x = ggtext::element_markdown()
+    )   
+  
   gp
 }

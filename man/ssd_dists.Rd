@@ -28,6 +28,7 @@ ssd_dists(npars = 5)
 \seealso{
 Other dists: 
 \code{\link{dist_data}},
-\code{\link{ssd_dists_all}()}
+\code{\link{ssd_dists_all}()},
+\code{\link{ssd_dists_shiny}()}
 }
 \concept{dists}

@@ -2,8 +2,7 @@
 % Please edit documentation in R/lgumbel.R
 \name{rlgumbel}
 \alias{rlgumbel}
-\title{Random Generation for log-Gumbel Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
+\title{Random Generation for log-Gumbel Distribution}
 \usage{
 rlgumbel(n, locationlog = 0, scalelog = 1)
 }
@@ -15,6 +14,8 @@ rlgumbel(n, locationlog = 0, scalelog = 1)
 \item{scalelog}{scale on log scale parameter.}
 }
 \description{
-Random Generation for log-Gumbel Distribution
+Deprecated for \code{ssd_rlgumbel()}.
+}
+\details{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }

@@ -16,6 +16,9 @@
 #    limitations under the License.
 
 #' Censor Data
+#' 
+#' Censors data to a specified range based on the `censoring` argument.
+#' The function is useful for creating test data sets.
 #'
 #' @inheritParams params
 #'
@@ -27,6 +30,10 @@
 ssd_censor_data <- function(data, left = "Conc", ..., right = left, censoring = c(0, Inf)) {
   .chk_data(data, left, right)
   chk_unused(...)
+  chk_numeric(censoring)
+  chk_vector(censoring)
+  chk_length(censoring, 2L)
+  chk_not_any_na(censoring)
 
   if (left == right) {
     right <- "right"
@@ -63,11 +70,10 @@ censor_data <- function(data, censoring) {
   if (!.is_censored(censoring)) {
     return(data)
   }
-  chk_not_any_na(censoring)
-
-  data$right[data$left < censoring[1]] <- censoring[1]
+  
+  data$right[data$left < censoring[1]] <- min(censoring)
   data$left[data$left < censoring[1]] <- 0
-  data$left[data$right > censoring[2]] <- censoring[2]
+  data$left[data$right > censoring[2]] <- max(censoring)
   data$right[data$right > censoring[2]] <- Inf
   data
 }

@@ -18,6 +18,7 @@ ssd_dists_all()
 \seealso{
 Other dists: 
 \code{\link{dist_data}},
-\code{\link{ssd_dists}()}
+\code{\link{ssd_dists}()},
+\code{\link{ssd_dists_shiny}()}
 }
 \concept{dists}

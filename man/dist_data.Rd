@@ -28,7 +28,8 @@ dist_data
 \seealso{
 Other dists: 
 \code{\link{ssd_dists}()},
-\code{\link{ssd_dists_all}()}
+\code{\link{ssd_dists_all}()},
+\code{\link{ssd_dists_shiny}()}
 }
 \concept{dists}
 \keyword{datasets}

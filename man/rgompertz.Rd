@@ -15,6 +15,5 @@ rgompertz(n, llocation = 0, lshape = 0)
 \item{lshape}{shape parameter on the log scale.}
 }
 \description{
-Random Generation for Gompertz Distribution
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Deprecated for \code{ssd_rgompertz()}.
 }
