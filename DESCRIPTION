@@ -15,7 +15,6 @@ Authors@R: c(
     person("Doug", "Spry", role = "ctb"),
     person("Rick", "van Dam", role = "ctb"),
     person("Graham", "Batley", role = "ctb"),
-    person("Tony", "Bigwood", role = "ctb"),
     person("Ali", "Azizishirazi", role = "ctb"),
     person("Nadine", "Hussein", , "nadine@poissonconsulting.ca", role = "ctb",
            comment = c(ORCID = "0000-0003-4470-8361")),

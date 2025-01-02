@@ -38,7 +38,6 @@ Other contributors:
   \item Doug Spry [contributor]
   \item Rick van Dam [contributor]
   \item Graham Batley [contributor]
-  \item Tony Bigwood [contributor]
   \item Ali Azizishirazi [contributor]
   \item Nadine Hussein \email{nadine@poissonconsulting.ca} (\href{https://orcid.org/0000-0003-4470-8361}{ORCID}) [contributor]
   \item Sarah Lyons \email{sarah@poissonconsulting.ca} (\href{https://orcid.org/0000-0002-6745-6796}{ORCID}) [contributor]
