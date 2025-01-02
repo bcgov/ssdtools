@@ -148,7 +148,7 @@ The TMB version of `ssdtools` now includes the option of fitting two mixture dis
 These can be fitted using `ssdtools` by supplying the strings "llogis_llogis" and/or "lnorm_lnorm" to the *dists* argument in the *ssd_fit_dists* call.
 
 The underlying code for these mixtures has three components: the likelihood function required for TMB; exported R functions to allow the usual methods for a distribution to be called (p, q and r); and a set of supporting R functions (see @fox_methodologies_2022  Appendix D for more details). 
-Both mixtures have five parameters - two parameters for each of the component distributions and a mixing parameter (pmix) that defines the weighting of the two distributions in the ‘mixture.’
+Both mixtures have five parameters - two parameters for each of the component distributions and a mixing parameter (pmix) that defines the weighting of the two distributions in the 'mixture.'
 
 ```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5, fig.cap="Sample lognormal lognormal mixture probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the lognormal lognormal mixture probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
@@ -203,7 +203,7 @@ While there is a variety of distributions available in `ssdtools`, the inclusion
 By default, `ssdtools` uses the (corrected) Akaike Information Criterion for small sample size (AICc) as a measure of relative quality of fit for different distributions and as the basis for calculating the model-averaged weights. 
 However, the choice of distributions used to fit a model-averaged SSD can have a profound effect on the estimated *HCx* values.
 
-Deciding on a final default set of distributions to adopt using the model averaging approach is non-trivial, and we acknowledge that there is probably no definitive ‘solution’ to this issue. 
+Deciding on a final default set of distributions to adopt using the model averaging approach is non-trivial, and we acknowledge that there is probably no definitive 'solution' to this issue. 
 However, the default set should be underpinned by a guiding principle of parsimony, i.e., the set should be as large as is necessary to cover a wide variety of distributional shapes and contingencies but no bigger.
 Further, the default set should result in model-averaged estimates of *HCx* values that: 1) minimise bias; 2) have actual coverages of confidence intervals that are close to the nominal level of confidence; 3) estimated *HCx* and confidence intervals of *HCx* are robust to small changes in the data; and 4) represent a positively continuous distribution that has both right and left tails.
 

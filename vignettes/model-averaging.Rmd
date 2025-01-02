@@ -71,7 +71,7 @@ require(ggplot2)
 > Many authors have noted that there is no guiding theory in ecotoxicology to justify any particular distributional form for the SSD other than that its domain be restricted to the positive real line [@newman_2000], [@Zajdlik_2005], [@chapman_2007], [@fox_2016]. 
 Indeed, [@chapman_2007] described the identification of a suitable probability model as one of the most important and difficult choices in the use of SSDs.
 Compounding this lack of clarity about the functional form of the SSD is the omnipresent, and equally vexatious issue of small sample size, meaning that any plausible candidate model is unlikely to be rejected [@fox_recent_2021].
-The ssdtools R package uses a model averaging procedure to avoid the need to a-priori select a candidate distribution and instead uses a measure of ‘fit’ for each model to compute weights to be applied to an initial set of candidate distributions. 
+The ssdtools R package uses a model averaging procedure to avoid the need to a-priori select a candidate distribution and instead uses a measure of 'fit' for each model to compute weights to be applied to an initial set of candidate distributions. 
 The method, as applied in the SSD context is described in detail in [@fox_recent_2021], and potentially provides a level of flexibility and parsimony that is difficult to achieve with a single SSD distribution.
 
 [@fox_methodologies_2022]
@@ -201,7 +201,7 @@ The reason for this can be explained mathematically as follows (*if your not int
 The correct expression for a model-averaged SSD is: $$G\left( x \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}\left( x \right)$$ where ${F_i}\left(  \cdot  \right)$ is the *i^th^* component SSD (i.e. *cdf*) and *w~i~* is the weight assigned to ${F_i}\left(  \cdot  \right)$.
 <br>Notice that the function $G\left( x \right)$ is a proper *cumulative distribution function* (*cdf*) which means for a given quantile, *x*, $G\left( x \right)$ returns the *cumulative probability*: $$P\left[ {X \leqslant x} \right]$$
 
-<br>Now, the *incorrect* approach takes a weighted sum of the component *inverse cdf's*, that is:
+<br>Now, the *incorrect* approach takes a weighted sum of the component *inverse cdfs*, that is:
 
 $$H\left( p \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}^{ - 1}\left( p \right)$$
 where ${F_i}^{ - 1}\left(  \cdot  \right)$ is the *i^th^* *inverse cdf*.
