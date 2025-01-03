@@ -1,6 +1,11 @@
-url: ~
+url: https://bcgov.github.io/ssdtools/
+
 template:
   bootstrap: 5
+  
+development:
+  mode: auto
+  
 authors:
   Joe Thorley:
     href: https://github.com/joethorley
@@ -128,6 +133,3 @@ articles:
   - customising-plots
   - additional-technical-details
   - faqs
-
-development:
-  mode: auto
