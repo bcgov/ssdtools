@@ -27,43 +27,6 @@ mixture. Multiple distributions can be averaged using Akaike Information
 Criteria. Confidence intervals on hazard concentrations and proportions
 are produced by bootstrapping.
 
-## Installation
-
-### Release
-
-To install the latest release version from
-[CRAN](https://CRAN.R-project.org/package=ssdtools).
-
-``` r
-install.packages("ssdtools")
-```
-
-#### Website
-
-The website for the release version is at
-<https://bcgov.github.io/ssdtools/>.
-
-### Development
-
-To install the latest development version from
-[r-universe](https://bcgov.r-universe.dev/ssdtools).
-
-``` r
-install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://cloud.r-project.org"))
-```
-
-or from [GitHub](https://github.com/bcgov/ssdtools)
-
-``` r
-# install.packages("remotes")
-remotes::install_github("bcgov/ssdtools")
-```
-
-#### Website
-
-The website for the development version is at
-<https://bcgov.github.io/ssdtools/dev/>.
-
 ## Introduction
 
 The dependency [`ssddata`](https://github.com/open-AIMS/ssddata)
@@ -175,6 +138,39 @@ software see:
 *Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity
 Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
 <https://doi.org/10.1002/etc.4925>.*
+
+## Installation
+
+### Release
+
+To install the latest release version from
+[CRAN](https://CRAN.R-project.org/package=ssdtools).
+
+``` r
+install.packages("ssdtools")
+```
+
+The website for the release version is at
+<https://bcgov.github.io/ssdtools/>.
+
+### Development
+
+To install the development version from
+[GitHub](https://github.com/bcgov/ssdtools)
+
+``` r
+# install.packages("remotes")
+remotes::install_github("bcgov/ssdtools")
+```
+
+or from [r-universe](https://bcgov.r-universe.dev/ssdtools).
+
+``` r
+install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+The website for the development version is at
+<https://bcgov.github.io/ssdtools/dev/>.
 
 ### Getting Help or Reporting an Issue
 
