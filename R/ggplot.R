@@ -33,11 +33,14 @@ ssd_pal <- function() {
 }
 
 #' Discrete color-blind scale for SSD Plots
+#' 
+#' The functions were designed for coloring different groups in a plot of SSD data.
 #'
 #' @param ... Arguments passed to [ggplot2::discrete_scale()].
 #' @family ggplot
 #' @export
 #' @examples
+#' # Use the color-blind palette for a SSD plot
 #' ssd_plot(ssddata::ccme_boron, boron_pred, shape = "Group", color = "Group") +
 #'   scale_colour_ssd()
 scale_colour_ssd <- function(...) {
@@ -52,6 +55,12 @@ scale_color_ssd <- function(...) {
 
 #' @describeIn scale_colour_ssd Discrete color-blind scale for SSD Plots
 #' @export
+#' @examples
+#' # Use the color-blind palette for a histogram of concentrations
+#' ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Species, y = Conc, fill = Group)) +
+#'   ggplot2::geom_col() +
+#'   scale_fill_ssd() +
+#'   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1))
 scale_fill_ssd <- function(...) {
   discrete_scale("fill", palette = ssd_pal(), ...)
 }
@@ -192,16 +201,11 @@ geom_xribbon <- function(mapping = NULL,
 #' Species Sensitivity Data Points
 #' `r lifecycle::badge('deprecated')`
 #'
-#' `geom_ssd()` has been deprecated for `geom_ssdpoint()`.
+#' Deprecated for `geom_ssdpoint()`.
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @export
-#' @examples
-#' \dontrun{
-#' ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-#'   geom_ssd()
-#' }
 geom_ssd <- function(mapping = NULL,
                      data = NULL,
                      stat = "ssdpoint",
@@ -211,12 +215,6 @@ geom_ssd <- function(mapping = NULL,
                      show.legend = NA,
                      inherit.aes = TRUE) {
   lifecycle::deprecate_stop("0.3.5", "geom_ssd()", "geom_ssdpoint()")
-
-  geom_ssdpoint(
-    mapping = mapping, data = data, stat = stat,
-    position = position, na.rm = na.rm, show.legend = show.legend,
-    inherit.aes = inherit.aes, ...
-  )
 }
 
 #' Plot Species Sensitivity Data
@@ -229,11 +227,6 @@ geom_ssd <- function(mapping = NULL,
 #' @seealso [`geom_ssdpoint()`]
 #' @family ggplot2
 #' @export
-#' @examples
-#' \dontrun{
-#' ggplot2::ggplot(ssddata::ccme_boron, ggplot2::aes(x = Conc)) +
-#'   stat_ssd()
-#' }
 stat_ssd <- function(mapping = NULL,
                      data = NULL,
                      geom = "point",
@@ -243,10 +236,4 @@ stat_ssd <- function(mapping = NULL,
                      show.legend = NA,
                      inherit.aes = TRUE) {
   lifecycle::deprecate_stop("0.3.5", "stat_ssd()")
-
-  layer(
-    stat = StatSsdpoint, data = data, mapping = mapping, geom = geom,
-    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(na.rm = na.rm, ...)
-  )
 }

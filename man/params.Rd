@@ -57,7 +57,11 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 
 \item{hc}{A value between 0 and 1 indicating the proportion hazard concentration (or NULL).}
 
+\item{hc_value}{A number of the hazard concentration value to offset.}
+
 \item{label}{A string of the column in data with the labels.}
+
+\item{label_size}{A number for the size of the labels.}
 
 \item{left}{A string of the column in data with the concentrations.}
 
@@ -129,7 +133,7 @@ remove them with a warning.}
 
 \item{p}{vector of probabilities.}
 
-\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Soft-deprecated for \code{proportion = 0.05}.}
+\item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Deprecated for \code{proportion = 0.05}. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{pmix}{Proportion mixture parameter.}
 
@@ -183,13 +187,17 @@ remove them with a warning.}
 
 \item{silent}{A flag indicating whether fits should fail silently.}
 
-\item{size}{A number for the size of the labels.}
+\item{size}{A number for the size of the labels. Deprecated for \code{label_size}. #' \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{suffix}{Additional text to display after the number on the y-axis.}
 
 \item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
 
-\item{trans}{A string which transformation to use by default \code{"log10"}.}
+\item{text_size}{A number for the text size.}
+
+\item{theme_classic}{A flag specifying whether to use the classic theme or the default.}
+
+\item{trans}{A string of which transformation to use. Accepted values include \code{"log10"}, \code{"log"}, and \code{"identity"} (\code{"log10"} by default).}
 
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
@@ -202,7 +210,14 @@ remove them with a warning.}
 \item A numeric vector of positions
 }}
 
-\item{xintercept}{The x-value for the intersect}
+\item{xlimits}{The x-axis limits as one of:
+\itemize{
+\item \code{NULL} to use the default scale range
+\item A numeric vector of length two providing the limits.
+Use NA to refer to the existing minimum or maximum limits.
+}}
+
+\item{xintercept}{The x-value for the intersect.}
 
 \item{xlab}{A string of the x-axis label.}
 

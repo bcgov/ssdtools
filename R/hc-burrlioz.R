@@ -26,22 +26,4 @@
 ssd_hc_burrlioz <- function(x, percent, proportion = 0.05, ci = FALSE, level = 0.95, nboot = 1000,
                             min_pboot = 0.95, parametric = FALSE) {
   lifecycle::deprecate_stop("0.3.5", "ssd_hc_burrlioz()", "ssd_hc()")
-  chk_s3_class(x, "fitburrlioz")
-
-  if (lifecycle::is_present(percent)) {
-    lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
-    chk_vector(percent)
-    chk_numeric(percent)
-    chk_range(percent, c(0, 100))
-    proportion <- percent / 100
-  }
-
-  chk_vector(proportion)
-  chk_numeric(proportion)
-  chk_range(proportion)
-
-  ssd_hc(x,
-    proportion = proportion, ci = ci, level = level,
-    nboot = nboot, min_pboot = min_pboot, parametric = parametric
-  )
 }

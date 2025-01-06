@@ -89,7 +89,7 @@ The probability density function, ${f_X}(x;b,c,k)$ and cumulative distribution f
 
 <br>
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5, fig.cap="Sample Burr probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE, fig.align='center', fig.width=9,fig.height=5, fig.cap="Sample Burr probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the Burr type III probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 f <- function(x, b, c, k) {
@@ -148,9 +148,9 @@ The TMB version of `ssdtools` now includes the option of fitting two mixture dis
 These can be fitted using `ssdtools` by supplying the strings "llogis_llogis" and/or "lnorm_lnorm" to the *dists* argument in the *ssd_fit_dists* call.
 
 The underlying code for these mixtures has three components: the likelihood function required for TMB; exported R functions to allow the usual methods for a distribution to be called (p, q and r); and a set of supporting R functions (see @fox_methodologies_2022  Appendix D for more details). 
-Both mixtures have five parameters - two parameters for each of the component distributions and a mixing parameter (pmix) that defines the weighting of the two distributions in the ‘mixture.’
+Both mixtures have five parameters - two parameters for each of the component distributions and a mixing parameter (pmix) that defines the weighting of the two distributions in the 'mixture.'
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5, fig.cap="Sample lognormal lognormal mixture probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5, fig.cap="Sample lognormal lognormal mixture probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the lognormal lognormal mixture probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 f <- function(x, m1, s1, m2, s2, p) {
@@ -203,7 +203,7 @@ While there is a variety of distributions available in `ssdtools`, the inclusion
 By default, `ssdtools` uses the (corrected) Akaike Information Criterion for small sample size (AICc) as a measure of relative quality of fit for different distributions and as the basis for calculating the model-averaged weights. 
 However, the choice of distributions used to fit a model-averaged SSD can have a profound effect on the estimated *HCx* values.
 
-Deciding on a final default set of distributions to adopt using the model averaging approach is non-trivial, and we acknowledge that there is probably no definitive ‘solution’ to this issue. 
+Deciding on a final default set of distributions to adopt using the model averaging approach is non-trivial, and we acknowledge that there is probably no definitive 'solution' to this issue. 
 However, the default set should be underpinned by a guiding principle of parsimony, i.e., the set should be as large as is necessary to cover a wide variety of distributional shapes and contingencies but no bigger.
 Further, the default set should result in model-averaged estimates of *HCx* values that: 1) minimise bias; 2) have actual coverages of confidence intervals that are close to the nominal level of confidence; 3) estimated *HCx* and confidence intervals of *HCx* are robust to small changes in the data; and 4) represent a positively continuous distribution that has both right and left tails.
 
@@ -216,7 +216,7 @@ The default list of candidate distributions in `ssdtools` is comprised of the fo
 
 The default distributions are plotted below with a mean of 2 and standard deviation of 2 on the (natural) log concentration scale or around 7.4 on the concentration scale.
 
-```{r, message=FALSE, echo=FALSE, fig.width=7,fig.height=5, fig.cap="Currently recommended default distributions."}
+```{r, message=FALSE, echo=FALSE, fig.width=7,fig.height=5, fig.cap="Currently recommended default distributions.", fig.alt="The cumulative distribution function of the six default distributions using a mean and standard deviation of 2 for all. The distributions included are the gammal, lgumbel, llogis, lnorm, lnorm_lnorm and weibull."}
 library(ssdtools)
 library(ggplot2)
 
@@ -244,9 +244,9 @@ The Burr Type 3 is a flexible three parameter distribution can be fitted using `
 
 <br>
 
-The Burr family of distributions has been central to the derivation of guideline values in Australia and New Zealand for over 20 yr [@fox_recent_2021]. While offering a high degree of ﬂexibility, experience with these distributions during that time has repeatedly highlighted numerical stability and convergence issues when parameters are estimated using maximum likelihood [@fox_recent_2021]. 
-This is thought to be due to the high degree of collinearity between parameter estimates and/or relatively ﬂat likelihood proﬁles [@fox_recent_2021], and is one of the motivations behind the logic coded into Burrlioz to revert to either of the two limiting distributions.
-Burr Type 3 distribution is not currently one of the recommended distributionsin the default model set. 
+The Burr family of distributions has been central to the derivation of guideline values in Australia and New Zealand for over 20 yr [@fox_recent_2021]. While offering a high degree of flexibility, experience with these distributions during that time has repeatedly highlighted numerical stability and convergence issues when parameters are estimated using maximum likelihood [@fox_recent_2021]. 
+This is thought to be due to the high degree of collinearity between parameter estimates and/or relatively flat likelihood profiles [@fox_recent_2021], and is one of the motivations behind the logic coded into Burrlioz to revert to either of the two limiting distributions.
+Burr Type 3 distribution is not currently one of the recommended distributions in the default model set. 
 This is because of 1) the convergence issues associated with the Burr Type 3 distribution, 2) the fact that reverting to a limiting two parameter distribution does not fit easily within a model averaging framework, and 3) that one of the two limiting distributions (the inverse Pareto, see below) also has estimation and convergence issues.
 
 #### Log-normal
@@ -256,18 +256,17 @@ The [log-normal](https://en.wikipedia.org/wiki/Log-normal_distribution) distribu
 A random variable, $X$ is lognormally distributed if the *logarithm* of $X$ is normally distributed. The *pdf* of $X$ is given by 
 
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
-  <b><u>Lognormal Distribution</u></b>
+  <b><u>Log-normal Distribution</u></b>
   
-  $${f_X}\left( {x;\mu ,\sigma } \right) = \frac{1}{{\sqrt {2\pi } {\kern 1pt} \sigma x}}\exp \left[ { - \frac{{{{\left( {\ln x - \mu } \right)}^2}}}{{2{\sigma ^2}}}} \right]; \quad x,\sigma  > 0,\; - \infty  < \mu  < \infty $$
-
+  $${f_X}\left( x; \mu, \sigma \right) = \frac{1}{\sqrt{2\pi}\ \sigma x}\exp \left[ - \frac{\left( {\ln x - \mu } \right)^2}{2\sigma^2} \right] ;\ x,\sigma  > 0;\ - \infty  < \mu  < \infty$$
 </div>
 
 <br>
 
-The lognormal distribution was selected as the starting distribution given the data are for effect concentrations. 
+The log-normal distribution was selected as the starting distribution given the data are for effect concentrations. 
 The log-normal distribution can be fitted using `ssdtools` supplying the string `lnorm` to the `dists` argument in the `ssd_fit_dists` call.
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample lognormal probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample lognormal probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the lognormal probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 conc <- seq(0, 10, by = 0.005)
@@ -327,7 +326,7 @@ The log-logistic distribution is often used as a candidate SSD primarily because
 We included it because it has wider tails than the log-normal and because it is a specific case of the more general Burr family of distributions [@shao_estimation_2000, @burr_cumulative_1942].
 The log-logistic distribution can be fitted using `ssdtools` by supplying the string `lnorm` to the `dists` argument in the `ssd_fit_dists` call.
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Log logistic probability density (A) and cumulative probability (B)  functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Log logistic probability density (A) and cumulative probability (B)  functions.", fig.alt="A two panel plot showing several realisations of the log logistic probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 f <- function(x, a, b) {
@@ -377,7 +376,7 @@ For use in modeling species sensitivity data, the gamma distribution has two key
 
 The gamma distribution can be fitted using `ssdtools` by supplying the string  "gamma" to the *dists* argument in the *ssd_fit_dists* call.  
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample gamma probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample gamma probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the Gamma density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 conc <- seq(0, 10, by = 0.005)
@@ -412,7 +411,7 @@ The two-parameter log-gumbel distribution has the following *pdf* and *cdf*:
 
 <br>
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Log-Gumbel probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Log-Gumbel probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the log Gumbel probability density function on the left panel and the cumulative density function of distribution on the right panel. The log Gumbel is also known as the inverse Weibull distribution."}
 par(mfrow = c(1, 2))
 
 f <- function(x, a, b) {
@@ -472,7 +471,7 @@ The second parameterisation in which the *product* $b\eta$ in the formulae above
 
 <br>
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Gompertz probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Gompertz probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the Gompertz probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 f <- function(x, n, b) {
@@ -522,7 +521,7 @@ The two-parameter [Weibull](https://en.wikipedia.org/wiki/Weibull_distribution) 
 
 The Weibull distribution can be fitted in `ssdtools` by supplying the string  `weibull` to the `dists` argument in the `ssd_fit_dists` call.  
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Weibull probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Weibull probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the Weibull probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 conc <- seq(0, 10, by = 0.005)
@@ -594,7 +593,7 @@ Thus, it doesn't matter whether you're fitting a Pareto or inverse Pareto distri
 
 Because it is *bounded*, the North American version of the (Inverse)Pareto distribution is not useful as a stand-alone SSD - more so for the *inverse Pareto* distribution since it is bounded from *above*.
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample North American Pareto probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample North American Pareto probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the North American Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 conc <- seq(0, 10, by = 0.005)
@@ -611,14 +610,9 @@ lines(conc, extraDistr::ppareto(conc, 4, 4), col = "#1CADF2")
 lines(conc, extraDistr::ppareto(conc, 10, 7), col = "#1F1CF2")
 legend("topleft", "(B)", bty = "n")
 
-conc <- seq(0, 10, by = 0.005)
-plot(conc, extraDistr::ppareto(conc, 3, 2), type = "l", ylab = "Cumulative probability", xlab = "Concentration", col = "#FF5733", ylim = c(0, 1))
-lines(conc, extraDistr::ppareto(conc, 0.838, 0.911), col = "#F2A61C")
-lines(conc, extraDistr::ppareto(conc, 4, 4), col = "#1CADF2")
-lines(conc, extraDistr::ppareto(conc, 10, 7), col = "#1F1CF2")
 ```
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample Sample North American inverse Pareto probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample North American inverse Pareto probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the North American inverse Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 f <- function(x, a, b) {
@@ -670,7 +664,7 @@ We see from the *pdf* plots that the alternative, *European* version of the inve
 We note in passing that *both* versions of these Pareto and inverse Pareto distrbutions are available in `R`. 
 For example, the `R`package `extraDistr` has North American versions, while the `actuar` package has European versions.
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample European Pareto probability density (A) and cumulative probability (B) functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample European Pareto probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the European Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 conc <- seq(0, 10, by = 0.005)
@@ -688,7 +682,7 @@ lines(conc, actuar::ppareto(conc, 10.5, 6.5), col = "#1F1CF2")
 legend("topleft", "(B)", bty = "n")
 ```
 
-```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample European inverse Pareto probability density (A) and cumulative probability (B)  functions."}
+```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample European inverse Pareto probability density (A) and cumulative probability (B)  functions.", fig.alt="A two panel plot showing several realisations of the European inverse Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel."}
 par(mfrow = c(1, 2))
 
 conc <- seq(0, 10, by = 0.001)
@@ -726,7 +720,7 @@ The inverse Weibull (log-Gumbel) distribution can be fitted in `ssdtools` by sup
 
 <hr>
 
-![](images/relationships.png){width=100%}
+![ Flow diagram showing the relationship between the various statistical distributions available in ssdtools. ](images/relationships.png){width=100%} \
 
 ## References
 

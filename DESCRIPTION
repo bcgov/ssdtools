@@ -1,6 +1,6 @@
 Package: ssdtools
 Title: Species Sensitivity Distributions
-Version: 2.1.0.9001
+Version: 2.2.0
 Authors@R: c(
     person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7683-4592")),
@@ -11,22 +11,24 @@ Authors@R: c(
     person("Seb", "Dalgarno", , "seb@poissonconsulting.ca", role = "ctb",
            comment = c(ORCID = "0000-0002-3658-4517")),
     person("Kathleen", "McTavish", role = "ctb"),
-    person("Heather", "Thompson", role = "ctb"),
+    person("Heather", "Thompson", role = "ctb"), 
     person("Doug", "Spry", role = "ctb"),
     person("Rick", "van Dam", role = "ctb"),
     person("Graham", "Batley", role = "ctb"),
-    person("Tony", "Bigwood", role = "ctb"),
     person("Ali", "Azizishirazi", role = "ctb"),
     person("Nadine", "Hussein", , "nadine@poissonconsulting.ca", role = "ctb",
            comment = c(ORCID = "0000-0003-4470-8361")),
     person("Sarah", "Lyons", , "sarah@poissonconsulting.ca", role = "ctb",
            comment = c(ORCID = "0000-0002-6745-6796")),
+    person("Duncan", "Kennedy", , "duncan@poissonconsulting.ca", role = "ctb",
+           comment = c(ORCID = "0009-0001-4880-5751")),
     person("Stephanie", "Hazlitt", role = "ctb"),
     person("Hadley", "Wickham", role = "ctb"),
     person("Sergio", "Ibarra Espinosa", role = "ctb"),
     person("Andy", "Teucher", role = "ctb"),
     person("Emilie", "Doussantousse", role = "ctb"),
     person("Nan-Hung", "Hsieh", role = "ctb"),
+    person("Florencia", "D'Andrea", role = "ctb"),
     person("Province of British Columbia", role = c("fnd", "cph")),
     person("Environment and Climate Change Canada", role = c("fnd", "cph")),
     person("Australian Government Department of Climate Change, Energy, the Environment and Water", role = c("fnd", "cph"))
@@ -38,8 +40,7 @@ Description: Species sensitivity distributions are cumulative probability
     fit distributions such as the gamma, log-logistic, log-normal and
     log-normal log-normal mixture. Multiple distributions can be averaged
     using Akaike Information Criteria.  Confidence intervals on hazard
-    concentrations and proportions are produced by parametric
-    bootstrapping.
+    concentrations and proportions are produced by bootstrapping.
 License: Apache License (== 2.0) | file LICENSE
 URL: https://github.com/bcgov/ssdtools, https://bcgov.github.io/ssdtools/
 BugReports: https://github.com/bcgov/ssdtools/issues
@@ -51,6 +52,7 @@ Imports:
     furrr,
     generics,
     ggplot2,
+    ggtext,
     glue,
     goftest,
     graphics,

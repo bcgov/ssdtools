@@ -2,7 +2,8 @@
 % Please edit documentation in R/utils.R
 \name{comma_signif}
 \alias{comma_signif}
-\title{Comma and Significance Formatter}
+\title{Comma and Significance Formatter
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 \usage{
 comma_signif(x, digits = 3, ..., big.mark = ",")
 }
@@ -19,7 +20,7 @@ comma_signif(x, digits = 3, ..., big.mark = ",")
 A character vector.
 }
 \description{
-Comma and Significance Formatter
+Deprecated for \code{ssd_label_comma()}
 }
 \examples{
 \dontrun{

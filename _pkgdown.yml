@@ -1,6 +1,11 @@
-url: ~
+url: https://bcgov.github.io/ssdtools/
+
 template:
   bootstrap: 5
+  
+development:
+  mode: auto
+  
 authors:
   Joe Thorley:
     href: https://github.com/joethorley
@@ -24,6 +29,7 @@ reference:
   - ssd_dists
   - ssd_dists_all
   - ssd_dists_bcanz
+  - ssd_dists_shiny
 - title: Fit
   desc: Functions that fit distributions to data
   contents: 
@@ -70,6 +76,7 @@ reference:
   - scale_color_ssd
   - scale_colour_ssd
   - ssd_label_comma
+  - ssd_label_comma_hc
   - ssd_pal
   - ssd_plot
   - ssd_plot_cdf
@@ -125,6 +132,4 @@ articles:
   - articles/confidence-intervals
   - customising-plots
   - additional-technical-details
-
-development:
-  mode: auto
+  - faqs

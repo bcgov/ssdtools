@@ -1,20 +1,23 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.1.0.9001
+# ssdtools 2.2.0
 
-- Fixed equation rendering for vignettes on website.
-- Corrected y-axis labels for bimodal plots in distributions vignette from Cumulative Probability to Probability Density.
-
-
-# ssdtools 2.1.0.9000
-
-- Same as previous version.
-
+- Added `ssd_label_comma_hc()` function to label numbers with significant digits and comma and offset hazard concentration value if present in breaks.
+- Added `ssd_dists_shiny()` to define distributions for use in shiny app.
+- For `plot_coord_scale()` function:
+  - Added `x_limits = NULL` to allow setting of x-axis limits.
+  - Added `hc_value = NULL` to pass hazard concentration value.
+  - Restricted `trans` argument to `"identity"`, `"log10"` or "`log`".
+- For `ssd_plot()` function:
+  - Added `text_size` argument.
+  - Added `theme_classic = FALSE` argument to switch classic theme.
+  - Soft-deprecated `size` argument for `label_size`.
+- Turned off x-axis minor breaks for all plots (for consistency) as HC major break causing multiple minor breaks in `ssd_plot()`.
 
 # ssdtools 2.1.0
 
-- Added `ssd_xxmulti_fitdists()` functions to accept object of class `fitdists`.
-- Set `ssd_xxmulti(..., lnorm.weight = 0)` (instead of 1) to avoid incorrect values with `do.call("ssd_xxmulti", c(..., estimates(fits))` if `fits` does not include the log-normal distribution.
+- Added `ssd_xxmulti_fitdists()` family of functions (`ssd_rmulti_fitdists()`, `ssd_pmulti_fitdists()` and `ssd_qmulti_fitdists()`) to accept object of class `fitdists`.
+- Set `lnorm.weight = 1` instead of `1` in the `ssd_xxmulti()` family of functions (`ssd_rmulti()`, `ssd_pmulti()` and `ssd_qmulti`) to avoid incorrect values with `do.call("ssd_xxmulti", c(..., estimates(fits))` if `fits` does not include the log-normal distribution.
 
 
 # ssdtools 2.0.0
@@ -69,7 +72,7 @@ The following functions and arguments were also added:
 
 - `ssd_hp_bcanz()` and `ssd_hp.fitburrlioz()` to get hazard proportions.
 - `ssd_pmulti()`, `ssd_qmulti()` and `ssd_rmulti()` for combined mixture distributions.
-- `ssd_exx()` functions to get default parameter estimates for distributions.
+- `ssd_exx()` family of functions (i.e. `ssd_elnorm()`, `ssd_egamma()` etc) to get default parameter estimates for distributions.
 - `ssd_censor_data()` to censor data. 
 - `npars = c(2L, 5L)` argument to `ssd_dists_bcanz()` to specify the number of parameters.
 - `dists = ssd_dists_bcanz()` to `ssd_fit_bcanz()` to allow other packages to modify.
@@ -155,7 +158,8 @@ ssdtools version 1.0.0 is the first major release of `ssdtools` with some import
 
 ## Fitting
 
-An important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/lbbe-software/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) which has resulted in improved handling of censored data.
+An important change to the functionality of `ssd_fit_dists()` was to switch from model fitting using [`fitdistrplus`](https://github.com/lbbe-software/fitdistrplus) to [`TMB`](https://github.com/kaskr/adcomp) to allow full control over model specification as well as improved handling of censored data.
+The change is internal and does not directly affect the user interface.
 Although it was hoped that model fitting would be faster this is currently not the case.
 
 As a result of the change the `fitdists` objects returned by `ssd_fit_dists()` from previous versions of `ssdtools` are not compatible with the major release and should be regenerated.
@@ -251,7 +255,7 @@ The function `ssd_fit_burrlioz()` was added to approximate the behaviour of [Bur
 Hazard concentration estimation is performed by `ssd_hc()` (which is wrapped by `predict()`) and hazard protection estimation by `ssd_hp()`.
 By default confidence intervals are estimated by parametric bootstrapping.
 
-To reduce the time required for bootstrapping, parallelization was implemented using the [future](https://github.com/HenrikBengtsson/future) package.
+To reduce the time required for bootstrapping, parallelization was implemented using the [future](https://github.com/futureverse/future) package.
 
 The following arguments were added to `ssd_hc()` and `ssd_hp()`
 
