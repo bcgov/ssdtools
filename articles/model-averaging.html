@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Model Averaging SSDs">
 </head>
 <body>
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,9 +61,9 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-10-22</h4>
+            <h4 data-toc-skip class="date">2025-01-06</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/v2.1.0/vignettes/model-averaging.Rmd" class="external-link"><code>vignettes/model-averaging.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/model-averaging.Rmd" class="external-link"><code>vignettes/model-averaging.Rmd</code></a></small>
       <div class="d-none name"><code>model-averaging.Rmd</code></div>
     </div>
 
@@ -165,7 +165,7 @@ to the summation. While this is appropriate in many cases, it’s not
 useful when the components contribute to varying degrees. An example
 familiar to ecotoxicologists is that of a <em>time-varying</em>
 concentration as shown in the figure below.<br></p>
-<p><img src="images%2FFigure1.jpg" style="width:90.0%" align="center"></p>
+<p><img src="images%2FFigure1.jpg" style="width:90.0%" align="center" alt="A hypothetical time series showing a concentration measurement changing over time, with different time periods associated with different concentrations."><br></p>
 <p>From the figure we see there are 5 concentrations going from left to
 to right:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">{</mo><mn>0.25</mn><mo>,</mo><mn>0.95</mn><mo>,</mo><mn>0.25</mn><mo>,</mo><mn>0.12</mn><mo>,</mo><mn>0.5</mn><mo stretchy="true" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\left\{ 0.25,0.95,0.25,0.12,0.5 \right\}</annotation></semantics></math>.
@@ -212,7 +212,7 @@ lognormal distributions. Model 1 is the LN(-1.067,0.414) distribution
 while Model 2 is the LN(-0.387,0.617) distribution. A plot of the
 empirical <em>cdf</em> and Models 1 and 2 is shown below.</p>
 <div class="figure">
-<img src="model-averaging_files/figure-html/unnamed-chunk-6-1.png" alt="Emprirical cdf (black); Model 1(green); and Model 2 (blue)" width="672"><p class="caption">
+<img src="model-averaging_files/figure-html/unnamed-chunk-6-1.png" alt="The example data ploted as an empirical cumulative distribution function. Two fitted lines are shown for two different lognormal distributions, one that fits the lower left tail, and another that fits the upper right tail." width="672"><p class="caption">
 Emprirical cdf (black); Model 1(green); and Model 2 (blue)
 </p>
 </div>
@@ -226,7 +226,7 @@ that the best fit is obtained by using 44% of Model 1 and 56% of Model
 2. Redrawing the plot and adding the <em>weighted average</em> of Models
 1 and 2 is shown below.</p>
 <div class="figure">
-<img src="model-averaging_files/figure-html/unnamed-chunk-7-1.png" alt="Empirical cdf (black); Model 1(green); Model 2 (blue); and averaged Model (red)" width="672"><p class="caption">
+<img src="model-averaging_files/figure-html/unnamed-chunk-7-1.png" alt="The example data ploted as an empirical cumulative distribution function. Two fitted lines are shown for two different lognormal distributions, one that fits the lower left tail, and another that fits the upper right tail. A third line shows the weighted average of these two distributions, which appears between the two inidividual distributions and fits the data well." width="672"><p class="caption">
 Empirical cdf (black); Model 1(green); Model 2 (blue); and averaged
 Model (red)
 </p>
@@ -251,7 +251,7 @@ approach would be to apply the same weights to the individual
 <p>So our model-averaged <em>HC20</em> estimate is 0.33. As a check, we
 can determine the <em>fraction affected</em> at concentration = 0.33 -
 it should of course be 20%. Let’s take a look at the plot.</p>
-<p><img src="model-averaging_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><img src="model-averaging_files/figure-html/unnamed-chunk-9-1.png" alt="The weighted average of the two lognormal distributions, as fitted to the example data. Highlighted is the corresponding fraction affected at a concentration of 0.33, which is at 30 percent." width="672"></p>
 <p>Something’s wrong - the fraction affected at concentration 0.33 is
 30% - <strong>not the required 20%</strong>. This issue is taken up in
 the next section</p>
@@ -283,7 +283,7 @@ which means for a given quantile, <em>x</em>,
 returns the <em>cumulative probability</em>:
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>X</mi><mo>≤</mo><mi>x</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">P\left[ {X \leqslant x} \right]</annotation></semantics></math></p>
 <p><br>Now, the <em>incorrect</em> approach takes a weighted sum of the
-component <em>inverse cdf’s</em>, that is:</p>
+component <em>inverse cdfs</em>, that is:</p>
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><msub><mi>w</mi><mi>i</mi></msub><msup><msub><mi>F</mi><mi>i</mi></msub><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H\left( p \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}^{ - 1}\left( p \right)</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><msub><mi>F</mi><mi>i</mi></msub><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{F_i}^{ - 1}\left(  \cdot  \right)</annotation></semantics></math>
@@ -331,7 +331,7 @@ and the <em>inverse</em> of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H\left( p \right)</annotation></semantics></math>
 both as functions of <em>x</em> (a quantile) for our two-component
 lognormal distribution above.</p>
-<p><img src="model-averaging_files/figure-html/unnamed-chunk-10-1.png" width="768"></p>
+<p><img src="model-averaging_files/figure-html/unnamed-chunk-10-1.png" alt="The weighted average of the two lognormal distributions, as fitted to the example data, plotted as a line for the incorrect weighting method, as well as the correct weighting method. The line for two methods do not overlap, although they do cross at a value of 1.12. Because they do not overlap, the two methods will return a different concentration for the 80 percent fraction affected." width="768"></p>
 Clearly, the two functions are <strong>not</strong> the same and thus
 <em>HCx</em> values derived from each will nearly always be different
 (as indicated by the positions of the vertical red and green dashed
@@ -396,7 +396,7 @@ principle holds:
 below, the <em>HCx</em> is obtained from the MA-SSD (red curve) by
 following the → arrows while the fraction affected is obtained by
 following the ← arrows.</p>
-<p><img src="images%2FFigure2.jpg" style="width:100.0%" align="center"></p>
+<p><img src="images%2FFigure2.jpg" style="width:100.0%" align="center" alt="The weighted average of the two lognormal distributions, as fitted to the example data, plotted as a line for the correct weighting method only. Highlighted is the corresponding fraction affected at a concentration of 0.292, which is at 20 percent for the correct weighting method, and confirms this method meets the inversion principle."><br></p>
 <p>
 Finally, we’ll briefly discuss how the <em>HCx</em> is computed in
 <code>R</code> using the same method as has been implemented in
@@ -434,7 +434,7 @@ zero-crossing</em> of the function
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">G\left( x \right)</annotation></semantics></math>
 for the case
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">p=0.2</annotation></semantics></math>.</p>
-<p><img src="images%2Funiroot.jpg" style="width:100.0%" align="center"></p>
+<p><img src="images%2Funiroot.jpg" style="width:100.0%" align="center" alt="The weighted average of the two lognormal distributions, as fitted to the example data, plotted as a line for the correct weighting method only, demonstrating finding the zero crossing on the function."><br></p>
 <br><p>
 In <code>R</code> finding the roots of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>:</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>p</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x:G\left( x \right) - p = 0</annotation></semantics></math>
@@ -520,9 +520,8 @@ of toxicity values. The use of the Pareto may be a questionable choice
 given it is truncated at 0.18 (which is the minimum value of our
 toxicity data). <br></p>
 <div class="figure">
-<img src="model-averaging_files/figure-html/unnamed-chunk-13-1.png" alt="Emprirical cdf (black); lognormal (green); gamma (blue); and Pareeto (red)" width="672"><p class="caption">
-Emprirical cdf (black); lognormal (green); gamma (blue); and Pareeto
-(red)
+<img src="model-averaging_files/figure-html/unnamed-chunk-13-1.png" alt="The example empirical cdf showing how the lognormal, gamma and Pareeto distributions fit these data." width="672"><p class="caption">
+Empirical cdf (black); lognormal (green); gamma (blue); and Pareto (red)
 </p>
 </div>
 
@@ -619,11 +618,13 @@ is the <em>AIC</em> for the <strong>best-fitting</strong> model
 (i.e.<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mn>0</mn></msub><mo>=</mo><munder><mo>min</mo><mi>i</mi></munder><mrow><mo stretchy="true" form="prefix">{</mo><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow><annotation encoding="application/x-tex">AI{C_0} = \mathop {\min }\limits_i \left\{ {AI{C_i}} \right\}</annotation></semantics></math>
 ). The <em>model-averaged weights</em>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>i</mi></msub><annotation encoding="application/x-tex">{w_i}</annotation></semantics></math>
-are then computed as:</p>
-<div style="text-align: center;" font-size: color: class="box">
-<b><u>AIC Model averaging weights</u></b>\[{{w}_{i}}=\frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}\]
+are then computed as</p>
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+<p><b><u>AIC Model Averaging Weights</u></b></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mi>i</mi></msub><mo>=</mo><mfrac><mrow><mo>exp</mo><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>Δ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow><mrow><mo>∑</mo><mrow><mo>exp</mo><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>Δ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">{w}_{i} = \frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}</annotation></semantics></math></p>
 </div>
-<br><p>
+<p><br></p>
+<p>
 </p>
 <p>The model-averaged weights for the gamma, lognormal, and Pareto
 distributions used in the previous example can be computed ‘manually’ in
@@ -656,7 +657,7 @@ distributions used in the previous example can be computed ‘manually’ in
 
 <p>Finally, let’s look at the fitted <em>model-averaged SSD</em>:</p>
 <div class="figure">
-<img src="model-averaging_files/figure-html/unnamed-chunk-17-1.png" alt="Empirical cdf (black) and model-averaged fit (magenta)" width="768"><p class="caption">
+<img src="model-averaging_files/figure-html/unnamed-chunk-17-1.png" alt="The example empirical cdf showing how the model average of the lognormal, Gamma and pareto distributions fit these data." width="768"><p class="caption">
 Empirical cdf (black) and model-averaged fit (magenta)
 </p>
 </div>
@@ -678,11 +679,15 @@ proposed a modification to the AIC to address this problem, although it
 too relied on a number of assumptions. This ‘correction’ to the AIC for
 small samples (referred to as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}</annotation></semantics></math>)
-is:</p>
-<div style="text-align: center;" font-size: color: class="box">
-<b><u>Corrected Akaike Information Criterion (AICc)</u></b>\[AI{{C}_{c}}=AIC+\frac{2{{k}^{2}}+2k}{n-k-1}\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+is</p>
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+<p><b><u>Corrected Akaike Information Criterion (AICc)</u></b></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>A</mi><mi>I</mi><mi>C</mi></mrow><mi>c</mi></msub><mo>=</mo><mi>A</mi><mi>I</mi><mi>C</mi><mo>+</mo><mfrac><mrow><mn>2</mn><msup><mi>k</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>k</mi></mrow><mrow><mi>n</mi><mo>−</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">{AIC}_{c} = AIC + \frac{2k^2 + 2k}{n - k - 1}</annotation></semantics></math></p>
+<p>where <em>n</em> is the sample size and <em>k</em> is the number of
+parameters.</p>
 </div>
-<p><br>It is clear from the formula for
+<p><br></p>
+<p>It is clear from the formula for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">AI{{C}_{c}}</annotation></semantics></math>
 that for  
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≫</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">n\gg k</annotation></semantics></math>,
@@ -694,21 +699,27 @@ mean we are dealing with (pathologically) small sample sizes. There are
 no hard and fast rules as to what constitutes an <em>appropriate</em>
 sample size for SSD modelling. However, Professor David Fox’s personal
 rule of thumb which works quite well is:</p>
-<div style="text-align: center;" font-size: color: class="box">
-<b><u>Sample size rule-of-thumb for SSD modelling</u></b> \[n\ge 5k+1\]where <i>n</i> is the sample size and <i>k</i> is the number of parameters.
+<div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
+<p><b><u>Sample Size Rule-of-Thumb for SSD Modelling</u></b></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>5</mn><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">{n \geq 5k + 1}</annotation></semantics></math></p>
+<p>where <em>n</em> is the sample size and <em>k</em> is the number of
+parameters.</p>
 </div>
-<p><br>Since most of the common SSD models are 2-parameter, we should be
+<p><br></p>
+<p>Since most of the common SSD models are 2-parameter, we should be
 aiming to have a sample size of at least 11. For 3-parameter models
 (like the Burr III), the minimum sample size is 16 and if we wanted to
 fit a mixture of two, 2-parameter models (eg.
 <em>logNormal-logNormal</em> or <em>logLogistic-logLogistic</em>) the
 sample size should be <em>at least</em> 26. Sadly, this is rarely the
-case in practice!</p>
+case in practice! Jurisdictional guidance material may specify minimum
+sample size requirements, and should be adhered to where available and
+relevant.</p>
 </div>
 <div class="section level3">
 <h3 id="model-averaging-in-ssdtools">Model-Averaging in <code>ssdtools</code><a class="anchor" aria-label="anchor" href="#model-averaging-in-ssdtools"></a>
 </h3>
-<p>Please see the <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html" class="external-link">Getting
+<p>Please see the <a href="https://bcgov.github.io/ssdtools/articles/ssdtools.html">Getting
 started with ssdtools</a> vignette for examples of obtaining
 model-averaged <em>HCx</em> values and predictions using
 <code>ssdtools</code>.</p>

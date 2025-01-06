@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Frequently Asked Questions">
 </head>
 <body>
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-09-25</h4>
+            <h4 data-toc-skip class="date">2025-01-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/faqs.Rmd" class="external-link"><code>vignettes/faqs.Rmd</code></a></small>
       <div class="d-none name"><code>faqs.Rmd</code></div>
@@ -69,56 +69,28 @@ Team</h4>
 
     
     
-<div class="section level2">
-<h2 id="how-can-i-plot-the-model-averaged-fit-with-individual-fits">How can I plot the model averaged fit with individual fits?<a class="anchor" aria-label="anchor" href="#how-can-i-plot-the-model-averaged-fit-with-individual-fits"></a>
-</h2>
+<div class="section level3">
+<h3 id="how-can-i-plot-the-model-averaged-fit-and-the-individual-fits">How can I plot the model averaged fit and the individual fits?<a class="anchor" aria-label="anchor" href="#how-can-i-plot-the-model-averaged-fit-and-the-individual-fits"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
+<span><span class="co">#&gt;   object 'type_sum.accel' not found</span></span>
 <span></span>
 <span><span class="va">dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="va">dist</span>, average <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
-<p><img src="faqs_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
+<p><img src="faqs_files/figure-html/unnamed-chunk-2-1.png" alt="A plot showing the model averaged fit and the individual fits for the ccme_boron data." width="576"></p>
 </div>
-<div class="section level2">
-<h2 id="how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals">How do I fit distributions to multiple groups such taxa and/or
-chemicals?<a class="anchor" aria-label="anchor" href="#how-do-i-fit-distributions-to-multiple-groups-such-taxa-andor-chemicals"></a>
-</h2>
-<p>An elegant approach using some tidyverse packages is demonstrated
-below.</p>
+<div class="section level3">
+<h3 id="how-can-i-include-mathematical-expressions-in-the-x-axis-label-when-using-ssd_plot">How can I include mathematical expressions in the x-axis label when
+using <code>ssd_plot()</code>?<a class="anchor" aria-label="anchor" href="#how-can-i-include-mathematical-expressions-in-the-x-axis-label-when-using-ssd_plot"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ssddata</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">boron_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span><span class="va">ccme_boron</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Chemical</span>, <span class="va">Species</span>, <span class="va">Conc</span>, <span class="va">Units</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    Fit <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">ssd_fit_dists</span>, dists <span class="op">=</span> <span class="st">"lnorm"</span><span class="op">)</span>,</span>
-<span>    Prediction <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">Fit</span>, <span class="va">predict</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">Prediction</span><span class="op">)</span></span></code></pre></div>
-<p>The resultant data and predictions can then be plotted as
-follows.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="va">ccme_boron</span>, <span class="va">boron_preds</span>, xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span>, ci <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">Group</span><span class="op">)</span></span></code></pre></div>
-<p><img src="faqs_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
-</div>
-<div class="section level2">
-<h2 id="how-do-i-allow-mathematical-expressions-in-the-xlabel-when-using-ssd_plot">How do I allow mathematical expressions in the xlabel when using
-<code>ssd_plot()</code>?<a class="anchor" aria-label="anchor" href="#how-do-i-allow-mathematical-expressions-in-the-xlabel-when-using-ssd_plot"></a>
-</h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stefanom.io/latex2exp/" class="external-link">latex2exp</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/ssdtools" class="external-link">ssdtools</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/ssd_plot.html">ssd_plot</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span>, <span class="fu">ssdtools</span><span class="fu">::</span><span class="va"><a href="../reference/boron_pred.html">boron_pred</a></span>, label <span class="op">=</span> <span class="st">"Species"</span>, shape <span class="op">=</span> <span class="st">"Group"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span><span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html" class="external-link">TeX</a></span><span class="op">(</span><span class="st">"Boron $(\\mu g$/L)$"</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">100</span>, <span class="fl">1000</span>, <span class="fl">10000</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre></div>
-<p><img src="faqs_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span><span class="fu">latex2exp</span><span class="fu">::</span><span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html" class="external-link">TeX</a></span><span class="op">(</span><span class="st">"Boron $(\\mu g$/L)$"</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">100</span>, <span class="fl">1000</span>, <span class="fl">10000</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="faqs_files/figure-html/unnamed-chunk-3-1.png" alt="A plot showing the model averaged fit with a mathematical expression in the xlabel with the units." width="576"></p>
 <div id="refs">
 
 </div>
@@ -126,7 +98,7 @@ follows.</p>
 <div class="section level2">
 <h2 id="licensing">Licensing<a class="anchor" aria-label="anchor" href="#licensing"></a>
 </h2>
-<p>Copyright 2018-2024 Province of British Columbia<br>
+<p>Copyright 2015-2023 Province of British Columbia<br>
 Copyright 2021 Environment and Climate Change Canada<br>
 Copyright 2023-2024 Australian Government Department of Climate Change,
 Energy, the Environment and Water</p>
