@@ -127,9 +127,9 @@ reference:
 articles:
 - title: All vignettes
   contents:
-  - model-averaging
-  - distributions
+  - articles/model-averaging
+  - articles/distributions
   - articles/confidence-intervals
-  - customising-plots
-  - additional-technical-details
+  - articles/customising-plots
+  - articles/additional-technical-details
   - faqs
