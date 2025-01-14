@@ -2,14 +2,15 @@ pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  additional-technical-details: additional-technical-details.html
+  articles/additional-technical-details: additional-technical-details.html
   articles/confidence-intervals: confidence-intervals.html
-  customising-plots: customising-plots.html
-  distributions: distributions.html
+  articles/customising-plots: customising-plots.html
+  articles/distributions: distributions.html
   faqs: faqs.html
-  model-averaging: model-averaging.html
+  articles/model-averaging: model-averaging.html
+  articles/small-sample-bias: small-sample-bias.html
   ssdtools: ssdtools.html
-last_built: 2025-01-07T11:59Z
+last_built: 2025-01-14T17:37Z
 urls:
   reference: https://bcgov.github.io/ssdtools/reference
   article: https://bcgov.github.io/ssdtools/articles
