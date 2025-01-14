@@ -12,6 +12,7 @@ authors:
   orcid: 0000-0002-3178-7243
   affiliation: "4, 5"
 - name: Carl Schwarz
+  orcid: 0000-0002-8525-862X
   affiliation: 6
 affiliations:
 - index: 1

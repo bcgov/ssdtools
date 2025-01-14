@@ -2,7 +2,7 @@
 title: "Customising Plots"
 author: "ssdtools Team"
 date: '`r format(Sys.time(), "%Y-%m-%d", tz = "UTC")`'
-bibliography: references.bib
+bibliography: ../references.bib
 mathfont: Courier
 latex_engine: MathJax
 output: rmarkdown::html_vignette
