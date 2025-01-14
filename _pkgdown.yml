@@ -1,7 +1,7 @@
-url: https://bcgov.github.io/ssdtools/
+url: https://poissonconsulting.github.io/ssdtools/
 
 template:
-  bootstrap: 5
+  package: poissontemplate
   
 development:
   mode: auto
@@ -21,7 +21,6 @@ authors:
     href: https://www.canada.ca/en/environment-climate-change.html
   Australian Government Department of Climate Change, Energy, the Environment and Water:
     href: https://www.dcceew.gov.au/
-destination: docs
 reference:
 - title: Distribution Names
   desc: Functions that return character vectors of distribution names
