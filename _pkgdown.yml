@@ -1,7 +1,7 @@
-url: https://poissonconsulting.github.io/ssdtools/
+url: https://bcgov.github.io/ssdtools/
 
 template:
-  package: poissontemplate
+  bootstrap: 5
   
 development:
   mode: auto
