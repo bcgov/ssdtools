@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.2.0.9000
+
+- Merge branch 'bcgov:main' into main.
+
+- Merge pull request #396 from bcgov/joss-paper.
+
+- Merge pull request #391 from poissonconsulting/box.
+
+- Merge pull request #388 from poissonconsulting/box.
+
+- Merge pull request #389 from nanhung/main.
+
+
 # ssdtools 2.2.0
 
 - Added `ssd_label_comma_hc()` function to label numbers with significant digits and comma and offset hazard concentration value if present in breaks.
