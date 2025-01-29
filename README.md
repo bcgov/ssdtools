@@ -12,7 +12,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 coverage](https://codecov.io/gh/bcgov/ssdtools/graph/badge.svg)](https://app.codecov.io/gh/bcgov/ssdtools)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
-![CRAN downloads](https://cranlogs.r-pkg.org/badges/ssdtools)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.07492/status.svg)](https://doi.org/10.21105/joss.07492)
 <!-- badges: end -->
 
 `ssdtools` is an R package to fit and plot Species Sensitivity

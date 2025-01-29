@@ -88,7 +88,6 @@ Suggests:
     magrittr,
     mle.tools,
     patchwork,
-    R.rsp,
     readr,
     reshape2,
     rmarkdown,
@@ -102,11 +101,10 @@ LinkingTo:
     RcppEigen,
     TMB
 VignetteBuilder: 
-    knitr,
-    R.rsp
+    knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.2.9000
