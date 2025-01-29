@@ -1,0 +1,50 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Thorley
+  given-names: Joe
+  orcid: "https://orcid.org/0000-0002-7683-4592"
+- family-names: Fisher
+  given-names: Rebecca
+  orcid: "https://orcid.org/0000-0001-5148-6731"
+- family-names: Fox
+  given-names: David
+  orcid: "https://orcid.org/0000-0002-3178-7243"
+- family-names: Schwarz
+  given-names: Carl
+  orcid: "https://orcid.org/0000-0002-8525-862X"
+contact:
+- family-names: Thorley
+  given-names: Joe
+  orcid: "https://orcid.org/0000-0002-7683-4592"
+doi: 10.5281/zenodo.14609128
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Thorley
+    given-names: Joe
+    orcid: "https://orcid.org/0000-0002-7683-4592"
+  - family-names: Fisher
+    given-names: Rebecca
+    orcid: "https://orcid.org/0000-0001-5148-6731"
+  - family-names: Fox
+    given-names: David
+    orcid: "https://orcid.org/0000-0002-3178-7243"
+  - family-names: Schwarz
+    given-names: Carl
+    orcid: "https://orcid.org/0000-0002-8525-862X"
+  date-published: 2025-01-28
+  doi: 10.21105/joss.07492
+  issn: 2475-9066
+  issue: 105
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 7492
+  title: "ssdtools v2: An R package to fit Species Sensitivity
+    Distributions"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.07492"
+  volume: 10
+title: "ssdtools v2: An R package to fit Species Sensitivity
+  Distributions"

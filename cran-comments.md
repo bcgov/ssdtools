@@ -1,3 +1,13 @@
+## Previous Submission
+
+> Thanks, we see:
+
+> Size of tarball: 5665221 bytes
+
+> Can this be reducd to less than 5 MB?
+
+Yes we have transferred all but two small vignettes to vignettes/articles.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
