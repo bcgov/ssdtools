@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-12-03</h4>
+            <h4 data-toc-skip class="date">2025-01-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/confidence-intervals.Rmd" class="external-link"><code>vignettes/articles/confidence-intervals.Rmd</code></a></small>
       <div class="d-none name"><code>confidence-intervals.Rmd</code></div>
@@ -139,7 +139,7 @@ relatively straightforward. However, obtaining bootstrap CIs for
 model-averaged SSDs requires careful consideration, as the procedure is
 subject to the same problems evident when obtaining model-averaged
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><msub><mi>C</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">HC_x</annotation></semantics></math>
-estimates (see the <a href="https://bcgov.github.io/ssdtools/articles/model-averaging.html" class="external-link">Model
+estimates (see the <a href="https://bcgov.github.io/ssdtools/articles/model-averaging.html">Model
 Averaging SSDs</a> vignette). Model-averaged estimates and/or CIs can be
 calculated by treating the distributions as constituting a single
 mixture distribution versus ‘taking the (weighted) mean’. When
@@ -156,7 +156,7 @@ model-averaged estimates and CLs as the weighted (by the AICc values)
 arithmetic means of the estimates and upper and lower CLs obtained via
 bootstrapping from each of the candidate distributions independently.
 This method is not only computationally inefficient but may lead to
-incorrect results (as described in the <a href="https://bcgov.github.io/ssdtools/articles/model-averaging.html" class="external-link">Model
+incorrect results (as described in the <a href="https://bcgov.github.io/ssdtools/articles/model-averaging.html">Model
 Averaging SSDs</a> vignette) and has been shown via simulations studies
 to result in CIs with very low coverage. The current version of
 <code>ssdtools</code> retains this functionality by setting

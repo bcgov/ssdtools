@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-12-03</h4>
+            <h4 data-toc-skip class="date">2025-01-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="d-none name"><code>ssdtools.Rmd</code></div>
@@ -92,7 +92,7 @@ package.</p>
 <h2 id="philosophy">Philosophy<a class="anchor" aria-label="anchor" href="#philosophy"></a>
 </h2>
 <p><code>ssdtools</code> provides the key functionality required to fit
-SSDs using Maximum Likelihood and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">model
+SSDs using Maximum Likelihood and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html">model
 averaging</a> in R. It is intended to be used in conjunction with <a href="https://www.tidyverse.org" class="external-link">tidyverse</a> packages such as
 <code>readr</code> to input data, <code>tidyr</code> and
 <code>dplyr</code> to group and manipulate data and <code>ggplot2</code>
@@ -167,8 +167,8 @@ package.</p>
 </h2>
 <p>The function <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> inputs a data frame and
 fits one or more distributions. The user can specify a subset of the
-following 10 distributions. Please see the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html" class="external-link">distributions</a>
-and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">model
+following 10 distributions. Please see the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html">distributions</a>
+and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html">model
 averaging</a> vignettes for more information regarding appropriate use
 of distributions and the use of model-averaged SSDs.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -205,7 +205,7 @@ tidyverse generic <code>tidy</code> function (or the base R generic
 <code>autoplot</code> generic function (a wrapper on
 <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code>). As <code>autoplot</code> returns a
 <code>ggplot</code> object it can be modified prior to plotting. For
-more information see the <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">customising
+more information see the <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html">customising
 plots</a> vignette.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># set plot theme</span></span>
@@ -273,9 +273,9 @@ recommended approach is to estimate the average fit based on the
 relative weights of the distributions <span class="citation">(Burnham
 and Anderson 2002)</span>. The <code>AICc</code> based weights are
 indicated by the <code>weight</code> column in the goodness of fit
-table. A detailed introduction to model averaging can be found in the <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html" class="external-link">Model
+table. A detailed introduction to model averaging can be found in the <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html">Model
 averaging</a> vignette. A discussion on the recommended set of default
-distributions can be found in the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html" class="external-link">Distributions</a>
+distributions can be found in the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html">Distributions</a>
 vignette.</p>
 </div>
 <div class="section level2">

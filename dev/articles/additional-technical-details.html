@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,9 +62,9 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2024-12-03</h4>
+            <h4 data-toc-skip class="date">2025-01-29</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/additional-technical-details.Rmd" class="external-link"><code>vignettes/additional-technical-details.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/additional-technical-details.Rmd" class="external-link"><code>vignettes/articles/additional-technical-details.Rmd</code></a></small>
       <div class="d-none name"><code>additional-technical-details.Rmd</code></div>
     </div>
 
@@ -91,7 +91,7 @@ estimate parameters for each distribution that is fit to the data.
 Statistical theory says that maximum likelihood estimators are
 asymptotically unbiased, but does not guarantee performance in small
 samples. A detailed account of the issue of small sample bias in
-estimates can be found in the following <a href="https://github.com/bcgov/ssdtools/blob/master/vignettes/small-sample-bias.pdf" class="external-link">pdf</a>.</p>
+estimates can be found in the small sample size vignette.</p>
 </div>
 <div class="section level2">
 <h2 id="investigations-into-setting-minimum-sample-sizes-for-uni-modal-and-bi-modal-distributions-in-ssdtools">Investigations into setting minimum sample sizes for uni-modal and
@@ -135,13 +135,13 @@ limited to): 5 (current ANZG minimum), 6 (current BC minimum), and 8
 <li>For each randomly generated dataset, <code>ssdtools</code> was used
 to re-fit the data, and model averaged estimates were obtained using the
 multi-method, with upper and lower confidence limits (CLs) produced
-using the recommended weighted sample method (see <a href="https://bcgov.github.io/ssdtools/articles/confidence-intervals.html" class="external-link">Confidence
+using the recommended weighted sample method (see <a href="https://bcgov.github.io/ssdtools/articles/confidence-intervals.html">Confidence
 Intervals for Hazard Concentrations</a> vignette).</li>
 </ol>
 <p>The individual ssdtools fits are shown below for each of the 20
 simulation datasets from ssddata, for the six recommended default
 distributions, as well as the model averaged CDF (black line):</p>
-<p><img src="images%2Ffitted_dists.png"></p>
+<p><img src="images%2Ffitted_dists.png" alt="An aggregate plot of all the 20 datasets from ssddata, showing how the six recommended default distributions fit to each, as well as the model averaged fit."><br></p>
 <p>This simulation process was repeated a minimum of 1,000 times for
 each dataset, and the results collated across all iterations. For each
 simulated dataset the true HCx values were obtained directly from the
@@ -167,7 +167,7 @@ are the upper and lower limits respectively.</p>
 size across ~1000 simulations of 20 datasets using the multi model
 averaging method and the weighted sample method for estimating
 confidence intervals via ssdtools are shown below:</p>
-<p><img src="images%2Fssdata_sims_collated.png"></p>
+<p><img src="images%2Fssdata_sims_collated.png" alt="An aggregate plot showing how bias and confidence interval width decrease, and coverage increases as the number of data points in the SSD increases. The first three bars are colored to highlight that the biggest changes are from five to six and then seven data points."><br></p>
 <p>The simulation results showed significant gains in terms of reduced
 bias from N=5 to N=6, as well as in coverage, which improved
 substantially between N=5 and N=6. There is also a small additional gain
@@ -190,7 +190,7 @@ bootstrap method of obtaining confidence intervals.</p>
 <p>Bias of sample size across ~1000 simulations of 353 datasets using
 the multi model averaging method via ssdtools, for HC5, 10 and 20 (0.05,
 0.1, and 0.2) are shown below:</p>
-<p><img src="images%2Fall_sims_bias.png"></p>
+<p><img src="images%2Fall_sims_bias.png" alt="An aggregate plot showing how bias increases as the number of data points in the SSD increases. Columns are for different proportions of the community potentially effected. The biggest changes are for 5% of the community effected. Data generated from a Gamma distribution show the greatest bias, followed by the Weibull and then the lognormal-lognormal mixture distribution."><br></p>
 <p>Note that simulation results are shown separately for those derived
 from each of the six distributions as the underlying source data
 generating distribution.</p>
@@ -224,7 +224,7 @@ source (data generating) distributions, when fit using the default set
 of six distributions using ssdtools; and the lower plot (B) showing the
 AICc weight of the lognormal-lognormal mixture distribution for each of
 the source (data generating) distributions.</p>
-<p><img src="images%2Fweights_collated.png"></p>
+<p><img src="images%2Fweights_collated.png" alt="A two panel plot, with both showing how AICc based weights increase as the number of data points in the SSD increases. The top panel shows that when there is a large enough sample size the AICc weights for the true source distribution are high. The bottom panel shows the weights for the lognormal-lognormal mixture distribution and highlights that these remain low except when the lognormal-lognormal mixture is the source distribution."><br></p>
 <p>We found that the AICc weights for the five unimodal distributions
 were relatively similar (~0.2) for very low N. This is because for small
 N it is difficult to discern differences between the distributions in
