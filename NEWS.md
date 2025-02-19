@@ -1,8 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.2.0.9001
+
+- Update citations.
+
+
 # ssdtools 2.2.0.9000
 
 - House-keeping on Github actions.
+
 
 # ssdtools 2.2.0
 
