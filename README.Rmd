@@ -99,6 +99,11 @@ For recent developments in SSD modeling including a review of existing software 
 
 *Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity Distribution Modeling. Environ Toxicol Chem 40(2): 293–308. <https://doi.org/10.1002/etc.4925>.*
 
+## Citation
+
+```{r, comment = "", echo = FALSE}
+citation("ssdtools")
+```
 
 ## Installation
 
