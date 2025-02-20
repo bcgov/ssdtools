@@ -1,22 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.2.0.9003
+# ssdtools 2.3.0
 
 - Merge pull request #112 from poissonconsulting/invp.
-
-
-# ssdtools 2.2.0.9002
 
 - Added valid column to dist_data to indicate the "invpareto" has invalid likelihood.
 - Modified `ssd_fit_dists()` so fits distributions with invalid likelihoods in isolation.
 - Modified `ssd_hc()` and `ssd_hp()` so does not average if just one distribution.
 
-# ssdtools 2.2.0.9001
-
 - Update citations.
-
-
-# ssdtools 2.2.0.9000
 
 - House-keeping on Github actions.
 
