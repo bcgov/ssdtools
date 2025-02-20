@@ -29,10 +29,11 @@
 #' ssd_dists(bcanz = TRUE)
 #' ssd_dists(tails = FALSE)
 #' ssd_dists(npars = 5)
-ssd_dists <- function(bcanz = NULL, tails = NULL, npars = 2:5) {
+ssd_dists <- function(bcanz = NULL, tails = NULL, npars = 2:5, valid = TRUE) {
   chk_null_or(bcanz, vld = vld_flag)
   chk_null_or(tails, vld = vld_flag)
-
+  chk_null_or(valid, vld = vld_flag)
+  
   chk_whole_numeric(npars)
   chk_not_any_na(npars)
   chk_range(npars, c(2L, 5L))
@@ -44,23 +45,26 @@ ssd_dists <- function(bcanz = NULL, tails = NULL, npars = 2:5) {
   if (!is.null(tails)) {
     dists <- dists[dists$tails == tails, ]
   }
+  if (!is.null(valid)) {
+    dists <- dists[dists$valid == valid, ]
+  }
   dists <- dists[dists$npars %in% npars, ]
-
   dists$dist
 }
 
 #' All Species Sensitivity Distributions
 #'
 #' Gets a character vector of the names of all the available distributions.
-#'
+#' 
+#' @inheritParams params
 #' @return A unique, sorted character vector of the distributions.
 #' @family dists
 #' @export
 #'
 #' @examples
 #' ssd_dists_all()
-ssd_dists_all <- function() {
-  ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5)
+ssd_dists_all <- function(valid = TRUE) {
+  ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5, valid = valid)
 }
 
 #' All Shiny Species Sensitivity Distributions
@@ -75,5 +79,5 @@ ssd_dists_all <- function() {
 #' @examples
 #' ssd_dists_shiny()
 ssd_dists_shiny <- function() {
-  ssd_dists(bcanz = NULL, tails = TRUE, npars = 2:5)
+  ssd_dists(bcanz = NULL, tails = TRUE, npars = 2:5, valid = TRUE)
 }

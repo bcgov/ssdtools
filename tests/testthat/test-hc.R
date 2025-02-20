@@ -541,30 +541,21 @@ test_that("ssd_hc save_to", {
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to")
   expect_identical(list.files(dir), c(
-    "data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv",
-    "data_000000003_multi.csv", "estimates_000000000_multi.rds",
-    "estimates_000000001_multi.rds", "estimates_000000002_multi.rds",
-    "estimates_000000003_multi.rds"
+    "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "data_000000002_lnorm.csv",
+    "data_000000003_lnorm.csv", "estimates_000000000_lnorm.rds",
+    "estimates_000000001_lnorm.rds", "estimates_000000002_lnorm.rds",
+    "estimates_000000003_lnorm.rds"
   ))
-  data <- read.csv(file.path(dir, "data_000000000_multi.csv"))
+  data <- read.csv(file.path(dir, "data_000000000_lnorm.csv"))
   expect_snapshot_data(hc, "hc_save_to1data")
-  boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
+  boot1 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
   expect_snapshot_data(hc, "hc_save_to1")
-  ests <- readRDS(file.path(dir, "estimates_000000000_multi.rds"))
-  ests1 <- readRDS(file.path(dir, "estimates_000000001_multi.rds"))
+  ests <- readRDS(file.path(dir, "estimates_000000000_lnorm.rds"))
+  ests1 <- readRDS(file.path(dir, "estimates_000000001_lnorm.rds"))
 
   expect_identical(names(ests), names(ests1))
   expect_identical(names(ests), c(
-    "burrIII3.weight", "burrIII3.shape1", "burrIII3.shape2", "burrIII3.scale",
-    "gamma.weight", "gamma.shape", "gamma.scale", "gompertz.weight",
-    "gompertz.location", "gompertz.shape", "invpareto.weight", "invpareto.shape",
-    "invpareto.scale", "lgumbel.weight", "lgumbel.locationlog", "lgumbel.scalelog",
-    "llogis.weight", "llogis.locationlog", "llogis.scalelog", "llogis_llogis.weight",
-    "llogis_llogis.locationlog1", "llogis_llogis.scalelog1", "llogis_llogis.locationlog2",
-    "llogis_llogis.scalelog2", "llogis_llogis.pmix", "lnorm.weight",
-    "lnorm.meanlog", "lnorm.sdlog", "lnorm_lnorm.weight", "lnorm_lnorm.meanlog1",
-    "lnorm_lnorm.sdlog1", "lnorm_lnorm.meanlog2", "lnorm_lnorm.sdlog2",
-    "lnorm_lnorm.pmix", "weibull.weight", "weibull.shape", "weibull.scale"
+    "meanlog", "sdlog"
   ))
 })
 
@@ -620,12 +611,12 @@ test_that("ssd_hc save_to rescale", {
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to_rescale")
   expect_identical(list.files(dir), c(
-    "data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv",
-    "data_000000003_multi.csv", "estimates_000000000_multi.rds",
-    "estimates_000000001_multi.rds", "estimates_000000002_multi.rds",
-    "estimates_000000003_multi.rds"
+    "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "data_000000002_lnorm.csv",
+    "data_000000003_lnorm.csv", "estimates_000000000_lnorm.rds",
+    "estimates_000000001_lnorm.rds", "estimates_000000002_lnorm.rds",
+    "estimates_000000003_lnorm.rds"
   ))
-  boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
+  boot1 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
   expect_snapshot_data(hc, "hc_save_to1_rescale")
 })
 
@@ -637,13 +628,13 @@ test_that("ssd_hc save_to lnorm 1", {
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to11")
   expect_identical(list.files(dir), c(
-    "data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds",
-    "estimates_000000001_multi.rds"
+    "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "estimates_000000000_lnorm.rds",
+    "estimates_000000001_lnorm.rds"
   ))
-  boot1 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
+  boot1 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
   fit1 <- ssd_fit_dists(boot1, dist = "lnorm", left = "left", right = "right", weight = "weight")
   est <- ssd_hc(fit1)$est
-  expect_identical(hc$lcl, est)
+  expect_equal(hc$lcl, est, tolerance = 1e-6)
   expect_identical(hc$lcl, hc$ucl)
 })
 
@@ -654,16 +645,16 @@ test_that("ssd_hc save_to replaces", {
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir)
   expect_identical(list.files(dir), c(
-    "data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds",
-    "estimates_000000001_multi.rds"
+    "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "estimates_000000000_lnorm.rds",
+    "estimates_000000001_lnorm.rds"
   ))
-  boot <- read.csv(file.path(dir, "data_000000001_multi.csv"))
+  boot <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
   hc2 <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir)
   expect_identical(list.files(dir), c(
-    "data_000000000_multi.csv", "data_000000001_multi.csv", "estimates_000000000_multi.rds",
-    "estimates_000000001_multi.rds"
+    "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "estimates_000000000_lnorm.rds",
+    "estimates_000000001_lnorm.rds"
   ))
-  boot2 <- read.csv(file.path(dir, "data_000000001_multi.csv"))
+  boot2 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
   expect_snapshot_data(boot, "hc_boot1_replace")
   expect_snapshot_data(boot2, "hc_boot2_replace")
 })

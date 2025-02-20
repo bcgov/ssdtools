@@ -117,6 +117,7 @@
 #' @param text_size A number for the text size.
 #' @param theme_classic A flag specifying whether to use the classic theme or the default.
 #' @param trans A string of which transformation to use. Accepted values include `"log10"`, `"log"`, and `"identity"` (`"log10"` by default).
+#' @param valid A flag or NULL specifying whether to include distributions with valid likelihoods that allows them to be fit with other distributions for modeling averaging.
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
 #' @param x The object.
 #' @param xbreaks The x-axis breaks as one of:

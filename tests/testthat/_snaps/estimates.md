@@ -96,15 +96,6 @@
     $gompertz.shape
     [1] 1
     
-    $invpareto.weight
-    [1] 0
-    
-    $invpareto.shape
-    [1] 3
-    
-    $invpareto.scale
-    [1] 1
-    
     $lgumbel.weight
     [1] 0.01344657
     

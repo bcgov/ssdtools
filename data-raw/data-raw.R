@@ -21,17 +21,17 @@ library(tibble)
 library(usethis)
 
 dist_data <- tibble::tribble(
-  ~dist, ~bcanz, ~tails, ~npars,
-  "burrIII3", FALSE, TRUE, 3L,
-  "gamma", TRUE, TRUE, 2L,
-  "gompertz", FALSE, TRUE, 2L,
-  "invpareto", FALSE, FALSE, 2L,
-  "lgumbel", TRUE, TRUE, 2L,
-  "llogis", TRUE, TRUE, 2L,
-  "llogis_llogis", FALSE, TRUE, 5L,
-  "lnorm", TRUE, TRUE, 2L,
-  "lnorm_lnorm", TRUE, TRUE, 5L,
-  "weibull", TRUE, TRUE, 2L
+  ~dist, ~bcanz, ~tails, ~npars, ~valid,
+  "burrIII3", FALSE, TRUE, 3L, TRUE,
+  "gamma", TRUE, TRUE, 2L, TRUE,
+  "gompertz", FALSE, TRUE, 2L, TRUE,
+  "invpareto", FALSE, FALSE, 2L, FALSE,
+  "lgumbel", TRUE, TRUE, 2L, TRUE,
+  "llogis", TRUE, TRUE, 2L, TRUE,
+  "llogis_llogis", FALSE, TRUE, 5L, TRUE,
+  "lnorm", TRUE, TRUE, 2L, TRUE,
+  "lnorm_lnorm", TRUE, TRUE, 5L, TRUE,
+  "weibull", TRUE, TRUE, 2L, TRUE
 )
 
 use_data(dist_data, overwrite = TRUE)

@@ -43,10 +43,10 @@
 #'
 #' \describe{
 #'   \item{dist}{The distribution (chr).}
-#'   \item{npars}{The number of parameters (int).}
-#'   \item{tails}{Whether the distribution has both tails (flag).}
-#'   \item{stable}{Whether the distribution is numerically stable (flag).}
 #'   \item{bcanz}{Whether the distribution belongs to the set of distributions approved by BC, Canada, Australia and New Zealand for official guidelines (flag).}
+#'   \item{tails}{Whether the distribution has both tails (flag).}
+#'   \item{npars}{The number of parameters (int).}
+#'   \item{valid}{Whether the distribution has a valid likelihood that allows it to be fit with other distributions for modeling averaging (flag).}
 #' }
 #' @family dists
 #' @examples

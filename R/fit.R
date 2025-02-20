@@ -185,7 +185,10 @@ ssd_fit_dists <- function(
   chk_not_any_na(dists)
   chk_unique(dists)
 
-  chk_subset(dists, ssd_dists_all())
+  chk_subset(dists, ssd_dists_all(valid = NULL))
+  if(length(dists) > 1 && any(dists %in% ssd_dists_all(valid = FALSE))) {
+    err("distributions with invalid likelihoods must be fitted in isolation.")
+  }
 
   chk_whole_number(nrow)
   chk_gte(nrow, 4L)

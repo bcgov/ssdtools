@@ -4,9 +4,9 @@
       hc_multi
     Output
       # A tibble: 1 x 11
-        dist  proportion   est    se   lcl   ucl    wt method     nboot pboot samples 
-        <chr>      <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <int> <dbl> <I<list>
-      1 lnorm       0.05  1.68    NA    NA    NA     1 parametric     0    NA <dbl>   
+        dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
+        <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <int> <dbl> <I<lis>
+      1 average       0.05  1.68    NA    NA    NA     1 parametr~     0    NA <dbl>  
 
 # hc multi_ci all
 
@@ -46,9 +46,9 @@
       hc_average
     Output
       # A tibble: 1 x 11
-        dist  proportion   est    se   lcl   ucl    wt method     nboot pboot samples 
-        <chr>      <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>
-      1 lnorm       0.05  1.68 0.529 0.948  2.76     1 parametric   100     1 <dbl>   
+        dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
+        <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
+      1 average       0.05  1.68 0.529 0.948  2.76     1 parametr~   100     1 <dbl>  
 
 ---
 
@@ -56,7 +56,7 @@
       hc_multi
     Output
       # A tibble: 1 x 11
-        dist  proportion   est    se   lcl   ucl    wt method     nboot pboot samples 
-        <chr>      <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <dbl> <dbl> <I<list>
-      1 lnorm       0.05  1.68 0.529 0.948  2.76     1 parametric   100     1 <dbl>   
+        dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
+        <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
+      1 average       0.05  1.68 0.535 0.979  2.99     1 parametr~   100     1 <dbl>  
 
