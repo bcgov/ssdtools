@@ -2,12 +2,9 @@
 
 # ssdtools 2.2.0.9002
 
-- Add valid column to dist_data.
-
-- Now only fit invalid distributions in isolation.
-
-- Now only average if more than 1 distribution.
-
+- Added valid column to dist_data to indicate the "invpareto" has invalid likelihood.
+- Modified `ssd_fit_dists()` so fits distributions with invalid likelihoods in isolation.
+- Modified `ssd_hc()` and `ssd_hp()` so does not average if just one distribution.
 
 # ssdtools 2.2.0.9001
 

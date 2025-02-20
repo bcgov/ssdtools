@@ -38,6 +38,14 @@ test_that("invpareto gives cis with ccme_boron", {
   expect_snapshot_data(hc, "hc_boron")
 })
 
+test_that("invpareto ssd_hp gives cis with ccme_boron", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "invpareto")
+  expect_s3_class(fit, "fitdists")
+  set.seed(99)
+  hp <- ssd_hp(fit, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+  expect_snapshot_data(hp, "hp_boron")
+})
+
 test_that("invpareto initial shape is MLEs", {
   set.seed(99)
   data <- data.frame(Conc = ssd_rinvpareto(6), weight = 1)
