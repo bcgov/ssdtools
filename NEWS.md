@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.2.0.9003
+
+- Merge pull request #112 from poissonconsulting/invp.
+
+
 # ssdtools 2.2.0.9002
 
 - Added valid column to dist_data to indicate the "invpareto" has invalid likelihood.
