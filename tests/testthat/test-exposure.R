@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,15 +41,15 @@ test_that("exposure different mean and log", {
 
 test_that("exposure multiple distributions", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   withr::with_seed(1, {
-  expect_equal(ssd_exposure(fits, nboot = 100), 0.0663472624824284, tolerance = 1e-6)
+    expect_equal(ssd_exposure(fits, nboot = 100), 0.0663472624824284, tolerance = 1e-6)
   })
 })
 
 test_that("exposure fitdist rescale", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm", rescale = TRUE)
-  
+
   withr::with_seed(1, {
     expect_equal(ssd_exposure(fits), 0.0554388582680626, tolerance = 1e-6)
   })

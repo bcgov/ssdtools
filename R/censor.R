@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +16,7 @@
 #    limitations under the License.
 
 #' Censor Data
-#' 
+#'
 #' Censors data to a specified range based on the `censoring` argument.
 #' The function is useful for creating test data sets.
 #'
@@ -70,7 +70,7 @@ censor_data <- function(data, censoring) {
   if (!.is_censored(censoring)) {
     return(data)
   }
-  
+
   data$right[data$left < censoring[1]] <- min(censoring)
   data$left[data$left < censoring[1]] <- 0
   data$left[data$right > censoring[2]] <- max(censoring)

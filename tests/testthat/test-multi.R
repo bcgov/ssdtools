@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,13 +20,13 @@ test_that("multi", {
   expect_equal(ssd_qmulti(0.75, lnorm.weight = 2), 1.96303108415826)
   set.seed(42)
   expect_equal(ssd_rmulti(2, lnorm.weight = 1), c(3.93912428813385, 4.62130564767823))
-  
+
   set.seed(42)
   expect_equal(ssd_rmulti(1, gamma.weight = 0.5, lnorm.weight = 0.5), 3.13234340623737)
 
   set.seed(42)
   expect_equal(ssd_rmulti(1, gamma.weight = 1, lnorm.weight = 1), 3.13234340623737)
-  
+
   expect_equal(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99), lnorm.weight = 1), lnorm.weight = 1),
     c(0, 0.1, 0.5, 0.9, 0.99),
     tolerance = 1e-5

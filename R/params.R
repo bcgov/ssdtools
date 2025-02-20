@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -114,7 +114,7 @@
 #' @param size A number for the size of the labels. Deprecated for `label_size`. #' `r lifecycle::badge("deprecated")`
 #' @param suffix Additional text to display after the number on the y-axis.
 #' @param tails A flag or NULL specifying whether to only include distributions with both tails.
-#' @param text_size A number for the text size. 
+#' @param text_size A number for the text size.
 #' @param theme_classic A flag specifying whether to use the classic theme or the default.
 #' @param trans A string of which transformation to use. Accepted values include `"log10"`, `"log"`, and `"identity"` (`"log10"` by default).
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
@@ -125,7 +125,7 @@
 #'   - A numeric vector of positions
 #' @param xlimits The x-axis limits as one of:
 #'   - `NULL` to use the default scale range
-#'   - A numeric vector of length two providing the limits. 
+#'   - A numeric vector of length two providing the limits.
 #'   Use NA to refer to the existing minimum or maximum limits.
 #' @param xintercept The x-value for the intersect.
 #' @param xlab A string of the x-axis label.
