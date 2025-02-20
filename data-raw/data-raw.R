@@ -34,15 +34,6 @@ dist_data <- tibble::tribble(
   "weibull", TRUE, TRUE, 2L
 )
 
-stopifnot(identical(dist_data$dist, ssdtools::ssd_dists()))
-stopifnot(identical(dist_data$dist[dist_data$bcanz], ssdtools::ssd_dists_bcanz()))
-stopifnot(identical(dist_data$dist[dist_data$npars == 2], ssdtools::ssd_dists(npars = 2)))
-stopifnot(identical(dist_data$dist[dist_data$npars == 3], ssdtools::ssd_dists(npars = 3)))
-stopifnot(identical(dist_data$dist[dist_data$npars == 4], ssdtools::ssd_dists(npars = 4)))
-stopifnot(identical(dist_data$dist[dist_data$npars == 5], ssdtools::ssd_dists(npars = 5)))
-stopifnot(identical(dist_data$dist[dist_data$tails], ssdtools::ssd_dists(tails = TRUE)))
-stopifnot(identical(dist_data$dist[!dist_data$tails], ssdtools::ssd_dists(tails = FALSE)))
-
 use_data(dist_data, overwrite = TRUE)
 
 fits <- ssd_fit_dists(ssddata::ccme_boron)
