@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2025-01-29</h4>
+            <h4 data-toc-skip class="date">2025-02-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="d-none name"><code>ssdtools.Rmd</code></div>
@@ -166,15 +166,15 @@ package.</p>
 </h2>
 <p>The function <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> inputs a data frame and
 fits one or more distributions. The user can specify a subset of the
-following 10 distributions. Please see the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html">distributions</a>
+following 9 distributions. Please see the <a href="https://bcgov.github.io/ssdtools/articles/B_distributions.html">distributions</a>
 and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html">model
 averaging</a> vignettes for more information regarding appropriate use
 of distributions and the use of model-averaged SSDs.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ssd_dists_all.html">ssd_dists_all</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "burrIII3"      "gamma"         "gompertz"      "invpareto"    </span></span>
-<span><span class="co">#&gt;  [5] "lgumbel"       "llogis"        "llogis_llogis" "lnorm"        </span></span>
-<span><span class="co">#&gt;  [9] "lnorm_lnorm"   "weibull"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "burrIII3"      "gamma"         "gompertz"      "lgumbel"      </span></span>
+<span><span class="co">#&gt; [5] "llogis"        "llogis_llogis" "lnorm"         "lnorm_lnorm"  </span></span>
+<span><span class="co">#&gt; [9] "weibull"</span></span></code></pre></div>
 <p>using the <code>dists</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span>, dists <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"llogis"</span>, <span class="st">"lnorm"</span>, <span class="st">"gamma"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>

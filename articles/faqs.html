@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2025-01-29</h4>
+            <h4 data-toc-skip class="date">2025-02-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/faqs.Rmd" class="external-link"><code>vignettes/faqs.Rmd</code></a></small>
       <div class="d-none name"><code>faqs.Rmd</code></div>
@@ -104,6 +104,47 @@ Energy, the Environment and Water</p>
 License</a></p>
 <p>The code is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0" class="external-link">Apache License
 2.0</a></p>
+</div>
+<div class="section level2">
+<h2 id="censoring">Censoring<a class="anchor" aria-label="anchor" href="#censoring"></a>
+</h2>
+<div class="section level3">
+<h3 id="what-is-censored-data">What is censored data?<a class="anchor" aria-label="anchor" href="#what-is-censored-data"></a>
+</h3>
+<p>Data is censored when the exact value is uncertain. There are three
+primary types of censoring. Right censoring when only the lower bound is
+known (&gt;), left censoring when only the upper bound is known (&lt;)
+and interval censored when both the lower and upper bound are known
+(&gt;&lt;). Uncensored data can be thought of as interval censored data
+in which the upper and lower bound are identical (=). Likewise, missing
+data can be considered to be censored data in which both the upper and
+lower bound are unknown (?).</p>
+</div>
+<div class="section level3">
+<h3 id="how-is-censored-data-coded-in-ssdtools">How is censored data coded in ssdtools?<a class="anchor" aria-label="anchor" href="#how-is-censored-data-coded-in-ssdtools"></a>
+</h3>
+<p>Censored data is coded by specifying the lower bound values in one
+column (&gt;) and the upper bound values in a second column (&lt;).
+Unknown lower bounds are coded using NA or 0 while unknown upper bounds
+are coded using NA or Inf. The name of the columns with the lower and
+upper bound values are then passed to the <code>left</code> (&gt;) and
+<code>right</code> (&lt;) arguments in the <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code>
+function, respectively.</p>
+</div>
+<div class="section level3">
+<h3 id="what-are-the-current-limitations-on-analyzing-censored-data">What are the current limitations on analyzing censored data?<a class="anchor" aria-label="anchor" href="#what-are-the-current-limitations-on-analyzing-censored-data"></a>
+</h3>
+<p>Currently <code>ssdtools</code> has the following limitations on the
+analysis of censored data:</p>
+<ul>
+<li>distribution fitting to left (&lt;) or interval (&gt;&lt;) censored
+data only, i.e., when the upper bound is known;</li>
+<li>model averaging when the distributions have the same number of
+parameters only; and</li>
+<li>estimation of confidence interval using non-parametric bootstrapping
+only.</li>
+</ul>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
