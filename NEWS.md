@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.2.0.9002
+
+- Add valid column to dist_data.
+
+- Now only fit invalid distributions in isolation.
+
+- Now only average if more than 1 distribution.
+
+
 # ssdtools 2.2.0.9001
 
 - Update citations.
