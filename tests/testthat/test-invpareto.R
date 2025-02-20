@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,6 +36,14 @@ test_that("invpareto gives cis with ccme_boron", {
   set.seed(99)
   hc <- ssd_hc(fit, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
   expect_snapshot_data(hc, "hc_boron")
+})
+
+test_that("invpareto ssd_hp gives cis with ccme_boron", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "invpareto")
+  expect_s3_class(fit, "fitdists")
+  set.seed(99)
+  hp <- ssd_hp(fit, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+  expect_snapshot_data(hp, "hp_boron")
 })
 
 test_that("invpareto initial shape is MLEs", {

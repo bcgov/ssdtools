@@ -199,6 +199,8 @@ remove them with a warning.}
 
 \item{trans}{A string of which transformation to use. Accepted values include \code{"log10"}, \code{"log"}, and \code{"identity"} (\code{"log10"} by default).}
 
+\item{valid}{A flag or NULL specifying whether to include distributions with valid likelihoods that allows them to be fit with other distributions for modeling averaging.}
+
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
 \item{x}{The object.}

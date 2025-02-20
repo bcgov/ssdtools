@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,6 @@
 #    limitations under the License.
 
 test_that("npars", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("llogis_llogis", "lnorm_lnorm", "lnorm", "invpareto"))
-  expect_identical(npars(fits), c(llogis_llogis = 5L, lnorm_lnorm = 5L, lnorm = 2L, invpareto = 2L))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("llogis_llogis", "lnorm_lnorm", "lnorm"))
+  expect_identical(npars(fits), c(llogis_llogis = 5L, lnorm_lnorm = 5L, lnorm = 2L))
 })

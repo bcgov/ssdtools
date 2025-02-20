@@ -4,7 +4,10 @@
 \alias{ssd_dists_all}
 \title{All Species Sensitivity Distributions}
 \usage{
-ssd_dists_all()
+ssd_dists_all(valid = TRUE)
+}
+\arguments{
+\item{valid}{A flag or NULL specifying whether to include distributions with valid likelihoods that allows them to be fit with other distributions for modeling averaging.}
 }
 \value{
 A unique, sorted character vector of the distributions.

@@ -44,3 +44,28 @@ ssd_plot(ssddata::ccme_boron, ssdtools::boron_pred, label = "Species", shape = "
 ```{r, results = "asis", echo = FALSE}
 cat(ssd_licensing_md())
 ```
+
+## Censoring
+
+### What is censored data?
+
+Data is censored when the exact value is uncertain. 
+There are three primary types of censoring.
+Right censoring when only the lower bound is known (>), left censoring when only the upper bound is known (<)
+and interval censored when both the lower and upper bound are known (><).
+Uncensored data can be thought of as interval censored data in which the upper and lower bound are identical (=).
+Likewise, missing data can be considered to be censored data in which both the upper and lower bound are unknown (?).
+
+### How is censored data coded in ssdtools?
+
+Censored data is coded by specifying the lower bound values in one column (>) and the upper bound values in a second column (<).
+Unknown lower bounds are coded using NA or 0 while unknown upper bounds are coded using NA or Inf.
+The name of the columns with the lower and upper bound values are then passed to the `left` (>) and `right` (<) arguments in the `ssd_fit_dists()` function, respectively.
+
+### What are the current limitations on analysing censored data?
+
+Currently `ssdtools` has the following limitations on the analysis of censored data:
+
+- distribution fitting to left (<) or interval (><) censored data only, i.e., when the upper bound is known;
+- model averaging when the distributions have the same number of parameters only; and
+- estimation of confidence interval using non-parametric bootstrapping only.

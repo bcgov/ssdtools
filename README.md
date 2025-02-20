@@ -139,6 +139,28 @@ software see:
 Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
 <https://doi.org/10.1002/etc.4925>.*
 
+## Citation
+
+    To cite package 'ssdtools' in publications use:
+
+      Thorley J, Fisher R, Fox D, Schwarz C (2025). "ssdtools v2: An R
+      package to fit Species Sensitivity Distributions." _Journal of Open
+      Source Software_, *10*(105), 7492. doi:10.21105/joss.07492
+      <https://doi.org/10.21105/joss.07492>.
+
+    A BibTeX entry for LaTeX users is
+
+      @Article{,
+        title = {ssdtools v2: An R package to fit Species Sensitivity Distributions},
+        author = {Joe Thorley and Rebecca Fisher and David Fox and Carl Schwarz},
+        year = {2025},
+        journal = {Journal of Open Source Software},
+        volume = {10},
+        number = {105},
+        pages = {7492},
+        doi = {10.21105/joss.07492},
+      }
+
 ## Installation
 
 ### Release
