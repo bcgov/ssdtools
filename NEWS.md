@@ -1,8 +1,11 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.2.0.9000
+# ssdtools 2.3.0
 
-- House-keeping on Github actions.
+- Added valid column to dist_data to indicate the "invpareto" has invalid likelihood.
+- Modified `ssd_fit_dists()` so fits distributions with invalid likelihoods in isolation.
+- Modified `ssd_hc()` and `ssd_hp()` so does not average if just one distribution.
+- Updated citations to Thorley et al. (2025).
 
 # ssdtools 2.2.0
 
@@ -17,6 +20,7 @@
   - Added `theme_classic = FALSE` argument to switch classic theme.
   - Soft-deprecated `size` argument for `label_size`.
 - Turned off x-axis minor breaks for all plots (for consistency) as HC major break causing multiple minor breaks in `ssd_plot()`.
+
 
 # ssdtools 2.1.0
 

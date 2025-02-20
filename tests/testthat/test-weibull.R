@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ test_that("weibull", {
   expect_equal(ssd_qweibull(0.75), 1.38629436111989)
   set.seed(42)
   expect_equal(ssd_rweibull(2), c(0.0890432104972705, 0.0649915162066272))
-  testthat::skip_on_cran() # ssd_fit_dists() failing on CRAN M1mac likely due to much older version of the OS and toolchain 
+  testthat::skip_on_cran() # ssd_fit_dists() failing on CRAN M1mac likely due to much older version of the OS and toolchain
   test_dist("weibull")
 })
 

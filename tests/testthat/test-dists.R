@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@
 
 test_that("dists all", {
   expect_identical(
-    ssd_dists_all(),
+    ssd_dists_all(valid = NULL),
     c(
       "burrIII3", "gamma", "gompertz", "invpareto", "lgumbel", "llogis",
       "llogis_llogis", "lnorm", "lnorm_lnorm", "weibull"
@@ -44,7 +44,7 @@ test_that("dists can select none", {
 })
 
 test_that("dists without tails", {
-  expect_identical(ssd_dists(tails = FALSE), "invpareto")
+  expect_identical(ssd_dists(tails = FALSE, valid = NULL), "invpareto")
 })
 
 test_that("dists 5 pars", {

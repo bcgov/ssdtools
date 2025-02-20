@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,9 +49,9 @@ ssd_elgumbel <- function() {
 
 #' Cumulative Distribution Function for Log-Gumbel Distribution
 #' `r lifecycle::badge("deprecated")`
-#' 
+#'
 #' Deprecated for `ssd_plgumbel()`.
-#' 
+#'
 #' @inheritParams params
 #' @export
 plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
@@ -72,7 +72,7 @@ ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, lo
 
 #' Quantile Function for Log-Gumbel Distribution
 #' `r lifecycle::badge("deprecated")`
-#' 
+#'
 #' Deprecated for `ssd_qlgumbel()`.
 #'
 #' @inheritParams params
@@ -105,9 +105,9 @@ ssd_elgumbel <- function() {
 }
 
 #' Random Generation for log-Gumbel Distribution
-#' 
+#'
 #' Deprecated for `ssd_rlgumbel()`.
-#' 
+#'
 #' `r lifecycle::badge("deprecated")`
 #' @inheritParams params
 #' @export

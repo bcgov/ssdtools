@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,9 +30,9 @@
 #' @family boron
 #' @examples
 #' \dontrun{
-#'  fits <- ssd_fit_dists(ssddata::ccme_boron)
-#'  set.seed(99)
-#'  boron_pred <- predict(fits, ci = TRUE)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron)
+#' set.seed(99)
+#' boron_pred <- predict(fits, ci = TRUE)
 #' }
 #' head(boron_pred)
 "boron_pred"
@@ -43,10 +43,10 @@
 #'
 #' \describe{
 #'   \item{dist}{The distribution (chr).}
-#'   \item{npars}{The number of parameters (int).}
-#'   \item{tails}{Whether the distribution has both tails (flag).}
-#'   \item{stable}{Whether the distribution is numerically stable (flag).}
 #'   \item{bcanz}{Whether the distribution belongs to the set of distributions approved by BC, Canada, Australia and New Zealand for official guidelines (flag).}
+#'   \item{tails}{Whether the distribution has both tails (flag).}
+#'   \item{npars}{The number of parameters (int).}
+#'   \item{valid}{Whether the distribution has a valid likelihood that allows it to be fit with other distributions for modeling averaging (flag).}
 #' }
 #' @family dists
 #' @examples

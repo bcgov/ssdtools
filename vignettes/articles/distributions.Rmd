@@ -609,7 +609,6 @@ lines(conc, extraDistr::ppareto(conc, 0.838, 0.911), col = "#F2A61C")
 lines(conc, extraDistr::ppareto(conc, 4, 4), col = "#1CADF2")
 lines(conc, extraDistr::ppareto(conc, 10, 7), col = "#1F1CF2")
 legend("topleft", "(B)", bty = "n")
-
 ```
 
 ```{r echo=FALSE,fig.align='center',fig.width=9,fig.height=5,fig.cap="Sample North American inverse Pareto probability density (A) and cumulative probability (B) functions.", fig.alt="A two panel plot showing several realisations of the North American inverse Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel."}

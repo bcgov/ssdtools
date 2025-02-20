@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,11 +27,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-#'   set.seed(10)
-#'   ssd_exposure(fits)
-#'   ssd_exposure(fits, meanlog = 1)
-#'   ssd_exposure(fits, meanlog = 1, sdlog = 1)
+#' fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+#' set.seed(10)
+#' ssd_exposure(fits)
+#' ssd_exposure(fits, meanlog = 1)
+#' ssd_exposure(fits, meanlog = 1, sdlog = 1)
 #' }
 ssd_exposure <- function(x, meanlog = 0, sdlog = 1, nboot = 1000) {
   chk_number(meanlog)

@@ -1,0 +1,11 @@
+bibentry(
+  "Article",
+  title = "ssdtools v2: An R package to fit Species Sensitivity Distributions",
+  author = "Joe Thorley, Rebecca Fisher, David Fox, Carl Schwarz",
+  year = 2025,
+  journal = "Journal of Open Source Software",
+  volume = 10,
+  number = 105,
+  pages = 7492,
+  doi = "10.21105/joss.07492"
+)

@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,9 +40,9 @@ ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p =
 
 #' Cumulative Distribution Function for Gompertz Distribution
 #' `r lifecycle::badge("deprecated")`
-#' 
+#'
 #' Deprecated for `ssd_pgompertz()`.
-#' 
+#'
 #' @inheritParams params
 #' @export
 pgompertz <- function(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
@@ -63,9 +63,9 @@ ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p =
 
 #' Quantile Function for Gompertz Distribution
 #' `r lifecycle::badge("deprecated")`
-#' 
+#'
 #' Deprecated for `ssd_qgompertz()`.
-#' 
+#'
 #' @inheritParams params
 #' @export
 qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
@@ -93,9 +93,9 @@ ssd_egompertz <- function() {
 
 #' Random Generation for Gompertz Distribution
 #' `r lifecycle::badge("deprecated")`
-#' 
+#'
 #' Deprecated for `ssd_rgompertz()`.
-#' 
+#'
 #' @inheritParams params
 #' @export
 rgompertz <- function(n, llocation = 0, lshape = 0) {

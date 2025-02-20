@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,27 +21,18 @@ library(tibble)
 library(usethis)
 
 dist_data <- tibble::tribble(
-  ~dist, ~bcanz, ~tails, ~npars,
-  "burrIII3", FALSE, TRUE, 3L,
-  "gamma", TRUE, TRUE, 2L,
-  "gompertz", FALSE, TRUE, 2L,
-  "invpareto", FALSE, FALSE, 2L,
-  "lgumbel", TRUE, TRUE, 2L,
-  "llogis", TRUE, TRUE, 2L,
-  "llogis_llogis", FALSE, TRUE, 5L,
-  "lnorm", TRUE, TRUE, 2L,
-  "lnorm_lnorm", TRUE, TRUE, 5L,
-  "weibull", TRUE, TRUE, 2L
+  ~dist, ~bcanz, ~tails, ~npars, ~valid,
+  "burrIII3", FALSE, TRUE, 3L, TRUE,
+  "gamma", TRUE, TRUE, 2L, TRUE,
+  "gompertz", FALSE, TRUE, 2L, TRUE,
+  "invpareto", FALSE, FALSE, 2L, FALSE,
+  "lgumbel", TRUE, TRUE, 2L, TRUE,
+  "llogis", TRUE, TRUE, 2L, TRUE,
+  "llogis_llogis", FALSE, TRUE, 5L, TRUE,
+  "lnorm", TRUE, TRUE, 2L, TRUE,
+  "lnorm_lnorm", TRUE, TRUE, 5L, TRUE,
+  "weibull", TRUE, TRUE, 2L, TRUE
 )
-
-stopifnot(identical(dist_data$dist, ssdtools::ssd_dists()))
-stopifnot(identical(dist_data$dist[dist_data$bcanz], ssdtools::ssd_dists_bcanz()))
-stopifnot(identical(dist_data$dist[dist_data$npars == 2], ssdtools::ssd_dists(npars = 2)))
-stopifnot(identical(dist_data$dist[dist_data$npars == 3], ssdtools::ssd_dists(npars = 3)))
-stopifnot(identical(dist_data$dist[dist_data$npars == 4], ssdtools::ssd_dists(npars = 4)))
-stopifnot(identical(dist_data$dist[dist_data$npars == 5], ssdtools::ssd_dists(npars = 5)))
-stopifnot(identical(dist_data$dist[dist_data$tails], ssdtools::ssd_dists(tails = TRUE)))
-stopifnot(identical(dist_data$dist[!dist_data$tails], ssdtools::ssd_dists(tails = FALSE)))
 
 use_data(dist_data, overwrite = TRUE)
 

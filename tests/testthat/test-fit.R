@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -65,6 +65,11 @@ test_that("ssd_fit_dists not happy with left as left by default", {
   data <- ssddata::ccme_boron
   data$left <- data$Conc
   chk::expect_chk_error(ssd_fit_dists(data, left = "left"))
+})
+
+test_that("ssd_fit_dists gives chk error if valid and more than one distribution", {
+  data <- ssddata::ccme_boron
+  expect_error(ssd_fit_dists(data, dists = c("lnorm", "invpareto")))
 })
 
 test_that("ssd_fit_dists returns object class fitdists", {

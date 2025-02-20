@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -165,6 +165,6 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FA
     ep(glue::glue("expect_identical(length(ssd_r{dist}(1, lnorm.weight = 1)), 1L)"))
     ep(glue::glue("expect_identical(length(ssd_r{dist}(2, lnorm.weight = 1)), 2L)"))
     ep(glue::glue("expect_identical(length(ssd_r{dist}(3:4, lnorm.weight = 1)), 2L)"))
-    ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1), lnorm.weight = 1)), 2L)")) 
+    ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1), lnorm.weight = 1)), 2L)"))
   }
 }

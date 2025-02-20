@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@
 #' }
 ssd_wqg_bc <- function(data, left = "Conc") {
   lifecycle::deprecate_warn(
-    "2.0.0", "ssd_wqg_bc()", 
+    "2.0.0", "ssd_wqg_bc()",
     details = "Please use `ssd_fit_bcanz()` and `ssd_hc()` instead."
   )
   fits <- ssd_fit_bcanz(data, left = left)

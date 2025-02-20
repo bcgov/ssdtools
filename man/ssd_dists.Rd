@@ -4,7 +4,7 @@
 \alias{ssd_dists}
 \title{Species Sensitivity Distributions}
 \usage{
-ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5)
+ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5, valid = TRUE)
 }
 \arguments{
 \item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
@@ -12,6 +12,8 @@ ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5)
 \item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
 
 \item{npars}{A whole numeric vector specifying which distributions to include based on the number of parameters.}
+
+\item{valid}{A flag or NULL specifying whether to include distributions with valid likelihoods that allows them to be fit with other distributions for modeling averaging.}
 }
 \value{
 A unique, sorted character vector of the distributions.

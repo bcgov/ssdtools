@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +42,7 @@ ssd_label_comma <- function(digits = 3, ..., big.mark = ",") {
   }
 }
 
-#' Label numbers with significant digits and comma. 
+#' Label numbers with significant digits and comma.
 #' If `hc_value` is present in breaks, put on new line and make bold.
 #'
 #' @inheritParams params
@@ -59,11 +59,11 @@ ssd_label_comma <- function(digits = 3, ..., big.mark = ",") {
 ssd_label_comma_hc <- function(hc_value, digits = 3, ..., big.mark = ",") {
   chk_number(hc_value)
   chk_unused(...)
-  
+
   function(x) {
     marked <- ssd_label_comma(digits = digits, big.mark = big.mark)(x)
     purrr::map_chr(marked, ~ {
-      if (!is.na(.x) && .x == signif(hc_value, digits = digits)) 
+      if (!is.na(.x) && .x == signif(hc_value, digits = digits))
         .x <- paste0("<br>**", .x, "**")
       .x
     })

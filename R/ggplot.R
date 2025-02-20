@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change, 
+# Copyright 2023-2024 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ ssd_pal <- function() {
 }
 
 #' Discrete color-blind scale for SSD Plots
-#' 
+#'
 #' The functions were designed for coloring different groups in a plot of SSD data.
 #'
 #' @param ... Arguments passed to [ggplot2::discrete_scale()].
