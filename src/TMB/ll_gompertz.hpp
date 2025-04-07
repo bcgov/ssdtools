@@ -85,7 +85,8 @@ Type ll_gompertz(objective_function<Type>* obj) // normal with parameters mu and
      if(left(i) < right(i)){   // censored data
         pleft = 0;
         if(left(i)>0){ pleft=1 - exp(-location/shape * (exp(left(i) * shape) - 1));};
-        pright =1 - exp(-location/shape * (exp(right(i) * shape) - 1));
+        pright = 1;
+        if(isfinite(right(i))){ pright =1 - exp(-location/shape * (exp(right(i) * shape) - 1));};
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };
      

@@ -88,8 +88,11 @@ Type ll_lgumbel(objective_function<Type>* obj) // normal with parameters mu and 
           z = (log(left(i))-locationlog)/scalelog;
           pleft= exp(-exp(-z));
         };
-        z=(log(right(i))-locationlog)/scalelog;
-        pright = exp(-exp(-z));
+        pright = 1;
+        if(isfinite(right(i))){ 
+          z=(log(right(i))-locationlog)/scalelog;
+          pright = exp(-exp(-z));
+        };
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };
      

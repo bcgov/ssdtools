@@ -82,7 +82,8 @@ Type ll_weibull(objective_function<Type>* obj) // normal with parameters mu and 
      if(left(i) < right(i)){   // censored data
         pleft = 0;
         if(left(i)>0){ pleft=pweibull( left(i), shape, scale );};
-        pright =pweibull( right(i), shape, scale);
+        pright = 1;
+        if(isfinite(right(i))){ pright = pweibull( right(i), shape, scale);};
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };
      
