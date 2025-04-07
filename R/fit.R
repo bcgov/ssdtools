@@ -220,8 +220,9 @@ ssd_fit_dists <- function(
   data <- process_data(data, left, right, weight)
   attrs <- adjust_data(data, rescale = rescale, reweight = reweight, silent = silent)
 
-  if (any(is.infinite(attrs$data$right))) {
-    err("Distributions cannot currently be fitted to right censored data.")
+  # TODO: Drop this check once implmented for all distributions
+  if (any(is.infinite(attrs$data$right)) && !"lnorm" %in% dists) {
+    err("Currently only the 'lnorm' distribution can be fitted to right-censored data.")
   }
 
   fits <- fits_dists(attrs$data, dists,

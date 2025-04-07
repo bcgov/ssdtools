@@ -16,3 +16,8 @@ inst/doc
 scripts
 
 /paper/paper.pdf
+
+.vscode
+.github/dependabot.yml
+.devcontainer
+inst/eduard.R
