@@ -48,8 +48,8 @@ test_that("summary fitdists with right censored, rescaled, weighted data", {
   data$Mass <- seq_len(nrow(data))
   data$Other <- data$Conc
   data$Other[1] <- Inf
-  expect_error(fits <- ssd_fit_dists(data, right = "Other", weight = "Mass", rescale = TRUE, dists = "lnorm"))
-  # expect_snapshot_output(print(fits))
+  fits <- ssd_fit_dists(data, right = "Other", weight = "Mass", rescale = TRUE, dists = "lnorm")
+  expect_snapshot_output(print(fits))
 })
 
 test_that("print fitdists with multiple distributions", {

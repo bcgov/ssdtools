@@ -29,6 +29,14 @@
     
     Parameters estimated from 28 rows of inconsistently censored data.
 
+# summary fitdists with right censored, rescaled, weighted data
+
+    Distribution 'lnorm'
+      meanlog 0.632182
+      sdlog 1.30302
+    
+    Parameters estimated from 28 rows of inconsistently censored, unequally weighted and rescaled (8.408) data.
+
 # print fitdists with multiple distributions
 
     Distribution 'gamma'

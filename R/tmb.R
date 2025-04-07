@@ -53,7 +53,7 @@ fit_tmb <- function(data, dist, min_pmix, range_shape1, range_shape2,
                     control, pars = NULL, hessian = TRUE, ...) {
   # sdist cannot handle Infs very well, turn into NAs
   # TODO: better handle in process_data which sets it to Inf?
-  data_s  <- data
+  data_s <- data
   data_s$right[is.infinite(data_s$right)] <- NA
   pars <- sdist(dist, data_s, pars)
   model <- tmb_model(dist, data, pars = pars)
