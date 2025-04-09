@@ -26,7 +26,7 @@
 # Flags specifically for the TMB compilation can also be set
 # through the 'TMB_FLAGS' argument below, e.g.,
 #
-## TMB_FLAGS = -I"../../inst/include" # add include directory inst/include
+TMB_FLAGS = -I"../../inst/include" # add include directory inst/include
 #
 # --- TMB-specific compiling directives below ---
 
