@@ -49,6 +49,7 @@ Other contributors:
   \item Emilie Doussantousse [contributor]
   \item Nan-Hung Hsieh [contributor]
   \item Florencia D'Andrea [contributor]
+  \item Eduard Szöcs (\href{https://orcid.org/0000-0001-5376-1194}{ORCID}) [contributor]
   \item Province of British Columbia [funder, copyright holder]
   \item Environment and Climate Change Canada [funder, copyright holder]
   \item Australian Government Department of Climate Change, Energy, the Environment and Water [funder, copyright holder]
