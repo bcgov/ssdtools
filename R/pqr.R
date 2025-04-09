@@ -173,6 +173,7 @@ rdist <- function(dist, n, ..., .lgt = FALSE, chk) {
 }
 
 sdist <- function(dist, data, pars) {
+  data$right[is.infinite(data$right)] <- NA_real_
   fun <- paste0("s", dist)
   do.call(fun, list(data = data, pars = pars))
 }
