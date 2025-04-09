@@ -20,7 +20,7 @@
 # In principle, TMB model compilation is a completely separate process from
 # that of the remainder of 'src'.
 # Therefore, other Makevars flags can be added here, e.g.,
-CXX_STD = CXX23 # uncomment this line to enable C++23 support
+# CXX_STD = CXX14 # uncomment this line to enable C++14 support
 #
 # Flags specifically for the TMB compilation can also be set
 # through the 'TMB_FLAGS' argument below, e.g.,
