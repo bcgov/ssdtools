@@ -21,6 +21,7 @@
 # that of the remainder of 'src'.
 # Therefore, other Makevars flags can be added here, e.g.,
 #
+std=c++11
 ## CXX_STD = CXX14 # uncomment this line to enable C++14 support
 #
 # Flags specifically for the TMB compilation can also be set
