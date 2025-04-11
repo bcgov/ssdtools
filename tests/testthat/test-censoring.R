@@ -13,11 +13,12 @@ test_that("left, right and interval censoring works ", {
   expect_warning(hcparametric <- ssd_hc(fit, ci = TRUE, average = FALSE, parametric =TRUE), "^Parametric CIs cannot be calculated for censored data\\.$")
   expect_snapshot_data(hcparametric, "hcparametric")
   
-  expect_warning(hcaverage <- ssd_hc(fit, average = TRUE), "^Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters\\.$")
+  expect_warning(hcaverage <- ssd_hc(fit, ci = FALSE, average = TRUE, parametric = TRUE), "^Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters\\.$")
   expect_snapshot_data(hcaverage, "hcaverage")
 
   set.seed(42)
-  # warning(hcaveragenonparametric <- ssd_hc(fit, ci = TRUE, average = TRUE, parametric = FALSE, nboot = 10, min_pboot = 0.5), "^Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters\\.$")
+  # FIXME - should return tibble with 1 row even if NAs
+  expect_error(expect_warning(hcaveragenonparametric <- ssd_hc(fit, ci = TRUE, average = TRUE, parametric = FALSE, nboot = 10, min_pboot = 0.5), "^Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters\\.$"))
 })
 
 test_that("left, right and interval censoring works same number of parameter ", {
@@ -35,7 +36,7 @@ test_that("left, right and interval censoring works same number of parameter ", 
   expect_warning(hcparametric <- ssd_hc(fit, ci = TRUE, average = FALSE, parametric =TRUE), "^Parametric CIs cannot be calculated for censored data\\.$")
   expect_snapshot_data(hcparametric, "hcparametric2")
   
-  hcaverage <- ssd_hc(fit, average = TRUE)
+  hcaverage <- ssd_hc(fit, ci = FALSE, average = TRUE, parametric = TRUE)
   expect_snapshot_data(hcaverage, "hcaverage2")
   set.seed(42)
   hcaveragenonparametric <- ssd_hc(fit, ci = TRUE, average = TRUE, parametric = FALSE, nboot = 10)
