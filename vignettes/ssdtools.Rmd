@@ -209,8 +209,6 @@ print(boron_pc)
 Censored data is that for which only a lower and/or upper limit is known for a particular species.
 If the `right` argument in `ssd_fit_dists()` is different to the `left` argument then the data are considered to be censored.
 
-It is important to note that `ssdtools` doesn't currently support right censored data.
-
 Let's produce some left censored data.
 
 ```{r}

@@ -66,6 +66,5 @@ The name of the columns with the lower and upper bound values are then passed to
 
 Currently `ssdtools` has the following limitations on the analysis of censored data:
 
-- distribution fitting to left (<) or interval (><) censored data only, i.e., when the upper bound is known;
 - model averaging when the distributions have the same number of parameters only; and
 - estimation of confidence interval using non-parametric bootstrapping only.
