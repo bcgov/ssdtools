@@ -20,7 +20,7 @@ test_that("ssd_pal is function", {
 })
 
 test_that("scale_colour_ssd is ggproto", {
-  expect_true(ggplot2::is.ggproto(scale_colour_ssd()))
+  expect_true(ggplot2::is_ggproto(scale_colour_ssd()))
 })
 
 test_that("scale_color_ssd is ggproto", {
@@ -30,7 +30,7 @@ test_that("scale_color_ssd is ggproto", {
 })
 
 test_that("scale_fill_ssd is ggproto", {
-  expect_true(ggplot2::is.ggproto(scale_fill_ssd()))
+  expect_true(ggplot2::is_ggproto(scale_fill_ssd()))
 })
 
 test_that("stat_ssd deprecated", {
