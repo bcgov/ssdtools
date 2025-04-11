@@ -82,7 +82,7 @@ Type ll_lnorm(objective_function<Type>* obj) {
         pleft = 0;
         if(left(i)>0){ pleft=pnorm(log(left(i)), meanlog, sdlog);};
         pright = 1;
-        if(isfinite(right(i))){ pright=pnorm(log(right(i)), meanlog, sdlog);};
+        if(std::isfinite(right(i))){ pright=pnorm(log(right(i)), meanlog, sdlog);};
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };
      

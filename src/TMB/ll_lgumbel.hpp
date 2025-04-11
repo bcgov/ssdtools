@@ -89,7 +89,7 @@ Type ll_lgumbel(objective_function<Type>* obj) // normal with parameters mu and 
           pleft= exp(-exp(-z));
         };
         pright = 1;
-        if(isfinite(right(i))){ 
+        if(std::isfinite(right(i))){ 
           z=(log(right(i))-locationlog)/scalelog;
           pright = exp(-exp(-z));
         };
