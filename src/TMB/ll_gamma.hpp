@@ -81,6 +81,7 @@ Type ll_gamma(objective_function<Type>* obj) // normal with parameters mu and lo
         pleft = 0;
         if(left(i)>0){ pleft=pgamma( left(i), shape, scale );};
         pright = 1;
+        using std::isfinite;
         if(isfinite(right(i))){ pright = pgamma( right(i), shape, scale );};
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };
