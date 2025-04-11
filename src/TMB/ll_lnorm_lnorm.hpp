@@ -60,6 +60,7 @@ Type ll_lnorm_lnorm(objective_function<Type>* obj) // normal with parameters mu 
         if(left(i)>0){ pleft=pmix * pnorm(log(left(i)), meanlog1, sdlog1)+
                             (1-pmix) * pnorm(log(left(i)), meanlog2, sdlog2);};
         pright = 1;
+        using std::isfinite;
         if(isfinite(right(i))){ pright = pmix * pnorm(log(right(i)), meanlog1, sdlog1)+
                                   (1-pmix)* pnorm(log(right(i)), meanlog2, sdlog2);};
         nll -= weight(i)*log(pright-pleft);

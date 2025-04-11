@@ -94,6 +94,7 @@ Type ll_invpareto(objective_function<Type>* obj) // normal with parameters mu an
         if(left(i)>scale)pleft=1;
         if((left(i)>0) && (left(i)<=scale)){ pleft= pow((left(i)/scale),shape);};  // need the other tail for the inverse
         pright = 1;
+        using std::isfinite;
         if(isfinite(right(i)) && right(i)<=scale) { pright=pow((right(i)/scale),shape);};
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };

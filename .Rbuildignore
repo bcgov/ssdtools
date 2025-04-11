@@ -21,3 +21,5 @@
 ^CODE_OF_CONDUCT\.md$
 ^vignettes/articles$
 ^CITATION\.cff$
+
+.devcontainer
