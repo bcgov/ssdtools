@@ -94,7 +94,7 @@ Type ll_llogis_llogis(objective_function<Type>* obj) // normal with parameters m
         if(left(i)>0){ pleft=pmix   * 1/(1+exp(-(log(left(i))-locationlog1)/scalelog1))+
                             (1-pmix)* 1/(1+exp(-(log(left(i))-locationlog2)/scalelog2));};
         pright = 1;
-        if(std::isfinite(right(i))){ pright=pmix    * 1/(1+exp(-(log(right(i))-locationlog1)/scalelog1))+
+        if(isfinite(right(i))){ pright=pmix    * 1/(1+exp(-(log(right(i))-locationlog1)/scalelog1))+
           (1-pmix)* 1/(1+exp(-(log(right(i))-locationlog2)/scalelog2));};
         nll -= weight(i)*log(pright-pleft);
      };

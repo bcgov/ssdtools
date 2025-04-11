@@ -81,7 +81,7 @@ Type ll_llogis(objective_function<Type>* obj) {
         pleft = 0;
         if(left(i)>0){ pleft=1/(1+exp(-(log(left(i))-locationlog)/scalelog));};
         pright = 1;
-        if(std::isfinite(right(i))){ pright=1/(1+exp(-(log(right(i))-locationlog)/scalelog));};
+        if(isfinite(right(i))){ pright=1/(1+exp(-(log(right(i))-locationlog)/scalelog));};
         nll -= weight(i)*log(pright-pleft);
      };
      
