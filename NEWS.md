@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.3.0.9000
+
+- Implemented right censoring for all distributions.
+
 # ssdtools 2.3.0
 
 - Added valid column to dist_data to indicate the "invpareto" has invalid likelihood.
