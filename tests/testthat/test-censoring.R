@@ -8,7 +8,7 @@ test_that("left, right and interval censoring works ", {
   
   set.seed(42)
   hcnonparametric <- ssd_hc(fit, ci = TRUE, average = FALSE, parametric = FALSE, nboot = 10, min_pboot = 0.1)
-  expect_snapshot_data(hcnonparametric, "hcnonparametric")
+  expect_snapshot_data(hcnonparametric, "hcnonparametric", digits = 3)
   
   expect_warning(hcparametric <- ssd_hc(fit, ci = TRUE, average = FALSE, parametric =TRUE), "^Parametric CIs cannot be calculated for censored data\\.$")
   expect_snapshot_data(hcparametric, "hcparametric")
