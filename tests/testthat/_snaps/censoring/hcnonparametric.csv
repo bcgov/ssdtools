@@ -1,7 +1,7 @@
 dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-gamma,0.05,1.18081,0.458988,0.519882,1.81873,NA,non-parametric,10,1,numeric(0)
-lgumbel,0.05,1.82796,0.455128,1.49375,2.71364,NA,non-parametric,10,1,numeric(0)
-llogis,0.05,1.78679,1.02995,1.19804,4.09295,NA,non-parametric,10,1,numeric(0)
-lnorm,0.05,1.81555,0.719816,1.33417,3.49322,NA,non-parametric,10,1,numeric(0)
-lnorm_lnorm,0.05,1.35263,1.37008,1.06127,3.69929,NA,non-parametric,10,0.4,numeric(0)
-weibull,0.05,1.2343,1.09688,0.539931,3.342,NA,non-parametric,10,1,numeric(0)
+gamma,0.05,1.18,0.459,0.52,1.82,NA,non-parametric,10,1,numeric(0)
+lgumbel,0.05,1.83,0.455,1.49,2.71,NA,non-parametric,10,1,numeric(0)
+llogis,0.05,1.79,1.03,1.2,4.09,NA,non-parametric,10,1,numeric(0)
+lnorm,0.05,1.82,0.72,1.33,3.49,NA,non-parametric,10,1,numeric(0)
+lnorm_lnorm,0.05,1.35,1.37,1.06,3.7,NA,non-parametric,10,0.4,numeric(0)
+weibull,0.05,1.23,1.1,0.54,3.34,NA,non-parametric,10,1,numeric(0)
