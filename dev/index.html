@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.2.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,6 +65,7 @@
 
 <p><code>ssdtools</code> is an R package to fit and plot Species Sensitivity Distributions (SSD).</p>
 <p>SSDs are cumulative probability distributions which are fitted to toxicity concentrations for different species as described by Posthuma et al. (2001). The ssdtools package uses Maximum Likelihood to fit distributions such as the log-normal, log-logistic, log-Gumbel (also known as the inverse Weibull), gamma, Weibull and log-normal log-normal mixture. Multiple distributions can be averaged using Akaike Information Criteria. Confidence intervals on hazard concentrations and proportions are produced by bootstrapping.</p>
+<p><code>ssdtools</code> can handle censored data with two limitations. It is currently only possible to model average when the distributions have the same number of parameters and confidence intervals can only be estimated using non-parametric (as opposed to parametric) bootstrapping.</p>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -141,13 +142,36 @@
 <p><em>Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity Distribution Modeling. Environ Toxicol Chem 40(2): 293–308. <a href="https://doi.org/10.1002/etc.4925" class="external-link uri">https://doi.org/10.1002/etc.4925</a>.</em></p>
 </div>
 <div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>To cite package <span class="st">'ssdtools'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  Thorley J, Fisher R, Fox D, Schwarz <span class="fu">C</span> (<span class="dv">2025</span>). <span class="st">"ssdtools v2: An R</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="st">  package to fit Species Sensitivity Distributions."</span> _Journal of Open</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  Source Software_, <span class="sc">*</span><span class="dv">10</span><span class="sc">*</span>(<span class="dv">105</span>), <span class="fl">7492.</span> doi<span class="sc">:</span><span class="fl">10.21105</span><span class="sc">/</span>joss<span class="fl">.07492</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>doi.org<span class="sc">/</span><span class="fl">10.21105</span><span class="sc">/</span>joss<span class="fl">.07492</span><span class="sc">&gt;</span>.</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  <span class="sc">@</span>Article{,</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>    title <span class="ot">=</span> {ssdtools v2<span class="sc">:</span> An R package to fit Species Sensitivity Distributions},</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>    author <span class="ot">=</span> {Joe Thorley and Rebecca Fisher and David Fox and Carl Schwarz},</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2025</span>},</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>    journal <span class="ot">=</span> {Journal of Open Source Software},</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>    volume <span class="ot">=</span> {<span class="dv">10</span>},</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>    number <span class="ot">=</span> {<span class="dv">105</span>},</span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>    pages <span class="ot">=</span> {<span class="dv">7492</span>},</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>    doi <span class="ot">=</span> {<span class="fl">10.21105</span><span class="sc">/</span>joss<span class="fl">.07492</span>},</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>  }</span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="section level3">
 <h3 id="release">Release<a class="anchor" aria-label="anchor" href="#release"></a>
 </h3>
 <p>To install the latest release version from <a href="https://CRAN.R-project.org/package=ssdtools" class="external-link">CRAN</a>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ssdtools"</span><span class="op">)</span></span></code></pre></div>
 <p>The website for the release version is at <a href="https://bcgov.github.io/ssdtools/" class="uri">https://bcgov.github.io/ssdtools/</a>.</p>
 </div>
@@ -155,11 +179,11 @@
 <h3 id="development">Development<a class="anchor" aria-label="anchor" href="#development"></a>
 </h3>
 <p>To install the development version from <a href="https://github.com/bcgov/ssdtools" class="external-link">GitHub</a></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"bcgov/ssdtools"</span><span class="op">)</span></span></code></pre></div>
 <p>or from <a href="https://bcgov.r-universe.dev/ssdtools" class="external-link">r-universe</a>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ssdtools"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://bcgov.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The website for the development version is at <a href="https://bcgov.github.io/ssdtools/dev/" class="uri">https://bcgov.github.io/ssdtools/dev/</a>.</p>
 </div>
