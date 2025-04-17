@@ -7,12 +7,17 @@
 .Renviron
 .RProfile
 .httr-oauth
+.devcontainer
 
 *.html
+.vscode
+
+.github/dependabot.yml
 
 docs
 inst/docs
 inst/doc
+inst/eduard.R
 scripts
 
 /paper/paper.pdf

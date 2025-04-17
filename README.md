@@ -27,6 +27,11 @@ mixture. Multiple distributions can be averaged using Akaike Information
 Criteria. Confidence intervals on hazard concentrations and proportions
 are produced by bootstrapping.
 
+`ssdtools` can handle censored data with two limitations. It is
+currently only possible to model average when the distributions have the
+same number of parameters and confidence intervals can only be estimated
+using non-parametric (as opposed to parametric) bootstrapping.
+
 ## Introduction
 
 The dependency [`ssddata`](https://github.com/open-AIMS/ssddata)

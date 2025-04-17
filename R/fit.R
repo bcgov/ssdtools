@@ -220,10 +220,6 @@ ssd_fit_dists <- function(
   data <- process_data(data, left, right, weight)
   attrs <- adjust_data(data, rescale = rescale, reweight = reweight, silent = silent)
 
-  if (any(is.infinite(attrs$data$right))) {
-    err("Distributions cannot currently be fitted to right censored data.")
-  }
-
   fits <- fits_dists(attrs$data, dists,
     min_pmix = min_pmix, range_shape1 = range_shape1,
     range_shape2 = range_shape2,

@@ -333,16 +333,14 @@ test_that("ssd_fit_dists works with right censored data", {
   data$right <- data$Conc
   data$right[1] <- Inf
 
-  expect_error(
-    fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
-    "^Distributions cannot currently be fitted to right censored data\\.$"
-  )
+  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
 
-  #
-  # tidy <- tidy(fits)
-  #
-  # expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323))
-  # expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761))
+  tidy <- tidy(fits)
+
+  expect_equal(tidy$est, c(2.634609, 1.208644), tolerance = 1e-06) 
+  # mosaic: 2.6 & 1.2
+  expect_equal(tidy$se, c(0.2317194, 0.1634157), tolerance = 1e-06)
+  expect_equal(unname(logLik(fits)), -114.5698) # mosaic: -114.6
 })
 
 test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
@@ -350,26 +348,11 @@ test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
 
   data$right <- data$Conc
   data$right[1] <- Inf
-
-  expect_error(
-    fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
-    "^Distributions cannot currently be fitted to right censored data\\.$"
-  )
-
+  fitsInf <- ssd_fit_dists(data, dists = "lnorm", right = "right")
   data$right[1] <- NA
-
-  expect_error(
-    fits <- ssd_fit_dists(data, dists = "lnorm", right = "right"),
-    "^Distributions cannot currently be fitted to right censored data\\.$"
-  )
-
-  # fits0 <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  #
-  # data$right[1] <- NA
-  #
-  # fitsna <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  #
-  # expect_equal(tidy(fits0), tidy(fitsna))
+  fitsna <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+  
+  expect_equal(tidy(fitsInf), tidy(fitsna))
 })
 
 test_that("ssd_fit_dists min_pmix at_boundary_ok FALSE", {

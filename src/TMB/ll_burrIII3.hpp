@@ -86,7 +86,9 @@ Type ll_burrIII3(objective_function<Type>* obj) // normal with parameters mu and
      if(left(i) < right(i)){   // censored data
         pleft = 0;
         if(left(i)>0){ pleft=1/pow(1+pow(scale/left(i),shape2),shape1);};
-        pright = 1/pow(1+pow(scale/right(i),shape2),shape1);
+        pright = 1;
+        using std::isfinite;
+        if(isfinite(right(i))){ pright = 1/pow(1+pow(scale/right(i),shape2),shape1);};
         nll -= weight(i)*log(pright-pleft);  // contribution to log-likelihood for censored values
      };
      

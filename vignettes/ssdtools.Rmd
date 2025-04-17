@@ -29,6 +29,9 @@ SSDs are cumulative probability distributions that are used to estimate the perc
 The concentration that affects 5% of the species is referred to as the 5% Hazard Concentration (*HC~5~*). This is equivalent to a 95% protection value (*PC~95~*).
 For more information on SSDs the reader is referred to @posthuma_species_2001.
 
+`ssdtools` can handle left, right and interval censored data with two limitations.
+It is currently only possible to model average when the distributions have the same number of parameters and confidence intervals can only be estimated using non-parametric (as opposed to parametric) bootstrapping.
+
 In order to use `ssdtools` you need to install R (see below) or use the Shiny [app](https://bcgov-env.shinyapps.io/ssdtools/).
 The shiny app includes a user guide. 
 This vignette is a user manual for the R package.
@@ -208,8 +211,6 @@ print(boron_pc)
 
 Censored data is that for which only a lower and/or upper limit is known for a particular species.
 If the `right` argument in `ssd_fit_dists()` is different to the `left` argument then the data are considered to be censored.
-
-It is important to note that `ssdtools` doesn't currently support right censored data.
 
 Let's produce some left censored data.
 
