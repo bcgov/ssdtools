@@ -79,5 +79,10 @@ ssd_dists_all <- function(valid = TRUE) {
 #' @examples
 #' ssd_dists_shiny()
 ssd_dists_shiny <- function() {
+  lifecycle::deprecate_soft(
+    "2.3.0",
+    "ssd_dists_shiny()",
+    details = "Use `ssd_dists(tails = TRUE)` instead."
+  )
   ssd_dists(bcanz = NULL, tails = TRUE, npars = 2:5, valid = TRUE)
 }
