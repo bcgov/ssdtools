@@ -166,7 +166,11 @@ fits_dists <- function(data, dists, min_pmix, range_shape1, range_shape2, contro
 #' ssd_plot_cdf(fits)
 #' ssd_hc(fits)
 ssd_fit_dists <- function(
-    data, left = "Conc", right = left, weight = NULL,
+    data, 
+    left = "Conc",
+    ...,
+    right = left, 
+    weight = NULL,
     dists = ssd_dists_bcanz(),
     nrow = 6L,
     rescale = FALSE,
@@ -179,6 +183,7 @@ ssd_fit_dists <- function(
     range_shape2 = range_shape1,
     control = list(),
     silent = FALSE) {
+  chk_unused(...)
   chk_character_or_factor(dists)
   chk_vector(dists)
   check_dim(dists, values = TRUE)

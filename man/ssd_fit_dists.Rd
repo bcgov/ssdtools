@@ -7,6 +7,7 @@
 ssd_fit_dists(
   data,
   left = "Conc",
+  ...,
   right = left,
   weight = NULL,
   dists = ssd_dists_bcanz(),
@@ -27,6 +28,8 @@ ssd_fit_dists(
 \item{data}{A data frame.}
 
 \item{left}{A string of the column in data with the concentrations.}
+
+\item{...}{Unused.}
 
 \item{right}{A string of the column in data with the right concentration values.}
 

@@ -7,6 +7,7 @@
 ssd_fit_burrlioz(
   data,
   left = "Conc",
+  ...,
   rescale = FALSE,
   control = list(),
   silent = FALSE
@@ -16,6 +17,8 @@ ssd_fit_burrlioz(
 \item{data}{A data frame.}
 
 \item{left}{A string of the column in data with the concentrations.}
+
+\item{...}{Unused.}
 
 \item{rescale}{A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.}
 

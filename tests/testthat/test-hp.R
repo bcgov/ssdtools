@@ -299,7 +299,7 @@ test_that("ssd_hp with 1 bootstrap", {
 })
 
 test_that("ssd_hp fix_weight", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
 
   set.seed(102)
   hc_unfix <- ssd_hp(fits, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)

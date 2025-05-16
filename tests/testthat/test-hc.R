@@ -536,7 +536,7 @@ test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
 test_that("ssd_hc save_to", {
   dir <- withr::local_tempdir()
 
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to")
@@ -562,7 +562,7 @@ test_that("ssd_hc save_to", {
 test_that("ssd_hc save_to ci_method = weighted_samples", {
   dir <- withr::local_tempdir()
 
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, ci_method = "weighted_arithmetic", samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to_not_multi")
@@ -606,7 +606,7 @@ test_that("ssd_hc save_to ci_method = weighted_samples default", {
 test_that("ssd_hc save_to rescale", {
   dir <- withr::local_tempdir()
 
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm", rescale = TRUE)
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm", rescale = TRUE)
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to_rescale")
@@ -623,7 +623,7 @@ test_that("ssd_hc save_to rescale", {
 test_that("ssd_hc save_to lnorm 1", {
   dir <- withr::local_tempdir()
 
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to11")
@@ -632,7 +632,7 @@ test_that("ssd_hc save_to lnorm 1", {
     "estimates_000000001_lnorm.rds"
   ))
   boot1 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
-  fit1 <- ssd_fit_dists(boot1, dist = "lnorm", left = "left", right = "right", weight = "weight")
+  fit1 <- ssd_fit_dists(boot1, dists = "lnorm", left = "left", right = "right", weight = "weight")
   est <- ssd_hc(fit1)$est
   expect_equal(hc$lcl, est, tolerance = 1e-6)
   expect_identical(hc$lcl, hc$ucl)
@@ -641,7 +641,7 @@ test_that("ssd_hc save_to lnorm 1", {
 test_that("ssd_hc save_to replaces", {
   dir <- withr::local_tempdir()
 
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = "lnorm")
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir)
   expect_identical(list.files(dir), c(
@@ -660,7 +660,7 @@ test_that("ssd_hc save_to replaces", {
 })
 
 test_that("ssd_hc fix_weight", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
 
   set.seed(102)
   hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
@@ -672,7 +672,7 @@ test_that("ssd_hc fix_weight", {
 })
 
 test_that("ssd_hc multiple values", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
 
   set.seed(102)
   hc_unfix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
@@ -686,7 +686,7 @@ test_that("ssd_hc multiple values", {
 test_that("ssd_hc multiple values save_to", {
   dir <- withr::local_tempdir()
 
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
 
   set.seed(102)
   hc <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 2, save_to = dir, ci = TRUE, ci_method = "multi_fixed")
@@ -700,7 +700,7 @@ test_that("ssd_hc multiple values save_to", {
 test_that("ssd_hc not multi_ci save_to", {
   dir <- withr::local_tempdir()
 
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dist = c("lnorm", "lgumbel"))
+  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
 
   set.seed(102)
   hc <- ssd_hc(fits, nboot = 2, ci_method = "weighted_arithmetic", save_to = dir, ci = TRUE)

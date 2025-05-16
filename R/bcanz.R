@@ -51,7 +51,8 @@ ssd_dists_bcanz <- function(npars = c(2L, 5L)) {
 #' @export
 #' @examples
 #' ssd_fit_bcanz(ssddata::ccme_boron)
-ssd_fit_bcanz <- function(data, left = "Conc", dists = ssd_dists_bcanz()) {
+ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz()) {
+  chk_unused(...)
   ssd_fit_dists(data,
     left = left,
     dists = dists
