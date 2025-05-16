@@ -56,7 +56,15 @@ comma_signif <- function(x, digits = 3, ..., big.mark = ",") {
 #' @examples
 #' ssd_ecd(1:10)
 ssd_ecd <- function(x, ties.method = "first") {
-  (rank(x, ties.method = ties.method) - 0.5) / length(x)
+  if(!missing(ties.method)) {
+    lifecycle::deprecate_warn("2.3.0", "ssd_ecd(ties.method)")
+  }
+  chk_numeric(x)
+  if(!length(x)) return(numeric())
+  if(length(x) == 1L) return(0.5)
+  if(anyNA(x)) return(rep(NA_real_, length(x)))
+  rank <- rank(x, ties.method = "first")
+  stats::ppoints(length(x))[rank]
 }
 
 #' Empirical Cumulative Density for Species Sensitivity Data
