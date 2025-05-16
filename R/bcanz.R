@@ -52,10 +52,28 @@ ssd_dists_bcanz <- function(npars = c(2L, 5L)) {
 #' @examples
 #' ssd_fit_bcanz(ssddata::ccme_boron)
 ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz()) {
+  chk_data(data)
   chk_unused(...)
+  chk_subset(dists, ssd_dists_bcanz())
+  
+  ## all arguments manually specified to ensure robust to 
+  ## changes in default values in ssd_fit_dists()
   ssd_fit_dists(data,
     left = left,
-    dists = dists
+    right = left, 
+    weight = NULL,
+    dists = dists,
+    nrow = 6L,
+    rescale = FALSE,
+    reweight = FALSE,
+    computable = FALSE,
+    at_boundary_ok = TRUE,
+    all_dists = FALSE,
+    min_pmix = ssd_min_pmix(nrow(data)),
+    range_shape1 = c(0.05, 20),
+    range_shape2 = c(0.05, 20),
+    control = list(),
+    silent = FALSE
   )
 }
 
