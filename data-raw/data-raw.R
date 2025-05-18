@@ -51,4 +51,4 @@ use_data(boron_pred, overwrite = TRUE)
 ## preserves old version
 fits2.3 <- ssdtools:::fits2.3
 
-use_data(fits2.3, overwrite = TRUE, internal = TRUE)
+use_data(fits, fits2.3, overwrite = TRUE, internal = TRUE)

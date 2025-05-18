@@ -40,7 +40,7 @@ ssd_computable <- function(x, ...) {
 ssd_computable.tmbfit <- function(x, ...) {
   chk_unused(...)
   if(is.null(x$flags$computable)) {
-    return(NA_real_)
+    return(NA)
   }
   x$flags$computable
 }

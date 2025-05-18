@@ -40,7 +40,7 @@ ssd_at_boundary <- function(x, ...) {
 ssd_at_boundary.tmbfit <- function(x, ...) {
   chk_unused(...)
   if(is.null(x$flags$at_boundary)) {
-    return(NA_real_)
+    return(NA)
   }
   x$flags$at_boundary
 }
