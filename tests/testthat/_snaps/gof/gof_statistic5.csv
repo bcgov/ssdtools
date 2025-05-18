@@ -1,3 +1,3 @@
-dist,ad,ks,cvm,aic,aicc,bic,delta,weight
-llogis_llogis,NA,NA,NA,224.934,NA,NA,1.219,0.352
-lnorm_lnorm,NA,NA,NA,223.714,NA,NA,0,0.648
+dist,npars,nobs,log_lik,aic,aicc,delta,weight,bic,ad,ks,cvm,at_bound,computable
+llogis_llogis,5,NA,-107.467,224.934,NA,1.219,0.352,NA,NA,NA,NA,FALSE,TRUE
+lnorm_lnorm,5,NA,-106.857,223.714,NA,0,0.648,NA,NA,NA,NA,FALSE,TRUE

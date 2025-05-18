@@ -6,6 +6,11 @@ test_that("test at boundary 2 9", {
   expect_equal(unname(fit$lnorm_lnorm$optim$par["pmix"]), ssd_min_pmix(nrow(data)))
   gof <- ssd_gof(fit)
   expect_snapshot_data(gof, "b29")
+  expect_identical(ssd_at_boundary(fit),
+                   c(gamma = FALSE, lgumbel = FALSE, llogis = FALSE, lnorm = FALSE, 
+                     lnorm_lnorm = TRUE, weibull = FALSE))
+  expect_identical(ssd_at_boundary(fit$lnorm), FALSE)
+  expect_identical(ssd_at_boundary(fit$lnorm_lnorm), TRUE)
 })
 
 test_that("test at boundary 2 14", {
@@ -16,6 +21,11 @@ test_that("test at boundary 2 14", {
   expect_equal(unname(fit$lnorm_lnorm$optim$par["pmix"]), ssd_min_pmix(nrow(data)))
   gof <- ssd_gof(fit)
   expect_snapshot_data(gof, "b214")
+  expect_identical(ssd_at_boundary(fit),
+                   c(gamma = FALSE, lgumbel = FALSE, llogis = FALSE, lnorm = FALSE, 
+                     lnorm_lnorm = TRUE, weibull = FALSE))
+  expect_identical(ssd_at_boundary(fit$lnorm), FALSE)
+  expect_identical(ssd_at_boundary(fit$lnorm_lnorm), TRUE)
 })
 
 test_that("test at boundary 2 23", {
@@ -27,4 +37,9 @@ test_that("test at boundary 2 23", {
                0.211770893307891)
   gof <- ssd_gof(fit)
   expect_snapshot_data(gof, "b223")
+  expect_identical(ssd_at_boundary(fit),
+                   c(gamma = FALSE, lgumbel = FALSE, llogis = FALSE, lnorm = FALSE, 
+                     lnorm_lnorm = FALSE, weibull = FALSE))
+  expect_identical(ssd_at_boundary(fit$lnorm), FALSE)
+  expect_identical(ssd_at_boundary(fit$lnorm_lnorm), FALSE)
 })

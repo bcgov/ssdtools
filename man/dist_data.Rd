@@ -20,6 +20,7 @@ A data frame of information on the implemented distributions.
 \item{tails}{Whether the distribution has both tails (flag).}
 \item{npars}{The number of parameters (int).}
 \item{valid}{Whether the distribution has a valid likelihood that allows it to be fit with other distributions for modeling averaging (flag).}
+\item{bound}{Whether one or more parameters have boundaries (flag).}
 }
 }
 \examples{

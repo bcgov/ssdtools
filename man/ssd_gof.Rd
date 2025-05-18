@@ -25,6 +25,8 @@ Returns a tbl data frame with the following columns
 \item{dist}{The distribution name (chr)}
 \item{aic}{Akaike's Information Criterion (dbl)}
 \item{bic}{Bayesian Information Criterion (dbl)}
+\item{at_bound}{Parameter(s) at boundary (lgl)}
+\item{computable}{All parameter have computable standard errors (lgl)}
 }
 and if the data are non-censored
 \describe{
