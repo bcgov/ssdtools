@@ -36,7 +36,10 @@ dist_data <- tibble::tribble(
 
 use_data(dist_data, overwrite = TRUE)
 
-fits <- ssd_fit_dists(ssddata::ccme_boron)
+withr::with_seed(
+  99,
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+)
 
 withr::with_seed(
   99,
