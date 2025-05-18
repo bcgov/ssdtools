@@ -35,14 +35,10 @@ reference:
   - ssd_fit_dists
   - ssd_fit_bcanz
   - ssd_fit_burrlioz
-- title: Hazard Concentrations
-  desc: Functions that calculate hazard concentrations
-  contents:
+- title: Hazard Concentrations and Proportions
+  desc: Functions that calculate hazard concentrations and Proportions
   - ssd_hc
   - ssd_hc_bcanz
-- title: Hazard Proportions
-  desc: Functions that calculate hazard proportions
-  contents:
   - ssd_hp
   - ssd_hp_bcanz
 - title: Manipulate Data
@@ -97,6 +93,8 @@ reference:
   - ssd_licensing_md
   - npars
   - params
+  - ssd_at_boundary
+  - ssd_computable
   - ssd_ecd
   - ssd_ecd_data
   - ssd_exposure
