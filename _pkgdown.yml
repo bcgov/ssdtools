@@ -37,6 +37,7 @@ reference:
   - ssd_fit_burrlioz
 - title: Hazard Concentrations and Proportions
   desc: Functions that calculate hazard concentrations and Proportions
+  contents:
   - ssd_hc
   - ssd_hc_bcanz
   - ssd_hp
