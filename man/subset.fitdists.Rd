@@ -4,7 +4,7 @@
 \alias{subset.fitdists}
 \title{Subset fitdists Object}
 \usage{
-\method{subset}{fitdists}(x, select = names(x), delta = Inf, ...)
+\method{subset}{fitdists}(x, select = names(x), delta = Inf, ..., strict = TRUE)
 }
 \arguments{
 \item{x}{The object.}
@@ -15,6 +15,8 @@
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 
 \item{...}{Unused.}
+
+\item{strict}{A flag indicating whether all elements of select must be present.}
 }
 \description{
 Select a subset of distributions from a fitdists object.

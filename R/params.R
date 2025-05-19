@@ -112,6 +112,7 @@
 #' @param shift_x The value to multiply the label x values by (after adding `add_x`).
 #' @param silent A flag indicating whether fits should fail silently.
 #' @param size A number for the size of the labels. Deprecated for `label_size`. #' `r lifecycle::badge("deprecated")`
+#' @param strict A flag indicating whether all elements of select must be present.
 #' @param suffix Additional text to display after the number on the y-axis.
 #' @param tails A flag or NULL specifying whether to only include distributions with both tails.
 #' @param text_size A number for the text size.

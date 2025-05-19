@@ -189,6 +189,8 @@ remove them with a warning.}
 
 \item{size}{A number for the size of the labels. Deprecated for \code{label_size}. #' \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
+\item{strict}{A flag indicating whether all elements of select must be present.}
+
 \item{suffix}{Additional text to display after the number on the y-axis.}
 
 \item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
