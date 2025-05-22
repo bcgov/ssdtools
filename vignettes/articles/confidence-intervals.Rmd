@@ -71,7 +71,7 @@ library(ssdtools)
 fit <- ssd_fit_dists(data = ssddata::ccme_silver)
 set.seed(99)
 
-ssd_hc(fit, ci = TRUE, multi_est = FALSE, ci_method = "weighted_arithmetic")
+ssd_hc(fit, ci = TRUE, multi_est = "arithmetic", ci_method = "weighted_arithmetic")
 ```
 
 Use of this method is not recommended as it is both technically incorrect and computationally inefficient and only retained to allow users to reproduce previous results.

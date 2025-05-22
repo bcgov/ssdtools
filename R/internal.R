@@ -43,3 +43,10 @@ root <- function(p, f) {
   }
   q
 }
+
+weighted_mean <- function(x, multi_est) {
+  if(multi_est == "arithmetic") {
+    weighted.mean(x)
+  }
+  exp(weighted.mean(log(x)))
+}

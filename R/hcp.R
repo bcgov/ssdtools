@@ -167,7 +167,7 @@ replace_estimates <- function(hcp, est) {
   hcp
 }
 
-hcp_average <- function(hcp, weight, value, method, nboot) {
+hcp_average <- function(hcp, weight, value, method, nboot, multi_est) {
   samples <- group_samples(hcp)
 
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
@@ -252,7 +252,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   hcp
 }
 
-.ssd_hcp_conventional <- function(x, value, ci, level, nboot, min_pboot, estimates,
+.ssd_hcp_conventional <- function(x, value, ci, level, nboot, multi_est, min_pboot, estimates,
                                   data, rescale, weighted, censoring, min_pmix,
                                   range_shape1, range_shape2, parametric, control,
                                   save_to, samples, fix_weights, hc, fun) {
@@ -359,13 +359,13 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
       fix_weights = fix_weights, hc = hc
     )
 
-    if (multi_est) {
+    if (multi_est == "invertible") {
       return(hcp)
     }
 
     est <- .ssd_hcp_conventional(
       x, value,
-      ci = FALSE, level = level, nboot = nboot,
+      ci = FALSE, level = level, nboot = nboot, multi_est = multi_est,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -380,7 +380,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
 
   hcp <- .ssd_hcp_conventional(
     x, value,
-    ci = ci, level = level, nboot = nboot,
+    ci = ci, level = level, nboot = nboot, multi_est = multi_est,
     min_pboot = min_pboot, estimates = estimates,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -388,13 +388,13 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     fix_weights = fix_weights, hc = hc, fun = fun
   )
 
-  if (!multi_est) {
+  if (multi_est != "invertible") {
     if (!fix_weights) {
       return(hcp)
     }
     est <- .ssd_hcp_conventional(
       x, value,
-      ci = FALSE, level = level, nboot = nboot,
+      ci = FALSE, level = level, nboot = nboot, multi_est = multi_est,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -444,7 +444,9 @@ ssd_hcp_fitdists <- function(
   chk_gt(nboot)
   chk_lt(nboot, 1e+09)
   chk_flag(average)
-  chk_flag(multi_est)
+  
+  chkor_vld(vld_flag(multi_est), vld_string(multi_est))
+  
   chk_number(delta)
   chk_gte(delta)
   chk_number(min_pboot)
@@ -455,6 +457,21 @@ ssd_hcp_fitdists <- function(
   chk_null_or(control, vld = vld_list)
   chk_null_or(save_to, vld = vld_dir)
   chk_flag(samples)
+  
+  
+  if(vld_flag(multi_est)) {
+    if(multi_est) {
+      if(!missing(multi_est)) {
+        lifecycle::deprecate_soft("2.3.1", I("multi_est = TRUE"), I("multi_est = 'invertible'"))
+      }
+      multi_est <- "invertible"
+    } else {
+      lifecycle::deprecate_soft("2.3.1", I("multi_est = FALSE"), I("multi_est = 'arithmetic'"))
+      multi_est <- "arithmetic"
+    }
+  }
+  
+  chk_subset(multi_est, c("arithmetic", "geometric", "invertible"))
 
   x <- subset(x, delta = delta)
 

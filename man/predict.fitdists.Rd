@@ -13,7 +13,7 @@
   level = 0.95,
   nboot = 1000,
   min_pboot = 0.95,
-  multi_est = TRUE,
+  multi_est = "invertible",
   ci_method = "weighted_samples",
   parametric = TRUE,
   delta = 9.21,

@@ -44,7 +44,7 @@ ssd_hp.fitdists <- function(
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
-    multi_est = TRUE,
+    multi_est = "invertible",
     ci_method = "weighted_samples",
     parametric = TRUE,
     delta = 9.21,
@@ -54,13 +54,15 @@ ssd_hp.fitdists <- function(
     ...) {
   chk_vector(conc)
   chk_numeric(conc)
+  
   chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-
+  
   chk_unused(...)
-
+  
+  
   fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
   multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
-
+  
   if(length(x) == 1L) {
     average <- FALSE
   }
@@ -112,9 +114,9 @@ ssd_hp.fitburrlioz <- function(
   chk_numeric(conc)
   chk_flag(ci)
   chk_unused(...)
-
+  
   fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
-
+  
   hcp <- ssd_hcp_fitdists(
     x = x,
     value = conc,
@@ -122,7 +124,7 @@ ssd_hp.fitburrlioz <- function(
     level = level,
     nboot = nboot,
     average = FALSE,
-    multi_est = TRUE,
+    multi_est = "invertible",
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,
@@ -134,7 +136,7 @@ ssd_hp.fitburrlioz <- function(
     fix_weights = FALSE,
     fun = fun
   )
-
+  
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp
 }

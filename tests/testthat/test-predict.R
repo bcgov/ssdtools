@@ -18,7 +18,7 @@
 test_that("predict", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
-  pred <- predict(fits, ci_method = "weighted_samples", multi_est = FALSE)
+  pred <- predict(fits, ci_method = "weighted_samples", multi_est = "arithmetic")
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_dists")
 })
@@ -27,7 +27,7 @@ test_that("predict cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   set.seed(10)
-  pred <- predict(fits, ci = TRUE, nboot = 10L, ci_method = "weighted_arithmetic", multi_est = FALSE)
+  pred <- predict(fits, ci = TRUE, nboot = 10L, ci_method = "weighted_arithmetic", multi_est = "arithmetic")
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_cis")
 })
@@ -66,14 +66,14 @@ test_that("predict matches ssd_hc with and without average", {
     computable = TRUE, at_boundary_ok = FALSE, rescale = FALSE
   )
 
-  ave5 <- ssd_hc(fit, multi_est = FALSE)
-  multi5 <- ssd_hc(fit, multi_est = TRUE)
+  ave5 <- ssd_hc(fit, multi_est = "arithmetic")
+  multi5 <- ssd_hc(fit)
 
   expect_snapshot_data(ave5, "ave5")
   expect_snapshot_data(multi5, "multi5")
 
-  pred_multi <- predict(fit, ci = FALSE, multi_est = TRUE)
-  pred_ave <- predict(fit, ci = FALSE, multi_est = FALSE)
+  pred_multi <- predict(fit, ci = FALSE)
+  pred_ave <- predict(fit, ci = FALSE, multi_est = "arithmetic")
 
   expect_identical(pred_ave[pred_ave$proportion == 0.05, ]$est, ave5$est)
   expect_identical(pred_multi[pred_ave$proportion == 0.05, ]$est, multi5$est)

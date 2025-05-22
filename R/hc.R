@@ -85,27 +85,27 @@ ssd_hc.list <- function(
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
-
+  
   if (lifecycle::is_present(percent)) {
-    lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", with = "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
     chk_numeric(percent)
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-
+  
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
-
+  
   if (!length(x)) {
     hc <- no_hcp()
     hc <- dplyr::rename(hc, proportion = "value")
     return(hc)
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
-    MoreArgs = list(proportion = proportion),
-    SIMPLIFY = FALSE
+               MoreArgs = list(proportion = proportion),
+               SIMPLIFY = FALSE
   )
   bind_rows(hc)
 }
@@ -125,7 +125,7 @@ ssd_hc.fitdists <- function(
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
-    multi_est = TRUE,
+    multi_est = "invertible",
     ci_method = "weighted_samples",
     parametric = TRUE,
     delta = 9.21,
@@ -134,7 +134,7 @@ ssd_hc.fitdists <- function(
     control = NULL,
     ...) {
   chk_unused(...)
-
+  
   if (lifecycle::is_present(percent)) {
     lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
@@ -142,7 +142,7 @@ ssd_hc.fitdists <- function(
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-
+  
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
@@ -174,7 +174,7 @@ ssd_hc.fitdists <- function(
     save_to = save_to,
     hc = TRUE
   )
-
+  
   hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }
@@ -201,7 +201,7 @@ ssd_hc.fitburrlioz <- function(
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
   chk_unused(...)
-
+  
   if (lifecycle::is_present(percent)) {
     lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
@@ -209,13 +209,13 @@ ssd_hc.fitburrlioz <- function(
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-
+  
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
-
+  
   fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
-
+  
   hcp <- ssd_hcp_fitdists(
     x = x,
     value = proportion,
@@ -223,7 +223,7 @@ ssd_hc.fitburrlioz <- function(
     level = level,
     nboot = nboot,
     average = FALSE,
-    multi_est = TRUE,
+    multi_est = "invertible",
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,
@@ -235,7 +235,7 @@ ssd_hc.fitburrlioz <- function(
     fix_weights = FALSE,
     fun = fun
   )
-
+  
   hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }
