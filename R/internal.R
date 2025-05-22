@@ -44,6 +44,9 @@ root <- function(p, f) {
   q
 }
 
-weighted.geomean <- function(x, w) {
+weighted_mean <- function(x, w, geometric) {
+  if(!geometric) {
+    return(weighted.mean(x, w = w))
+  }
   exp(weighted.mean(log(x), w = w))
 }

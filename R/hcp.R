@@ -176,11 +176,7 @@ hcp_average <- function(hcp, weight, value, method, nboot, geometric) {
     abind(x, y, along = 3)
   }, hcp)
   suppressMessages(min <- apply(hcp, c(1, 2), min))
-  if(!geometric) {
-    suppressMessages(hcp <- apply(hcp, c(1, 2), weighted.mean, w = weight))
-  } else {
-    suppressMessages(hcp <- apply(hcp, c(1, 2), weighted.geomean, w = weight))
-  }
+  suppressMessages(hcp <- apply(hcp, c(1, 2), weighted_mean, w = weight, geometric = geometric))
   min <- as.data.frame(min)
   hcp <- as.data.frame(hcp)
   tib <- tibble(
