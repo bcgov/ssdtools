@@ -119,7 +119,7 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     saveRDS(estimates, boot_filepath(0, dist, save_to, prefix = "estimates", ext = ".rds"))
   }
 
-  estimates <- future_map(1:nboot, sample_parameters,
+  estimates <- future_map(seq_len(nboot), sample_parameters,
     dist = dist, fun = sfun,
     data = data, args = args, pars = pars,
     weighted = weighted, censoring = censoring, min_pmix = min_pmix,
