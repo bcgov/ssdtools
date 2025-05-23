@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change,
+# Copyright 2023-2025 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -135,36 +135,12 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   )
 }
 
-hcp_ind <- function(hcp, weight, method) {
-  hcp <- mapply(
-    function(x, y) {
-      x$wt <- y
-      x
-    },
-    x = hcp, y = weight,
-    USE.NAMES = FALSE, SIMPLIFY = FALSE
-  )
-  hcp <- bind_rows(hcp)
-  hcp$method <- method
-  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot", "samples")]
-  return(hcp)
-}
-
 group_samples <- function(hcp) {
   samples <- lapply(hcp, function(x) x[c("dist", "value", "samples")])
   samples <- bind_rows(samples)
   samples <- dplyr::group_by(samples, .data$value)
   samples <- dplyr::summarise(samples, samples = I(list(unlist(samples))))
   dplyr::ungroup(samples)
-}
-
-replace_estimates <- function(hcp, est) {
-  est <- est[c("value", "est")]
-  colnames(est) <- c("value", "est2")
-  hcp <- dplyr::inner_join(hcp, est, by = c("value"))
-  hcp$est <- hcp$est2
-  hcp$est2 <- NULL
-  hcp
 }
 
 hcp_average <- function(hcp, weight, value, method, nboot, geometric) {
@@ -179,8 +155,9 @@ hcp_average <- function(hcp, weight, value, method, nboot, geometric) {
   suppressMessages(hcp <- apply(hcp, c(1, 2), weighted_mean, w = weight, geometric = geometric))
   min <- as.data.frame(min)
   hcp <- as.data.frame(hcp)
+  print(hcp)
   tib <- tibble(
-    dist = "average", value = value, est = hcp$est, se = hcp$se,
+    dist = "average", value = value, est = hcp$est, se = NA_real,
     lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
     method = method, nboot = nboot, pboot = min$pboot
   )
@@ -205,50 +182,27 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   hcp
 }
 
-.ssd_hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,
-                         data, rescale,
-                         weighted, censoring, min_pmix, range_shape1,
-                         range_shape2, parametric,
-                         control, hc, save_to, samples, fun) {
-  weight <- purrr::map_dbl(estimates, function(x) x$weight)
-  hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit,
-                     value = value, ci = ci, level = level, nboot = nboot,
-                     min_pboot = min_pboot,
-                     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                     parametric = parametric, fix_weights = FALSE, average = FALSE, control = control,
-                     hc = hc, save_to = save_to, samples = samples, fun = fun
+hcp_ind <- function(hcp, weight, method) {
+  hcp <- mapply(
+    function(x, y) {
+      x$wt <- y
+      x
+    },
+    x = hcp, y = weight,
+    USE.NAMES = FALSE, SIMPLIFY = FALSE
   )
-  method <- if (parametric) "parametric" else "non-parametric"
-  
-  hcp_ind(hcp, weight, method)
-}
-
-
-.ssd_hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
-                           data, rescale, weighted, censoring, min_pmix,
-                           range_shape1, range_shape2, parametric, control,
-                           save_to, samples, fix_weights, hc) {
-  estimates <- estimates(x, all_estimates = TRUE)
-  dist <- "multi"
-  fun <- fits_dists
-  pars <- pars_fitdists(x)
-  
-  hcp <- .ssd_hcp(x,
-                  dist = dist, estimates = estimates,
-                  fun = fun, pars = pars,
-                  value = value, ci = ci, level = level, nboot = nboot,
-                  min_pboot = min_pboot,
-                  data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                  min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                  parametric = parametric, control = control, save_to = save_to,
-                  samples = samples,
-                  hc = hc, fix_weights = fix_weights
-  )
-  hcp$dist <- "average"
-  method <- if (parametric) "parametric" else "non-parametric"
+  hcp <- bind_rows(hcp)
   hcp$method <- method
   hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot", "samples")]
+  return(hcp)
+}
+
+replace_estimates <- function(hcp, est) {
+  est <- est[c("value", "est")]
+  colnames(est) <- c("value", "est2")
+  hcp <- dplyr::inner_join(hcp, est, by = c("value"))
+  hcp$est <- hcp$est2
+  hcp$est2 <- NULL
   hcp
 }
 
@@ -281,6 +235,52 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     return(hcp)
   }
   hcp_weighted(hcp, level = level, samples = samples, min_pboot = min_pboot)
+}
+
+.ssd_hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
+                           data, rescale, weighted, censoring, min_pmix,
+                           range_shape1, range_shape2, parametric, control,
+                           save_to, samples, fix_weights, hc) {
+  estimates <- estimates(x, all_estimates = TRUE)
+  dist <- "multi"
+  fun <- fits_dists
+  pars <- pars_fitdists(x)
+  
+  hcp <- .ssd_hcp(x,
+                  dist = dist, estimates = estimates,
+                  fun = fun, pars = pars,
+                  value = value, ci = ci, level = level, nboot = nboot,
+                  min_pboot = min_pboot,
+                  data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                  min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                  parametric = parametric, control = control, save_to = save_to,
+                  samples = samples,
+                  hc = hc, fix_weights = fix_weights
+  )
+  hcp$dist <- "average"
+  method <- if (parametric) "parametric" else "non-parametric"
+  hcp$method <- method
+  hcp <- hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "method", "nboot", "pboot", "samples")]
+  hcp
+}
+
+.ssd_hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,
+                         data, rescale,
+                         weighted, censoring, min_pmix, range_shape1,
+                         range_shape2, parametric,
+                         control, hc, save_to, samples, fun) {
+  weight <- purrr::map_dbl(estimates, function(x) x$weight)
+  hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit,
+                     value = value, ci = ci, level = level, nboot = nboot,
+                     min_pboot = min_pboot,
+                     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                     parametric = parametric, fix_weights = FALSE, average = FALSE, control = control,
+                     hc = hc, save_to = save_to, samples = samples, fun = fun
+  )
+  method <- if (parametric) "parametric" else "non-parametric"
+  
+  hcp_ind(hcp, weight, method)
 }
 
 .ssd_hcp_fitdists_average <- function(
