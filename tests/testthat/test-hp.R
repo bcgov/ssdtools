@@ -365,13 +365,9 @@ test_that("hp multi_est = TRUE deprecated", {
     invertible <- ssd_hp(fits)
   })
   
-  lifecycle::expect_deprecated({
-    withr::with_seed(10, {
-      true <- ssd_hp(fits, multi_est = TRUE)
-    })
-  },
-  "Please use multi_est = 'invertible' instead."
-  )
+  withr::with_seed(10, {
+    true <- ssd_hp(fits, multi_est = TRUE)
+  })
   expect_identical(true, invertible)
 })
 
@@ -381,12 +377,8 @@ test_that("hp multi_est = FALSE deprecated", {
     arithmetic <- ssd_hp(fits, multi_est = "arithmetic")
   })
   
-  lifecycle::expect_deprecated({
-    withr::with_seed(10, {
-      false <- ssd_hp(fits, multi_est = FALSE)
-    })
-  },
-  "Please use multi_est = 'arithmetic' instead."
-  )
+  withr::with_seed(10, {
+    false <- ssd_hp(fits, multi_est = FALSE)
+  })
   expect_identical(false, arithmetic)
 })

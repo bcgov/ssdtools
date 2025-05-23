@@ -462,15 +462,7 @@ ssd_hcp_fitdists <- function(
   
   
   if(vld_flag(multi_est)) {
-    if(multi_est) {
-      if(!missing(multi_est)) {
-        lifecycle::deprecate_soft("2.3.1", I("multi_est = TRUE"), I("multi_est = 'invertible'"))
-      }
-      multi_est <- "invertible"
-    } else {
-      lifecycle::deprecate_soft("2.3.1", I("multi_est = FALSE"), I("multi_est = 'arithmetic'"))
-      multi_est <- "arithmetic"
-    }
+    multi_est <- if(multi_est) "invertible" else "arithmetic"
   }
   
   chk_subset(multi_est, c("arithmetic", "geometric", "invertible"))

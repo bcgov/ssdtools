@@ -114,7 +114,10 @@ to report the confidence intervals.}
 \item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
 Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
 
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the arithmetic mean)
+when calculating model averaged estimates or a string specifying whether to
+treat the distributions as constituting a single distribution (\code{multi_est = 'arithmetic'}) or
+to take the arithmetic (\code{multi_est = 'arithmetic'}) or geometric (\code{multi_est = 'geometric'}) mean.}
 
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
