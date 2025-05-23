@@ -50,7 +50,7 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
 
 ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   multiplier <- if (hc) rescale else 100
-
+  
   hcp <- tibble(
     dist = dist,
     value = value,
@@ -73,7 +73,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     range_shape1, range_shape2, parametric, control, save_to, samples, hc,
     fix_weights = FALSE) {
   args <- estimates
-
+  
   if (hc) {
     args$p <- value
     what <- paste0("ssd_q", dist)
@@ -81,14 +81,14 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     args$q <- value / rescale
     what <- paste0("ssd_p", dist)
   }
-
+  
   est <- do.call(what, args)
   if (!ci) {
     return(no_ci_hcp(value = value, dist = dist, est = est, rescale = rescale, hc = hc))
   }
-
+  
   censoring <- censoring / rescale
-
+  
   ests <- boot_estimates(
     fun = fun, dist = dist, estimates = estimates,
     pars = pars, nboot = nboot, data = data, weighted = weighted,
@@ -106,8 +106,8 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   }
   cis <- cis_estimates(ests, what, level = level, x = x, samples = samples)
   hcp <- ci_hcp(cis,
-    estimates = ests, value = value, dist = dist,
-    est = est, rescale = rescale, nboot = nboot, hc = hc
+                estimates = ests, value = value, dist = dist,
+                est = est, rescale = rescale, nboot = nboot, hc = hc
   )
   replace_min_pboot_na(hcp, min_pboot)
 }
@@ -124,14 +124,14 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     nboot <- round(nboot * weight)
   }
   .ssd_hcp(x,
-    dist = dist, estimates = estimates,
-    fun = fun, pars = pars,
-    value = value, ci = ci, level = level, nboot = nboot,
-    min_pboot = min_pboot,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control, save_to = save_to, samples = samples,
-    hc = hc
+           dist = dist, estimates = estimates,
+           fun = fun, pars = pars,
+           value = value, ci = ci, level = level, nboot = nboot,
+           min_pboot = min_pboot,
+           data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+           min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+           parametric = parametric, control = control, save_to = save_to, samples = samples,
+           hc = hc
   )
 }
 
@@ -169,7 +169,7 @@ replace_estimates <- function(hcp, est) {
 
 hcp_average <- function(hcp, weight, value, method, nboot, geometric) {
   samples <- group_samples(hcp)
-
+  
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
   hcp <- lapply(hcp, as.matrix)
   hcp <- Reduce(function(x, y) {
@@ -212,15 +212,15 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
                          control, hc, save_to, samples, fun) {
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
   hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit,
-    value = value, ci = ci, level = level, nboot = nboot,
-    min_pboot = min_pboot,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, fix_weights = FALSE, average = FALSE, control = control,
-    hc = hc, save_to = save_to, samples = samples, fun = fun
+                     value = value, ci = ci, level = level, nboot = nboot,
+                     min_pboot = min_pboot,
+                     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                     parametric = parametric, fix_weights = FALSE, average = FALSE, control = control,
+                     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   method <- if (parametric) "parametric" else "non-parametric"
-
+  
   hcp_ind(hcp, weight, method)
 }
 
@@ -233,17 +233,17 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   dist <- "multi"
   fun <- fits_dists
   pars <- pars_fitdists(x)
-
+  
   hcp <- .ssd_hcp(x,
-    dist = dist, estimates = estimates,
-    fun = fun, pars = pars,
-    value = value, ci = ci, level = level, nboot = nboot,
-    min_pboot = min_pboot,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control, save_to = save_to,
-    samples = samples,
-    hc = hc, fix_weights = fix_weights
+                  dist = dist, estimates = estimates,
+                  fun = fun, pars = pars,
+                  value = value, ci = ci, level = level, nboot = nboot,
+                  min_pboot = min_pboot,
+                  data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                  min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                  parametric = parametric, control = control, save_to = save_to,
+                  samples = samples,
+                  hc = hc, fix_weights = fix_weights
   )
   hcp$dist <- "average"
   method <- if (parametric) "parametric" else "non-parametric"
@@ -263,16 +263,16 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   }
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
   hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit,
-    value = value, ci = ci, level = level, nboot = nboot,
-    min_pboot = min_pboot,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, fix_weights = fix_weights, average = TRUE, control = control,
-    hc = hc, save_to = save_to, samples = samples || fix_weights, fun = fun
+                     value = value, ci = ci, level = level, nboot = nboot,
+                     min_pboot = min_pboot,
+                     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                     parametric = parametric, fix_weights = fix_weights, average = TRUE, control = control,
+                     hc = hc, save_to = save_to, samples = samples || fix_weights, fun = fun
   )
-
+  
   method <- if (parametric) "parametric" else "non-parametric"
-
+  
   hcp <- hcp_average(hcp, weight, value, method, nboot, geometric = geometric)
   if (!fix_weights) {
     if (!samples) {
@@ -303,11 +303,11 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   if (!length(x) || !length(value)) {
     return(no_hcp())
   }
-
+  
   if (is.null(control)) {
     control <- .control_fitdists(x)
   }
-
+  
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
@@ -317,21 +317,21 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
   estimates <- .list_estimates(x, all_estimates = FALSE)
-
+  
   if (parametric && ci && !identical(censoring, c(0, Inf))) {
     wrn("Parametric CIs cannot be calculated for censored data.")
     ci <- FALSE
   }
-
+  
   if (parametric && ci && unequal) {
     wrn("Parametric CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }
-
+  
   if (!ci) {
     nboot <- 0L
   }
-
+  
   if (!average) {
     hcp <- .ssd_hcp_ind(
       x,
@@ -344,10 +344,46 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     )
     return(hcp)
   }
+  .ssd_hcp_fitdists_average(
+    x = x, value = value, ci = ci, level = level, nboot = nboot, multi_est = multi_est,
+    min_pboot = min_pboot, estimates = estimates, multi_ci = multi_ci,
+    fix_weights = fix_weights,
+    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+    parametric = parametric, control = control,
+    hc = hc, save_to = save_to, samples = samples, fun = fun
+  )
+}
+
+.ssd_hcp_fitdists_average <- function(
+    x,
+    value,
+    data, 
+    ci,
+    level,
+    nboot,
+    multi_est,
+    min_pboot,
+    min_pmix = min_pmix,
+    parametric,
+    rescale,
+    weighted,
+    multi_ci,
+    censoring,
+    range_shape1,
+    range_shape2,
+    fix_weights,
+    estimates,
+    control,
+    hc,
+    save_to,
+    samples,
+    fun) {
+  
   if (.is_censored(censoring) && !identical_parameters(x)) {
     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
-
+  
   geometric = multi_est == "geometric"
   
   if (multi_ci) {
@@ -360,11 +396,11 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
       parametric = parametric, control = control, save_to = save_to, samples = samples,
       fix_weights = fix_weights, hc = hc
     )
-
+    
     if (multi_est == "invertible") {
       return(hcp)
     }
-
+    
     est <- .ssd_hcp_conventional(
       x, value,
       ci = FALSE, level = level, nboot = nboot, geometric = geometric,
@@ -374,12 +410,12 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
       parametric = parametric, control = control, save_to = save_to, samples = samples,
       fix_weights = fix_weights, hc = hc, fun = fun
     )
-
+    
     hcp <- replace_estimates(hcp, est)
-
+    
     return(hcp)
   }
-
+  
   hcp <- .ssd_hcp_conventional(
     x, value,
     ci = ci, level = level, nboot = nboot, geometric = geometric,
@@ -389,7 +425,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     parametric = parametric, control = control, save_to = save_to, samples = samples,
     fix_weights = fix_weights, hc = hc, fun = fun
   )
-
+  
   if (multi_est != "invertible") {
     if (!fix_weights) {
       return(hcp)
@@ -415,7 +451,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
     )
   }
   hcp <- replace_estimates(hcp, est)
-
+  
   hcp
 }
 
@@ -466,9 +502,9 @@ ssd_hcp_fitdists <- function(
   }
   
   chk_subset(multi_est, c("arithmetic", "geometric", "invertible"))
-
+  
   x <- subset(x, delta = delta)
-
+  
   hcp <- .ssd_hcp_fitdists(
     x,
     value = value,
