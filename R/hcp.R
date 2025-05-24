@@ -147,7 +147,6 @@ hcp_average <- function(hcp, weight, value, method, nboot, geometric) {
   suppressMessages(hcp <- apply(hcp, c(1, 2), weighted_mean, w = weight, geometric = geometric))
   min <- as.data.frame(min)
   hcp <- as.data.frame(hcp)
-  print(hcp)
   tib <- tibble(
     dist = "average", value = value, est = hcp$est, se = hcp$se,
     lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
@@ -256,8 +255,7 @@ replace_estimates <- function(hcp, est) {
                          weighted, censoring, min_pmix, range_shape1,
                          range_shape2, parametric,
                          control, hc, save_to, samples, fun) {
-  weight <- purrr::map_dbl(estimates, function(x) x$weight)
-  hcp <- purrr::map2(x, weight, .ssd_hcp_tmbfit,
+  hcp <- purrr::map(x, .ssd_hcp_tmbfit, weight = 1,
                      value = value, ci = ci, level = level, nboot = nboot,
                      min_pboot = min_pboot,
                      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
@@ -266,6 +264,8 @@ replace_estimates <- function(hcp, est) {
                      hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   method <- if (parametric) "parametric" else "non-parametric"
+
+  weight <- purrr::map_dbl(estimates, function(x) x$weight)
   
   hcp_ind(hcp, weight, method)
 }

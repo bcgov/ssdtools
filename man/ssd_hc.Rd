@@ -102,16 +102,6 @@ When calculating the model averaged estimates treating the
 distributions as constituting a single mixture distribution
 ensures that \code{ssd_hc()} is the inverse of \code{ssd_hp()}.
 
-If treating the distributions as constituting a single mixture distribution
-when calculating model average confidence intervals then
-\code{weighted} specifies whether to use the original model weights versus
-re-estimating for each bootstrap sample unless 'taking the mean' in which case
-\code{weighted} specifies
-whether to take bootstrap samples from each distribution proportional to
-its weight (so that they sum to \code{nboot}) versus
-calculating the weighted arithmetic means of the lower
-and upper confidence limits based on \code{nboot} samples for each distribution.
-
 Distributions with an absolute AIC difference greater
 than a delta of by default 7 have considerably less support (weight < 0.01)
 and are excluded
