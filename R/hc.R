@@ -110,6 +110,7 @@ ssd_hc.fitdists <- function(
     x,
     percent,
     proportion = 0.05,
+    ...,
     average = TRUE,
     ci = FALSE,
     level = 0.95,
@@ -121,8 +122,7 @@ ssd_hc.fitdists <- function(
     delta = 9.21,
     samples = FALSE,
     save_to = NULL,
-    control = NULL,
-    ...) {
+    control = NULL) {
   chk_unused(...)
   
   if (lifecycle::is_present(percent)) {
@@ -132,7 +132,7 @@ ssd_hc.fitdists <- function(
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-  
+
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
@@ -179,14 +179,15 @@ ssd_hc.fitburrlioz <- function(
     x,
     percent,
     proportion = 0.05,
+    ...,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
     parametric = FALSE,
     samples = FALSE,
-    save_to = NULL,
-    ...) {
+    save_to = NULL
+  ) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))

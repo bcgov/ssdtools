@@ -39,6 +39,7 @@ ssd_hp <- function(x, ...) {
 ssd_hp.fitdists <- function(
     x,
     conc = 1,
+    ...,
     average = TRUE,
     ci = FALSE,
     level = 0.95,
@@ -50,15 +51,12 @@ ssd_hp.fitdists <- function(
     delta = 9.21,
     samples = FALSE,
     save_to = NULL,
-    control = NULL,
-    ...) {
+    control = NULL) {
   chk_vector(conc)
   chk_numeric(conc)
-  
-  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-  
   chk_unused(...)
   
+  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
   
   fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
   multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
@@ -99,14 +97,14 @@ ssd_hp.fitdists <- function(
 ssd_hp.fitburrlioz <- function(
     x,
     conc = 1,
+    ...,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
     parametric = FALSE,
     samples = FALSE,
-    save_to = NULL,
-    ...) {
+    save_to = NULL) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
