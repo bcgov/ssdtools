@@ -794,13 +794,13 @@ test_that("hc proportion multiple decimal places", {
 test_that("hc multi_est = TRUE optional", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   withr::with_seed(10, {
-    invertible <- ssd_hc(fits)
+    multi <- ssd_hc(fits)
   })
   
   withr::with_seed(10, {
     true <- ssd_hc(fits, multi_est = TRUE)
   })
-  expect_identical(true, invertible)
+  expect_identical(true, multi)
 })
 
 test_that("hc multi_est = FALSE optional", {

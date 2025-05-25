@@ -362,13 +362,13 @@ test_that("hp weighted bootie", {
 test_that("hp multi_est = TRUE deprecated", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   withr::with_seed(10, {
-    invertible <- ssd_hp(fits)
+    multi <- ssd_hp(fits)
   })
   
   withr::with_seed(10, {
     true <- ssd_hp(fits, multi_est = TRUE)
   })
-  expect_identical(true, invertible)
+  expect_identical(true, multi)
 })
 
 test_that("hp multi_est = FALSE deprecated", {

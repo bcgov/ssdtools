@@ -291,7 +291,7 @@ replace_estimates <- function(hcp, est) {
       fix_weights = fix_weights, hc = hc
     )
     
-    if (multi_est == "invertible") {
+    if (multi_est == "multi") {
       return(hcp)
     }
     
@@ -318,7 +318,7 @@ replace_estimates <- function(hcp, est) {
     fix_weights = fix_weights, hc = hc, fun = fun
   )
   
-  if (multi_est != "invertible") {
+  if (multi_est != "multi") {
     if (!fix_weights) {
       return(hcp)
     }
@@ -428,10 +428,10 @@ ssd_hcp_fitdists <- function(
   chk_flag(samples)
   
   if(vld_flag(multi_est)) {
-    multi_est <- if(multi_est) "invertible" else "arithmetic"
+    multi_est <- if(multi_est) "multi" else "arithmetic"
   }
   
-  chk_subset(multi_est, c("arithmetic", "geometric", "invertible"))
+  chk_subset(multi_est, c("arithmetic", "geometric", "multi"))
   
   x <- subset(x, delta = delta)
   

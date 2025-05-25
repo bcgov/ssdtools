@@ -214,7 +214,7 @@ ssd_hc.fitburrlioz <- function(
     level = level,
     nboot = nboot,
     average = FALSE,
-    multi_est = "invertible",
+    multi_est = "multi",
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,
