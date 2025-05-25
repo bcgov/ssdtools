@@ -189,12 +189,9 @@ hcp_ind <- function(hcp, weight, method) {
 }
 
 replace_estimates <- function(hcp, est) {
-  est <- est[c("value", "est")]
-  colnames(est) <- c("value", "est2")
-  hcp <- dplyr::inner_join(hcp, est, by = c("value"))
-  hcp$est <- hcp$est2
-  hcp$est2 <- NULL
-  hcp
+  est <- dplyr::select(est, "value", est2 = "est")
+  hcp <- dplyr::inner_join(hcp, est, by = "value")
+  dplyr::mutate(hcp, est = .data$est2, est2 = NULL)
 }
 
 .ssd_hcp_conventional <- function(x, value, ci, level, nboot, geometric, min_pboot, estimates,
