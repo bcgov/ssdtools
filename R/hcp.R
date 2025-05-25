@@ -272,14 +272,17 @@ replace_estimates <- function(hcp, est) {
 
 .ssd_hcp_fitdists_average <- function(
     x, value, data, ci, level, nboot, multi_est,
-    min_pboot, min_pmix,parametric,rescale, weighted, multi_ci, censoring,
-    range_shape1, range_shape2, fix_weights, estimates, control, hc, save_to,
+    min_pboot, min_pmix,parametric,rescale, weighted, ci_method, censoring,
+    range_shape1, range_shape2, estimates, control, hc, save_to,
     samples, fun) {
   
   if (.is_censored(censoring) && !identical_parameters(x)) {
     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
-  
+
+  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
+  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
+
   geometric = multi_est == "geometric"
   
   if (multi_ci) {
@@ -345,7 +348,7 @@ replace_estimates <- function(hcp, est) {
 
 .ssd_hcp_fitdists <- function(
     x, value, ci, level, nboot, average, multi_est, min_pboot, parametric,
-    multi_ci, fix_weights, control, hc, save_to, samples, fun) {
+    ci_method, control, hc, save_to, samples, fun) {
   if (!length(x) || !length(value)) {
     return(no_hcp())
   }
@@ -391,8 +394,7 @@ replace_estimates <- function(hcp, est) {
   }
   .ssd_hcp_fitdists_average(
     x = x, value = value, ci = ci, level = level, nboot = nboot, multi_est = multi_est,
-    min_pboot = min_pboot, estimates = estimates, multi_ci = multi_ci,
-    fix_weights = fix_weights,
+    min_pboot = min_pboot, estimates = estimates, ci_method = ci_method,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control,
@@ -424,10 +426,7 @@ ssd_hcp_fitdists <- function(
   
   chk_string(ci_method)
   chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-  
-  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
-  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
-  
+
   chk_null_or(control, vld = vld_list)
   chk_null_or(save_to, vld = vld_dir)
   chk_flag(samples)
@@ -443,7 +442,7 @@ ssd_hcp_fitdists <- function(
   hcp <- .ssd_hcp_fitdists(
     x, value = value, ci = ci, level = level, nboot = nboot,
     average = average, multi_est = multi_est, min_pboot = min_pboot,
-    parametric = parametric, multi_ci = multi_ci, fix_weights = fix_weights,
+    parametric = parametric, ci_method = ci_method,
     control = control, save_to = save_to, samples = samples, hc = hc, fun = fun
   )
   warn_min_pboot(hcp, min_pboot)
