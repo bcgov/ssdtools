@@ -136,11 +136,6 @@ ssd_hc.fitdists <- function(
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
-  chk_string(ci_method)
-  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-
-  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
-  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
   
   if(length(x) == 1L) {
     average <- FALSE
@@ -157,8 +152,7 @@ ssd_hc.fitdists <- function(
     delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi_ci = multi_ci,
-    fix_weights = fix_weights,
+    ci_method = ci_method,
     control = control,
     samples = samples,
     save_to = save_to,
@@ -214,19 +208,18 @@ ssd_hc.fitburrlioz <- function(
     level = level,
     nboot = nboot,
     average = FALSE,
-    multi_est = "multi",
+    multi_est = TRUE,
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi_ci = TRUE,
+    ci_method = "multi_free",
     save_to = save_to,
     samples = samples,
     control = NULL,
     hc = TRUE,
-    fix_weights = FALSE,
     fun = fun
   )
-  
+
   hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }

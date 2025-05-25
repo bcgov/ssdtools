@@ -402,8 +402,8 @@ replace_estimates <- function(hcp, est) {
 
 ssd_hcp_fitdists <- function(
     x, value, ci, level, nboot, average, multi_est, delta, min_pboot,
-    parametric, multi_ci, control, samples, save_to,
-    hc, fix_weights, fun = fit_tmb) {
+    parametric, ci_method, control, samples, save_to,
+    hc, fun = fit_tmb) {
   chk_vector(value)
   chk_numeric(value)
   chk_flag(ci)
@@ -421,8 +421,13 @@ ssd_hcp_fitdists <- function(
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_flag(parametric)
-  chk_flag(multi_ci)
-  chk_flag(fix_weights)
+  
+  chk_string(ci_method)
+  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
+  
+  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
+  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
+  
   chk_null_or(control, vld = vld_list)
   chk_null_or(save_to, vld = vld_dir)
   chk_flag(samples)
