@@ -4,12 +4,14 @@
 \alias{ssd_hp_bcanz}
 \title{BCANZ Hazard Proportion}
 \usage{
-ssd_hp_bcanz(x, conc = 1, nboot = 10000, min_pboot = 0.95)
+ssd_hp_bcanz(x, conc = 1, ..., nboot = 10000, min_pboot = 0.95)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{conc}{A numeric vector of concentrations to calculate the hazard proportions for.}
+
+\item{...}{Unused.}
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.}
 

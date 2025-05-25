@@ -92,12 +92,22 @@ ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz()) {
 #' @examples
 #' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 #' ssd_hc_bcanz(fits, nboot = 100)
-ssd_hc_bcanz <- function(x, nboot = 10000, min_pboot = 0.95) {
+ssd_hc_bcanz <- function(x, ..., nboot = 10000, min_pboot = 0.95) {
+  chk_unused(...)
   ssd_hc(x,
     proportion = c(0.01, 0.05, 0.1, 0.2),
+    average = TRUE,
     ci = TRUE,
+    level = 0.95,
     nboot = nboot,
-    min_pboot = min_pboot
+    min_pboot = min_pboot,
+    multi_est = TRUE,
+    ci_method = "weighted_samples",
+    parametric = TRUE,
+    delta = 9.21,
+    samples = FALSE,
+    save_to = NULL,
+    control = NULL
   )
 }
 
@@ -115,11 +125,21 @@ ssd_hc_bcanz <- function(x, nboot = 10000, min_pboot = 0.95) {
 #' @examples
 #' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 #' ssd_hp_bcanz(fits, nboot = 100)
-ssd_hp_bcanz <- function(x, conc = 1, nboot = 10000, min_pboot = 0.95) {
+ssd_hp_bcanz <- function(x, conc = 1, ..., nboot = 10000, min_pboot = 0.95) {
+  chk_unused(...)
   ssd_hp(x,
     conc = conc,
+    average = TRUE,
     ci = TRUE,
+    level = 0.95,
     nboot = nboot,
-    min_pboot = min_pboot
+    min_pboot = min_pboot,
+    multi_est = TRUE,
+    ci_method = "weighted_samples",
+    parametric = TRUE,
+    delta = 9.21,
+    samples = FALSE,
+    save_to = NULL,
+    control = NULL
   )
 }
