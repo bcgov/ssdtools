@@ -199,7 +199,6 @@ replace_estimates <- function(hcp, est) {
                                   range_shape1, range_shape2, parametric, control,
                                   save_to, samples, ci_method, hc, fun) {
   
-  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic"))
   fix_weights <- ci_method == "weighted_samples"
   
   if (ci && fix_weights) {
@@ -232,7 +231,7 @@ replace_estimates <- function(hcp, est) {
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control,
                            save_to, samples, ci_method, hc) {
-  chk_subset(ci_method, c("multi_free", "multi_fixed"))
+  
   fix_weights <- ci_method == "multi_fixed"
   
   estimates <- estimates(x, all_estimates = TRUE)
@@ -305,7 +304,7 @@ replace_estimates <- function(hcp, est) {
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control, save_to = save_to, samples = samples,
-      ci_method = "weighted_samples", hc = hc, fun = fun
+      ci_method = ci_method, hc = hc, fun = fun
     )
     
     hcp <- replace_estimates(hcp, est)
@@ -341,7 +340,7 @@ replace_estimates <- function(hcp, est) {
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control, save_to = save_to, samples = samples,
-      ci_method = "multi_free", hc = hc
+      ci_method = ci_method, hc = hc
     )
   }
   replace_estimates(hcp, est)
