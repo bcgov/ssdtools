@@ -194,12 +194,14 @@ replace_estimates <- function(hcp, est) {
   dplyr::mutate(hcp, est = .data$est2, est2 = NULL)
 }
 
-.ssd_hcp_conventional <- function(x, value, ci, level, nboot, geometric, min_pboot, estimates,
+.ssd_hcp_conventional <- function(x, value, ci, level, nboot, multi_est, min_pboot, estimates,
                                   data, rescale, weighted, censoring, min_pmix,
                                   range_shape1, range_shape2, parametric, control,
                                   save_to, samples, ci_method, hc, fun) {
   
   fix_weights <- ci_method == "weighted_samples"
+  geometric <- multi_est == "geometric"
+  
   
   if (ci && fix_weights) {
     atleast1 <- round(glance(x)$weight * nboot) >= 1L
@@ -283,8 +285,6 @@ replace_estimates <- function(hcp, est) {
     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
 
-  geometric = multi_est == "geometric"
-  
   if (ci_method %in% c("multi_free", "multi_fixed")) {
     hcp <- .ssd_hcp_multi(
       x, value, ci = ci, level = level, nboot = nboot,
@@ -299,7 +299,7 @@ replace_estimates <- function(hcp, est) {
     }
     
     est <- .ssd_hcp_conventional(
-      x, value, ci = FALSE, level = level, nboot = nboot, geometric = geometric,
+      x, value, ci = FALSE, level = level, nboot = nboot, multi_est = multi_est,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -313,7 +313,7 @@ replace_estimates <- function(hcp, est) {
   }
   
   hcp <- .ssd_hcp_conventional(
-    x, value, ci = ci, level = level, nboot = nboot, geometric = geometric,
+    x, value, ci = ci, level = level, nboot = nboot, multi_est = multi_est,
     min_pboot = min_pboot, estimates = estimates,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -327,7 +327,7 @@ replace_estimates <- function(hcp, est) {
     }
     est <- .ssd_hcp_conventional(
       x, value,
-      ci = FALSE, level = level, nboot = nboot, geometric = geometric,
+      ci = FALSE, level = level, nboot = nboot, multi_est = multi_est,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
