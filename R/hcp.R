@@ -197,7 +197,11 @@ replace_estimates <- function(hcp, est) {
 .ssd_hcp_conventional <- function(x, value, ci, level, nboot, geometric, min_pboot, estimates,
                                   data, rescale, weighted, censoring, min_pmix,
                                   range_shape1, range_shape2, parametric, control,
-                                  save_to, samples, fix_weights, hc, fun) {
+                                  save_to, samples, ci_method, hc, fun) {
+  
+  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic"))
+  fix_weights <- ci_method == "weighted_samples"
+  
   if (ci && fix_weights) {
     atleast1 <- round(glance(x)$weight * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
@@ -227,7 +231,10 @@ replace_estimates <- function(hcp, est) {
 .ssd_hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control,
-                           save_to, samples, fix_weights, hc) {
+                           save_to, samples, ci_method, hc) {
+  chk_subset(ci_method, c("multi_free", "multi_fixed"))
+  fix_weights <- ci_method == "multi_fixed"
+  
   estimates <- estimates(x, all_estimates = TRUE)
   dist <- "multi"
   fun <- fits_dists
@@ -277,18 +284,15 @@ replace_estimates <- function(hcp, est) {
     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
 
-  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
-  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
-
   geometric = multi_est == "geometric"
   
-  if (multi_ci) {
+  if (ci_method %in% c("multi_free", "multi_fixed")) {
     hcp <- .ssd_hcp_multi(
       x, value, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control, save_to = save_to, samples = samples,
-      fix_weights = fix_weights, hc = hc
+      ci_method = ci_method, hc = hc
     )
     
     if (multi_est == "multi") {
@@ -301,7 +305,7 @@ replace_estimates <- function(hcp, est) {
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control, save_to = save_to, samples = samples,
-      fix_weights = fix_weights, hc = hc, fun = fun
+      ci_method = "weighted_samples", hc = hc, fun = fun
     )
     
     hcp <- replace_estimates(hcp, est)
@@ -315,11 +319,11 @@ replace_estimates <- function(hcp, est) {
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to, samples = samples,
-    fix_weights = fix_weights, hc = hc, fun = fun
+    ci_method = ci_method, hc = hc, fun = fun
   )
   
   if (multi_est != "multi") {
-    if (!fix_weights) {
+    if (ci_method != "weighted_samples") {
       return(hcp)
     }
     est <- .ssd_hcp_conventional(
@@ -329,7 +333,7 @@ replace_estimates <- function(hcp, est) {
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control, save_to = save_to, samples = samples,
-      fix_weights = fix_weights, hc = hc, fun = fun
+      ci_method = ci_method, hc = hc, fun = fun
     )
   } else {
     est <- .ssd_hcp_multi(
@@ -337,7 +341,7 @@ replace_estimates <- function(hcp, est) {
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control, save_to = save_to, samples = samples,
-      fix_weights = fix_weights, hc = hc
+      ci_method = "multi_free", hc = hc
     )
   }
   replace_estimates(hcp, est)
