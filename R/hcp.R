@@ -69,7 +69,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     x, dist, estimates, fun, pars, value, ci, level, nboot, min_pboot,
     data, rescale, weighted, censoring, min_pmix,
     range_shape1, range_shape2, parametric, control, save_to, samples, hc,
-    fix_weights = FALSE) {
+    ci_method) {
   args <- estimates
   
   if (hc) {
@@ -93,7 +93,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     censoring = censoring, min_pmix = min_pmix,
     range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to,
-    fix_weights = fix_weights
+    ci_method = ci_method
   )
   x <- value
   if (!hc) {
@@ -123,7 +123,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to, samples = samples,
-    hc = hc
+    hc = hc, ci_method = "irrelevant"
   )
 }
 
@@ -233,9 +233,7 @@ replace_estimates <- function(hcp, est) {
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control,
                            save_to, samples, ci_method, hc) {
-  
-  fix_weights <- ci_method == "multi_fixed"
-  
+
   estimates <- estimates(x, all_estimates = TRUE)
   dist <- "multi"
   fun <- fits_dists
@@ -247,7 +245,7 @@ replace_estimates <- function(hcp, est) {
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to,
-    samples = samples, hc = hc, fix_weights = fix_weights
+    samples = samples, hc = hc, ci_method = ci_method
   )
   hcp$dist <- "average"
   method <- if (parametric) "parametric" else "non-parametric"

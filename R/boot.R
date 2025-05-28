@@ -95,7 +95,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   est
 }
 
-boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control, save_to, fix_weights) {
+boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control, save_to, ci_method) {
   sfun <- safely(fun)
 
   args <- list(n = nrow(data))
@@ -105,7 +105,7 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
 
   seeds <- seed_streams(nboot)
 
-  if (fix_weights) {
+  if (ci_method == "multi_fixed") {
     wts <- estimates[stringr::str_detect(names(estimates), "\\.weight$")]
   } else {
     wts <- NULL
