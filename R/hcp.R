@@ -109,12 +109,14 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
 
 .ssd_hcp_tmbfit <- function(
     x, weight, value, ci, level, nboot, min_pboot, data, rescale, weighted, censoring, min_pmix,
-    range_shape1, range_shape2, parametric, fix_weights, average, control, hc, save_to, samples,
+    range_shape1, range_shape2, parametric, ci_method, average, control, hc, save_to, samples,
     fun) {
   estimates <- estimates(x)
   dist <- .dist_tmbfit(x)
   pars <- .pars_tmbfit(x)
-  if (fix_weights && average) {
+  samples <- samples || ci_method == "weighted_samples"
+  
+  if (ci_method == "weighted_samples" && average) {
     nboot <- round(nboot * weight)
   }
   .ssd_hcp(
@@ -199,11 +201,10 @@ replace_estimates <- function(hcp, est) {
                                   range_shape1, range_shape2, parametric, control,
                                   save_to, samples, ci_method, hc, fun) {
   
-  fix_weights <- ci_method == "weighted_samples"
   geometric <- est_method == "geometric"
   
   
-  if (ci && fix_weights) {
+  if (ci &&  ci_method == "weighted_samples") {
     atleast1 <- round(glance(x)$weight * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
     estimates <- estimates[atleast1]
@@ -213,14 +214,14 @@ replace_estimates <- function(hcp, est) {
     x, weight, .ssd_hcp_tmbfit, value = value, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, fix_weights = fix_weights, average = TRUE, control = control,
-    hc = hc, save_to = save_to, samples = samples || fix_weights, fun = fun
+    parametric = parametric, ci_method = ci_method, average = TRUE, control = control,
+    hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   
   method <- if (parametric) "parametric" else "non-parametric"
   
   hcp <- hcp_average(hcp, weight, value, method, nboot, geometric = geometric)
-  if (!fix_weights) {
+  if (ci_method != "weighted_samples") {
     if (!samples) {
       hcp$samples <- I(list(numeric(0)))
     }
@@ -263,7 +264,7 @@ replace_estimates <- function(hcp, est) {
                      min_pboot = min_pboot,
                      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
                      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                     parametric = parametric, fix_weights = FALSE, average = FALSE, control = control,
+                     parametric = parametric, ci_method = "irrelevant", average = FALSE, control = control,
                      hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   method <- if (parametric) "parametric" else "non-parametric"
