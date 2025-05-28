@@ -59,14 +59,38 @@ ssd_hp(x, ...)
 proportion of bootstrap samples that must successfully fit (return a likelihood)
 to report the confidence intervals.}
 
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the arithmetic mean) when calculating model averaged estimates.}
+\item{multi_est}{A flag specifying whether to estimate directly from
+the model-averaged cumulative distribution function (\code{multi_est = TRUE}) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (\code{multi_est = FALSE}).}
 
-\item{est_method}{A string specifying whether to
-treat the distributions as constituting a single distribution (\code{est_method = 'arithmetic'}) or
-to take the arithmetic (\code{est_method = 'arithmetic'}) or geometric (\code{est_method = 'geometric'}) mean.}
+\item{est_method}{A string specifying whether to estimate directly from
+the model-averaged cumulative distribution function (\code{est_method = 'multi'}) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (\code{est_method = 'arithmetic'}) or
+or to use the geometric mean instead (\code{est_method = 'geometric'}).}
 
-\item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
-Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
+\item{ci_method}{A string specifying which method to use for estimating
+the standard error and confidence intervals from the bootstrap samples.
+Possible values include \code{ci_method = "multi_fixed"} and  \code{ci_method = "multi_free"}
+which generate the bootstrap samples using the model-averaged cumulative distribution function
+but differ in whether the model weights are fixed at the values for the original dataset
+or re-estimated for each bootstrap sample dataset.
+The value \code{ci_method = "weighted_samples"} takes bootstrap samples
+from each distribution proportional to its AICc based weights.
+The value \code{ci_method = "legacy"} (was \code{ci_method = "weighted_arithmetic"} but
+has been soft-deprecated) which is only included for
+historical reasons takes the weighted arithmetic mean of the confidence
+interval while \code{ci_method = "MAW1"} and \code{ci_method = "MAW2"}
+use the two alternative equations of Burnham and Anderson to
+model average the weighted standard errors and then calculate the confidence
+limits using the Wald approach.
+Finally \code{ci_method = "arithmetic"} and \code{ci_method = "geometric"}
+take the weighted arithmetic or geometric mean of the values for
+each bootstrap iteration across all the distributions and then
+calculate the confidence limits from the single set of samples.}
 
 \item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 
