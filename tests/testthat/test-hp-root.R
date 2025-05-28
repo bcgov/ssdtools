@@ -19,7 +19,7 @@ test_that("hp multi_ci lnorm", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   set.seed(102)
   hp_dist <- ssd_hp(fits, average = FALSE, ci_method = "weighted_arithmetic")
-  hp_average <- ssd_hp(fits, average = TRUE, ci_method = "weighted_arithmetic", multi_est = "arithmetic")
+  hp_average <- ssd_hp(fits, average = TRUE, ci_method = "weighted_arithmetic", est_method = "arithmetic")
   hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed")
   expect_identical(hp_average$est, hp_dist$est)
   expect_equal(hp_multi, hp_average)

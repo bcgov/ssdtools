@@ -128,19 +128,19 @@ test_that("hp fitdists gives different answer with model averaging as hc not sam
   expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, proportion = 5 / 100)$est)$est, 5)
   
   fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"), min_pmix = 0)
-  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5 / 100, ci_method = "weighted_arithmetic",multi_est = "arithmetic")$est)$est, 4.59194131309822, tolerance = 1e-06)
+  expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5 / 100, ci_method = "weighted_arithmetic",est_method = "arithmetic")$est)$est, 4.59194131309822, tolerance = 1e-06)
 })
 
 test_that("ssd_hp fitdists averages", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  hp <- ssd_hp(fits, ci_method = "weighted_arithmetic", multi_est = "arithmetic")
+  hp <- ssd_hp(fits, ci_method = "weighted_arithmetic", est_method = "arithmetic")
   expect_s3_class(hp, "tbl_df")
   expect_snapshot_data(hp, "hp145")
 })
 
 test_that("ssd_hp fitdists geomean", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  hp <- ssd_hp(fits, ci_method = "weighted_arithmetic", multi_est = "geometric")
+  hp <- ssd_hp(fits, ci_method = "weighted_arithmetic", est_method = "geometric")
   expect_s3_class(hp, "tbl_df")
   expect_snapshot_data(hp, "hp145g")
 })
@@ -329,9 +329,9 @@ test_that("hp multis match", {
   set.seed(102)
   hp_tf <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, ci_method = "weighted_samples")
   set.seed(102)
-  hp_ft <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = "arithmetic", ci_method = "multi_fixed")
+  hp_ft <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "multi_fixed")
   set.seed(102)
-  hp_ff <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = "arithmetic", ci_method = "weighted_samples")
+  hp_ff <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "weighted_samples")
   set.seed(102)
   hp_tt <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE, ci_method = "multi_fixed")
   
@@ -345,11 +345,11 @@ test_that("hp weighted bootie", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hp_weighted2 <- ssd_hp(fits,
-                         ci = TRUE, nboot = 10, average = TRUE,multi_est = "arithmetic", ci_method = "weighted_samples",
+                         ci = TRUE, nboot = 10, average = TRUE,est_method = "arithmetic", ci_method = "weighted_samples",
                          samples = TRUE
   )
   set.seed(102)
-  hp_unweighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE,multi_est = "arithmetic", ci_method = "weighted_arithmetic", samples = TRUE)
+  hp_unweighted2 <- ssd_hp(fits, ci = TRUE, nboot = 10, average = TRUE,est_method = "arithmetic", ci_method = "weighted_arithmetic", samples = TRUE)
   
   expect_identical(hp_weighted2$est, hp_unweighted2$est)
   expect_identical(length(hp_weighted2$samples[[1]]), 11L)
@@ -359,26 +359,31 @@ test_that("hp weighted bootie", {
   expect_snapshot_boot_data(hp_unweighted2, "hp_unweighted2")
 })
 
-test_that("hp multi_est = TRUE deprecated", {
+test_that("hc multi_est = TRUE deprecated", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   withr::with_seed(10, {
-    multi <- ssd_hp(fits)
+    multi <- ssd_hc(fits)
   })
   
   withr::with_seed(10, {
-    true <- ssd_hp(fits, multi_est = TRUE)
+    lifecycle::expect_deprecated({
+      true <- ssd_hc(fits, multi_est = TRUE)
+    })
   })
   expect_identical(true, multi)
 })
 
-test_that("hp multi_est = FALSE deprecated", {
+test_that("hp est_method = FALSE deprecated and overrides est_method", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   withr::with_seed(10, {
-    arithmetic <- ssd_hp(fits, multi_est = "arithmetic")
+    arithmetic <- ssd_hp(fits, est_method = "arithmetic")
   })
   
   withr::with_seed(10, {
-    false <- ssd_hp(fits, multi_est = FALSE)
+    lifecycle::expect_deprecated({
+      false <- ssd_hp(fits, multi_est = FALSE, est_method = "geometric")
+    })  
   })
+  
   expect_identical(false, arithmetic)
 })

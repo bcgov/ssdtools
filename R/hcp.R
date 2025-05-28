@@ -194,13 +194,13 @@ replace_estimates <- function(hcp, est) {
   dplyr::mutate(hcp, est = .data$est2, est2 = NULL)
 }
 
-.ssd_hcp_conventional <- function(x, value, ci, level, nboot, multi_est, min_pboot, estimates,
+.ssd_hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
                                   data, rescale, weighted, censoring, min_pmix,
                                   range_shape1, range_shape2, parametric, control,
                                   save_to, samples, ci_method, hc, fun) {
   
   fix_weights <- ci_method == "weighted_samples"
-  geometric <- multi_est == "geometric"
+  geometric <- est_method == "geometric"
   
   
   if (ci && fix_weights) {
@@ -276,7 +276,7 @@ replace_estimates <- function(hcp, est) {
 }
 
 .ssd_hcp_fitdists_average <- function(
-    x, value, data, ci, level, nboot, multi_est,
+    x, value, data, ci, level, nboot, est_method,
     min_pboot, min_pmix,parametric,rescale, weighted, ci_method, censoring,
     range_shape1, range_shape2, estimates, control, hc, save_to,
     samples, fun) {
@@ -294,12 +294,12 @@ replace_estimates <- function(hcp, est) {
       ci_method = ci_method, hc = hc
     )
     
-    if (multi_est == "multi") {
+    if (est_method == "multi") {
       return(hcp)
     }
     
     est <- .ssd_hcp_conventional(
-      x, value, ci = FALSE, level = level, nboot = nboot, multi_est = multi_est,
+      x, value, ci = FALSE, level = level, nboot = nboot, est_method = est_method,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -313,7 +313,7 @@ replace_estimates <- function(hcp, est) {
   }
   
   hcp <- .ssd_hcp_conventional(
-    x, value, ci = ci, level = level, nboot = nboot, multi_est = multi_est,
+    x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
     min_pboot = min_pboot, estimates = estimates,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -321,13 +321,13 @@ replace_estimates <- function(hcp, est) {
     ci_method = ci_method, hc = hc, fun = fun
   )
   
-  if (multi_est != "multi") {
+  if (est_method != "multi") {
     if (ci_method != "weighted_samples") {
       return(hcp)
     }
     est <- .ssd_hcp_conventional(
       x, value,
-      ci = FALSE, level = level, nboot = nboot, multi_est = multi_est,
+      ci = FALSE, level = level, nboot = nboot, est_method = est_method,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -347,7 +347,7 @@ replace_estimates <- function(hcp, est) {
 }
 
 .ssd_hcp_fitdists <- function(
-    x, value, ci, level, nboot, average, multi_est, min_pboot, parametric,
+    x, value, ci, level, nboot, average, est_method, min_pboot, parametric,
     ci_method, control, hc, save_to, samples, fun) {
   if (!length(x) || !length(value)) {
     return(no_hcp())
@@ -393,7 +393,7 @@ replace_estimates <- function(hcp, est) {
     return(hcp)
   }
   .ssd_hcp_fitdists_average(
-    x = x, value = value, ci = ci, level = level, nboot = nboot, multi_est = multi_est,
+    x = x, value = value, ci = ci, level = level, nboot = nboot, est_method = est_method,
     min_pboot = min_pboot, estimates = estimates, ci_method = ci_method,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -403,7 +403,7 @@ replace_estimates <- function(hcp, est) {
 }
 
 ssd_hcp_fitdists <- function(
-    x, value, ci, level, nboot, average, multi_est, delta, min_pboot,
+    x, value, ci, level, nboot, average, est_method, delta, min_pboot,
     parametric, ci_method, control, samples, save_to,
     hc, fun = fit_tmb) {
   chk_vector(value)
@@ -416,7 +416,8 @@ ssd_hcp_fitdists <- function(
   chk_lt(nboot, 1e+09)
   chk_flag(average)
   
-  chkor_vld(vld_flag(multi_est), vld_string(multi_est))
+  chk_string(est_method)
+  chk_subset(est_method, c("arithmetic", "geometric", "multi"))
   
   chk_number(delta)
   chk_gte(delta)
@@ -431,17 +432,11 @@ ssd_hcp_fitdists <- function(
   chk_null_or(save_to, vld = vld_dir)
   chk_flag(samples)
   
-  if(vld_flag(multi_est)) {
-    multi_est <- if(multi_est) "multi" else "arithmetic"
-  }
-  
-  chk_subset(multi_est, c("arithmetic", "geometric", "multi"))
-  
   x <- subset(x, delta = delta)
   
   hcp <- .ssd_hcp_fitdists(
     x, value = value, ci = ci, level = level, nboot = nboot,
-    average = average, multi_est = multi_est, min_pboot = min_pboot,
+    average = average, est_method = est_method, min_pboot = min_pboot,
     parametric = parametric, ci_method = ci_method,
     control = control, save_to = save_to, samples = samples, hc = hc, fun = fun
   )

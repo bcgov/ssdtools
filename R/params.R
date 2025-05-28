@@ -19,6 +19,7 @@
 #' @param add_x The value to add to the label x values (before multiplying by `shift_x`).
 #' @param all A flag specifying whether to also return transformed parameters.
 #' @param all_dists A flag specifying whether all the named distributions must fit successfully.
+#' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
 #' @param at_boundary_ok A flag specifying whether a model with one or more
 #' parameters at the boundary should be considered to have converged (default = FALSE).
 #' @param average A flag specifying whether to provide model averaged values as opposed to a value for each distribution.
@@ -30,6 +31,8 @@
 #' relative to the extremes for non-missing values.
 #' @param chk A flag specifying whether to check the arguments.
 #' @param ci A flag specifying whether to estimate confidence intervals (by bootstrapping).
+#' @param ci_method A string specifying which method to use for estimating the bootstrap values.
+#' Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.
 #' @param censoring A numeric vector of the left and right censoring values.
 #' @param color A string of the column in data for the color aesthetic.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
@@ -40,6 +43,9 @@
 #' Distributions with an absolute AIC difference greater than delta are excluded from the calculations.
 #' @param digits A whole number specifying the number of significant figures.
 #' @param dists A character vector of the distribution names.
+#' @param est_method A string specifying whether to 
+#' treat the distributions as constituting a single distribution (`est_method = 'arithmetic'`) or
+#' to take the arithmetic (`est_method = 'arithmetic'`) or geometric (`est_method = 'geometric'`) mean.
 #' @param fitdists An object of class fitdists.
 #' @param hc A value between 0 and 1 indicating the proportion hazard concentration (or NULL).
 #' @param hc_value A number of the hazard concentration value to offset.
@@ -70,13 +76,7 @@
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
 #' @param n A whole number of the effective number of rows of data.
 #' @param npars A whole numeric vector specifying which distributions to include based on the number of parameters.
-#' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
-#' @param ci_method A string specifying which method to use for estimating the bootstrap values.
-#' Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.
-#' @param multi_est A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the arithmetic mean) 
-#' when calculating model averaged estimates or a string specifying whether to 
-#' treat the distributions as constituting a single distribution (`multi_est = 'arithmetic'`) or
-#' to take the arithmetic (`multi_est = 'arithmetic'`) or geometric (`multi_est = 'geometric'`) mean.
+#' @param multi_est A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the arithmetic mean) when calculating model averaged estimates.
 #' @param na.rm A flag specifying whether to silently remove missing values or
 #' remove them with a warning.
 #' @param n positive number of observations.

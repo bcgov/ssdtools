@@ -186,14 +186,14 @@ test_that("ssd_hc fitdists works fractions", {
 
 test_that("ssd_hc fitdists averages", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  hc <- ssd_hc(fits, ci_method = "weighted_arithmetic", multi_est = "arithmetic")
+  hc <- ssd_hc(fits, ci_method = "weighted_arithmetic", est_method = "arithmetic")
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_data(hc, "hc145")
 })
 
 test_that("ssd_hc fitdists geomean", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  hc <- ssd_hc(fits, ci_method = "weighted_arithmetic", multi_est = "geometric")
+  hc <- ssd_hc(fits, ci_method = "weighted_arithmetic", est_method = "geometric")
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_data(hc, "hc145g")
 })
@@ -206,7 +206,7 @@ test_that("ssd_hc fitdists correctly averages", {
   hc <- ssd_hc(fits, average = FALSE, ci_method = "multi_free")
   expect_equal(hc$est, c(3881.17238083968, 5540.52003), tolerance = 1e-5)
   expect_equal(hc$wt, c(0.0968427088339105, 0.90315729116609))
-  hc_avg <- ssd_hc(fits, ci_method = "weighted_arithmetic", multi_est = "arithmetic")
+  hc_avg <- ssd_hc(fits, ci_method = "weighted_arithmetic", est_method = "arithmetic")
   expect_equal(hc_avg$est, sum(hc$est * hc$wt))
 })
 
@@ -440,9 +440,9 @@ test_that("ssd_hc effect with higher weight two distributions", {
   data$Weight <- rep(10, nrow(data))
   fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
   set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic", multi_est = "arithmetic")
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic", est_method = "arithmetic")
   set.seed(10)
-  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic", multi_est = "arithmetic")
+  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, ci_method = "weighted_arithmetic", est_method = "arithmetic")
   expect_equal(hc$est, 1.6490386909599, tolerance = 1e-5)
   expect_equal(hc_10$est, 1.68117856793665, tolerance = 1e-5)
   expect_equal(hc$se, 0.511475588315084, tolerance = 1e-6)
@@ -588,7 +588,7 @@ test_that("ssd_hc save_to ci_method = weighted_samples default", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, ci_method = "weighted_arithmetic", multi_est = "arithmetic", samples = TRUE)
+  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, ci_method = "weighted_arithmetic", est_method = "arithmetic", samples = TRUE)
   expect_snapshot_data(hc, "hc_save_to_not_multi_default")
   expect_identical(
     sort(list.files(dir)),
@@ -734,7 +734,7 @@ test_that("ssd_hc identical if in parallel", {
 test_that("hc multi_ci false weighted", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
   set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, ci_method = "weighted_samples", multi_est = "arithmetic", min_pboot = 0.8)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, ci_method = "weighted_samples", est_method = "arithmetic", min_pboot = 0.8)
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc_weighted_samples")
 })
@@ -744,9 +744,9 @@ test_that("hc multis match", {
   set.seed(102)
   hc_tf <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, ci_method = "weighted_samples")
   set.seed(102)
-  hc_ft <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = "arithmetic", ci_method = "multi_fixed")
+  hc_ft <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "multi_fixed")
   set.seed(102)
-  hc_ff <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = "arithmetic", ci_method = "weighted_samples")
+  hc_ff <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "weighted_samples")
   set.seed(102)
   hc_tt <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, ci_method = "multi_fixed")
   
@@ -760,11 +760,11 @@ test_that("hc weighted bootie", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
   hc_weighted2 <- ssd_hc(fits,
-                         ci = TRUE, nboot = 10, average = TRUE, multi_est = "arithmetic", ci_method = "weighted_samples",
+                         ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "weighted_samples",
                          samples = TRUE
   )
   set.seed(102)
-  hc_unweighted2 <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, multi_est = "arithmetic", ci_method = "weighted_arithmetic", samples = TRUE)
+  hc_unweighted2 <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "weighted_arithmetic", samples = TRUE)
   
   expect_identical(hc_weighted2$est, hc_unweighted2$est)
   expect_identical(length(hc_weighted2$samples[[1]]), 11L)
@@ -791,28 +791,31 @@ test_that("hc proportion multiple decimal places", {
   expect_identical(hc2$proportion, 0.111111)
 })
 
-test_that("hc multi_est = TRUE optional", {
+test_that("hc multi_est = TRUE deprecated", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   withr::with_seed(10, {
     multi <- ssd_hc(fits)
   })
   
   withr::with_seed(10, {
-    true <- ssd_hc(fits, multi_est = TRUE)
+    lifecycle::expect_deprecated({
+      true <- ssd_hc(fits, multi_est = TRUE)
+    })
   })
   expect_identical(true, multi)
 })
 
-test_that("hc multi_est = FALSE optional", {
+test_that("hc est_method = FALSE deprecated and overrides est_method", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   withr::with_seed(10, {
-    arithmetic <- ssd_hc(fits, multi_est = "arithmetic")
+    arithmetic <- ssd_hc(fits, est_method = "arithmetic")
   })
   
   withr::with_seed(10, {
-    false <- ssd_hc(fits, multi_est = FALSE)
+    lifecycle::expect_deprecated({
+      false <- ssd_hc(fits, multi_est = FALSE, est_method = "geometric")
+    })  
   })
   
   expect_identical(false, arithmetic)
 })
-

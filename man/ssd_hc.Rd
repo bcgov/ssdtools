@@ -13,7 +13,7 @@ ssd_hc(x, ...)
 
 \method{ssd_hc}{fitdists}(
   x,
-  percent,
+  percent = deprecated(),
   proportion = 0.05,
   ...,
   average = TRUE,
@@ -21,7 +21,8 @@ ssd_hc(x, ...)
   level = 0.95,
   nboot = 1000,
   min_pboot = 0.95,
-  multi_est = TRUE,
+  multi_est = deprecated(),
+  est_method = "multi",
   ci_method = "weighted_samples",
   parametric = TRUE,
   delta = 9.21,
@@ -65,10 +66,11 @@ ssd_hc(x, ...)
 proportion of bootstrap samples that must successfully fit (return a likelihood)
 to report the confidence intervals.}
 
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the arithmetic mean)
-when calculating model averaged estimates or a string specifying whether to
-treat the distributions as constituting a single distribution (\code{multi_est = 'arithmetic'}) or
-to take the arithmetic (\code{multi_est = 'arithmetic'}) or geometric (\code{multi_est = 'geometric'}) mean.}
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the arithmetic mean) when calculating model averaged estimates.}
+
+\item{est_method}{A string specifying whether to
+treat the distributions as constituting a single distribution (\code{est_method = 'arithmetic'}) or
+to take the arithmetic (\code{est_method = 'arithmetic'}) or geometric (\code{est_method = 'geometric'}) mean.}
 
 \item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
 Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}

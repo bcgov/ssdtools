@@ -45,7 +45,8 @@ ssd_hp.fitdists <- function(
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
-    multi_est = TRUE,
+    multi_est = deprecated(),
+    est_method = "multi",
     ci_method = "weighted_samples",
     parametric = TRUE,
     delta = 9.21,
@@ -55,6 +56,15 @@ ssd_hp.fitdists <- function(
   chk_vector(conc)
   chk_numeric(conc)
   chk_unused(...)
+  
+  if (lifecycle::is_present(multi_est)) {
+    lifecycle::deprecate_soft("2.3.1", "ssd_hc(multi_est)", "ssd_hc(est_method)")
+    
+    chk_flag(multi_est)
+    
+    multi_est <- if(multi_est) "multi" else "arithmetic"
+    est_method <- multi_est
+  }
   
   if(length(x) == 1L) {
     average <- FALSE
@@ -67,7 +77,7 @@ ssd_hp.fitdists <- function(
     level = level,
     nboot = nboot,
     average = average,
-    multi_est = multi_est,
+    est_method = est_method,
     delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
@@ -116,7 +126,7 @@ ssd_hp.fitburrlioz <- function(
     level = level,
     nboot = nboot,
     average = FALSE,
-    multi_est = TRUE,
+    est_method = "multi",
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,

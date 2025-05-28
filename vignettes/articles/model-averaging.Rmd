@@ -264,7 +264,7 @@ For this equality to hold, it is necessary that $qf\left( p \right) = d{f^{ - 1}
 # Obtain a model-averaged HCx using the ssd_hc() function
 hcp<-ssd_hc(x, p = p)
 # Check that the inversion principle holds
-ssd_hp(x, hcp, multi_est = TRUE) == p   # this should result in logical `TRUE`
+ssd_hp(x, hcp, est_method = "multi") == p   # this should result in logical `TRUE`
 ```
 *Note: if the `multi_est` argument is set to `FALSE` the test will fail*.
 <br>

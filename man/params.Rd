@@ -15,6 +15,8 @@
 
 \item{all_dists}{A flag specifying whether all the named distributions must fit successfully.}
 
+\item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
+
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).}
 
@@ -34,6 +36,9 @@ relative to the extremes for non-missing values.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
+\item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
+Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
+
 \item{censoring}{A numeric vector of the left and right censoring values.}
 
 \item{color}{A string of the column in data for the color aesthetic.}
@@ -52,6 +57,10 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 \item{digits}{A whole number specifying the number of significant figures.}
 
 \item{dists}{A character vector of the distribution names.}
+
+\item{est_method}{A string specifying whether to
+treat the distributions as constituting a single distribution (\code{est_method = 'arithmetic'}) or
+to take the arithmetic (\code{est_method = 'arithmetic'}) or geometric (\code{est_method = 'geometric'}) mean.}
 
 \item{fitdists}{An object of class fitdists.}
 
@@ -109,15 +118,7 @@ to report the confidence intervals.}
 
 \item{npars}{A whole numeric vector specifying which distributions to include based on the number of parameters.}
 
-\item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
-
-\item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
-Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
-
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the arithmetic mean)
-when calculating model averaged estimates or a string specifying whether to
-treat the distributions as constituting a single distribution (\code{multi_est = 'arithmetic'}) or
-to take the arithmetic (\code{multi_est = 'arithmetic'}) or geometric (\code{multi_est = 'geometric'}) mean.}
+\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the arithmetic mean) when calculating model averaged estimates.}
 
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}
