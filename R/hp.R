@@ -67,7 +67,7 @@ ssd_hp.fitdists <- function(
 
   chk_string(ci_method) 
   if(ci_method == "weighted_arithmetic") {
-    lifecycle::deprecate_stop("2.3.1", I("ssd_hp(ci_method = 'weighted_arithmetic'"), I("ssd_hp(ci_method = 'MACL'"))
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(ci_method = 'weighted_arithmetic'"), I("ssd_hp(ci_method = 'MACL'"))
     
     ci_method <- "MACL"
   }

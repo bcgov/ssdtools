@@ -819,3 +819,18 @@ test_that("hc est_method = FALSE deprecated and overrides est_method", {
   
   expect_identical(false, arithmetic)
 })
+
+test_that("hc ci_method = 'weighted_arithmetic' deprecated for MACL", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  withr::with_seed(10, {
+    lifecycle::expect_deprecated({
+      weighted_arithmetic <- ssd_hc(fits, ci_method = "weighted_arithmetic")
+    })
+  })
+  
+  withr::with_seed(10, {
+    macl <- ssd_hc(fits, ci_method = "MACL")
+  })
+  
+  expect_identical(macl, weighted_arithmetic)
+})
