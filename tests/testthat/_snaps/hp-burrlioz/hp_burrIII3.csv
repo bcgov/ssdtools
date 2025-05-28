@@ -1,2 +1,2 @@
-dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-burrIII3,1,57.7535,4.59367,50.995,65.3705,1,non-parametric,10,1,"c(`000000001_burrIII3` = 66.7397, `000000002_burrIII3` = 54.7298, `000000003_burrIII3` = 51.1802, `000000004_burrIII3` = 60.6545, `000000005_burrIII3` = 57.2087, `000000006_burrIII3` = 50.9412, `000000007_burrIII3` = 54.9825, `000000008_burrIII3` = 57.6309, `000000009_burrIII3` = 58.1794, `000000010_burrIII3` = 56.5409)"
+dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+burrIII3,1,57.7535,4.59367,50.995,65.3705,1,cdf,quantiles,non-parametric,10,1,"c(`000000001_burrIII3` = 66.7397, `000000002_burrIII3` = 54.7298, `000000003_burrIII3` = 51.1802, `000000004_burrIII3` = 60.6545, `000000005_burrIII3` = 57.2087, `000000006_burrIII3` = 50.9412, `000000007_burrIII3` = 54.9825, `000000008_burrIII3` = 57.6309, `000000009_burrIII3` = 58.1794, `000000010_burrIII3` = 56.5409)"

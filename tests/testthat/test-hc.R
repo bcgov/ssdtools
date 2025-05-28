@@ -66,7 +66,7 @@ test_that("ssd_hc list names must be unique", {
 test_that("ssd_hc list handles zero length list", {
   hc <- ssd_hc(structure(list(), .Names = character(0)))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
   expect_identical(hc$dist, character(0))
   expect_identical(hc$proportion, numeric(0))
   expect_identical(hc$se, numeric(0))
@@ -137,7 +137,7 @@ test_that("ssd_hc fitdists works zero length percent", {
   
   hc <- ssd_hc(fits, proportion = numeric(0))
   expect_s3_class(hc, class = "tbl_df")
-  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
   expect_equal(hc$dist, character(0))
   expect_identical(hc$proportion, numeric(0))
   expect_equal(hc$est, numeric(0))
@@ -833,4 +833,29 @@ test_that("hc ci_method = 'weighted_arithmetic' deprecated for MACL", {
   })
   
   expect_identical(macl, weighted_arithmetic)
+})
+
+
+test_that("hc est_method and ci_method combos", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
+  
+  ## TODO: add ssd_est_methods() and ssd_ci_methods() functions.
+  est_methods <- c("multi", "arithmetic", "geometric")
+  ci_methods <- c("multi_fixed", "multi_free", "weighted_samples", "MACL")
+  parametric <- c(TRUE, FALSE)
+  ci <- c(FALSE, TRUE)
+  
+  data <- tidyr::expand_grid(est_method = est_methods, ci_method = ci_methods,
+                      parametric = parametric, ci = ci)
+  
+  func <- function(est_method, ci_method, parametric, ci, fit) {
+    withr::with_seed(10, {
+      ssd_hc(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
+    })
+  }
+  ls <- purrr::pmap(data, .f = func, fit = fit)
+  ls <- dplyr::bind_rows(ls)
+  data <- dplyr::rename_with(data, \(.x) paste0(.x, "_data"))
+  data <- dplyr::bind_cols(ls, data)
+  expect_snapshot_data(data, "all_hc_combos")
 })

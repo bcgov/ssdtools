@@ -34,9 +34,10 @@ test_that("hp multi_ci lnorm", {
 test_that("hp multi_ci all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE)
+  hp_average <- ssd_hp(fits, average = TRUE, ci_method = "weighted_samples")
   hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed")
-  expect_equal(hp_multi, hp_average)
+  expect_equal(hp_multi[!colnames(hp_multi) %in% c("ci_method", "method")], 
+               hp_average[!colnames(hp_average) %in% c("ci_method", "method")])
   expect_equal(hp_average$est, 3.89879276872944, tolerance = 1e-5)
   expect_equal(hp_multi$est, 3.89879276872944, tolerance = 1e-5)
   testthat::expect_snapshot({

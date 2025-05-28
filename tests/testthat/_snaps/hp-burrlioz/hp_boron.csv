@@ -1,2 +1,2 @@
-dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-invpareto,1,8.57733,2.41834,4.66069,11.3967,1,non-parametric,10,1,"c(`000000001_invpareto` = 5.06062, `000000002_invpareto` = 5.22846, `000000003_invpareto` = 11.7276, `000000004_invpareto` = 9.70733, `000000005_invpareto` = 8.33961, `000000006_invpareto` = 9.06561, `000000007_invpareto` = 10.2569, `000000008_invpareto` = 4.54458, `000000009_invpareto` = 9.10488, `000000010_invpareto` = 7.7534)"
+dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+invpareto,1,8.57733,2.41834,4.66069,11.3967,1,cdf,quantiles,non-parametric,10,1,"c(`000000001_invpareto` = 5.06062, `000000002_invpareto` = 5.22846, `000000003_invpareto` = 11.7276, `000000004_invpareto` = 9.70733, `000000005_invpareto` = 8.33961, `000000006_invpareto` = 9.06561, `000000007_invpareto` = 10.2569, `000000008_invpareto` = 4.54458, `000000009_invpareto` = 9.10488, `000000010_invpareto` = 7.7534)"

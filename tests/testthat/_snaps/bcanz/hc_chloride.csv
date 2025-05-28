@@ -1,5 +1,5 @@
-dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-average,0.01,0.267258,0.337761,0.0476618,0.995389,1,parametric,10,1,numeric(0)
-average,0.05,1.25678,0.69858,0.469904,2.44696,1,parametric,10,1,numeric(0)
-average,0.1,2.38165,0.986339,1.21915,4.18705,1,parametric,10,1,numeric(0)
-average,0.2,4.81003,1.41415,3.28125,7.51421,1,parametric,10,1,numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+average,0.01,0.267258,0.337761,0.0476618,0.995389,1,cdf,weighted_samples,parametric,10,1,numeric(0)
+average,0.05,1.25678,0.69858,0.469904,2.44696,1,cdf,weighted_samples,parametric,10,1,numeric(0)
+average,0.1,2.38165,0.986339,1.21915,4.18705,1,cdf,weighted_samples,parametric,10,1,numeric(0)
+average,0.2,4.81003,1.41415,3.28125,7.51421,1,cdf,weighted_samples,parametric,10,1,numeric(0)

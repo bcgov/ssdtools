@@ -29,7 +29,7 @@ test_that("hp fitdists works with zero length conc", {
   
   hp <- ssd_hp(fits, numeric(0))
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
   expect_equal(hp$dist, character(0))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0))
@@ -401,4 +401,28 @@ test_that("hp ci_method = 'weighted_arithmetic' deprecated for MACL", {
   })
   
   expect_identical(macl, weighted_arithmetic)
+})
+
+test_that("hp est_method and ci_method combos", {
+  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
+  
+  ## TODO: add ssd_est_methods() and ssd_ci_methods() functions.
+  est_methods <- c("multi", "arithmetic", "geometric")
+  ci_methods <- c("multi_fixed", "multi_free", "weighted_samples", "MACL")
+  parametric <- c(TRUE, FALSE)
+  ci <- c(FALSE, TRUE)
+  
+  data <- tidyr::expand_grid(est_method = est_methods, ci_method = ci_methods,
+                             parametric = parametric, ci = ci)
+  
+  func <- function(est_method, ci_method, parametric, ci, fit) {
+    withr::with_seed(10, {
+      ssd_hp(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
+    })
+  }
+  ls <- purrr::pmap(data, .f = func, fit = fit)
+  ls <- dplyr::bind_rows(ls)
+  data <- dplyr::rename_with(data, \(.x) paste0(.x, "_data"))
+  data <- dplyr::bind_cols(ls, data)
+  expect_snapshot_data(data, "all_hp_combos")
 })

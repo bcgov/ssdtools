@@ -1,2 +1,2 @@
-dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-average,1,3.89878,NA,NA,NA,1,parametric,0,NA,numeric(0)
+dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+average,1,3.89878,NA,NA,NA,1,cdf,weighted_samples,parametric,0,NA,numeric(0)
