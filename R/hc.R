@@ -134,18 +134,24 @@ ssd_hc.fitdists <- function(
     proportion <- percent / 100
   }
   
+  chk_vector(proportion)
+  chk_numeric(proportion)
+  chk_range(proportion)
+  
   if (lifecycle::is_present(multi_est)) {
     lifecycle::deprecate_soft("2.3.1", "ssd_hc(multi_est)", "ssd_hc(est_method)")
     
     chk_flag(multi_est)
     
-    multi_est <- if(multi_est) "multi" else "arithmetic"
-    est_method <- multi_est
+    est_method <- if(multi_est) "multi" else "arithmetic"
   }
-
-  chk_vector(proportion)
-  chk_numeric(proportion)
-  chk_range(proportion)
+  
+  chk_string(ci_method) 
+  if(ci_method == "weighted_arithmetic") {
+    lifecycle::deprecate_stop("2.3.1", I("ssd_hc(ci_method = 'weighted_arithmetic'"), I("ssd_hc(ci_method = 'MACL'"))
+    
+    ci_method <- "MACL"
+  }
   
   if(length(x) == 1L) {
     average <- FALSE

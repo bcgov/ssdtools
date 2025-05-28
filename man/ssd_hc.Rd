@@ -88,7 +88,7 @@ or re-estimated for each bootstrap sample dataset.
 The value \code{ci_method = "weighted_samples"} takes bootstrap samples
 from each distribution proportional to its AICc based weights and
 calculates the confidence limits (and SE) from this single set.
-The value \code{ci_method = "MACL"} (was \code{ci_method = "weighted_arithmetic"} but
+The value \code{ci_method = "weighted_arithmetic"} (was \code{ci_method = "MACL"} but
 has been soft-deprecated) which is only included for
 historical reasons takes the weighted arithmetic mean of the confidence
 limits and \code{ci_method = MGCL} which was included for a research paper

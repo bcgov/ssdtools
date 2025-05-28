@@ -62,8 +62,14 @@ ssd_hp.fitdists <- function(
     
     chk_flag(multi_est)
     
-    multi_est <- if(multi_est) "multi" else "arithmetic"
-    est_method <- multi_est
+    est_method <- if(multi_est) "multi" else "arithmetic"
+  }
+
+  chk_string(ci_method) 
+  if(ci_method == "weighted_arithmetic") {
+    lifecycle::deprecate_stop("2.3.1", I("ssd_hp(ci_method = 'weighted_arithmetic'"), I("ssd_hp(ci_method = 'MACL'"))
+    
+    ci_method <- "MACL"
   }
   
   if(length(x) == 1L) {
