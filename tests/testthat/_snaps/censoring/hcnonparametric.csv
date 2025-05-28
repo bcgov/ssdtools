@@ -1,7 +1,7 @@
 dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
-gamma,0.05,1.18,0.459,0.52,1.82,NA,cdf,quantiles,non-parametric,10,1,numeric(0)
-lgumbel,0.05,1.83,0.455,1.49,2.71,NA,cdf,quantiles,non-parametric,10,1,numeric(0)
-llogis,0.05,1.79,1.03,1.2,4.09,NA,cdf,quantiles,non-parametric,10,1,numeric(0)
-lnorm,0.05,1.82,0.72,1.33,3.49,NA,cdf,quantiles,non-parametric,10,1,numeric(0)
-lnorm_lnorm,0.05,1.35,1.37,1.06,3.7,NA,cdf,quantiles,non-parametric,10,0.4,numeric(0)
-weibull,0.05,1.23,1.1,0.54,3.34,NA,cdf,quantiles,non-parametric,10,1,numeric(0)
+gamma,0.05,1.18,0.459,0.52,1.82,NA,multi,weighted_samples,non-parametric,10,1,numeric(0)
+lgumbel,0.05,1.83,0.455,1.49,2.71,NA,multi,weighted_samples,non-parametric,10,1,numeric(0)
+llogis,0.05,1.79,1.03,1.2,4.09,NA,multi,weighted_samples,non-parametric,10,1,numeric(0)
+lnorm,0.05,1.82,0.72,1.33,3.49,NA,multi,weighted_samples,non-parametric,10,1,numeric(0)
+lnorm_lnorm,0.05,1.35,1.37,1.06,3.7,NA,multi,weighted_samples,non-parametric,10,0.4,numeric(0)
+weibull,0.05,1.23,1.1,0.54,3.34,NA,multi,weighted_samples,non-parametric,10,1,numeric(0)

@@ -22,13 +22,17 @@ test_that("hp multi_ci lnorm", {
   hp_average <- ssd_hp(fits, average = TRUE, ci_method = "MACL", est_method = "arithmetic")
   hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed")
   expect_identical(hp_average$est, hp_dist$est)
-  expect_equal(hp_multi, hp_average)
   expect_equal(hp_average$est, 1.9543030195088, tolerance = 1e-5)
   expect_equal(hp_multi$est, 1.95430301950878, tolerance = 1e-5)
-
   testthat::expect_snapshot({
     hp_multi
   })
+  
+  hp_multi$est_method <- NULL
+  hp_average$est_method <- NULL
+  hp_multi$ci_method <- NULL
+  hp_average$ci_method <- NULL
+  expect_equal(hp_multi, hp_average)
 })
 
 test_that("hp multi_ci all", {

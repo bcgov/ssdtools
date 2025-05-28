@@ -1,2 +1,2 @@
 dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
-invpareto,0.05,0.386944,NA,NA,NA,1,cdf,NA,non-parametric,0,NA,numeric(0)
+invpareto,0.05,0.386944,NA,NA,NA,1,multi,multi_free,non-parametric,0,NA,numeric(0)

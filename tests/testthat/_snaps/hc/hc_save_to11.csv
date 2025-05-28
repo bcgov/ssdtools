@@ -1,2 +1,2 @@
 dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
-lnorm,0.05,1.68117,NA,1.29091,1.29091,1,cdf,quantiles,parametric,1,1,c(`000000001_lnorm` = 1.29091)
+lnorm,0.05,1.68117,NA,1.29091,1.29091,1,multi,multi_fixed,parametric,1,1,c(`000000001_lnorm` = 1.29091)

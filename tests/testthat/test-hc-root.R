@@ -22,7 +22,7 @@ test_that("hc multi_ci lnorm", {
   hc_average <- ssd_hc(fits, average = TRUE, ci_method = "MACL", est_method = "arithmetic")
   hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed")
   expect_identical(hc_dist$est, hc_average$est)
-  expect_equal(hc_multi, hc_average)
+  expect_identical(hc_dist$est, hc_multi$est)
 
   testthat::expect_snapshot({
     hc_multi
@@ -82,8 +82,12 @@ test_that("hc multi_ci lnorm ci", {
   testthat::expect_snapshot({
     hc_multi
   })
-
+  
   hc_dist$dist <- NULL
   hc_average$dist <- NULL
+  hc_dist$est_method <- NULL
+  hc_average$est_method <- NULL
+  hc_dist$ci_method <- NULL
+  hc_average$ci_method <- NULL
   expect_identical(hc_dist, hc_average)
 })
