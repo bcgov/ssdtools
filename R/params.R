@@ -39,7 +39,7 @@
 #' or re-estimated for each bootstrap sample dataset.  
 #' The value `ci_method = "weighted_samples"` takes bootstrap samples 
 #' from each distribution proportional to its AICc based weights.
-#' The value `ci_method = "legacy"` (was `ci_method = "weighted_arithmetic"` but 
+#' The value `ci_method = "MACL"` (was `ci_method = "weighted_arithmetic"` but 
 #' has been soft-deprecated) which is only included for
 #' historical reasons takes the weighted arithmetic mean of the confidence
 #' interval while `ci_method = "MAW1"` and `ci_method = "MAW2"`

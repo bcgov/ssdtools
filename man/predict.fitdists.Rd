@@ -55,7 +55,7 @@ but differ in whether the model weights are fixed at the values for the original
 or re-estimated for each bootstrap sample dataset.
 The value \code{ci_method = "weighted_samples"} takes bootstrap samples
 from each distribution proportional to its AICc based weights.
-The value \code{ci_method = "legacy"} (was \code{ci_method = "weighted_arithmetic"} but
+The value \code{ci_method = "MACL"} (was \code{ci_method = "weighted_arithmetic"} but
 has been soft-deprecated) which is only included for
 historical reasons takes the weighted arithmetic mean of the confidence
 interval while \code{ci_method = "MAW1"} and \code{ci_method = "MAW2"}
