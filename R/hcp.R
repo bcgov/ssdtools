@@ -148,7 +148,7 @@ group_samples <- function(hcp) {
   dplyr::ungroup(samples)
 }
 
-hcp_average <- function(hcp, weight, value, est_method, ci_method, method, nboot, geometric) {
+hcp_average <- function(hcp, weight, value, est_method, ci_method, nboot, geometric) {
   samples <- group_samples(hcp)
   
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
@@ -164,7 +164,7 @@ hcp_average <- function(hcp, weight, value, est_method, ci_method, method, nboot
     dist = "average", value = value, est = hcp$est, se = hcp$se,
     lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
     est_method = est_method, ci_method = ci_method,
-    method = method, nboot = nboot, pboot = min$pboot
+    nboot = nboot, pboot = min$pboot
   )
   tib <- dplyr::inner_join(tib, samples, by = "value")
   dplyr::arrange(tib, .data$value)
@@ -198,11 +198,9 @@ hcp_ind <- function(hcp, weight, ci, parametric, est_method, ci_method) {
     USE.NAMES = FALSE, SIMPLIFY = FALSE
   )
   hcp <- bind_rows(hcp)
-  method <- if (parametric) "parametric" else "non-parametric"
-  hcp$method <- method
   hcp$est_method <- est_method
   hcp$ci_method <- ci_method
-  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples")]
+  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "nboot", "pboot", "samples")]
 }
 
 replace_estimates <- function(hcp, est) {
@@ -236,9 +234,7 @@ replace_estimates <- function(hcp, est) {
     hc = hc, save_to = save_to, samples = samples || ci_method == "weighted_samples", fun = fun
   )
   
-  method <- if (parametric) "parametric" else "non-parametric"
-  
-  hcp <- hcp_average(hcp, weight, value, method, nboot, est_method = est_method, ci_method = ci_method, geometric = geometric)
+  hcp <- hcp_average(hcp, weight, value, nboot = nboot, est_method = est_method, ci_method = ci_method, geometric = geometric)
   if (ci_method != "weighted_samples") {
     if (!samples) {
       hcp$samples <- I(list(numeric(0)))
@@ -328,7 +324,6 @@ replace_estimates <- function(hcp, est) {
     
     return(hcp)
   }
-  
   hcp <- .ssd_hcp_conventional(
     x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
     min_pboot = min_pboot, estimates = estimates,
@@ -421,6 +416,14 @@ replace_estimates <- function(hcp, est) {
   )
 }
 
+tidy_hcp <- function(hcp, parametric) {
+  n <- nrow(hcp)
+  method <- if (parametric) "parametric" else "non-parametric"
+  hcp$method <- rep(method, n)
+  
+  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples")]
+}
+
 ssd_hcp_fitdists <- function(
     x, value, ci, level, nboot, average, est_method, delta, min_pboot,
     parametric, ci_method, control, samples, save_to,
@@ -459,6 +462,6 @@ ssd_hcp_fitdists <- function(
     parametric = parametric, ci_method = ci_method,
     control = control, save_to = save_to, samples = samples, hc = hc, fun = fun
   )
-  hcp$method <- if (parametric) "parametric" else "non-parametric"
+  hcp <- tidy_hcp(hcp, parametric = parametric)  
   warn_min_pboot(hcp, min_pboot)
 }
