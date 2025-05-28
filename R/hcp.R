@@ -82,7 +82,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, est_method, ci_met
     x, dist, estimates, fun, pars, value, ci, level, nboot, min_pboot,
     data, rescale, weighted, censoring, min_pmix,
     range_shape1, range_shape2, parametric, control, save_to, samples, hc,
-    est_method, ci_method, method) {
+    est_method, ci_method) {
   args <- estimates
   
   if (hc) {
@@ -207,7 +207,7 @@ hcp_ind <- function(hcp, weight, ci, method) {
 }
 
 replace_estimates <- function(hcp, est) {
-  est <- dplyr::select(est, "value", est2 = "est", est_method2 = est_method,)
+  est <- dplyr::select(est, "value", est2 = "est", est_method2 = "est_method")
   hcp <- dplyr::inner_join(hcp, est, by = "value")
   dplyr::mutate(hcp, est = .data$est2, est_method = .data$est_method2, 
                 est2 = NULL, est_method2 = NULL)
@@ -265,8 +265,7 @@ replace_estimates <- function(hcp, est) {
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to,
-    samples = samples, hc = hc, ci_method = ci_method, est_method = est_method,
-    method = method
+    samples = samples, hc = hc, ci_method = ci_method, est_method = est_method
   )
   hcp$dist <- "average"
   hcp$ci_method <- if(ci) ci_method else NA_character_
