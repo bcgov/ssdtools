@@ -1,3 +1,3 @@
 dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
-lnorm,0.05,1.31771,NA,NA,NA,NA,multi,weighted_samples,parametric,0,NA,numeric(0)
-lnorm_lnorm,0.05,1.35381,NA,NA,NA,NA,multi,weighted_samples,parametric,0,NA,numeric(0)
+lnorm,0.05,1.31771,NA,NA,NA,NA,multi,NA,NA,0,NA,numeric(0)
+lnorm_lnorm,0.05,1.35381,NA,NA,NA,NA,multi,NA,NA,0,NA,numeric(0)

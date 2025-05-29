@@ -1,7 +1,7 @@
 dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
-gamma,1,4.67759,NA,NA,NA,0.356574,multi,weighted_samples,parametric,0,NA,numeric(0)
-lgumbel,1,0.856452,NA,NA,NA,0.0134466,multi,weighted_samples,parametric,0,NA,numeric(0)
-llogis,1,2.80047,NA,NA,NA,0.0656452,multi,weighted_samples,parametric,0,NA,numeric(0)
-lnorm,1,1.95431,NA,NA,NA,0.177236,multi,weighted_samples,parametric,0,NA,numeric(0)
-lnorm_lnorm,1,1.23379,NA,NA,NA,0.0296268,multi,weighted_samples,parametric,0,NA,numeric(0)
-weibull,1,4.62301,NA,NA,NA,0.357472,multi,weighted_samples,parametric,0,NA,numeric(0)
+gamma,1,4.67759,NA,NA,NA,0.356574,multi,NA,NA,0,NA,numeric(0)
+lgumbel,1,0.856452,NA,NA,NA,0.0134466,multi,NA,NA,0,NA,numeric(0)
+llogis,1,2.80047,NA,NA,NA,0.0656452,multi,NA,NA,0,NA,numeric(0)
+lnorm,1,1.95431,NA,NA,NA,0.177236,multi,NA,NA,0,NA,numeric(0)
+lnorm_lnorm,1,1.23379,NA,NA,NA,0.0296268,multi,NA,NA,0,NA,numeric(0)
+weibull,1,4.62301,NA,NA,NA,0.357472,multi,NA,NA,0,NA,numeric(0)

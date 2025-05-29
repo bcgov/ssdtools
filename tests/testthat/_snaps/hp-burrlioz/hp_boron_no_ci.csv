@@ -1,2 +1,2 @@
 dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
-invpareto,1,8.57733,NA,NA,NA,1,multi,multi_free,non-parametric,0,NA,numeric(0)
+invpareto,1,8.57733,NA,NA,NA,1,multi,NA,NA,0,NA,numeric(0)

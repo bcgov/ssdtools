@@ -360,9 +360,19 @@ replace_estimates <- function(hcp, est) {
   replace_estimates(hcp, est)
 }
 
-tidy_hcp <- function(hcp, parametric) {
+tidy_hcp <- function(hcp, ci, parametric) {
   method <- if (parametric) "parametric" else "non-parametric"
   hcp$method <- method
+  if(!ci) {
+    hcp$se <- NA_real_
+    hcp$lcl <- NA_real_
+    hcp$ucl <- NA_real_
+    hcp$ci_method <- NA_character_
+    hcp$method <- NA_character_
+    hcp$nboot <- 0L
+    hcp$pboot <- NA_real_
+    hcp$samples <- I(list(numeric(0)))
+  }
   
   hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples")]
 }
@@ -426,7 +436,7 @@ tidy_hcp <- function(hcp, parametric) {
       hc = hc, save_to = save_to, samples = samples, fun = fun
     )
   }
-  tidy_hcp(hcp, parametric = parametric)  
+  tidy_hcp(hcp, ci = ci, parametric = parametric)  
 }
 
 ssd_hcp_fitdists <- function(

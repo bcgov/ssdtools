@@ -6,7 +6,8 @@
 
 - Added `ssd_at_boundary()` and `ssd_computable()`.
 - Added `est_method = "multi"` argument to `ssd_hc()` and `ssd_hp()` and soft deprecated `multi_est = TRUE`.
-- Added `"est_method"` and `"ci_method"` columns to tibbles output by `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Added `"est_method"` and `"ci_method"` columns to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Added `"at_bound"` and `"computable"` columns to tibble output by `gof()`.
 - Added `strict = TRUE` argument to `subset()` to allow subsetting when distributions missing (with `strict = FALSE`).
 - Added ... and checked unused to `ssd_fit_xx()` family of functions.
 
