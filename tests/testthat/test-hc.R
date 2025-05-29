@@ -20,7 +20,6 @@ test_that("hc", {
   withr::with_seed(102, {
     hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, samples = TRUE)
   })
-  expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
 })
 
@@ -785,7 +784,6 @@ test_that("hc multi_ci false weighted", {
   withr::with_seed(102, {
     hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, ci_method = "weighted_samples", est_method = "arithmetic", min_pboot = 0.8)
   })
-  expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc_weighted_samples")
 })
 
@@ -910,6 +908,7 @@ test_that("hc est_method and ci_method combos", {
         hc <- ssd_hc(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
       })
     )
+    expect_s3_class(hc, "tbl")
     hc$id <- id
     hc
   }
