@@ -95,9 +95,11 @@ reference:
   - npars
   - params
   - ssd_at_boundary
+  - ssd_ci_methods
   - ssd_computable
   - ssd_ecd
   - ssd_ecd_data
+  - ssd_est_methods
   - ssd_exposure
   - ssd_is_censored
   - ssd_match_moments

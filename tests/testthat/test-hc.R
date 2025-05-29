@@ -871,9 +871,8 @@ test_that("hc ci_method = 'weighted_arithmetic' deprecated for MACL", {
 test_that("hc est_method and ci_method combos", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
   
-  ## TODO: add ssd_est_methods() and ssd_ci_methods() functions.
-  est_methods <- c("multi", "arithmetic", "geometric")
-  ci_methods <- c("multi_fixed", "multi_free", "weighted_samples", "MACL")
+  est_methods <- ssd_est_methods()
+  ci_methods <- ssd_ci_methods()
   parametric <- c(TRUE, FALSE)
   ci <- c(FALSE, TRUE)
   

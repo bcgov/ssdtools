@@ -452,7 +452,7 @@ ssd_hcp_fitdists <- function(
   chk_flag(average)
   
   chk_string(est_method)
-  chk_subset(est_method, c("arithmetic", "geometric", "multi"))
+  chk_subset(est_method, ssd_est_methods())
   
   chk_number(delta)
   chk_gte(delta)
@@ -461,8 +461,7 @@ ssd_hcp_fitdists <- function(
   chk_flag(parametric)
   
   chk_string(ci_method)
-  chk_subset(ci_method, c("weighted_samples", "MACL", "multi_free", "multi_fixed"))
-  ## TODO: implement MGCL, MAW1, MAW2, arithmetic, geometric and potentially MATA
+  chk_subset(ci_method, ssd_ci_methods())
   chk_null_or(control, vld = vld_list)
   chk_null_or(save_to, vld = vld_dir)
   chk_flag(samples)
