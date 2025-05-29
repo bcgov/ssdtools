@@ -869,14 +869,16 @@ test_that("hc ci_method = 'weighted_arithmetic' deprecated for MACL", {
 })
 
 test_that("hc est_method and ci_method combos", {
-  fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
+  fit1 <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
+  fit2 <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
+  fits <- list(fit1, fit2)
   
   est_methods <- ssd_est_methods()
   ci_methods <- ssd_ci_methods()
   parametric <- c(TRUE, FALSE)
   ci <- c(FALSE, TRUE)
   
-  data <- tidyr::expand_grid(fit = list(fit), est_method = est_methods, ci = ci, parametric = parametric, ci_method = ci_methods)
+  data <- tidyr::expand_grid(fit = fits, est_method = est_methods, ci = ci, parametric = parametric, ci_method = ci_methods)
   data$id <- 1:nrow(data)
   
   func <- function(fit, est_method, ci_method, parametric, ci, id) {
