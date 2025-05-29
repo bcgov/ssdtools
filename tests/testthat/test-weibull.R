@@ -21,7 +21,7 @@ test_that("weibull", {
   withr::with_seed(42, {
     expect_equal(ssd_rweibull(2), c(0.0890432104972705, 0.0649915162066272))
   })
-  testthat::skip_on_cran() # ssd_fit_dists() failing on CRAN M1mac likely due to much older version of the OS and toolchain
+  skip_on_cran() # ssd_fit_dists() failing on CRAN M1mac likely due to much older version of the OS and toolchain
   test_dist("weibull")
 })
 

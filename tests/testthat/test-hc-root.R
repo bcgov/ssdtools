@@ -47,7 +47,7 @@ test_that("hc multi_ci all multiple hcs", {
   })
   expect_equal(hc_average$est, c(1.24151480646654, 2.37337090704541), tolerance = 1e-5)
   expect_equal(hc_multi$est, c(1.2567737470831, 2.38164080837643), tolerance = 1e-5)
-  testthat::expect_snapshot({
+  expect_snapshot({
     hc_multi
   })
 })

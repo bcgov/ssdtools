@@ -161,7 +161,7 @@ test_that("ssd_rmulti all", {
 
 test_that("ssd_emulti", {
   estimates <- ssd_emulti()
-  testthat::expect_snapshot(estimates)
+  expect_snapshot(estimates)
   args <- estimates
   args$q <- 1
   p <- do.call("ssd_pmulti", args)
