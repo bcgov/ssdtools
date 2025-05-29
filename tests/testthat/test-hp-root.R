@@ -25,9 +25,7 @@ test_that("hp multi_ci lnorm", {
   expect_identical(hp_average$est, hp_dist$est)
   expect_equal(hp_average$est, 1.9543030195088, tolerance = 1e-5)
   expect_equal(hp_multi$est, 1.95430301950878, tolerance = 1e-5)
-  testthat::expect_snapshot({
-    hp_multi
-  })
+  expect_snapshot_data(hp_multi, "hp_multi_ci_lnorm")
   
   hp_multi$est_method <- NULL
   hp_average$est_method <- NULL
@@ -46,9 +44,7 @@ test_that("hp multi_ci all", {
                hp_average[!colnames(hp_average) %in% c("ci_method", "method")])
   expect_equal(hp_average$est, 3.89879276872944, tolerance = 1e-5)
   expect_equal(hp_multi$est, 3.89879276872944, tolerance = 1e-5)
-  testthat::expect_snapshot({
-    hp_multi
-  })
+  expect_snapshot_data(hp_multi, "hp_multi_ci_all")
 })
 
 test_that("hp multi_ci lnorm ci", {
@@ -63,13 +59,8 @@ test_that("hp multi_ci lnorm ci", {
     hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 100)
   })
 
-  testthat::expect_snapshot({
-    hp_average
-  })
-
-  testthat::expect_snapshot({
-    hp_multi
-  })
+  expect_snapshot_data(hp_average, "hp_multi_ci_lnorm_ci_average")
+  expect_snapshot_data(hp_multi, "hp_multi_ci_lnorm_ci_multi")
 
   hp_dist$dist <- NULL
   hp_average$dist <- NULL

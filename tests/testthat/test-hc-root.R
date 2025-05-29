@@ -25,9 +25,7 @@ test_that("hc multi_ci lnorm", {
   expect_identical(hc_dist$est, hc_average$est)
   expect_identical(hc_dist$est, hc_multi$est)
 
-  testthat::expect_snapshot({
-    hc_multi
-  })
+  expect_snapshot_data(hc_multi, "hc_multi_ci_lnorm")
 })
 
 test_that("hc multi_ci all", {
@@ -38,9 +36,7 @@ test_that("hc multi_ci all", {
   })
   expect_equal(hc_average$est, 1.241515, tolerance = 1e-5)
   expect_equal(hc_multi$est, 1.2567737470831, tolerance = 1e-5)
-  testthat::expect_snapshot({
-    hc_multi
-  })
+  expect_snapshot_data(hc_multi, "hc_multi_ci_all")
 })
 
 test_that("hc multi_ci all multiple hcs", {
@@ -66,9 +62,7 @@ test_that("hc multi_ci all multiple hcs cis", {
   })
   expect_equal(hc_average$est, c(1.24151480646654, 2.37337090704541), tolerance = 1e-5)
   expect_equal(hc_multi$est, c(1.2567737470831, 2.38164080837643), tolerance = 1e-5)
-  testthat::expect_snapshot({
-    hc_multi
-  })
+  expect_snapshot_data(hc_multi, "hc_multi_ci_all_multiple_hcs_cis")
 })
 
 test_that("hc multi_ci lnorm ci", {
@@ -83,14 +77,9 @@ test_that("hc multi_ci lnorm ci", {
     hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 100)
   })
 
-  testthat::expect_snapshot({
-    hc_average
-  })
+  expect_snapshot_data(hc_average, "hc_multi_ci_lnorm_ci_average")
+  expect_snapshot_data(hc_multi, "hc_multi_ci_lnorm_ci_multi")
 
-  testthat::expect_snapshot({
-    hc_multi
-  })
-  
   hc_dist$dist <- NULL
   hc_average$dist <- NULL
   hc_dist$est_method <- NULL
