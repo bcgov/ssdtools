@@ -877,14 +877,15 @@ test_that("hc est_method and ci_method combos", {
   ci_methods <- ssd_ci_methods()
   parametric <- c(TRUE, FALSE)
   ci <- c(FALSE, TRUE)
+  average <- c(TRUE, FALSE)
   
-  data <- tidyr::expand_grid(fit = fits, est_method = est_methods, ci = ci, parametric = parametric, ci_method = ci_methods)
+  data <- tidyr::expand_grid(fit = fits, average = average, est_method = est_methods, ci = ci, parametric = parametric, ci_method = ci_methods)
   data$seed <- 10
   data$id <- 1:nrow(data)
   
-  func <- function(fit, est_method, ci_method, parametric, ci, seed, id) {
+  func <- function(fit, average, est_method, ci_method, parametric, ci, seed, id) {
     withr::with_seed(seed, {
-      hc <- ssd_hc(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
+      hc <- ssd_hc(fit, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
     })
     expect_s3_class(hc, "tbl")
     hc$id <- id
