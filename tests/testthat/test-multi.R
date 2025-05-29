@@ -18,14 +18,17 @@
 test_that("multi", {
   expect_equal(ssd_pmulti(1, lnorm.weight = 0.5), 0.5)
   expect_equal(ssd_qmulti(0.75, lnorm.weight = 2), 1.96303108415826)
-  set.seed(42)
-  expect_equal(ssd_rmulti(2, lnorm.weight = 1), c(3.93912428813385, 4.62130564767823))
+  withr::with_seed(42, {
+    expect_equal(ssd_rmulti(2, lnorm.weight = 1), c(3.93912428813385, 4.62130564767823))
+  })
 
-  set.seed(42)
-  expect_equal(ssd_rmulti(1, gamma.weight = 0.5, lnorm.weight = 0.5), 3.13234340623737)
+  withr::with_seed(42, {
+    expect_equal(ssd_rmulti(1, gamma.weight = 0.5, lnorm.weight = 0.5), 3.13234340623737)
+  })
 
-  set.seed(42)
-  expect_equal(ssd_rmulti(1, gamma.weight = 1, lnorm.weight = 1), 3.13234340623737)
+  withr::with_seed(42, {
+    expect_equal(ssd_rmulti(1, gamma.weight = 1, lnorm.weight = 1), 3.13234340623737)
+  })
 
   expect_equal(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99), lnorm.weight = 1), lnorm.weight = 1),
     c(0, 0.1, 0.5, 0.9, 0.99),
@@ -119,12 +122,15 @@ test_that("ssd_rmulti", {
   args <- estimates(fit)
   args$n <- 0
   expect_equal(ssd_rmulti_fitdists(n = 0, fit), numeric(0))
-  set.seed(99)
-  expect_equal(ssd_rmulti_fitdists(n = 1, fit), 19.7526821719427, tolerance = 1e-5)
-  set.seed(99)
-  expect_equal(ssd_rmulti_fitdists(2, fit), c(19.7526668357838, 2.69561402072501), tolerance = 1e-6)
-  set.seed(99)
-  n100 <- ssd_rmulti_fitdists(100, fit)
+  withr::with_seed(99, {
+    expect_equal(ssd_rmulti_fitdists(n = 1, fit), 19.7526821719427, tolerance = 1e-5)
+  })
+  withr::with_seed(99, {
+    expect_equal(ssd_rmulti_fitdists(2, fit), c(19.7526668357838, 2.69561402072501), tolerance = 1e-6)
+  })
+  withr::with_seed(99, {
+    n100 <- ssd_rmulti_fitdists(100, fit)
+  })
   expect_identical(length(n100), 100L)
   expect_equal(min(n100), 0.029587302066941, tolerance = 1e-6)
   expect_equal(max(n100), 168.790837576735, tolerance = 1e-5)
@@ -133,18 +139,20 @@ test_that("ssd_rmulti", {
 
 test_that("ssd_rmulti all", {
   set.seed(99)
-  n100 <- ssd_rmulti(
-    n = 100,
-    burrIII3.weight = 1 / 9,
-    gamma.weight = 1 / 9,
-    gompertz.weight = 1 / 9,
-    lgumbel.weight = 1 / 9,
-    llogis.weight = 1 / 9,
-    llogis_llogis.weight = 1 / 9,
-    lnorm.weight = 1 / 9,
-    lnorm_lnorm.weight = 1 / 9,
-    weibull.weight = 1 / 9
-  )
+  withr::with_seed(99, {
+    n100 <- ssd_rmulti(
+      n = 100,
+      burrIII3.weight = 1 / 9,
+      gamma.weight = 1 / 9,
+      gompertz.weight = 1 / 9,
+      lgumbel.weight = 1 / 9,
+      llogis.weight = 1 / 9,
+      llogis_llogis.weight = 1 / 9,
+      lnorm.weight = 1 / 9,
+      lnorm_lnorm.weight = 1 / 9,
+      weibull.weight = 1 / 9
+    )
+  })
 
   expect_identical(length(n100), 100L)
   expect_equal(min(n100), 0.00186939153235795)
