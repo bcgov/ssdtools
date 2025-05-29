@@ -64,8 +64,9 @@ ssd_gof(fits)
 and the model-averaged 5% hazard concentration estimated (with bootstrapping to get confidence intervals) using `ssd_hc`.
 
 ```{r}
-set.seed(99)
-hc5 <- ssd_hc(fits, ci = TRUE)
+withr::with_seed(99, {
+  hc5 <- ssd_hc(fits, ci = TRUE)
+})
 print(hc5)
 ```
 

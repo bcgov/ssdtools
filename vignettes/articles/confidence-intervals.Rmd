@@ -69,9 +69,9 @@ The current version of `ssdtools` retains this functionality by setting `ci_meth
 library(ssdtools)
 
 fit <- ssd_fit_dists(data = ssddata::ccme_silver)
-set.seed(99)
-
-ssd_hc(fit, ci = TRUE, est_method = "arithmetic", ci_method = "MACL")
+withr::with_seed(99, {
+  ssd_hc(fit, ci = TRUE, est_method = "arithmetic", ci_method = "MACL")
+})
 ```
 
 Use of this method is not recommended as it is both technically incorrect and computationally inefficient and only retained to allow users to reproduce previous results.
