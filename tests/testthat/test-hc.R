@@ -868,20 +868,19 @@ test_that("hc ci_method = 'weighted_arithmetic' deprecated for MACL", {
   expect_identical(macl, weighted_arithmetic)
 })
 
-
 test_that("hc est_method and ci_method combos", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
-  
+
   ## TODO: add ssd_est_methods() and ssd_ci_methods() functions.
   est_methods <- c("multi", "arithmetic", "geometric")
   ci_methods <- c("multi_fixed", "multi_free", "weighted_samples", "MACL")
   parametric <- c(TRUE, FALSE)
   ci <- c(FALSE, TRUE)
   
-  data <- tidyr::expand_grid(ci = ci, parametric = parametric,ci_method = ci_methods, est_method = est_methods)
+  data <- tidyr::expand_grid(fit = list(fit), est_method = est_methods, ci = ci, parametric = parametric, ci_method = ci_methods)
   data$id <- 1:nrow(data)
   
-  func <- function(est_method, ci_method, parametric, ci, fit, id) {
+  func <- function(fit, est_method, ci_method, parametric, ci, id) {
     suppressWarnings(
       withr::with_seed(10, {
         hc <- ssd_hc(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
@@ -891,9 +890,11 @@ test_that("hc est_method and ci_method combos", {
     hc$id <- id
     hc
   }
-  ls <- purrr::pmap(data, .f = func, fit = fit)
+  ls <- purrr::pmap(data, .f = func)
+  
   ls <- dplyr::bind_rows(ls)
   data <- dplyr::rename(data, ci_method_arg = "ci_method", est_method_arg = "est_method")
   data <- dplyr::inner_join(data, ls, by = "id")
+  data$fit <- NULL
   expect_snapshot_data(data, "all_hc_combos")
 })
