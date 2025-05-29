@@ -17,8 +17,9 @@
 
 test_that("hc", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, samples = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, samples = TRUE)
+  })
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
 })
@@ -244,8 +245,9 @@ test_that("ssd_hc fitdists correct for rescaling", {
 test_that("ssd_hc fitdists cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
-  set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, ci_method = "MACL", samples = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, ci = TRUE, ci_method = "MACL", samples = TRUE)
+  })
   expect_s3_class(hc, "tbl_df")
   
   expect_snapshot_data(hc, "hc_cis")
@@ -254,8 +256,9 @@ test_that("ssd_hc fitdists cis", {
 test_that("ssd_hc fitdists cis level = 0.8", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   
-  set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, level = 0.8, ci_method = "MACL", samples = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, ci = TRUE, level = 0.8, ci_method = "MACL", samples = TRUE)
+  })
   expect_s3_class(hc, "tbl_df")
   
   expect_snapshot_data(hc, "hc_cis_level08")
@@ -267,16 +270,18 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   data$Conc[1] <- 0.5
   data$Conc2[1] <- 1.0
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
+  })
   expect_equal(hc$se, 0.475836654747499, tolerance = 1e-6)
   
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
-  set.seed(10)
-  expect_warning(
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-    "^Parametric CIs cannot be calculated for censored data[.]$"
-  )
+  withr::with_seed(10, {
+    expect_warning(
+      hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+      "^Parametric CIs cannot be calculated for censored data[.]$"
+    )
+  })
   expect_identical(hc$se, NA_real_)
 })
 
@@ -285,11 +290,12 @@ test_that("ssd_hc works with fully left censored data", {
   data$Conc2 <- data$Conc
   data$Conc <- 0
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
-  set.seed(10)
-  expect_warning(
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL"),
-    "^Parametric CIs cannot be calculated for censored data[.]$"
-  )
+  withr::with_seed(10, {
+    expect_warning(
+      hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL"),
+      "^Parametric CIs cannot be calculated for censored data[.]$"
+    )
+  })
   expect_snapshot_data(hc, "fullyleft")
 })
 
@@ -298,12 +304,13 @@ test_that("ssd_hc warns with partially left censored data", {
   data$right <- data$Conc
   data$Conc[c(3, 6, 8)] <- NA
   
-  set.seed(100)
-  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  expect_warning(
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
-    "Parametric CIs cannot be calculated for censored data\\."
-  )
+  withr::with_seed(100, {
+    fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+    expect_warning(
+      hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
+      "Parametric CIs cannot be calculated for censored data\\."
+    )
+  })
   expect_snapshot_data(hc, "partialeft")
 })
 
@@ -313,12 +320,13 @@ test_that("ssd_hc works with fully left censored data", {
   data$right[data$Conc < 4] <- 4
   data$Conc[data$Conc < 4] <- NA
   
-  set.seed(100)
-  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  expect_warning(
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
-    "^Parametric CIs cannot be calculated for censored data\\.$"
-  )
+  withr::with_seed(100, {
+    fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+    expect_warning(
+      hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE),
+      "^Parametric CIs cannot be calculated for censored data\\.$"
+    )
+  })
   expect_snapshot_data(hc, "partialeftfull")
 })
 
@@ -327,9 +335,10 @@ test_that("ssd_hc works with partially left censored data non-parametric", {
   data$right <- data$Conc
   data$Conc[c(3, 6, 8)] <- NA
   
-  set.seed(100)
-  fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, parametric = FALSE)
+  withr::with_seed(100, {
+    fits <- ssd_fit_dists(data, dists = "lnorm", right = "right")
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = FALSE, parametric = FALSE)
+  })
   expect_snapshot_data(hc, "partialeftnonpara")
   expect_gt(hc$ucl, hc$est)
 })
@@ -339,11 +348,12 @@ test_that("ssd_hc not work partially censored even if all same left", {
   data$Conc2 <- data$Conc
   data$Conc <- 0.1
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
-  set.seed(10)
-  expect_warning(
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-    "^Parametric CIs cannot be calculated for censored data[.]$"
-  )
+  withr::with_seed(10, {
+    expect_warning(
+      hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+      "^Parametric CIs cannot be calculated for censored data[.]$"
+    )
+  })
 })
 
 test_that("ssd_hc doesn't works with inconsisently censored data", {
@@ -352,24 +362,27 @@ test_that("ssd_hc doesn't works with inconsisently censored data", {
   data$Conc <- 0
   data$Conc[1] <- data$Conc2[1] / 2
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
-  set.seed(10)
-  expect_warning(
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
-    "^Parametric CIs cannot be calculated for censored data[.]$"
-  )
+  withr::with_seed(10, {
+    expect_warning(
+      hc <- ssd_hc(fits, ci = TRUE, nboot = 10),
+      "^Parametric CIs cannot be calculated for censored data[.]$"
+    )
+  })
 })
 
 test_that("ssd_hc same with equally weighted data", {
   data <- ssddata::ccme_boron
   data$Weight <- rep(1, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  })
   
   data$Weight <- rep(2, nrow(data))
   fits2 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  set.seed(10)
-  hc2 <- ssd_hc(fits2, ci = TRUE, nboot = 10)
+  withr::with_seed(10, {
+    hc2 <- ssd_hc(fits2, ci = TRUE, nboot = 10)
+  })
   expect_equal(hc2, hc)
 })
 
@@ -377,8 +390,9 @@ test_that("ssd_hc calculates cis with equally weighted data", {
   data <- ssddata::ccme_boron
   data$Weight <- rep(2, nrow(data))
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL", samples = TRUE)
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL", samples = TRUE)
+  })
   expect_snapshot_data(hc, "hcici")
 })
 
@@ -386,16 +400,18 @@ test_that("ssd_hc calculates cis in parallel but one distribution", {
   local_multisession()
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = "lnorm")
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL", samples = TRUE)
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL", samples = TRUE)
+  })
   expect_snapshot_data(hc, "hcici_multi")
 })
 
 test_that("ssd_hc calculates cis with two distributions", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
+  })
   expect_equal(hc$se, 0.511475169043532, tolerance = 1e-6)
 })
 
@@ -403,8 +419,9 @@ test_that("ssd_hc calculates cis in parallel with two distributions", {
   local_multisession()
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
+  })
   expect_equal(hc$se, 0.511475169043532, tolerance = 1e-6)
 })
 
@@ -426,10 +443,12 @@ test_that("ssd_hc no effect with higher weight one distribution", {
   fits <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
   data$Weight <- rep(10, nrow(data))
   fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = "lnorm")
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
-  set.seed(10)
-  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
+  })
+  withr::with_seed(10, {
+    hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10)
+  })
   expect_equal(hc_10, hc)
 })
 
@@ -439,10 +458,12 @@ test_that("ssd_hc effect with higher weight two distributions", {
   fits <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
   data$Weight <- rep(10, nrow(data))
   fits_10 <- ssd_fit_dists(data, weight = "Weight", dists = c("lnorm", "llogis"))
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL", est_method = "arithmetic")
-  set.seed(10)
-  hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, ci_method = "MACL", est_method = "arithmetic")
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL", est_method = "arithmetic")
+  })
+  withr::with_seed(10, {
+    hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, ci_method = "MACL", est_method = "arithmetic")
+  })
   expect_equal(hc$est, 1.6490386909599, tolerance = 1e-5)
   expect_equal(hc_10$est, 1.68117856793665, tolerance = 1e-5)
   expect_equal(hc$se, 0.511475588315084, tolerance = 1e-6)
@@ -450,81 +471,94 @@ test_that("ssd_hc effect with higher weight two distributions", {
 })
 
 test_that("ssd_hc cis with non-convergence", {
-  set.seed(99)
-  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
-  data <- data.frame(Conc = conc)
-  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
-  expect_identical(attr(fit, "min_pmix"), 0.15)
-  hc15 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, ci_method = "MACL")
-  attr(fit, "min_pmix") <- 0.3
-  expect_identical(attr(fit, "min_pmix"), 0.3)
-  hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, ci_method = "MACL")
+  withr::with_seed(99, {
+    conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
+    data <- data.frame(Conc = conc)
+    fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
+    expect_identical(attr(fit, "min_pmix"), 0.15)
+    hc15 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, ci_method = "MACL")
+    attr(fit, "min_pmix") <- 0.3
+    expect_identical(attr(fit, "min_pmix"), 0.3)
+    hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, ci_method = "MACL")
+  })
+  
   expect_s3_class(hc30, "tbl")
   expect_snapshot_data(hc30, "hc_30")
 })
 
 test_that("ssd_hc cis with error and multiple dists", {
-  set.seed(99)
-  conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
+  withr::with_seed(99, {
+    conc <- ssd_rlnorm_lnorm(30, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
+  })
   data <- data.frame(Conc = conc)
   fit <- ssd_fit_dists(data, dists = c("lnorm", "llogis_llogis"), min_pmix = 0.1)
   expect_identical(attr(fit, "min_pmix"), 0.1)
-  set.seed(99)
-  skip_on_cran() # did not throw the expected warning.
-  expect_warning(hc_err_two <- ssd_hc(fit, ci = TRUE, nboot = 100, average = FALSE, delta = 100))
+  skip_on_cran() # did not throw the expected warning. FIXME
+  withr::with_seed(99, {
+    expect_warning(hc_err_two <- ssd_hc(fit, ci = TRUE, nboot = 100, average = FALSE, delta = 100))
+  })
   expect_snapshot_boot_data(hc_err_two, "hc_err_two")
-  set.seed(99)
-  expect_warning(hc_err_avg <- ssd_hc(fit,
-                                      ci = TRUE, nboot = 100,
-                                      delta = 100, ci_method = "MACL"
-  ))
+  withr::with_seed(99, {
+    expect_warning(hc_err_avg <- ssd_hc(fit,
+                                        ci = TRUE, nboot = 100,
+                                        delta = 100, ci_method = "MACL"
+    ))
+  })
   expect_snapshot_boot_data(hc_err_avg, "hc_err_avg")
 })
 
 test_that("ssd_hc with 1 bootstrap", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(10)
-  hc <- ssd_hc(fit, ci = TRUE, nboot = 1, ci_method = "MACL")
+  withr::with_seed(10, {
+    hc <- ssd_hc(fit, ci = TRUE, nboot = 1, ci_method = "MACL")
+  })
   expect_snapshot_data(hc, "hc_1")
 })
 
 test_that("ssd_hc parametric and non-parametric small sample size", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
-  set.seed(47)
-  hc_para_small <- ssd_hc(fit, nboot = 10, ci = TRUE, samples = TRUE)
+  withr::with_seed(47, {
+    hc_para_small <- ssd_hc(fit, nboot = 10, ci = TRUE, samples = TRUE)
+  })
   expect_snapshot_data(hc_para_small, "hc_para_small")
-  set.seed(47)
-  hc_nonpara_small <- ssd_hc(fit, nboot = 10, ci = TRUE, parametric = FALSE, samples = TRUE)
+  withr::with_seed(47, {
+    hc_nonpara_small <- ssd_hc(fit, nboot = 10, ci = TRUE, parametric = FALSE, samples = TRUE)
+  })
   expect_snapshot_data(hc_para_small, "hc_para_small")
 })
 
 test_that("ssd_hc_burrlioz gets estimates with invpareto", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
-  set.seed(47)
-  hc_boron <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE)
+  withr::with_seed(47, {
+    hc_boron <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE)
+  })
   expect_snapshot_data(hc_boron, "hc_boron")
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3", {
-  set.seed(99)
-  data <- data.frame(Conc = ssd_rburrIII3(30))
+  withr::with_seed(99, {
+    data <- data.frame(Conc = ssd_rburrIII3(30))
+  })
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
-  set.seed(49)
-  hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE)
+  withr::with_seed(49, {
+    hc_burrIII3 <- ssd_hc(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE)
+  })
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3")
 })
 
 test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
-  set.seed(99)
-  data <- data.frame(Conc = ssd_rburrIII3(30))
+  withr::with_seed(99, {
+    data <- data.frame(Conc = ssd_rburrIII3(30))
+  })
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
-  set.seed(49)
-  hc_burrIII3 <- ssd_hc(fit,
-                        nboot = 10, ci = TRUE, min_pboot = 0,
-                        parametric = TRUE, samples = TRUE
-  )
+  withr::with_seed(49, {
+    hc_burrIII3 <- ssd_hc(fit,
+                          nboot = 10, ci = TRUE, min_pboot = 0,
+                          parametric = TRUE, samples = TRUE
+    )
+  })
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
 })
 

@@ -21,12 +21,13 @@ test_that("schwarz-tillmans", {
     "gompertz", "weibull", "gamma", "lnorm", "llogis", "lgumbel"
   )
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
-
-  hc <- ssd_hc(fits, average = FALSE, ci_method = "weighted_samples", est_method = "arithmetic")
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, average = FALSE, ci_method = "weighted_samples", est_method = "arithmetic")
+    hc_avg <- ssd_hc(fits, average = TRUE, ci_method = "weighted_samples", est_method = "arithmetic")
+  })
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc")
 
-  hc_avg <- ssd_hc(fits, average = TRUE, ci_method = "weighted_samples", est_method = "arithmetic")
   expect_s3_class(hc_avg, "tbl")
   expect_snapshot_data(hc_avg, "hc_avg")
 
