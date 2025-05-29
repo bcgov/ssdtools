@@ -238,43 +238,64 @@ Random Number Generation
 }}
 \examples{
 
-set.seed(50)
-hist(ssd_rburrIII3(10000), breaks = 1000)
+withr::with_seed(50, {
+x <- ssd_rburrIII3(10000)
+})
+hist(x, breaks = 1000)
 
-set.seed(50)
-hist(ssd_rgamma(10000), breaks = 1000)
+withr::with_seed(50, {
+x <- ssd_rgamma(10000)
+})
+hist(x, breaks = 1000)
 
-set.seed(50)
-hist(ssd_rgompertz(10000), breaks = 1000)
+withr::with_seed(50, {
+x <- ssd_rgompertz(10000)
+})
+hist(x, breaks = 1000)
 
-set.seed(50)
-hist(ssd_rinvpareto(10000), breaks = 1000)
+withr::with_seed(50, {
+x <- ssd_rinvpareto(10000)
+})
+hist(x, breaks = 1000)
 
-set.seed(50)
-hist(ssd_rlgumbel(10000), breaks = 1000)
+withr::with_seed(50, {
+  x <- ssd_rlgumbel(10000)
+})
+hist(x, breaks = 1000)
 
-set.seed(50)
-hist(ssd_rllogis_llogis(10000), breaks = 1000)
+withr::with_seed(50, {
+  x <- ssd_rllogis_llogis(10000)
+})
+hist(x, breaks = 1000)
 
-set.seed(50)
-hist(ssd_rllogis(10000), breaks = 1000)
+withr::with_seed(50, {
+  x <- ssd_rllogis(10000)
+})
+hist(x, breaks = 1000)
 
-set.seed(50)
-hist(ssd_rlnorm_lnorm(10000), breaks = 1000)
+withr::with_seed(50, {
+  x <- ssd_rlnorm_lnorm(10000)
+})
+hist(x, breaks = 1000)
 
-set.seed(50)
-hist(ssd_rlnorm(10000), breaks = 1000)
+withr::with_seed(50, {
+  x <- ssd_rlnorm(10000)
+})
+hist(x, breaks = 1000)
 
-# multi
-set.seed(50)
-hist(ssd_rmulti(1000, gamma.weight = 0.5, lnorm.weight = 0.5), breaks = 100)
+withr::with_seed(50, {
+  x <- ssd_rmulti(1000, gamma.weight = 0.5, lnorm.weight = 0.5)
+})
+hist(x, breaks = 100)
 
 # multi fitdists
 fit <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_rmulti_fitdists(2, fit)
 
-set.seed(50)
-hist(ssd_rweibull(10000), breaks = 1000)
+withr::with_seed(50, {
+  x <- ssd_rweibull(10000)
+})
+hist(x, breaks = 1000)
 }
 \seealso{
 \code{\link{ssd_p}} and \code{\link{ssd_q}}

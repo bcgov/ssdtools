@@ -31,10 +31,11 @@
 #' @examples
 #' \dontrun{
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
-#' set.seed(99)
-#' boron_pred <- predict(fits, ci = TRUE)
-#' }
+#' withr::with_seed(99, {
+#'   boron_pred <- predict(fits, ci = TRUE)
+#' })
 #' head(boron_pred)
+#' }
 "boron_pred"
 
 #' Distribution Data

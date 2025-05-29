@@ -89,8 +89,10 @@ qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p 
 #' @export
 #' @examples
 #'
-#' set.seed(50)
-#' hist(ssd_rlgumbel(10000), breaks = 1000)
+#' withr::with_seed(50, {
+#'   x <- ssd_rlgumbel(10000)
+#' })
+#' hist(x, breaks = 1000)
 ssd_rlgumbel <- function(n, locationlog = 0, scalelog = 1, chk = TRUE) {
   rdist("gumbel", n = n, location = locationlog, scale = scalelog, .lgt = TRUE, chk = chk)
 }

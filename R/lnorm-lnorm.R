@@ -49,8 +49,10 @@ ssd_qlnorm_lnorm <- function(p, meanlog1 = 0, sdlog1 = 1,
 #' @export
 #' @examples
 #'
-#' set.seed(50)
-#' hist(ssd_rlnorm_lnorm(10000), breaks = 1000)
+#' withr::with_seed(50, {
+#'   x <- ssd_rlnorm_lnorm(10000)
+#' })
+#' hist(x, breaks = 1000)
 ssd_rlnorm_lnorm <- function(n, meanlog1 = 0, sdlog1 = 1,
                              meanlog2 = 1, sdlog2 = 1, pmix = 0.5, chk = TRUE) {
   rdist("lnorm_lnorm",
