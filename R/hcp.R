@@ -15,6 +15,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+## no_hcp is returned without tidying so must be complete
 no_hcp <- function(hc) {
   tibble(
     dist = character(0),
@@ -37,7 +38,7 @@ no_ci_hcp <- function(value, dist, est, rescale, parametric, est_method, ci_meth
   na <- rep(NA_real_, length(value))
   na_chr <- rep(NA_character_, length(value))
   multiplier <- if (hc) rescale else 100
-
+  
   tibble(
     dist = rep(dist, length(value)),
     value = value,
@@ -248,7 +249,7 @@ replace_estimates <- function(hcp, est) {
                            data, rescale, weighted, censoring, min_pmix,
                            range_shape1, range_shape2, parametric, control,
                            save_to, samples, est_method, ci_method, hc) {
-
+  
   estimates <- estimates(x, all_estimates = TRUE)
   dist <- "multi"
   fun <- fits_dists
@@ -274,14 +275,14 @@ replace_estimates <- function(hcp, est) {
                          control, est_method, ci_method, hc, save_to, samples, fun) {
   
   hcp <- purrr::map(x, .ssd_hcp_tmbfit, weight = 1,
-                     value = value, ci = ci, level = level, nboot = nboot,
-                     min_pboot = min_pboot,
-                     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-                     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-                     parametric = parametric, est_method = est_method, ci_method = ci_method, average = FALSE, control = control,
-                     hc = hc, save_to = save_to, samples = samples, fun = fun
+                    value = value, ci = ci, level = level, nboot = nboot,
+                    min_pboot = min_pboot,
+                    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+                    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+                    parametric = parametric, est_method = est_method, ci_method = ci_method, average = FALSE, control = control,
+                    hc = hc, save_to = save_to, samples = samples, fun = fun
   )
-
+  
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
   
   hcp_ind(hcp, weight = weight, ci = ci, est_method = est_method, ci_method = ci_method, parametric = parametric)
@@ -296,7 +297,7 @@ replace_estimates <- function(hcp, est) {
   if (.is_censored(censoring) && !identical_parameters(x)) {
     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
-
+  
   if (ci_method %in% c("multi_free", "multi_fixed")) {
     hcp <- .ssd_hcp_multi(
       x, value, ci = ci, level = level, nboot = nboot,
@@ -332,7 +333,7 @@ replace_estimates <- function(hcp, est) {
     parametric = parametric, control = control, save_to = save_to, samples = samples,
     ci_method = ci_method, hc = hc, fun = fun
   )
-
+  
   if (est_method != "multi") {
     if (ci_method != "weighted_samples") {
       return(hcp)
@@ -359,6 +360,13 @@ replace_estimates <- function(hcp, est) {
   replace_estimates(hcp, est)
 }
 
+tidy_hcp <- function(hcp, parametric) {
+  method <- if (parametric) "parametric" else "non-parametric"
+  hcp$method <- method
+  
+  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples")]
+}
+
 .ssd_hcp_fitdists <- function(
     x, value, ci, level, nboot, average, est_method, min_pboot, parametric,
     ci_method, control, hc, save_to, samples, fun) {
@@ -380,12 +388,21 @@ replace_estimates <- function(hcp, est) {
   unequal <- .unequal_fitdists(x)
   estimates <- .list_estimates(x, all_estimates = FALSE)
   
-  if (parametric && ci && !identical(censoring, c(0, Inf))) {
+  if(length(x) == 1L) {
+    average <- FALSE
+  }
+  
+  if(ci && !parametric && average && ci_method %in% c("multi_free", "multi_fixed")) {
+    wrn("Non-parametric CIs cannot be calculated for 'multi_free' and 'multi_fixed' methods.")
+    ci <- FALSE
+  }
+  
+  if (ci && parametric && !identical(censoring, c(0, Inf))) {
     wrn("Parametric CIs cannot be calculated for censored data.")
     ci <- FALSE
   }
   
-  if (parametric && ci && unequal) {
+  if (ci && parametric && unequal) {
     wrn("Parametric CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }
@@ -404,24 +421,17 @@ replace_estimates <- function(hcp, est) {
       est_method = est_method, ci_method = ci_method,
       hc = hc, save_to = save_to, samples = samples, fun = fun
     )
-    return(hcp)
+  } else {
+    hcp <- .ssd_hcp_fitdists_average(
+      x = x, value = value, ci = ci, level = level, nboot = nboot, est_method = est_method,
+      min_pboot = min_pboot, estimates = estimates, ci_method = ci_method,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control,
+      hc = hc, save_to = save_to, samples = samples, fun = fun
+    )
   }
-  .ssd_hcp_fitdists_average(
-    x = x, value = value, ci = ci, level = level, nboot = nboot, est_method = est_method,
-    min_pboot = min_pboot, estimates = estimates, ci_method = ci_method,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control,
-    hc = hc, save_to = save_to, samples = samples, fun = fun
-  )
-}
-
-tidy_hcp <- function(hcp, parametric) {
-  n <- nrow(hcp)
-  method <- if (parametric) "parametric" else "non-parametric"
-  hcp$method <- rep(method, n)
-  
-  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples")]
+  tidy_hcp(hcp, parametric = parametric)  
 }
 
 ssd_hcp_fitdists <- function(
@@ -462,6 +472,5 @@ ssd_hcp_fitdists <- function(
     parametric = parametric, ci_method = ci_method,
     control = control, save_to = save_to, samples = samples, hc = hc, fun = fun
   )
-  hcp <- tidy_hcp(hcp, parametric = parametric)  
   warn_min_pboot(hcp, min_pboot)
 }

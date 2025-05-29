@@ -72,10 +72,6 @@ ssd_hp.fitdists <- function(
     ci_method <- "MACL"
   }
   
-  if(length(x) == 1L) {
-    average <- FALSE
-  }
-  
   hcp <- ssd_hcp_fitdists(
     x = x,
     value = conc,

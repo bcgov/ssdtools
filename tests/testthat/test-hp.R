@@ -118,7 +118,7 @@ test_that("hp fitdists works not average multiple dists", {
   expect_snapshot_data(hp, "hp114")
 })
 
-test_that("hp fitdists gives different answer with model averaging as hc not same for either", {
+test_that("hp fitdists gives different answer with model averaging as hp not same for either", {
   data <- ssddata::aims_molybdenum_marine
   
   fits_lgumbel <- ssd_fit_dists(data, dists = "lgumbel")
@@ -359,7 +359,7 @@ test_that("hp weighted bootie", {
   expect_snapshot_boot_data(hp_unweighted2, "hp_unweighted2")
 })
 
-test_that("hc multi_est = TRUE deprecated", {
+test_that("hp multi_est = TRUE deprecated", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   withr::with_seed(10, {
     multi <- ssd_hc(fits)
@@ -403,6 +403,8 @@ test_that("hp ci_method = 'weighted_arithmetic' deprecated for MACL", {
   expect_identical(macl, weighted_arithmetic)
 })
 
+## TODO: add ssd_est_methods() and ssd_ci_methods() functions.
+
 test_that("hp est_method and ci_method combos", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
   
@@ -412,17 +414,21 @@ test_that("hp est_method and ci_method combos", {
   parametric <- c(TRUE, FALSE)
   ci <- c(FALSE, TRUE)
   
-  data <- tidyr::expand_grid(est_method = est_methods, ci_method = ci_methods,
-                             parametric = parametric, ci = ci)
+  data <- tidyr::expand_grid(ci = ci, parametric = parametric,ci_method = ci_methods, est_method = est_methods)
+  data$id <- 1:nrow(data)
   
-  func <- function(est_method, ci_method, parametric, ci, fit) {
-    withr::with_seed(10, {
-      ssd_hp(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
-    })
+  func <- function(est_method, ci_method, parametric, ci, fit, id) {
+    suppressWarnings(
+      withr::with_seed(10, {
+        hp <- ssd_hp(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
+      })
+    )
+    hp$id <- id
+    hp
   }
   ls <- purrr::pmap(data, .f = func, fit = fit)
   ls <- dplyr::bind_rows(ls)
-  data <- dplyr::rename_with(data, \(.x) paste0(.x, "_data"))
-  data <- dplyr::bind_cols(ls, data)
+  data <- dplyr::rename(data, ci_method_arg = "ci_method", est_method_arg = "est_method")
+  data <- dplyr::inner_join(data, ls, by = "id")
   expect_snapshot_data(data, "all_hp_combos")
 })
