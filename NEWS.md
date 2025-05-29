@@ -1,8 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.3.0.9000
+# ssdtools 2.3.0.9001
 
-- Implemented right censoring for all distributions.
+- Implemented model fitting with right censoring for all distributions (by @eduardszoecs).
+
+- Added `ssd_at_boundary()` and `ssd_computable()`.
+- Added `est_method = "multi"` argument to `ssd_hc()` and `ssd_hp()` and soft deprecated `multi_est = TRUE`.
+- Added `"est_method"` and `"ci_method"` columns to tibbles output by `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Added `strict = TRUE` argument to `subset()` to allow subsetting when distributions missing (with `strict = FALSE`).
+- Added ... and checked unused to `ssd_fit_xx()` family of functions.
+
+- Improved method to calculate `ssd_ecd()` so ensures symmetric about 0.5 and deprecated `ties.method = "first"` argument.
+- `ssd_fit_bcanz()` now checks all dists are subset of `ssd_dists_bcanz()`.
+
+- Deprecated `ssd_dists_shiny()`.
+- Soft-deprecated `ci_method = "weighted_arithmetic"` for `ci_method = "MACL"`.
 
 # ssdtools 2.3.0
 
