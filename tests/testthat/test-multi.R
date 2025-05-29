@@ -138,7 +138,6 @@ test_that("ssd_rmulti", {
 })
 
 test_that("ssd_rmulti all", {
-  set.seed(99)
   withr::with_seed(99, {
     n100 <- ssd_rmulti(
       n = 100,
