@@ -22,6 +22,7 @@ ssd_hp(x, ...)
   ci_method = "weighted_samples",
   parametric = TRUE,
   delta = 9.21,
+  proportion = FALSE,
   samples = FALSE,
   save_to = NULL,
   control = NULL
@@ -36,6 +37,7 @@ ssd_hp(x, ...)
   nboot = 1000,
   min_pboot = 0.95,
   parametric = FALSE,
+  proportion = FALSE,
   samples = FALSE,
   save_to = NULL
 )
@@ -99,6 +101,13 @@ calculate the confidence limits (and SE) from the single set of samples.}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
+
+\item{proportion}{A flag specifing whether to return hazard proportions
+(\code{proportion = TRUE}) or hazard percentages (\code{proportion = FALSE}).
+To not break existing code the default value is \code{FALSE} but
+will be switching the default to \code{TRUE} in a future version.
+The user is recommended to manually set to \code{TRUE} now to avoid
+unexpected changes in future versions.}
 
 \item{samples}{A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output.}
 

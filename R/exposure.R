@@ -40,5 +40,5 @@ ssd_exposure <- function(x, meanlog = 0, sdlog = 1, nboot = 1000) {
   chk_whole_number(nboot)
   chk_gt(nboot)
   conc <- ssd_rlnorm(nboot, meanlog = meanlog, sdlog = sdlog)
-  mean(ssd_hp(x, conc)$est) / 100
+  mean(ssd_hp(x, conc, proportion = TRUE)$est)
 }

@@ -44,7 +44,7 @@ test_that("invpareto ssd_hp gives cis with ccme_boron", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "invpareto")
   expect_s3_class(fit, "fitdists")
   withr::with_seed(99, {
-    hp <- ssd_hp(fit, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+    hp <- ssd_hp(fit, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE, proportion = FALSE)
   })
   expect_snapshot_data(hp, "hp_boron")
 })

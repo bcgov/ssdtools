@@ -15,6 +15,19 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+samples_multiply <- function(samples, multiplier) {
+  purrr::map(samples, function(x, m) x * m, m = multiplier)
+}
+
+hcp_multiply <- function(hcp, multiplier) {
+  hcp$est <- hcp$est * multiplier
+  hcp$se <- hcp$se * multiplier
+  hcp$lcl <- hcp$lcl * multiplier
+  hcp$ucl <- hcp$ucl * multiplier
+  hcp$samples <- samples_multiply(hcp$samples, multiplier)
+  hcp
+}
+
 ## no_hcp is returned without tidying so must be complete
 no_hcp <- function(hc) {
   tibble(
@@ -37,7 +50,7 @@ no_hcp <- function(hc) {
 no_ci_hcp <- function(value, dist, est, rescale, parametric, est_method, ci_method, hc) {
   na <- rep(NA_real_, length(value))
   na_chr <- rep(NA_character_, length(value))
-  multiplier <- if (hc) rescale else 100
+  multiplier <- if (hc) rescale else 1
   
   tibble(
     dist = rep(dist, length(value)),
@@ -57,7 +70,7 @@ no_ci_hcp <- function(value, dist, est, rescale, parametric, est_method, ci_meth
 }
 
 ci_hcp <- function(cis, estimates, value, dist, est, rescale, est_method, ci_method, parametric, nboot, hc) {
-  multiplier <- if (hc) rescale else 100
+  multiplier <- if (hc) rescale else 1
   
   tibble(
     dist = dist,

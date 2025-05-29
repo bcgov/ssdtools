@@ -4,7 +4,14 @@
 \alias{ssd_hp_bcanz}
 \title{BCANZ Hazard Proportion}
 \usage{
-ssd_hp_bcanz(x, conc = 1, ..., nboot = 10000, min_pboot = 0.95)
+ssd_hp_bcanz(
+  x,
+  conc = 1,
+  ...,
+  nboot = 10000,
+  min_pboot = 0.95,
+  proportion = FALSE
+)
 }
 \arguments{
 \item{x}{The object.}
@@ -18,6 +25,8 @@ ssd_hp_bcanz(x, conc = 1, ..., nboot = 10000, min_pboot = 0.95)
 \item{min_pboot}{A number between 0 and 1 of the minimum
 proportion of bootstrap samples that must successfully fit (return a likelihood)
 to report the confidence intervals.}
+
+\item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
 }
 \value{
 A tibble of corresponding hazard concentrations.

@@ -18,7 +18,7 @@
 test_that("ssd_hp_burrlioz gets estimates with invpareto", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   withr::with_seed(47, {
-    hp_boron <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE)
+    hp_boron <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE, proportion = FALSE)
   })
   expect_snapshot_data(hp_boron, "hp_boron")
 })
@@ -26,7 +26,7 @@ test_that("ssd_hp_burrlioz gets estimates with invpareto", {
 test_that("ssd_hp_burrlioz gets estimates with invpareto no ci", {
   fit <- ssd_fit_burrlioz(ssddata::ccme_boron)
   withr::with_seed(47, {
-    hp_boron <- ssd_hp(fit, nboot = 10, ci = FALSE, min_pboot = 0)
+    hp_boron <- ssd_hp(fit, nboot = 10, ci = FALSE, min_pboot = 0, proportion = FALSE)
   })
   expect_snapshot_data(hp_boron, "hp_boron_no_ci")
 })
@@ -38,7 +38,7 @@ test_that("ssd_hp_burrlioz gets estimates with burrIII3", {
   fit <- ssd_fit_burrlioz(data)
   expect_identical(names(fit), "burrIII3")
   withr::with_seed(49, {
-    hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE)
+    hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0, samples = TRUE, proportion = FALSE)
   })
   expect_snapshot_data(hp_burrIII3, "hp_burrIII3")
 })
@@ -51,7 +51,7 @@ test_that("ssd_hp_burrlioz currently errors!", {
   expect_identical(names(fit), "burrIII3")
   # FIXME: currently errors!
   withr::with_seed(47, {
-    expect_error(hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0))
+    expect_error(hp_burrIII3 <- ssd_hp(fit, nboot = 10, ci = TRUE, min_pboot = 0, proportion = FALSE))
   })
 })
 
@@ -64,7 +64,8 @@ test_that("ssd_hp_burrlioz gets estimates with burrIII3 parametric", {
   withr::with_seed(49, {
     hp_burrIII3 <- ssd_hp(fit,
                           nboot = 10, ci = TRUE, min_pboot = 0,
-                          parametric = TRUE, samples = TRUE
+                          parametric = TRUE, samples = TRUE,
+                          proportion = FALSE
     )
   })
   expect_snapshot_data(hp_burrIII3, "hp_burrIII3_parametric")

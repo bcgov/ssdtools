@@ -24,6 +24,12 @@
 #' For more information see the inverse function [`ssd_hc()`].
 #'
 #' @inheritParams params
+#' @param proportion A flag specifing whether to return hazard proportions 
+#' (`proportion = TRUE`) or hazard percentages (`proportion = FALSE`).
+#' To not break existing code the default value is `FALSE` but 
+#' will be switching the default to `TRUE` in a future version. 
+#' The user is recommended to manually set to `TRUE` now to avoid 
+#' unexpected changes in future versions.
 #' @return A tibble of corresponding hazard proportions.
 #' @seealso [`ssd_hc()`]
 #' @export
@@ -50,6 +56,7 @@ ssd_hp.fitdists <- function(
     ci_method = "weighted_samples",
     parametric = TRUE,
     delta = 9.21,
+    proportion = FALSE,
     samples = FALSE,
     save_to = NULL,
     control = NULL) {
@@ -64,13 +71,18 @@ ssd_hp.fitdists <- function(
     
     est_method <- if(multi_est) "multi" else "arithmetic"
   }
-
+  
   chk_string(ci_method) 
   if(ci_method == "weighted_arithmetic") {
-    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(ci_method = 'weighted_arithmetic'"), I("ssd_hp(ci_method = 'MACL'"))
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(ci_method = 'weighted_arithmetic')"), I("ssd_hp(ci_method = 'MACL')"))
     
     ci_method <- "MACL"
   }
+  
+  if (missing(proportion)) {
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), id = "ssd_hp")    
+  }
+  chk_flag(proportion)
   
   hcp <- ssd_hcp_fitdists(
     x = x,
@@ -90,6 +102,9 @@ ssd_hp.fitdists <- function(
     hc = FALSE
   )
   hcp <- dplyr::rename(hcp, conc = "value")
+  if(!proportion) {
+    hcp <- hcp_multiply(hcp, 100)
+  }
   hcp
 }
 
@@ -109,6 +124,7 @@ ssd_hp.fitburrlioz <- function(
     nboot = 1000,
     min_pboot = 0.95,
     parametric = FALSE,
+    proportion = FALSE,
     samples = FALSE,
     save_to = NULL) {
   chk_length(x, upper = 1L)
@@ -118,6 +134,11 @@ ssd_hp.fitburrlioz <- function(
   chk_numeric(conc)
   chk_flag(ci)
   chk_unused(...)
+  
+  if (missing(proportion)) {
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), id = "ssd_hp")    
+  }
+  chk_flag(proportion)
   
   fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
   
@@ -141,5 +162,8 @@ ssd_hp.fitburrlioz <- function(
   )
   
   hcp <- dplyr::rename(hcp, conc = "value")
+  if(!proportion) {
+    hcp <- hcp_multiply(hcp, 100)
+  }
   hcp
 }

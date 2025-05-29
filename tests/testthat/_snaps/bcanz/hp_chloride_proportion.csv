@@ -1,0 +1,2 @@
+dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
+average,1,0.0389878,0.026869,0.0101647,0.0872357,1,multi,weighted_samples,parametric,10,1,numeric(0)
