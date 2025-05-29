@@ -1,2 +1,2 @@
 dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
-lnorm_lnorm,0.05,0.929401,0.0162377,0.886451,0.942623,1,multi,MACL,parametric,100,0.95,numeric(0)
+lnorm_lnorm,0.05,0.929401,0.0103044,0.894415,0.92196,1,multi,MACL,parametric,10,1,numeric(0)

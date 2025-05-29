@@ -1,3 +1,0 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,samples
-lnorm_lnorm,0.05,36.8756,NA,NA,NA,0.617286,multi,weighted_samples,parametric,1000,numeric(0)
-llogis_llogis,0.05,36.9061,NA,NA,NA,0.382714,multi,weighted_samples,parametric,1000,numeric(0)

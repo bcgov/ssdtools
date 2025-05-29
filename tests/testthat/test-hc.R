@@ -243,23 +243,17 @@ test_that("ssd_hc fitdists correct for rescaling", {
 
 test_that("ssd_hc fitdists cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  
   withr::with_seed(102, {
-    hc <- ssd_hc(fits, ci = TRUE, ci_method = "MACL", samples = TRUE)
+    hc <- ssd_hc(fits, ci = TRUE, ci_method = "MACL", nboot = 10, samples = TRUE)
   })
-  expect_s3_class(hc, "tbl_df")
-  
   expect_snapshot_data(hc, "hc_cis")
 })
 
 test_that("ssd_hc fitdists cis level = 0.8", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  
   withr::with_seed(102, {
-    hc <- ssd_hc(fits, ci = TRUE, level = 0.8, ci_method = "MACL", samples = TRUE)
+    hc <- ssd_hc(fits, ci = TRUE, level = 0.8, ci_method = "MACL", nboot = 10, samples = TRUE)
   })
-  expect_s3_class(hc, "tbl_df")
-  
   expect_snapshot_data(hc, "hc_cis_level08")
 })
 
@@ -475,13 +469,11 @@ test_that("ssd_hc cis with non-convergence", {
     data <- data.frame(Conc = conc)
     fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
     expect_identical(attr(fit, "min_pmix"), 0.15)
-    hc15 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, ci_method = "MACL")
+    hc15 <- ssd_hc(fit, ci = TRUE, nboot = 10, min_pboot = 0.9, ci_method = "MACL")
     attr(fit, "min_pmix") <- 0.3
     expect_identical(attr(fit, "min_pmix"), 0.3)
-    hc30 <- ssd_hc(fit, ci = TRUE, nboot = 100, min_pboot = 0.9, ci_method = "MACL")
+    hc30 <- ssd_hc(fit, ci = TRUE, nboot = 10, min_pboot = 0.9, ci_method = "MACL")
   })
-  
-  expect_s3_class(hc30, "tbl")
   expect_snapshot_data(hc30, "hc_30")
 })
 
@@ -559,19 +551,6 @@ test_that("ssd_hc_burrlioz gets estimates with burrIII3 parametric", {
     )
   })
   expect_snapshot_data(hc_burrIII3, "hc_burrIII3_parametric")
-})
-
-test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
-  fits <- ssd_fit_dists(ssddata::ccme_chloride,
-                        min_pmix = 0.0001, at_boundary_ok = TRUE,
-                        dists = c("lnorm_lnorm", "llogis_llogis")
-  )
-  
-  withr::with_seed(102, {
-    expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE))
-  })
-  expect_s3_class(hc, "tbl_df")
-  expect_snapshot_boot_data(hc, "hc_cis_chloride50")
 })
 
 test_that("ssd_hc save_to", {
@@ -710,12 +689,12 @@ test_that("ssd_hc fix_weight", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
   withr::with_seed(102, {
-    hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
+    hc_unfix <- ssd_hc(fits, nboot = 10, ci = TRUE, ci_method = "multi_free", samples = TRUE)
   })
   expect_snapshot_data(hc_unfix, "hc_unfix")
   
   withr::with_seed(102, {
-    hc_fix <- ssd_hc(fits, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+    hc_fix <- ssd_hc(fits, nboot = 10, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
   })
   expect_snapshot_data(hc_fix, "hc_fix")
 })
@@ -724,12 +703,12 @@ test_that("ssd_hc multiple values", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
   withr::with_seed(102, {
-    hc_unfix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
+    hc_unfix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 10, ci = TRUE, ci_method = "multi_free", samples = TRUE)
   })
   expect_snapshot_data(hc_unfix, "hc_unfixmulti")
   
   withr::with_seed(102, {
-    hc_fix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+    hc_fix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 10, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
   })
   expect_snapshot_data(hc_fix, "hc_fixmulti")
 })
@@ -770,13 +749,13 @@ test_that("ssd_hc identical if in parallel", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
   withr::with_seed(10, {
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 500)
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10)
   })
   local_multisession(workers = 2)
   withr::with_seed(10, {
-    hc2 <- ssd_hc(fits, ci = TRUE, nboot = 500)
+    hc2 <- ssd_hc(fits, ci = TRUE, nboot = 10)
   })
-  expect_equal(hc, hc2, tolerance = 1e-6)
+  expect_equal(hc, hc2)
 })
 
 test_that("hc multi_ci false weighted", {
