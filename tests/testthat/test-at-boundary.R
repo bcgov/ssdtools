@@ -25,7 +25,7 @@ test_that("test at boundary 2 9", {
                    c(gamma = FALSE, lgumbel = FALSE, llogis = FALSE, lnorm = FALSE, 
                      lnorm_lnorm = TRUE, weibull = FALSE))
   expect_false(ssd_at_boundary(fit$lnorm))
-  expect_identical(ssd_at_boundary(fit$lnorm_lnorm), TRUE)
+  expect_true(ssd_at_boundary(fit$lnorm_lnorm))
 })
 
 test_that("test at boundary 2 14", {
@@ -40,7 +40,7 @@ test_that("test at boundary 2 14", {
                    c(gamma = FALSE, lgumbel = FALSE, llogis = FALSE, lnorm = FALSE, 
                      lnorm_lnorm = TRUE, weibull = FALSE))
   expect_false(ssd_at_boundary(fit$lnorm))
-  expect_identical(ssd_at_boundary(fit$lnorm_lnorm), TRUE)
+  expect_true(ssd_at_boundary(fit$lnorm_lnorm))
 })
 
 test_that("test at boundary 2 23", {

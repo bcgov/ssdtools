@@ -102,7 +102,7 @@ test_that("summary fitdists with partially censored, rescaled, unequally weighte
   expect_identical(summary$nrow, 28L)
   expect_equal(summary$rescaled, 8.40832920383116)
   expect_identical(summary$weighted, 28)
-  expect_identical(summary$unequal, TRUE)
+  expect_true(summary$unequal)
 })
 
 test_that("summary fitdists with left censored, rescaled, unequally weighted data", {
@@ -118,7 +118,7 @@ test_that("summary fitdists with left censored, rescaled, unequally weighted dat
   expect_identical(summary$nrow, 28L)
   expect_equal(summary$rescaled, 13.2947358003083)
   expect_identical(summary$weighted, 28)
-  expect_identical(summary$unequal, TRUE)
+  expect_true(summary$unequal)
 })
 
 test_that("summary weighted if equal weights but not 1", {

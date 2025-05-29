@@ -27,7 +27,7 @@ test_that("test computable fits", {
   expect_identical(ssd_computable(fits),
                    c(gamma = TRUE, lgumbel = TRUE, llogis = TRUE, lnorm = TRUE, 
                      lnorm_lnorm = TRUE, weibull = TRUE))
-  expect_identical(ssd_computable(fits$lnorm), TRUE)
-  expect_identical(ssd_computable(fits$lnorm_lnorm), TRUE)
+  expect_true(ssd_computable(fits$lnorm))
+  expect_true(ssd_computable(fits$lnorm_lnorm))
 })
 
