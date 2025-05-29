@@ -1,11 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.3.0.9001
+# ssdtools 2.3.0.9002
 
 - Implemented model fitting with right censoring for all distributions (by @eduardszoecs).
 
 - Added `ssd_at_boundary()` and `ssd_computable()`.
 - Added `est_method = "multi"` argument to `ssd_hc()` and `ssd_hp()` and soft deprecated `multi_est = TRUE`.
+- Renamed `"method"` column to `"boot_method"` in tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"est_method"` and `"ci_method"` columns to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"at_bound"` and `"computable"` columns to tibble output by `gof()`.
 - Added `strict = TRUE` argument to `subset()` to allow subsetting when distributions missing (with `strict = FALSE`).
