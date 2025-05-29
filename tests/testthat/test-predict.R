@@ -26,8 +26,9 @@ test_that("predict", {
 test_that("predict cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
-  set.seed(10)
-  pred <- predict(fits, ci = TRUE, nboot = 10L, ci_method = "MACL", est_method = "arithmetic")
+  withr::with_seed(10, {
+    pred <- predict(fits, ci = TRUE, nboot = 10L, ci_method = "MACL", est_method = "arithmetic")
+  })
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_cis")
 })
@@ -46,9 +47,9 @@ test_that("predict cis fitburrlioz", {
   fits <- ssd_fit_burrlioz(ssddata::ccme_boron)
 
   expect_true(is.fitdists(fits))
-  set.seed(10)
-
-  pred <- predict(fits, ci = TRUE, nboot = 10L)
+  withr::with_seed(10, {
+    pred <- predict(fits, ci = TRUE, nboot = 10L)
+  })
   expect_s3_class(pred, "tbl")
   expect_snapshot_data(pred, "pred_cis_burrlioz")
 })

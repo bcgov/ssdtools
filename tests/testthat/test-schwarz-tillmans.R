@@ -16,12 +16,11 @@
 #    limitations under the License.
 
 test_that("schwarz-tillmans", {
-  set.seed(10)
   dists <- c(
     "gompertz", "weibull", "gamma", "lnorm", "llogis", "lgumbel"
   )
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
   withr::with_seed(10, {
+    fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
     hc <- ssd_hc(fits, average = FALSE, ci_method = "weighted_samples", est_method = "arithmetic")
     hc_avg <- ssd_hc(fits, average = TRUE, ci_method = "weighted_samples", est_method = "arithmetic")
   })

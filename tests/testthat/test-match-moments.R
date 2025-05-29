@@ -17,8 +17,9 @@
 
 test_that("match_moments all", {
   rlang::local_options(lifecycle_verbosity = "quiet")
-  set.seed(10)
-  pars <- ssd_match_moments(dists = ssd_dists_all())
+  withr::with_seed(10, {
+    pars <- ssd_match_moments(dists = ssd_dists_all())
+  })
   expect_snapshot_output(print(pars))
   expect_snapshot_plot(ssd_plot_cdf(pars), "cdf")
 })

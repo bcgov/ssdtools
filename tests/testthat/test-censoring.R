@@ -6,7 +6,6 @@ test_that("left, right and interval censoring works ", {
   data$right[3] <- data$Conc[3] * 2
   fit <- ssd_fit_dists(data, right = "right")
   
-  set.seed(42)
   withr::with_seed(42, {
     hcnonparametric <- ssd_hc(fit, ci = TRUE, average = FALSE, parametric = FALSE, nboot = 10, min_pboot = 0.1)
     expect_warning(hcparametric <- ssd_hc(fit, ci = TRUE, average = FALSE, parametric =TRUE), "^Parametric CIs cannot be calculated for censored data\\.$")
