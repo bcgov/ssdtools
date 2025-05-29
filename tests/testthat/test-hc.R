@@ -870,7 +870,7 @@ test_that("hc ci_method = 'weighted_arithmetic' deprecated for MACL", {
 
 test_that("hc est_method and ci_method combos", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
-
+  
   ## TODO: add ssd_est_methods() and ssd_ci_methods() functions.
   est_methods <- c("multi", "arithmetic", "geometric")
   ci_methods <- c("multi_fixed", "multi_free", "weighted_samples", "MACL")
@@ -881,11 +881,9 @@ test_that("hc est_method and ci_method combos", {
   data$id <- 1:nrow(data)
   
   func <- function(fit, est_method, ci_method, parametric, ci, id) {
-    suppressWarnings(
-      withr::with_seed(10, {
-        hc <- ssd_hc(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
-      })
-    )
+    withr::with_seed(10, {
+      hc <- ssd_hc(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
+    })
     expect_s3_class(hc, "tbl")
     hc$id <- id
     hc

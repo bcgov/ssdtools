@@ -392,11 +392,6 @@ tidy_hcp <- function(hcp, parametric) {
     average <- FALSE
   }
   
-  if(ci && !parametric && average && ci_method %in% c("multi_free", "multi_fixed")) {
-    wrn("Non-parametric CIs cannot be calculated for 'multi_free' and 'multi_fixed' methods.")
-    ci <- FALSE
-  }
-  
   if (ci && parametric && !identical(censoring, c(0, Inf))) {
     wrn("Parametric CIs cannot be calculated for censored data.")
     ci <- FALSE
