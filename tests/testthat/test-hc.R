@@ -66,7 +66,7 @@ test_that("ssd_hc list names must be unique", {
 test_that("ssd_hc list handles zero length list", {
   hc <- ssd_hc(structure(list(), .Names = character(0)))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples"))
   expect_identical(hc$dist, character(0))
   expect_identical(hc$proportion, numeric(0))
   expect_identical(hc$se, numeric(0))
@@ -137,7 +137,7 @@ test_that("ssd_hc fitdists works zero length percent", {
   
   hc <- ssd_hc(fits, proportion = numeric(0))
   expect_s3_class(hc, class = "tbl_df")
-  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples"))
   expect_equal(hc$dist, character(0))
   expect_identical(hc$proportion, numeric(0))
   expect_equal(hc$est, numeric(0))

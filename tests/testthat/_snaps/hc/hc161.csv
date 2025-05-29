@@ -1,4 +1,4 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
 lnorm,0.01,0.721365,NA,NA,NA,1,multi,NA,NA,0,NA,numeric(0)
 lnorm,0.02,1.0119,NA,NA,NA,1,multi,NA,NA,0,NA,numeric(0)
 lnorm,0.03,1.25428,NA,NA,NA,1,multi,NA,NA,0,NA,numeric(0)

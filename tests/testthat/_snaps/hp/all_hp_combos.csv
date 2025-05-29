@@ -1,4 +1,4 @@
-est_method_arg,ci,parametric,ci_method_arg,id,dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+est_method_arg,ci,parametric,ci_method_arg,id,dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
 multi,FALSE,TRUE,multi_fixed,1,average,1,2.183,NA,NA,NA,1,multi,NA,NA,0,NA,numeric(0)
 multi,FALSE,TRUE,multi_free,2,average,1,2.183,NA,NA,NA,1,multi,NA,NA,0,NA,numeric(0)
 multi,FALSE,TRUE,weighted_samples,3,average,1,2.183,NA,NA,NA,1,multi,NA,NA,0,NA,numeric(0)

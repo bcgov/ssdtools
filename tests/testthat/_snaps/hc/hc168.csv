@@ -1,4 +1,4 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
 gamma,0.05,1.07428,NA,NA,NA,0.356574,multi,NA,NA,0,NA,numeric(0)
 lgumbel,0.05,1.76939,NA,NA,NA,0.0134466,multi,NA,NA,0,NA,numeric(0)
 llogis,0.05,1.56226,NA,NA,NA,0.0656452,multi,NA,NA,0,NA,numeric(0)

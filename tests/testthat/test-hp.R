@@ -30,7 +30,7 @@ test_that("hp fitdists works with zero length conc", {
   
   hp <- ssd_hp(fits, numeric(0))
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples"))
   expect_equal(hp$dist, character(0))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0))

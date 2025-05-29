@@ -1,4 +1,4 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
 gompertz,0.05,1.29989,NA,NA,NA,0.270604,arithmetic,NA,NA,0,NA,numeric(0)
 weibull,0.05,1.08673,NA,NA,NA,0.268699,arithmetic,NA,NA,0,NA,numeric(0)
 gamma,0.05,1.07428,NA,NA,NA,0.268024,arithmetic,NA,NA,0,NA,numeric(0)

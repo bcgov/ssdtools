@@ -1,4 +1,4 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
 average,0.01,0.341193,0.22218,0.152495,0.793733,1,arithmetic,MACL,parametric,10,1,numeric(0)
 average,0.02,0.573301,0.343373,0.262088,1.25501,1,arithmetic,MACL,parametric,10,1,numeric(0)
 average,0.03,0.797574,0.446326,0.377276,1.66709,1,arithmetic,MACL,parametric,10,1,numeric(0)
