@@ -568,8 +568,9 @@ test_that("ssd_hc passing all boots ccme_chloride lnorm_lnorm", {
                         dists = c("lnorm_lnorm", "llogis_llogis")
   )
   
-  set.seed(102)
-  expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE))
+  withr::with_seed(102, {
+    expect_warning(hc <- ssd_hc(fits, ci = TRUE, nboot = 1000, average = FALSE))
+  })
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_boot_data(hc, "hc_cis_chloride50")
 })
@@ -578,8 +579,9 @@ test_that("ssd_hc save_to", {
   dir <- withr::local_tempdir()
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
+  })
   expect_snapshot_data(hc, "hc_save_to")
   expect_identical(list.files(dir), c(
     "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "data_000000002_lnorm.csv",
@@ -604,8 +606,9 @@ test_that("ssd_hc save_to ci_method = weighted_samples", {
   dir <- withr::local_tempdir()
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, ci_method = "MACL", samples = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, nboot = 3, ci = TRUE, save_to = dir, ci_method = "MACL", samples = TRUE)
+  })
   expect_snapshot_data(hc, "hc_save_to_not_multi")
   expect_identical(list.files(dir), c(
     "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "data_000000002_lnorm.csv",
@@ -621,8 +624,9 @@ test_that("ssd_hc save_to ci_method = weighted_samples default", {
   dir <- withr::local_tempdir()
   
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, ci_method = "MACL", est_method = "arithmetic", samples = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, nboot = 1, ci = TRUE, save_to = dir, ci_method = "MACL", est_method = "arithmetic", samples = TRUE)
+  })
   expect_snapshot_data(hc, "hc_save_to_not_multi_default")
   expect_identical(
     sort(list.files(dir)),
@@ -648,8 +652,9 @@ test_that("ssd_hc save_to rescale", {
   dir <- withr::local_tempdir()
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm", rescale = TRUE)
-  set.seed(102)
-  hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, nboot = 3, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
+  })
   expect_snapshot_data(hc, "hc_save_to_rescale")
   expect_identical(list.files(dir), c(
     "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "data_000000002_lnorm.csv",
@@ -665,8 +670,9 @@ test_that("ssd_hc save_to lnorm 1", {
   dir <- withr::local_tempdir()
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir, samples = TRUE)
+  })
   expect_snapshot_data(hc, "hc_save_to11")
   expect_identical(list.files(dir), c(
     "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "estimates_000000000_lnorm.rds",
@@ -683,14 +689,15 @@ test_that("ssd_hc save_to replaces", {
   dir <- withr::local_tempdir()
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir)
-  expect_identical(list.files(dir), c(
-    "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "estimates_000000000_lnorm.rds",
-    "estimates_000000001_lnorm.rds"
-  ))
-  boot <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
-  hc2 <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir)
+    expect_identical(list.files(dir), c(
+      "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "estimates_000000000_lnorm.rds",
+      "estimates_000000001_lnorm.rds"
+    ))
+    boot <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
+    hc2 <- ssd_hc(fits, nboot = 1, ci = TRUE, ci_method = "multi_fixed", save_to = dir)
+  })
   expect_identical(list.files(dir), c(
     "data_000000000_lnorm.csv", "data_000000001_lnorm.csv", "estimates_000000000_lnorm.rds",
     "estimates_000000001_lnorm.rds"
@@ -703,24 +710,28 @@ test_that("ssd_hc save_to replaces", {
 test_that("ssd_hc fix_weight", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
-  set.seed(102)
-  hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
+  withr::with_seed(102, {
+    hc_unfix <- ssd_hc(fits, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
+  })
   expect_snapshot_data(hc_unfix, "hc_unfix")
   
-  set.seed(102)
-  hc_fix <- ssd_hc(fits, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+  withr::with_seed(102, {
+    hc_fix <- ssd_hc(fits, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+  })
   expect_snapshot_data(hc_fix, "hc_fix")
 })
 
 test_that("ssd_hc multiple values", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
-  set.seed(102)
-  hc_unfix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
+  withr::with_seed(102, {
+    hc_unfix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 100, ci = TRUE, ci_method = "multi_free", samples = TRUE)
+  })
   expect_snapshot_data(hc_unfix, "hc_unfixmulti")
   
-  set.seed(102)
-  hc_fix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+  withr::with_seed(102, {
+    hc_fix <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
+  })
   expect_snapshot_data(hc_fix, "hc_fixmulti")
 })
 
@@ -729,8 +740,9 @@ test_that("ssd_hc multiple values save_to", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
-  set.seed(102)
-  hc <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 2, save_to = dir, ci = TRUE, ci_method = "multi_fixed")
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, proportion = c(5, 10) / 100, nboot = 2, save_to = dir, ci = TRUE, ci_method = "multi_fixed")
+  })
   expect_identical(list.files(dir), c(
     "data_000000000_multi.csv", "data_000000001_multi.csv", "data_000000002_multi.csv",
     "estimates_000000000_multi.rds", "estimates_000000001_multi.rds",
@@ -743,8 +755,9 @@ test_that("ssd_hc not multi_ci save_to", {
   
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
   
-  set.seed(102)
-  hc <- ssd_hc(fits, nboot = 2, ci_method = "MACL", save_to = dir, ci = TRUE)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, nboot = 2, ci_method = "MACL", save_to = dir, ci = TRUE)
+  })
   expect_identical(list.files(dir), c(
     "data_000000000_lgumbel.csv", "data_000000000_lnorm.csv", "data_000000001_lgumbel.csv",
     "data_000000001_lnorm.csv", "data_000000002_lgumbel.csv", "data_000000002_lnorm.csv",
@@ -757,32 +770,39 @@ test_that("ssd_hc not multi_ci save_to", {
 test_that("ssd_hc identical if in parallel", {
   data <- ssddata::ccme_boron
   fits <- ssd_fit_dists(data, dists = c("lnorm", "llogis"))
-  set.seed(10)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 500)
+  withr::with_seed(10, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 500)
+  })
   local_multisession(workers = 2)
-  set.seed(10)
-  hc2 <- ssd_hc(fits, ci = TRUE, nboot = 500)
+  withr::with_seed(10, {
+    hc2 <- ssd_hc(fits, ci = TRUE, nboot = 500)
+  })
   expect_equal(hc, hc2, tolerance = 1e-6)
 })
 
 test_that("hc multi_ci false weighted", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
-  set.seed(102)
-  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, ci_method = "weighted_samples", est_method = "arithmetic", min_pboot = 0.8)
+  withr::with_seed(102, {
+    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, ci_method = "weighted_samples", est_method = "arithmetic", min_pboot = 0.8)
+  })
   expect_s3_class(hc, "tbl")
   expect_snapshot_data(hc, "hc_weighted_samples")
 })
 
 test_that("hc multis match", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
-  set.seed(102)
-  hc_tf <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, ci_method = "weighted_samples")
-  set.seed(102)
-  hc_ft <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "multi_fixed")
-  set.seed(102)
-  hc_ff <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "weighted_samples")
-  set.seed(102)
-  hc_tt <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, ci_method = "multi_fixed")
+  withr::with_seed(102, {
+    hc_tf <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, ci_method = "weighted_samples")
+  })
+  withr::with_seed(102, {
+    hc_ft <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "multi_fixed")
+  })
+  withr::with_seed(102, {
+    hc_ff <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "weighted_samples")
+  })
+  withr::with_seed(102, {
+    hc_tt <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, ci_method = "multi_fixed")
+  })
   
   expect_identical(hc_tf$est, hc_tt$est)
   expect_identical(hc_ft$est, hc_ff$est)
@@ -792,13 +812,15 @@ test_that("hc multis match", {
 
 test_that("hc weighted bootie", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hc_weighted2 <- ssd_hc(fits,
-                         ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "weighted_samples",
-                         samples = TRUE
-  )
-  set.seed(102)
-  hc_unweighted2 <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "MACL", samples = TRUE)
+  withr::with_seed(102, {
+    hc_weighted2 <- ssd_hc(fits,
+                           ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "weighted_samples",
+                           samples = TRUE
+    )
+  })
+  withr::with_seed(102, {
+    hc_unweighted2 <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, est_method = "arithmetic", ci_method = "MACL", samples = TRUE)
+  })
   
   expect_identical(hc_weighted2$est, hc_unweighted2$est)
   expect_identical(length(hc_weighted2$samples[[1]]), 11L)
