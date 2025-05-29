@@ -1,2 +1,2 @@
 dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
-lnorm,-1,0,NA,NA,NA,1,multi,NA,NA,0,NA,numeric(0)
+lnorm,-1,0,NA,NA,NA,1,NA,NA,NA,0,NA,numeric(0)

@@ -1,5 +1,5 @@
 dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
-gamma,0.05,1.18081,0.458988,0.519882,1.81873,0.423429,multi,weighted_samples,non-parametric,10,1,numeric(0)
-llogis,0.05,1.78679,0.524431,1.43316,2.8353,0.0571963,multi,weighted_samples,non-parametric,10,1,numeric(0)
-lnorm,0.05,1.81555,0.936998,1.28368,3.85052,0.0983544,multi,weighted_samples,non-parametric,10,1,numeric(0)
-weibull,0.05,1.2343,0.846602,0.823534,3.31819,0.42102,multi,weighted_samples,non-parametric,10,1,numeric(0)
+gamma,0.05,1.18081,0.458988,0.519882,1.81873,0.423429,NA,NA,non-parametric,10,1,numeric(0)
+llogis,0.05,1.78679,0.524431,1.43316,2.8353,0.0571963,NA,NA,non-parametric,10,1,numeric(0)
+lnorm,0.05,1.81555,0.936998,1.28368,3.85052,0.0983544,NA,NA,non-parametric,10,1,numeric(0)
+weibull,0.05,1.2343,0.846602,0.823534,3.31819,0.42102,NA,NA,non-parametric,10,1,numeric(0)
