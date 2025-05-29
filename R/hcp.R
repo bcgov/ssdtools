@@ -27,7 +27,7 @@ no_hcp <- function(hc) {
     wt = numeric(0),
     est_method = character(0),
     ci_method = character(0),
-    method = character(0),
+    boot_method = character(0),
     nboot = integer(0),
     pboot = numeric(0),
     samples = I(list(numeric(0)))
@@ -49,7 +49,7 @@ no_ci_hcp <- function(value, dist, est, rescale, parametric, est_method, ci_meth
     wt = rep(1, length(value)),
     est_method = rep(est_method, length(value)),
     ci_method = rep(ci_method, length(value)),
-    method = rep(parametric, length(value)),
+    boot_method = rep(parametric, length(value)),
     nboot = rep(0L, length(value)),
     pboot = na,
     samples = I(list(numeric(0)))
@@ -59,7 +59,6 @@ no_ci_hcp <- function(value, dist, est, rescale, parametric, est_method, ci_meth
 ci_hcp <- function(cis, estimates, value, dist, est, rescale, est_method, ci_method, parametric, nboot, hc) {
   multiplier <- if (hc) rescale else 100
   
-  ## FIXME: need to add est_method, ci_method and method
   tibble(
     dist = dist,
     value = value,
@@ -69,7 +68,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, est_method, ci_met
     ucl = cis$ucl * multiplier,
     est_method = est_method,
     ci_method = ci_method,
-    method = parametric,
+    boot_method = parametric,
     wt = rep(1, length(value)),
     nboot = nboot,
     pboot = length(estimates) / nboot,
@@ -265,7 +264,7 @@ replace_estimates <- function(hcp, est) {
   )
   hcp$dist <- "average"
   hcp$ci_method <- if(ci) ci_method else NA_character_
-  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples")]
+  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples")]
 }
 
 .ssd_hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,
@@ -360,11 +359,20 @@ replace_estimates <- function(hcp, est) {
   replace_estimates(hcp, est)
 }
 
-tidy_hcp <- function(hcp, parametric) {
-  method <- if (parametric) "parametric" else "non-parametric"
-  hcp$method <- method
+tidy_hcp <- function(hcp, ci, parametric) {
+  hcp$boot_method <- if (parametric) "parametric" else "non-parametric"
+  if(!ci) {
+    hcp$se <- NA_real_
+    hcp$lcl <- NA_real_
+    hcp$ucl <- NA_real_
+    hcp$ci_method <- NA_character_
+    hcp$boot_method <- NA_character_
+    hcp$nboot <- 0L
+    hcp$pboot <- NA_real_
+    hcp$samples <- I(list(numeric(0)))
+  }
   
-  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples")]
+  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples")]
 }
 
 .ssd_hcp_fitdists <- function(
@@ -390,11 +398,6 @@ tidy_hcp <- function(hcp, parametric) {
   
   if(length(x) == 1L) {
     average <- FALSE
-  }
-  
-  if(ci && !parametric && average && ci_method %in% c("multi_free", "multi_fixed")) {
-    wrn("Non-parametric CIs cannot be calculated for 'multi_free' and 'multi_fixed' methods.")
-    ci <- FALSE
   }
   
   if (ci && parametric && !identical(censoring, c(0, Inf))) {
@@ -431,7 +434,7 @@ tidy_hcp <- function(hcp, parametric) {
       hc = hc, save_to = save_to, samples = samples, fun = fun
     )
   }
-  tidy_hcp(hcp, parametric = parametric)  
+  tidy_hcp(hcp, ci = ci, parametric = parametric)  
 }
 
 ssd_hcp_fitdists <- function(

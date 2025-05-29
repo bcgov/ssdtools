@@ -21,8 +21,8 @@ test_that("schwarz-tillmans", {
   )
   withr::with_seed(10, {
     fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
-    hc <- ssd_hc(fits, average = FALSE, ci_method = "weighted_samples", est_method = "arithmetic")
-    hc_avg <- ssd_hc(fits, average = TRUE, ci_method = "weighted_samples", est_method = "arithmetic")
+    hc <- ssd_hc(fits, average = FALSE, est_method = "arithmetic")
+    hc_avg <- ssd_hc(fits, average = TRUE, est_method = "arithmetic")
   })
   expect_snapshot_data(hc, "hc")
   expect_snapshot_data(hc_avg, "hc_avg")

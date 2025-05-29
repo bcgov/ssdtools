@@ -1,4 +1,4 @@
-dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
 gamma,1,4.67759,2.14332,0.993989,6.55631,0.356574,multi,weighted_samples,parametric,10,1,numeric(0)
 lgumbel,1,0.856452,0.732699,0.0636536,2.21195,0.0134466,multi,weighted_samples,parametric,10,1,numeric(0)
 llogis,1,2.80047,1.89766,0.460372,6.09523,0.0656452,multi,weighted_samples,parametric,10,1,numeric(0)

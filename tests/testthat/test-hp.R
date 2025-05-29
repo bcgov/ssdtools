@@ -30,7 +30,7 @@ test_that("hp fitdists works with zero length conc", {
   
   hp <- ssd_hp(fits, numeric(0))
   expect_s3_class(hp, "tbl_df")
-  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hp), c("dist", "conc", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples"))
   expect_equal(hp$dist, character(0))
   expect_identical(hp$conc, numeric(0))
   expect_equal(hp$est, numeric(0))
@@ -431,31 +431,32 @@ test_that("hp ci_method = 'weighted_arithmetic' deprecated for MACL", {
 })
 
 ## TODO: add ssd_est_methods() and ssd_ci_methods() functions.
-
 test_that("hp est_method and ci_method combos", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
   
-  ## TODO: add ssd_est_methods() and ssd_ci_methods() functions.
   est_methods <- c("multi", "arithmetic", "geometric")
   ci_methods <- c("multi_fixed", "multi_free", "weighted_samples", "MACL")
   parametric <- c(TRUE, FALSE)
   ci <- c(FALSE, TRUE)
   
-  data <- tidyr::expand_grid(ci = ci, parametric = parametric,ci_method = ci_methods, est_method = est_methods)
+  data <- tidyr::expand_grid(fit = list(fit), est_method = est_methods, ci = ci, parametric = parametric, ci_method = ci_methods)
   data$id <- 1:nrow(data)
   
-  func <- function(est_method, ci_method, parametric, ci, fit, id) {
+  func <- function(fit, est_method, ci_method, parametric, ci, id) {
     suppressWarnings(
       withr::with_seed(10, {
         hp <- ssd_hp(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
       })
     )
+    expect_s3_class(hp, "tbl")
     hp$id <- id
     hp
   }
-  ls <- purrr::pmap(data, .f = func, fit = fit)
+  ls <- purrr::pmap(data, .f = func)
+  
   ls <- dplyr::bind_rows(ls)
   data <- dplyr::rename(data, ci_method_arg = "ci_method", est_method_arg = "est_method")
   data <- dplyr::inner_join(data, ls, by = "id")
+  data$fit <- NULL
   expect_snapshot_data(data, "all_hp_combos")
 })

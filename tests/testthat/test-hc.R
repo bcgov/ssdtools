@@ -66,7 +66,7 @@ test_that("ssd_hc list names must be unique", {
 test_that("ssd_hc list handles zero length list", {
   hc <- ssd_hc(structure(list(), .Names = character(0)))
   expect_s3_class(hc, "tbl_df")
-  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples"))
   expect_identical(hc$dist, character(0))
   expect_identical(hc$proportion, numeric(0))
   expect_identical(hc$se, numeric(0))
@@ -137,7 +137,7 @@ test_that("ssd_hc fitdists works zero length percent", {
   
   hc <- ssd_hc(fits, proportion = numeric(0))
   expect_s3_class(hc, class = "tbl_df")
-  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "method", "nboot", "pboot", "samples"))
+  expect_identical(colnames(hc), c("dist", "proportion", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples"))
   expect_equal(hc$dist, character(0))
   expect_identical(hc$proportion, numeric(0))
   expect_equal(hc$est, numeric(0))
@@ -868,7 +868,6 @@ test_that("hc ci_method = 'weighted_arithmetic' deprecated for MACL", {
   expect_identical(macl, weighted_arithmetic)
 })
 
-
 test_that("hc est_method and ci_method combos", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "llogis"))
   
@@ -878,22 +877,22 @@ test_that("hc est_method and ci_method combos", {
   parametric <- c(TRUE, FALSE)
   ci <- c(FALSE, TRUE)
   
-  data <- tidyr::expand_grid(ci = ci, parametric = parametric,ci_method = ci_methods, est_method = est_methods)
+  data <- tidyr::expand_grid(fit = list(fit), est_method = est_methods, ci = ci, parametric = parametric, ci_method = ci_methods)
   data$id <- 1:nrow(data)
   
-  func <- function(est_method, ci_method, parametric, ci, fit, id) {
-    suppressWarnings(
-      withr::with_seed(10, {
-        hc <- ssd_hc(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
-      })
-    )
+  func <- function(fit, est_method, ci_method, parametric, ci, id) {
+    withr::with_seed(10, {
+      hc <- ssd_hc(fit, est_method = est_method, ci_method = ci_method, parametric = parametric, ci = ci, nboot = 10)
+    })
     expect_s3_class(hc, "tbl")
     hc$id <- id
     hc
   }
-  ls <- purrr::pmap(data, .f = func, fit = fit)
+  ls <- purrr::pmap(data, .f = func)
+  
   ls <- dplyr::bind_rows(ls)
   data <- dplyr::rename(data, ci_method_arg = "ci_method", est_method_arg = "est_method")
   data <- dplyr::inner_join(data, ls, by = "id")
+  data$fit <- NULL
   expect_snapshot_data(data, "all_hc_combos")
 })
