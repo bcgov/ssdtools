@@ -1,2 +1,2 @@
-dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-average,0.05,1.27578,0.569544,0.492722,2.16469,1,parametric,10,1,"c(`000000001_lnorm` = 1.29091, `000000002_lnorm` = 2.32183, `000000003_lnorm` = 1.62344, `000000001_gamma` = 0.508842, `000000002_gamma` = 1.14031, `000000003_gamma` = 0.859883, `000000004_gamma` = 0.65392, `000000005_gamma` = 0.488042, `000000006_gamma` = 1.15914, `000000007_gamma` = 0.732169)"
+dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+average,0.05,1.27578,0.569544,0.492722,2.16469,1,arithmetic,weighted_samples,parametric,10,1,"c(`000000001_lnorm` = 1.29091, `000000002_lnorm` = 2.32183, `000000003_lnorm` = 1.62344, `000000001_gamma` = 0.508842, `000000002_gamma` = 1.14031, `000000003_gamma` = 0.859883, `000000004_gamma` = 0.65392, `000000005_gamma` = 0.488042, `000000006_gamma` = 1.15914, `000000007_gamma` = 0.732169)"

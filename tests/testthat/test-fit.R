@@ -276,8 +276,9 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
     "^Distribution 'lnorm_lnorm' failed to fit \\(try rescaling data\\)"
   )
 
-  set.seed(102)
-  fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm"), rescale = FALSE, at_boundary_ok = TRUE)
+  withr::with_seed(102, {
+    fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm"), rescale = FALSE, at_boundary_ok = TRUE)
+  })
 
   tidy <- tidy(fits)
   expect_s3_class(tidy, "tbl")
@@ -356,8 +357,9 @@ test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
 })
 
 test_that("ssd_fit_dists min_pmix at_boundary_ok FALSE", {
-  set.seed(99)
-  conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.1)
+  withr::with_seed(99, {
+    conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.1)
+  })
   data <- data.frame(Conc = conc)
   fits <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0.1)
   tidy <- tidy(fits)
@@ -369,8 +371,9 @@ test_that("ssd_fit_dists min_pmix at_boundary_ok FALSE", {
 })
 
 test_that("ssd_fit_dists min_pmix", {
-  set.seed(99)
-  conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.1)
+  withr::with_seed(99, {
+    conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.1)
+  })
   data <- data.frame(Conc = conc)
   fits <- ssd_fit_dists(data, dists = c("lnorm_lnorm"), min_pmix = 0.11, at_boundary_ok = TRUE)
   tidy <- tidy(fits)
@@ -378,11 +381,12 @@ test_that("ssd_fit_dists min_pmix", {
 })
 
 test_that("ssd_fit_dists at_boundary_ok message", {
-  set.seed(99)
-  expect_warning(
-    ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "burrIII3"), at_boundary_ok = FALSE),
-    "one or more parameters at boundary[.]$"
-  )
+  withr::with_seed(99, {
+    expect_warning(
+      ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "burrIII3"), at_boundary_ok = FALSE),
+      "one or more parameters at boundary[.]$"
+    )
+  })
   expect_warning(
     ssd_fit_dists(ssddata::ccme_boron,
       dists = c("lnorm", "burrIII3"),
@@ -417,8 +421,9 @@ test_that("ssd_fit_dists works min_pmix = 0.5 and at_boundary_ok = TRUE and comp
 })
 
 test_that("ssd_fit_dists min_pmix 0", {
-  set.seed(99)
-  data <- data.frame(Conc = ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 2, pmix = 0.01))
+  withr::with_seed(99, {
+    data <- data.frame(Conc = ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 2, pmix = 0.01))
+  })
   fit <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0)
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_pmix0")

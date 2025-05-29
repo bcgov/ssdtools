@@ -222,10 +222,11 @@ library(ggplot2)
 
 # theme_set(theme_bw())
 
-set.seed(7)
-
+withr::with_seed(7, {
 ssd_plot_cdf(ssd_match_moments(meanlog = 2, sdlog = 2)) +
   scale_color_ssd()
+})
+
 ```
 
 

@@ -19,6 +19,7 @@ test_that("lnorm", {
   test_dist("lnorm")
   expect_equal(ssd_plnorm(1), 0.5)
   expect_equal(ssd_qlnorm(0.75), 1.96303108415826)
-  set.seed(42)
-  expect_equal(ssd_rlnorm(2), c(3.93912432924107, 0.568531719998709))
+  withr::with_seed(42, {
+    expect_equal(ssd_rlnorm(2), c(3.93912432924107, 0.568531719998709))
+  })
 })

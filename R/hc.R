@@ -30,16 +30,6 @@
 #' distributions as constituting a single mixture distribution
 #' ensures that `ssd_hc()` is the inverse of `ssd_hp()`.
 #'
-#' If treating the distributions as constituting a single mixture distribution
-#' when calculating model average confidence intervals then
-#' `weighted` specifies whether to use the original model weights versus
-#' re-estimating for each bootstrap sample unless 'taking the mean' in which case
-#' `weighted` specifies
-#' whether to take bootstrap samples from each distribution proportional to
-#' its weight (so that they sum to `nboot`) versus
-#' calculating the weighted arithmetic means of the lower
-#' and upper confidence limits based on `nboot` samples for each distribution.
-#'
 #' Distributions with an absolute AIC difference greater
 #' than a delta of by default 7 have considerably less support (weight < 0.01)
 #' and are excluded
@@ -85,27 +75,27 @@ ssd_hc.list <- function(
   chk_named(x)
   chk_unique(names(x))
   chk_unused(...)
-
+  
   if (lifecycle::is_present(percent)) {
-    lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
+    lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", with = "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
     chk_numeric(percent)
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-
+  
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
-
+  
   if (!length(x)) {
     hc <- no_hcp()
     hc <- dplyr::rename(hc, proportion = "value")
     return(hc)
   }
   hc <- mapply(.ssd_hc_dist, x, names(x),
-    MoreArgs = list(proportion = proportion),
-    SIMPLIFY = FALSE
+               MoreArgs = list(proportion = proportion),
+               SIMPLIFY = FALSE
   )
   bind_rows(hc)
 }
@@ -118,23 +108,24 @@ ssd_hc.list <- function(
 #' ssd_hc(fits)
 ssd_hc.fitdists <- function(
     x,
-    percent,
+    percent = deprecated(),
     proportion = 0.05,
+    ...,
     average = TRUE,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
-    multi_est = TRUE,
+    multi_est = deprecated(),
+    est_method = "multi",
     ci_method = "weighted_samples",
     parametric = TRUE,
     delta = 9.21,
     samples = FALSE,
     save_to = NULL,
-    control = NULL,
-    ...) {
+    control = NULL) {
   chk_unused(...)
-
+  
   if (lifecycle::is_present(percent)) {
     lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
@@ -142,18 +133,24 @@ ssd_hc.fitdists <- function(
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-
+  
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
-  chk_string(ci_method)
-  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-
-  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
-  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
   
-  if(length(x) == 1L) {
-    average <- FALSE
+  if (lifecycle::is_present(multi_est)) {
+    lifecycle::deprecate_soft("2.3.1", "ssd_hc(multi_est)", "ssd_hc(est_method)")
+    
+    chk_flag(multi_est)
+    
+    est_method <- if(multi_est) "multi" else "arithmetic"
+  }
+  
+  chk_string(ci_method) 
+  if(ci_method == "weighted_arithmetic") {
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hc(ci_method = 'weighted_arithmetic'"), I("ssd_hc(ci_method = 'MACL'"))
+    
+    ci_method <- "MACL"
   }
   
   hcp <- ssd_hcp_fitdists(
@@ -163,18 +160,17 @@ ssd_hc.fitdists <- function(
     level = level,
     nboot = nboot,
     average = average,
-    multi_est = multi_est,
+    est_method = est_method,
     delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi_ci = multi_ci,
-    fix_weights = fix_weights,
+    ci_method = ci_method,
     control = control,
     samples = samples,
     save_to = save_to,
     hc = TRUE
   )
-
+  
   hcp <- dplyr::rename(hcp, proportion = "value")
   hcp
 }
@@ -189,19 +185,20 @@ ssd_hc.fitburrlioz <- function(
     x,
     percent,
     proportion = 0.05,
+    ...,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
     parametric = FALSE,
     samples = FALSE,
-    save_to = NULL,
-    ...) {
+    save_to = NULL
+  ) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
   chk_unused(...)
-
+  
   if (lifecycle::is_present(percent)) {
     lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
     chk_vector(percent)
@@ -209,13 +206,13 @@ ssd_hc.fitburrlioz <- function(
     chk_range(percent, c(0, 100))
     proportion <- percent / 100
   }
-
+  
   chk_vector(proportion)
   chk_numeric(proportion)
   chk_range(proportion)
-
+  
   fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
-
+  
   hcp <- ssd_hcp_fitdists(
     x = x,
     value = proportion,
@@ -223,16 +220,15 @@ ssd_hc.fitburrlioz <- function(
     level = level,
     nboot = nboot,
     average = FALSE,
-    multi_est = TRUE,
+    est_method = "multi",
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi_ci = TRUE,
+    ci_method = "multi_free",
     save_to = save_to,
     samples = samples,
     control = NULL,
     hc = TRUE,
-    fix_weights = FALSE,
     fun = fun
   )
 

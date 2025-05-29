@@ -19,6 +19,7 @@ test_that("lgumbel", {
   test_dist("lgumbel")
   expect_equal(ssd_plgumbel(1), 0.367879441171442)
   expect_equal(ssd_qlgumbel(0.75), 3.47605949678221)
-  set.seed(42)
-  expect_equal(ssd_rlgumbel(2), c(11.2305025213646, 15.3866236451648))
+  withr::with_seed(42, {
+    expect_equal(ssd_rlgumbel(2), c(11.2305025213646, 15.3866236451648))
+  })
 })

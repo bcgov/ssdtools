@@ -15,6 +15,8 @@
 
 \item{all_dists}{A flag specifying whether all the named distributions must fit successfully.}
 
+\item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
+
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).}
 
@@ -34,6 +36,29 @@ relative to the extremes for non-missing values.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
+\item{ci_method}{A string specifying which method to use for estimating
+the standard error and confidence limits from the bootstrap samples.
+Possible values include \code{ci_method = "multi_fixed"} and  \code{ci_method = "multi_free"}
+which generate the bootstrap samples using the model-averaged cumulative distribution function
+but differ in whether the model weights are fixed at the values for the original dataset
+or re-estimated for each bootstrap sample dataset.
+The value \code{ci_method = "weighted_samples"} takes bootstrap samples
+from each distribution proportional to its AICc based weights and
+calculates the confidence limits (and SE) from this single set.
+The value \code{ci_method = "weighted_arithmetic"} (was \code{ci_method = "MACL"} but
+has been soft-deprecated) which is only included for
+historical reasons takes the weighted arithmetic mean of the confidence
+limits and \code{ci_method = MGCL} which was included for a research paper
+takes the weighted geometric mean of the confidence limits.
+The values \code{ci_method = "MAW1"} and \code{ci_method = "MAW2"}
+use the two alternative equations of Burnham and Anderson to
+model average the weighted standard errors and then calculate the confidence
+limits using the Wald approach.
+Finally \code{ci_method = "arithmetic"} and \code{ci_method = "geometric"}
+take the weighted arithmetic or geometric mean of the values for
+each bootstrap iteration across all the distributions and then
+calculate the confidence limits (and SE) from the single set of samples.}
+
 \item{censoring}{A numeric vector of the left and right censoring values.}
 
 \item{color}{A string of the column in data for the color aesthetic.}
@@ -52,6 +77,13 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 \item{digits}{A whole number specifying the number of significant figures.}
 
 \item{dists}{A character vector of the distribution names.}
+
+\item{est_method}{A string specifying whether to estimate directly from
+the model-averaged cumulative distribution function (\code{est_method = 'multi'}) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (\code{est_method = 'arithmetic'}) or
+or to use the geometric mean instead (\code{est_method = 'geometric'}).}
 
 \item{fitdists}{An object of class fitdists.}
 
@@ -109,12 +141,11 @@ to report the confidence intervals.}
 
 \item{npars}{A whole numeric vector specifying which distributions to include based on the number of parameters.}
 
-\item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
-
-\item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
-Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
-
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
+\item{multi_est}{A flag specifying whether to estimate directly from
+the model-averaged cumulative distribution function (\code{multi_est = TRUE}) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (\code{multi_est = FALSE}).}
 
 \item{na.rm}{A flag specifying whether to silently remove missing values or
 remove them with a warning.}

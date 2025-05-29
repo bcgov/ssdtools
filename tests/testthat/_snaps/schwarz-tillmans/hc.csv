@@ -1,7 +1,7 @@
-dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-gompertz,0.05,1.29989,NA,NA,NA,0.270604,parametric,0,NA,numeric(0)
-weibull,0.05,1.08673,NA,NA,NA,0.268699,parametric,0,NA,numeric(0)
-gamma,0.05,1.07428,NA,NA,NA,0.268024,parametric,0,NA,numeric(0)
-lnorm,0.05,1.68117,NA,NA,NA,0.133222,parametric,0,NA,numeric(0)
-llogis,0.05,1.56226,NA,NA,NA,0.0493432,parametric,0,NA,numeric(0)
-lgumbel,0.05,1.76939,NA,NA,NA,0.0101073,parametric,0,NA,numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,method,nboot,pboot,samples
+gompertz,0.05,1.29989,NA,NA,NA,0.270604,arithmetic,weighted_samples,parametric,0,NA,numeric(0)
+weibull,0.05,1.08673,NA,NA,NA,0.268699,arithmetic,weighted_samples,parametric,0,NA,numeric(0)
+gamma,0.05,1.07428,NA,NA,NA,0.268024,arithmetic,weighted_samples,parametric,0,NA,numeric(0)
+lnorm,0.05,1.68117,NA,NA,NA,0.133222,arithmetic,weighted_samples,parametric,0,NA,numeric(0)
+llogis,0.05,1.56226,NA,NA,NA,0.0493432,arithmetic,weighted_samples,parametric,0,NA,numeric(0)
+lgumbel,0.05,1.76939,NA,NA,NA,0.0101073,arithmetic,weighted_samples,parametric,0,NA,numeric(0)

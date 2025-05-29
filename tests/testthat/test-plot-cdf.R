@@ -40,7 +40,9 @@ test_that("ssd_plot_cdf deals with named list", {
 
 test_that("autoplot deals with delta", {
   dists <- ssd_dists_all()
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists, at_boundary_ok = TRUE, computable = FALSE)
+  withr::with_seed(100, {
+    fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists, at_boundary_ok = TRUE, computable = FALSE)
+  })
   expect_snapshot_plot(ssd_plot_cdf(fits, delta = Inf), "fits_delta")
 })
 

@@ -28,10 +28,11 @@
 #' @examples
 #' \dontrun{
 #' fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-#' set.seed(10)
-#' ssd_exposure(fits)
-#' ssd_exposure(fits, meanlog = 1)
-#' ssd_exposure(fits, meanlog = 1, sdlog = 1)
+#' withr::with_seed(10, {
+#'   ssd_exposure(fits)
+#'   ssd_exposure(fits, meanlog = 1)
+#'   ssd_exposure(fits, meanlog = 1, sdlog = 1)
+#' })
 #' }
 ssd_exposure <- function(x, meanlog = 0, sdlog = 1, nboot = 1000) {
   chk_number(meanlog)

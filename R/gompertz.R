@@ -76,8 +76,10 @@ qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = F
 #' @export
 #' @examples
 #'
-#' set.seed(50)
-#' hist(ssd_rgompertz(10000), breaks = 1000)
+#' withr::with_seed(50, {
+#' x <- ssd_rgompertz(10000)
+#' })
+#' hist(x, breaks = 1000)
 ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
   rdist("gompertz", n = n, location = location, shape = shape, chk = chk)
 }

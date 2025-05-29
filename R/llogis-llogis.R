@@ -49,8 +49,10 @@ ssd_qllogis_llogis <- function(p, locationlog1 = 0, scalelog1 = 1,
 #' @export
 #' @examples
 #'
-#' set.seed(50)
-#' hist(ssd_rllogis_llogis(10000), breaks = 1000)
+#' withr::with_seed(50, {
+#'   x <- ssd_rllogis_llogis(10000)
+#' })
+#' hist(x, breaks = 1000)
 ssd_rllogis_llogis <- function(n, locationlog1 = 0, scalelog1 = 1,
                                locationlog2 = 1, scalelog2 = 1, pmix = 0.5, chk = TRUE) {
   rdist("logis_logis",

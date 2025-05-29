@@ -39,7 +39,7 @@ test_that("summary fitdists", {
   expect_identical(summary$min_pmix, 0.01)
   expect_identical(summary$rescaled, 1)
   expect_identical(summary$weighted, 1)
-  expect_identical(summary$unequal, FALSE)
+  expect_false(summary$unequal)
 })
 
 test_that("summary partially left censored", {
@@ -56,7 +56,7 @@ test_that("summary partially left censored", {
   expect_equal(summary$min_pmix, 0.107142857)
   expect_identical(summary$rescaled, 1)
   expect_identical(summary$weighted, 1)
-  expect_identical(summary$unequal, FALSE)
+  expect_false(summary$unequal)
 })
 
 test_that("summary partiaally right censored", {
@@ -73,7 +73,7 @@ test_that("summary partiaally right censored", {
   expect_equal(summary$min_pmix, 0.107142857)
   expect_identical(summary$rescaled, 1)
   expect_identical(summary$weighted, 1)
-  expect_identical(summary$unequal, FALSE)
+  expect_false(summary$unequal)
 })
 
 test_that("summary fitdists with multiple dists", {
@@ -86,7 +86,7 @@ test_that("summary fitdists with multiple dists", {
   expect_identical(summary$nrow, 28L)
   expect_equal(summary$rescaled, 8.40832920383116)
   expect_identical(summary$weighted, 1)
-  expect_identical(summary$unequal, FALSE)
+  expect_false(summary$unequal)
 })
 
 test_that("summary fitdists with partially censored, rescaled, unequally weighted data", {
@@ -102,7 +102,7 @@ test_that("summary fitdists with partially censored, rescaled, unequally weighte
   expect_identical(summary$nrow, 28L)
   expect_equal(summary$rescaled, 8.40832920383116)
   expect_identical(summary$weighted, 28)
-  expect_identical(summary$unequal, TRUE)
+  expect_true(summary$unequal)
 })
 
 test_that("summary fitdists with left censored, rescaled, unequally weighted data", {
@@ -118,7 +118,7 @@ test_that("summary fitdists with left censored, rescaled, unequally weighted dat
   expect_identical(summary$nrow, 28L)
   expect_equal(summary$rescaled, 13.2947358003083)
   expect_identical(summary$weighted, 28)
-  expect_identical(summary$unequal, TRUE)
+  expect_true(summary$unequal)
 })
 
 test_that("summary weighted if equal weights but not 1", {
@@ -128,7 +128,7 @@ test_that("summary weighted if equal weights but not 1", {
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
   expect_identical(summary$weighted, 2)
-  expect_identical(summary$unequal, FALSE)
+  expect_false(summary$unequal)
 })
 
 test_that("summary not weighted if equal weights but not 1 and reweighted", {
@@ -138,7 +138,7 @@ test_that("summary not weighted if equal weights but not 1 and reweighted", {
   summary <- summary(fits)
   expect_s3_class(summary, "summary_fitdists")
   expect_identical(summary$weighted, 1)
-  expect_identical(summary$unequal, FALSE)
+  expect_false(summary$unequal)
 })
 
 test_that("summary min_pmix 0.1", {

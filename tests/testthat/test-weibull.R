@@ -18,37 +18,42 @@
 test_that("weibull", {
   expect_equal(ssd_pweibull(1), 0.632120558828558)
   expect_equal(ssd_qweibull(0.75), 1.38629436111989)
-  set.seed(42)
-  expect_equal(ssd_rweibull(2), c(0.0890432104972705, 0.0649915162066272))
-  testthat::skip_on_cran() # ssd_fit_dists() failing on CRAN M1mac likely due to much older version of the OS and toolchain
+  withr::with_seed(42, {
+    expect_equal(ssd_rweibull(2), c(0.0890432104972705, 0.0649915162066272))
+  })
+  skip_on_cran() # ssd_fit_dists() failing on CRAN M1mac likely due to much older version of the OS and toolchain
   test_dist("weibull")
 })
 
 test_that("weibull", {
-  set.seed(99)
-  data <- data.frame(Conc = ssd_rweibull(1000, shape = 0.5, scale = 2))
+  withr::with_seed(99, {
+    data <- data.frame(Conc = ssd_rweibull(1000, shape = 0.5, scale = 2))
+  })
   fit <- ssd_fit_dists(data, dists = c("weibull", "lgumbel"))
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy")
 })
 
 test_that("weibull works anona", {
-  set.seed(99)
-  fit <- ssd_fit_dists(ssddata::anon_a, dists = c("weibull", "lgumbel"))
+  withr::with_seed(99, {
+    fit <- ssd_fit_dists(ssddata::anon_a, dists = c("weibull", "lgumbel"))
+  })
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_anona")
 })
 
 test_that("weibull works anon_e", {
-  set.seed(99)
-  fit <- ssd_fit_dists(ssddata::anon_e, dists = c("weibull", "lgumbel"))
+  withr::with_seed(99, {
+    fit <- ssd_fit_dists(ssddata::anon_e, dists = c("weibull", "lgumbel"))
+  })
   tidy <- tidy(fit)
   expect_snapshot_data(tidy, "tidy_anon_e")
 })
 
 test_that("weibull bootstraps anona", {
-  set.seed(99)
   fit <- ssd_fit_dists(ssddata::anon_a, dists = "weibull")
-  hc <- ssd_hc(fit, nboot = 1000, ci = TRUE, ci_method = "weighted_samples", samples = TRUE)
+  withr::with_seed(99, {
+    hc <- ssd_hc(fit, nboot = 1000, ci = TRUE, ci_method = "weighted_samples", samples = TRUE)
+  })
   expect_snapshot_data(hc, "hc_anona")
 })

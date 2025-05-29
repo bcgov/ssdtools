@@ -39,30 +39,37 @@ ssd_hp <- function(x, ...) {
 ssd_hp.fitdists <- function(
     x,
     conc = 1,
+    ...,
     average = TRUE,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
-    multi_est = TRUE,
+    multi_est = deprecated(),
+    est_method = "multi",
     ci_method = "weighted_samples",
     parametric = TRUE,
     delta = 9.21,
     samples = FALSE,
     save_to = NULL,
-    control = NULL,
-    ...) {
+    control = NULL) {
   chk_vector(conc)
   chk_numeric(conc)
-  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-
   chk_unused(...)
+  
+  if (lifecycle::is_present(multi_est)) {
+    lifecycle::deprecate_soft("2.3.1", "ssd_hc(multi_est)", "ssd_hc(est_method)")
+    
+    chk_flag(multi_est)
+    
+    est_method <- if(multi_est) "multi" else "arithmetic"
+  }
 
-  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
-  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
-
-  if(length(x) == 1L) {
-    average <- FALSE
+  chk_string(ci_method) 
+  if(ci_method == "weighted_arithmetic") {
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(ci_method = 'weighted_arithmetic'"), I("ssd_hp(ci_method = 'MACL'"))
+    
+    ci_method <- "MACL"
   }
   
   hcp <- ssd_hcp_fitdists(
@@ -72,12 +79,11 @@ ssd_hp.fitdists <- function(
     level = level,
     nboot = nboot,
     average = average,
-    multi_est = multi_est,
+    est_method = est_method,
     delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi_ci = multi_ci,
-    fix_weights = fix_weights,
+    ci_method = ci_method,
     control = control,
     save_to = save_to,
     samples = samples,
@@ -97,14 +103,14 @@ ssd_hp.fitdists <- function(
 ssd_hp.fitburrlioz <- function(
     x,
     conc = 1,
+    ...,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
     parametric = FALSE,
     samples = FALSE,
-    save_to = NULL,
-    ...) {
+    save_to = NULL) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
@@ -112,9 +118,9 @@ ssd_hp.fitburrlioz <- function(
   chk_numeric(conc)
   chk_flag(ci)
   chk_unused(...)
-
+  
   fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
-
+  
   hcp <- ssd_hcp_fitdists(
     x = x,
     value = conc,
@@ -122,19 +128,18 @@ ssd_hp.fitburrlioz <- function(
     level = level,
     nboot = nboot,
     average = FALSE,
-    multi_est = TRUE,
+    est_method = "multi",
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi_ci = TRUE,
+    ci_method = "multi_free",
     control = NULL,
     save_to = save_to,
     samples = samples,
     hc = FALSE,
-    fix_weights = FALSE,
     fun = fun
   )
-
+  
   hcp <- dplyr::rename(hcp, conc = "value")
   hcp
 }
