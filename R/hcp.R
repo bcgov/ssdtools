@@ -363,19 +363,19 @@ tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
   hcp$est_method <- est_method
   hcp$ci_method <- ci_method
   hcp$boot_method <- if (parametric) "parametric" else "non-parametric"
+
+  if(!average) {
+    hcp$est_method <- "cdf"
+    hcp$ci_method <- "percentile"
+  }
+  
   if(!ci) {
     hcp$se <- NA_real_
     hcp$lcl <- NA_real_
     hcp$ucl <- NA_real_
-    hcp$ci_method <- NA_character_
-    hcp$boot_method <- NA_character_
     hcp$nboot <- 0L
-    hcp$pboot <- NA_real_
+    hcp$pboot <- 1
     hcp$samples <- list(numeric(0))
-  }
-  if(!average) {
-    hcp$est_method <- NA_character_
-    hcp$ci_method <- NA_character_
   }
   
   hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "dists", "samples")]
