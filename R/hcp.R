@@ -147,7 +147,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
 }
 
 group_samples <- function(hcp) {
-  samples <- lapply(hcp, function(x) x[c("dist", "value", "samples")])
+  samples <- lapply(hcp, function(x) x[c("value", "samples")])
   samples <- bind_rows(samples)
   samples <- dplyr::group_by(samples, .data$value)
   samples <- dplyr::summarise(samples, samples = list(unlist(samples)))
