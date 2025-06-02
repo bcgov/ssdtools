@@ -147,11 +147,10 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
 }
 
 group_samples <- function(hcp) {
-  samples <- lapply(hcp, function(x) x[c("value", "samples")])
-  samples <- bind_rows(samples)
-  samples <- dplyr::group_by(samples, .data$value)
-  samples <- dplyr::summarise(samples, samples = list(unlist(samples)))
-  dplyr::ungroup(samples)
+    bind_rows(hcp) |>
+    dplyr::group_by(.data$value) |>
+    dplyr::summarise(samples = list(unlist(samples))) |>
+    dplyr::ungroup()
 }
 
 hcp_average <- function(hcp, weight, value, nboot, geometric) {
