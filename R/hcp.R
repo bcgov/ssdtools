@@ -149,7 +149,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
 group_samples <- function(hcp) {
     bind_rows(hcp) |>
     dplyr::group_by(.data$value) |>
-    dplyr::summarise(samples = list(unlist(samples))) |>
+    dplyr::summarise(samples = list(unlist(.data$samples))) |>
     dplyr::ungroup()
 }
 
@@ -378,7 +378,7 @@ tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
     hcp$ci_method <- NA_character_
   }
   
-  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples")]
+  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "dists", "samples")]
 }
 
 .ssd_hcp_fitdists <- function(
@@ -430,6 +430,7 @@ tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
       est_method = est_method, ci_method = ci_method,
       hc = hc, save_to = save_to, samples = samples, fun = fun
     )
+    hcp$dists <- as.list(hcp$dist)
   } else {
     hcp <- .ssd_hcp_fitdists_average(
       x = x, value = value, ci = ci, level = level, nboot = nboot, est_method = est_method,
@@ -439,6 +440,7 @@ tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
       parametric = parametric, control = control,
       hc = hc, save_to = save_to, samples = samples, fun = fun
     )
+    hcp$dists <- rep(list(sort(names(x))), nrow(hcp))
   }
   tidy_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric)  
 }

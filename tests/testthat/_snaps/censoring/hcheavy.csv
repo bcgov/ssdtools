@@ -1,7 +1,7 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
-gamma,0.05,0.891792,NA,NA,NA,NA,NA,NA,NA,0,NA,numeric(0)
-lgumbel,0.05,1.01753,NA,NA,NA,NA,NA,NA,NA,0,NA,numeric(0)
-llogis,0.05,0.957689,NA,NA,NA,NA,NA,NA,NA,0,NA,numeric(0)
-lnorm,0.05,0.987866,NA,NA,NA,NA,NA,NA,NA,0,NA,numeric(0)
-lnorm_lnorm,0.05,0.919187,NA,NA,NA,NA,NA,NA,NA,0,NA,numeric(0)
-weibull,0.05,0.774635,NA,NA,NA,NA,NA,NA,NA,0,NA,numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+gamma,0.05,0.891792,NA,NA,NA,NA,NA,NA,NA,0,NA,gamma,numeric(0)
+lgumbel,0.05,1.01753,NA,NA,NA,NA,NA,NA,NA,0,NA,lgumbel,numeric(0)
+llogis,0.05,0.957689,NA,NA,NA,NA,NA,NA,NA,0,NA,llogis,numeric(0)
+lnorm,0.05,0.987866,NA,NA,NA,NA,NA,NA,NA,0,NA,lnorm,numeric(0)
+lnorm_lnorm,0.05,0.919187,NA,NA,NA,NA,NA,NA,NA,0,NA,lnorm_lnorm,numeric(0)
+weibull,0.05,0.774635,NA,NA,NA,NA,NA,NA,NA,0,NA,weibull,numeric(0)

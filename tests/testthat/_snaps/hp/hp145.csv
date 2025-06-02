@@ -1,2 +1,2 @@
-dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples
-average,1,3.89878,NA,NA,NA,1,arithmetic,NA,NA,0,NA,numeric(0)
+dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+average,1,3.89878,NA,NA,NA,1,arithmetic,NA,NA,0,NA,"c(""gamma"", ""lgumbel"", ""llogis"", ""lnorm"", ""lnorm_lnorm"", ""weibull"")",numeric(0)
