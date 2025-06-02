@@ -201,7 +201,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   hcp
 }
 
-hcp_ind <- function(hcp, weight, ci, parametric, est_method, ci_method) {
+hcp_ind <- function(hcp, weight) {
   hcp <- mapply(
     function(x, y) {
       x$wt <- y
@@ -211,9 +211,7 @@ hcp_ind <- function(hcp, weight, ci, parametric, est_method, ci_method) {
     USE.NAMES = FALSE, SIMPLIFY = FALSE
   )
   hcp <- bind_rows(hcp)
-  hcp$est_method <- est_method
-  hcp$ci_method <- ci_method
-  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "nboot", "pboot", "samples")]
+  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples")]
 }
 
 replace_estimates <- function(hcp, est) {
@@ -297,7 +295,7 @@ replace_estimates <- function(hcp, est) {
   
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
   
-  hcp_ind(hcp, weight = weight, ci = ci, est_method = est_method, ci_method = ci_method, parametric = parametric)
+  hcp_ind(hcp, weight = weight)
 }
 
 .ssd_hcp_fitdists_average <- function(
@@ -372,7 +370,9 @@ replace_estimates <- function(hcp, est) {
   replace_estimates(hcp, est)
 }
 
-tidy_hcp <- function(hcp, ci, average, parametric) {
+tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
+  hcp$est_method <- est_method
+  hcp$ci_method <- ci_method
   hcp$boot_method <- if (parametric) "parametric" else "non-parametric"
   if(!ci) {
     hcp$se <- NA_real_
@@ -451,7 +451,7 @@ tidy_hcp <- function(hcp, ci, average, parametric) {
       hc = hc, save_to = save_to, samples = samples, fun = fun
     )
   }
-  tidy_hcp(hcp, ci = ci, average = average, parametric = parametric)  
+  tidy_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric)  
 }
 
 ssd_hcp_fitdists <- function(
