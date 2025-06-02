@@ -69,7 +69,7 @@ no_ci_hcp <- function(value, dist, est, rescale, parametric, est_method, ci_meth
   )
 }
 
-ci_hcp <- function(cis, estimates, value, dist, est, rescale, est_method, ci_method, parametric, nboot, hc) {
+ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   multiplier <- if (hc) rescale else 1
   
   tibble(
@@ -79,9 +79,6 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, est_method, ci_met
     se = cis$se * multiplier,
     lcl = cis$lcl * multiplier,
     ucl = cis$ucl * multiplier,
-    est_method = est_method,
-    ci_method = ci_method,
-    boot_method = parametric,
     wt = rep(1, length(value)),
     nboot = nboot,
     pboot = length(estimates) / nboot,
@@ -126,8 +123,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, est_method, ci_met
   cis <- cis_estimates(ests, what, level = level, x = x, samples = samples)
   hcp <- ci_hcp(
     cis, estimates = ests, value = value, dist = dist,
-    est = est, rescale = rescale, nboot = nboot, est_method = est_method,
-    ci_method = ci_method, parametric = parametric, hc = hc
+    est = est, rescale = rescale, nboot = nboot, hc = hc
   )
   replace_min_pboot_na(hcp, min_pboot)
 }
@@ -215,10 +211,9 @@ hcp_ind <- function(hcp, weight) {
 }
 
 replace_estimates <- function(hcp, est) {
-  est <- dplyr::select(est, "value", est2 = "est", est_method2 = "est_method")
+  est <- dplyr::select(est, "value", est2 = "est")
   hcp <- dplyr::inner_join(hcp, est, by = "value")
-  dplyr::mutate(hcp, est = .data$est2, est_method = .data$est_method2, 
-                est2 = NULL, est_method2 = NULL)
+  dplyr::mutate(hcp, est = .data$est2, est2 = NULL)
 }
 
 .ssd_hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
@@ -274,8 +269,7 @@ replace_estimates <- function(hcp, est) {
     samples = samples, hc = hc, ci_method = ci_method, est_method = est_method
   )
   hcp$dist <- "average"
-  hcp$ci_method <- if(ci) ci_method else NA_character_
-  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "samples")]
+  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples")]
 }
 
 .ssd_hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,
