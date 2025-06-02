@@ -61,7 +61,7 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
     ucl = na,
     wt = rep(1, length(value)),
     nboot = rep(0L, length(value)),
-    pboot = na,
+    pboot = 1,
     samples = list(numeric(0))
   )
 }
@@ -153,7 +153,7 @@ group_samples <- function(hcp) {
     dplyr::ungroup()
 }
 
-hcp_average <- function(hcp, weight, value, nboot, geometric) {
+hcp_average <- function(hcp, weight, value, nboot, est_method) {
   samples <- group_samples(hcp)
   
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
@@ -162,7 +162,7 @@ hcp_average <- function(hcp, weight, value, nboot, geometric) {
     abind(x, y, along = 3)
   }, hcp)
   suppressMessages(min <- apply(hcp, c(1, 2), min))
-  suppressMessages(hcp <- apply(hcp, c(1, 2), weighted_mean, w = weight, geometric = geometric))
+  suppressMessages(hcp <- apply(hcp, c(1, 2), weighted_mean, w = weight, geometric = est_method == "geometric"))
   min <- as.data.frame(min)
   hcp <- as.data.frame(hcp)
   tib <- tibble(
@@ -216,9 +216,6 @@ replace_estimates <- function(hcp, est) {
                                   range_shape1, range_shape2, parametric, control,
                                   save_to, samples, ci_method, hc, fun) {
   
-  geometric <- est_method == "geometric"
-  
-  
   if (ci &&  ci_method == "weighted_samples") {
     atleast1 <- round(glance(x)$weight * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
@@ -235,7 +232,7 @@ replace_estimates <- function(hcp, est) {
     hc = hc, save_to = save_to, samples = samples || ci_method == "weighted_samples", fun = fun
   )
   
-  hcp <- hcp_average(hcp, weight, value, nboot = nboot, geometric = geometric)
+  hcp <- hcp_average(hcp, weight, value, nboot = nboot, est_method = est_method)
   if (ci_method != "weighted_samples") {
     if (!samples) {
       hcp$samples <- list(numeric(0))
