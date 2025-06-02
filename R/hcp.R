@@ -157,7 +157,7 @@ group_samples <- function(hcp) {
   dplyr::ungroup(samples)
 }
 
-hcp_average <- function(hcp, weight, value, est_method, ci_method, nboot, geometric) {
+hcp_average <- function(hcp, weight, value, nboot, geometric) {
   samples <- group_samples(hcp)
   
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
@@ -172,7 +172,6 @@ hcp_average <- function(hcp, weight, value, est_method, ci_method, nboot, geomet
   tib <- tibble(
     dist = "average", value = value, est = hcp$est, se = hcp$se,
     lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
-    est_method = est_method, ci_method = ci_method,
     nboot = nboot, pboot = min$pboot
   )
   tib <- dplyr::inner_join(tib, samples, by = "value")
@@ -240,7 +239,7 @@ replace_estimates <- function(hcp, est) {
     hc = hc, save_to = save_to, samples = samples || ci_method == "weighted_samples", fun = fun
   )
   
-  hcp <- hcp_average(hcp, weight, value, nboot = nboot, est_method = est_method, ci_method = ci_method, geometric = geometric)
+  hcp <- hcp_average(hcp, weight, value, nboot = nboot, geometric = geometric)
   if (ci_method != "weighted_samples") {
     if (!samples) {
       hcp$samples <- I(list(numeric(0)))
