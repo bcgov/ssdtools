@@ -23,11 +23,11 @@ xcis_estimates <- function(x, args, n, what, level, samples) {
   }
   ests <- do.call(what, args)
   names(ests) <- n
-  quantile <- quantile(ests, probs = probs(level))
+  quantile <- unname(quantile(ests, probs = probs(level)))
   samples <- if (samples) ests else numeric(0)
-  data.frame(
+  tibble(
     se = sd(ests), lcl = quantile[1], ucl = quantile[2],
-    samples = I(list(samples)),
+    samples = list(samples),
     row.names = NULL
   )
 }

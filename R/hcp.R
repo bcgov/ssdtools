@@ -43,7 +43,7 @@ no_hcp <- function(hc) {
     boot_method = character(0),
     nboot = integer(0),
     pboot = numeric(0),
-    samples = I(list(numeric(0)))
+    samples = list(numeric(0))
   )
 }
 
@@ -62,7 +62,7 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
     wt = rep(1, length(value)),
     nboot = rep(0L, length(value)),
     pboot = na,
-    samples = I(list(numeric(0)))
+    samples = list(numeric(0))
   )
 }
 
@@ -150,7 +150,7 @@ group_samples <- function(hcp) {
   samples <- lapply(hcp, function(x) x[c("dist", "value", "samples")])
   samples <- bind_rows(samples)
   samples <- dplyr::group_by(samples, .data$value)
-  samples <- dplyr::summarise(samples, samples = I(list(unlist(samples))))
+  samples <- dplyr::summarise(samples, samples = list(unlist(samples)))
   dplyr::ungroup(samples)
 }
 
@@ -188,7 +188,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   hcp$ucl[fail] <- NA_real_
   hcp$se[fail] <- NA_real_
   if (!samples) {
-    hcp$samples <- I(list(numeric(0)))
+    hcp$samples <- list(numeric(0))
   }
   hcp
 }
@@ -239,7 +239,7 @@ replace_estimates <- function(hcp, est) {
   hcp <- hcp_average(hcp, weight, value, nboot = nboot, geometric = geometric)
   if (ci_method != "weighted_samples") {
     if (!samples) {
-      hcp$samples <- I(list(numeric(0)))
+      hcp$samples <- list(numeric(0))
     }
     return(hcp)
   }
@@ -372,7 +372,7 @@ tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
     hcp$boot_method <- NA_character_
     hcp$nboot <- 0L
     hcp$pboot <- NA_real_
-    hcp$samples <- I(list(numeric(0)))
+    hcp$samples <- list(numeric(0))
   }
   if(!average) {
     hcp$est_method <- NA_character_
