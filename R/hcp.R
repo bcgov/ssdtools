@@ -47,7 +47,7 @@ no_hcp <- function(hc) {
   )
 }
 
-no_ci_hcp <- function(value, dist, est, rescale, parametric, est_method, ci_method, hc) {
+no_ci_hcp <- function(value, dist, est, rescale, hc) {
   na <- rep(NA_real_, length(value))
   na_chr <- rep(NA_character_, length(value))
   multiplier <- if (hc) rescale else 1
@@ -60,9 +60,6 @@ no_ci_hcp <- function(value, dist, est, rescale, parametric, est_method, ci_meth
     lcl = na,
     ucl = na,
     wt = rep(1, length(value)),
-    est_method = rep(est_method, length(value)),
-    ci_method = rep(ci_method, length(value)),
-    boot_method = rep(parametric, length(value)),
     nboot = rep(0L, length(value)),
     pboot = na,
     samples = I(list(numeric(0)))
@@ -103,7 +100,7 @@ ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   
   est <- do.call(what, args)
   if (!ci) {
-    return(no_ci_hcp(value = value, dist = dist, est = est, rescale = rescale, parametric = parametric, est_method = est_method, ci_method = ci_method, hc = hc))
+    return(no_ci_hcp(value = value, dist = dist, est = est, rescale = rescale, hc = hc))
   }
   
   censoring <- censoring / rescale
