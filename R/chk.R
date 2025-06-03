@@ -70,6 +70,10 @@
   if (any(zero_weight)) {
     abort_chk("`data` has %n row%s with zero weight in '", weight, "'", n = sum(zero_weight))
   }
+  inf_weight <- is.infinite(data$weight)
+  if (any(inf_weight)) {
+    abort_chk("`data` has %n row%s with Inf weight in '", weight, "'", n = sum(inf_weight))
+  }
   org_data
 }
 

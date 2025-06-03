@@ -150,11 +150,8 @@ test_that("ssd_fit_dists all distributions fail to fit if Inf weight", {
   data$Mass <- rep(1, nrow(data))
   data$Mass[1] <- Inf
   expect_error(
-    expect_warning(
       ssd_fit_dists(data, weight = "Mass", dists = "lnorm"),
-      "^Distribution 'lnorm' failed to fit"
-    ),
-    "^All distributions failed to fit\\."
+      "^`data` has 1 row with Inf weight in 'Mass'\\.$"
   )
 })
 

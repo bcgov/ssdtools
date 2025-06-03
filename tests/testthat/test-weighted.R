@@ -35,10 +35,10 @@ test_that("weighted errors", {
 
   data$Weight[rank(data$Conc) > 6] <- Inf
 
-  expect_warning(expect_error(
+  expect_error(
     ssd_fit_dists(data, dists = "lnorm", weight = "Weight"),
-    "^All distributions failed to fit\\.$"
-  ))
+    "^`data` has 22 rows with Inf weight in 'Weight'\\.$"
+  )
 })
 
 test_that("weighted works", {
