@@ -69,9 +69,9 @@ ssd_gof <- function(x, ...) {
 #' @export
 #' @examples
 #' ssd_gof(fits, pvalue = TRUE)
-ssd_gof.fitdists <- function(x, pvalue = FALSE, ..., wt = FALSE) {
-  chk_flag(pvalue)
+ssd_gof.fitdists <- function(x, ..., pvalue = FALSE, wt = FALSE) {
   chk_unused(...)
+  chk_flag(pvalue)
   
   if(missing(wt)) {
     lifecycle::deprecate_soft("2.3.1", I("ssd_gof(wt = FALSE)"), I("ssd_gof(wt = TRUE)"))    

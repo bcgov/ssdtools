@@ -35,6 +35,7 @@ predict.fitdists <- function(
     object,
     percent,
     proportion = 1:99 / 100,
+    ...,
     average = TRUE,
     ci = FALSE,
     level = 0.95,
@@ -44,10 +45,8 @@ predict.fitdists <- function(
     ci_method = "weighted_samples",
     parametric = TRUE,
     delta = 9.21,
-    control = NULL,
-    ...) {
+    control = NULL) {
   chk_unused(...)
-
 
   if (lifecycle::is_present(percent)) {
     lifecycle::deprecate_soft("2.0.0", "ssd_hc(percent)", "ssd_hc(proportion)", id = "hc")
@@ -94,12 +93,12 @@ predict.fitburrlioz <- function(
     object,
     percent,
     proportion = 1:99 / 100,
+    ...,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
-    parametric = TRUE,
-    ...) {
+    parametric = TRUE) {
   chk_unused(...)
 
   if (lifecycle::is_present(percent)) {

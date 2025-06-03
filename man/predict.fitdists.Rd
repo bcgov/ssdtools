@@ -8,6 +8,7 @@
   object,
   percent,
   proportion = 1:99/100,
+  ...,
   average = TRUE,
   ci = FALSE,
   level = 0.95,
@@ -17,8 +18,7 @@
   ci_method = "weighted_samples",
   parametric = TRUE,
   delta = 9.21,
-  control = NULL,
-  ...
+  control = NULL
 )
 }
 \arguments{
@@ -27,6 +27,8 @@
 \item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Deprecated for \code{proportion = 0.05}. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
+
+\item{...}{Unused.}
 
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
@@ -76,8 +78,6 @@ calculate the confidence limits (and SE) from the single set of samples.}
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
-
-\item{...}{Unused.}
 }
 \description{
 A wrapper on \code{\link[=ssd_hc]{ssd_hc()}} that by default calculates

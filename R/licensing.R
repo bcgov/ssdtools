@@ -26,7 +26,7 @@ ssd_licensing_md <- function() {
   "## Licensing
   Copyright 2015-2023 Province of British Columbia\\
   Copyright 2021 Environment and Climate Change Canada\\
-  Copyright 2023-2024 Australian Government Department of Climate Change, Energy, the Environment and Water
+  Copyright 2023-2025 Australian Government Department of Climate Change, Energy, the Environment and Water
 
   The documentation is released under the
   [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/)

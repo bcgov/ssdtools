@@ -26,11 +26,11 @@
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' subset(fits, c("gamma", "lnorm"))
-subset.fitdists <- function(x, select = names(x), delta = Inf, ..., strict = TRUE) {
+subset.fitdists <- function(x, select = names(x),  ..., delta = Inf, strict = TRUE) {
   if (!length(x)) {
     return(x)
   }
-
+  chk_unused(...)
   chk_s3_class(select, "character")
   chk_vector(select)
   chk_unique(select)
@@ -41,7 +41,6 @@ subset.fitdists <- function(x, select = names(x), delta = Inf, ..., strict = TRU
   if(strict) {
     chk_superset(names(x), select)
   }
-  chk_unused(...)
 
   attrs <- .attrs_fitdists(x)
 

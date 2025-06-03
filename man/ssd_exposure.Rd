@@ -4,7 +4,7 @@
 \alias{ssd_exposure}
 \title{Proportion Exposure}
 \usage{
-ssd_exposure(x, meanlog = 0, sdlog = 1, nboot = 1000)
+ssd_exposure(x, meanlog = 0, sdlog = 1, ..., nboot = 1000)
 }
 \arguments{
 \item{x}{The object.}
@@ -12,6 +12,8 @@ ssd_exposure(x, meanlog = 0, sdlog = 1, nboot = 1000)
 \item{meanlog}{The mean of the exposure concentrations on the log scale.}
 
 \item{sdlog}{The standard deviation of the exposure concentrations on the log scale.}
+
+\item{...}{Unused.}
 
 \item{nboot}{The number of samples to use to calculate the exposure.}
 }

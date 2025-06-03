@@ -29,7 +29,8 @@
 #' ssd_dists(bcanz = TRUE)
 #' ssd_dists(tails = FALSE)
 #' ssd_dists(npars = 5)
-ssd_dists <- function(bcanz = NULL, tails = NULL, npars = 2:5, valid = TRUE) {
+ssd_dists <- function(bcanz = NULL, ..., tails = NULL, npars = 2:5, valid = TRUE) {
+  chk_unused(...)
   chk_null_or(bcanz, vld = vld_flag)
   chk_null_or(tails, vld = vld_flag)
   chk_null_or(valid, vld = vld_flag)

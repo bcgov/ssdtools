@@ -78,9 +78,10 @@ ssd_ecd <- function(x, ties.method = "first") {
 #' @examples
 #' ssd_ecd_data(ssddata::ccme_boron)
 ssd_ecd_data <- function(
-    data, left = "Conc", right = left, bounds = c(left = 1, right = 1)) {
+    data, left = "Conc", right = left, ..., bounds = c(left = 1, right = 1)) {
   .chk_data(data, left, right)
   .chk_bounds(bounds)
+  chk_unused(...)
 
   if (!nrow(data)) {
     return(double(0))

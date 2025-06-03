@@ -4,17 +4,17 @@
 \alias{subset.fitdists}
 \title{Subset fitdists Object}
 \usage{
-\method{subset}{fitdists}(x, select = names(x), delta = Inf, ..., strict = TRUE)
+\method{subset}{fitdists}(x, select = names(x), ..., delta = Inf, strict = TRUE)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{select}{A character vector of the distributions to select.}
 
+\item{...}{Unused.}
+
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
-
-\item{...}{Unused.}
 
 \item{strict}{A flag indicating whether all elements of select must be present.}
 }

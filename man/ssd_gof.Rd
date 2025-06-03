@@ -7,7 +7,7 @@
 \usage{
 ssd_gof(x, ...)
 
-\method{ssd_gof}{fitdists}(x, pvalue = FALSE, ..., wt = FALSE)
+\method{ssd_gof}{fitdists}(x, ..., pvalue = FALSE, wt = FALSE)
 }
 \arguments{
 \item{x}{The object.}
