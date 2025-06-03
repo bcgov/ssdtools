@@ -236,6 +236,8 @@ remove them with a warning.}
 
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
+\item{wt}{A flag specifying whether to return the Akaike weight as "wt" instead of "weight".}
+
 \item{x}{The object.}
 
 \item{xbreaks}{The x-axis breaks as one of:

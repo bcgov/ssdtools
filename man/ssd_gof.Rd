@@ -7,7 +7,7 @@
 \usage{
 ssd_gof(x, ...)
 
-\method{ssd_gof}{fitdists}(x, pvalue = FALSE, ...)
+\method{ssd_gof}{fitdists}(x, pvalue = FALSE, ..., wt = FALSE)
 }
 \arguments{
 \item{x}{The object.}
@@ -15,6 +15,8 @@ ssd_gof(x, ...)
 \item{...}{Unused.}
 
 \item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
+
+\item{wt}{A flag specifying whether to return the Akaike weight as "wt" instead of "weight".}
 }
 \value{
 A tbl data frame of the gof statistics.

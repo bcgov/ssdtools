@@ -46,9 +46,15 @@ generics::glance
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
-#' glance(fits)
-glance.fitdists <- function(x, ...) {
+#' glance(fits, wt = TRUE)
+glance.fitdists <- function(x, ..., wt = FALSE) {
   chk_unused(...)
+  
+  if(missing(wt)) {
+    lifecycle::deprecate_soft("2.3.1", I("glance(wt = FALSE)"), I("glance(wt = TRUE)"))    
+  }
+  chk_flag(wt)
+  
   nobs <- nobs(x)
   tbl <- lapply(x, .glance_tmbfit, nobs = nobs)
   tbl <- bind_rows(tbl)

@@ -27,7 +27,7 @@ test_that("schwarz-tillmans", {
   expect_snapshot_data(hc, "hc")
   expect_snapshot_data(hc_avg, "hc_avg")
 
-  gof <- ssd_gof(fits, pvalue = FALSE)
+  gof <- ssd_gof(fits, pvalue = FALSE, wt = TRUE)
   expect_s3_class(gof, "tbl_df")
   expect_snapshot_data(gof, "gof")
 })

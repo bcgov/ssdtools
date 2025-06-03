@@ -55,7 +55,7 @@ subset.fitdists <- function(x, select = names(x), delta = Inf, ..., strict = TRU
     return(x)
   }
 
-  d <- glance(x)$delta
+  d <- glance(x, wt = TRUE)$delta
   x <- x[is.na(d) | abs(d) <= delta]
 
   class(x) <- class

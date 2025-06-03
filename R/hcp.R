@@ -217,7 +217,7 @@ replace_estimates <- function(hcp, est) {
                                   save_to, samples, ci_method, hc, fun) {
   
   if (ci &&  ci_method == "weighted_samples") {
-    atleast1 <- round(glance(x)$wt * nboot) >= 1L
+    atleast1 <- round(glance(x, wt = TRUE)$wt * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
     estimates <- estimates[atleast1]
   }

@@ -4,12 +4,14 @@
 \alias{glance.fitdists}
 \title{Get a tibble summarizing each distribution}
 \usage{
-\method{glance}{fitdists}(x, ...)
+\method{glance}{fitdists}(x, ..., wt = FALSE)
 }
 \arguments{
 \item{x}{The object.}
 
 \item{...}{Unused.}
+
+\item{wt}{A flag specifying whether to return the Akaike weight as "wt" instead of "weight".}
 }
 \value{
 A tidy tibble of the distributions.
@@ -19,7 +21,7 @@ Gets a tibble with a single row for each distribution.
 }
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
-glance(fits)
+glance(fits, wt = TRUE)
 }
 \seealso{
 \code{\link[=ssd_gof]{ssd_gof()}}

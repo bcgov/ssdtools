@@ -18,11 +18,27 @@
 test_that("gof paper also", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
-  gof_statistic <- ssd_gof(fits)
+  gof_statistic <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof_statistic, "gof_statistic")
 
-  gof <- ssd_gof(fits, pvalue = TRUE)
+  gof <- ssd_gof(fits, pvalue = TRUE, wt = TRUE)
   expect_snapshot_data(gof, "gof")
+})
+
+test_that("gof wt deprecated", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  
+  expect_deprecated(
+    gof_statistic <- ssd_gof(fits)
+  )
+  expect_snapshot_data(gof_statistic, "gof_statisticdep")
+})
+
+test_that("gof wt = FALSE no deprecated message", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  
+  gof_statistic <- ssd_gof(fits, wt = FALSE)
+  expect_snapshot_data(gof_statistic, "gof_statisticwtFALSE")
 })
 
 test_that("gof censored same parameters2", {
@@ -32,10 +48,10 @@ test_that("gof censored same parameters2", {
 
   fits <- ssd_fit_dists(data, right = "right", dists = c("llogis", "lnorm"))
 
-  gof_statistic <- ssd_gof(fits)
+  gof_statistic <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof_statistic, "gof_statistic2")
 
-  gof <- ssd_gof(fits, pvalue = TRUE)
+  gof <- ssd_gof(fits, pvalue = TRUE, wt = TRUE)
   expect_snapshot_data(gof, "gof2")
 })
 
@@ -46,10 +62,10 @@ test_that("gof censored same parameters5", {
 
   fits <- ssd_fit_dists(data, right = "right", dists = c("llogis_llogis", "lnorm_lnorm"))
 
-  gof_statistic <- ssd_gof(fits)
+  gof_statistic <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof_statistic, "gof_statistic5")
 
-  gof <- ssd_gof(fits, pvalue = TRUE)
+  gof <- ssd_gof(fits, pvalue = TRUE, wt = TRUE)
   expect_snapshot_data(gof, "gof5")
 })
 
@@ -60,15 +76,15 @@ test_that("gof censored same diff parameters", {
 
   fits <- ssd_fit_dists(data, right = "right", dists = c("llogis", "lnorm_lnorm"))
 
-  gof_statistic <- ssd_gof(fits)
+  gof_statistic <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof_statistic, "gof_statisticn")
 
-  gof <- ssd_gof(fits, pvalue = TRUE)
+  gof <- ssd_gof(fits, pvalue = TRUE, wt = TRUE)
   expect_snapshot_data(gof, "gofn")
 })
 
 test_that("gof fits2.3", {
   fits <- ssdtools:::fits2.3
-  gof <- ssd_gof(fits)
+  gof <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof, "gof23")
 })
