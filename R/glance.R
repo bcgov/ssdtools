@@ -56,6 +56,6 @@ glance.fitdists <- function(x, ...) {
   if (is.na(tbl$delta[1]) && all(tbl$npars == tbl$npars[1])) {
     tbl$delta <- tbl$aic - min(tbl$aic)
   }
-  tbl$weight <- exp(-tbl$delta / 2) / sum(exp(-tbl$delta / 2))
+  tbl$wt <- exp(-tbl$delta / 2) / sum(exp(-tbl$delta / 2))
   tbl
 }

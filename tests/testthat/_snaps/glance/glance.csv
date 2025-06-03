@@ -1,4 +1,4 @@
-dist,npars,nobs,log_lik,aic,aicc,delta,weight
+dist,npars,nobs,log_lik,aic,aicc,delta,wt
 gamma,2,28,-116.815,237.63,238.11,0.00502965,0.356574
 lgumbel,2,28,-120.093,244.186,244.666,6.56066,0.0134466
 llogis,2,28,-118.507,241.015,241.495,3.38958,0.0656452

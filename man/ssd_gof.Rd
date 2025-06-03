@@ -41,9 +41,9 @@ and if there are 8 or more samples
 In the case of an object of class fitdists the function also returns
 \describe{
 \item{delta}{The Information Criterion differences (dbl)}
-\item{weight}{The Information Criterion weights (dbl)}
+\item{wt}{The Information Criterion weights (dbl)}
 }
-where \code{delta} and \code{weight} are based on \code{aic} for censored data
+where \code{delta} and \code{wt} are based on \code{aic} for censored data
 and \code{aicc} for non-censored data.
 }
 \section{Methods (by class)}{

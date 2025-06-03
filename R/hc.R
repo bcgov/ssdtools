@@ -31,7 +31,7 @@
 #' ensures that `ssd_hc()` is the inverse of `ssd_hp()`.
 #'
 #' Distributions with an absolute AIC difference greater
-#' than a delta of by default 7 have considerably less support (weight < 0.01)
+#' than a delta of by default 7 have considerably less support (wt < 0.01)
 #' and are excluded
 #' prior to calculation of the hazard concentrations to reduce the run time.
 #'

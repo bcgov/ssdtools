@@ -38,9 +38,9 @@
 #' In the case of an object of class fitdists the function also returns
 #' \describe{
 #'   \item{delta}{The Information Criterion differences (dbl)}
-#'   \item{weight}{The Information Criterion weights (dbl)}
+#'   \item{wt}{The Information Criterion weights (dbl)}
 #' }
-#' where `delta` and `weight` are based on `aic` for censored data
+#' where `delta` and `wt` are based on `aic` for censored data
 #' and `aicc` for non-censored data.
 #'
 #' @inheritParams params
@@ -87,9 +87,9 @@ ssd_gof.fitdists <- function(x, pvalue = FALSE, ...) {
     gof <- cbind(gof, tests)
     gof <- as_tibble(gof)
   }
-  gof$weight <- round(gof$weight, 3)
+  gof$wt <- round(gof$wt, 3)
   gof$delta <- round(gof$delta, 3)
-  gof[c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "weight")]
+  gof[c("dist", "ad", "ks", "cvm", "aic", "aicc", "bic", "delta", "wt")]
   ## after in case old fit object and not have at_boundary or computable flags.
   gof$at_bound <- ssd_at_boundary(x)
   gof$computable <- ssd_computable(x)

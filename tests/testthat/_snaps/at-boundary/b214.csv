@@ -1,4 +1,4 @@
-dist,npars,nobs,log_lik,aic,aicc,delta,weight,bic,ad,ks,cvm,at_bound,computable
+dist,npars,nobs,log_lik,aic,aicc,delta,wt,bic,ad,ks,cvm,at_bound,computable
 gamma,2,16,-44.093,92.1859,93.109,0,0.495,93.7311,0.386915,0.150188,0.0577659,FALSE,TRUE
 lgumbel,2,16,-51.6615,107.323,108.246,15.137,0,108.868,1.81833,0.294436,0.33008,FALSE,TRUE
 llogis,2,16,-46.7595,97.519,98.4421,5.333,0.034,99.0642,0.763246,0.149783,0.0729455,FALSE,TRUE

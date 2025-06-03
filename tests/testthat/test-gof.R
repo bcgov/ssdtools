@@ -70,5 +70,5 @@ test_that("gof censored same diff parameters", {
 test_that("gof fits2.3", {
   fits <- ssdtools:::fits2.3
   gof <- ssd_gof(fits)
-  expect_snapshot_data(gof, "gof2.3")
+  expect_snapshot_data(gof, "gof23")
 })
