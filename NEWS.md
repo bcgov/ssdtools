@@ -1,25 +1,29 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.3.0.9003
+# ssdtools 2.3.0.9004
 
 - Implemented model fitting with right censoring for all distributions (by @eduardszoecs).
 
+- Added ... and check unused to ensure matching names of subsequent arguments.
+- Added class and attribute preserving `[[` and `[` operators.
+- Fixed error message when Inf weights.
 - Added `ssd_at_boundary()` and `ssd_computable()`.
 - Added `ssd_ci_methods()` and `ssd_est_methods()` to get character vector of methods.
-- Added `est_method = "multi"` argument to `ssd_hc()` and `ssd_hp()` and soft deprecated `multi_est = TRUE`.
-- Added `proportion = FALSE` argument to `ssd_hp()` to facilitate switching from default of percentages to proportions.
 - Added column `"dists"` to `ssd_hc()` and `ssd_hp()` which is a list of the distributions.
 - Renamed `"method"` column to `"boot_method"` in tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"est_method"` and `"ci_method"` columns to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"at_bound"` and `"computable"` columns to tibble output by `gof()`.
 - Added `strict = TRUE` argument to `subset()` to allow subsetting when distributions missing (with `strict = FALSE`).
-- Added ... and checked unused to `ssd_fit_xx()` family of functions.
 
 - Improved method to calculate `ssd_ecd()` so ensures symmetric about 0.5 and deprecated `ties.method = "first"` argument.
 - `ssd_fit_bcanz()` now checks all dists are subset of `ssd_dists_bcanz()`.
 - `ssd_hc()`, `ssd_hp()` and `predict()` now return all non-missing values when `nboot = 0` except se, lcl and ucl.
 
 - Deprecated `ssd_dists_shiny()`.
+
+- Soft-deprecated `est_method = "multi"` argument to `multi_est = TRUE` for `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Soft-deprecated `proportion = FALSE` to `proportion = TRUE` argument to `ssd_hp()` which switches output from percentages to proportions.
+- Soft-deprecated `wt = FALSE` for `wt = TRUE` argument to `ssd_gof()` and `glance()` which replaces column `"weight"` with `"wt"` in output.
 - Soft-deprecated `ci_method = "weighted_arithmetic"` for `ci_method = "MACL"`.
 
 # ssdtools 2.3.0
