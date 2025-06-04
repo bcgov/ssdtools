@@ -50,8 +50,9 @@ generics::glance
 glance.fitdists <- function(x, ..., wt = FALSE) {
   chk_unused(...)
   
-  if(missing(wt)) {
-    lifecycle::deprecate_soft("2.3.1", I("glance(wt = FALSE)"), I("glance(wt = TRUE)"))    
+  if(vld_flag(wt) && !wt) {
+    lifecycle::deprecate_soft("2.3.1", I("glance(wt = FALSE)"), I("glance(wt = TRUE)"),
+                              "Please set the `wt` argument to `glance()` to be TRUE which will rename the 'weight' column to 'wt' and then update your downstream code accordingly.")    
   }
   chk_flag(wt)
   
@@ -63,5 +64,8 @@ glance.fitdists <- function(x, ..., wt = FALSE) {
     tbl$delta <- tbl$aic - min(tbl$aic)
   }
   tbl$wt <- exp(-tbl$delta / 2) / sum(exp(-tbl$delta / 2))
+  if(!wt) {
+    tbl <- dplyr::rename(tbl, "weight" = "wt")
+  }
   tbl
 }

@@ -80,7 +80,9 @@ ssd_hp.fitdists <- function(
   }
   
   if (missing(proportion)) {
-    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), id = "ssd_hp")    
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), 
+                              "Please set the `proportion` argument to `ssd_hp()` to be TRUE which will cause it to return hazard proportions instead of percentages then update your downstream code accordingly.", 
+                              id = "ssd_hp")    
   }
   chk_flag(proportion)
   
@@ -136,7 +138,9 @@ ssd_hp.fitburrlioz <- function(
   chk_unused(...)
   
   if (missing(proportion)) {
-    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), id = "ssd_hp")    
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), 
+                              "Please set the `proportion` argument to `ssd_hp_bcanz()` to be TRUE which will cause it to return hazard proportions instead of percentages then update your downstream code accordingly.", 
+                              id = "ssd_hp")    
   }
   chk_flag(proportion)
   

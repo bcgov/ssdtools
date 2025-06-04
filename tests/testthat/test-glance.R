@@ -25,11 +25,12 @@ test_that("glance no wt deprecated", {
   expect_snapshot_data(glance, "glancedep")
 })
 
-test_that("glance wt FALSE not deprecated", {
+test_that("glance wt FALSE still deprecated", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
-  glance <- glance(fits, wt = FALSE)
-
+ 
+  expect_deprecated( 
+    glance <- glance(fits, wt = FALSE)
+  )
   expect_s3_class(glance, "tbl")
   expect_snapshot_data(glance, "glancefalse")
 })
