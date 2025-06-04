@@ -5,6 +5,7 @@
 #' distributions.
 #' 
 #' @returns A character vector of the available methods.
+#' @keywords internal
 #' @export
 #'
 #' @examples

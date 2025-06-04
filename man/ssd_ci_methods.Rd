@@ -17,3 +17,4 @@ distributions.
 \examples{
 ssd_ci_methods()
 }
+\keyword{internal}

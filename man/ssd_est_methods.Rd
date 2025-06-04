@@ -17,3 +17,4 @@ distributions.
 \examples{
 ssd_est_methods()
 }
+\keyword{internal}
