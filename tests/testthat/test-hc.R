@@ -204,8 +204,8 @@ test_that("ssd_hc fitdists correctly averages", {
                         min_pmix = 0
   )
   hc <- ssd_hc(fits, average = FALSE, ci_method = "multi_free")
-  expect_equal(hc$est, c(3881.17238083968, 5540.52003), tolerance = 1e-5)
-  expect_equal(hc$wt, c(0.0968427088339105, 0.90315729116609))
+  expect_snapshot_value(hc$est, style = "deparse")
+  expect_snapshot_value(hc$wt,  style = "deparse")
   hc_avg <- ssd_hc(fits, ci_method = "MACL", est_method = "arithmetic")
   expect_equal(hc_avg$est, sum(hc$est * hc$wt))
 })
