@@ -183,7 +183,7 @@ test_that("ssd_hp doesn't calculate cis with inconsistent censoring", {
   withr::with_seed(10, {
     hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "MACL", proportion = FALSE)
   })
-  expect_equal(hp$se, 1.88668081916483, tolerance = 1e-6)
+  expect_snapshot_value(hp$se, style = "deparse")
   
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   withr::with_seed(10, {
@@ -218,7 +218,7 @@ test_that("ssd_hp calculates cis with equally weighted data", {
   withr::with_seed(10, {
     hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "MACL", proportion = FALSE)
   })
-  expect_equal(hp$se, 1.4551513510538, tolerance = 1e-5)
+  expect_snapshot_value(hp$se, style = "deparse")
 })
 
 test_that("ssd_hp calculates cis with two distributions", {
@@ -227,7 +227,7 @@ test_that("ssd_hp calculates cis with two distributions", {
   withr::with_seed(10, {
     hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "MACL", proportion = FALSE)
   })
-  expect_equal(hp$se, 1.4500084773305, tolerance = 1e-5)
+  expect_snapshot_value(hp$se, style = "deparse")
 })
 
 test_that("ssd_hp calculates cis in parallel but one distribution", {
@@ -237,7 +237,7 @@ test_that("ssd_hp calculates cis in parallel but one distribution", {
   withr::with_seed(10, {
     hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "MACL", proportion = FALSE)
   })
-  expect_equal(hp$se, 1.4551513510538, tolerance = 1e-5)
+  expect_snapshot_value(hp$se, style = "deparse")
 })
 
 test_that("ssd_hp calculates cis in parallel with two distributions", {
@@ -247,7 +247,7 @@ test_that("ssd_hp calculates cis in parallel with two distributions", {
   withr::with_seed(10, {
     hp <- ssd_hp(fits, 1, ci = TRUE, nboot = 10, ci_method = "MACL", proportion = FALSE)
   })
-  expect_equal(hp$se, 1.4500084773305, tolerance = 1e-5)
+  expect_snapshot_value(hp$se, style = "deparse")
 })
 
 test_that("ssd_hp doesn't calculate cis with unequally weighted data", {
@@ -289,10 +289,10 @@ test_that("ssd_hp effect with higher weight two distributions", {
   withr::with_seed(10, {
     hp_10 <- ssd_hp(fits_10, 3, ci = TRUE, nboot = 10, ci_method = "MACL", proportion = FALSE)
   })
-  expect_equal(hp$est, 11.753562486648, tolerance = 1e-5)
-  expect_equal(hp_10$est, 11.931807182972, tolerance = 1e-5)
-  expect_equal(hp$se, 4.5637225910467, tolerance = 1e-5)
-  expect_equal(hp_10$se, 4.83426079388412, tolerance = 1e-5)
+  expect_snapshot_value(hp$est, style = "deparse")
+  expect_snapshot_value(hp_10$est, style = "deparse")
+  expect_snapshot_value(hp$se, style = "deparse")
+  expect_snapshot_value(hp_10$se, style = "deparse")
 })
 
 test_that("ssd_hp cis with non-convergence", {

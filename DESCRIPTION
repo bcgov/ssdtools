@@ -71,8 +71,7 @@ Imports:
     tibble,
     TMB,
     universals,
-    utils,
-    withr
+    utils
 Suggests:
     actuar,
     covr,
@@ -96,7 +95,8 @@ Suggests:
     tidyr,
     tidyselect,
     tinytex,
-    VGAM
+    VGAM,
+    withr
 LinkingTo: 
     Rcpp,
     RcppEigen,

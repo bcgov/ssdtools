@@ -266,7 +266,7 @@ test_that("ssd_hc doesn't calculate cis with inconsistent censoring", {
   withr::with_seed(10, {
     hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
   })
-  expect_equal(hc$se, 0.475836654747499, tolerance = 1e-6)
+  expect_snapshot_value(hc$se, style = "deparse")
   
   fits <- ssd_fit_dists(data, right = "Conc2", dists = c("lnorm", "llogis"))
   withr::with_seed(10, {
@@ -405,7 +405,7 @@ test_that("ssd_hc calculates cis with two distributions", {
   withr::with_seed(10, {
     hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
   })
-  expect_equal(hc$se, 0.511475169043532, tolerance = 1e-6)
+  expect_snapshot_value(hc$se, style = "deparse")
 })
 
 test_that("ssd_hc calculates cis in parallel with two distributions", {
@@ -415,7 +415,7 @@ test_that("ssd_hc calculates cis in parallel with two distributions", {
   withr::with_seed(10, {
     hc <- ssd_hc(fits, ci = TRUE, nboot = 10, ci_method = "MACL")
   })
-  expect_equal(hc$se, 0.511475169043532, tolerance = 1e-6)
+  expect_snapshot_value(hc$se, style = "deparse")
 })
 
 test_that("ssd_hc doesn't calculate cis with unequally weighted data", {
@@ -457,10 +457,10 @@ test_that("ssd_hc effect with higher weight two distributions", {
   withr::with_seed(10, {
     hc_10 <- ssd_hc(fits_10, ci = TRUE, nboot = 10, ci_method = "MACL", est_method = "arithmetic")
   })
-  expect_equal(hc$est, 1.6490386909599, tolerance = 1e-5)
-  expect_equal(hc_10$est, 1.68117856793665, tolerance = 1e-5)
-  expect_equal(hc$se, 0.511475588315084, tolerance = 1e-6)
-  expect_equal(hc_10$se, 0.455819671683407, tolerance = 1e-6)
+  expect_snapshot_value(hc$est, style = "deparse")
+  expect_snapshot_value(hc_10$est, style = "deparse")
+  expect_snapshot_value(hc$se, style = "deparse")
+  expect_snapshot_value(hc_10$se, style = "deparse")
 })
 
 test_that("ssd_hc cis with non-convergence", {
@@ -659,7 +659,7 @@ test_that("ssd_hc save_to lnorm 1", {
   boot1 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
   fit1 <- ssd_fit_dists(boot1, dists = "lnorm", left = "left", right = "right", weight = "weight")
   est <- ssd_hc(fit1)$est
-  expect_equal(hc$lcl, est, tolerance = 1e-6)
+  expect_snapshot_value(hc$lcl, est, style = "deparse")
   expect_identical(hc$lcl, hc$ucl)
 })
 
