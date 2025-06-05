@@ -19,7 +19,7 @@ test_that("schwarz-tillmans", {
   dists <- c(
     "gompertz", "weibull", "gamma", "lnorm", "llogis", "lgumbel"
   )
-  withr::with_seed(10, {
+  withr::with_seed(50, {
     fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
     hc <- ssd_hc(fits, average = FALSE, est_method = "arithmetic")
     hc_avg <- ssd_hc(fits, average = TRUE, est_method = "arithmetic")

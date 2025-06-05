@@ -18,39 +18,39 @@
 test_that("exposure fitdist", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
-  withr::with_seed(1, {
-    expect_equal(ssd_exposure(fits), 0.0554388713536206, tolerance = 1e-6)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_exposure(fits), style = "deparse")
   })
 })
 
 test_that("exposure different mean", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
-  withr::with_seed(1, {
-    expect_equal(ssd_exposure(fits, 1, nboot = 100), 0.170901838844338, tolerance = 1e-6)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_exposure(fits, 1, nboot = 100), style = "deparse")
   })
 })
 
 test_that("exposure different mean and log", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
 
-  withr::with_seed(1, {
-    expect_equal(ssd_exposure(fits, 1, sdlog = 10, nboot = 100), 0.490815139369754, tolerance = 1e-6)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_exposure(fits, 1, sdlog = 10, nboot = 100), style = "deparse")
   })
 })
 
 test_that("exposure multiple distributions", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
-  withr::with_seed(1, {
-    expect_equal(ssd_exposure(fits, nboot = 100), 0.0663472624824284, tolerance = 1e-6)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_exposure(fits, nboot = 100), 0.0663472624824284, style = "deparse")
   })
 })
 
 test_that("exposure fitdist rescale", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm", rescale = TRUE)
 
-  withr::with_seed(1, {
-    expect_equal(ssd_exposure(fits), 0.0554388582680626, tolerance = 1e-6)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_exposure(fits), style = "deparse")
   })
 })

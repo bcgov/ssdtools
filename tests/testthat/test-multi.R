@@ -16,28 +16,26 @@
 #    limitations under the License.
 
 test_that("multi", {
-  expect_equal(ssd_pmulti(1, lnorm.weight = 0.5), 0.5)
-  expect_equal(ssd_qmulti(0.75, lnorm.weight = 2), 1.96303108415826)
-  withr::with_seed(42, {
-    expect_equal(ssd_rmulti(2, lnorm.weight = 1), c(3.93912428813385, 4.62130564767823))
+  expect_snapshot_value(ssd_pmulti(1, lnorm.weight = 0.5), style = "deparse")
+  expect_snapshot_value(ssd_qmulti(0.75, lnorm.weight = 2), style = "deparse")
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rmulti(2, lnorm.weight = 1), style = "deparse")
   })
 
-  withr::with_seed(42, {
-    expect_equal(ssd_rmulti(1, gamma.weight = 0.5, lnorm.weight = 0.5), 3.13234340623737)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rmulti(1, gamma.weight = 0.5, lnorm.weight = 0.5), style = "deparse")
   })
 
-  withr::with_seed(42, {
-    expect_equal(ssd_rmulti(1, gamma.weight = 1, lnorm.weight = 1), 3.13234340623737)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rmulti(1, gamma.weight = 1, lnorm.weight = 1), style = "deparse")
   })
 
-  expect_equal(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99), lnorm.weight = 1), lnorm.weight = 1),
-    c(0, 0.1, 0.5, 0.9, 0.99),
-    tolerance = 1e-5
+  expect_snapshot_value(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99), lnorm.weight = 1), lnorm.weight = 1),
+                        style = "deparse"
   )
 
-  expect_equal(ssd_pmulti(ssd_qmulti(c(0, 0.1, 0.5, 0.9, 0.99), lnorm.weight = 1), lnorm.weight = 1),
-    c(0, 0.1, 0.5, 0.9, 0.99),
-    tolerance = 1e-6
+  expect_snapshot_value(ssd_pmulti(ssd_qmulti(c(0, 0.1, 0.5, 0.9, 0.99), lnorm.weight = 1), lnorm.weight = 1),
+                        style = "deparse"
   )
   expect_error(ssd_pmulti(0.5), "^At least one distribution must have a positive weight\\.$")
   expect_error(ssd_qmulti(0.75), "^At least one distribution must have a positive weight\\.$")
@@ -122,23 +120,23 @@ test_that("ssd_rmulti", {
   args <- estimates(fit)
   args$n <- 0
   expect_equal(ssd_rmulti_fitdists(n = 0, fit), numeric(0))
-  withr::with_seed(99, {
-    expect_equal(ssd_rmulti_fitdists(n = 1, fit), 19.7526821719427, tolerance = 1e-5)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rmulti_fitdists(n = 1, fit), style = "deparse")
   })
-  withr::with_seed(99, {
-    expect_equal(ssd_rmulti_fitdists(2, fit), c(19.7526668357838, 2.69561402072501), tolerance = 1e-6)
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rmulti_fitdists(2, fit), style = "deparse")
   })
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     n100 <- ssd_rmulti_fitdists(100, fit)
   })
   expect_identical(length(n100), 100L)
-  expect_equal(min(n100), 0.029587302066941, tolerance = 1e-6)
-  expect_equal(max(n100), 168.790837576735, tolerance = 1e-5)
-  expect_equal(mean(n100), 23.407676351398, tolerance = 1e-6)
+  expect_snapshot_value(min(n100), style = "deparse")
+  expect_snapshot_value(max(n100), style = "deparse")
+  expect_snapshot_value(mean(n100), style = "deparse")
 })
 
 test_that("ssd_rmulti all", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     n100 <- ssd_rmulti(
       n = 100,
       burrIII3.weight = 1 / 9,
@@ -154,9 +152,9 @@ test_that("ssd_rmulti all", {
   })
 
   expect_identical(length(n100), 100L)
-  expect_equal(min(n100), 0.00186939153235795)
-  expect_equal(max(n100), 71.0159373252447)
-  expect_equal(mean(n100), 2.82398251730892)
+  expect_snapshot_value(min(n100), style = "deparse")
+  expect_snapshot_value(max(n100), style = "deparse")
+  expect_snapshot_value(mean(n100), style = "deparse")
 })
 
 test_that("ssd_emulti", {

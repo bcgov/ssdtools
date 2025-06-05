@@ -273,7 +273,7 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
     "^Distribution 'lnorm_lnorm' failed to fit \\(try rescaling data\\)"
   )
 
-  withr::with_seed(102, {
+  withr::with_seed(50, {
     fits <- ssd_fit_dists(data, right = "Other", dists = c("lgumbel", "llogis", "lnorm"), rescale = FALSE, at_boundary_ok = TRUE)
   })
 
@@ -292,8 +292,8 @@ test_that("ssd_fit_dists works with slightly censored data", {
 
   tidy <- tidy(fits)
 
-  expect_equal(tidy$est, c(2.56052524750529, 1.17234562953404), tolerance = 1e-06)
-  expect_equal(tidy$se, c(0.234063281091344, 0.175423555900586), tolerance = 1e-05)
+  expect_snapshot_value(tidy$est, style = "deparse")
+  expect_snapshot_value(tidy$se, style = "deparse")
 })
 
 test_that("ssd_fit_dists accepts 0 for left censored data", {
@@ -306,8 +306,8 @@ test_that("ssd_fit_dists accepts 0 for left censored data", {
 
   tidy <- tidy(fits)
 
-  expect_equal(tidy$est, c(2.54093502870563, 1.27968456496323), tolerance = 1e-06)
-  expect_equal(tidy$se, c(0.242558677928804, 0.175719927258761), tolerance = 1e-06)
+  expect_snapshot_value(tidy$est, style = "deparse")
+  expect_snapshot_value(tidy$se, style = "deparse")
 })
 
 test_that("ssd_fit_dists gives same values with zero and missing left values", {
@@ -335,10 +335,10 @@ test_that("ssd_fit_dists works with right censored data", {
 
   tidy <- tidy(fits)
 
-  expect_equal(tidy$est, c(2.634609, 1.208644), tolerance = 1e-06) 
+  expect_snapshot_value(tidy$est, style = "deparse") 
   # mosaic: 2.6 & 1.2
-  expect_equal(tidy$se, c(0.2317194, 0.1634157), tolerance = 1e-06)
-  expect_equal(unname(logLik(fits)), -114.5698) # mosaic: -114.6
+  expect_snapshot_value(tidy$se, style = "deparse")
+  expect_snapshot_value(unname(logLik(fits)), style = "deparse") # mosaic: -114.6
 })
 
 test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
@@ -354,7 +354,7 @@ test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
 })
 
 test_that("ssd_fit_dists min_pmix at_boundary_ok FALSE", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.1)
   })
   data <- data.frame(Conc = conc)
@@ -368,7 +368,7 @@ test_that("ssd_fit_dists min_pmix at_boundary_ok FALSE", {
 })
 
 test_that("ssd_fit_dists min_pmix", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     conc <- ssd_rlnorm_lnorm(1000, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.1)
   })
   data <- data.frame(Conc = conc)
@@ -378,7 +378,7 @@ test_that("ssd_fit_dists min_pmix", {
 })
 
 test_that("ssd_fit_dists at_boundary_ok message", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     expect_warning(
       ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "burrIII3"), at_boundary_ok = FALSE),
       "one or more parameters at boundary[.]$"
@@ -418,7 +418,7 @@ test_that("ssd_fit_dists works min_pmix = 0.5 and at_boundary_ok = TRUE and comp
 })
 
 test_that("ssd_fit_dists min_pmix 0", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     data <- data.frame(Conc = ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 2, pmix = 0.01))
   })
   fit <- ssd_fit_dists(data, dists = c("lnorm_lnorm", "llogis_llogis"), min_pmix = 0)

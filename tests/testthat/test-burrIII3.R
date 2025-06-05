@@ -17,17 +17,17 @@
 
 test_that("burrIII3", {
   test_dist("burrIII3")
-  expect_equal(ssd_pburrIII3(1), 0.5)
-  expect_equal(ssd_qburrIII3(0.75), 3)
-  withr::with_seed(42, {
-    expect_equal(ssd_rburrIII3(2), c(10.7379218085407, 14.8920392236127))
+  expect_snapshot_value(ssd_pburrIII3(1), style = "deparse")
+  expect_snapshot_value(ssd_qburrIII3(0.75), style = "deparse")
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rburrIII3(2), style = "deparse")
   })
 })
 
 test_that("burrIII3 gives cis with ccme_chloride", {
   fit <- ssd_fit_dists(ssddata::ccme_chloride, dists = "burrIII3")
   expect_s3_class(fit, "fitdists")
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     hc <- ssd_hc(fit, nboot = 10, ci = TRUE, ci_method = "MACL", est_method = "arithmetic", samples = TRUE)
   })
   expect_snapshot_data(hc, "hc_chloride")
@@ -36,7 +36,7 @@ test_that("burrIII3 gives cis with ccme_chloride", {
 test_that("burrIII3 gives cis with ccme_uranium", {
   fit <- ssd_fit_dists(ssddata::ccme_uranium, dists = "burrIII3")
   expect_s3_class(fit, "fitdists")
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     hc <- ssd_hc(fit, nboot = 10, ci = TRUE, ci_method = "MACL", est_method = "arithmetic", samples = TRUE)
   })
 

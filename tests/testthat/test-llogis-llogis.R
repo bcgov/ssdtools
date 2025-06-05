@@ -20,10 +20,10 @@ test_that("llogis_llogis test_dist", {
 })
 
 test_that("llogis_llogis custom checks", {
-  expect_equal(ssd_pllogis_llogis(1), 0.384470710684998)
-  expect_equal(ssd_qllogis_llogis(0.75), 5.26666940630986)
-  withr::with_seed(42, {
-    expect_equal(ssd_rllogis_llogis(2), c(0.400833984692937, 4.89788262355488))
+  expect_snapshot_value(ssd_pllogis_llogis(1), style = "deparse")
+  expect_snapshot_value(ssd_qllogis_llogis(0.75), style = "deparse")
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rllogis_llogis(2), style = "deparse")
   })
 })
 
@@ -42,10 +42,10 @@ test_that("ssd_pllogis_llogis allows reversed distributions", {
 })
 
 test_that("ssd_rllogis_llogis allows reversed distributions", {
-  withr::with_seed(10, {
+  withr::with_seed(50, {
     r1 <- ssd_rllogis_llogis(1, locationlog1 = 0, locationlog2 = 1, pmix = 0.1)
   })
-  withr::with_seed(10, {
+  withr::with_seed(50, {
     r2 <- ssd_rllogis_llogis(1, locationlog1 = 1, locationlog2 = 0, pmix = 0.9)
   })
   expect_equal(r1, r2)

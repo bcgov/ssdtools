@@ -1,6 +1,6 @@
 library(ssdtools)
 
-withr::with_seed(42, {
+withr::with_seed(50, {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   ssd_gof(fits)
   ssd_hc(fits, ci = TRUE)

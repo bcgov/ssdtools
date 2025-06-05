@@ -31,7 +31,7 @@
 #' @examples
 #' \dontrun{
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
-#' withr::with_seed(99, {
+#' withr::with_seed(50, {
 #'   boron_pred <- predict(fits, ci = TRUE)
 #' })
 #' head(boron_pred)

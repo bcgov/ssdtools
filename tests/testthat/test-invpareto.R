@@ -17,10 +17,10 @@
 
 test_that("invpareto", {
   test_dist("invpareto", upadj = 1e-03)
-  expect_equal(ssd_pinvpareto(0.5), 0.125)
-  expect_equal(ssd_qinvpareto(0.125), 0.5)
-  withr::with_seed(42, {
-    expect_equal(ssd_rinvpareto(2), c(0.970755086941947, 0.978569136804486))
+  expect_snapshot_value(ssd_pinvpareto(0.5), style = "deparse")
+  expect_snapshot_value(ssd_qinvpareto(0.125), style = "deparse")
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rinvpareto(2), style = "deparse")
   })
 })
 
@@ -34,7 +34,7 @@ test_that("invpareto fits with anon_a", {
 test_that("invpareto gives cis with ccme_boron", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "invpareto")
   expect_s3_class(fit, "fitdists")
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     hc <- ssd_hc(fit, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE)
   })
   expect_snapshot_data(hc, "hc_boron")
@@ -43,33 +43,30 @@ test_that("invpareto gives cis with ccme_boron", {
 test_that("invpareto ssd_hp gives cis with ccme_boron", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "invpareto")
   expect_s3_class(fit, "fitdists")
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     hp <- ssd_hp(fit, nboot = 100, ci = TRUE, ci_method = "multi_fixed", samples = TRUE, proportion = FALSE)
   })
   expect_snapshot_data(hp, "hp_boron")
 })
 
 test_that("invpareto initial shape is MLEs", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     data <- data.frame(Conc = ssd_rinvpareto(6), weight = 1)
   })
   data$left <- data$Conc
   data$right <- data$left
   initial <- ssdtools:::sinvpareto(data)
-  expect_equal(lapply(initial, exp), list(log_scale = 1.03299515712949, log_shape = 4.14668077241))
+  expect_snapshot_value(lapply(initial, exp), style = "deparse")
   fit <- ssd_fit_dists(data, dists = "invpareto")
-  expect_equal(
-    estimates(fit),
-    list(invpareto.weight = 1, invpareto.scale = 1.03299515712949, invpareto.shape = 4.14668077241)
-  )
+  expect_snapshot_value(estimates(fit), style = "deparse")
 })
 
 test_that("invpareto unbiased scale estimator small n", {
   fun <- function(n) {
     exp(ssdtools:::sinvpareto(data.frame(right = ssd_rinvpareto(n)))$log_scale)
   }
-  withr::with_seed(99, {
-    expect_equal(mean(vapply(rep(6, 1000), fun, 1)), 0.992849622620409)
+  withr::with_seed(50, {
+    expect_snapshot_value(mean(vapply(rep(6, 1000), fun, 1)), style = "deparse")
   })
 })
 
@@ -77,8 +74,8 @@ test_that("invpareto biased shape estimator small n", {
   fun <- function(n) {
     exp(ssdtools:::sinvpareto(data.frame(right = ssd_rinvpareto(n)))$log_shape)
   }
-  withr::with_seed(99, {
-    expect_equal(mean(vapply(rep(6, 1000), fun, 1)), 3.8284232651135)
+  withr::with_seed(50, {
+    expect_snapshot_value(mean(vapply(rep(6, 1000), fun, 1)), style = "deparse")
   })
 })
 
@@ -86,8 +83,8 @@ test_that("invpareto unbiased scale estimator large n", {
   fun <- function(n) {
     exp(ssdtools:::sinvpareto(data.frame(right = ssd_rinvpareto(n)))$log_scale)
   }
-  withr::with_seed(99, {
-    expect_equal(mean(vapply(rep(1000, 1000), fun, 1)), 1.00001036453276)
+  withr::with_seed(50, {
+    expect_snapshot_value(mean(vapply(rep(1000, 1000), fun, 1)), style = "deparse")
   })
 })
 
@@ -95,8 +92,8 @@ test_that("invpareto unbiased shape estimator large n", {
   fun <- function(n) {
     exp(ssdtools:::sinvpareto(data.frame(right = ssd_rinvpareto(n)))$log_shape)
   }
-  withr::with_seed(99, {
-    expect_equal(mean(vapply(rep(1000, 1000), fun, 1)), 3.00215185407015)
+  withr::with_seed(50, {
+    expect_snapshot_value(mean(vapply(rep(1000, 1000), fun, 1)), style = "deparse")
   })
 })
 

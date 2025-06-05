@@ -17,10 +17,10 @@
 
 test_that("hc multi_ci all multiple hcs cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  withr::with_seed(102, {
+  withr::with_seed(50, {
     hc_average <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "MACL", est_method = "arithmetic", nboot = 10, ci = TRUE)
   })
-  withr::with_seed(105, {
+  withr::with_seed(50, {
     hc_multi <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "multi_fixed", nboot = 10, ci = TRUE)
   })
   expect_snapshot_data(hc_average, "hc_multi_ci_all_multiple_hcs_cis_average")
@@ -29,13 +29,13 @@ test_that("hc multi_ci all multiple hcs cis", {
 
 test_that("hc multi_ci lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  withr::with_seed(102, {
+  withr::with_seed(50, {
     hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 10, ci_method = "weighted_samples")
   })
-  withr::with_seed(102, {
+  withr::with_seed(50, {
     hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 10, ci_method = "MACL", est_method = "arithmetic")
   })
-  withr::with_seed(102, {
+  withr::with_seed(50, {
     hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 10)
   })
 

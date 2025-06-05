@@ -30,7 +30,7 @@ test_that("burrlioz with eight or less samples gives llogis", {
 })
 
 test_that("burrlioz with burrIII3 data gives burrIII3", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     conc <- ssd_rburrIII3(30)
   })
   data <- data.frame(Conc = conc)
@@ -41,7 +41,7 @@ test_that("burrlioz with burrIII3 data gives burrIII3", {
 })
 
 test_that("burrlioz with invpareto data gives invpareto", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     conc <- ssd_rinvpareto(30)
   })
   data <- data.frame(Conc = conc)
@@ -52,7 +52,7 @@ test_that("burrlioz with invpareto data gives invpareto", {
 })
 
 test_that("burrlioz with lgumbel data gives lgumbel", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     conc <- ssd_rlgumbel(25)
   })
   data <- data.frame(Conc = conc)

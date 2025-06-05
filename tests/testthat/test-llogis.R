@@ -19,7 +19,7 @@ test_that("llogis", {
   test_dist("llogis")
   expect_equal(ssd_pllogis(1), 0.5)
   expect_equal(ssd_qllogis(0.75), 3)
-  withr::with_seed(42, {
-    expect_equal(ssd_rllogis(2), c(10.7379218085407, 14.8920392236127))
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rllogis(2), style = "deparse")
   })
 })

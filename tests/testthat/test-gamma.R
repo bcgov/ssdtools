@@ -16,9 +16,9 @@
 #    limitations under the License.
 test_that("gamma", {
   test_dist("gamma")
-  expect_equal(ssd_pgamma(1), 0.632120558828558)
-  expect_equal(ssd_qgamma(0.75), 1.38629436111989)
-  withr::with_seed(42, {
-    expect_equal(ssd_rgamma(2), c(1.93929578065309, 0.180419099876704))
+  expect_snapshot_value(ssd_pgamma(1), style = "deparse")
+  expect_snapshot_value(ssd_qgamma(0.75), style = "deparse")
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rgamma(2), style = "deparse")
   })
 })

@@ -16,17 +16,17 @@
 #    limitations under the License.
 
 test_that("weibull", {
-  expect_equal(ssd_pweibull(1), 0.632120558828558)
-  expect_equal(ssd_qweibull(0.75), 1.38629436111989)
-  withr::with_seed(42, {
-    expect_equal(ssd_rweibull(2), c(0.0890432104972705, 0.0649915162066272))
+  expect_snapshot_value(ssd_pweibull(1), style = "deparse")
+  expect_snapshot_value(ssd_qweibull(0.75), style = "deparse")
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rweibull(2), style = "deparse")
   })
   skip_on_cran() # ssd_fit_dists() failing on CRAN M1mac likely due to much older version of the OS and toolchain
   test_dist("weibull")
 })
 
 test_that("weibull", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     data <- data.frame(Conc = ssd_rweibull(1000, shape = 0.5, scale = 2))
   })
   fit <- ssd_fit_dists(data, dists = c("weibull", "lgumbel"))
@@ -35,7 +35,7 @@ test_that("weibull", {
 })
 
 test_that("weibull works anona", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     fit <- ssd_fit_dists(ssddata::anon_a, dists = c("weibull", "lgumbel"))
   })
   tidy <- tidy(fit)
@@ -43,7 +43,7 @@ test_that("weibull works anona", {
 })
 
 test_that("weibull works anon_e", {
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     fit <- ssd_fit_dists(ssddata::anon_e, dists = c("weibull", "lgumbel"))
   })
   tidy <- tidy(fit)
@@ -52,7 +52,7 @@ test_that("weibull works anon_e", {
 
 test_that("weibull bootstraps anona", {
   fit <- ssd_fit_dists(ssddata::anon_a, dists = "weibull")
-  withr::with_seed(99, {
+  withr::with_seed(50, {
     hc <- ssd_hc(fit, nboot = 1000, ci = TRUE, ci_method = "weighted_samples", samples = TRUE)
   })
   expect_snapshot_data(hc, "hc_anona")

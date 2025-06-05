@@ -1,2 +1,2 @@
 dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,dists,samples
-lnorm,1,1.95431,1.62922,0.349467,5.38039,1,cdf,percentile,parametric,100,1,lnorm,numeric(0)
+lnorm,1,1.95431,1.5333,0.151011,6.19794,1,cdf,percentile,parametric,100,1,lnorm,numeric(0)

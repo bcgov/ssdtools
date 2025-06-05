@@ -17,7 +17,7 @@
 
 test_that("hp multi_ci lnorm", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  withr::with_seed(102, {
+  withr::with_seed(502, {
     hp_dist <- ssd_hp(fits, average = FALSE, ci_method = "MACL", proportion = FALSE)
     hp_average <- ssd_hp(fits, average = TRUE, ci_method = "MACL", est_method = "arithmetic", proportion = FALSE)
     hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
@@ -36,7 +36,7 @@ test_that("hp multi_ci lnorm", {
 
 test_that("hp multi_ci all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  withr::with_seed(102, {
+  withr::with_seed(502, {
     hp_average <- ssd_hp(fits, average = TRUE, ci_method = "weighted_samples", proportion = FALSE)
     hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
   })
@@ -49,13 +49,13 @@ test_that("hp multi_ci all", {
 
 test_that("hp multi_ci lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  withr::with_seed(102, {
+  withr::with_seed(502, {
     hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, ci_method = "MACL", proportion = FALSE)
   })
-  withr::with_seed(102, {
+  withr::with_seed(502, {
     hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, ci_method = "MACL", proportion = FALSE)
   })
-  withr::with_seed(102, {
+  withr::with_seed(502, {
     hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 100, proportion = FALSE)
   })
 

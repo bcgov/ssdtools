@@ -28,7 +28,7 @@
 #' @examples
 #' \dontrun{
 #' fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-#' withr::with_seed(10, {
+#' withr::with_seed(50, {
 #'   ssd_exposure(fits)
 #'   ssd_exposure(fits, meanlog = 1)
 #'   ssd_exposure(fits, meanlog = 1, sdlog = 1)
