@@ -153,7 +153,7 @@ group_samples <- function(hcp) {
     dplyr::ungroup()
 }
 
-hcp_average <- function(hcp, weight, value, nboot, est_method) {
+hcp_average2 <- function(hcp, weight, value, nboot, est_method) {
   samples <- group_samples(hcp)
   
   hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
@@ -192,12 +192,6 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   hcp
 }
 
-replace_estimates <- function(hcp, est) {
-  est <- dplyr::select(est, "value", est2 = "est")
-  hcp <- dplyr::inner_join(hcp, est, by = "value")
-  dplyr::mutate(hcp, est = .data$est2, est2 = NULL)
-}
-
 .ssd_hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
                                   data, rescale, weighted, censoring, min_pmix,
                                   range_shape1, range_shape2, parametric, control,
@@ -219,7 +213,7 @@ replace_estimates <- function(hcp, est) {
     hc = hc, save_to = save_to, samples = samples || ci_method == "weighted_samples", fun = fun
   )
   
-  hcp <- hcp_average(hcp, weight, value, nboot = nboot, est_method = est_method)
+  hcp <- hcp_average2(hcp, weight, value, nboot = nboot, est_method = est_method)
   if (ci_method != "weighted_samples") {
     if (!samples) {
       hcp$samples <- list(numeric(0))
@@ -249,78 +243,6 @@ replace_estimates <- function(hcp, est) {
   )
   hcp$dist <- "average"
   hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples")]
-}
-
-.ssd_hcp_fitdists_average <- function(
-    x, value, data, ci, level, nboot, est_method,
-    min_pboot, min_pmix,parametric,rescale, weighted, ci_method, censoring,
-    range_shape1, range_shape2, estimates, control, hc, save_to,
-    samples, fun) {
-  
-  if (.is_censored(censoring) && !identical_parameters(x)) {
-    wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
-  }
-  
-  if (ci_method %in% c("multi_free", "multi_fixed")) {
-    hcp <- .ssd_hcp_multi(
-      x, value, ci = ci, level = level, nboot = nboot,
-      min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring, 
-      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control, save_to = save_to, samples = samples,
-      est_method = est_method,
-      ci_method = ci_method, hc = hc
-    )
-    
-    if (est_method == "multi") {
-      return(hcp)
-    }
-    
-    est <- .ssd_hcp_conventional(
-      x, value, ci = FALSE, level = level, nboot = nboot, est_method = est_method,
-      min_pboot = min_pboot, estimates = estimates,
-      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control, save_to = save_to, samples = samples,
-      ci_method = ci_method, hc = hc, fun = fun
-    )
-    
-    hcp <- replace_estimates(hcp, est)
-    
-    return(hcp)
-  }
-  hcp <- .ssd_hcp_conventional(
-    x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
-    min_pboot = min_pboot, estimates = estimates,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control, save_to = save_to, samples = samples,
-    ci_method = ci_method, hc = hc, fun = fun
-  )
-  
-  if (est_method != "multi") {
-    if (ci_method != "weighted_samples") {
-      return(hcp)
-    }
-    est <- .ssd_hcp_conventional(
-      x, value,
-      ci = FALSE, level = level, nboot = nboot, est_method = est_method,
-      min_pboot = min_pboot, estimates = estimates,
-      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control, save_to = save_to, samples = samples,
-      ci_method = ci_method, hc = hc, fun = fun
-    )
-  } else {
-    est <- .ssd_hcp_multi(
-      x, value, ci = FALSE, level = level, nboot = nboot, min_pboot = min_pboot,
-      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control, save_to = save_to, samples = samples,
-      est_method = est_method,
-      ci_method = ci_method, hc = hc
-    )
-  }
-  replace_estimates(hcp, est)
 }
 
 tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
@@ -396,7 +318,7 @@ hcp2 <- function(
     )
     hcp$dists <- as.list(hcp$dist)
   } else {
-    hcp <- .ssd_hcp_fitdists_average(
+    hcp <- hcp_average(
       x = x, value = value, ci = ci, level = level, nboot = nboot, est_method = est_method,
       min_pboot = min_pboot, estimates = estimates, ci_method = ci_method,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
