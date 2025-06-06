@@ -19,10 +19,6 @@ hcp_wb <- function(hcp, level, samples, nboot, min_pboot) {
   hcp$ucl <- unlist(quantiles[[2]])
   hcp$se <- purrr::map_dbl(hcp$samples, sd)
   hcp$pboot <- pmin(purrr::map_dbl(hcp$samples, length) / nboot, 1)
-  fail <- hcp$pboot < min_pboot
-  hcp$lcl[fail] <- NA_real_
-  hcp$ucl[fail] <- NA_real_
-  hcp$se[fail] <- NA_real_
   if (!samples) {
     hcp$samples <- list(numeric(0))
   }

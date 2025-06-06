@@ -47,11 +47,11 @@ no_hcp <- function(hc) {
   )
 }
 
-clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, nboot, samples) {
+clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, nboot, min_pboot, samples) {
   hcp$est_method <- est_method
   hcp$ci_method <- ci_method
   hcp$boot_method <- if (parametric) "parametric" else "non-parametric"
-
+  
   if(ci) {
     hcp$nboot <- nboot
   } else {
@@ -62,6 +62,13 @@ clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, nboot
     hcp$pboot <- 1
   }
   
+  if(any(hcp$pboot < min_pboot)) {
+    fail <- hcp$pboot < min_pboot
+    hcp$lcl[fail] <- NA_real_
+    hcp$ucl[fail] <- NA_real_
+    hcp$se[fail] <- NA_real_
+  }
+
   if(average) {
     hcp$dist <- "average"
     hcp$wt <- 1
@@ -139,7 +146,7 @@ hcp2 <- function(
     )
     hcp$dists <- rep(list(sort(names(x))), nrow(hcp))
   }
-  clean_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, nboot = nboot, samples = samples)  
+  clean_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, nboot = nboot, min_pboot = min_pboot, samples = samples)  
 }
 
 hcp <- function(
