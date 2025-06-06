@@ -1,7 +1,7 @@
 hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
                       data, rescale, weighted, censoring, min_pmix,
                       range_shape1, range_shape2, parametric, control,
-                      save_to, samples, est_method, ci_method, hc) {
+                      save_to, samples, est_method, ci_method, hc, ...) {
   
   estimates <- estimates(x, all_estimates = TRUE)
   dist <- "multi"
