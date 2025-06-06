@@ -153,7 +153,7 @@ ssd_hc.fitdists <- function(
     ci_method <- "MACL"
   }
   
-  hcp <- ssd_hcp_fitdists(
+  hcp <- hcp(
     x = x,
     value = proportion,
     ci = ci,
@@ -213,7 +213,7 @@ ssd_hc.fitburrlioz <- function(
   
   fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
   
-  hcp <- ssd_hcp_fitdists(
+  hcp <- hcp(
     x = x,
     value = proportion,
     ci = ci,

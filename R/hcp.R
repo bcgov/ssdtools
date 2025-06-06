@@ -378,7 +378,7 @@ tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
   hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "dists", "samples")]
 }
 
-.ssd_hcp_fitdists <- function(
+hcp2 <- function(
     x, value, ci, level, nboot, average, est_method, min_pboot, parametric,
     ci_method, control, hc, save_to, samples, fun) {
   if (!length(x) || !length(value)) {
@@ -442,7 +442,7 @@ tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric) {
   tidy_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric)  
 }
 
-ssd_hcp_fitdists <- function(
+hcp <- function(
     x, value, ci, level, nboot, average, est_method, delta, min_pboot,
     parametric, ci_method, control, samples, save_to,
     hc, fun = fit_tmb) {
@@ -473,7 +473,7 @@ ssd_hcp_fitdists <- function(
   
   x <- subset(x, delta = delta)
   
-  hcp <- .ssd_hcp_fitdists(
+  hcp <- hcp2(
     x, value = value, ci = ci, level = level, nboot = nboot,
     average = average, est_method = est_method, min_pboot = min_pboot,
     parametric = parametric, ci_method = ci_method,

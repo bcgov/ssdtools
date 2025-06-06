@@ -86,7 +86,7 @@ ssd_hp.fitdists <- function(
   }
   chk_flag(proportion)
   
-  hcp <- ssd_hcp_fitdists(
+  hcp <- hcp(
     x = x,
     value = conc,
     ci = ci,
@@ -146,7 +146,7 @@ ssd_hp.fitburrlioz <- function(
   
   fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
   
-  hcp <- ssd_hcp_fitdists(
+  hcp <- hcp(
     x = x,
     value = conc,
     ci = ci,
