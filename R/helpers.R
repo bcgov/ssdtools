@@ -44,10 +44,6 @@ strip_loglogit <- function(x) {
   sub("^log(it){0,1}_", "", x)
 }
 
-bind_rows <- function(x) {
-  dplyr::bind_rows(x)
-}
-
 measured_range <- function(x) {
   x <- x[!is.na(x)]
   x <- x[is.finite(x)]

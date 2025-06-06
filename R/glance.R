@@ -58,7 +58,7 @@ glance.fitdists <- function(x, ..., wt = FALSE) {
   
   nobs <- nobs(x)
   tbl <- lapply(x, .glance_tmbfit, nobs = nobs)
-  tbl <- bind_rows(tbl)
+  tbl <- dplyr::bind_rows(tbl)
   tbl$delta <- tbl$aicc - min(tbl$aicc)
   if (is.na(tbl$delta[1]) && all(tbl$npars == tbl$npars[1])) {
     tbl$delta <- tbl$aic - min(tbl$aic)

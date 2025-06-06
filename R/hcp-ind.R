@@ -6,7 +6,7 @@ hcp_ind_weight <- function(hcp, weight) {
   x = hcp, y = weight,
   USE.NAMES = FALSE, SIMPLIFY = FALSE
   ) |>
-    bind_rows()
+    dplyr::bind_rows()
 }
 
 hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,

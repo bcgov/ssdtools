@@ -89,7 +89,7 @@ ssd_gof.fitdists <- function(x, ..., pvalue = FALSE, wt = FALSE) {
   } else {
     data <- .data_fitdists(x)
     tests <- lapply(x, .tests_tmbfit, data = data, pvalue = pvalue)
-    tests <- bind_rows(tests)
+    tests <- dplyr::bind_rows(tests)
     gof <- cbind(gof, tests)
     gof <- as_tibble(gof)
   }

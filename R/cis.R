@@ -40,5 +40,5 @@ cis_estimates <- function(estimates, what, level, x, samples, .names = NULL) {
   })
   args <- lapply(args, as.double)
   x <- lapply(x, xcis_estimates, args, n, what, level, samples = samples)
-  bind_rows(x)
+  dplyr::bind_rows(x)
 }

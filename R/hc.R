@@ -97,7 +97,7 @@ ssd_hc.list <- function(
                MoreArgs = list(proportion = proportion),
                SIMPLIFY = FALSE
   )
-  bind_rows(hc)
+  dplyr::bind_rows(hc)
 }
 
 #' @describeIn ssd_hc Hazard Concentrations for fitdists Object
