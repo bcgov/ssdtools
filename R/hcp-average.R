@@ -1,6 +1,6 @@
 replace_estimates <- function(hcp, est) {
-  est <- dplyr::select(est, "value", est2 = "est")
-  dplyr::inner_join(hcp, est, by = "value") |>
+  dplyr::select(est, "value", est2 = "est") |>
+    dplyr::inner_join(hcp, by = "value") |>
     dplyr::mutate(est = .data$est2, est2 = NULL)
 }
 
