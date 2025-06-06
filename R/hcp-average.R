@@ -1,7 +1,7 @@
 replace_estimates <- function(hcp, est) {
   est <- dplyr::select(est, "value", est2 = "est")
-  hcp <- dplyr::inner_join(hcp, est, by = "value")
-  dplyr::mutate(hcp, est = .data$est2, est2 = NULL)
+  dplyr::inner_join(hcp, est, by = "value") |>
+    dplyr::mutate(est = .data$est2, est2 = NULL)
 }
 
 hcp_average <- function(
