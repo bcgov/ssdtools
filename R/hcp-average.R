@@ -14,8 +14,16 @@ hcp_average <- function(
     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
   
+  ci_fun <- if (ci_method %in% c("multi_free", "multi_fixed")) {
+    hcp_multi
+  } else if(ci_method == "weighted_samples") {
+    hcp_weighted
+  } else {
+    hcp_conventional
+  }
+  
   if (ci_method %in% c("multi_free", "multi_fixed")) {
-    hcp <- hcp_multi(
+    hcp <- ci_fun(
       x, value, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring, 
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -28,7 +36,7 @@ hcp_average <- function(
       return(hcp)
     }
   } else if(ci_method == "weighted_samples") {
-    hcp <- hcp_weighted(
+    hcp <- ci_fun(
       x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
@@ -37,7 +45,7 @@ hcp_average <- function(
       ci_method = ci_method, hc = hc, fun = fun
     ) 
   } else {
-    hcp <- hcp_conventional(
+    hcp <- ci_fun(
       x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
