@@ -27,43 +27,29 @@ hcp_average <- function(
     if (est_method == "multi") {
       return(hcp)
     }
-    
-    est <- hcp_conventional(
-      x, value, ci = FALSE, level = level, nboot = nboot, est_method = est_method,
+  } else if(ci_method == "weighted_samples") {
+    hcp <- hcp_weighted(
+      x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
+      min_pboot = min_pboot, estimates = estimates,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control, save_to = save_to, samples = samples,
+      ci_method = ci_method, hc = hc, fun = fun
+    ) 
+  } else {
+    hcp <- hcp_conventional(
+      x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control, save_to = save_to, samples = samples,
       ci_method = ci_method, hc = hc, fun = fun
     )
-    
-    hcp <- replace_estimates(hcp, est)
-    
-    return(hcp)
-  }
-  hcp <- hcp_conventional(
-    x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
-    min_pboot = min_pboot, estimates = estimates,
-    data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control, save_to = save_to, samples = samples,
-    ci_method = ci_method, hc = hc, fun = fun
-  )
-  
-  if (est_method != "multi") {
-    if (ci_method != "weighted_samples") {
+    if(est_method %in% c("arithmetic", "geometric")) {
       return(hcp)
     }
-    est <- hcp_conventional(
-      x, value,
-      ci = FALSE, level = level, nboot = nboot, est_method = est_method,
-      min_pboot = min_pboot, estimates = estimates,
-      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-      parametric = parametric, control = control, save_to = save_to, samples = samples,
-      ci_method = ci_method, hc = hc, fun = fun
-    )
-  } else {
+  }
+  if(est_method == "multi") {
     est <- hcp_multi(
       x, value, ci = FALSE, level = level, nboot = nboot, min_pboot = min_pboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
@@ -71,6 +57,15 @@ hcp_average <- function(
       parametric = parametric, control = control, save_to = save_to, samples = samples,
       est_method = est_method,
       ci_method = ci_method, hc = hc
+    )
+  } else {
+    est <- hcp_conventional(
+      x, value, ci = FALSE, level = level, nboot = nboot, est_method = est_method,
+      min_pboot = min_pboot, estimates = estimates,
+      data = data, rescale = rescale, weighted = weighted, censoring = censoring,
+      min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
+      parametric = parametric, control = control, save_to = save_to, samples = samples,
+      ci_method = ci_method, hc = hc, fun = fun
     )
   }
   replace_estimates(hcp, est)
