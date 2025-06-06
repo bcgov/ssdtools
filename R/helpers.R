@@ -45,8 +45,7 @@ strip_loglogit <- function(x) {
 }
 
 bind_rows <- function(x) {
-  x <- do.call("rbind", x)
-  as_tibble(x)
+  dplyr::bind_rows(x)
 }
 
 measured_range <- function(x) {
