@@ -15,7 +15,7 @@ hcp_average <- function(
   }
   
   if (ci_method %in% c("multi_free", "multi_fixed")) {
-    hcp <- .ssd_hcp_multi(
+    hcp <- hcp_multi(
       x, value, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring, 
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -28,7 +28,7 @@ hcp_average <- function(
       return(hcp)
     }
     
-    est <- .ssd_hcp_conventional(
+    est <- hcp_conventional(
       x, value, ci = FALSE, level = level, nboot = nboot, est_method = est_method,
       min_pboot = min_pboot, estimates = estimates,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
@@ -41,7 +41,7 @@ hcp_average <- function(
     
     return(hcp)
   }
-  hcp <- .ssd_hcp_conventional(
+  hcp <- hcp_conventional(
     x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
     min_pboot = min_pboot, estimates = estimates,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
@@ -54,7 +54,7 @@ hcp_average <- function(
     if (ci_method != "weighted_samples") {
       return(hcp)
     }
-    est <- .ssd_hcp_conventional(
+    est <- hcp_conventional(
       x, value,
       ci = FALSE, level = level, nboot = nboot, est_method = est_method,
       min_pboot = min_pboot, estimates = estimates,
@@ -64,7 +64,7 @@ hcp_average <- function(
       ci_method = ci_method, hc = hc, fun = fun
     )
   } else {
-    est <- .ssd_hcp_multi(
+    est <- hcp_multi(
       x, value, ci = FALSE, level = level, nboot = nboot, min_pboot = min_pboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
