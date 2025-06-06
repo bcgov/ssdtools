@@ -14,11 +14,14 @@ hcp_average <- function(
     wrn("Model averaged estimates cannot be calculated for censored data when the distributions have different numbers of parameters.")
   }
   
+  est_same <- FALSE
   ci_fun <- if (ci_method %in% c("multi_free", "multi_fixed")) {
+    est_same <- est_method == "multi"
     hcp_multi
   } else if(ci_method == "weighted_samples") {
     hcp_weighted
   } else {
+    est_same <- est_method %in% c("arithmetic", "geometric")
     hcp_conventional
   }
   
@@ -31,15 +34,10 @@ hcp_average <- function(
     ci_method = ci_method, hc = hc, fun = fun
   ) 
   
-  if (ci_method %in% c("multi_free", "multi_fixed")) {
-    if (est_method == "multi") {
-      return(hcp)
-    }
-  } else if(ci_method != "weighted_samples") {
-    if(est_method %in% c("arithmetic", "geometric")) {
-      return(hcp)
-    }
+  if(est_same) {
+    return(hcp)
   }
+
   est_fun <- if(est_method == "multi") {
     hcp_multi
   } else {

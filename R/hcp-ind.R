@@ -1,14 +1,13 @@
 hcp_ind_weight <- function(hcp, weight) {
-  hcp <- mapply(
-    function(x, y) {
-      x$wt <- y
-      x
-    },
-    x = hcp, y = weight,
-    USE.NAMES = FALSE, SIMPLIFY = FALSE
-  )
-  hcp <- bind_rows(hcp)
-  hcp[c("dist", "value", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples")]
+  mapply(function(x, y) {
+    x$wt <- y
+    x
+  },
+  x = hcp, y = weight,
+  USE.NAMES = FALSE, SIMPLIFY = FALSE
+  ) |>
+    bind_rows() |>
+    dplyr::select(c("dist", "value", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples"))
 }
 
 hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,
@@ -23,7 +22,8 @@ hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,
     min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, est_method = est_method, ci_method = ci_method, average = FALSE, control = control,
+    parametric = parametric, est_method = est_method, ci_method = ci_method, 
+    average = FALSE, control = control,
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   
