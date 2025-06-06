@@ -22,11 +22,6 @@ warn_min_pboot <- function(x, min_pboot) {
   x
 }
 
-replace_min_pboot_na <- function(x, min_pboot) {
-  x[!is.na(x$pboot) & x$pboot < min_pboot, c("se", "lcl", "ucl")] <- NA_real_
-  x
-}
-
 sample_nonparametric <- function(data) {
   data[sample(nrow(data), replace = TRUE), ]
 }

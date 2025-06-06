@@ -47,105 +47,6 @@ no_hcp <- function(hc) {
   )
 }
 
-no_ci_hcp <- function(value, dist, est, rescale, hc) {
-  na <- rep(NA_real_, length(value))
-  na_chr <- rep(NA_character_, length(value))
-  multiplier <- if (hc) rescale else 1
-  
-  tibble(
-    dist = rep(dist, length(value)),
-    value = value,
-    est = est * multiplier,
-    se = na,
-    lcl = na,
-    ucl = na,
-    wt = rep(1, length(value)),
-    nboot = rep(0L, length(value)),
-    pboot = 1,
-    samples = list(numeric(0))
-  )
-}
-
-ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
-  multiplier <- if (hc) rescale else 1
-  
-  tibble(
-    dist = dist,
-    value = value,
-    est = est * multiplier,
-    se = cis$se * multiplier,
-    lcl = cis$lcl * multiplier,
-    ucl = cis$ucl * multiplier,
-    wt = rep(1, length(value)),
-    nboot = nboot,
-    pboot = length(estimates) / nboot,
-    samples = I(lapply(cis$samples, function(x) x * multiplier))
-  )
-}
-
-.ssd_hcp <- function(
-    x, dist, estimates, fun, pars, value, ci, level, nboot, min_pboot,
-    data, rescale, weighted, censoring, min_pmix,
-    range_shape1, range_shape2, parametric, control, save_to, samples, hc,
-    est_method, ci_method) {
-  args <- estimates
-  
-  if (hc) {
-    args$p <- value
-    what <- paste0("ssd_q", dist)
-  } else {
-    args$q <- value / rescale
-    what <- paste0("ssd_p", dist)
-  }
-  
-  est <- do.call(what, args)
-  if (!ci) {
-    return(no_ci_hcp(value = value, dist = dist, est = est, rescale = rescale, hc = hc))
-  }
-  
-  censoring <- censoring / rescale
-  
-  ests <- boot_estimates(
-    fun = fun, dist = dist, estimates = estimates,
-    pars = pars, nboot = nboot, data = data, weighted = weighted,
-    censoring = censoring, min_pmix = min_pmix,
-    range_shape1 = range_shape1, range_shape2 = range_shape2,
-    parametric = parametric, control = control, save_to = save_to,
-    ci_method = ci_method
-  )
-  x <- value
-  if (!hc) {
-    x <- x / rescale
-  }
-  cis <- cis_estimates(ests, what, level = level, x = x, samples = samples)
-  hcp <- ci_hcp(
-    cis, estimates = ests, value = value, dist = dist,
-    est = est, rescale = rescale, nboot = nboot, hc = hc
-  )
-  replace_min_pboot_na(hcp, min_pboot)
-}
-
-.ssd_hcp_tmbfit <- function(
-    x, weight, value, ci, level, nboot, min_pboot, data, rescale, weighted, censoring, min_pmix,
-    range_shape1, range_shape2, parametric, est_method, ci_method, average, control, hc, save_to, samples,
-    fun) {
-  estimates <- estimates(x)
-  dist <- .dist_tmbfit(x)
-  pars <- .pars_tmbfit(x)
-  
-  if (ci_method == "weighted_samples" && average) {
-    nboot <- round(nboot * weight)
-  }
-  .ssd_hcp(
-    x, dist = dist, estimates = estimates, fun = fun, pars = pars,
-    value = value, ci = ci, level = level, nboot = nboot,
-    min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
-    min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
-    control = control, save_to = save_to, samples = samples,
-    hc = hc, ci_method = ci_method, est_method = est_method, parametric = parametric
-  )
-}
-
 group_samples <- function(hcp) {
     bind_rows(hcp) |>
     dplyr::group_by(.data$value) |>
@@ -206,7 +107,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   
   
   hcp <- purrr::map2(
-    x, weight, .ssd_hcp_tmbfit, value = value, ci = ci, level = level, nboot = nboot,
+    x, weight, hcp_tmbfit, value = value, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,
@@ -233,7 +134,7 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
   fun <- fits_dists
   pars <- pars_fitdists(x)
   
-  hcp <- .ssd_hcp(
+  hcp <- hcp_tmbfit2(
     x, dist = dist, estimates = estimates, fun = fun, pars = pars,
     value = value, ci = ci, level = level, nboot = nboot, min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
