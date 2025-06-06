@@ -6,8 +6,8 @@ hcp_wb <- function(hcp, weight, level, samples, nboot, min_pboot) {
     dplyr::summarise(
       pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
-    dplyr::ungroup() |>
-    dplyr::arrange(.data$value)
+    dplyr::ungroup()
+  
   ## uses weighted bootstrap to get se, lcl and ucl
   quantiles <- purrr::map(hcp$samples, stats::quantile, probs = probs(level))
   quantiles <- purrr::transpose(quantiles)
@@ -18,7 +18,8 @@ hcp_wb <- function(hcp, weight, level, samples, nboot, min_pboot) {
   if (!samples) {
     hcp$samples <- list(numeric(0))
   }
-  hcp
+  hcp |>
+    dplyr::arrange(.data$value)
 }
 
 hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
