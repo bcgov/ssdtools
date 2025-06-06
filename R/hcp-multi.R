@@ -15,7 +15,5 @@ hcp_multi <- function(x, value, ci, level, nboot, min_pboot,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to,
     samples = samples, hc = hc, ci_method = ci_method, est_method = est_method
-  ) |>
-    dplyr::mutate(dist = "average") |>
-    dplyr::select(c("dist", "value", "est", "se", "lcl", "ucl", "wt", "nboot", "pboot", "samples"))
+  )
 }
