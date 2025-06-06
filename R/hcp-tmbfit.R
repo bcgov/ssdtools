@@ -82,19 +82,13 @@ hcp_tmbfit2 <- function(
 }
 
 hcp_tmbfit <- function(
-    x, weight, value, ci, level, nboot, min_pboot, data, rescale, weighted, censoring, min_pmix,
+    x, nboot, value, ci, level, min_pboot, data, rescale, weighted, censoring, min_pmix,
     range_shape1, range_shape2, parametric, est_method, ci_method, average, control, hc, save_to, samples,
     fun) {
   estimates <- estimates(x)
   dist <- .dist_tmbfit(x)
   pars <- .pars_tmbfit(x)
   
-  if (ci_method == "weighted_samples") {
-    ## FIX ME need to ensure sums to nboot
-    if(average) {
-      nboot <- round(nboot * weight)
-    }
-  }
   hcp_tmbfit2(
     x, dist = dist, estimates = estimates, fun = fun, pars = pars,
     value = value, ci = ci, level = level, nboot = nboot,

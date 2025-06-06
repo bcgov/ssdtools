@@ -25,15 +25,17 @@ hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, esti
                          range_shape1, range_shape2, parametric, control,
                          save_to, samples, ci_method, hc, fun) {
   
+  # FIXME: ensure always sum to nboot!
   if (ci) {
     atleast1 <- round(glance(x, wt = TRUE)$wt * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
     estimates <- estimates[atleast1]
   }
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
-  
+  nboots <- round(nboot * weight)
+
   hcp <- purrr::map2(
-    x, weight, hcp_tmbfit, value = value, ci = ci, level = level, nboot = nboot,
+    x, nboots, hcp_tmbfit, value = value, ci = ci, level = level,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,

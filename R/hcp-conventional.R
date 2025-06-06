@@ -34,8 +34,8 @@ hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, 
   
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
   
-  hcp <- purrr::map2(
-    x, weight, hcp_tmbfit, value = value, ci = ci, level = level, nboot = nboot,
+  hcp <- purrr::map(
+    x, hcp_tmbfit, nboot = nboot, value = value, ci = ci, level = level,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,
