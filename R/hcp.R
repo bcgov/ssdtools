@@ -47,12 +47,14 @@ no_hcp <- function(hc) {
   )
 }
 
-clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, samples) {
+clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, nboot, samples) {
   hcp$est_method <- est_method
   hcp$ci_method <- ci_method
   hcp$boot_method <- if (parametric) "parametric" else "non-parametric"
 
-  if(!ci) {
+  if(ci) {
+    hcp$nboot <- nboot
+  } else {
     hcp$se <- NA_real_
     hcp$lcl <- NA_real_
     hcp$ucl <- NA_real_
@@ -137,7 +139,7 @@ hcp2 <- function(
     )
     hcp$dists <- rep(list(sort(names(x))), nrow(hcp))
   }
-  clean_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, samples = samples)  
+  clean_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, nboot = nboot, samples = samples)  
 }
 
 hcp <- function(

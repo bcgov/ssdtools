@@ -1,4 +1,4 @@
-hcp_ma2 <- function(hcp, weight, value, nboot, est_method, ci_method) {
+hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
   hcp <- hcp |>
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
@@ -8,18 +8,17 @@ hcp_ma2 <- function(hcp, weight, value, nboot, est_method, ci_method) {
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup()
 
-  hcp$nboot <- nboot
   dplyr::arrange(hcp, .data$value)
 }
 
 ## uses weighted bootstrap to get se, lcl and ucl
-hcp_wb <- function(hcp, level, samples, min_pboot) {
+hcp_wb <- function(hcp, level, samples, nboot, min_pboot) {
   quantiles <- purrr::map(hcp$samples, stats::quantile, probs = probs(level))
   quantiles <- purrr::transpose(quantiles)
   hcp$lcl <- unlist(quantiles[[1]])
   hcp$ucl <- unlist(quantiles[[2]])
   hcp$se <- purrr::map_dbl(hcp$samples, sd)
-  hcp$pboot <- pmin(purrr::map_dbl(hcp$samples, length) / hcp$nboot, 1)
+  hcp$pboot <- pmin(purrr::map_dbl(hcp$samples, length) / nboot, 1)
   fail <- hcp$pboot < min_pboot
   hcp$lcl[fail] <- NA_real_
   hcp$ucl[fail] <- NA_real_
@@ -50,8 +49,8 @@ hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, esti
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   
-  hcp <- hcp_ma2(hcp, weight, value, nboot = nboot, est_method = est_method, ci_method = ci_method)
-  hcp <- hcp_wb(hcp, level = level, samples = samples, min_pboot = min_pboot)
+  hcp <- hcp_ma2(hcp, weight, est_method = est_method, ci_method = ci_method)
+  hcp <- hcp_wb(hcp, level = level, samples = samples, nboot = nboot, min_pboot = min_pboot)
   if (!samples) {
     hcp$samples <- list(numeric(0))
   }

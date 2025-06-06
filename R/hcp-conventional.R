@@ -12,7 +12,7 @@ ma_cl <- function(cl, wt, est_method) {
   weighted.mean(cl, w = wt)
 }
 
-hcp_ma <- function(hcp, weight, nboot, est_method, ci_method) {
+hcp_ma <- function(hcp, weight, est_method, ci_method) {
   hcp <- hcp |>
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
@@ -26,7 +26,6 @@ hcp_ma <- function(hcp, weight, nboot, est_method, ci_method) {
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup()
   
-  hcp$nboot <- nboot
   dplyr::arrange(hcp, .data$value)
 }
 
@@ -45,5 +44,5 @@ hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, 
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   
-  hcp_ma(hcp, weight, nboot = nboot, est_method = est_method, ci_method = ci_method)
+  hcp_ma(hcp, weight, est_method = est_method, ci_method = ci_method)
 }
