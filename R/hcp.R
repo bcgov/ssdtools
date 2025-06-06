@@ -62,6 +62,7 @@ clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, sampl
   
   if(average) {
     hcp$dist <- "average"
+    hcp$wt <- 1
   } else {
     hcp$est_method <- "cdf"
     hcp$ci_method <- "percentile"

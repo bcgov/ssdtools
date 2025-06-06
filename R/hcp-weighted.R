@@ -1,32 +1,13 @@
-ma_est <- function(est, wt, est_method) {
-  if(est_method == "geometric") {
-    return(exp(weighted.mean(log(est), w = wt)))
-  }
-  weighted.mean(est, w = wt)
-}
-
-ma_cl <- function(cl, wt, est_method) {
-  if(est_method == "geometric") {
-    return(exp(weighted.mean(log(cl), w = wt)))
-  }
-  weighted.mean(cl, w = wt)
-}
-
-hcp_ma <- function(hcp, weight, value, nboot, est_method, ci_method) {
+hcp_ma2 <- function(hcp, weight, value, nboot, est_method, ci_method) {
   hcp <- hcp |>
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
     dplyr::mutate(weight = weight) |>
     dplyr::summarise(
-      est = ma_est(.data$est, .data$weight, est_method = est_method),
-      lcl = ma_cl(.data$lcl, .data$weight, est_method = est_method),
-      ucl = ma_cl(.data$ucl, .data$weight, est_method = est_method),
-      se = ma_cl(.data$se, .data$weight, est_method = est_method),
       pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup()
-  
-  hcp$wt <- 1
+
   hcp$nboot <- nboot
   dplyr::arrange(hcp, .data$value)
 }
@@ -69,7 +50,7 @@ hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, esti
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   
-  hcp <- hcp_ma(hcp, weight, value, nboot = nboot, est_method = est_method, ci_method = ci_method)
+  hcp <- hcp_ma2(hcp, weight, value, nboot = nboot, est_method = est_method, ci_method = ci_method)
   hcp <- hcp_wb(hcp, level = level, samples = samples, min_pboot = min_pboot)
   if (!samples) {
     hcp$samples <- list(numeric(0))
