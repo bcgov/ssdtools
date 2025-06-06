@@ -11,11 +11,13 @@ hcp_wb <- function(hcp, weight, level, samples, nboot, min_pboot) {
   ## uses weighted bootstrap to get se, lcl and ucl
   quantiles <- purrr::map(hcp$samples, stats::quantile, probs = probs(level))
   quantiles <- purrr::transpose(quantiles)
-  hcp$lcl <- unlist(quantiles[[1]])
-  hcp$ucl <- unlist(quantiles[[2]])
-  hcp$se <- purrr::map_dbl(hcp$samples, sd)
-  hcp$pboot <- pmin(purrr::map_dbl(hcp$samples, length) / nboot, 1)
-  hcp
+  
+  hcp |> 
+    dplyr::mutate(
+      lcl = unlist(quantiles[[1]]),
+      ucl = unlist(quantiles[[2]]),
+      se = purrr::map_dbl(.data$samples, sd),
+      pboot = pmin(purrr::map_dbl(.data$samples, length) / nboot, 1))
 }
 
 hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
@@ -23,7 +25,6 @@ hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, esti
                          range_shape1, range_shape2, parametric, control,
                          save_to, samples, ci_method, hc, fun) {
   
-  ## FIXME how to ensure nboot!
   if (ci) {
     atleast1 <- round(glance(x, wt = TRUE)$wt * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
