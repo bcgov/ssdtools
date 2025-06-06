@@ -33,7 +33,7 @@ hcp_ma <- function(hcp, weight, value, nboot, est_method, ci_method) {
 }
 
 ## uses weighted bootstrap to get se, lcl and ucl
-hcp_weighted <- function(hcp, level, samples, min_pboot) {
+hcp_wb <- function(hcp, level, samples, min_pboot) {
   quantiles <- purrr::map(hcp$samples, stats::quantile, probs = probs(level))
   quantiles <- purrr::transpose(quantiles)
   hcp$lcl <- unlist(quantiles[[1]])
@@ -67,15 +67,15 @@ hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, 
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,
-    hc = hc, save_to = save_to, samples = samples || ci_method == "weighted_samples", fun = fun
+    hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   
   hcp <- hcp_ma(hcp, weight, value, nboot = nboot, est_method = est_method, ci_method = ci_method)
-  if (ci_method != "weighted_samples") {
-    if (!samples) {
-      hcp$samples <- list(numeric(0))
-    }
-    return(hcp)
+  if(ci_method == "weighted_samples") {
+    return(hcp_wb(hcp, level = level, samples = samples, min_pboot = min_pboot))
   }
-  hcp_weighted(hcp, level = level, samples = samples, min_pboot = min_pboot)
+  if (!samples) {
+    hcp$samples <- list(numeric(0))
+  }
+  hcp
 }

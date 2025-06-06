@@ -89,8 +89,11 @@ hcp_tmbfit <- function(
   dist <- .dist_tmbfit(x)
   pars <- .pars_tmbfit(x)
   
-  if (ci_method == "weighted_samples" && average) {
-    nboot <- round(nboot * weight)
+  if (ci_method == "weighted_samples") {
+    samples <- TRUE
+    if(average) {
+      nboot <- round(nboot * weight)
+    }
   }
   hcp_tmbfit2(
     x, dist = dist, estimates = estimates, fun = fun, pars = pars,
