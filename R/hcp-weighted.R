@@ -15,11 +15,7 @@ hcp_wb <- function(hcp, weight, level, samples, nboot, min_pboot) {
   hcp$ucl <- unlist(quantiles[[2]])
   hcp$se <- purrr::map_dbl(hcp$samples, sd)
   hcp$pboot <- pmin(purrr::map_dbl(hcp$samples, length) / nboot, 1)
-  if (!samples) {
-    hcp$samples <- list(numeric(0))
-  }
-  hcp |>
-    dplyr::arrange(.data$value)
+  hcp
 }
 
 hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,

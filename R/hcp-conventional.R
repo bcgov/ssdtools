@@ -25,8 +25,6 @@ hcp_ma <- function(hcp, weight, est_method, ci_method) {
       pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup()
-  
-  dplyr::arrange(hcp, .data$value)
 }
 
 hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,

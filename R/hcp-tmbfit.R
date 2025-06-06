@@ -91,6 +91,7 @@ hcp_tmbfit <- function(
   
   if (ci_method == "weighted_samples") {
     samples <- TRUE
+    ## FIX ME need to ensure sums to nboot
     if(average) {
       nboot <- round(nboot * weight)
     }
