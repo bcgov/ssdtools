@@ -1,4 +1,4 @@
-hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
+hcp_wb <- function(hcp, weight, level, samples, nboot, min_pboot) {
   hcp <- hcp |>
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
@@ -6,13 +6,9 @@ hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
     dplyr::summarise(
       pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
-    dplyr::ungroup()
-
-  dplyr::arrange(hcp, .data$value)
-}
-
-## uses weighted bootstrap to get se, lcl and ucl
-hcp_wb <- function(hcp, level, samples, nboot, min_pboot) {
+    dplyr::ungroup() |>
+    dplyr::arrange(.data$value)
+  ## uses weighted bootstrap to get se, lcl and ucl
   quantiles <- purrr::map(hcp$samples, stats::quantile, probs = probs(level))
   quantiles <- purrr::transpose(quantiles)
   hcp$lcl <- unlist(quantiles[[1]])
@@ -26,10 +22,11 @@ hcp_wb <- function(hcp, level, samples, nboot, min_pboot) {
 }
 
 hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
-                             data, rescale, weighted, censoring, min_pmix,
-                             range_shape1, range_shape2, parametric, control,
-                             save_to, samples, ci_method, hc, fun) {
+                         data, rescale, weighted, censoring, min_pmix,
+                         range_shape1, range_shape2, parametric, control,
+                         save_to, samples, ci_method, hc, fun) {
   
+  ## FIXME how to ensure nboot!
   if (ci) {
     atleast1 <- round(glance(x, wt = TRUE)$wt * nboot) >= 1L
     x <- subset(x, names(x)[atleast1])
@@ -45,10 +42,5 @@ hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, esti
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   
-  hcp <- hcp_ma2(hcp, weight, est_method = est_method, ci_method = ci_method)
-  hcp <- hcp_wb(hcp, level = level, samples = samples, nboot = nboot, min_pboot = min_pboot)
-  if (!samples) {
-    hcp$samples <- list(numeric(0))
-  }
-  hcp
+  hcp_wb(hcp, weight = weight, level = level, samples = samples, nboot = nboot, min_pboot = min_pboot)
 }
