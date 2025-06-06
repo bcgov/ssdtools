@@ -1,29 +1,35 @@
-group_samples <- function(hcp) {
-  bind_rows(hcp) |>
-    dplyr::group_by(.data$value) |>
-    dplyr::summarise(samples = list(unlist(.data$samples))) |>
-    dplyr::ungroup()
+ma_est <- function(est, wt, est_method) {
+  if(est_method == "geometric") {
+    return(exp(weighted.mean(log(est), w = wt)))
+  }
+  weighted.mean(est, w = wt)
 }
 
-hcp_average2 <- function(hcp, weight, value, nboot, est_method) {
-  samples <- group_samples(hcp)
+ma_cl <- function(cl, wt, est_method) {
+  if(est_method == "geometric") {
+    return(exp(weighted.mean(log(cl), w = wt)))
+  }
+  weighted.mean(cl, w = wt)
+}
+
+hcp_ma <- function(hcp, weight, value, nboot, est_method, ci_method) {
+  hcp <- hcp |>
+    dplyr::bind_rows() |>
+    dplyr::group_by(.data$value) |>
+    dplyr::mutate(weight = weight) |>
+    dplyr::summarise(
+      est = ma_est(.data$est, .data$weight, est_method = est_method),
+      lcl = ma_cl(.data$lcl, .data$weight, est_method = est_method),
+      ucl = ma_cl(.data$ucl, .data$weight, est_method = est_method),
+      se = ma_cl(.data$se, .data$weight, est_method = est_method),
+      pboot = min(.data$pboot),
+      samples = list(unlist(.data$samples))) |>
+    dplyr::ungroup()
   
-  hcp <- lapply(hcp, function(x) x[c("value", "est", "se", "lcl", "ucl", "pboot")])
-  hcp <- lapply(hcp, as.matrix)
-  hcp <- Reduce(function(x, y) {
-    abind(x, y, along = 3)
-  }, hcp)
-  suppressMessages(min <- apply(hcp, c(1, 2), min))
-  suppressMessages(hcp <- apply(hcp, c(1, 2), weighted_mean, w = weight, geometric = est_method == "geometric"))
-  min <- as.data.frame(min)
-  hcp <- as.data.frame(hcp)
-  tib <- tibble(
-    dist = "average", value = value, est = hcp$est, se = hcp$se,
-    lcl = hcp$lcl, ucl = hcp$ucl, wt = rep(1, length(value)),
-    nboot = nboot, pboot = min$pboot
-  )
-  tib <- dplyr::inner_join(tib, samples, by = "value")
-  dplyr::arrange(tib, .data$value)
+  hcp$dist <- "average"
+  hcp$wt <- 1
+  hcp$nboot <- nboot
+  dplyr::arrange(hcp, .data$value)
 }
 
 ## uses weighted bootstrap to get se, lcl and ucl
@@ -45,9 +51,9 @@ hcp_weighted <- function(hcp, level, samples, min_pboot) {
 }
 
 hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
-                                  data, rescale, weighted, censoring, min_pmix,
-                                  range_shape1, range_shape2, parametric, control,
-                                  save_to, samples, ci_method, hc, fun) {
+                             data, rescale, weighted, censoring, min_pmix,
+                             range_shape1, range_shape2, parametric, control,
+                             save_to, samples, ci_method, hc, fun) {
   
   if (ci &&  ci_method == "weighted_samples") {
     atleast1 <- round(glance(x, wt = TRUE)$wt * nboot) >= 1L
@@ -55,7 +61,6 @@ hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, 
     estimates <- estimates[atleast1]
   }
   weight <- purrr::map_dbl(estimates, function(x) x$weight)
-  
   
   hcp <- purrr::map2(
     x, weight, hcp_tmbfit, value = value, ci = ci, level = level, nboot = nboot,
@@ -65,7 +70,7 @@ hcp_conventional <- function(x, value, ci, level, nboot, est_method, min_pboot, 
     hc = hc, save_to = save_to, samples = samples || ci_method == "weighted_samples", fun = fun
   )
   
-  hcp <- hcp_average2(hcp, weight, value, nboot = nboot, est_method = est_method)
+  hcp <- hcp_ma(hcp, weight, value, nboot = nboot, est_method = est_method, ci_method = ci_method)
   if (ci_method != "weighted_samples") {
     if (!samples) {
       hcp$samples <- list(numeric(0))
