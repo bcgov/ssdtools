@@ -47,7 +47,7 @@ no_hcp <- function(hc) {
   )
 }
 
-tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, samples) {
+clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, samples) {
   hcp$est_method <- est_method
   hcp$ci_method <- ci_method
   hcp$boot_method <- if (parametric) "parametric" else "non-parametric"
@@ -60,10 +60,12 @@ tidy_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, sample
     hcp$pboot <- 1
   }
   
-  if(!average) {
+  if(average) {
+    hcp$dist <- "average"
+  } else {
     hcp$est_method <- "cdf"
     hcp$ci_method <- "percentile"
-  }
+  } 
   
   if(!samples) {
     hcp$samples <- list(numeric(0))
@@ -134,7 +136,7 @@ hcp2 <- function(
     )
     hcp$dists <- rep(list(sort(names(x))), nrow(hcp))
   }
-  tidy_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, samples = samples)  
+  clean_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, samples = samples)  
 }
 
 hcp <- function(

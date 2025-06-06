@@ -26,7 +26,6 @@ hcp_ma <- function(hcp, weight, value, nboot, est_method, ci_method) {
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup()
   
-  hcp$dist <- "average"
   hcp$wt <- 1
   hcp$nboot <- nboot
   dplyr::arrange(hcp, .data$value)
