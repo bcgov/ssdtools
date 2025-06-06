@@ -36,7 +36,7 @@ hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, esti
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,
-    hc = hc, save_to = save_to, samples = samples, fun = fun
+    hc = hc, save_to = save_to, samples = TRUE, fun = fun
   )
   
   hcp_wb(hcp, weight = weight, level = level, samples = samples, nboot = nboot, min_pboot = min_pboot)
