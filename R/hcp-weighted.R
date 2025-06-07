@@ -1,4 +1,4 @@
-hcp_wb <- function(hcp, weight, level, samples, nboot, min_pboot) {
+hcp_wb <- function(hcp, weight, level, nboot) {
   hcp <- hcp |>
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
@@ -36,26 +36,25 @@ get_nboots <- function(weight, nboot) {
   nboots
 }
 
-hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
+hcp_weighted <- function(x, value, level, nboot, est_method, min_pboot, estimates,
                          data, rescale, weighted, censoring, min_pmix,
                          range_shape1, range_shape2, parametric, control,
-                         save_to, samples, ci_method, hc, fun) {
+                         save_to, ci_method, hc, fun, ...) {
   
   weight <- glance(x, wt = TRUE)$wt
-  nboots <- round(weight * nboot)
-  if(ci) {
-    nboots <- get_nboots(weight, nboot)
-    x <- subset(x, names(x)[nboots > 0])
-    nboots <- nboots[nboots > 0]
-    weight <- glance(x, wt = TRUE)$wt
-  }
+  nboots <- get_nboots(weight, nboot)
+  
+  x <- subset(x, names(x)[nboots > 0])
+  nboots <- nboots[nboots > 0]
+  weight <- glance(x, wt = TRUE)$wt
+
   hcp <- purrr::map2(
-    x, nboots, hcp_tmbfit, value = value, ci = ci, level = level,
+    x, nboots, hcp_tmbfit, value = value, ci = TRUE, level = level,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,
     hc = hc, save_to = save_to, samples = TRUE, fun = fun
   )
   
-  hcp_wb(hcp, weight = weight, level = level, samples = samples, nboot = nboot, min_pboot = min_pboot)
+  hcp_wb(hcp, weight = weight, level = level, nboot = nboot)
 }
