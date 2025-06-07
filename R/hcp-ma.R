@@ -39,7 +39,7 @@ hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
-  weight <- purrr::map_dbl(estimates, function(x) x$weight)
-  
+  weight <- glance(x, wt = TRUE)$wt
+
   hcp_ma2(hcp, weight, est_method = est_method, ci_method = ci_method)
 }
