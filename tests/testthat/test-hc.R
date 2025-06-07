@@ -800,7 +800,7 @@ test_that("hc weighted bootie", {
   })
   
   expect_identical(hc_weighted2$est, hc_unweighted2$est)
-  expect_identical(length(hc_weighted2$samples[[1]]), 11L)
+  expect_identical(length(hc_weighted2$samples[[1]]), 10L)
   expect_identical(length(hc_unweighted2$samples[[1]]), 60L)
   
   expect_snapshot_boot_data(hc_weighted2, "hc_weighted2")

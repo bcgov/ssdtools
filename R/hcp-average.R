@@ -22,7 +22,7 @@ hcp_average <- function(
     hcp_weighted
   } else {
     est_same <- est_method %in% c("arithmetic", "geometric")
-    hcp_conventional
+    hcp_ma
   }
   
   hcp <- ci_fun(
@@ -41,7 +41,7 @@ hcp_average <- function(
   est_fun <- if(est_method == "multi") {
     hcp_multi
   } else {
-    hcp_conventional
+    hcp_ma
   }
   est <- est_fun(
     x, value, ci = FALSE, level = level, nboot = nboot, min_pboot = min_pboot,

@@ -20,20 +20,35 @@ hcp_wb <- function(hcp, weight, level, samples, nboot, min_pboot) {
       pboot = pmin(purrr::map_dbl(.data$samples, length) / nboot, 1))
 }
 
+get_nboots <- function(weight, nboot) {
+  nboots <- as.integer(round(weight * nboot))
+  
+  while(sum(nboots) != nboot) {
+    diff <- nboots/nboot - weight
+    if(sum(nboots) < nboot) {
+      wch <- which.min(diff)
+      nboots[wch] <- nboots[wch] + 1L
+    } else {
+      wch <- which.max(diff)
+      nboots[wch] <- nboots[wch] - 1L
+    }
+  }
+  nboots
+}
+
 hcp_weighted <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
                          data, rescale, weighted, censoring, min_pmix,
                          range_shape1, range_shape2, parametric, control,
                          save_to, samples, ci_method, hc, fun) {
   
-  # FIXME: ensure always sum to nboot!
-  if (ci) {
-    atleast1 <- round(glance(x, wt = TRUE)$wt * nboot) >= 1L
-    x <- subset(x, names(x)[atleast1])
-    estimates <- estimates[atleast1]
+  weight <- glance(x, wt = TRUE)$wt
+  nboots <- round(weight * nboot)
+  if(ci) {
+    nboots <- get_nboots(weight, nboot)
+    x <- subset(x, names(x)[nboots > 0])
+    nboots <- nboots[nboots > 0]
+    weight <- glance(x, wt = TRUE)$wt
   }
-  weight <- purrr::map_dbl(estimates, function(x) x$weight)
-  nboots <- round(nboot * weight)
-
   hcp <- purrr::map2(
     x, nboots, hcp_tmbfit, value = value, ci = ci, level = level,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
