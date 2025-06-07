@@ -4,6 +4,16 @@ replace_estimates <- function(hcp, est) {
     dplyr::mutate(est = .data$est2, est2 = NULL)
 }
 
+hcp_noci <- function(value, nboot, est_method, ci_method, ...) {
+  tibble(
+    value = value,
+    est_method = est_method,
+    ci_method = ci_method,
+    nboot = nboot,
+    pboot = 1
+  )
+}
+
 hcp_average <- function(
     x, value, data, ci, level, nboot, est_method,
     min_pboot, min_pmix,parametric,rescale, weighted, ci_method, censoring,
@@ -15,7 +25,9 @@ hcp_average <- function(
   }
   
   est_same <- FALSE
-  ci_fun <- if (ci_method %in% c("multi_free", "multi_fixed")) {
+  ci_fun <- if(!ci) {
+    hcp_noci
+  } else if(ci_method %in% c("multi_fixed", "multi_free")) {
     est_same <- est_method == "multi"
     hcp_multi
   } else if(ci_method == "weighted_samples") {
@@ -26,7 +38,7 @@ hcp_average <- function(
   }
   
   hcp <- ci_fun(
-    x, value, ci = ci, level = level, nboot = nboot, est_method = est_method,
+    x, value = value, ci = ci, level = level, nboot = nboot, est_method = est_method,
     min_pboot = min_pboot, estimates = estimates,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -37,7 +49,7 @@ hcp_average <- function(
   if(est_same) {
     return(hcp)
   }
-
+  
   est_fun <- if(est_method == "multi") {
     hcp_multi
   } else {
