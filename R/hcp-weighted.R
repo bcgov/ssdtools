@@ -3,7 +3,6 @@ hcp_wb <- function(hcp, level, nboot) {
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
     dplyr::summarise(
-      pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup()
   
@@ -35,7 +34,7 @@ get_nboots <- function(weight, nboot) {
   nboots
 }
 
-hcp_weighted <- function(x, value, level, nboot, est_method, min_pboot, estimates,
+hcp_weighted <- function(x, value, level, nboot, est_method, min_pboot,
                          data, rescale, weighted, censoring, min_pmix,
                          range_shape1, range_shape2, parametric, control,
                          save_to, ci_method, hc, fun, ...) {
