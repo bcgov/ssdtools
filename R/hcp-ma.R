@@ -15,33 +15,38 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-ma_est <- function(est, wt, est_method) {
-  if(est_method == "arithmetic") {
-    return(weighted.mean(est, w = wt))
+weighted_mean <- function(x, wt, geometric) {
+  if(geometric) {
+    return(exp(weighted.mean(log(x), w = wt)))
   }
-  if(est_method == "geometric") {
-    return(exp(weighted.mean(log(est), w = wt)))
-  } 
+  weighted.mean(x, w = wt)
+}
+
+ma_est <- function(est, wt, est_method) {
+  if(est_method %in% c("arithmetic", "geometric")) {
+    return(weighted_mean(est, wt, geometric = est_method == "geometric"))
+  }
   chk_subset(est_method, ssd_est_methods())
 }
 
 ma_lcl <- function(lcl, ucl, se, wt, ci_method) {
-  if(ci_method == "MACL") {
-    return(weighted.mean(lcl, w = wt))
+  if(ci_method %in% c("MACL", "GMACL")) {
+    return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
   } 
   chk_subset(ci_method, ssd_ci_methods())
 }
 
 ma_ucl <- function(lcl, ucl, se, wt, ci_method) {
-  if(ci_method == "MACL") {
-    return(weighted.mean(ucl, w = wt))
+  if(ci_method %in% c("MACL", "GMACL")) {
+    return(weighted_mean(ucl, wt, geometric = ci_method == "GMACL"))
   } 
   chk_subset(ci_method, ssd_ci_methods())
 }
 
+## FIXME: what should the se be for MACL and GMACL!
 ma_se <- function(lcl, ucl, se, wt, ci_method) {
-  if(ci_method == "MACL") {
-    return(weighted.mean(se, w = wt))
+  if(ci_method %in% c("MACL", "GMACL")) {
+    return(weighted_mean(se, wt, geometric = ci_method == "GMACL"))
   } 
   chk_subset(ci_method, ssd_ci_methods())
 }
