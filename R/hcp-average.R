@@ -76,7 +76,7 @@ hcp_average <- function(
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to, samples = samples,
     est_method = est_method,
-    ci_method = "arithmetic", hc = hc
+    ci_method = "MACL", hc = hc
   )
   replace_estimates(hcp, est)
 }

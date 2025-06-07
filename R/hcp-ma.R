@@ -16,17 +16,34 @@
 #    limitations under the License.
 
 ma_est <- function(est, wt, est_method) {
+  if(est_method == "arithmetic") {
+    return(weighted.mean(est, w = wt))
+  }
   if(est_method == "geometric") {
     return(exp(weighted.mean(log(est), w = wt)))
-  }
-  weighted.mean(est, w = wt)
+  } 
+  chk_subset(est_method, ssd_est_methods())
 }
 
-ma_cl <- function(cl, wt, est_method) {
-  if(est_method == "geometric") {
-    return(exp(weighted.mean(log(cl), w = wt)))
-  }
-  weighted.mean(cl, w = wt)
+ma_lcl <- function(lcl, ucl, se, wt, ci_method) {
+  if(ci_method == "MACL") {
+    return(weighted.mean(lcl, w = wt))
+  } 
+  chk_subset(ci_method, ssd_ci_methods())
+}
+
+ma_ucl <- function(lcl, ucl, se, wt, ci_method) {
+  if(ci_method == "MACL") {
+    return(weighted.mean(ucl, w = wt))
+  } 
+  chk_subset(ci_method, ssd_ci_methods())
+}
+
+ma_se <- function(lcl, ucl, se, wt, ci_method) {
+  if(ci_method == "MACL") {
+    return(weighted.mean(se, w = wt))
+  } 
+  chk_subset(ci_method, ssd_ci_methods())
 }
 
 hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
@@ -36,12 +53,14 @@ hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
     dplyr::mutate(weight = weight) |>
     dplyr::summarise(
       est = ma_est(.data$est, .data$weight, est_method = est_method),
-      lcl = ma_cl(.data$lcl, .data$weight, est_method = est_method),
-      ucl = ma_cl(.data$ucl, .data$weight, est_method = est_method),
-      se = ma_cl(.data$se, .data$weight, est_method = est_method),
+      lcl2 = ma_lcl(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
+      ucl2 = ma_ucl(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
+      se2 = ma_se(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
       pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
-    dplyr::ungroup()
+    dplyr::ungroup() |>
+    dplyr::rename(
+      lcl = "lcl2", ucl = "ucl2", se = "se2")
 }
 
 hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot,
