@@ -30,7 +30,7 @@ hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
 hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot,
                              data, rescale, weighted, censoring, min_pmix,
                              range_shape1, range_shape2, parametric, control,
-                             save_to, samples, ci_method, hc, fun, ...) {
+                             save_to, samples, ci_method, hc, fun) {
   
   hcp <- purrr::map(
     x, hcp_tmbfit, nboot = nboot, value = value, ci = ci, level = level,

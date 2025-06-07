@@ -9,7 +9,7 @@ hcp_ind_weight <- function(hcp, weight) {
     dplyr::bind_rows()
 }
 
-hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,
+hcp_ind <- function(x, value, ci, level, nboot, min_pboot,
                     data, rescale,
                     weighted, censoring, min_pmix, range_shape1,
                     range_shape2, parametric,
@@ -25,8 +25,9 @@ hcp_ind <- function(x, value, ci, level, nboot, min_pboot, estimates,
     average = FALSE, control = control,
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
-  
-  weight <- purrr::map_dbl(estimates, function(x) x$weight)
+  weight <- glance(x, wt = TRUE)$wt
+  # 
+  # weight <- purrr::map_dbl(estimates, function(x) x$weight)
   
   hcp_ind_weight(hcp, weight = weight)
 }

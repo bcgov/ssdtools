@@ -17,7 +17,7 @@ hcp_noci <- function(value, nboot, est_method, ci_method, ...) {
 hcp_average <- function(
     x, value, data, ci, level, nboot, est_method,
     min_pboot, min_pmix,parametric,rescale, weighted, ci_method, censoring,
-    range_shape1, range_shape2, estimates, control, hc, save_to,
+    range_shape1, range_shape2, control, hc, save_to,
     samples, fun) {
   
   if (.is_censored(censoring) && !identical_parameters(x)) {
@@ -39,7 +39,7 @@ hcp_average <- function(
   
   hcp <- ci_fun(
     x, value = value, ci = ci, level = level, nboot = nboot, est_method = est_method,
-    min_pboot = min_pboot, estimates = estimates,
+    min_pboot = min_pboot,
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to, samples = samples,
@@ -60,7 +60,7 @@ hcp_average <- function(
     data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, control = control, save_to = save_to, samples = samples,
-    est_method = est_method, estimates = estimates,
+    est_method = est_method,
     ci_method = "arithmetic", hc = hc
   )
   replace_estimates(hcp, est)

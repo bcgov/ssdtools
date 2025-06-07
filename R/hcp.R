@@ -104,8 +104,7 @@ hcp2 <- function(
   range_shape2 <- .range_shape2_fitdists(x)
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
-  estimates <- .list_estimates(x, all_estimates = FALSE)
-  
+
   if(length(x) == 1L) {
     average <- FALSE
   }
@@ -127,7 +126,7 @@ hcp2 <- function(
   if (!average) {
     hcp <- hcp_ind(
       x, value = value, ci = ci, level = level, nboot = nboot,
-      min_pboot = min_pboot, estimates = estimates,
+      min_pboot = min_pboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control,
@@ -138,7 +137,7 @@ hcp2 <- function(
   } else {
     hcp <- hcp_average(
       x = x, value = value, ci = ci, level = level, nboot = nboot, est_method = est_method,
-      min_pboot = min_pboot, estimates = estimates, ci_method = ci_method,
+      min_pboot = min_pboot, ci_method = ci_method,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
       parametric = parametric, control = control,
