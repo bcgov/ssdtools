@@ -32,8 +32,6 @@ hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
                              range_shape1, range_shape2, parametric, control,
                              save_to, samples, ci_method, hc, fun) {
   
-  weight <- purrr::map_dbl(estimates, function(x) x$weight)
-  
   hcp <- purrr::map(
     x, hcp_tmbfit, nboot = nboot, value = value, ci = ci, level = level,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
@@ -41,6 +39,7 @@ hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot, estimates,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
+  weight <- purrr::map_dbl(estimates, function(x) x$weight)
   
   hcp_ma2(hcp, weight, est_method = est_method, ci_method = ci_method)
 }

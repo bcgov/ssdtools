@@ -1,8 +1,7 @@
-hcp_wb <- function(hcp, weight, level, nboot) {
+hcp_wb <- function(hcp, level, nboot) {
   hcp <- hcp |>
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
-    dplyr::mutate(weight = weight) |>
     dplyr::summarise(
       pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
@@ -46,7 +45,6 @@ hcp_weighted <- function(x, value, level, nboot, est_method, min_pboot, estimate
   
   x <- subset(x, names(x)[nboots > 0])
   nboots <- nboots[nboots > 0]
-  weight <- glance(x, wt = TRUE)$wt
 
   hcp <- purrr::map2(
     x, nboots, hcp_tmbfit, value = value, ci = TRUE, level = level,
@@ -56,5 +54,5 @@ hcp_weighted <- function(x, value, level, nboot, est_method, min_pboot, estimate
     hc = hc, save_to = save_to, samples = TRUE, fun = fun
   )
   
-  hcp_wb(hcp, weight = weight, level = level, nboot = nboot)
+  hcp_wb(hcp, level = level, nboot = nboot)
 }
