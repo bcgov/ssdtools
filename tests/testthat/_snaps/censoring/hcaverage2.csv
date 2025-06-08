@@ -1,2 +1,2 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,dists,samples
-average,0.05,1.30188,NA,NA,NA,1,multi,weighted_samples,parametric,0,1,"c(""gamma"", ""llogis"", ""lnorm"", ""weibull"")",numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+average,0.05,1.30188,NA,NA,NA,1,0.95,multi,weighted_samples,parametric,0,1,"c(""gamma"", ""llogis"", ""lnorm"", ""weibull"")",numeric(0)

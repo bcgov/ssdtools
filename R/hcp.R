@@ -47,10 +47,11 @@ no_hcp <- function(hc) {
   )
 }
 
-clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, nboot, min_pboot, samples) {
+clean_hcp <- function(hcp, ci, level, average, est_method, ci_method, parametric, nboot, min_pboot, samples) {
   hcp$est_method <- est_method
   hcp$ci_method <- ci_method
   hcp$boot_method <- if (parametric) "parametric" else "non-parametric"
+  hcp$level <- level
   
   if(ci) {
     hcp$nboot <- nboot
@@ -82,7 +83,7 @@ clean_hcp <- function(hcp, ci, average, est_method, ci_method, parametric, nboot
   }
   
   hcp |>
-    dplyr::select(c("dist", "value", "est", "se", "lcl", "ucl", "wt", "est_method", "ci_method", "boot_method", "nboot", "pboot", "dists", "samples"))
+    dplyr::select(c("dist", "value", "est", "se", "lcl", "ucl", "wt", "level", "est_method", "ci_method", "boot_method", "nboot", "pboot", "dists", "samples"))
 }
 
 hcp2 <- function(
@@ -145,7 +146,7 @@ hcp2 <- function(
     )
     hcp$dists <- rep(list(sort(names(x))), nrow(hcp))
   }
-  clean_hcp(hcp, ci = ci, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, nboot = nboot, min_pboot = min_pboot, samples = samples)  
+  clean_hcp(hcp, ci = ci, level = level, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, nboot = nboot, min_pboot = min_pboot, samples = samples)  
 }
 
 hcp <- function(

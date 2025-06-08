@@ -1,7 +1,7 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,dists,samples
-gamma,0.05,1.07428,NA,NA,NA,0.356574,cdf,percentile,parametric,0,1,gamma,numeric(0)
-lgumbel,0.05,1.76939,NA,NA,NA,0.0134466,cdf,percentile,parametric,0,1,lgumbel,numeric(0)
-llogis,0.05,1.56226,NA,NA,NA,0.0656452,cdf,percentile,parametric,0,1,llogis,numeric(0)
-lnorm,0.05,1.68117,NA,NA,NA,0.177236,cdf,percentile,parametric,0,1,lnorm,numeric(0)
-lnorm_lnorm,0.05,1.54147,NA,NA,NA,0.0296268,cdf,percentile,parametric,0,1,lnorm_lnorm,numeric(0)
-weibull,0.05,1.08673,NA,NA,NA,0.357472,cdf,percentile,parametric,0,1,weibull,numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+gamma,0.05,1.07428,NA,NA,NA,0.356574,0.95,cdf,percentile,parametric,0,1,gamma,numeric(0)
+lgumbel,0.05,1.76939,NA,NA,NA,0.0134466,0.95,cdf,percentile,parametric,0,1,lgumbel,numeric(0)
+llogis,0.05,1.56226,NA,NA,NA,0.0656452,0.95,cdf,percentile,parametric,0,1,llogis,numeric(0)
+lnorm,0.05,1.68117,NA,NA,NA,0.177236,0.95,cdf,percentile,parametric,0,1,lnorm,numeric(0)
+lnorm_lnorm,0.05,1.54147,NA,NA,NA,0.0296268,0.95,cdf,percentile,parametric,0,1,lnorm_lnorm,numeric(0)
+weibull,0.05,1.08673,NA,NA,NA,0.357472,0.95,cdf,percentile,parametric,0,1,weibull,numeric(0)

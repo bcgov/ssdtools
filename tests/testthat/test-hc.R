@@ -23,6 +23,13 @@ test_that("hc", {
   expect_snapshot_data(hc, "hc")
 })
 
+test_that("hc level", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  withr::local_seed(102)
+  hc <- ssd_hc(fits, ci = TRUE, level = 0.89, nboot = 10, average = FALSE, samples = TRUE)
+  expect_snapshot_data(hc, "hc89")
+})
+
 test_that("hc estimate with censored data same number of 2parameters", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc

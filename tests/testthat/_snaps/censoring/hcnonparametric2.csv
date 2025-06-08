@@ -1,5 +1,5 @@
-dist,proportion,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,dists,samples
-gamma,0.05,1.18081,1.63151,0.445984,4.95818,0.423429,cdf,percentile,non-parametric,10,1,gamma,numeric(0)
-llogis,0.05,1.78679,0.660192,0.974571,3.04553,0.0571963,cdf,percentile,non-parametric,10,1,llogis,numeric(0)
-lnorm,0.05,1.81555,0.716091,1.41929,3.42364,0.0983544,cdf,percentile,non-parametric,10,1,lnorm,numeric(0)
-weibull,0.05,1.2343,0.964931,0.658571,3.11011,0.42102,cdf,percentile,non-parametric,10,1,weibull,numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+gamma,0.05,1.18081,1.63151,0.445984,4.95818,0.423429,0.95,cdf,percentile,non-parametric,10,1,gamma,numeric(0)
+llogis,0.05,1.78679,0.660192,0.974571,3.04553,0.0571963,0.95,cdf,percentile,non-parametric,10,1,llogis,numeric(0)
+lnorm,0.05,1.81555,0.716091,1.41929,3.42364,0.0983544,0.95,cdf,percentile,non-parametric,10,1,lnorm,numeric(0)
+weibull,0.05,1.2343,0.964931,0.658571,3.11011,0.42102,0.95,cdf,percentile,non-parametric,10,1,weibull,numeric(0)
