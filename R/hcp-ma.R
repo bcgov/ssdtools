@@ -76,7 +76,9 @@ ma_lcl <- function(est, lcl, se, log_se, wt, df, level, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
   }
-  
+  tail <- 1-(1-level)/2 
+  adj <- stats::qt(tail, df = df)/stats::qnorm(tail)
+
   NA_real_ 
 }
 
