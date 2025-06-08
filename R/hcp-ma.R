@@ -40,16 +40,25 @@ ma_se <- function(se, log_se, est, wt, ci_method) {
   } 
   if(ci_method %in% "GMACL") {
     log_se <- weighted_mean(log_se, wt, geometric = FALSE)
-    est <- ma_est(est, wt = wt, est_method = "geometric")
-    return(exp_se(se = log_se, est = est))
-  } 
+    est_ma <- ma_est(est, wt = wt, est_method = "geometric")
+    return(exp_se(se = log_se, est = est_ma))
+  } ## FIXME: Turek and Fletcher 2021 have additional adjuster on se^2
+  ## but not seeing in Burnham and Anderson
+  if(ci_method %in% c("MAW1", "MAW2")) {
+    est_ma <- ma_est(est, wt = wt, est_method = "arithmetic")
+    if(ci_method == "MAW1") {
+      return(sum(wt * sqrt((se^2 + (est - est_ma)^2))))
+    } else {
+      return(sqrt(sum(wt * (se^2 + (est - est_ma)^2))))
+    }
+  }
   NA_real_
 }
 
 ma_lcl <- function(est, lcl, se, log_se, wt, df, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
-  } 
+  }
   NA_real_ 
 }
 
@@ -83,9 +92,9 @@ hcp_ma2 <- function(hcp, weight, ndata, est_method, ci_method) {
 }
 
 hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot,
-                             data, rescale, weighted, censoring, min_pmix,
-                             range_shape1, range_shape2, parametric, control,
-                             save_to, samples, ci_method, hc, fun) {
+                   data, rescale, weighted, censoring, min_pmix,
+                   range_shape1, range_shape2, parametric, control,
+                   save_to, samples, ci_method, hc, fun) {
   
   hcp <- purrr::map(
     x, hcp_tmbfit, nboot = nboot, value = value, ci = ci, level = level,
@@ -96,6 +105,6 @@ hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot,
   )
   weight <- glance(x, wt = TRUE)$wt
   ndata <- ndata(data)
-
+  
   hcp_ma2(hcp, weight, ndata, est_method = est_method, ci_method = ci_method)
 }
