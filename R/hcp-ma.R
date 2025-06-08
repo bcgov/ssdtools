@@ -52,6 +52,14 @@ ma_se <- function(se, log_se, est, wt, ci_method) {
       return(sqrt(sum(wt * (se^2 + (est - est_ma)^2))))
     }
   }
+  if(ci_method %in% c("GMAW1", "GMAW2")) {
+    est_ma <- ma_est(est, wt = wt, est_method = "geometric")
+    if(ci_method == "GMAW1") {
+      return(exp_se(sum(wt * sqrt((log_se^2 + (log(est) - log(est_ma))^2))), est_ma))
+    } else {
+      return(exp_se(sqrt(sum(wt * (log_se^2 + (log(est) - log(est_ma))^2))), est_ma))
+    }
+  }
   NA_real_
 }
 
