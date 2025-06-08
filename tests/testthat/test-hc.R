@@ -63,6 +63,12 @@ test_that("ssd_hc list names must be unique", {
   chk::expect_chk_error(ssd_hc(list("lnorm" = NULL, "lnorm" = NULL)))
 })
 
+test_that("hc with missing data", {
+  data <- ssddata::ccme_boron
+  data$Conc[1] <- NA_real_
+  chk::expect_chk_error(ssd_fit_dists(data))
+})
+
 test_that("ssd_hc list handles zero length list", {
   hc <- ssd_hc(structure(list(), .Names = character(0)))
   expect_s3_class(hc, "tbl_df")

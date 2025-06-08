@@ -43,3 +43,8 @@ root <- function(p, f) {
   }
   q
 }
+
+ndata <- function(data) {
+  ## FIXME: account for censoring
+  return(nrow(data))
+}

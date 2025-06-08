@@ -31,7 +31,7 @@ ma_est <- function(est, wt, est_method) {
   if(est_method %in% c("arithmetic", "geometric")) {
     return(weighted_mean(est, wt, geometric = est_method == "geometric"))
   }
-  chk_subset(est_method, ssd_est_methods())
+  NA_real_
 }
 
 ma_se <- function(se, log_se, est, wt, ci_method) {
@@ -43,24 +43,24 @@ ma_se <- function(se, log_se, est, wt, ci_method) {
     est <- ma_est(est, wt = wt, est_method = "geometric")
     return(exp_se(se = log_se, est = est))
   } 
-  chk_subset(ci_method, ssd_ci_methods())
+  NA_real_
 }
 
 ma_lcl <- function(est, lcl, se, wt, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
   } 
-  chk_subset(ci_method, ssd_ci_methods())
+  NA_real_ 
 }
 
 ma_ucl <- function(est, ucl, se, wt, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(ucl, wt, geometric = ci_method == "GMACL"))
   } 
-  chk_subset(ci_method, ssd_ci_methods())
+  NA_real_
 }
 
-hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
+hcp_ma2 <- function(hcp, weight, ndata, est_method, ci_method) {
   hcp <- hcp |>
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
@@ -90,6 +90,7 @@ hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot,
     hc = hc, save_to = save_to, samples = samples, fun = fun
   )
   weight <- glance(x, wt = TRUE)$wt
+  ndata <- ndata(data)
 
-  hcp_ma2(hcp, weight, est_method = est_method, ci_method = ci_method)
+  hcp_ma2(hcp, weight, ndata, est_method = est_method, ci_method = ci_method)
 }
