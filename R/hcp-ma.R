@@ -23,16 +23,8 @@ weighted_mean <- function(x, wt, geometric) {
 }
 
 ## https://stats.stackexchange.com/questions/123514/calculating-standard-error-after-a-log-transform
-log_se <- function(se, est) {
-  se / est
-}
-
 exp_se <- function(se, est) {
   se * est
-}
-
-log_est <- function(est, se) {
-  log(est) - log_se(se, est)^2 / 2
 }
 
 ma_est <- function(est, wt, est_method) {
@@ -42,13 +34,14 @@ ma_est <- function(est, wt, est_method) {
   chk_subset(est_method, ssd_est_methods())
 }
 
-ma_se <- function(est, se, wt, ci_method) {
+ma_se <- function(se, log_se, est, wt, ci_method) {
   if(ci_method %in% "MACL") {
     return(weighted_mean(se, wt, geometric = FALSE))
   } 
   if(ci_method %in% "GMACL") {
-##    se <- exp(log_se(se, est) what needs to happen here?
-    return(weighted_mean(se, wt, geometric = TRUE))
+    log_se <- weighted_mean(log_se, wt, geometric = FALSE)
+    est <- ma_est(est, wt = wt, est_method = "geometric")
+    return(exp_se(se = log_se, est = est))
   } 
   chk_subset(ci_method, ssd_ci_methods())
 }
@@ -74,7 +67,7 @@ hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
     dplyr::mutate(weight = weight) |>
     dplyr::summarise(
       est_ma = ma_est(.data$est, .data$weight, est_method = est_method),
-      se_ma = ma_se(se = .data$se, est = .data$est, wt = .data$weight, ci_method = ci_method),
+      se_ma = ma_se(se = .data$se, log_se = .data$log_se, est = .data$est, wt = .data$weight, ci_method = ci_method),
       lcl_ma = ma_lcl(lcl = .data$lcl, est = .data$est, se = .data$se, wt = .data$weight, ci_method = ci_method),
       ucl_ma = ma_ucl(ucl = .data$ucl, est = .data$est, se = .data$se, wt = .data$weight, ci_method = ci_method),
       pboot = min(.data$pboot),

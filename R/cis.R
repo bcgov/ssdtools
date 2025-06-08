@@ -26,7 +26,7 @@ xcis_estimates <- function(x, args, n, what, level, samples) {
   quantile <- unname(quantile(ests, probs = probs(level)))
   samples <- if (samples) ests else numeric(0)
   tibble(
-    se = sd(ests), lcl = quantile[1], ucl = quantile[2],
+    se = sd(ests), log_se = sd(log(ests)), lcl = quantile[1], ucl = quantile[2],
     samples = list(samples),
     row.names = NULL
   )
