@@ -29,24 +29,24 @@ ma_est <- function(est, wt, est_method) {
   chk_subset(est_method, ssd_est_methods())
 }
 
-ma_lcl <- function(lcl, ucl, se, wt, ci_method) {
+## FIXME: what should the se be for MACL and GMACL!
+ma_se <- function(est, se, wt, ci_method) {
+  if(ci_method %in% c("MACL", "GMACL")) {
+    return(weighted_mean(se, wt, geometric = ci_method == "GMACL"))
+  } 
+  chk_subset(ci_method, ssd_ci_methods())
+}
+
+ma_lcl <- function(est, lcl, se, wt, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
   } 
   chk_subset(ci_method, ssd_ci_methods())
 }
 
-ma_ucl <- function(lcl, ucl, se, wt, ci_method) {
+ma_ucl <- function(est, ucl, se, wt, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(ucl, wt, geometric = ci_method == "GMACL"))
-  } 
-  chk_subset(ci_method, ssd_ci_methods())
-}
-
-## FIXME: what should the se be for MACL and GMACL!
-ma_se <- function(lcl, ucl, se, wt, ci_method) {
-  if(ci_method %in% c("MACL", "GMACL")) {
-    return(weighted_mean(se, wt, geometric = ci_method == "GMACL"))
   } 
   chk_subset(ci_method, ssd_ci_methods())
 }
@@ -57,15 +57,15 @@ hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
     dplyr::group_by(.data$value) |>
     dplyr::mutate(weight = weight) |>
     dplyr::summarise(
-      est2 = ma_est(.data$est, .data$weight, est_method = est_method),
-      lcl2 = ma_lcl(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
-      ucl2 = ma_ucl(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
-      se2 = ma_se(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
+      est_ma = ma_est(.data$est, .data$weight, est_method = est_method),
+      se_ma = ma_se(se = .data$se, est = .data$est, wt = .data$weight, ci_method = ci_method),
+      lcl_ma = ma_lcl(lcl = .data$lcl, est = .data$est, se = .data$se, wt = .data$weight, ci_method = ci_method),
+      ucl_ma = ma_ucl(ucl = .data$ucl, est = .data$est, se = .data$se, wt = .data$weight, ci_method = ci_method),
       pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup() |>
     dplyr::rename(
-      est = "est2", lcl = "lcl2", ucl = "ucl2", se = "se2")
+      est = "est_ma", lcl = "lcl_ma", ucl = "ucl_ma", se = "se_ma")
 }
 
 hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot,
