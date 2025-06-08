@@ -34,6 +34,14 @@ ma_est <- function(est, wt, est_method) {
   NA_real_
 }
 
+maw1 <- function(se, est, est_ma, wt, adj = 1) {
+  sum(wt * sqrt((se^2 * adj + (est - est_ma)^2)))
+}
+
+maw2 <- function(se, est, est_ma, wt, adj = 1) {
+  sqrt(sum(wt * (se^2 * adj + (est - est_ma)^2)))
+}
+
 ma_se <- function(se, log_se, est, wt, ci_method) {
   if(ci_method %in% "MACL") {
     return(weighted_mean(se, wt, geometric = FALSE))
@@ -47,9 +55,9 @@ ma_se <- function(se, log_se, est, wt, ci_method) {
   if(ci_method %in% c("MAW1", "MAW2")) {
     est_ma <- ma_est(est, wt = wt, est_method = "arithmetic")
     if(ci_method == "MAW1") {
-      return(sum(wt * sqrt((se^2 + (est - est_ma)^2))))
+      return(maw1(se, est = est, est_ma = est_ma, wt = wt))
     } else {
-      return(sqrt(sum(wt * (se^2 + (est - est_ma)^2))))
+      return(maw2(se, est = est, est_ma = est_ma, wt = wt))
     }
   }
   if(ci_method %in% c("GMAW1", "GMAW2")) {
@@ -63,21 +71,22 @@ ma_se <- function(se, log_se, est, wt, ci_method) {
   NA_real_
 }
 
-ma_lcl <- function(est, lcl, se, log_se, wt, df, ci_method) {
+ma_lcl <- function(est, lcl, se, log_se, wt, df, level, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
   }
+  
   NA_real_ 
 }
 
-ma_ucl <- function(est, ucl, se, log_se, wt, df, ci_method) {
+ma_ucl <- function(est, ucl, se, log_se, wt, df, level, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(ucl, wt, geometric = ci_method == "GMACL"))
   } 
   NA_real_
 }
 
-hcp_ma2 <- function(hcp, weight, ndata, est_method, ci_method) {
+hcp_ma2 <- function(hcp, weight, ndata, level, est_method, ci_method) {
   data_dists <- ssdtools::dist_data |>
     dplyr::select("dist", "npars")
   
@@ -90,8 +99,8 @@ hcp_ma2 <- function(hcp, weight, ndata, est_method, ci_method) {
     dplyr::summarise(
       est_ma = ma_est(.data$est, .data$weight, est_method = est_method),
       se_ma = ma_se(se = .data$se, log_se = .data$log_se, est = .data$est, wt = .data$weight, ci_method = ci_method),
-      lcl_ma = ma_lcl(lcl = .data$lcl, est = .data$est, se = .data$se, log_se = .data$log_se, wt = .data$weight, df = .data$df, ci_method = ci_method),
-      ucl_ma = ma_ucl(ucl = .data$ucl, est = .data$est, se = .data$se, log_se = .data$log_se, wt = .data$weight, df = .data$df, ci_method = ci_method),
+      lcl_ma = ma_lcl(lcl = .data$lcl, est = .data$est, se = .data$se, log_se = .data$log_se, wt = .data$weight, df = .data$df, level = level, ci_method = ci_method),
+      ucl_ma = ma_ucl(ucl = .data$ucl, est = .data$est, se = .data$se, log_se = .data$log_se, wt = .data$weight, df = .data$df, level = level, ci_method = ci_method),
       pboot = min(.data$pboot),
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup() |>
@@ -114,5 +123,5 @@ hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot,
   weight <- glance(x, wt = TRUE)$wt
   ndata <- ndata(data)
   
-  hcp_ma2(hcp, weight, ndata, est_method = est_method, ci_method = ci_method)
+  hcp_ma2(hcp, weight, ndata, level = level, est_method = est_method, ci_method = ci_method)
 }
