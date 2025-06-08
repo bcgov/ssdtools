@@ -76,24 +76,23 @@ ma_se <- function(se, log_se, est, wt, adj, ci_method) {
   NA_real_
 }
 
-ma_ci <- function(est, se, log_se, wt, df, level, adj, ci_method) {
-  if(ci_method %in% c("MACL", "GMACL")) {
-    return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
-  }
-  return(NA_real_)
+ma_ci <- function(est, se, log_se, wt, df, level, ci_method) {
   tail <- 1-(1-level)/2 
   adj <- stats::qt(tail, df = df)/stats::qnorm(tail)
-  se_adj <- ma_se(se = se, log_se = log_se, est = est, wt = wt, ,
+  se_adj <- ma_se(se = se, log_se = log_se, est = est, wt = wt,
                   adj = adj, ci_method = ci_method)
-  ci <- qnorm(c(1-tail, tail))
+  quantiles <- stats::qnorm(c(1-tail, tail))
         
   if(ci_method %in% c("MAW1", "MAW2")) {
     est_ma <- ma_est(est, wt = wt, est_method = "arithmetic")
-    return(est_ma + se_adj * ci)
+    ci <- est_ma + se_adj * quantiles
+    ci[ci < 0] <- 0
+    return(ci)
   }
   if(ci_method %in% c("GMAW1", "GMAW2")) {
     est_ma <- ma_est(est, wt = wt, est_method = "geometric")
-    return(NA_real_)
+    ci <- exp(log(est_ma) + log_se(se_adj, est_ma) * quantiles)
+    return(ci)
   }
   NA_real_ 
 }
@@ -103,9 +102,8 @@ ma_lcl <- function(est, lcl, se, log_se, wt, df, level, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
   }
-  return(NA_real_)
   if(ci_method %in% c("MAW1", "MAW2", "GMAW1", "GMAW2")) {
-    ci <- ma_ci(est = est, se = se, log_se = log_se, wt = wt, df = df, level = level, adj = adj, ci_method = ci_method)
+    ci <- ma_ci(est = est, se = se, log_se = log_se, wt = wt, df = df, level = level, ci_method = ci_method)
     return(ci[1])
   }
   NA_real_ 
@@ -115,9 +113,8 @@ ma_ucl <- function(ucl, est, se, log_se, wt, df, level, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(ucl, wt, geometric = ci_method == "GMACL"))
   }
-  return(NA_real_)
   if(ci_method %in% c("MAW1", "MAW2", "GMAW1", "GMAW2")) {
-    ci <- ma_ci(est = est, se = se, log_se = log_se, wt = wt, df = df, level = level, adj = adj, ci_method = ci_method)
+    ci <- ma_ci(est = est, se = se, log_se = log_se, wt = wt, df = df, level = level, ci_method = ci_method)
     return(ci[2])
   }
   NA_real_ 
