@@ -57,7 +57,7 @@ hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
     dplyr::group_by(.data$value) |>
     dplyr::mutate(weight = weight) |>
     dplyr::summarise(
-      est = ma_est(.data$est, .data$weight, est_method = est_method),
+      est2 = ma_est(.data$est, .data$weight, est_method = est_method),
       lcl2 = ma_lcl(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
       ucl2 = ma_ucl(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
       se2 = ma_se(.data$lcl, .data$ucl, .data$se, .data$weight, ci_method = ci_method),
@@ -65,7 +65,7 @@ hcp_ma2 <- function(hcp, weight, est_method, ci_method) {
       samples = list(unlist(.data$samples))) |>
     dplyr::ungroup() |>
     dplyr::rename(
-      lcl = "lcl2", ucl = "ucl2", se = "se2")
+      est = "est2", lcl = "lcl2", ucl = "ucl2", se = "se2")
 }
 
 hcp_ma <- function(x, value, ci, level, nboot, est_method, min_pboot,
