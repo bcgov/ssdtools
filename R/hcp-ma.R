@@ -22,6 +22,19 @@ weighted_mean <- function(x, wt, geometric) {
   weighted.mean(x, w = wt)
 }
 
+## https://stats.stackexchange.com/questions/123514/calculating-standard-error-after-a-log-transform
+log_se <- function(se, est) {
+  se / est
+}
+
+exp_se <- function(se, est) {
+  se * est
+}
+
+log_est <- function(est, se) {
+  log(est) - log_se(se, est)^2 / 2
+}
+
 ma_est <- function(est, wt, est_method) {
   if(est_method %in% c("arithmetic", "geometric")) {
     return(weighted_mean(est, wt, geometric = est_method == "geometric"))
@@ -29,10 +42,13 @@ ma_est <- function(est, wt, est_method) {
   chk_subset(est_method, ssd_est_methods())
 }
 
-## FIXME: what should the se be for MACL and GMACL!
 ma_se <- function(est, se, wt, ci_method) {
-  if(ci_method %in% c("MACL", "GMACL")) {
-    return(weighted_mean(se, wt, geometric = ci_method == "GMACL"))
+  if(ci_method %in% "MACL") {
+    return(weighted_mean(se, wt, geometric = FALSE))
+  } 
+  if(ci_method %in% "GMACL") {
+##    se <- exp(log_se(se, est) what needs to happen here?
+    return(weighted_mean(se, wt, geometric = TRUE))
   } 
   chk_subset(ci_method, ssd_ci_methods())
 }
