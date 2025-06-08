@@ -27,6 +27,10 @@ exp_se <- function(se, est) {
   se * est
 }
 
+log_se <- function(se, est) {
+  se / est
+}
+
 ma_est <- function(est, wt, est_method) {
   if(est_method %in% c("arithmetic", "geometric")) {
     return(weighted_mean(est, wt, geometric = est_method == "geometric"))
@@ -34,15 +38,15 @@ ma_est <- function(est, wt, est_method) {
   NA_real_
 }
 
-maw1 <- function(se, est, est_ma, wt, adj = 1) {
+maw1 <- function(se, est, est_ma, wt, adj) {
   sum(wt * sqrt((se^2 * adj + (est - est_ma)^2)))
 }
 
-maw2 <- function(se, est, est_ma, wt, adj = 1) {
+maw2 <- function(se, est, est_ma, wt, adj) {
   sqrt(sum(wt * (se^2 * adj + (est - est_ma)^2)))
 }
 
-ma_se <- function(se, log_se, est, wt, ci_method) {
+ma_se <- function(se, log_se, est, wt, adj, ci_method) {
   if(ci_method %in% "MACL") {
     return(weighted_mean(se, wt, geometric = FALSE))
   } 
@@ -55,38 +59,68 @@ ma_se <- function(se, log_se, est, wt, ci_method) {
   if(ci_method %in% c("MAW1", "MAW2")) {
     est_ma <- ma_est(est, wt = wt, est_method = "arithmetic")
     if(ci_method == "MAW1") {
-      return(maw1(se, est = est, est_ma = est_ma, wt = wt))
+      return(maw1(se, est = est, est_ma = est_ma, wt = wt, adj = adj))
     } else {
-      return(maw2(se, est = est, est_ma = est_ma, wt = wt))
+      return(maw2(se, est = est, est_ma = est_ma, wt = wt, adj = adj))
     }
   }
   if(ci_method %in% c("GMAW1", "GMAW2")) {
     est_ma <- ma_est(est, wt = wt, est_method = "geometric")
     if(ci_method == "GMAW1") {
-      maw_se <- maw1(log_se, est = log(est), est_ma = log(est_ma), wt = wt)
+      maw_se <- maw1(log_se, est = log(est), est_ma = log(est_ma), wt = wt, adj = adj)
     } else {
-      maw_se <- maw2(log_se, est = log(est), est_ma = log(est_ma), wt = wt)
+      maw_se <- maw2(log_se, est = log(est), est_ma = log(est_ma), wt = wt, adj = adj)
     }
     return(exp_se(maw_se, est_ma))
   }
   NA_real_
 }
 
+ma_ci <- function(est, se, log_se, wt, df, level, adj, ci_method) {
+  if(ci_method %in% c("MACL", "GMACL")) {
+    return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
+  }
+  return(NA_real_)
+  tail <- 1-(1-level)/2 
+  adj <- stats::qt(tail, df = df)/stats::qnorm(tail)
+  se_adj <- ma_se(se = se, log_se = log_se, est = est, wt = wt, ,
+                  adj = adj, ci_method = ci_method)
+  ci <- qnorm(c(1-tail, tail))
+        
+  if(ci_method %in% c("MAW1", "MAW2")) {
+    est_ma <- ma_est(est, wt = wt, est_method = "arithmetic")
+    return(est_ma + se_adj * ci)
+  }
+  if(ci_method %in% c("GMAW1", "GMAW2")) {
+    est_ma <- ma_est(est, wt = wt, est_method = "geometric")
+    return(NA_real_)
+  }
+  NA_real_ 
+}
+
+
 ma_lcl <- function(est, lcl, se, log_se, wt, df, level, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(lcl, wt, geometric = ci_method == "GMACL"))
   }
-  tail <- 1-(1-level)/2 
-  adj <- stats::qt(tail, df = df)/stats::qnorm(tail)
-
+  return(NA_real_)
+  if(ci_method %in% c("MAW1", "MAW2", "GMAW1", "GMAW2")) {
+    ci <- ma_ci(est = est, se = se, log_se = log_se, wt = wt, df = df, level = level, adj = adj, ci_method = ci_method)
+    return(ci[1])
+  }
   NA_real_ 
 }
 
-ma_ucl <- function(est, ucl, se, log_se, wt, df, level, ci_method) {
+ma_ucl <- function(ucl, est, se, log_se, wt, df, level, ci_method) {
   if(ci_method %in% c("MACL", "GMACL")) {
     return(weighted_mean(ucl, wt, geometric = ci_method == "GMACL"))
-  } 
-  NA_real_
+  }
+  return(NA_real_)
+  if(ci_method %in% c("MAW1", "MAW2", "GMAW1", "GMAW2")) {
+    ci <- ma_ci(est = est, se = se, log_se = log_se, wt = wt, df = df, level = level, adj = adj, ci_method = ci_method)
+    return(ci[2])
+  }
+  NA_real_ 
 }
 
 hcp_ma2 <- function(hcp, weight, ndata, level, est_method, ci_method) {
@@ -101,7 +135,8 @@ hcp_ma2 <- function(hcp, weight, ndata, level, est_method, ci_method) {
     dplyr::mutate(weight = weight) |>
     dplyr::summarise(
       est_ma = ma_est(.data$est, .data$weight, est_method = est_method),
-      se_ma = ma_se(se = .data$se, log_se = .data$log_se, est = .data$est, wt = .data$weight, ci_method = ci_method),
+      se_ma = ma_se(se = .data$se, log_se = .data$log_se, est = .data$est, wt = .data$weight, 
+                    adj = 1, ci_method = ci_method),
       lcl_ma = ma_lcl(lcl = .data$lcl, est = .data$est, se = .data$se, log_se = .data$log_se, wt = .data$weight, df = .data$df, level = level, ci_method = ci_method),
       ucl_ma = ma_ucl(ucl = .data$ucl, est = .data$est, se = .data$se, log_se = .data$log_se, wt = .data$weight, df = .data$df, level = level, ci_method = ci_method),
       pboot = min(.data$pboot),
