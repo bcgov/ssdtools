@@ -39,11 +39,11 @@ ma_est <- function(est, wt, est_method) {
 }
 
 maw1 <- function(se, est, est_ma, wt, adj) {
-  sum(wt * sqrt((se^2 * adj + (est - est_ma)^2)))
+  sum(wt * sqrt(((se * adj)^2 + (est - est_ma)^2)))
 }
 
 maw2 <- function(se, est, est_ma, wt, adj) {
-  sqrt(sum(wt * (se^2 * adj + (est - est_ma)^2)))
+  sqrt(sum(wt * ((se * adj)^2 + (est - est_ma)^2)))
 }
 
 ma_se <- function(se, log_se, est, wt, adj, ci_method) {
@@ -79,6 +79,7 @@ ma_se <- function(se, log_se, est, wt, adj, ci_method) {
 ma_ci <- function(est, se, log_se, wt, df, level, ci_method) {
   tail <- 1-(1-level)/2 
   adj <- stats::qt(tail, df = df)/stats::qnorm(tail)
+  ## get log_se_adj here .... then not need log_se().
   se_adj <- ma_se(se = se, log_se = log_se, est = est, wt = wt,
                   adj = adj, ci_method = ci_method)
   quantiles <- stats::qnorm(c(1-tail, tail))
