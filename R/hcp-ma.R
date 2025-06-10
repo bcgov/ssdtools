@@ -22,6 +22,7 @@ weighted_mean <- function(x, wt, geometric) {
   weighted.mean(x, w = wt)
 }
 
+## TODO: becky to confirm she agrees with this transform
 ## https://stats.stackexchange.com/questions/123514/calculating-standard-error-after-a-log-transform
 exp_se <- function(se, est) {
   se * est
