@@ -11,5 +11,5 @@
 #' @examples
 #' ssd_est_methods()
 ssd_est_methods <- function() {
-  c("arithmetic", "geometric", "multi")
+  sort(c("arithmetic", "geometric", "multi"))
 }

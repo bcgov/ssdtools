@@ -1,5 +1,4 @@
 test_that("ssd_est_methods", {
-  expect_identical(ssd_est_methods(), 
-                   c("arithmetic", "geometric", "multi"))
+  expect_snapshot_value(ssd_est_methods(), style = "deparse")
 })
 
