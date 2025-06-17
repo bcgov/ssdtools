@@ -204,6 +204,7 @@
 #' @param ... Unused.
 #' @aliases parameters arguments args
 #' @usage NULL
+#' @keywords internal
 #' @export
 # nocov start
 params <- function(...) NULL

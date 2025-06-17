@@ -24,6 +24,7 @@
 #' @inheritParams params
 #' @return A character vector.
 #' @seealso [ssd_label_comma()]
+#' @keywords internal
 #' @export
 #' @examples
 #' \dontrun{

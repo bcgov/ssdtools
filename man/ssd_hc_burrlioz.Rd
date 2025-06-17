@@ -41,3 +41,4 @@ A tibble of corresponding hazard concentrations.
 \description{
 Deprecated for \code{\link[=ssd_hc]{ssd_hc()}}.
 }
+\keyword{internal}

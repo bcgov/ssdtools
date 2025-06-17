@@ -19,3 +19,4 @@ for non-censored data.
 \details{
 Deprecated for \code{\link[fitdistrplus:descdist]{fitdistrplus::descdist()}}.
 }
+\keyword{internal}

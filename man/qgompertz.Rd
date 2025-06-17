@@ -21,3 +21,4 @@ qgompertz(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE)
 \description{
 Deprecated for \code{ssd_qgompertz()}.
 }
+\keyword{internal}

@@ -28,6 +28,7 @@
 #'   \item{dist}{The distribution (chr).}
 #' }
 #' @family boron
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
@@ -51,6 +52,7 @@
 #'   \item{bound}{Whether one or more parameters have boundaries (flag).}
 #' }
 #' @family dists
+#' @keywords internal
 #' @examples
 #' dist_data
 "dist_data"

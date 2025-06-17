@@ -21,6 +21,7 @@
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
+#' @keywords internal
 #' @export
 dlgumbel <- function(x, locationlog = 0, scalelog = 1, log = FALSE) {
   lifecycle::deprecate_stop("1.0.0", "dlgumbel()")
@@ -53,6 +54,7 @@ ssd_elgumbel <- function() {
 #' Deprecated for `ssd_plgumbel()`.
 #'
 #' @inheritParams params
+#' @keywords internal
 #' @export
 plgumbel <- function(q, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_stop("1.0.0", "plgumbel()", "ssd_plgumbel()")
@@ -76,6 +78,7 @@ ssd_qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, lo
 #' Deprecated for `ssd_qlgumbel()`.
 #'
 #' @inheritParams params
+#' @keywords internal
 #' @export
 qlgumbel <- function(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_stop("1.0.0", "qlgumbel()", "ssd_qlgumbel()")
@@ -112,6 +115,7 @@ ssd_elgumbel <- function() {
 #'
 #' `r lifecycle::badge("deprecated")`
 #' @inheritParams params
+#' @keywords internal
 #' @export
 rlgumbel <- function(n, locationlog = 0, scalelog = 1) {
   lifecycle::deprecate_stop("1.0.0", "rlgumbel()", "ssd_rlgumbel()")

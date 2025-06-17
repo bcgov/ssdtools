@@ -33,4 +33,4 @@ Other dists:
 \code{\link{ssd_dists_shiny}()}
 }
 \concept{dists}
-\keyword{datasets}
+\keyword{internal}

@@ -26,6 +26,7 @@
 #' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @family wqg
 #' @seealso [`ssd_fit_bcanz()`] and [`ssd_hc()`]
+#' @keywords internal
 #' @export
 #'
 #' @examples
@@ -53,6 +54,7 @@ ssd_wqg_bc <- function(data, left = "Conc") {
 #' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @family wqg
 #' @seealso [`ssd_fit_burrlioz()`] and [`ssd_hc()`]
+#' @keywords internal
 #' @export
 #'
 #' @examples
