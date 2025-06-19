@@ -45,6 +45,6 @@ root <- function(p, f) {
 }
 
 ndata <- function(data) {
-  ## FIXME: account for censoring
+  ## FIXME: account for censoring otherwise error...
   return(nrow(data))
 }

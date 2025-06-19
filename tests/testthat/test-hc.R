@@ -477,16 +477,15 @@ test_that("ssd_hc effect with higher weight two distributions", {
 })
 
 test_that("ssd_hc cis with non-convergence", {
-  withr::with_seed(99, {
-    conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
-    data <- data.frame(Conc = conc)
-    fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
-    expect_identical(attr(fit, "min_pmix"), 0.15)
-    hc15 <- ssd_hc(fit, ci = TRUE, nboot = 10, min_pboot = 0.9, ci_method = "MACL")
-    attr(fit, "min_pmix") <- 0.3
-    expect_identical(attr(fit, "min_pmix"), 0.3)
-    hc30 <- ssd_hc(fit, ci = TRUE, nboot = 10, min_pboot = 0.9, ci_method = "MACL")
-  })
+  withr::local_seed(99)
+  conc <- ssd_rlnorm_lnorm(100, meanlog1 = 0, meanlog2 = 1, sdlog1 = 1 / 10, sdlog2 = 1 / 10, pmix = 0.2)
+  data <- data.frame(Conc = conc)
+  fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
+  expect_identical(attr(fit, "min_pmix"), 0.15)
+  hc15 <- ssd_hc(fit, ci = TRUE, nboot = 10, min_pboot = 0.9, ci_method = "MACL")
+  attr(fit, "min_pmix") <- 0.3
+  expect_identical(attr(fit, "min_pmix"), 0.3)
+  hc30 <- ssd_hc(fit, ci = TRUE, nboot = 10, min_pboot = 0.9, ci_method = "MACL")
   expect_snapshot_data(hc30, "hc_30")
 })
 
@@ -773,9 +772,8 @@ test_that("ssd_hc identical if in parallel", {
 
 test_that("hc multi_ci false weighted", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "gamma"))
-  withr::with_seed(102, {
-    hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, ci_method = "weighted_samples", est_method = "arithmetic", min_pboot = 0.8)
-  })
+  withr::local_seed(102)
+  hc <- ssd_hc(fits, ci = TRUE, nboot = 10, average = TRUE, samples = TRUE, ci_method = "weighted_samples", est_method = "arithmetic", min_pboot = 0.8)
   expect_snapshot_data(hc, "hc_weighted_samples")
 })
 
@@ -880,6 +878,15 @@ test_that("hc ci_method = 'weighted_arithmetic' deprecated for MACL", {
   
   expect_identical(macl, weighted_arithmetic)
 })
+
+
+test_that("ssd_hc fitdists arithmetic_samples ci", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+  hc <- ssd_hc(fits, ci_method = "arithmetic_samples", est_method = "arithmetic", nboot = 10, average = TRUE, ci = TRUE)
+  expect_s3_class(hc, "tbl_df")
+  expect_snapshot_data(hc, "hc_arithmetic_samples")
+})
+
 
 test_that("hc est_method and ci_method combos", {
   fit1 <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")

@@ -11,6 +11,7 @@
 #' @examples
 #' ssd_ci_methods()
 ssd_ci_methods <- function() {
-  sort(c("MACL", "GMACL", "MAW1", "MAW2", "GMAW1", "GMAW2", "multi_fixed", "multi_free", "weighted_samples"))
-  ## TODO: finish "MAW1" and "MAW2" add "MAW1", "MAW2" and potentiall "MATA" methods
+  sort(c("MACL", "GMACL", "MAW1", "MAW2", "GMAW1", "GMAW2", 
+         "multi_fixed", "multi_free", "arithmetic_samples", "geometric_samples", "weighted_samples"))
+  ## TODO: add "MATA" method?
 }

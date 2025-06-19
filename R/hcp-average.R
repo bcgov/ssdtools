@@ -47,6 +47,8 @@ hcp_average <- function(
     hcp_multi
   } else if(ci_method == "weighted_samples") {
     hcp_weighted
+  } else if(ci_method %in% c("arithmetic_samples", "geometric_samples")) {
+    hcp_samples
   } else {
     est_same <- est_method %in% c("arithmetic", "geometric")
     hcp_ma
