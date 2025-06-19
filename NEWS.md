@@ -1,9 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.3.0.9004
+# ssdtools 2.3.0.9005
 
 - Implemented model fitting with right censoring for all distributions (by @eduardszoecs).
 
+- Added following `ci_methods`: `"GMACL"`, `"MAW1"`, `"MAW2"`, `"GMAW1"`, `"GMAW2"`, `"arithmetic_samples"` and `"geometric_samples"` to `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added ... and check unused to ensure matching names of subsequent arguments.
 - Added class and attribute preserving `[[` and `[` operators.
 - Fixed error message when Inf weights.
@@ -12,9 +13,10 @@
 - Added column `"dists"` to `ssd_hc()` and `ssd_hp()` which is a list of the distributions.
 - Renamed `"method"` column to `"boot_method"` in tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"est_method"` and `"ci_method"` columns to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Added `"level"` column to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"at_bound"` and `"computable"` columns to tibble output by `gof()`.
 - Added `strict = TRUE` argument to `subset()` to allow subsetting when distributions missing (with `strict = FALSE`).
-
+- Now ensures weighted_samples sum to nboot.
 - Improved method to calculate `ssd_ecd()` so ensures symmetric about 0.5 and deprecated `ties.method = "first"` argument.
 - `ssd_fit_bcanz()` now checks all dists are subset of `ssd_dists_bcanz()`.
 - `ssd_hc()`, `ssd_hp()` and `predict()` now return all non-missing values when `nboot = 0` except se, lcl and ucl.
