@@ -200,7 +200,6 @@ ssd_fit_dists <- function(
   
   chk_whole_number(nrow)
   chk_gte(nrow, 4L)
-  .chk_data(data, left, right, weight, nrow)
   
   chkor_vld(vld_flag(rescale), vld_string(rescale))
   chk_number(wet1)
@@ -232,6 +231,7 @@ ssd_fit_dists <- function(
     rescale <- "no"
   }
   chk_subset(rescale, c("no", "geomean", "wet"))
+  .chk_data(data, left, right, weight, wet = rescale == "wet", nrow)
   
   org_data <- as_tibble(data)
   data <- process_data(data, left, right, weight)

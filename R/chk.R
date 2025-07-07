@@ -15,7 +15,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.chk_data <- function(data, left, right, weight = NULL, nrow = 0, missing = FALSE) {
+.chk_data <- function(data, left, right, wet = FALSE, weight = NULL, nrow = 0, missing = FALSE) {
   chk_string(left)
   chk_string(right)
   chk_null_or(weight, vld = vld_string)
@@ -28,8 +28,14 @@
 
   org_data <- data
   values <- setNames(list(c(0, Inf, NA)), left)
+  if (wet) {
+    values <- setNames(list(c(0, 1, NA)), left)
+  }
   if (left != right) {
     values <- c(values, setNames(list(c(0, Inf, NA)), right))
+    if (wet) {
+      values <- c(values, setNames(list(c(0, 1, NA)), right))
+    }
   }
   if (!is.null(weight)) {
     values <- c(values, setNames(list(c(0, Inf)), weight))
@@ -57,6 +63,11 @@
   if (!missing) {
     missing <- (is.na(data$left) | data$left == 0 | is.infinite(data$left)) &
       (is.na(data$right) | data$right == 0 | is.infinite(data$right))
+    
+    if(wet) {
+      missing <- (is.na(data$left) | data$left == 0 | data$left == 1) &
+        (is.na(data$right) | data$right == 0 | data$right == 1)
+    }
 
     if (any(missing)) {
       msg <- paste0("`data` has %n row%s with effectively missing values in '", left, "'")
