@@ -15,16 +15,16 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-samples_multiply <- function(samples, multiplier) {
-  purrr::map(samples, function(x, m) x * m, m = multiplier)
+samples_unscale <- function(samples, rescale) {
+  purrr::map(samples, function(x, r) unscale(x, r), r = rescale)
 }
 
-hcp_multiply <- function(hcp, multiplier) {
-  hcp$est <- hcp$est * multiplier
-  hcp$se <- hcp$se * multiplier
-  hcp$lcl <- hcp$lcl * multiplier
-  hcp$ucl <- hcp$ucl * multiplier
-  hcp$samples <- samples_multiply(hcp$samples, multiplier)
+hcp_unscale <- function(hcp, rescale) {
+  hcp$est <- unscale(hcp$est, rescale)
+  hcp$se <- unscale(hcp$se, rescale)
+  hcp$lcl <- unscale(hcp$lcl, rescale)
+  hcp$ucl <- unscale(hcp$ucl, rescale)
+  hcp$samples <- samples_unscale(hcp$samples, rescale)
   hcp
 }
 

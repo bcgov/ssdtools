@@ -21,32 +21,32 @@ replace_min_pboot_na <- function(x, min_pboot) {
 }
 
 ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
-  multiplier <- if (hc) rescale else 1
+  rescale <- if (hc) rescale else 1
   
   tibble(
     dist = dist,
     value = value,
-    est = est * multiplier,
-    log_se = cis$log_se + log(multiplier), 
-    se = cis$se * multiplier,
-    lcl = cis$lcl * multiplier,
-    ucl = cis$ucl * multiplier,
+    est = unscale(est, rescale),
+    log_se = log(unscale(exp(cis$log_se), rescale)), 
+    se = unscale(cis$se, rescale),
+    lcl = unscale(cis$lcl, rescale),
+    ucl = unscale(cis$ucl, rescale),
     wt = rep(1, length(value)),
     nboot = nboot,
     pboot = length(estimates) / nboot,
-    samples = I(lapply(cis$samples, function(x) x * multiplier))
+    samples = I(lapply(cis$samples, function(x) unscale(x, rescale)))
   )
 }
 
 no_ci_hcp <- function(value, dist, est, rescale, hc) {
   na <- rep(NA_real_, length(value))
   na_chr <- rep(NA_character_, length(value))
-  multiplier <- if (hc) rescale else 1
+  rescale <- if (hc) rescale else 1
   
   tibble(
     dist = rep(dist, length(value)),
     value = value,
-    est = est * multiplier,
+    est = unscale(est, rescale),
     se = na,
     log_se = na,
     lcl = na,
