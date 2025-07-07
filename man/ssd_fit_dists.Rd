@@ -13,6 +13,7 @@ ssd_fit_dists(
   dists = ssd_dists_bcanz(),
   nrow = 6L,
   rescale = FALSE,
+  wet1 = 0.999,
   reweight = FALSE,
   computable = FALSE,
   at_boundary_ok = TRUE,
@@ -39,7 +40,10 @@ ssd_fit_dists(
 
 \item{nrow}{A positive whole number of the minimum number of non-missing rows.}
 
-\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.}
+\item{rescale}{A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("wet").}
+
+\item{wet1}{A number specifying the upper left value when \code{rescale = "wet"}.
+By default left values cannot exceed 0.999.}
 
 \item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 

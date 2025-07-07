@@ -128,7 +128,7 @@ geomid <- function(x) {
   exp(mean(log(range(x))))
 }
 
-adjust_data <- function(data, rescale, reweight, silent) {
+adjust_data <- function(data, rescale, reweight, wet1, silent) {
   censoring <- censoring(data)
 
   if (reweight) {
@@ -137,13 +137,19 @@ adjust_data <- function(data, rescale, reweight, silent) {
   weighted <- max(data$weight)
   unequal <- any(data$weight != data$weight[1])
 
-  if (rescale) {
+  if (rescale == "geomean") {
     rescale <- c(data$left, data$right)
     rescale <- geomid(rescale)
     data$left <- data$left / rescale
     data$right <- data$right / rescale
-  } else {
+  } else if(rescale == "no") {
     rescale <- 1
+  } else {
+    data$left <- pmin(data$left, wet1)
+    data$left <- logit(data$left)
+    data$right[is.infinite(data$right)] <- 1
+    data$right <- logit(data$right)
+    rescale <- Inf
   }
 
   list(data = data, censoring = censoring, rescale = rescale, weighted = weighted, unequal = unequal)

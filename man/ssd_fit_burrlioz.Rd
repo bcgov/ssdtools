@@ -20,7 +20,7 @@ ssd_fit_burrlioz(
 
 \item{...}{Unused.}
 
-\item{rescale}{A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.}
+\item{rescale}{A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("wet").}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 

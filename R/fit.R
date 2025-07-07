@@ -176,6 +176,7 @@ ssd_fit_dists <- function(
     dists = ssd_dists_bcanz(),
     nrow = 6L,
     rescale = FALSE,
+    wet1 = 0.999,
     reweight = FALSE,
     computable = FALSE,
     at_boundary_ok = TRUE,
@@ -201,7 +202,9 @@ ssd_fit_dists <- function(
   chk_gte(nrow, 4L)
   .chk_data(data, left, right, weight, nrow)
   
-  chk_flag(rescale)
+  chkor_vld(vld_flag(rescale), vld_string(rescale))
+  chk_number(wet1)
+  chk_range(wet1, inclusive = FALSE)
   chk_flag(reweight)
   chk_flag(computable)
   chk_flag(at_boundary_ok)
@@ -223,9 +226,16 @@ ssd_fit_dists <- function(
   chk_list(control)
   chk_flag(silent)
   
+  if(isTRUE(rescale)) {
+    rescale <- "geomean"
+  } else if(isFALSE(rescale)) {
+    rescale <- "no"
+  }
+  chk_subset(rescale, c("no", "geomean", "wet"))
+  
   org_data <- as_tibble(data)
   data <- process_data(data, left, right, weight)
-  attrs <- adjust_data(data, rescale = rescale, reweight = reweight, silent = silent)
+  attrs <- adjust_data(data, rescale = rescale, reweight = reweight, wet1 = wet1, silent = silent)
   
   fits <- fits_dists(attrs$data, dists,
                      min_pmix = min_pmix, range_shape1 = range_shape1,
