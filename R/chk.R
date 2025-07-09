@@ -63,11 +63,6 @@
   if (!missing) {
     missing <- (is.na(data$left) | data$left == 0 | is.infinite(data$left)) &
       (is.na(data$right) | data$right == 0 | is.infinite(data$right))
-    
-    if(wet) {
-      missing <- (is.na(data$left) | data$left == 0 | data$left == 1) &
-        (is.na(data$right) | data$right == 0 | data$right == 1)
-    }
 
     if (any(missing)) {
       msg <- paste0("`data` has %n row%s with effectively missing values in '", left, "'")

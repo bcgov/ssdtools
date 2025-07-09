@@ -31,7 +31,6 @@ hcp_ind <- function(x, value, ci, level, nboot, min_pboot,
                     weighted, censoring, min_pmix, range_shape1,
                     range_shape2, parametric,
                     control, est_method, ci_method, hc, save_to, samples, fun) {
-  
   hcp <- purrr::map(
     x, hcp_tmbfit, nboot = nboot,
     value = value, ci = ci, level = level,

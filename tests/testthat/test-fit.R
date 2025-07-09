@@ -296,6 +296,17 @@ test_that("ssd_fit_dists works with slightly censored data", {
   expect_snapshot_value(tidy$se, style = "deparse")
 })
 
+test_that("ssd_fit_dists works with wet data", {
+  data <- ssddata::ccme_boron
+  data$Conc <- plogis(data$Conc)
+  
+  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "wet")
+  
+  tidy <- tidy(fits)
+  
+  expect_snapshot_data(tidy, "tidy_wet")
+})
+
 test_that("ssd_fit_dists accepts 0 for left censored data", {
   data <- ssddata::ccme_boron
 

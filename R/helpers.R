@@ -46,7 +46,7 @@ invlogit <- function(x) {
 
 unscale <- function(x, rescale) {
   if(is.infinite(rescale)) {
-    invlogit(x)
+    return(invlogit(x))
   }
   x * rescale
 }

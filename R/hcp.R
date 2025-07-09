@@ -123,7 +123,6 @@ hcp2 <- function(
   if (!ci) {
     nboot <- 0L
   }
-  
   if (!average) {
     hcp <- hcp_ind(
       x, value = value, ci = ci, level = level, nboot = nboot,

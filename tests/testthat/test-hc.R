@@ -197,6 +197,16 @@ test_that("ssd_hc fitdists works fractions", {
   expect_snapshot_data(hc, "hc505")
 })
 
+test_that("ssd_hc fitdists works wet", {
+  data <- ssddata::ccme_boron
+  data$Conc <- plogis(data$Conc) * 0.9
+  withr::local_seed(99)
+  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "wet")
+  withr::local_seed(99)
+  hc <- ssd_hc(fits, average = FALSE, est_method = "multi")
+  expect_snapshot_data(hc, "hcwet")
+})
+
 test_that("ssd_hc fitdists averages", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   hc <- ssd_hc(fits, ci_method = "MACL", est_method = "arithmetic")
