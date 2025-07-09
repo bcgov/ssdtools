@@ -44,6 +44,14 @@ invlogit <- function(x) {
   stats::plogis(x)
 }
 
+rescale <- function(x, rescale) {
+  if(is.infinite(rescale)) {
+    print(x)
+    return(logit(x))
+  }
+  x / rescale
+}
+
 unscale <- function(x, rescale) {
   if(is.infinite(rescale)) {
     return(invlogit(x))

@@ -1,0 +1,2 @@
+dist,proportion,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+lnorm,0.05,0.751325,0.525443,0.725663,0.777659,1,0.95,cdf,percentile,parametric,10,1,lnorm,numeric(0)

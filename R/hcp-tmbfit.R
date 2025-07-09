@@ -69,7 +69,7 @@ hcp_tmbfit2 <- function(
     args$p <- value
     what <- paste0("ssd_q", dist)
   } else {
-    args$q <- value / rescale
+    args$q <- rescale(value, rescale)
     what <- paste0("ssd_p", dist)
   }
   
