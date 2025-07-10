@@ -1,10 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# ssdtools 2.3.0.9005
+# ssdtools 2.3.0.9006
 
 - Implemented model fitting with right censoring for all distributions (by @eduardszoecs).
 
 - Added following `ci_methods`: `"GMACL"`, `"MAW1"`, `"MAW2"`, `"GMAW1"`, `"GMAW2"`, `"arithmetic_samples"` and `"geometric_samples"` to `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Added `rescale = "odds"` option to `ssd_fit_dists()` to allow fitting to dilution data.
+- Added `odds_max = 0.999` argument to `ssd_fit_dists()` to handle values of 1.
 - Added ... and check unused to ensure matching names of subsequent arguments.
 - Added class and attribute preserving `[[` and `[` operators.
 - Fixed error message when Inf weights.
