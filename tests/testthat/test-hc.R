@@ -197,21 +197,21 @@ test_that("ssd_hc fitdists works fractions", {
   expect_snapshot_data(hc, "hc505")
 })
 
-test_that("ssd_hc fitdists works wet", {
+test_that("ssd_hc fitdists works odds", {
   data <- ssddata::ccme_boron
   data$Conc <- plogis(data$Conc) * 0.9
   withr::local_seed(99)
-  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "wet")
+  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "odds")
   withr::local_seed(99)
   hc <- ssd_hc(fits, average = FALSE, est_method = "multi", ci = TRUE, nboot = 10L)
   expect_snapshot_data(hc, "hcwet")
 })
 
-test_that("ssd_hc fitdists works wet 0.8", {
+test_that("ssd_hc fitdists works odds 0.8", {
   data <- ssddata::ccme_boron
   data$Conc <- plogis(data$Conc) * 0.9
   withr::local_seed(99)
-  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "wet", wet1 = 0.8)
+  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "odds", odds_max = 0.8)
   withr::local_seed(99)
   hc <- ssd_hc(fits, average = FALSE, est_method = "multi", ci = TRUE, nboot = 10L)
   expect_snapshot_data(hc, "hcwet08")

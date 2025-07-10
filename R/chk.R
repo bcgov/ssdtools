@@ -15,7 +15,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-.chk_data <- function(data, left, right, wet = FALSE, weight = NULL, nrow = 0, missing = FALSE) {
+.chk_data <- function(data, left, right, odds = FALSE, weight = NULL, nrow = 0, missing = FALSE) {
   chk_string(left)
   chk_string(right)
   chk_null_or(weight, vld = vld_string)
@@ -28,12 +28,12 @@
 
   org_data <- data
   values <- setNames(list(c(0, Inf, NA)), left)
-  if (wet) {
+  if (odds) {
     values <- setNames(list(c(0, 1, NA)), left)
   }
   if (left != right) {
     values <- c(values, setNames(list(c(0, Inf, NA)), right))
-    if (wet) {
+    if (odds) {
       values <- c(values, setNames(list(c(0, 1, NA)), right))
     }
   }

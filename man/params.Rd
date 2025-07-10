@@ -182,7 +182,7 @@ remove them with a warning.}
 
 \item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 
-\item{rescale}{A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("wet").}
+\item{rescale}{A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("odds").}
 
 \item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
 
@@ -236,7 +236,7 @@ remove them with a warning.}
 
 \item{weight}{A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.}
 
-\item{wet1}{A number specifying the upper left value when \code{rescale = "wet"}.
+\item{odds_max}{A number specifying the upper left value when \code{rescale = "odds"}.
 By default left values cannot exceed 0.999.}
 
 \item{wt}{A flag specifying whether to return the Akaike weight as "wt" instead of "weight".}

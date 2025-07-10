@@ -36,25 +36,24 @@ is_bounds <- function(dist) {
   exists(fun, mode = "function")
 }
 
-logit <- function(x) {
-  stats::qlogis(x)
+odds <- function(x) {
+  x/(1 - x)
 }
 
-invlogit <- function(x) {
-  stats::plogis(x)
+inv_odds <- function(x) {
+  x/(1 + x)
 }
 
 rescale <- function(x, rescale) {
   if(is.infinite(rescale)) {
-    print(x)
-    return(logit(x))
+    return(odds(x))
   }
   x / rescale
 }
 
 unscale <- function(x, rescale) {
   if(is.infinite(rescale)) {
-    return(invlogit(x))
+    return(inv_odds(x))
   }
   x * rescale
 }
@@ -147,7 +146,7 @@ geomid <- function(x) {
   exp(mean(log(range(x))))
 }
 
-adjust_data <- function(data, rescale, reweight, wet1, silent) {
+adjust_data <- function(data, rescale, reweight, odds_max, silent) {
   censoring <- censoring(data)
 
   if (reweight) {
@@ -164,10 +163,10 @@ adjust_data <- function(data, rescale, reweight, wet1, silent) {
   } else if(rescale == "no") {
     rescale <- 1
   } else {
-    data$left <- pmin(data$left, wet1)
-    data$left <- logit(data$left)
+    data$left <- pmin(data$left, odds_max)
+    data$left <- odds(data$left)
     data$right[is.infinite(data$right)] <- 1
-    data$right <- logit(data$right)
+    data$right <- odds(data$right)
     rescale <- Inf
   }
 

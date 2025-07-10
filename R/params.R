@@ -123,7 +123,7 @@
 #' @param range_shape2 A numeric vector of length two of the lower and upper bounds for the shape2 parameter.
 #' @param range_shape2 shape2 parameter.
 #' @param reweight A flag specifying whether to reweight weights by dividing by the largest weight.
-#' @param rescale A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("wet").
+#' @param rescale A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("odds").
 #' @param ribbon A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.
 #' @param right A string of the column in data with the right concentration values.
 #' @param save_to NULL or a string specifying a directory to save where the bootstrap datasets and parameter estimates (when successfully converged) to.
@@ -150,7 +150,7 @@
 #' @param trans A string of which transformation to use. Accepted values include `"log10"`, `"log"`, and `"identity"` (`"log10"` by default).
 #' @param valid A flag or NULL specifying whether to include distributions with valid likelihoods that allows them to be fit with other distributions for modeling averaging.
 #' @param weight A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.
-#' @param wet1 A number specifying the upper left value when `rescale = "wet"`.
+#' @param odds_max A number specifying the upper left value when `rescale = "odds"`.
 #' By default left values cannot exceed 0.999.
 #' @param wt A flag specifying whether to return the Akaike weight as "wt" instead of "weight".
 #' @param x The object.

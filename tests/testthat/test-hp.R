@@ -139,32 +139,33 @@ test_that("hp fitdists gives different answer with model averaging as hp not sam
   
   fits_lnorm_lnorm <- ssd_fit_dists(data, dists = "lnorm_lnorm")
   expect_equal(ssd_hp(fits_lnorm_lnorm, ssd_hc(fits_lnorm_lnorm, proportion = 5 / 100)$est, proportion = TRUE)$est, 5 / 100)
-  
   fits_both <- ssd_fit_dists(data, dists = c("lgumbel", "lnorm_lnorm"), min_pmix = 0)
   expect_equal(ssd_hp(fits_both, ssd_hc(fits_both, proportion = 5 / 100, ci_method = "MACL",est_method = "arithmetic")$est, proportion = TRUE)$est, 4.59194131309822 / 100, tolerance = 1e-06)
 })
 
-test_that("ssd_hc fitdists works wet", {
+test_that("ssd_hc fitdists works odds", {
   data <- ssddata::ccme_boron
   data$Conc <- plogis(data$Conc) * 0.9
   withr::local_seed(99)
-  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "wet")
+  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "odds")
   withr::local_seed(99)
   hp1 <- ssd_hp(fits, average = FALSE, proportion = TRUE, est_method = "multi", ci = TRUE, nboot = 10L)
   expect_snapshot_data(hp1, "hpwet1")
-  hp7 <- ssd_hp(fits, conc = 0.7786452, average = FALSE, proportion = TRUE, est_method = "multi", ci = TRUE, nboot = 10L)
+  hp7 <- ssd_hp(fits, conc = 0.7979396, average = FALSE, proportion = TRUE, est_method = "multi", ci = TRUE, nboot = 10L)
   expect_snapshot_data(hp7, "hpwet7")
+  hp10 <- ssd_hp(fits, conc = 10, average = FALSE, proportion = TRUE, est_method = "multi", ci = TRUE, nboot = 10L)
+  expect_snapshot_data(hp10, "hpwet10")
 })
 
-test_that("ssd_hc fitdists works wet 0.8", {
+test_that("ssd_hp fitdists works odds 0.8", {
   data <- ssddata::ccme_boron
   data$Conc <- plogis(data$Conc) * 0.9
   withr::local_seed(99)
-  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "wet", wet1 = 0.8)
+  fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "odds", odds_max = 0.8)
   withr::local_seed(99)
   hp1 <- ssd_hp(fits, average = FALSE, proportion = TRUE, est_method = "multi", ci = TRUE, nboot = 10L)
   expect_snapshot_data(hp1, "hpwet081")
-  hp7 <- ssd_hp(fits, conc = 0.7513255, average = FALSE, proportion = TRUE, est_method = "multi", ci = TRUE, nboot = 10L)
+  hp7 <- ssd_hp(fits, conc = 0.7591709, average = FALSE, proportion = TRUE, est_method = "multi", ci = TRUE, nboot = 10L)
   expect_snapshot_data(hp7, "hpwet087")
 })
 
