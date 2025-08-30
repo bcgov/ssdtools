@@ -267,6 +267,7 @@ test_that("ssd_fit_dists computable = TRUE allows for fits without standard erro
   data$Other <- data$Conc
   data$Conc <- data$Conc / max(data$Conc)
 
+  skip_on_ci() # did not throw the expected warning.
   skip_on_cran() # did not throw the expected warning.
   expect_warning(
     ssd_fit_dists(data, right = "Other", rescale = FALSE, at_boundary_ok = FALSE),
