@@ -16,7 +16,7 @@
 #    limitations under the License.
 
 test_that("invpareto", {
-  test_dist("invpareto", upadj = 1e-03)
+  test_dist("invpareto")
   expect_snapshot_value(ssd_pinvpareto(0.5), style = "deparse")
   expect_snapshot_value(ssd_qinvpareto(0.125), style = "deparse")
   withr::with_seed(50, {

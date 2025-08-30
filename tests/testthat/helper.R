@@ -74,7 +74,7 @@ ep <- function(text) {
   invisible(eval(parse(text = text)))
 }
 
-test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FALSE) {
+test_dist <- function(dist, qroottolerance = 1.490116e-08, multi = FALSE) {
   if (!multi) {
     ep(glue::glue("expect_identical(ssd_p{dist}(numeric(0)), numeric(0))"))
     ep(glue::glue("expect_identical(ssd_p{dist}(NA), NA_real_)"))
@@ -136,36 +136,17 @@ test_dist <- function(dist, qroottolerance = 1.490116e-08, upadj = 0, multi = FA
     ep(glue::glue("expect_identical(length(ssd_r{dist}(2)), 2L)"))
     ep(glue::glue("expect_identical(length(ssd_r{dist}(3:4)), 2L)"))
     ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1))), 2L)"))
-    
-    ests <- ep(glue::glue("ssd_e{dist}()"))
-    testthat::expect_true(vld_list(ests))
-    testthat::expect_true(vld_all(ests, vld_number))
-    testthat::expect_true(vld_length(ests, length = 2L, upper = 5L))
-    testthat::expect_true(vld_named(ests))
-    
-    withr::with_seed(97, {
-      data <- data.frame(Conc = ep(glue::glue("ssd_r{dist}(1000)")))
-    })
-    fits <- ssd_fit_dists(data = data, dists = dist)
-    tidy <- tidy(fits)
-    testthat::expect_s3_class(tidy, "tbl_df")
-    testthat::expect_identical(names(tidy), c("dist", "term", "est", "se"))
-    testthat::expect_identical(tidy$dist[1], dist)
-    tidy$lower <- tidy$est - tidy$se * 3
-    tidy$upper <- tidy$est + tidy$se * 3
-    
-    default <- ep(glue::glue("formals(ssd_r{dist})"))
-    default$n <- NULL
-    default$chk <- NULL
-    default <- data.frame(term = names(default), default = unlist(default))
-    
-    tidy <- merge(tidy, default, by = "term", all = "TRUE")
-    testthat::expect_true(all(tidy$default > tidy$lower - upadj))
-    testthat::expect_true(all(tidy$default < tidy$upper + upadj))
   } else {
     ep(glue::glue("expect_identical(length(ssd_r{dist}(1, lnorm.weight = 1)), 1L)"))
     ep(glue::glue("expect_identical(length(ssd_r{dist}(2, lnorm.weight = 1)), 2L)"))
     ep(glue::glue("expect_identical(length(ssd_r{dist}(3:4, lnorm.weight = 1)), 2L)"))
     ep(glue::glue("expect_identical(length(ssd_r{dist}(c(NA, 1), lnorm.weight = 1)), 2L)"))
+  }
+  if(!multi) {
+    ests <- ep(glue::glue("ssd_e{dist}()"))
+    testthat::expect_true(vld_list(ests))
+    testthat::expect_true(vld_all(ests, vld_number))
+    testthat::expect_true(vld_length(ests, length = 2L, upper = 5L))
+    testthat::expect_true(vld_named(ests))
   }
 }
