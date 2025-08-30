@@ -2,33 +2,44 @@
 
 # ssdtools 2.4.0
 
-- Internal changes only.
+## Features
 
+- Add model fitting with right censoring for all distributions (by @eduardszoecs).
+- Added following `ci_methods` to `ssd_hc()`, `ssd_hp()` and `predict()`: `"GMACL"`, `"MAW1"`, `"MAW2"`, `"GMAW1"`, `"GMAW2"`, `"arithmetic_samples"` and `"geometric_samples"`.
+- Added `rescale = "odds"` option to `ssd_fit_dists()` to allow fitting to dilution data including `odds_max = 0.999` argument to handle values of 1.
+- Improved method to calculate `ssd_ecd()` so ensures symmetric about 0.5.
 
-# ssdtools 2.3.0.9006
+- Ensures `weighted_samples` sum to nboot.
+- `ssd_hc()`, `ssd_hp()` and `predict()` now only return missing values for `se`, `lcl` and `ucl` when `nboot = 0`.
 
-- Implemented model fitting with right censoring for all distributions (by @eduardszoecs).
+## Functions
 
-- Added following `ci_methods`: `"GMACL"`, `"MAW1"`, `"MAW2"`, `"GMAW1"`, `"GMAW2"`, `"arithmetic_samples"` and `"geometric_samples"` to `ssd_hc()`, `ssd_hp()` and `predict()`.
-- Added `rescale = "odds"` option to `ssd_fit_dists()` to allow fitting to dilution data.
-- Added `odds_max = 0.999` argument to `ssd_fit_dists()` to handle values of 1.
-- Added ... and check unused to ensure matching names of subsequent arguments.
-- Added class and attribute preserving `[[` and `[` operators.
-- Fixed error message when Inf weights.
-- Added `ssd_at_boundary()` and `ssd_computable()`.
 - Added `ssd_ci_methods()` and `ssd_est_methods()` to get character vector of methods.
-- Added column `"dists"` to `ssd_hc()` and `ssd_hp()` which is a list of the distributions.
-- Renamed `"method"` column to `"boot_method"` in tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Added `ssd_at_boundary()` and `ssd_computable()`.
+- Added class and attribute preserving `[[` and `[` operators.
+
+## Arguments
+
+- Added `strict = TRUE` argument to `subset()` to allow subsetting when distributions missing (with `strict = FALSE`).
+
+## Output Columns
+
+- Added column `"dists"` to `ssd_hc()`, `ssd_hp()` and `predict()` which is a list of the distributions.
 - Added `"est_method"` and `"ci_method"` columns to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"level"` column to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"at_bound"` and `"computable"` columns to tibble output by `gof()`.
-- Added `strict = TRUE` argument to `subset()` to allow subsetting when distributions missing (with `strict = FALSE`).
-- Now ensures weighted_samples sum to nboot.
-- Improved method to calculate `ssd_ecd()` so ensures symmetric about 0.5 and deprecated `ties.method = "first"` argument.
+- Renamed `"method"` column to `"boot_method"` in tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
+
+## Error Checking
+
+- Added ... and check unused to ensure matching names of subsequent arguments.
+- Fixed error message when Inf weights.
 - `ssd_fit_bcanz()` now checks all dists are subset of `ssd_dists_bcanz()`.
-- `ssd_hc()`, `ssd_hp()` and `predict()` now return all non-missing values when `nboot = 0` except se, lcl and ucl.
+
+## Deprecated
 
 - Deprecated `ssd_dists_shiny()`.
+- Deprecated `ties.method = "first"` argument in `ssd_ecd()`.
 
 - Soft-deprecated `est_method = "multi"` argument to `multi_est = TRUE` for `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Soft-deprecated `proportion = FALSE` to `proportion = TRUE` argument to `ssd_hp()` which switches output from percentages to proportions.
