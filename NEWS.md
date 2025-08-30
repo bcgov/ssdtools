@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.4.0
+
+- Internal changes only.
+
+
 # ssdtools 2.3.0.9006
 
 - Implemented model fitting with right censoring for all distributions (by @eduardszoecs).
