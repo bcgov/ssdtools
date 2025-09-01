@@ -24,7 +24,7 @@
 #' For more information see the inverse function [`ssd_hc()`].
 #'
 #' @inheritParams params
-#' @param proportion A flag specifing whether to return hazard proportions 
+#' @param proportion A flag specifying whether to return hazard proportions 
 #' (`proportion = TRUE`) or hazard percentages (`proportion = FALSE`).
 #' To not break existing code the default value is `FALSE` but 
 #' will be switching the default to `TRUE` in a future version. 

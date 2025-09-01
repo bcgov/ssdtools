@@ -102,7 +102,7 @@ calculate the confidence limits (and SE) from the single set of samples.}
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 
-\item{proportion}{A flag specifing whether to return hazard proportions
+\item{proportion}{A flag specifying whether to return hazard proportions
 (\code{proportion = TRUE}) or hazard percentages (\code{proportion = FALSE}).
 To not break existing code the default value is \code{FALSE} but
 will be switching the default to \code{TRUE} in a future version.
