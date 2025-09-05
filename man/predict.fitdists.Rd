@@ -8,17 +8,17 @@
   object,
   percent,
   proportion = 1:99/100,
+  ...,
   average = TRUE,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
   min_pboot = 0.95,
-  multi_est = TRUE,
+  est_method = "multi",
   ci_method = "weighted_samples",
   parametric = TRUE,
   delta = 9.21,
-  control = NULL,
-  ...
+  control = NULL
 )
 }
 \arguments{
@@ -27,6 +27,8 @@
 \item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Deprecated for \code{proportion = 0.05}. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
+
+\item{...}{Unused.}
 
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
@@ -40,10 +42,35 @@
 proportion of bootstrap samples that must successfully fit (return a likelihood)
 to report the confidence intervals.}
 
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
+\item{est_method}{A string specifying whether to estimate directly from
+the model-averaged cumulative distribution function (\code{est_method = 'multi'}) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (\code{est_method = 'arithmetic'}) or
+or to use the geometric mean instead (\code{est_method = 'geometric'}).}
 
-\item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
-Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
+\item{ci_method}{A string specifying which method to use for estimating
+the standard error and confidence limits from the bootstrap samples.
+Possible values include \code{ci_method = "multi_fixed"} and  \code{ci_method = "multi_free"}
+which generate the bootstrap samples using the model-averaged cumulative distribution function
+but differ in whether the model weights are fixed at the values for the original dataset
+or re-estimated for each bootstrap sample dataset.
+The value \code{ci_method = "weighted_samples"} takes bootstrap samples
+from each distribution proportional to its AICc based weights and
+calculates the confidence limits (and SE) from this single set.
+The value \code{ci_method = "weighted_arithmetic"} (was \code{ci_method = "MACL"} but
+has been soft-deprecated) which is only included for
+historical reasons takes the weighted arithmetic mean of the confidence
+limits and \code{ci_method = MGCL} which was included for a research paper
+takes the weighted geometric mean of the confidence limits.
+The values \code{ci_method = "MAW1"} and \code{ci_method = "MAW2"}
+use the two alternative equations of Burnham and Anderson to
+model average the weighted standard errors and then calculate the confidence
+limits using the Wald approach.
+Finally \code{ci_method = "arithmetic"} and \code{ci_method = "geometric"}
+take the weighted arithmetic or geometric mean of the values for
+each bootstrap iteration across all the distributions and then
+calculate the confidence limits (and SE) from the single set of samples.}
 
 \item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 
@@ -51,8 +78,6 @@ Possible values are "multi_free" and "multi_fixed" which treat the distributions
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
 
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
-
-\item{...}{Unused.}
 }
 \description{
 A wrapper on \code{\link[=ssd_hc]{ssd_hc()}} that by default calculates

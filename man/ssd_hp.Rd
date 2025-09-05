@@ -11,32 +11,35 @@ ssd_hp(x, ...)
 \method{ssd_hp}{fitdists}(
   x,
   conc = 1,
+  ...,
   average = TRUE,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
   min_pboot = 0.95,
-  multi_est = TRUE,
+  multi_est = deprecated(),
+  est_method = "multi",
   ci_method = "weighted_samples",
   parametric = TRUE,
   delta = 9.21,
+  proportion = FALSE,
   samples = FALSE,
   save_to = NULL,
-  control = NULL,
-  ...
+  control = NULL
 )
 
 \method{ssd_hp}{fitburrlioz}(
   x,
   conc = 1,
+  ...,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
   min_pboot = 0.95,
   parametric = FALSE,
+  proportion = FALSE,
   samples = FALSE,
-  save_to = NULL,
-  ...
+  save_to = NULL
 )
 }
 \arguments{
@@ -58,15 +61,53 @@ ssd_hp(x, ...)
 proportion of bootstrap samples that must successfully fit (return a likelihood)
 to report the confidence intervals.}
 
-\item{multi_est}{A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.}
+\item{multi_est}{A flag specifying whether to estimate directly from
+the model-averaged cumulative distribution function (\code{multi_est = TRUE}) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (\code{multi_est = FALSE}).}
 
-\item{ci_method}{A string specifying which method to use for estimating the bootstrap values.
-Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.}
+\item{est_method}{A string specifying whether to estimate directly from
+the model-averaged cumulative distribution function (\code{est_method = 'multi'}) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (\code{est_method = 'arithmetic'}) or
+or to use the geometric mean instead (\code{est_method = 'geometric'}).}
+
+\item{ci_method}{A string specifying which method to use for estimating
+the standard error and confidence limits from the bootstrap samples.
+Possible values include \code{ci_method = "multi_fixed"} and  \code{ci_method = "multi_free"}
+which generate the bootstrap samples using the model-averaged cumulative distribution function
+but differ in whether the model weights are fixed at the values for the original dataset
+or re-estimated for each bootstrap sample dataset.
+The value \code{ci_method = "weighted_samples"} takes bootstrap samples
+from each distribution proportional to its AICc based weights and
+calculates the confidence limits (and SE) from this single set.
+The value \code{ci_method = "weighted_arithmetic"} (was \code{ci_method = "MACL"} but
+has been soft-deprecated) which is only included for
+historical reasons takes the weighted arithmetic mean of the confidence
+limits and \code{ci_method = MGCL} which was included for a research paper
+takes the weighted geometric mean of the confidence limits.
+The values \code{ci_method = "MAW1"} and \code{ci_method = "MAW2"}
+use the two alternative equations of Burnham and Anderson to
+model average the weighted standard errors and then calculate the confidence
+limits using the Wald approach.
+Finally \code{ci_method = "arithmetic"} and \code{ci_method = "geometric"}
+take the weighted arithmetic or geometric mean of the values for
+each bootstrap iteration across all the distributions and then
+calculate the confidence limits (and SE) from the single set of samples.}
 
 \item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
+
+\item{proportion}{A flag specifying whether to return hazard proportions
+(\code{proportion = TRUE}) or hazard percentages (\code{proportion = FALSE}).
+To not break existing code the default value is \code{FALSE} but
+will be switching the default to \code{TRUE} in a future version.
+The user is recommended to manually set to \code{TRUE} now to avoid
+unexpected changes in future versions.}
 
 \item{samples}{A flag specfying whether to include a numeric vector of the bootstrap samples as a list column in the output.}
 

@@ -8,6 +8,7 @@ ssd_match_moments(
   dists = ssd_dists_bcanz(),
   meanlog = 1,
   sdlog = 1,
+  ...,
   nsim = 1e+05
 )
 }
@@ -17,6 +18,8 @@ ssd_match_moments(
 \item{meanlog}{The mean on the log scale.}
 
 \item{sdlog}{The standard deviation on the log scale.}
+
+\item{...}{Unused.}
 
 \item{nsim}{A positive whole number of the number of simulations to generate.}
 }

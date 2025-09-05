@@ -23,11 +23,11 @@ xcis_estimates <- function(x, args, n, what, level, samples) {
   }
   ests <- do.call(what, args)
   names(ests) <- n
-  quantile <- quantile(ests, probs = probs(level))
+  quantile <- unname(quantile(ests, probs = probs(level)))
   samples <- if (samples) ests else numeric(0)
-  data.frame(
-    se = sd(ests), lcl = quantile[1], ucl = quantile[2],
-    samples = I(list(samples)),
+  tibble(
+    se = sd(ests), log_se = sd(log(ests)), lcl = quantile[1], ucl = quantile[2],
+    samples = list(samples),
     row.names = NULL
   )
 }
@@ -40,5 +40,5 @@ cis_estimates <- function(estimates, what, level, x, samples, .names = NULL) {
   })
   args <- lapply(args, as.double)
   x <- lapply(x, xcis_estimates, args, n, what, level, samples = samples)
-  bind_rows(x)
+  dplyr::bind_rows(x)
 }

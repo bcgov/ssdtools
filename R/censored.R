@@ -66,6 +66,7 @@ ssd_is_censored.fitdists <- function(x, ...) {
 #' @param x A fitdists object.
 #'
 #' @return A flag indicating if the data is censored.
+#' @keywords internal
 #' @export
 #' @seealso [`ssd_is_censored()`]
 is_censored <- function(x) {

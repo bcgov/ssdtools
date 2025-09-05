@@ -43,7 +43,7 @@ estimates.fitdists <- function(x, all_estimates = FALSE, ...) {
 
 .list_estimates <- function(x, all_estimates = TRUE) {
   y <- lapply(x, estimates)
-  wt <- glance(x)$weight
+  wt <- glance(x, wt = TRUE)$wt
   y <- purrr::map2(y, wt, function(a, b) c(list(weight = b), a))
   names(y) <- names(x)
   if (!all_estimates) {

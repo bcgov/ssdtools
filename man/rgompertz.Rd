@@ -17,3 +17,4 @@ rgompertz(n, llocation = 0, lshape = 0)
 \description{
 Deprecated for \code{ssd_rgompertz()}.
 }
+\keyword{internal}

@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change,
+# Copyright 2023-2025 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,6 +24,12 @@
 #' For more information see the inverse function [`ssd_hc()`].
 #'
 #' @inheritParams params
+#' @param proportion A flag specifying whether to return hazard proportions 
+#' (`proportion = TRUE`) or hazard percentages (`proportion = FALSE`).
+#' To not break existing code the default value is `FALSE` but 
+#' will be switching the default to `TRUE` in a future version. 
+#' The user is recommended to manually set to `TRUE` now to avoid 
+#' unexpected changes in future versions.
 #' @return A tibble of corresponding hazard proportions.
 #' @seealso [`ssd_hc()`]
 #' @export
@@ -39,51 +45,68 @@ ssd_hp <- function(x, ...) {
 ssd_hp.fitdists <- function(
     x,
     conc = 1,
+    ...,
     average = TRUE,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
-    multi_est = TRUE,
+    multi_est = deprecated(),
+    est_method = "multi",
     ci_method = "weighted_samples",
     parametric = TRUE,
     delta = 9.21,
+    proportion = FALSE,
     samples = FALSE,
     save_to = NULL,
-    control = NULL,
-    ...) {
+    control = NULL) {
   chk_vector(conc)
   chk_numeric(conc)
-  chk_subset(ci_method, c("weighted_samples", "weighted_arithmetic", "multi_free", "multi_fixed"))
-
   chk_unused(...)
-
-  fix_weights <- ci_method %in% c("weighted_samples", "multi_fixed")
-  multi_ci <- ci_method %in% c("multi_free", "multi_fixed")
-
-  if(length(x) == 1L) {
-    average <- FALSE
+  
+  if (lifecycle::is_present(multi_est)) {
+    lifecycle::deprecate_soft("2.3.1", "ssd_hc(multi_est)", "ssd_hc(est_method)")
+    
+    chk_flag(multi_est)
+    
+    est_method <- if(multi_est) "multi" else "arithmetic"
   }
   
-  hcp <- ssd_hcp_fitdists(
+  chk_string(ci_method) 
+  if(ci_method == "weighted_arithmetic") {
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(ci_method = 'weighted_arithmetic')"), I("ssd_hp(ci_method = 'MACL')"))
+    
+    ci_method <- "MACL"
+  }
+  
+  if (missing(proportion)) {
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), 
+                              "Please set the `proportion` argument to `ssd_hp()` to be TRUE which will cause it to return hazard proportions instead of percentages then update your downstream code accordingly.", 
+                              id = "ssd_hp")    
+  }
+  chk_flag(proportion)
+  
+  hcp <- hcp(
     x = x,
     value = conc,
     ci = ci,
     level = level,
     nboot = nboot,
     average = average,
-    multi_est = multi_est,
+    est_method = est_method,
     delta = delta,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi_ci = multi_ci,
-    fix_weights = fix_weights,
+    ci_method = ci_method,
     control = control,
     save_to = save_to,
     samples = samples,
     hc = FALSE
   )
   hcp <- dplyr::rename(hcp, conc = "value")
+  if(!proportion) {
+    hcp <- hcp_unscale(hcp, 100)
+  }
   hcp
 }
 
@@ -97,14 +120,15 @@ ssd_hp.fitdists <- function(
 ssd_hp.fitburrlioz <- function(
     x,
     conc = 1,
+    ...,
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
     min_pboot = 0.95,
     parametric = FALSE,
+    proportion = FALSE,
     samples = FALSE,
-    save_to = NULL,
-    ...) {
+    save_to = NULL) {
   chk_length(x, upper = 1L)
   chk_named(x)
   chk_subset(names(x), c("burrIII3", "invpareto", "llogis", "lgumbel"))
@@ -112,29 +136,38 @@ ssd_hp.fitburrlioz <- function(
   chk_numeric(conc)
   chk_flag(ci)
   chk_unused(...)
-
+  
+  if (missing(proportion)) {
+    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), 
+                              "Please set the `proportion` argument to `ssd_hp_bcanz()` to be TRUE which will cause it to return hazard proportions instead of percentages then update your downstream code accordingly.", 
+                              id = "ssd_hp")    
+  }
+  chk_flag(proportion)
+  
   fun <- if (names(x) == "burrIII3") fit_burrlioz else fit_tmb
-
-  hcp <- ssd_hcp_fitdists(
+  
+  hcp <- hcp(
     x = x,
     value = conc,
     ci = ci,
     level = level,
     nboot = nboot,
     average = FALSE,
-    multi_est = TRUE,
+    est_method = "multi",
     delta = Inf,
     min_pboot = min_pboot,
     parametric = parametric,
-    multi_ci = TRUE,
+    ci_method = "multi_free",
     control = NULL,
     save_to = save_to,
     samples = samples,
     hc = FALSE,
-    fix_weights = FALSE,
     fun = fun
   )
-
+  
   hcp <- dplyr::rename(hcp, conc = "value")
+  if(!proportion) {
+    hcp <- hcp_unscale(hcp, 100)
+  }
   hcp
 }

@@ -24,6 +24,7 @@
 #' @inheritParams params
 #' @return A character vector.
 #' @seealso [ssd_label_comma()]
+#' @keywords internal
 #' @export
 #' @examples
 #' \dontrun{
@@ -56,7 +57,15 @@ comma_signif <- function(x, digits = 3, ..., big.mark = ",") {
 #' @examples
 #' ssd_ecd(1:10)
 ssd_ecd <- function(x, ties.method = "first") {
-  (rank(x, ties.method = ties.method) - 0.5) / length(x)
+  if(!missing(ties.method)) {
+    lifecycle::deprecate_warn("2.3.0", "ssd_ecd(ties.method)")
+  }
+  chk_numeric(x)
+  if(!length(x)) return(numeric())
+  if(length(x) == 1L) return(0.5)
+  if(anyNA(x)) return(rep(NA_real_, length(x)))
+  rank <- rank(x, ties.method = "first")
+  stats::ppoints(length(x))[rank]
 }
 
 #' Empirical Cumulative Density for Species Sensitivity Data
@@ -70,9 +79,10 @@ ssd_ecd <- function(x, ties.method = "first") {
 #' @examples
 #' ssd_ecd_data(ssddata::ccme_boron)
 ssd_ecd_data <- function(
-    data, left = "Conc", right = left, bounds = c(left = 1, right = 1)) {
+    data, left = "Conc", right = left, ..., bounds = c(left = 1, right = 1)) {
   .chk_data(data, left, right)
   .chk_bounds(bounds)
+  chk_unused(...)
 
   if (!nrow(data)) {
     return(double(0))

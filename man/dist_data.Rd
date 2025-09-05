@@ -5,7 +5,7 @@
 \alias{dist_data}
 \title{Distribution Data}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10 rows and 5 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10 rows and 6 columns.
 }
 \usage{
 dist_data
@@ -20,6 +20,7 @@ A data frame of information on the implemented distributions.
 \item{tails}{Whether the distribution has both tails (flag).}
 \item{npars}{The number of parameters (int).}
 \item{valid}{Whether the distribution has a valid likelihood that allows it to be fit with other distributions for modeling averaging (flag).}
+\item{bound}{Whether one or more parameters have boundaries (flag).}
 }
 }
 \examples{
@@ -32,4 +33,4 @@ Other dists:
 \code{\link{ssd_dists_shiny}()}
 }
 \concept{dists}
-\keyword{datasets}
+\keyword{internal}

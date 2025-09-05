@@ -26,6 +26,7 @@
 #' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @family wqg
 #' @seealso [`ssd_fit_bcanz()`] and [`ssd_hc()`]
+#' @keywords internal
 #' @export
 #'
 #' @examples
@@ -35,10 +36,10 @@
 ssd_wqg_bc <- function(data, left = "Conc") {
   lifecycle::deprecate_warn(
     "2.0.0", "ssd_wqg_bc()",
-    details = "Please use `ssd_fit_bcanz()` and `ssd_hc()` instead."
+    details = "Please use `ssd_fit_bcanz()` and `ssd_hc_bcanz()` instead."
   )
   fits <- ssd_fit_bcanz(data, left = left)
-  ssd_hc(fits, ci = TRUE, nboot = 10000)
+  ssd_hc_bcanz(fits)
 }
 
 
@@ -53,6 +54,7 @@ ssd_wqg_bc <- function(data, left = "Conc") {
 #' @return A tibble of the 5% hazard concentration with 95% confidence intervals.
 #' @family wqg
 #' @seealso [`ssd_fit_burrlioz()`] and [`ssd_hc()`]
+#' @keywords internal
 #' @export
 #'
 #' @examples

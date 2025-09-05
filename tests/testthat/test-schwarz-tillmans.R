@@ -16,21 +16,18 @@
 #    limitations under the License.
 
 test_that("schwarz-tillmans", {
-  set.seed(10)
   dists <- c(
     "gompertz", "weibull", "gamma", "lnorm", "llogis", "lgumbel"
   )
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
-
-  hc <- ssd_hc(fits, average = FALSE, ci_method = "weighted_samples", multi_est = FALSE)
-  expect_s3_class(hc, "tbl")
+  withr::with_seed(50, {
+    fits <- ssd_fit_dists(ssddata::ccme_boron, dists = dists)
+    hc <- ssd_hc(fits, average = FALSE, est_method = "arithmetic")
+    hc_avg <- ssd_hc(fits, average = TRUE, est_method = "arithmetic")
+  })
   expect_snapshot_data(hc, "hc")
-
-  hc_avg <- ssd_hc(fits, average = TRUE, ci_method = "weighted_samples", multi_est = FALSE)
-  expect_s3_class(hc_avg, "tbl")
   expect_snapshot_data(hc_avg, "hc_avg")
 
-  gof <- ssd_gof(fits, pvalue = FALSE)
+  gof <- ssd_gof(fits, pvalue = FALSE, wt = TRUE)
   expect_s3_class(gof, "tbl_df")
   expect_snapshot_data(gof, "gof")
 })

@@ -46,16 +46,26 @@ generics::glance
 #' @export
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
-#' glance(fits)
-glance.fitdists <- function(x, ...) {
+#' glance(fits, wt = TRUE)
+glance.fitdists <- function(x, ..., wt = FALSE) {
   chk_unused(...)
+  
+  if(vld_flag(wt) && !wt) {
+    lifecycle::deprecate_soft("2.3.1", I("glance(wt = FALSE)"), I("glance(wt = TRUE)"),
+                              "Please set the `wt` argument to `glance()` to be TRUE which will rename the 'weight' column to 'wt' and then update your downstream code accordingly.")    
+  }
+  chk_flag(wt)
+  
   nobs <- nobs(x)
   tbl <- lapply(x, .glance_tmbfit, nobs = nobs)
-  tbl <- bind_rows(tbl)
+  tbl <- dplyr::bind_rows(tbl)
   tbl$delta <- tbl$aicc - min(tbl$aicc)
   if (is.na(tbl$delta[1]) && all(tbl$npars == tbl$npars[1])) {
     tbl$delta <- tbl$aic - min(tbl$aic)
   }
-  tbl$weight <- exp(-tbl$delta / 2) / sum(exp(-tbl$delta / 2))
+  tbl$wt <- exp(-tbl$delta / 2) / sum(exp(-tbl$delta / 2))
+  if(!wt) {
+    tbl <- dplyr::rename(tbl, "weight" = "wt")
+  }
   tbl
 }

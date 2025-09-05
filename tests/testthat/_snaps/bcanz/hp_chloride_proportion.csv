@@ -1,0 +1,2 @@
+dist,conc,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+average,1,0.0389878,0.0226487,0.00919425,0.070924,1,0.95,multi,weighted_samples,parametric,10,1,"c(""gamma"", ""lgumbel"", ""llogis"", ""lnorm"", ""lnorm_lnorm"", ""weibull"")",numeric(0)

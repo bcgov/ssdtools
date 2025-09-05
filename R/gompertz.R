@@ -21,6 +21,7 @@
 #' @param x A numeric vector of values.
 #' @inheritParams params
 #' @return A numeric vector.
+#' @keywords internal
 #' @export
 dgompertz <- function(x, llocation = 0, lshape = 0, log = FALSE) {
   lifecycle::deprecate_stop("1.0.0", "dgompertz()")
@@ -44,6 +45,7 @@ ssd_pgompertz <- function(q, location = 1, shape = 1, lower.tail = TRUE, log.p =
 #' Deprecated for `ssd_pgompertz()`.
 #'
 #' @inheritParams params
+#' @keywords internal
 #' @export
 pgompertz <- function(q, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_stop("1.0.0", "pgompertz()", "ssd_pgompertz()")
@@ -67,6 +69,7 @@ ssd_qgompertz <- function(p, location = 1, shape = 1, lower.tail = TRUE, log.p =
 #' Deprecated for `ssd_qgompertz()`.
 #'
 #' @inheritParams params
+#' @keywords internal
 #' @export
 qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = FALSE) {
   lifecycle::deprecate_stop("1.0.0", "qgompertz()", "ssd_qgompertz()")
@@ -76,8 +79,10 @@ qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = F
 #' @export
 #' @examples
 #'
-#' set.seed(50)
-#' hist(ssd_rgompertz(10000), breaks = 1000)
+#' withr::with_seed(50, {
+#' x <- ssd_rgompertz(10000)
+#' })
+#' hist(x, breaks = 1000)
 ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {
   rdist("gompertz", n = n, location = location, shape = shape, chk = chk)
 }
@@ -97,6 +102,7 @@ ssd_egompertz <- function() {
 #' Deprecated for `ssd_rgompertz()`.
 #'
 #' @inheritParams params
+#' @keywords internal
 #' @export
 rgompertz <- function(n, llocation = 0, lshape = 0) {
   lifecycle::deprecate_stop("1.0.0", "rgompertz()", "ssd_rgompertz()")

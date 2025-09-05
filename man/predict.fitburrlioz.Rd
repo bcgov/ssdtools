@@ -8,12 +8,12 @@
   object,
   percent,
   proportion = 1:99/100,
+  ...,
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
   min_pboot = 0.95,
-  parametric = TRUE,
-  ...
+  parametric = TRUE
 )
 }
 \arguments{
@@ -22,6 +22,8 @@
 \item{percent}{A numeric vector of percent values to estimate hazard concentrations for. Deprecated for \code{proportion = 0.05}. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{proportion}{A numeric vector of proportion values to estimate hazard concentrations for.}
+
+\item{...}{Unused.}
 
 \item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
@@ -34,8 +36,6 @@ proportion of bootstrap samples that must successfully fit (return a likelihood)
 to report the confidence intervals.}
 
 \item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
-
-\item{...}{Unused.}
 }
 \description{
 A wrapper on \code{\link[=ssd_hc]{ssd_hc()}} that by default calculates

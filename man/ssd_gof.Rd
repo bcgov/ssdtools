@@ -7,7 +7,7 @@
 \usage{
 ssd_gof(x, ...)
 
-\method{ssd_gof}{fitdists}(x, pvalue = FALSE, ...)
+\method{ssd_gof}{fitdists}(x, ..., pvalue = FALSE, wt = FALSE)
 }
 \arguments{
 \item{x}{The object.}
@@ -15,6 +15,8 @@ ssd_gof(x, ...)
 \item{...}{Unused.}
 
 \item{pvalue}{A flag specifying whether to return p-values or the statistics (default) for the various tests.}
+
+\item{wt}{A flag specifying whether to return the Akaike weight as "wt" instead of "weight".}
 }
 \value{
 A tbl data frame of the gof statistics.
@@ -25,6 +27,8 @@ Returns a tbl data frame with the following columns
 \item{dist}{The distribution name (chr)}
 \item{aic}{Akaike's Information Criterion (dbl)}
 \item{bic}{Bayesian Information Criterion (dbl)}
+\item{at_bound}{Parameter(s) at boundary (lgl)}
+\item{computable}{All parameter have computable standard errors (lgl)}
 }
 and if the data are non-censored
 \describe{
@@ -39,9 +43,9 @@ and if there are 8 or more samples
 In the case of an object of class fitdists the function also returns
 \describe{
 \item{delta}{The Information Criterion differences (dbl)}
-\item{weight}{The Information Criterion weights (dbl)}
+\item{wt}{The Information Criterion weights (dbl)}
 }
-where \code{delta} and \code{weight} are based on \code{aic} for censored data
+where \code{delta} and \code{wt} are based on \code{aic} for censored data
 and \code{aicc} for non-censored data.
 }
 \section{Methods (by class)}{
@@ -52,7 +56,7 @@ and \code{aicc} for non-censored data.
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_gof(fits)
-ssd_gof(fits, pvalue = TRUE)
+ssd_gof(fits, pvalue = TRUE, wt = TRUE)
 }
 \seealso{
 \code{\link[=glance.fitdists]{glance.fitdists()}}

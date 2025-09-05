@@ -1,2 +1,2 @@
-dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-lnorm,1,1.95431,NA,5.58253,5.58253,1,parametric,1,1,c(`000000001_lnorm` = 5.58253)
+dist,conc,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+lnorm,1,1.95431,NA,5.58253,5.58253,1,0.95,cdf,percentile,parametric,1,1,lnorm,c(`000000001_lnorm` = 5.58253)

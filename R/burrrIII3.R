@@ -43,8 +43,10 @@ ssd_qburrIII3 <- function(p, shape1 = 1, shape2 = 1, scale = 1, lower.tail = TRU
 #' @export
 #' @examples
 #'
-#' set.seed(50)
-#' hist(ssd_rburrIII3(10000), breaks = 1000)
+#' withr::with_seed(50, {
+#' x <- ssd_rburrIII3(10000)
+#' })
+#' hist(x, breaks = 1000)
 ssd_rburrIII3 <- function(n, shape1 = 1, shape2 = 1, scale = 1, chk = TRUE) {
   rdist("burrIII3", n = n, shape1 = shape1, shape2 = shape2, scale = scale, chk = chk)
 }

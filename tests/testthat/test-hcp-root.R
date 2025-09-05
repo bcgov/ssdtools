@@ -18,11 +18,11 @@
 test_that("hp is hc conc = 1 ci_method = 'multi_fixed'", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   conc <- 1
-  hp_multi <- ssd_hp(fits, conc = conc, average = TRUE, ci_method = "multi_fixed")
+  hp_multi <- ssd_hp(fits, conc = conc, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
   hc_multi <- ssd_hc(fits, proportion = hp_multi$est / 100, average = TRUE, ci_method = "multi_fixed")
   expect_equal(hc_multi$est, 1)
   for (i in 1:10) {
-    hp_multi <- ssd_hp(fits, conc = hc_multi$est, average = TRUE, ci_method = "multi_fixed")
+    hp_multi <- ssd_hp(fits, conc = hc_multi$est, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
     hc_multi <- ssd_hc(fits, proportion = hp_multi$est / 100, average = TRUE, ci_method = "multi_fixed")
   }
   expect_equal(hc_multi$est, 1)
@@ -31,11 +31,11 @@ test_that("hp is hc conc = 1 ci_method = 'multi_fixed'", {
 test_that("hp is hc conc = 10 ci_method = 'multi_fixed'", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   conc <- 10
-  hp_multi <- ssd_hp(fits, conc = conc, average = TRUE, ci_method = "multi_fixed")
+  hp_multi <- ssd_hp(fits, conc = conc, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
   hc_multi <- ssd_hc(fits, proportion = hp_multi$est / 100, average = TRUE, ci_method = "multi_fixed")
   expect_equal(hc_multi$est, 10.00000012176)
   for (i in 1:10) {
-    hp_multi <- ssd_hp(fits, conc = hc_multi$est, average = TRUE, ci_method = "multi_fixed")
+    hp_multi <- ssd_hp(fits, conc = hc_multi$est, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
     hc_multi <- ssd_hc(fits, proportion = hp_multi$est / 100, average = TRUE, ci_method = "multi_fixed")
   }
   expect_equal(hc_multi$est, 10)

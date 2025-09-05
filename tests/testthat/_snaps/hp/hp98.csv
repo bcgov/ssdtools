@@ -1,2 +1,2 @@
-dist,conc,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-lnorm,1,1.95431,1.45516,0.636771,5.11975,1,parametric,10,1,"c(`000000001_lnorm` = 5.58253, `000000002_lnorm` = 3.52573, `000000003_lnorm` = 2.55718, `000000004_lnorm` = 1.82391, `000000005_lnorm` = 1.7567, `000000006_lnorm` = 1.27, `000000007_lnorm` = 2.16266, `000000008_lnorm` = 0.819781, `000000009_lnorm` = 0.583639, `000000010_lnorm` = 2.3715)"
+dist,conc,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+lnorm,1,1.95431,1.45516,0.636771,5.11975,1,0.95,cdf,percentile,parametric,10,1,lnorm,"c(`000000001_lnorm` = 5.58253, `000000002_lnorm` = 3.52573, `000000003_lnorm` = 2.55718, `000000004_lnorm` = 1.82391, `000000005_lnorm` = 1.7567, `000000006_lnorm` = 1.27, `000000007_lnorm` = 2.16266, `000000008_lnorm` = 0.819781, `000000009_lnorm` = 0.583639, `000000010_lnorm` = 2.3715)"
