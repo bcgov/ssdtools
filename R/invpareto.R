@@ -44,7 +44,7 @@ ssd_qinvpareto <- function(p, shape = 3, scale = 1, lower.tail = TRUE, log.p = F
 #' @examples
 #'
 #' withr::with_seed(50, {
-#' x <- ssd_rinvpareto(10000)
+#'   x <- ssd_rinvpareto(10000)
 #' })
 #' hist(x, breaks = 1000)
 ssd_rinvpareto <- function(n, shape = 3, scale = 1, chk = TRUE) {

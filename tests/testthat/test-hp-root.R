@@ -26,7 +26,7 @@ test_that("hp multi_ci lnorm", {
   expect_snapshot_value(hp_average$est, style = "deparse")
   expect_snapshot_value(hp_multi$est, style = "deparse")
   expect_snapshot_data(hp_multi, "hp_multi_ci_lnorm")
-  
+
   hp_multi$est_method <- NULL
   hp_average$est_method <- NULL
   hp_multi$ci_method <- NULL
@@ -40,8 +40,10 @@ test_that("hp multi_ci all", {
     hp_average <- ssd_hp(fits, average = TRUE, ci_method = "weighted_samples", proportion = FALSE)
     hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
   })
-  expect_equal(hp_multi[!colnames(hp_multi) %in% c("ci_method", "boot_method")], 
-               hp_average[!colnames(hp_average) %in% c("ci_method", "boot_method")])
+  expect_equal(
+    hp_multi[!colnames(hp_multi) %in% c("ci_method", "boot_method")],
+    hp_average[!colnames(hp_average) %in% c("ci_method", "boot_method")]
+  )
   expect_snapshot_value(hp_average$est, style = "deparse")
   expect_snapshot_value(hp_multi$est, style = "deparse")
   expect_snapshot_data(hp_multi, "hp_multi_ci_all")

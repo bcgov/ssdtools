@@ -41,7 +41,7 @@ test_that("ssd_dists_bcanz works", {
 test_that("ssd_dists_bcanz proportion = TRUE", {
   fit <- ssd_fit_bcanz(data = ssddata::ccme_boron)
   withr::with_seed(50, {
-      hp <- ssd_hp_bcanz(fit, nboot = 10, proportion = TRUE)
+    hp <- ssd_hp_bcanz(fit, nboot = 10, proportion = TRUE)
   })
   expect_snapshot_data(hp, "hp_chloride_proportion")
 })

@@ -17,17 +17,17 @@
 
 test_that("gof paper also", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   gof_statistic <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof_statistic, "gof_statistic")
-  
+
   gof <- ssd_gof(fits, pvalue = TRUE, wt = TRUE)
   expect_snapshot_data(gof, "gof")
 })
 
 test_that("gof wt deprecated", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   expect_deprecated(
     gof_statistic <- ssd_gof(fits)
   )
@@ -36,8 +36,8 @@ test_that("gof wt deprecated", {
 
 test_that("gof wt = FALSE still deprecated message", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
-  expect_deprecated( 
+
+  expect_deprecated(
     gof_statistic <- ssd_gof(fits, wt = FALSE)
   )
   expect_snapshot_data(gof_statistic, "gof_statisticwtFALSE")
@@ -47,12 +47,12 @@ test_that("gof censored same parameters2", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
   data$Conc[c(3, 6, 8)] <- NA
-  
+
   fits <- ssd_fit_dists(data, right = "right", dists = c("llogis", "lnorm"))
-  
+
   gof_statistic <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof_statistic, "gof_statistic2")
-  
+
   gof <- ssd_gof(fits, pvalue = TRUE, wt = TRUE)
   expect_snapshot_data(gof, "gof2")
 })
@@ -61,12 +61,12 @@ test_that("gof censored same parameters5", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
   data$Conc[c(3, 6, 8)] <- NA
-  
+
   fits <- ssd_fit_dists(data, right = "right", dists = c("llogis_llogis", "lnorm_lnorm"))
-  
+
   gof_statistic <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof_statistic, "gof_statistic5")
-  
+
   gof <- ssd_gof(fits, pvalue = TRUE, wt = TRUE)
   expect_snapshot_data(gof, "gof5")
 })
@@ -75,12 +75,12 @@ test_that("gof censored same diff parameters", {
   data <- ssddata::ccme_boron
   data$right <- data$Conc
   data$Conc[c(3, 6, 8)] <- NA
-  
+
   fits <- ssd_fit_dists(data, right = "right", dists = c("llogis", "lnorm_lnorm"))
-  
+
   gof_statistic <- ssd_gof(fits, wt = TRUE)
   expect_snapshot_data(gof_statistic, "gof_statisticn")
-  
+
   gof <- ssd_gof(fits, pvalue = TRUE, wt = TRUE)
   expect_snapshot_data(gof, "gofn")
 })
