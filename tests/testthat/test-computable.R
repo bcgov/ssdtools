@@ -15,19 +15,26 @@
 
 test_that("test computable fits2.3", {
   fits <- ssdtools:::fits2.3
-  expect_identical(ssd_computable(fits),
-                   c(gamma = NA, lgumbel = NA, llogis = NA, lnorm = NA, 
-                     lnorm_lnorm = NA, weibull = NA))
+  expect_identical(
+    ssd_computable(fits),
+    c(
+      gamma = NA, lgumbel = NA, llogis = NA, lnorm = NA,
+      lnorm_lnorm = NA, weibull = NA
+    )
+  )
   expect_identical(ssd_computable(fits$lnorm), NA)
   expect_identical(ssd_computable(fits$lnorm_lnorm), NA)
 })
 
 test_that("test computable fits", {
   fits <- ssdtools:::fits
-  expect_identical(ssd_computable(fits),
-                   c(gamma = TRUE, lgumbel = TRUE, llogis = TRUE, lnorm = TRUE, 
-                     lnorm_lnorm = TRUE, weibull = TRUE))
+  expect_identical(
+    ssd_computable(fits),
+    c(
+      gamma = TRUE, lgumbel = TRUE, llogis = TRUE, lnorm = TRUE,
+      lnorm_lnorm = TRUE, weibull = TRUE
+    )
+  )
   expect_true(ssd_computable(fits$lnorm))
   expect_true(ssd_computable(fits$lnorm_lnorm))
 })
-

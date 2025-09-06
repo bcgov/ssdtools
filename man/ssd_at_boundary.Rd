@@ -35,14 +35,14 @@ Generic function to test if one or more parameters is at boundary.
 
 }}
 \examples{
-fits <- ssd_fit_dists(ssddata::ccme_boron, 
+fits <- ssd_fit_dists(ssddata::ccme_boron,
   dists = c("lnorm", "lnorm_lnorm", "burrIII3")
 )
 ssd_at_boundary(fits$lnorm)
 ssd_at_boundary(fits$lnorm_lnorm)
 ssd_at_boundary(fits$burrIII3)
 
-fits <- ssd_fit_dists(ssddata::ccme_boron, 
+fits <- ssd_fit_dists(ssddata::ccme_boron,
   dists = c("lnorm", "lnorm_lnorm", "burrIII3")
 )
 ssd_at_boundary(fits)

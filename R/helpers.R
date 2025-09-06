@@ -37,22 +37,22 @@ is_bounds <- function(dist) {
 }
 
 odds <- function(x) {
-  x/(1 - x)
+  x / (1 - x)
 }
 
 inv_odds <- function(x) {
-  x/(1 + x)
+  x / (1 + x)
 }
 
 rescale <- function(x, rescale) {
-  if(is.infinite(rescale)) {
+  if (is.infinite(rescale)) {
     return(odds(x))
   }
   x / rescale
 }
 
 unscale <- function(x, rescale) {
-  if(is.infinite(rescale)) {
+  if (is.infinite(rescale)) {
     return(inv_odds(x))
   }
   x * rescale
@@ -160,7 +160,7 @@ adjust_data <- function(data, rescale, reweight, odds_max, silent) {
     rescale <- geomid(rescale)
     data$left <- data$left / rescale
     data$right <- data$right / rescale
-  } else if(rescale == "no") {
+  } else if (rescale == "no") {
     rescale <- 1
   } else {
     data$left <- pmin(data$left, odds_max)

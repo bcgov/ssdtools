@@ -17,11 +17,11 @@
 
 samples_to_vectors <- function(x, nboot) {
   vec <- rep(NA_real_, times = nboot)
-  
+
   numbers <- names(x) |>
     stringr::str_extract("^\\d+") |>
     as.integer()
-  
+
   vec[numbers] <- x
   vec
 }
@@ -38,8 +38,9 @@ combine_samples <- function(samples, weight, nboot, geometric) {
     dplyr::pull(.data$.samples)
 
   names(samples) <- boot_filename(seq_along(samples),
-                                  prefix = "", sep = "",
-                                  dist = "_average")
+    prefix = "", sep = "",
+    dist = "_average"
+  )
   samples[!is.na(samples)]
 }
 
@@ -51,33 +52,35 @@ hcp_combine_samples <- function(hcp, weight, ci_method, level, nboot) {
     dplyr::bind_rows() |>
     dplyr::group_by(.data$value) |>
     dplyr::summarise(
-      samples = list(combine_samples(.data$samples, weight, nboot = nboot1, geometric = geometric))) |>
+      samples = list(combine_samples(.data$samples, weight, nboot = nboot1, geometric = geometric))
+    ) |>
     dplyr::ungroup()
-  
+
   quantiles <- purrr::map(hcp$samples, stats::quantile, probs = probs(level))
   quantiles <- purrr::transpose(quantiles)
-  
-  hcp |> 
+
+  hcp |>
     dplyr::mutate(
       lcl = unlist(quantiles[[1]]),
       ucl = unlist(quantiles[[2]]),
       se = purrr::map_dbl(.data$samples, sd),
-      pboot = pmin(purrr::map_dbl(.data$samples, length) / nboot, 1))
+      pboot = pmin(purrr::map_dbl(.data$samples, length) / nboot, 1)
+    )
 }
 
 hcp_samples <- function(x, value, level, nboot, est_method, min_pboot,
-                         data, rescale, weighted, censoring, min_pmix,
-                         range_shape1, range_shape2, parametric, control,
-                         save_to, ci_method, hc, fun, ...) {
-
+                        data, rescale, weighted, censoring, min_pmix,
+                        range_shape1, range_shape2, parametric, control,
+                        save_to, ci_method, hc, fun, ...) {
   hcp <- purrr::map(
-    x, hcp_tmbfit, value = value, ci = TRUE, level = level, nboot = nboot,
+    x, hcp_tmbfit,
+    value = value, ci = TRUE, level = level, nboot = nboot,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
     parametric = parametric, est_method = est_method, ci_method = ci_method, average = TRUE, control = control,
     hc = hc, save_to = save_to, samples = TRUE, fun = fun
   )
   weight <- glance(x, wt = TRUE)$wt
-  
+
   hcp_combine_samples(hcp, weight, ci_method = ci_method, level = level, nboot = nboot)
 }

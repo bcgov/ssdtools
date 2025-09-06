@@ -29,8 +29,8 @@
 #' @export
 #' @examples
 #' ssd_fit_burrlioz(ssddata::ccme_boron)
-ssd_fit_burrlioz <- function(data, 
-                             left = "Conc", 
+ssd_fit_burrlioz <- function(data,
+                             left = "Conc",
                              ...,
                              rescale = FALSE,
                              control = list(),

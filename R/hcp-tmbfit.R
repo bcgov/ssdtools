@@ -22,12 +22,12 @@ replace_min_pboot_na <- function(x, min_pboot) {
 
 ci_hcp <- function(cis, estimates, value, dist, est, rescale, nboot, hc) {
   rescale <- if (hc) rescale else 1
-  
+
   tibble(
     dist = dist,
     value = value,
     est = unscale(est, rescale),
-    log_se = log(unscale(exp(cis$log_se), rescale)), 
+    log_se = log(unscale(exp(cis$log_se), rescale)),
     se = unscale(cis$se, rescale),
     lcl = unscale(cis$lcl, rescale),
     ucl = unscale(cis$ucl, rescale),
@@ -42,7 +42,7 @@ no_ci_hcp <- function(value, dist, est, rescale, hc) {
   na <- rep(NA_real_, length(value))
   na_chr <- rep(NA_character_, length(value))
   rescale <- if (hc) rescale else 1
-  
+
   tibble(
     dist = rep(dist, length(value)),
     value = value,
@@ -64,7 +64,7 @@ hcp_tmbfit2 <- function(
     range_shape1, range_shape2, parametric, control, save_to, samples, hc,
     est_method, ci_method) {
   args <- estimates
-  
+
   if (hc) {
     args$p <- value
     what <- paste0("ssd_q", dist)
@@ -72,14 +72,14 @@ hcp_tmbfit2 <- function(
     args$q <- rescale(value, rescale)
     what <- paste0("ssd_p", dist)
   }
-  
+
   est <- do.call(what, args)
   if (!ci) {
     return(no_ci_hcp(value = value, dist = dist, est = est, rescale = rescale, hc = hc))
   }
-  
+
   censoring <- censoring / rescale
-  
+
   ests <- boot_estimates(
     fun = fun, dist = dist, estimates = estimates,
     pars = pars, nboot = nboot, data = data, weighted = weighted,
@@ -94,7 +94,8 @@ hcp_tmbfit2 <- function(
   }
   cis <- cis_estimates(ests, what, level = level, x = x, samples = samples)
   hcp <- ci_hcp(
-    cis, estimates = ests, value = value, dist = dist,
+    cis,
+    estimates = ests, value = value, dist = dist,
     est = est, rescale = rescale, nboot = nboot, hc = hc
   )
   replace_min_pboot_na(hcp, min_pboot)
@@ -107,9 +108,10 @@ hcp_tmbfit <- function(
   estimates <- estimates(x)
   dist <- .dist_tmbfit(x)
   pars <- .pars_tmbfit(x)
-  
+
   hcp_tmbfit2(
-    x, dist = dist, estimates = estimates, fun = fun, pars = pars,
+    x,
+    dist = dist, estimates = estimates, fun = fun, pars = pars,
     value = value, ci = ci, level = level, nboot = nboot,
     min_pboot = min_pboot, data = data, rescale = rescale, weighted = weighted, censoring = censoring,
     min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,

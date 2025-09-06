@@ -239,22 +239,22 @@ Random Number Generation
 \examples{
 
 withr::with_seed(50, {
-x <- ssd_rburrIII3(10000)
+  x <- ssd_rburrIII3(10000)
 })
 hist(x, breaks = 1000)
 
 withr::with_seed(50, {
-x <- ssd_rgamma(10000)
+  x <- ssd_rgamma(10000)
 })
 hist(x, breaks = 1000)
 
 withr::with_seed(50, {
-x <- ssd_rgompertz(10000)
+  x <- ssd_rgompertz(10000)
 })
 hist(x, breaks = 1000)
 
 withr::with_seed(50, {
-x <- ssd_rinvpareto(10000)
+  x <- ssd_rinvpareto(10000)
 })
 hist(x, breaks = 1000)
 

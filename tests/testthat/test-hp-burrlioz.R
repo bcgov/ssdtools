@@ -63,9 +63,9 @@ test_that("ssd_hp_burrlioz gets estimates with burrIII3 parametric", {
   expect_identical(names(fit), "burrIII3")
   withr::with_seed(49, {
     hp_burrIII3 <- ssd_hp(fit,
-                          nboot = 10, ci = TRUE, min_pboot = 0,
-                          parametric = TRUE, samples = TRUE,
-                          proportion = FALSE
+      nboot = 10, ci = TRUE, min_pboot = 0,
+      parametric = TRUE, samples = TRUE,
+      proportion = FALSE
     )
   })
   expect_snapshot_data(hp_burrIII3, "hp_burrIII3_parametric")

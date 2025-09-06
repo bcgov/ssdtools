@@ -7,9 +7,9 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![R-CMD-check](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/ssdtools/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/poissonconsulting/ssdtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/ssdtools/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/bcgov/ssdtools/graph/badge.svg)](https://app.codecov.io/gh/bcgov/ssdtools)
+coverage](https://codecov.io/gh/poissonconsulting/ssdtools/graph/badge.svg)](https://app.codecov.io/gh/poissonconsulting/ssdtools)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ssdtools)](https://cran.r-project.org/package=ssdtools)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.07492/status.svg)](https://doi.org/10.21105/joss.07492)
@@ -76,6 +76,13 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(fits)
+#> Warning: ssd_gof(wt = FALSE) was deprecated in ssdtools 2.3.1.
+#> ℹ Please use ssd_gof(wt = TRUE) instead.
+#> ℹ Please set the `wt` argument to `ssd_gof()` to be TRUE which will rename the
+#>   'weight' column to 'wt' and then update your downstream code accordingly.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 #> # A tibble: 6 × 14
 #>   dist    npars  nobs log_lik   aic  aicc delta weight   bic    ad     ks    cvm
 #>   <chr>   <int> <int>   <dbl> <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl>  <dbl>  <dbl>
@@ -96,11 +103,12 @@ withr::with_seed(99, {
   hc5 <- ssd_hc(fits, ci = TRUE)
 })
 print(hc5)
-#> # A tibble: 1 × 13
-#>   dist    proportion   est    se   lcl   ucl    wt est_method ci_method   method
-#>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <chr>       <chr> 
-#> 1 average       0.05  1.26 0.782 0.407  3.29     1 multi      weighted_s… param…
-#> # ℹ 3 more variables: nboot <dbl>, pboot <dbl>, samples <I<list>>
+#> # A tibble: 1 × 15
+#>   dist    proportion   est    se   lcl   ucl    wt level est_method ci_method   
+#>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <chr>       
+#> 1 average       0.05  1.26 0.782 0.407  3.29     1  0.95 multi      weighted_sa…
+#> # ℹ 5 more variables: boot_method <chr>, nboot <dbl>, pboot <dbl>,
+#> #   dists <list>, samples <list>
 ```
 
 Model-averaged predictions complete with confidence intervals can also
@@ -233,7 +241,7 @@ Distributions in Ecotoxicology. CRC Press.
 
 Copyright 2015-2023 Province of British Columbia  
 Copyright 2021 Environment and Climate Change Canada  
-Copyright 2023-2024 Australian Government Department of Climate Change,
+Copyright 2023-2025 Australian Government Department of Climate Change,
 Energy, the Environment and Water
 
 The documentation is released under the [CC BY 4.0

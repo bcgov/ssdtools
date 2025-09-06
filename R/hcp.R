@@ -52,8 +52,8 @@ clean_hcp <- function(hcp, ci, level, average, est_method, ci_method, parametric
   hcp$ci_method <- ci_method
   hcp$boot_method <- if (parametric) "parametric" else "non-parametric"
   hcp$level <- level
-  
-  if(ci) {
+
+  if (ci) {
     hcp$nboot <- nboot
   } else {
     hcp$se <- NA_real_
@@ -62,26 +62,26 @@ clean_hcp <- function(hcp, ci, level, average, est_method, ci_method, parametric
     hcp$nboot <- 0L
     hcp$pboot <- 1
   }
-  
-  if(any(hcp$pboot < min_pboot)) {
+
+  if (any(hcp$pboot < min_pboot)) {
     fail <- hcp$pboot < min_pboot
     hcp$lcl[fail] <- NA_real_
     hcp$ucl[fail] <- NA_real_
     hcp$se[fail] <- NA_real_
   }
 
-  if(average) {
+  if (average) {
     hcp$dist <- "average"
     hcp$wt <- 1
   } else {
     hcp$est_method <- "cdf"
     hcp$ci_method <- "percentile"
-  } 
-  
-  if(!samples) {
+  }
+
+  if (!samples) {
     hcp$samples <- list(numeric(0))
   }
-  
+
   hcp |>
     dplyr::select(c("dist", "value", "est", "se", "lcl", "ucl", "wt", "level", "est_method", "ci_method", "boot_method", "nboot", "pboot", "dists", "samples"))
 }
@@ -92,11 +92,11 @@ hcp2 <- function(
   if (!length(x) || !length(value)) {
     return(no_hcp())
   }
-  
+
   if (is.null(control)) {
     control <- .control_fitdists(x)
   }
-  
+
   data <- .data_fitdists(x)
   rescale <- .rescale_fitdists(x)
   censoring <- .censoring_fitdists(x)
@@ -106,26 +106,27 @@ hcp2 <- function(
   weighted <- .weighted_fitdists(x)
   unequal <- .unequal_fitdists(x)
 
-  if(length(x) == 1L) {
+  if (length(x) == 1L) {
     average <- FALSE
   }
-  
+
   if (ci && parametric && !identical(censoring, c(0, Inf))) {
     wrn("Parametric CIs cannot be calculated for censored data.")
     ci <- FALSE
   }
-  
+
   if (ci && parametric && unequal) {
     wrn("Parametric CIs cannot be calculated for unequally weighted data.")
     ci <- FALSE
   }
-  
+
   if (!ci) {
     nboot <- 0L
   }
   if (!average) {
     hcp <- hcp_ind(
-      x, value = value, ci = ci, level = level, nboot = nboot,
+      x,
+      value = value, ci = ci, level = level, nboot = nboot,
       min_pboot = min_pboot,
       data = data, rescale = rescale, weighted = weighted, censoring = censoring,
       min_pmix = min_pmix, range_shape1 = range_shape1, range_shape2 = range_shape2,
@@ -145,7 +146,7 @@ hcp2 <- function(
     )
     hcp$dists <- rep(list(sort(names(x))), nrow(hcp))
   }
-  clean_hcp(hcp, ci = ci, level = level, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, nboot = nboot, min_pboot = min_pboot, samples = samples)  
+  clean_hcp(hcp, ci = ci, level = level, average = average, est_method = est_method, ci_method = ci_method, parametric = parametric, nboot = nboot, min_pboot = min_pboot, samples = samples)
 }
 
 hcp <- function(
@@ -161,27 +162,28 @@ hcp <- function(
   chk_gt(nboot)
   chk_lt(nboot, 1e+09)
   chk_flag(average)
-  
+
   chk_string(est_method)
   chk_subset(est_method, ssd_est_methods())
-  
+
   chk_number(delta)
   chk_gte(delta)
   chk_number(min_pboot)
   chk_range(min_pboot)
   chk_flag(parametric)
-  
+
   chk_string(ci_method)
   chk_subset(ci_method, ssd_ci_methods())
   chk_null_or(control, vld = vld_list)
   chk_null_or(save_to, vld = vld_dir)
   chk_flag(samples)
-  
+
   ## FIXME add warning on GMACL and MACL?
   x <- subset(x, delta = delta)
-  
+
   hcp <- hcp2(
-    x, value = value, ci = ci, level = level, nboot = nboot,
+    x,
+    value = value, ci = ci, level = level, nboot = nboot,
     average = average, est_method = est_method, min_pboot = min_pboot,
     parametric = parametric, ci_method = ci_method,
     control = control, save_to = save_to, samples = samples, hc = hc, fun = fun

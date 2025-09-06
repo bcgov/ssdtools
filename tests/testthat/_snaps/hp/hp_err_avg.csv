@@ -1,2 +1,0 @@
-dist,conc,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,dists,samples
-average,1,8.71512,NA,NA,NA,1,0.95,multi,MACL,parametric,100,"c(""llogis_llogis"", ""lnorm"")",numeric(0)
