@@ -1,6 +1,6 @@
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2021 Environment and Climate Change Canada
-# Copyright 2023-2024 Australian Government Department of Climate Change,
+# Copyright 2023-2025 Australian Government Department of Climate Change,
 # Energy, the Environment and Water
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,17 +36,30 @@ is_bounds <- function(dist) {
   exists(fun, mode = "function")
 }
 
-logit <- function(x) {
-  stats::qlogis(x)
+odds <- function(x) {
+  x/(1 - x)
+}
+
+inv_odds <- function(x) {
+  x/(1 + x)
+}
+
+rescale <- function(x, rescale) {
+  if(is.infinite(rescale)) {
+    return(odds(x))
+  }
+  x / rescale
+}
+
+unscale <- function(x, rescale) {
+  if(is.infinite(rescale)) {
+    return(inv_odds(x))
+  }
+  x * rescale
 }
 
 strip_loglogit <- function(x) {
   sub("^log(it){0,1}_", "", x)
-}
-
-bind_rows <- function(x) {
-  x <- do.call("rbind", x)
-  as_tibble(x)
 }
 
 measured_range <- function(x) {
@@ -133,7 +146,7 @@ geomid <- function(x) {
   exp(mean(log(range(x))))
 }
 
-adjust_data <- function(data, rescale, reweight, silent) {
+adjust_data <- function(data, rescale, reweight, odds_max, silent) {
   censoring <- censoring(data)
 
   if (reweight) {
@@ -142,13 +155,19 @@ adjust_data <- function(data, rescale, reweight, silent) {
   weighted <- max(data$weight)
   unequal <- any(data$weight != data$weight[1])
 
-  if (rescale) {
+  if (rescale == "geomean") {
     rescale <- c(data$left, data$right)
     rescale <- geomid(rescale)
     data$left <- data$left / rescale
     data$right <- data$right / rescale
-  } else {
+  } else if(rescale == "no") {
     rescale <- 1
+  } else {
+    data$left <- pmin(data$left, odds_max)
+    data$left <- odds(data$left)
+    data$right[is.infinite(data$right)] <- 1
+    data$right <- odds(data$right)
+    rescale <- Inf
   }
 
   list(data = data, censoring = censoring, rescale = rescale, weighted = weighted, unequal = unequal)

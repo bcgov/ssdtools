@@ -112,3 +112,4 @@ Uses the empirical cumulative density/distribution to visualize species sensitiv
 \code{\link[=geom_ssdpoint]{geom_ssdpoint()}}
 }
 \concept{ggplot2}
+\keyword{internal}

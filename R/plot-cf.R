@@ -24,6 +24,7 @@
 #' Deprecated for [fitdistrplus::descdist()].
 #'
 #' @inheritParams ssd_fit_dists
+#' @keywords internal
 #' @export
 ssd_plot_cf <- function(data, left = "Conc") {
   lifecycle::deprecate_stop("0.3.5", "ssd_plot_cf()", "fitdistrplus::descdist()",

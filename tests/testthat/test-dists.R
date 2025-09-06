@@ -26,11 +26,13 @@ test_that("dists all", {
 })
 
 test_that("dists shiny", {
-  expect_identical(
-    ssd_dists_shiny(),
-    c(
-      "burrIII3", "gamma", "gompertz", "lgumbel", "llogis",
-      "llogis_llogis", "lnorm", "lnorm_lnorm", "weibull"
+  lifecycle::expect_deprecated(
+    expect_identical(
+      ssd_dists_shiny(),
+      c(
+        "burrIII3", "gamma", "gompertz", "lgumbel", "llogis",
+        "llogis_llogis", "lnorm", "lnorm_lnorm", "weibull"
+      )
     )
   )
 })

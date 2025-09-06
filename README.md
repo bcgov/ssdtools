@@ -76,28 +76,31 @@ The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
 ssd_gof(fits)
-#> # A tibble: 6 × 9
-#>   dist           ad     ks    cvm   aic  aicc   bic delta weight
-#>   <chr>       <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-#> 1 gamma       0.440 0.117  0.0554  238.  238.  240. 0.005  0.357
-#> 2 lgumbel     0.829 0.158  0.134   244.  245.  247. 6.56   0.013
-#> 3 llogis      0.487 0.0994 0.0595  241.  241.  244. 3.39   0.066
-#> 4 lnorm       0.507 0.107  0.0703  239.  240.  242. 1.40   0.177
-#> 5 lnorm_lnorm 0.320 0.116  0.0414  240.  243.  247. 4.98   0.03 
-#> 6 weibull     0.434 0.117  0.0542  238.  238.  240. 0      0.357
+#> # A tibble: 6 × 14
+#>   dist    npars  nobs log_lik   aic  aicc delta weight   bic    ad     ks    cvm
+#>   <chr>   <int> <int>   <dbl> <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl>  <dbl>  <dbl>
+#> 1 gamma       2    28   -117.  238.  238. 0.005  0.357  240. 0.440 0.117  0.0554
+#> 2 lgumbel     2    28   -120.  244.  245. 6.56   0.013  247. 0.829 0.158  0.134 
+#> 3 llogis      2    28   -119.  241.  241. 3.39   0.066  244. 0.487 0.0994 0.0595
+#> 4 lnorm       2    28   -118.  239.  240. 1.40   0.177  242. 0.507 0.107  0.0703
+#> 5 lnorm_…     5    28   -115.  240.  243. 4.98   0.03   247. 0.320 0.116  0.0414
+#> 6 weibull     2    28   -117.  238.  238. 0      0.357  240. 0.434 0.117  0.0542
+#> # ℹ 2 more variables: at_bound <lgl>, computable <lgl>
 ```
 
 and the model-averaged 5% hazard concentration estimated (with
 bootstrapping to get confidence intervals) using `ssd_hc`.
 
 ``` r
-set.seed(99)
-hc5 <- ssd_hc(fits, ci = TRUE)
+withr::with_seed(99, {
+  hc5 <- ssd_hc(fits, ci = TRUE)
+})
 print(hc5)
-#> # A tibble: 1 × 11
-#>   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples
-#>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>     <dbl> <dbl> <I<lis>
-#> 1 average       0.05  1.26 0.782 0.407  3.29     1 parametr…  1000     1 <dbl>
+#> # A tibble: 1 × 13
+#>   dist    proportion   est    se   lcl   ucl    wt est_method ci_method   method
+#>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <chr>       <chr> 
+#> 1 average       0.05  1.26 0.782 0.407  3.29     1 multi      weighted_s… param…
+#> # ℹ 3 more variables: nboot <dbl>, pboot <dbl>, samples <I<list>>
 ```
 
 Model-averaged predictions complete with confidence intervals can also

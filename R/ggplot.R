@@ -205,6 +205,7 @@ geom_xribbon <- function(mapping = NULL,
 #'
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
+#' @keywords internal
 #' @export
 geom_ssd <- function(mapping = NULL,
                      data = NULL,
@@ -226,6 +227,7 @@ geom_ssd <- function(mapping = NULL,
 #' @inheritParams ggplot2::geom_point
 #' @seealso [`geom_ssdpoint()`]
 #' @family ggplot2
+#' @keywords internal
 #' @export
 stat_ssd <- function(mapping = NULL,
                      data = NULL,

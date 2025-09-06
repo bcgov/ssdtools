@@ -1,5 +1,5 @@
-dist,proportion,est,se,lcl,ucl,wt,method,nboot,pboot,samples
-gamma,0.05,1.18081,NA,NA,NA,0.423429,parametric,0,NA,numeric(0)
-llogis,0.05,1.78679,NA,NA,NA,0.0571963,parametric,0,NA,numeric(0)
-lnorm,0.05,1.81555,NA,NA,NA,0.0983544,parametric,0,NA,numeric(0)
-weibull,0.05,1.2343,NA,NA,NA,0.42102,parametric,0,NA,numeric(0)
+dist,proportion,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+gamma,0.05,1.18081,NA,NA,NA,0.423429,0.95,cdf,percentile,parametric,0,1,gamma,numeric(0)
+llogis,0.05,1.78679,NA,NA,NA,0.0571963,0.95,cdf,percentile,parametric,0,1,llogis,numeric(0)
+lnorm,0.05,1.81555,NA,NA,NA,0.0983544,0.95,cdf,percentile,parametric,0,1,lnorm,numeric(0)
+weibull,0.05,1.2343,NA,NA,NA,0.42102,0.95,cdf,percentile,parametric,0,1,weibull,numeric(0)

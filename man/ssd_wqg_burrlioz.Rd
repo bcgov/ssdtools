@@ -31,3 +31,4 @@ Other wqg:
 \code{\link{ssd_wqg_bc}()}
 }
 \concept{wqg}
+\keyword{internal}

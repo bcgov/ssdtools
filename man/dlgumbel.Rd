@@ -23,3 +23,4 @@ A numeric vector.
 Log-Gumbel (Inverse Weibull) Probability Density
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
+\keyword{internal}

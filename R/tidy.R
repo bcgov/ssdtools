@@ -69,6 +69,6 @@ tidy.tmbfit <- function(x, all = FALSE, ...) {
 tidy.fitdists <- function(x, all = FALSE, ...) {
   chk_unused(...)
   x <- lapply(x, tidy, all = all)
-  x <- bind_rows(x)
+  x <- dplyr::bind_rows(x)
   x
 }

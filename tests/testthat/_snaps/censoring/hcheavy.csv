@@ -1,0 +1,7 @@
+dist,proportion,est,se,lcl,ucl,wt,level,est_method,ci_method,boot_method,nboot,pboot,dists,samples
+gamma,0.05,0.502465,NA,NA,NA,NA,0.95,cdf,percentile,parametric,0,1,gamma,numeric(0)
+lgumbel,0.05,0.86191,NA,NA,NA,NA,0.95,cdf,percentile,parametric,0,1,lgumbel,numeric(0)
+llogis,0.05,0.800977,NA,NA,NA,NA,0.95,cdf,percentile,parametric,0,1,llogis,numeric(0)
+lnorm,0.05,0.804335,NA,NA,NA,NA,0.95,cdf,percentile,parametric,0,1,lnorm,numeric(0)
+lnorm_lnorm,0.05,0.835826,NA,NA,NA,NA,0.95,cdf,percentile,parametric,0,1,lnorm_lnorm,numeric(0)
+weibull,0.05,0.377033,NA,NA,NA,NA,0.95,cdf,percentile,parametric,0,1,weibull,numeric(0)

@@ -1,1 +1,1 @@
-dist,conc,est,se,lcl,ucl,wt,nboot,pboot,samples
+dist,conc,est,se,lcl,ucl,wt,est_method,ci_method,boot_method,nboot,pboot,samples

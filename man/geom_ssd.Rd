@@ -108,3 +108,4 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 \description{
 Deprecated for \code{geom_ssdpoint()}.
 }
+\keyword{internal}

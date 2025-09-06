@@ -8,6 +8,7 @@ ssd_ecd_data(
   data,
   left = "Conc",
   right = left,
+  ...,
   bounds = c(left = 1, right = 1)
 )
 }
@@ -17,6 +18,8 @@ ssd_ecd_data(
 \item{left}{A string of the column in data with the concentrations.}
 
 \item{right}{A string of the column in data with the right concentration values.}
+
+\item{...}{Unused.}
 
 \item{bounds}{A named non-negative numeric vector of the left and right bounds for
 uncensored missing (0 and Inf) data in terms of the orders of magnitude

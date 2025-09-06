@@ -17,49 +17,50 @@
 
 test_that("hp multi_ci lnorm", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hp_dist <- ssd_hp(fits, average = FALSE, ci_method = "weighted_arithmetic")
-  hp_average <- ssd_hp(fits, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE)
-  hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", multi_est = TRUE)
-  expect_identical(hp_average$est, hp_dist$est)
-  expect_equal(hp_multi, hp_average)
-  expect_equal(hp_average$est, 1.9543030195088, tolerance = 1e-5)
-  expect_equal(hp_multi$est, 1.95430301950878, tolerance = 1e-5)
-
-  testthat::expect_snapshot({
-    hp_multi
+  withr::with_seed(502, {
+    hp_dist <- ssd_hp(fits, average = FALSE, ci_method = "MACL", proportion = FALSE)
+    hp_average <- ssd_hp(fits, average = TRUE, ci_method = "MACL", est_method = "arithmetic", proportion = FALSE)
+    hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
   })
+  expect_identical(hp_average$est, hp_dist$est)
+  expect_snapshot_value(hp_average$est, style = "deparse")
+  expect_snapshot_value(hp_multi$est, style = "deparse")
+  expect_snapshot_data(hp_multi, "hp_multi_ci_lnorm")
+  
+  hp_multi$est_method <- NULL
+  hp_average$est_method <- NULL
+  hp_multi$ci_method <- NULL
+  hp_average$ci_method <- NULL
+  expect_equal(hp_multi, hp_average)
 })
 
 test_that("hp multi_ci all", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE)
-  hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed")
-  expect_equal(hp_multi, hp_average)
-  expect_equal(hp_average$est, 3.89879276872944, tolerance = 1e-5)
-  expect_equal(hp_multi$est, 3.89879276872944, tolerance = 1e-5)
-  testthat::expect_snapshot({
-    hp_multi
+  withr::with_seed(502, {
+    hp_average <- ssd_hp(fits, average = TRUE, ci_method = "weighted_samples", proportion = FALSE)
+    hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", proportion = FALSE)
   })
+  expect_equal(hp_multi[!colnames(hp_multi) %in% c("ci_method", "boot_method")], 
+               hp_average[!colnames(hp_average) %in% c("ci_method", "boot_method")])
+  expect_snapshot_value(hp_average$est, style = "deparse")
+  expect_snapshot_value(hp_multi$est, style = "deparse")
+  expect_snapshot_data(hp_multi, "hp_multi_ci_all")
 })
 
 test_that("hp multi_ci lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, ci_method = "weighted_arithmetic")
-  set.seed(102)
-  hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, ci_method = "weighted_arithmetic", multi_est = TRUE)
-  set.seed(102)
-  hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 100)
-
-  testthat::expect_snapshot({
-    hp_average
+  withr::with_seed(502, {
+    hp_dist <- ssd_hp(fits, average = FALSE, ci = TRUE, nboot = 100, ci_method = "MACL", proportion = FALSE)
+  })
+  withr::with_seed(502, {
+    hp_average <- ssd_hp(fits, average = TRUE, ci = TRUE, nboot = 100, ci_method = "MACL", proportion = FALSE)
+  })
+  withr::with_seed(502, {
+    hp_multi <- ssd_hp(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 100, proportion = FALSE)
   })
 
-  testthat::expect_snapshot({
-    hp_multi
-  })
+  expect_snapshot_data(hp_average, "hp_multi_ci_lnorm_ci_average")
+  expect_snapshot_data(hp_multi, "hp_multi_ci_lnorm_ci_multi")
 
   hp_dist$dist <- NULL
   hp_average$dist <- NULL

@@ -21,3 +21,4 @@ qlgumbel(p, locationlog = 0, scalelog = 1, lower.tail = TRUE, log.p = FALSE)
 \description{
 Deprecated for \code{ssd_qlgumbel()}.
 }
+\keyword{internal}

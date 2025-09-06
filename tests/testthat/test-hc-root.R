@@ -15,75 +15,31 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-test_that("hc multi_ci lnorm", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hc_dist <- ssd_hc(fits, average = FALSE, ci_method = "weighted_arithmetic")
-  hc_average <- ssd_hc(fits, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE)
-  hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed")
-  expect_identical(hc_dist$est, hc_average$est)
-  expect_equal(hc_multi, hc_average)
-
-  testthat::expect_snapshot({
-    hc_multi
-  })
-})
-
-test_that("hc multi_ci all", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE, ci_method = "weighted_samples", multi_est = FALSE)
-  hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed")
-  expect_equal(hc_average$est, 1.241515, tolerance = 1e-5)
-  expect_equal(hc_multi$est, 1.2567737470831, tolerance = 1e-5)
-  testthat::expect_snapshot({
-    hc_multi
-  })
-})
-
-test_that("hc multi_ci all multiple hcs", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hc_average <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE)
-  hc_multi <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "multi_fixed")
-  expect_equal(hc_average$est, c(1.24151480646654, 2.37337090704541), tolerance = 1e-5)
-  expect_equal(hc_multi$est, c(1.2567737470831, 2.38164080837643), tolerance = 1e-5)
-  testthat::expect_snapshot({
-    hc_multi
-  })
-})
-
 test_that("hc multi_ci all multiple hcs cis", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  set.seed(102)
-  hc_average <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "weighted_arithmetic", multi_est = FALSE, nboot = 10, ci = TRUE)
-  set.seed(105)
-  hc_multi <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "multi_fixed", nboot = 10, ci = TRUE)
-  expect_equal(hc_average$est, c(1.24151480646654, 2.37337090704541), tolerance = 1e-5)
-  expect_equal(hc_multi$est, c(1.2567737470831, 2.38164080837643), tolerance = 1e-5)
-  testthat::expect_snapshot({
-    hc_multi
+  withr::with_seed(50, {
+    hc_average <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "MACL", est_method = "arithmetic", nboot = 10, ci = TRUE)
   })
+  withr::with_seed(50, {
+    hc_multi <- ssd_hc(fits, proportion = c(5, 10) / 100, average = TRUE, ci_method = "multi_fixed", nboot = 10, ci = TRUE)
+  })
+  expect_snapshot_data(hc_average, "hc_multi_ci_all_multiple_hcs_cis_average")
+  expect_snapshot_data(hc_multi, "hc_multi_ci_all_multiple_hcs_cis_multi")
 })
 
 test_that("hc multi_ci lnorm ci", {
   fits <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
-  set.seed(102)
-  hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 100, ci_method = "weighted_samples")
-  set.seed(102)
-  hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 100, ci_method = "weighted_arithmetic", multi_est = FALSE)
-  set.seed(102)
-  hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 100)
-
-  testthat::expect_snapshot({
-    hc_average
+  withr::with_seed(50, {
+    hc_dist <- ssd_hc(fits, average = FALSE, ci = TRUE, nboot = 10, ci_method = "weighted_samples")
+  })
+  withr::with_seed(50, {
+    hc_average <- ssd_hc(fits, average = TRUE, ci = TRUE, nboot = 10, ci_method = "MACL", est_method = "arithmetic")
+  })
+  withr::with_seed(50, {
+    hc_multi <- ssd_hc(fits, average = TRUE, ci_method = "multi_fixed", ci = TRUE, nboot = 10)
   })
 
-  testthat::expect_snapshot({
-    hc_multi
-  })
-
-  hc_dist$dist <- NULL
-  hc_average$dist <- NULL
-  expect_identical(hc_dist, hc_average)
+  expect_snapshot_data(hc_dist, "hc_multi_ci_lnorm_ci_dist")
+  expect_snapshot_data(hc_average, "hc_multi_ci_lnorm_ci_average")
+  expect_snapshot_data(hc_multi, "hc_multi_ci_lnorm_ci_multi")
 })

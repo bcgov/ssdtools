@@ -217,8 +217,7 @@ A plot of the results is:
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 # Simulation study to estimate effect of small sample bias on estimates of HC5 and HC1
 # Use a normal distribution 
-set.seed(964544)
-
+withr::local_seed(964544)
 mu <- 0
 sd <- 1
 
@@ -547,8 +546,7 @@ in the previous simulation study.
 # Simulation study to estimate effect of small sample bias on estimates of HC5 and HC1
 # Use a gamma distribution with the same mean and sd as a log-normal (0,1) 
 
-set.seed(23432)
-
+withr::local_seed(23432)
 
 # get the shape and scale parameter
 mean.log <- 0

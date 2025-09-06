@@ -4,12 +4,14 @@
 \alias{ssd_fit_bcanz}
 \title{Fit BCANZ Distributions}
 \usage{
-ssd_fit_bcanz(data, left = "Conc", dists = ssd_dists_bcanz())
+ssd_fit_bcanz(data, left = "Conc", ..., dists = ssd_dists_bcanz())
 }
 \arguments{
 \item{data}{A data frame.}
 
 \item{left}{A string of the column in data with the concentrations.}
+
+\item{...}{Unused.}
 
 \item{dists}{A character vector of the distribution names.}
 }

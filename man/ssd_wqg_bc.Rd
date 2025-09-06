@@ -31,3 +31,4 @@ Other wqg:
 \code{\link{ssd_wqg_burrlioz}()}
 }
 \concept{wqg}
+\keyword{internal}

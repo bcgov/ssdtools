@@ -19,3 +19,4 @@ Deprecated for \code{\link[=ssd_is_censored]{ssd_is_censored()}}.
 \seealso{
 \code{\link[=ssd_is_censored]{ssd_is_censored()}}
 }
+\keyword{internal}

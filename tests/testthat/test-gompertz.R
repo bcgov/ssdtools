@@ -17,8 +17,9 @@
 
 test_that("gompertz", {
   test_dist("gompertz")
-  expect_equal(ssd_pgompertz(1), 0.820625921265983)
-  expect_equal(ssd_qgompertz(0.75), 0.869741686191944)
-  set.seed(42)
-  expect_equal(ssd_rgompertz(2), c(1.24208466660006, 1.32596518320944))
+  expect_snapshot_value(ssd_pgompertz(1), style = "deparse")
+  expect_snapshot_value(ssd_qgompertz(0.75), style = "deparse")
+  withr::with_seed(50, {
+    expect_snapshot_value(ssd_rgompertz(2), style = "deparse")
+  })
 })

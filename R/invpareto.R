@@ -43,8 +43,10 @@ ssd_qinvpareto <- function(p, shape = 3, scale = 1, lower.tail = TRUE, log.p = F
 #' @export
 #' @examples
 #'
-#' set.seed(50)
-#' hist(ssd_rinvpareto(10000), breaks = 1000)
+#' withr::with_seed(50, {
+#' x <- ssd_rinvpareto(10000)
+#' })
+#' hist(x, breaks = 1000)
 ssd_rinvpareto <- function(n, shape = 3, scale = 1, chk = TRUE) {
   rdist("invpareto", n = n, shape = shape, scale = scale, chk = chk)
 }

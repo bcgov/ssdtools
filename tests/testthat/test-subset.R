@@ -23,6 +23,9 @@ test_that("subset", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   expect_identical(subset(fits), fits)
+  expect_error(names(subset(fits, c("lnorm", "fubar"))))
+  expect_identical(names(subset(fits, c("lnorm", "fubar"), strict = FALSE)), "lnorm")
+  expect_identical(names(subset(fits, c("fubar"), strict = FALSE)), character(0))
   expect_identical(names(subset(fits, c("lnorm", "gamma"))), c("gamma", "lnorm"))
   expect_identical(subset(fits, delta = 10), fits)
   expect_identical(names(subset(fits, delta = 0)), "weibull")

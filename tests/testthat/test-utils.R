@@ -16,7 +16,19 @@
 #    limitations under the License.
 
 test_that("ssd_ecd", {
-  expect_equal(ssd_ecd(1:10), seq(0.05, 0.95, by = 0.1))
+  expect_equal(ssd_ecd(numeric()), numeric())
+  expect_equal(ssd_ecd(NA_real_), 0.5)
+  expect_equal(ssd_ecd(1), 0.5)
+  expect_equal(ssd_ecd(1:2), c(0.277777777777778, 0.722222222222222))
+  expect_equal(ssd_ecd(c(1, NA_real_)), c(NA_real_, NA_real_))
+  expect_equal(ssd_ecd(1:10), c(0.0609756097560976, 0.158536585365854, 0.25609756097561, 0.353658536585366, 
+                                0.451219512195122, 0.548780487804878, 0.646341463414634, 0.74390243902439, 
+                                0.841463414634146, 0.939024390243902))
+  expect_equal(ssd_ecd(1:100), seq(0.005, 0.995, by = 0.01))
+})
+
+test_that("ssd_ecd ties.method argument deprecated", {
+  lifecycle::expect_deprecated(expect_equal(ssd_ecd(1, ties.method = "first"), 0.5))
 })
 
 test_that("ssd_ecd_data", {

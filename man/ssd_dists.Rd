@@ -4,10 +4,12 @@
 \alias{ssd_dists}
 \title{Species Sensitivity Distributions}
 \usage{
-ssd_dists(bcanz = NULL, tails = NULL, npars = 2:5, valid = TRUE)
+ssd_dists(bcanz = NULL, ..., tails = NULL, npars = 2:5, valid = TRUE)
 }
 \arguments{
 \item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
+
+\item{...}{Unused.}
 
 \item{tails}{A flag or NULL specifying whether to only include distributions with both tails.}
 

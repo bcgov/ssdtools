@@ -22,11 +22,6 @@ warn_min_pboot <- function(x, min_pboot) {
   x
 }
 
-replace_min_pboot_na <- function(x, min_pboot) {
-  x[!is.na(x$pboot) & x$pboot < min_pboot, c("se", "lcl", "ucl")] <- NA_real_
-  x
-}
-
 sample_nonparametric <- function(data) {
   data[sample(nrow(data), replace = TRUE), ]
 }
@@ -95,7 +90,7 @@ sample_parameters <- function(i, dist, fun, data, args, pars, weighted, censorin
   est
 }
 
-boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control, save_to, fix_weights) {
+boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, censoring, range_shape1, range_shape2, min_pmix, parametric, control, save_to, ci_method) {
   sfun <- safely(fun)
 
   args <- list(n = nrow(data))
@@ -105,7 +100,7 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
 
   seeds <- seed_streams(nboot)
 
-  if (fix_weights) {
+  if (ci_method == "multi_fixed") {
     wts <- estimates[stringr::str_detect(names(estimates), "\\.weight$")]
   } else {
     wts <- NULL
@@ -119,7 +114,7 @@ boot_estimates <- function(fun, dist, estimates, pars, nboot, data, weighted, ce
     saveRDS(estimates, boot_filepath(0, dist, save_to, prefix = "estimates", ext = ".rds"))
   }
 
-  estimates <- future_map(1:nboot, sample_parameters,
+  estimates <- future_map(seq_len(nboot), sample_parameters,
     dist = dist, fun = sfun,
     data = data, args = args, pars = pars,
     weighted = weighted, censoring = censoring, min_pmix = min_pmix,

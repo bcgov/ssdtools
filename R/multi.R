@@ -185,9 +185,10 @@ ssd_qmulti <- function(
 #' @export
 #' @examples
 #'
-#' # multi
-#' set.seed(50)
-#' hist(ssd_rmulti(1000, gamma.weight = 0.5, lnorm.weight = 0.5), breaks = 100)
+#' withr::with_seed(50, {
+#'   x <- ssd_rmulti(1000, gamma.weight = 0.5, lnorm.weight = 0.5)
+#' })
+#' hist(x, breaks = 100)
 ssd_rmulti <- function(
     n,
     burrIII3.weight = 0,
