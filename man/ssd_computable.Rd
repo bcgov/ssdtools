@@ -35,14 +35,14 @@ Generic function to test if all parameters have numerically computable standard 
 
 }}
 \examples{
-fits <- ssd_fit_dists(ssddata::ccme_boron, 
+fits <- ssd_fit_dists(ssddata::ccme_boron,
   dists = c("lnorm", "lnorm_lnorm", "burrIII3")
 )
 ssd_computable(fits$lnorm)
 ssd_computable(fits$lnorm_lnorm)
 ssd_computable(fits$burrIII3)
 
-fits <- ssd_fit_dists(ssddata::ccme_boron, 
+fits <- ssd_fit_dists(ssddata::ccme_boron,
   dists = c("lnorm", "lnorm_lnorm", "burrIII3")
 )
 ssd_computable(fits)
