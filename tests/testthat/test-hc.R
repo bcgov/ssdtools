@@ -900,7 +900,7 @@ test_that("hc est_method and ci_method combos", {
 
   data <- tidyr::expand_grid(fit = fits, average = average, est_method = est_methods, ci = ci, parametric = parametric, ci_method = ci_methods)
   data$seed <- 10
-  data$id <- 1:nrow(data)
+  data$id <- seq_len(nrow(data))
 
   func <- function(fit, average, est_method, ci_method, parametric, ci, seed, id) {
     withr::with_seed(seed, {
