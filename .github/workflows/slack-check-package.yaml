@@ -30,7 +30,7 @@ jobs:
           GITHUB_PAT: ${{ secrets.PRIVATE_ACTIONS_PAT_2 }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           REPO: ${{ github.repository }}
-          URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}
         run: |
           install.packages("remotes")
           remotes::install_github("poissonconsulting/poisslack")
