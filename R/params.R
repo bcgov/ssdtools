@@ -40,19 +40,10 @@
 #' The value `ci_method = "weighted_samples"` takes bootstrap samples 
 #' from each distribution proportional to its AICc based weights and 
 #' calculates the confidence limits (and SE) from this single set.
-#' The value `ci_method = "weighted_arithmetic"` (was `ci_method = "MACL"` but 
+#' The value `ci_method = "MACL"` (was `ci_method = "weighted_arithmetic"` but 
 #' has been soft-deprecated) which is only included for
 #' historical reasons takes the weighted arithmetic mean of the confidence
-#' limits and `ci_method = MGCL` which was included for a research paper
-#' takes the weighted geometric mean of the confidence limits.
-#' The values `ci_method = "MAW1"` and `ci_method = "MAW2"`
-#' use the two alternative equations of Burnham and Anderson to 
-#' model average the weighted standard errors and then calculate the confidence
-#' limits using the Wald approach. 
-#' Finally `ci_method = "arithmetic"` and `ci_method = "geometric"`
-#' take the weighted arithmetic or geometric mean of the values for 
-#' each bootstrap iteration across all the distributions and then
-#' calculate the confidence limits (and SE) from the single set of samples.
+#' limits.
 #' @param censoring A numeric vector of the left and right censoring values.
 #' @param color A string of the column in data for the color aesthetic.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.

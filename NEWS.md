@@ -4,13 +4,8 @@
 
 ## Features
 
-- Add model fitting with right censoring for all distributions (by @eduardszoecs).
-- Added following `ci_methods` to `ssd_hc()`, `ssd_hp()` and `predict()`: `"GMACL"`, `"MAW1"`, `"MAW2"`, `"GMAW1"`, `"GMAW2"`, `"arithmetic_samples"` and `"geometric_samples"`.
+- Added right censoring for all distributions (by @eduardszoecs).
 - Added `rescale = "odds"` option to `ssd_fit_dists()` to allow fitting to dilution data including `odds_max = 0.999` argument to handle values of 1.
-- Improved method to calculate `ssd_ecd()` so ensures symmetric about 0.5.
-
-- Ensures `weighted_samples` sum to nboot.
-- `ssd_hc()`, `ssd_hp()` and `predict()` now only return missing values for `se`, `lcl` and `ucl` when `nboot = 0`.
 
 ## Functions
 
@@ -27,14 +22,20 @@
 - Added column `"dists"` to `ssd_hc()`, `ssd_hp()` and `predict()` which is a list of the distributions.
 - Added `"est_method"` and `"ci_method"` columns to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Added `"level"` column to tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
-- Added `"at_bound"` and `"computable"` columns to tibble output by `gof()`.
+- Added `"at_bound"` and `"computable"` columns to tibble output by `ssd_gof()`.
 - Renamed `"method"` column to `"boot_method"` in tibble output by `ssd_hc()`, `ssd_hp()` and `predict()`.
+- `ssd_hc()`, `ssd_hp()` and `predict()` now only return missing values for `se`, `lcl` and `ucl` when `nboot = 0`.
 
 ## Error Checking
 
 - Added ... and check unused to ensure matching names of subsequent arguments.
 - Fixed error message when Inf weights.
 - `ssd_fit_bcanz()` now checks all dists are subset of `ssd_dists_bcanz()`.
+
+## Modifications
+
+- Modified method to calculate `ssd_ecd()` to use `stats::ppoints()`.
+- Ensures `weighted_samples` sum to nboot.
 
 ## Deprecated
 
