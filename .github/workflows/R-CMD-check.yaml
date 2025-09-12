@@ -58,8 +58,8 @@ jobs:
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
-        if: github.event_name == 'schedule' && github.repository_owner == 'poissonconsulting'
-      with:
+        if: github.event_name != 'schedule'
+        with:
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
