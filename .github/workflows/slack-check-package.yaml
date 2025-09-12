@@ -8,7 +8,7 @@ name: slack-check-package
 
 jobs:
   message-slack:
-    if: ${{ github.event.workflow_run.event == 'schedule' && github.repository_owner == 'poissonconsulting'
+    if: github.event.workflow_run.event == 'schedule' && github.repository_owner == 'poissonconsulting'
     runs-on: ubuntu-latest
 
     steps:
