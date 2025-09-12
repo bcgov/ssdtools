@@ -1,0 +1,65 @@
+on:
+  workflow_run:
+    workflows: ["R-CMD-check"]
+    types:
+      - completed
+
+name: slack-check-package
+
+jobs:
+  message-slack:
+    if: ${{ github.event.workflow_run.event == 'schedule' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 📥 Download status artifacts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh run download ${{ github.event.workflow_run.id }} --dir status
+
+      - name: 🧰 Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: 📢 Send Slack message
+        env:
+          GITHUB_PAT: ${{ secrets.PRIVATE_ACTIONS_PAT_2 }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          REPO: ${{ github.repository }}
+          URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}
+        run: |
+          install.packages("remotes")
+          remotes::install_github("poissonconsulting/poisslack")
+
+          files <- list.files("status", pattern = "\\.txt$", full.names = TRUE, recursive = TRUE)
+          print(files)
+
+          msg <- paste(basename(Sys.getenv("REPO")), "R CMD check results:\n\n")
+          for (i in files) {
+            os <- basename(i)
+            os <- sub("\\.txt$", "", os)
+            os <- gsub("-", " ", os)
+
+            status <- readLines(i)
+            status <- status[length(status)]
+
+            if (grepl("[1-9][0-9]* error", status)) { status <- "❌ ERROR" }
+            else if (grepl("[1-9][0-9]* warning", status)) { status <- "⚠️ WARNING" }
+            else if (grepl("[1-9][0-9]* note", status)) { status <- "📝 NOTE" }
+            else { status <- "✅ SUCCESS" }
+
+            msg <- paste0(msg, os, ": ", status, "\n")
+          }
+          msg <- paste0(msg, "\n🔗 View full logs: ", Sys.getenv("URL"))
+
+          poisslack::slackr_bot(
+            text = msg,
+            channel = paste0(basename(Sys.getenv("REPO")), "-actions"),
+            username = "check-package-bot",
+            incoming_webhook_url = Sys.getenv("SLACK_WEBHOOK_URL")
+          )
+        shell: Rscript {0}

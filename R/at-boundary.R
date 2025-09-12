@@ -28,18 +28,18 @@ ssd_at_boundary <- function(x, ...) {
 #' @return A flag indicating if one or more parameters at boundary.
 #' @inheritParams params
 #' @export
-#' 
+#'
 #' @examples
-#' fits <- ssd_fit_dists(ssddata::ccme_boron, 
+#' fits <- ssd_fit_dists(ssddata::ccme_boron,
 #'   dists = c("lnorm", "lnorm_lnorm", "burrIII3")
 #' )
 #' ssd_at_boundary(fits$lnorm)
 #' ssd_at_boundary(fits$lnorm_lnorm)
 #' ssd_at_boundary(fits$burrIII3)
-#' 
+#'
 ssd_at_boundary.tmbfit <- function(x, ...) {
   chk_unused(...)
-  if(is.null(x$flags$at_boundary)) {
+  if (is.null(x$flags$at_boundary)) {
     return(NA)
   }
   x$flags$at_boundary
@@ -49,13 +49,13 @@ ssd_at_boundary.tmbfit <- function(x, ...) {
 #' @return A logical vector for each distribution indicating if one or more parameters at boundary.
 #' @inheritParams params
 #' @export
-#' 
+#'
 #' @examples
-#' fits <- ssd_fit_dists(ssddata::ccme_boron, 
+#' fits <- ssd_fit_dists(ssddata::ccme_boron,
 #'   dists = c("lnorm", "lnorm_lnorm", "burrIII3")
 #' )
 #' ssd_at_boundary(fits)
-#' 
+#'
 ssd_at_boundary.fitdists <- function(x, ...) {
   chk_unused(...)
   x <- vapply(x, ssd_at_boundary, TRUE)

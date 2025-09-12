@@ -14,10 +14,6 @@
 
     0.511475267792982
 
-# ssd_hc calculates cis in parallel with two distributions
-
-    0.511475267792982
-
 # ssd_hc effect with higher weight two distributions
 
     1.64903549462519

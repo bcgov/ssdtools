@@ -80,7 +80,7 @@ qgompertz <- function(p, llocation = 0, lshape = 0, lower.tail = TRUE, log.p = F
 #' @examples
 #'
 #' withr::with_seed(50, {
-#' x <- ssd_rgompertz(10000)
+#'   x <- ssd_rgompertz(10000)
 #' })
 #' hist(x, breaks = 1000)
 ssd_rgompertz <- function(n, location = 1, shape = 1, chk = TRUE) {

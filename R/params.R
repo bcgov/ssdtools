@@ -31,14 +31,14 @@
 #' relative to the extremes for non-missing values.
 #' @param chk A flag specifying whether to check the arguments.
 #' @param ci A flag specifying whether to estimate confidence intervals (by bootstrapping).
-#' @param ci_method A string specifying which method to use for estimating 
+#' @param ci_method A string specifying which method to use for estimating
 #' the standard error and confidence limits from the bootstrap samples.
 #' Possible values include `ci_method = "multi_fixed"` and  `ci_method = "multi_free"`
-#' which generate the bootstrap samples using the model-averaged cumulative distribution function 
-#' but differ in whether the model weights are fixed at the values for the original dataset 
-#' or re-estimated for each bootstrap sample dataset.  
-#' The value `ci_method = "weighted_samples"` takes bootstrap samples 
-#' from each distribution proportional to its AICc based weights and 
+#' which generate the bootstrap samples using the model-averaged cumulative distribution function
+#' but differ in whether the model weights are fixed at the values for the original dataset
+#' or re-estimated for each bootstrap sample dataset.
+#' The value `ci_method = "weighted_samples"` takes bootstrap samples
+#' from each distribution proportional to its AICc based weights and
 #' calculates the confidence limits (and SE) from this single set.
 #' The value `ci_method = "MACL"` (was `ci_method = "weighted_arithmetic"` but 
 #' has been soft-deprecated) which is only included for
@@ -54,11 +54,11 @@
 #' Distributions with an absolute AIC difference greater than delta are excluded from the calculations.
 #' @param digits A whole number specifying the number of significant figures.
 #' @param dists A character vector of the distribution names.
-#' @param est_method A string specifying whether to estimate directly from 
+#' @param est_method A string specifying whether to estimate directly from
 #' the model-averaged cumulative distribution function (`est_method = 'multi'`) or
-#' to take the arithmetic mean of the estimates from the 
-#' individual cumulative distribution functions weighted 
-#' by the AICc derived weights  (`est_method = 'arithmetic'`) or 
+#' to take the arithmetic mean of the estimates from the
+#' individual cumulative distribution functions weighted
+#' by the AICc derived weights  (`est_method = 'arithmetic'`) or
 #' or to use the geometric mean instead (`est_method = 'geometric'`).
 #' @param fitdists An object of class fitdists.
 #' @param hc A value between 0 and 1 indicating the proportion hazard concentration (or NULL).
@@ -90,10 +90,10 @@
 #' @param min_pmix A number between 0 and 0.5 specifying the minimum proportion in mixture models.
 #' @param n A whole number of the effective number of rows of data.
 #' @param npars A whole numeric vector specifying which distributions to include based on the number of parameters.
-#' @param multi_est A flag specifying whether to estimate directly from 
-#' the model-averaged cumulative distribution function (`multi_est = TRUE`) or 
-#' to take the arithmetic mean of the estimates from the 
-#' individual cumulative distribution functions weighted 
+#' @param multi_est A flag specifying whether to estimate directly from
+#' the model-averaged cumulative distribution function (`multi_est = TRUE`) or
+#' to take the arithmetic mean of the estimates from the
+#' individual cumulative distribution functions weighted
 #' by the AICc derived weights  (`multi_est = FALSE`).
 #' @param na.rm A flag specifying whether to silently remove missing values or
 #' remove them with a warning.

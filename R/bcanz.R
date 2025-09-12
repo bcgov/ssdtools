@@ -35,7 +35,7 @@ ssd_dists_bcanz <- function(npars = c(2L, 5L)) {
   chk_unique(npars)
   check_dim(npars, values = 1:2)
   chk_subset(npars, c(2L, 5L))
-  
+
   ssd_dists(bcanz = TRUE, npars = npars)
 }
 
@@ -55,25 +55,25 @@ ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz()) {
   chk_data(data)
   chk_unused(...)
   chk_subset(dists, ssd_dists_bcanz())
-  
-  ## all arguments manually specified to ensure robust to 
+
+  ## all arguments manually specified to ensure robust to
   ## changes in default values in ssd_fit_dists()
   ssd_fit_dists(data,
-                left = left,
-                right = left, 
-                weight = NULL,
-                dists = dists,
-                nrow = 6L,
-                rescale = FALSE,
-                reweight = FALSE,
-                computable = FALSE,
-                at_boundary_ok = TRUE,
-                all_dists = FALSE,
-                min_pmix = ssd_min_pmix(nrow(data)),
-                range_shape1 = c(0.05, 20),
-                range_shape2 = c(0.05, 20),
-                control = list(),
-                silent = FALSE
+    left = left,
+    right = left,
+    weight = NULL,
+    dists = dists,
+    nrow = 6L,
+    rescale = FALSE,
+    reweight = FALSE,
+    computable = FALSE,
+    at_boundary_ok = TRUE,
+    all_dists = FALSE,
+    min_pmix = ssd_min_pmix(nrow(data)),
+    range_shape1 = c(0.05, 20),
+    range_shape2 = c(0.05, 20),
+    control = list(),
+    silent = FALSE
   )
 }
 
@@ -95,19 +95,19 @@ ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz()) {
 ssd_hc_bcanz <- function(x, ..., nboot = 10000, min_pboot = 0.95) {
   chk_unused(...)
   ssd_hc(x,
-         proportion = c(0.01, 0.05, 0.1, 0.2),
-         average = TRUE,
-         ci = TRUE,
-         level = 0.95,
-         nboot = nboot,
-         min_pboot = min_pboot,
-         est_method = "multi",
-         ci_method = "weighted_samples",
-         parametric = TRUE,
-         delta = 9.21,
-         samples = FALSE,
-         save_to = NULL,
-         control = NULL
+    proportion = c(0.01, 0.05, 0.1, 0.2),
+    average = TRUE,
+    ci = TRUE,
+    level = 0.95,
+    nboot = nboot,
+    min_pboot = min_pboot,
+    est_method = "multi",
+    ci_method = "weighted_samples",
+    parametric = TRUE,
+    delta = 9.21,
+    samples = FALSE,
+    save_to = NULL,
+    control = NULL
   )
 }
 
@@ -128,27 +128,29 @@ ssd_hc_bcanz <- function(x, ..., nboot = 10000, min_pboot = 0.95) {
 #' ssd_hp_bcanz(fits, nboot = 100)
 ssd_hp_bcanz <- function(x, conc = 1, ..., nboot = 10000, min_pboot = 0.95, proportion = FALSE) {
   chk_unused(...)
-  
+
   if (missing(proportion) || isFALSE(proportion)) {
-    lifecycle::deprecate_soft("2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"), 
-                              "Please set the `proportion` argument to `ssd_hp_bcanz()` to be TRUE which will cause it to return hazard proportions instead of percentages then update your downstream code accordingly.")    
+    lifecycle::deprecate_soft(
+      "2.3.1", I("ssd_hp(proportion = FALSE)"), I("ssd_hp(proportion = TRUE)"),
+      "Please set the `proportion` argument to `ssd_hp_bcanz()` to be TRUE which will cause it to return hazard proportions instead of percentages then update your downstream code accordingly."
+    )
   }
   chk_flag(proportion)
-  
+
   ssd_hp(x,
-         conc = conc,
-         average = TRUE,
-         ci = TRUE,
-         level = 0.95,
-         nboot = nboot,
-         min_pboot = min_pboot,
-         est_method = "multi",
-         ci_method = "weighted_samples",
-         parametric = TRUE,
-         delta = 9.21,
-         proportion = proportion,
-         samples = FALSE,
-         save_to = NULL,
-         control = NULL
+    conc = conc,
+    average = TRUE,
+    ci = TRUE,
+    level = 0.95,
+    nboot = nboot,
+    min_pboot = min_pboot,
+    est_method = "multi",
+    ci_method = "weighted_samples",
+    parametric = TRUE,
+    delta = 9.21,
+    proportion = proportion,
+    samples = FALSE,
+    save_to = NULL,
+    control = NULL
   )
 }

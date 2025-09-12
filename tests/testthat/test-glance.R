@@ -17,7 +17,7 @@
 
 test_that("glance no wt deprecated", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   expect_deprecated(
     glance <- glance(fits)
   )
@@ -27,8 +27,8 @@ test_that("glance no wt deprecated", {
 
 test_that("glance wt FALSE still deprecated", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
- 
-  expect_deprecated( 
+
+  expect_deprecated(
     glance <- glance(fits, wt = FALSE)
   )
   expect_s3_class(glance, "tbl")
@@ -37,7 +37,7 @@ test_that("glance wt FALSE still deprecated", {
 
 test_that("glance weights rescale log_lik", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
-  
+
   glance <- glance(fits, wt = TRUE)
   expect_s3_class(glance, "tbl")
   expect_snapshot_data(glance, "glance")
@@ -46,7 +46,7 @@ test_that("glance weights rescale log_lik", {
 test_that("glance weights independent of rescaling", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, rescale = FALSE)
   fit_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
-  
+
   glance <- glance(fit, wt = TRUE)
   glance_rescale <- glance(fit_rescale, wt = TRUE)
   expect_equal(glance_rescale$wt, glance$wt, tolerance = 1e-06)
@@ -58,7 +58,7 @@ test_that("glance weights rescale log_lik", {
   fit <- ssd_fit_dists(data, weight = "weight")
   data$weight <- rep(2, nrow(data))
   fit_weight <- ssd_fit_dists(data, weight = "weight")
-  
+
   glance <- glance(fit, wt = TRUE)
   glance_weight <- glance(fit_weight, wt = TRUE)
   expect_equal(glance_weight$log_lik / 2, glance$log_lik)
@@ -70,7 +70,7 @@ test_that("glance reweight same log_lik", {
   fit <- ssd_fit_dists(data, weight = "weight")
   data$weight <- rep(2, nrow(data))
   fit_weight <- ssd_fit_dists(data, weight = "weight", reweight = TRUE)
-  
+
   glance <- glance(fit, wt = TRUE)
   glance_weight <- glance(fit_weight, wt = TRUE)
   expect_equal(glance_weight$log_lik, glance$log_lik)
@@ -80,15 +80,15 @@ test_that("glance reweight same log_lik", {
   data <- ssddata::ccme_boron
   data$Upper <- data$Conc
   data$Upper[1] <- data$Conc[1] * 1.0001
-  
+
   fit <- ssd_fit_dists(data, dists = c("gamma", "llogis", "lnorm"))
   fit_cens <- ssd_fit_dists(data, dists = c("gamma", "llogis", "lnorm"), right = "Upper")
   fit_cens_n <- ssd_fit_dists(data, dists = c("gamma", "llogis", "lnorm_lnorm"), right = "Upper")
-  
+
   glance <- glance(fit, wt = TRUE)
   glance_cens <- glance(fit_cens, wt = TRUE)
   glance_cens_n <- glance(fit_cens_n, wt = TRUE)
-  
+
   expect_snapshot_data(glance, "fit")
   expect_snapshot_data(glance_cens, "fit_cens")
   expect_snapshot_data(glance_cens_n, "fit_cens_n")

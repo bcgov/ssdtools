@@ -26,7 +26,7 @@
 #' @examples
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' subset(fits, c("gamma", "lnorm"))
-subset.fitdists <- function(x, select = names(x),  ..., delta = Inf, strict = TRUE) {
+subset.fitdists <- function(x, select = names(x), ..., delta = Inf, strict = TRUE) {
   if (!length(x)) {
     return(x)
   }
@@ -38,7 +38,7 @@ subset.fitdists <- function(x, select = names(x),  ..., delta = Inf, strict = TR
   chk_gte(delta)
   chk_named(x)
   chk_flag(strict)
-  if(strict) {
+  if (strict) {
     chk_superset(names(x), select)
   }
 
