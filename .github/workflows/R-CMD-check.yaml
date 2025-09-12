@@ -58,13 +58,13 @@ jobs:
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
-        if: github.event_name != 'schedule'
-        with:
+        if: github.event_name == 'schedule' && github.repository_owner == 'poissonconsulting'
+      with:
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
       - name: 🧪 Run R-CMD-check and save summary
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' && github.repository_owner == 'poissonconsulting'
         
         env:
           OS: ${{ matrix.config.os }}
@@ -84,7 +84,7 @@ jobs:
         shell: Rscript {0}
 
       - name: 💾 Upload status artifact
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' && github.repository_owner == 'poissonconsulting'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.config.os }}-R-${{ matrix.config.r }}
@@ -92,7 +92,7 @@ jobs:
           retention-days: 6
 
       - name: 💾 Upload snapshot artifacts
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' && github.repository_owner == 'poissonconsulting'
         uses: actions/upload-artifact@v4
         with:
           name: snapshots-${{ matrix.config.os }}-R-${{ matrix.config.r }}

@@ -38,7 +38,7 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
   }
 
   list(
-    coord_trans(x = trans),
+    coord_transform(x = trans),
     scale_x_continuous(xlab,
       breaks = xbreaks,
       minor_breaks = NULL,
