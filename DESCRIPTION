@@ -75,13 +75,10 @@ Imports:
 Suggests:
     actuar,
     covr,
-    doFuture,
     dplyr,
     EnvStats,
     extraDistr,
     fitdistrplus,
-    foreach,
-    future,
     grDevices,
     knitr,
     latex2exp,

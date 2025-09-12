@@ -15,14 +15,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-local_multisession <- function(.local_envir = parent.frame(), workers = 2) {
-  oldDoPar <- doFuture::registerDoFuture()
-  withr::defer_parent(with(oldDoPar, foreach::setDoPar(fun = fun, data = data, info = info)))
-  oldPlan <- future::plan("future::multisession", workers = workers)
-  withr::defer_parent(future::plan(oldPlan))
-  invisible(oldDoPar)
-}
-
 save_png <- function(x, width = 400, height = 400) {
   path <- tempfile(fileext = ".png")
   grDevices::png(path, width = width, height = height)
