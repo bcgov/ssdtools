@@ -31,11 +31,11 @@ test_that("multi", {
   })
 
   expect_snapshot_value(ssd_qmulti(ssd_pmulti(c(0, 0.1, 0.5, 0.9, 0.99), lnorm.weight = 1), lnorm.weight = 1),
-                        style = "deparse"
+    style = "deparse"
   )
 
   expect_snapshot_value(ssd_pmulti(ssd_qmulti(c(0, 0.1, 0.5, 0.9, 0.99), lnorm.weight = 1), lnorm.weight = 1),
-                        style = "deparse"
+    style = "deparse"
   )
   expect_error(ssd_pmulti(0.5), "^At least one distribution must have a positive weight\\.$")
   expect_error(ssd_qmulti(0.75), "^At least one distribution must have a positive weight\\.$")
@@ -63,7 +63,7 @@ test_that("ssd_pmulti weights", {
   fit <- ssd_fit_dists(data = ssddata::ccme_boron)
   args <- estimates(fit)
   args$q <- 1
-  expect_snapshot_value(do.call("ssd_pmulti", args),  style = "deparse")
+  expect_snapshot_value(do.call("ssd_pmulti", args), style = "deparse")
   args$gamma.weight <- 0
   args$lgumbel.weight <- 0
   args$llogis.weight <- 0

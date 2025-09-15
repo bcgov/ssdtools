@@ -88,19 +88,10 @@ or re-estimated for each bootstrap sample dataset.
 The value \code{ci_method = "weighted_samples"} takes bootstrap samples
 from each distribution proportional to its AICc based weights and
 calculates the confidence limits (and SE) from this single set.
-The value \code{ci_method = "weighted_arithmetic"} (was \code{ci_method = "MACL"} but
+The value \code{ci_method = "MACL"} (was \code{ci_method = "weighted_arithmetic"} but
 has been soft-deprecated) which is only included for
 historical reasons takes the weighted arithmetic mean of the confidence
-limits and \code{ci_method = MGCL} which was included for a research paper
-takes the weighted geometric mean of the confidence limits.
-The values \code{ci_method = "MAW1"} and \code{ci_method = "MAW2"}
-use the two alternative equations of Burnham and Anderson to
-model average the weighted standard errors and then calculate the confidence
-limits using the Wald approach.
-Finally \code{ci_method = "arithmetic"} and \code{ci_method = "geometric"}
-take the weighted arithmetic or geometric mean of the values for
-each bootstrap iteration across all the distributions and then
-calculate the confidence limits (and SE) from the single set of samples.}
+limits.}
 
 \item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 

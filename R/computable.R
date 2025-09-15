@@ -28,18 +28,18 @@ ssd_computable <- function(x, ...) {
 #' @return A flag indicating if all parameters have numerically computable standard errors.
 #' @inheritParams params
 #' @export
-#' 
+#'
 #' @examples
-#' fits <- ssd_fit_dists(ssddata::ccme_boron, 
+#' fits <- ssd_fit_dists(ssddata::ccme_boron,
 #'   dists = c("lnorm", "lnorm_lnorm", "burrIII3")
 #' )
 #' ssd_computable(fits$lnorm)
 #' ssd_computable(fits$lnorm_lnorm)
 #' ssd_computable(fits$burrIII3)
-#' 
+#'
 ssd_computable.tmbfit <- function(x, ...) {
   chk_unused(...)
-  if(is.null(x$flags$computable)) {
+  if (is.null(x$flags$computable)) {
     return(NA)
   }
   x$flags$computable
@@ -49,13 +49,13 @@ ssd_computable.tmbfit <- function(x, ...) {
 #' @return A logical vector for each distribution indicating if all parameters have numerically computable standard errors.
 #' @inheritParams params
 #' @export
-#' 
+#'
 #' @examples
-#' fits <- ssd_fit_dists(ssddata::ccme_boron, 
+#' fits <- ssd_fit_dists(ssddata::ccme_boron,
 #'   dists = c("lnorm", "lnorm_lnorm", "burrIII3")
 #' )
 #' ssd_computable(fits)
-#' 
+#'
 ssd_computable.fitdists <- function(x, ...) {
   chk_unused(...)
   x <- vapply(x, ssd_computable, TRUE)

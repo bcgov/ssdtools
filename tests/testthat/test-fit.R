@@ -150,8 +150,8 @@ test_that("ssd_fit_dists all distributions fail to fit if Inf weight", {
   data$Mass <- rep(1, nrow(data))
   data$Mass[1] <- Inf
   expect_error(
-      ssd_fit_dists(data, weight = "Mass", dists = "lnorm"),
-      "^`data` has 1 row with Inf weight in 'Mass'\\.$"
+    ssd_fit_dists(data, weight = "Mass", dists = "lnorm"),
+    "^`data` has 1 row with Inf weight in 'Mass'\\.$"
   )
 })
 
@@ -279,11 +279,11 @@ test_that("ssd_fit_dists works with slightly censored data", {
 test_that("ssd_fit_dists works with odds data", {
   data <- ssddata::ccme_boron
   data$Conc <- plogis(data$Conc)
-  
+
   fits <- ssd_fit_dists(data, dists = "lnorm", rescale = "odds")
-  
+
   tidy <- tidy(fits)
-  
+
   expect_snapshot_data(tidy, "tidy_wet")
 })
 
@@ -326,7 +326,7 @@ test_that("ssd_fit_dists works with right censored data", {
 
   tidy <- tidy(fits)
 
-  expect_snapshot_value(tidy$est, style = "deparse") 
+  expect_snapshot_value(tidy$est, style = "deparse")
   # mosaic: 2.6 & 1.2
   expect_snapshot_value(tidy$se, style = "deparse")
   expect_snapshot_value(unname(logLik(fits)), style = "deparse") # mosaic: -114.6
@@ -340,7 +340,7 @@ test_that("ssd_fit_dists gives same answer for missing versus Inf right", {
   fitsInf <- ssd_fit_dists(data, dists = "lnorm", right = "right")
   data$right[1] <- NA
   fitsna <- ssd_fit_dists(data, dists = "lnorm", right = "right")
-  
+
   expect_equal(tidy(fitsInf), tidy(fitsna))
 })
 

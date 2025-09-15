@@ -69,6 +69,7 @@ scale_fill_ssd <- function(...) {
 #'
 #' Uses the empirical cumulative distribution to create scatterplot of points `x`.
 #'
+#' @param inherit.aes If `FALSE`, overrides the default aesthetics, rather than combining with them.
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @seealso [`ssd_plot_cdf()`]
@@ -96,6 +97,7 @@ geom_ssdpoint <- function(mapping = NULL,
 #'
 #' Uses the empirical cumulative distribution to draw lines between points `x` and `xend`.
 #'
+#' @param inherit.aes If `FALSE`, overrides the default aesthetics, rather than combining with them.
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_segment
 #' @seealso [`ssd_plot_cdf()`]
@@ -175,6 +177,7 @@ geom_hcintersect <- function(mapping = NULL,
 #'
 #' Plots the `x` interval defined by `xmin` and `xmax`.
 #'
+#' @param inherit.aes If `FALSE`, overrides the default aesthetics, rather than combining with them.
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @seealso [`ssd_plot_cdf()`]
@@ -203,6 +206,7 @@ geom_xribbon <- function(mapping = NULL,
 #'
 #' Deprecated for `geom_ssdpoint()`.
 #'
+#' @param inherit.aes If `FALSE`, overrides the default aesthetics, rather than combining with them.
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @keywords internal
@@ -223,6 +227,7 @@ geom_ssd <- function(mapping = NULL,
 #'
 #' Uses the empirical cumulative density/distribution to visualize species sensitivity data.
 #'
+#' @param inherit.aes If `FALSE`, overrides the default aesthetics, rather than combining with them.
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @seealso [`geom_ssdpoint()`]
