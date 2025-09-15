@@ -15,7 +15,7 @@ For more information see the inverse function ssd_hc()."><meta property="og:imag
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,33 +58,36 @@ For more information see the inverse function <code><a href="ssd_hc.html">ssd_hc
 <span><span class="fu">ssd_hp</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  conc <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  average <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  min_pboot <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  multi_est <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  multi_est <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  est_method <span class="op">=</span> <span class="st">"multi"</span>,</span>
 <span>  ci_method <span class="op">=</span> <span class="st">"weighted_samples"</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  delta <span class="op">=</span> <span class="fl">9.21</span>,</span>
+<span>  proportion <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  samples <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  save_to <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  control <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'fitburrlioz'</span></span>
 <span><span class="fu">ssd_hp</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  conc <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  min_pboot <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  proportion <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  samples <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  save_to <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  save_to <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -127,12 +130,46 @@ to report the confidence intervals.</p></dd>
 
 
 <dt id="arg-multi-est">multi_est<a class="anchor" aria-label="anchor" href="#arg-multi-est"></a></dt>
-<dd><p>A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.</p></dd>
+<dd><p>A flag specifying whether to estimate directly from
+the model-averaged cumulative distribution function (<code>multi_est = TRUE</code>) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (<code>multi_est = FALSE</code>).</p></dd>
+
+
+<dt id="arg-est-method">est_method<a class="anchor" aria-label="anchor" href="#arg-est-method"></a></dt>
+<dd><p>A string specifying whether to estimate directly from
+the model-averaged cumulative distribution function (<code>est_method = 'multi'</code>) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (<code>est_method = 'arithmetic'</code>) or
+or to use the geometric mean instead (<code>est_method = 'geometric'</code>).</p></dd>
 
 
 <dt id="arg-ci-method">ci_method<a class="anchor" aria-label="anchor" href="#arg-ci-method"></a></dt>
-<dd><p>A string specifying which method to use for estimating the bootstrap values.
-Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.</p></dd>
+<dd><p>A string specifying which method to use for estimating
+the standard error and confidence limits from the bootstrap samples.
+Possible values include <code>ci_method = "multi_fixed"</code> and  <code>ci_method = "multi_free"</code>
+which generate the bootstrap samples using the model-averaged cumulative distribution function
+but differ in whether the model weights are fixed at the values for the original dataset
+or re-estimated for each bootstrap sample dataset.
+The value <code>ci_method = "weighted_samples"</code> takes bootstrap samples
+from each distribution proportional to its AICc based weights and
+calculates the confidence limits (and SE) from this single set.
+The value <code>ci_method = "MACL"</code> (was <code>ci_method = "weighted_arithmetic"</code> but
+has been soft-deprecated) which is only included for
+historical reasons takes the weighted arithmetic mean of the confidence
+limits and <code>ci_method = MGCL</code> which was included for a research paper
+takes the weighted geometric mean of the confidence limits.
+The values <code>ci_method = "MAW1"</code> and <code>ci_method = "MAW2"</code>
+use the two alternative equations of Burnham and Anderson to
+model average the weighted standard errors and then calculate the confidence
+limits using the Wald approach.
+Finally <code>ci_method = "arithmetic"</code> and <code>ci_method = "geometric"</code>
+take the weighted arithmetic or geometric mean of the values for
+each bootstrap iteration across all the distributions and then
+calculate the confidence limits (and SE) from the single set of samples.
+limits.</p></dd>
 
 
 <dt id="arg-parametric">parametric<a class="anchor" aria-label="anchor" href="#arg-parametric"></a></dt>
@@ -142,6 +179,15 @@ Possible values are "multi_free" and "multi_fixed" which treat the distributions
 <dt id="arg-delta">delta<a class="anchor" aria-label="anchor" href="#arg-delta"></a></dt>
 <dd><p>A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.</p></dd>
+
+
+<dt id="arg-proportion">proportion<a class="anchor" aria-label="anchor" href="#arg-proportion"></a></dt>
+<dd><p>A flag specifying whether to return hazard proportions
+(<code>proportion = TRUE</code>) or hazard percentages (<code>proportion = FALSE</code>).
+To not break existing code the default value is <code>FALSE</code> but
+will be switching the default to <code>TRUE</code> in a future version.
+The user is recommended to manually set to <code>TRUE</code> now to avoid
+unexpected changes in future versions.</p></dd>
 
 
 <dt id="arg-samples">samples<a class="anchor" aria-label="anchor" href="#arg-samples"></a></dt>
@@ -175,17 +221,26 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fits</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_dists.html">ssd_fit_dists</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ssd_hp</span><span class="op">(</span><span class="va">fits</span>, conc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   dist     conc   est    se   lcl   ucl    wt method     nboot pboot samples  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;list&gt;&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> average     1  3.90    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametric     0   <span style="color: #BB0000;">NaN</span> <span style="color: #949494;">&lt;dbl [0]&gt;</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>ssd_hp(proportion = FALSE) was deprecated in ssdtools 2.3.1.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use ssd_hp(proportion = TRUE) instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please set the `proportion` argument to `ssd_hp()` to be TRUE which will</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   cause it to return hazard proportions instead of percentages then update your</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   downstream code accordingly.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dist     conc   est    se   lcl   ucl    wt level est_method ci_method       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> average     1  3.90    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1  0.95 multi      weighted_samples</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: boot_method &lt;chr&gt;, nboot &lt;int&gt;, pboot &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dists &lt;list&gt;, samples &lt;list&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="ssd_fit_burrlioz.html">ssd_fit_burrlioz</a></span><span class="op">(</span><span class="fu">ssddata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ssddata/man/ccme_boron.html" class="external-link">ccme_boron</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ssd_hp</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   dist       conc   est    se   lcl   ucl    wt method       nboot pboot samples</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> invpareto     1  8.58    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 non-paramet…     0    <span style="color: #BB0000;">NA</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dist       conc   est    se   lcl   ucl    wt level est_method ci_method </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> invpareto     1  8.58    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1  0.95 cdf        percentile</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: boot_method &lt;chr&gt;, nboot &lt;int&gt;, pboot &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dists &lt;list&gt;, samples &lt;list&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -197,7 +252,7 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,10 @@
 <dd><p>A flag specifying whether all the named distributions must fit successfully.</p></dd>
 
 
+<dt id="arg-all-estimates">all_estimates<a class="anchor" aria-label="anchor" href="#arg-all-estimates"></a></dt>
+<dd><p>A flag specifying whether to calculate estimates for all implemented distributions.</p></dd>
+
+
 <dt id="arg-at-boundary-ok">at_boundary_ok<a class="anchor" aria-label="anchor" href="#arg-at-boundary-ok"></a></dt>
 <dd><p>A flag specifying whether a model with one or more
 parameters at the boundary should be considered to have converged (default = FALSE).</p></dd>
@@ -92,6 +96,32 @@ relative to the extremes for non-missing values.</p></dd>
 
 <dt id="arg-ci">ci<a class="anchor" aria-label="anchor" href="#arg-ci"></a></dt>
 <dd><p>A flag specifying whether to estimate confidence intervals (by bootstrapping).</p></dd>
+
+
+<dt id="arg-ci-method">ci_method<a class="anchor" aria-label="anchor" href="#arg-ci-method"></a></dt>
+<dd><p>A string specifying which method to use for estimating
+the standard error and confidence limits from the bootstrap samples.
+Possible values include <code>ci_method = "multi_fixed"</code> and  <code>ci_method = "multi_free"</code>
+which generate the bootstrap samples using the model-averaged cumulative distribution function
+but differ in whether the model weights are fixed at the values for the original dataset
+or re-estimated for each bootstrap sample dataset.
+The value <code>ci_method = "weighted_samples"</code> takes bootstrap samples
+from each distribution proportional to its AICc based weights and
+calculates the confidence limits (and SE) from this single set.
+The value <code>ci_method = "MACL"</code> (was <code>ci_method = "weighted_arithmetic"</code> but
+has been soft-deprecated) which is only included for
+historical reasons takes the weighted arithmetic mean of the confidence
+limits and <code>ci_method = MGCL</code> which was included for a research paper
+takes the weighted geometric mean of the confidence limits.
+The values <code>ci_method = "MAW1"</code> and <code>ci_method = "MAW2"</code>
+use the two alternative equations of Burnham and Anderson to
+model average the weighted standard errors and then calculate the confidence
+limits using the Wald approach.
+Finally <code>ci_method = "arithmetic"</code> and <code>ci_method = "geometric"</code>
+take the weighted arithmetic or geometric mean of the values for
+each bootstrap iteration across all the distributions and then
+calculate the confidence limits (and SE) from the single set of samples.
+limits.</p></dd>
 
 
 <dt id="arg-censoring">censoring<a class="anchor" aria-label="anchor" href="#arg-censoring"></a></dt>
@@ -129,6 +159,15 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 
 <dt id="arg-dists">dists<a class="anchor" aria-label="anchor" href="#arg-dists"></a></dt>
 <dd><p>A character vector of the distribution names.</p></dd>
+
+
+<dt id="arg-est-method">est_method<a class="anchor" aria-label="anchor" href="#arg-est-method"></a></dt>
+<dd><p>A string specifying whether to estimate directly from
+the model-averaged cumulative distribution function (<code>est_method = 'multi'</code>) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (<code>est_method = 'arithmetic'</code>) or
+or to use the geometric mean instead (<code>est_method = 'geometric'</code>).</p></dd>
 
 
 <dt id="arg-fitdists">fitdists<a class="anchor" aria-label="anchor" href="#arg-fitdists"></a></dt>
@@ -241,17 +280,12 @@ to report the confidence intervals.</p></dd>
 <dd><p>A whole numeric vector specifying which distributions to include based on the number of parameters.</p></dd>
 
 
-<dt id="arg-all-estimates">all_estimates<a class="anchor" aria-label="anchor" href="#arg-all-estimates"></a></dt>
-<dd><p>A flag specifying whether to calculate estimates for all implemented distributions.</p></dd>
-
-
-<dt id="arg-ci-method">ci_method<a class="anchor" aria-label="anchor" href="#arg-ci-method"></a></dt>
-<dd><p>A string specifying which method to use for estimating the bootstrap values.
-Possible values are "multi_free" and "multi_fixed" which treat the distributions as constituting a single distribution but differ in whether the model weights are fixed and "weighted_samples" and "weighted_arithmetic" take bootstrap samples from each distribution proportional to its weight versus calculating the weighted arithmetic means of the lower and upper confidence limits.</p></dd>
-
-
 <dt id="arg-multi-est">multi_est<a class="anchor" aria-label="anchor" href="#arg-multi-est"></a></dt>
-<dd><p>A flag specifying whether to treat the distributions as constituting a single distribution (as opposed to taking the mean) when calculating model averaged estimates.</p></dd>
+<dd><p>A flag specifying whether to estimate directly from
+the model-averaged cumulative distribution function (<code>multi_est = TRUE</code>) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (<code>multi_est = FALSE</code>).</p></dd>
 
 
 <dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
@@ -324,7 +358,7 @@ remove them with a warning.</p></dd>
 
 
 <dt id="arg-rescale">rescale<a class="anchor" aria-label="anchor" href="#arg-rescale"></a></dt>
-<dd><p>A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.</p></dd>
+<dd><p>A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("odds").</p></dd>
 
 
 <dt id="arg-ribbon">ribbon<a class="anchor" aria-label="anchor" href="#arg-ribbon"></a></dt>
@@ -399,6 +433,10 @@ remove them with a warning.</p></dd>
 <dd><p>A number for the size of the labels. Deprecated for <code>label_size</code>. #' <a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a></p></dd>
 
 
+<dt id="arg-strict">strict<a class="anchor" aria-label="anchor" href="#arg-strict"></a></dt>
+<dd><p>A flag indicating whether all elements of select must be present.</p></dd>
+
+
 <dt id="arg-suffix">suffix<a class="anchor" aria-label="anchor" href="#arg-suffix"></a></dt>
 <dd><p>Additional text to display after the number on the y-axis.</p></dd>
 
@@ -425,6 +463,15 @@ remove them with a warning.</p></dd>
 
 <dt id="arg-weight">weight<a class="anchor" aria-label="anchor" href="#arg-weight"></a></dt>
 <dd><p>A string of the numeric column in data with positive weights less than or equal to 1,000 or NULL.</p></dd>
+
+
+<dt id="arg-odds-max">odds_max<a class="anchor" aria-label="anchor" href="#arg-odds-max"></a></dt>
+<dd><p>A number specifying the upper left value when <code>rescale = "odds"</code>.
+By default left values cannot exceed 0.999.</p></dd>
+
+
+<dt id="arg-wt">wt<a class="anchor" aria-label="anchor" href="#arg-wt"></a></dt>
+<dd><p>A flag specifying whether to return the Akaike weight as "wt" instead of "weight".</p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
@@ -618,7 +665,7 @@ Use NA to refer to the existing minimum or maximum limits.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

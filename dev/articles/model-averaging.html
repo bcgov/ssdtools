@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2025-05-01</h4>
+            <h4 data-toc-skip class="date">2025-09-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/model-averaging.Rmd" class="external-link"><code>vignettes/articles/model-averaging.Rmd</code></a></small>
       <div class="d-none name"><code>model-averaging.Rmd</code></div>
@@ -385,7 +385,7 @@ principle holds:
 <pre><code><span><span class="co"># Obtain a model-averaged HCx using the ssd_hc() function</span></span>
 <span><span class="va">hcp</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">x</span>, p <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span>
 <span><span class="co"># Check that the inversion principle holds</span></span>
-<span><span class="fu"><a href="../reference/ssd_hp.html">ssd_hp</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">hcp</span>, multi_est <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">==</span> <span class="va">p</span>   <span class="co"># this should result in logical `TRUE`</span></span></code></pre>
+<span><span class="fu"><a href="../reference/ssd_hp.html">ssd_hp</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">hcp</span>, est_method <span class="op">=</span> <span class="st">"multi"</span><span class="op">)</span> <span class="op">==</span> <span class="va">p</span>   <span class="co"># this should result in logical `TRUE`</span></span></code></pre>
 <p><em>Note: if the <code>multi_est</code> argument is set to
 <code>FALSE</code> the test will fail</em>. <br></p>
 <p>
@@ -784,7 +784,7 @@ Development of Canadian Water Quality Guidelines.”</span> CCME Project
 </h2>
 <p>Copyright 2015-2023 Province of British Columbia<br>
 Copyright 2021 Environment and Climate Change Canada<br>
-Copyright 2023-2024 Australian Government Department of Climate Change,
+Copyright 2023-2025 Australian Government Department of Climate Change,
 Energy, the Environment and Water</p>
 <p>The documentation is released under the <a href="https://creativecommons.org/licenses/by/4.0/" class="external-link">CC BY 4.0
 License</a></p>
@@ -802,7 +802,7 @@ License</a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

@@ -44,7 +44,10 @@
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/rgompertz.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/rlgumbel.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/scale_colour_ssd.html</loc></url>
+<url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_at_boundary.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_censor_data.html</loc></url>
+<url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_ci_methods.html</loc></url>
+<url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_computable.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_data.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_dists.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_dists_all.html</loc></url>
@@ -53,6 +56,7 @@
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_e.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_ecd.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_ecd_data.html</loc></url>
+<url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_est_methods.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_exposure.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_fit_bcanz.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/dev/reference/ssd_fit_burrlioz.html</loc></url>

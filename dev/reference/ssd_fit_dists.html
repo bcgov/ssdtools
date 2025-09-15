@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,11 +43,13 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ssd_fit_dists</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  left <span class="op">=</span> <span class="st">"Conc"</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  right <span class="op">=</span> <span class="va">left</span>,</span>
 <span>  weight <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dists <span class="op">=</span> <span class="fu"><a href="ssd_dists_bcanz.html">ssd_dists_bcanz</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  nrow <span class="op">=</span> <span class="fl">6L</span>,</span>
 <span>  rescale <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  odds_max <span class="op">=</span> <span class="fl">0.999</span>,</span>
 <span>  reweight <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  computable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  at_boundary_ok <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -72,6 +74,10 @@
 <dd><p>A string of the column in data with the concentrations.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Unused.</p></dd>
+
+
 <dt id="arg-right">right<a class="anchor" aria-label="anchor" href="#arg-right"></a></dt>
 <dd><p>A string of the column in data with the right concentration values.</p></dd>
 
@@ -89,7 +95,12 @@
 
 
 <dt id="arg-rescale">rescale<a class="anchor" aria-label="anchor" href="#arg-rescale"></a></dt>
-<dd><p>A flag specifying whether to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values.</p></dd>
+<dd><p>A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("odds").</p></dd>
+
+
+<dt id="arg-odds-max">odds_max<a class="anchor" aria-label="anchor" href="#arg-odds-max"></a></dt>
+<dd><p>A number specifying the upper left value when <code>rescale = "odds"</code>.
+By default left values cannot exceed 0.999.</p></dd>
 
 
 <dt id="arg-reweight">reweight<a class="anchor" aria-label="anchor" href="#arg-reweight"></a></dt>
@@ -185,10 +196,12 @@ then the data are considered to be censored.</p>
 <span class="r-in"><span><span class="fu"><a href="ssd_plot_cdf.html">ssd_plot_cdf</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ssd_fit_dists-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="ssd_hc.html">ssd_hc</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   dist    proportion   est    se   lcl   ucl    wt method    nboot pboot samples</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> average       0.05  1.26    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1 parametr…     0   <span style="color: #BB0000;">NaN</span> <span style="color: #949494;">&lt;dbl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   dist    proportion   est    se   lcl   ucl    wt level est_method ci_method   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> average       0.05  1.26    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     1  0.95 multi      weighted_sa…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: boot_method &lt;chr&gt;, nboot &lt;int&gt;, pboot &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dists &lt;list&gt;, samples &lt;list&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -200,7 +213,7 @@ then the data are considered to be censored.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,9 +34,58 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.3.0.9000" id="ssdtools-2309000">ssdtools 2.3.0.9000<a class="anchor" aria-label="anchor" href="#ssdtools-2309000"></a></h2>
-<ul><li>Implemented right censoring for all distributions.</li>
+<h2 class="pkg-version" data-toc-text="2.4.0.9000" id="ssdtools-2409000">ssdtools 2.4.0.9000<a class="anchor" aria-label="anchor" href="#ssdtools-2409000"></a></h2>
+<ul><li>Added following <code>ci_methods</code> to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>: <code>"GMACL"</code>, <code>"MAW1"</code>, <code>"MAW2"</code>, <code>"GMAW1"</code>, <code>"GMAW2"</code>, <code>"arithmetic_samples"</code> and <code>"geometric_samples"</code>.</li>
 </ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.4.0" id="ssdtools-240">ssdtools 2.4.0<a class="anchor" aria-label="anchor" href="#ssdtools-240"></a></h2><p class="text-muted">CRAN release: 2025-09-12</p>
+<div class="section level3">
+<h3 id="features-2-4-0">Features<a class="anchor" aria-label="anchor" href="#features-2-4-0"></a></h3>
+<ul><li>Added right censoring for all distributions (by <a href="https://github.com/eduardszoecs" class="external-link">@eduardszoecs</a>).</li>
+<li>Added <code>rescale = "odds"</code> option to <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> to allow fitting to dilution data including <code>odds_max = 0.999</code> argument to handle values of 1.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="functions-2-4-0">Functions<a class="anchor" aria-label="anchor" href="#functions-2-4-0"></a></h3>
+<ul><li>Added <code><a href="../reference/ssd_ci_methods.html">ssd_ci_methods()</a></code> and <code><a href="../reference/ssd_est_methods.html">ssd_est_methods()</a></code> to get character vector of methods.</li>
+<li>Added <code><a href="../reference/ssd_at_boundary.html">ssd_at_boundary()</a></code> and <code><a href="../reference/ssd_computable.html">ssd_computable()</a></code>.</li>
+<li>Added class and attribute preserving <code>[[</code> and <code>[</code> operators.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="arguments-2-4-0">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2-4-0"></a></h3>
+<ul><li>Added <code>strict = TRUE</code> argument to <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> to allow subsetting when distributions missing (with <code>strict = FALSE</code>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="output-columns-2-4-0">Output Columns<a class="anchor" aria-label="anchor" href="#output-columns-2-4-0"></a></h3>
+<ul><li>Added column <code>"dists"</code> to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> which is a list of the distributions.</li>
+<li>Added <code>"est_method"</code> and <code>"ci_method"</code> columns to tibble output by <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</li>
+<li>Added <code>"level"</code> column to tibble output by <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</li>
+<li>Added <code>"at_bound"</code> and <code>"computable"</code> columns to tibble output by <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code>.</li>
+<li>Renamed <code>"method"</code> column to <code>"boot_method"</code> in tibble output by <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</li>
+<li>
+<code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> now only return missing values for <code>se</code>, <code>lcl</code> and <code>ucl</code> when <code>nboot = 0</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="error-checking-2-4-0">Error Checking<a class="anchor" aria-label="anchor" href="#error-checking-2-4-0"></a></h3>
+<ul><li>Added … and check unused to ensure matching names of subsequent arguments.</li>
+<li>Fixed error message when Inf weights.</li>
+<li>
+<code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> now checks all dists are subset of <code><a href="../reference/ssd_dists_bcanz.html">ssd_dists_bcanz()</a></code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="modifications-2-4-0">Modifications<a class="anchor" aria-label="anchor" href="#modifications-2-4-0"></a></h3>
+<ul><li>Modified method to calculate <code><a href="../reference/ssd_ecd.html">ssd_ecd()</a></code> to use <code><a href="https://rdrr.io/r/stats/ppoints.html" class="external-link">stats::ppoints()</a></code>.</li>
+<li>Ensures <code>weighted_samples</code> sum to nboot.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-2-4-0">Deprecated<a class="anchor" aria-label="anchor" href="#deprecated-2-4-0"></a></h3>
+<ul><li><p>Deprecated <code><a href="../reference/ssd_dists_shiny.html">ssd_dists_shiny()</a></code>.</p></li>
+<li><p>Deprecated <code>ties.method = "first"</code> argument in <code><a href="../reference/ssd_ecd.html">ssd_ecd()</a></code>.</p></li>
+<li><p>Soft-deprecated <code>est_method = "multi"</code> argument to <code>multi_est = TRUE</code> for <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</p></li>
+<li><p>Soft-deprecated <code>proportion = FALSE</code> to <code>proportion = TRUE</code> argument to <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> which switches output from percentages to proportions.</p></li>
+<li><p>Soft-deprecated <code>wt = FALSE</code> for <code>wt = TRUE</code> argument to <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code> and <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> which replaces column <code>"weight"</code> with <code>"wt"</code> in output.</p></li>
+<li><p>Soft-deprecated <code>ci_method = "weighted_arithmetic"</code> for <code>ci_method = "MACL"</code>.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.3.0" id="ssdtools-230">ssdtools 2.3.0<a class="anchor" aria-label="anchor" href="#ssdtools-230"></a></h2><p class="text-muted">CRAN release: 2025-02-20</p>
 <ul><li>Added valid column to dist_data to indicate the “invpareto” has invalid likelihood.</li>
@@ -545,7 +594,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
