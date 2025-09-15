@@ -34,15 +34,11 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.4.0" id="ssdtools-240">ssdtools 2.4.0<a class="anchor" aria-label="anchor" href="#ssdtools-240"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.4.0" id="ssdtools-240">ssdtools 2.4.0<a class="anchor" aria-label="anchor" href="#ssdtools-240"></a></h2><p class="text-muted">CRAN release: 2025-09-12</p>
 <div class="section level3">
 <h3 id="features-2-4-0">Features<a class="anchor" aria-label="anchor" href="#features-2-4-0"></a></h3>
-<ul><li><p>Add model fitting with right censoring for all distributions (by <a href="https://github.com/eduardszoecs" class="external-link">@eduardszoecs</a>).</p></li>
-<li><p>Added following <code>ci_methods</code> to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>: <code>"GMACL"</code>, <code>"MAW1"</code>, <code>"MAW2"</code>, <code>"GMAW1"</code>, <code>"GMAW2"</code>, <code>"arithmetic_samples"</code> and <code>"geometric_samples"</code>.</p></li>
-<li><p>Added <code>rescale = "odds"</code> option to <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> to allow fitting to dilution data including <code>odds_max = 0.999</code> argument to handle values of 1.</p></li>
-<li><p>Improved method to calculate <code><a href="../reference/ssd_ecd.html">ssd_ecd()</a></code> so ensures symmetric about 0.5.</p></li>
-<li><p>Ensures <code>weighted_samples</code> sum to nboot.</p></li>
-<li><p><code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> now only return missing values for <code>se</code>, <code>lcl</code> and <code>ucl</code> when <code>nboot = 0</code>.</p></li>
+<ul><li>Added right censoring for all distributions (by <a href="https://github.com/eduardszoecs" class="external-link">@eduardszoecs</a>).</li>
+<li>Added <code>rescale = "odds"</code> option to <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> to allow fitting to dilution data including <code>odds_max = 0.999</code> argument to handle values of 1.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="functions-2-4-0">Functions<a class="anchor" aria-label="anchor" href="#functions-2-4-0"></a></h3>
@@ -59,8 +55,10 @@
 <ul><li>Added column <code>"dists"</code> to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> which is a list of the distributions.</li>
 <li>Added <code>"est_method"</code> and <code>"ci_method"</code> columns to tibble output by <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</li>
 <li>Added <code>"level"</code> column to tibble output by <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</li>
-<li>Added <code>"at_bound"</code> and <code>"computable"</code> columns to tibble output by <code>gof()</code>.</li>
+<li>Added <code>"at_bound"</code> and <code>"computable"</code> columns to tibble output by <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code>.</li>
 <li>Renamed <code>"method"</code> column to <code>"boot_method"</code> in tibble output by <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</li>
+<li>
+<code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> now only return missing values for <code>se</code>, <code>lcl</code> and <code>ucl</code> when <code>nboot = 0</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="error-checking-2-4-0">Error Checking<a class="anchor" aria-label="anchor" href="#error-checking-2-4-0"></a></h3>
@@ -68,6 +66,11 @@
 <li>Fixed error message when Inf weights.</li>
 <li>
 <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code> now checks all dists are subset of <code><a href="../reference/ssd_dists_bcanz.html">ssd_dists_bcanz()</a></code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="modifications-2-4-0">Modifications<a class="anchor" aria-label="anchor" href="#modifications-2-4-0"></a></h3>
+<ul><li>Modified method to calculate <code><a href="../reference/ssd_ecd.html">ssd_ecd()</a></code> to use <code><a href="https://rdrr.io/r/stats/ppoints.html" class="external-link">stats::ppoints()</a></code>.</li>
+<li>Ensures <code>weighted_samples</code> sum to nboot.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="deprecated-2-4-0">Deprecated<a class="anchor" aria-label="anchor" href="#deprecated-2-4-0"></a></h3>
