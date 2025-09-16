@@ -95,8 +95,7 @@ limits using the Wald approach.
 Finally \code{ci_method = "arithmetic"} and \code{ci_method = "geometric"}
 take the weighted arithmetic or geometric mean of the values for
 each bootstrap iteration across all the distributions and then
-calculate the confidence limits (and SE) from the single set of samples.
-limits.}
+calculate the confidence limits (and SE) from the single set of samples.}
 
 \item{parametric}{A flag specifying whether to perform parametric bootstrapping as opposed to non-parametrically resampling the original data with replacement.}
 

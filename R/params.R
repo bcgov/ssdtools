@@ -53,7 +53,6 @@
 #' take the weighted arithmetic or geometric mean of the values for 
 #' each bootstrap iteration across all the distributions and then
 #' calculate the confidence limits (and SE) from the single set of samples.
-#' limits.
 #' @param censoring A numeric vector of the left and right censoring values.
 #' @param color A string of the column in data for the color aesthetic.
 #' @param computable A flag specifying whether to only return fits with numerically computable standard errors.
