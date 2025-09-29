@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.4.0.9001
+
+- Allow ssd_plot() to use concentration as labels.
+
+- Merge branch 'main' into dev.
+
+
 # ssdtools 2.4.0.9000
 
 - Added following `ci_methods` to `ssd_hc()`, `ssd_hp()` and `predict()`: `"GMACL"`, `"MAW1"`, `"MAW2"`, `"GMAW1"`, `"GMAW2"`, `"arithmetic_samples"` and `"geometric_samples"`.
