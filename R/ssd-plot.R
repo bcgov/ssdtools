@@ -85,8 +85,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   chk_null_or(color, vld = vld_string)
   chk_null_or(linetype, vld = vld_string)
   chk_null_or(linecolor, vld = vld_string)
-  check_names(data, c(unique(c(left, right)), label, shape))
-
+  check_names(data, unique(c(left, right, label, shape)))
   check_names(pred, c("proportion", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
   chk_numeric(pred$proportion)
   chk_range(pred$proportion)

@@ -36,7 +36,7 @@ ssd_plot_data <- function(data, left = "Conc", right = left, ...,
   chk_unused(...)
   chk_null_or(label, vld = vld_string)
   chk_null_or(shape, vld = vld_string)
-  check_names(data, c(unique(c(left, right)), label, shape))
+  check_names(data, unique(c(left, right, label, shape)))
 
   chk_number(shift_x)
   chk_range(shift_x, c(1, 1000))
