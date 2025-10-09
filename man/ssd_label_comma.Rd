@@ -4,14 +4,21 @@
 \alias{ssd_label_comma}
 \title{Label numbers with significant digits and comma}
 \usage{
-ssd_label_comma(digits = 3, ..., big.mark = ",")
+ssd_label_comma(
+  digits = 3,
+  ...,
+  big.mark = ",",
+  decimal.mark = getOption("OutDec", ".")
+)
 }
 \arguments{
 \item{digits}{A whole number specifying the number of significant figures.}
 
 \item{...}{Unused.}
 
-\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
+\item{big.mark}{A string specifying the thousands separator.}
+
+\item{decimal.mark}{A string specifying the numeric decimal point.}
 }
 \value{
 A "labelling" function that takes a vector x and

@@ -92,3 +92,16 @@ test_that("ssd_plot label_size", {
 test_that("ssd_plot label_size", {
   expect_snapshot_plot(ssd_plot(ssddata::ccme_boron, boron_pred, label_size = 5, theme_classic = TRUE), "boron_themeclassic")
 })
+
+test_that("ssd_plot deci mark", {
+  data <- ssddata::ccme_boron
+  data$Conc <- data$Conc
+  boron_pred <- ssdtools::boron_pred
+  boron_pred$est <- boron_pred$est
+  boron_pred$lcl <- boron_pred$lcl
+  boron_pred$ucl <- boron_pred$ucl
+  expect_snapshot_plot(ssd_plot(data, boron_pred, decimal.mark = "-"), "boron_decimark")
+  withr::with_options(list(OutDec = ":"), {
+      expect_snapshot_plot(ssd_plot(data, boron_pred), "boron_decimark2")
+  })
+})

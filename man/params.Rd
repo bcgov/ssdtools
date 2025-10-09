@@ -24,7 +24,7 @@ parameters at the boundary should be considered to have converged (default = FAL
 
 \item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
 
-\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
+\item{big.mark}{A string specifying the thousands separator.}
 
 \item{breaks}{A character vector}
 
@@ -70,6 +70,8 @@ calculate the confidence limits (and SE) from the single set of samples.}
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
 \item{data}{A data frame.}
+
+\item{decimal.mark}{A string specifying the numeric decimal point.}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}

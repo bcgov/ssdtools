@@ -33,3 +33,9 @@ test_that("ssd_plot_data ccme_boron language", {
   expect_snapshot_plot(ssd_plot_data(data), "big_mark_comma")
   expect_snapshot_plot(ssd_plot_data(data, big.mark = " "), "big_mark_space")
 })
+
+test_that("ssd_plot_data ccme_boron small data", {
+  data <- ssddata::ccme_boron
+  data$Conc <- data$Conc / 1000
+  expect_snapshot_plot(ssd_plot_data(data, decimal.mark = " "), "decimal_mark_space")
+})

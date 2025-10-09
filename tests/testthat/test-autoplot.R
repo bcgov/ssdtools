@@ -42,3 +42,12 @@ test_that("autoplot language", {
   expect_snapshot_plot(autoplot(fits, big.mark = "!!"), "suffix")
   expect_snapshot_plot(autoplot(fits, big.mark = ":"), "autoplot_bigmark")
 })
+
+test_that("autoplot small", {
+  data <- ssddata::ccme_boron
+  data$Conc <- data$Conc / 1000
+  fits <- ssd_fit_dists(data,
+    dists = c("lnorm")
+  )
+  expect_snapshot_plot(autoplot(fits, decimal.mark = "-"), "autoplot_decimalmark")
+})
