@@ -14,7 +14,7 @@ comma_signif(x, digits = 3, ..., big.mark = ",")
 
 \item{...}{Unused.}
 
-\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
+\item{big.mark}{A string specifying the thousands separator.}
 }
 \value{
 A character vector.

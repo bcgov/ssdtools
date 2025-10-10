@@ -24,7 +24,7 @@
 #' parameters at the boundary should be considered to have converged (default = FALSE).
 #' @param average A flag specifying whether to provide model averaged values as opposed to a value for each distribution.
 #' @param bcanz A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.
-#' @param big.mark A string specifying used between every 3 digits to separate thousands on the x-axis.
+#' @param big.mark A string specifying the thousands separator.
 #' @param breaks A character vector
 #' @param bounds A named non-negative numeric vector of the left and right bounds for
 #' uncensored missing (0 and Inf) data in terms of the orders of magnitude
@@ -59,6 +59,7 @@
 #' @param conc A numeric vector of concentrations to calculate the hazard proportions for.
 #' @param control A list of control parameters passed to [`stats::optim()`].
 #' @param data A data frame.
+#' @param decimal.mark A string specifying the numeric decimal point.
 #' @param delta A non-negative number specifying the maximum absolute AIC difference cutoff.
 #' Distributions with an absolute AIC difference greater than delta are excluded from the calculations.
 #' @param digits A whole number specifying the number of significant figures.

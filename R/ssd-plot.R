@@ -18,7 +18,8 @@
 #' @export
 ggplot2::waiver
 
-plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver(), xlimits = NULL, hc_value = NULL) {
+plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, decimal.mark,
+   suffix, xbreaks = waiver(), xlimits = NULL, hc_value = NULL) {
   chk_string(xlab)
   chk_string(ylab)
 
@@ -32,9 +33,9 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
     xbreaks <- unique(c(xbreaks, hc_value))
   }
 
-  ssd_label_fun <- ssd_label_comma(big.mark = big.mark)
+  ssd_label_fun <- ssd_label_comma(big.mark = big.mark, decimal.mark = decimal.mark)
   if (!is.null(hc_value)) {
-    ssd_label_fun <- ssd_label_comma_hc(hc_value, big.mark = big.mark)
+    ssd_label_fun <- ssd_label_comma_hc(hc_value, big.mark = big.mark, decimal.mark = decimal.mark)
   }
 
   list(
@@ -69,7 +70,9 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
                      ci = TRUE, ribbon = TRUE, hc = 0.05,
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
-                     big.mark = ",", suffix = "%",
+                     big.mark = ",", 
+                     decimal.mark = getOption("OutDec", "."),
+                     suffix = "%",
                      trans = "log10", xbreaks = waiver(),
                      xlimits = NULL, text_size = 11, label_size = 2.5,
                      theme_classic = FALSE) {
@@ -188,7 +191,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
     hc_value <- pred$est[pred$proportion %in% hc]
   }
   gp <- gp + plot_coord_scale(data,
-    xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
+    xlab = xlab, ylab = ylab, big.mark = big.mark, decimal.mark = decimal.mark,
+    suffix = suffix,
     trans = trans, xbreaks = xbreaks, xlimits = xlimits, hc_value = hc_value
   )
 
