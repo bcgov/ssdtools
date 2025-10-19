@@ -55,7 +55,7 @@ and \code{aicc} for non-censored data.
 }}
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
-ssd_gof(fits)
+ssd_gof(fits, wt = TRUE)
 ssd_gof(fits, pvalue = TRUE, wt = TRUE)
 }
 \seealso{
