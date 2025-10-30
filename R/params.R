@@ -21,7 +21,7 @@
 #' @param all_dists A flag specifying whether all the named distributions must fit successfully.
 #' @param all_estimates A flag specifying whether to calculate estimates for all implemented distributions.
 #' @param at_boundary_ok A flag specifying whether a model with one or more
-#' parameters at the boundary should be considered to have converged (default = FALSE).
+#' parameters at the boundary should be considered to have converged (default = TRUE).
 #' @param average A flag specifying whether to provide model averaged values as opposed to a value for each distribution.
 #' @param bcanz A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.
 #' @param big.mark A string specifying the thousands separator.

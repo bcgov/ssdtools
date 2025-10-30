@@ -50,7 +50,7 @@ By default left values cannot exceed 0.999.}
 \item{computable}{A flag specifying whether to only return fits with numerically computable standard errors.}
 
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
-parameters at the boundary should be considered to have converged (default = FALSE).}
+parameters at the boundary should be considered to have converged (default = TRUE).}
 
 \item{all_dists}{A flag specifying whether all the named distributions must fit successfully.}
 

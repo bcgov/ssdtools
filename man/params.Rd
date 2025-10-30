@@ -18,7 +18,7 @@
 \item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
-parameters at the boundary should be considered to have converged (default = FALSE).}
+parameters at the boundary should be considered to have converged (default = TRUE).}
 
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
