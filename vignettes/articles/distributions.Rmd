@@ -189,12 +189,9 @@ legend("topleft", "(B)", bty = "n")
 ```
 
 <br>As can be see from the plot above, the mixture distributions provide a highly flexible means of modelling *bimodality* in an emprical SSD. 
-This happens, for example, when the toxicity data for some toxicant include both animal and plant species, or there are different modes of action operating.
-Unfortunately, this increased flexibility comes with a high penalty in the model-averaging process. 
-The combination of small sample sizes and a high parameter count (typically 5 or more) means that mixture distributions will be down-weighted - even when they do a good job at describing the data. 
-For this reason, when attempting to model bimodal data, we suggest looking at the fit using the default set of distributions and then examining the fit with just one of either the log-normal mixture or the log-logistic mixture. 
-Keep in mind that this should only be done if the sample size is not pathologically small. 
-As a guide, Prof. David Fox recommends as an *absolute minimum* $n \ge 3k + 1$ but preferably $n \ge 5k + 1$ where $k$ is the number of model parameters.
+This happens, for example, when the toxicity data for some toxicant include both animal and plant species, or there are different modes of action operating. 
+When attempting to model bimodal data, we suggest looking at the fit using the default set of distributions and then examining the fit with just one of either the log-normal mixture or the log-logistic mixture. 
+
 
 ## Default Distributions
 
