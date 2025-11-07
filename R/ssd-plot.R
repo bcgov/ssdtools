@@ -16,7 +16,7 @@
 #    limitations under the License.
 
 #' @export
-ggplot2::waiver
+ggplot2::waiver 
 
 plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, decimal.mark,
    suffix, xbreaks = waiver(), xlimits = NULL, hc_value = NULL) {
@@ -133,8 +133,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
       gp <- gp + geom_xribbon(data = pred, aes(xmin = !!sym("lcl"), xmax = !!sym("ucl"), y = !!sym("proportion")), alpha = 0.2)
     } else {
       gp <- gp +
-        geom_line(data = pred, aes(x = !!sym("lcl"), y = !!sym("proportion")), color = "darkgreen") +
-        geom_line(data = pred, aes(x = !!sym("ucl"), y = !!sym("proportion")), color = "darkgreen")
+        geom_line(data = pred, aes(x = !!sym("lcl"), y = !!sym("proportion")), color = "black", linetype = "dashed") +
+        geom_line(data = pred, aes(x = !!sym("ucl"), y = !!sym("proportion")), color = "black", linetype = "dashed")
     }
   }
 
@@ -143,7 +143,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   } else if (ribbon) {
     gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "black")
   } else {
-    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "red")
+    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "#3063A3")
   }
 
   if (!is.null(hc)) {
