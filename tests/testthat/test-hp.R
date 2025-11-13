@@ -183,6 +183,13 @@ test_that("ssd_hp fitdists geomean", {
   expect_snapshot_data(hp, "hp145g")
 })
 
+test_that("ssd_hp fitdists est_method arithmetic and multi are equal", {
+  fits <- ssd_fit_bcanz(ssddata::csiro_nickel_fresh)
+  hpa <- ssd_hp(fits, est_method = "arithmetic")
+  hpm <- ssd_hp(fits, est_method = "multi")
+  testthat::expect_equal(hpa$est, hpm$est)
+})
+
 test_that("ssd_hp fitdists correct for rescaling", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
   fits_rescale <- ssd_fit_dists(ssddata::ccme_boron, rescale = TRUE)
