@@ -1,11 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.4.0.9002
+
+- Fix documentation to indicate that default value of `at_boundary_ok = TRUE`.
+- `ssd_gof(wt = TRUE)` in example.
+- Added `decimal.mark = getOption("OutDec", ".")` argument to plotting functions. (#135).
+
 # ssdtools 2.4.0.9001
 
 - Allow ssd_plot() to use concentration as labels.
-
-- Merge branch 'main' into dev.
-
 
 # ssdtools 2.4.0.9000
 
