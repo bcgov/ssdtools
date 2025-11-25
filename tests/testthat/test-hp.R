@@ -185,8 +185,8 @@ test_that("ssd_hp fitdists geomean", {
 
 test_that("ssd_hp fitdists est_method arithmetic and multi are equal", {
   fits <- ssd_fit_bcanz(ssddata::csiro_nickel_fresh)
-  hpa <- ssd_hp(fits, est_method = "arithmetic")
-  hpm <- ssd_hp(fits, est_method = "multi")
+  hpa <- ssd_hp(fits, proportion = FALSE, est_method = "arithmetic")
+  hpm <- ssd_hp(fits, proportion = FALSE, est_method = "multi")
   testthat::expect_equal(hpa$est, hpm$est)
 })
 
