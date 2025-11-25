@@ -178,7 +178,6 @@ hcp <- function(
   chk_null_or(save_to, vld = vld_dir)
   chk_flag(samples)
 
-  ## FIXME add warning on GMACL and MACL?
   x <- subset(x, delta = delta)
 
   hcp <- hcp2(
