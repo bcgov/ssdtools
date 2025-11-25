@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.5.0
+
+- Same as previous version.
+
+
 # ssdtools 2.4.0.9002
 
 - Fix documentation to indicate that default value of `at_boundary_ok = TRUE`.
