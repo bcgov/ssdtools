@@ -11,7 +11,7 @@ Authors@R: c(
     person("Seb", "Dalgarno", , "seb@poissonconsulting.ca", role = "ctb",
            comment = c(ORCID = "0000-0002-3658-4517")),
     person("Kathleen", "McTavish", role = "ctb"),
-    person("Heather", "Thompson", role = "ctb"), 
+    person("Heather", "Thompson", role = "ctb"),
     person("Doug", "Spry", role = "ctb"),
     person("Rick", "van Dam", role = "ctb"),
     person("Graham", "Batley", role = "ctb"),
@@ -29,7 +29,8 @@ Authors@R: c(
     person("Emilie", "Doussantousse", role = "ctb"),
     person("Nan-Hung", "Hsieh", role = "ctb"),
     person("Florencia", "D'Andrea", role = "ctb"),
-    person("Eduard", "Szöcs", role = "ctb", comment = c(ORCID = "0000-0001-5376-1194")),
+    person("Eduard", "Szöcs", role = "ctb",
+           comment = c(ORCID = "0000-0001-5376-1194")),
     person("Province of British Columbia", role = c("fnd", "cph")),
     person("Environment and Climate Change Canada", role = c("fnd", "cph")),
     person("Australian Government Department of Climate Change, Energy, the Environment and Water", role = c("fnd", "cph"))
