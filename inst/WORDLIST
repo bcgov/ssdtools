@@ -95,6 +95,7 @@ forall
 frac
 funder
 ge
+geomean
 geom's
 geoms
 geq
@@ -118,6 +119,7 @@ le
 leftrightarrow
 leq
 leqslant
+lgl
 lgumbel
 lim
 linetype
@@ -175,6 +177,7 @@ th
 tibble
 tibbles
 tidyverse
+tmbfit
 toxicant
 unmapped
 von

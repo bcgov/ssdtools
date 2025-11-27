@@ -92,7 +92,7 @@ or re-estimated for each bootstrap sample dataset.
 The value \code{ci_method = "MACL"} (was \code{ci_method = "weighted_arithmetic"}), which is only included for
 historical reasons, takes the weighted arithmetic mean of the confidence
 limits while \code{ci_method = GMACL} which
-takes the weighted geometric mean of the confidence limits was added for completeness but is also not recommende.
+takes the weighted geometric mean of the confidence limits was added for completeness but is also not recommended.
 The values \code{ci_method = "MAW1"} and \code{ci_method = "MAW2"}
 use the two alternative equations of Burnham and Anderson (2002) to
 model average the weighted standard errors and then calculate the confidence
