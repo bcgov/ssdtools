@@ -21,3 +21,6 @@ inst/eduard.R
 scripts
 
 /paper/paper.pdf
+revdep/checks.noindex
+revdep/library.noindex
+data.sqlite
