@@ -43,7 +43,7 @@ test_that("exposure multiple distributions", {
   fits <- ssd_fit_dists(ssddata::ccme_boron)
 
   withr::with_seed(50, {
-    expect_snapshot_value(ssd_exposure(fits, nboot = 100), 0.0663472624824284, style = "deparse")
+    expect_snapshot_value(ssd_exposure(fits, nboot = 100), style = "deparse")
   })
 })
 

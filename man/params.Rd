@@ -18,13 +18,13 @@
 \item{all_estimates}{A flag specifying whether to calculate estimates for all implemented distributions.}
 
 \item{at_boundary_ok}{A flag specifying whether a model with one or more
-parameters at the boundary should be considered to have converged (default = FALSE).}
+parameters at the boundary should be considered to have converged (default = TRUE).}
 
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
 
 \item{bcanz}{A flag or NULL specifying whether to only include distributions in the set that is approved by BC, Canada, Australia and New Zealand for official guidelines.}
 
-\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
+\item{big.mark}{A string specifying the thousands separator.}
 
 \item{breaks}{A character vector}
 
@@ -38,27 +38,22 @@ relative to the extremes for non-missing values.}
 
 \item{ci_method}{A string specifying which method to use for estimating
 the standard error and confidence limits from the bootstrap samples.
-Possible values include \code{ci_method = "multi_fixed"} and  \code{ci_method = "multi_free"}
-which generate the bootstrap samples using the model-averaged cumulative distribution function
-but differ in whether the model weights are fixed at the values for the original dataset
-or re-estimated for each bootstrap sample dataset.
-The value \code{ci_method = "weighted_samples"} takes bootstrap samples
+The default and recommended value is still \code{ci_method = "weighted_samples"}
+which takes bootstrap samples
 from each distribution proportional to its AICc based weights and
 calculates the confidence limits (and SE) from this single set.
-The value \code{ci_method = "MACL"} (was \code{ci_method = "weighted_arithmetic"} but
-has been soft-deprecated) which is only included for
-historical reasons takes the weighted arithmetic mean of the confidence
-limits and \code{ci_method = MGCL} which was included for a research paper
-takes the weighted geometric mean of the confidence limits.
-The values \code{ci_method = "MAW1"} and \code{ci_method = "MAW2"}
-use the two alternative equations of Burnham and Anderson to
-model average the weighted standard errors and then calculate the confidence
-limits using the Wald approach.
-Finally \code{ci_method = "arithmetic"} and \code{ci_method = "geometric"}
+\code{ci_method = "multi_fixed"} and  \code{ci_method = "multi_free"}
+generate the bootstrap samples using the model-averaged cumulative distribution function
+but differ in whether the model weights are fixed at the values for the original dataset
+or re-estimated for each bootstrap sample dataset.
+The value \code{ci_method = "MACL"} (was \code{ci_method = "weighted_arithmetic"}), which is only included for
+historical reasons, takes the weighted arithmetic mean of the confidence
+limits while \code{ci_method = GMACL} which
+takes the weighted geometric mean of the confidence limits was added for completeness but is also not recommended.
+Finally \code{ci_method = "arithmetic_samples"} and \code{ci_method = "geometric_samples"}
 take the weighted arithmetic or geometric mean of the values for
 each bootstrap iteration across all the distributions and then
-calculate the confidence limits (and SE) from the single set of samples.
-limits.}
+calculate the confidence limits (and SE) from the single set of samples.}
 
 \item{censoring}{A numeric vector of the left and right censoring values.}
 
@@ -71,6 +66,8 @@ limits.}
 \item{control}{A list of control parameters passed to \code{\link[stats:optim]{stats::optim()}}.}
 
 \item{data}{A data frame.}
+
+\item{decimal.mark}{A string specifying the numeric decimal point.}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
@@ -183,7 +180,7 @@ remove them with a warning.}
 
 \item{reweight}{A flag specifying whether to reweight weights by dividing by the largest weight.}
 
-\item{rescale}{A string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("odds").}
+\item{rescale}{A flag specifying whether to leave the values unchanged (FALSE) or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values (TRUE) or a string specifying whether to leave the values unchanged ("no") or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values ("geomean") or to logistically transform ("odds").}
 
 \item{ribbon}{A flag indicating whether to plot the confidence interval as a grey ribbon as opposed to green solid lines.}
 

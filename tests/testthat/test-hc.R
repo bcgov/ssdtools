@@ -506,7 +506,7 @@ test_that("ssd_hc parametric and non-parametric small sample size", {
   withr::with_seed(47, {
     hc_nonpara_small <- ssd_hc(fit, nboot = 10, ci = TRUE, parametric = FALSE, samples = TRUE)
   })
-  expect_snapshot_data(hc_para_small, "hc_para_small")
+  expect_snapshot_data(hc_nonpara_small, "hc_nonpara_small")
 })
 
 test_that("ssd_hc_burrlioz gets estimates with invpareto", {
@@ -650,7 +650,7 @@ test_that("ssd_hc save_to lnorm 1", {
   boot1 <- read.csv(file.path(dir, "data_000000001_lnorm.csv"))
   fit1 <- ssd_fit_dists(boot1, dists = "lnorm", left = "left", right = "right", weight = "weight")
   est <- ssd_hc(fit1)$est
-  expect_snapshot_value(hc$lcl, est, style = "deparse")
+  expect_snapshot_value(hc$lcl, style = "deparse")
   expect_identical(hc$lcl, hc$ucl)
 })
 

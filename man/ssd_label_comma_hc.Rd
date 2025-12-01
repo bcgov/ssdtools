@@ -5,7 +5,13 @@
 \title{Label numbers with significant digits and comma.
 If \code{hc_value} is present in breaks, put on new line and make bold.}
 \usage{
-ssd_label_comma_hc(hc_value, digits = 3, ..., big.mark = ",")
+ssd_label_comma_hc(
+  hc_value,
+  digits = 3,
+  ...,
+  big.mark = ",",
+  decimal.mark = getOption("OutDec", ".")
+)
 }
 \arguments{
 \item{hc_value}{A number of the hazard concentration value to offset.}
@@ -14,7 +20,9 @@ ssd_label_comma_hc(hc_value, digits = 3, ..., big.mark = ",")
 
 \item{...}{Unused.}
 
-\item{big.mark}{A string specifying used between every 3 digits to separate thousands on the x-axis.}
+\item{big.mark}{A string specifying the thousands separator.}
+
+\item{decimal.mark}{A string specifying the numeric decimal point.}
 }
 \value{
 A "labelling" function that takes a vector x and

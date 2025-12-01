@@ -17,6 +17,7 @@
 
 release_questions <- function() {
   c(
+    "Have you fixed all the `FIXME`s?",
     "Have you run `data-raw/data-raw.R`?",
     "Have you tested using `ssdtests` package?",
     "Have you run `vignettestatic/small-sample-bias.Rmd`?",

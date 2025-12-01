@@ -16,9 +16,10 @@
 #    limitations under the License.
 
 #' @export
-ggplot2::waiver
+ggplot2::waiver 
 
-plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks = waiver(), xlimits = NULL, hc_value = NULL) {
+plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, decimal.mark,
+   suffix, xbreaks = waiver(), xlimits = NULL, hc_value = NULL) {
   chk_string(xlab)
   chk_string(ylab)
 
@@ -32,9 +33,9 @@ plot_coord_scale <- function(data, xlab, ylab, trans, big.mark, suffix, xbreaks 
     xbreaks <- unique(c(xbreaks, hc_value))
   }
 
-  ssd_label_fun <- ssd_label_comma(big.mark = big.mark)
+  ssd_label_fun <- ssd_label_comma(big.mark = big.mark, decimal.mark = decimal.mark)
   if (!is.null(hc_value)) {
-    ssd_label_fun <- ssd_label_comma_hc(hc_value, big.mark = big.mark)
+    ssd_label_fun <- ssd_label_comma_hc(hc_value, big.mark = big.mark, decimal.mark = decimal.mark)
   }
 
   list(
@@ -69,7 +70,9 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
                      ci = TRUE, ribbon = TRUE, hc = 0.05,
                      shift_x = 3, add_x = 0,
                      bounds = c(left = 1, right = 1),
-                     big.mark = ",", suffix = "%",
+                     big.mark = ",", 
+                     decimal.mark = getOption("OutDec", "."),
+                     suffix = "%",
                      trans = "log10", xbreaks = waiver(),
                      xlimits = NULL, text_size = 11, label_size = 2.5,
                      theme_classic = FALSE) {
@@ -85,8 +88,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   chk_null_or(color, vld = vld_string)
   chk_null_or(linetype, vld = vld_string)
   chk_null_or(linecolor, vld = vld_string)
-  check_names(data, c(unique(c(left, right)), label, shape))
-
+  check_names(data, unique(c(left, right, label, shape)))
   check_names(pred, c("proportion", "est", "lcl", "ucl", unique(c(linetype, linecolor))))
   chk_numeric(pred$proportion)
   chk_range(pred$proportion)
@@ -131,8 +133,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
       gp <- gp + geom_xribbon(data = pred, aes(xmin = !!sym("lcl"), xmax = !!sym("ucl"), y = !!sym("proportion")), alpha = 0.2)
     } else {
       gp <- gp +
-        geom_line(data = pred, aes(x = !!sym("lcl"), y = !!sym("proportion")), color = "darkgreen") +
-        geom_line(data = pred, aes(x = !!sym("ucl"), y = !!sym("proportion")), color = "darkgreen")
+        geom_line(data = pred, aes(x = !!sym("lcl"), y = !!sym("proportion")), color = "black", linetype = "dashed") +
+        geom_line(data = pred, aes(x = !!sym("ucl"), y = !!sym("proportion")), color = "black", linetype = "dashed")
     }
   }
 
@@ -141,7 +143,7 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
   } else if (ribbon) {
     gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "black")
   } else {
-    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "red")
+    gp <- gp + geom_line(data = pred, aes(x = !!sym("est"), y = !!sym("proportion"), linetype = !!linetype), color = "#3063A3")
   }
 
   if (!is.null(hc)) {
@@ -189,7 +191,8 @@ ssd_plot <- function(data, pred, left = "Conc", right = left, ...,
     hc_value <- pred$est[pred$proportion %in% hc]
   }
   gp <- gp + plot_coord_scale(data,
-    xlab = xlab, ylab = ylab, big.mark = big.mark, suffix = suffix,
+    xlab = xlab, ylab = ylab, big.mark = big.mark, decimal.mark = decimal.mark,
+    suffix = suffix,
     trans = trans, xbreaks = xbreaks, xlimits = xlimits, hc_value = hc_value
   )
 
