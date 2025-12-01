@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.5.0.9000
+
+- No changes.
+
+
 # ssdtools 2.5.0
 
 - Added the following confidence interval methods to `ssd_hc()`, `ssd_hp()` and `predict()`:
