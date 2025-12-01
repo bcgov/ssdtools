@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,9 +60,9 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2025-09-15</h4>
+            <h4 data-toc-skip class="date">2025-12-01</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/v2.4.0/vignettes/articles/model-averaging.Rmd" class="external-link"><code>vignettes/articles/model-averaging.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/model-averaging.Rmd" class="external-link"><code>vignettes/articles/model-averaging.Rmd</code></a></small>
       <div class="d-none name"><code>model-averaging.Rmd</code></div>
     </div>
 
@@ -211,7 +211,7 @@ lognormal distributions. Model 1 is the LN(-1.067,0.414) distribution
 while Model 2 is the LN(-0.387,0.617) distribution. A plot of the
 empirical <em>cdf</em> and Models 1 and 2 is shown below.</p>
 <div class="figure">
-<img src="model-averaging_files/figure-html/unnamed-chunk-6-1.png" alt="The example data ploted as an empirical cumulative distribution function. Two fitted lines are shown for two different lognormal distributions, one that fits the lower left tail, and another that fits the upper right tail." width="672"><p class="caption">
+<img src="model-averaging_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="The example data ploted as an empirical cumulative distribution function. Two fitted lines are shown for two different lognormal distributions, one that fits the lower left tail, and another that fits the upper right tail." width="672"><p class="caption">
 Emprirical cdf (black); Model 1(green); and Model 2 (blue)
 </p>
 </div>
@@ -225,7 +225,7 @@ that the best fit is obtained by using 44% of Model 1 and 56% of Model
 2. Redrawing the plot and adding the <em>weighted average</em> of Models
 1 and 2 is shown below.</p>
 <div class="figure">
-<img src="model-averaging_files/figure-html/unnamed-chunk-7-1.png" alt="The example data ploted as an empirical cumulative distribution function. Two fitted lines are shown for two different lognormal distributions, one that fits the lower left tail, and another that fits the upper right tail. A third line shows the weighted average of these two distributions, which appears between the two inidividual distributions and fits the data well." width="672"><p class="caption">
+<img src="model-averaging_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="The example data ploted as an empirical cumulative distribution function. Two fitted lines are shown for two different lognormal distributions, one that fits the lower left tail, and another that fits the upper right tail. A third line shows the weighted average of these two distributions, which appears between the two inidividual distributions and fits the data well." width="672"><p class="caption">
 Empirical cdf (black); Model 1(green); Model 2 (blue); and averaged
 Model (red)
 </p>
@@ -250,7 +250,7 @@ approach would be to apply the same weights to the individual
 <p>So our model-averaged <em>HC20</em> estimate is 0.33. As a check, we
 can determine the <em>fraction affected</em> at concentration = 0.33 -
 it should of course be 20%. Let’s take a look at the plot.</p>
-<p><img src="model-averaging_files/figure-html/unnamed-chunk-9-1.png" alt="The weighted average of the two lognormal distributions, as fitted to the example data. Highlighted is the corresponding fraction affected at a concentration of 0.33, which is at 30 percent." width="672"></p>
+<p><img src="model-averaging_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="The weighted average of the two lognormal distributions, as fitted to the example data. Highlighted is the corresponding fraction affected at a concentration of 0.33, which is at 30 percent." width="672"></p>
 <p>Something’s wrong - the fraction affected at concentration 0.33 is
 30% - <strong>not the required 20%</strong>. This issue is taken up in
 the next section</p>
@@ -330,7 +330,7 @@ and the <em>inverse</em> of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H\left( p \right)</annotation></semantics></math>
 both as functions of <em>x</em> (a quantile) for our two-component
 lognormal distribution above.</p>
-<p><img src="model-averaging_files/figure-html/unnamed-chunk-10-1.png" alt="The weighted average of the two lognormal distributions, as fitted to the example data, plotted as a line for the incorrect weighting method, as well as the correct weighting method. The line for two methods do not overlap, although they do cross at a value of 1.12. Because they do not overlap, the two methods will return a different concentration for the 80 percent fraction affected." width="768"></p>
+<p><img src="model-averaging_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="The weighted average of the two lognormal distributions, as fitted to the example data, plotted as a line for the incorrect weighting method, as well as the correct weighting method. The line for two methods do not overlap, although they do cross at a value of 1.12. Because they do not overlap, the two methods will return a different concentration for the 80 percent fraction affected." width="768"></p>
 Clearly, the two functions are <strong>not</strong> the same and thus
 <em>HCx</em> values derived from each will nearly always be different
 (as indicated by the positions of the vertical red and green dashed
@@ -519,7 +519,7 @@ of toxicity values. The use of the Pareto may be a questionable choice
 given it is truncated at 0.18 (which is the minimum value of our
 toxicity data). <br></p>
 <div class="figure">
-<img src="model-averaging_files/figure-html/unnamed-chunk-13-1.png" alt="The example empirical cdf showing how the lognormal, gamma and Pareeto distributions fit these data." width="672"><p class="caption">
+<img src="model-averaging_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="The example empirical cdf showing how the lognormal, gamma and Pareeto distributions fit these data." width="672"><p class="caption">
 Empirical cdf (black); lognormal (green); gamma (blue); and Pareto (red)
 </p>
 </div>
@@ -656,7 +656,7 @@ distributions used in the previous example can be computed ‘manually’ in
 
 <p>Finally, let’s look at the fitted <em>model-averaged SSD</em>:</p>
 <div class="figure">
-<img src="model-averaging_files/figure-html/unnamed-chunk-17-1.png" alt="The example empirical cdf showing how the model average of the lognormal, Gamma and pareto distributions fit these data." width="768"><p class="caption">
+<img src="model-averaging_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="The example empirical cdf showing how the model average of the lognormal, Gamma and pareto distributions fit these data." width="768"><p class="caption">
 Empirical cdf (black) and model-averaged fit (magenta)
 </p>
 </div>
@@ -801,7 +801,7 @@ License</a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

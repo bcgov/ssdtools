@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,9 +60,9 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2025-09-15</h4>
+            <h4 data-toc-skip class="date">2025-12-01</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/v2.4.0/vignettes/articles/confidence-intervals.Rmd" class="external-link"><code>vignettes/articles/confidence-intervals.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/confidence-intervals.Rmd" class="external-link"><code>vignettes/articles/confidence-intervals.Rmd</code></a></small>
       <div class="d-none name"><code>confidence-intervals.Rmd</code></div>
     </div>
 
@@ -295,13 +295,13 @@ package.</p>
 compare the upper and lower CLs for the four bootstrapping methods
 described above. The upper CLs are relatively similar among the four
 methods.</p>
-<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-2-1.png" alt="A plot of the upper confidence limits for the four bootstrapping methods showing they are relatively similar." width="576"></p>
+<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="A plot of the upper confidence limits for the four bootstrapping methods showing they are relatively similar." width="576"></p>
 <p>However, the lower CL obtained using the weighted arithmetic mean
 (the default method implemented in earlier versions of
 <code>ssdtools</code>) is much higher than the other three methods,
 potentially accounting for the relatively poor coverage of this method
 in our simulation studies.</p>
-<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-3-1.png" alt="A plot of the lower confidence limits for the four bootstrapping methods showing that the value for the weighted arithmetic mean is substantially higher than the other three." width="576"></p>
+<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="A plot of the lower confidence limits for the four bootstrapping methods showing that the value for the weighted arithmetic mean is substantially higher than the other three." width="576"></p>
 <p>Given the similarity of the upper and lower CLs of the weighted
 bootstrap sample method compared to the potentially more theoretically
 correct, but computationally more intensive weighted mixture method (via
@@ -314,7 +314,7 @@ that the weighted bootstrap method is ~ 11 times faster, representing a
 considerable computational saving across many SSDs. For this reason,
 this method is currently set as the default method for confidence
 interval estimation in <code>ssdtools</code>.</p>
-<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-4-1.png" alt="A plot of the elapsed time for the four bootstrapping methods showing that the weighted bootstrap sample method is much faster than the other methods." width="576"></p>
+<p><img src="confidence-intervals_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="A plot of the elapsed time for the four bootstrapping methods showing that the weighted bootstrap sample method is much faster than the other methods." width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -359,7 +359,7 @@ License</a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

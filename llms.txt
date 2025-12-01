@@ -1,0 +1,568 @@
+# ssdtools
+
+`ssdtools` is an R package to fit and plot Species Sensitivity
+Distributions (SSD).
+
+SSDs are cumulative probability distributions which are fitted to
+toxicity concentrations for different species as described by Posthuma
+et al. (2001). The ssdtools package uses Maximum Likelihood to fit
+distributions such as the log-normal, log-logistic, log-Gumbel (also
+known as the inverse Weibull), gamma, Weibull and log-normal log-normal
+mixture. Multiple distributions can be averaged using Akaike Information
+Criteria. Confidence intervals on hazard concentrations and proportions
+are produced by bootstrapping.
+
+`ssdtools` can handle censored data with two limitations. It is
+currently only possible to model average when the distributions have the
+same number of parameters and confidence intervals can only be estimated
+using non-parametric (as opposed to parametric) bootstrapping.
+
+## Introduction
+
+The dependency [`ssddata`](https://github.com/open-AIMS/ssddata)
+provides example data sets for several chemicals including Boron. The
+[ECOTOX](https://cfpub.epa.gov/ecotox/) Knowledgebase is another source
+of toxicity concentrations for over 12,000 chemicals.
+
+``` r
+library(ssdtools)
+ssddata::ccme_boron
+#> # A tibble: 28 × 5
+#>    Chemical Species                  Conc Group        Units
+#>    <chr>    <chr>                   <dbl> <fct>        <chr>
+#>  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L 
+#>  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L 
+#>  3 Boron    Micropterus salmoides     4.1 Fish         mg/L 
+#>  4 Boron    Brachydanio rerio        10   Fish         mg/L 
+#>  5 Boron    Carassius auratus        15.6 Fish         mg/L 
+#>  6 Boron    Pimephales promelas      18.3 Fish         mg/L 
+#>  7 Boron    Daphnia magna             6   Invertebrate mg/L 
+#>  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L 
+#>  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L 
+#> 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L 
+#> # ℹ 18 more rows
+```
+
+The six default distributions are fit using
+[`ssd_fit_dists()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_dists.md)
+
+``` r
+fits <- ssd_fit_dists(ssddata::ccme_boron)
+```
+
+and can be quickly plotted using `autoplot`
+
+``` r
+autoplot(fits)
+```
+
+![A plot of the data and fitted
+distributions](reference/figures/README-unnamed-chunk-4-1.png)
+
+The goodness of fit can be assessed using `ssd_gof`
+
+``` r
+ssd_gof(fits, wt = TRUE)
+#> # A tibble: 6 × 14
+#>   dist     npars  nobs log_lik   aic  aicc delta    wt   bic    ad     ks    cvm
+#>   <chr>    <int> <int>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>  <dbl>
+#> 1 gamma        2    28   -117.  238.  238. 0.005 0.357  240. 0.440 0.117  0.0554
+#> 2 lgumbel      2    28   -120.  244.  245. 6.56  0.013  247. 0.829 0.158  0.134 
+#> 3 llogis       2    28   -119.  241.  241. 3.39  0.066  244. 0.487 0.0994 0.0595
+#> 4 lnorm        2    28   -118.  239.  240. 1.40  0.177  242. 0.507 0.107  0.0703
+#> 5 lnorm_l…     5    28   -115.  240.  243. 4.98  0.03   247. 0.320 0.116  0.0414
+#> 6 weibull      2    28   -117.  238.  238. 0     0.357  240. 0.434 0.117  0.0542
+#> # ℹ 2 more variables: at_bound <lgl>, computable <lgl>
+```
+
+and the model-averaged 5% hazard concentration estimated (with
+bootstrapping to get confidence intervals) using `ssd_hc`.
+
+``` r
+withr::with_seed(99, {
+  hc5 <- ssd_hc(fits, ci = TRUE)
+})
+print(hc5)
+#> # A tibble: 1 × 15
+#>   dist    proportion   est    se   lcl   ucl    wt level est_method ci_method   
+#>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <chr>       
+#> 1 average       0.05  1.26 0.782 0.407  3.29     1  0.95 multi      weighted_sa…
+#> # ℹ 5 more variables: boot_method <chr>, nboot <dbl>, pboot <dbl>,
+#> #   dists <list>, samples <list>
+```
+
+Model-averaged predictions complete with confidence intervals can also
+be estimated by parametric bootstrapping using the `stats` generic
+`predict`.
+
+``` r
+boron_pred <- predict(fits, ci = TRUE)
+```
+
+The predictions can be plotted together with the original data using
+`ssd_plot`.
+
+``` r
+library(ggplot2)
+
+theme_set(theme_bw())
+
+ssd_plot(ssddata::ccme_boron, boron_pred,
+  shape = "Group", color = "Group", label = "Species",
+  xlab = "Concentration (mg/L)", ribbon = TRUE
+) +
+  expand_limits(x = 3000) +
+  scale_colour_ssd()
+```
+
+![A plot of the data and model-averaged prediction with confidence
+intervals](reference/figures/README-unnamed-chunk-8-1.png)
+
+## Information
+
+Get started with ssdtools at
+<https://bcgov.github.io/ssdtools/articles/ssdtools.html>.
+
+A shiny app to allow non-R users to interface with ssdtools is available
+at <https://github.com/bcgov/shinyssdtools>.
+
+For the latest changes to the development version see the
+[NEWS](https://bcgov.github.io/ssdtools/news/) file.
+
+For recent developments in SSD modeling including a review of existing
+software see:
+
+*Fox, D.R., et al. 2021. Recent Developments in Species Sensitivity
+Distribution Modeling. Environ Toxicol Chem 40(2): 293–308.
+<https://doi.org/10.1002/etc.4925>.*
+
+## Citation
+
+``` R
+To cite package 'ssdtools' in publications use:
+
+  Thorley J, Fisher R, Fox D, Schwarz C (2025). "ssdtools v2: An R
+  package to fit Species Sensitivity Distributions." _Journal of Open
+  Source Software_, *10*(105), 7492. doi:10.21105/joss.07492
+  <https://doi.org/10.21105/joss.07492>.
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {ssdtools v2: An R package to fit Species Sensitivity Distributions},
+    author = {Joe Thorley and Rebecca Fisher and David Fox and Carl Schwarz},
+    year = {2025},
+    journal = {Journal of Open Source Software},
+    volume = {10},
+    number = {105},
+    pages = {7492},
+    doi = {10.21105/joss.07492},
+  }
+```
+
+## Installation
+
+### Release
+
+To install the latest release version from
+[CRAN](https://CRAN.R-project.org/package=ssdtools).
+
+``` r
+install.packages("ssdtools")
+```
+
+The website for the release version is at
+<https://bcgov.github.io/ssdtools/>.
+
+### Development
+
+To install the development version from
+[GitHub](https://github.com/bcgov/ssdtools)
+
+``` r
+# install.packages("remotes")
+remotes::install_github("bcgov/ssdtools")
+```
+
+or from [r-universe](https://bcgov.r-universe.dev/ssdtools).
+
+``` r
+install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+The website for the development version is at
+<https://bcgov.github.io/ssdtools/dev/>.
+
+### Getting Help or Reporting an Issue
+
+To report bugs/issues/feature requests, please file an
+[issue](https://github.com/bcgov/ssdtools/issues/).
+
+### Contribution
+
+If you would like to contribute to the package, please see our
+[CONTRIBUTING](https://github.com/bcgov/ssdtools/blob/master/.github/CONTRIBUTING.md)
+guidelines.
+
+### Code of Conduct
+
+Please note that the ssdtools project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+## References
+
+Posthuma, L., Suter II, G.W., and Traas, T.P. 2001. Species Sensitivity
+Distributions in Ecotoxicology. CRC Press.
+
+## Licensing
+
+Copyright 2015-2023 Province of British Columbia  
+Copyright 2021 Environment and Climate Change Canada  
+Copyright 2023-2025 Australian Government Department of Climate Change,
+Energy, the Environment and Water
+
+The documentation is released under the [CC BY 4.0
+License](https://creativecommons.org/licenses/by/4.0/)
+
+The code is released under the [Apache License
+2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+# Package index
+
+## Distribution Names
+
+Functions that return character vectors of distribution names
+
+- [`ssd_dists()`](https://bcgov.github.io/ssdtools/reference/ssd_dists.md)
+  : Species Sensitivity Distributions
+- [`ssd_dists_all()`](https://bcgov.github.io/ssdtools/reference/ssd_dists_all.md)
+  : All Species Sensitivity Distributions
+- [`ssd_dists_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_dists_bcanz.md)
+  : BCANZ Distributions
+- [`ssd_dists_shiny()`](https://bcgov.github.io/ssdtools/reference/ssd_dists_shiny.md)
+  : All Shiny Species Sensitivity Distributions
+
+## Fit
+
+Functions that fit distributions to data
+
+- [`ssd_fit_dists()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_dists.md)
+  : Fit Distributions
+- [`ssd_fit_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_bcanz.md)
+  : Fit BCANZ Distributions
+- [`ssd_fit_burrlioz()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_burrlioz.md)
+  : Fit Burrlioz Distributions
+
+## Hazard Concentrations and Proportions
+
+Functions that calculate hazard concentrations and Proportions
+
+- [`ssd_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_hc.md) :
+  Hazard Concentrations for Species Sensitivity Distributions
+- [`ssd_hc_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_hc_bcanz.md)
+  : BCANZ Hazard Concentrations
+- [`ssd_hp()`](https://bcgov.github.io/ssdtools/reference/ssd_hp.md) :
+  Hazard Proportion
+- [`ssd_hp_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_hp_bcanz.md)
+  : BCANZ Hazard Proportion
+
+## Manipulate Data
+
+Functions that manipulate data
+
+- [`ssd_censor_data()`](https://bcgov.github.io/ssdtools/reference/ssd_censor_data.md)
+  : Censor Data
+- [`ssd_data()`](https://bcgov.github.io/ssdtools/reference/ssd_data.md)
+  : Data from fitdists Object
+- [`ssd_sort_data()`](https://bcgov.github.io/ssdtools/reference/ssd_sort_data.md)
+  : Sort Species Sensitivity Data
+
+## Manipulate Fits
+
+Functions that manipulate fits of distributions
+
+- [`augment(`*`<fitdists>`*`)`](https://bcgov.github.io/ssdtools/reference/augment.fitdists.md)
+  : Augmented Data from fitdists Object
+- [`coef(`*`<fitdists>`*`)`](https://bcgov.github.io/ssdtools/reference/coef.fitdists.md)
+  : Turn a fitdists Object into a Tidy Tibble
+- [`estimates(`*`<fitdists>`*`)`](https://bcgov.github.io/ssdtools/reference/estimates.fitdists.md)
+  : Estimates for fitdists Object
+- [`glance(`*`<fitdists>`*`)`](https://bcgov.github.io/ssdtools/reference/glance.fitdists.md)
+  : Get a tibble summarizing each distribution
+- [`predict(`*`<fitburrlioz>`*`)`](https://bcgov.github.io/ssdtools/reference/predict.fitburrlioz.md)
+  : Predict Hazard Concentrations of fitburrlioz Object
+- [`predict(`*`<fitdists>`*`)`](https://bcgov.github.io/ssdtools/reference/predict.fitdists.md)
+  : Predict Hazard Concentrations of fitdists Object
+- [`ssd_gof()`](https://bcgov.github.io/ssdtools/reference/ssd_gof.md) :
+  Goodness of Fit
+- [`subset(`*`<fitdists>`*`)`](https://bcgov.github.io/ssdtools/reference/subset.fitdists.md)
+  : Subset fitdists Object
+- [`tidy(`*`<fitdists>`*`)`](https://bcgov.github.io/ssdtools/reference/tidy.fitdists.md)
+  : Turn a fitdists Object into a Tibble
+
+## Plots
+
+Functions to Generate Plots
+
+- [`autoplot(`*`<fitdists>`*`)`](https://bcgov.github.io/ssdtools/reference/autoplot.fitdists.md)
+  : Plot a fitdists Object
+
+- [`geom_hcintersect()`](https://bcgov.github.io/ssdtools/reference/geom_hcintersect.md)
+  : Species Sensitivity Hazard Concentration Intersection
+
+- [`geom_ssdpoint()`](https://bcgov.github.io/ssdtools/reference/geom_ssdpoint.md)
+  : Species Sensitivity Data Points
+
+- [`geom_ssdsegment()`](https://bcgov.github.io/ssdtools/reference/geom_ssdsegment.md)
+  : Species Sensitivity Censored Segments
+
+- [`geom_xribbon()`](https://bcgov.github.io/ssdtools/reference/geom_xribbon.md)
+  : Ribbon on X-Axis
+
+- [`scale_colour_ssd()`](https://bcgov.github.io/ssdtools/reference/scale_colour_ssd.md)
+  [`scale_color_ssd()`](https://bcgov.github.io/ssdtools/reference/scale_colour_ssd.md)
+  [`scale_fill_ssd()`](https://bcgov.github.io/ssdtools/reference/scale_colour_ssd.md)
+  : Discrete color-blind scale for SSD Plots
+
+- [`ssd_label_comma()`](https://bcgov.github.io/ssdtools/reference/ssd_label_comma.md)
+  : Label numbers with significant digits and comma
+
+- [`ssd_label_comma_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_label_comma_hc.md)
+  :
+
+  Label numbers with significant digits and comma. If `hc_value` is
+  present in breaks, put on new line and make bold.
+
+- [`ssd_pal()`](https://bcgov.github.io/ssdtools/reference/ssd_pal.md) :
+  Color-blind Palette for SSD Plots
+
+- [`ssd_plot()`](https://bcgov.github.io/ssdtools/reference/ssd_plot.md)
+  : Plot Species Sensitivity Data and Distributions
+
+- [`ssd_plot_cdf()`](https://bcgov.github.io/ssdtools/reference/ssd_plot_cdf.md)
+  : Plot Cumulative Distribution Function (CDF)
+
+- [`ssd_plot_data()`](https://bcgov.github.io/ssdtools/reference/ssd_plot_data.md)
+  : Plot Species Sensitivity Data
+
+- [`StatSsdpoint`](https://bcgov.github.io/ssdtools/reference/ssdtools-ggproto.md)
+  [`StatSsdsegment`](https://bcgov.github.io/ssdtools/reference/ssdtools-ggproto.md)
+  [`GeomSsdpoint`](https://bcgov.github.io/ssdtools/reference/ssdtools-ggproto.md)
+  [`GeomSsdsegment`](https://bcgov.github.io/ssdtools/reference/ssdtools-ggproto.md)
+  [`GeomHcintersect`](https://bcgov.github.io/ssdtools/reference/ssdtools-ggproto.md)
+  [`GeomXribbon`](https://bcgov.github.io/ssdtools/reference/ssdtools-ggproto.md)
+  : ggproto Classes for Plotting Species Sensitivity Data and
+  Distributions
+
+## Distributional Functions
+
+Distribution, quantile, random functions
+
+- [`ssd_pburrIII3()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_pgamma()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_pgompertz()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_pinvpareto()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_plgumbel()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_pllogis_llogis()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_pllogis()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_plnorm_lnorm()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_plnorm()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_pmulti()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_pmulti_fitdists()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  [`ssd_pweibull()`](https://bcgov.github.io/ssdtools/reference/ssd_p.md)
+  : Cumulative Distribution Function
+- [`ssd_qburrIII3()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qgamma()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qgompertz()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qinvpareto()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qlgumbel()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qllogis_llogis()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qllogis()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qlnorm_lnorm()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qlnorm()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qmulti()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qmulti_fitdists()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  [`ssd_qweibull()`](https://bcgov.github.io/ssdtools/reference/ssd_q.md)
+  : Quantile Function
+- [`ssd_rburrIII3()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rgamma()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rgompertz()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rinvpareto()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rlgumbel()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rllogis_llogis()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rllogis()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rlnorm_lnorm()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rlnorm()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rmulti()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rmulti_fitdists()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  [`ssd_rweibull()`](https://bcgov.github.io/ssdtools/reference/ssd_r.md)
+  : Random Number Generation
+- [`ssd_eburrIII3()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_egamma()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_egompertz()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_einvpareto()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_elgumbel()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_ellogis_llogis()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_ellogis()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_elnorm_lnorm()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_elnorm()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_emulti()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  [`ssd_eweibull()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  : Default Parameter Estimates
+
+## Miscellaneous
+
+Miscellaneous functions and data
+
+- [`boron_pred`](https://bcgov.github.io/ssdtools/reference/boron_pred.md)
+  : Model Averaged Predictions for CCME Boron Data
+- [`dist_data`](https://bcgov.github.io/ssdtools/reference/dist_data.md)
+  : Distribution Data
+- [`is.fitdists()`](https://bcgov.github.io/ssdtools/reference/is.fitdists.md)
+  : Is fitdists Object
+- [`ssd_licensing_md()`](https://bcgov.github.io/ssdtools/reference/ssd_licensing_md.md)
+  : Licensing Markdown
+- [`reexports`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`augment`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`autoplot`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`coef`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`estimates`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`glance`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`logLik`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`nobs`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`npars`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`plot`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`predict`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`waiver`](https://bcgov.github.io/ssdtools/reference/reexports.md)
+  [`tidy`](https://bcgov.github.io/ssdtools/reference/reexports.md) :
+  Objects exported from other packages
+- [`params`](https://bcgov.github.io/ssdtools/reference/params.md)
+  [`parameters`](https://bcgov.github.io/ssdtools/reference/params.md)
+  [`arguments`](https://bcgov.github.io/ssdtools/reference/params.md)
+  [`args`](https://bcgov.github.io/ssdtools/reference/params.md) :
+  Parameter Descriptions for ssdtools Functions
+- [`ssd_at_boundary()`](https://bcgov.github.io/ssdtools/reference/ssd_at_boundary.md)
+  : Is At Boundary
+- [`ssd_ci_methods()`](https://bcgov.github.io/ssdtools/reference/ssd_ci_methods.md)
+  : Confidence Interval Methods for SSDs
+- [`ssd_computable()`](https://bcgov.github.io/ssdtools/reference/ssd_computable.md)
+  : Is Computable Standard Errors
+- [`ssd_ecd()`](https://bcgov.github.io/ssdtools/reference/ssd_ecd.md) :
+  Empirical Cumulative Density
+- [`ssd_ecd_data()`](https://bcgov.github.io/ssdtools/reference/ssd_ecd_data.md)
+  : Empirical Cumulative Density for Species Sensitivity Data
+- [`ssd_est_methods()`](https://bcgov.github.io/ssdtools/reference/ssd_est_methods.md)
+  : Estimate Methods for SSDs
+- [`ssd_exposure()`](https://bcgov.github.io/ssdtools/reference/ssd_exposure.md)
+  : Proportion Exposure
+- [`ssd_is_censored()`](https://bcgov.github.io/ssdtools/reference/ssd_is_censored.md)
+  : Is Censored
+- [`ssd_match_moments()`](https://bcgov.github.io/ssdtools/reference/ssd_match_moments.md)
+  : Match Moments
+- [`ssd_min_pmix()`](https://bcgov.github.io/ssdtools/reference/ssd_min_pmix.md)
+  : Calculate Minimum Proportion in Mixture Models
+
+## Deprecated
+
+Deprecated functions which will become defunct in future versions
+
+- [`comma_signif()`](https://bcgov.github.io/ssdtools/reference/comma_signif.md)
+  :
+
+  Comma and Significance Formatter **\[deprecated\]**
+
+- [`geom_ssd()`](https://bcgov.github.io/ssdtools/reference/geom_ssd.md)
+  :
+
+  Species Sensitivity Data Points **\[deprecated\]**
+
+- [`is_censored()`](https://bcgov.github.io/ssdtools/reference/is_censored.md)
+  :
+
+  Is Censored **\[deprecated\]**
+
+- [`ssd_wqg_bc()`](https://bcgov.github.io/ssdtools/reference/ssd_wqg_bc.md)
+  :
+
+  Water Quality Guideline for British Columbia **\[deprecated\]**
+
+- [`ssd_wqg_burrlioz()`](https://bcgov.github.io/ssdtools/reference/ssd_wqg_burrlioz.md)
+  :
+
+  Water Quality Guideline for Burrlioz **\[deprecated\]**
+
+- [`ssd_hc_burrlioz()`](https://bcgov.github.io/ssdtools/reference/ssd_hc_burrlioz.md)
+  :
+
+  Hazard Concentrations for Burrlioz Fit **\[deprecated\]**
+
+- [`ssd_plot_cf()`](https://bcgov.github.io/ssdtools/reference/ssd_plot_cf.md)
+  :
+
+  Cullen and Frey Plot **\[deprecated\]**
+
+- [`stat_ssd()`](https://bcgov.github.io/ssdtools/reference/stat_ssd.md)
+  :
+
+  Plot Species Sensitivity Data **\[deprecated\]**
+
+- [`dgompertz()`](https://bcgov.github.io/ssdtools/reference/dgompertz.md)
+  **\[deprecated\]** :
+
+  Gompertz Probability Density **\[deprecated\]**
+
+- [`pgompertz()`](https://bcgov.github.io/ssdtools/reference/pgompertz.md)
+  :
+
+  Cumulative Distribution Function for Gompertz Distribution
+  **\[deprecated\]**
+
+- [`qgompertz()`](https://bcgov.github.io/ssdtools/reference/qgompertz.md)
+  :
+
+  Quantile Function for Gompertz Distribution **\[deprecated\]**
+
+- [`rgompertz()`](https://bcgov.github.io/ssdtools/reference/rgompertz.md)
+  :
+
+  Random Generation for Gompertz Distribution **\[deprecated\]**
+
+- [`dlgumbel()`](https://bcgov.github.io/ssdtools/reference/dlgumbel.md)
+  **\[deprecated\]** :
+
+  Log-Gumbel (Inverse Weibull) Probability Density **\[deprecated\]**
+
+- [`plgumbel()`](https://bcgov.github.io/ssdtools/reference/plgumbel.md)
+  :
+
+  Cumulative Distribution Function for Log-Gumbel Distribution
+  **\[deprecated\]**
+
+- [`qlgumbel()`](https://bcgov.github.io/ssdtools/reference/qlgumbel.md)
+  :
+
+  Quantile Function for Log-Gumbel Distribution **\[deprecated\]**
+
+- [`rlgumbel()`](https://bcgov.github.io/ssdtools/reference/rlgumbel.md)
+  : Random Generation for log-Gumbel Distribution
+
+# Articles
+
+### All vignettes
+
+- [Model Averaging
+  SSDs](https://bcgov.github.io/ssdtools/articles/model-averaging.md):
+- [Distributions in
+  ssdtools](https://bcgov.github.io/ssdtools/articles/distributions.md):
+- [Confidence Intervals for Hazard
+  Concentrations](https://bcgov.github.io/ssdtools/articles/confidence-intervals.md):
+- [Customising
+  Plots](https://bcgov.github.io/ssdtools/articles/customising-plots.md):
+- [Small Sample Bias in
+  Estimates](https://bcgov.github.io/ssdtools/articles/small-sample-bias.md):
+- [Additional Technical
+  Details](https://bcgov.github.io/ssdtools/articles/additional-technical-details.md):
+- [Frequently Asked
+  Questions](https://bcgov.github.io/ssdtools/articles/faqs.md):

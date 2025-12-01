@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,9 +60,9 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2025-09-15</h4>
+            <h4 data-toc-skip class="date">2025-12-01</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/v2.4.0/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/ssdtools.Rmd" class="external-link"><code>vignettes/ssdtools.Rmd</code></a></small>
       <div class="d-none name"><code>ssdtools.Rmd</code></div>
     </div>
 
@@ -96,7 +96,7 @@ package.</p>
 </h2>
 <p><code>ssdtools</code> provides the key functionality required to fit
 SSDs using Maximum Likelihood and <a href="https://bcgov.github.io/ssdtools/articles/A_model_averaging.html">model
-averaging</a> in R. It is intended to be used in conjunction with <a href="https://www.tidyverse.org" class="external-link">tidyverse</a> packages such as
+averaging</a> in R. It is intended to be used in conjunction with <a href="https://tidyverse.org" class="external-link">tidyverse</a> packages such as
 <code>readr</code> to input data, <code>tidyr</code> and
 <code>dplyr</code> to group and manipulate data and <code>ggplot2</code>
 <span class="citation">(Wickham 2016)</span> to plot data. As such it
@@ -216,7 +216,7 @@ plots</a> vignette.</p>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">fits</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity Distributions for Boron"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-9-1.png" alt="A plot of the CCME boron dataset with the gamma, log-logistic and log-normal distributions with a simple black and white background color scheme." width="576"></p>
+<p><img src="ssdtools_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="A plot of the CCME boron dataset with the gamma, log-logistic and log-normal distributions with a simple black and white background color scheme." width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="selecting-one-distribution">Selecting One Distribution<a class="anchor" aria-label="anchor" href="#selecting-one-distribution"></a>
@@ -312,20 +312,22 @@ generated as well as the proportion of the data sets that successfully
 fitted (<code>pboot</code>).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">boron_pred</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 11</span></span></span>
-<span><span class="co">#&gt;    dist    proportion   est    se    lcl   ucl    wt method  nboot pboot samples</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;I&lt;lis&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> average       0.01 0.267 0.402 0.041<span style="text-decoration: underline;">9</span>  1.53     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> average       0.02 0.531 0.518 0.110   2.03     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> average       0.03 0.783 0.615 0.198   2.50     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> average       0.04 1.02  0.701 0.300   2.89     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> average       0.05 1.26  0.782 0.407   3.29     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> average       0.06 1.48  0.859 0.520   3.72     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> average       0.07 1.71  0.934 0.645   4.16     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> average       0.08 1.93  1.01  0.769   4.58     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> average       0.09 2.16  1.08  0.896   4.95     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> average       0.1  2.38  1.15  1.03    5.33     1 parame…  <span style="text-decoration: underline;">1</span>000     1 <span style="color: #949494;">&lt;dbl&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 89 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 15</span></span></span>
+<span><span class="co">#&gt;    dist    proportion   est    se    lcl   ucl    wt level est_method ci_method </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> average       0.01 0.267 0.402 0.041<span style="text-decoration: underline;">9</span>  1.53     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> average       0.02 0.531 0.518 0.110   2.03     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> average       0.03 0.783 0.615 0.198   2.50     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> average       0.04 1.02  0.701 0.300   2.89     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> average       0.05 1.26  0.782 0.407   3.29     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> average       0.06 1.48  0.859 0.520   3.72     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> average       0.07 1.71  0.934 0.645   4.16     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> average       0.08 1.93  1.01  0.769   4.58     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> average       0.09 2.16  1.08  0.896   4.95     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> average       0.1  2.38  1.15  1.03    5.33     1  0.95 multi      weighted_…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 89 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: boot_method &lt;chr&gt;, nboot &lt;dbl&gt;, pboot &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   dists &lt;list&gt;, samples &lt;list&gt;</span></span></span></code></pre></div>
 <p>The data frame of the estimates can then be plotted together with the
 original data using the <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> function to summarize an
 analysis. Once again the returned object is a <code>ggplot</code> object
@@ -338,7 +340,7 @@ which can be customized prior to plotting.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> <span class="op">+</span> <span class="co"># to ensure the species labels fit</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Species Sensitivity for Boron"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/scale_colour_ssd.html">scale_colour_ssd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-13-1.png" alt="A plot of the CCME boron dataset species colored by group and the model average species sensitivity distribution with a simple black and white background color scheme." width="576"></p>
+<p><img src="ssdtools_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="A plot of the CCME boron dataset species colored by group and the model average species sensitivity distribution with a simple black and white background color scheme." width="576"></p>
 <p>In the above plot the model-averaged 95% confidence interval is
 indicated by the shaded band and the model-averaged 5%/95%
 Hazard/Protection Concentration (<em>HC5</em>/ <em>PC<sub>95</sub></em>)
@@ -459,7 +461,7 @@ plot indicate the censoring (range of possible values).</p>
 <span>  left <span class="op">=</span> <span class="st">"left"</span>, right <span class="op">=</span> <span class="st">"right"</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Concentration (mg/L)"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="ssdtools_files/figure-html/unnamed-chunk-19-1.png" alt="A plot of the left censored CCME boron dataset with the model average species sensitivity distribution and arrows indicating the censoring." width="576"></p>
+<p><img src="ssdtools_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="A plot of the left censored CCME boron dataset with the model average species sensitivity distribution and arrows indicating the censoring." width="576"></p>
 </div>
 </div>
 <div class="section level2">
@@ -522,7 +524,7 @@ License</a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

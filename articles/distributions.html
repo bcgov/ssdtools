@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,9 +60,9 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2025-09-15</h4>
+            <h4 data-toc-skip class="date">2025-12-01</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/v2.4.0/vignettes/articles/distributions.Rmd" class="external-link"><code>vignettes/articles/distributions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/distributions.Rmd" class="external-link"><code>vignettes/articles/distributions.Rmd</code></a></small>
       <div class="d-none name"><code>distributions.Rmd</code></div>
     </div>
 
@@ -163,7 +163,7 @@ for the Burr III distribution are:</p>
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-2-1.png" alt="A two panel plot showing several realisations of the Burr type III probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="A two panel plot showing several realisations of the Burr type III probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample Burr probability density (A) and cumulative probability (B)
 functions.
 </p>
@@ -230,7 +230,7 @@ parameters - two parameters for each of the component distributions and
 a mixing parameter (pmix) that defines the weighting of the two
 distributions in the ‘mixture.’</p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-3-1.png" alt="A two panel plot showing several realisations of the lognormal lognormal mixture probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="A two panel plot showing several realisations of the lognormal lognormal mixture probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample lognormal lognormal mixture probability density (A) and
 cumulative probability (B) functions.
 </p>
@@ -239,23 +239,10 @@ cumulative probability (B) functions.
 provide a highly flexible means of modelling <em>bimodality</em> in an
 emprical SSD. This happens, for example, when the toxicity data for some
 toxicant include both animal and plant species, or there are different
-modes of action operating. Unfortunately, this increased flexibility
-comes with a high penalty in the model-averaging process. The
-combination of small sample sizes and a high parameter count (typically
-5 or more) means that mixture distributions will be down-weighted - even
-when they do a good job at describing the data. For this reason, when
-attempting to model bimodal data, we suggest looking at the fit using
-the default set of distributions and then examining the fit with just
-one of either the log-normal mixture or the log-logistic mixture. Keep
-in mind that this should only be done if the sample size is not
-pathologically small. As a guide, Prof. David Fox recommends as an
-<em>absolute minimum</em>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>3</mn><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n \ge 3k + 1</annotation></semantics></math>
-but preferably
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>5</mn><mi>k</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n \ge 5k + 1</annotation></semantics></math>
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-is the number of model parameters.</p>
+modes of action operating. When attempting to model bimodal data, we
+suggest looking at the fit using the default set of distributions and
+then examining the fit with just one of either the log-normal mixture or
+the log-logistic mixture.</p>
 </div>
 </div>
 <div class="section level2">
@@ -300,7 +287,7 @@ distributions</p>
 standard deviation of 2 on the (natural) log concentration scale or
 around 7.4 on the concentration scale.</p>
 <div class="figure">
-<img src="distributions_files/figure-html/unnamed-chunk-4-1.png" alt="The cumulative distribution function of the six default distributions using a mean and standard deviation of 2 for all. The distributions included are the gammal, lgumbel, llogis, lnorm, lnorm_lnorm and weibull." width="672"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="The cumulative distribution function of the six default distributions using a mean and standard deviation of 2 for all. The distributions included are the gammal, lgumbel, llogis, lnorm, lnorm_lnorm and weibull." width="672"><p class="caption">
 Currently recommended default distributions.
 </p>
 </div>
@@ -363,7 +350,7 @@ distribution can be fitted using <code>ssdtools</code> supplying the
 string <code>lnorm</code> to the <code>dists</code> argument in the
 <code>ssd_fit_dists</code> call.</p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-5-1.png" alt="A two panel plot showing several realisations of the lognormal probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="A two panel plot showing several realisations of the lognormal probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample lognormal probability density (A) and cumulative probability (B)
 functions.
 </p>
@@ -403,7 +390,7 @@ be fitted using <code>ssdtools</code> by supplying the string
 <code>lnorm</code> to the <code>dists</code> argument in the
 <code>ssd_fit_dists</code> call.</p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-6-1.png" alt="A two panel plot showing several realisations of the log logistic probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="A two panel plot showing several realisations of the log logistic probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample Log logistic probability density (A) and cumulative probability
 (B) functions.
 </p>
@@ -437,7 +424,7 @@ and 2) it has wider tails.</p>
 supplying the string “gamma” to the <em>dists</em> argument in the
 <em>ssd_fit_dists</em> call.</p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-7-1.png" alt="A two panel plot showing several realisations of the Gamma density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="A two panel plot showing several realisations of the Gamma density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample gamma probability density (A) and cumulative probability (B)
 functions.
 </p>
@@ -459,7 +446,7 @@ call. The two-parameter log-gumbel distribution has the following
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-8-1.png" alt="A two panel plot showing several realisations of the log Gumbel probability density function on the left panel and the cumulative density function of distribution on the right panel. The log Gumbel is also known as the inverse Weibull distribution." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="A two panel plot showing several realisations of the log Gumbel probability density function on the left panel and the cumulative density function of distribution on the right panel. The log Gumbel is also known as the inverse Weibull distribution." width="864"><p class="caption">
 Sample Log-Gumbel probability density (A) and cumulative probability (B)
 functions.
 </p>
@@ -494,7 +481,7 @@ giving:</p>
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-9-1.png" alt="A two panel plot showing several realisations of the Gompertz probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="A two panel plot showing several realisations of the Gompertz probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample Gompertz probability density (A) and cumulative probability (B)
 functions.
 </p>
@@ -528,7 +515,7 @@ distribution has the following <em>pdf</em> and <em>cdf</em>:</p>
 supplying the string <code>weibull</code> to the <code>dists</code>
 argument in the <code>ssd_fit_dists</code> call.</p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-10-1.png" alt="A two panel plot showing several realisations of the Weibull probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="A two panel plot showing several realisations of the Weibull probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample Weibull probability density (A) and cumulative probability (B)
 functions.
 </p>
@@ -641,13 +628,13 @@ Pareto distribution to your data - the parameter estimates are the
 so for the <em>inverse Pareto</em> distribution since it is bounded from
 <em>above</em>.</p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-11-1.png" alt="A two panel plot showing several realisations of the North American Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="A two panel plot showing several realisations of the North American Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample North American Pareto probability density (A) and cumulative
 probability (B) functions.
 </p>
 </div>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-12-1.png" alt="A two panel plot showing several realisations of the North American inverse Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="A two panel plot showing several realisations of the North American inverse Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample North American inverse Pareto probability density (A) and
 cumulative probability (B) functions.
 </p>
@@ -675,13 +662,13 @@ example, the <code>R</code>package <code>extraDistr</code> has North
 American versions, while the <code>actuar</code> package has European
 versions.</p>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-13-1.png" alt="A two panel plot showing several realisations of the European Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="A two panel plot showing several realisations of the European Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample European Pareto probability density (A) and cumulative
 probability (B) functions.
 </p>
 </div>
 <div class="figure" style="text-align: center">
-<img src="distributions_files/figure-html/unnamed-chunk-14-1.png" alt="A two panel plot showing several realisations of the European inverse Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
+<img src="distributions_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="A two panel plot showing several realisations of the European inverse Pareto probability density function on the left panel and the cumulative density function of distribution on the right panel." width="864"><p class="caption">
 Sample European inverse Pareto probability density (A) and cumulative
 probability (B) functions.
 </p>
@@ -830,7 +817,7 @@ License</a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

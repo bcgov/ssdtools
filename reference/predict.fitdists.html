@@ -9,7 +9,7 @@ all hazard concentrations from 1 to 99%."><meta property="og:image" content="htt
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +32,7 @@ all hazard concentrations from 1 to 99%."><meta property="og:image" content="htt
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Predict Hazard Concentrations of fitdists Object</h1>
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/v2.4.0/R/predict.R" class="external-link"><code>R/predict.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/R/predict.R" class="external-link"><code>R/predict.R</code></a></small>
       <div class="d-none name"><code>predict.fitdists.Rd</code></div>
     </div>
 
@@ -116,17 +116,22 @@ or to use the geometric mean instead (<code>est_method = 'geometric'</code>).</p
 <dt id="arg-ci-method">ci_method<a class="anchor" aria-label="anchor" href="#arg-ci-method"></a></dt>
 <dd><p>A string specifying which method to use for estimating
 the standard error and confidence limits from the bootstrap samples.
-Possible values include <code>ci_method = "multi_fixed"</code> and  <code>ci_method = "multi_free"</code>
-which generate the bootstrap samples using the model-averaged cumulative distribution function
-but differ in whether the model weights are fixed at the values for the original dataset
-or re-estimated for each bootstrap sample dataset.
-The value <code>ci_method = "weighted_samples"</code> takes bootstrap samples
+The default and recommended value is still <code>ci_method = "weighted_samples"</code>
+which takes bootstrap samples
 from each distribution proportional to its AICc based weights and
 calculates the confidence limits (and SE) from this single set.
-The value <code>ci_method = "MACL"</code> (was <code>ci_method = "weighted_arithmetic"</code> but
-has been soft-deprecated) which is only included for
-historical reasons takes the weighted arithmetic mean of the confidence
-limits.</p></dd>
+<code>ci_method = "multi_fixed"</code> and  <code>ci_method = "multi_free"</code>
+generate the bootstrap samples using the model-averaged cumulative distribution function
+but differ in whether the model weights are fixed at the values for the original dataset
+or re-estimated for each bootstrap sample dataset.
+The value <code>ci_method = "MACL"</code> (was <code>ci_method = "weighted_arithmetic"</code>), which is only included for
+historical reasons, takes the weighted arithmetic mean of the confidence
+limits while <code>ci_method = GMACL</code> which
+takes the weighted geometric mean of the confidence limits was added for completeness but is also not recommended.
+Finally <code>ci_method = "arithmetic_samples"</code> and <code>ci_method = "geometric_samples"</code>
+take the weighted arithmetic or geometric mean of the values for
+each bootstrap iteration across all the distributions and then
+calculate the confidence limits (and SE) from the single set of samples.</p></dd>
 
 
 <dt id="arg-parametric">parametric<a class="anchor" aria-label="anchor" href="#arg-parametric"></a></dt>
@@ -182,7 +187,7 @@ Distributions with an absolute AIC difference greater than delta are excluded fr
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
