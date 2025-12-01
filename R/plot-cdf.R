@@ -35,15 +35,15 @@ ssd_plot_cdf <- function(x, ...) {
 #' fits <- ssd_fit_dists(ssddata::ccme_boron)
 #' ssd_plot_cdf(fits)
 #' ssd_plot_cdf(fits, average = NA)
-ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 9.21, ...) {
+ssd_plot_cdf.fitdists <- function(x, average = FALSE, est_method = "multi", delta = 9.21, ...) {
   chk_scalar(average)
   chk_logical(average)
 
   if (!is.na(average)) {
-    pred <- ssd_hc(x, proportion = 1:99 / 100, average = average, delta = delta)
+    pred <- ssd_hc(x, proportion = 1:99 / 100, average = average, est_method = est_method, delta = delta)
   } else {
-    pred <- ssd_hc(x, proportion = 1:99 / 100, average = FALSE, delta = delta)
-    pred_ave <- ssd_hc(x, proportion = 1:99 / 100, average = TRUE, delta = delta)
+    pred <- ssd_hc(x, proportion = 1:99 / 100, average = FALSE, est_method = est_method, delta = delta)
+    pred_ave <- ssd_hc(x, proportion = 1:99 / 100, average = TRUE, est_method = est_method, delta = delta)
     pred <- dplyr::bind_rows(pred, pred_ave)
   }
   data <- ssd_data(x)
