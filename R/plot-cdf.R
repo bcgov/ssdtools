@@ -52,11 +52,14 @@ ssd_plot_cdf.fitdists <- function(x, average = FALSE, delta = 9.21, ...) {
   linetype <- if (length(unique(pred$dist)) > 1) "dist" else NULL
   linecolor <- linetype
 
-  ssd_plot(
+  gp <- ssd_plot(
     data = data, pred = pred, left = cols$left, right = cols$right,
     ci = FALSE, hc = NULL, linetype = linetype, linecolor = linecolor, ...
-  ) +
-    labs(linetype = "Distribution", color = "Distribution")
+  )
+  if(!is.null(linetype)) {
+    gp <- gp +  labs(linetype = "Distribution", color = "Distribution")
+  }
+  gp
 }
 
 #' @describeIn ssd_plot_cdf Plot CDF for named list of distributional parameter values
