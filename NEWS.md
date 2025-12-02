@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.5.0.9002
+
+- Merge pull request #152 from poissonconsulting/joethorley/issue151.
+
+
 # ssdtools 2.5.0.9001
 
 - Add `est_method = "multi"` to `ssd_plot_cdf()`.
