@@ -145,6 +145,8 @@ ssd_hc.fitdists <- function(
 
     est_method <- if (multi_est) "multi" else "arithmetic"
   }
+  chk_string(est_method)
+  chk_subset(est_method, ssd_est_methods())
 
   chk_string(ci_method)
   if (ci_method == "weighted_arithmetic") {
@@ -152,6 +154,7 @@ ssd_hc.fitdists <- function(
 
     ci_method <- "MACL"
   }
+  chk_subset(ci_method, ssd_ci_methods())
 
   hcp <- hcp(
     x = x,
