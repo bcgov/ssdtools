@@ -8,7 +8,7 @@
 \usage{
 ssd_plot_cdf(x, ...)
 
-\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, delta = 9.21, ...)
+\method{ssd_plot_cdf}{fitdists}(x, average = FALSE, est_method = "multi", delta = 9.21, ...)
 
 \method{ssd_plot_cdf}{list}(x, ...)
 }
@@ -18,6 +18,13 @@ ssd_plot_cdf(x, ...)
 \item{...}{Additional arguments passed to \code{\link[=ssd_plot]{ssd_plot()}}.}
 
 \item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution or if NA provides model averaged and individual values.}
+
+\item{est_method}{A string specifying whether to estimate directly from
+the model-averaged cumulative distribution function (\code{est_method = 'multi'}) or
+to take the arithmetic mean of the estimates from the
+individual cumulative distribution functions weighted
+by the AICc derived weights  (\code{est_method = 'arithmetic'}) or
+or to use the geometric mean instead (\code{est_method = 'geometric'}).}
 
 \item{delta}{A non-negative number specifying the maximum absolute AIC difference cutoff.
 Distributions with an absolute AIC difference greater than delta are excluded from the calculations.}
