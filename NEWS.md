@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.5.0.9001
+
+- Add `est_method = "multi"` to `ssd_plot_cdf()`.
+
+
 # ssdtools 2.5.0.9000
 
 - No changes.
