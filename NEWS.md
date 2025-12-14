@@ -73,7 +73,7 @@
 - Deprecated `ssd_dists_shiny()`.
 - Deprecated `ties.method = "first"` argument in `ssd_ecd()`.
 
-- Soft-deprecated `est_method = "multi"` argument to `multi_est = TRUE` for `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Soft-deprecated `est_method = "multi"` argument for `multi_est = TRUE` for `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Soft-deprecated `proportion = FALSE` to `proportion = TRUE` argument to `ssd_hp()` which switches output from percentages to proportions.
 - Soft-deprecated `wt = FALSE` for `wt = TRUE` argument to `ssd_gof()` and `glance()` which replaces column `"weight"` with `"wt"` in output.
 - Soft-deprecated `ci_method = "weighted_arithmetic"` for `ci_method = "MACL"`.
