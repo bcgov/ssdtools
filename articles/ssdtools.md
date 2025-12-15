@@ -155,7 +155,7 @@ generic function (a wrapper on
 [`ssd_plot_cdf()`](https://bcgov.github.io/ssdtools/reference/ssd_plot_cdf.md)).
 As `autoplot` returns a `ggplot` object it can be modified prior to
 plotting. For more information see the [customising
-plots](https://bcgov.github.io/ssdtools/articles/A_model_averaging.html)
+plots](https://bcgov.github.io/ssdtools/articles/customising-plots.html)
 vignette.
 
 ``` r
