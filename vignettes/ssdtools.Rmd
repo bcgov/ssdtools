@@ -113,7 +113,7 @@ tidy(fits)
 
 It is generally more informative to plot the fits using the `autoplot` generic function (a wrapper on `ssd_plot_cdf()`).
 As `autoplot` returns a `ggplot` object it can be modified prior to plotting.
-For more information see the [customising plots](https://bcgov.github.io/ssdtools/articles/A_model_averaging.html) vignette.
+For more information see the [customising plots](https://bcgov.github.io/ssdtools/articles/customising-plots.html) vignette.
 
 ```{r, fig.alt="A plot of the CCME boron dataset with the gamma, log-logistic and log-normal distributions with a simple black and white background color scheme."}
 theme_set(theme_bw()) # set plot theme
