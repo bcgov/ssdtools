@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.5.0.9004
+
+- Added `rescale = FALSE` and `silent = FALSE` arguments to `ssd_fit_bcanz()`.
+
 # ssdtools 2.5.0.9003
 
 - Added `ci_methods` of `"MAW1"`, `"MAW2"`,`"GMAW1"` and `"GMAW2"`.
