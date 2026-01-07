@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.5.0.9005
+
+- Changed `min_pboot = 0.95` to `min_pboot = 0.8` to be consistent with shinyssdtools.
+
+- Added `proportion = c(0.01, 0.05, 0.1, 0.2)` to `ssd_hc_bcanz()` and `average = TRUE` and `ci = FALSE` arguments to `ssd_hc_bcanz()` and `ssd_hp_bcanz()`.
+
+
 # ssdtools 2.5.0.9004
 
 - Added `rescale = FALSE` and `silent = FALSE` arguments to `ssd_fit_bcanz()`.
