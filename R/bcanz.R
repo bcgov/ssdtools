@@ -93,7 +93,7 @@ ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz(), r
 #' @examples
 #' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 #' ssd_hc_bcanz(fits, nboot = 100)
-ssd_hc_bcanz <- function(x, proportion = c(0.01, 0.05, 0.1, 0.2), ..., average = TRUE, ci = FALSE, nboot = 10000, min_pboot = 0.95) {
+ssd_hc_bcanz <- function(x, proportion = c(0.01, 0.05, 0.1, 0.2), ..., average = TRUE, ci = FALSE, nboot = 10000, min_pboot = 0.8) {
   chk_unused(...)
   ssd_hc(x,
     proportion = proportion,
@@ -127,7 +127,7 @@ ssd_hc_bcanz <- function(x, proportion = c(0.01, 0.05, 0.1, 0.2), ..., average =
 #' @examples
 #' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 #' ssd_hp_bcanz(fits, nboot = 100)
-ssd_hp_bcanz <- function(x, conc = 1, ..., average = TRUE, ci = FALSE, nboot = 10000, min_pboot = 0.95, proportion = FALSE) {
+ssd_hp_bcanz <- function(x, conc = 1, ..., average = TRUE, ci = FALSE, nboot = 10000, min_pboot = 0.8, proportion = FALSE) {
   chk_unused(...)
 
   if (missing(proportion) || isFALSE(proportion)) {

@@ -20,7 +20,7 @@ ssd_hc(x, ...)
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  min_pboot = 0.95,
+  min_pboot = 0.8,
   multi_est = deprecated(),
   est_method = "multi",
   ci_method = "weighted_samples",
@@ -39,7 +39,7 @@ ssd_hc(x, ...)
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  min_pboot = 0.95,
+  min_pboot = 0.8,
   parametric = FALSE,
   samples = FALSE,
   save_to = NULL

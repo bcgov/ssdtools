@@ -11,7 +11,7 @@ ssd_hc_bcanz(
   average = TRUE,
   ci = FALSE,
   nboot = 10000,
-  min_pboot = 0.95
+  min_pboot = 0.8
 )
 }
 \arguments{
