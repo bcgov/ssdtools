@@ -1,5 +1,13 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.6.0
+
+- Added `ci_methods` of `"MAW1"`, `"MAW2"`,`"GMAW1"` and `"GMAW2"` to `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Added `rescale = FALSE` and `silent = FALSE` arguments to `ssd_fit_bcanz()`.
+- Added `proportion = c(0.01, 0.05, 0.1, 0.2)` to `ssd_hc_bcanz()` and `average = TRUE` and `ci = FALSE` arguments to `ssd_hc_bcanz()` and `ssd_hp_bcanz()`.
+- Added `est_method = "multi"` to `ssd_plot_cdf()`.
+- Changed `min_pboot = 0.95` to `min_pboot = 0.8` to be consistent with shinyssdtools.
+
 # ssdtools 2.5.0
 
 - Added the following confidence interval methods to `ssd_hc()`, `ssd_hp()` and `predict()`:
@@ -53,7 +61,7 @@
 - Deprecated `ssd_dists_shiny()`.
 - Deprecated `ties.method = "first"` argument in `ssd_ecd()`.
 
-- Soft-deprecated `est_method = "multi"` argument to `multi_est = TRUE` for `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Soft-deprecated `est_method = "multi"` argument for `multi_est = TRUE` for `ssd_hc()`, `ssd_hp()` and `predict()`.
 - Soft-deprecated `proportion = FALSE` to `proportion = TRUE` argument to `ssd_hp()` which switches output from percentages to proportions.
 - Soft-deprecated `wt = FALSE` for `wt = TRUE` argument to `ssd_gof()` and `glance()` which replaces column `"weight"` with `"wt"` in output.
 - Soft-deprecated `ci_method = "weighted_arithmetic"` for `ci_method = "MACL"`.
