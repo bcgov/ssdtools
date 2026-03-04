@@ -21,6 +21,7 @@ test_that("ssd_plot_cdf", {
   expect_snapshot_plot(ssd_plot_cdf(fits), "fits")
   expect_snapshot_plot(ssd_plot_cdf(fits, average = TRUE), "fits_average")
   expect_snapshot_plot(ssd_plot_cdf(fits, average = NA), "fits_average_na")
+  expect_snapshot_plot(ssd_plot_cdf(fits, average = TRUE, est_method = "geometric"), "fits_average_est_method")
 })
 
 test_that("ssd_plot_cdf deals with rescaled data", {

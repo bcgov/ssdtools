@@ -4,7 +4,14 @@
 \alias{ssd_fit_bcanz}
 \title{Fit BCANZ Distributions}
 \usage{
-ssd_fit_bcanz(data, left = "Conc", ..., dists = ssd_dists_bcanz())
+ssd_fit_bcanz(
+  data,
+  left = "Conc",
+  ...,
+  dists = ssd_dists_bcanz(),
+  rescale = FALSE,
+  silent = FALSE
+)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -14,6 +21,10 @@ ssd_fit_bcanz(data, left = "Conc", ..., dists = ssd_dists_bcanz())
 \item{...}{Unused.}
 
 \item{dists}{A character vector of the distribution names.}
+
+\item{rescale}{A flag specifying whether to leave the values unchanged (FALSE) or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values (TRUE).}
+
+\item{silent}{A flag indicating whether fits should fail silently.}
 }
 \value{
 An object of class fitdists.

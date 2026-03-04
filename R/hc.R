@@ -115,7 +115,7 @@ ssd_hc.fitdists <- function(
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
-    min_pboot = 0.95,
+    min_pboot = 0.8,
     multi_est = deprecated(),
     est_method = "multi",
     ci_method = "weighted_samples",
@@ -145,6 +145,8 @@ ssd_hc.fitdists <- function(
 
     est_method <- if (multi_est) "multi" else "arithmetic"
   }
+  chk_string(est_method)
+  chk_subset(est_method, ssd_est_methods())
 
   chk_string(ci_method)
   if (ci_method == "weighted_arithmetic") {
@@ -152,6 +154,7 @@ ssd_hc.fitdists <- function(
 
     ci_method <- "MACL"
   }
+  chk_subset(ci_method, ssd_ci_methods())
 
   hcp <- hcp(
     x = x,
@@ -189,7 +192,7 @@ ssd_hc.fitburrlioz <- function(
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
-    min_pboot = 0.95,
+    min_pboot = 0.8,
     parametric = FALSE,
     samples = FALSE,
     save_to = NULL) {

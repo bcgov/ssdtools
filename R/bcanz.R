@@ -45,26 +45,27 @@ ssd_dists_bcanz <- function(npars = c(2L, 5L)) {
 #' BC, Canada, Australia and New Zealand for official guidelines.
 #'
 #' @inheritParams params
+#' @param rescale A flag specifying whether to leave the values unchanged (FALSE) or to rescale concentration values by dividing by the geometric mean of the minimum and maximum positive finite values (TRUE).
 #' @return An object of class fitdists.
 #' @seealso [`ssd_fit_dists()`]
 #' @family BCANZ
 #' @export
 #' @examples
 #' ssd_fit_bcanz(ssddata::ccme_boron)
-ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz()) {
+ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz(), rescale = FALSE, silent = FALSE) {
   chk_data(data)
   chk_unused(...)
   chk_subset(dists, ssd_dists_bcanz())
+  chk_flag(rescale)
+  chk_flag(silent)
 
-  ## all arguments manually specified to ensure robust to
-  ## changes in default values in ssd_fit_dists()
   ssd_fit_dists(data,
     left = left,
     right = left,
     weight = NULL,
     dists = dists,
     nrow = 6L,
-    rescale = FALSE,
+    rescale = rescale,
     reweight = FALSE,
     computable = FALSE,
     at_boundary_ok = TRUE,
@@ -73,7 +74,7 @@ ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz()) {
     range_shape1 = c(0.05, 20),
     range_shape2 = c(0.05, 20),
     control = list(),
-    silent = FALSE
+    silent = silent
   )
 }
 
@@ -92,12 +93,12 @@ ssd_fit_bcanz <- function(data, left = "Conc", ..., dists = ssd_dists_bcanz()) {
 #' @examples
 #' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 #' ssd_hc_bcanz(fits, nboot = 100)
-ssd_hc_bcanz <- function(x, ..., nboot = 10000, min_pboot = 0.95) {
+ssd_hc_bcanz <- function(x, proportion = c(0.01, 0.05, 0.1, 0.2), ..., average = TRUE, ci = FALSE, nboot = 10000, min_pboot = 0.8) {
   chk_unused(...)
   ssd_hc(x,
-    proportion = c(0.01, 0.05, 0.1, 0.2),
-    average = TRUE,
-    ci = TRUE,
+    proportion = proportion,
+    average = average,
+    ci = ci,
     level = 0.95,
     nboot = nboot,
     min_pboot = min_pboot,
@@ -126,7 +127,7 @@ ssd_hc_bcanz <- function(x, ..., nboot = 10000, min_pboot = 0.95) {
 #' @examples
 #' fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 #' ssd_hp_bcanz(fits, nboot = 100)
-ssd_hp_bcanz <- function(x, conc = 1, ..., nboot = 10000, min_pboot = 0.95, proportion = FALSE) {
+ssd_hp_bcanz <- function(x, conc = 1, ..., average = TRUE, ci = FALSE, nboot = 10000, min_pboot = 0.8, proportion = FALSE) {
   chk_unused(...)
 
   if (missing(proportion) || isFALSE(proportion)) {
@@ -139,8 +140,8 @@ ssd_hp_bcanz <- function(x, conc = 1, ..., nboot = 10000, min_pboot = 0.95, prop
 
   ssd_hp(x,
     conc = conc,
-    average = TRUE,
-    ci = TRUE,
+    average = average,
+    ci = ci,
     level = 0.95,
     nboot = nboot,
     min_pboot = min_pboot,

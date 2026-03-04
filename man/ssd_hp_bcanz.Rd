@@ -8,8 +8,10 @@ ssd_hp_bcanz(
   x,
   conc = 1,
   ...,
+  average = TRUE,
+  ci = FALSE,
   nboot = 10000,
-  min_pboot = 0.95,
+  min_pboot = 0.8,
   proportion = FALSE
 )
 }
@@ -19,6 +21,10 @@ ssd_hp_bcanz(
 \item{conc}{A numeric vector of concentrations to calculate the hazard proportions for.}
 
 \item{...}{Unused.}
+
+\item{average}{A flag specifying whether to provide model averaged values as opposed to a value for each distribution.}
+
+\item{ci}{A flag specifying whether to estimate confidence intervals (by bootstrapping).}
 
 \item{nboot}{A count of the number of bootstrap samples to use to estimate the confidence limits. A value of 10,000 is recommended for official guidelines.}
 

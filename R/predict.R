@@ -40,7 +40,7 @@ predict.fitdists <- function(
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
-    min_pboot = 0.95,
+    min_pboot = 0.8,
     est_method = "multi",
     ci_method = "weighted_samples",
     parametric = TRUE,
@@ -97,7 +97,7 @@ predict.fitburrlioz <- function(
     ci = FALSE,
     level = 0.95,
     nboot = 1000,
-    min_pboot = 0.95,
+    min_pboot = 0.8,
     parametric = TRUE) {
   chk_unused(...)
 

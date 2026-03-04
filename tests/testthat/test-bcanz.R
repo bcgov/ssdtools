@@ -28,9 +28,9 @@ test_that("ssd_dists_bcanz works", {
 test_that("ssd_dists_bcanz works", {
   fit <- ssd_fit_bcanz(data = ssddata::ccme_boron)
   withr::with_seed(50, {
-    hc <- ssd_hc_bcanz(fit, nboot = 10)
+    hc <- ssd_hc_bcanz(fit)
     lifecycle::expect_deprecated(
-      hp <- ssd_hp_bcanz(fit, nboot = 10),
+      hp <- ssd_hp_bcanz(fit),
       "ssd_hp\\(proportion = FALSE\\) was deprecated"
     )
   })
@@ -41,7 +41,7 @@ test_that("ssd_dists_bcanz works", {
 test_that("ssd_dists_bcanz proportion = TRUE", {
   fit <- ssd_fit_bcanz(data = ssddata::ccme_boron)
   withr::with_seed(50, {
-    hp <- ssd_hp_bcanz(fit, nboot = 10, proportion = TRUE)
+    hp <- ssd_hp_bcanz(fit, proportion = TRUE)
   })
   expect_snapshot_data(hp, "hp_chloride_proportion")
 })
