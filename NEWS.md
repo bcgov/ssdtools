@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.6.0
+
+- Merge branch 'dev' into rferror.
+
+
 # ssdtools 2.5.0.9005
 
 - Changed `min_pboot = 0.95` to `min_pboot = 0.8` to be consistent with shinyssdtools.
