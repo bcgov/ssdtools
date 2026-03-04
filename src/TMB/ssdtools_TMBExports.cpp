@@ -55,7 +55,7 @@ Type objective_function<Type>::operator() () {
   } else if(model == "ll_weibull") {
     return ll_weibull(this);
   } else {
-    ## brackets on Rf_error necessary to protect it
+// brackets on Rf_error necessary to protect it https://github.com/bcgov/ssdtools/issues/467
     (Rf_error)("Unknown model.");
   }
   return 0;
