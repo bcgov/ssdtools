@@ -6,7 +6,14 @@ New Zealand for official guidelines.
 ## Usage
 
 ``` r
-ssd_fit_bcanz(data, left = "Conc", ..., dists = ssd_dists_bcanz())
+ssd_fit_bcanz(
+  data,
+  left = "Conc",
+  ...,
+  dists = ssd_dists_bcanz(),
+  rescale = FALSE,
+  silent = FALSE
+)
 ```
 
 ## Arguments
@@ -26,6 +33,16 @@ ssd_fit_bcanz(data, left = "Conc", ..., dists = ssd_dists_bcanz())
 - dists:
 
   A character vector of the distribution names.
+
+- rescale:
+
+  A flag specifying whether to leave the values unchanged (FALSE) or to
+  rescale concentration values by dividing by the geometric mean of the
+  minimum and maximum positive finite values (TRUE).
+
+- silent:
+
+  A flag indicating whether fits should fail silently.
 
 ## Value
 

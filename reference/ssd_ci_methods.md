@@ -18,7 +18,8 @@ A character vector of the available methods.
 
 ``` r
 ssd_ci_methods()
-#> [1] "GMACL"              "MACL"               "arithmetic_samples"
-#> [4] "geometric_samples"  "multi_fixed"        "multi_free"        
-#> [7] "weighted_samples"  
+#>  [1] "GMACL"              "GMAW1"              "GMAW2"             
+#>  [4] "MACL"               "MAW1"               "MAW2"              
+#>  [7] "arithmetic_samples" "geometric_samples"  "multi_fixed"       
+#> [10] "multi_free"         "weighted_samples"  
 ```

@@ -8,7 +8,15 @@ minutes to run with recommended 10,000 iterations.
 ## Usage
 
 ``` r
-ssd_hc_bcanz(x, ..., nboot = 10000, min_pboot = 0.95)
+ssd_hc_bcanz(
+  x,
+  proportion = c(0.01, 0.05, 0.1, 0.2),
+  ...,
+  average = TRUE,
+  ci = FALSE,
+  nboot = 10000,
+  min_pboot = 0.8
+)
 ```
 
 ## Arguments
@@ -17,9 +25,24 @@ ssd_hc_bcanz(x, ..., nboot = 10000, min_pboot = 0.95)
 
   The object.
 
+- proportion:
+
+  A numeric vector of proportion values to estimate hazard
+  concentrations for.
+
 - ...:
 
   Unused.
+
+- average:
+
+  A flag specifying whether to provide model averaged values as opposed
+  to a value for each distribution.
+
+- ci:
+
+  A flag specifying whether to estimate confidence intervals (by
+  bootstrapping).
 
 - nboot:
 
@@ -51,12 +74,12 @@ Other BCANZ:
 fits <- ssd_fit_bcanz(ssddata::ccme_boron)
 ssd_hc_bcanz(fits, nboot = 100)
 #> # A tibble: 4 × 15
-#>   dist    proportion   est    se    lcl   ucl    wt level est_method ci_method  
-#>   <chr>        <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <chr>      <chr>      
-#> 1 average       0.01 0.267 0.322 0.0466  1.04     1  0.95 multi      weighted_s…
-#> 2 average       0.05 1.26  0.681 0.424   2.87     1  0.95 multi      weighted_s…
-#> 3 average       0.1  2.38  1.04  1.03    4.59     1  0.95 multi      weighted_s…
-#> 4 average       0.2  4.81  1.71  2.60    8.72     1  0.95 multi      weighted_s…
-#> # ℹ 5 more variables: boot_method <chr>, nboot <dbl>, pboot <dbl>,
+#>   dist    proportion   est    se   lcl   ucl    wt level est_method ci_method   
+#>   <chr>        <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <chr>       
+#> 1 average       0.01 0.267    NA    NA    NA     1  0.95 multi      weighted_sa…
+#> 2 average       0.05 1.26     NA    NA    NA     1  0.95 multi      weighted_sa…
+#> 3 average       0.1  2.38     NA    NA    NA     1  0.95 multi      weighted_sa…
+#> 4 average       0.2  4.81     NA    NA    NA     1  0.95 multi      weighted_sa…
+#> # ℹ 5 more variables: boot_method <chr>, nboot <int>, pboot <dbl>,
 #> #   dists <list>, samples <list>
 ```

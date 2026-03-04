@@ -16,7 +16,7 @@ predict(
   ci = FALSE,
   level = 0.95,
   nboot = 1000,
-  min_pboot = 0.95,
+  min_pboot = 0.8,
   parametric = TRUE
 )
 ```

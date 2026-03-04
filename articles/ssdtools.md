@@ -182,7 +182,7 @@ ssd_gof(fits)
 #> ℹ Please use ssd_gof(wt = TRUE) instead.
 #> ℹ Please set the `wt` argument to `ssd_gof()` to be TRUE which will rename the
 #>   'weight' column to 'wt' and then update your downstream code accordingly.
-#> This warning is displayed once every 8 hours.
+#> This warning is displayed once per session.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 #> generated.
 #> # A tibble: 3 × 14
@@ -344,7 +344,7 @@ withr::with_seed(99, {
 #> ℹ Please set the `proportion` argument to `ssd_hp()` to be TRUE which will
 #>   cause it to return hazard proportions instead of percentages then update your
 #>   downstream code accordingly.
-#> This warning is displayed once every 8 hours.
+#> This warning is displayed once per session.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 #> generated.
 #> # A tibble: 1 × 15

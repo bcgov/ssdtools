@@ -15,7 +15,7 @@ For more information see the inverse function ssd_hc()."><meta property="og:imag
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@ For more information see the inverse function <code><a href="ssd_hc.html">ssd_hc
 <span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span>  min_pboot <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  min_pboot <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>  multi_est <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  est_method <span class="op">=</span> <span class="st">"multi"</span>,</span>
 <span>  ci_method <span class="op">=</span> <span class="st">"weighted_samples"</span>,</span>
@@ -83,7 +83,7 @@ For more information see the inverse function <code><a href="ssd_hc.html">ssd_hc
 <span>  ci <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  nboot <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span>  min_pboot <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  min_pboot <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>  parametric <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  proportion <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  samples <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -161,6 +161,13 @@ The value <code>ci_method = "MACL"</code> (was <code>ci_method = "weighted_arith
 historical reasons, takes the weighted arithmetic mean of the confidence
 limits while <code>ci_method = GMACL</code> which
 takes the weighted geometric mean of the confidence limits was added for completeness but is also not recommended.
+The values <code>ci_method = "MAW1"</code> and <code>ci_method = "MAW2"</code>
+use the two alternative equations of Burnham and Anderson (2002) to
+model average the weighted standard errors and then calculate the confidence
+limits using the Wald approach.
+The values <code>ci_method = "GMAW1"</code> and <code>ci_method = "GMAW2"</code>
+use the same equations as the previous two methods but
+model average the weighted standard errors on the geometric scale.
 Finally <code>ci_method = "arithmetic_samples"</code> and <code>ci_method = "geometric_samples"</code>
 take the weighted arithmetic or geometric mean of the values for
 each bootstrap iteration across all the distributions and then

@@ -1,5 +1,24 @@
 # Changelog
 
+## ssdtools 2.6.0
+
+- Added `ci_methods` of `"MAW1"`, `"MAW2"`,`"GMAW1"` and `"GMAW2"` to
+  [`ssd_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_hc.md),
+  [`ssd_hp()`](https://bcgov.github.io/ssdtools/reference/ssd_hp.md) and
+  [`predict()`](https://rdrr.io/r/stats/predict.html).
+- Added `rescale = FALSE` and `silent = FALSE` arguments to
+  [`ssd_fit_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_bcanz.md).
+- Added `proportion = c(0.01, 0.05, 0.1, 0.2)` to
+  [`ssd_hc_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_hc_bcanz.md)
+  and `average = TRUE` and `ci = FALSE` arguments to
+  [`ssd_hc_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_hc_bcanz.md)
+  and
+  [`ssd_hp_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_hp_bcanz.md).
+- Added `est_method = "multi"` to
+  [`ssd_plot_cdf()`](https://bcgov.github.io/ssdtools/reference/ssd_plot_cdf.md).
+- Changed `min_pboot = 0.95` to `min_pboot = 0.8` to be consistent with
+  shinyssdtools.
+
 ## ssdtools 2.5.0
 
 CRAN release: 2025-12-01
@@ -108,7 +127,7 @@ CRAN release: 2025-09-12
 - Deprecated `ties.method = "first"` argument in
   [`ssd_ecd()`](https://bcgov.github.io/ssdtools/reference/ssd_ecd.md).
 
-- Soft-deprecated `est_method = "multi"` argument to `multi_est = TRUE`
+- Soft-deprecated `est_method = "multi"` argument for `multi_est = TRUE`
   for
   [`ssd_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_hc.md),
   [`ssd_hp()`](https://bcgov.github.io/ssdtools/reference/ssd_hp.md) and

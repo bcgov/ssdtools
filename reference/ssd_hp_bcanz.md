@@ -12,8 +12,10 @@ ssd_hp_bcanz(
   x,
   conc = 1,
   ...,
+  average = TRUE,
+  ci = FALSE,
   nboot = 10000,
-  min_pboot = 0.95,
+  min_pboot = 0.8,
   proportion = FALSE
 )
 ```
@@ -32,6 +34,16 @@ ssd_hp_bcanz(
 - ...:
 
   Unused.
+
+- average:
+
+  A flag specifying whether to provide model averaged values as opposed
+  to a value for each distribution.
+
+- ci:
+
+  A flag specifying whether to estimate confidence intervals (by
+  bootstrapping).
 
 - nboot:
 
@@ -75,7 +87,7 @@ ssd_hp_bcanz(fits, nboot = 100)
 #> # A tibble: 1 × 15
 #>   dist     conc   est    se   lcl   ucl    wt level est_method ci_method       
 #>   <chr>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>      <chr>           
-#> 1 average     1  3.90  2.21 0.123  7.83     1  0.95 multi      weighted_samples
-#> # ℹ 5 more variables: boot_method <chr>, nboot <dbl>, pboot <dbl>,
+#> 1 average     1  3.90    NA    NA    NA     1  0.95 multi      weighted_samples
+#> # ℹ 5 more variables: boot_method <chr>, nboot <int>, pboot <dbl>,
 #> #   dists <list>, samples <list>
 ```

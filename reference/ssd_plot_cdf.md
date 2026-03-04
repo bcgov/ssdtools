@@ -8,7 +8,7 @@ Generic function to plots the cumulative distribution function (CDF).
 ssd_plot_cdf(x, ...)
 
 # S3 method for class 'fitdists'
-ssd_plot_cdf(x, average = FALSE, delta = 9.21, ...)
+ssd_plot_cdf(x, average = FALSE, est_method = "multi", delta = 9.21, ...)
 
 # S3 method for class 'list'
 ssd_plot_cdf(x, ...)
@@ -30,6 +30,15 @@ ssd_plot_cdf(x, ...)
   A flag specifying whether to provide model averaged values as opposed
   to a value for each distribution or if NA provides model averaged and
   individual values.
+
+- est_method:
+
+  A string specifying whether to estimate directly from the
+  model-averaged cumulative distribution function
+  (`est_method = 'multi'`) or to take the arithmetic mean of the
+  estimates from the individual cumulative distribution functions
+  weighted by the AICc derived weights (`est_method = 'arithmetic'`) or
+  or to use the geometric mean instead (`est_method = 'geometric'`).
 
 - delta:
 
