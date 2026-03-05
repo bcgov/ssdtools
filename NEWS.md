@@ -1,12 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.6.0.9000
+
+- Switching to development version.
+
+
 # ssdtools 2.6.0
 
-- Added `ci_methods` of `"MAW1"`, `"MAW2"`,`"GMAW1"` and `"GMAW2"` to `ssd_hc()`, `ssd_hp()` and `predict()`.
+- Changed from `min_pboot = 0.95` to `min_pboot = 0.8` to be consistent with shinyssdtools.
 - Added `rescale = FALSE` and `silent = FALSE` arguments to `ssd_fit_bcanz()`.
 - Added `proportion = c(0.01, 0.05, 0.1, 0.2)` to `ssd_hc_bcanz()` and `average = TRUE` and `ci = FALSE` arguments to `ssd_hc_bcanz()` and `ssd_hp_bcanz()`.
 - Added `est_method = "multi"` to `ssd_plot_cdf()`.
-- Changed `min_pboot = 0.95` to `min_pboot = 0.8` to be consistent with shinyssdtools.
 
 # ssdtools 2.5.0
 

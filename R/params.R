@@ -45,13 +45,6 @@
 #' historical reasons, takes the weighted arithmetic mean of the confidence
 #' limits while `ci_method = GMACL` which
 #' takes the weighted geometric mean of the confidence limits was added for completeness but is also not recommended.
-#' The values `ci_method = "MAW1"` and `ci_method = "MAW2"`
-#' use the two alternative equations of Burnham and Anderson (2002) to 
-#' model average the weighted standard errors and then calculate the confidence
-#' limits using the Wald approach.
-#' The values `ci_method = "GMAW1"` and `ci_method = "GMAW2"`
-#' use the same equations as the previous two methods but 
-#' model average the weighted standard errors on the geometric scale.
 #' Finally `ci_method = "arithmetic_samples"` and `ci_method = "geometric_samples"`
 #' take the weighted arithmetic or geometric mean of the values for 
 #' each bootstrap iteration across all the distributions and then
