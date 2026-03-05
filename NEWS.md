@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.6.0.9000
+
+- Switching to development version.
+
+
 # ssdtools 2.6.0
 
 - Changed from `min_pboot = 0.95` to `min_pboot = 0.8` to be consistent with shinyssdtools.
