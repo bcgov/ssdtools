@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.4.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.6.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,8 +34,29 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.4.0.9000" id="ssdtools-2409000">ssdtools 2.4.0.9000<a class="anchor" aria-label="anchor" href="#ssdtools-2409000"></a></h2>
-<ul><li>Added following <code>ci_methods</code> to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>: <code>"GMACL"</code>, <code>"MAW1"</code>, <code>"MAW2"</code>, <code>"GMAW1"</code>, <code>"GMAW2"</code>, <code>"arithmetic_samples"</code> and <code>"geometric_samples"</code>.</li>
+<h2 class="pkg-version" data-toc-text="2.6.0.9000" id="ssdtools-2609000">ssdtools 2.6.0.9000<a class="anchor" aria-label="anchor" href="#ssdtools-2609000"></a></h2>
+<ul><li>Switching to development version.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.6.0" id="ssdtools-260">ssdtools 2.6.0<a class="anchor" aria-label="anchor" href="#ssdtools-260"></a></h2><p class="text-muted">CRAN release: 2026-03-05</p>
+<ul><li>Changed from <code>min_pboot = 0.95</code> to <code>min_pboot = 0.8</code> to be consistent with shinyssdtools.</li>
+<li>Added <code>rescale = FALSE</code> and <code>silent = FALSE</code> arguments to <code><a href="../reference/ssd_fit_bcanz.html">ssd_fit_bcanz()</a></code>.</li>
+<li>Added <code>proportion = c(0.01, 0.05, 0.1, 0.2)</code> to <code><a href="../reference/ssd_hc_bcanz.html">ssd_hc_bcanz()</a></code> and <code>average = TRUE</code> and <code>ci = FALSE</code> arguments to <code><a href="../reference/ssd_hc_bcanz.html">ssd_hc_bcanz()</a></code> and <code><a href="../reference/ssd_hp_bcanz.html">ssd_hp_bcanz()</a></code>.</li>
+<li>Added <code>est_method = "multi"</code> to <code><a href="../reference/ssd_plot_cdf.html">ssd_plot_cdf()</a></code>.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.5.0" id="ssdtools-250">ssdtools 2.5.0<a class="anchor" aria-label="anchor" href="#ssdtools-250"></a></h2><p class="text-muted">CRAN release: 2025-12-01</p>
+<ul><li>Added the following confidence interval methods to <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>:
+<ul><li>
+<code>"GMACL"</code>: weighted geometric mean of the confidence limits.</li>
+<li>
+<code>"arithmetic_samples"</code>: takes weighted arithmetic mean of the values for each bootstrap iteration across all the distributions and then calculates the confidence limits from the single set of samples.</li>
+<li>
+<code>"geometric_samples"</code>: takes weighted geometric mean of the values for each bootstrap iteration across all the distributions and then calculates the confidence limits from the single set of samples. The new confidence interval methods were added for research or completeness and the default recommended method is still <code>ci_method = "weighted_samples"</code>.</li>
+</ul></li>
+<li>Added <code>decimal.mark = getOption("OutDec", ".")</code> argument to plotting functions. (<a href="https://github.com/bcgov/ssdtools/issues/135" class="external-link">#135</a>).</li>
+<li>Allowed <code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> to use concentration as labels for shinyssdtools.</li>
+<li>Fixed documentation to indicate that default value of <code>at_boundary_ok = TRUE</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.4.0" id="ssdtools-240">ssdtools 2.4.0<a class="anchor" aria-label="anchor" href="#ssdtools-240"></a></h2><p class="text-muted">CRAN release: 2025-09-12</p>
@@ -80,7 +101,7 @@
 <h3 id="deprecated-2-4-0">Deprecated<a class="anchor" aria-label="anchor" href="#deprecated-2-4-0"></a></h3>
 <ul><li><p>Deprecated <code><a href="../reference/ssd_dists_shiny.html">ssd_dists_shiny()</a></code>.</p></li>
 <li><p>Deprecated <code>ties.method = "first"</code> argument in <code><a href="../reference/ssd_ecd.html">ssd_ecd()</a></code>.</p></li>
-<li><p>Soft-deprecated <code>est_method = "multi"</code> argument to <code>multi_est = TRUE</code> for <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</p></li>
+<li><p>Soft-deprecated <code>est_method = "multi"</code> argument for <code>multi_est = TRUE</code> for <code><a href="../reference/ssd_hc.html">ssd_hc()</a></code>, <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>.</p></li>
 <li><p>Soft-deprecated <code>proportion = FALSE</code> to <code>proportion = TRUE</code> argument to <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> which switches output from percentages to proportions.</p></li>
 <li><p>Soft-deprecated <code>wt = FALSE</code> for <code>wt = TRUE</code> argument to <code><a href="../reference/ssd_gof.html">ssd_gof()</a></code> and <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> which replaces column <code>"weight"</code> with <code>"wt"</code> in output.</p></li>
 <li><p>Soft-deprecated <code>ci_method = "weighted_arithmetic"</code> for <code>ci_method = "MACL"</code>.</p></li>
@@ -594,7 +615,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
