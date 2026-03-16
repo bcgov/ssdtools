@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.6.0.9001
+
+- Update README with consultation process.
+
+
 # ssdtools 2.6.0.9000
 
 - Switching to development version.
