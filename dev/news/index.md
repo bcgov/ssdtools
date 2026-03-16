@@ -1,5 +1,9 @@
 # Changelog
 
+## ssdtools 2.6.0.9001
+
+- Update README with consultation process.
+
 ## ssdtools 2.6.0.9000
 
 - Switching to development version.

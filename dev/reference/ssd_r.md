@@ -409,7 +409,7 @@ hist(x, breaks = 100)
 # multi fitdists
 fit <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_rmulti_fitdists(2, fit)
-#> [1] 9.832527 3.215087
+#> [1] 35.95923  7.99105
 
 withr::with_seed(50, {
   x <- ssd_rweibull(10000)

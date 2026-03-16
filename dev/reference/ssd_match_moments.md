@@ -67,8 +67,8 @@ print(moments)
 #>     0.96875     0.52500 
 #> 
 #> $lnorm
-#>  meanlog    sdlog 
-#> 1.091455 1.004492 
+#>   meanlog     sdlog 
+#> 0.9812500 0.9515625 
 #> 
 #> $lnorm_lnorm
 #>  meanlog1    sdlog1  meanlog2    sdlog2      pmix 
@@ -85,7 +85,7 @@ ssd_hc(moments)
 #> 1 gamma             0.05 0.490    NA    NA    NA     1     0    NA
 #> 2 lgumbel           0.05 0.739    NA    NA    NA     1     0    NA
 #> 3 llogis            0.05 0.562    NA    NA    NA     1     0    NA
-#> 4 lnorm             0.05 0.571    NA    NA    NA     1     0    NA
+#> 4 lnorm             0.05 0.558    NA    NA    NA     1     0    NA
 #> 5 lnorm_lnorm       0.05 0.469    NA    NA    NA     1     0    NA
 #> 6 weibull           0.05 0.501    NA    NA    NA     1     0    NA
 ssd_plot_cdf(moments)
