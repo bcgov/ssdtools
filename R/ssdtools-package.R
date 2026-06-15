@@ -24,7 +24,6 @@ utils::globalVariables("where")
 ## usethis namespace: start
 #' @import chk ggplot2
 #' @import rlang
-#' @importFrom abind abind
 #' @importFrom furrr future_map furrr_options
 #' @importFrom generics augment glance tidy
 #' @importFrom ggplot2 autoplot sym

@@ -49,8 +49,8 @@ BugReports: https://github.com/bcgov/ssdtools/issues
 Depends:
     R (>= 4.1)
 Imports:
-    abind,
     chk,
+    dplyr,
     furrr,
     generics,
     ggplot2,
@@ -77,7 +77,6 @@ Imports:
 Suggests:
     actuar,
     covr,
-    dplyr,
     EnvStats,
     extraDistr,
     fitdistrplus,
@@ -87,7 +86,6 @@ Suggests:
     magrittr,
     mle.tools,
     patchwork,
-    reshape2,
     rmarkdown,
     testthat (>= 3.0.0),
     tidyr,
