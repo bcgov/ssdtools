@@ -1,5 +1,9 @@
 # Changelog
 
+## ssdtools 2.6.0.9002
+
+- Format repository R code using Air.
+
 ## ssdtools 2.6.0.9001
 
 - Update README with consultation process.

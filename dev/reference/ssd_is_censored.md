@@ -43,6 +43,7 @@ A flag indicating whether an object is censored.
 ## Examples
 
 ``` r
+
 ssd_is_censored(ssddata::ccme_boron)
 #> [1] FALSE
 ssd_is_censored(data.frame(Conc = 1, right = 2), right = "right")

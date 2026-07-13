@@ -5,22 +5,22 @@
 > Many authors have noted that there is no guiding theory in
 > ecotoxicology to justify any particular distributional form for the
 > SSD other than that its domain be restricted to the positive real line
-> (Newman et al. 2000), (Zajdlik 2005), (Chapman et al. 2007), (David R.
-> Fox 2016). Indeed, (Chapman et al. 2007) described the identification
-> of a suitable probability model as one of the most important and
-> difficult choices in the use of SSDs. Compounding this lack of clarity
-> about the functional form of the SSD is the omnipresent, and equally
-> vexatious issue of small sample size, meaning that any plausible
-> candidate model is unlikely to be rejected (D. R. Fox et al. 2021).
-> The ssdtools R package uses a model averaging procedure to avoid the
-> need to a-priori select a candidate distribution and instead uses a
-> measure of ‘fit’ for each model to compute weights to be applied to an
-> initial set of candidate distributions. The method, as applied in the
-> SSD context is described in detail in (D. R. Fox et al. 2021), and
-> potentially provides a level of flexibility and parsimony that is
-> difficult to achieve with a single SSD distribution.
+> (Newman et al. 2000), (Zajdlik 2005), (Chapman et al. 2007), (Fox
+> 2016). Indeed, (Chapman et al. 2007) described the identification of a
+> suitable probability model as one of the most important and difficult
+> choices in the use of SSDs. Compounding this lack of clarity about the
+> functional form of the SSD is the omnipresent, and equally vexatious
+> issue of small sample size, meaning that any plausible candidate model
+> is unlikely to be rejected (Fox et al. 2021). The ssdtools R package
+> uses a model averaging procedure to avoid the need to a-priori select
+> a candidate distribution and instead uses a measure of ‘fit’ for each
+> model to compute weights to be applied to an initial set of candidate
+> distributions. The method, as applied in the SSD context is described
+> in detail in (Fox et al. 2021), and potentially provides a level of
+> flexibility and parsimony that is difficult to achieve with a single
+> SSD distribution.
 
-(D. Fox et al. 2022)
+(Fox et al. 2022)
 
 ## Preliminaries
 
@@ -45,15 +45,18 @@ the benefits tend to outweigh this information loss. Indeed, much of
 ‘conventional’ statistical theory and practice is focused on the mean.
 Examples include T-tests, ANOVA, regression, and clustering. When we
 talk of an ‘average’ we are usually referring to the simple, *arithmetic
-mean*:$$\bar{X} = \frac{1}{n}\sum\limits_{i = 1}^{n}X_{i}$$ although we
-recognize there are other types of mean including the geometric mean,
-the harmonic mean and the weighted mean. The last of these is
-particularly pertinent to model averaging.
+mean*:
+``` math
+\bar{X}=\frac{1}{n}\sum\limits_{i=1}^{n}{{{X}_{i}}}
+```
+although we recognize there are other types of mean including the
+geometric mean, the harmonic mean and the weighted mean. The last of
+these is particularly pertinent to model averaging.
 
 ### Weighted Averages
 
 For the simple arithmetic mean, all of the individual values receive the
-same weighting - they each contribute $\frac{1}{n}$ to the summation.
+same weighting - they each contribute $`\frac{1}{n}`$ to the summation.
 While this is appropriate in many cases, it’s not useful when the
 components contribute to varying degrees. An example familiar to
 ecotoxicologists is that of a *time-varying* concentration as shown in
@@ -64,20 +67,26 @@ changing over time, with different time periods associated with
 different concentrations.](images/Figure1.jpg)  
 
 From the figure we see there are 5 concentrations going from left to to
-right: $\left\{ 0.25,0.95,0.25,0.12,0.5 \right\}$. If we were to take
+right: $`\left\{ 0.25,0.95,0.25,0.12,0.5 \right\}`$. If we were to take
 the simple arithmetic mean of these concentrations we get
-$\bar{X} = 0.414$. But this ignores the different *durations* of these 5
+$`\bar{X}=0.414`$. But this ignores the different *durations* of these 5
 concentrations. Of the 170 hours, 63 were at concentration 0.25, 25 at
 concentration 0.95, 23 at concentration 0.25, 23 at concentration 0.12,
 and 36 at concentration 0.50. So if we were to *weight* these
 concentrations by time have:  
-$${\bar{X}}_{TW} = \frac{(63 \cdot 0.25 + 25 \cdot 0.95 + 23 \cdot 0.25 + 23 \cdot 0.12 + 36 \cdot 0.50)}{(63 + 25 + 23 + 23 + 36)} = \frac{56.01}{170} = 0.33$$  
-So, our formula for a *weighted average*
-is:$$\bar{X} = \sum\limits_{i = 1}^{n}{w_{i}X_{i}}$$ with
-$0 \leq w_{i} \leq 1$ and $\sum\limits_{i = 1}^{n}{w_{i} = 1}$.  
+``` math
+{{{\bar{X}}}_{TW}}=\frac{\left( 63\cdot 0.25+25\cdot 0.95+23\cdot 0.25+23\cdot 0.12+36\cdot 0.50 \right)}{\left( 63+25+23+23+36 \right)}=\frac{56.01}{170}=0.33
+```
+  
+So, our formula for a *weighted average* is:
+``` math
+\bar{X}=\sum\limits_{i=1}^{n}{{{w}_{i}}{{X}_{i}}}
+```
+with $`0\le {{w}_{i}}\le 1`$ and
+$`\sum\limits_{i=1}^{n}{{{w}_{i}}=1}`$.  
 Note, the simple arithmetic mean is just a special case of the weighted
-mean with $\sum\limits_{i = 1}^{n}{w_{i} = \frac{1}{n}}$ ;
-$\forall i = 1,\ldots,n$
+mean with $`\sum\limits_{i=1}^{n}{{{w}_{i}}=\frac{1}{n}}`$ ;
+$`\forall i=1,\ldots ,n`$
 
 ## Model Averaging
 
@@ -137,6 +146,7 @@ What about estimation of an *HC20*? It’s a simple matter to work out the
 Thus we have:
 
 ``` r
+
 # Model 1 HC20
 cat("Model 1 HC20 =", qlnorm(0.2, -1.067, 0.414))
 #> Model 1 HC20 = 0.2428209
@@ -173,32 +183,45 @@ the mathematical explanation - skip ahead to the next section*).
 #### The fallacy of weighting individual *HCx* values
 
 The correct expression for a model-averaged SSD is:
-$$G(x) = \sum\limits_{i = 1}^{k}w_{i}F_{i}(x)$$ where $F_{i}( \cdot )$
-is the *i^(th)* component SSD (i.e. *cdf*) and *w_(i)* is the weight
-assigned to $F_{i}( \cdot )$.  
-Notice that the function $G(x)$ is a proper *cumulative distribution
-function* (*cdf*) which means for a given quantile, *x*, $G(x)$ returns
-the *cumulative probability*: $$P\lbrack X \leq x\rbrack$$
+``` math
+G\left( x \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}\left( x \right)
+```
+where $`{F_i}\left(  \cdot  \right)`$ is the *i^(th)* component SSD
+(i.e. *cdf*) and *w_(i)* is the weight assigned to
+$`{F_i}\left(  \cdot  \right)`$.  
+Notice that the function $`G\left( x \right)`$ is a proper *cumulative
+distribution function* (*cdf*) which means for a given quantile, *x*,
+$`G\left( x \right)`$ returns the *cumulative probability*:
+``` math
+P\left[ {X \leqslant x} \right]
+```
 
   
 Now, the *incorrect* approach takes a weighted sum of the component
 *inverse cdfs*, that is:
 
-$$H(p) = \sum\limits_{i = 1}^{k}w_{i}{F_{i}}^{- 1}(p)$$ where
-${F_{i}}^{- 1}( \cdot )$ is the *i^(th)* *inverse cdf*. Notice that
-$G_{i}( \cdot )$ is a function of a *quantile* and returns a
-**probability** while $H_{i}( \cdot )$ is a function of a *probability*
-and returns an **quantile**.
+``` math
+H\left( p \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}^{ - 1}\left( p \right)
+```
+where $`{F_i}^{ - 1}\left(  \cdot  \right)`$ is the *i^(th)* *inverse
+cdf*. Notice that $`{G_i}\left(  \cdot  \right)`$ is a function of a
+*quantile* and returns a **probability** while
+$`{H_i}\left(  \cdot  \right)`$ is a function of a *probability* and
+returns an **quantile**.
 
 Now, the *correct* method of determining the *HCx* is to work with the
-proper model-averaged *cdf* $G(x)$. This means finding the **inverse**
-function $G^{- 1}(p)$. We’ll address how we do this in a moment.
+proper model-averaged *cdf* $`G\left( x \right)`$. This means finding
+the **inverse** function $`{G^{ - 1}}\left( p \right)`$. We’ll address
+how we do this in a moment.
 
-The reason why $H(p)$ does **not** return the correct result is because
-of *the implicit assumption that the inverse of $G(x)$ is equivalent to
-$H(p)$.* This is akin to stating the inverse of a *sum* is equal to the
-sum of the inverses i.e.
-$$\sum\limits_{i = 1}^{n}\frac{1}{X_{i}} = \frac{1}{\sum\limits_{i = 1}^{n}X_{i}}{\mspace{6mu}\text{???}}$$
+The reason why $`H\left( p \right)`$ does **not** return the correct
+result is because of *the implicit assumption that the inverse of
+$`G\left( x \right)`$ is equivalent to $`H\left( p \right)`$.* This is
+akin to stating the inverse of a *sum* is equal to the sum of the
+inverses i.e.
+``` math
+\sum\limits_{i = 1}^n {\frac{1}{{{X_i}}}}  = \frac{1}{{\sum\limits_{i = 1}^n {{X_i}} }}{\text{  ???}}
+```
 
 ------------------------------------------------------------------------
 
@@ -207,18 +230,25 @@ where the above identity does in fact hold, but for that you need to use
 **complex numbers**.
 
 For example, consider two complex numbers
-$${\text{a =}\mspace{6mu}}\frac{(5 - i)}{2}{\mspace{6mu}\text{and}\mspace{6mu}}b = - 1.683 - 1.915i$$
+``` math
+{\text{a = }}\frac{{\left( {5 - i} \right)}}{2}{\text{   and     }}b =  - 1.683 - 1.915i
+```
 It can be shown that
-$$\frac{1}{a + b} = \frac{1}{a} + \frac{1}{b} = 0.126 + 0.372i$$
+``` math
+\frac{1}{{a + b}} = \frac{1}{a} + \frac{1}{b} = 0.126 + 0.372i
+```
 
 ------------------------------------------------------------------------
 
 Back to the issue at hand, and since we’re not dealing with complex
-numbers, it’s safe to say:$$G^{- 1}(p) \neq H(p)$$
+numbers, it’s safe to say:
+``` math
+{G^{ - 1}}\left( p \right) \ne H\left( p \right)
+```
 
-If you need a visual demonstration, we can plot $G(x)$ and the *inverse*
-of $H(p)$ both as functions of *x* (a quantile) for our two-component
-lognormal distribution above.
+If you need a visual demonstration, we can plot $`G\left( x \right)`$
+and the *inverse* of $`H\left( p \right)`$ both as functions of *x* (a
+quantile) for our two-component lognormal distribution above.
 
 ![The weighted average of the two lognormal distributions, as fitted to
 the example data, plotted as a line for the incorrect weighting method,
@@ -246,19 +276,23 @@ A proper *HCx* needs to satisfy what David Fox refers to as **the
 inversion principle**.
 
 More formally, the inversion principle states that an *HCx* (denoted as
-$\varphi_{x}$) **must** satisfy the following:
+$`{\varphi _x}`$) must satisfy the following:
 
-$$df\left( \varphi_{x} \right) = x\quad\quad and\quad\quad qf(x) = \varphi_{x}$$
+``` math
+df\left( {{\varphi _x}} \right) = x\quad \quad and\quad \quad qf\left( x \right) = {\varphi _x}
+```
 
-where $df( \cdot )$ is a model-averaged *distribution function*
-(i.e. SSD) and $qf( \cdot )$ is a model-averaged *quantile function*.
-For this equality to hold, it is necessary that $qf(p) = df^{- 1}(p)$.
+where $`df\left(  \cdot  \right)`$ is a model-averaged *distribution
+function* (i.e. SSD) and $`qf\left(  \cdot  \right)`$ is a
+model-averaged *quantile function*. For this equality to hold, it is
+necessary that $`qf\left( p \right) = d{f^{ - 1}}\left( p \right)`$.
 
   
-So, in our example above, the green curve was taken to be $qf(x)$ and
-this was used to derive $\varphi_{x}$ but the *fraction affected*
-$\left\{ = df\left( \varphi_{x} \right) \right\}$ at $\varphi_{x}$ is
-computed using the red curve.
+So, in our example above, the green curve was taken to be
+$`qf\left( x \right)`$ and this was used to derive $`{\varphi _x}`$ but
+the *fraction affected*
+$`\left\{ { = df\left( {{\varphi _x}} \right)} \right\}`$ at
+$`{\varphi _x}`$ is computed using the red curve.
 
 In `ssdtools` the following is a check that the inversion principle
 holds:
@@ -292,22 +326,31 @@ the same method as has been implemented in `ssdtools`.
 ### Computing the *HCx* in `R`/`ssdtools`
 
 Recall, our MA-SSD was given as
-$$G(x) = \sum\limits_{i = 1}^{k}w_{i}F_{i}(x)$$ and an *HCx* is obtained
-from the MA-SSD by essentially working ‘in reverse’ by starting at a
-value of $x$ on the **vertical** scale in the Figure above and following
-the → arrows and reading off the corresponding value on the horizontal
-scale.
+``` math
+G\left( x \right) = \sum\limits_{i = 1}^k {{w_i}} {F_i}\left( x \right)
+```
+and an *HCx* is obtained from the MA-SSD by essentially working ‘in
+reverse’ by starting at a value of $`x`$ on the **vertical** scale in
+the Figure above and following the → arrows and reading off the
+corresponding value on the horizontal scale.
 
 Obviously, we need to be able to ‘codify’ this process in `R` (or any
 other computer language).  
 Mathematically this is equivalent to seeking a solution to the following
-equation:$$x:G(x) = p$$ or, equivalently:$$x:G(x) - p = 0$$ for some
-fraction affected, $p$.
+equation:
+``` math
+{x:G\left( x \right) = p}
+```
+or, equivalently:
+``` math
+x:G\left( x \right) - p = 0
+```
+for some fraction affected, $`p`$.
 
 Finding the solution to this last equation is referred to as *finding
-the root(s)* of the function $G(x)$ or, as is made clear in the figure
-below, *finding the zero-crossing* of the function $G(x)$ for the case
-$p = 0.2$.
+the root(s)* of the function $`G\left( x \right)`$ or, as is made clear
+in the figure below, *finding the zero-crossing* of the function
+$`G\left( x \right)`$ for the case $`p=0.2`$.
 
 ![The weighted average of the two lognormal distributions, as fitted to
 the example data, plotted as a line for the correct weighting method
@@ -316,8 +359,8 @@ function.](images/uniroot.jpg)
 
   
 
-In `R` finding the roots of $x:G(x) - p = 0$ is achieved using the
-[`uniroot()`](https://rdrr.io/r/stats/uniroot.html) function.
+In `R` finding the roots of $`x:G\left( x \right) - p = 0`$ is achieved
+using the [`uniroot()`](https://rdrr.io/r/stats/uniroot.html) function.
 
 Help on the `uniroot` function can be found
 [here](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/uniroot.html)
@@ -349,6 +392,7 @@ test is a good choice and is readily performed using the
 in the `goftest` package in `R` as follows:
 
 ``` r
+
 dat <- data.frame(Conc = c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59))
 library(goftest)
 library(EnvStats) # this is required for the Pareto cdf (ppareto)
@@ -392,16 +436,16 @@ cvm.test(dat$Conc, null = "ppareto", location = 0.1800000, shape = 0.9566756, es
     data:  dat$Conc
     omega2max = 0.31391, p-value = 0.4015
 
-From this output and using a level of significance of $p = 0.05$, we see
-that none of the distributions is implausible. However, if *forced* to
-choose just one distribution, we would choose the *Pareto* distribution
-(smaller values of the `omega2max` statistic are better). However, this
-does not mean that the gamma and lognormal distributions are of no value
-in describing the data. We can see from the plot below, that in fact
-both the gamma and lognormal distributions do a reasonable job over the
-range of toxicity values. The use of the Pareto may be a questionable
-choice given it is truncated at 0.18 (which is the minimum value of our
-toxicity data).  
+From this output and using a level of significance of $`p = 0.05`$, we
+see that none of the distributions is implausible. However, if *forced*
+to choose just one distribution, we would choose the *Pareto*
+distribution (smaller values of the `omega2max` statistic are better).
+However, this does not mean that the gamma and lognormal distributions
+are of no value in describing the data. We can see from the plot below,
+that in fact both the gamma and lognormal distributions do a reasonable
+job over the range of toxicity values. The use of the Pareto may be a
+questionable choice given it is truncated at 0.18 (which is the minimum
+value of our toxicity data).  
 
 ![The example empirical cdf showing how the lognormal, gamma and Pareeto
 distributions fit these
@@ -418,15 +462,15 @@ statistical significance, a *p-value* is computed from the value of the
 relevant *test statistic* - in this case, the value of the `omega2max`
 test statistic. For this particular test, it’s a case of the *smaller*
 the better. From the output above we see that the `omega2max` values are
-$0.344$ for the gamma distribution, $0.328$ for the lognormal
-distribution, and $0.314$ for the Pareto distribution.
+$`0.344`$ for the gamma distribution, $`0.328`$ for the lognormal
+distribution, and $`0.314`$ for the Pareto distribution.
 
 We might somewhat naively compute the relative weights as:  
-$w_{1} = \frac{0.344^{- 1}}{\left( 0.344^{- 1} + 0.328^{- 1} + 0.314^{- 1} \right)} = 0.318$
+$`{w_1} = \frac{{{{0.344}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.318`$
        
-$w_{2} = \frac{0.328^{- 1}}{\left( 0.344^{- 1} + 0.328^{- 1} + 0.314^{- 1} \right)} = 0.333$
+$`{w_2} = \frac{{{{0.328}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.333`$
     and
-$w_{3} = \frac{0.314^{- 1}}{\left( 0.344^{- 1} + 0.328^{- 1} + 0.314^{- 1} \right)} = 0.349$  
+$`{w_3} = \frac{{{{0.314}^{ - 1}}}}{{\left( {{{0.344}^{ - 1}} + {{0.328}^{ - 1}} + {{0.314}^{ - 1}}} \right)}} = 0.349`$  
    (we use *reciprocals* since smaller values of `omega2max` represent
 better fits). As will be seen shortly - these are incorrect.
 
@@ -442,16 +486,21 @@ should consult (Burnham and Anderson 2002). A commonly used metric to
 determine the model-average weights is the **Akaike Information
 Criterion** or
 [AIC](https://en.wikipedia.org/wiki/Akaike_information_criterion). The
-formula for the $AIC$ is: $$AIC = 2k - 2\ln\left( \ell \right)$$ where
-$k$ is the number of model parameters and $\ell$ is the *likelihood* for
-that model. Again, a full discussion of statistical likelihood is beyond
-the present scope. A relatively gentle introduction can be found
+formula for the $`AIC`$ is:
+``` math
+AIC = 2k - 2\ln \left( \ell  \right)
+```
+where $`k`$ is the number of model parameters and $`\ell`$ is the
+*likelihood* for that model. Again, a full discussion of statistical
+likelihood is beyond the present scope. A relatively gentle introduction
+can be found
 [here](https://ep-news.web.cern.ch/what-likelihood-function-and-how-it-used-particle-physics).
 
 The likelihood for our three distributions can be computed in `R` as
 follows:
 
 ``` r
+
 sum(log(dgamma(dat$Conc, shape = 2.0591977, scale = 0.3231032)))
 #> [1] -7.020597
 sum(log(dlnorm(dat$Conc, meanlog = -0.6695120, sdlog = 0.7199573)))
@@ -477,17 +526,24 @@ the `AIC` values. More detailed information can be found
 [here](https://training.visionanalytix.com/ssd-model-averaging/).
 
 The *AIC* for the *i^(th)* distribution fitted to the data is
-$$AIC_{i} = 2k_{i} - 2\ln\left( L_{i} \right)$$ where $L_{i}$ is the
-*i^(th) likelihood* and $k_{i}$ is the *number of parameters* for the
-*i^(th) distribution*. Next, we form the differences:
-$$\Delta_{i} = AIC_{i} - AIC_{0}$$ where $AIC_{0}$ is the *AIC* for the
-**best-fitting** model
-(i.e.$AIC_{0} = \min\limits_{i}\left\{ AIC_{i} \right\}$ ). The
-*model-averaged weights* $w_{i}$ are then computed as
+``` math
+AI{C_i} = 2{k_i} - 2\ln \left( {{L_i}} \right)
+```
+where $`{L_i}`$ is the *i^(th) likelihood* and $`{k_i}`$ is the *number
+of parameters* for the *i^(th) distribution*. Next, we form the
+differences:
+``` math
+{\Delta _i} = AI{C_i} - AI{C_0}
+```
+where $`AI{C_0}`$ is the *AIC* for the **best-fitting** model
+(i.e.$`AI{C_0} = \mathop {\min }\limits_i \left\{ {AI{C_i}} \right\}`$
+). The *model-averaged weights* $`{w_i}`$ are then computed as
 
 ***AIC Model Averaging Weights***
 
-$$w_{i} = \frac{\exp\left\{ - \frac{1}{2}\Delta_{i} \right\}}{\sum{\exp\left\{ - \frac{1}{2}\Delta_{i} \right\}}}$$
+``` math
+{w}_{i} = \frac{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}{\sum{\exp \left\{ -\frac{1}{2}{{\Delta }_{i}} \right\}}}
+```
 
   
 
@@ -496,6 +552,7 @@ distributions used in the previous example can be computed ‘manually’ in
 `R` as follows:
 
 ``` r
+
 dat <- c(1.73, 0.57, 0.33, 0.28, 0.3, 0.29, 2.15, 0.8, 0.76, 0.54, 0.42, 0.83, 0.21, 0.18, 0.59)
 aic <- NULL
 k <- 2 # number of parameters for each of the distributions
@@ -537,24 +594,27 @@ very good fit to the empirical data.
 ### Correcting for distributions having differing numbers of parameters
 
 In deriving the AIC, Akaike had to make certain, strong assumptions. In
-addition, the bias factor (the $2k$ term) was derived from theoretical
+addition, the bias factor (the $`2k`$ term) was derived from theoretical
 considerations (such as mathematical *expectation*) that relate to
 *infinite* sample sizes. For small sample sizes, the AIC is likely to
 select models having too many parameters (i.e models which *over-fit*).
 In 1978, Sugiura proposed a modification to the AIC to address this
 problem, although it too relied on a number of assumptions. This
-‘correction’ to the AIC for small samples (referred to as $AIC_{c}$) is
+‘correction’ to the AIC for small samples (referred to as
+$`AI{{C}_{c}}`$) is
 
 ***Corrected Akaike Information Criterion (AICc)***
 
-$${AIC}_{c} = AIC + \frac{2k^{2} + 2k}{n - k - 1}$$
+``` math
+{AIC}_{c} = AIC + \frac{2k^2 + 2k}{n - k - 1}
+```
 
 where *n* is the sample size and *k* is the number of parameters.
 
   
 
-It is clear from the formula for $AIC_{c}$ that for   $n \gg k$,   
-$AIC_{c} \simeq AIC$. The issue of sample size is ubiquitous in
+It is clear from the formula for $`AI{{C}_{c}}`$ that for   $`n\gg k`$,
+   $`AI{{C}_{c}}\simeq AIC`$. The issue of sample size is ubiquitous in
 statistics, but even more so in ecotoxicology where logistical and
 practical limitations invariably mean we are dealing with
 (pathologically) small sample sizes. There are no hard and fast rules as
@@ -564,7 +624,9 @@ well is:
 
 ***Sample Size Rule-of-Thumb for SSD Modelling***
 
-$$n \geq 5k + 1$$
+``` math
+{n \geq 5k + 1}
+```
 
 where *n* is the sample size and *k* is the number of parameters.
 
@@ -592,42 +654,38 @@ Burnham, Kenneth, and David Anderson. 2002. *Model Selection and
 Multimodel Inference - a Practical Information-Theoretic Approach*.
 Springer. <https://link.springer.com/book/10.1007/b97636>.
 
-Chapman, PF RM, A Hart, W Roelofs, T Aldenberg, K Solomon, J LM
-Tarazona, P Byrne, et al. 2007. “Methods of Uncertainty Analysis.” *In:
-A H (Ed) EUFRAM Concerted Action to Develop a European Framework for
-Probabilistic Risk Assessment of the Environmental Impacts of
-Pesticides, Vol 2, Detailed Reports on Role, Methods, Reporting and
+Chapman, PF RM, A Hart, W Roelofs, et al. 2007. “Methods of Uncertainty
+Analysis.” *In: A H (Ed) EUFRAM Concerted Action to Develop a European
+Framework for Probabilistic Risk Assessment of the Environmental Impacts
+of Pesticides, Vol 2, Detailed Reports on Role, Methods, Reporting and
 Validation*.
 
 Fletcher, David. 2018. *Model Averaging*. Springer.
 <https://link.springer.com/book/10.1007/978-3-662-58541-2>.
 
-Fox, D. R., R. A. Dam, R. Fisher, G. E. Batley, A. R. Tillmanns, J.
-Thorley, C. J. Schwarz, D. J. Spry, and K. McTavish. 2021. “Recent
-Developments in Species Sensitivity Distribution Modeling.”
-*Environmental Toxicology and Chemistry* 40 (2): 293–308.
-<https://doi.org/10.1002/etc.4925>.
+Fox, D. R., R. A. Dam, R. Fisher, et al. 2021. “Recent Developments in
+Species Sensitivity Distribution Modeling.” *Environmental Toxicology
+and Chemistry* 40 (2): 293–308. <https://doi.org/10.1002/etc.4925>.
 
 Fox, David R. 2016. “Contemporary Methods for Statistical Design and
 Analysis.” *In: Blasco J, Chapman PM, Campana O, Hampel M (Eds) Marine
 Ecotoxicology.*, August.
 <https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5>.
 
-Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. “Joint Investigation
+Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. *Joint Investigation
 into statistical methodologies Underpinning the derivation of toxicant
-guideline values in Australia and New Zealand.” Environmetrics
+guideline values in Australia and New Zealand*. Environmetrics
 Australia; Australian Institute of Marine Science.
 <https://doi.org/10.25845/fm9b-7n28>.
 
-Newman, Michael C., David R. Ownby, Laurent C. A. Mézin, David C.
-Powell, Tyler R. L. Christensen, Scott B. Lerberg, and Britt-Anne
-Anderson. 2000. “Applying species-sensitivity distributions in
-ecological risk assessment: Assumptions of distribution type and
-Sufficient numbers of species.” *Environmental Toxicology and Chemistry*
-19 (February): 508–15. <https://doi.org/10.1002/etc.5620190233>.
+Newman, Michael C., David R. Ownby, Laurent C. A. Mézin, et al. 2000.
+“Applying species-sensitivity distributions in ecological risk
+assessment: Assumptions of distribution type and Sufficient numbers of
+species.” *Environmental Toxicology and Chemistry* 19 (February):
+508–15. <https://doi.org/10.1002/etc.5620190233>.
 
-Zajdlik, B. 2005. “Statistical Analysis of the SSD Approach for
-Development of Canadian Water Quality Guidelines.” CCME Project
+Zajdlik, B. 2005. *Statistical Analysis of the SSD Approach for
+Development of Canadian Water Quality Guidelines*. CCME Project
 354‐200/5. Zajdlik; Associates.
 
 ## Licensing

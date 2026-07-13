@@ -10,8 +10,6 @@
   Concentrations](https://bcgov.github.io/ssdtools/dev/articles/confidence-intervals.md):
 - [Customising
   Plots](https://bcgov.github.io/ssdtools/dev/articles/customising-plots.md):
-- [Small Sample Bias in
-  Estimates](https://bcgov.github.io/ssdtools/dev/articles/small-sample-bias.md):
 - [Additional Technical
   Details](https://bcgov.github.io/ssdtools/dev/articles/additional-technical-details.md):
 - [Frequently Asked

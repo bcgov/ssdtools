@@ -15,8 +15,6 @@ ssd_einvpareto()
 
 ssd_elgumbel()
 
-ssd_elgumbel()
-
 ssd_ellogis_llogis()
 
 ssd_ellogis()
@@ -40,8 +38,6 @@ ssd_eweibull()
 
 - `ssd_einvpareto()`: Default Parameter Values for Inverse Pareto
   Distribution
-
-- `ssd_elgumbel()`: Default Parameter Values for Log-Gumbel Distribution
 
 - `ssd_elgumbel()`: Default Parameter Values for log-Gumbel Distribution
 
@@ -68,6 +64,7 @@ ssd_eweibull()
 ## Examples
 
 ``` r
+
 ssd_eburrIII3()
 #> $shape1
 #> [1] 1
@@ -92,14 +89,6 @@ ssd_egompertz()
 #> [1] 1
 #> 
 #> $shape
-#> [1] 1
-#> 
-
-ssd_einvpareto()
-#> $shape
-#> [1] 3
-#> 
-#> $scale
 #> [1] 1
 #> 
 

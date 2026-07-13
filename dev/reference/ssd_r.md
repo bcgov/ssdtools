@@ -346,6 +346,7 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 ## Examples
 
 ``` r
+
 withr::with_seed(50, {
   x <- ssd_rburrIII3(10000)
 })

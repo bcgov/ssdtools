@@ -45,18 +45,18 @@ and
 
 ``` r
 ssd_sort_data(ssddata::ccme_boron)
-#> # A tibble: 28 × 5
-#>    Chemical Species                Conc Group        Units
-#>    <chr>    <chr>                 <dbl> <fct>        <chr>
-#>  1 Boron    Elodea canadensis       1   Plant        mg/L 
-#>  2 Boron    Spirodella polyrrhiza   1.8 Plant        mg/L 
-#>  3 Boron    Chlorella pyrenoidosa   2   Plant        mg/L 
-#>  4 Boron    Oncorhynchus mykiss     2.1 Fish         mg/L 
-#>  5 Boron    Ictalurus punctatus     2.4 Fish         mg/L 
-#>  6 Boron    Phragmites australis    4   Plant        mg/L 
-#>  7 Boron    Micropterus salmoides   4.1 Fish         mg/L 
-#>  8 Boron    Chlorella vulgaris      5.2 Plant        mg/L 
-#>  9 Boron    Daphnia magna           6   Invertebrate mg/L 
-#> 10 Boron    Brachydanio rerio      10   Fish         mg/L 
+#> # A tibble: 28 × 6
+#>    Chemical Species                Conc Group        Units Medium    
+#>    <chr>    <chr>                 <dbl> <fct>        <chr> <chr>     
+#>  1 Boron    Elodea canadensis       1   Plant        mg/L  Freshwater
+#>  2 Boron    Spirodella polyrrhiza   1.8 Plant        mg/L  Freshwater
+#>  3 Boron    Chlorella pyrenoidosa   2   Plant        mg/L  Freshwater
+#>  4 Boron    Oncorhynchus mykiss     2.1 Fish         mg/L  Freshwater
+#>  5 Boron    Ictalurus punctatus     2.4 Fish         mg/L  Freshwater
+#>  6 Boron    Phragmites australis    4   Plant        mg/L  Freshwater
+#>  7 Boron    Micropterus salmoides   4.1 Fish         mg/L  Freshwater
+#>  8 Boron    Chlorella vulgaris      5.2 Plant        mg/L  Freshwater
+#>  9 Boron    Daphnia magna           6   Invertebrate mg/L  Freshwater
+#> 10 Boron    Brachydanio rerio      10   Fish         mg/L  Freshwater
 #> # ℹ 18 more rows
 ```

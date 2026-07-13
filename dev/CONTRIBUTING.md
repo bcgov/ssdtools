@@ -32,6 +32,7 @@ second collaborator is added if there are changes throughout the code or
 copyright is added for specific function(s). So it could read:
 
 ``` r
+
 # Copyright 2015-2023 Province of British Columbia
 # Copyright 2024 Collaborator
 #
@@ -51,6 +52,7 @@ copyright is added for specific function(s). So it could read:
 or
 
 ``` r
+
 # Copyright 2024 Collaborator
 # Apache 2.0 License
 new_function <- function() {

@@ -203,6 +203,7 @@ and
 ## Examples
 
 ``` r
+
 ssd_hc(ssd_match_moments())
 #> # A tibble: 6 × 9
 #>   dist        proportion   est    se   lcl   ucl    wt nboot pboot

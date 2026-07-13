@@ -4,12 +4,12 @@
 
 Bootstrapping is a resampling technique used to obtain confidence
 intervals (CIs) for summary statistics. The team have explored the use
-of alternative methods for obtaining the CIs of $HC_{x}$ estimates. This
+of alternative methods for obtaining the CIs of $`HC_x`$ estimates. This
 included using the closed-form expression for the variance-covariance
 matrix of the parameters of the Burr III distribution, coupled with the
 delta-method, as well as an alternative bootstrap method for the inverse
 Pareto distribution based on statistical properties of the parameters
-(D. Fox et al. 2022). In both cases, it appeared that these methods can
+(Fox et al. 2022). In both cases, it appeared that these methods can
 give results similar to other traditional bootstrapping approaches in
 much less time, and are therefore potentially worth further
 investigation. However, implementation of such methods across all the
@@ -25,11 +25,11 @@ However, more reliable results can be obtained using samples of 5,000 or
 ## Parametric versus non-parametric bootstrapping
 
 [`Burrlioz`](https://research.csiro.au/software/burrlioz/) uses a
-non-parametric bootstrap method to obtain CIs on the $HC_{x}$ estimate.
+non-parametric bootstrap method to obtain CIs on the $`HC_x`$ estimate.
 Non-parametric bootstrapping is carried out by repeatedly resampling the
 raw data with replacement, and refitting the distribution many times.
 The 95% confidence limits (CLs) are then obtained by calculating the
-lower 0.025th and upper 0.975th quantiles of the resulting $HC_{x}$
+lower 0.025th and upper 0.975th quantiles of the resulting $`HC_x`$
 estimates across all the bootstrap samples (typically \> 1,000). This
 type of bootstrap takes into account uncertainty in the distribution fit
 based on uncertainty in the data.
@@ -40,14 +40,14 @@ the data, parametric bootstrapping draws a random a set of new data (of
 the same sample size as the original) from the fitted distribution to
 repeatedly refit the distribution. Upper and lower 95% bounds are again
 calculated as the lower 0.025th and upper 0.975th quantiles of the
-resulting $HC_{x}$ estimates across all the bootstrap samples (again,
+resulting $`HC_x`$ estimates across all the bootstrap samples (again,
 typically \> 1,000). This approach attempts to capture the uncertainty
 in the data for a sample size from a given distribution, but it assumes
 no uncertainty in that original fit.
 
 Using simulation studies the ssdtools team examined bias and compared
 the resulting coverage of the parametric and non-parametric
-bootstrapping methods (D. Fox et al. 2022). They found that coverage was
+bootstrapping methods (Fox et al. 2022). They found that coverage was
 better using the parametric bootstrapping method, and this has been
 retained as the default bootstrapping method in the update to ssdtools
 although non-parametric bootstrapping is currently the only method
@@ -58,7 +58,7 @@ available for censored data.
 Bootstrapping to obtain CIs for individual distributions is relatively
 straightforward. However, obtaining bootstrap CIs for model-averaged
 SSDs requires careful consideration, as the procedure is subject to the
-same problems evident when obtaining model-averaged $HC_{x}$ estimates
+same problems evident when obtaining model-averaged $`HC_x`$ estimates
 (see the [Model Averaging
 SSDs](https://bcgov.github.io/ssdtools/articles/model-averaging.html)
 vignette). Model-averaged estimates and/or CIs can be calculated by
@@ -87,6 +87,7 @@ with very low coverage. The current version of `ssdtools` retains this
 functionality by setting `ci_method = "MACL"`.
 
 ``` r
+
 library(ssdtools)
 
 fit <- ssd_fit_dists(data = ssddata::ccme_silver)
@@ -132,12 +133,13 @@ Using simulation studies we explored the coverage and bias of CI values
 obtained without and without fixing the distribution weights, and
 results indicate little difference.
 
-The following code can be used to obtain CIs for $HC_{x}$ estimates via
+The following code can be used to obtain CIs for $`HC_x`$ estimates via
 bootstrapping from the weighted mixture distribution (using
 [`ssd_rmulti()`](https://bcgov.github.io/ssdtools/dev/reference/ssd_r.md)),
 with and without fixed weight values respectively.
 
 ``` r
+
 # Using the multi boostrapping method with fixed weights
 ssd_hc(fit, ci = TRUE, ci_method = "multi_fixed")
 #> # A tibble: 1 × 15
@@ -149,6 +151,7 @@ ssd_hc(fit, ci = TRUE, ci_method = "multi_fixed")
 ```
 
 ``` r
+
 # Using the multi boostrapping method without fixed weights
 ssd_hc(fit, ci = TRUE, ci_method = "multi_free")
 #> # A tibble: 1 × 15
@@ -185,16 +188,16 @@ Pseudo-code for this method is as follows:
 
 - The random sample is re-fit using that distribution.
 
-- $HC_{x}$ is estimated from the re-fitted bootstrap fit.
+- $`HC_x`$ is estimated from the re-fitted bootstrap fit.
 
-- The $HC_{x}$ estimates for all `nboot_vals` for all distribution are
+- The $`HC_x`$ estimates for all `nboot_vals` for all distribution are
   then pooled across all distributions, and *quantile()* is used to
   determine the lower and upper confidence bounds for this pooled
-  weighted bootstrap sample of $HC_{x}$ values.
+  weighted bootstrap sample of $`HC_x`$ values.
 
 This method does not draw random samples from the mixture distribution
 using *ssd_rmulti*. While mathematically the method shares some
-properties with obtaining $HC_{x}$ estimates via summing the weighted
+properties with obtaining $`HC_x`$ estimates via summing the weighted
 values (weighted arithmetic mean), simulation studies have shown that,
 as a method for obtaining CIs, this pooled weighted sample method yields
 similar CIs and coverage to the
@@ -206,6 +209,7 @@ This method which is recommended is currently the default method in
 [`ssd_hc()`](https://bcgov.github.io/ssdtools/dev/reference/ssd_hc.md).
 
 ``` r
+
 # Using a weighted pooled bootstrap sample
 ssd_hc(fit, ci = TRUE)
 #> # A tibble: 1 × 15
@@ -219,10 +223,10 @@ ssd_hc(fit, ci = TRUE)
 ## Comparing bootstrapping methods
 
 We have undertaken extensive simulation studies comparing the
-implemented methods, and the results of these are reported in D. R. Fox
-et al. (2024). For illustrative purposes, here we compare upper and
-lower CLs using only a single example data set, the silver data set from
-the Canadian Council of Ministers of the Environment (CCME) in the
+implemented methods, and the results of these are reported in Fox et al.
+(2024). For illustrative purposes, here we compare upper and lower CLs
+using only a single example data set, the silver data set from the
+Canadian Council of Ministers of the Environment (CCME) in the
 [`ssddata`](https://github.com/open-AIMS/ssddata) package.
 
 Using the other default settings for `ssdtools`, we compare the upper
@@ -263,15 +267,15 @@ methods.](confidence-intervals_files/figure-html/unnamed-chunk-4-1.png)
 
 ## References
 
-Fox, David R, Rebecca Fisher, Thorley, and Joseph L. 2024. “Final Report
+Fox, David R, Rebecca Fisher, Thorley, and Joseph L. 2024. *Final Report
 of the Joint Investigation into SSD Modelling and Ssdtools
 Implementation for the Derivation of Toxicant Guidelines Values in
-Australia and New Zealand.” Environmetrics Australia; Australian
+Australia and New Zealand*. Environmetrics Australia; Australian
 Institute of Marine Science. <https://doi.org/10.25845/xtvt-yc51>.
 
-Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. “Joint Investigation
+Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. *Joint Investigation
 into statistical methodologies Underpinning the derivation of toxicant
-guideline values in Australia and New Zealand.” Environmetrics
+guideline values in Australia and New Zealand*. Environmetrics
 Australia; Australian Institute of Marine Science.
 <https://doi.org/10.25845/fm9b-7n28>.
 

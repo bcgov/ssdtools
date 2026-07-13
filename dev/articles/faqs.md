@@ -3,6 +3,7 @@
 ### How can I plot the model averaged fit and the individual fits?
 
 ``` r
+
 library(ssdtools)
 
 dist <- ssd_fit_dists(ssddata::ccme_boron)
@@ -15,6 +16,7 @@ ccme_boron data.](faqs_files/figure-html/unnamed-chunk-2-1.png)
 ### How can I include mathematical expressions in the x-axis label when using `ssd_plot()`?
 
 ``` r
+
 library(ssdtools)
 
 ssd_plot(ssddata::ccme_boron, ssdtools::boron_pred, label = "Species", shape = "Group") +
