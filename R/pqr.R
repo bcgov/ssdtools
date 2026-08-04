@@ -229,8 +229,15 @@ bdist <- function(dist, data, min_pmix, range_shape1, range_shape2) {
 }
 
 mdist <- function(dist) {
-  fun <- paste0("m", dist)
-  if (!exists(fun, mode = "function")) {
+  # Scope to ssdtools only — attached packages (e.g. actuar::mlnorm) must not
+  # satisfy this hook (#479).
+  fun <- get0(
+    paste0("m", dist),
+    envir = asNamespace("ssdtools"),
+    mode = "function",
+    inherits = FALSE
+  )
+  if (is.null(fun)) {
     return(list())
   }
   do.call(fun, args = list())
