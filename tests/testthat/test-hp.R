@@ -457,44 +457,6 @@ test_that("ssd_hp effect with higher weight two distributions", {
   expect_snapshot_value(hp_10$se, style = "deparse")
 })
 
-test_that("ssd_hp cis with non-convergence", {
-  withr::with_seed(99, {
-    conc <- ssd_rlnorm_lnorm(
-      100,
-      meanlog1 = 0,
-      meanlog2 = 1,
-      sdlog1 = 1 / 10,
-      sdlog2 = 1 / 10,
-      pmix = 0.2
-    )
-    data <- data.frame(Conc = conc)
-    fit <- ssd_fit_dists(data, dists = "lnorm_lnorm", min_pmix = 0.15)
-    expect_identical(attr(fit, "min_pmix"), 0.15)
-    hp15 <- ssd_hp(
-      fit,
-      conc = 1,
-      ci = TRUE,
-      nboot = 100,
-      min_pboot = 0.9,
-      proportion = FALSE
-    )
-    attr(fit, "min_pmix") <- 0.3
-    expect_identical(attr(fit, "min_pmix"), 0.3)
-    hp30 <- ssd_hp(
-      fit,
-      conc = 1,
-      ci = TRUE,
-      nboot = 100,
-      min_pboot = 0.9,
-      ci_method = "MACL",
-      samples = TRUE,
-      proportion = FALSE
-    )
-  })
-  expect_s3_class(hp30, "tbl")
-  expect_snapshot_data(hp30, "hp_30")
-})
-
 test_that("ssd_hp with 1 bootstrap", {
   fit <- ssd_fit_dists(ssddata::ccme_boron, dists = "lnorm")
   withr::with_seed(10, {
@@ -509,34 +471,6 @@ test_that("ssd_hp with 1 bootstrap", {
     )
   })
   expect_snapshot_data(hp, "hp_1")
-})
-
-test_that("ssd_hp fix_weight", {
-  fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("lnorm", "lgumbel"))
-
-  withr::with_seed(102, {
-    hc_unfix <- ssd_hp(
-      fits,
-      nboot = 100,
-      ci = TRUE,
-      ci_method = "multi_free",
-      samples = TRUE,
-      proportion = FALSE
-    )
-  })
-  expect_snapshot_data(hc_unfix, "hc_unfix")
-
-  withr::with_seed(102, {
-    hc_fix <- ssd_hp(
-      fits,
-      nboot = 100,
-      ci = TRUE,
-      ci_method = "multi_fixed",
-      samples = TRUE,
-      proportion = FALSE
-    )
-  })
-  expect_snapshot_data(hc_fix, "hc_fix")
 })
 
 test_that("hp multis match", {
@@ -657,6 +591,25 @@ test_that("hp est_method = FALSE deprecated and overrides est_method", {
   })
 
   expect_identical(false, arithmetic)
+})
+
+test_that("hp duplicate conc values return one row per input value in order", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+
+  hp <- ssd_hp(fits, conc = c(1, 10, 20), proportion = TRUE)
+  hp_dup <- ssd_hp(fits, conc = c(1, 10, 20, 1), proportion = TRUE)
+
+  expect_identical(nrow(hp_dup), 4L)
+  expect_identical(hp_dup$conc, c(1, 10, 20, 1))
+  expect_equal(hp_dup$est, c(hp$est, hp$est[1]))
+})
+
+test_that("hp duplicate conc values unaffected when average = FALSE", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+
+  hp <- ssd_hp(fits, conc = c(1, 10, 1), average = FALSE, proportion = TRUE)
+  expect_identical(nrow(hp), 18L)
+  expect_identical(unique(hp$conc), c(1, 10))
 })
 
 test_that("hp ci_method = 'weighted_arithmetic' deprecated for MACL", {

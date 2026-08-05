@@ -23,7 +23,11 @@ generics::glance
   npars <- npars(x)
   log_lik <- logLik(x)
   aic <- 2 * npars - 2 * log_lik
-  aicc <- aic + 2 * npars * (npars + 1) / (nobs - npars - 1)
+  if (isTRUE(nobs <= npars)) {
+    aicc <- Inf
+  } else {
+    aicc <- aic + 2 * npars * (npars + 1) / (nobs - npars - 1)
+  }
 
   tibble(
     dist = dist,
@@ -38,6 +42,10 @@ generics::glance
 #' Get a tibble summarizing each distribution
 #'
 #' Gets a tibble with a single row for each distribution.
+#'
+#' The `aicc` is `Inf` if the number of observations is less than
+#' the number of parameters plus two as the small sample size
+#' correction is undefined.
 #'
 #' @inheritParams params
 #' @return A tidy tibble of the distributions.

@@ -58,6 +58,11 @@ hcp_average <- function(
     )
   }
 
+  ## Compute on the unique values so the various ci/est functions (some of
+  ## which collapse duplicates via group_by()) agree on the row structure,
+  ## then re-expand to the input `value` vector preserving order and duplicates.
+  uvalue <- unique(value)
+
   est_same <- FALSE
   ci_fun <- if (!ci) {
     hcp_noci
@@ -75,7 +80,7 @@ hcp_average <- function(
 
   hcp <- ci_fun(
     x,
-    value = value,
+    value = uvalue,
     ci = ci,
     level = level,
     nboot = nboot,
@@ -98,7 +103,7 @@ hcp_average <- function(
   )
 
   if (est_same) {
-    return(hcp)
+    return(hcp[match(value, hcp$value), ])
   }
 
   est_fun <- if (est_method == "multi") {
@@ -108,7 +113,7 @@ hcp_average <- function(
   }
   est <- est_fun(
     x,
-    value,
+    uvalue,
     ci = FALSE,
     level = level,
     nboot = nboot,
@@ -128,5 +133,6 @@ hcp_average <- function(
     ci_method = "MACL",
     hc = hc
   )
-  replace_estimates(hcp, est)
+  hcp <- replace_estimates(hcp, est)
+  hcp[match(value, hcp$value), ]
 }

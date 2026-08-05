@@ -1229,3 +1229,14 @@ test_that("ssd_hc fitdists arithmetic_samples ci", {
   expect_s3_class(hc, "tbl_df")
   expect_snapshot_data(hc, "hc_arithmetic_samples")
 })
+
+test_that("hc duplicate proportion values return one row per input value in order", {
+  fits <- ssd_fit_dists(ssddata::ccme_boron)
+
+  hc <- ssd_hc(fits, proportion = c(0.05, 0.1, 0.2))
+  hc_dup <- ssd_hc(fits, proportion = c(0.05, 0.1, 0.2, 0.05))
+
+  expect_identical(nrow(hc_dup), 4L)
+  expect_identical(hc_dup$proportion, c(0.05, 0.1, 0.2, 0.05))
+  expect_equal(hc_dup$est, c(hc$est, hc$est[1]))
+})

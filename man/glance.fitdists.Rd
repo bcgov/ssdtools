@@ -19,6 +19,11 @@ A tidy tibble of the distributions.
 \description{
 Gets a tibble with a single row for each distribution.
 }
+\details{
+The \code{aicc} is \code{Inf} if the number of observations is less than
+the number of parameters plus two as the small sample size
+correction is undefined.
+}
 \examples{
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 glance(fits, wt = TRUE)

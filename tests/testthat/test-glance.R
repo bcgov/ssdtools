@@ -76,6 +76,26 @@ test_that("glance reweight same log_lik", {
   expect_equal(glance_weight$log_lik, glance$log_lik)
 })
 
+test_that("glance aicc is Inf when nobs < npars + 2", {
+  data <- data.frame(Conc = c(0.1, 0.3, 1, 3, 10))
+  fit <- ssd_fit_dists(data, dists = c("lnorm", "lnorm_lnorm"), nrow = 5)
+
+  glance <- glance(fit, wt = TRUE)
+  expect_identical(glance$nobs, c(5L, 5L))
+  expect_true(is.finite(glance$aicc[glance$dist == "lnorm"]))
+  expect_identical(glance$aicc[glance$dist == "lnorm_lnorm"], Inf)
+  expect_identical(glance$wt[glance$dist == "lnorm_lnorm"], 0)
+})
+
+test_that("glance aicc finite when nobs >= npars + 2", {
+  data <- data.frame(Conc = c(0.1, 0.3, 1, 3, 10, 30, 100))
+  fit <- ssd_fit_dists(data, dists = c("lnorm", "lnorm_lnorm"))
+
+  glance <- glance(fit, wt = TRUE)
+  expect_identical(glance$nobs, c(7L, 7L))
+  expect_true(all(is.finite(glance$aicc)))
+})
+
 test_that("glance reweight same log_lik", {
   data <- ssddata::ccme_boron
   data$Upper <- data$Conc
