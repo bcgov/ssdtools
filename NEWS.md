@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# ssdtools 2.6.0.9003
+
+- Merge pull request #480 from poissonconsulting/dev.
+
+- Merge pull request #481 from Zhenglei-BCS/fix/mdist-namespace-lookup.
+
+- Merge pull request #478 from poissonconsulting/dev.
+
+- Merge pull request #472 from poissonconsulting/dev.
+
+- Format repository R code using Air. (#472).
+
+
 # ssdtools 2.6.0.9002
 
 - Format repository R code using Air.
