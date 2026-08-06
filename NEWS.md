@@ -2,15 +2,27 @@
 
 # ssdtools 2.6.0.9003
 
-- Merge pull request #480 from poissonconsulting/dev.
+- `ssd_hc()` and `ssd_hp()` now return one row per input value when values are duplicated (poissonconsulting/ssdtools#141).
 
-- Merge pull request #481 from Zhenglei-BCS/fix/mdist-namespace-lookup.
+- AICc is now `Inf` when the number of observations is less than the number of parameters plus 2 as the small sample correction is undefined (poissonconsulting/ssdtools#175).
 
-- Merge pull request #478 from poissonconsulting/dev.
+- Fixed distribution function lookup to the ssdtools namespace only so that attached packages exporting `m*` helpers (notably actuar) no longer break `ssd_fit_dists()` (#479).
 
-- Merge pull request #472 from poissonconsulting/dev.
+- Fixed starting values for weighted fits, which previously used the logical `weight` flag in place of the weight vector.
 
-- Format repository R code using Air. (#472).
+- Removed a duplicate `ssd_elgumbel()` definition.
+
+- Replaced the deprecated `..density..` with `after_stat(density)` in `StatSsdpoint`.
+
+- Fixed the function names in two `ssd_hp()` deprecation messages.
+
+- `ssd_plot()` now checks that `hc` is numeric and that `decimal.mark` is a string and `ssd_plot_data()` now checks that `suffix` is a string.
+
+- Moved dplyr from Suggests to Imports and dropped the unused plyr, abind, magrittr, reshape2 and tidyselect dependencies.
+
+- Removed the small sample bias vignette (moved to ssdvignettes).
+
+- Updated the `range_shape1` and `range_shape2` parameter descriptions.
 
 
 # ssdtools 2.6.0.9002
