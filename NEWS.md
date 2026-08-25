@@ -4,6 +4,10 @@
 
 - Format repository R code using Air.
 
+- Removed the dependency on the ggtext package, which is scheduled for archival on CRAN (#482).
+
+- `ssd_label_comma_hc()` now returns plotmath expressions instead of markdown so that the hazard concentration label is bold on its own line without ggtext, and marks the hazard concentration correctly when `big.mark` or `decimal.mark` change the formatting (#482).
+
 
 # ssdtools 2.6.0.9001
 

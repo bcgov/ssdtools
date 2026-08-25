@@ -345,10 +345,7 @@ ssd_plot <- function(
   }
 
   gp <- gp +
-    theme(
-      text = element_text(size = text_size),
-      axis.text.x = ggtext::element_markdown()
-    )
+    theme(text = element_text(size = text_size))
 
   gp
 }

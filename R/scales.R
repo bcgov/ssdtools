@@ -52,7 +52,8 @@ ssd_label_comma <- function(
 #' @inheritParams params
 #'
 #' @return A "labelling" function that takes a vector x and
-#' returns a character vector of `length(x)` giving a label for each input value.
+#' returns a list of `length(x)` giving a label for each input value.
+#' The label for `hc_value` is a plotmath expression.
 #' @seealso [scales::label_comma()]
 #' @export
 #'
@@ -71,18 +72,19 @@ ssd_label_comma_hc <- function(
   chk_number(hc_value)
 
   function(x) {
-    marked <- ssd_label_comma(
+    label_fun <- ssd_label_comma(
       digits = digits,
       big.mark = big.mark,
       decimal.mark = decimal.mark
-    )(x)
-    purrr::map_chr(
-      marked,
+    )
+    hc_label <- label_fun(hc_value)
+    purrr::map(
+      label_fun(x),
       ~ {
-        if (!is.na(.x) && .x == signif(hc_value, digits = digits)) {
-          .x <- paste0("<br>**", .x, "**")
+        if (is.na(.x) || .x != hc_label) {
+          return(.x)
         }
-        .x
+        bquote(atop(phantom(0), bold(.(.x))))
       }
     )
   }

@@ -26,7 +26,8 @@ ssd_label_comma_hc(
 }
 \value{
 A "labelling" function that takes a vector x and
-returns a character vector of \code{length(x)} giving a label for each input value.
+returns a list of \code{length(x)} giving a label for each input value.
+The label for \code{hc_value} is a plotmath expression.
 }
 \description{
 Label numbers with significant digits and comma.

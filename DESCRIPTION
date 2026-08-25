@@ -54,7 +54,6 @@ Imports:
     furrr,
     generics,
     ggplot2,
-    ggtext,
     glue,
     goftest,
     graphics,
