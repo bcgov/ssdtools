@@ -24,11 +24,6 @@
 
 - Updated the `range_shape1` and `range_shape2` parameter descriptions.
 
-
-# ssdtools 2.6.0.9002
-
-- Format repository R code using Air.
-
 - Removed the dependency on the ggtext package, which is scheduled for archival on CRAN (#482).
 
 - Added `ssd_element_text_hc()`, a theme element that draws multi-line axis labels in bold, which replaces `ggtext::element_markdown()` for the hazard concentration label (#482).
@@ -36,6 +31,11 @@
 - `ssd_label_comma_hc()` now puts the hazard concentration label on its own line instead of marking it up as markdown (#482).
 
 - `ssd_label_comma_hc()` now marks the hazard concentration when `big.mark` or `decimal.mark` change the formatting of the label (#482).
+
+
+# ssdtools 2.6.0.9002
+
+- Format repository R code using Air.
 
 
 # ssdtools 2.6.0.9001
