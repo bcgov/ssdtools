@@ -53,13 +53,16 @@ ssd_label_comma <- function(
 #'
 #' @return A "labelling" function that takes a vector x and
 #' returns a character vector of `length(x)` giving a label for each input value.
-#' @seealso [scales::label_comma()]
+#' The label for `hc_value` is prefixed with a newline so that it is drawn
+#' on its own line, and bold by [ssd_element_text_hc()].
+#' @seealso [scales::label_comma()] and [ssd_element_text_hc()]
 #' @export
 #'
 #' @examples
 #' ggplot2::ggplot(data = ssddata::anon_e, ggplot2::aes(x = Conc / 10)) +
 #'   geom_ssdpoint() +
-#'   ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26))
+#'   ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26)) +
+#'   ggplot2::theme(axis.text.x = ssd_element_text_hc())
 ssd_label_comma_hc <- function(
   hc_value,
   digits = 3,
@@ -71,18 +74,19 @@ ssd_label_comma_hc <- function(
   chk_number(hc_value)
 
   function(x) {
-    marked <- ssd_label_comma(
+    label_fun <- ssd_label_comma(
       digits = digits,
       big.mark = big.mark,
       decimal.mark = decimal.mark
-    )(x)
+    )
+    hc_label <- label_fun(hc_value)
     purrr::map_chr(
-      marked,
+      label_fun(x),
       ~ {
-        if (!is.na(.x) && .x == signif(hc_value, digits = digits)) {
-          .x <- paste0("<br>**", .x, "**")
+        if (is.na(.x) || .x != hc_label) {
+          return(.x)
         }
-        .x
+        paste0("\n", .x)
       }
     )
   }
