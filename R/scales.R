@@ -52,15 +52,17 @@ ssd_label_comma <- function(
 #' @inheritParams params
 #'
 #' @return A "labelling" function that takes a vector x and
-#' returns a list of `length(x)` giving a label for each input value.
-#' The label for `hc_value` is a plotmath expression.
-#' @seealso [scales::label_comma()]
+#' returns a character vector of `length(x)` giving a label for each input value.
+#' The label for `hc_value` is prefixed with a newline so that it is drawn
+#' on its own line, and bold by [ssd_element_text_hc()].
+#' @seealso [scales::label_comma()] and [ssd_element_text_hc()]
 #' @export
 #'
 #' @examples
 #' ggplot2::ggplot(data = ssddata::anon_e, ggplot2::aes(x = Conc / 10)) +
 #'   geom_ssdpoint() +
-#'   ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26))
+#'   ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26)) +
+#'   ggplot2::theme(axis.text.x = ssd_element_text_hc())
 ssd_label_comma_hc <- function(
   hc_value,
   digits = 3,
@@ -78,13 +80,13 @@ ssd_label_comma_hc <- function(
       decimal.mark = decimal.mark
     )
     hc_label <- label_fun(hc_value)
-    purrr::map(
+    purrr::map_chr(
       label_fun(x),
       ~ {
         if (is.na(.x) || .x != hc_label) {
           return(.x)
         }
-        bquote(atop(phantom(0), bold(.(.x))))
+        paste0("\n", .x)
       }
     )
   }

@@ -6,7 +6,11 @@
 
 - Removed the dependency on the ggtext package, which is scheduled for archival on CRAN (#482).
 
-- `ssd_label_comma_hc()` now returns plotmath expressions instead of markdown so that the hazard concentration label is bold on its own line without ggtext, and marks the hazard concentration correctly when `big.mark` or `decimal.mark` change the formatting (#482).
+- Added `ssd_element_text_hc()`, a theme element that draws multi-line axis labels in bold, which replaces `ggtext::element_markdown()` for the hazard concentration label (#482).
+
+- `ssd_label_comma_hc()` now puts the hazard concentration label on its own line instead of marking it up as markdown (#482).
+
+- `ssd_label_comma_hc()` now marks the hazard concentration when `big.mark` or `decimal.mark` change the formatting of the label (#482).
 
 
 # ssdtools 2.6.0.9001

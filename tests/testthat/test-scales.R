@@ -28,25 +28,28 @@ test_that("ssd_label_comma formats with significant digits and big mark", {
   )
 })
 
-test_that("ssd_label_comma_hc makes the hc label a plotmath expression", {
-  labels <- ssd_label_comma_hc(1.26)(c(1, 1.26, 10))
-  expect_identical(labels[[1]], "1")
-  expect_identical(labels[[3]], "10")
-  expect_identical(labels[[2]], bquote(atop(phantom(0), bold("1.26"))))
+test_that("ssd_label_comma_hc puts the hc label on its own line", {
+  expect_identical(
+    ssd_label_comma_hc(1.26)(c(1, 1.26, 10)),
+    c("1", "\n1.26", "10")
+  )
 })
 
 test_that("ssd_label_comma_hc leaves non-hc labels as ssd_label_comma", {
   x <- c(1, 10, NA)
   expect_identical(
-    unlist(ssd_label_comma_hc(1.26)(x)),
+    ssd_label_comma_hc(1.26)(x),
     ssd_label_comma()(x)
   )
 })
 
 test_that("ssd_label_comma_hc marks hc with big.mark and decimal.mark", {
-  labels <- ssd_label_comma_hc(1260)(c(1, 1260))
-  expect_identical(labels[[2]], bquote(atop(phantom(0), bold("1,260"))))
-
-  labels <- ssd_label_comma_hc(1.26, decimal.mark = "-")(c(1, 1.26))
-  expect_identical(labels[[2]], bquote(atop(phantom(0), bold("1-26"))))
+  expect_identical(
+    ssd_label_comma_hc(1260)(c(1, 1260))[2],
+    "\n1,260"
+  )
+  expect_identical(
+    ssd_label_comma_hc(1.26, decimal.mark = "-")(c(1, 1.26))[2],
+    "\n1-26"
+  )
 })
