@@ -88,7 +88,7 @@ test_that("hc with missing data", {
 })
 
 test_that("ssd_hc list handles zero length list", {
-  hc <- ssd_hc(structure(list(), .Names = character(0)))
+  hc <- ssd_hc(structure(list(), names = character(0)))
   expect_s3_class(hc, "tbl_df")
   expect_identical(
     colnames(hc),
