@@ -2,7 +2,7 @@ ssdtools 2.7.0
 
 ## Cran Repository Policy
 
-- [ ] Reviewed CRP last edited 2024-08-27.
+- [x] Reviewed CRP last edited 2024-08-27.
 
 ## Notes
 
