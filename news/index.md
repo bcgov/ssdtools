@@ -2,12 +2,59 @@
 
 ## ssdtools 2.7.0
 
-- AICc is now `Inf` when the number of observations is less than the
-  number of parameters plus 2 as the small sample correction is
-  undefined (poissonconsulting/ssdtools#175).
+### Bug Fixes
+
+- AICc is now `Inf` (as undefined) when the number of observations is
+  less than or equal to the number of parameters. Previously it was only
+  `Inf` when equal to the number of parameters plus 1
+  (poissonconsulting/ssdtools#175).
+
+- Fixed distribution function lookup to the ssdtools namespace only so
+  that attached packages exporting `m*` helpers (notably actuar) no
+  longer break
+  [`ssd_fit_dists()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_dists.md)
+  ([\#479](https://github.com/bcgov/ssdtools/issues/479)).
 
 - Fixed starting values for weighted fits, which previously used the
   logical `weight` flag in place of the weight vector.
+
+- Removed a duplicate
+  [`ssd_elgumbel()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
+  definition.
+
+- Fixed the function names in two
+  [`ssd_hp()`](https://bcgov.github.io/ssdtools/reference/ssd_hp.md)
+  deprecation messages.
+
+- [`ssd_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_hc.md) and
+  [`ssd_hp()`](https://bcgov.github.io/ssdtools/reference/ssd_hp.md) now
+  return one row per input value when values are duplicated
+  (poissonconsulting/ssdtools#141).
+
+- [`ssd_label_comma_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_label_comma_hc.md)
+  now marks the hazard concentration when `big.mark` or `decimal.mark`
+  change the formatting of the label
+  ([\#482](https://github.com/bcgov/ssdtools/issues/482)).
+
+### Additions
+
+- Added
+  [`ssd_element_text_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_element_text_hc.md),
+  a theme element that draws multi-line axis labels in bold, which
+  replaces `ggtext::element_markdown()` for the hazard concentration
+  label ([\#482](https://github.com/bcgov/ssdtools/issues/482)).
+
+### Modifications
+
+- [`ssd_label_comma_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_label_comma_hc.md)
+  now puts the hazard concentration label on its own line instead of
+  marking it up as markdown
+  ([\#482](https://github.com/bcgov/ssdtools/issues/482)).
+
+- Replaced the deprecated `..density..` with `after_stat(density)` in
+  `StatSsdpoint`.
+
+### Dependencies
 
 - Moved dplyr and VGAM from Suggests to Imports and dropped the unused
   plyr, abind, magrittr, reshape2 and tidyselect dependencies. Fitting
@@ -17,55 +64,21 @@
   archival on CRAN
   ([\#482](https://github.com/bcgov/ssdtools/issues/482)).
 
-- Removed the small sample bias vignette (moved to ssdvignettes).
-
-- Replaced the deprecated `..density..` with `after_stat(density)` in
-  `StatSsdpoint`.
-
-- Updated the `range_shape1` and `range_shape2` parameter descriptions.
-
-- Updated the README with the consultation process.
-
-- Removed a duplicate
-  [`ssd_elgumbel()`](https://bcgov.github.io/ssdtools/reference/ssd_e.md)
-  definition.
-
-- Added
-  [`ssd_element_text_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_element_text_hc.md),
-  a theme element that draws multi-line axis labels in bold, which
-  replaces `ggtext::element_markdown()` for the hazard concentration
-  label ([\#482](https://github.com/bcgov/ssdtools/issues/482)).
-
-- Fixed distribution function lookup to the ssdtools namespace only so
-  that attached packages exporting `m*` helpers (notably actuar) no
-  longer break
-  [`ssd_fit_dists()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_dists.md)
-  ([\#479](https://github.com/bcgov/ssdtools/issues/479)).
-
-- [`ssd_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_hc.md) and
-  [`ssd_hp()`](https://bcgov.github.io/ssdtools/reference/ssd_hp.md) now
-  return one row per input value when values are duplicated
-  (poissonconsulting/ssdtools#141).
-
-- Fixed the function names in two
-  [`ssd_hp()`](https://bcgov.github.io/ssdtools/reference/ssd_hp.md)
-  deprecation messages.
-
-- [`ssd_label_comma_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_label_comma_hc.md)
-  now puts the hazard concentration label on its own line instead of
-  marking it up as markdown
-  ([\#482](https://github.com/bcgov/ssdtools/issues/482)).
-
-- [`ssd_label_comma_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_label_comma_hc.md)
-  now marks the hazard concentration when `big.mark` or `decimal.mark`
-  change the formatting of the label
-  ([\#482](https://github.com/bcgov/ssdtools/issues/482)).
+### Error Checking
 
 - [`ssd_plot()`](https://bcgov.github.io/ssdtools/reference/ssd_plot.md)
   now checks that `hc` is numeric and that `decimal.mark` is a string
   and
   [`ssd_plot_data()`](https://bcgov.github.io/ssdtools/reference/ssd_plot_data.md)
   now checks that `suffix` is a string.
+
+### Documentation
+
+- Removed the small sample bias vignette (moved to ssdvignettes).
+
+- Updated the `range_shape1` and `range_shape2` parameter descriptions.
+
+- Updated the README with the consultation process.
 
 ## ssdtools 2.6.0
 

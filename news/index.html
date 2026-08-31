@@ -35,23 +35,42 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.7.0" id="ssdtools-270">ssdtools 2.7.0<a class="anchor" aria-label="anchor" href="#ssdtools-270"></a></h2>
-<ul><li><p>AICc is now <code>Inf</code> when the number of observations is less than the number of parameters plus 2 as the small sample correction is undefined (poissonconsulting/ssdtools#175).</p></li>
+<div class="section level3">
+<h3 id="bug-fixes-2-7-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-7-0"></a></h3>
+<ul><li><p>AICc is now <code>Inf</code> (as undefined) when the number of observations is less than or equal to the number of parameters. Previously it was only <code>Inf</code> when equal to the number of parameters plus 1 (poissonconsulting/ssdtools#175).</p></li>
+<li><p>Fixed distribution function lookup to the ssdtools namespace only so that attached packages exporting <code>m*</code> helpers (notably actuar) no longer break <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> (<a href="https://github.com/bcgov/ssdtools/issues/479" class="external-link">#479</a>).</p></li>
 <li><p>Fixed starting values for weighted fits, which previously used the logical <code>weight</code> flag in place of the weight vector.</p></li>
-<li><p>Moved dplyr and VGAM from Suggests to Imports and dropped the unused plyr, abind, magrittr, reshape2 and tidyselect dependencies. Fitting the Gompertz distribution no longer prompts to install VGAM.</p></li>
-<li><p>Removed the dependency on the ggtext package, which is scheduled for archival on CRAN (<a href="https://github.com/bcgov/ssdtools/issues/482" class="external-link">#482</a>).</p></li>
-<li><p>Removed the small sample bias vignette (moved to ssdvignettes).</p></li>
+<li><p>Removed a duplicate <code><a href="../reference/ssd_e.html">ssd_elgumbel()</a></code> definition.</p></li>
+<li><p>Fixed the function names in two <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> deprecation messages.</p></li>
+<li><p><code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now return one row per input value when values are duplicated (poissonconsulting/ssdtools#141).</p></li>
+<li><p><code><a href="../reference/ssd_label_comma_hc.html">ssd_label_comma_hc()</a></code> now marks the hazard concentration when <code>big.mark</code> or <code>decimal.mark</code> change the formatting of the label (<a href="https://github.com/bcgov/ssdtools/issues/482" class="external-link">#482</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="additions-2-7-0">Additions<a class="anchor" aria-label="anchor" href="#additions-2-7-0"></a></h3>
+<ul><li>Added <code><a href="../reference/ssd_element_text_hc.html">ssd_element_text_hc()</a></code>, a theme element that draws multi-line axis labels in bold, which replaces <code>ggtext::element_markdown()</code> for the hazard concentration label (<a href="https://github.com/bcgov/ssdtools/issues/482" class="external-link">#482</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="modifications-2-7-0">Modifications<a class="anchor" aria-label="anchor" href="#modifications-2-7-0"></a></h3>
+<ul><li><p><code><a href="../reference/ssd_label_comma_hc.html">ssd_label_comma_hc()</a></code> now puts the hazard concentration label on its own line instead of marking it up as markdown (<a href="https://github.com/bcgov/ssdtools/issues/482" class="external-link">#482</a>).</p></li>
 <li><p>Replaced the deprecated <code>..density..</code> with <code>after_stat(density)</code> in <code>StatSsdpoint</code>.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="dependencies-2-7-0">Dependencies<a class="anchor" aria-label="anchor" href="#dependencies-2-7-0"></a></h3>
+<ul><li><p>Moved dplyr and VGAM from Suggests to Imports and dropped the unused plyr, abind, magrittr, reshape2 and tidyselect dependencies. Fitting the Gompertz distribution no longer prompts to install VGAM.</p></li>
+<li><p>Removed the dependency on the ggtext package, which is scheduled for archival on CRAN (<a href="https://github.com/bcgov/ssdtools/issues/482" class="external-link">#482</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="error-checking-2-7-0">Error Checking<a class="anchor" aria-label="anchor" href="#error-checking-2-7-0"></a></h3>
+<ul><li>
+<code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> now checks that <code>hc</code> is numeric and that <code>decimal.mark</code> is a string and <code><a href="../reference/ssd_plot_data.html">ssd_plot_data()</a></code> now checks that <code>suffix</code> is a string.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-7-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-7-0"></a></h3>
+<ul><li><p>Removed the small sample bias vignette (moved to ssdvignettes).</p></li>
 <li><p>Updated the <code>range_shape1</code> and <code>range_shape2</code> parameter descriptions.</p></li>
 <li><p>Updated the README with the consultation process.</p></li>
-<li><p>Removed a duplicate <code><a href="../reference/ssd_e.html">ssd_elgumbel()</a></code> definition.</p></li>
-<li><p>Added <code><a href="../reference/ssd_element_text_hc.html">ssd_element_text_hc()</a></code>, a theme element that draws multi-line axis labels in bold, which replaces <code>ggtext::element_markdown()</code> for the hazard concentration label (<a href="https://github.com/bcgov/ssdtools/issues/482" class="external-link">#482</a>).</p></li>
-<li><p>Fixed distribution function lookup to the ssdtools namespace only so that attached packages exporting <code>m*</code> helpers (notably actuar) no longer break <code><a href="../reference/ssd_fit_dists.html">ssd_fit_dists()</a></code> (<a href="https://github.com/bcgov/ssdtools/issues/479" class="external-link">#479</a>).</p></li>
-<li><p><code><a href="../reference/ssd_hc.html">ssd_hc()</a></code> and <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> now return one row per input value when values are duplicated (poissonconsulting/ssdtools#141).</p></li>
-<li><p>Fixed the function names in two <code><a href="../reference/ssd_hp.html">ssd_hp()</a></code> deprecation messages.</p></li>
-<li><p><code><a href="../reference/ssd_label_comma_hc.html">ssd_label_comma_hc()</a></code> now puts the hazard concentration label on its own line instead of marking it up as markdown (<a href="https://github.com/bcgov/ssdtools/issues/482" class="external-link">#482</a>).</p></li>
-<li><p><code><a href="../reference/ssd_label_comma_hc.html">ssd_label_comma_hc()</a></code> now marks the hazard concentration when <code>big.mark</code> or <code>decimal.mark</code> change the formatting of the label (<a href="https://github.com/bcgov/ssdtools/issues/482" class="external-link">#482</a>).</p></li>
-<li><p><code><a href="../reference/ssd_plot.html">ssd_plot()</a></code> now checks that <code>hc</code> is numeric and that <code>decimal.mark</code> is a string and <code><a href="../reference/ssd_plot_data.html">ssd_plot_data()</a></code> now checks that <code>suffix</code> is a string.</p></li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.6.0" id="ssdtools-260">ssdtools 2.6.0<a class="anchor" aria-label="anchor" href="#ssdtools-260"></a></h2><p class="text-muted">CRAN release: 2026-03-05</p>
 <ul><li>Changed from <code>min_pboot = 0.95</code> to <code>min_pboot = 0.8</code> to be consistent with shinyssdtools.</li>
