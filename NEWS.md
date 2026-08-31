@@ -4,7 +4,7 @@
 
 ## Bug Fixes
 
-- AICc is now `Inf` when the number of observations is less than the number of parameters plus 2 as the small sample correction is undefined (poissonconsulting/ssdtools#175).
+- AICc is now `Inf` (as undefined) when the number of observations is less or equal to the number of parameters. Previously it was only `Inf` when equal to the number of parameters plus 1 (poissonconsulting/ssdtools#175).
 
 - Fixed distribution function lookup to the ssdtools namespace only so that attached packages exporting `m*` helpers (notably actuar) no longer break `ssd_fit_dists()` (#479).
 
