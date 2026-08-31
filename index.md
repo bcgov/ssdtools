@@ -25,6 +25,7 @@ provides example data sets for several chemicals including Boron. The
 of toxicity concentrations for over 12,000 chemicals.
 
 ``` r
+
 library(ssdtools)
 ssddata::ccme_boron
 #> # A tibble: 28 × 5
@@ -47,12 +48,14 @@ The six default distributions are fit using
 [`ssd_fit_dists()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_dists.md)
 
 ``` r
+
 fits <- ssd_fit_dists(ssddata::ccme_boron)
 ```
 
 and can be quickly plotted using `autoplot`
 
 ``` r
+
 autoplot(fits)
 ```
 
@@ -62,6 +65,7 @@ distributions](reference/figures/README-unnamed-chunk-4-1.png)
 The goodness of fit can be assessed using `ssd_gof`
 
 ``` r
+
 ssd_gof(fits, wt = TRUE)
 #> # A tibble: 6 × 14
 #>   dist     npars  nobs log_lik   aic  aicc delta    wt   bic    ad     ks    cvm
@@ -79,6 +83,7 @@ and the model-averaged 5% hazard concentration estimated (with
 bootstrapping to get confidence intervals) using `ssd_hc`.
 
 ``` r
+
 withr::with_seed(99, {
   hc5 <- ssd_hc(fits, ci = TRUE)
 })
@@ -96,6 +101,7 @@ be estimated by parametric bootstrapping using the `stats` generic
 `predict`.
 
 ``` r
+
 boron_pred <- predict(fits, ci = TRUE)
 ```
 
@@ -103,6 +109,7 @@ The predictions can be plotted together with the original data using
 `ssd_plot`.
 
 ``` r
+
 library(ggplot2)
 
 theme_set(theme_bw())
@@ -168,6 +175,7 @@ To install the latest release version from
 [CRAN](https://CRAN.R-project.org/package=ssdtools).
 
 ``` r
+
 install.packages("ssdtools")
 ```
 
@@ -180,6 +188,7 @@ To install the development version from
 [GitHub](https://github.com/bcgov/ssdtools)
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("bcgov/ssdtools")
 ```
@@ -187,6 +196,7 @@ remotes::install_github("bcgov/ssdtools")
 or from [r-universe](https://bcgov.r-universe.dev/ssdtools).
 
 ``` r
+
 install.packages("ssdtools", repos = c("https://bcgov.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
@@ -210,6 +220,47 @@ Please note that the ssdtools project is released with a [Contributor
 Code of
 Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
+
+## Consultation
+
+### Versioning
+
+The ssdtools and [shinyssdtools](https://github.com/bcgov/shinyssdtools)
+development team is using [Semantic Versioning](https://semver.org/) for
+numbering releases. For example, using the notation “v 2.3.0”, the first
+number is the major version, the second the minor version and the third
+the patch version – i.e. v MAJOR.MINOR.PATCH. Each of these number
+levels relates to the following types of updates:
+
+- MAJOR versions – updates that result in changes to the way that water
+  quality guideline values are calculated (produced using
+  [`ssd_fit_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_fit_bcanz.md)
+  and
+  [`ssd_hc_bcanz()`](https://bcgov.github.io/ssdtools/reference/ssd_hc_bcanz.md)
+  and the shinyssdtools application).
+- MINOR versions – updates that add new functionality (e.g. for
+  researchers) but which do not change the way that water quality
+  guideline values are calculated.
+- PATCH versions – updates that fix bugs.
+
+### Review Process
+
+The jurisdictional consultation and review process for ssdtools updates
+is set out as follows:
+
+- MAJOR version releases
+  - the ssdtools Technical Committee will review and approve/not approve
+    proposed changes to ssdtools and shinyssdtools updates that would
+    constitute MAJOR version releases.
+  - The ssdtools Technical Committee will approve/not approve a MAJOR
+    version release.
+- MINOR versions releases
+  - the ssdtools Technical Committee will be consulted on and will
+    provide guidance on MINOR version updates.
+- PATCH version releases
+  - the ssdtools Technical Committee will not be consulted on PATCH
+    version releases unless the ssdtools and shinyssdtools development
+    team identify a need to do so.
 
 ## References
 

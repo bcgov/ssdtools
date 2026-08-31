@@ -10,6 +10,7 @@ For example, consider the CCME boron data from the
 and then plot the cdfs as follows.
 
 ``` r
+
 library(ssdtools)
 library(ggplot2)
 
@@ -30,6 +31,7 @@ For example, we can add the model-averaged cdf by setting
 and change the theme.
 
 ``` r
+
 ssd_plot_cdf(fits, average = NA, big.mark = " ") +
   scale_color_manual(name = "Distribution", breaks = c("average", names(fits)), values = 1:7) +
   theme_bw()
@@ -51,6 +53,7 @@ The first is
 which plots species sensitivity data
 
 ``` r
+
 ggplot(ssddata::ccme_boron) +
   geom_ssdpoint(aes(x = Conc)) +
   ylab("Probability density") +
@@ -66,6 +69,7 @@ The second is `geom_ssdsegments()` which plots the ranges of censored
 species sensitivity data
 
 ``` r
+
 ggplot(ssddata::ccme_boron) +
   geom_ssdsegment(aes(x = Conc, xend = Conc * 4)) +
   ylab("Probability density") +
@@ -83,6 +87,7 @@ The third is
 which plots species sensitivity confidence intervals
 
 ``` r
+
 ggplot(boron_pred) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion)) +
   ylab("Probability density") +
@@ -99,6 +104,7 @@ And the fourth is
 which plots hazard concentrations
 
 ``` r
+
 ggplot() +
   geom_hcintersect(xintercept = c(1, 2, 3), yintercept = c(0.05, 0.1, 0.2)) +
   ylab("Probability density") +
@@ -113,6 +119,7 @@ lines.](customising-plots_files/figure-html/unnamed-chunk-7-1.png)
 Geoms can be combined as follows
 
 ``` r
+
 gp <- ggplot(boron_pred, aes(x = est)) +
   geom_xribbon(aes(xmin = lcl, xmax = ucl, y = proportion), alpha = 0.2) +
   geom_line(aes(y = proportion)) +
@@ -133,6 +140,7 @@ To log the x-axis and include mathematical notation and add the HC5
 value use the following code.
 
 ``` r
+
 gp +
   scale_x_log10(
     latex2exp::TeX("Boron $(\\mu g$/L)$")
@@ -151,6 +159,7 @@ The most recent plot can be saved as a file using
 also allows the user to set the resolution.
 
 ``` r
+
 ggsave("file_name.png", dpi = 300)
 ```
 

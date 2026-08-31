@@ -95,6 +95,9 @@ Functions to Generate Plots
   [`scale_fill_ssd()`](https://bcgov.github.io/ssdtools/reference/scale_colour_ssd.md)
   : Discrete color-blind scale for SSD Plots
 
+- [`ssd_element_text_hc()`](https://bcgov.github.io/ssdtools/reference/ssd_element_text_hc.md)
+  : Theme Element for Hazard Concentration Axis Labels
+
 - [`ssd_label_comma()`](https://bcgov.github.io/ssdtools/reference/ssd_label_comma.md)
   : Label numbers with significant digits and comma
 

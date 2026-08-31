@@ -346,6 +346,7 @@ ssd_rweibull(n, shape = 1, scale = 1, chk = TRUE)
 ## Examples
 
 ``` r
+
 withr::with_seed(50, {
   x <- ssd_rburrIII3(10000)
 })
@@ -409,7 +410,7 @@ hist(x, breaks = 100)
 # multi fitdists
 fit <- ssd_fit_dists(ssddata::ccme_boron)
 ssd_rmulti_fitdists(2, fit)
-#> [1] 9.832527 3.215087
+#> [1]  3.340844 14.974019
 
 withr::with_seed(50, {
   x <- ssd_rweibull(10000)

@@ -2,7 +2,7 @@
 
 Species sensitivity distributions are cumulative probability
 distributions which are fitted to toxicity concentrations for different
-species as described by Posthuma et al.(2001) \<isbn:9781566705783\>.
+species as described by Posthuma et al. (2001) \<isbn:9781566705783\>.
 The ssdtools package uses Maximum Likelihood to fit distributions such
 as the gamma, log-logistic, log-normal and log-normal log-normal
 mixture. Multiple distributions can be averaged using Akaike Information
@@ -25,6 +25,9 @@ Useful links:
 ([ORCID](https://orcid.org/0000-0002-7683-4592))
 
 Authors:
+
+- Joe Thorley <joe@poissonconsulting.ca>
+  ([ORCID](https://orcid.org/0000-0002-7683-4592))
 
 - Rebecca Fisher <R.Fisher@aims.gov.au>
 

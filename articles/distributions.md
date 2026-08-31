@@ -5,7 +5,7 @@
 Many authors have noted that there is no guiding theory in ecotoxicology
 to justify a particular distributional form for the SSD other than that
 its domain be restricted to the positive real line (Newman et al. 2000;
-Zajdlik 2005; David R. Fox 2016). Distributions selected to use in model
+Zajdlik 2005; Fox 2016). Distributions selected to use in model
 averaging of SSDs must be bounded by zero given that effect
 concentrations cannot be negative. They must also be continuous, and
 generally unbounded on the right. Furthermore, the selected
@@ -34,17 +34,17 @@ original version of `ssdtools` as developed by [Thorley and Schwarz
 included three additional distributions in the candidate model set,
 including the log-gumbel, Gompertz and Weibull distributions. Of these,
 the log-Gumbel (otherwise known as the inverse Weibull, see below) shows
-relatively good convergence (see Figure 32, D. Fox et al. 2022), and is
+relatively good convergence (see Figure 32, Fox et al. 2022), and is
 also one of the limiting distributions of the Burr Type 3 distribution
 implemented in `ssdtools`, and has been retained in the default model
 set. The Gompertz and Weibull distributions, however can exhibit
 unstable behaviour, sometimes showing poor convergence, and therefore
-been excluded from the default set (see Figure 32, D. Fox et al. 2022)
+been excluded from the default set (see Figure 32, Fox et al. 2022)
 
 ### Burr III distribution
 
 A history of Burrlioz and the primary distributions it used were
-recently summmarized by D. R. Fox et al. (2021).
+recently summmarized by Fox et al. (2021).
 
 > In 2000, Australia and New Zealand (Australian and New Zealand
 > Environment and Conservation Council/Agriculture and Resource
@@ -66,19 +66,23 @@ recently summmarized by D. R. Fox et al. (2021).
 > type III distribution is used for data sets of 8 species or more
 > (Batley et al. 2018; Australian and New Zealand Guidelines 2018).
 
-(D. R. Fox et al. 2021)
+(Fox et al. 2021)
 
-The probability density function, $f_{X}(x;b,c,k)$ and cumulative
-distribution function, $F_{X}(x;b,c,k)$ for the Burr III distribution
+The probability density function, $`{f_X}(x;b,c,k)`$ and cumulative
+distribution function, $`{F_X}(x;b,c,k)`$ for the Burr III distribution
 are:
 
 ***Burr III Distribution***
 
-$$f_{X}(x;b,c,k) = \frac{b\, k\, c}{x^{2}}\frac{\left( \frac{b}{x} \right)^{c - 1}}{\left\lbrack 1 + \left( \frac{b}{x} \right)^{c} \right\rbrack^{k + 1}};\quad b,c,k,x > 0$$
+``` math
+f_X(x;b,c,k) = \frac{{b\,k\,c}}{{x^2}} \frac{{\left( \frac{b}{x} \right)}^{c - 1}}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^{k + 1}}; \quad b, c, k, x > 0
+```
 
   
 
-$$F_{X}(x;b,c,k) = \frac{1}{\left\lbrack 1 + \left( \frac{b}{x} \right)^{c} \right\rbrack^{k}};\quad b,c,k,x > 0$$
+``` math
+F_X(x;b,c,k) = \frac{1}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^k}; \quad b, c, k, x > 0
+```
 
   
 
@@ -122,7 +126,7 @@ distributions are used by the Burrlioz software, these have been
 implemented in `ssdtools`. However, we have found there are stability
 issues with both the Burr type III, as well as the inverse Pareto
 distributions, which currently precludes their inclusion in the default
-model set (see D. Fox et al. (2022), and below for more details).
+model set (see Fox et al. (2022), and below for more details).
 
 ### Bimodal distributions
 
@@ -132,13 +136,13 @@ convenient and more realistic way of modelling bimodal toxicity data
 models provide a better conceptual match to the inherent underlying data
 generating process since they directly model bimodality as a mixture of
 2 underlying univariate distributions that represent, for example,
-different modes of action (D. R. Fox et al. 2021). It has been
-postulated that a mixture-model would only be selected in a
-model-averaging context when the fit afforded by the mixture is
-demonstrably better than the fit afforded by any single distribution.
-This is a consequence of the high penalty in AICc associated with the
-increased number of parameters (p in Equation 7 of (D. R. Fox et al.
-2021)) and will be most pronounced for relatively small sample sizes.
+different modes of action (Fox et al. 2021). It has been postulated that
+a mixture-model would only be selected in a model-averaging context when
+the fit afforded by the mixture is demonstrably better than the fit
+afforded by any single distribution. This is a consequence of the high
+penalty in AICc associated with the increased number of parameters (p in
+Equation 7 of (Fox et al. 2021)) and will be most pronounced for
+relatively small sample sizes.
 
 The TMB version of `ssdtools` now includes the option of fitting two
 mixture distributions, individually or as part of a model average set.
@@ -149,7 +153,7 @@ These can be fitted using `ssdtools` by supplying the strings
 The underlying code for these mixtures has three components: the
 likelihood function required for TMB; exported R functions to allow the
 usual methods for a distribution to be called (p, q and r); and a set of
-supporting R functions (see D. Fox et al. (2022) Appendix D for more
+supporting R functions (see Fox et al. (2022) Appendix D for more
 details). Both mixtures have five parameters - two parameters for each
 of the component distributions and a mixing parameter (pmix) that
 defines the weighting of the two distributions in the ‘mixture.’
@@ -202,7 +206,7 @@ The `ssdtools` development team has undertaken extensive simulation
 studies, as well as some detailed technical examinations of the various
 candidate distributions to examine issues of bias, coverage and
 numerical stability. A detailed account of our findings can be found in
-our report (D. Fox et al. 2022) and are not repeated in detail here,
+our report (Fox et al. 2022) and are not repeated in detail here,
 although some of the issues associated with individual distributions are
 outlined below.
 
@@ -240,18 +244,18 @@ argument in the `ssd_fit_dists` call.
   
 
 The Burr family of distributions has been central to the derivation of
-guideline values in Australia and New Zealand for over 20 yr (D. R. Fox
-et al. 2021). While offering a high degree of flexibility, experience
-with these distributions during that time has repeatedly highlighted
+guideline values in Australia and New Zealand for over 20 yr (Fox et al.
+2021). While offering a high degree of flexibility, experience with
+these distributions during that time has repeatedly highlighted
 numerical stability and convergence issues when parameters are estimated
-using maximum likelihood (D. R. Fox et al. 2021). This is thought to be
-due to the high degree of collinearity between parameter estimates
-and/or relatively flat likelihood profiles (D. R. Fox et al. 2021), and
-is one of the motivations behind the logic coded into Burrlioz to revert
-to either of the two limiting distributions. Burr Type 3 distribution is
-not currently one of the recommended distributions in the default model
-set. This is because of 1) the convergence issues associated with the
-Burr Type 3 distribution, 2) the fact that reverting to a limiting two
+using maximum likelihood (Fox et al. 2021). This is thought to be due to
+the high degree of collinearity between parameter estimates and/or
+relatively flat likelihood profiles (Fox et al. 2021), and is one of the
+motivations behind the logic coded into Burrlioz to revert to either of
+the two limiting distributions. Burr Type 3 distribution is not
+currently one of the recommended distributions in the default model set.
+This is because of 1) the convergence issues associated with the Burr
+Type 3 distribution, 2) the fact that reverting to a limiting two
 parameter distribution does not fit easily within a model averaging
 framework, and 3) that one of the two limiting distributions (the
 inverse Pareto, see below) also has estimation and convergence issues.
@@ -263,12 +267,14 @@ distribution is a commonly used distribution in the natural sciences -
 particularly as a probability model to describe right (positive)-skewed
 phenomena such as *concentration* data.
 
-A random variable, $X$ is lognormally distributed if the *logarithm* of
-$X$ is normally distributed. The *pdf* of $X$ is given by
+A random variable, $`X`$ is lognormally distributed if the *logarithm*
+of $`X`$ is normally distributed. The *pdf* of $`X`$ is given by
 
 ***Log-normal Distribution***
 
-$$f_{X}(x;\mu,\sigma) = \frac{1}{\sqrt{2\pi}\ \sigma x}\exp\left\lbrack - \frac{\left( \ln x - \mu \right)^{2}}{2\sigma^{2}} \right\rbrack;\ x,\sigma > 0;\  - \infty < \mu < \infty$$
+``` math
+{f_X}\left( x; \mu, \sigma \right) = \frac{1}{\sqrt{2\pi}\ \sigma x}\exp \left[ - \frac{\left( {\ln x - \mu } \right)^2}{2\sigma^2} \right] ;\ x,\sigma  > 0;\ - \infty  < \mu  < \infty
+```
 
   
 
@@ -289,24 +295,33 @@ functions.
 
 Like the *lognormal* distribution, the
 [log-logistic](https://en.wikipedia.org/wiki/Log-logistic_distribution)
-is similarly defined, that is: if $X$ has a log-logistic distribution,
-then $Y = \ln(X)$ has a *logistic* distribution.
+is similarly defined, that is: if $`X`$ has a log-logistic distribution,
+then $`Y = \ln (X)`$ has a *logistic* distribution.
 
 ***Log-logistic Distribution***
 
-$$f_{Y}(y;\alpha,\beta) = \frac{\left( \frac{\beta}{\alpha} \right)\left( \frac{y}{\alpha} \right)^{\beta - 1}}{\left\lbrack 1 + \left( \frac{y}{\alpha} \right)^{\beta} \right\rbrack^{2}};\quad y,\alpha,\beta > 0$$
+``` math
+{f_Y}\left( {y;\alpha ,\beta } \right) = \frac{\left( \frac{\beta}{\alpha} \right) \left( \frac{y}{\alpha} \right)^{\beta - 1}}{\left[ 1 + \left( \frac{y}{\alpha} \right)^\beta \right]^2}; \quad y, \alpha, \beta > 0
+```
 
-$$F_{Y}(y;\alpha,\beta) = \frac{\left( \frac{y}{\alpha} \right)^{\beta}}{1 + \left( \frac{y}{\alpha} \right)^{\beta}};\quad y,\alpha,\beta > 0$$
+``` math
+{F_Y}\left( {y;\alpha ,\beta } \right) = \frac{\left( \frac{y}{\alpha} \right)^\beta}{1 + \left( \frac{y}{\alpha} \right)^\beta}; \quad y, \alpha, \beta > 0
+```
 
   
 
-letting $\mu = \ln(\alpha)$ and $s = \frac{1}{\beta}$ we have:
+letting $`\mu  = \ln \left( \alpha  \right)`$ and
+$`s = \frac{1}{\beta }`$ we have:
 
 ***Logistic Distribution***
 
-$$f_{X}(x;\mu,s) = \frac{e^{- x}}{\left( 1 + e^{- x} \right)^{2}};\quad x,s > 0,\; - \infty < \mu < \infty$$
+``` math
+{f_X}\left( {x;\mu ,s} \right) = \frac{e^{-x}}{\left( 1 + e^{-x} \right)^2}; \quad x, s > 0, \; -\infty < \mu < \infty
+```
 
-$$F_{X}(x;\mu,s) = \frac{1}{1 + e^{- \frac{x - \mu}{s}}};\quad x,s > 0,\; - \infty < \mu < \infty$$
+``` math
+{F_X}\left( {x;\mu ,s} \right) = \frac{1}{1 + e^{-\frac{x - \mu}{s}}}; \quad x, s > 0, \; -\infty < \mu < \infty
+```
 
   
 
@@ -334,15 +349,22 @@ has the following *pdf* and *cdf*.
 
 ***Gamma Distribution***
 
-$$f_{X}(x;b,c) = \frac{x^{c - 1}e^{- \frac{x}{b}}}{b^{c}\,\Gamma(c)},\quad 0 \leq x < \infty,b,c > 0$$
+``` math
+{f_X}\left( {x;b,c} \right) = \frac{x^{c - 1} e^{-\frac{x}{b}}}{b^c \, \Gamma(c)}, \quad 0 \leq x < \infty,b,c > 0
+```
 
-$$F_{X}(x;b,c) = \frac{1}{\Gamma(c)}\,\gamma\left( c,\frac{x}{b} \right),\quad 0 \leq x < \infty,b,c > 0$$
+``` math
+{F_X}\left( {x;b,c} \right) = \frac{1}{\Gamma(c)} \, \gamma\left(c, \frac{x}{b}\right), \quad 0 \leq x < \infty,b,c > 0
+```
 
   
 
-where $\Gamma( \cdot )$ is the *gamma* function (in `R` this is simply
-`gamma(x)`) and $\gamma( \cdot )$ is the (lower) *incomplete gamma*
-function $$\gamma(x,a) = \int\limits_{0}^{x}t^{a - 1}\, e^{- t}\, dt$$
+where $`\Gamma \left(  \cdot  \right)`$ is the *gamma* function (in `R`
+this is simply `gamma(x)`) and $`\gamma \left(  \cdot  \right)`$ is the
+(lower) *incomplete gamma* function
+``` math
+\gamma \left( {x,a} \right) = \int\limits_0^x {{t^{a - 1}}} \,{e^{ - t}}\,dt
+```
 (this can be computed using the `gammainc` function from the `pracma`
 package in `R`).
 
@@ -372,9 +394,13 @@ distribution has the following *pdf* and *cdf*:
 
 ***Log-Gumbel Distribution***
 
-$$f_{X}(x;\alpha,\beta) = \frac{\beta\, e^{- {(\alpha x)}^{- \beta}}}{\alpha^{\beta}\, x^{\beta + 1}},\quad x,\alpha,\beta > 0$$
+``` math
+{f_X}\left( {x;\alpha ,\beta } \right) = \frac{\beta \, e^{-(\alpha x)^{-\beta}}}{\alpha^\beta \, x^{\beta + 1}}, \quad x, \alpha, \beta > 0
+```
 
-$$F_{X}(x;\alpha,\beta) = e^{- {(\alpha x)}^{- \beta}},\quad x,\alpha,\beta > 0$$
+``` math
+{F_X}\left( {x;\alpha ,\beta } \right) = e^{-(\alpha x)^{-\beta}}, \quad x, \alpha, \beta > 0
+```
 
   
 
@@ -399,20 +425,28 @@ also used in `ssdtools` \[Gompertz\] has the following *pdf* and *cdf*:
 
 ***Gompertz Distribution: Parameterisation I***
 
-$$f_{X}(x;\eta,b) = b\eta\exp\left( \eta + bx - \eta e^{bx} \right),\quad 0 \leq x < \infty,\eta,b > 0$$
+``` math
+{f_X}\left( {x;\eta ,b} \right) = b \eta \exp\left(\eta + bx - \eta e^{bx}\right), \quad 0 \leq x < \infty, \eta, b > 0
+```
 
-$$F_{X}(x;\eta,b) = 1 - \exp\left\lbrack - \eta\left( e^{bx} - 1 \right) \right\rbrack,\quad 0 \leq x < \infty,\eta,b > 0$$
+``` math
+{F_X}\left( {x;\eta ,b} \right) = 1 - \exp\left[ -\eta \left(e^{bx} - 1\right) \right], \quad 0 \leq x < \infty, \eta, b > 0
+```
 
   
 
-The second parameterisation in which the *product* $b\eta$ in the
-formulae above is replaced by the parameter $a$ giving:
+The second parameterisation in which the *product* $`b\eta`$ in the
+formulae above is replaced by the parameter $`a`$ giving:
 
 ***Gompertz Distribution: Parameterisation II***
 
-$$f_{X}(x;a,b) = \frac{a}{b}e^{\frac{x}{b}}\exp\left\lbrack - a\left( e^{\frac{x}{b}} - 1 \right) \right\rbrack,\quad 0 \leq x < \infty,a,b > 0$$
+``` math
+{f_X}(x;a,b) = \frac{a}{b} e^{\frac{x}{b}} \exp\left[ -a\left(e^{\frac{x}{b}} - 1\right) \right], \quad 0 \leq x < \infty, a, b > 0
+```
 
-$$F_{X}(x;a,b) = 1 - \exp\left\lbrack - a\left( e^{\frac{x}{b}} - 1 \right) \right\rbrack,\quad 0 \leq x < \infty,a,b > 0$$
+``` math
+{F_X}(x;a,b) = 1 - \exp\left[ -a\left(e^{\frac{x}{b}} - 1\right) \right], \quad 0 \leq x < \infty, a, b > 0
+```
 
   
 
@@ -425,7 +459,7 @@ Sample Gompertz probability density (A) and cumulative probability (B)
 functions.
 
 The Gompertz distribution is available in `ssdtools`, however parameter
-estimation can be somewhat unstable (D. Fox et al. 2022), and for this
+estimation can be somewhat unstable (Fox et al. 2022), and for this
 reason it is not currently included in the default set.
 
 #### Weibull distribution
@@ -435,7 +469,7 @@ distribution (see next) in `ssdtools` was primarily necessitated by the
 need to maintain consistency with the calculations undertaken in
 `Burrlioz`. As mentioned earlier, both the Weibull and inverse Pareto
 distributions arise as *limiting distributions* when the Burr parameters
-$c$ and $k$ tend to either zero and/or infinity in specific ways.
+$`c`$ and $`k`$ tend to either zero and/or infinity in specific ways.
 
 The two-parameter
 [Weibull](https://en.wikipedia.org/wiki/Weibull_distribution)
@@ -443,9 +477,13 @@ distribution has the following *pdf* and *cdf*:
 
 ***Weibull Distribution***
 
-$$f_{X}(x;c,\theta) = \frac{c}{\theta}\left( \frac{x}{\theta} \right)^{c - 1}e^{- {(\frac{x}{\theta})}^{c}},\quad 0 \leq x < \infty,c,\theta > 0$$
+``` math
+{f_X}(x;c,\theta) = \frac{c}{\theta} \left( \frac{x}{\theta} \right)^{c - 1} e^{-\left( \frac{x}{\theta} \right)^c}, \quad 0 \leq x < \infty, c, \theta > 0
+```
 
-$$F_{X}(x;c,\theta) = 1 - e^{- {(\frac{x}{\theta})}^{c}},\quad 0 \leq x < \infty,c,\theta > 0$$
+``` math
+{F_X}(x;c,\theta) = 1 - e^{-\left( \frac{x}{\theta} \right)^c}, \quad 0 \leq x < \infty, c, \theta > 0
+```
 
   
 
@@ -474,8 +512,8 @@ The inverse Pareto is not offered as a stand-alone option in the
 `Burrlioz 2.0` software. We have spent considerable time and effort
 exploring the properties of the inverse Pareto distribution, including
 deriving bias correction equations and alternative methods for deriving
-confidence intervals (D. Fox et al. 2022). This work has substantial
-value for improving the current `Burrlioz 2.0` method, and our bias
+confidence intervals (Fox et al. 2022). This work has substantial value
+for improving the current `Burrlioz 2.0` method, and our bias
 corrections should be adopted when deriving *HCx* estimates from the
 inverse Pareto where parameters have been estimated using maximum
 likelihood.
@@ -488,16 +526,17 @@ use in the model-fitting process.
 As with many statistical distributions, different ‘variants’ exist.
 These ‘variants’ are not so much different distributions as they are
 simple re-parameterisations. For example, many distributions have a
-*scale* parameter, $\beta$ and some authors and texts will use $\beta$
-while others use $\frac{1}{\beta}$. An example of this
+*scale* parameter, $`\beta`$ and some authors and texts will use
+$`\beta`$ while others use $`\frac{1}{\beta }`$. An example of this
 re-parameterisation was given above for the Gompertz distribution. While
 the choice of mathematical representation may be purely preferential, it
 is sometimes done for mathematical convenience. For example,
 Parameterisation I of the Gompertz distribution above was obtained by
-letting $a = b\eta$ in Parameterisation II. This re-expression involving
-parameters $b$ and $\eta$ would be particularly useful when trying to
-fit a distribution for which one of $\left\{ b,\,\eta \right\}$ was very
-small and the other was very large.
+letting $`a = b\eta`$ in Parameterisation II. This re-expression
+involving parameters $`b`$ and $`\eta`$ would be particularly useful
+when trying to fit a distribution for which one of
+$`\left\{ {b,\,\eta } \right\}`$ was very small and the other was very
+large.
 
 It has already been noted that the particular parameterisation of the
 (Inverse)Pareto distribution used in both `Burrlioz 2.0` and `ssdtools`
@@ -521,38 +560,59 @@ Version*
   
 Pareto Distribution**
 
-$$f_{X}(x;\alpha,\beta) = \alpha\beta^{\alpha}x^{- {(\alpha + 1)}},\quad x > \beta,\;\alpha,\beta > 0$$
+``` math
+{f_X}\left( {x;\alpha ,\beta } \right) = \alpha \beta^\alpha x^{-(\alpha + 1)}, \quad x > \beta, \; \alpha, \beta > 0
+```
 
-$$F_{X}(x;\alpha,\beta) = 1 - \left( \frac{\beta}{x} \right)^{\alpha},\quad x > \beta,\;\alpha,\beta > 0$$
+``` math
+{F_X}\left( {x;\alpha ,\beta } \right) = 1 - \left( \frac{\beta}{x} \right)^\alpha, \quad x > \beta, \; \alpha, \beta > 0
+```
 
-Now, if $X$ has the Pareto distribution above, then  
-$$Y = \frac{1}{X}$$  
+Now, if $`X`$ has the Pareto distribution above, then  
+``` math
+ Y = \frac{1}{X} 
+```
+  
 has an *inverse Pareto distribution.*  
   
 **Inverse Pareto Distribution**
 
-$$g_{Y}(y;\alpha,\beta) = \alpha\beta^{\alpha}y^{\alpha - 1},\quad y \leq \frac{1}{\beta},\;\alpha,\beta > 0$$
+``` math
+{g_Y}\left( {y;\alpha ,\beta } \right) = \alpha \beta^\alpha y^{\alpha - 1}, \quad y \le \frac{1}{\beta}, \; \alpha, \beta > 0
+```
 
-$$G_{Y}(y;\alpha,\beta) = (\beta y)^{\alpha},\quad 0 < y \leq \frac{1}{\beta},\;\alpha,\beta > 0$$
+``` math
+{G_Y}\left( {y;\alpha ,\beta } \right) = \left( \beta y \right)^\alpha, \quad 0 < y \le \frac{1}{\beta}, \; \alpha, \beta > 0
+```
 
   
 
 Importantly, we see that the *North American* versions of these
 distributions are ***bounded*** with the Pareto distribution bounded
-**below** by $\beta$ and the inverse Pareto distribution bounded *above*
-by $\frac{1}{\beta}$.  
-As an aside, the *mle* of $\beta$ in the Pareto distribution is
-$$\widehat{\beta} = \min\left\{ X_{1},\ldots,X_{n} \right\}$$ and the
-*mle* of $\frac{1}{\beta}$ in the inverse Pareto is $$\begin{array}{l}
-{\widetilde{\beta} = \max\left\{ Y_{1},\ldots,Y_{n} \right\}} \\
-{\quad = \max\left\{ \frac{1}{X_{1}},\ldots,\frac{1}{X_{n}} \right\} = \frac{1}{\min\left\{ X_{1},\ldots,X_{n} \right\}}} \\
-{\quad = \frac{1}{\widehat{\beta}}}
-\end{array}$$.
+**below** by $`\beta`$ and the inverse Pareto distribution bounded
+*above* by $`\frac{1}{\beta }`$.  
+As an aside, the *mle* of $`\beta`$ in the Pareto distribution is
+``` math
+\hat \beta  = \min \left\{ {{X_1}, \ldots ,{X_n}} \right\}
+```
+and the *mle* of $`\frac{1}{\beta }`$ in the inverse Pareto is
+``` math
+\begin{array}{*{20}{l}}
+{\tilde \beta  = \max \left\{ {{Y_1}, \ldots ,{Y_n}} \right\}}\\
+{\quad  = \max \left\{ {\frac{1}{{{X_1}}}, \ldots ,\frac{1}{{{X_n}}}} \right\} = \frac{1}{{\min \left\{ {{X_1}, \ldots ,{X_n}} \right\}}}}\\
+{\quad  = \frac{1}{{\hat \beta }}}
+\end{array}
+```
+.
 
-and the *mle* of $\alpha$ is:
-$$\widehat{\alpha} = \left\lbrack \ln\left( \frac{g}{\widehat{\beta}} \right) \right\rbrack^{- 1}$$
-where $g$ is the *geometric mean*:
-$$g = \left\lbrack \prod\limits_{i = 1}^{n}X_{i} \right\rbrack^{\frac{1}{n}}$$
+and the *mle* of $`\alpha`$ is:
+``` math
+\hat \alpha  = {\left[ {\ln \left( {\frac{g}{{\hat \beta }}} \right)} \right]^{ - 1}}
+```
+where $`g`$ is the *geometric mean*:
+``` math
+g = {\left[ {\prod\limits_{i = 1}^n {{X_i}} } \right]^{\frac{1}{n}}}
+```
 
 Thus, it doesn’t matter whether you’re fitting a Pareto or inverse
 Pareto distribution to your data - the parameter estimates are the
@@ -589,19 +649,30 @@ Version*
   
 Pareto Distribution**
 
-$$f_{X}(x;\alpha,\beta) = \frac{\alpha\beta x^{\alpha - 1}}{(x + \beta)^{\alpha + 1}},\quad x,\alpha,\beta > 0$$
+``` math
+{f_X}\left( {x;\alpha ,\beta } \right) = \frac{\alpha \beta x^{\alpha - 1}}{\left( x + \beta \right)^{\alpha + 1}}, \quad x, \alpha, \beta > 0
+```
 
-$$F_{X}(x;\alpha,\beta) = 1 - \left( \frac{\beta}{x + \beta} \right)^{\alpha},\quad x,\alpha,\beta > 0$$
+``` math
+{F_X}\left( {x;\alpha ,\beta } \right) = 1 - \left( \frac{\beta}{x + \beta} \right)^\alpha, \quad x, \alpha, \beta > 0
+```
 
-Now, if $X$ has the Pareto distribution above, then  
-$$Y = \frac{1}{X}$$  
+Now, if $`X`$ has the Pareto distribution above, then  
+``` math
+ Y = \frac{1}{X} 
+```
+  
 has an *inverse Pareto distribution.*  
   
 **Inverse Pareto Distribution**
 
-$$g_{Y}(y;\alpha,\beta) = \frac{\alpha\beta^{\alpha}y^{\alpha - 1}}{(1 + \beta y)^{\alpha + 1}},\quad y,\alpha,\beta > 0$$
+``` math
+{g_Y}\left( {y;\alpha ,\beta } \right) = \frac{\alpha \beta^\alpha y^{\alpha - 1}}{\left( 1 + \beta y \right)^{\alpha + 1}}, \quad y, \alpha, \beta > 0
+```
 
-$$G_{Y}(y;\alpha,\beta) = \left( \frac{\beta y}{1 + \beta y} \right)^{\alpha},\quad y,\alpha,\beta > 0$$
+``` math
+{G_Y}\left( {y;\alpha ,\beta } \right) = \left( \frac{\beta y}{1 + \beta y} \right)^\alpha, \quad y, \alpha, \beta > 0
+```
 
   
 
@@ -643,18 +714,18 @@ the `ssd_fit_dists` call.
 
 ##### NOTES
 
-1.  In the diagram below, $X$ denotes the random variable in the box at
-    the *beginning* of the arrow and the expression beside the arrow
-    indicates the mathematical transformation of $X$ such that the
+1.  In the diagram below, $`X`$ denotes the random variable in the box
+    at the *beginning* of the arrow and the expression beside the arrow
+    indicates the mathematical transformation of $`X`$ such that the
     resultant *transformed* data has the distribution identified in the
     box at the *end* of the arrow.
 
-2.  *Reciprocal* transformations ($\frac{1}{X}$) are **bi-directional**
-    ($\leftrightarrow$).
+2.  *Reciprocal* transformations ($`\frac{1}{X}`$) are
+    **bi-directional** ($`\leftrightarrow`$).
 
 3.  Although the *negative exponential* distribution is **not**
     explicitly included in `ssdtools`, it is a special case of the
-    *gamma* distribution with $c = 1$. It is included in this figure as
+    *gamma* distribution with $`c=1`$. It is included in this figure as
     it is related to other distributions that *are* included in
     `ssdtools`.
 
@@ -681,44 +752,40 @@ Dalgarno, Seb. 2021. “Shinyssdtools: A Web Application for Fitting
 Species Sensitivity Distributions (SSDs).” *Journal of Open Source
 Software* 6 (57): 2848. <https://doi.org/10.21105/joss.02848>.
 
-Fisher, Rebecca, Rick van Dam, Graeme Batley, David Fox, Andrew Harford,
-Chris Humphrey, Cath King, Patricia Menendez, Andrew Negri, and Abigail
-Proctor. 2019. “KEY ISSUES IN THE DERIVATION OF WATER QUALITY GUIDELINE
-VALUES: A WORKSHOP REPORT.” Journal Article.
+Fisher, Rebecca, Rick van Dam, Graeme Batley, et al. 2019. *KEY ISSUES
+IN THE DERIVATION OF WATER QUALITY GUIDELINE VALUES: A WORKSHOP REPORT*.
+Journal Article.
 
-Fox, D. R., R. A. Dam, R. Fisher, G. E. Batley, A. R. Tillmanns, J.
-Thorley, C. J. Schwarz, D. J. Spry, and K. McTavish. 2021. “Recent
-Developments in Species Sensitivity Distribution Modeling.”
-*Environmental Toxicology and Chemistry* 40 (2): 293–308.
-<https://doi.org/10.1002/etc.4925>.
+Fox, D. R., R. A. Dam, R. Fisher, et al. 2021. “Recent Developments in
+Species Sensitivity Distribution Modeling.” *Environmental Toxicology
+and Chemistry* 40 (2): 293–308. <https://doi.org/10.1002/etc.4925>.
 
 Fox, David R. 2016. “Contemporary Methods for Statistical Design and
 Analysis.” *In: Blasco J, Chapman PM, Campana O, Hampel M (Eds) Marine
 Ecotoxicology.*, August.
 <https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5>.
 
-Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. “Joint Investigation
+Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. *Joint Investigation
 into statistical methodologies Underpinning the derivation of toxicant
-guideline values in Australia and New Zealand.” Environmetrics
+guideline values in Australia and New Zealand*. Environmetrics
 Australia; Australian Institute of Marine Science.
 <https://doi.org/10.25845/fm9b-7n28>.
 
-Newman, Michael C., David R. Ownby, Laurent C. A. Mézin, David C.
-Powell, Tyler R. L. Christensen, Scott B. Lerberg, and Britt-Anne
-Anderson. 2000. “Applying species-sensitivity distributions in
-ecological risk assessment: Assumptions of distribution type and
-Sufficient numbers of species.” *Environmental Toxicology and Chemistry*
-19 (February): 508–15. <https://doi.org/10.1002/etc.5620190233>.
+Newman, Michael C., David R. Ownby, Laurent C. A. Mézin, et al. 2000.
+“Applying species-sensitivity distributions in ecological risk
+assessment: Assumptions of distribution type and Sufficient numbers of
+species.” *Environmental Toxicology and Chemistry* 19 (February):
+508–15. <https://doi.org/10.1002/etc.5620190233>.
 
-Shao, Quanxi. 2000. “Estimation for Hazardous Concentrations Based on
-NOEC Toxicity Data: An Alternative Approach,” 13.
+Shao, Quanxi. 2000. *Estimation for Hazardous Concentrations Based on
+NOEC Toxicity Data: An Alternative Approach*. 13.
 
 Thorley, Joe, and Carl Schwarz. 2018. “Ssdtools: An R Package to Fit
 Species Sensitivity Distributions.” *Journal of Open Source Software* 3
 (31): 1082. <https://doi.org/10.21105/joss.01082>.
 
-Zajdlik, B. 2005. “Statistical Analysis of the SSD Approach for
-Development of Canadian Water Quality Guidelines.” CCME Project
+Zajdlik, B. 2005. *Statistical Analysis of the SSD Approach for
+Development of Canadian Water Quality Guidelines*. CCME Project
 354‐200/5. Zajdlik; Associates.
 
 ## Licensing

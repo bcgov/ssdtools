@@ -370,6 +370,7 @@ ssd_qweibull(p, shape = 1, scale = 1, lower.tail = TRUE, log.p = FALSE)
 ## Examples
 
 ``` r
+
 ssd_qburrIII3(0.5)
 #> [1] 1
 

@@ -11,7 +11,6 @@
 <url><loc>https://bcgov.github.io/ssdtools/articles/faqs.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/articles/index.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/articles/model-averaging.html</loc></url>
-<url><loc>https://bcgov.github.io/ssdtools/articles/small-sample-bias.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/articles/ssdtools.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/authors.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/index.html</loc></url>
@@ -57,6 +56,7 @@
 <url><loc>https://bcgov.github.io/ssdtools/reference/ssd_e.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/reference/ssd_ecd.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/reference/ssd_ecd_data.html</loc></url>
+<url><loc>https://bcgov.github.io/ssdtools/reference/ssd_element_text_hc.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/reference/ssd_est_methods.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/reference/ssd_exposure.html</loc></url>
 <url><loc>https://bcgov.github.io/ssdtools/reference/ssd_fit_bcanz.html</loc></url>

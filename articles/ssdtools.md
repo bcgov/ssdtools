@@ -10,7 +10,7 @@ the percent of species that are affected and/or protected by a given
 concentration of a chemical. The concentration that affects 5% of the
 species is referred to as the 5% Hazard Concentration (*HC₅*). This is
 equivalent to a 95% protection value (*PC₉₅*). For more information on
-SSDs the reader is referred to Posthuma, Suter II, and Traas (2001).
+SSDs the reader is referred to Posthuma et al. (2001).
 
 `ssdtools` can handle left, right and interval censored data with two
 limitations. It is currently only possible to model average when the
@@ -44,6 +44,7 @@ Once R is installed, the `ssdtools` package can be installed (together
 with the tidyverse) by executing the following code at the R console
 
 ``` r
+
 install.packages(c("ssdtools", "tidyverse"))
 ```
 
@@ -51,6 +52,7 @@ The `ssdtools` package (and ggplot2 package) can then be loaded into the
 current session using
 
 ``` r
+
 library(ssdtools)
 library(ggplot2)
 ```
@@ -81,6 +83,7 @@ this can be saved as `Species` and `Group` columns. The `.csv` file can
 then be read into R using the following
 
 ``` r
+
 data <- read_csv(file = "path/to/file.csv")
 ```
 
@@ -88,20 +91,21 @@ For the purposes of this manual we use the CCME dataset for boron from
 the [`ssddata`](https://github.com/open-AIMS/ssddata) package.
 
 ``` r
+
 ssddata::ccme_boron
-#> # A tibble: 28 × 5
-#>    Chemical Species                  Conc Group        Units
-#>    <chr>    <chr>                   <dbl> <fct>        <chr>
-#>  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L 
-#>  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L 
-#>  3 Boron    Micropterus salmoides     4.1 Fish         mg/L 
-#>  4 Boron    Brachydanio rerio        10   Fish         mg/L 
-#>  5 Boron    Carassius auratus        15.6 Fish         mg/L 
-#>  6 Boron    Pimephales promelas      18.3 Fish         mg/L 
-#>  7 Boron    Daphnia magna             6   Invertebrate mg/L 
-#>  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L 
-#>  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L 
-#> 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L 
+#> # A tibble: 28 × 6
+#>    Chemical Species                  Conc Group        Units Medium    
+#>    <chr>    <chr>                   <dbl> <fct>        <chr> <chr>     
+#>  1 Boron    Oncorhynchus mykiss       2.1 Fish         mg/L  Freshwater
+#>  2 Boron    Ictalurus punctatus       2.4 Fish         mg/L  Freshwater
+#>  3 Boron    Micropterus salmoides     4.1 Fish         mg/L  Freshwater
+#>  4 Boron    Brachydanio rerio        10   Fish         mg/L  Freshwater
+#>  5 Boron    Carassius auratus        15.6 Fish         mg/L  Freshwater
+#>  6 Boron    Pimephales promelas      18.3 Fish         mg/L  Freshwater
+#>  7 Boron    Daphnia magna             6   Invertebrate mg/L  Freshwater
+#>  8 Boron    Opercularia bimarginata  10   Invertebrate mg/L  Freshwater
+#>  9 Boron    Ceriodaphnia dubia       13.4 Invertebrate mg/L  Freshwater
+#> 10 Boron    Entosiphon sulcatum      15   Invertebrate mg/L  Freshwater
 #> # ℹ 18 more rows
 ```
 
@@ -118,6 +122,7 @@ vignettes for more information regarding appropriate use of
 distributions and the use of model-averaged SSDs.
 
 ``` r
+
 ssd_dists_all()
 #> [1] "burrIII3"      "gamma"         "gompertz"      "lgumbel"      
 #> [5] "llogis"        "llogis_llogis" "lnorm"         "lnorm_lnorm"  
@@ -127,6 +132,7 @@ ssd_dists_all()
 using the `dists` argument.
 
 ``` r
+
 fits <- ssd_fit_dists(ssddata::ccme_boron, dists = c("llogis", "lnorm", "gamma"))
 ```
 
@@ -136,6 +142,7 @@ The estimates for the various terms can be extracted using the tidyverse
 generic `tidy` function (or the base R generic `coef` function).
 
 ``` r
+
 tidy(fits)
 #> # A tibble: 6 × 4
 #>   dist   term           est    se
@@ -159,6 +166,7 @@ plots](https://bcgov.github.io/ssdtools/articles/customising-plots.html)
 vignette.
 
 ``` r
+
 theme_set(theme_bw()) # set plot theme
 
 autoplot(fits) +
@@ -177,6 +185,7 @@ distribution (or as discussed below averaging the results weighted by
 the fit).
 
 ``` r
+
 ssd_gof(fits)
 #> Warning: ssd_gof(wt = FALSE) was deprecated in ssdtools 2.3.1.
 #> ℹ Please use ssd_gof(wt = TRUE) instead.
@@ -253,6 +262,7 @@ averaging is only possible if the distributions have the same number of
 parameters (so that `AIC` can be used to compare the models).
 
 ``` r
+
 withr::with_seed(99, {
   boron_pred <- predict(fits, ci = TRUE)
 })
@@ -266,6 +276,7 @@ generated as well as the proportion of the data sets that successfully
 fitted (`pboot`).
 
 ``` r
+
 boron_pred
 #> # A tibble: 99 × 15
 #>    dist    proportion   est    se    lcl   ucl    wt level est_method ci_method 
@@ -292,6 +303,7 @@ function to summarize an analysis. Once again the returned object is a
 `ggplot` object which can be customized prior to plotting.
 
 ``` r
+
 ssd_plot(ssddata::ccme_boron, boron_pred,
   color = "Group", label = "Species",
   xlab = "Concentration (mg/L)", ribbon = TRUE
@@ -327,6 +339,7 @@ protected at a given concentration using
 [`ssd_hp()`](https://bcgov.github.io/ssdtools/reference/ssd_hp.md).
 
 ``` r
+
 withr::with_seed(99, {
   boron_hc5 <- ssd_hc(fits, proportion = 0.05, ci = TRUE)
   print(boron_hc5)
@@ -366,6 +379,7 @@ censored.
 Let’s produce some left censored data.
 
 ``` r
+
 boron_censored <- ssddata::ccme_boron |>
   dplyr::mutate(left = Conc, right = Conc)
 
@@ -380,6 +394,7 @@ data for distributions with the same number of parameters. We can call
 only the default two parameter models using `ssd_dists_bcanz(n = 2)`.
 
 ``` r
+
 dists <- ssd_fit_dists(boron_censored,
   dists = ssd_dists_bcanz(n = 2),
   left = "left", right = "right"
@@ -390,6 +405,7 @@ There are less goodness-of-fit statistics available for fits to censored
 data (currently just `AIC` and `BIC`).
 
 ``` r
+
 ssd_gof(dists)
 #> # A tibble: 5 × 14
 #>   dist    npars  nobs log_lik   aic  aicc delta weight   bic    ad    ks   cvm
@@ -405,6 +421,7 @@ ssd_gof(dists)
 The model-averaged predictions are calculated using `AIC`
 
 ``` r
+
 ssd_hc(dists, average = FALSE)
 #> # A tibble: 5 × 15
 #>   dist    proportion   est    se   lcl   ucl     wt level est_method ci_method 
@@ -430,6 +447,7 @@ data using non-parametric bootstrapping. The horizontal lines in the
 plot indicate the censoring (range of possible values).
 
 ``` r
+
 withr::with_seed(99, {
   pred <- predict(dists, ci = TRUE, parametric = FALSE)
 })
@@ -447,21 +465,19 @@ censoring.](ssdtools_files/figure-html/unnamed-chunk-19-1.png)
 ## References
 
 Burnham, Kenneth P., and David R. Anderson, eds. 2002. *Model Selection
-and Multimodel Inference*. New York, NY: Springer New York.
+and Multimodel Inference*. Springer New York.
 <https://doi.org/10.1007/b97636>.
 
-Fox, D. R., R. A. Dam, R. Fisher, G. E. Batley, A. R. Tillmanns, J.
-Thorley, C. J. Schwarz, D. J. Spry, and K. McTavish. 2021. “Recent
-Developments in Species Sensitivity Distribution Modeling.”
-*Environmental Toxicology and Chemistry* 40 (2): 293–308.
-<https://doi.org/10.1002/etc.4925>.
+Fox, D. R., R. A. Dam, R. Fisher, et al. 2021. “Recent Developments in
+Species Sensitivity Distribution Modeling.” *Environmental Toxicology
+and Chemistry* 40 (2): 293–308. <https://doi.org/10.1002/etc.4925>.
 
 Posthuma, Leo, Glenn W Suter II, and Theo P Traas. 2001. *Species
 Sensitivity Distributions in Ecotoxicology*. CRC press.
 <https://www.routledge.com/Species-Sensitivity-Distributions-in-Ecotoxicology/Posthuma-II-Traas/p/book/9781566705783>.
 
 R Core Team. 2024. *R: A Language and Environment for Statistical
-Computing*. Vienna, Austria: R Foundation for Statistical Computing.
+Computing*. R Foundation for Statistical Computing.
 <https://www.R-project.org/>.
 
 Wickham, Hadley. 2016. *ggplot2: Elegant Graphics for Data Analysis*.
@@ -469,7 +485,7 @@ Springer-Verlag New York. <https://ggplot2.tidyverse.org>.
 
 Wickham, Hadley, and Garrett Grolemund. 2016. *R for Data Science:
 Import, Tidy, Transform, Visualize, and Model Data*. First edition.
-Sebastopol, CA: O’Reilly. <https://r4ds.had.co.nz>.
+O’Reilly. <https://r4ds.had.co.nz>.
 
 ## Licensing
 

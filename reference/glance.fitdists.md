@@ -28,6 +28,12 @@ glance(x, ..., wt = FALSE)
 
 A tidy tibble of the distributions.
 
+## Details
+
+The `aicc` is `Inf` if the number of observations is less than the
+number of parameters plus two as the small sample size correction is
+undefined.
+
 ## See also
 
 [`ssd_gof()`](https://bcgov.github.io/ssdtools/reference/ssd_gof.md)

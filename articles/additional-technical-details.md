@@ -35,13 +35,13 @@ default set of six distributions (lognormal, log-Gumbel, log-logistic,
 gamma, Weibull, and the lognormal-log-normal mixture), with model
 averaged estimates obtained using the multi-method, and confidence
 intervals estimated using the recommended weighted sample bootstrap
-method (see D. R. Fox et al. (2024)). A total of 20 unique datasets were
+method (see Fox et al. (2024)). A total of 20 unique datasets were
 extracted from ssddata and used to define the parameters for the
 simulation study as follows:
 
 1.  Each dataset was extracted from `ssddata` and fit using the default
-    distribution set as recommended in (D. Fox et al. 2022) and (D. R.
-    Fox et al. 2024).
+    distribution set as recommended in (Fox et al. 2022) and (Fox et al.
+    2024).
 2.  Of the six default distributions, the parameters for the
     distribution having the highest weight for each dataset was used to
     generate new random datasets of varying values of N, including (but
@@ -69,12 +69,17 @@ simulated dataset the true HCx values were obtained directly from the
 parameter estimates of from data generating distribution. From these,
 relative bias was calculated as the scaled-difference between the
 estimated HCx values and the true HCx value, i.e
-$$\frac{\widehat{HC}x - HCx}{HCx}$$ where $\widehat{HC}x$ is the
-estimate of the true value, $HCx$; coverage was calculated as the
-proportion of simulations where the true $HCx$ value fell within the
-lower and upper 95% confidence limits; and the scaled confidence
-interval width was calculated as $$\frac{UL - LL}{HCx}$$ where $UL$ and
-$LL$ are the upper and lower limits respectively.
+``` math
+\frac{\widehat {HC}x-HCx}{HCx}
+```
+where $`\widehat {HC}x`$ is the estimate of the true value, $`HCx`$;
+coverage was calculated as the proportion of simulations where the true
+$`HCx`$ value fell within the lower and upper 95% confidence limits; and
+the scaled confidence interval width was calculated as
+``` math
+\frac{UL-LL}{HCx}
+```
+where $`UL`$ and $`LL`$ are the upper and lower limits respectively.
 
 Bias, confidence interval width and coverage as a function of sample
 size across ~1000 simulations of 20 datasets using the multi model
@@ -199,22 +204,26 @@ results suggest any gains in increasing this to 7 are minimal.
 
 ### Burr III distribution
 
-The probability density function, $f_{X}(x;b,c,k)$ and cumulative
-distribution function, $F_{X}(x;b,c,k)$ for the Burr III distribution
+The probability density function, $`{f_X}(x;b,c,k)`$ and cumulative
+distribution function, $`{F_X}(x;b,c,k)`$ for the Burr III distribution
 (also known as the *Dagum* distribution) as used in `ssdtools` are
 
 ***Burr III Distribution***
 
-$$f_{X}(x;b,c,k) = \frac{b\, k\, c}{x^{2}}\frac{\left( \frac{b}{x} \right)^{c - 1}}{\left\lbrack 1 + \left( \frac{b}{x} \right)^{c} \right\rbrack^{k + 1}},\quad b,c,k,x > 0$$
+``` math
+f_X(x; b, c, k) = \frac{b \, k \, c}{x^2} \frac{\left( \frac{b}{x} \right)^{c - 1}}{\left[ 1 + \left( \frac{b}{x} \right)^c \right]^{k + 1}}, \quad b, c, k, x > 0
+```
 
-$$F_{X}(x;b,c,k) = \frac{1}{\left\lbrack 1 + \left( \frac{b}{x} \right)^{c} \right\rbrack^{k}},\quad b,c,k,x > 0$$
+``` math
+F_X(x; b, c, k) = \frac{1}{\left[ 1 + \left( \frac{b}{x} \right)^c \right]^k}, \quad b, c, k, x > 0
+```
 
   
 
 ### Inverse Pareto distribution
 
-Let $X \sim Burr(b,c,k)$ have the *pdf* given in the box above. It is
-well known that the distribution of $Y = \frac{1}{X}$ is the *inverse
+Let $`X \sim Burr(b,c,k)`$ have the *pdf* given in the box above. It is
+well known that the distribution of $`Y = \frac{1}{X}`$ is the *inverse
 Burr* distribution (also known as the *SinghMaddala* distribution) for
 which
 
@@ -223,36 +232,43 @@ which
 {{\left\[ {1 + {{\left( {\frac{y}{b}} \right)}^c}} \right\]}^{k +
 1}}}}}, & {b,c,k,y \> 0} \end{array} \$\$
 
-$$\begin{matrix}
-{{F_{Y}(y;b,c,k) = 1 - \frac{1}{\left\lbrack 1 + \left( \frac{y}{b} \right)^{c} \right\rbrack^{k}}},} & {b,c,k,y > 0}
-\end{matrix}$$
+``` math
+\begin{array}{*{20}{c}}
+{{F_Y}(y;b,c,k) = 1 - \frac{1}{{{{\left[ {1 + {{\left( {\frac{y}{b}} \right)}^c}} \right]}^k}}}}, & {b,c,k,y > 0}
+\end{array}
+```
 
-We now consider the limiting distribution when
-$\left. c\rightarrow\infty \right.$ and $\left. k\rightarrow 0 \right.$
-in such a way that the product $ck$ remains constant,
-i.e. $ck = \lambda$.
+We now consider the limiting distribution when $`c \to \infty`$ and
+$`k \to 0`$ in such a way that the product $`ck`$ remains constant,
+i.e. $`ck = \lambda`$.
 
-Now, $$\begin{array}{l}
-{\operatorname{}\limits_{ck = \lambda}\left\{ F_{Y}(y;b,c,k) \right\} = 1 - \operatorname{}\limits_{ck = \lambda}\frac{1}{\left\lbrack 1 + \left( \frac{y}{b} \right)^{c} \right\rbrack^{k}}} \\
- \\
+Now,
+``` math
+\begin{array}{l}
+\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{F_Y}(y;b,c,k)} \right\} = 1 - \mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \frac{1}{{{{\left[ {1 + {{\left( {\frac{y}{b}} \right)}^c}} \right]}^k}}} \\
+\\
 \text{and} \\
- \\
-{\operatorname{}\limits_{ck = \lambda}\left\lbrack 1 + \left( \frac{y}{b} \right)^{c} \right\rbrack^{k} = \operatorname{}\limits_{ck = \lambda}\left\{ \left( \frac{y}{b} \right)^{ck}\left\lbrack 1 + \left( \frac{b}{y} \right)^{c} \right\rbrack^{k} \right\}} \\
- \\
+\\
+\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } {\left[ {1 + {{\left( {\frac{y}{b}} \right)}^c}} \right]^k} = \mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left( {\frac{y}{b}} \right)}^{ck}}{{\left[ {1 + {{\left( {\frac{b}{y}} \right)}^c}} \right]}^k}} \right\} \\
+\\
 \text{and} \\
- \\
-{\operatorname{}\limits_{ck = \lambda}\left\{ \left( \frac{y}{b} \right)^{ck}\left\lbrack 1 + \left( \frac{b}{y} \right)^{c} \right\rbrack^{k} \right\} = \operatorname{}\limits_{ck = \lambda}\left\{ \left( \frac{y}{b} \right)^{ck} \right\}\operatorname{}\limits_{ck = \lambda}\left\{ \left\lbrack 1 + \left( \frac{b}{y} \right)^{c} \right\rbrack^{k} \right\}} \\
-{= \operatorname{}\limits_{ck = \lambda}\left\{ \left( \frac{y}{b} \right)^{ck} \right\}\; \cdot \, 1} \\
-{= \left( \frac{y}{b} \right)^{\lambda}}
-\end{array}$$
+\\
+\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left( {\frac{y}{b}} \right)}^{ck}}{{\left[ {1 + {{\left( {\frac{b}{y}} \right)}^c}} \right]}^k}} \right\} = \mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left( {\frac{y}{b}} \right)}^{ck}}} \right\}\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left[ {1 + {{\left( {\frac{b}{y}} \right)}^c}} \right]}^k}} \right\} \\
+= \mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{{\left( {\frac{y}{b}} \right)}^{ck}}} \right\}\; \cdot \,1 \\
+= {\left( {\frac{y}{b}} \right)^\lambda }
+\end{array}
+```
 
-Therefore, $$\begin{matrix}
-{\operatorname{}\limits_{ck = \lambda}\left\{ F_{Y}(y;b,c,k) \right\} = 1 - \left( \frac{b}{y} \right)^{\lambda}} & {y \geq b}
-\end{matrix}$$
+Therefore,
+``` math
+\begin{array}{*{20}{c}}
+{\mathop {\mathop {\lim }\limits_{(c,k) \to (\infty ,0)} }\limits_{ck = \lambda } \left\{ {{F_Y}(y;b,c,k)} \right\} = 1 - {{\left( {\frac{b}{y}} \right)}^\lambda }} & {y \ge b}
+\end{array}
+```
 
 which we recognise as the (American) Pareto distribution. So, if the
-limiting distribution of $Y = \frac{1}{X}$ is a Pareto distribution,
-then the limiting distribution of $X = \frac{1}{Y}$ is the (American)
+limiting distribution of $`Y = \frac{1}{X}`$ is a Pareto distribution,
+then the limiting distribution of $`X = \frac{1}{Y}`$ is the (American)
 *inverse Pareto* distribution
 
 \$\$ \begin{array}{l} {f_X}\left( {x;\alpha ,\beta } \right) = \lambda
@@ -264,37 +280,49 @@ b}};{\rm{ }}\lambda {\rm{,}}b \> 0 \\ {F_X}\left( {x;\alpha ,\beta }
 For completeness, the MLEs of this distribution have closed-form
 expressions and are given by
 
-$$\begin{array}{l}
-{\widehat{\lambda} = \left\lbrack \ln\left( \frac{g_{X}}{\widehat{b}} \right) \right\rbrack^{- 1}} \\
-{\widehat{b} = \frac{1}{\max\{ X_{i}\}}}
-\end{array}$$
+``` math
+\begin{array}{l}
+\hat \lambda  = \left[ \ln \left( \frac{{g_X}}{{\hat b}} \right) \right]^{-1} \\
+\hat b = \frac{1}{{\max \{ X_i \}}}
+\end{array}
+```
 
 and \$\rm{g_X}\$ is the *geometric mean* of the data.
 
 ### Inverse Weibull distribution
 
-Let $X \sim \text{Burr}(b,c,k)$ have the *pdf* given in the box above.
-We make the transformation $Y = \frac{bk^{\frac{1}{c}}\theta}{X}$, where
-$\theta$ is a parameter (constant). The distribution of $Y$ is also a
-Burr distribution and has *cdf*
+Let $`X \sim \text{Burr}(b,c,k)`$ have the *pdf* given in the box above.
+We make the transformation $`Y = \frac{b k^{\frac{1}{c}} \theta}{X}`$,
+where $`\theta`$ is a parameter (constant). The distribution of $`Y`$ is
+also a Burr distribution and has *cdf*
 
-$$G_{Y}(y) = 1 - \frac{1}{\left\lbrack 1 + \left( \frac{y}{k^{\frac{1}{c}}\theta} \right)^{c} \right\rbrack^{k}}.$$
+``` math
+G_Y(y) = 1 - \frac{1}{\left[ 1 + \left( \frac{y}{k^{\frac{1}{c}} \theta} \right)^c \right]^k}.
+```
 
 We are interested in the limiting behavior of this Burr distribution as
-$\left. k\rightarrow\infty \right.$.
+$`k \to \infty`$.
 
 Now,
 
-$$\lim\limits_{k\rightarrow\infty}G_{Y}(y) = 1 - \lim\limits_{k\rightarrow\infty}\left\lbrack 1 + \left( \frac{y}{k^{\frac{1}{c}}\theta} \right)^{c} \right\rbrack^{- k}.$$
+``` math
+\lim_{k \to \infty} G_Y(y) = 1 - \lim_{k \to \infty} \left[ 1 + \left( \frac{y}{k^{\frac{1}{c}} \theta} \right)^c \right]^{-k}.
+```
 
-$$= 1 - \lim\limits_{k\rightarrow\infty}\left\lbrack 1 + \frac{\left( \frac{y}{\theta} \right)^{c}}{k} \right\rbrack^{- k}.$$
+``` math
+= 1 - \lim_{k \to \infty} \left[ 1 + \frac{\left( \frac{y}{\theta} \right)^c}{k} \right]^{-k}.
+```
 
-$$= 1 - \exp\left\lbrack - \left( \frac{y}{\theta} \right)^{c} \right\rbrack,$$
+``` math
+= 1 - \exp \left[ -\left( \frac{y}{\theta} \right)^c \right],
+```
 
-$$\left\{ {\text{using the fact that}\mspace{6mu}}\lim\limits_{n\rightarrow\infty}\left( 1 + \frac{z}{n} \right)^{- n} = e^{- z} \right\}.$$
+``` math
+\left\{ \text{using the fact that } \lim_{n \to \infty} \left( 1 + \frac{z}{n} \right)^{-n} = e^{-z} \right\}.
+```
 
 We recognize the last expression as the *cdf* of a Weibull distribution
-with parameters $c$ and $\theta$.
+with parameters $`c`$ and $`\theta`$.
 
 ## References
 
@@ -307,15 +335,15 @@ Province of British Columbia, Victoria, BC, Canada.
 Fisher, Rebecca, and Joe Thorley. 2021. *Ssddata: Species Sensitivity
 Distribution Data*. <https://CRAN.R-project.org/package=ssddata>.
 
-Fox, David R, Rebecca Fisher, Thorley, and Joseph L. 2024. “Final Report
+Fox, David R, Rebecca Fisher, Thorley, and Joseph L. 2024. *Final Report
 of the Joint Investigation into SSD Modelling and Ssdtools
 Implementation for the Derivation of Toxicant Guidelines Values in
-Australia and New Zealand.” Environmetrics Australia; Australian
+Australia and New Zealand*. Environmetrics Australia; Australian
 Institute of Marine Science. <https://doi.org/10.25845/xtvt-yc51>.
 
-Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. “Joint Investigation
+Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. *Joint Investigation
 into statistical methodologies Underpinning the derivation of toxicant
-guideline values in Australia and New Zealand.” Environmetrics
+guideline values in Australia and New Zealand*. Environmetrics
 Australia; Australian Institute of Marine Science.
 <https://doi.org/10.25845/fm9b-7n28>.
 
@@ -323,13 +351,12 @@ Thorley, Joe, and Carl Schwarz. 2018. “Ssdtools: An r Package to Fit
 Species Sensitivity Distributions.” *Journal of Open Source Software* 3
 (31). <https://joss.theoj.org/papers/10.21105/joss.01082>.
 
-Warne, M, GE Batley, RA van Dam, JC Chapman, DR Fox, CW Hickey, and JL
-Stauber. 2018. “Revised Method for Deriving Australian and New Zealand
-Water Quality Guideline Values for Toxicants – Update of 2015 Version.”
-Journal Article. *Prepared for the Revision of the Australian and New
-Zealand Guidelines for Fresh and Marine Water Quality. Australian and
-New Zealand Governments and Australian State and Territory Governments,
-Canberra, 48 Pp*.
+Warne, M, GE Batley, RA van Dam, et al. 2018. “Revised Method for
+Deriving Australian and New Zealand Water Quality Guideline Values for
+Toxicants – Update of 2015 Version.” Journal Article. *Prepared for the
+Revision of the Australian and New Zealand Guidelines for Fresh and
+Marine Water Quality. Australian and New Zealand Governments and
+Australian State and Territory Governments, Canberra, 48 Pp*.
 
 ## Licensing
 

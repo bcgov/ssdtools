@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Distributions in ssdtools">
 </head>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ssdtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@
                         <h4 data-toc-skip class="author">ssdtools
 Team</h4>
             
-            <h4 data-toc-skip class="date">2026-03-04</h4>
+            <h4 data-toc-skip class="date">2026-08-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/ssdtools/blob/main/vignettes/articles/distributions.Rmd" class="external-link"><code>vignettes/articles/distributions.Rmd</code></a></small>
       <div class="d-none name"><code>distributions.Rmd</code></div>
@@ -88,13 +88,13 @@ Team</h4>
 </h2>
 <p>Many authors have noted that there is no guiding theory in
 ecotoxicology to justify a particular distributional form for the SSD
-other than that its domain be restricted to the positive real line <span class="citation">(Newman et al. 2000; Zajdlik 2005; David R. Fox
-2016)</span>. Distributions selected to use in model averaging of SSDs
-must be bounded by zero given that effect concentrations cannot be
-negative. They must also be continuous, and generally unbounded on the
-right. Furthermore, the selected distributions within the candidate
-model set should provide a variety of shapes to capture the diversity of
-shapes in empirical species sensitivity distributions.</p>
+other than that its domain be restricted to the positive real line <span class="citation">(Newman et al. 2000; Zajdlik 2005; Fox 2016)</span>.
+Distributions selected to use in model averaging of SSDs must be bounded
+by zero given that effect concentrations cannot be negative. They must
+also be continuous, and generally unbounded on the right. Furthermore,
+the selected distributions within the candidate model set should provide
+a variety of shapes to capture the diversity of shapes in empirical
+species sensitivity distributions.</p>
 <p>To date 9 distributions have been implemented in
 <code>ssdtools</code>, although only 6 appear in the default set. Here
 we provide a detailed account of all 9 of the distributions available in
@@ -114,19 +114,19 @@ the original version of <code>ssdtools</code> as developed by <a href="https://j
 Schwarz (2018)</a> also included three additional distributions in the
 candidate model set, including the log-gumbel, Gompertz and Weibull
 distributions. Of these, the log-Gumbel (otherwise known as the inverse
-Weibull, see below) shows relatively good convergence <span class="citation">(see Figure 32, D. Fox et al. 2022)</span>, and is also
+Weibull, see below) shows relatively good convergence <span class="citation">(see Figure 32, Fox et al. 2022)</span>, and is also
 one of the limiting distributions of the Burr Type 3 distribution
 implemented in <code>ssdtools</code>, and has been retained in the
 default model set. The Gompertz and Weibull distributions, however can
 exhibit unstable behaviour, sometimes showing poor convergence, and
 therefore been excluded from the default set <span class="citation">(see
-Figure 32, D. Fox et al. 2022)</span></p>
+Figure 32, Fox et al. 2022)</span></p>
 </div>
 <div class="section level3">
 <h3 id="burr-iii-distribution">Burr III distribution<a class="anchor" aria-label="anchor" href="#burr-iii-distribution"></a>
 </h3>
 <p>A history of Burrlioz and the primary distributions it used were
-recently summmarized by <span class="citation">D. R. Fox et al.
+recently summmarized by <span class="citation">Fox et al.
 (2021)</span>.</p>
 <blockquote>
 <p>In 2000, Australia and New Zealand (Australian and New Zealand
@@ -149,17 +149,17 @@ these small data sets, whereas the Burr type III distribution is used
 for data sets of 8 species or more (Batley et al. 2018; Australian and
 New Zealand Guidelines 2018).</p>
 </blockquote>
-<p><span class="citation">(D. R. Fox et al. 2021)</span></p>
+<p><span class="citation">(Fox et al. 2021)</span></p>
 <p>The probability density function,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{f_X}(x;b,c,k)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">{f_X}(x;b,c,k)</annotation></semantics></math>
 and cumulative distribution function,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">{F_X}(x;b,c,k)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">{F_X}(x;b,c,k)</annotation></semantics></math>
 for the Burr III distribution are:</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Burr III Distribution</u></b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>b</mi><mspace width="0.167em"></mspace><mi>k</mi><mspace width="0.167em"></mspace><mi>c</mi></mrow><msup><mi>x</mi><mn>2</mn></msup></mfrac><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msup></mfrac><mo>;</mo><mspace width="1.0em"></mspace><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f_X(x;b,c,k) = \frac{{b\,k\,c}}{{x^2}} \frac{{\left( \frac{b}{x} \right)}^{c - 1}}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^{k + 1}}; \quad b, c, k, x &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><mi>b</mi><mspace width="0.167em"></mspace><mi>k</mi><mspace width="0.167em"></mspace><mi>c</mi></mrow><msup><mi>x</mi><mn>2</mn></msup></mfrac><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msup></mfrac><mo>;</mo><mspace width="1.0em"></mspace><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f_X(x;b,c,k) = \frac{{b\,k\,c}}{{x^2}} \frac{{\left( \frac{b}{x} \right)}^{c - 1}}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^{k + 1}}; \quad b, c, k, x &gt; 0</annotation></semantics></math></p>
 <p><br></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup><mo stretchy="true" form="postfix">]</mo></mrow><mi>k</mi></msup></mfrac><mo>;</mo><mspace width="1.0em"></mspace><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">F_X(x;b,c,k) = \frac{1}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^k}; \quad b, c, k, x &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><msup><mrow><mo stretchy="true" form="prefix">[</mo><mn>1</mn><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>b</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup><mo stretchy="true" form="postfix">]</mo></mrow><mi>k</mi></msup></mfrac><mo>;</mo><mspace width="1.0em"></mspace><mi>b</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>k</mi><mo>,</mo><mi>x</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">F_X(x;b,c,k) = \frac{1}{{\left[ 1 + \left( \frac{b}{x} \right)^c \right]}^k}; \quad b, c, k, x &gt; 0</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center">
@@ -197,8 +197,8 @@ Gumbel) distributions are used by the Burrlioz software, these have been
 implemented in <code>ssdtools</code>. However, we have found there are
 stability issues with both the Burr type III, as well as the inverse
 Pareto distributions, which currently precludes their inclusion in the
-default model set (see <span class="citation">D. Fox et al.
-(2022)</span>, and below for more details).</p>
+default model set (see <span class="citation">Fox et al. (2022)</span>,
+and below for more details).</p>
 </div>
 <div class="section level3">
 <h3 id="bimodal-distributions">Bimodal distributions<a class="anchor" aria-label="anchor" href="#bimodal-distributions"></a>
@@ -209,13 +209,13 @@ convenient and more realistic way of modelling bimodal toxicity data
 heavy, statistical mixture models provide a better conceptual match to
 the inherent underlying data generating process since they directly
 model bimodality as a mixture of 2 underlying univariate distributions
-that represent, for example, different modes of action <span class="citation">(D. R. Fox et al. 2021)</span>. It has been postulated
-that a mixture-model would only be selected in a model-averaging context
-when the fit afforded by the mixture is demonstrably better than the fit
+that represent, for example, different modes of action <span class="citation">(Fox et al. 2021)</span>. It has been postulated that a
+mixture-model would only be selected in a model-averaging context when
+the fit afforded by the mixture is demonstrably better than the fit
 afforded by any single distribution. This is a consequence of the high
 penalty in AICc associated with the increased number of parameters (p in
-Equation 7 of <span class="citation">(D. R. Fox et al. 2021)</span>) and
-will be most pronounced for relatively small sample sizes.</p>
+Equation 7 of <span class="citation">(Fox et al. 2021)</span>) and will
+be most pronounced for relatively small sample sizes.</p>
 <p>The TMB version of <code>ssdtools</code> now includes the option of
 fitting two mixture distributions, individually or as part of a model
 average set. These can be fitted using <code>ssdtools</code> by
@@ -224,7 +224,7 @@ supplying the strings “llogis_llogis” and/or “lnorm_lnorm” to the
 <p>The underlying code for these mixtures has three components: the
 likelihood function required for TMB; exported R functions to allow the
 usual methods for a distribution to be called (p, q and r); and a set of
-supporting R functions (see <span class="citation">D. Fox et al.
+supporting R functions (see <span class="citation">Fox et al.
 (2022)</span> Appendix D for more details). Both mixtures have five
 parameters - two parameters for each of the component distributions and
 a mixing parameter (pmix) that defines the weighting of the two
@@ -273,7 +273,7 @@ continuous distribution that has both right and left tails.</p>
 simulation studies, as well as some detailed technical examinations of
 the various candidate distributions to examine issues of bias, coverage
 and numerical stability. A detailed account of our findings can be found
-in our report <span class="citation">(D. Fox et al. 2022)</span> and are
+in our report <span class="citation">(Fox et al. 2022)</span> and are
 not repeated in detail here, although some of the issues associated with
 individual distributions are outlined below.</p>
 <div class="section level3">
@@ -309,20 +309,20 @@ fitted using <code>ssdtools</code> by supplying the string
 </div>
 <p><br></p>
 <p>The Burr family of distributions has been central to the derivation
-of guideline values in Australia and New Zealand for over 20 yr <span class="citation">(D. R. Fox et al. 2021)</span>. While offering a high
-degree of flexibility, experience with these distributions during that
-time has repeatedly highlighted numerical stability and convergence
-issues when parameters are estimated using maximum likelihood <span class="citation">(D. R. Fox et al. 2021)</span>. This is thought to be
-due to the high degree of collinearity between parameter estimates
-and/or relatively flat likelihood profiles <span class="citation">(D. R.
-Fox et al. 2021)</span>, and is one of the motivations behind the logic
-coded into Burrlioz to revert to either of the two limiting
-distributions. Burr Type 3 distribution is not currently one of the
-recommended distributions in the default model set. This is because of
-1) the convergence issues associated with the Burr Type 3 distribution,
-2) the fact that reverting to a limiting two parameter distribution does
-not fit easily within a model averaging framework, and 3) that one of
-the two limiting distributions (the inverse Pareto, see below) also has
+of guideline values in Australia and New Zealand for over 20 yr <span class="citation">(Fox et al. 2021)</span>. While offering a high degree
+of flexibility, experience with these distributions during that time has
+repeatedly highlighted numerical stability and convergence issues when
+parameters are estimated using maximum likelihood <span class="citation">(Fox et al. 2021)</span>. This is thought to be due to
+the high degree of collinearity between parameter estimates and/or
+relatively flat likelihood profiles <span class="citation">(Fox et al.
+2021)</span>, and is one of the motivations behind the logic coded into
+Burrlioz to revert to either of the two limiting distributions. Burr
+Type 3 distribution is not currently one of the recommended
+distributions in the default model set. This is because of 1) the
+convergence issues associated with the Burr Type 3 distribution, 2) the
+fact that reverting to a limiting two parameter distribution does not
+fit easily within a model averaging framework, and 3) that one of the
+two limiting distributions (the inverse Pareto, see below) also has
 estimation and convergence issues.</p>
 </div>
 <div class="section level4">
@@ -341,7 +341,7 @@ is normally distributed. The <em>pdf</em> of
 is given by</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Log-normal Distribution</u></b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt><mspace width="0.222em"></mspace><mi>σ</mi><mi>x</mi></mrow></mfrac><mo>exp</mo><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>x</mi><mo>−</mo><mi>μ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><mo stretchy="true" form="postfix">]</mo></mrow><mo>;</mo><mspace width="0.222em"></mspace><mi>x</mi><mo>,</mo><mi>σ</mi><mo>&gt;</mo><mn>0</mn><mo>;</mo><mspace width="0.222em"></mspace><mo>−</mo><mi>∞</mi><mo>&lt;</mo><mi>μ</mi><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">{f_X}\left( x; \mu, \sigma \right) = \frac{1}{\sqrt{2\pi}\ \sigma x}\exp \left[ - \frac{\left( {\ln x - \mu } \right)^2}{2\sigma^2} \right] ;\ x,\sigma  &gt; 0;\ - \infty  &lt; \mu  &lt; \infty</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt><mspace width="0.222em"></mspace><mi>σ</mi><mi>x</mi></mrow></mfrac><mrow><mi mathvariant="normal">exp</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>−</mi><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi mathvariant="normal">ln</mi><mi>x</mi><mo>−</mo><mi>μ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><mo stretchy="true" form="postfix">]</mo></mrow><mo>;</mo><mspace width="0.222em"></mspace><mi>x</mi><mo>,</mo><mi>σ</mi><mo>&gt;</mo><mn>0</mn><mo>;</mo><mspace width="0.222em"></mspace><mo>−</mo><mi>∞</mi><mo>&lt;</mo><mi>μ</mi><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">{f_X}\left( x; \mu, \sigma \right) = \frac{1}{\sqrt{2\pi}\ \sigma x}\exp \left[ - \frac{\left( {\ln x - \mu } \right)^2}{2\sigma^2} \right] ;\ x,\sigma  &gt; 0;\ - \infty  &lt; \mu  &lt; \infty</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <p>The log-normal distribution was selected as the starting distribution
@@ -363,7 +363,7 @@ functions.
 is similarly defined, that is: if
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
 has a log-logistic distribution, then
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Y = \ln (X)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mrow><mi mathvariant="normal">ln</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y = \ln (X)</annotation></semantics></math>
 has a <em>logistic</em> distribution.</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Log-logistic Distribution</u></b></p>
@@ -372,14 +372,14 @@ has a <em>logistic</em> distribution.</p>
 </div>
 <p><br></p>
 <p>letting
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mu  = \ln \left( \alpha  \right)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mrow><mi mathvariant="normal">ln</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mu  = \ln \left( \alpha  \right)</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mfrac><mn>1</mn><mi>β</mi></mfrac></mrow><annotation encoding="application/x-tex">s = \frac{1}{\beta }</annotation></semantics></math>
 we have:</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Logistic Distribution</u></b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>μ</mi><mo>,</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><msup><mi>e</mi><mrow><mo>−</mo><mi>x</mi></mrow></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>x</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mfrac><mo>;</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>,</mo><mi>s</mi><mo>&gt;</mo><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mo>−</mo><mi>∞</mi><mo>&lt;</mo><mi>μ</mi><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;\mu ,s} \right) = \frac{e^{-x}}{\left( 1 + e^{-x} \right)^2}; \quad x, s &gt; 0, \; -\infty &lt; \mu &lt; \infty</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>μ</mi><mo>,</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mfrac><mrow><mi>x</mi><mo>−</mo><mi>μ</mi></mrow><mi>s</mi></mfrac></mrow></msup></mrow></mfrac><mo>;</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>,</mo><mi>s</mi><mo>&gt;</mo><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mo>−</mo><mi>∞</mi><mo>&lt;</mo><mi>μ</mi><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;\mu ,s} \right) = \frac{1}{1 + e^{-\frac{x - \mu}{s}}}; \quad x, s &gt; 0, \; -\infty &lt; \mu &lt; \infty</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>μ</mi><mo>,</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><msup><mi>e</mi><mrow><mi>−</mi><mi>x</mi></mrow></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>x</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mfrac><mo>;</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>,</mo><mi>s</mi><mo>&gt;</mo><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mo>−</mo><mi>∞</mi><mo>&lt;</mo><mi>μ</mi><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;\mu ,s} \right) = \frac{e^{-x}}{\left( 1 + e^{-x} \right)^2}; \quad x, s &gt; 0, \; -\infty &lt; \mu &lt; \infty</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>μ</mi><mo>,</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mi>−</mi><mfrac><mrow><mi>x</mi><mo>−</mo><mi>μ</mi></mrow><mi>s</mi></mfrac></mrow></msup></mrow></mfrac><mo>;</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>,</mo><mi>s</mi><mo>&gt;</mo><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mo>−</mo><mi>∞</mi><mo>&lt;</mo><mi>μ</mi><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;\mu ,s} \right) = \frac{1}{1 + e^{-\frac{x - \mu}{s}}}; \quad x, s &gt; 0, \; -\infty &lt; \mu &lt; \infty</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <p>The log-logistic distribution is often used as a candidate SSD
@@ -403,17 +403,17 @@ Sample Log logistic probability density (A) and cumulative probability
 distribution has the following <em>pdf</em> and <em>cdf</em>.</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Gamma Distribution</u></b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><msup><mi>x</mi><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mo>−</mo><mfrac><mi>x</mi><mi>b</mi></mfrac></mrow></msup></mrow><mrow><msup><mi>b</mi><mi>c</mi></msup><mspace width="0.167em"></mspace><mi>Γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>c</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;b,c} \right) = \frac{x^{c - 1} e^{-\frac{x}{b}}}{b^c \, \Gamma(c)}, \quad 0 \leq x &lt; \infty,b,c &gt; 0</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mi>Γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>c</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mspace width="0.167em"></mspace><mi>γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>c</mi><mo>,</mo><mfrac><mi>x</mi><mi>b</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;b,c} \right) = \frac{1}{\Gamma(c)} \, \gamma\left(c, \frac{x}{b}\right), \quad 0 \leq x &lt; \infty,b,c &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><msup><mi>x</mi><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mi>−</mi><mfrac><mi>x</mi><mi>b</mi></mfrac></mrow></msup></mrow><mrow><msup><mi>b</mi><mi>c</mi></msup><mspace width="0.167em"></mspace><mi mathvariant="normal">Γ</mi><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;b,c} \right) = \frac{x^{c - 1} e^{-\frac{x}{b}}}{b^c \, \Gamma(c)}, \quad 0 \leq x &lt; \infty,b,c &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mspace width="0.167em"></mspace><mi>γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>c</mi><mo>,</mo><mfrac><mi>x</mi><mi>b</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;b,c} \right) = \frac{1}{\Gamma(c)} \, \gamma\left(c, \frac{x}{b}\right), \quad 0 \leq x &lt; \infty,b,c &gt; 0</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Gamma \left(  \cdot  \right)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>⋅</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Gamma \left(  \cdot  \right)</annotation></semantics></math>
 is the <em>gamma</em> function (in <code>R</code> this is simply
 <code>gamma(x)</code>) and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\gamma \left(  \cdot  \right)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>⋅</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\gamma \left(  \cdot  \right)</annotation></semantics></math>
 is the (lower) <em>incomplete gamma</em> function
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∫</mo><mn>0</mn><mi>x</mi></munderover><msup><mi>t</mi><mrow><mi>a</mi><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.167em"></mspace><msup><mi>e</mi><mrow><mo>−</mo><mi>t</mi></mrow></msup><mspace width="0.167em"></mspace><mi>d</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\gamma \left( {x,a} \right) = \int\limits_0^x {{t^{a - 1}}} \,{e^{ - t}}\,dt</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∫</mo><mn>0</mn><mi>x</mi></munderover><msup><mi>t</mi><mrow><mi>a</mi><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.167em"></mspace><msup><mi>e</mi><mrow><mi>−</mi><mi>t</mi></mrow></msup><mspace width="0.167em"></mspace><mi>d</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\gamma \left( {x,a} \right) = \int\limits_0^x {{t^{a - 1}}} \,{e^{ - t}}\,dt</annotation></semantics></math>
 (this can be computed using the <code>gammainc</code> function from the
 <code>pracma</code> package in <code>R</code>).</p>
 <p>For use in modeling species sensitivity data, the gamma distribution
@@ -441,8 +441,8 @@ call. The two-parameter log-gumbel distribution has the following
 <em>pdf</em> and <em>cdf</em>:</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Log-Gumbel Distribution</u></b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>β</mi><mspace width="0.167em"></mspace><msup><mi>e</mi><mrow><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mi>β</mi></mrow></msup></mrow></msup></mrow><mrow><msup><mi>α</mi><mi>β</mi></msup><mspace width="0.167em"></mspace><msup><mi>x</mi><mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>,</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;\alpha ,\beta } \right) = \frac{\beta \, e^{-(\alpha x)^{-\beta}}}{\alpha^\beta \, x^{\beta + 1}}, \quad x, \alpha, \beta &gt; 0</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>e</mi><mrow><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mi>β</mi></mrow></msup></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>,</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;\alpha ,\beta } \right) = e^{-(\alpha x)^{-\beta}}, \quad x, \alpha, \beta &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>β</mi><mspace width="0.167em"></mspace><msup><mi>e</mi><mrow><mi>−</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mi>β</mi></mrow></msup></mrow></msup></mrow><mrow><msup><mi>α</mi><mi>β</mi></msup><mspace width="0.167em"></mspace><msup><mi>x</mi><mrow><mi>β</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>,</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;\alpha ,\beta } \right) = \frac{\beta \, e^{-(\alpha x)^{-\beta}}}{\alpha^\beta \, x^{\beta + 1}}, \quad x, \alpha, \beta &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>e</mi><mrow><mi>−</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>−</mi><mi>β</mi></mrow></msup></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>,</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;\alpha ,\beta } \right) = e^{-(\alpha x)^{-\beta}}, \quad x, \alpha, \beta &gt; 0</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center">
@@ -465,8 +465,8 @@ and also used in <code>ssdtools</code> [Gompertz] has the following
 <em>pdf</em> and <em>cdf</em>:</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Gompertz Distribution: Parameterisation I</u></b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>η</mi><mo>,</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>b</mi><mi>η</mi><mo>exp</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>η</mi><mo>+</mo><mi>b</mi><mi>x</mi><mo>−</mo><mi>η</mi><msup><mi>e</mi><mrow><mi>b</mi><mi>x</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>η</mi><mo>,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;\eta ,b} \right) = b \eta \exp\left(\eta + bx - \eta e^{bx}\right), \quad 0 \leq x &lt; \infty, \eta, b &gt; 0</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>η</mi><mo>,</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mo>exp</mo><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mi>η</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>e</mi><mrow><mi>b</mi><mi>x</mi></mrow></msup><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>η</mi><mo>,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;\eta ,b} \right) = 1 - \exp\left[ -\eta \left(e^{bx} - 1\right) \right], \quad 0 \leq x &lt; \infty, \eta, b &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>η</mi><mo>,</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>b</mi><mi>η</mi><mrow><mi mathvariant="normal">exp</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>η</mi><mo>+</mo><mi>b</mi><mi>x</mi><mo>−</mo><mi>η</mi><msup><mi>e</mi><mrow><mi>b</mi><mi>x</mi></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>η</mi><mo>,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;\eta ,b} \right) = b \eta \exp\left(\eta + bx - \eta e^{bx}\right), \quad 0 \leq x &lt; \infty, \eta, b &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>η</mi><mo>,</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mrow><mi mathvariant="normal">exp</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>−</mi><mi>η</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>e</mi><mrow><mi>b</mi><mi>x</mi></mrow></msup><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>η</mi><mo>,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;\eta ,b} \right) = 1 - \exp\left[ -\eta \left(e^{bx} - 1\right) \right], \quad 0 \leq x &lt; \infty, \eta, b &gt; 0</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <p>The second parameterisation in which the <em>product</em>
@@ -476,8 +476,8 @@ in the formulae above is replaced by the parameter
 giving:</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Gompertz Distribution: Parameterisation II</u></b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><msup><mi>e</mi><mfrac><mi>x</mi><mi>b</mi></mfrac></msup><mo>exp</mo><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>e</mi><mfrac><mi>x</mi><mi>b</mi></mfrac></msup><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}(x;a,b) = \frac{a}{b} e^{\frac{x}{b}} \exp\left[ -a\left(e^{\frac{x}{b}} - 1\right) \right], \quad 0 \leq x &lt; \infty, a, b &gt; 0</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mo>exp</mo><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>e</mi><mfrac><mi>x</mi><mi>b</mi></mfrac></msup><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}(x;a,b) = 1 - \exp\left[ -a\left(e^{\frac{x}{b}} - 1\right) \right], \quad 0 \leq x &lt; \infty, a, b &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><msup><mi>e</mi><mfrac><mi>x</mi><mi>b</mi></mfrac></msup><mrow><mi mathvariant="normal">exp</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>−</mi><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>e</mi><mfrac><mi>x</mi><mi>b</mi></mfrac></msup><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}(x;a,b) = \frac{a}{b} e^{\frac{x}{b}} \exp\left[ -a\left(e^{\frac{x}{b}} - 1\right) \right], \quad 0 \leq x &lt; \infty, a, b &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mrow><mi mathvariant="normal">exp</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>−</mi><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>e</mi><mfrac><mi>x</mi><mi>b</mi></mfrac></msup><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}(x;a,b) = 1 - \exp\left[ -a\left(e^{\frac{x}{b}} - 1\right) \right], \quad 0 \leq x &lt; \infty, a, b &gt; 0</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center">
@@ -487,8 +487,8 @@ functions.
 </p>
 </div>
 <p>The Gompertz distribution is available in <code>ssdtools</code>,
-however parameter estimation can be somewhat unstable <span class="citation">(D. Fox et al. 2022)</span>, and for this reason it is
-not currently included in the default set.</p>
+however parameter estimation can be somewhat unstable <span class="citation">(Fox et al. 2022)</span>, and for this reason it is not
+currently included in the default set.</p>
 </div>
 <div class="section level4">
 <h4 id="weibull-distribution">Weibull distribution<a class="anchor" aria-label="anchor" href="#weibull-distribution"></a>
@@ -507,8 +507,8 @@ tend to either zero and/or infinity in specific ways.</p>
 distribution has the following <em>pdf</em> and <em>cdf</em>:</p>
 <div style="text-align: center; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p><b><u>Weibull Distribution</u></b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>c</mi><mo>,</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mi>c</mi><mi>θ</mi></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>x</mi><mi>θ</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>x</mi><mi>θ</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>θ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}(x;c,\theta) = \frac{c}{\theta} \left( \frac{x}{\theta} \right)^{c - 1} e^{-\left( \frac{x}{\theta} \right)^c}, \quad 0 \leq x &lt; \infty, c, \theta &gt; 0</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>c</mi><mo>,</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>x</mi><mi>θ</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>θ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}(x;c,\theta) = 1 - e^{-\left( \frac{x}{\theta} \right)^c}, \quad 0 \leq x &lt; \infty, c, \theta &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>c</mi><mo>,</mo><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mi>c</mi><mi>θ</mi></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>x</mi><mi>θ</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>c</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mi>−</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>x</mi><mi>θ</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>θ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}(x;c,\theta) = \frac{c}{\theta} \left( \frac{x}{\theta} \right)^{c - 1} e^{-\left( \frac{x}{\theta} \right)^c}, \quad 0 \leq x &lt; \infty, c, \theta &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>c</mi><mo>,</mo><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>x</mi><mi>θ</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>c</mi></msup></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mn>0</mn><mo>≤</mo><mi>x</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mi>c</mi><mo>,</mo><mi>θ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}(x;c,\theta) = 1 - e^{-\left( \frac{x}{\theta} \right)^c}, \quad 0 \leq x &lt; \infty, c, \theta &gt; 0</annotation></semantics></math></p>
 </div>
 <p><br></p>
 <p>The Weibull distribution can be fitted in <code>ssdtools</code> by
@@ -535,7 +535,7 @@ details</a>). The inverse Pareto is not offered as a stand-alone option
 in the <code>Burrlioz 2.0</code> software. We have spent considerable
 time and effort exploring the properties of the inverse Pareto
 distribution, including deriving bias correction equations and
-alternative methods for deriving confidence intervals <span class="citation">(D. Fox et al. 2022)</span>. This work has substantial
+alternative methods for deriving confidence intervals <span class="citation">(Fox et al. 2022)</span>. This work has substantial
 value for improving the current <code>Burrlioz 2.0</code> method, and
 our bias corrections should be adopted when deriving <em>HCx</em>
 estimates from the inverse Pareto where parameters have been estimated
@@ -584,7 +584,7 @@ limiting case of the Burr distribution).</p>
 <div style="text-align: left; font-size: 1.2em; color: black; border: 1px solid black; padding: 10px; border-radius: 5px;">
 <p>                    <b><u>(Inverse) Pareto Distribution - North
 American Version</u><br><br> Pareto Distribution</b></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>α</mi><msup><mi>β</mi><mi>α</mi></msup><msup><mi>x</mi><mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>&gt;</mo><mi>β</mi><mo>,</mo><mspace width="0.278em"></mspace><mi>α</mi><mo>,</mo><mi>β</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;\alpha ,\beta } \right) = \alpha \beta^\alpha x^{-(\alpha + 1)}, \quad x &gt; \beta, \; \alpha, \beta &gt; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>α</mi><msup><mi>β</mi><mi>α</mi></msup><msup><mi>x</mi><mrow><mi>−</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>&gt;</mo><mi>β</mi><mo>,</mo><mspace width="0.278em"></mspace><mi>α</mi><mo>,</mo><mi>β</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{f_X}\left( {x;\alpha ,\beta } \right) = \alpha \beta^\alpha x^{-(\alpha + 1)}, \quad x &gt; \beta, \; \alpha, \beta &gt; 0</annotation></semantics></math></p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>X</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>β</mi><mi>x</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>α</mi></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>&gt;</mo><mi>β</mi><mo>,</mo><mspace width="0.278em"></mspace><mi>α</mi><mo>,</mo><mi>β</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{F_X}\left( {x;\alpha ,\beta } \right) = 1 - \left( \frac{\beta}{x} \right)^\alpha, \quad x &gt; \beta, \; \alpha, \beta &gt; 0</annotation></semantics></math></p>
 <p>Now, if
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
@@ -603,11 +603,11 @@ and the inverse Pareto distribution bounded <em>above</em> by
 an aside, the <em>mle</em> of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
 in the Pareto distribution is
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>β</mi><mo accent="true">̂</mo></mover><mo>=</mo><mo>min</mo><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>X</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow><annotation encoding="application/x-tex">\hat \beta  = \min \left\{ {{X_1}, \ldots ,{X_n}} \right\}</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>β</mi><mo accent="true">̂</mo></mover><mo>=</mo><mrow><mi mathvariant="normal">min</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>X</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow><annotation encoding="application/x-tex">\hat \beta  = \min \left\{ {{X_1}, \ldots ,{X_n}} \right\}</annotation></semantics></math>
 and the <em>mle</em> of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mn>1</mn><mi>β</mi></mfrac><annotation encoding="application/x-tex">\frac{1}{\beta }</annotation></semantics></math>
 in the inverse Pareto is
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="left" style="text-align: left"><mover><mi>β</mi><mo accent="true">̃</mo></mover><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>Y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>Y</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mspace width="1.0em"></mspace><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">{</mo><mfrac><mn>1</mn><msub><mi>X</mi><mn>1</mn></msub></mfrac><mo>,</mo><mi>…</mi><mo>,</mo><mfrac><mn>1</mn><msub><mi>X</mi><mi>n</mi></msub></mfrac><mo stretchy="true" form="postfix">}</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mo>min</mo><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>X</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow></mfrac></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mspace width="1.0em"></mspace><mo>=</mo><mfrac><mn>1</mn><mover><mi>β</mi><mo accent="true">̂</mo></mover></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{*{20}{l}}
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="left" style="text-align: left"><mover><mi>β</mi><mo accent="true">̃</mo></mover><mo>=</mo><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>Y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>Y</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mspace width="1.0em"></mspace><mo>=</mo><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">{</mo><mfrac><mn>1</mn><msub><mi>X</mi><mn>1</mn></msub></mfrac><mo>,</mo><mi>…</mi><mo>,</mo><mfrac><mn>1</mn><msub><mi>X</mi><mi>n</mi></msub></mfrac><mo stretchy="true" form="postfix">}</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mrow><mi mathvariant="normal">min</mi><mo>⁡</mo></mrow><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>X</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow></mrow></mfrac></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mspace width="1.0em"></mspace><mo>=</mo><mfrac><mn>1</mn><mover><mi>β</mi><mo accent="true">̂</mo></mover></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{*{20}{l}}
 {\tilde \beta  = \max \left\{ {{Y_1}, \ldots ,{Y_n}} \right\}}\\
 {\quad  = \max \left\{ {\frac{1}{{{X_1}}}, \ldots ,\frac{1}{{{X_n}}}} \right\} = \frac{1}{{\min \left\{ {{X_1}, \ldots ,{X_n}} \right\}}}}\\
 {\quad  = \frac{1}{{\hat \beta }}}
@@ -615,7 +615,7 @@ in the inverse Pareto is
 <p>and the <em>mle</em> of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
 is:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>α</mi><mo accent="true">̂</mo></mover><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">[</mo><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>g</mi><mover><mi>β</mi><mo accent="true">̂</mo></mover></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\hat \alpha  = {\left[ {\ln \left( {\frac{g}{{\hat \beta }}} \right)} \right]^{ - 1}}</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>α</mi><mo accent="true">̂</mo></mover><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">[</mo><mi mathvariant="normal">ln</mi><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>g</mi><mover><mi>β</mi><mo accent="true">̂</mo></mover></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\hat \alpha  = {\left[ {\ln \left( {\frac{g}{{\hat \beta }}} \right)} \right]^{ - 1}}</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
 is the <em>geometric mean</em>:
@@ -725,7 +725,7 @@ American</em> versions are <strong>bounded</strong>.</p></li>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-aldenberg_confidence_1993" class="csl-entry">
 Aldenberg, T., and W. Slob. 1993. <span>“Confidence <span>Limits</span>
 for <span>Hazardous</span> <span>Concentrations</span>
@@ -745,14 +745,12 @@ Application for Fitting <span>Species</span> <span>Sensitivity</span>
 Open Source Software</em> 6 (57): 2848. <a href="https://doi.org/10.21105/joss.02848" class="external-link">https://doi.org/10.21105/joss.02848</a>.
 </div>
 <div id="ref-fisher2019" class="csl-entry">
-Fisher, Rebecca, Rick van Dam, Graeme Batley, David Fox, Andrew Harford,
-Chris Humphrey, Cath King, Patricia Menendez, Andrew Negri, and Abigail
-Proctor. 2019. <span>“KEY ISSUES IN THE DERIVATION OF WATER QUALITY
-GUIDELINE VALUES: A WORKSHOP REPORT.”</span> Journal Article.
+Fisher, Rebecca, Rick van Dam, Graeme Batley, et al. 2019. <em>KEY
+ISSUES IN THE DERIVATION OF WATER QUALITY GUIDELINE VALUES: A WORKSHOP
+REPORT</em>. Journal Article.
 </div>
 <div id="ref-fox_recent_2021" class="csl-entry">
-Fox, D. R., R. A. Dam, R. Fisher, G. E. Batley, A. R. Tillmanns, J.
-Thorley, C. J. Schwarz, D. J. Spry, and K. McTavish. 2021. <span>“Recent
+Fox, D. R., R. A. Dam, R. Fisher, et al. 2021. <span>“Recent
 <span>Developments</span> in <span>Species</span>
 <span>Sensitivity</span> <span>Distribution</span>
 <span>Modeling</span>.”</span> <em>Environmental Toxicology and
@@ -764,22 +762,21 @@ and Analysis.”</span> <em>In: Blasco J, Chapman PM, Campana O, Hampel M
 (Eds) Marine Ecotoxicology.</em>, August. <a href="https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5" class="external-link">https://shop.elsevier.com/books/marine-ecotoxicology/blasco/978-0-12-803371-5</a>.
 </div>
 <div id="ref-fox_methodologies_2022" class="csl-entry">
-Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. <span>“Joint
+Fox, DR, R Fisher, JL Thorley, and C Schwarz. 2022. <em>Joint
 Investigation into <span class="nocase">statistical</span> <span class="nocase">methodologies</span> Underpinning the <span class="nocase">derivation</span> of <span class="nocase">toxicant</span>
 <span class="nocase">guideline</span> <span class="nocase">values</span>
-in <span>Australia</span> and <span>New Zealand</span>.”</span>
+in <span>Australia</span> and <span>New Zealand</span></em>.
 Environmetrics Australia; Australian Institute of Marine Science. <a href="https://doi.org/10.25845/fm9b-7n28" class="external-link">https://doi.org/10.25845/fm9b-7n28</a>.
 </div>
 <div id="ref-newman_2000" class="csl-entry">
-Newman, Michael C., David R. Ownby, Laurent C. A. Mézin, David C.
-Powell, Tyler R. L. Christensen, Scott B. Lerberg, and Britt-Anne
-Anderson. 2000. <span>“Applying <span class="nocase">species-sensitivity
+Newman, Michael C., David R. Ownby, Laurent C. A. Mézin, et al. 2000.
+<span>“Applying <span class="nocase">species-sensitivity
 distributions</span> in <span class="nocase">ecological</span> <span class="nocase">risk assessment</span>: Assumptions of <span class="nocase">distribution type</span> and Sufficient <span class="nocase">numbers of species</span>.”</span> <em>Environmental
 Toxicology and Chemistry</em> 19 (February): 508–15. <a href="https://doi.org/10.1002/etc.5620190233" class="external-link">https://doi.org/10.1002/etc.5620190233</a>.
 </div>
 <div id="ref-shao_estimation_2000" class="csl-entry">
-Shao, Quanxi. 2000. <span>“Estimation for Hazardous Concentrations Based
-on <span>NOEC</span> Toxicity Data: An Alternative Approach,”</span> 13.
+Shao, Quanxi. 2000. <em>Estimation for Hazardous Concentrations Based on
+<span>NOEC</span> Toxicity Data: An Alternative Approach</em>. 13.
 </div>
 <div id="ref-thorley_ssdtools_2018" class="csl-entry">
 Thorley, Joe, and Carl Schwarz. 2018. <span>“Ssdtools: <span>An</span>
@@ -788,8 +785,8 @@ Thorley, Joe, and Carl Schwarz. 2018. <span>“Ssdtools: <span>An</span>
 of Open Source Software</em> 3 (31): 1082. <a href="https://doi.org/10.21105/joss.01082" class="external-link">https://doi.org/10.21105/joss.01082</a>.
 </div>
 <div id="ref-Zajdlik_2005" class="csl-entry">
-Zajdlik, B. 2005. <span>“Statistical Analysis of the SSD Approach for
-Development of Canadian Water Quality Guidelines.”</span> CCME Project
+Zajdlik, B. 2005. <em>Statistical Analysis of the SSD Approach for
+Development of Canadian Water Quality Guidelines</em>. CCME Project
 354‐200/5. Zajdlik; Associates.
 </div>
 </div>
@@ -817,7 +814,7 @@ License</a></p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
