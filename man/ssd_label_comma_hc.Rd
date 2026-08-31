@@ -27,6 +27,8 @@ ssd_label_comma_hc(
 \value{
 A "labelling" function that takes a vector x and
 returns a character vector of \code{length(x)} giving a label for each input value.
+The label for \code{hc_value} is prefixed with a newline so that it is drawn
+on its own line, and bold by \code{\link[=ssd_element_text_hc]{ssd_element_text_hc()}}.
 }
 \description{
 Label numbers with significant digits and comma.
@@ -35,8 +37,9 @@ If \code{hc_value} is present in breaks, put on new line and make bold.
 \examples{
 ggplot2::ggplot(data = ssddata::anon_e, ggplot2::aes(x = Conc / 10)) +
   geom_ssdpoint() +
-  ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26))
+  ggplot2::scale_x_log10(labels = ssd_label_comma_hc(1.26)) +
+  ggplot2::theme(axis.text.x = ssd_element_text_hc())
 }
 \seealso{
-\code{\link[scales:label_comma]{scales::label_comma()}}
+\code{\link[scales:label_comma]{scales::label_comma()}} and \code{\link[=ssd_element_text_hc]{ssd_element_text_hc()}}
 }

@@ -71,6 +71,7 @@ reference:
   - scale_fill_ssd
   - scale_color_ssd
   - scale_colour_ssd
+  - ssd_element_text_hc
   - ssd_label_comma
   - ssd_label_comma_hc
   - ssd_pal
