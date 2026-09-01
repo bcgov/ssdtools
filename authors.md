@@ -72,7 +72,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/bcgov/ssdtools/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/bcgov/ssdtools/blob/v2.7.0/inst/CITATION)
 
 Thorley J, Fisher R, Fox D, Schwarz C (2025). “ssdtools v2: An R package
 to fit Species Sensitivity Distributions.” *Journal of Open Source
